@@ -49,7 +49,7 @@ namespace xml_service.Models.V100
         internal static SignedIdentifier DeserializeSignedIdentifier(XElement element)
         {
             SignedIdentifier result = default;
-            string value = default;
+            result = new SignedIdentifier(); string value = default;
             var id = element.Element("Id");
             if (id != null)
             {

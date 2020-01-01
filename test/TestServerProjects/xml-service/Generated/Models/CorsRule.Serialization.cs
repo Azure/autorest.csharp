@@ -81,7 +81,7 @@ namespace xml_service.Models.V100
         internal static CorsRule DeserializeCorsRule(XElement element)
         {
             CorsRule result = default;
-            string value = default;
+            result = new CorsRule(); string value = default;
             var allowedOrigins = element.Element("AllowedOrigins");
             if (allowedOrigins != null)
             {

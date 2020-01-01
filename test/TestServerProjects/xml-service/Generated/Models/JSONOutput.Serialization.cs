@@ -51,7 +51,7 @@ namespace xml_service.Models.V100
         internal static JSONOutput DeserializeJSONOutput(XElement element)
         {
             JSONOutput result = default;
-            int? value = default;
+            result = new JSONOutput(); int? value = default;
             var id = element.Element("id");
             if (id != null)
             {

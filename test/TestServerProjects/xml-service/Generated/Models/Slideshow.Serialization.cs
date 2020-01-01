@@ -122,7 +122,7 @@ namespace xml_service.Models.V100
         internal static Slideshow DeserializeSlideshow(XElement element)
         {
             Slideshow result = default;
-            var title = element.Attribute("title");
+            result = new Slideshow(); var title = element.Attribute("title");
             if (title != null)
             {
                 result.Title = (string?)title;
@@ -142,11 +142,7 @@ namespace xml_service.Models.V100
             foreach (var e in element.Elements("slide"))
             {
                 Slide value = default;
-                var slide = e.Element("slide");
-                if (slide != null)
-                {
-                    value = Slide.DeserializeSlide(slide);
-                }
+                value = Slide.DeserializeSlide(e);
                 result.Slides.Add(value);
             }
             return result;

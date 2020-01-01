@@ -99,7 +99,7 @@ namespace xml_service.Models.V100
         internal static Metrics DeserializeMetrics(XElement element)
         {
             Metrics result = default;
-            string? value = default;
+            result = new Metrics(); string? value = default;
             var version = element.Element("Version");
             if (version != null)
             {

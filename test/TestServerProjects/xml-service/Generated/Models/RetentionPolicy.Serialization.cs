@@ -61,7 +61,7 @@ namespace xml_service.Models.V100
         internal static RetentionPolicy DeserializeRetentionPolicy(XElement element)
         {
             RetentionPolicy result = default;
-            bool value = default;
+            result = new RetentionPolicy(); bool value = default;
             var enabled = element.Element("Enabled");
             if (enabled != null)
             {

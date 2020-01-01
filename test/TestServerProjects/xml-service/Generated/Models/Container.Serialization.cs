@@ -83,7 +83,7 @@ namespace xml_service.Models.V100
         internal static Container DeserializeContainer(XElement element)
         {
             Container result = default;
-            string value = default;
+            result = new Container(); string value = default;
             var name = element.Element("Name");
             if (name != null)
             {
@@ -98,16 +98,16 @@ namespace xml_service.Models.V100
             }
             result.Properties = value0;
             IDictionary<string, string>? value1 = default;
-            var elements = element.Elements();
-            foreach (var e in elements)
+            var metadata = element.Element("Metadata");
+            if (metadata != null)
             {
-                string value2 = default;
-                var dictionaryItem = e.Element("!dictionary-item");
-                if (dictionaryItem != null)
+                value1 = new Dictionary<string, string>(); var elements = metadata.Elements();
+                foreach (var e in elements)
                 {
-                    value2 = (string)dictionaryItem;
+                    string value2 = default;
+                    value2 = (string)e;
+                    value1.Add(e.Name.LocalName, value2);
                 }
-                value1.Add(e.Name.LocalName, value2);
             }
             result.Metadata = value1;
             return result;

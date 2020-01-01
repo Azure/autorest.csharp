@@ -156,7 +156,7 @@ namespace xml_service.Models.V100
         internal static StorageServiceProperties DeserializeStorageServiceProperties(XElement element)
         {
             StorageServiceProperties result = default;
-            Logging? value = default;
+            result = new StorageServiceProperties(); Logging? value = default;
             var logging = element.Element("Logging");
             if (logging != null)
             {
@@ -193,16 +193,15 @@ namespace xml_service.Models.V100
             result.DeleteRetentionPolicy = value3;
             result.Cors = new List<CorsRule>();
             var cors = element.Element("Cors");
-            result.Cors = new List<CorsRule>();
-            foreach (var e in cors.Elements("CorsRule"))
+            if (cors != null)
             {
-                CorsRule value4 = default;
-                var corsRule = e.Element("CorsRule");
-                if (corsRule != null)
+                result.Cors = new List<CorsRule>();
+                foreach (var e in cors.Elements("CorsRule"))
                 {
-                    value4 = CorsRule.DeserializeCorsRule(corsRule);
+                    CorsRule value4 = default;
+                    value4 = CorsRule.DeserializeCorsRule(e);
+                    result.Cors.Add(value4);
                 }
-                result.Cors.Add(value4);
             }
             return result;
         }

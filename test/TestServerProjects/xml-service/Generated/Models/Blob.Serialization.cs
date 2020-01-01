@@ -103,7 +103,7 @@ namespace xml_service.Models.V100
         internal static Blob DeserializeBlob(XElement element)
         {
             Blob result = default;
-            string value = default;
+            result = new Blob(); string value = default;
             var name = element.Element("Name");
             if (name != null)
             {
@@ -132,16 +132,16 @@ namespace xml_service.Models.V100
             }
             result.Properties = value2;
             IDictionary<string, string>? value3 = default;
-            var elements = element.Elements();
-            foreach (var e in elements)
+            var metadata = element.Element("Metadata");
+            if (metadata != null)
             {
-                string value4 = default;
-                var dictionaryItem = e.Element("!dictionary-item");
-                if (dictionaryItem != null)
+                value3 = new Dictionary<string, string>(); var elements = metadata.Elements();
+                foreach (var e in elements)
                 {
-                    value4 = (string)dictionaryItem;
+                    string value4 = default;
+                    value4 = (string)e;
+                    value3.Add(e.Name.LocalName, value4);
                 }
-                value3.Add(e.Name.LocalName, value4);
             }
             result.Metadata = value3;
             return result;

@@ -41,7 +41,7 @@ namespace xml_service.Models.V100
         internal static BlobPrefix DeserializeBlobPrefix(XElement element)
         {
             BlobPrefix result = default;
-            string value = default;
+            result = new BlobPrefix(); string value = default;
             var name = element.Element("Name");
             if (name != null)
             {

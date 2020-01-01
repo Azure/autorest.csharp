@@ -92,7 +92,7 @@ namespace xml_service.Models.V100
         internal static Banana DeserializeBanana(XElement element)
         {
             Banana result = default;
-            string? value = default;
+            result = new Banana(); string? value = default;
             var name = element.Element("name");
             if (name != null)
             {

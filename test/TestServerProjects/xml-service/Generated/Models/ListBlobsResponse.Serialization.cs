@@ -109,7 +109,7 @@ namespace xml_service.Models.V100
         internal static ListBlobsResponse DeserializeListBlobsResponse(XElement element)
         {
             ListBlobsResponse result = default;
-            var serviceEndpoint = element.Attribute("ServiceEndpoint");
+            result = new ListBlobsResponse(); var serviceEndpoint = element.Attribute("ServiceEndpoint");
             if (serviceEndpoint != null)
             {
                 result.ServiceEndpoint = (string)serviceEndpoint;

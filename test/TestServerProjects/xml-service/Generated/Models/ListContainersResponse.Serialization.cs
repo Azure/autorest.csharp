@@ -124,7 +124,7 @@ namespace xml_service.Models.V100
         internal static ListContainersResponse DeserializeListContainersResponse(XElement element)
         {
             ListContainersResponse result = default;
-            var serviceEndpoint = element.Attribute("ServiceEndpoint");
+            result = new ListContainersResponse(); var serviceEndpoint = element.Attribute("ServiceEndpoint");
             if (serviceEndpoint != null)
             {
                 result.ServiceEndpoint = (string)serviceEndpoint;
@@ -159,16 +159,15 @@ namespace xml_service.Models.V100
             result.NextMarker = value2;
             result.Containers = new List<Container>();
             var containers = element.Element("Containers");
-            result.Containers = new List<Container>();
-            foreach (var e in containers.Elements("Container"))
+            if (containers != null)
             {
-                Container value3 = default;
-                var container = e.Element("Container");
-                if (container != null)
+                result.Containers = new List<Container>();
+                foreach (var e in containers.Elements("Container"))
                 {
-                    value3 = Container.DeserializeContainer(container);
+                    Container value3 = default;
+                    value3 = Container.DeserializeContainer(e);
+                    result.Containers.Add(value3);
                 }
-                result.Containers.Add(value3);
             }
             return result;
         }

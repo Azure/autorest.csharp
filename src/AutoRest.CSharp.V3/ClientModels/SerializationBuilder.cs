@@ -35,13 +35,13 @@ namespace AutoRest.CSharp.V3.ClientModels
                     return BuildSerialization(schema, isNullable);
                 case KnownMediaType.Xml:
                     return BuildXmlElementSerialization(schema, isNullable, schema.Serialization?.Xml?.Name ??
-                                                                     schema.Language.Default.Name);
+                                                                     schema.Language.Default.Name, true);
                 default:
                     throw new NotImplementedException(mediaType.ToString());
             }
         }
 
-        private static XmlElementSerialization BuildXmlElementSerialization(Schema schema, bool isNullable, string? name)
+        private static XmlElementSerialization BuildXmlElementSerialization(Schema schema, bool isNullable, string? name, bool isRoot)
         {
             string xmlName =
                 schema.Serialization?.Xml?.Name ??
@@ -51,20 +51,20 @@ namespace AutoRest.CSharp.V3.ClientModels
             switch (schema)
             {
                 case ConstantSchema constantSchema:
-                    return BuildXmlElementSerialization(constantSchema.ValueType, constantSchema.Value.Value == null, name);
+                    return BuildXmlElementSerialization(constantSchema.ValueType, constantSchema.Value.Value == null, name, false);
                 case ArraySchema arraySchema:
-                    var wrapped = arraySchema.Serialization?.Xml?.Wrapped == true;
+                    var wrapped = isRoot || arraySchema.Serialization?.Xml?.Wrapped == true;
 
                     return new XmlArraySerialization(
                         ClientModelBuilderHelpers.CreateType(arraySchema, isNullable),
-                        BuildXmlElementSerialization(arraySchema.ElementType, false, null),
+                        BuildXmlElementSerialization(arraySchema.ElementType, false, null, false),
                         xmlName,
                         wrapped);
 
                 case DictionarySchema dictionarySchema:
                     return new XmlDictionarySerialization(
                         ClientModelBuilderHelpers.CreateType(dictionarySchema, isNullable),
-                        BuildXmlElementSerialization(dictionarySchema.ElementType, false, "!dictionary-item"),
+                        BuildXmlElementSerialization(dictionarySchema.ElementType, false, "!dictionary-item", false),
                         xmlName);
                 default:
                     return new XmlElementValueSerialization(xmlName, BuildXmlValueSerialization(schema, isNullable));
@@ -125,7 +125,7 @@ namespace AutoRest.CSharp.V3.ClientModels
                     }
                     else
                     {
-                        XmlElementSerialization valueSerialization = BuildXmlElementSerialization(property.Schema, property.IsNullable(), name);
+                        XmlElementSerialization valueSerialization = BuildXmlElementSerialization(property.Schema, property.IsNullable(), name, false);
 
                         if (valueSerialization is XmlArraySerialization arraySerialization)
                         {

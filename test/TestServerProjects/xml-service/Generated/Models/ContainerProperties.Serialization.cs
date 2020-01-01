@@ -132,7 +132,7 @@ namespace xml_service.Models.V100
         internal static ContainerProperties DeserializeContainerProperties(XElement element)
         {
             ContainerProperties result = default;
-            DateTimeOffset value = default;
+            result = new ContainerProperties(); DateTimeOffset value = default;
             var lastModified = element.Element("Last-Modified");
             if (lastModified != null)
             {

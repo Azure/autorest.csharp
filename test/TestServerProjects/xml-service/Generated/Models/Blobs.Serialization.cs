@@ -92,16 +92,12 @@ namespace xml_service.Models.V100
         internal static Blobs DeserializeBlobs(XElement element)
         {
             Blobs result = default;
-            result.BlobPrefix = new List<BlobPrefix>();
+            result = new Blobs(); result.BlobPrefix = new List<BlobPrefix>();
             result.BlobPrefix = new List<BlobPrefix>();
             foreach (var e in element.Elements("BlobPrefix"))
             {
                 BlobPrefix value = default;
-                var blobPrefix = e.Element("BlobPrefix");
-                if (blobPrefix != null)
-                {
-                    value = V100.BlobPrefix.DeserializeBlobPrefix(blobPrefix);
-                }
+                value = V100.BlobPrefix.DeserializeBlobPrefix(e);
                 result.BlobPrefix.Add(value);
             }
             result.Blob = new List<Blob>();
@@ -109,11 +105,7 @@ namespace xml_service.Models.V100
             foreach (var e0 in element.Elements("Blob"))
             {
                 Blob value = default;
-                var blob = e0.Element("Blob");
-                if (blob != null)
-                {
-                    value = V100.Blob.DeserializeBlob(blob);
-                }
+                value = V100.Blob.DeserializeBlob(e0);
                 result.Blob.Add(value);
             }
             return result;

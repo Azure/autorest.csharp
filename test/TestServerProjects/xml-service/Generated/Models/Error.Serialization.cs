@@ -71,7 +71,7 @@ namespace xml_service.Models.V100
         internal static Error DeserializeError(XElement element)
         {
             Error result = default;
-            int? value = default;
+            result = new Error(); int? value = default;
             var status = element.Element("status");
             if (status != null)
             {

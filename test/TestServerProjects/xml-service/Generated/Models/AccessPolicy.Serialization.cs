@@ -62,7 +62,7 @@ namespace xml_service.Models.V100
         internal static AccessPolicy DeserializeAccessPolicy(XElement element)
         {
             AccessPolicy result = default;
-            DateTimeOffset value = default;
+            result = new AccessPolicy(); DateTimeOffset value = default;
             var start = element.Element("Start");
             if (start != null)
             {

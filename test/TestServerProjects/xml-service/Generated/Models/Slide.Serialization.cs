@@ -104,7 +104,7 @@ namespace xml_service.Models.V100
         internal static Slide DeserializeSlide(XElement element)
         {
             Slide result = default;
-            var type = element.Attribute("type");
+            result = new Slide(); var type = element.Attribute("type");
             if (type != null)
             {
                 result.Type = (string?)type;
@@ -121,11 +121,7 @@ namespace xml_service.Models.V100
             foreach (var e in element.Elements("item"))
             {
                 string value0 = default;
-                var item = e.Element("item");
-                if (item != null)
-                {
-                    value0 = (string)item;
-                }
+                value0 = (string)e;
                 result.Items.Add(value0);
             }
             return result;

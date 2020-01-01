@@ -572,7 +572,7 @@ namespace xml_service.Models.V100
         internal static BlobProperties DeserializeBlobProperties(XElement element)
         {
             BlobProperties result = default;
-            DateTimeOffset value = default;
+            result = new BlobProperties(); DateTimeOffset value = default;
             var lastModified = element.Element("Last-Modified");
             if (lastModified != null)
             {

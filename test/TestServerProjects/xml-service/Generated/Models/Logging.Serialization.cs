@@ -79,7 +79,7 @@ namespace xml_service.Models.V100
         internal static Logging DeserializeLogging(XElement element)
         {
             Logging result = default;
-            string value = default;
+            result = new Logging(); string value = default;
             var version = element.Element("Version");
             if (version != null)
             {

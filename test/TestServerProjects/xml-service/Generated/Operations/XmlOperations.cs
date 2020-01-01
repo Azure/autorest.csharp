@@ -503,16 +503,16 @@ namespace xml_service
                         {
                             var document = await XDocument.LoadAsync(message.Response.ContentStream, LoadOptions.PreserveWhitespace, cancellationToken).ConfigureAwait(false);
                             ICollection<Banana> value = default;
-                            value = new List<Banana>();
-                            foreach (var e in document.Elements("banana"))
+                            var bananas = document.Element("bananas");
+                            if (bananas != null)
                             {
-                                Banana value0 = default;
-                                var banana = e.Element("banana");
-                                if (banana != null)
+                                value = new List<Banana>();
+                                foreach (var e in bananas.Elements("banana"))
                                 {
-                                    value0 = Banana.DeserializeBanana(banana);
+                                    Banana value0 = default;
+                                    value0 = Banana.DeserializeBanana(e);
+                                    value.Add(value0);
                                 }
-                                value.Add(value0);
                             }
                             return Response.FromValue(value, message.Response);
                         }
@@ -585,16 +585,16 @@ namespace xml_service
                         {
                             var document = await XDocument.LoadAsync(message.Response.ContentStream, LoadOptions.PreserveWhitespace, cancellationToken).ConfigureAwait(false);
                             ICollection<Banana> value = default;
-                            value = new List<Banana>();
-                            foreach (var e in document.Elements("banana"))
+                            var bananas = document.Element("bananas");
+                            if (bananas != null)
                             {
-                                Banana value0 = default;
-                                var banana = e.Element("banana");
-                                if (banana != null)
+                                value = new List<Banana>();
+                                foreach (var e in bananas.Elements("banana"))
                                 {
-                                    value0 = Banana.DeserializeBanana(banana);
+                                    Banana value0 = default;
+                                    value0 = Banana.DeserializeBanana(e);
+                                    value.Add(value0);
                                 }
-                                value.Add(value0);
                             }
                             return Response.FromValue(value, message.Response);
                         }
@@ -667,16 +667,16 @@ namespace xml_service
                         {
                             var document = await XDocument.LoadAsync(message.Response.ContentStream, LoadOptions.PreserveWhitespace, cancellationToken).ConfigureAwait(false);
                             ICollection<Banana> value = default;
-                            value = new List<Banana>();
-                            foreach (var e in document.Elements("banana"))
+                            var bananas = document.Element("bananas");
+                            if (bananas != null)
                             {
-                                Banana value0 = default;
-                                var banana = e.Element("banana");
-                                if (banana != null)
+                                value = new List<Banana>();
+                                foreach (var e in bananas.Elements("banana"))
                                 {
-                                    value0 = Banana.DeserializeBanana(banana);
+                                    Banana value0 = default;
+                                    value0 = Banana.DeserializeBanana(e);
+                                    value.Add(value0);
                                 }
-                                value.Add(value0);
                             }
                             return Response.FromValue(value, message.Response);
                         }
@@ -935,16 +935,15 @@ namespace xml_service
                             var document = await XDocument.LoadAsync(message.Response.ContentStream, LoadOptions.PreserveWhitespace, cancellationToken).ConfigureAwait(false);
                             ICollection<SignedIdentifier> value = default;
                             var signedIdentifiers = document.Element("SignedIdentifiers");
-                            value = new List<SignedIdentifier>();
-                            foreach (var e in signedIdentifiers.Elements("SignedIdentifier"))
+                            if (signedIdentifiers != null)
                             {
-                                SignedIdentifier value0 = default;
-                                var signedIdentifier = e.Element("SignedIdentifier");
-                                if (signedIdentifier != null)
+                                value = new List<SignedIdentifier>();
+                                foreach (var e in signedIdentifiers.Elements("SignedIdentifier"))
                                 {
-                                    value0 = SignedIdentifier.DeserializeSignedIdentifier(signedIdentifier);
+                                    SignedIdentifier value0 = default;
+                                    value0 = SignedIdentifier.DeserializeSignedIdentifier(e);
+                                    value.Add(value0);
                                 }
-                                value.Add(value0);
                             }
                             return Response.FromValue(value, message.Response);
                         }

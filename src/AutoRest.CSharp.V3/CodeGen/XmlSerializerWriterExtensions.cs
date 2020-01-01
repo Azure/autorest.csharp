@@ -176,7 +176,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
         }
 
-        public static void ToDeserializeCall(this CodeWriter writer, XmlElementSerialization serialization, TypeFactory typeFactory, CodeWriterDelegate element, ref string destination)
+        public static void ToDeserializeCall(this CodeWriter writer, XmlElementSerialization serialization, TypeFactory typeFactory, CodeWriterDelegate element, ref string destination, bool isElement = false)
         {
             var type = serialization.Type;
 
@@ -194,11 +194,11 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                 writer
                     .Line($"{typeFactory.CreateType(type)} {destination:D} = default;")
-                    .ToDeserializeCall(serialization, typeFactory, w => w.AppendRaw(s), element);
+                    .ToDeserializeCall(serialization, typeFactory, w => w.AppendRaw(s), element, isElement);
             }
         }
 
-        public static void ToDeserializeCall(this CodeWriter writer, XmlElementSerialization serialization, TypeFactory typeFactory, CodeWriterDelegate destination, CodeWriterDelegate element)
+        private static void ToDeserializeCall(this CodeWriter writer, XmlElementSerialization serialization, TypeFactory typeFactory, CodeWriterDelegate destination, CodeWriterDelegate element, bool isElement = false)
         {
             switch (serialization)
             {
@@ -206,33 +206,52 @@ namespace AutoRest.CSharp.V3.CodeGen
                 {
                     string childElementVariable = writer.GetTemporaryVariable("e");
 
-                    if (arraySerialization.Wrapped)
+                    CodeWriter.CodeWriterScope? scope = null;
+                    if (!isElement && arraySerialization.Wrapped)
                     {
                         string elementVariable = writer.GetTemporaryVariable(arraySerialization.Name.ToVariableName());
 
                         writer.Line($"var {elementVariable:D} = {element}.Element({arraySerialization.Name:L});");
 
                         element = w => w.AppendRaw(elementVariable);
+
+                        scope = writer.Scope($"if ({elementVariable} != null)");
                     }
 
                     writer.Line($"{destination} = new {typeFactory.CreateConcreteType(serialization.Type)}();");
 
                     using (writer.Scope($"foreach (var {childElementVariable:D} in {element}.Elements({arraySerialization.ValueSerialization.Name:L}))"))
                     {
-                        var itemVariableName = "value";
+                        var itemVariableName = writer.GetTemporaryVariable("value");
                         writer.ToDeserializeCall(
                             arraySerialization.ValueSerialization,
                             typeFactory,
                             w => w.AppendRaw(childElementVariable),
-                            ref itemVariableName);
+                            ref itemVariableName,
+                            true);
 
                         writer.Line($"{destination}.Add({itemVariableName});");
                     }
 
+                    scope?.Dispose();
                     break;
                 }
                 case XmlDictionarySerialization dictionarySerialization:
                 {
+                    CodeWriter.CodeWriterScope? scope = null;
+                    if (!isElement)
+                    {
+                        string dictElementVariable = writer.GetTemporaryVariable(dictionarySerialization.Name.ToVariableName());
+
+                        writer.Line($"var {dictElementVariable:D} = {element}.Element({dictionarySerialization.Name:L});");
+
+                        element = w => w.AppendRaw(dictElementVariable);
+
+                        scope = writer.Scope($"if ({dictElementVariable} != null)");
+                    }
+
+                    writer.Append($"{destination} = new {typeFactory.CreateConcreteType(dictionarySerialization.Type)}();");
+
                     string elementsVariable = writer.GetTemporaryVariable("elements");
                     string elementVariable = writer.GetTemporaryVariable("e");
 
@@ -244,14 +263,18 @@ namespace AutoRest.CSharp.V3.CodeGen
                             dictionarySerialization.ValueSerialization,
                             typeFactory,
                             w => w.AppendRaw(elementVariable),
-                            ref itemVariableName);
+                            ref itemVariableName,
+                            true);
 
                         writer.Line($"{destination}.Add({elementVariable}.Name.LocalName, {itemVariableName});");
                     }
 
+                    scope?.Dispose();
                     break;
                 }
                 case XmlObjectSerialization elementSerialization:
+                    writer.Append($"{destination} = new {typeFactory.CreateConcreteType(elementSerialization.Type)}();");
+
                     foreach (XmlObjectAttributeSerialization attribute in elementSerialization.Attributes)
                     {
                         string elementVariable = writer.GetTemporaryVariable(attribute.MemberName.ToVariableName());
@@ -294,12 +317,20 @@ namespace AutoRest.CSharp.V3.CodeGen
                 case XmlElementValueSerialization valueSerialization:
                 {
                     string elementVariable = writer.GetTemporaryVariable(valueSerialization.Name.ToVariableName());
-                    writer.Line($"var {elementVariable:D} = {element}.Element({valueSerialization.Name:L});");
+                    CodeWriterDelegate elementVariableDelegate = w => w.AppendRaw(elementVariable);
+                    if (isElement)
+                    {
+                        elementVariableDelegate = element;
+                    }
+                    else
+                    {
+                        writer.Line($"var {elementVariable:D} = {element}.Element({valueSerialization.Name:L});");
+                    }
 
-                    using (writer.Scope($"if ({elementVariable} != null)"))
+                    using (isElement ? null : writer.Scope($"if ({elementVariableDelegate} != null)"))
                     {
                         writer.Append($"{destination} = ");
-                        writer.ToDeserializeValueCall(valueSerialization.Value, typeFactory, w => w.Append($"{elementVariable}"));
+                        writer.ToDeserializeValueCall(valueSerialization.Value, typeFactory, w => w.Append(elementVariableDelegate));
                         writer.Line($";");
                     }
 
@@ -308,7 +339,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
         }
 
-        public static void ToDeserializeValueCall(this CodeWriter writer, XmlValueSerialization serialization, TypeFactory typeFactory, CodeWriterDelegate element)
+        private static void ToDeserializeValueCall(this CodeWriter writer, XmlValueSerialization serialization, TypeFactory typeFactory, CodeWriterDelegate element)
         {
             switch (serialization.Type)
             {
