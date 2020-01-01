@@ -180,22 +180,13 @@ namespace AutoRest.CSharp.V3.CodeGen
         {
             var type = serialization.Type;
 
-            // if (serialization is XmlElementValueSerialization valueSerialization)
-            // {
-            //     writer.Append($"var {destination:D} =")
-            //         .ToDeserializeCall(valueSerialization, typeFactory, element);
-            //     writer.LineRaw(";");
-            // }
-            // else
-            {
-                destination = writer.GetTemporaryVariable(destination);
+            destination = writer.GetTemporaryVariable(destination);
 
-                string s = destination;
+            string s = destination;
 
-                writer
-                    .Line($"{typeFactory.CreateType(type)} {destination:D} = default;")
-                    .ToDeserializeCall(serialization, typeFactory, w => w.AppendRaw(s), element, isElement);
-            }
+            writer
+                .Line($"{typeFactory.CreateType(type)} {destination:D} = default;")
+                .ToDeserializeCall(serialization, typeFactory, w => w.AppendRaw(s), element, isElement);
         }
 
         private static void ToDeserializeCall(this CodeWriter writer, XmlElementSerialization serialization, TypeFactory typeFactory, CodeWriterDelegate destination, CodeWriterDelegate element, bool isElement = false)

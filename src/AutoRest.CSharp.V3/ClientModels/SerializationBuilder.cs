@@ -34,8 +34,7 @@ namespace AutoRest.CSharp.V3.ClientModels
                 case KnownMediaType.Json:
                     return BuildSerialization(schema, isNullable);
                 case KnownMediaType.Xml:
-                    return BuildXmlElementSerialization(schema, isNullable, schema.Serialization?.Xml?.Name ??
-                                                                     schema.Language.Default.Name, true);
+                    return BuildXmlElementSerialization(schema, isNullable, schema.XmlName ?? schema.Name, true);
                 default:
                     throw new NotImplementedException(mediaType.ToString());
             }
@@ -44,9 +43,9 @@ namespace AutoRest.CSharp.V3.ClientModels
         private static XmlElementSerialization BuildXmlElementSerialization(Schema schema, bool isNullable, string? name, bool isRoot)
         {
             string xmlName =
-                schema.Serialization?.Xml?.Name ??
+                schema.XmlName ??
                 name ??
-                schema.Language.Default.Name;
+                schema.Name;
 
             switch (schema)
             {
