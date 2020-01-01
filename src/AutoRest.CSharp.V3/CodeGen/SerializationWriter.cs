@@ -93,7 +93,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                 var resultVariable = "result";
                 writer.ToDeserializeCall(serialization,
                     _typeFactory,
-                    w=> w.AppendRaw("element"), ref resultVariable);
+                    w=> w.AppendRaw("element"), ref resultVariable, true);
                 writer.Line($"return {resultVariable};");
             }
         }
