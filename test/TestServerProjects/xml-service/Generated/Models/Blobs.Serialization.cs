@@ -93,14 +93,12 @@ namespace xml_service.Models.V100
         {
             Blobs result = default;
             result = new Blobs(); result.BlobPrefix = new List<BlobPrefix>();
-            result.BlobPrefix = new List<BlobPrefix>();
             foreach (var e in element.Elements("BlobPrefix"))
             {
                 BlobPrefix value = default;
                 value = V100.BlobPrefix.DeserializeBlobPrefix(e);
                 result.BlobPrefix.Add(value);
             }
-            result.Blob = new List<Blob>();
             result.Blob = new List<Blob>();
             foreach (var e0 in element.Elements("Blob"))
             {

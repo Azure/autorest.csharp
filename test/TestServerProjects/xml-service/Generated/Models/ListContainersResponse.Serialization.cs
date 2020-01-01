@@ -157,7 +157,6 @@ namespace xml_service.Models.V100
                 value2 = (string)nextMarker;
             }
             result.NextMarker = value2;
-            result.Containers = new List<Container>();
             var containers = element.Element("Containers");
             if (containers != null)
             {

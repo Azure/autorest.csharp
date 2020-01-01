@@ -297,8 +297,6 @@ namespace AutoRest.CSharp.V3.CodeGen
                     {
                         CodeWriterDelegate arrayDestination = w => w.Append($"{destination}.{embeddedArray.MemberName}");
 
-                        ClientTypeReference type = embeddedArray.ArraySerialization.Type;
-                        writer.Line($"{arrayDestination:D} = new {typeFactory.CreateConcreteType(type)}();");
                         writer.ToDeserializeCall(
                             embeddedArray.ArraySerialization,
                             typeFactory,

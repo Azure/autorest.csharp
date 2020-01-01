@@ -100,8 +100,7 @@ namespace xml_service.Models.V100
         internal static AppleBarrel DeserializeAppleBarrel(XElement element)
         {
             AppleBarrel result = default;
-            result = new AppleBarrel(); result.GoodApples = new List<string>();
-            var goodApples = element.Element("GoodApples");
+            result = new AppleBarrel(); var goodApples = element.Element("GoodApples");
             if (goodApples != null)
             {
                 result.GoodApples = new List<string>();
@@ -112,7 +111,6 @@ namespace xml_service.Models.V100
                     result.GoodApples.Add(value);
                 }
             }
-            result.BadApples = new List<string>();
             var badApples = element.Element("BadApples");
             if (badApples != null)
             {

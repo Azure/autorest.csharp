@@ -191,7 +191,6 @@ namespace xml_service.Models.V100
                 value3 = RetentionPolicy.DeserializeRetentionPolicy(deleteRetentionPolicy);
             }
             result.DeleteRetentionPolicy = value3;
-            result.Cors = new List<CorsRule>();
             var cors = element.Element("Cors");
             if (cors != null)
             {

@@ -138,7 +138,6 @@ namespace xml_service.Models.V100
                 result.Author = (string?)author;
             }
             result.Slides = new List<Slide>();
-            result.Slides = new List<Slide>();
             foreach (var e in element.Elements("slide"))
             {
                 Slide value = default;

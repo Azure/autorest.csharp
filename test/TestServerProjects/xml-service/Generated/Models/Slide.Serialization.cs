@@ -117,7 +117,6 @@ namespace xml_service.Models.V100
             }
             result.Title = value;
             result.Items = new List<string>();
-            result.Items = new List<string>();
             foreach (var e in element.Elements("item"))
             {
                 string value0 = default;
