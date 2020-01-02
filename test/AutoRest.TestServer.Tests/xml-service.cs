@@ -14,7 +14,23 @@ namespace AutoRest.TestServer.Tests
 {
     public class XmlTests : TestServerTestBase
     {
-        public XmlTests(TestServerVersion version) : base(version) { }
+        public XmlTests(TestServerVersion version) : base(version, "xml") { }
+
+        [Test]
+        public Task JsonInputInXMLSwagger() => TestStatus(async (host, pipeline) =>
+        {
+            return await new XmlOperations(ClientDiagnostics, pipeline, host).JsonInputAsync(new JSONInput()
+            {
+                Id = 42
+            });
+        });
+
+        [Test]
+        public Task JsonOutputInXMLSwagger() => Test(async (host, pipeline) =>
+        {
+            var result = await new XmlOperations(ClientDiagnostics, pipeline, host).JsonOutputAsync();
+            Assert.AreEqual(42, result.Value.Id);
+        });
 
 
         [Test]
@@ -45,7 +61,7 @@ namespace AutoRest.TestServer.Tests
                 }
             };
 
-            return await new XmlOperations(ClientDiagnostics, pipeline).PutSimpleAsync(slideshow);
+            return await new XmlOperations(ClientDiagnostics, pipeline, host).PutSimpleAsync(slideshow);
         }, true);
 
         [Test]
@@ -87,7 +103,7 @@ namespace AutoRest.TestServer.Tests
                 }
             };
 
-            return await new XmlOperations(ClientDiagnostics, pipeline).PutComplexTypeRefNoMetaAsync(root);
+            return await new XmlOperations(ClientDiagnostics, pipeline, host).PutComplexTypeRefNoMetaAsync(root);
         }, true);
 
         [Test]
@@ -112,7 +128,7 @@ namespace AutoRest.TestServer.Tests
                 }
             };
 
-            return await new XmlOperations(ClientDiagnostics, pipeline).PutComplexTypeRefWithMetaAsync(root);
+            return await new XmlOperations(ClientDiagnostics, pipeline, host).PutComplexTypeRefWithMetaAsync(root);
         }, true);
 
         [Test]
@@ -138,7 +154,7 @@ namespace AutoRest.TestServer.Tests
                 }
             };
 
-            return await new XmlOperations(ClientDiagnostics, pipeline).PutRootListSingleItemAsync(root);
+            return await new XmlOperations(ClientDiagnostics, pipeline, host).PutRootListSingleItemAsync(root);
         }, true);
 
         [Test]
@@ -161,7 +177,7 @@ namespace AutoRest.TestServer.Tests
                 Slides = new List<Slide>()
             };
 
-            return await new XmlOperations(ClientDiagnostics, pipeline).PutEmptyListAsync(root);
+            return await new XmlOperations(ClientDiagnostics, pipeline, host).PutEmptyListAsync(root);
         }, true);
 
         [Test]
@@ -186,7 +202,7 @@ namespace AutoRest.TestServer.Tests
                 Expiration = DateTimeOffset.Parse("2012-02-24T00:53:52.789Z")
             };
 
-            return await new XmlOperations(ClientDiagnostics, pipeline).PutEmptyChildElementAsync(root);
+            return await new XmlOperations(ClientDiagnostics, pipeline, host).PutEmptyChildElementAsync(root);
         }, true);
 
         [Test]
@@ -209,7 +225,7 @@ namespace AutoRest.TestServer.Tests
                 GoodApples = new[] {"Fuji", "Gala"}
             };
 
-            return await new XmlOperations(ClientDiagnostics, pipeline).PutWrappedListsAsync(root);
+            return await new XmlOperations(ClientDiagnostics, pipeline, host).PutWrappedListsAsync(root);
         }, true);
 
         [Test]
@@ -231,7 +247,7 @@ namespace AutoRest.TestServer.Tests
                 GoodApples = new string[] {}
             };
 
-            return await new XmlOperations(ClientDiagnostics, pipeline).PutEmptyWrappedListsAsync(root);
+            return await new XmlOperations(ClientDiagnostics, pipeline, host).PutEmptyWrappedListsAsync(root);
         }, true);
 
         [Test]
@@ -255,12 +271,13 @@ namespace AutoRest.TestServer.Tests
                     AccessPolicy =
                     {
                         Start = DateTimeOffset.Parse("2009-09-28T08:49:37.123Z"),
-                        Expiry = DateTimeOffset.Parse("2009-09-29T08:49:37.123Z")
+                        Expiry = DateTimeOffset.Parse("2009-09-29T08:49:37.123Z"),
+                        Permission = "rwd"
                     }
                 }
             };
 
-            return await new XmlOperations(ClientDiagnostics, pipeline).PutAclsAsync(root);
+            return await new XmlOperations(ClientDiagnostics, pipeline, host).PutAclsAsync(root);
         }, true);
 
         [Test]
@@ -275,6 +292,7 @@ namespace AutoRest.TestServer.Tests
 
             Assert.AreEqual("MTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTI=", acl.Id);
             Assert.AreEqual(DateTimeOffset.Parse("2009-09-28T08:49:37.123Z"), acl.AccessPolicy.Start);
+            Assert.AreEqual("rwd", acl.AccessPolicy.Permission);
             Assert.AreEqual(DateTimeOffset.Parse("2009-09-29T08:49:37.123Z"), acl.AccessPolicy.Expiry);
         }, true);
 
@@ -297,7 +315,7 @@ namespace AutoRest.TestServer.Tests
                 }
             };
 
-            return await new XmlOperations(ClientDiagnostics, pipeline).PutRootListAsync(root);
+            return await new XmlOperations(ClientDiagnostics, pipeline, host).PutRootListAsync(root);
         }, true);
 
         [Test]
@@ -322,7 +340,7 @@ namespace AutoRest.TestServer.Tests
         {
             var root = new List<Banana>();
 
-            return await new XmlOperations(ClientDiagnostics, pipeline).PutEmptyRootListAsync(root);
+            return await new XmlOperations(ClientDiagnostics, pipeline, host).PutEmptyRootListAsync(root);
         }, true);
 
         [Test]
@@ -497,7 +515,7 @@ namespace AutoRest.TestServer.Tests
                     }
                 }
             };
-            return await new XmlOperations(ClientDiagnostics, pipeline).PutServicePropertiesAsync(properties);
+            return await new XmlOperations(ClientDiagnostics, pipeline, host).PutServicePropertiesAsync(properties);
         }, true);
 
         [Test]
