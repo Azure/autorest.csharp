@@ -4,6 +4,7 @@
 using AutoRest.CSharp.V3.ClientModels;
 using AutoRest.CSharp.V3.Pipeline.Generated;
 using AutoRest.CSharp.V3.Utilities;
+using Azure.Core;
 
 namespace AutoRest.CSharp.V3.Plugins
 {
@@ -12,25 +13,40 @@ namespace AutoRest.CSharp.V3.Plugins
         public static bool IsNullable(this Parameter parameter) => !(parameter.Required ?? false);
         public static bool IsNullable(this Property parameter) => !(parameter.Required ?? false);
 
-        public static string CSharpName(this Parameter parameter) => parameter.Schema is ConstantSchema ?
-            parameter.Language.Default.Name.ToCleanName() :
-            parameter.Language.Default.Name.ToVariableName();
+        public static string CSharpName(this Parameter parameter) =>
+            GetClientName(parameter.Extensions) ?? parameter.Language.Default.Name.ToCleanName();
 
         public static string CSharpName(this ChoiceValue choice) => choice.Language.Default.Name.ToCleanName();
 
         public static string CSharpName(this Property property) =>
-            (property.Language.Default.Name == null || property.Language.Default.Name == "null") ? "NullProperty" : property.Language.Default.Name.ToCleanName();
+            GetClientName(property.Extensions) ?? property.Language.Default.Name.ToCleanName();
 
-        public static string CSharpName(this OperationGroup operationGroup) =>
-            $"{(!operationGroup.Language.Default.Name.IsNullOrEmpty() ? operationGroup.Language.Default.Name.ToCleanName() : "All")}Operations";
+        public static string CSharpName(this OperationGroup operationGroup)
+        {
+            string? clientName = GetClientName(operationGroup.Extensions);
+            if (clientName != null)
+            {
+                return clientName;
+            }
+
+            string baseName = operationGroup.Language.Default.Name.IsNullOrEmpty() ? "All" : operationGroup.Language.Default.Name.ToCleanName();
+            return $"{baseName}Operations";
+        }
 
         public static string CSharpName(this Operation operation) =>
             operation.Language.Default.Name.ToCleanName();
 
-        public static string CSharpName(this Schema operation) =>
-            operation.Language.Default.Name.ToCleanName();
+        public static string CSharpName(this Schema schema) =>
+            GetClientName(schema.Extensions) ?? schema.Language.Default.Name.ToCleanName();
 
-        public static string CSharpName(this ISchemaTypeProvider operation) =>
-            operation.Name.ToCleanName();
+        private static string? GetClientName(DictionaryOfAny? extensions)
+        {
+            if (extensions != null && extensions.TryGetValue("x-ms-client-name", out object? value))
+            {
+                return value as string;
+            }
+
+            return null;
+        }
     }
 }
