@@ -118,6 +118,7 @@ namespace AutoRest.CSharp.V3.Plugins
             return true;
         }
 
+        // TODO: remove if https://github.com/Azure/autorest.modelerfour/issues/103 is implemented
         private KnownMediaType[] GetMediaTypes(CodeModel codeModel)
         {
             HashSet<KnownMediaType> types = new HashSet<KnownMediaType>();
