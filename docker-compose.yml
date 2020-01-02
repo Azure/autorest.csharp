@@ -9,7 +9,7 @@ services:
     ### Get generated code to local to view .cs and .nupkg file
     ### you can change .nupkg to .zip to view generated .dll file inside the package
     # volumes:
-    #   - /Users/nkar/workspaces/temp/autorest/output:/app/output
+    #   - C:/New folder/output4:/app/output
     environment: 
       ENV_YML_FILE_URL: ${SWAGGER_URL}
       ENV_OUTPUT_PATH: "/app/output"

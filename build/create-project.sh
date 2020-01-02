@@ -11,7 +11,7 @@ curl -o $INPUT_PATH ${ENV_YML_FILE_URL}
 
 eolConverter "./input/swagger.yml"
 
-autorest --use=/app --csharp --output-folder=$OUTPUT_PATH --namespace=$NAMESPACE --input-file=$INPUT_PATH
+autorest --use=/app --csharp --output-folder=$OUTPUT_PATH --namespace=$NAMESPACE --input-file=$INPUT_PATH --add-credentials
 
 dotnet new classlib -n $NAMESPACE -o $OUTPUT_PATH
 cat >NuGet.config <<EOL
@@ -36,8 +36,8 @@ cat >NuGet.config <<EOL
 EOL
 
 dotnet add $OUTPUT_PATH/$NAMESPACE.csproj package Newtonsoft.Json -v 11.0.2
-dotnet add $OUTPUT_PATH/$NAMESPACE.csproj package Microsoft.Rest.ClientRuntime -v 2.3.12
-dotnet add $OUTPUT_PATH/$NAMESPACE.csproj package Agoda.Frameworks.Http.AutoRestExt -v 2.0.74
+dotnet add $OUTPUT_PATH/$NAMESPACE.csproj package Microsoft.Rest.ClientRuntime -v 2.3.21
+dotnet add $OUTPUT_PATH/$NAMESPACE.csproj package Agoda.Frameworks.Http -v 3.0.75
 rm $OUTPUT_PATH/Class1.cs
 
 dotnet pack $OUTPUT_PATH/$NAMESPACE.csproj -p:PackageVersion=$ENV_VERSION

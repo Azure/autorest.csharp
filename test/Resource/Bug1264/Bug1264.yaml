@@ -1,0 +1,35 @@
+openapi: 3.0.0
+servers: []
+info:
+  version: 1.0.0
+  title: API with collection format
+paths:
+  "/operation3/{arrayPath}":
+    put:
+      operationId: my_operation3
+      parameters:
+      - name: arrayPath
+        in: path
+        required: true
+        description: array type path param
+        style: simple
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ResultObject"
+      description: simple put op
+components:
+  schemas:
+    ResultObject:
+      properties:
+        SomeProp:
+          type: string
+          description: simple prop
+      description: simple res obj

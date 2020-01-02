@@ -61,7 +61,6 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
-    <PackageReference Include="System.CodeDom" Version="4.5.0" />
     <PackageReference Include="YamlDotNet.Signed" Version="5.2.1" />
     <PackageReference Include="Microsoft.CodeAnalysis" Version="2.3.1" />
     <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="2.3.1" />
@@ -79,6 +78,24 @@
     <PackageReference Include="dotnet-Perks.CodeGen" Version="2.0.1">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <DotnetRazor Remove="LoadBalanced\Templates\Rest\Client\ExtendedServiceClientTemplate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <DotnetRazor Remove="LoadBalanced\Templates\Rest\Client\MethodBodyTemplateRestCall.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <DotnetRazor Remove="LoadBalanced\Templates\Rest\Client\MethodTemplate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <DotnetRazor Remove="LoadBalanced\Templates\Rest\Client\ServiceClientTemplate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <DotnetRazor Remove="LoadBalanced\Templates\Rest\Client\MethodBodyTemplateForwardTo.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <DotnetRazor Remove="LoadBalanced\Templates\Rest\Client\ServiceClientBodyTemplate.cshtml" />
   </ItemGroup>
 
 </Project>

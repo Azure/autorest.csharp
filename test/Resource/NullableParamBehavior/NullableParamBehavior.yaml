@@ -1,0 +1,371 @@
+---
+openapi: 3.0.0
+servers: []
+info:
+  version: 1.0.0
+  title: Simple API
+paths:
+  "/operationInteger":
+    get:
+      operationId: test_op
+      responses:
+        '200':
+          description: OK
+          type: integer
+    # Naming: paramDCBA
+    # A: readOnly (false or true or not set)
+    # B: required (false or true or not set)
+    # C: x-nullable (false or true or not set)
+    # D: default (not set or set)
+    parameters:
+    - in: query
+      name: param0000
+      x-nullable: false
+      required: false
+      readOnly: false
+      schema:
+        type: integer
+    - in: query
+      name: param0001
+      x-nullable: false
+      required: false
+      readOnly: true
+      schema:
+        type: integer
+    - in: query
+      name: param0002
+      x-nullable: false
+      required: false
+      schema:
+        type: integer
+    - in: query
+      name: param0010
+      x-nullable: false
+      required: true
+      readOnly: false
+      schema:
+        type: integer
+    - in: query
+      name: param0011
+      x-nullable: false
+      required: true
+      readOnly: true
+      schema:
+        type: integer
+    - in: query
+      name: param0012
+      x-nullable: false
+      required: true
+      schema:
+        type: integer
+    - in: query
+      name: param0020
+      x-nullable: false
+      readOnly: false
+      schema:
+        type: integer
+    - in: query
+      name: param0021
+      x-nullable: false
+      readOnly: true
+      schema:
+        type: integer
+    - in: query
+      name: param0022
+      x-nullable: false
+      schema:
+        type: integer
+    - in: query
+      name: param0100
+      x-nullable: true
+      required: false
+      readOnly: false
+      schema:
+        type: integer
+    - in: query
+      name: param0101
+      x-nullable: true
+      required: false
+      readOnly: true
+      schema:
+        type: integer
+    - in: query
+      name: param0102
+      x-nullable: true
+      required: false
+      schema:
+        type: integer
+    - in: query
+      name: param0110
+      x-nullable: true
+      required: true
+      readOnly: false
+      schema:
+        type: integer
+    - in: query
+      name: param0111
+      x-nullable: true
+      required: true
+      readOnly: true
+      schema:
+        type: integer
+    - in: query
+      name: param0112
+      x-nullable: true
+      required: true
+      schema:
+        type: integer
+    - in: query
+      name: param0120
+      x-nullable: true
+      readOnly: false
+      schema:
+        type: integer
+    - in: query
+      name: param0121
+      x-nullable: true
+      readOnly: true
+      schema:
+        type: integer
+    - in: query
+      name: param0122
+      x-nullable: true
+      schema:
+        type: integer
+    - in: query
+      name: param0200
+      required: false
+      readOnly: false
+      schema:
+        type: integer
+    - in: query
+      name: param0201
+      required: false
+      readOnly: true
+      schema:
+        type: integer
+    - in: query
+      name: param0202
+      required: false
+      schema:
+        type: integer
+    - in: query
+      name: param0210
+      required: true
+      readOnly: false
+      schema:
+        type: integer
+    - in: query
+      name: param0211
+      required: true
+      readOnly: true
+      schema:
+        type: integer
+    - in: query
+      name: param0212
+      required: true
+      schema:
+        type: integer
+    - in: query
+      name: param0220
+      readOnly: false
+      schema:
+        type: integer
+    - in: query
+      name: param0221
+      readOnly: true
+      schema:
+        type: integer
+    - in: query
+      name: param0222
+      schema:
+        type: integer
+    - in: query
+      name: param1000
+      x-nullable: false
+      required: false
+      readOnly: false
+      schema:
+        type: integer
+        default: 42
+    - in: query
+      name: param1001
+      x-nullable: false
+      required: false
+      readOnly: true
+      schema:
+        type: integer
+        default: 42
+    - in: query
+      name: param1002
+      x-nullable: false
+      required: false
+      schema:
+        type: integer
+        default: 42
+    - in: query
+      name: param1010
+      x-nullable: false
+      required: true
+      readOnly: false
+      schema:
+        type: integer
+        default: 42
+    - in: query
+      name: param1011
+      x-nullable: false
+      required: true
+      readOnly: true
+      schema:
+        type: integer
+        default: 42
+    - in: query
+      name: param1012
+      x-nullable: false
+      required: true
+      schema:
+        type: integer
+        default: 42
+    - in: query
+      name: param1020
+      x-nullable: false
+      readOnly: false
+      schema:
+        type: integer
+        default: 42
+    - in: query
+      name: param1021
+      x-nullable: false
+      readOnly: true
+      schema:
+        type: integer
+        default: 42
+    - in: query
+      name: param1022
+      x-nullable: false
+      schema:
+        type: integer
+        default: 42
+    - in: query
+      name: param1100
+      x-nullable: true
+      required: false
+      readOnly: false
+      schema:
+        type: integer
+        default: 42
+    - in: query
+      name: param1101
+      x-nullable: true
+      required: false
+      readOnly: true
+      schema:
+        type: integer
+        default: 42
+    - in: query
+      name: param1102
+      x-nullable: true
+      required: false
+      schema:
+        type: integer
+        default: 42
+    - in: query
+      name: param1110
+      x-nullable: true
+      required: true
+      readOnly: false
+      schema:
+        type: integer
+        default: 42
+    - in: query
+      name: param1111
+      x-nullable: true
+      required: true
+      readOnly: true
+      schema:
+        type: integer
+        default: 42
+    - in: query
+      name: param1112
+      x-nullable: true
+      required: true
+      schema:
+        type: integer
+        default: 42
+    - in: query
+      name: param1120
+      x-nullable: true
+      readOnly: false
+      schema:
+        type: integer
+        default: 42
+    - in: query
+      name: param1121
+      x-nullable: true
+      readOnly: true
+      schema:
+        type: integer
+        default: 42
+    - in: query
+      name: param1122
+      x-nullable: true
+      schema:
+        type: integer
+        default: 42
+    - in: query
+      name: param1200
+      required: false
+      readOnly: false
+      schema:
+        type: integer
+        default: 42
+    - in: query
+      name: param1201
+      required: false
+      readOnly: true
+      schema:
+        type: integer
+        default: 42
+    - in: query
+      name: param1202
+      required: false
+      schema:
+        type: integer
+        default: 42
+    - in: query
+      name: param1210
+      required: true
+      readOnly: false
+      schema:
+        type: integer
+        default: 42
+    - in: query
+      name: param1211
+      required: true
+      readOnly: true
+      schema:
+        type: integer
+        default: 42
+    - in: query
+      name: param1212
+      required: true
+      schema:
+        type: integer
+        default: 42
+    - in: query
+      name: param1220
+      readOnly: false
+      schema:
+        type: integer
+        default: 42
+    - in: query
+      name: param1221
+      readOnly: true
+      schema:
+        type: integer
+        default: 42
+    - in: query
+      name: param1222
+      schema:
+        type: integer
+        default: 42

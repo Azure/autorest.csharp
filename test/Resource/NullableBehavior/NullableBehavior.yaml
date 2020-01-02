@@ -1,0 +1,472 @@
+openapi: 3.0.0
+servers: []
+info:
+  version: 1.0.0
+  title: Simple API
+paths:
+  "/operationInteger":
+    get:
+      operationId: test_integer
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ResultInteger"
+components:
+  # Naming: MemberCBA
+  # A: readOnly (true or false)
+  # B: default (set or not)
+  # C: required (listed or not)
+  schemas:
+    ResultInteger:
+      required:
+      - Member100
+      - Member110
+      properties:
+        Member000:
+          type: integer
+          readOnly: false
+        Member001:
+          type: integer
+          readOnly: true
+        Member010:
+          type: integer
+          readOnly: false
+          default: 42
+        Member011:
+          type: integer
+          readOnly: true
+          default: 42
+        Member100:
+          type: integer
+          readOnly: false
+        Member110:
+          type: integer
+          readOnly: false
+          default: 42
+    ResultIntegerXNfalse:
+      required:
+      - Member100
+      - Member110
+      properties:
+        Member000:
+          type: integer
+          readOnly: false
+          nullable: false
+        Member001:
+          type: integer
+          readOnly: true
+          nullable: false
+        Member010:
+          type: integer
+          readOnly: false
+          default: 42
+          nullable: false
+        Member011:
+          type: integer
+          readOnly: true
+          default: 42
+          nullable: false
+        Member100:
+          type: integer
+          readOnly: false
+          nullable: false
+        Member110:
+          type: integer
+          readOnly: false
+          default: 42
+          nullable: false
+    ResultIntegerXNtrue:
+      required:
+      - Member100
+      - Member110
+      properties:
+        Member000:
+          type: integer
+          readOnly: false
+          nullable: true
+        Member001:
+          type: integer
+          readOnly: true
+          nullable: true
+        Member010:
+          type: integer
+          readOnly: false
+          default: 42
+          nullable: true
+        Member011:
+          type: integer
+          readOnly: true
+          default: 42
+          nullable: true
+        Member100:
+          type: integer
+          readOnly: false
+          nullable: true
+        Member110:
+          type: integer
+          readOnly: false
+          default: 42
+          nullable: true
+    ResultGuid:
+      required:
+      - Member100
+      - Member110
+      properties:
+        Member000:
+          type: string
+          format: uuid
+          readOnly: false
+        Member001:
+          type: string
+          format: uuid
+          readOnly: true
+        Member010:
+          type: string
+          format: uuid
+          readOnly: false
+          default: 42
+        Member011:
+          type: string
+          format: uuid
+          readOnly: true
+          default: 42
+        Member100:
+          type: string
+          format: uuid
+          readOnly: false
+        Member110:
+          type: string
+          format: uuid
+          readOnly: false
+          default: 42
+    ResultGuidXNfalse:
+      required:
+      - Member100
+      - Member110
+      properties:
+        Member000:
+          type: string
+          format: uuid
+          readOnly: false
+          nullable: false
+        Member001:
+          type: string
+          format: uuid
+          readOnly: true
+          nullable: false
+        Member010:
+          type: string
+          format: uuid
+          readOnly: false
+          default: 42
+          nullable: false
+        Member011:
+          type: string
+          format: uuid
+          readOnly: true
+          default: 42
+          nullable: false
+        Member100:
+          type: string
+          format: uuid
+          readOnly: false
+          nullable: false
+        Member110:
+          type: string
+          format: uuid
+          readOnly: false
+          default: 42
+          nullable: false
+    ResultGuidXNtrue:
+      required:
+      - Member100
+      - Member110
+      properties:
+        Member000:
+          type: string
+          format: uuid
+          readOnly: false
+          nullable: true
+        Member001:
+          type: string
+          format: uuid
+          readOnly: true
+          nullable: true
+        Member010:
+          type: string
+          format: uuid
+          readOnly: false
+          default: 42
+          nullable: true
+        Member011:
+          type: string
+          format: uuid
+          readOnly: true
+          default: 42
+          nullable: true
+        Member100:
+          type: string
+          format: uuid
+          readOnly: false
+          nullable: true
+        Member110:
+          type: string
+          format: uuid
+          readOnly: false
+          default: 42
+          nullable: true
+    ResultList:
+      required:
+      - Member100
+      - Member110
+      properties:
+        Member000:
+          type: array
+          items:
+            type: integer
+            readOnly: false
+        Member001:
+          type: array
+          items:
+            type: integer
+            readOnly: true
+        Member010:
+          type: array
+          items:
+            type: integer
+            readOnly: false
+            default: 42
+        Member011:
+          type: array
+          items:
+            type: integer
+            readOnly: true
+            default: 42
+        Member100:
+          type: array
+          items:
+            type: integer
+            readOnly: false
+        Member110:
+          type: array
+          items:
+            type: integer
+            readOnly: false
+            default: 42
+    ResultListXNfalse:
+      required:
+      - Member100
+      - Member110
+      properties:
+        Member000:
+          type: array
+          items:
+            type: integer
+            readOnly: false
+            nullable: false
+        Member001:
+          type: array
+          items:
+            type: integer
+            readOnly: true
+            nullable: false
+        Member010:
+          type: array
+          items:
+            type: integer
+            readOnly: false
+            default: 42
+            nullable: false
+        Member011:
+          type: array
+          items:
+            type: integer
+            readOnly: true
+            default: 42
+            nullable: false
+        Member100:
+          type: array
+          items:
+            type: integer
+            readOnly: false
+            nullable: false
+        Member110:
+          type: array
+          items:
+            type: integer
+            readOnly: false
+            default: 42
+            nullable: false
+    ResultListXNtrue:
+      required:
+      - Member100
+      - Member110
+      properties:
+        Member000:
+          type: array
+          items:
+            type: integer
+            readOnly: false
+            nullable: true
+        Member001:
+          type: array
+          items:
+            type: integer
+            readOnly: true
+            nullable: true
+        Member010:
+          type: array
+          items:
+            type: integer
+            readOnly: false
+            default: 42
+            nullable: true
+        Member011:
+          type: array
+          items:
+            type: integer
+            readOnly: true
+            default: 42
+            nullable: true
+        Member100:
+          type: array
+          items:
+            type: integer
+            readOnly: false
+            nullable: true
+        Member110:
+          type: array
+          items:
+            type: integer
+            readOnly: false
+            default: 42
+            nullable: true
+    ResultDictionary:
+      required:
+      - Member100
+      - Member110
+      properties:
+        Member000:
+          type: object
+          additionalProperties:
+            type: integer
+            readOnly: false
+        Member001:
+          type: object
+          additionalProperties:
+            type: integer
+            readOnly: true
+        Member010:
+          type: object
+          additionalProperties:
+            type: integer
+            readOnly: false
+            default: 42
+        Member011:
+          type: object
+          additionalProperties:
+            type: integer
+            readOnly: true
+            default: 42
+        Member100:
+          type: object
+          additionalProperties:
+            type: integer
+            readOnly: false
+        Member110:
+          type: object
+          additionalProperties:
+            type: integer
+            readOnly: false
+            default: 42
+    ResultDictionaryXNfalse:
+      required:
+      - Member100
+      - Member110
+      properties:
+        Member000:
+          type: object
+          additionalProperties:
+            type: integer
+            readOnly: false
+            nullable: false
+        Member001:
+          type: object
+          additionalProperties:
+            type: integer
+            readOnly: true
+            nullable: false
+        Member010:
+          type: object
+          additionalProperties:
+            type: integer
+            readOnly: false
+            default: 42
+            nullable: false
+        Member011:
+          type: object
+          additionalProperties:
+            type: integer
+            readOnly: true
+            default: 42
+            nullable: false
+        Member100:
+          type: object
+          additionalProperties:
+            type: integer
+            readOnly: false
+            nullable: false
+        Member110:
+          type: object
+          additionalProperties:
+            type: integer
+            readOnly: false
+            default: 42
+            nullable: false
+    ResultDictionaryXNtrue:
+      required:
+      - Member100
+      - Member110
+      properties:
+        Member000:
+          type: object
+          additionalProperties:
+            type: integer
+            readOnly: false
+            nullable: true
+        Member001:
+          type: object
+          additionalProperties:
+            type: integer
+            readOnly: true
+            nullable: true
+        Member010:
+          type: object
+          additionalProperties:
+            type: integer
+            readOnly: false
+            default: 42
+            nullable: true
+        Member011:
+          type: object
+          additionalProperties:
+            type: integer
+            readOnly: true
+            default: 42
+            nullable: true
+        Member100:
+          type: object
+          additionalProperties:
+            type: integer
+            readOnly: false
+            nullable: true
+        Member110:
+          type: object
+          additionalProperties:
+            type: integer
+            readOnly: false
+            default: 42
+            nullable: true
