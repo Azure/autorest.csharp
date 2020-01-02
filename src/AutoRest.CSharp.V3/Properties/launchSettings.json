@@ -10,7 +10,7 @@
     },
     "AppConfiguration": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\AppConfiguration\\CodeModel.yaml --plugin=cs-modeler --output-path=$(SolutionDir)\\samples\\AppConfiguration --namespace=AppConfiguration"
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\AppConfiguration\\AppConfiguration\\CodeModel.yaml --plugin=cs-modeler --output-path=$(SolutionDir)\\samples\\AppConfiguration\\AppConfiguration --namespace=AppConfiguration"
     },
     "header": {
       "commandName": "Project",
@@ -66,7 +66,7 @@
     },
     "CognitiveServices.TextAnalytics": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\CognitiveServices.TextAnalytics\\CodeModel.yaml --plugin=cs-modeler --output-path=$(SolutionDir)\\samples\\CognitiveServices.TextAnalytics --namespace=CognitiveServices.TextAnalytics"
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\CognitiveServices.TextAnalytics\\CognitiveServices.TextAnalytics\\CodeModel.yaml --plugin=cs-modeler --output-path=$(SolutionDir)\\samples\\CognitiveServices.TextAnalytics\\CognitiveServices.TextAnalytics --namespace=CognitiveServices.TextAnalytics"
     },
     "validation": {
       "commandName": "Project",

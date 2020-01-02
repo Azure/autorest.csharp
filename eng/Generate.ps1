@@ -95,10 +95,9 @@ $testNames =
 foreach ($testName in $testNames)
 {
     $inputFile = Join-Path $testServerSwaggerPath "$testName.json"
-    $outputPath = Join-Path $testServerDirectory $testName
     $swaggerDefinitions[$testName] = @{
         'title'=$testName;
-        'output'=$outputPath;
+        'output'=$testServerDirectory;
         'arguments'="--require=$configurationPath --input-file=$inputFile"
     }
 }
@@ -110,10 +109,9 @@ foreach ($file in Get-ChildItem $testSwaggerPath)
 {
     $testName = [System.IO.Path]::GetFileNameWithoutExtension($file.Name)
     $inputFile = Join-Path $testSwaggerPath "$testName.json"
-    $outputPath = Join-Path $testServerDirectory $testName
     $swaggerDefinitions[$testName] = @{
         'title'=$testName;
-        'output'=$outputPath;
+        'output'=$testServerDirectory;
         'arguments'="--require=$configurationPath --input-file=$inputFile"
     }
 }
@@ -141,8 +139,8 @@ if ($updateLaunchSettings)
     foreach ($key in $swaggerDefinitions.Keys)
     {
         $definition = $swaggerDefinitions[$key];
-        $outputPath = $definition.output.Replace($repoRoot, "`$(SolutionDir)")
-        $codeModel = (Join-Path $outputPath 'CodeModel.yaml')
+        $outputPath = (Join-Path $definition.output $key).Replace($repoRoot, "`$(SolutionDir)")
+        $codeModel = Join-Path $outputPath 'CodeModel.yaml'
         $namespace = $definition.title.Replace('-', '_')
 
         $settings.profiles[$key] = @{

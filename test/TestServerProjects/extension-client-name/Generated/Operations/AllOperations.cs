@@ -13,33 +13,33 @@ namespace extension_client_name
 {
     internal partial class AllOperations
     {
-        private string Host;
+        private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
-        public AllOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string Host = "http://localhost:3000")
+        public AllOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            if (Host == null)
+            if (host == null)
             {
-                throw new ArgumentNullException(nameof(Host));
+                throw new ArgumentNullException(nameof(host));
             }
 
-            this.Host = Host;
+            this.host = host;
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
-        public async ValueTask<ResponseWithHeaders<OriginalSchema, OriginalOperationHeaders>> OriginalOperationAsync(string OriginalPathParameter, string OriginalQueryParameter, OriginalSchema RenamedBodyParameter, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<OriginalSchema, OriginalOperationHeaders>> OriginalOperationAsync(string originalPathParameter, string originalQueryParameter, OriginalSchema renamedBodyParameter, CancellationToken cancellationToken = default)
         {
-            if (OriginalPathParameter == null)
+            if (originalPathParameter == null)
             {
-                throw new ArgumentNullException(nameof(OriginalPathParameter));
+                throw new ArgumentNullException(nameof(originalPathParameter));
             }
-            if (OriginalQueryParameter == null)
+            if (originalQueryParameter == null)
             {
-                throw new ArgumentNullException(nameof(OriginalQueryParameter));
+                throw new ArgumentNullException(nameof(originalQueryParameter));
             }
-            if (RenamedBodyParameter == null)
+            if (renamedBodyParameter == null)
             {
-                throw new ArgumentNullException(nameof(RenamedBodyParameter));
+                throw new ArgumentNullException(nameof(renamedBodyParameter));
             }
 
             using var scope = clientDiagnostics.CreateScope("extension_client_name.OriginalOperation");
@@ -49,13 +49,13 @@ namespace extension_client_name
                 using var message = pipeline.CreateMessage();
                 var request = message.Request;
                 request.Method = RequestMethod.Patch;
-                request.Uri.Reset(new Uri($"{Host}"));
+                request.Uri.Reset(new Uri($"{host}"));
                 request.Uri.AppendPath("/originalOperation/", false);
-                request.Uri.AppendPath(OriginalPathParameter, true);
+                request.Uri.AppendPath(originalPathParameter, true);
                 request.Headers.Add("Content-Type", "application/json");
-                request.Uri.AppendQuery("originalQueryParameter", OriginalQueryParameter, true);
+                request.Uri.AppendQuery("originalQueryParameter", originalQueryParameter, true);
                 using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(RenamedBodyParameter);
+                content.JsonWriter.WriteObjectValue(renamedBodyParameter);
                 request.Content = content;
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
