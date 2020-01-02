@@ -45,6 +45,8 @@ namespace AutoRest.TestServer.Tests.Infrastructure
                     {
                         BaseAddress = new Uri(Host)
                     };
+                    _ = Task.Run(() => ReadOutput(_process.StandardError));
+                    _ = Task.Run(() => ReadOutput(_process.StandardOutput));
                     return;
                 }
             }
@@ -112,6 +114,14 @@ namespace AutoRest.TestServer.Tests.Infrastructure
             }
 
             return results.ToArray();
+        }
+
+        private void ReadOutput(StreamReader stream)
+        {
+            while (!_process.HasExited && !stream.EndOfStream)
+            {
+                stream.ReadToEnd();
+            }
         }
 
         public void Stop()
