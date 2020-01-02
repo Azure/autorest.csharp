@@ -106,7 +106,8 @@ namespace AutoRest.CSharp.V3.CodeGen
                                 writer.AppendRaw("WriteObjectValue");
                             }
                             else if (frameworkType == typeof(string) ||
-                                     frameworkType == typeof(char))
+                                     frameworkType == typeof(char) ||
+                                     frameworkType == typeof(Guid))
                             {
                                 writer.AppendRaw("WriteStringValue");
                             }
@@ -314,6 +315,8 @@ namespace AutoRest.CSharp.V3.CodeGen
                         writer.AppendRaw("GetDecimal");
                     if (frameworkType == typeof(string))
                         writer.AppendRaw("GetString");
+                    if (frameworkType == typeof(Guid))
+                        writer.AppendRaw("GetGuid");
 
                     if (frameworkType == typeof(byte[]))
                     {
