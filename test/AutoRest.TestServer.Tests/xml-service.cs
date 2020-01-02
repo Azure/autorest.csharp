@@ -17,6 +17,7 @@ namespace AutoRest.TestServer.Tests
         public XmlTests(TestServerVersion version) : base(version, "xml") { }
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task JsonInputInXMLSwagger() => TestStatus(async (host, pipeline) =>
         {
             return await new XmlOperations(ClientDiagnostics, pipeline, host).JsonInputAsync(new JSONInput()
@@ -26,14 +27,15 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task JsonOutputInXMLSwagger() => Test(async (host, pipeline) =>
         {
             var result = await new XmlOperations(ClientDiagnostics, pipeline, host).JsonOutputAsync();
             Assert.AreEqual(42, result.Value.Id);
         });
 
-
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task PutSimpleAsync() => TestStatus(async (host, pipeline) =>
         {
             var slideshow = new Slideshow();
@@ -92,6 +94,7 @@ namespace AutoRest.TestServer.Tests
 
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task PutComplexTypeRefNoMetaAsync() => TestStatus(async (host, pipeline) =>
         {
             var root = new RootWithRefAndNoMeta
@@ -117,6 +120,7 @@ namespace AutoRest.TestServer.Tests
         }, true);
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task PutComplexTypeRefWithMetaAsync() => TestStatus(async (host, pipeline) =>
         {
             var root = new RootWithRefAndMeta()
@@ -142,6 +146,7 @@ namespace AutoRest.TestServer.Tests
         }, true);
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task PutRootListSingleItemAsync() => TestStatus(async (host, pipeline) =>
         {
             var root = new[]
@@ -170,6 +175,7 @@ namespace AutoRest.TestServer.Tests
         }, true);
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task PutEmptyListAsync() => TestStatus(async (host, pipeline) =>
         {
             var root = new Slideshow
@@ -193,6 +199,7 @@ namespace AutoRest.TestServer.Tests
         }, true);
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task PutEmptyChildElementAsync() => TestStatus(async (host, pipeline) =>
         {
             var root = new Banana()
@@ -217,6 +224,7 @@ namespace AutoRest.TestServer.Tests
         }, true);
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task PutWrappedListsAsync() => TestStatus(async (host, pipeline) =>
         {
             var root = new AppleBarrel()
@@ -239,6 +247,7 @@ namespace AutoRest.TestServer.Tests
         }, true);
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task PutEmptyWrappedListsAsync() => TestStatus(async (host, pipeline) =>
         {
             var root = new AppleBarrel()
@@ -261,6 +270,7 @@ namespace AutoRest.TestServer.Tests
         }, true);
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task PutAclsAsync() => TestStatus(async (host, pipeline) =>
         {
             var root = new List<SignedIdentifier>()
@@ -297,6 +307,7 @@ namespace AutoRest.TestServer.Tests
         }, true);
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task PutRootListAsync() => TestStatus(async (host, pipeline) =>
         {
             var root = new List<Banana>()
@@ -336,6 +347,7 @@ namespace AutoRest.TestServer.Tests
         }, true);
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task PutEmptyRootListAsync() => TestStatus(async (host, pipeline) =>
         {
             var root = new List<Banana>();
@@ -476,6 +488,7 @@ namespace AutoRest.TestServer.Tests
         }, true);
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task PutServicePropertiesAsync() => TestStatus(async (host, pipeline) =>
         {
             var properties = new StorageServiceProperties()
