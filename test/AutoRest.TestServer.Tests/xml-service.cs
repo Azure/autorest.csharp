@@ -146,6 +146,7 @@ namespace AutoRest.TestServer.Tests
         }, true);
 
         [Test]
+        [Ignore("https://github.com/Azure/autorest.testserver/pull/111")]
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task PutRootListSingleItemAsync() => TestStatus(async (host, pipeline) =>
         {
@@ -199,6 +200,7 @@ namespace AutoRest.TestServer.Tests
         }, true);
 
         [Test]
+        [Ignore("https://github.com/Azure/autorest.testserver/pull/111")]
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task PutEmptyChildElementAsync() => TestStatus(async (host, pipeline) =>
         {
@@ -270,6 +272,7 @@ namespace AutoRest.TestServer.Tests
         }, true);
 
         [Test]
+        [Ignore("https://github.com/Azure/autorest.testserver/pull/111")]
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task PutAclsAsync() => TestStatus(async (host, pipeline) =>
         {
@@ -307,6 +310,7 @@ namespace AutoRest.TestServer.Tests
         }, true);
 
         [Test]
+        [Ignore("https://github.com/Azure/autorest.testserver/pull/111")]
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task PutRootListAsync() => TestStatus(async (host, pipeline) =>
         {
