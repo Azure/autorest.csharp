@@ -223,6 +223,18 @@ namespace AutoRest.TestServer.Tests
         }, true);
 
         [Test]
+        public Task PutEmptyWrappedListsAsync() => TestStatus(async (host, pipeline) =>
+        {
+            var root = new AppleBarrel()
+            {
+                BadApples = new string[] {},
+                GoodApples = new string[] {}
+            };
+
+            return await new XmlOperations(ClientDiagnostics, pipeline).PutEmptyWrappedListsAsync(root);
+        }, true);
+
+        [Test]
         public Task GetEmptyWrappedListsAsync() => Test(async (host, pipeline) =>
         {
             var result = await new XmlOperations(ClientDiagnostics, pipeline, host).GetEmptyWrappedListsAsync();
@@ -230,6 +242,25 @@ namespace AutoRest.TestServer.Tests
 
             CollectionAssert.AreEqual(new string[] {}, value.BadApples);
             CollectionAssert.AreEqual(new string[] {}, value.GoodApples);
+        }, true);
+
+        [Test]
+        public Task PutAclsAsync() => TestStatus(async (host, pipeline) =>
+        {
+            var root = new List<SignedIdentifier>()
+            {
+                new SignedIdentifier()
+                {
+                    Id = "MTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTI=",
+                    AccessPolicy =
+                    {
+                        Start = DateTimeOffset.Parse("2009-09-28T08:49:37.123Z"),
+                        Expiry = DateTimeOffset.Parse("2009-09-29T08:49:37.123Z")
+                    }
+                }
+            };
+
+            return await new XmlOperations(ClientDiagnostics, pipeline).PutAclsAsync(root);
         }, true);
 
         [Test]
@@ -245,6 +276,62 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual("MTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTI=", acl.Id);
             Assert.AreEqual(DateTimeOffset.Parse("2009-09-28T08:49:37.123Z"), acl.AccessPolicy.Start);
             Assert.AreEqual(DateTimeOffset.Parse("2009-09-29T08:49:37.123Z"), acl.AccessPolicy.Expiry);
+        }, true);
+
+        [Test]
+        public Task PutRootListAsync() => TestStatus(async (host, pipeline) =>
+        {
+            var root = new List<Banana>()
+            {
+                new Banana()
+                {
+                    Name = "Cavendish",
+                    Flavor = "Sweet",
+                    Expiration = DateTimeOffset.Parse("2018-02-28T00:40:00.123Z")
+                },
+                new Banana()
+                {
+                    Name = "Plantain",
+                    Flavor = "Savory",
+                    Expiration = DateTimeOffset.Parse("2018-02-28T00:40:00.123Z")
+                }
+            };
+
+            return await new XmlOperations(ClientDiagnostics, pipeline).PutRootListAsync(root);
+        }, true);
+
+        [Test]
+        public Task GetRootListAsync() => Test(async (host, pipeline) =>
+        {
+            var result = await new XmlOperations(ClientDiagnostics, pipeline, host).GetRootListAsync();
+            var values = result.Value.ToArray();
+
+            Assert.AreEqual(2, values.Length);
+
+            Assert.AreEqual("Cavendish", values[0].Name);
+            Assert.AreEqual("Sweet", values[0].Flavor);
+            Assert.AreEqual(DateTimeOffset.Parse("2018-02-28T00:40:00.123Z"), values[0].Expiration);
+
+            Assert.AreEqual("Plantain", values[1].Name);
+            Assert.AreEqual("Savory", values[1].Flavor);
+            Assert.AreEqual(DateTimeOffset.Parse("2018-02-28T00:40:00.123Z"), values[1].Expiration);
+        }, true);
+
+        [Test]
+        public Task PutEmptyRootListAsync() => TestStatus(async (host, pipeline) =>
+        {
+            var root = new List<Banana>();
+
+            return await new XmlOperations(ClientDiagnostics, pipeline).PutEmptyRootListAsync(root);
+        }, true);
+
+        [Test]
+        public Task GetEmptyRootListAsync() => Test(async (host, pipeline) =>
+        {
+            var result = await new XmlOperations(ClientDiagnostics, pipeline, host).GetEmptyRootListAsync();
+            var values = result.Value.ToArray();
+
+            Assert.AreEqual(0, values.Length);
         }, true);
 
         [Test]
@@ -368,6 +455,49 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual("yellow", blobs[4].Metadata["Color"]);
             Assert.AreEqual("03", blobs[4].Metadata["BlobNumber"]);
             Assert.AreEqual("SomeMetadataValue", blobs[4].Metadata["SomeMetadataName"]);
+        }, true);
+
+        [Test]
+        public Task PutServicePropertiesAsync() => TestStatus(async (host, pipeline) =>
+        {
+            var properties = new StorageServiceProperties()
+            {
+                Logging = new Logging()
+                {
+                    Version = "1.0",
+                    Delete = true,
+                    Read = false,
+                    Write = true,
+                    RetentionPolicy = new RetentionPolicy()
+                    {
+                        Days = 7,
+                        Enabled = true
+                    }
+                },
+                HourMetrics = new Metrics()
+                {
+                    Version = "1.0",
+                    Enabled = true,
+                    IncludeAPIs = false,
+                    RetentionPolicy = new RetentionPolicy()
+                    {
+                        Days = 7,
+                        Enabled = true
+                    }
+                },
+                MinuteMetrics = new Metrics()
+                {
+                    Version = "1.0",
+                    Enabled = true,
+                    IncludeAPIs = true,
+                    RetentionPolicy = new RetentionPolicy()
+                    {
+                        Days = 7,
+                        Enabled = true
+                    }
+                }
+            };
+            return await new XmlOperations(ClientDiagnostics, pipeline).PutServicePropertiesAsync(properties);
         }, true);
 
         [Test]
