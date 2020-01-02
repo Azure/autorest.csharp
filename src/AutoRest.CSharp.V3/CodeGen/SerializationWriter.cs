@@ -37,6 +37,11 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         private void WriteObjectSerialization(CodeWriter writer, ClientObject model)
         {
+            if (!model.Serializations.Any())
+            {
+                return;
+            }
+
             var cs = _typeFactory.CreateType(model);
             using (writer.Namespace(cs.Namespace))
             {
