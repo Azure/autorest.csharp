@@ -47,7 +47,7 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            var document = await XDocument.LoadAsync(message.Response.ContentStream, LoadOptions.PreserveWhitespace, cancellationToken).ConfigureAwait(false);
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             RootWithRefAndNoMeta value = default;
                             var rootWithRefAndNoMeta = document.Element("RootWithRefAndNoMeta");
                             if (rootWithRefAndNoMeta != null)
@@ -118,7 +118,7 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            var document = await XDocument.LoadAsync(message.Response.ContentStream, LoadOptions.PreserveWhitespace, cancellationToken).ConfigureAwait(false);
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             RootWithRefAndMeta value = default;
                             var rootWithRefAndMeta = document.Element("RootWithRefAndMeta");
                             if (rootWithRefAndMeta != null)
@@ -189,7 +189,7 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            var document = await XDocument.LoadAsync(message.Response.ContentStream, LoadOptions.PreserveWhitespace, cancellationToken).ConfigureAwait(false);
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             Slideshow value = default;
                             var slideshow = document.Element("slideshow");
                             if (slideshow != null)
@@ -260,7 +260,7 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            var document = await XDocument.LoadAsync(message.Response.ContentStream, LoadOptions.PreserveWhitespace, cancellationToken).ConfigureAwait(false);
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             AppleBarrel value = default;
                             var appleBarrel = document.Element("AppleBarrel");
                             if (appleBarrel != null)
@@ -359,7 +359,7 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            var document = await XDocument.LoadAsync(message.Response.ContentStream, LoadOptions.PreserveWhitespace, cancellationToken).ConfigureAwait(false);
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             Slideshow value = default;
                             var slideshow = document.Element("slideshow");
                             if (slideshow != null)
@@ -430,7 +430,7 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            var document = await XDocument.LoadAsync(message.Response.ContentStream, LoadOptions.PreserveWhitespace, cancellationToken).ConfigureAwait(false);
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             AppleBarrel value = default;
                             var appleBarrel = document.Element("AppleBarrel");
                             if (appleBarrel != null)
@@ -501,7 +501,7 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            var document = await XDocument.LoadAsync(message.Response.ContentStream, LoadOptions.PreserveWhitespace, cancellationToken).ConfigureAwait(false);
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             ICollection<Banana> value = default;
                             var bananas = document.Element("bananas");
                             if (bananas != null)
@@ -583,7 +583,7 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            var document = await XDocument.LoadAsync(message.Response.ContentStream, LoadOptions.PreserveWhitespace, cancellationToken).ConfigureAwait(false);
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             ICollection<Banana> value = default;
                             var bananas = document.Element("bananas");
                             if (bananas != null)
@@ -665,7 +665,7 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            var document = await XDocument.LoadAsync(message.Response.ContentStream, LoadOptions.PreserveWhitespace, cancellationToken).ConfigureAwait(false);
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             ICollection<Banana> value = default;
                             var bananas = document.Element("bananas");
                             if (bananas != null)
@@ -747,7 +747,7 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            var document = await XDocument.LoadAsync(message.Response.ContentStream, LoadOptions.PreserveWhitespace, cancellationToken).ConfigureAwait(false);
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             Banana value = default;
                             var banana = document.Element("banana");
                             if (banana != null)
@@ -819,7 +819,7 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            var document = await XDocument.LoadAsync(message.Response.ContentStream, LoadOptions.PreserveWhitespace, cancellationToken).ConfigureAwait(false);
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             ListContainersResponse value = default;
                             var enumerationResults = document.Element("EnumerationResults");
                             if (enumerationResults != null)
@@ -857,7 +857,7 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            var document = await XDocument.LoadAsync(message.Response.ContentStream, LoadOptions.PreserveWhitespace, cancellationToken).ConfigureAwait(false);
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             StorageServiceProperties value = default;
                             var storageServiceProperties = document.Element("StorageServiceProperties");
                             if (storageServiceProperties != null)
@@ -932,7 +932,7 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            var document = await XDocument.LoadAsync(message.Response.ContentStream, LoadOptions.PreserveWhitespace, cancellationToken).ConfigureAwait(false);
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             ICollection<SignedIdentifier> value = default;
                             var signedIdentifiers = document.Element("SignedIdentifiers");
                             if (signedIdentifiers != null)
@@ -1018,7 +1018,7 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            var document = await XDocument.LoadAsync(message.Response.ContentStream, LoadOptions.PreserveWhitespace, cancellationToken).ConfigureAwait(false);
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             ListBlobsResponse value = default;
                             var enumerationResults = document.Element("EnumerationResults");
                             if (enumerationResults != null)

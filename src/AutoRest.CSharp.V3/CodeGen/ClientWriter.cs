@@ -383,7 +383,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                                 );
                                 break;
                             case XmlElementSerialization xmlSerialization:
-                                writer.Line($"var {document:D} = await {typeof(XDocument)}.LoadAsync(message.Response.ContentStream, LoadOptions.PreserveWhitespace, cancellationToken).ConfigureAwait(false);");
+                                writer.Line($"var {document:D} = {typeof(XDocument)}.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);");
                                 writer.ToDeserializeCall(
                                     xmlSerialization,
                                     _typeFactory,
