@@ -55,7 +55,7 @@ namespace extensible_enums_swagger
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw new Exception();
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -90,7 +90,7 @@ namespace extensible_enums_swagger
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw new Exception();
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception e)

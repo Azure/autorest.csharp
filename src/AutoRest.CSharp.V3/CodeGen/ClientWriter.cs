@@ -390,10 +390,8 @@ namespace AutoRest.CSharp.V3.CodeGen
                     }
                 }
 
-
                 writer.Line($"default:");
-                //TODO: Handle actual exception responses
-                writer.Line($"throw new {typeof(Exception)}();");
+                writer.Line($"throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);");
             }
         }
     }

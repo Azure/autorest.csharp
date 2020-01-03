@@ -49,7 +49,7 @@ namespace body_boolean
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw new Exception();
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -80,7 +80,7 @@ namespace body_boolean
                     case 200:
                         return message.Response;
                     default:
-                        throw new Exception();
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -111,7 +111,7 @@ namespace body_boolean
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw new Exception();
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -142,7 +142,7 @@ namespace body_boolean
                     case 200:
                         return message.Response;
                     default:
-                        throw new Exception();
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -173,7 +173,7 @@ namespace body_boolean
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw new Exception();
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -204,7 +204,7 @@ namespace body_boolean
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw new Exception();
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception e)

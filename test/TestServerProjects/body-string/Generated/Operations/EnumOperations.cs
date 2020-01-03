@@ -50,7 +50,7 @@ namespace body_string
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw new Exception();
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -81,7 +81,7 @@ namespace body_string
                     case 200:
                         return message.Response;
                     default:
-                        throw new Exception();
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -112,7 +112,7 @@ namespace body_string
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw new Exception();
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -143,7 +143,7 @@ namespace body_string
                     case 200:
                         return message.Response;
                     default:
-                        throw new Exception();
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -174,7 +174,7 @@ namespace body_string
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw new Exception();
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -209,7 +209,7 @@ namespace body_string
                     case 200:
                         return message.Response;
                     default:
-                        throw new Exception();
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception e)
