@@ -33,7 +33,6 @@ namespace AutoRest.TestServer.Tests
             CollectionAssert.AreEqual(File.ReadAllBytes(SamplePngPath), memoryStream.ToArray());
         });
 
-
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task FileStreamVeryLarge() => Test(async (host, pipeline) =>
@@ -53,6 +52,23 @@ namespace AutoRest.TestServer.Tests
             await result.Value.DisposeAsync().ConfigureAwait(false);
         });
 
+        [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
+        public Task FileStreamVeryLarge_Sync() => Test((host, pipeline) =>
+        {
+            var result = new FilesOperations(ClientDiagnostics, pipeline, host).GetFileLarge();
+            var buffer = new byte[2 * 1024 * 1024L];
+            var stream = result.Value;
+            long total = 0;
+            var count = stream.Read(buffer, 0, buffer.Length);
+            while (count > 0)
+            {
+                total += count;
+                count = stream.Read(buffer, 0, buffer.Length);
+            }
 
+            Assert.AreEqual(3000 * 1024 * 1024L, total);
+            result.Value.Dispose();
+        });
     }
 }
