@@ -13,7 +13,7 @@ namespace AutoRest.TestServer.Tests
         {
             var method = TypeAsserts.HasPublicInstanceMethod(typeof(AllOperations), "OriginalOperationAsync");
             // TODO: Add more tests here
-            TypeAsserts.HasParameter(method, "RenamedBodyParameter");
+            TypeAsserts.HasParameter(method, "renamedBodyParameter");
         }
     }
 }
