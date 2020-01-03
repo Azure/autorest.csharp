@@ -14,10 +14,12 @@ namespace Azure.Core
 
         public static string ToString(bool value) => value ? "true" : "false";
 
-        public static string ToString(DateTimeOffset value, string format) => format switch
+        // TODO: remove useRealIso when https://github.com/Azure/autorest.testserver/pull/111 is in
+        public static string ToString(DateTimeOffset value, string format, bool workaroundFullIsoFormat = false) => format switch
         {
             "D" => value.ToString("yyyy-MM-dd"),
-            "S" => value.ToString("yyyy-MM-ddTHH:mm:ssZ"),
+            "S" when workaroundFullIsoFormat => value.ToString("yyyy-MM-ddTHH:mm:ss.fffZ"),
+            "S" when !workaroundFullIsoFormat => value.ToString("yyyy-MM-ddTHH:mm:ssZ"),
             "R" => value.ToString("R"),
             "U" => value.ToUnixTimeSeconds().ToString(CultureInfo.InvariantCulture),
             _ => throw new ArgumentException("Format is not supported", nameof(format))

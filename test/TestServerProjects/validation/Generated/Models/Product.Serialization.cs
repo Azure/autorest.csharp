@@ -40,11 +40,8 @@ namespace validation.Models.V100
             writer.WriteNumberValue(ConstInt);
             writer.WritePropertyName("constString");
             writer.WriteStringValue(ConstString);
-            if (ConstStringAsEnum != null)
-            {
-                writer.WritePropertyName("constStringAsEnum");
-                writer.WriteStringValue(ConstStringAsEnum);
-            }
+            writer.WritePropertyName("constStringAsEnum");
+            writer.WriteStringValue(ConstStringAsEnum);
             writer.WriteEndObject();
         }
         internal static Product DeserializeProduct(JsonElement element)
@@ -105,10 +102,6 @@ namespace validation.Models.V100
                 }
                 if (property.NameEquals("constStringAsEnum"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     result.ConstStringAsEnum = property.Value.GetString();
                     continue;
                 }

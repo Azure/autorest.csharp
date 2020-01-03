@@ -23,6 +23,12 @@ namespace AutoRest.CSharp.V3.Pipeline.Generated
         }
     }
 
+    internal partial class Schema
+    {
+        public string? XmlName => Serialization?.Xml?.Name;
+        public string Name => Language.Default.Name;
+    }
+
     internal partial class Relations
     {
         public Relations()
