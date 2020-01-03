@@ -1194,7 +1194,7 @@ namespace body_array
                 throw;
             }
         }
-        public async ValueTask<Response<ICollection<string>>> GetUuidValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ICollection<Guid>>> GetUuidValidAsync(CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_array.GetUuidValid");
@@ -1212,10 +1212,10 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<string> value = new List<string>();
+                            ICollection<Guid> value = new List<Guid>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                value.Add(item.GetString());
+                                value.Add(item.GetGuid());
                             }
                             return Response.FromValue(value, message.Response);
                         }
@@ -1229,7 +1229,7 @@ namespace body_array
                 throw;
             }
         }
-        public async ValueTask<Response> PutUuidValidAsync(IEnumerable<string> arrayBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutUuidValidAsync(IEnumerable<Guid> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -1269,7 +1269,7 @@ namespace body_array
                 throw;
             }
         }
-        public async ValueTask<Response<ICollection<string>>> GetUuidInvalidCharsAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ICollection<Guid>>> GetUuidInvalidCharsAsync(CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("body_array.GetUuidInvalidChars");
@@ -1287,10 +1287,10 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<string> value = new List<string>();
+                            ICollection<Guid> value = new List<Guid>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                value.Add(item.GetString());
+                                value.Add(item.GetGuid());
                             }
                             return Response.FromValue(value, message.Response);
                         }

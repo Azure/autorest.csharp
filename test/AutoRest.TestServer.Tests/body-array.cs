@@ -440,16 +440,19 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        //TODO: https://github.com/Azure/autorest.csharp/issues/369
         public Task GetArrayUuidValid() => Test(async (host, pipeline) =>
         {
             var result = await new ArrayOperations(ClientDiagnostics, pipeline, host).GetUuidValidAsync();
 
-            CollectionAssert.AreEqual(new[] { "6dcc7237-45fe-45c4-8a6b-3a8a3f625652", "d1399005-30f7-40d6-8da6-dd7c89ad34db", "f42f6aa1-a5bc-4ddf-907e-5f915de43205" }, result.Value);
+            CollectionAssert.AreEqual(new[]
+            {
+                Guid.Parse("6dcc7237-45fe-45c4-8a6b-3a8a3f625652"),
+                Guid.Parse("d1399005-30f7-40d6-8da6-dd7c89ad34db"),
+                Guid.Parse("f42f6aa1-a5bc-4ddf-907e-5f915de43205")
+            }, result.Value);
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/369")]
         public Task GetArrayUuidWithInvalidChars() => Test((host, pipeline) =>
         {
             Assert.ThrowsAsync(Is.InstanceOf<Exception>(), async () => await new ArrayOperations(ClientDiagnostics, pipeline, host).GetUuidInvalidCharsAsync());
@@ -550,6 +553,11 @@ namespace AutoRest.TestServer.Tests
 
         [Test]
         public Task PutArrayUuidValid() => TestStatus(async (host, pipeline) => await new ArrayOperations(ClientDiagnostics, pipeline, host).PutUuidValidAsync(
-            new[] { "6dcc7237-45fe-45c4-8a6b-3a8a3f625652", "d1399005-30f7-40d6-8da6-dd7c89ad34db", "f42f6aa1-a5bc-4ddf-907e-5f915de43205" }));
+            new[]
+            {
+                Guid.Parse("6dcc7237-45fe-45c4-8a6b-3a8a3f625652"),
+                Guid.Parse("d1399005-30f7-40d6-8da6-dd7c89ad34db"),
+                Guid.Parse("f42f6aa1-a5bc-4ddf-907e-5f915de43205")
+            }));
     }
 }

@@ -65,7 +65,7 @@ namespace AutoRest.CSharp.V3.ClientModels
             AllSchemaTypes.String => typeof(string),
             AllSchemaTypes.Unixtime => typeof(DateTimeOffset),
             AllSchemaTypes.Uri => typeof(Uri),
-            AllSchemaTypes.Uuid => typeof(string),
+            AllSchemaTypes.Uuid => typeof(Guid),
             AllSchemaTypes.Any => typeof(object),
             AllSchemaTypes.Binary => typeof(byte[]),
             _ => null
