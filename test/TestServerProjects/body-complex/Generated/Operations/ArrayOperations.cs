@@ -28,18 +28,23 @@ namespace body_complex
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+        internal HttpMessage CreateGetValidRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/complex/array/valid", false);
+            return message;
+        }
         public async ValueTask<Response<ArrayWrapper>> GetValidAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.GetValid");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetValid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/array/valid", false);
+                using var message = CreateGetValidRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -58,6 +63,19 @@ namespace body_complex
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreatePutValidRequest(ArrayWrapper complexBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/complex/array/valid", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(complexBody);
+            request.Content = content;
+            return message;
         }
         public async ValueTask<Response> PutValidAsync(ArrayWrapper complexBody, CancellationToken cancellationToken = default)
         {
@@ -66,19 +84,11 @@ namespace body_complex
                 throw new ArgumentNullException(nameof(complexBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.PutValid");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.PutValid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/array/valid", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(complexBody);
-                request.Content = content;
+                using var message = CreatePutValidRequest(complexBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -94,18 +104,23 @@ namespace body_complex
                 throw;
             }
         }
+        internal HttpMessage CreateGetEmptyRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/complex/array/empty", false);
+            return message;
+        }
         public async ValueTask<Response<ArrayWrapper>> GetEmptyAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.GetEmpty");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetEmpty");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/array/empty", false);
+                using var message = CreateGetEmptyRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -125,6 +140,19 @@ namespace body_complex
                 throw;
             }
         }
+        internal HttpMessage CreatePutEmptyRequest(ArrayWrapper complexBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/complex/array/empty", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(complexBody);
+            request.Content = content;
+            return message;
+        }
         public async ValueTask<Response> PutEmptyAsync(ArrayWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -132,19 +160,11 @@ namespace body_complex
                 throw new ArgumentNullException(nameof(complexBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.PutEmpty");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.PutEmpty");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/array/empty", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(complexBody);
-                request.Content = content;
+                using var message = CreatePutEmptyRequest(complexBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -160,18 +180,23 @@ namespace body_complex
                 throw;
             }
         }
+        internal HttpMessage CreateGetNotProvidedRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/complex/array/notprovided", false);
+            return message;
+        }
         public async ValueTask<Response<ArrayWrapper>> GetNotProvidedAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.GetNotProvided");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetNotProvided");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/array/notprovided", false);
+                using var message = CreateGetNotProvidedRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {

@@ -29,8 +29,5 @@ namespace AutoRest.CSharp.V3.Plugins
 
         public static string CSharpName(this Schema operation) =>
             operation.Language.Default.Name.ToCleanName();
-
-        public static string CSharpName(this ISchemaTypeProvider operation) =>
-            operation.Name.ToCleanName();
     }
 }

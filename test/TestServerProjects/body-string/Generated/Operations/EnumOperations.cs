@@ -28,18 +28,23 @@ namespace body_string
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+        internal HttpMessage CreateGetNotExpandableRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/string/enum/notExpandable", false);
+            return message;
+        }
         public async ValueTask<Response<Colors>> GetNotExpandableAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_string.GetNotExpandable");
+            using var scope = clientDiagnostics.CreateScope("EnumOperations.GetNotExpandable");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/string/enum/notExpandable", false);
+                using var message = CreateGetNotExpandableRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -58,23 +63,28 @@ namespace body_string
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreatePutNotExpandableRequest(Colors stringBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/string/enum/notExpandable", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteStringValue(stringBody.ToSerialString());
+            request.Content = content;
+            return message;
         }
         public async ValueTask<Response> PutNotExpandableAsync(Colors stringBody, CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_string.PutNotExpandable");
+            using var scope = clientDiagnostics.CreateScope("EnumOperations.PutNotExpandable");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/string/enum/notExpandable", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStringValue(stringBody.ToSerialString());
-                request.Content = content;
+                using var message = CreatePutNotExpandableRequest(stringBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -90,18 +100,23 @@ namespace body_string
                 throw;
             }
         }
+        internal HttpMessage CreateGetReferencedRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/string/enum/Referenced", false);
+            return message;
+        }
         public async ValueTask<Response<Colors>> GetReferencedAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_string.GetReferenced");
+            using var scope = clientDiagnostics.CreateScope("EnumOperations.GetReferenced");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/string/enum/Referenced", false);
+                using var message = CreateGetReferencedRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -121,22 +136,27 @@ namespace body_string
                 throw;
             }
         }
+        internal HttpMessage CreatePutReferencedRequest(Colors enumStringBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/string/enum/Referenced", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteStringValue(enumStringBody.ToSerialString());
+            request.Content = content;
+            return message;
+        }
         public async ValueTask<Response> PutReferencedAsync(Colors enumStringBody, CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_string.PutReferenced");
+            using var scope = clientDiagnostics.CreateScope("EnumOperations.PutReferenced");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/string/enum/Referenced", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStringValue(enumStringBody.ToSerialString());
-                request.Content = content;
+                using var message = CreatePutReferencedRequest(enumStringBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -152,18 +172,23 @@ namespace body_string
                 throw;
             }
         }
+        internal HttpMessage CreateGetReferencedConstantRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/string/enum/ReferencedConstant", false);
+            return message;
+        }
         public async ValueTask<Response<RefColorConstant>> GetReferencedConstantAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_string.GetReferencedConstant");
+            using var scope = clientDiagnostics.CreateScope("EnumOperations.GetReferencedConstant");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/string/enum/ReferencedConstant", false);
+                using var message = CreateGetReferencedConstantRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -183,6 +208,19 @@ namespace body_string
                 throw;
             }
         }
+        internal HttpMessage CreatePutReferencedConstantRequest(RefColorConstant enumStringBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/string/enum/ReferencedConstant", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(enumStringBody);
+            request.Content = content;
+            return message;
+        }
         public async ValueTask<Response> PutReferencedConstantAsync(RefColorConstant enumStringBody, CancellationToken cancellationToken = default)
         {
             if (enumStringBody == null)
@@ -190,19 +228,11 @@ namespace body_string
                 throw new ArgumentNullException(nameof(enumStringBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_string.PutReferencedConstant");
+            using var scope = clientDiagnostics.CreateScope("EnumOperations.PutReferencedConstant");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/string/enum/ReferencedConstant", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(enumStringBody);
-                request.Content = content;
+                using var message = CreatePutReferencedConstantRequest(enumStringBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {

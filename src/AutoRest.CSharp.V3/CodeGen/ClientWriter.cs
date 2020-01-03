@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             _typeFactory = typeFactory;
         }
 
-        public bool WriteClient(CodeWriter writer, ServiceClient operationGroup)
+        public void WriteClient(CodeWriter writer, ServiceClient operationGroup)
         {
             var cs = _typeFactory.CreateType(operationGroup.Name);
             var @namespace = cs.Namespace;
@@ -41,12 +41,11 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                     foreach (var method in operationGroup.Methods)
                     {
-                        WriteOperation(writer, method, cs.Namespace);
+                        WriteRequestCreation(writer, method);
+                        WriteOperation(writer, method);
                     }
                 }
             }
-
-            return true;
         }
 
         private void WriteClientFields(CodeWriter writer, ServiceClient operationGroup)
@@ -95,7 +94,78 @@ namespace AutoRest.CSharp.V3.CodeGen
             writer.AppendRaw(",");
         }
 
-        private void WriteOperation(CodeWriter writer, ClientMethod operation, CSharpNamespace @namespace)
+
+        private string CreateRequestMethodName(ClientMethod operation) => $"Create{operation.Name}Request";
+
+        private void WriteRequestCreation(CodeWriter writer, ClientMethod operation)
+        {
+
+            writer.Append($"internal {typeof(HttpMessage)} {CreateRequestMethodName(operation)}(");
+            foreach (ServiceClientParameter clientParameter in operation.Parameters)
+            {
+                writer.Append($"{_typeFactory.CreateInputType(clientParameter.Type)} {clientParameter.Name},");
+            }
+            writer.RemoveTrailingComma();
+            writer.Line($")");
+            using (writer.Scope())
+            {
+                writer.Line($"var message = pipeline.CreateMessage();");
+                writer.Line($"var request = message.Request;");
+                var method = operation.Request.Method;
+                writer.Line($"request.Method = {writer.Type(typeof(RequestMethod))}.{method.ToRequestMethodName()};");
+
+                var urlText = String.Join(String.Empty, operation.Request.HostSegments.Select(s => s.IsConstant ? s.Constant.Value : "{" + s.Parameter.Name + "}"));
+                writer.Line($"request.Uri.Reset(new {writer.Type(typeof(Uri))}({urlText:L}));");
+
+                foreach (var segment in operation.Request.PathSegments)
+                {
+                    WritePathSegment(writer, segment);
+                }
+
+                foreach (var header in operation.Request.Headers)
+                {
+                    WriteHeader(writer, header);
+                }
+
+                //TODO: Duplicate code between query and header parameter processing logic
+                foreach (var queryParameter in operation.Request.Query)
+                {
+                    WriteQueryParameter(writer, queryParameter);
+                }
+
+                if (operation.Request.Body is ObjectRequestBody body && body.Serialization is JsonSerialization jsonSerialization)
+                {
+                    writer.Line($"using var content = new {typeof(Utf8JsonRequestContent)}();");
+
+                    ConstantOrParameter value = body.Value;
+
+                    writer.ToSerializeCall(
+                        jsonSerialization,
+                        _typeFactory,
+                        WriteConstantOrParameter(value),
+                        writerName: w => w.Append($"content.{nameof(Utf8JsonRequestContent.JsonWriter)}"));
+
+                    writer.Line($"request.Content = content;");
+                }
+                else if (operation.Request.Body is ObjectRequestBody xmlBody && xmlBody.Serialization is XmlElementSerialization xmlSerialization)
+                {
+                    writer.Line($"using var content = new {typeof(XmlWriterContent)}();");
+
+                    ConstantOrParameter value = xmlBody.Value;
+
+                    writer.ToSerializeCall(
+                        xmlSerialization,
+                        _typeFactory,
+                        WriteConstantOrParameter(value),
+                        writerName: w => w.Append($"content.{nameof(XmlWriterContent.XmlWriter)}"));
+
+                    writer.Line($"request.Content = content;");
+                }
+
+                writer.Line($"return message;");
+            }
+        }
+        private void WriteOperation(CodeWriter writer, ClientMethod operation)
         {
             //TODO: Handle multiple responses
             var responseBody = operation.Response.ResponseBody;
@@ -124,76 +194,30 @@ namespace AutoRest.CSharp.V3.CodeGen
             {
                 WriteParameterNullChecks(writer, operation.Parameters);
 
-                writer.Line($"using var scope = clientDiagnostics.CreateScope(\"{@namespace.FullName}.{methodName}\");");
-                //TODO: Implement attribute logic
-                //writer.Line("scope.AddAttribute(\"key\", name);");
+                writer.Line($"using var scope = clientDiagnostics.CreateScope({operation.Diagnostics.ScopeName:L});");
+                foreach (DiagnosticScopeAttributes diagnosticScopeAttributes in operation.Diagnostics.Attributes)
+                {
+                    writer.Line($"scope.AddAttribute({diagnosticScopeAttributes.Name:L}, {WriteConstantOrParameter(diagnosticScopeAttributes.Value)};");
+                }
                 writer.Line($"scope.Start();");
 
-                using (writer.Try())
+                using (writer.Scope($"try"))
                 {
-                    writer.Line($"using var message = pipeline.CreateMessage();");
-                    writer.Line($"var request = message.Request;");
-                    var method = operation.Request.Method;
-                    writer.Line($"request.Method = {writer.Type(typeof(RequestMethod))}.{method.ToRequestMethodName()};");
+                    writer.Append($"using var message = {CreateRequestMethodName(operation)}(");
 
-                    //TODO: Add logic to escape the strings when specified, using Uri.EscapeDataString(value);
-                    //TODO: Need proper logic to convert the values to strings. Right now, everything is just using default ToString().
-                    //TODO: Need logic to trim duplicate slashes (/) so when combined, you don't end  up with multiple // together
-                    var urlText = String.Join(String.Empty, operation.Request.HostSegments.Select(s => s.IsConstant ? s.Constant.Value : "{" + s.Parameter.Name + "}"));
-                    writer.Line($"request.Uri.Reset(new {writer.Type(typeof(Uri))}($\"{urlText}\"));");
-
-                    foreach (var segment in operation.Request.PathSegments)
+                    foreach (ServiceClientParameter parameter in operation.Parameters)
                     {
-                        WritePathSegment(writer, segment);
+                        writer.Append($"{parameter.Name}, ");
                     }
-
-                    foreach (var header in operation.Request.Headers)
-                    {
-                        WriteHeader(writer, header);
-                    }
-
-                    //TODO: Duplicate code between query and header parameter processing logic
-                    foreach (var queryParameter in operation.Request.Query)
-                    {
-                        WriteQueryParameter(writer, queryParameter);
-                    }
-
-                    if (operation.Request.Body is ObjectRequestBody body && body.Serialization is JsonSerialization jsonSerialization)
-                    {
-                        writer.Line($"using var content = new {typeof(Utf8JsonRequestContent)}();");
-
-                        ConstantOrParameter value = body.Value;
-
-                        writer.ToSerializeCall(
-                            jsonSerialization,
-                            _typeFactory,
-                            w => WriteConstantOrParameter(w, value),
-                            writerName: w => w.Append($"content.{nameof(Utf8JsonRequestContent.JsonWriter)}"));
-
-                        writer.Line($"request.Content = content;");
-                    }
-                    else if (operation.Request.Body is ObjectRequestBody xmlBody && xmlBody.Serialization is XmlElementSerialization xmlSerialization)
-                    {
-                        writer.Line($"using var content = new {typeof(XmlWriterContent)}();");
-
-                        ConstantOrParameter value = xmlBody.Value;
-
-                        writer.ToSerializeCall(
-                            xmlSerialization,
-                            _typeFactory,
-                            w => WriteConstantOrParameter(w, value),
-                            writerName: w => w.Append($"content.{nameof(XmlWriterContent.XmlWriter)}"));
-
-                        writer.Line($"request.Content = content;");
-                    }
+                    writer.RemoveTrailingComma();
+                    writer.Line($");");
 
                     writer.Line($"await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);");
 
                     WriteStatusCodeSwitch(writer, responseBody, headerModelType, operation);
                 }
 
-                var exceptionParameter = writer.Pair(typeof(Exception), "e");
-                using (writer.Catch(exceptionParameter))
+                using (writer.Scope($"catch ({typeof(Exception)} e)"))
                 {
                     writer.Line($"scope.Failed(e);");
                     writer.Line($"throw;");
@@ -201,7 +225,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
         }
 
-        private void WriteConstantOrParameter(CodeWriter writer, ConstantOrParameter constantOrParameter)
+        private CodeWriterDelegate WriteConstantOrParameter(ConstantOrParameter constantOrParameter) => writer =>
         {
             if (constantOrParameter.IsConstant)
             {
@@ -212,7 +236,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                 writer.AppendRaw(constantOrParameter.Parameter.Name)
                     .AppendNullableValue(_typeFactory.CreateType(constantOrParameter.Type));
             }
-        }
+        };
 
         private void WriteParameterNullChecks(CodeWriter writer, IEnumerable<ServiceClientParameter> parameters)
         {
@@ -265,8 +289,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         private void WritePathSegment(CodeWriter writer, PathSegment segment)
         {
-            writer.Append($"request.Uri.AppendPath(");
-            WriteConstantOrParameter(writer, segment.Value);
+            writer.Append($"request.Uri.AppendPath({WriteConstantOrParameter(segment.Value)}");
             WriteSerializationFormat(writer, segment.Format);
             writer.Line($", {segment.Escape:L});");
         }
@@ -275,8 +298,7 @@ namespace AutoRest.CSharp.V3.CodeGen
         {
             using (WriteValueNullCheck(writer, header.Value))
             {
-                writer.Append($"request.Headers.Add({header.Name:L}, ");
-                WriteConstantOrParameter(writer, header.Value);
+                writer.Append($"request.Headers.Add({header.Name:L}, {WriteConstantOrParameter(header.Value)}");
                 WriteSerializationFormat(writer, header.Format);
                 writer.Line($");");
             }
@@ -342,8 +364,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             ConstantOrParameter value = queryParameter.Value;
             using (WriteValueNullCheck(writer, value))
             {
-                writer.Append($"request.Uri.{method}({queryParameter.Name:L}, ");
-                WriteConstantOrParameter(writer, value);
+                writer.Append($"request.Uri.{method}({queryParameter.Name:L}, {WriteConstantOrParameter(value)}");
                 if (delimiter != null)
                 {
                     writer.Append($", {delimiter:L}");

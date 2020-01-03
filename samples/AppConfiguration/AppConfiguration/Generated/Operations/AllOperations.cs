@@ -36,35 +36,40 @@ namespace AppConfiguration
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+        internal HttpMessage CreateGetKeysRequest(string? name, string? after, string? acceptDatetime)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/keys", false);
+            if (syncToken != null)
+            {
+                request.Headers.Add("Sync-Token", syncToken);
+            }
+            if (acceptDatetime != null)
+            {
+                request.Headers.Add("Accept-Datetime", acceptDatetime);
+            }
+            if (name != null)
+            {
+                request.Uri.AppendQuery("name", name, true);
+            }
+            request.Uri.AppendQuery("api-version", ApiVersion, true);
+            if (after != null)
+            {
+                request.Uri.AppendQuery("After", after, true);
+            }
+            return message;
+        }
         public async ValueTask<ResponseWithHeaders<KeyListResult, GetKeysHeaders>> GetKeysAsync(string? name, string? after, string? acceptDatetime, CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("AppConfiguration.GetKeys");
+            using var scope = clientDiagnostics.CreateScope("AllOperations.GetKeys");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/keys", false);
-                if (syncToken != null)
-                {
-                    request.Headers.Add("Sync-Token", syncToken);
-                }
-                if (acceptDatetime != null)
-                {
-                    request.Headers.Add("Accept-Datetime", acceptDatetime);
-                }
-                if (name != null)
-                {
-                    request.Uri.AppendQuery("name", name, true);
-                }
-                request.Uri.AppendQuery("api-version", ApiVersion, true);
-                if (after != null)
-                {
-                    request.Uri.AppendQuery("After", after, true);
-                }
+                using var message = CreateGetKeysRequest(name, after, acceptDatetime);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -85,35 +90,40 @@ namespace AppConfiguration
                 throw;
             }
         }
+        internal HttpMessage CreateCheckKeysRequest(string? name, string? after, string? acceptDatetime)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Head;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/keys", false);
+            if (syncToken != null)
+            {
+                request.Headers.Add("Sync-Token", syncToken);
+            }
+            if (acceptDatetime != null)
+            {
+                request.Headers.Add("Accept-Datetime", acceptDatetime);
+            }
+            if (name != null)
+            {
+                request.Uri.AppendQuery("name", name, true);
+            }
+            request.Uri.AppendQuery("api-version", ApiVersion, true);
+            if (after != null)
+            {
+                request.Uri.AppendQuery("After", after, true);
+            }
+            return message;
+        }
         public async ValueTask<ResponseWithHeaders<CheckKeysHeaders>> CheckKeysAsync(string? name, string? after, string? acceptDatetime, CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("AppConfiguration.CheckKeys");
+            using var scope = clientDiagnostics.CreateScope("AllOperations.CheckKeys");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Head;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/keys", false);
-                if (syncToken != null)
-                {
-                    request.Headers.Add("Sync-Token", syncToken);
-                }
-                if (acceptDatetime != null)
-                {
-                    request.Headers.Add("Accept-Datetime", acceptDatetime);
-                }
-                if (name != null)
-                {
-                    request.Uri.AppendQuery("name", name, true);
-                }
-                request.Uri.AppendQuery("api-version", ApiVersion, true);
-                if (after != null)
-                {
-                    request.Uri.AppendQuery("After", after, true);
-                }
+                using var message = CreateCheckKeysRequest(name, after, acceptDatetime);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -130,43 +140,48 @@ namespace AppConfiguration
                 throw;
             }
         }
+        internal HttpMessage CreateGetKeyValuesRequest(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Get6ItemsItem>? select)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/kv", false);
+            if (syncToken != null)
+            {
+                request.Headers.Add("Sync-Token", syncToken);
+            }
+            if (acceptDatetime != null)
+            {
+                request.Headers.Add("Accept-Datetime", acceptDatetime);
+            }
+            if (key != null)
+            {
+                request.Uri.AppendQuery("key", key, true);
+            }
+            if (label != null)
+            {
+                request.Uri.AppendQuery("label", label, true);
+            }
+            request.Uri.AppendQuery("api-version", ApiVersion, true);
+            if (after != null)
+            {
+                request.Uri.AppendQuery("After", after, true);
+            }
+            if (select != null)
+            {
+                request.Uri.AppendQueryDelimited("$Select", select, ",", true);
+            }
+            return message;
+        }
         public async ValueTask<ResponseWithHeaders<KeyValueListResult, GetKeyValuesHeaders>> GetKeyValuesAsync(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Get6ItemsItem>? select, CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("AppConfiguration.GetKeyValues");
+            using var scope = clientDiagnostics.CreateScope("AllOperations.GetKeyValues");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/kv", false);
-                if (syncToken != null)
-                {
-                    request.Headers.Add("Sync-Token", syncToken);
-                }
-                if (acceptDatetime != null)
-                {
-                    request.Headers.Add("Accept-Datetime", acceptDatetime);
-                }
-                if (key != null)
-                {
-                    request.Uri.AppendQuery("key", key, true);
-                }
-                if (label != null)
-                {
-                    request.Uri.AppendQuery("label", label, true);
-                }
-                request.Uri.AppendQuery("api-version", ApiVersion, true);
-                if (after != null)
-                {
-                    request.Uri.AppendQuery("After", after, true);
-                }
-                if (select != null)
-                {
-                    request.Uri.AppendQueryDelimited("$Select", select, ",", true);
-                }
+                using var message = CreateGetKeyValuesRequest(key, label, after, acceptDatetime, select);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -187,43 +202,48 @@ namespace AppConfiguration
                 throw;
             }
         }
+        internal HttpMessage CreateCheckKeyValuesRequest(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Head6ItemsItem>? select)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Head;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/kv", false);
+            if (syncToken != null)
+            {
+                request.Headers.Add("Sync-Token", syncToken);
+            }
+            if (acceptDatetime != null)
+            {
+                request.Headers.Add("Accept-Datetime", acceptDatetime);
+            }
+            if (key != null)
+            {
+                request.Uri.AppendQuery("key", key, true);
+            }
+            if (label != null)
+            {
+                request.Uri.AppendQuery("label", label, true);
+            }
+            request.Uri.AppendQuery("api-version", ApiVersion, true);
+            if (after != null)
+            {
+                request.Uri.AppendQuery("After", after, true);
+            }
+            if (select != null)
+            {
+                request.Uri.AppendQueryDelimited("$Select", select, ",", true);
+            }
+            return message;
+        }
         public async ValueTask<ResponseWithHeaders<CheckKeyValuesHeaders>> CheckKeyValuesAsync(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Head6ItemsItem>? select, CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("AppConfiguration.CheckKeyValues");
+            using var scope = clientDiagnostics.CreateScope("AllOperations.CheckKeyValues");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Head;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/kv", false);
-                if (syncToken != null)
-                {
-                    request.Headers.Add("Sync-Token", syncToken);
-                }
-                if (acceptDatetime != null)
-                {
-                    request.Headers.Add("Accept-Datetime", acceptDatetime);
-                }
-                if (key != null)
-                {
-                    request.Uri.AppendQuery("key", key, true);
-                }
-                if (label != null)
-                {
-                    request.Uri.AppendQuery("label", label, true);
-                }
-                request.Uri.AppendQuery("api-version", ApiVersion, true);
-                if (after != null)
-                {
-                    request.Uri.AppendQuery("After", after, true);
-                }
-                if (select != null)
-                {
-                    request.Uri.AppendQueryDelimited("$Select", select, ",", true);
-                }
+                using var message = CreateCheckKeyValuesRequest(key, label, after, acceptDatetime, select);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -240,6 +260,41 @@ namespace AppConfiguration
                 throw;
             }
         }
+        internal HttpMessage CreateGetKeyValueRequest(string key, string? label, string? acceptDatetime, string? ifMatch, string? ifNoneMatch, IEnumerable<Get7ItemsItem>? select)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/kv/", false);
+            request.Uri.AppendPath(key, true);
+            if (syncToken != null)
+            {
+                request.Headers.Add("Sync-Token", syncToken);
+            }
+            if (acceptDatetime != null)
+            {
+                request.Headers.Add("Accept-Datetime", acceptDatetime);
+            }
+            if (ifMatch != null)
+            {
+                request.Headers.Add("If-Match", ifMatch);
+            }
+            if (ifNoneMatch != null)
+            {
+                request.Headers.Add("If-None-Match", ifNoneMatch);
+            }
+            if (label != null)
+            {
+                request.Uri.AppendQuery("label", label, true);
+            }
+            request.Uri.AppendQuery("api-version", ApiVersion, true);
+            if (select != null)
+            {
+                request.Uri.AppendQueryDelimited("$Select", select, ",", true);
+            }
+            return message;
+        }
         public async ValueTask<ResponseWithHeaders<KeyValue, GetKeyValueHeaders>> GetKeyValueAsync(string key, string? label, string? acceptDatetime, string? ifMatch, string? ifNoneMatch, IEnumerable<Get7ItemsItem>? select, CancellationToken cancellationToken = default)
         {
             if (key == null)
@@ -247,41 +302,11 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = clientDiagnostics.CreateScope("AppConfiguration.GetKeyValue");
+            using var scope = clientDiagnostics.CreateScope("AllOperations.GetKeyValue");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/kv/", false);
-                request.Uri.AppendPath(key, true);
-                if (syncToken != null)
-                {
-                    request.Headers.Add("Sync-Token", syncToken);
-                }
-                if (acceptDatetime != null)
-                {
-                    request.Headers.Add("Accept-Datetime", acceptDatetime);
-                }
-                if (ifMatch != null)
-                {
-                    request.Headers.Add("If-Match", ifMatch);
-                }
-                if (ifNoneMatch != null)
-                {
-                    request.Headers.Add("If-None-Match", ifNoneMatch);
-                }
-                if (label != null)
-                {
-                    request.Uri.AppendQuery("label", label, true);
-                }
-                request.Uri.AppendQuery("api-version", ApiVersion, true);
-                if (select != null)
-                {
-                    request.Uri.AppendQueryDelimited("$Select", select, ",", true);
-                }
+                using var message = CreateGetKeyValueRequest(key, label, acceptDatetime, ifMatch, ifNoneMatch, select);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -302,6 +327,42 @@ namespace AppConfiguration
                 throw;
             }
         }
+        internal HttpMessage CreatePutKeyValueRequest(string key, string? label, string? ifMatch, string? ifNoneMatch, KeyValue? entity)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/kv/", false);
+            request.Uri.AppendPath(key, true);
+            if (syncToken != null)
+            {
+                request.Headers.Add("Sync-Token", syncToken);
+            }
+            if (ifMatch != null)
+            {
+                request.Headers.Add("If-Match", ifMatch);
+            }
+            if (ifNoneMatch != null)
+            {
+                request.Headers.Add("If-None-Match", ifNoneMatch);
+            }
+            request.Headers.Add("Content-Type", "application/vnd.microsoft.appconfig.kv+json");
+            request.Headers.Add("Content-Type", "application/vnd.microsoft.appconfig.kvset+json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Content-Type", "text/json");
+            request.Headers.Add("Content-Type", "application/*+json");
+            request.Headers.Add("Content-Type", "application/json-patch+json");
+            if (label != null)
+            {
+                request.Uri.AppendQuery("label", label, true);
+            }
+            request.Uri.AppendQuery("api-version", ApiVersion, true);
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(entity);
+            request.Content = content;
+            return message;
+        }
         public async ValueTask<ResponseWithHeaders<KeyValue, PutKeyValueHeaders>> PutKeyValueAsync(string key, string? label, string? ifMatch, string? ifNoneMatch, KeyValue? entity, CancellationToken cancellationToken = default)
         {
             if (key == null)
@@ -309,42 +370,11 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = clientDiagnostics.CreateScope("AppConfiguration.PutKeyValue");
+            using var scope = clientDiagnostics.CreateScope("AllOperations.PutKeyValue");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/kv/", false);
-                request.Uri.AppendPath(key, true);
-                if (syncToken != null)
-                {
-                    request.Headers.Add("Sync-Token", syncToken);
-                }
-                if (ifMatch != null)
-                {
-                    request.Headers.Add("If-Match", ifMatch);
-                }
-                if (ifNoneMatch != null)
-                {
-                    request.Headers.Add("If-None-Match", ifNoneMatch);
-                }
-                request.Headers.Add("Content-Type", "application/vnd.microsoft.appconfig.kv+json");
-                request.Headers.Add("Content-Type", "application/vnd.microsoft.appconfig.kvset+json");
-                request.Headers.Add("Content-Type", "application/json");
-                request.Headers.Add("Content-Type", "text/json");
-                request.Headers.Add("Content-Type", "application/*+json");
-                request.Headers.Add("Content-Type", "application/json-patch+json");
-                if (label != null)
-                {
-                    request.Uri.AppendQuery("label", label, true);
-                }
-                request.Uri.AppendQuery("api-version", ApiVersion, true);
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(entity);
-                request.Content = content;
+                using var message = CreatePutKeyValueRequest(key, label, ifMatch, ifNoneMatch, entity);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -365,6 +395,29 @@ namespace AppConfiguration
                 throw;
             }
         }
+        internal HttpMessage CreateDeleteKeyValueRequest(string key, string? label, string? ifMatch)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Delete;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/kv/", false);
+            request.Uri.AppendPath(key, true);
+            if (syncToken != null)
+            {
+                request.Headers.Add("Sync-Token", syncToken);
+            }
+            if (ifMatch != null)
+            {
+                request.Headers.Add("If-Match", ifMatch);
+            }
+            if (label != null)
+            {
+                request.Uri.AppendQuery("label", label, true);
+            }
+            request.Uri.AppendQuery("api-version", ApiVersion, true);
+            return message;
+        }
         public async ValueTask<ResponseWithHeaders<KeyValue, DeleteKeyValueHeaders>> DeleteKeyValueAsync(string key, string? label, string? ifMatch, CancellationToken cancellationToken = default)
         {
             if (key == null)
@@ -372,29 +425,11 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = clientDiagnostics.CreateScope("AppConfiguration.DeleteKeyValue");
+            using var scope = clientDiagnostics.CreateScope("AllOperations.DeleteKeyValue");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Delete;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/kv/", false);
-                request.Uri.AppendPath(key, true);
-                if (syncToken != null)
-                {
-                    request.Headers.Add("Sync-Token", syncToken);
-                }
-                if (ifMatch != null)
-                {
-                    request.Headers.Add("If-Match", ifMatch);
-                }
-                if (label != null)
-                {
-                    request.Uri.AppendQuery("label", label, true);
-                }
-                request.Uri.AppendQuery("api-version", ApiVersion, true);
+                using var message = CreateDeleteKeyValueRequest(key, label, ifMatch);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -415,6 +450,41 @@ namespace AppConfiguration
                 throw;
             }
         }
+        internal HttpMessage CreateCheckKeyValueRequest(string key, string? label, string? acceptDatetime, string? ifMatch, string? ifNoneMatch, IEnumerable<Head7ItemsItem>? select)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Head;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/kv/", false);
+            request.Uri.AppendPath(key, true);
+            if (syncToken != null)
+            {
+                request.Headers.Add("Sync-Token", syncToken);
+            }
+            if (acceptDatetime != null)
+            {
+                request.Headers.Add("Accept-Datetime", acceptDatetime);
+            }
+            if (ifMatch != null)
+            {
+                request.Headers.Add("If-Match", ifMatch);
+            }
+            if (ifNoneMatch != null)
+            {
+                request.Headers.Add("If-None-Match", ifNoneMatch);
+            }
+            if (label != null)
+            {
+                request.Uri.AppendQuery("label", label, true);
+            }
+            request.Uri.AppendQuery("api-version", ApiVersion, true);
+            if (select != null)
+            {
+                request.Uri.AppendQueryDelimited("$Select", select, ",", true);
+            }
+            return message;
+        }
         public async ValueTask<ResponseWithHeaders<CheckKeyValueHeaders>> CheckKeyValueAsync(string key, string? label, string? acceptDatetime, string? ifMatch, string? ifNoneMatch, IEnumerable<Head7ItemsItem>? select, CancellationToken cancellationToken = default)
         {
             if (key == null)
@@ -422,41 +492,11 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = clientDiagnostics.CreateScope("AppConfiguration.CheckKeyValue");
+            using var scope = clientDiagnostics.CreateScope("AllOperations.CheckKeyValue");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Head;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/kv/", false);
-                request.Uri.AppendPath(key, true);
-                if (syncToken != null)
-                {
-                    request.Headers.Add("Sync-Token", syncToken);
-                }
-                if (acceptDatetime != null)
-                {
-                    request.Headers.Add("Accept-Datetime", acceptDatetime);
-                }
-                if (ifMatch != null)
-                {
-                    request.Headers.Add("If-Match", ifMatch);
-                }
-                if (ifNoneMatch != null)
-                {
-                    request.Headers.Add("If-None-Match", ifNoneMatch);
-                }
-                if (label != null)
-                {
-                    request.Uri.AppendQuery("label", label, true);
-                }
-                request.Uri.AppendQuery("api-version", ApiVersion, true);
-                if (select != null)
-                {
-                    request.Uri.AppendQueryDelimited("$Select", select, ",", true);
-                }
+                using var message = CreateCheckKeyValueRequest(key, label, acceptDatetime, ifMatch, ifNoneMatch, select);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -473,39 +513,44 @@ namespace AppConfiguration
                 throw;
             }
         }
+        internal HttpMessage CreateGetLabelsRequest(string? name, string? after, string? acceptDatetime, IEnumerable<string>? select)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/labels", false);
+            if (syncToken != null)
+            {
+                request.Headers.Add("Sync-Token", syncToken);
+            }
+            if (acceptDatetime != null)
+            {
+                request.Headers.Add("Accept-Datetime", acceptDatetime);
+            }
+            if (name != null)
+            {
+                request.Uri.AppendQuery("name", name, true);
+            }
+            request.Uri.AppendQuery("api-version", ApiVersion, true);
+            if (after != null)
+            {
+                request.Uri.AppendQuery("After", after, true);
+            }
+            if (select != null)
+            {
+                request.Uri.AppendQueryDelimited("$Select", select, ",", true);
+            }
+            return message;
+        }
         public async ValueTask<ResponseWithHeaders<LabelListResult, GetLabelsHeaders>> GetLabelsAsync(string? name, string? after, string? acceptDatetime, IEnumerable<string>? select, CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("AppConfiguration.GetLabels");
+            using var scope = clientDiagnostics.CreateScope("AllOperations.GetLabels");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/labels", false);
-                if (syncToken != null)
-                {
-                    request.Headers.Add("Sync-Token", syncToken);
-                }
-                if (acceptDatetime != null)
-                {
-                    request.Headers.Add("Accept-Datetime", acceptDatetime);
-                }
-                if (name != null)
-                {
-                    request.Uri.AppendQuery("name", name, true);
-                }
-                request.Uri.AppendQuery("api-version", ApiVersion, true);
-                if (after != null)
-                {
-                    request.Uri.AppendQuery("After", after, true);
-                }
-                if (select != null)
-                {
-                    request.Uri.AppendQueryDelimited("$Select", select, ",", true);
-                }
+                using var message = CreateGetLabelsRequest(name, after, acceptDatetime, select);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -526,39 +571,44 @@ namespace AppConfiguration
                 throw;
             }
         }
+        internal HttpMessage CreateCheckLabelsRequest(string? name, string? after, string? acceptDatetime, IEnumerable<string>? select)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Head;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/labels", false);
+            if (syncToken != null)
+            {
+                request.Headers.Add("Sync-Token", syncToken);
+            }
+            if (acceptDatetime != null)
+            {
+                request.Headers.Add("Accept-Datetime", acceptDatetime);
+            }
+            if (name != null)
+            {
+                request.Uri.AppendQuery("name", name, true);
+            }
+            request.Uri.AppendQuery("api-version", ApiVersion, true);
+            if (after != null)
+            {
+                request.Uri.AppendQuery("After", after, true);
+            }
+            if (select != null)
+            {
+                request.Uri.AppendQueryDelimited("$Select", select, ",", true);
+            }
+            return message;
+        }
         public async ValueTask<ResponseWithHeaders<CheckLabelsHeaders>> CheckLabelsAsync(string? name, string? after, string? acceptDatetime, IEnumerable<string>? select, CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("AppConfiguration.CheckLabels");
+            using var scope = clientDiagnostics.CreateScope("AllOperations.CheckLabels");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Head;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/labels", false);
-                if (syncToken != null)
-                {
-                    request.Headers.Add("Sync-Token", syncToken);
-                }
-                if (acceptDatetime != null)
-                {
-                    request.Headers.Add("Accept-Datetime", acceptDatetime);
-                }
-                if (name != null)
-                {
-                    request.Uri.AppendQuery("name", name, true);
-                }
-                request.Uri.AppendQuery("api-version", ApiVersion, true);
-                if (after != null)
-                {
-                    request.Uri.AppendQuery("After", after, true);
-                }
-                if (select != null)
-                {
-                    request.Uri.AppendQueryDelimited("$Select", select, ",", true);
-                }
+                using var message = CreateCheckLabelsRequest(name, after, acceptDatetime, select);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -575,6 +625,33 @@ namespace AppConfiguration
                 throw;
             }
         }
+        internal HttpMessage CreatePutLockRequest(string key, string? label, string? ifMatch, string? ifNoneMatch)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/locks/", false);
+            request.Uri.AppendPath(key, true);
+            if (syncToken != null)
+            {
+                request.Headers.Add("Sync-Token", syncToken);
+            }
+            if (ifMatch != null)
+            {
+                request.Headers.Add("If-Match", ifMatch);
+            }
+            if (ifNoneMatch != null)
+            {
+                request.Headers.Add("If-None-Match", ifNoneMatch);
+            }
+            if (label != null)
+            {
+                request.Uri.AppendQuery("label", label, true);
+            }
+            request.Uri.AppendQuery("api-version", ApiVersion, true);
+            return message;
+        }
         public async ValueTask<ResponseWithHeaders<KeyValue, PutLockHeaders>> PutLockAsync(string key, string? label, string? ifMatch, string? ifNoneMatch, CancellationToken cancellationToken = default)
         {
             if (key == null)
@@ -582,33 +659,11 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = clientDiagnostics.CreateScope("AppConfiguration.PutLock");
+            using var scope = clientDiagnostics.CreateScope("AllOperations.PutLock");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/locks/", false);
-                request.Uri.AppendPath(key, true);
-                if (syncToken != null)
-                {
-                    request.Headers.Add("Sync-Token", syncToken);
-                }
-                if (ifMatch != null)
-                {
-                    request.Headers.Add("If-Match", ifMatch);
-                }
-                if (ifNoneMatch != null)
-                {
-                    request.Headers.Add("If-None-Match", ifNoneMatch);
-                }
-                if (label != null)
-                {
-                    request.Uri.AppendQuery("label", label, true);
-                }
-                request.Uri.AppendQuery("api-version", ApiVersion, true);
+                using var message = CreatePutLockRequest(key, label, ifMatch, ifNoneMatch);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -629,6 +684,33 @@ namespace AppConfiguration
                 throw;
             }
         }
+        internal HttpMessage CreateDeleteLockRequest(string key, string? label, string? ifMatch, string? ifNoneMatch)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Delete;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/locks/", false);
+            request.Uri.AppendPath(key, true);
+            if (syncToken != null)
+            {
+                request.Headers.Add("Sync-Token", syncToken);
+            }
+            if (ifMatch != null)
+            {
+                request.Headers.Add("If-Match", ifMatch);
+            }
+            if (ifNoneMatch != null)
+            {
+                request.Headers.Add("If-None-Match", ifNoneMatch);
+            }
+            if (label != null)
+            {
+                request.Uri.AppendQuery("label", label, true);
+            }
+            request.Uri.AppendQuery("api-version", ApiVersion, true);
+            return message;
+        }
         public async ValueTask<ResponseWithHeaders<KeyValue, DeleteLockHeaders>> DeleteLockAsync(string key, string? label, string? ifMatch, string? ifNoneMatch, CancellationToken cancellationToken = default)
         {
             if (key == null)
@@ -636,33 +718,11 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = clientDiagnostics.CreateScope("AppConfiguration.DeleteLock");
+            using var scope = clientDiagnostics.CreateScope("AllOperations.DeleteLock");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Delete;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/locks/", false);
-                request.Uri.AppendPath(key, true);
-                if (syncToken != null)
-                {
-                    request.Headers.Add("Sync-Token", syncToken);
-                }
-                if (ifMatch != null)
-                {
-                    request.Headers.Add("If-Match", ifMatch);
-                }
-                if (ifNoneMatch != null)
-                {
-                    request.Headers.Add("If-None-Match", ifNoneMatch);
-                }
-                if (label != null)
-                {
-                    request.Uri.AppendQuery("label", label, true);
-                }
-                request.Uri.AppendQuery("api-version", ApiVersion, true);
+                using var message = CreateDeleteLockRequest(key, label, ifMatch, ifNoneMatch);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -683,43 +743,48 @@ namespace AppConfiguration
                 throw;
             }
         }
+        internal HttpMessage CreateGetRevisionsRequest(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Enum0>? select)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/revisions", false);
+            if (syncToken != null)
+            {
+                request.Headers.Add("Sync-Token", syncToken);
+            }
+            if (acceptDatetime != null)
+            {
+                request.Headers.Add("Accept-Datetime", acceptDatetime);
+            }
+            if (key != null)
+            {
+                request.Uri.AppendQuery("key", key, true);
+            }
+            if (label != null)
+            {
+                request.Uri.AppendQuery("label", label, true);
+            }
+            request.Uri.AppendQuery("api-version", ApiVersion, true);
+            if (after != null)
+            {
+                request.Uri.AppendQuery("After", after, true);
+            }
+            if (select != null)
+            {
+                request.Uri.AppendQueryDelimited("$Select", select, ",", true);
+            }
+            return message;
+        }
         public async ValueTask<ResponseWithHeaders<KeyValueListResult, GetRevisionsHeaders>> GetRevisionsAsync(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Enum0>? select, CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("AppConfiguration.GetRevisions");
+            using var scope = clientDiagnostics.CreateScope("AllOperations.GetRevisions");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/revisions", false);
-                if (syncToken != null)
-                {
-                    request.Headers.Add("Sync-Token", syncToken);
-                }
-                if (acceptDatetime != null)
-                {
-                    request.Headers.Add("Accept-Datetime", acceptDatetime);
-                }
-                if (key != null)
-                {
-                    request.Uri.AppendQuery("key", key, true);
-                }
-                if (label != null)
-                {
-                    request.Uri.AppendQuery("label", label, true);
-                }
-                request.Uri.AppendQuery("api-version", ApiVersion, true);
-                if (after != null)
-                {
-                    request.Uri.AppendQuery("After", after, true);
-                }
-                if (select != null)
-                {
-                    request.Uri.AppendQueryDelimited("$Select", select, ",", true);
-                }
+                using var message = CreateGetRevisionsRequest(key, label, after, acceptDatetime, select);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -740,43 +805,48 @@ namespace AppConfiguration
                 throw;
             }
         }
+        internal HttpMessage CreateCheckRevisionsRequest(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Enum0>? select)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Head;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/revisions", false);
+            if (syncToken != null)
+            {
+                request.Headers.Add("Sync-Token", syncToken);
+            }
+            if (acceptDatetime != null)
+            {
+                request.Headers.Add("Accept-Datetime", acceptDatetime);
+            }
+            if (key != null)
+            {
+                request.Uri.AppendQuery("key", key, true);
+            }
+            if (label != null)
+            {
+                request.Uri.AppendQuery("label", label, true);
+            }
+            request.Uri.AppendQuery("api-version", ApiVersion, true);
+            if (after != null)
+            {
+                request.Uri.AppendQuery("After", after, true);
+            }
+            if (select != null)
+            {
+                request.Uri.AppendQueryDelimited("$Select", select, ",", true);
+            }
+            return message;
+        }
         public async ValueTask<ResponseWithHeaders<CheckRevisionsHeaders>> CheckRevisionsAsync(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Enum0>? select, CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("AppConfiguration.CheckRevisions");
+            using var scope = clientDiagnostics.CreateScope("AllOperations.CheckRevisions");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Head;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/revisions", false);
-                if (syncToken != null)
-                {
-                    request.Headers.Add("Sync-Token", syncToken);
-                }
-                if (acceptDatetime != null)
-                {
-                    request.Headers.Add("Accept-Datetime", acceptDatetime);
-                }
-                if (key != null)
-                {
-                    request.Uri.AppendQuery("key", key, true);
-                }
-                if (label != null)
-                {
-                    request.Uri.AppendQuery("label", label, true);
-                }
-                request.Uri.AppendQuery("api-version", ApiVersion, true);
-                if (after != null)
-                {
-                    request.Uri.AppendQuery("After", after, true);
-                }
-                if (select != null)
-                {
-                    request.Uri.AppendQueryDelimited("$Select", select, ",", true);
-                }
+                using var message = CreateCheckRevisionsRequest(key, label, after, acceptDatetime, select);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {

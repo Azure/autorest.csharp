@@ -27,6 +27,21 @@ namespace extension_client_name
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+        internal HttpMessage CreateOriginalOperationRequest(string originalPathParameter, string originalQueryParameter, OriginalSchema renamedBodyParameter)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Patch;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/originalOperation/", false);
+            request.Uri.AppendPath(originalPathParameter, true);
+            request.Headers.Add("Content-Type", "application/json");
+            request.Uri.AppendQuery("originalQueryParameter", originalQueryParameter, true);
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(renamedBodyParameter);
+            request.Content = content;
+            return message;
+        }
         public async ValueTask<ResponseWithHeaders<OriginalSchema, OriginalOperationHeaders>> OriginalOperationAsync(string originalPathParameter, string originalQueryParameter, OriginalSchema renamedBodyParameter, CancellationToken cancellationToken = default)
         {
             if (originalPathParameter == null)
@@ -42,21 +57,11 @@ namespace extension_client_name
                 throw new ArgumentNullException(nameof(renamedBodyParameter));
             }
 
-            using var scope = clientDiagnostics.CreateScope("extension_client_name.OriginalOperation");
+            using var scope = clientDiagnostics.CreateScope("AllOperations.OriginalOperation");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Patch;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/originalOperation/", false);
-                request.Uri.AppendPath(originalPathParameter, true);
-                request.Headers.Add("Content-Type", "application/json");
-                request.Uri.AppendQuery("originalQueryParameter", originalQueryParameter, true);
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(renamedBodyParameter);
-                request.Content = content;
+                using var message = CreateOriginalOperationRequest(originalPathParameter, originalQueryParameter, renamedBodyParameter);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {

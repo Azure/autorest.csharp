@@ -27,18 +27,23 @@ namespace body_number
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+        internal HttpMessage CreateGetNullRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/number/null", false);
+            return message;
+        }
         public async ValueTask<Response<float>> GetNullAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_number.GetNull");
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.GetNull");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/number/null", false);
+                using var message = CreateGetNullRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -57,19 +62,24 @@ namespace body_number
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreateGetInvalidFloatRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/number/invalidfloat", false);
+            return message;
         }
         public async ValueTask<Response<float>> GetInvalidFloatAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_number.GetInvalidFloat");
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.GetInvalidFloat");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/number/invalidfloat", false);
+                using var message = CreateGetInvalidFloatRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -88,19 +98,24 @@ namespace body_number
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreateGetInvalidDoubleRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/number/invaliddouble", false);
+            return message;
         }
         public async ValueTask<Response<double>> GetInvalidDoubleAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_number.GetInvalidDouble");
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.GetInvalidDouble");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/number/invaliddouble", false);
+                using var message = CreateGetInvalidDoubleRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -120,18 +135,23 @@ namespace body_number
                 throw;
             }
         }
+        internal HttpMessage CreateGetInvalidDecimalRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/number/invaliddecimal", false);
+            return message;
+        }
         public async ValueTask<Response<decimal>> GetInvalidDecimalAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_number.GetInvalidDecimal");
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.GetInvalidDecimal");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/number/invaliddecimal", false);
+                using var message = CreateGetInvalidDecimalRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -151,22 +171,27 @@ namespace body_number
                 throw;
             }
         }
+        internal HttpMessage CreatePutBigFloatRequest(float numberBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/number/big/float/3.402823e+20", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteNumberValue(numberBody);
+            request.Content = content;
+            return message;
+        }
         public async ValueTask<Response> PutBigFloatAsync(float numberBody, CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_number.PutBigFloat");
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.PutBigFloat");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/number/big/float/3.402823e+20", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteNumberValue(numberBody);
-                request.Content = content;
+                using var message = CreatePutBigFloatRequest(numberBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -182,18 +207,23 @@ namespace body_number
                 throw;
             }
         }
+        internal HttpMessage CreateGetBigFloatRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/number/big/float/3.402823e+20", false);
+            return message;
+        }
         public async ValueTask<Response<float>> GetBigFloatAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_number.GetBigFloat");
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.GetBigFloat");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/number/big/float/3.402823e+20", false);
+                using var message = CreateGetBigFloatRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -213,22 +243,27 @@ namespace body_number
                 throw;
             }
         }
+        internal HttpMessage CreatePutBigDoubleRequest(double numberBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/number/big/double/2.5976931e+101", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteNumberValue(numberBody);
+            request.Content = content;
+            return message;
+        }
         public async ValueTask<Response> PutBigDoubleAsync(double numberBody, CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_number.PutBigDouble");
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.PutBigDouble");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/number/big/double/2.5976931e+101", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteNumberValue(numberBody);
-                request.Content = content;
+                using var message = CreatePutBigDoubleRequest(numberBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -243,19 +278,24 @@ namespace body_number
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreateGetBigDoubleRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/number/big/double/2.5976931e+101", false);
+            return message;
         }
         public async ValueTask<Response<double>> GetBigDoubleAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_number.GetBigDouble");
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.GetBigDouble");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/number/big/double/2.5976931e+101", false);
+                using var message = CreateGetBigDoubleRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -274,23 +314,28 @@ namespace body_number
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreatePutBigDoublePositiveDecimalRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/number/big/double/99999999.99", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteNumberValue(99999999.99);
+            request.Content = content;
+            return message;
         }
         public async ValueTask<Response> PutBigDoublePositiveDecimalAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_number.PutBigDoublePositiveDecimal");
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.PutBigDoublePositiveDecimal");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/number/big/double/99999999.99", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteNumberValue(99999999.99);
-                request.Content = content;
+                using var message = CreatePutBigDoublePositiveDecimalRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -305,19 +350,24 @@ namespace body_number
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreateGetBigDoublePositiveDecimalRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/number/big/double/99999999.99", false);
+            return message;
         }
         public async ValueTask<Response<double>> GetBigDoublePositiveDecimalAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_number.GetBigDoublePositiveDecimal");
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.GetBigDoublePositiveDecimal");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/number/big/double/99999999.99", false);
+                using var message = CreateGetBigDoublePositiveDecimalRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -336,23 +386,28 @@ namespace body_number
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreatePutBigDoubleNegativeDecimalRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/number/big/double/-99999999.99", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteNumberValue(-99999999.99);
+            request.Content = content;
+            return message;
         }
         public async ValueTask<Response> PutBigDoubleNegativeDecimalAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_number.PutBigDoubleNegativeDecimal");
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.PutBigDoubleNegativeDecimal");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/number/big/double/-99999999.99", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteNumberValue(-99999999.99);
-                request.Content = content;
+                using var message = CreatePutBigDoubleNegativeDecimalRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -367,19 +422,24 @@ namespace body_number
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreateGetBigDoubleNegativeDecimalRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/number/big/double/-99999999.99", false);
+            return message;
         }
         public async ValueTask<Response<double>> GetBigDoubleNegativeDecimalAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_number.GetBigDoubleNegativeDecimal");
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.GetBigDoubleNegativeDecimal");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/number/big/double/-99999999.99", false);
+                using var message = CreateGetBigDoubleNegativeDecimalRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -398,23 +458,28 @@ namespace body_number
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreatePutBigDecimalRequest(decimal numberBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/number/big/decimal/2.5976931e+101", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteNumberValue(numberBody);
+            request.Content = content;
+            return message;
         }
         public async ValueTask<Response> PutBigDecimalAsync(decimal numberBody, CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_number.PutBigDecimal");
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.PutBigDecimal");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/number/big/decimal/2.5976931e+101", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteNumberValue(numberBody);
-                request.Content = content;
+                using var message = CreatePutBigDecimalRequest(numberBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -429,19 +494,24 @@ namespace body_number
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreateGetBigDecimalRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/number/big/decimal/2.5976931e+101", false);
+            return message;
         }
         public async ValueTask<Response<decimal>> GetBigDecimalAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_number.GetBigDecimal");
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.GetBigDecimal");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/number/big/decimal/2.5976931e+101", false);
+                using var message = CreateGetBigDecimalRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -460,23 +530,28 @@ namespace body_number
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreatePutBigDecimalPositiveDecimalRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/number/big/decimal/99999999.99", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteNumberValue(99999999.99M);
+            request.Content = content;
+            return message;
         }
         public async ValueTask<Response> PutBigDecimalPositiveDecimalAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_number.PutBigDecimalPositiveDecimal");
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.PutBigDecimalPositiveDecimal");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/number/big/decimal/99999999.99", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteNumberValue(99999999.99M);
-                request.Content = content;
+                using var message = CreatePutBigDecimalPositiveDecimalRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -491,19 +566,24 @@ namespace body_number
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreateGetBigDecimalPositiveDecimalRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/number/big/decimal/99999999.99", false);
+            return message;
         }
         public async ValueTask<Response<decimal>> GetBigDecimalPositiveDecimalAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_number.GetBigDecimalPositiveDecimal");
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.GetBigDecimalPositiveDecimal");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/number/big/decimal/99999999.99", false);
+                using var message = CreateGetBigDecimalPositiveDecimalRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -522,23 +602,28 @@ namespace body_number
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreatePutBigDecimalNegativeDecimalRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/number/big/decimal/-99999999.99", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteNumberValue(-99999999.99M);
+            request.Content = content;
+            return message;
         }
         public async ValueTask<Response> PutBigDecimalNegativeDecimalAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_number.PutBigDecimalNegativeDecimal");
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.PutBigDecimalNegativeDecimal");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/number/big/decimal/-99999999.99", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteNumberValue(-99999999.99M);
-                request.Content = content;
+                using var message = CreatePutBigDecimalNegativeDecimalRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -554,18 +639,23 @@ namespace body_number
                 throw;
             }
         }
+        internal HttpMessage CreateGetBigDecimalNegativeDecimalRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/number/big/decimal/-99999999.99", false);
+            return message;
+        }
         public async ValueTask<Response<decimal>> GetBigDecimalNegativeDecimalAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_number.GetBigDecimalNegativeDecimal");
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.GetBigDecimalNegativeDecimal");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/number/big/decimal/-99999999.99", false);
+                using var message = CreateGetBigDecimalNegativeDecimalRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -585,22 +675,27 @@ namespace body_number
                 throw;
             }
         }
+        internal HttpMessage CreatePutSmallFloatRequest(float numberBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/number/small/float/3.402823e-20", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteNumberValue(numberBody);
+            request.Content = content;
+            return message;
+        }
         public async ValueTask<Response> PutSmallFloatAsync(float numberBody, CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_number.PutSmallFloat");
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.PutSmallFloat");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/number/small/float/3.402823e-20", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteNumberValue(numberBody);
-                request.Content = content;
+                using var message = CreatePutSmallFloatRequest(numberBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -615,19 +710,24 @@ namespace body_number
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreateGetSmallFloatRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/number/small/float/3.402823e-20", false);
+            return message;
         }
         public async ValueTask<Response<double>> GetSmallFloatAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_number.GetSmallFloat");
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.GetSmallFloat");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/number/small/float/3.402823e-20", false);
+                using var message = CreateGetSmallFloatRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -646,23 +746,28 @@ namespace body_number
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreatePutSmallDoubleRequest(double numberBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/number/small/double/2.5976931e-101", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteNumberValue(numberBody);
+            request.Content = content;
+            return message;
         }
         public async ValueTask<Response> PutSmallDoubleAsync(double numberBody, CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_number.PutSmallDouble");
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.PutSmallDouble");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/number/small/double/2.5976931e-101", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteNumberValue(numberBody);
-                request.Content = content;
+                using var message = CreatePutSmallDoubleRequest(numberBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -678,18 +783,23 @@ namespace body_number
                 throw;
             }
         }
+        internal HttpMessage CreateGetSmallDoubleRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/number/small/double/2.5976931e-101", false);
+            return message;
+        }
         public async ValueTask<Response<double>> GetSmallDoubleAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_number.GetSmallDouble");
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.GetSmallDouble");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/number/small/double/2.5976931e-101", false);
+                using var message = CreateGetSmallDoubleRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -709,22 +819,27 @@ namespace body_number
                 throw;
             }
         }
+        internal HttpMessage CreatePutSmallDecimalRequest(decimal numberBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/number/small/decimal/2.5976931e-101", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteNumberValue(numberBody);
+            request.Content = content;
+            return message;
+        }
         public async ValueTask<Response> PutSmallDecimalAsync(decimal numberBody, CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_number.PutSmallDecimal");
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.PutSmallDecimal");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/number/small/decimal/2.5976931e-101", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteNumberValue(numberBody);
-                request.Content = content;
+                using var message = CreatePutSmallDecimalRequest(numberBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -740,18 +855,23 @@ namespace body_number
                 throw;
             }
         }
+        internal HttpMessage CreateGetSmallDecimalRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/number/small/decimal/2.5976931e-101", false);
+            return message;
+        }
         public async ValueTask<Response<decimal>> GetSmallDecimalAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_number.GetSmallDecimal");
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.GetSmallDecimal");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/number/small/decimal/2.5976931e-101", false);
+                using var message = CreateGetSmallDecimalRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {

@@ -27,18 +27,23 @@ namespace body_date
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+        internal HttpMessage CreateGetNullRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/date/null", false);
+            return message;
+        }
         public async ValueTask<Response<DateTimeOffset>> GetNullAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_date.GetNull");
+            using var scope = clientDiagnostics.CreateScope("DateOperations.GetNull");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/date/null", false);
+                using var message = CreateGetNullRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -57,19 +62,24 @@ namespace body_date
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreateGetInvalidDateRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/date/invaliddate", false);
+            return message;
         }
         public async ValueTask<Response<DateTimeOffset>> GetInvalidDateAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_date.GetInvalidDate");
+            using var scope = clientDiagnostics.CreateScope("DateOperations.GetInvalidDate");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/date/invaliddate", false);
+                using var message = CreateGetInvalidDateRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -88,19 +98,24 @@ namespace body_date
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreateGetOverflowDateRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/date/overflowdate", false);
+            return message;
         }
         public async ValueTask<Response<DateTimeOffset>> GetOverflowDateAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_date.GetOverflowDate");
+            using var scope = clientDiagnostics.CreateScope("DateOperations.GetOverflowDate");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/date/overflowdate", false);
+                using var message = CreateGetOverflowDateRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -119,19 +134,24 @@ namespace body_date
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreateGetUnderflowDateRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/date/underflowdate", false);
+            return message;
         }
         public async ValueTask<Response<DateTimeOffset>> GetUnderflowDateAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_date.GetUnderflowDate");
+            using var scope = clientDiagnostics.CreateScope("DateOperations.GetUnderflowDate");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/date/underflowdate", false);
+                using var message = CreateGetUnderflowDateRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -150,23 +170,28 @@ namespace body_date
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreatePutMaxDateRequest(DateTimeOffset dateBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/date/max", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteStringValue(dateBody, "D");
+            request.Content = content;
+            return message;
         }
         public async ValueTask<Response> PutMaxDateAsync(DateTimeOffset dateBody, CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_date.PutMaxDate");
+            using var scope = clientDiagnostics.CreateScope("DateOperations.PutMaxDate");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/date/max", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStringValue(dateBody, "D");
-                request.Content = content;
+                using var message = CreatePutMaxDateRequest(dateBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -182,18 +207,23 @@ namespace body_date
                 throw;
             }
         }
+        internal HttpMessage CreateGetMaxDateRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/date/max", false);
+            return message;
+        }
         public async ValueTask<Response<DateTimeOffset>> GetMaxDateAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_date.GetMaxDate");
+            using var scope = clientDiagnostics.CreateScope("DateOperations.GetMaxDate");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/date/max", false);
+                using var message = CreateGetMaxDateRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -213,22 +243,27 @@ namespace body_date
                 throw;
             }
         }
+        internal HttpMessage CreatePutMinDateRequest(DateTimeOffset dateBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/date/min", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteStringValue(dateBody, "D");
+            request.Content = content;
+            return message;
+        }
         public async ValueTask<Response> PutMinDateAsync(DateTimeOffset dateBody, CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_date.PutMinDate");
+            using var scope = clientDiagnostics.CreateScope("DateOperations.PutMinDate");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/date/min", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStringValue(dateBody, "D");
-                request.Content = content;
+                using var message = CreatePutMinDateRequest(dateBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -244,18 +279,23 @@ namespace body_date
                 throw;
             }
         }
+        internal HttpMessage CreateGetMinDateRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/date/min", false);
+            return message;
+        }
         public async ValueTask<Response<DateTimeOffset>> GetMinDateAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_date.GetMinDate");
+            using var scope = clientDiagnostics.CreateScope("DateOperations.GetMinDate");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/date/min", false);
+                using var message = CreateGetMinDateRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {

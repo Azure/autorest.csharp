@@ -28,18 +28,23 @@ namespace body_complex
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+        internal HttpMessage CreateGetIntRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/complex/primitive/integer", false);
+            return message;
+        }
         public async ValueTask<Response<IntWrapper>> GetIntAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.GetInt");
+            using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.GetInt");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/primitive/integer", false);
+                using var message = CreateGetIntRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -59,6 +64,19 @@ namespace body_complex
                 throw;
             }
         }
+        internal HttpMessage CreatePutIntRequest(IntWrapper complexBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/complex/primitive/integer", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(complexBody);
+            request.Content = content;
+            return message;
+        }
         public async ValueTask<Response> PutIntAsync(IntWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -66,19 +84,11 @@ namespace body_complex
                 throw new ArgumentNullException(nameof(complexBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.PutInt");
+            using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.PutInt");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/primitive/integer", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(complexBody);
-                request.Content = content;
+                using var message = CreatePutIntRequest(complexBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -94,18 +104,23 @@ namespace body_complex
                 throw;
             }
         }
+        internal HttpMessage CreateGetLongRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/complex/primitive/long", false);
+            return message;
+        }
         public async ValueTask<Response<LongWrapper>> GetLongAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.GetLong");
+            using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.GetLong");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/primitive/long", false);
+                using var message = CreateGetLongRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -125,6 +140,19 @@ namespace body_complex
                 throw;
             }
         }
+        internal HttpMessage CreatePutLongRequest(LongWrapper complexBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/complex/primitive/long", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(complexBody);
+            request.Content = content;
+            return message;
+        }
         public async ValueTask<Response> PutLongAsync(LongWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -132,19 +160,11 @@ namespace body_complex
                 throw new ArgumentNullException(nameof(complexBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.PutLong");
+            using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.PutLong");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/primitive/long", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(complexBody);
-                request.Content = content;
+                using var message = CreatePutLongRequest(complexBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -160,18 +180,23 @@ namespace body_complex
                 throw;
             }
         }
+        internal HttpMessage CreateGetFloatRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/complex/primitive/float", false);
+            return message;
+        }
         public async ValueTask<Response<FloatWrapper>> GetFloatAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.GetFloat");
+            using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.GetFloat");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/primitive/float", false);
+                using var message = CreateGetFloatRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -191,6 +216,19 @@ namespace body_complex
                 throw;
             }
         }
+        internal HttpMessage CreatePutFloatRequest(FloatWrapper complexBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/complex/primitive/float", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(complexBody);
+            request.Content = content;
+            return message;
+        }
         public async ValueTask<Response> PutFloatAsync(FloatWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -198,19 +236,11 @@ namespace body_complex
                 throw new ArgumentNullException(nameof(complexBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.PutFloat");
+            using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.PutFloat");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/primitive/float", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(complexBody);
-                request.Content = content;
+                using var message = CreatePutFloatRequest(complexBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -226,18 +256,23 @@ namespace body_complex
                 throw;
             }
         }
+        internal HttpMessage CreateGetDoubleRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/complex/primitive/double", false);
+            return message;
+        }
         public async ValueTask<Response<DoubleWrapper>> GetDoubleAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.GetDouble");
+            using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.GetDouble");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/primitive/double", false);
+                using var message = CreateGetDoubleRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -257,6 +292,19 @@ namespace body_complex
                 throw;
             }
         }
+        internal HttpMessage CreatePutDoubleRequest(DoubleWrapper complexBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/complex/primitive/double", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(complexBody);
+            request.Content = content;
+            return message;
+        }
         public async ValueTask<Response> PutDoubleAsync(DoubleWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -264,19 +312,11 @@ namespace body_complex
                 throw new ArgumentNullException(nameof(complexBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.PutDouble");
+            using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.PutDouble");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/primitive/double", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(complexBody);
-                request.Content = content;
+                using var message = CreatePutDoubleRequest(complexBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -292,18 +332,23 @@ namespace body_complex
                 throw;
             }
         }
+        internal HttpMessage CreateGetBoolRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/complex/primitive/bool", false);
+            return message;
+        }
         public async ValueTask<Response<BooleanWrapper>> GetBoolAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.GetBool");
+            using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.GetBool");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/primitive/bool", false);
+                using var message = CreateGetBoolRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -323,6 +368,19 @@ namespace body_complex
                 throw;
             }
         }
+        internal HttpMessage CreatePutBoolRequest(BooleanWrapper complexBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/complex/primitive/bool", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(complexBody);
+            request.Content = content;
+            return message;
+        }
         public async ValueTask<Response> PutBoolAsync(BooleanWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -330,19 +388,11 @@ namespace body_complex
                 throw new ArgumentNullException(nameof(complexBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.PutBool");
+            using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.PutBool");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/primitive/bool", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(complexBody);
-                request.Content = content;
+                using var message = CreatePutBoolRequest(complexBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -358,18 +408,23 @@ namespace body_complex
                 throw;
             }
         }
+        internal HttpMessage CreateGetStringRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/complex/primitive/string", false);
+            return message;
+        }
         public async ValueTask<Response<StringWrapper>> GetStringAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.GetString");
+            using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.GetString");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/primitive/string", false);
+                using var message = CreateGetStringRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -389,6 +444,19 @@ namespace body_complex
                 throw;
             }
         }
+        internal HttpMessage CreatePutStringRequest(StringWrapper complexBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/complex/primitive/string", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(complexBody);
+            request.Content = content;
+            return message;
+        }
         public async ValueTask<Response> PutStringAsync(StringWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -396,19 +464,11 @@ namespace body_complex
                 throw new ArgumentNullException(nameof(complexBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.PutString");
+            using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.PutString");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/primitive/string", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(complexBody);
-                request.Content = content;
+                using var message = CreatePutStringRequest(complexBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -424,18 +484,23 @@ namespace body_complex
                 throw;
             }
         }
+        internal HttpMessage CreateGetDateRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/complex/primitive/date", false);
+            return message;
+        }
         public async ValueTask<Response<DateWrapper>> GetDateAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.GetDate");
+            using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.GetDate");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/primitive/date", false);
+                using var message = CreateGetDateRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -455,6 +520,19 @@ namespace body_complex
                 throw;
             }
         }
+        internal HttpMessage CreatePutDateRequest(DateWrapper complexBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/complex/primitive/date", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(complexBody);
+            request.Content = content;
+            return message;
+        }
         public async ValueTask<Response> PutDateAsync(DateWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -462,19 +540,11 @@ namespace body_complex
                 throw new ArgumentNullException(nameof(complexBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.PutDate");
+            using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.PutDate");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/primitive/date", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(complexBody);
-                request.Content = content;
+                using var message = CreatePutDateRequest(complexBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -490,18 +560,23 @@ namespace body_complex
                 throw;
             }
         }
+        internal HttpMessage CreateGetDateTimeRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/complex/primitive/datetime", false);
+            return message;
+        }
         public async ValueTask<Response<DatetimeWrapper>> GetDateTimeAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.GetDateTime");
+            using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.GetDateTime");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/primitive/datetime", false);
+                using var message = CreateGetDateTimeRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -521,6 +596,19 @@ namespace body_complex
                 throw;
             }
         }
+        internal HttpMessage CreatePutDateTimeRequest(DatetimeWrapper complexBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/complex/primitive/datetime", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(complexBody);
+            request.Content = content;
+            return message;
+        }
         public async ValueTask<Response> PutDateTimeAsync(DatetimeWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -528,19 +616,11 @@ namespace body_complex
                 throw new ArgumentNullException(nameof(complexBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.PutDateTime");
+            using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.PutDateTime");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/primitive/datetime", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(complexBody);
-                request.Content = content;
+                using var message = CreatePutDateTimeRequest(complexBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -556,18 +636,23 @@ namespace body_complex
                 throw;
             }
         }
+        internal HttpMessage CreateGetDateTimeRfc1123Request()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/complex/primitive/datetimerfc1123", false);
+            return message;
+        }
         public async ValueTask<Response<Datetimerfc1123Wrapper>> GetDateTimeRfc1123Async(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.GetDateTimeRfc1123");
+            using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.GetDateTimeRfc1123");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/primitive/datetimerfc1123", false);
+                using var message = CreateGetDateTimeRfc1123Request();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -587,6 +672,19 @@ namespace body_complex
                 throw;
             }
         }
+        internal HttpMessage CreatePutDateTimeRfc1123Request(Datetimerfc1123Wrapper complexBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/complex/primitive/datetimerfc1123", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(complexBody);
+            request.Content = content;
+            return message;
+        }
         public async ValueTask<Response> PutDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -594,19 +692,11 @@ namespace body_complex
                 throw new ArgumentNullException(nameof(complexBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.PutDateTimeRfc1123");
+            using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.PutDateTimeRfc1123");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/primitive/datetimerfc1123", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(complexBody);
-                request.Content = content;
+                using var message = CreatePutDateTimeRfc1123Request(complexBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -622,18 +712,23 @@ namespace body_complex
                 throw;
             }
         }
+        internal HttpMessage CreateGetDurationRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/complex/primitive/duration", false);
+            return message;
+        }
         public async ValueTask<Response<DurationWrapper>> GetDurationAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.GetDuration");
+            using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.GetDuration");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/primitive/duration", false);
+                using var message = CreateGetDurationRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -653,6 +748,19 @@ namespace body_complex
                 throw;
             }
         }
+        internal HttpMessage CreatePutDurationRequest(DurationWrapper complexBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/complex/primitive/duration", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(complexBody);
+            request.Content = content;
+            return message;
+        }
         public async ValueTask<Response> PutDurationAsync(DurationWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -660,19 +768,11 @@ namespace body_complex
                 throw new ArgumentNullException(nameof(complexBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.PutDuration");
+            using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.PutDuration");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/primitive/duration", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(complexBody);
-                request.Content = content;
+                using var message = CreatePutDurationRequest(complexBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -688,18 +788,23 @@ namespace body_complex
                 throw;
             }
         }
+        internal HttpMessage CreateGetByteRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/complex/primitive/byte", false);
+            return message;
+        }
         public async ValueTask<Response<ByteWrapper>> GetByteAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.GetByte");
+            using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.GetByte");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/primitive/byte", false);
+                using var message = CreateGetByteRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -719,6 +824,19 @@ namespace body_complex
                 throw;
             }
         }
+        internal HttpMessage CreatePutByteRequest(ByteWrapper complexBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/complex/primitive/byte", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(complexBody);
+            request.Content = content;
+            return message;
+        }
         public async ValueTask<Response> PutByteAsync(ByteWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -726,19 +844,11 @@ namespace body_complex
                 throw new ArgumentNullException(nameof(complexBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.PutByte");
+            using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.PutByte");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/primitive/byte", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(complexBody);
-                request.Content = content;
+                using var message = CreatePutByteRequest(complexBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {

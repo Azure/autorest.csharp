@@ -27,6 +27,16 @@ namespace header
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+        internal HttpMessage CreateParamExistingKeyRequest(string userAgent)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/header/param/existingkey", false);
+            request.Headers.Add("User-Agent", userAgent);
+            return message;
+        }
         public async ValueTask<Response> ParamExistingKeyAsync(string userAgent, CancellationToken cancellationToken = default)
         {
             if (userAgent == null)
@@ -34,16 +44,11 @@ namespace header
                 throw new ArgumentNullException(nameof(userAgent));
             }
 
-            using var scope = clientDiagnostics.CreateScope("header.ParamExistingKey");
+            using var scope = clientDiagnostics.CreateScope("HeaderOperations.ParamExistingKey");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Post;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/header/param/existingkey", false);
-                request.Headers.Add("User-Agent", userAgent);
+                using var message = CreateParamExistingKeyRequest(userAgent);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -59,18 +64,23 @@ namespace header
                 throw;
             }
         }
+        internal HttpMessage CreateResponseExistingKeyRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/header/response/existingkey", false);
+            return message;
+        }
         public async ValueTask<ResponseWithHeaders<ResponseExistingKeyHeaders>> ResponseExistingKeyAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("header.ResponseExistingKey");
+            using var scope = clientDiagnostics.CreateScope("HeaderOperations.ResponseExistingKey");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Post;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/header/response/existingkey", false);
+                using var message = CreateResponseExistingKeyRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -87,6 +97,16 @@ namespace header
                 throw;
             }
         }
+        internal HttpMessage CreateParamProtectedKeyRequest(string contentType)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/header/param/protectedkey", false);
+            request.Headers.Add("Content-Type", contentType);
+            return message;
+        }
         public async ValueTask<Response> ParamProtectedKeyAsync(string contentType, CancellationToken cancellationToken = default)
         {
             if (contentType == null)
@@ -94,16 +114,11 @@ namespace header
                 throw new ArgumentNullException(nameof(contentType));
             }
 
-            using var scope = clientDiagnostics.CreateScope("header.ParamProtectedKey");
+            using var scope = clientDiagnostics.CreateScope("HeaderOperations.ParamProtectedKey");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Post;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/header/param/protectedkey", false);
-                request.Headers.Add("Content-Type", contentType);
+                using var message = CreateParamProtectedKeyRequest(contentType);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -119,18 +134,23 @@ namespace header
                 throw;
             }
         }
+        internal HttpMessage CreateResponseProtectedKeyRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/header/response/protectedkey", false);
+            return message;
+        }
         public async ValueTask<ResponseWithHeaders<ResponseProtectedKeyHeaders>> ResponseProtectedKeyAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("header.ResponseProtectedKey");
+            using var scope = clientDiagnostics.CreateScope("HeaderOperations.ResponseProtectedKey");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Post;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/header/response/protectedkey", false);
+                using var message = CreateResponseProtectedKeyRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -147,6 +167,17 @@ namespace header
                 throw;
             }
         }
+        internal HttpMessage CreateParamIntegerRequest(string scenario, int value)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/header/param/prim/integer", false);
+            request.Headers.Add("scenario", scenario);
+            request.Headers.Add("value", value);
+            return message;
+        }
         public async ValueTask<Response> ParamIntegerAsync(string scenario, int value, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
@@ -154,17 +185,11 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("header.ParamInteger");
+            using var scope = clientDiagnostics.CreateScope("HeaderOperations.ParamInteger");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Post;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/header/param/prim/integer", false);
-                request.Headers.Add("scenario", scenario);
-                request.Headers.Add("value", value);
+                using var message = CreateParamIntegerRequest(scenario, value);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -180,6 +205,16 @@ namespace header
                 throw;
             }
         }
+        internal HttpMessage CreateResponseIntegerRequest(string scenario)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/header/response/prim/integer", false);
+            request.Headers.Add("scenario", scenario);
+            return message;
+        }
         public async ValueTask<ResponseWithHeaders<ResponseIntegerHeaders>> ResponseIntegerAsync(string scenario, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
@@ -187,16 +222,11 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("header.ResponseInteger");
+            using var scope = clientDiagnostics.CreateScope("HeaderOperations.ResponseInteger");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Post;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/header/response/prim/integer", false);
-                request.Headers.Add("scenario", scenario);
+                using var message = CreateResponseIntegerRequest(scenario);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -213,6 +243,17 @@ namespace header
                 throw;
             }
         }
+        internal HttpMessage CreateParamLongRequest(string scenario, long value)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/header/param/prim/long", false);
+            request.Headers.Add("scenario", scenario);
+            request.Headers.Add("value", value);
+            return message;
+        }
         public async ValueTask<Response> ParamLongAsync(string scenario, long value, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
@@ -220,17 +261,11 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("header.ParamLong");
+            using var scope = clientDiagnostics.CreateScope("HeaderOperations.ParamLong");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Post;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/header/param/prim/long", false);
-                request.Headers.Add("scenario", scenario);
-                request.Headers.Add("value", value);
+                using var message = CreateParamLongRequest(scenario, value);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -246,6 +281,16 @@ namespace header
                 throw;
             }
         }
+        internal HttpMessage CreateResponseLongRequest(string scenario)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/header/response/prim/long", false);
+            request.Headers.Add("scenario", scenario);
+            return message;
+        }
         public async ValueTask<ResponseWithHeaders<ResponseLongHeaders>> ResponseLongAsync(string scenario, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
@@ -253,16 +298,11 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("header.ResponseLong");
+            using var scope = clientDiagnostics.CreateScope("HeaderOperations.ResponseLong");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Post;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/header/response/prim/long", false);
-                request.Headers.Add("scenario", scenario);
+                using var message = CreateResponseLongRequest(scenario);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -279,6 +319,17 @@ namespace header
                 throw;
             }
         }
+        internal HttpMessage CreateParamFloatRequest(string scenario, float value)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/header/param/prim/float", false);
+            request.Headers.Add("scenario", scenario);
+            request.Headers.Add("value", value);
+            return message;
+        }
         public async ValueTask<Response> ParamFloatAsync(string scenario, float value, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
@@ -286,17 +337,11 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("header.ParamFloat");
+            using var scope = clientDiagnostics.CreateScope("HeaderOperations.ParamFloat");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Post;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/header/param/prim/float", false);
-                request.Headers.Add("scenario", scenario);
-                request.Headers.Add("value", value);
+                using var message = CreateParamFloatRequest(scenario, value);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -312,6 +357,16 @@ namespace header
                 throw;
             }
         }
+        internal HttpMessage CreateResponseFloatRequest(string scenario)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/header/response/prim/float", false);
+            request.Headers.Add("scenario", scenario);
+            return message;
+        }
         public async ValueTask<ResponseWithHeaders<ResponseFloatHeaders>> ResponseFloatAsync(string scenario, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
@@ -319,16 +374,11 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("header.ResponseFloat");
+            using var scope = clientDiagnostics.CreateScope("HeaderOperations.ResponseFloat");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Post;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/header/response/prim/float", false);
-                request.Headers.Add("scenario", scenario);
+                using var message = CreateResponseFloatRequest(scenario);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -345,6 +395,17 @@ namespace header
                 throw;
             }
         }
+        internal HttpMessage CreateParamDoubleRequest(string scenario, double value)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/header/param/prim/double", false);
+            request.Headers.Add("scenario", scenario);
+            request.Headers.Add("value", value);
+            return message;
+        }
         public async ValueTask<Response> ParamDoubleAsync(string scenario, double value, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
@@ -352,17 +413,11 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("header.ParamDouble");
+            using var scope = clientDiagnostics.CreateScope("HeaderOperations.ParamDouble");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Post;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/header/param/prim/double", false);
-                request.Headers.Add("scenario", scenario);
-                request.Headers.Add("value", value);
+                using var message = CreateParamDoubleRequest(scenario, value);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -378,6 +433,16 @@ namespace header
                 throw;
             }
         }
+        internal HttpMessage CreateResponseDoubleRequest(string scenario)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/header/response/prim/double", false);
+            request.Headers.Add("scenario", scenario);
+            return message;
+        }
         public async ValueTask<ResponseWithHeaders<ResponseDoubleHeaders>> ResponseDoubleAsync(string scenario, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
@@ -385,16 +450,11 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("header.ResponseDouble");
+            using var scope = clientDiagnostics.CreateScope("HeaderOperations.ResponseDouble");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Post;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/header/response/prim/double", false);
-                request.Headers.Add("scenario", scenario);
+                using var message = CreateResponseDoubleRequest(scenario);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -411,6 +471,17 @@ namespace header
                 throw;
             }
         }
+        internal HttpMessage CreateParamBoolRequest(string scenario, bool value)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/header/param/prim/bool", false);
+            request.Headers.Add("scenario", scenario);
+            request.Headers.Add("value", value);
+            return message;
+        }
         public async ValueTask<Response> ParamBoolAsync(string scenario, bool value, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
@@ -418,17 +489,11 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("header.ParamBool");
+            using var scope = clientDiagnostics.CreateScope("HeaderOperations.ParamBool");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Post;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/header/param/prim/bool", false);
-                request.Headers.Add("scenario", scenario);
-                request.Headers.Add("value", value);
+                using var message = CreateParamBoolRequest(scenario, value);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -444,6 +509,16 @@ namespace header
                 throw;
             }
         }
+        internal HttpMessage CreateResponseBoolRequest(string scenario)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/header/response/prim/bool", false);
+            request.Headers.Add("scenario", scenario);
+            return message;
+        }
         public async ValueTask<ResponseWithHeaders<ResponseBoolHeaders>> ResponseBoolAsync(string scenario, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
@@ -451,16 +526,11 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("header.ResponseBool");
+            using var scope = clientDiagnostics.CreateScope("HeaderOperations.ResponseBool");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Post;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/header/response/prim/bool", false);
-                request.Headers.Add("scenario", scenario);
+                using var message = CreateResponseBoolRequest(scenario);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -477,6 +547,20 @@ namespace header
                 throw;
             }
         }
+        internal HttpMessage CreateParamStringRequest(string scenario, string? value)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/header/param/prim/string", false);
+            request.Headers.Add("scenario", scenario);
+            if (value != null)
+            {
+                request.Headers.Add("value", value);
+            }
+            return message;
+        }
         public async ValueTask<Response> ParamStringAsync(string scenario, string? value, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
@@ -484,20 +568,11 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("header.ParamString");
+            using var scope = clientDiagnostics.CreateScope("HeaderOperations.ParamString");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Post;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/header/param/prim/string", false);
-                request.Headers.Add("scenario", scenario);
-                if (value != null)
-                {
-                    request.Headers.Add("value", value);
-                }
+                using var message = CreateParamStringRequest(scenario, value);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -513,6 +588,16 @@ namespace header
                 throw;
             }
         }
+        internal HttpMessage CreateResponseStringRequest(string scenario)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/header/response/prim/string", false);
+            request.Headers.Add("scenario", scenario);
+            return message;
+        }
         public async ValueTask<ResponseWithHeaders<ResponseStringHeaders>> ResponseStringAsync(string scenario, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
@@ -520,16 +605,11 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("header.ResponseString");
+            using var scope = clientDiagnostics.CreateScope("HeaderOperations.ResponseString");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Post;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/header/response/prim/string", false);
-                request.Headers.Add("scenario", scenario);
+                using var message = CreateResponseStringRequest(scenario);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -546,6 +626,17 @@ namespace header
                 throw;
             }
         }
+        internal HttpMessage CreateParamDateRequest(string scenario, DateTimeOffset value)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/header/param/prim/date", false);
+            request.Headers.Add("scenario", scenario);
+            request.Headers.Add("value", value, "D");
+            return message;
+        }
         public async ValueTask<Response> ParamDateAsync(string scenario, DateTimeOffset value, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
@@ -553,17 +644,11 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("header.ParamDate");
+            using var scope = clientDiagnostics.CreateScope("HeaderOperations.ParamDate");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Post;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/header/param/prim/date", false);
-                request.Headers.Add("scenario", scenario);
-                request.Headers.Add("value", value, "D");
+                using var message = CreateParamDateRequest(scenario, value);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -579,6 +664,16 @@ namespace header
                 throw;
             }
         }
+        internal HttpMessage CreateResponseDateRequest(string scenario)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/header/response/prim/date", false);
+            request.Headers.Add("scenario", scenario);
+            return message;
+        }
         public async ValueTask<ResponseWithHeaders<ResponseDateHeaders>> ResponseDateAsync(string scenario, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
@@ -586,16 +681,11 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("header.ResponseDate");
+            using var scope = clientDiagnostics.CreateScope("HeaderOperations.ResponseDate");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Post;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/header/response/prim/date", false);
-                request.Headers.Add("scenario", scenario);
+                using var message = CreateResponseDateRequest(scenario);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -612,6 +702,17 @@ namespace header
                 throw;
             }
         }
+        internal HttpMessage CreateParamDatetimeRequest(string scenario, DateTimeOffset value)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/header/param/prim/datetime", false);
+            request.Headers.Add("scenario", scenario);
+            request.Headers.Add("value", value, "S");
+            return message;
+        }
         public async ValueTask<Response> ParamDatetimeAsync(string scenario, DateTimeOffset value, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
@@ -619,17 +720,11 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("header.ParamDatetime");
+            using var scope = clientDiagnostics.CreateScope("HeaderOperations.ParamDatetime");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Post;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/header/param/prim/datetime", false);
-                request.Headers.Add("scenario", scenario);
-                request.Headers.Add("value", value, "S");
+                using var message = CreateParamDatetimeRequest(scenario, value);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -645,6 +740,16 @@ namespace header
                 throw;
             }
         }
+        internal HttpMessage CreateResponseDatetimeRequest(string scenario)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/header/response/prim/datetime", false);
+            request.Headers.Add("scenario", scenario);
+            return message;
+        }
         public async ValueTask<ResponseWithHeaders<ResponseDatetimeHeaders>> ResponseDatetimeAsync(string scenario, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
@@ -652,16 +757,11 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("header.ResponseDatetime");
+            using var scope = clientDiagnostics.CreateScope("HeaderOperations.ResponseDatetime");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Post;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/header/response/prim/datetime", false);
-                request.Headers.Add("scenario", scenario);
+                using var message = CreateResponseDatetimeRequest(scenario);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -678,6 +778,20 @@ namespace header
                 throw;
             }
         }
+        internal HttpMessage CreateParamDatetimeRfc1123Request(string scenario, DateTimeOffset? value)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/header/param/prim/datetimerfc1123", false);
+            request.Headers.Add("scenario", scenario);
+            if (value != null)
+            {
+                request.Headers.Add("value", value.Value, "R");
+            }
+            return message;
+        }
         public async ValueTask<Response> ParamDatetimeRfc1123Async(string scenario, DateTimeOffset? value, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
@@ -685,20 +799,11 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("header.ParamDatetimeRfc1123");
+            using var scope = clientDiagnostics.CreateScope("HeaderOperations.ParamDatetimeRfc1123");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Post;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/header/param/prim/datetimerfc1123", false);
-                request.Headers.Add("scenario", scenario);
-                if (value != null)
-                {
-                    request.Headers.Add("value", value.Value, "R");
-                }
+                using var message = CreateParamDatetimeRfc1123Request(scenario, value);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -714,6 +819,16 @@ namespace header
                 throw;
             }
         }
+        internal HttpMessage CreateResponseDatetimeRfc1123Request(string scenario)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/header/response/prim/datetimerfc1123", false);
+            request.Headers.Add("scenario", scenario);
+            return message;
+        }
         public async ValueTask<ResponseWithHeaders<ResponseDatetimeRfc1123Headers>> ResponseDatetimeRfc1123Async(string scenario, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
@@ -721,16 +836,11 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("header.ResponseDatetimeRfc1123");
+            using var scope = clientDiagnostics.CreateScope("HeaderOperations.ResponseDatetimeRfc1123");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Post;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/header/response/prim/datetimerfc1123", false);
-                request.Headers.Add("scenario", scenario);
+                using var message = CreateResponseDatetimeRfc1123Request(scenario);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -747,6 +857,17 @@ namespace header
                 throw;
             }
         }
+        internal HttpMessage CreateParamDurationRequest(string scenario, TimeSpan value)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/header/param/prim/duration", false);
+            request.Headers.Add("scenario", scenario);
+            request.Headers.Add("value", value, "P");
+            return message;
+        }
         public async ValueTask<Response> ParamDurationAsync(string scenario, TimeSpan value, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
@@ -754,17 +875,11 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("header.ParamDuration");
+            using var scope = clientDiagnostics.CreateScope("HeaderOperations.ParamDuration");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Post;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/header/param/prim/duration", false);
-                request.Headers.Add("scenario", scenario);
-                request.Headers.Add("value", value, "P");
+                using var message = CreateParamDurationRequest(scenario, value);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -780,6 +895,16 @@ namespace header
                 throw;
             }
         }
+        internal HttpMessage CreateResponseDurationRequest(string scenario)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/header/response/prim/duration", false);
+            request.Headers.Add("scenario", scenario);
+            return message;
+        }
         public async ValueTask<ResponseWithHeaders<ResponseDurationHeaders>> ResponseDurationAsync(string scenario, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
@@ -787,16 +912,11 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("header.ResponseDuration");
+            using var scope = clientDiagnostics.CreateScope("HeaderOperations.ResponseDuration");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Post;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/header/response/prim/duration", false);
-                request.Headers.Add("scenario", scenario);
+                using var message = CreateResponseDurationRequest(scenario);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -813,6 +933,17 @@ namespace header
                 throw;
             }
         }
+        internal HttpMessage CreateParamByteRequest(string scenario, byte[] value)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/header/param/prim/byte", false);
+            request.Headers.Add("scenario", scenario);
+            request.Headers.Add("value", value);
+            return message;
+        }
         public async ValueTask<Response> ParamByteAsync(string scenario, byte[] value, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
@@ -824,17 +955,11 @@ namespace header
                 throw new ArgumentNullException(nameof(value));
             }
 
-            using var scope = clientDiagnostics.CreateScope("header.ParamByte");
+            using var scope = clientDiagnostics.CreateScope("HeaderOperations.ParamByte");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Post;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/header/param/prim/byte", false);
-                request.Headers.Add("scenario", scenario);
-                request.Headers.Add("value", value);
+                using var message = CreateParamByteRequest(scenario, value);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -850,6 +975,16 @@ namespace header
                 throw;
             }
         }
+        internal HttpMessage CreateResponseByteRequest(string scenario)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/header/response/prim/byte", false);
+            request.Headers.Add("scenario", scenario);
+            return message;
+        }
         public async ValueTask<ResponseWithHeaders<ResponseByteHeaders>> ResponseByteAsync(string scenario, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
@@ -857,16 +992,11 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("header.ResponseByte");
+            using var scope = clientDiagnostics.CreateScope("HeaderOperations.ResponseByte");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Post;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/header/response/prim/byte", false);
-                request.Headers.Add("scenario", scenario);
+                using var message = CreateResponseByteRequest(scenario);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -883,6 +1013,20 @@ namespace header
                 throw;
             }
         }
+        internal HttpMessage CreateParamEnumRequest(string scenario, GreyscaleColors? value)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/header/param/prim/enum", false);
+            request.Headers.Add("scenario", scenario);
+            if (value != null)
+            {
+                request.Headers.Add("value", value.Value);
+            }
+            return message;
+        }
         public async ValueTask<Response> ParamEnumAsync(string scenario, GreyscaleColors? value, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
@@ -890,20 +1034,11 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("header.ParamEnum");
+            using var scope = clientDiagnostics.CreateScope("HeaderOperations.ParamEnum");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Post;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/header/param/prim/enum", false);
-                request.Headers.Add("scenario", scenario);
-                if (value != null)
-                {
-                    request.Headers.Add("value", value.Value);
-                }
+                using var message = CreateParamEnumRequest(scenario, value);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -919,6 +1054,16 @@ namespace header
                 throw;
             }
         }
+        internal HttpMessage CreateResponseEnumRequest(string scenario)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/header/response/prim/enum", false);
+            request.Headers.Add("scenario", scenario);
+            return message;
+        }
         public async ValueTask<ResponseWithHeaders<ResponseEnumHeaders>> ResponseEnumAsync(string scenario, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
@@ -926,16 +1071,11 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("header.ResponseEnum");
+            using var scope = clientDiagnostics.CreateScope("HeaderOperations.ResponseEnum");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Post;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/header/response/prim/enum", false);
-                request.Headers.Add("scenario", scenario);
+                using var message = CreateResponseEnumRequest(scenario);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -952,18 +1092,23 @@ namespace header
                 throw;
             }
         }
+        internal HttpMessage CreateCustomRequestIdRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0", false);
+            return message;
+        }
         public async ValueTask<Response> CustomRequestIdAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("header.CustomRequestId");
+            using var scope = clientDiagnostics.CreateScope("HeaderOperations.CustomRequestId");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Post;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0", false);
+                using var message = CreateCustomRequestIdRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {

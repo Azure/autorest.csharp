@@ -28,18 +28,23 @@ namespace body_complex
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+        internal HttpMessage CreateGetValidRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/complex/polymorphism/valid", false);
+            return message;
+        }
         public async ValueTask<Response<Fish>> GetValidAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.GetValid");
+            using var scope = clientDiagnostics.CreateScope("PolymorphismOperations.GetValid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/polymorphism/valid", false);
+                using var message = CreateGetValidRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -59,6 +64,19 @@ namespace body_complex
                 throw;
             }
         }
+        internal HttpMessage CreatePutValidRequest(Fish complexBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/complex/polymorphism/valid", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(complexBody);
+            request.Content = content;
+            return message;
+        }
         public async ValueTask<Response> PutValidAsync(Fish complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -66,19 +84,11 @@ namespace body_complex
                 throw new ArgumentNullException(nameof(complexBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.PutValid");
+            using var scope = clientDiagnostics.CreateScope("PolymorphismOperations.PutValid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/polymorphism/valid", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(complexBody);
-                request.Content = content;
+                using var message = CreatePutValidRequest(complexBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -94,18 +104,23 @@ namespace body_complex
                 throw;
             }
         }
+        internal HttpMessage CreateGetDotSyntaxRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/complex/polymorphism/dotsyntax", false);
+            return message;
+        }
         public async ValueTask<Response<DotFish>> GetDotSyntaxAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.GetDotSyntax");
+            using var scope = clientDiagnostics.CreateScope("PolymorphismOperations.GetDotSyntax");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/polymorphism/dotsyntax", false);
+                using var message = CreateGetDotSyntaxRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -125,18 +140,23 @@ namespace body_complex
                 throw;
             }
         }
+        internal HttpMessage CreateGetComposedWithDiscriminatorRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/complex/polymorphism/composedWithDiscriminator", false);
+            return message;
+        }
         public async ValueTask<Response<DotFishMarket>> GetComposedWithDiscriminatorAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.GetComposedWithDiscriminator");
+            using var scope = clientDiagnostics.CreateScope("PolymorphismOperations.GetComposedWithDiscriminator");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/polymorphism/composedWithDiscriminator", false);
+                using var message = CreateGetComposedWithDiscriminatorRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -155,19 +175,24 @@ namespace body_complex
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreateGetComposedWithoutDiscriminatorRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/complex/polymorphism/composedWithoutDiscriminator", false);
+            return message;
         }
         public async ValueTask<Response<DotFishMarket>> GetComposedWithoutDiscriminatorAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.GetComposedWithoutDiscriminator");
+            using var scope = clientDiagnostics.CreateScope("PolymorphismOperations.GetComposedWithoutDiscriminator");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/polymorphism/composedWithoutDiscriminator", false);
+                using var message = CreateGetComposedWithoutDiscriminatorRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -187,18 +212,23 @@ namespace body_complex
                 throw;
             }
         }
+        internal HttpMessage CreateGetComplicatedRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/complex/polymorphism/complicated", false);
+            return message;
+        }
         public async ValueTask<Response<Salmon>> GetComplicatedAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.GetComplicated");
+            using var scope = clientDiagnostics.CreateScope("PolymorphismOperations.GetComplicated");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/polymorphism/complicated", false);
+                using var message = CreateGetComplicatedRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -218,6 +248,19 @@ namespace body_complex
                 throw;
             }
         }
+        internal HttpMessage CreatePutComplicatedRequest(Salmon complexBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/complex/polymorphism/complicated", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(complexBody);
+            request.Content = content;
+            return message;
+        }
         public async ValueTask<Response> PutComplicatedAsync(Salmon complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -225,19 +268,11 @@ namespace body_complex
                 throw new ArgumentNullException(nameof(complexBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.PutComplicated");
+            using var scope = clientDiagnostics.CreateScope("PolymorphismOperations.PutComplicated");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/polymorphism/complicated", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(complexBody);
-                request.Content = content;
+                using var message = CreatePutComplicatedRequest(complexBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -253,6 +288,19 @@ namespace body_complex
                 throw;
             }
         }
+        internal HttpMessage CreatePutMissingDiscriminatorRequest(Salmon complexBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/complex/polymorphism/missingdiscriminator", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(complexBody);
+            request.Content = content;
+            return message;
+        }
         public async ValueTask<Response<Salmon>> PutMissingDiscriminatorAsync(Salmon complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -260,19 +308,11 @@ namespace body_complex
                 throw new ArgumentNullException(nameof(complexBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.PutMissingDiscriminator");
+            using var scope = clientDiagnostics.CreateScope("PolymorphismOperations.PutMissingDiscriminator");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/polymorphism/missingdiscriminator", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(complexBody);
-                request.Content = content;
+                using var message = CreatePutMissingDiscriminatorRequest(complexBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -292,6 +332,19 @@ namespace body_complex
                 throw;
             }
         }
+        internal HttpMessage CreatePutValidMissingRequiredRequest(Fish complexBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/complex/polymorphism/missingrequired/invalid", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(complexBody);
+            request.Content = content;
+            return message;
+        }
         public async ValueTask<Response> PutValidMissingRequiredAsync(Fish complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -299,19 +352,11 @@ namespace body_complex
                 throw new ArgumentNullException(nameof(complexBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.PutValidMissingRequired");
+            using var scope = clientDiagnostics.CreateScope("PolymorphismOperations.PutValidMissingRequired");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/polymorphism/missingrequired/invalid", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(complexBody);
-                request.Content = content;
+                using var message = CreatePutValidMissingRequiredRequest(complexBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {

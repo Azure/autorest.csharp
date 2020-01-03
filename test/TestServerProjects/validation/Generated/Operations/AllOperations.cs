@@ -40,6 +40,21 @@ namespace validation
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+        internal HttpMessage CreateValidationOfMethodParametersRequest(string resourceGroupName, int id)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/fakepath/", false);
+            request.Uri.AppendPath(subscriptionId, true);
+            request.Uri.AppendPath("/", false);
+            request.Uri.AppendPath(resourceGroupName, true);
+            request.Uri.AppendPath("/", false);
+            request.Uri.AppendPath(id, true);
+            request.Uri.AppendQuery("apiVersion", ApiVersion, true);
+            return message;
+        }
         public async ValueTask<Response<Product>> ValidationOfMethodParametersAsync(string resourceGroupName, int id, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
@@ -47,21 +62,11 @@ namespace validation
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("validation.ValidationOfMethodParameters");
+            using var scope = clientDiagnostics.CreateScope("AllOperations.ValidationOfMethodParameters");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/fakepath/", false);
-                request.Uri.AppendPath(subscriptionId, true);
-                request.Uri.AppendPath("/", false);
-                request.Uri.AppendPath(resourceGroupName, true);
-                request.Uri.AppendPath("/", false);
-                request.Uri.AppendPath(id, true);
-                request.Uri.AppendQuery("apiVersion", ApiVersion, true);
+                using var message = CreateValidationOfMethodParametersRequest(resourceGroupName, id);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -80,6 +85,25 @@ namespace validation
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreateValidationOfBodyRequest(string resourceGroupName, int id, Product? body)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/fakepath/", false);
+            request.Uri.AppendPath(subscriptionId, true);
+            request.Uri.AppendPath("/", false);
+            request.Uri.AppendPath(resourceGroupName, true);
+            request.Uri.AppendPath("/", false);
+            request.Uri.AppendPath(id, true);
+            request.Headers.Add("Content-Type", "application/json");
+            request.Uri.AppendQuery("apiVersion", ApiVersion, true);
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(body);
+            request.Content = content;
+            return message;
         }
         public async ValueTask<Response<Product>> ValidationOfBodyAsync(string resourceGroupName, int id, Product? body, CancellationToken cancellationToken = default)
         {
@@ -88,25 +112,11 @@ namespace validation
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("validation.ValidationOfBody");
+            using var scope = clientDiagnostics.CreateScope("AllOperations.ValidationOfBody");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/fakepath/", false);
-                request.Uri.AppendPath(subscriptionId, true);
-                request.Uri.AppendPath("/", false);
-                request.Uri.AppendPath(resourceGroupName, true);
-                request.Uri.AppendPath("/", false);
-                request.Uri.AppendPath(id, true);
-                request.Headers.Add("Content-Type", "application/json");
-                request.Uri.AppendQuery("apiVersion", ApiVersion, true);
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(body);
-                request.Content = content;
+                using var message = CreateValidationOfBodyRequest(resourceGroupName, id, body);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -126,20 +136,25 @@ namespace validation
                 throw;
             }
         }
+        internal HttpMessage CreateGetWithConstantInPathRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/validation/constantsInPath/", false);
+            request.Uri.AppendPath("constant", true);
+            request.Uri.AppendPath("/value", false);
+            return message;
+        }
         public async ValueTask<Response> GetWithConstantInPathAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("validation.GetWithConstantInPath");
+            using var scope = clientDiagnostics.CreateScope("AllOperations.GetWithConstantInPath");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/validation/constantsInPath/", false);
-                request.Uri.AppendPath("constant", true);
-                request.Uri.AppendPath("/value", false);
+                using var message = CreateGetWithConstantInPathRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -155,24 +170,29 @@ namespace validation
                 throw;
             }
         }
+        internal HttpMessage CreatePostWithConstantInBodyRequest(Product? body)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/validation/constantsInPath/", false);
+            request.Uri.AppendPath("constant", true);
+            request.Uri.AppendPath("/value", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(body);
+            request.Content = content;
+            return message;
+        }
         public async ValueTask<Response<Product>> PostWithConstantInBodyAsync(Product? body, CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("validation.PostWithConstantInBody");
+            using var scope = clientDiagnostics.CreateScope("AllOperations.PostWithConstantInBody");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Post;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/validation/constantsInPath/", false);
-                request.Uri.AppendPath("constant", true);
-                request.Uri.AppendPath("/value", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(body);
-                request.Content = content;
+                using var message = CreatePostWithConstantInBodyRequest(body);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {

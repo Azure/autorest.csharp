@@ -27,18 +27,23 @@ namespace body_datetime_rfc1123
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+        internal HttpMessage CreateGetNullRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/datetimerfc1123/null", false);
+            return message;
+        }
         public async ValueTask<Response<DateTimeOffset>> GetNullAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_datetime_rfc1123.GetNull");
+            using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Operations.GetNull");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/datetimerfc1123/null", false);
+                using var message = CreateGetNullRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -57,19 +62,24 @@ namespace body_datetime_rfc1123
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreateGetInvalidRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/datetimerfc1123/invalid", false);
+            return message;
         }
         public async ValueTask<Response<DateTimeOffset>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_datetime_rfc1123.GetInvalid");
+            using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Operations.GetInvalid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/datetimerfc1123/invalid", false);
+                using var message = CreateGetInvalidRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -88,19 +98,24 @@ namespace body_datetime_rfc1123
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreateGetOverflowRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/datetimerfc1123/overflow", false);
+            return message;
         }
         public async ValueTask<Response<DateTimeOffset>> GetOverflowAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_datetime_rfc1123.GetOverflow");
+            using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Operations.GetOverflow");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/datetimerfc1123/overflow", false);
+                using var message = CreateGetOverflowRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -119,19 +134,24 @@ namespace body_datetime_rfc1123
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreateGetUnderflowRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/datetimerfc1123/underflow", false);
+            return message;
         }
         public async ValueTask<Response<DateTimeOffset>> GetUnderflowAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_datetime_rfc1123.GetUnderflow");
+            using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Operations.GetUnderflow");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/datetimerfc1123/underflow", false);
+                using var message = CreateGetUnderflowRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -150,23 +170,28 @@ namespace body_datetime_rfc1123
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreatePutUtcMaxDateTimeRequest(DateTimeOffset datetimeBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/datetimerfc1123/max", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteStringValue(datetimeBody, "R");
+            request.Content = content;
+            return message;
         }
         public async ValueTask<Response> PutUtcMaxDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_datetime_rfc1123.PutUtcMaxDateTime");
+            using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Operations.PutUtcMaxDateTime");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/datetimerfc1123/max", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStringValue(datetimeBody, "R");
-                request.Content = content;
+                using var message = CreatePutUtcMaxDateTimeRequest(datetimeBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -181,19 +206,24 @@ namespace body_datetime_rfc1123
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreateGetUtcLowercaseMaxDateTimeRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/datetimerfc1123/max/lowercase", false);
+            return message;
         }
         public async ValueTask<Response<DateTimeOffset>> GetUtcLowercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_datetime_rfc1123.GetUtcLowercaseMaxDateTime");
+            using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Operations.GetUtcLowercaseMaxDateTime");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/datetimerfc1123/max/lowercase", false);
+                using var message = CreateGetUtcLowercaseMaxDateTimeRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -212,19 +242,24 @@ namespace body_datetime_rfc1123
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreateGetUtcUppercaseMaxDateTimeRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/datetimerfc1123/max/uppercase", false);
+            return message;
         }
         public async ValueTask<Response<DateTimeOffset>> GetUtcUppercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_datetime_rfc1123.GetUtcUppercaseMaxDateTime");
+            using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Operations.GetUtcUppercaseMaxDateTime");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/datetimerfc1123/max/uppercase", false);
+                using var message = CreateGetUtcUppercaseMaxDateTimeRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -244,22 +279,27 @@ namespace body_datetime_rfc1123
                 throw;
             }
         }
+        internal HttpMessage CreatePutUtcMinDateTimeRequest(DateTimeOffset datetimeBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/datetimerfc1123/min", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteStringValue(datetimeBody, "R");
+            request.Content = content;
+            return message;
+        }
         public async ValueTask<Response> PutUtcMinDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_datetime_rfc1123.PutUtcMinDateTime");
+            using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Operations.PutUtcMinDateTime");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/datetimerfc1123/min", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStringValue(datetimeBody, "R");
-                request.Content = content;
+                using var message = CreatePutUtcMinDateTimeRequest(datetimeBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -275,18 +315,23 @@ namespace body_datetime_rfc1123
                 throw;
             }
         }
+        internal HttpMessage CreateGetUtcMinDateTimeRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/datetimerfc1123/min", false);
+            return message;
+        }
         public async ValueTask<Response<DateTimeOffset>> GetUtcMinDateTimeAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_datetime_rfc1123.GetUtcMinDateTime");
+            using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Operations.GetUtcMinDateTime");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/datetimerfc1123/min", false);
+                using var message = CreateGetUtcMinDateTimeRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {

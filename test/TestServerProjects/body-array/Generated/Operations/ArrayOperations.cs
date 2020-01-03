@@ -29,18 +29,23 @@ namespace body_array
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+        internal HttpMessage CreateGetNullRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/null", false);
+            return message;
+        }
         public async ValueTask<Response<ICollection<int>>> GetNullAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetNull");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetNull");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/null", false);
+                using var message = CreateGetNullRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -63,19 +68,24 @@ namespace body_array
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreateGetInvalidRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/invalid", false);
+            return message;
         }
         public async ValueTask<Response<ICollection<int>>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetInvalid");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetInvalid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/invalid", false);
+                using var message = CreateGetInvalidRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -99,18 +109,23 @@ namespace body_array
                 throw;
             }
         }
+        internal HttpMessage CreateGetEmptyRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/empty", false);
+            return message;
+        }
         public async ValueTask<Response<ICollection<int>>> GetEmptyAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetEmpty");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetEmpty");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/empty", false);
+                using var message = CreateGetEmptyRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -133,6 +148,24 @@ namespace body_array
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreatePutEmptyRequest(IEnumerable<string> arrayBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/empty", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteStartArray();
+            foreach (var item in arrayBody)
+            {
+                content.JsonWriter.WriteStringValue(item);
+            }
+            content.JsonWriter.WriteEndArray();
+            request.Content = content;
+            return message;
         }
         public async ValueTask<Response> PutEmptyAsync(IEnumerable<string> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -141,24 +174,11 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_array.PutEmpty");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.PutEmpty");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/empty", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStartArray();
-                foreach (var item in arrayBody)
-                {
-                    content.JsonWriter.WriteStringValue(item);
-                }
-                content.JsonWriter.WriteEndArray();
-                request.Content = content;
+                using var message = CreatePutEmptyRequest(arrayBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -174,18 +194,23 @@ namespace body_array
                 throw;
             }
         }
+        internal HttpMessage CreateGetBooleanTfftRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/boolean/tfft", false);
+            return message;
+        }
         public async ValueTask<Response<ICollection<bool>>> GetBooleanTfftAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetBooleanTfft");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetBooleanTfft");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/boolean/tfft", false);
+                using var message = CreateGetBooleanTfftRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -208,6 +233,24 @@ namespace body_array
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreatePutBooleanTfftRequest(IEnumerable<bool> arrayBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/boolean/tfft", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteStartArray();
+            foreach (var item in arrayBody)
+            {
+                content.JsonWriter.WriteBooleanValue(item);
+            }
+            content.JsonWriter.WriteEndArray();
+            request.Content = content;
+            return message;
         }
         public async ValueTask<Response> PutBooleanTfftAsync(IEnumerable<bool> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -216,24 +259,11 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_array.PutBooleanTfft");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.PutBooleanTfft");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/boolean/tfft", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStartArray();
-                foreach (var item in arrayBody)
-                {
-                    content.JsonWriter.WriteBooleanValue(item);
-                }
-                content.JsonWriter.WriteEndArray();
-                request.Content = content;
+                using var message = CreatePutBooleanTfftRequest(arrayBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -249,18 +279,23 @@ namespace body_array
                 throw;
             }
         }
+        internal HttpMessage CreateGetBooleanInvalidNullRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/boolean/true.null.false", false);
+            return message;
+        }
         public async ValueTask<Response<ICollection<bool>>> GetBooleanInvalidNullAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetBooleanInvalidNull");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetBooleanInvalidNull");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/boolean/true.null.false", false);
+                using var message = CreateGetBooleanInvalidNullRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -283,19 +318,24 @@ namespace body_array
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreateGetBooleanInvalidStringRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/boolean/true.boolean.false", false);
+            return message;
         }
         public async ValueTask<Response<ICollection<bool>>> GetBooleanInvalidStringAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetBooleanInvalidString");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetBooleanInvalidString");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/boolean/true.boolean.false", false);
+                using var message = CreateGetBooleanInvalidStringRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -319,18 +359,23 @@ namespace body_array
                 throw;
             }
         }
+        internal HttpMessage CreateGetIntegerValidRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/integer/1.-1.3.300", false);
+            return message;
+        }
         public async ValueTask<Response<ICollection<int>>> GetIntegerValidAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetIntegerValid");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetIntegerValid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/integer/1.-1.3.300", false);
+                using var message = CreateGetIntegerValidRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -353,6 +398,24 @@ namespace body_array
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreatePutIntegerValidRequest(IEnumerable<int> arrayBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/integer/1.-1.3.300", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteStartArray();
+            foreach (var item in arrayBody)
+            {
+                content.JsonWriter.WriteNumberValue(item);
+            }
+            content.JsonWriter.WriteEndArray();
+            request.Content = content;
+            return message;
         }
         public async ValueTask<Response> PutIntegerValidAsync(IEnumerable<int> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -361,24 +424,11 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_array.PutIntegerValid");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.PutIntegerValid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/integer/1.-1.3.300", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStartArray();
-                foreach (var item in arrayBody)
-                {
-                    content.JsonWriter.WriteNumberValue(item);
-                }
-                content.JsonWriter.WriteEndArray();
-                request.Content = content;
+                using var message = CreatePutIntegerValidRequest(arrayBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -394,18 +444,23 @@ namespace body_array
                 throw;
             }
         }
+        internal HttpMessage CreateGetIntInvalidNullRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/integer/1.null.zero", false);
+            return message;
+        }
         public async ValueTask<Response<ICollection<int>>> GetIntInvalidNullAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetIntInvalidNull");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetIntInvalidNull");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/integer/1.null.zero", false);
+                using var message = CreateGetIntInvalidNullRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -428,19 +483,24 @@ namespace body_array
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreateGetIntInvalidStringRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/integer/1.integer.0", false);
+            return message;
         }
         public async ValueTask<Response<ICollection<int>>> GetIntInvalidStringAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetIntInvalidString");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetIntInvalidString");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/integer/1.integer.0", false);
+                using var message = CreateGetIntInvalidStringRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -464,18 +524,23 @@ namespace body_array
                 throw;
             }
         }
+        internal HttpMessage CreateGetLongValidRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/long/1.-1.3.300", false);
+            return message;
+        }
         public async ValueTask<Response<ICollection<long>>> GetLongValidAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetLongValid");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetLongValid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/long/1.-1.3.300", false);
+                using var message = CreateGetLongValidRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -498,6 +563,24 @@ namespace body_array
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreatePutLongValidRequest(IEnumerable<long> arrayBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/long/1.-1.3.300", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteStartArray();
+            foreach (var item in arrayBody)
+            {
+                content.JsonWriter.WriteNumberValue(item);
+            }
+            content.JsonWriter.WriteEndArray();
+            request.Content = content;
+            return message;
         }
         public async ValueTask<Response> PutLongValidAsync(IEnumerable<long> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -506,24 +589,11 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_array.PutLongValid");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.PutLongValid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/long/1.-1.3.300", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStartArray();
-                foreach (var item in arrayBody)
-                {
-                    content.JsonWriter.WriteNumberValue(item);
-                }
-                content.JsonWriter.WriteEndArray();
-                request.Content = content;
+                using var message = CreatePutLongValidRequest(arrayBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -539,18 +609,23 @@ namespace body_array
                 throw;
             }
         }
+        internal HttpMessage CreateGetLongInvalidNullRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/long/1.null.zero", false);
+            return message;
+        }
         public async ValueTask<Response<ICollection<long>>> GetLongInvalidNullAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetLongInvalidNull");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetLongInvalidNull");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/long/1.null.zero", false);
+                using var message = CreateGetLongInvalidNullRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -573,19 +648,24 @@ namespace body_array
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreateGetLongInvalidStringRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/long/1.integer.0", false);
+            return message;
         }
         public async ValueTask<Response<ICollection<long>>> GetLongInvalidStringAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetLongInvalidString");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetLongInvalidString");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/long/1.integer.0", false);
+                using var message = CreateGetLongInvalidStringRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -609,18 +689,23 @@ namespace body_array
                 throw;
             }
         }
+        internal HttpMessage CreateGetFloatValidRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/float/0--0.01-1.2e20", false);
+            return message;
+        }
         public async ValueTask<Response<ICollection<float>>> GetFloatValidAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetFloatValid");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetFloatValid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/float/0--0.01-1.2e20", false);
+                using var message = CreateGetFloatValidRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -643,6 +728,24 @@ namespace body_array
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreatePutFloatValidRequest(IEnumerable<float> arrayBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/float/0--0.01-1.2e20", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteStartArray();
+            foreach (var item in arrayBody)
+            {
+                content.JsonWriter.WriteNumberValue(item);
+            }
+            content.JsonWriter.WriteEndArray();
+            request.Content = content;
+            return message;
         }
         public async ValueTask<Response> PutFloatValidAsync(IEnumerable<float> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -651,24 +754,11 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_array.PutFloatValid");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.PutFloatValid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/float/0--0.01-1.2e20", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStartArray();
-                foreach (var item in arrayBody)
-                {
-                    content.JsonWriter.WriteNumberValue(item);
-                }
-                content.JsonWriter.WriteEndArray();
-                request.Content = content;
+                using var message = CreatePutFloatValidRequest(arrayBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -684,18 +774,23 @@ namespace body_array
                 throw;
             }
         }
+        internal HttpMessage CreateGetFloatInvalidNullRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/float/0.0-null-1.2e20", false);
+            return message;
+        }
         public async ValueTask<Response<ICollection<float>>> GetFloatInvalidNullAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetFloatInvalidNull");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetFloatInvalidNull");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/float/0.0-null-1.2e20", false);
+                using var message = CreateGetFloatInvalidNullRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -718,19 +813,24 @@ namespace body_array
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreateGetFloatInvalidStringRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/float/1.number.0", false);
+            return message;
         }
         public async ValueTask<Response<ICollection<float>>> GetFloatInvalidStringAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetFloatInvalidString");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetFloatInvalidString");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/float/1.number.0", false);
+                using var message = CreateGetFloatInvalidStringRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -754,18 +854,23 @@ namespace body_array
                 throw;
             }
         }
+        internal HttpMessage CreateGetDoubleValidRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/double/0--0.01-1.2e20", false);
+            return message;
+        }
         public async ValueTask<Response<ICollection<double>>> GetDoubleValidAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetDoubleValid");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDoubleValid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/double/0--0.01-1.2e20", false);
+                using var message = CreateGetDoubleValidRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -788,6 +893,24 @@ namespace body_array
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreatePutDoubleValidRequest(IEnumerable<double> arrayBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/double/0--0.01-1.2e20", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteStartArray();
+            foreach (var item in arrayBody)
+            {
+                content.JsonWriter.WriteNumberValue(item);
+            }
+            content.JsonWriter.WriteEndArray();
+            request.Content = content;
+            return message;
         }
         public async ValueTask<Response> PutDoubleValidAsync(IEnumerable<double> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -796,24 +919,11 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_array.PutDoubleValid");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.PutDoubleValid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/double/0--0.01-1.2e20", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStartArray();
-                foreach (var item in arrayBody)
-                {
-                    content.JsonWriter.WriteNumberValue(item);
-                }
-                content.JsonWriter.WriteEndArray();
-                request.Content = content;
+                using var message = CreatePutDoubleValidRequest(arrayBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -829,18 +939,23 @@ namespace body_array
                 throw;
             }
         }
+        internal HttpMessage CreateGetDoubleInvalidNullRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/double/0.0-null-1.2e20", false);
+            return message;
+        }
         public async ValueTask<Response<ICollection<double>>> GetDoubleInvalidNullAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetDoubleInvalidNull");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDoubleInvalidNull");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/double/0.0-null-1.2e20", false);
+                using var message = CreateGetDoubleInvalidNullRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -863,19 +978,24 @@ namespace body_array
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreateGetDoubleInvalidStringRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/double/1.number.0", false);
+            return message;
         }
         public async ValueTask<Response<ICollection<double>>> GetDoubleInvalidStringAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetDoubleInvalidString");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDoubleInvalidString");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/double/1.number.0", false);
+                using var message = CreateGetDoubleInvalidStringRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -899,18 +1019,23 @@ namespace body_array
                 throw;
             }
         }
+        internal HttpMessage CreateGetStringValidRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/string/foo1.foo2.foo3", false);
+            return message;
+        }
         public async ValueTask<Response<ICollection<string>>> GetStringValidAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetStringValid");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetStringValid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/string/foo1.foo2.foo3", false);
+                using var message = CreateGetStringValidRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -934,6 +1059,24 @@ namespace body_array
                 throw;
             }
         }
+        internal HttpMessage CreatePutStringValidRequest(IEnumerable<string> arrayBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/string/foo1.foo2.foo3", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteStartArray();
+            foreach (var item in arrayBody)
+            {
+                content.JsonWriter.WriteStringValue(item);
+            }
+            content.JsonWriter.WriteEndArray();
+            request.Content = content;
+            return message;
+        }
         public async ValueTask<Response> PutStringValidAsync(IEnumerable<string> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
@@ -941,24 +1084,11 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_array.PutStringValid");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.PutStringValid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/string/foo1.foo2.foo3", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStartArray();
-                foreach (var item in arrayBody)
-                {
-                    content.JsonWriter.WriteStringValue(item);
-                }
-                content.JsonWriter.WriteEndArray();
-                request.Content = content;
+                using var message = CreatePutStringValidRequest(arrayBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -974,18 +1104,23 @@ namespace body_array
                 throw;
             }
         }
+        internal HttpMessage CreateGetEnumValidRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/enum/foo1.foo2.foo3", false);
+            return message;
+        }
         public async ValueTask<Response<ICollection<FooEnum>>> GetEnumValidAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetEnumValid");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetEnumValid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/enum/foo1.foo2.foo3", false);
+                using var message = CreateGetEnumValidRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1009,6 +1144,24 @@ namespace body_array
                 throw;
             }
         }
+        internal HttpMessage CreatePutEnumValidRequest(IEnumerable<FooEnum> arrayBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/enum/foo1.foo2.foo3", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteStartArray();
+            foreach (var item in arrayBody)
+            {
+                content.JsonWriter.WriteStringValue(item.ToSerialString());
+            }
+            content.JsonWriter.WriteEndArray();
+            request.Content = content;
+            return message;
+        }
         public async ValueTask<Response> PutEnumValidAsync(IEnumerable<FooEnum> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
@@ -1016,24 +1169,11 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_array.PutEnumValid");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.PutEnumValid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/enum/foo1.foo2.foo3", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStartArray();
-                foreach (var item in arrayBody)
-                {
-                    content.JsonWriter.WriteStringValue(item.ToSerialString());
-                }
-                content.JsonWriter.WriteEndArray();
-                request.Content = content;
+                using var message = CreatePutEnumValidRequest(arrayBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1049,18 +1189,23 @@ namespace body_array
                 throw;
             }
         }
+        internal HttpMessage CreateGetStringEnumValidRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/string-enum/foo1.foo2.foo3", false);
+            return message;
+        }
         public async ValueTask<Response<ICollection<Enum0>>> GetStringEnumValidAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetStringEnumValid");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetStringEnumValid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/string-enum/foo1.foo2.foo3", false);
+                using var message = CreateGetStringEnumValidRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1084,6 +1229,24 @@ namespace body_array
                 throw;
             }
         }
+        internal HttpMessage CreatePutStringEnumValidRequest(IEnumerable<Enum0> arrayBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/string-enum/foo1.foo2.foo3", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteStartArray();
+            foreach (var item in arrayBody)
+            {
+                content.JsonWriter.WriteStringValue(item.ToString());
+            }
+            content.JsonWriter.WriteEndArray();
+            request.Content = content;
+            return message;
+        }
         public async ValueTask<Response> PutStringEnumValidAsync(IEnumerable<Enum0> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
@@ -1091,24 +1254,11 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_array.PutStringEnumValid");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.PutStringEnumValid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/string-enum/foo1.foo2.foo3", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStartArray();
-                foreach (var item in arrayBody)
-                {
-                    content.JsonWriter.WriteStringValue(item.ToString());
-                }
-                content.JsonWriter.WriteEndArray();
-                request.Content = content;
+                using var message = CreatePutStringEnumValidRequest(arrayBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1124,18 +1274,23 @@ namespace body_array
                 throw;
             }
         }
+        internal HttpMessage CreateGetStringWithNullRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/string/foo.null.foo2", false);
+            return message;
+        }
         public async ValueTask<Response<ICollection<string>>> GetStringWithNullAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetStringWithNull");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetStringWithNull");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/string/foo.null.foo2", false);
+                using var message = CreateGetStringWithNullRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1158,19 +1313,24 @@ namespace body_array
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreateGetStringWithInvalidRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/string/foo.123.foo2", false);
+            return message;
         }
         public async ValueTask<Response<ICollection<string>>> GetStringWithInvalidAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetStringWithInvalid");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetStringWithInvalid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/string/foo.123.foo2", false);
+                using var message = CreateGetStringWithInvalidRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1194,18 +1354,23 @@ namespace body_array
                 throw;
             }
         }
+        internal HttpMessage CreateGetUuidValidRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/uuid/valid", false);
+            return message;
+        }
         public async ValueTask<Response<ICollection<string>>> GetUuidValidAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetUuidValid");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetUuidValid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/uuid/valid", false);
+                using var message = CreateGetUuidValidRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1228,6 +1393,24 @@ namespace body_array
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreatePutUuidValidRequest(IEnumerable<string> arrayBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/uuid/valid", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteStartArray();
+            foreach (var item in arrayBody)
+            {
+                content.JsonWriter.WriteStringValue(item);
+            }
+            content.JsonWriter.WriteEndArray();
+            request.Content = content;
+            return message;
         }
         public async ValueTask<Response> PutUuidValidAsync(IEnumerable<string> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -1236,24 +1419,11 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_array.PutUuidValid");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.PutUuidValid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/uuid/valid", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStartArray();
-                foreach (var item in arrayBody)
-                {
-                    content.JsonWriter.WriteStringValue(item);
-                }
-                content.JsonWriter.WriteEndArray();
-                request.Content = content;
+                using var message = CreatePutUuidValidRequest(arrayBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1269,18 +1439,23 @@ namespace body_array
                 throw;
             }
         }
+        internal HttpMessage CreateGetUuidInvalidCharsRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/uuid/invalidchars", false);
+            return message;
+        }
         public async ValueTask<Response<ICollection<string>>> GetUuidInvalidCharsAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetUuidInvalidChars");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetUuidInvalidChars");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/uuid/invalidchars", false);
+                using var message = CreateGetUuidInvalidCharsRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1304,18 +1479,23 @@ namespace body_array
                 throw;
             }
         }
+        internal HttpMessage CreateGetDateValidRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/date/valid", false);
+            return message;
+        }
         public async ValueTask<Response<ICollection<DateTimeOffset>>> GetDateValidAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetDateValid");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDateValid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/date/valid", false);
+                using var message = CreateGetDateValidRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1338,6 +1518,24 @@ namespace body_array
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreatePutDateValidRequest(IEnumerable<DateTimeOffset> arrayBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/date/valid", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteStartArray();
+            foreach (var item in arrayBody)
+            {
+                content.JsonWriter.WriteStringValue(item, "D");
+            }
+            content.JsonWriter.WriteEndArray();
+            request.Content = content;
+            return message;
         }
         public async ValueTask<Response> PutDateValidAsync(IEnumerable<DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -1346,24 +1544,11 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_array.PutDateValid");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.PutDateValid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/date/valid", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStartArray();
-                foreach (var item in arrayBody)
-                {
-                    content.JsonWriter.WriteStringValue(item, "D");
-                }
-                content.JsonWriter.WriteEndArray();
-                request.Content = content;
+                using var message = CreatePutDateValidRequest(arrayBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1379,18 +1564,23 @@ namespace body_array
                 throw;
             }
         }
+        internal HttpMessage CreateGetDateInvalidNullRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/date/invalidnull", false);
+            return message;
+        }
         public async ValueTask<Response<ICollection<DateTimeOffset>>> GetDateInvalidNullAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetDateInvalidNull");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDateInvalidNull");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/date/invalidnull", false);
+                using var message = CreateGetDateInvalidNullRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1413,19 +1603,24 @@ namespace body_array
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreateGetDateInvalidCharsRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/date/invalidchars", false);
+            return message;
         }
         public async ValueTask<Response<ICollection<DateTimeOffset>>> GetDateInvalidCharsAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetDateInvalidChars");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDateInvalidChars");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/date/invalidchars", false);
+                using var message = CreateGetDateInvalidCharsRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1449,18 +1644,23 @@ namespace body_array
                 throw;
             }
         }
+        internal HttpMessage CreateGetDateTimeValidRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/date-time/valid", false);
+            return message;
+        }
         public async ValueTask<Response<ICollection<DateTimeOffset>>> GetDateTimeValidAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetDateTimeValid");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDateTimeValid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/date-time/valid", false);
+                using var message = CreateGetDateTimeValidRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1483,6 +1683,24 @@ namespace body_array
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreatePutDateTimeValidRequest(IEnumerable<DateTimeOffset> arrayBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/date-time/valid", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteStartArray();
+            foreach (var item in arrayBody)
+            {
+                content.JsonWriter.WriteStringValue(item, "S");
+            }
+            content.JsonWriter.WriteEndArray();
+            request.Content = content;
+            return message;
         }
         public async ValueTask<Response> PutDateTimeValidAsync(IEnumerable<DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -1491,24 +1709,11 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_array.PutDateTimeValid");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.PutDateTimeValid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/date-time/valid", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStartArray();
-                foreach (var item in arrayBody)
-                {
-                    content.JsonWriter.WriteStringValue(item, "S");
-                }
-                content.JsonWriter.WriteEndArray();
-                request.Content = content;
+                using var message = CreatePutDateTimeValidRequest(arrayBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1524,18 +1729,23 @@ namespace body_array
                 throw;
             }
         }
+        internal HttpMessage CreateGetDateTimeInvalidNullRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/date-time/invalidnull", false);
+            return message;
+        }
         public async ValueTask<Response<ICollection<DateTimeOffset>>> GetDateTimeInvalidNullAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetDateTimeInvalidNull");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDateTimeInvalidNull");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/date-time/invalidnull", false);
+                using var message = CreateGetDateTimeInvalidNullRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1558,19 +1768,24 @@ namespace body_array
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreateGetDateTimeInvalidCharsRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/date-time/invalidchars", false);
+            return message;
         }
         public async ValueTask<Response<ICollection<DateTimeOffset>>> GetDateTimeInvalidCharsAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetDateTimeInvalidChars");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDateTimeInvalidChars");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/date-time/invalidchars", false);
+                using var message = CreateGetDateTimeInvalidCharsRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1594,18 +1809,23 @@ namespace body_array
                 throw;
             }
         }
+        internal HttpMessage CreateGetDateTimeRfc1123ValidRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/date-time-rfc1123/valid", false);
+            return message;
+        }
         public async ValueTask<Response<ICollection<DateTimeOffset>>> GetDateTimeRfc1123ValidAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetDateTimeRfc1123Valid");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDateTimeRfc1123Valid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/date-time-rfc1123/valid", false);
+                using var message = CreateGetDateTimeRfc1123ValidRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1629,6 +1849,24 @@ namespace body_array
                 throw;
             }
         }
+        internal HttpMessage CreatePutDateTimeRfc1123ValidRequest(IEnumerable<DateTimeOffset> arrayBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/date-time-rfc1123/valid", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteStartArray();
+            foreach (var item in arrayBody)
+            {
+                content.JsonWriter.WriteStringValue(item, "R");
+            }
+            content.JsonWriter.WriteEndArray();
+            request.Content = content;
+            return message;
+        }
         public async ValueTask<Response> PutDateTimeRfc1123ValidAsync(IEnumerable<DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
@@ -1636,24 +1874,11 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_array.PutDateTimeRfc1123Valid");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.PutDateTimeRfc1123Valid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/date-time-rfc1123/valid", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStartArray();
-                foreach (var item in arrayBody)
-                {
-                    content.JsonWriter.WriteStringValue(item, "R");
-                }
-                content.JsonWriter.WriteEndArray();
-                request.Content = content;
+                using var message = CreatePutDateTimeRfc1123ValidRequest(arrayBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1669,18 +1894,23 @@ namespace body_array
                 throw;
             }
         }
+        internal HttpMessage CreateGetDurationValidRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/duration/valid", false);
+            return message;
+        }
         public async ValueTask<Response<ICollection<TimeSpan>>> GetDurationValidAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetDurationValid");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDurationValid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/duration/valid", false);
+                using var message = CreateGetDurationValidRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1704,6 +1934,24 @@ namespace body_array
                 throw;
             }
         }
+        internal HttpMessage CreatePutDurationValidRequest(IEnumerable<TimeSpan> arrayBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/duration/valid", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteStartArray();
+            foreach (var item in arrayBody)
+            {
+                content.JsonWriter.WriteStringValue(item, "P");
+            }
+            content.JsonWriter.WriteEndArray();
+            request.Content = content;
+            return message;
+        }
         public async ValueTask<Response> PutDurationValidAsync(IEnumerable<TimeSpan> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
@@ -1711,24 +1959,11 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_array.PutDurationValid");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.PutDurationValid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/duration/valid", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStartArray();
-                foreach (var item in arrayBody)
-                {
-                    content.JsonWriter.WriteStringValue(item, "P");
-                }
-                content.JsonWriter.WriteEndArray();
-                request.Content = content;
+                using var message = CreatePutDurationValidRequest(arrayBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1744,18 +1979,23 @@ namespace body_array
                 throw;
             }
         }
+        internal HttpMessage CreateGetByteValidRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/byte/valid", false);
+            return message;
+        }
         public async ValueTask<Response<ICollection<byte[]>>> GetByteValidAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetByteValid");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetByteValid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/byte/valid", false);
+                using var message = CreateGetByteValidRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1778,6 +2018,24 @@ namespace body_array
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreatePutByteValidRequest(IEnumerable<byte[]> arrayBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/byte/valid", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteStartArray();
+            foreach (var item in arrayBody)
+            {
+                content.JsonWriter.WriteBase64StringValue(item);
+            }
+            content.JsonWriter.WriteEndArray();
+            request.Content = content;
+            return message;
         }
         public async ValueTask<Response> PutByteValidAsync(IEnumerable<byte[]> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -1786,24 +2044,11 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_array.PutByteValid");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.PutByteValid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/byte/valid", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStartArray();
-                foreach (var item in arrayBody)
-                {
-                    content.JsonWriter.WriteBase64StringValue(item);
-                }
-                content.JsonWriter.WriteEndArray();
-                request.Content = content;
+                using var message = CreatePutByteValidRequest(arrayBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1819,18 +2064,23 @@ namespace body_array
                 throw;
             }
         }
+        internal HttpMessage CreateGetByteInvalidNullRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/byte/invalidnull", false);
+            return message;
+        }
         public async ValueTask<Response<ICollection<byte[]>>> GetByteInvalidNullAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetByteInvalidNull");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetByteInvalidNull");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/byte/invalidnull", false);
+                using var message = CreateGetByteInvalidNullRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1854,18 +2104,23 @@ namespace body_array
                 throw;
             }
         }
+        internal HttpMessage CreateGetBase64UrlRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/prim/base64url/valid", false);
+            return message;
+        }
         public async ValueTask<Response<ICollection<byte[]>>> GetBase64UrlAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetBase64Url");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetBase64Url");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/prim/base64url/valid", false);
+                using var message = CreateGetBase64UrlRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1889,18 +2144,23 @@ namespace body_array
                 throw;
             }
         }
+        internal HttpMessage CreateGetComplexNullRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/complex/null", false);
+            return message;
+        }
         public async ValueTask<Response<ICollection<Product>>> GetComplexNullAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetComplexNull");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetComplexNull");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/complex/null", false);
+                using var message = CreateGetComplexNullRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1923,19 +2183,24 @@ namespace body_array
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreateGetComplexEmptyRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/complex/empty", false);
+            return message;
         }
         public async ValueTask<Response<ICollection<Product>>> GetComplexEmptyAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetComplexEmpty");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetComplexEmpty");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/complex/empty", false);
+                using var message = CreateGetComplexEmptyRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1958,19 +2223,24 @@ namespace body_array
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreateGetComplexItemNullRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/complex/itemnull", false);
+            return message;
         }
         public async ValueTask<Response<ICollection<Product>>> GetComplexItemNullAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetComplexItemNull");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetComplexItemNull");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/complex/itemnull", false);
+                using var message = CreateGetComplexItemNullRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1993,19 +2263,24 @@ namespace body_array
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreateGetComplexItemEmptyRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/complex/itemempty", false);
+            return message;
         }
         public async ValueTask<Response<ICollection<Product>>> GetComplexItemEmptyAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetComplexItemEmpty");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetComplexItemEmpty");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/complex/itemempty", false);
+                using var message = CreateGetComplexItemEmptyRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -2029,18 +2304,23 @@ namespace body_array
                 throw;
             }
         }
+        internal HttpMessage CreateGetComplexValidRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/complex/valid", false);
+            return message;
+        }
         public async ValueTask<Response<ICollection<Product>>> GetComplexValidAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetComplexValid");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetComplexValid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/complex/valid", false);
+                using var message = CreateGetComplexValidRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -2063,6 +2343,24 @@ namespace body_array
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreatePutComplexValidRequest(IEnumerable<Product> arrayBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/complex/valid", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteStartArray();
+            foreach (var item in arrayBody)
+            {
+                content.JsonWriter.WriteObjectValue(item);
+            }
+            content.JsonWriter.WriteEndArray();
+            request.Content = content;
+            return message;
         }
         public async ValueTask<Response> PutComplexValidAsync(IEnumerable<Product> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -2071,24 +2369,11 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_array.PutComplexValid");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.PutComplexValid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/complex/valid", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStartArray();
-                foreach (var item in arrayBody)
-                {
-                    content.JsonWriter.WriteObjectValue(item);
-                }
-                content.JsonWriter.WriteEndArray();
-                request.Content = content;
+                using var message = CreatePutComplexValidRequest(arrayBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -2104,18 +2389,23 @@ namespace body_array
                 throw;
             }
         }
+        internal HttpMessage CreateGetArrayNullRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/array/null", false);
+            return message;
+        }
         public async ValueTask<Response<ICollection<ICollection<string>>>> GetArrayNullAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetArrayNull");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetArrayNull");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/array/null", false);
+                using var message = CreateGetArrayNullRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -2143,19 +2433,24 @@ namespace body_array
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreateGetArrayEmptyRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/array/empty", false);
+            return message;
         }
         public async ValueTask<Response<ICollection<ICollection<string>>>> GetArrayEmptyAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetArrayEmpty");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetArrayEmpty");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/array/empty", false);
+                using var message = CreateGetArrayEmptyRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -2183,19 +2478,24 @@ namespace body_array
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreateGetArrayItemNullRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/array/itemnull", false);
+            return message;
         }
         public async ValueTask<Response<ICollection<ICollection<string>>>> GetArrayItemNullAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetArrayItemNull");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetArrayItemNull");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/array/itemnull", false);
+                using var message = CreateGetArrayItemNullRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -2223,19 +2523,24 @@ namespace body_array
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreateGetArrayItemEmptyRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/array/itemempty", false);
+            return message;
         }
         public async ValueTask<Response<ICollection<ICollection<string>>>> GetArrayItemEmptyAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetArrayItemEmpty");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetArrayItemEmpty");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/array/itemempty", false);
+                using var message = CreateGetArrayItemEmptyRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -2264,18 +2569,23 @@ namespace body_array
                 throw;
             }
         }
+        internal HttpMessage CreateGetArrayValidRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/array/valid", false);
+            return message;
+        }
         public async ValueTask<Response<ICollection<ICollection<string>>>> GetArrayValidAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetArrayValid");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetArrayValid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/array/valid", false);
+                using var message = CreateGetArrayValidRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -2303,6 +2613,29 @@ namespace body_array
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreatePutArrayValidRequest(IEnumerable<ICollection<string>> arrayBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/array/valid", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteStartArray();
+            foreach (var item in arrayBody)
+            {
+                content.JsonWriter.WriteStartArray();
+                foreach (var item0 in item)
+                {
+                    content.JsonWriter.WriteStringValue(item0);
+                }
+                content.JsonWriter.WriteEndArray();
+            }
+            content.JsonWriter.WriteEndArray();
+            request.Content = content;
+            return message;
         }
         public async ValueTask<Response> PutArrayValidAsync(IEnumerable<ICollection<string>> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -2311,29 +2644,11 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_array.PutArrayValid");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.PutArrayValid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/array/valid", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStartArray();
-                foreach (var item in arrayBody)
-                {
-                    content.JsonWriter.WriteStartArray();
-                    foreach (var item0 in item)
-                    {
-                        content.JsonWriter.WriteStringValue(item0);
-                    }
-                    content.JsonWriter.WriteEndArray();
-                }
-                content.JsonWriter.WriteEndArray();
-                request.Content = content;
+                using var message = CreatePutArrayValidRequest(arrayBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -2349,18 +2664,23 @@ namespace body_array
                 throw;
             }
         }
+        internal HttpMessage CreateGetDictionaryNullRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/dictionary/null", false);
+            return message;
+        }
         public async ValueTask<Response<ICollection<IDictionary<string, string>>>> GetDictionaryNullAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetDictionaryNull");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDictionaryNull");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/dictionary/null", false);
+                using var message = CreateGetDictionaryNullRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -2388,19 +2708,24 @@ namespace body_array
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreateGetDictionaryEmptyRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/dictionary/empty", false);
+            return message;
         }
         public async ValueTask<Response<ICollection<IDictionary<string, string>>>> GetDictionaryEmptyAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetDictionaryEmpty");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDictionaryEmpty");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/dictionary/empty", false);
+                using var message = CreateGetDictionaryEmptyRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -2428,19 +2753,24 @@ namespace body_array
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreateGetDictionaryItemNullRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/dictionary/itemnull", false);
+            return message;
         }
         public async ValueTask<Response<ICollection<IDictionary<string, string>>>> GetDictionaryItemNullAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetDictionaryItemNull");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDictionaryItemNull");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/dictionary/itemnull", false);
+                using var message = CreateGetDictionaryItemNullRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -2468,19 +2798,24 @@ namespace body_array
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreateGetDictionaryItemEmptyRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/dictionary/itemempty", false);
+            return message;
         }
         public async ValueTask<Response<ICollection<IDictionary<string, string>>>> GetDictionaryItemEmptyAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetDictionaryItemEmpty");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDictionaryItemEmpty");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/dictionary/itemempty", false);
+                using var message = CreateGetDictionaryItemEmptyRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -2509,18 +2844,23 @@ namespace body_array
                 throw;
             }
         }
+        internal HttpMessage CreateGetDictionaryValidRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/dictionary/valid", false);
+            return message;
+        }
         public async ValueTask<Response<ICollection<IDictionary<string, string>>>> GetDictionaryValidAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_array.GetDictionaryValid");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDictionaryValid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/dictionary/valid", false);
+                using var message = CreateGetDictionaryValidRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -2548,6 +2888,30 @@ namespace body_array
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreatePutDictionaryValidRequest(IEnumerable<IDictionary<string, string>> arrayBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/array/dictionary/valid", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteStartArray();
+            foreach (var item in arrayBody)
+            {
+                content.JsonWriter.WriteStartObject();
+                foreach (var item0 in item)
+                {
+                    content.JsonWriter.WritePropertyName(item0.Key);
+                    content.JsonWriter.WriteStringValue(item0.Value);
+                }
+                content.JsonWriter.WriteEndObject();
+            }
+            content.JsonWriter.WriteEndArray();
+            request.Content = content;
+            return message;
         }
         public async ValueTask<Response> PutDictionaryValidAsync(IEnumerable<IDictionary<string, string>> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -2556,30 +2920,11 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_array.PutDictionaryValid");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.PutDictionaryValid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/array/dictionary/valid", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStartArray();
-                foreach (var item in arrayBody)
-                {
-                    content.JsonWriter.WriteStartObject();
-                    foreach (var item0 in item)
-                    {
-                        content.JsonWriter.WritePropertyName(item0.Key);
-                        content.JsonWriter.WriteStringValue(item0.Value);
-                    }
-                    content.JsonWriter.WriteEndObject();
-                }
-                content.JsonWriter.WriteEndArray();
-                request.Content = content;
+                using var message = CreatePutDictionaryValidRequest(arrayBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {

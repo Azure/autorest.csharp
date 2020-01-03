@@ -27,18 +27,23 @@ namespace body_boolean
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+        internal HttpMessage CreateGetTrueRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/bool/true", false);
+            return message;
+        }
         public async ValueTask<Response<bool>> GetTrueAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_boolean.GetTrue");
+            using var scope = clientDiagnostics.CreateScope("BoolOperations.GetTrue");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/bool/true", false);
+                using var message = CreateGetTrueRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -57,23 +62,28 @@ namespace body_boolean
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreatePutTrueRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/bool/true", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteBooleanValue(true);
+            request.Content = content;
+            return message;
         }
         public async ValueTask<Response> PutTrueAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_boolean.PutTrue");
+            using var scope = clientDiagnostics.CreateScope("BoolOperations.PutTrue");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/bool/true", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteBooleanValue(true);
-                request.Content = content;
+                using var message = CreatePutTrueRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -88,19 +98,24 @@ namespace body_boolean
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreateGetFalseRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/bool/false", false);
+            return message;
         }
         public async ValueTask<Response<bool>> GetFalseAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_boolean.GetFalse");
+            using var scope = clientDiagnostics.CreateScope("BoolOperations.GetFalse");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/bool/false", false);
+                using var message = CreateGetFalseRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -120,22 +135,27 @@ namespace body_boolean
                 throw;
             }
         }
+        internal HttpMessage CreatePutFalseRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/bool/false", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteBooleanValue(false);
+            request.Content = content;
+            return message;
+        }
         public async ValueTask<Response> PutFalseAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_boolean.PutFalse");
+            using var scope = clientDiagnostics.CreateScope("BoolOperations.PutFalse");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/bool/false", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteBooleanValue(false);
-                request.Content = content;
+                using var message = CreatePutFalseRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -151,18 +171,23 @@ namespace body_boolean
                 throw;
             }
         }
+        internal HttpMessage CreateGetNullRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/bool/null", false);
+            return message;
+        }
         public async ValueTask<Response<bool>> GetNullAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_boolean.GetNull");
+            using var scope = clientDiagnostics.CreateScope("BoolOperations.GetNull");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/bool/null", false);
+                using var message = CreateGetNullRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -182,18 +207,23 @@ namespace body_boolean
                 throw;
             }
         }
+        internal HttpMessage CreateGetInvalidRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/bool/invalid", false);
+            return message;
+        }
         public async ValueTask<Response<bool>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_boolean.GetInvalid");
+            using var scope = clientDiagnostics.CreateScope("BoolOperations.GetInvalid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/bool/invalid", false);
+                using var message = CreateGetInvalidRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {

@@ -34,18 +34,23 @@ namespace body_complex
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+        internal HttpMessage CreateGetValidRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/complex/basic/valid", false);
+            return message;
+        }
         public async ValueTask<Response<Basic>> GetValidAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.GetValid");
+            using var scope = clientDiagnostics.CreateScope("BasicOperations.GetValid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/basic/valid", false);
+                using var message = CreateGetValidRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -65,6 +70,20 @@ namespace body_complex
                 throw;
             }
         }
+        internal HttpMessage CreatePutValidRequest(Basic complexBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/complex/basic/valid", false);
+            request.Headers.Add("Content-Type", "application/json");
+            request.Uri.AppendQuery("api-version", ApiVersion, true);
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(complexBody);
+            request.Content = content;
+            return message;
+        }
         public async ValueTask<Response> PutValidAsync(Basic complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -72,20 +91,11 @@ namespace body_complex
                 throw new ArgumentNullException(nameof(complexBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.PutValid");
+            using var scope = clientDiagnostics.CreateScope("BasicOperations.PutValid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/basic/valid", false);
-                request.Headers.Add("Content-Type", "application/json");
-                request.Uri.AppendQuery("api-version", ApiVersion, true);
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(complexBody);
-                request.Content = content;
+                using var message = CreatePutValidRequest(complexBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -101,18 +111,23 @@ namespace body_complex
                 throw;
             }
         }
+        internal HttpMessage CreateGetInvalidRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/complex/basic/invalid", false);
+            return message;
+        }
         public async ValueTask<Response<Basic>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.GetInvalid");
+            using var scope = clientDiagnostics.CreateScope("BasicOperations.GetInvalid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/basic/invalid", false);
+                using var message = CreateGetInvalidRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -131,19 +146,24 @@ namespace body_complex
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreateGetEmptyRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/complex/basic/empty", false);
+            return message;
         }
         public async ValueTask<Response<Basic>> GetEmptyAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.GetEmpty");
+            using var scope = clientDiagnostics.CreateScope("BasicOperations.GetEmpty");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/basic/empty", false);
+                using var message = CreateGetEmptyRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -162,19 +182,24 @@ namespace body_complex
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreateGetNullRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/complex/basic/null", false);
+            return message;
         }
         public async ValueTask<Response<Basic>> GetNullAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.GetNull");
+            using var scope = clientDiagnostics.CreateScope("BasicOperations.GetNull");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/basic/null", false);
+                using var message = CreateGetNullRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -194,18 +219,23 @@ namespace body_complex
                 throw;
             }
         }
+        internal HttpMessage CreateGetNotProvidedRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/complex/basic/notprovided", false);
+            return message;
+        }
         public async ValueTask<Response<Basic>> GetNotProvidedAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.GetNotProvided");
+            using var scope = clientDiagnostics.CreateScope("BasicOperations.GetNotProvided");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/basic/notprovided", false);
+                using var message = CreateGetNotProvidedRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {

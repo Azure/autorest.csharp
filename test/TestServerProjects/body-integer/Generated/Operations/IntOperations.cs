@@ -27,18 +27,23 @@ namespace body_integer
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+        internal HttpMessage CreateGetNullRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/int/null", false);
+            return message;
+        }
         public async ValueTask<Response<int>> GetNullAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_integer.GetNull");
+            using var scope = clientDiagnostics.CreateScope("IntOperations.GetNull");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/int/null", false);
+                using var message = CreateGetNullRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -57,19 +62,24 @@ namespace body_integer
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreateGetInvalidRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/int/invalid", false);
+            return message;
         }
         public async ValueTask<Response<int>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_integer.GetInvalid");
+            using var scope = clientDiagnostics.CreateScope("IntOperations.GetInvalid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/int/invalid", false);
+                using var message = CreateGetInvalidRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -88,19 +98,24 @@ namespace body_integer
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreateGetOverflowInt32Request()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/int/overflowint32", false);
+            return message;
         }
         public async ValueTask<Response<int>> GetOverflowInt32Async(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_integer.GetOverflowInt32");
+            using var scope = clientDiagnostics.CreateScope("IntOperations.GetOverflowInt32");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/int/overflowint32", false);
+                using var message = CreateGetOverflowInt32Request();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -119,19 +134,24 @@ namespace body_integer
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreateGetUnderflowInt32Request()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/int/underflowint32", false);
+            return message;
         }
         public async ValueTask<Response<int>> GetUnderflowInt32Async(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_integer.GetUnderflowInt32");
+            using var scope = clientDiagnostics.CreateScope("IntOperations.GetUnderflowInt32");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/int/underflowint32", false);
+                using var message = CreateGetUnderflowInt32Request();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -151,18 +171,23 @@ namespace body_integer
                 throw;
             }
         }
+        internal HttpMessage CreateGetOverflowInt64Request()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/int/overflowint64", false);
+            return message;
+        }
         public async ValueTask<Response<long>> GetOverflowInt64Async(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_integer.GetOverflowInt64");
+            using var scope = clientDiagnostics.CreateScope("IntOperations.GetOverflowInt64");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/int/overflowint64", false);
+                using var message = CreateGetOverflowInt64Request();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -181,19 +206,24 @@ namespace body_integer
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreateGetUnderflowInt64Request()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/int/underflowint64", false);
+            return message;
         }
         public async ValueTask<Response<long>> GetUnderflowInt64Async(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_integer.GetUnderflowInt64");
+            using var scope = clientDiagnostics.CreateScope("IntOperations.GetUnderflowInt64");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/int/underflowint64", false);
+                using var message = CreateGetUnderflowInt64Request();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -213,22 +243,27 @@ namespace body_integer
                 throw;
             }
         }
+        internal HttpMessage CreatePutMax32Request(int intBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/int/max/32", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteNumberValue(intBody);
+            request.Content = content;
+            return message;
+        }
         public async ValueTask<Response> PutMax32Async(int intBody, CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_integer.PutMax32");
+            using var scope = clientDiagnostics.CreateScope("IntOperations.PutMax32");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/int/max/32", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteNumberValue(intBody);
-                request.Content = content;
+                using var message = CreatePutMax32Request(intBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -243,23 +278,28 @@ namespace body_integer
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreatePutMax64Request(long intBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/int/max/64", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteNumberValue(intBody);
+            request.Content = content;
+            return message;
         }
         public async ValueTask<Response> PutMax64Async(long intBody, CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_integer.PutMax64");
+            using var scope = clientDiagnostics.CreateScope("IntOperations.PutMax64");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/int/max/64", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteNumberValue(intBody);
-                request.Content = content;
+                using var message = CreatePutMax64Request(intBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -274,23 +314,28 @@ namespace body_integer
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreatePutMin32Request(int intBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/int/min/32", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteNumberValue(intBody);
+            request.Content = content;
+            return message;
         }
         public async ValueTask<Response> PutMin32Async(int intBody, CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_integer.PutMin32");
+            using var scope = clientDiagnostics.CreateScope("IntOperations.PutMin32");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/int/min/32", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteNumberValue(intBody);
-                request.Content = content;
+                using var message = CreatePutMin32Request(intBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -305,23 +350,28 @@ namespace body_integer
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreatePutMin64Request(long intBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/int/min/64", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteNumberValue(intBody);
+            request.Content = content;
+            return message;
         }
         public async ValueTask<Response> PutMin64Async(long intBody, CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_integer.PutMin64");
+            using var scope = clientDiagnostics.CreateScope("IntOperations.PutMin64");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/int/min/64", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteNumberValue(intBody);
-                request.Content = content;
+                using var message = CreatePutMin64Request(intBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -336,19 +386,24 @@ namespace body_integer
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreateGetUnixTimeRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/int/unixtime", false);
+            return message;
         }
         public async ValueTask<Response<DateTimeOffset>> GetUnixTimeAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_integer.GetUnixTime");
+            using var scope = clientDiagnostics.CreateScope("IntOperations.GetUnixTime");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/int/unixtime", false);
+                using var message = CreateGetUnixTimeRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -368,22 +423,27 @@ namespace body_integer
                 throw;
             }
         }
+        internal HttpMessage CreatePutUnixTimeDateRequest(DateTimeOffset intBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/int/unixtime", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteStringValue(intBody, "U");
+            request.Content = content;
+            return message;
+        }
         public async ValueTask<Response> PutUnixTimeDateAsync(DateTimeOffset intBody, CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_integer.PutUnixTimeDate");
+            using var scope = clientDiagnostics.CreateScope("IntOperations.PutUnixTimeDate");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/int/unixtime", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStringValue(intBody, "U");
-                request.Content = content;
+                using var message = CreatePutUnixTimeDateRequest(intBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -399,18 +459,23 @@ namespace body_integer
                 throw;
             }
         }
+        internal HttpMessage CreateGetInvalidUnixTimeRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/int/invalidunixtime", false);
+            return message;
+        }
         public async ValueTask<Response<DateTimeOffset>> GetInvalidUnixTimeAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_integer.GetInvalidUnixTime");
+            using var scope = clientDiagnostics.CreateScope("IntOperations.GetInvalidUnixTime");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/int/invalidunixtime", false);
+                using var message = CreateGetInvalidUnixTimeRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -430,18 +495,23 @@ namespace body_integer
                 throw;
             }
         }
+        internal HttpMessage CreateGetNullUnixTimeRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.AppendPath("/int/nullunixtime", false);
+            return message;
+        }
         public async ValueTask<Response<DateTimeOffset>> GetNullUnixTimeAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_integer.GetNullUnixTime");
+            using var scope = clientDiagnostics.CreateScope("IntOperations.GetNullUnixTime");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/int/nullunixtime", false);
+                using var message = CreateGetNullUnixTimeRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {

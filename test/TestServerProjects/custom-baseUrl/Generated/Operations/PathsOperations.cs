@@ -26,6 +26,15 @@ namespace custom_baseUrl
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+        internal HttpMessage CreateGetEmptyRequest(string accountName)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri("http://{accountName}{host}"));
+            request.Uri.AppendPath("/customuri", false);
+            return message;
+        }
         public async ValueTask<Response> GetEmptyAsync(string accountName, CancellationToken cancellationToken = default)
         {
             if (accountName == null)
@@ -33,15 +42,11 @@ namespace custom_baseUrl
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("custom_baseUrl.GetEmpty");
+            using var scope = clientDiagnostics.CreateScope("PathsOperations.GetEmpty");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"http://{accountName}{host}"));
-                request.Uri.AppendPath("/customuri", false);
+                using var message = CreateGetEmptyRequest(accountName);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
