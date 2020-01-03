@@ -2319,7 +2319,7 @@ namespace body_array
             request.Uri.AppendPath("/array/prim/uuid/valid", false);
             return message;
         }
-        public async ValueTask<Response<ICollection<string>>> GetUuidValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ICollection<Guid>>> GetUuidValidAsync(CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetUuidValid");
@@ -2333,10 +2333,10 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<string> value = new List<string>();
+                            ICollection<Guid> value = new List<Guid>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                value.Add(item.GetString());
+                                value.Add(item.GetGuid());
                             }
                             return Response.FromValue(value, message.Response);
                         }
@@ -2350,7 +2350,7 @@ namespace body_array
                 throw;
             }
         }
-        public Response<ICollection<string>> GetUuidValid(CancellationToken cancellationToken = default)
+        public Response<ICollection<Guid>> GetUuidValid(CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetUuidValid");
@@ -2364,10 +2364,10 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<string> value = new List<string>();
+                            ICollection<Guid> value = new List<Guid>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                value.Add(item.GetString());
+                                value.Add(item.GetGuid());
                             }
                             return Response.FromValue(value, message.Response);
                         }
@@ -2381,7 +2381,7 @@ namespace body_array
                 throw;
             }
         }
-        internal HttpMessage CreatePutUuidValidRequest(IEnumerable<string> arrayBody)
+        internal HttpMessage CreatePutUuidValidRequest(IEnumerable<Guid> arrayBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -2399,7 +2399,7 @@ namespace body_array
             request.Content = content;
             return message;
         }
-        public async ValueTask<Response> PutUuidValidAsync(IEnumerable<string> arrayBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutUuidValidAsync(IEnumerable<Guid> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -2426,7 +2426,7 @@ namespace body_array
                 throw;
             }
         }
-        public Response PutUuidValid(IEnumerable<string> arrayBody, CancellationToken cancellationToken = default)
+        public Response PutUuidValid(IEnumerable<Guid> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -2462,7 +2462,7 @@ namespace body_array
             request.Uri.AppendPath("/array/prim/uuid/invalidchars", false);
             return message;
         }
-        public async ValueTask<Response<ICollection<string>>> GetUuidInvalidCharsAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ICollection<Guid>>> GetUuidInvalidCharsAsync(CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetUuidInvalidChars");
@@ -2476,10 +2476,10 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<string> value = new List<string>();
+                            ICollection<Guid> value = new List<Guid>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                value.Add(item.GetString());
+                                value.Add(item.GetGuid());
                             }
                             return Response.FromValue(value, message.Response);
                         }
@@ -2493,7 +2493,7 @@ namespace body_array
                 throw;
             }
         }
-        public Response<ICollection<string>> GetUuidInvalidChars(CancellationToken cancellationToken = default)
+        public Response<ICollection<Guid>> GetUuidInvalidChars(CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetUuidInvalidChars");
@@ -2507,10 +2507,10 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<string> value = new List<string>();
+                            ICollection<Guid> value = new List<Guid>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                value.Add(item.GetString());
+                                value.Add(item.GetGuid());
                             }
                             return Response.FromValue(value, message.Response);
                         }
