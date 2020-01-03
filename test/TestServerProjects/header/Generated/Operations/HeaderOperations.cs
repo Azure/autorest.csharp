@@ -50,7 +50,7 @@ namespace header
                     case 200:
                         return message.Response;
                     default:
-                        throw new Exception();
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -78,7 +78,7 @@ namespace header
                         var headers = new ResponseExistingKeyHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw new Exception();
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -110,7 +110,7 @@ namespace header
                     case 200:
                         return message.Response;
                     default:
-                        throw new Exception();
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -138,7 +138,7 @@ namespace header
                         var headers = new ResponseProtectedKeyHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw new Exception();
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -171,7 +171,7 @@ namespace header
                     case 200:
                         return message.Response;
                     default:
-                        throw new Exception();
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -204,7 +204,7 @@ namespace header
                         var headers = new ResponseIntegerHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw new Exception();
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -237,7 +237,7 @@ namespace header
                     case 200:
                         return message.Response;
                     default:
-                        throw new Exception();
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -270,7 +270,7 @@ namespace header
                         var headers = new ResponseLongHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw new Exception();
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -303,7 +303,7 @@ namespace header
                     case 200:
                         return message.Response;
                     default:
-                        throw new Exception();
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -336,7 +336,7 @@ namespace header
                         var headers = new ResponseFloatHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw new Exception();
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -369,7 +369,7 @@ namespace header
                     case 200:
                         return message.Response;
                     default:
-                        throw new Exception();
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -402,7 +402,7 @@ namespace header
                         var headers = new ResponseDoubleHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw new Exception();
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -435,7 +435,7 @@ namespace header
                     case 200:
                         return message.Response;
                     default:
-                        throw new Exception();
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -468,7 +468,7 @@ namespace header
                         var headers = new ResponseBoolHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw new Exception();
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -504,7 +504,7 @@ namespace header
                     case 200:
                         return message.Response;
                     default:
-                        throw new Exception();
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -537,7 +537,7 @@ namespace header
                         var headers = new ResponseStringHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw new Exception();
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -570,7 +570,7 @@ namespace header
                     case 200:
                         return message.Response;
                     default:
-                        throw new Exception();
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -603,7 +603,7 @@ namespace header
                         var headers = new ResponseDateHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw new Exception();
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -636,7 +636,7 @@ namespace header
                     case 200:
                         return message.Response;
                     default:
-                        throw new Exception();
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -669,7 +669,7 @@ namespace header
                         var headers = new ResponseDatetimeHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw new Exception();
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -705,7 +705,7 @@ namespace header
                     case 200:
                         return message.Response;
                     default:
-                        throw new Exception();
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -738,7 +738,7 @@ namespace header
                         var headers = new ResponseDatetimeRfc1123Headers(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw new Exception();
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -771,7 +771,7 @@ namespace header
                     case 200:
                         return message.Response;
                     default:
-                        throw new Exception();
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -804,7 +804,7 @@ namespace header
                         var headers = new ResponseDurationHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw new Exception();
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -841,7 +841,7 @@ namespace header
                     case 200:
                         return message.Response;
                     default:
-                        throw new Exception();
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -874,7 +874,7 @@ namespace header
                         var headers = new ResponseByteHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw new Exception();
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -910,7 +910,7 @@ namespace header
                     case 200:
                         return message.Response;
                     default:
-                        throw new Exception();
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -943,7 +943,7 @@ namespace header
                         var headers = new ResponseEnumHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw new Exception();
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -970,7 +970,7 @@ namespace header
                     case 200:
                         return message.Response;
                     default:
-                        throw new Exception();
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception e)

@@ -68,7 +68,7 @@ namespace extension_client_name
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw new Exception();
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception e)
