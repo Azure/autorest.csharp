@@ -3,6 +3,7 @@
 
 using System;
 using System.Globalization;
+using System.Xml;
 using AutoRest.CSharp.V3.ClientModels.Serialization;
 using AutoRest.CSharp.V3.Pipeline.Generated;
 
@@ -90,28 +91,6 @@ namespace AutoRest.CSharp.V3.ClientModels
         public static ClientConstant ParseClientConstant(ConstantSchema constant)
         {
             return ParseClientConstant(constant.Value.Value, CreateType(constant.ValueType, constant.Value.Value == null));
-        }
-
-        public static JsonSerialization CreateSerialization(Schema schema, bool isNullable)
-        {
-            switch (schema)
-            {
-                case ConstantSchema constantSchema:
-                    return CreateSerialization(constantSchema.ValueType, constantSchema.Value.Value == null);
-                case ArraySchema arraySchema:
-                    return new JsonArraySerialization(CreateType(arraySchema, false), CreateSerialization(arraySchema.ElementType, false));
-                case DictionarySchema dictionarySchema:
-
-                    var dictionaryElementTypeReference = new DictionaryTypeReference(
-                        new FrameworkTypeReference(typeof(string)),
-                        CreateType(dictionarySchema.ElementType, false),
-                        false);
-
-                    return new JsonObjectSerialization(dictionaryElementTypeReference, Array.Empty<JsonPropertySerialization>(),
-                        new JsonDynamicPropertiesSerialization(CreateSerialization(dictionarySchema.ElementType, false)));
-                default:
-                    return new JsonValueSerialization(CreateType(schema, isNullable), GetSerializationFormat(schema));
-            }
         }
     }
 }

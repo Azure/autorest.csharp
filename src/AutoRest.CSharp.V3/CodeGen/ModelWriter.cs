@@ -57,7 +57,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                 }
 
 
-                using (writer.Class(null, "partial", schema.CSharpName(), implements: string.Join(", ", implementsTypes)))
+                using (writer.Class(null, "partial", schema.Name, implements: string.Join(", ", implementsTypes)))
                 {
                     if (schema.Discriminator != null)
                     {
@@ -169,7 +169,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             using (writer.Namespace(cs.Namespace))
             {
                 var implementType = new CSharpType(typeof(IEquatable<>), cs);
-                using (writer.Struct(null, "readonly partial", schema.CSharpName(), writer.Type(implementType)))
+                using (writer.Struct(null, "readonly partial", schema.Name, writer.Type(implementType)))
                 {
                     var stringText = writer.Type(typeof(string));
                     var nullableStringText = writer.Type(typeof(string), true);
@@ -178,7 +178,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     writer.LineRaw($"private readonly {writer.Pair(nullableStringText, "_value")};");
                     writer.Line();
 
-                    using (writer.Method("public", null, schema.CSharpName(), writer.Pair(stringText, "value")))
+                    using (writer.Method("public", null, schema.Name, writer.Pair(stringText, "value")))
                     {
                         writer.LineRaw($"_value = value ?? throw new {writer.Type(typeof(ArgumentNullException))}(nameof(value));");
                     }

@@ -1,1 +1,4 @@
 * text=auto
+
+**/Generated/**/*.cs linguist-generated=true
+**/Generated/**/*.csproj linguist-generated=true

@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.V3.Utilities
         public static string? PrependUnderscoreIfNumbers(this string? text) => Regex.IsMatch(text ?? String.Empty, @"^\d") ? $"_{text}" : text;
 
         [return: NotNullIfNotNull("name")]
-        public static string? ToCleanName(this string? name) => name?.ToPascalCase().RemoveNonWordCharacters().PrependUnderscoreIfNumbers();
+        public static string ToCleanName(this string name) => name.ToPascalCase().RemoveNonWordCharacters().PrependUnderscoreIfNumbers();
         [return: NotNullIfNotNull("name")]
         public static string? ToVariableName(this string? name) => name?.ToCamelCase().RemoveNonWordCharacters().PrependUnderscoreIfNumbers();
 
