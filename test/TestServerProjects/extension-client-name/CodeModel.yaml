@@ -1,0 +1,166 @@
+!<!CodeModel> 
+schemas: !<!Schemas> 
+  objects:
+  - !<!ObjectSchema> &ref_4
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    properties:
+    - !<!Property> 
+      schema: !<!DictionarySchema> &ref_0
+        type: dictionary
+        elementType: !<!StringSchema> &ref_1
+          type: string
+          apiVersions:
+          - !<!ApiVersion> 
+            version: 1.0.0
+          language: !<!Languages> 
+            default:
+              name: string
+              description: MISSING·SCHEMA-DESCRIPTION-STRING
+              header: originalHeader
+          protocol: !<!Protocols> {}
+        language: !<!Languages> 
+          default:
+            name: OriginalSchema-originalProperty
+            description: A description about the set of tags.
+        protocol: !<!Protocols> {}
+      required: false
+      serializedName: originalProperty
+      language: !<!Languages> 
+        default:
+          name: originalProperty
+          description: A description about the set of tags.
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: OriginalSchema
+        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        namespace: Api100
+    protocol: !<!Protocols> {}
+  dictionaries:
+  - *ref_0
+  strings:
+  - !<!StringSchema> &ref_2
+    type: string
+    language: !<!Languages> 
+      default:
+        name: string
+        description: simple string
+    protocol: !<!Protocols> {}
+  - *ref_1
+globalParameters:
+- !<!Parameter> &ref_3
+  schema: *ref_2
+  clientDefaultValue: 'http://localhost:3000'
+  implementation: Client
+  required: true
+  language: !<!Languages> 
+    default:
+      name: $host
+      description: server parameter
+      serializedName: $host
+  protocol: !<!Protocols> 
+    http: !<!HttpParameter> 
+      in: uri
+info: !<!Info> 
+  description: Resource Flattening for AutoRest
+  title: extension-client-name
+operationGroups:
+- !<!OperationGroup> 
+  $key: ''
+  operations:
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_3
+      - !<!Parameter> 
+        schema: *ref_1
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: originalPathParameter
+            description: MISSING·PARAMETER-DESCRIPTION
+            serializedName: originalPathParameter
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: path
+      - !<!Parameter> 
+        schema: *ref_1
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: originalQueryParameter
+            description: MISSING·PARAMETER-DESCRIPTION
+            serializedName: originalQueryParameter
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      - !<!Parameter> 
+        schema: *ref_4
+        implementation: Method
+        required: true
+        extensions:
+          x-ms-requestBody-name: RenamedBodyParameter
+        language: !<!Languages> 
+          default:
+            name: RenamedBodyParameter
+            description: ''
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: '/originalOperation/{originalPathParameter}'
+          method: patch
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_4
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          headers:
+          - !<!HttpHeader> 
+            schema: *ref_1
+            header: originalHeader
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    extensions:
+      x-ms-requestBody-index: 2
+    language: !<!Languages> 
+      default:
+        name: originalOperation
+        description: MISSING·OPERATION-DESCRIPTION
+    protocol: !<!Protocols> {}
+  language: !<!Languages> 
+    default:
+      name: ''
+      description: ''
+  protocol: !<!Protocols> {}
+language: !<!Languages> 
+  default:
+    name: ''
+    description: ''
+protocol: !<!Protocols> 
+  http: !<!HttpModel> {}

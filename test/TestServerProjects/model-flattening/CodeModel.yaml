@@ -1,0 +1,1441 @@
+!<!CodeModel> 
+schemas: !<!Schemas> 
+  objects:
+  - !<!ObjectSchema> &ref_0
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    children: !<!Relations> 
+      all:
+      - !<!ObjectSchema> &ref_1
+        type: object
+        apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+        parents: !<!Relations> 
+          all:
+          - *ref_0
+          immediate:
+          - *ref_0
+        properties:
+        - !<!Property> 
+          schema: !<!ObjectSchema> &ref_3
+            type: object
+            apiVersions:
+            - !<!ApiVersion> 
+              version: 1.0.0
+            properties:
+            - !<!Property> 
+              schema: !<!StringSchema> &ref_24
+                type: string
+                apiVersions:
+                - !<!ApiVersion> 
+                  version: 1.0.0
+                language: !<!Languages> 
+                  default:
+                    name: FlattenedProduct-properties-p.name
+                    description: MISSING·SCHEMA-DESCRIPTION-STRING
+                protocol: !<!Protocols> {}
+              serializedName: p.name
+              language: !<!Languages> 
+                default:
+                  name: p.name
+                  description: MISSING·SCHEMA-DESCRIPTION-STRING
+              protocol: !<!Protocols> {}
+            - !<!Property> 
+              schema: !<!StringSchema> &ref_25
+                type: string
+                apiVersions:
+                - !<!ApiVersion> 
+                  version: 1.0.0
+                language: !<!Languages> 
+                  default:
+                    name: FlattenedProduct-properties-type
+                    description: MISSING·SCHEMA-DESCRIPTION-STRING
+                protocol: !<!Protocols> {}
+              serializedName: type
+              language: !<!Languages> 
+                default:
+                  name: type
+                  description: MISSING·SCHEMA-DESCRIPTION-STRING
+              protocol: !<!Protocols> {}
+            - !<!Property> 
+              schema: !<!ChoiceSchema> &ref_13
+                choices:
+                - !<!ChoiceValue> 
+                  value: Succeeded
+                  language:
+                    default:
+                      name: Succeeded
+                      description: ''
+                - !<!ChoiceValue> 
+                  value: Failed
+                  language:
+                    default:
+                      name: Failed
+                      description: ''
+                - !<!ChoiceValue> 
+                  value: canceled
+                  language:
+                    default:
+                      name: canceled
+                      description: ''
+                - !<!ChoiceValue> 
+                  value: Accepted
+                  language:
+                    default:
+                      name: Accepted
+                      description: ''
+                - !<!ChoiceValue> 
+                  value: Creating
+                  language:
+                    default:
+                      name: Creating
+                      description: ''
+                - !<!ChoiceValue> 
+                  value: Created
+                  language:
+                    default:
+                      name: Created
+                      description: ''
+                - !<!ChoiceValue> 
+                  value: Updating
+                  language:
+                    default:
+                      name: Updating
+                      description: ''
+                - !<!ChoiceValue> 
+                  value: Updated
+                  language:
+                    default:
+                      name: Updated
+                      description: ''
+                - !<!ChoiceValue> 
+                  value: Deleting
+                  language:
+                    default:
+                      name: Deleting
+                      description: ''
+                - !<!ChoiceValue> 
+                  value: Deleted
+                  language:
+                    default:
+                      name: Deleted
+                      description: ''
+                - !<!ChoiceValue> 
+                  value: OK
+                  language:
+                    default:
+                      name: OK
+                      description: ''
+                type: choice
+                apiVersions:
+                - !<!ApiVersion> 
+                  version: 1.0.0
+                choiceType: !<!StringSchema> &ref_6
+                  type: string
+                  language: !<!Languages> 
+                    default:
+                      name: string
+                      description: simple string
+                  protocol: !<!Protocols> {}
+                language: !<!Languages> 
+                  default:
+                    name: FlattenedProduct-properties-provisioningStateValues
+                    description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+                protocol: !<!Protocols> {}
+              readOnly: true
+              serializedName: provisioningStateValues
+              language: !<!Languages> 
+                default:
+                  name: provisioningStateValues
+                  description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+              protocol: !<!Protocols> {}
+            - !<!Property> 
+              schema: !<!StringSchema> &ref_26
+                type: string
+                apiVersions:
+                - !<!ApiVersion> 
+                  version: 1.0.0
+                language: !<!Languages> 
+                  default:
+                    name: FlattenedProduct-properties-provisioningState
+                    description: MISSING·SCHEMA-DESCRIPTION-STRING
+                protocol: !<!Protocols> {}
+              serializedName: provisioningState
+              language: !<!Languages> 
+                default:
+                  name: provisioningState
+                  description: MISSING·SCHEMA-DESCRIPTION-STRING
+              protocol: !<!Protocols> {}
+            extensions:
+              x-ms-client-flatten: true
+            language: !<!Languages> 
+              default:
+                name: FlattenedProduct-properties
+                description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+                namespace: Api100
+            protocol: !<!Protocols> {}
+          serializedName: properties
+          language: !<!Languages> 
+            default:
+              name: properties
+              description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+          protocol: !<!Protocols> {}
+        language: !<!Languages> 
+          default:
+            name: FlattenedProduct
+            description: Flattened product.
+            namespace: Api100
+        protocol: !<!Protocols> {}
+      immediate:
+      - *ref_1
+    properties:
+    - !<!Property> 
+      schema: !<!StringSchema> &ref_18
+        type: string
+        apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+        language: !<!Languages> 
+          default:
+            name: Resource-id
+            description: Resource Id
+        protocol: !<!Protocols> {}
+      readOnly: true
+      serializedName: id
+      language: !<!Languages> 
+        default:
+          name: id
+          description: Resource Id
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: !<!StringSchema> &ref_19
+        type: string
+        apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+        language: !<!Languages> 
+          default:
+            name: Resource-type
+            description: Resource Type
+        protocol: !<!Protocols> {}
+      readOnly: true
+      serializedName: type
+      language: !<!Languages> 
+        default:
+          name: type
+          description: Resource Type
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: !<!DictionarySchema> &ref_11
+        type: dictionary
+        elementType: !<!StringSchema> &ref_20
+          type: string
+          apiVersions:
+          - !<!ApiVersion> 
+            version: 1.0.0
+          language: !<!Languages> 
+            default:
+              name: string
+              description: MISSING·SCHEMA-DESCRIPTION-STRING
+          protocol: !<!Protocols> {}
+        language: !<!Languages> 
+          default:
+            name: Dictionary of string
+            description: Dictionary of <components·schemas·resource·properties·tags·additionalproperties>
+        protocol: !<!Protocols> {}
+      serializedName: tags
+      language: !<!Languages> 
+        default:
+          name: tags
+          description: Dictionary of <components·schemas·resource·properties·tags·additionalproperties>
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: !<!StringSchema> &ref_21
+        type: string
+        apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+        language: !<!Languages> 
+          default:
+            name: Resource-location
+            description: Resource Location
+        protocol: !<!Protocols> {}
+      serializedName: location
+      language: !<!Languages> 
+        default:
+          name: location
+          description: Resource Location
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: !<!StringSchema> &ref_22
+        type: string
+        apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+        language: !<!Languages> 
+          default:
+            name: Resource-name
+            description: Resource Name
+        protocol: !<!Protocols> {}
+      readOnly: true
+      serializedName: name
+      language: !<!Languages> 
+        default:
+          name: name
+          description: Resource Name
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: Resource
+        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        namespace: Api100
+    protocol: !<!Protocols> {}
+  - !<!ObjectSchema> &ref_2
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    properties:
+    - !<!Property> 
+      schema: !<!NumberSchema> &ref_17
+        type: integer
+        precision: 32
+        language: !<!Languages> 
+          default:
+            name: typeForstatus
+            description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+        protocol: !<!Protocols> {}
+      serializedName: status
+      language: !<!Languages> 
+        default:
+          name: status
+          description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: !<!StringSchema> &ref_23
+        type: string
+        apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+        language: !<!Languages> 
+          default:
+            name: Error-message
+            description: MISSING·SCHEMA-DESCRIPTION-STRING
+        protocol: !<!Protocols> {}
+      serializedName: message
+      language: !<!Languages> 
+        default:
+          name: message
+          description: MISSING·SCHEMA-DESCRIPTION-STRING
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: *ref_2
+      serializedName: parentError
+      language: !<!Languages> 
+        default:
+          name: parentError
+          description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: Error
+        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        namespace: Api100
+    protocol: !<!Protocols> {}
+  - *ref_1
+  - *ref_3
+  - !<!ObjectSchema> &ref_4
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    properties:
+    - !<!Property> 
+      schema: !<!StringSchema> &ref_27
+        type: string
+        apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+        language: !<!Languages> 
+          default:
+            name: WrappedProduct-value
+            description: the product value
+        protocol: !<!Protocols> {}
+      serializedName: value
+      language: !<!Languages> 
+        default:
+          name: value
+          description: the product value
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: WrappedProduct
+        description: The wrapped produc.
+        namespace: Api100
+    protocol: !<!Protocols> {}
+  - !<!ObjectSchema> &ref_14
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    properties:
+    - !<!Property> 
+      schema: *ref_4
+      serializedName: property
+      language: !<!Languages> 
+        default:
+          name: property
+          description: The wrapped produc.
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: ProductWrapper
+        description: The wrapped produc.
+        namespace: Api100
+    protocol: !<!Protocols> {}
+  - !<!ObjectSchema> &ref_39
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    properties:
+    - !<!Property> 
+      schema: *ref_1
+      serializedName: productresource
+      language: !<!Languages> 
+        default:
+          name: productresource
+          description: Flattened product.
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: !<!ArraySchema> &ref_15
+        type: array
+        apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+        elementType: *ref_1
+        language: !<!Languages> 
+          default:
+            name: ResourceCollection-arrayofresources
+            description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+        protocol: !<!Protocols> {}
+      serializedName: arrayofresources
+      language: !<!Languages> 
+        default:
+          name: arrayofresources
+          description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: !<!DictionarySchema> &ref_12
+        type: dictionary
+        elementType: *ref_1
+        language: !<!Languages> 
+          default:
+            name: ResourceCollection-dictionaryofresources
+            description: Dictionary of <FlattenedProduct>
+        protocol: !<!Protocols> {}
+      serializedName: dictionaryofresources
+      language: !<!Languages> 
+        default:
+          name: dictionaryofresources
+          description: Dictionary of <FlattenedProduct>
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: ResourceCollection
+        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        namespace: Api100
+    protocol: !<!Protocols> {}
+  - !<!ObjectSchema> &ref_5
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    children: !<!Relations> 
+      all:
+      - !<!ObjectSchema> &ref_9
+        type: object
+        apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+        parents: !<!Relations> 
+          all:
+          - *ref_5
+          immediate:
+          - *ref_5
+        properties:
+        - !<!Property> 
+          schema: !<!ObjectSchema> &ref_10
+            type: object
+            apiVersions:
+            - !<!ApiVersion> 
+              version: 1.0.0
+            properties:
+            - !<!Property> 
+              schema: !<!StringSchema> &ref_30
+                type: string
+                apiVersions:
+                - !<!ApiVersion> 
+                  version: 1.0.0
+                language: !<!Languages> 
+                  default:
+                    name: SimpleProductProperties-max_product_display_name
+                    description: Display name of product.
+                protocol: !<!Protocols> {}
+              required: true
+              serializedName: max_product_display_name
+              language: !<!Languages> 
+                default:
+                  name: max_product_display_name
+                  description: Display name of product.
+              protocol: !<!Protocols> {}
+            - !<!Property> 
+              schema: !<!ConstantSchema> &ref_16
+                type: constant
+                apiVersions:
+                - !<!ApiVersion> 
+                  version: 1.0.0
+                value: !<!ConstantValue> 
+                  value: Large
+                  language:
+                    default:
+                      name: ''
+                      description: ''
+                valueType: *ref_6
+                language: !<!Languages> 
+                  default:
+                    name: capacity
+                    description: 'Capacity of product. For example, 4 people.'
+                protocol: !<!Protocols> {}
+              required: true
+              serializedName: max_product_capacity
+              language: !<!Languages> 
+                default:
+                  name: max_product_capacity
+                  description: 'Capacity of product. For example, 4 people.'
+              protocol: !<!Protocols> {}
+            - !<!Property> 
+              schema: !<!ObjectSchema> &ref_7
+                type: object
+                apiVersions:
+                - !<!ApiVersion> 
+                  version: 1.0.0
+                parents: !<!Relations> 
+                  all:
+                  - !<!ObjectSchema> &ref_8
+                    type: object
+                    apiVersions:
+                    - !<!ApiVersion> 
+                      version: 1.0.0
+                    children: !<!Relations> 
+                      all:
+                      - *ref_7
+                      immediate:
+                      - *ref_7
+                    properties:
+                    - !<!Property> 
+                      schema: !<!StringSchema> &ref_31
+                        type: string
+                        apiVersions:
+                        - !<!ApiVersion> 
+                          version: 1.0.0
+                        language: !<!Languages> 
+                          default:
+                            name: GenericUrl-generic_value
+                            description: Generic URL value.
+                        protocol: !<!Protocols> {}
+                      serializedName: generic_value
+                      language: !<!Languages> 
+                        default:
+                          name: generic_value
+                          description: Generic URL value.
+                      protocol: !<!Protocols> {}
+                    language: !<!Languages> 
+                      default:
+                        name: GenericUrl
+                        description: The Generic URL.
+                        namespace: Api100
+                    protocol: !<!Protocols> {}
+                  immediate:
+                  - *ref_8
+                properties:
+                - !<!Property> 
+                  schema: !<!StringSchema> &ref_32
+                    type: string
+                    apiVersions:
+                    - !<!ApiVersion> 
+                      version: 1.0.0
+                    language: !<!Languages> 
+                      default:
+                        name: ProductUrl-@odata.value
+                        description: URL value.
+                    protocol: !<!Protocols> {}
+                  serializedName: '@odata.value'
+                  language: !<!Languages> 
+                    default:
+                      name: '@odata.value'
+                      description: URL value.
+                  protocol: !<!Protocols> {}
+                language: !<!Languages> 
+                  default:
+                    name: ProductUrl
+                    description: The product URL.
+                    namespace: Api100
+                protocol: !<!Protocols> {}
+              required: false
+              serializedName: max_product_image
+              language: !<!Languages> 
+                default:
+                  name: max_product_image
+                  description: The product URL.
+              protocol: !<!Protocols> {}
+            language: !<!Languages> 
+              default:
+                name: SimpleProductProperties
+                description: The product documentation.
+                namespace: Api100
+            protocol: !<!Protocols> {}
+          serializedName: details
+          language: !<!Languages> 
+            default:
+              name: details
+              description: The product documentation.
+          protocol: !<!Protocols> {}
+        language: !<!Languages> 
+          default:
+            name: SimpleProduct
+            description: The product documentation.
+            namespace: Api100
+        protocol: !<!Protocols> {}
+      immediate:
+      - *ref_9
+    properties:
+    - !<!Property> 
+      schema: !<!StringSchema> &ref_28
+        type: string
+        apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+        language: !<!Languages> 
+          default:
+            name: productId
+            description: 'Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.'
+        protocol: !<!Protocols> {}
+      required: true
+      serializedName: base_product_id
+      language: !<!Languages> 
+        default:
+          name: base_product_id
+          description: 'Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.'
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: !<!StringSchema> &ref_29
+        type: string
+        apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+        language: !<!Languages> 
+          default:
+            name: description
+            description: Description of product.
+        protocol: !<!Protocols> {}
+      required: false
+      serializedName: base_product_description
+      language: !<!Languages> 
+        default:
+          name: base_product_description
+          description: Description of product.
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: BaseProduct
+        description: The product documentation.
+        namespace: Api100
+    protocol: !<!Protocols> {}
+  - *ref_9
+  - *ref_10
+  - *ref_8
+  - *ref_7
+  dictionaries:
+  - *ref_11
+  - !<!DictionarySchema> &ref_38
+    type: dictionary
+    elementType: *ref_1
+    language: !<!Languages> 
+      default:
+        name: DictionaryOfFlattenedProduct
+        description: Dictionary of <FlattenedProduct>
+    protocol: !<!Protocols> {}
+  - *ref_12
+  choices:
+  - *ref_13
+  arrays:
+  - !<!ArraySchema> &ref_34
+    type: array
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    elementType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Array of Resource
+        description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+    protocol: !<!Protocols> {}
+  - !<!ArraySchema> &ref_35
+    type: array
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    elementType: *ref_1
+    language: !<!Languages> 
+      default:
+        name: Array of FlattenedProduct
+        description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+    protocol: !<!Protocols> {}
+  - !<!ArraySchema> &ref_36
+    type: array
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    elementType: *ref_4
+    language: !<!Languages> 
+      default:
+        name: Array of WrappedProduct
+        description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+    protocol: !<!Protocols> {}
+  - !<!ArraySchema> &ref_37
+    type: array
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    elementType: *ref_14
+    language: !<!Languages> 
+      default:
+        name: Array of ProductWrapper
+        description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+    protocol: !<!Protocols> {}
+  - *ref_15
+  constants:
+  - *ref_16
+  numbers:
+  - *ref_17
+  strings:
+  - *ref_6
+  - *ref_18
+  - *ref_19
+  - *ref_20
+  - *ref_21
+  - *ref_22
+  - *ref_23
+  - *ref_24
+  - *ref_25
+  - *ref_26
+  - *ref_27
+  - *ref_28
+  - *ref_29
+  - *ref_30
+  - *ref_31
+  - *ref_32
+globalParameters:
+- !<!Parameter> &ref_33
+  schema: *ref_6
+  clientDefaultValue: 'http://localhost:3000'
+  implementation: Client
+  required: true
+  language: !<!Languages> 
+    default:
+      name: $host
+      description: server parameter
+      serializedName: $host
+  protocol: !<!Protocols> 
+    http: !<!HttpParameter> 
+      in: uri
+info: !<!Info> 
+  description: Resource Flattening for AutoRest
+  title: model-flattening
+operationGroups:
+- !<!OperationGroup> 
+  $key: ''
+  operations:
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_33
+      - !<!Parameter> 
+        schema: *ref_34
+        implementation: Method
+        extensions:
+          x-ms-requestBody-name: ResourceArray
+        language: !<!Languages> 
+          default:
+            name: ResourceArray
+            description: External Resource as an Array to put
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /model-flatten/array
+          method: put
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_2
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    extensions:
+      x-ms-requestBody-index: 0
+    language: !<!Languages> 
+      default:
+        name: putArray
+        description: Put External Resource as an Array
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_33
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /model-flatten/array
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_35
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_2
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: getArray
+        description: Get External Resource as an Array
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_33
+      - !<!Parameter> 
+        schema: *ref_36
+        implementation: Method
+        extensions:
+          x-ms-requestBody-name: ResourceArray
+        language: !<!Languages> 
+          default:
+            name: ResourceArray
+            description: External Resource as an Array to put
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /model-flatten/wrappedarray
+          method: put
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_2
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    extensions:
+      x-ms-requestBody-index: 0
+    language: !<!Languages> 
+      default:
+        name: putWrappedArray
+        description: No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_33
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /model-flatten/wrappedarray
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_37
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_2
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: getWrappedArray
+        description: No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_33
+      - !<!Parameter> 
+        schema: *ref_38
+        implementation: Method
+        extensions:
+          x-ms-requestBody-name: ResourceDictionary
+        language: !<!Languages> 
+          default:
+            name: ResourceDictionary
+            description: External Resource as a Dictionary to put
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /model-flatten/dictionary
+          method: put
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_2
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    extensions:
+      x-ms-requestBody-index: 0
+    language: !<!Languages> 
+      default:
+        name: putDictionary
+        description: Put External Resource as a Dictionary
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_33
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /model-flatten/dictionary
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_38
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_2
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: getDictionary
+        description: Get External Resource as a Dictionary
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_33
+      - !<!Parameter> 
+        schema: *ref_39
+        implementation: Method
+        extensions:
+          x-ms-requestBody-name: ResourceComplexObject
+        language: !<!Languages> 
+          default:
+            name: ResourceComplexObject
+            description: External Resource as a ResourceCollection to put
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /model-flatten/resourcecollection
+          method: put
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_2
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    extensions:
+      x-ms-requestBody-index: 0
+    language: !<!Languages> 
+      default:
+        name: putResourceCollection
+        description: Put External Resource as a ResourceCollection
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_33
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /model-flatten/resourcecollection
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_39
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_2
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: getResourceCollection
+        description: Get External Resource as a ResourceCollection
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_33
+      - !<!Parameter> 
+        schema: *ref_9
+        implementation: Method
+        extensions:
+          x-ms-requestBody-name: SimpleBodyProduct
+        language: !<!Languages> 
+          default:
+            name: SimpleBodyProduct
+            description: Simple body product to put
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /model-flatten/customFlattening
+          method: put
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_9
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_2
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    extensions:
+      x-ms-requestBody-index: 0
+    language: !<!Languages> 
+      default:
+        name: putSimpleProduct
+        description: Put Simple Product with client flattening true on the model
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_33
+      - !<!Parameter> 
+        schema: *ref_9
+        implementation: Method
+        extensions:
+          x-ms-client-flatten: true
+          x-ms-requestBody-name: SimpleBodyProduct
+        language: !<!Languages> 
+          default:
+            name: SimpleBodyProduct
+            description: Simple body product to post
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /model-flatten/customFlattening
+          method: post
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_9
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_2
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    extensions:
+      x-ms-requestBody-index: 0
+    language: !<!Languages> 
+      default:
+        name: postFlattenedSimpleProduct
+        description: Put Flattened Simple Product with client flattening true on the parameter
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_33
+      - !<!Parameter> 
+        schema: *ref_20
+        implementation: Method
+        required: true
+        extensions:
+          x-ms-parameter-grouping:
+            name: flatten-parameter-group
+        language: !<!Languages> 
+          default:
+            name: name
+            description: Product name with value 'groupproduct'
+            serializedName: name
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: path
+      - !<!Parameter> 
+        schema: *ref_9
+        implementation: Method
+        extensions:
+          x-ms-client-flatten: true
+          x-ms-parameter-grouping:
+            name: flatten-parameter-group
+          x-ms-requestBody-name: SimpleBodyProduct
+        language: !<!Languages> 
+          default:
+            name: SimpleBodyProduct
+            description: Simple body product to put
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: '/model-flatten/customFlattening/parametergrouping/{name}/'
+          method: put
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_9
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_2
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    extensions:
+      x-ms-requestBody-index: 0
+    language: !<!Languages> 
+      default:
+        name: putSimpleProductWithGrouping
+        description: Put Simple Product with client flattening true on the model
+    protocol: !<!Protocols> {}
+  language: !<!Languages> 
+    default:
+      name: ''
+      description: ''
+  protocol: !<!Protocols> {}
+language: !<!Languages> 
+  default:
+    name: ''
+    description: ''
+protocol: !<!Protocols> 
+  http: !<!HttpModel> {}

@@ -1,0 +1,171 @@
+!<!CodeModel> 
+schemas: !<!Schemas> 
+  objects:
+  - !<!ObjectSchema> &ref_4
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    properties:
+    - !<!Property> 
+      schema: !<!NumberSchema> &ref_0
+        type: integer
+        precision: 32
+        language: !<!Languages> 
+          default:
+            name: typeForstatus
+            description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+        protocol: !<!Protocols> {}
+      serializedName: status
+      language: !<!Languages> 
+        default:
+          name: status
+          description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: !<!StringSchema> &ref_1
+        type: string
+        apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+        language: !<!Languages> 
+          default:
+            name: Error-message
+            description: MISSING·SCHEMA-DESCRIPTION-STRING
+        protocol: !<!Protocols> {}
+      serializedName: message
+      language: !<!Languages> 
+        default:
+          name: message
+          description: MISSING·SCHEMA-DESCRIPTION-STRING
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: Error
+        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        namespace: Api100
+    protocol: !<!Protocols> {}
+  numbers:
+  - *ref_0
+  strings:
+  - !<!StringSchema> &ref_2
+    type: string
+    language: !<!Languages> 
+      default:
+        name: string
+        description: simple string
+    protocol: !<!Protocols> {}
+  - *ref_1
+  - !<!StringSchema> 
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    defaultValue: host
+    language: !<!Languages> 
+      default:
+        name: string
+        description: MISSING·SCHEMA-DESCRIPTION-STRING
+    protocol: !<!Protocols> {}
+globalParameters:
+- !<!Parameter> &ref_3
+  schema: *ref_2
+  clientDefaultValue: host
+  implementation: Client
+  required: true
+  extensions:
+    x-in: path
+    x-ms-priority: 0
+    x-ms-skip-url-encoding: true
+    x-name: host
+    x-required: true
+    x-type: string
+  language: !<!Languages> 
+    default:
+      name: host
+      description: A string value that is used as a global part of the parameterized host
+      serializedName: host
+  protocol: !<!Protocols> 
+    http: !<!HttpParameter> 
+      in: uri
+info: !<!Info> 
+  description: Test Infrastructure for AutoRest
+  title: custom-baseUrl
+operationGroups:
+- !<!OperationGroup> 
+  $key: paths
+  operations:
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - !<!Parameter> 
+        schema: *ref_2
+        implementation: Method
+        required: true
+        extensions:
+          x-in: path
+          x-ms-skip-url-encoding: true
+          x-name: accountName
+          x-required: true
+          x-type: string
+        language: !<!Languages> 
+          default:
+            name: accountName
+            description: Account Name
+            serializedName: accountName
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: uri
+      - *ref_3
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /customuri
+          method: get
+          uri: 'http://{accountName}{host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_4
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: getEmpty
+        description: Get a 200 to test a valid base uri
+    protocol: !<!Protocols> {}
+  language: !<!Languages> 
+    default:
+      name: paths
+      description: ''
+  protocol: !<!Protocols> {}
+language: !<!Languages> 
+  default:
+    name: ''
+    description: ''
+protocol: !<!Protocols> 
+  http: !<!HttpModel> {}

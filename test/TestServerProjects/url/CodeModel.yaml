@@ -1,0 +1,4732 @@
+!<!CodeModel> 
+schemas: !<!Schemas> 
+  objects:
+  - !<!ObjectSchema> &ref_30
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    properties:
+    - !<!Property> 
+      schema: !<!NumberSchema> &ref_8
+        type: integer
+        precision: 32
+        language: !<!Languages> 
+          default:
+            name: typeForstatus
+            description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+        protocol: !<!Protocols> {}
+      serializedName: status
+      language: !<!Languages> 
+        default:
+          name: status
+          description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: !<!StringSchema> &ref_25
+        type: string
+        apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+        language: !<!Languages> 
+          default:
+            name: Error-message
+            description: MISSING·SCHEMA-DESCRIPTION-STRING
+        protocol: !<!Protocols> {}
+      serializedName: message
+      language: !<!Languages> 
+        default:
+          name: message
+          description: MISSING·SCHEMA-DESCRIPTION-STRING
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: Error
+        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        namespace: Api100
+    protocol: !<!Protocols> {}
+  arrays:
+  - !<!ArraySchema> &ref_51
+    type: array
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    elementType: !<!StringSchema> &ref_27
+      type: string
+      apiVersions:
+      - !<!ApiVersion> 
+        version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: get-0-itemsItem
+          description: MISSING·SCHEMA-DESCRIPTION-STRING
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: Array of get-0-itemsItem
+        description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+    protocol: !<!Protocols> {}
+  - !<!ArraySchema> &ref_74
+    type: array
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    elementType: !<!StringSchema> &ref_26
+      type: string
+      apiVersions:
+      - !<!ApiVersion> 
+        version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: string
+          description: MISSING·SCHEMA-DESCRIPTION-STRING
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: Array of string
+        description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+    protocol: !<!Protocols> {}
+  booleans:
+  - !<!BooleanSchema> &ref_0
+    type: boolean
+    language: !<!Languages> 
+      default:
+        name: bool
+        description: simple boolean
+    protocol: !<!Protocols> {}
+  - !<!BooleanSchema> &ref_55
+    type: boolean
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: boolean
+        description: MISSING·SCHEMA-DESCRIPTION-BOOLEAN
+    protocol: !<!Protocols> {}
+  byteArrays:
+  - !<!ByteArraySchema> &ref_44
+    type: byte-array
+    format: byte
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: byte-array
+        description: MISSING·SCHEMA-DESCRIPTION-BYTEARRAY
+    protocol: !<!Protocols> {}
+  - !<!ByteArraySchema> &ref_2
+    type: byte-array
+    format: byte
+    language: !<!Languages> 
+      default:
+        name: byte-array
+        description: MISSING·SCHEMA-DESCRIPTION-BYTEARRAY
+    protocol: !<!Protocols> {}
+  - !<!ByteArraySchema> &ref_50
+    type: byte-array
+    format: base64url
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: byte-array
+        description: MISSING·SCHEMA-DESCRIPTION-BYTEARRAY
+    protocol: !<!Protocols> {}
+  - !<!ByteArraySchema> &ref_3
+    type: byte-array
+    format: byte
+    language: !<!Languages> 
+      default:
+        name: byte-array
+        description: MISSING·SCHEMA-DESCRIPTION-BYTEARRAY
+    protocol: !<!Protocols> {}
+  constants:
+  - !<!ConstantSchema> &ref_29
+    type: constant
+    value: !<!ConstantValue> 
+      value: true
+      language:
+        default:
+          name: ''
+          description: ''
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant0
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_31
+    type: constant
+    value: !<!ConstantValue> 
+      value: false
+      language:
+        default:
+          name: ''
+          description: ''
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant1
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_32
+    type: constant
+    value: !<!ConstantValue> 
+      value: 1000000
+      language:
+        default:
+          name: ''
+          description: ''
+    valueType: !<!NumberSchema> &ref_9
+      type: number
+      precision: 32
+      language: !<!Languages> 
+        default:
+          name: number
+          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: Constant2
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_33
+    type: constant
+    value: !<!ConstantValue> 
+      value: -1000000
+      language:
+        default:
+          name: ''
+          description: ''
+    valueType: !<!NumberSchema> &ref_10
+      type: number
+      precision: 32
+      language: !<!Languages> 
+        default:
+          name: number
+          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: Constant3
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_34
+    type: constant
+    value: !<!ConstantValue> 
+      value: 10000000000
+      language:
+        default:
+          name: ''
+          description: ''
+    valueType: !<!NumberSchema> &ref_11
+      type: number
+      precision: 32
+      language: !<!Languages> 
+        default:
+          name: number
+          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: Constant4
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_35
+    type: constant
+    value: !<!ConstantValue> 
+      value: -10000000000
+      language:
+        default:
+          name: ''
+          description: ''
+    valueType: !<!NumberSchema> &ref_12
+      type: number
+      precision: 32
+      language: !<!Languages> 
+        default:
+          name: number
+          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: Constant5
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_36
+    type: constant
+    value: !<!ConstantValue> 
+      value: 103400000000000000000
+      language:
+        default:
+          name: ''
+          description: ''
+    valueType: !<!NumberSchema> &ref_13
+      type: number
+      precision: 32
+      language: !<!Languages> 
+        default:
+          name: number
+          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: Constant6
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_37
+    type: constant
+    value: !<!ConstantValue> 
+      value: -1.034e-20
+      language:
+        default:
+          name: ''
+          description: ''
+    valueType: !<!NumberSchema> &ref_14
+      type: number
+      precision: 32
+      language: !<!Languages> 
+        default:
+          name: number
+          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: Constant7
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_38
+    type: constant
+    value: !<!ConstantValue> 
+      value: 9999999.999
+      language:
+        default:
+          name: ''
+          description: ''
+    valueType: !<!NumberSchema> &ref_15
+      type: number
+      precision: 64
+      language: !<!Languages> 
+        default:
+          name: number
+          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: Constant8
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_39
+    type: constant
+    value: !<!ConstantValue> 
+      value: -9999999.999
+      language:
+        default:
+          name: ''
+          description: ''
+    valueType: !<!NumberSchema> &ref_16
+      type: number
+      precision: 64
+      language: !<!Languages> 
+        default:
+          name: number
+          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: Constant9
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_40
+    type: constant
+    value: !<!ConstantValue> 
+      value: 啊齄丂狛狜隣郎隣兀﨩
+      language:
+        default:
+          name: ''
+          description: ''
+    valueType: !<!StringSchema> &ref_1
+      type: string
+      language: !<!Languages> 
+        default:
+          name: string
+          description: simple string
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: Constant10
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_41
+    type: constant
+    value: !<!ConstantValue> 
+      value: 'begin!*''();:@ &=+$,/?#[]end'
+      language:
+        default:
+          name: ''
+          description: ''
+    valueType: *ref_1
+    language: !<!Languages> 
+      default:
+        name: Constant11
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_42
+    type: constant
+    value: !<!ConstantValue> 
+      value: ''
+      language:
+        default:
+          name: ''
+          description: ''
+    valueType: *ref_1
+    language: !<!Languages> 
+      default:
+        name: Constant12
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_45
+    type: constant
+    value: !<!ConstantValue> 
+      value: ''
+      language:
+        default:
+          name: ''
+          description: ''
+    valueType: *ref_2
+    language: !<!Languages> 
+      default:
+        name: Constant13
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_46
+    type: constant
+    value: !<!ConstantValue> 
+      value: '2012-01-01'
+      language:
+        default:
+          name: ''
+          description: ''
+    valueType: !<!DateSchema> &ref_6
+      type: date
+      language: !<!Languages> 
+        default:
+          name: date
+          description: MISSING·SCHEMA-DESCRIPTION-DATE
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: Constant14
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_48
+    type: constant
+    value: !<!ConstantValue> 
+      value: '2012-01-01T01:01:01Z'
+      language:
+        default:
+          name: ''
+          description: ''
+    valueType: !<!DateTimeSchema> &ref_4
+      type: date-time
+      format: date-time
+      language: !<!Languages> 
+        default:
+          name: date-time
+          description: MISSING·SCHEMA-DESCRIPTION-DATETIME
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: Constant15
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_53
+    type: constant
+    value: !<!ConstantValue> 
+      value: true
+      language:
+        default:
+          name: ''
+          description: ''
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant16
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_54
+    type: constant
+    value: !<!ConstantValue> 
+      value: false
+      language:
+        default:
+          name: ''
+          description: ''
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant17
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_56
+    type: constant
+    value: !<!ConstantValue> 
+      value: 1000000
+      language:
+        default:
+          name: ''
+          description: ''
+    valueType: !<!NumberSchema> &ref_17
+      type: number
+      precision: 32
+      language: !<!Languages> 
+        default:
+          name: number
+          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: Constant18
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_57
+    type: constant
+    value: !<!ConstantValue> 
+      value: -1000000
+      language:
+        default:
+          name: ''
+          description: ''
+    valueType: !<!NumberSchema> &ref_18
+      type: number
+      precision: 32
+      language: !<!Languages> 
+        default:
+          name: number
+          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: Constant19
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_59
+    type: constant
+    value: !<!ConstantValue> 
+      value: 10000000000
+      language:
+        default:
+          name: ''
+          description: ''
+    valueType: !<!NumberSchema> &ref_19
+      type: number
+      precision: 32
+      language: !<!Languages> 
+        default:
+          name: number
+          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: Constant20
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_60
+    type: constant
+    value: !<!ConstantValue> 
+      value: -10000000000
+      language:
+        default:
+          name: ''
+          description: ''
+    valueType: !<!NumberSchema> &ref_20
+      type: number
+      precision: 32
+      language: !<!Languages> 
+        default:
+          name: number
+          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: Constant21
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_62
+    type: constant
+    value: !<!ConstantValue> 
+      value: 103400000000000000000
+      language:
+        default:
+          name: ''
+          description: ''
+    valueType: !<!NumberSchema> &ref_21
+      type: number
+      precision: 32
+      language: !<!Languages> 
+        default:
+          name: number
+          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: Constant22
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_63
+    type: constant
+    value: !<!ConstantValue> 
+      value: -1.034e-20
+      language:
+        default:
+          name: ''
+          description: ''
+    valueType: !<!NumberSchema> &ref_22
+      type: number
+      precision: 32
+      language: !<!Languages> 
+        default:
+          name: number
+          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: Constant23
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_65
+    type: constant
+    value: !<!ConstantValue> 
+      value: 9999999.999
+      language:
+        default:
+          name: ''
+          description: ''
+    valueType: !<!NumberSchema> &ref_23
+      type: number
+      precision: 64
+      language: !<!Languages> 
+        default:
+          name: number
+          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: Constant24
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_66
+    type: constant
+    value: !<!ConstantValue> 
+      value: -9999999.999
+      language:
+        default:
+          name: ''
+          description: ''
+    valueType: !<!NumberSchema> &ref_24
+      type: number
+      precision: 64
+      language: !<!Languages> 
+        default:
+          name: number
+          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: Constant25
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_68
+    type: constant
+    value: !<!ConstantValue> 
+      value: 啊齄丂狛狜隣郎隣兀﨩
+      language:
+        default:
+          name: ''
+          description: ''
+    valueType: *ref_1
+    language: !<!Languages> 
+      default:
+        name: Constant26
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_69
+    type: constant
+    value: !<!ConstantValue> 
+      value: 'begin!*''();:@ &=+$,/?#[]end'
+      language:
+        default:
+          name: ''
+          description: ''
+    valueType: *ref_1
+    language: !<!Languages> 
+      default:
+        name: Constant27
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_70
+    type: constant
+    value: !<!ConstantValue> 
+      value: ''
+      language:
+        default:
+          name: ''
+          description: ''
+    valueType: *ref_1
+    language: !<!Languages> 
+      default:
+        name: Constant28
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_71
+    type: constant
+    value: !<!ConstantValue> 
+      value: ''
+      language:
+        default:
+          name: ''
+          description: ''
+    valueType: *ref_3
+    language: !<!Languages> 
+      default:
+        name: Constant29
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_72
+    type: constant
+    value: !<!ConstantValue> 
+      value: '2012-01-01'
+      language:
+        default:
+          name: ''
+          description: ''
+    valueType: !<!DateSchema> &ref_7
+      type: date
+      language: !<!Languages> 
+        default:
+          name: date
+          description: MISSING·SCHEMA-DESCRIPTION-DATE
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: Constant30
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_73
+    type: constant
+    value: !<!ConstantValue> 
+      value: '2012-01-01T01:01:01Z'
+      language:
+        default:
+          name: ''
+          description: ''
+    valueType: !<!DateTimeSchema> &ref_5
+      type: date-time
+      format: date-time
+      language: !<!Languages> 
+        default:
+          name: date-time
+          description: MISSING·SCHEMA-DESCRIPTION-DATETIME
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: Constant31
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+    protocol: !<!Protocols> {}
+  dateTimes:
+  - *ref_4
+  - !<!DateTimeSchema> &ref_49
+    type: date-time
+    format: date-time
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: date-time
+        description: MISSING·SCHEMA-DESCRIPTION-DATETIME
+    protocol: !<!Protocols> {}
+  - *ref_5
+  dates:
+  - *ref_6
+  - !<!DateSchema> &ref_47
+    type: date
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: date
+        description: MISSING·SCHEMA-DESCRIPTION-DATE
+    protocol: !<!Protocols> {}
+  - *ref_7
+  numbers:
+  - *ref_8
+  - *ref_9
+  - *ref_10
+  - *ref_11
+  - *ref_12
+  - *ref_13
+  - *ref_14
+  - *ref_15
+  - *ref_16
+  - *ref_17
+  - *ref_18
+  - !<!NumberSchema> &ref_58
+    type: integer
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    precision: 32
+    language: !<!Languages> 
+      default:
+        name: integer
+        description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+    protocol: !<!Protocols> {}
+  - *ref_19
+  - *ref_20
+  - !<!NumberSchema> &ref_61
+    type: integer
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    precision: 64
+    language: !<!Languages> 
+      default:
+        name: integer
+        description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+    protocol: !<!Protocols> {}
+  - *ref_21
+  - *ref_22
+  - !<!NumberSchema> &ref_64
+    type: number
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    precision: 32
+    language: !<!Languages> 
+      default:
+        name: number
+        description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+    protocol: !<!Protocols> {}
+  - *ref_23
+  - *ref_24
+  - !<!NumberSchema> &ref_67
+    type: number
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    precision: 64
+    language: !<!Languages> 
+      default:
+        name: number
+        description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+    protocol: !<!Protocols> {}
+  sealedChoices:
+  - !<!SealedChoiceSchema> &ref_43
+    choices:
+    - !<!ChoiceValue> 
+      value: red color
+      language:
+        default:
+          name: red color
+          description: ''
+    - !<!ChoiceValue> 
+      value: green color
+      language:
+        default:
+          name: green color
+          description: ''
+    - !<!ChoiceValue> 
+      value: blue color
+      language:
+        default:
+          name: blue color
+          description: ''
+    type: sealed-choice
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    choiceType: *ref_1
+    language: !<!Languages> 
+      default:
+        name: UriColor
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+    protocol: !<!Protocols> {}
+  strings:
+  - *ref_1
+  - *ref_25
+  - *ref_26
+  - *ref_27
+  unixtimes:
+  - !<!UnixTimeSchema> &ref_52
+    type: unixtime
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: unixtime
+        description: 'date in seconds since 1970-01-01T00:00:00Z.'
+    protocol: !<!Protocols> {}
+globalParameters:
+- !<!Parameter> &ref_75
+  schema: *ref_26
+  implementation: Client
+  required: true
+  extensions:
+    x-ms-priority: 0
+  language: !<!Languages> 
+    default:
+      name: globalStringPath
+      description: A string value 'globalItemStringPath' that appears in the path
+      serializedName: globalStringPath
+  protocol: !<!Protocols> 
+    http: !<!HttpParameter> 
+      in: path
+- !<!Parameter> &ref_76
+  schema: *ref_26
+  implementation: Client
+  extensions:
+    x-ms-priority: 1
+  language: !<!Languages> 
+    default:
+      name: globalStringQuery
+      description: should contain value null
+      serializedName: globalStringQuery
+  protocol: !<!Protocols> 
+    http: !<!HttpParameter> 
+      in: query
+- !<!Parameter> &ref_28
+  schema: *ref_1
+  clientDefaultValue: 'http://localhost:3000'
+  implementation: Client
+  required: true
+  language: !<!Languages> 
+    default:
+      name: $host
+      description: server parameter
+      serializedName: $host
+  protocol: !<!Protocols> 
+    http: !<!HttpParameter> 
+      in: uri
+info: !<!Info> 
+  description: Test Infrastructure for AutoRest
+  title: url
+operationGroups:
+- !<!OperationGroup> 
+  $key: paths
+  operations:
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_29
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: boolPath
+            description: true boolean value
+            serializedName: boolPath
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: path
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: '/paths/bool/true/{boolPath}'
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: getBooleanTrue
+        description: Get true Boolean value on path
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_31
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: boolPath
+            description: false boolean value
+            serializedName: boolPath
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: path
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: '/paths/bool/false/{boolPath}'
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: getBooleanFalse
+        description: Get false Boolean value on path
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_32
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: intPath
+            description: '''1000000'' integer value'
+            serializedName: intPath
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: path
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: '/paths/int/1000000/{intPath}'
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: getIntOneMillion
+        description: Get '1000000' integer value
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_33
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: intPath
+            description: '''-1000000'' integer value'
+            serializedName: intPath
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: path
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: '/paths/int/-1000000/{intPath}'
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: getIntNegativeOneMillion
+        description: Get '-1000000' integer value
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_34
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: longPath
+            description: '''10000000000'' 64 bit integer value'
+            serializedName: longPath
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: path
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: '/paths/long/10000000000/{longPath}'
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: getTenBillion
+        description: Get '10000000000' 64 bit integer value
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_35
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: longPath
+            description: '''-10000000000'' 64 bit integer value'
+            serializedName: longPath
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: path
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: '/paths/long/-10000000000/{longPath}'
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: getNegativeTenBillion
+        description: Get '-10000000000' 64 bit integer value
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_36
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: floatPath
+            description: '''1.034E+20''numeric value'
+            serializedName: floatPath
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: path
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: '/paths/float/1.034E+20/{floatPath}'
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: floatScientificPositive
+        description: Get '1.034E+20' numeric value
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_37
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: floatPath
+            description: '''-1.034E-20''numeric value'
+            serializedName: floatPath
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: path
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: '/paths/float/-1.034E-20/{floatPath}'
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: floatScientificNegative
+        description: Get '-1.034E-20' numeric value
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_38
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: doublePath
+            description: '''9999999.999''numeric value'
+            serializedName: doublePath
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: path
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: '/paths/double/9999999.999/{doublePath}'
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: doubleDecimalPositive
+        description: Get '9999999.999' numeric value
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_39
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: doublePath
+            description: '''-9999999.999''numeric value'
+            serializedName: doublePath
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: path
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: '/paths/double/-9999999.999/{doublePath}'
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: doubleDecimalNegative
+        description: Get '-9999999.999' numeric value
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_40
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: stringPath
+            description: '''啊齄丂狛狜隣郎隣兀﨩''multi-byte string value'
+            serializedName: stringPath
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: path
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: '/paths/string/unicode/{stringPath}'
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: stringUnicode
+        description: Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_41
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: stringPath
+            description: '''begin!*''();:@ &=+$,/?#[]end'' url encoded string value'
+            serializedName: stringPath
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: path
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: '/paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/{stringPath}'
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: stringUrlEncoded
+        description: 'Get ''begin!*''();:@ &=+$,/?#[]end'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_42
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: stringPath
+            description: ''''' string value'
+            serializedName: stringPath
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: path
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: '/paths/string/empty/{stringPath}'
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: stringEmpty
+        description: Get ''
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_26
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: stringPath
+            description: null string value
+            serializedName: stringPath
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: path
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: '/paths/string/null/{stringPath}'
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '400'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: stringNull
+        description: Get null (should throw)
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_43
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: enumPath
+            description: send the value green
+            serializedName: enumPath
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: path
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: '/paths/enum/green%20color/{enumPath}'
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: enumValid
+        description: Get using uri with 'green color' in path parameter
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_43
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: enumPath
+            description: send the value green
+            serializedName: enumPath
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: path
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: '/paths/string/null/{enumPath}'
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '400'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: enumNull
+        description: Get null (should throw on the client before the request is sent on wire)
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_44
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: bytePath
+            description: '''啊齄丂狛狜隣郎隣兀﨩'' multibyte value as utf-8 encoded byte array'
+            serializedName: bytePath
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: path
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: '/paths/byte/multibyte/{bytePath}'
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: byteMultiByte
+        description: Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_45
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: bytePath
+            description: ''''' as byte array'
+            serializedName: bytePath
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: path
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: '/paths/byte/empty/{bytePath}'
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: byteEmpty
+        description: Get '' as byte array
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_44
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: bytePath
+            description: '''啊齄丂狛狜隣郎隣兀﨩'' multibyte value as utf-8 encoded byte array'
+            serializedName: bytePath
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: path
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: '/paths/byte/null/{bytePath}'
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '400'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: byteNull
+        description: Get null as byte array (should throw)
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_46
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: datePath
+            description: '''2012-01-01'' as date'
+            serializedName: datePath
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: path
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: '/paths/date/2012-01-01/{datePath}'
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: DateValid
+        description: Get '2012-01-01' as date
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_47
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: datePath
+            description: null as date (should throw)
+            serializedName: datePath
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: path
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: '/paths/date/null/{datePath}'
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '400'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: DateNull
+        description: 'Get null as date - this should throw or be unusable on the client side, depending on date representation'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_48
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: dateTimePath
+            description: '''2012-01-01T01:01:01Z'' as date-time'
+            serializedName: dateTimePath
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: path
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: '/paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}'
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: DateTimeValid
+        description: 'Get ''2012-01-01T01:01:01Z'' as date-time'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_49
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: dateTimePath
+            description: null as date-time
+            serializedName: dateTimePath
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: path
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: '/paths/datetime/null/{dateTimePath}'
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '400'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: DateTimeNull
+        description: 'Get null as date-time, should be disallowed or throw depending on representation of date-time'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_50
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: base64UrlPath
+            description: base64url encoded value
+            serializedName: base64UrlPath
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: path
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: '/paths/string/bG9yZW0/{base64UrlPath}'
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: base64Url
+        description: Get 'lorem' encoded value as 'bG9yZW0' (base64url)
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_51
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: arrayPath
+            description: 'an array of string [''ArrayPath1'', ''begin!*''();:@ &=+$,/?#[]end'' , null, ''''] using the csv-array format'
+            serializedName: arrayPath
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: path
+            style: simple
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: '/paths/array/ArrayPath1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c/{arrayPath}'
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: ArrayCsvInPath
+        description: 'Get an array of string [''ArrayPath1'', ''begin!*''();:@ &=+$,/?#[]end'' , null, ''''] using the csv-array format'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_52
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: unixTimeUrlPath
+            description: Unix time encoded value
+            serializedName: unixTimeUrlPath
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: path
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: '/paths/int/1460505600/{unixTimeUrlPath}'
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: unixTimeUrl
+        description: Get the date 2016-04-13 encoded value as '1460505600' (Unix time)
+    protocol: !<!Protocols> {}
+  language: !<!Languages> 
+    default:
+      name: paths
+      description: ''
+  protocol: !<!Protocols> {}
+- !<!OperationGroup> 
+  $key: queries
+  operations:
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_53
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: boolQuery
+            description: true boolean value
+            serializedName: boolQuery
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /queries/bool/true
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: getBooleanTrue
+        description: Get true Boolean value on path
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_54
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: boolQuery
+            description: false boolean value
+            serializedName: boolQuery
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /queries/bool/false
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: getBooleanFalse
+        description: Get false Boolean value on path
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_55
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: boolQuery
+            description: null boolean value
+            serializedName: boolQuery
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /queries/bool/null
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: getBooleanNull
+        description: Get null Boolean value on query (query string should be absent)
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_56
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: intQuery
+            description: '''1000000'' integer value'
+            serializedName: intQuery
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /queries/int/1000000
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: getIntOneMillion
+        description: Get '1000000' integer value
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_57
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: intQuery
+            description: '''-1000000'' integer value'
+            serializedName: intQuery
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /queries/int/-1000000
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: getIntNegativeOneMillion
+        description: Get '-1000000' integer value
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_58
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: intQuery
+            description: null integer value
+            serializedName: intQuery
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /queries/int/null
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: getIntNull
+        description: Get null integer value (no query parameter)
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_59
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: longQuery
+            description: '''10000000000'' 64 bit integer value'
+            serializedName: longQuery
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /queries/long/10000000000
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: getTenBillion
+        description: Get '10000000000' 64 bit integer value
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_60
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: longQuery
+            description: '''-10000000000'' 64 bit integer value'
+            serializedName: longQuery
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /queries/long/-10000000000
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: getNegativeTenBillion
+        description: Get '-10000000000' 64 bit integer value
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_61
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: longQuery
+            description: null 64 bit integer value
+            serializedName: longQuery
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /queries/long/null
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: getLongNull
+        description: Get 'null 64 bit integer value (no query param in uri)
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_62
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: floatQuery
+            description: '''1.034E+20''numeric value'
+            serializedName: floatQuery
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /queries/float/1.034E+20
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: floatScientificPositive
+        description: Get '1.034E+20' numeric value
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_63
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: floatQuery
+            description: '''-1.034E-20''numeric value'
+            serializedName: floatQuery
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /queries/float/-1.034E-20
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: floatScientificNegative
+        description: Get '-1.034E-20' numeric value
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_64
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: floatQuery
+            description: null numeric value
+            serializedName: floatQuery
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /queries/float/null
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: floatNull
+        description: Get null numeric value (no query parameter)
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_65
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: doubleQuery
+            description: '''9999999.999''numeric value'
+            serializedName: doubleQuery
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /queries/double/9999999.999
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: doubleDecimalPositive
+        description: Get '9999999.999' numeric value
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_66
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: doubleQuery
+            description: '''-9999999.999''numeric value'
+            serializedName: doubleQuery
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /queries/double/-9999999.999
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: doubleDecimalNegative
+        description: Get '-9999999.999' numeric value
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_67
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: doubleQuery
+            description: null numeric value
+            serializedName: doubleQuery
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /queries/double/null
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: doubleNull
+        description: Get null numeric value (no query parameter)
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_68
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: stringQuery
+            description: '''啊齄丂狛狜隣郎隣兀﨩''multi-byte string value'
+            serializedName: stringQuery
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /queries/string/unicode/
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: stringUnicode
+        description: Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_69
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: stringQuery
+            description: '''begin!*''();:@ &=+$,/?#[]end'' url encoded string value'
+            serializedName: stringQuery
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: stringUrlEncoded
+        description: 'Get ''begin!*''();:@ &=+$,/?#[]end'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_70
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: stringQuery
+            description: ''''' string value'
+            serializedName: stringQuery
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /queries/string/empty
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: stringEmpty
+        description: Get ''
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_26
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: stringQuery
+            description: null string value
+            serializedName: stringQuery
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /queries/string/null
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: stringNull
+        description: Get null (no query parameter in url)
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_43
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: enumQuery
+            description: '''green color'' enum value'
+            serializedName: enumQuery
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /queries/enum/green%20color
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: enumValid
+        description: Get using uri with query parameter 'green color'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_43
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: enumQuery
+            description: '''green color'' enum value'
+            serializedName: enumQuery
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /queries/enum/null
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: enumNull
+        description: Get null (no query parameter in url)
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_44
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: byteQuery
+            description: '''啊齄丂狛狜隣郎隣兀﨩'' multibyte value as utf-8 encoded byte array'
+            serializedName: byteQuery
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /queries/byte/multibyte
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: byteMultiByte
+        description: Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_71
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: byteQuery
+            description: ''''' as byte array'
+            serializedName: byteQuery
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /queries/byte/empty
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: byteEmpty
+        description: Get '' as byte array
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_44
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: byteQuery
+            description: '''啊齄丂狛狜隣郎隣兀﨩'' multibyte value as utf-8 encoded byte array'
+            serializedName: byteQuery
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /queries/byte/null
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: byteNull
+        description: Get null as byte array (no query parameters in uri)
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_72
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: dateQuery
+            description: '''2012-01-01'' as date'
+            serializedName: dateQuery
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /queries/date/2012-01-01
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: DateValid
+        description: Get '2012-01-01' as date
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_47
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: dateQuery
+            description: null as date (no query parameters in uri)
+            serializedName: dateQuery
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /queries/date/null
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: DateNull
+        description: Get null as date - this should result in no query parameters in uri
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_73
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: dateTimeQuery
+            description: '''2012-01-01T01:01:01Z'' as date-time'
+            serializedName: dateTimeQuery
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /queries/datetime/2012-01-01T01%3A01%3A01Z
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: DateTimeValid
+        description: 'Get ''2012-01-01T01:01:01Z'' as date-time'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_49
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: dateTimeQuery
+            description: null as date-time (no query parameters)
+            serializedName: dateTimeQuery
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /queries/datetime/null
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: DateTimeNull
+        description: 'Get null as date-time, should result in no query parameters in uri'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_74
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: arrayQuery
+            description: 'an array of string [''ArrayQuery1'', ''begin!*''();:@ &=+$,/?#[]end'' , null, ''''] using the csv-array format'
+            serializedName: arrayQuery
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+            style: form
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /queries/array/csv/string/valid
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: ArrayStringCsvValid
+        description: 'Get an array of string [''ArrayQuery1'', ''begin!*''();:@ &=+$,/?#[]end'' , null, ''''] using the csv-array format'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_74
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: arrayQuery
+            description: 'an array of string [''ArrayQuery1'', ''begin!*''();:@ &=+$,/?#[]end'' , null, ''''] using the csv-array format'
+            serializedName: arrayQuery
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+            style: form
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /queries/array/csv/string/null
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: ArrayStringCsvNull
+        description: Get a null array of string using the csv-array format
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_74
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: arrayQuery
+            description: 'an array of string [''ArrayQuery1'', ''begin!*''();:@ &=+$,/?#[]end'' , null, ''''] using the csv-array format'
+            serializedName: arrayQuery
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+            style: form
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /queries/array/csv/string/empty
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: ArrayStringCsvEmpty
+        description: 'Get an empty array [] of string using the csv-array format'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_74
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: arrayQuery
+            description: 'an array of string [''ArrayQuery1'', ''begin!*''();:@ &=+$,/?#[]end'' , null, ''''] using the ssv-array format'
+            serializedName: arrayQuery
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+            style: spaceDelimited
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /queries/array/ssv/string/valid
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: ArrayStringSsvValid
+        description: 'Get an array of string [''ArrayQuery1'', ''begin!*''();:@ &=+$,/?#[]end'' , null, ''''] using the ssv-array format'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_74
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: arrayQuery
+            description: 'an array of string [''ArrayQuery1'', ''begin!*''();:@ &=+$,/?#[]end'' , null, ''''] using the tsv-array format'
+            serializedName: arrayQuery
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+            style: tabDelimited
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /queries/array/tsv/string/valid
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: ArrayStringTsvValid
+        description: 'Get an array of string [''ArrayQuery1'', ''begin!*''();:@ &=+$,/?#[]end'' , null, ''''] using the tsv-array format'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_74
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: arrayQuery
+            description: 'an array of string [''ArrayQuery1'', ''begin!*''();:@ &=+$,/?#[]end'' , null, ''''] using the pipes-array format'
+            serializedName: arrayQuery
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+            style: pipeDelimited
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /queries/array/pipes/string/valid
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: ArrayStringPipesValid
+        description: 'Get an array of string [''ArrayQuery1'', ''begin!*''();:@ &=+$,/?#[]end'' , null, ''''] using the pipes-array format'
+    protocol: !<!Protocols> {}
+  language: !<!Languages> 
+    default:
+      name: queries
+      description: ''
+  protocol: !<!Protocols> {}
+- !<!OperationGroup> 
+  $key: pathItems
+  operations:
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_26
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: pathItemStringPath
+            description: A string value 'pathItemStringPath' that appears in the path
+            serializedName: pathItemStringPath
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: path
+      - !<!Parameter> 
+        schema: *ref_26
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: pathItemStringQuery
+            description: A string value 'pathItemStringQuery' that appears as a query parameter
+            serializedName: pathItemStringQuery
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      - *ref_75
+      - *ref_76
+      - !<!Parameter> 
+        schema: *ref_26
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: localStringPath
+            description: should contain value 'localStringPath'
+            serializedName: localStringPath
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: path
+      - !<!Parameter> 
+        schema: *ref_26
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: localStringQuery
+            description: should contain value 'localStringQuery'
+            serializedName: localStringQuery
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: '/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/pathItemStringQuery/localStringQuery'
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: getAllWithValues
+        description: >-
+          send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery='pathItemStringQuery',
+          localStringQuery='localStringQuery'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_26
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: pathItemStringPath
+            description: A string value 'pathItemStringPath' that appears in the path
+            serializedName: pathItemStringPath
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: path
+      - !<!Parameter> 
+        schema: *ref_26
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: pathItemStringQuery
+            description: A string value 'pathItemStringQuery' that appears as a query parameter
+            serializedName: pathItemStringQuery
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      - *ref_75
+      - *ref_76
+      - !<!Parameter> 
+        schema: *ref_26
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: localStringPath
+            description: should contain value 'localStringPath'
+            serializedName: localStringPath
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: path
+      - !<!Parameter> 
+        schema: *ref_26
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: localStringQuery
+            description: should contain value 'localStringQuery'
+            serializedName: localStringQuery
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: '/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/localStringQuery'
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: getGlobalQueryNull
+        description: 'send globalStringPath=''globalStringPath'', pathItemStringPath=''pathItemStringPath'', localStringPath=''localStringPath'', globalStringQuery=null, pathItemStringQuery=''pathItemStringQuery'', localStringQuery=''localStringQuery'''
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_26
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: pathItemStringPath
+            description: A string value 'pathItemStringPath' that appears in the path
+            serializedName: pathItemStringPath
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: path
+      - !<!Parameter> 
+        schema: *ref_26
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: pathItemStringQuery
+            description: A string value 'pathItemStringQuery' that appears as a query parameter
+            serializedName: pathItemStringQuery
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      - *ref_75
+      - *ref_76
+      - !<!Parameter> 
+        schema: *ref_26
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: localStringPath
+            description: should contain value 'localStringPath'
+            serializedName: localStringPath
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: path
+      - !<!Parameter> 
+        schema: *ref_26
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: localStringQuery
+            description: should contain value 'localStringQuery'
+            serializedName: localStringQuery
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: '/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/null'
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: getGlobalAndLocalQueryNull
+        description: 'send globalStringPath=globalStringPath, pathItemStringPath=''pathItemStringPath'', localStringPath=''localStringPath'', globalStringQuery=null, pathItemStringQuery=''pathItemStringQuery'', localStringQuery=null'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_28
+      - !<!Parameter> 
+        schema: *ref_26
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: pathItemStringPath
+            description: A string value 'pathItemStringPath' that appears in the path
+            serializedName: pathItemStringPath
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: path
+      - !<!Parameter> 
+        schema: *ref_26
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: pathItemStringQuery
+            description: A string value 'pathItemStringQuery' that appears as a query parameter
+            serializedName: pathItemStringQuery
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      - *ref_75
+      - *ref_76
+      - !<!Parameter> 
+        schema: *ref_26
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: localStringPath
+            description: should contain value 'localStringPath'
+            serializedName: localStringPath
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: path
+      - !<!Parameter> 
+        schema: *ref_26
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: localStringQuery
+            description: should contain value 'localStringQuery'
+            serializedName: localStringQuery
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: '/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/null/null'
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_30
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: getLocalPathItemQueryNull
+        description: 'send globalStringPath=''globalStringPath'', pathItemStringPath=''pathItemStringPath'', localStringPath=''localStringPath'', globalStringQuery=''globalStringQuery'', pathItemStringQuery=null, localStringQuery=null'
+    protocol: !<!Protocols> {}
+  language: !<!Languages> 
+    default:
+      name: pathItems
+      description: ''
+  protocol: !<!Protocols> {}
+language: !<!Languages> 
+  default:
+    name: ''
+    description: ''
+protocol: !<!Protocols> 
+  http: !<!HttpModel> {}
