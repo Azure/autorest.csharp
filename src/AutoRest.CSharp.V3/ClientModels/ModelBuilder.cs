@@ -15,6 +15,13 @@ namespace AutoRest.CSharp.V3.ClientModels
 {
     internal class ModelBuilder
     {
+        private readonly KnownMediaType[] _mediaTypes;
+
+        public ModelBuilder(KnownMediaType[] mediaTypes)
+        {
+            _mediaTypes = mediaTypes;
+        }
+
         private static ClientModel BuildClientEnum(SealedChoiceSchema sealedChoiceSchema) => new ClientEnum(
             sealedChoiceSchema,
             sealedChoiceSchema.CSharpName(),
@@ -26,7 +33,7 @@ namespace AutoRest.CSharp.V3.ClientModels
             choiceSchema.Choices.Select(c => new ClientEnumValue(c.CSharpName(), ClientModelBuilderHelpers.StringConstant(c.Value))),
             true);
 
-        private static ClientModel BuildClientObject(ObjectSchema objectSchema)
+        private ClientModel BuildClientObject(ObjectSchema objectSchema)
         {
             ClientTypeReference? inheritsFromTypeReference = null;
             DictionarySchema? inheritedDictionarySchema = null;
@@ -45,20 +52,11 @@ namespace AutoRest.CSharp.V3.ClientModels
             }
 
             List<ClientObjectProperty> properties = new List<ClientObjectProperty>();
-            List<JsonPropertySerialization> serializationProperties = new List<JsonPropertySerialization>();
 
             foreach (Property property in objectSchema.Properties!)
             {
                 ClientObjectProperty clientObjectProperty = CreateProperty(property);
                 properties.Add(clientObjectProperty);
-            }
-
-            foreach (var schema in EnumerateHierarchy(objectSchema))
-            {
-                foreach (Property property in schema.Properties!)
-                {
-                    serializationProperties.Add(CreateSerialization(property));
-                }
             }
 
             Discriminator? schemaDiscriminator = objectSchema.Discriminator;
@@ -96,22 +94,13 @@ namespace AutoRest.CSharp.V3.ClientModels
                 properties.ToArray(),
                 discriminator,
                 inheritedDictionarySchema == null ? null : CreateDictionaryType(inheritedDictionarySchema),
-                new JsonObjectSerialization(schemaTypeReference, serializationProperties.ToArray(), CreateAdditionalProperties(objectSchema))
+                BuildSerializations(objectSchema)
                 );
         }
 
-        private static JsonDynamicPropertiesSerialization? CreateAdditionalProperties(ObjectSchema objectSchema)
+        private ObjectSerialization[] BuildSerializations(ObjectSchema objectSchema)
         {
-            var inheritedDictionarySchema = objectSchema.Parents!.All.OfType<DictionarySchema>().FirstOrDefault();
-
-            if (inheritedDictionarySchema == null)
-            {
-                return null;
-            }
-
-            return new JsonDynamicPropertiesSerialization(
-                ClientModelBuilderHelpers.CreateSerialization(inheritedDictionarySchema.ElementType, false)
-                );
+            return _mediaTypes.Select(type => SerializationBuilder.BuildObject(type, objectSchema, isNullable: false)).ToArray();
         }
 
         private static DictionaryTypeReference CreateDictionaryType(DictionarySchema inheritedDictionarySchema)
@@ -120,28 +109,6 @@ namespace AutoRest.CSharp.V3.ClientModels
                 new FrameworkTypeReference(typeof(string)),
                 ClientModelBuilderHelpers.CreateType(inheritedDictionarySchema.ElementType, false),
                 false);
-        }
-
-        private static IEnumerable<ObjectSchema> EnumerateHierarchy(ObjectSchema schema)
-        {
-            yield return schema;
-            foreach (ComplexSchema parent in schema.Parents!.All)
-            {
-                if (parent is ObjectSchema objectSchema)
-                {
-                    yield return objectSchema;
-                }
-            }
-        }
-
-        private static JsonPropertySerialization CreateSerialization(Property property)
-        {
-            return new JsonPropertySerialization(
-                property.SerializedName,
-                property.CSharpName(),
-                ClientModelBuilderHelpers.CreateSerialization(property.Schema, property.IsNullable()),
-                ClientModelBuilderHelpers.CreateType(property.Schema, property.IsNullable())
-                );
         }
 
         private static ClientObjectDiscriminatorImplementation[] CreateDiscriminatorImplementations(Discriminator schemaDiscriminator)
@@ -153,7 +120,7 @@ namespace AutoRest.CSharp.V3.ClientModels
             )).ToArray();
         }
 
-        public static ClientModel BuildModel(Schema schema) => schema switch
+        public ClientModel BuildModel(Schema schema) => schema switch
         {
             SealedChoiceSchema sealedChoiceSchema => BuildClientEnum(sealedChoiceSchema),
             ChoiceSchema choiceSchema => BuildClientEnum(choiceSchema),

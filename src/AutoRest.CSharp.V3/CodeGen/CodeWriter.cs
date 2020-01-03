@@ -25,10 +25,15 @@ namespace AutoRest.CSharp.V3.CodeGen
             _scopes.Push(new CodeWriterScope(this, ""));
         }
 
-        public CodeWriterScope Scope(string start = "{", string end = "}")
+        public CodeWriterScope Scope(FormattableString line)
         {
-            LineRaw(start);
-            CodeWriterScope codeWriterScope = new CodeWriterScope(this, end);
+            return Line(line).Scope();
+        }
+
+        public CodeWriterScope Scope()
+        {
+            LineRaw("{");
+            CodeWriterScope codeWriterScope = new CodeWriterScope(this, "}");
             _scopes.Push(codeWriterScope);
             return codeWriterScope;
         }

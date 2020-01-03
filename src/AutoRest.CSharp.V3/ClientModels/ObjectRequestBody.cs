@@ -5,15 +5,15 @@ using AutoRest.CSharp.V3.ClientModels.Serialization;
 
 namespace AutoRest.CSharp.V3.ClientModels
 {
-    internal class JsonResponseBody: ResponseBody
+    internal class ObjectRequestBody
     {
-        public JsonResponseBody(ClientTypeReference type, JsonSerialization serialization)
-        {
-            Serialization = serialization;
-            Type = type;
-        }
+        public ConstantOrParameter Value { get; }
+        public ObjectSerialization Serialization { get; }
 
-        public JsonSerialization Serialization { get; }
-        public override ClientTypeReference Type { get; }
+        public ObjectRequestBody(ConstantOrParameter value, ObjectSerialization serialization)
+        {
+            Value = value;
+            Serialization = serialization;
+        }
     }
 }

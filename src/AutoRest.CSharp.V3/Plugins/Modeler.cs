@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,7 +26,8 @@ namespace AutoRest.CSharp.V3.Plugins
                 .Concat(codeModel.Schemas.SealedChoices ?? Enumerable.Empty<SealedChoiceSchema>())
                 .Concat(codeModel.Schemas.Objects ?? Enumerable.Empty<ObjectSchema>());
 
-            var models = schemas.Select(ModelBuilder.BuildModel).ToArray();
+            var modelBuilder = new ModelBuilder(GetMediaTypes(codeModel));
+            var models = schemas.Select(modelBuilder.BuildModel).ToArray();
             var clients = codeModel.OperationGroups.Select(ClientBuilder.BuildClient).ToArray();
 
             var typeProviders = models.OfType<ISchemaTypeProvider>().ToArray();
@@ -114,6 +116,34 @@ namespace AutoRest.CSharp.V3.Plugins
             }
 
             return true;
+        }
+
+        // TODO: remove if https://github.com/Azure/autorest.modelerfour/issues/103 is implemented
+        private KnownMediaType[] GetMediaTypes(CodeModel codeModel)
+        {
+            HashSet<KnownMediaType> types = new HashSet<KnownMediaType>();
+            foreach (OperationGroup operationGroup in codeModel.OperationGroups)
+            {
+                foreach (Operation operation in operationGroup.Operations)
+                {
+                    if (operation.Request.Protocol.Http is HttpWithBodyRequest bodyRequest)
+                    {
+                        types.Add(bodyRequest.KnownMediaType);
+                    }
+
+                    foreach (var response in operation.Responses!)
+                    {
+                        if (response is SchemaResponse _ &&
+                            response.Protocol.Http is HttpResponse httpResponse)
+                        {
+                            types.Add(httpResponse.KnownMediaType);
+                        }
+                    }
+                }
+            }
+
+            // Order so JSON always goes first
+            return types.OrderBy(t => t).ToArray();
         }
     }
 }
