@@ -2,11 +2,13 @@
 // Licensed under the MIT License.
 
 using System.Text.Json;
+using System.Xml;
+using System.Xml.Linq;
 using Azure.Core;
 
-namespace custom_baseUrl.Models.V100
+namespace xml_service.Models.V100
 {
-    public partial class Error : IUtf8JsonSerializable
+    public partial class Error : IUtf8JsonSerializable, IXmlSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -47,6 +49,42 @@ namespace custom_baseUrl.Models.V100
                     continue;
                 }
             }
+            return result;
+        }
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        {
+            writer.WriteStartElement(nameHint ?? "Error");
+            if (Status != null)
+            {
+                writer.WriteStartElement("status");
+                writer.WriteValue(Status.Value);
+                writer.WriteEndElement();
+            }
+            if (Message != null)
+            {
+                writer.WriteStartElement("message");
+                writer.WriteValue(Message);
+                writer.WriteEndElement();
+            }
+            writer.WriteEndElement();
+        }
+        internal static Error DeserializeError(XElement element)
+        {
+            Error result = default;
+            result = new Error(); int? value = default;
+            var status = element.Element("status");
+            if (status != null)
+            {
+                value = (int?)status;
+            }
+            result.Status = value;
+            string? value0 = default;
+            var message = element.Element("message");
+            if (message != null)
+            {
+                value0 = (string?)message;
+            }
+            result.Message = value0;
             return result;
         }
     }

@@ -5,17 +5,15 @@ namespace AutoRest.CSharp.V3.ClientModels.Serialization
 {
     internal class JsonPropertySerialization
     {
-        public JsonPropertySerialization(string name, string memberName, JsonSerialization valueSerialization, ClientTypeReference type)
+        public JsonPropertySerialization(string name, string memberName, JsonSerialization valueSerialization)
         {
             Name = name;
             MemberName = memberName;
             ValueSerialization = valueSerialization;
-            Type = type;
         }
 
         public string Name { get; }
         public string MemberName { get; }
-        public ClientTypeReference Type { get; }
         public JsonSerialization ValueSerialization { get; }
     }
 }

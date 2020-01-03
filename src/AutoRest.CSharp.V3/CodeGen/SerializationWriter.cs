@@ -4,7 +4,10 @@
 using System;
 using System.Linq;
 using System.Text.Json;
+using System.Xml;
+using System.Xml.Linq;
 using AutoRest.CSharp.V3.ClientModels;
+using AutoRest.CSharp.V3.ClientModels.Serialization;
 using AutoRest.CSharp.V3.Plugins;
 using Azure.Core;
 
@@ -32,24 +35,77 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
         }
 
-
-        //TODO: This is currently input schemas only. Does not handle output-style schemas.
         private void WriteObjectSerialization(CodeWriter writer, ClientObject model)
         {
+            if (!model.Serializations.Any())
+            {
+                return;
+            }
+
             var cs = _typeFactory.CreateType(model);
             using (writer.Namespace(cs.Namespace))
             {
-                using (writer.Class(null, "partial", model.Name, writer.Type(typeof(IUtf8JsonSerializable))))
-                {
-                    WriteSerialize(writer, model);
+                writer.Append($"public partial class {model.Name}: {typeof(IUtf8JsonSerializable)}");
 
-                    WriteDeserialize(writer, model, cs);
+                if (model.Serializations.OfType<XmlElementSerialization>().Any())
+                {
+                    writer.Append($", {typeof(IXmlSerializable)}");
+                }
+
+                using (writer.Scope())
+                {
+                    foreach (var serialization in model.Serializations)
+                    {
+                        switch (serialization)
+                        {
+                            case JsonSerialization jsonSerialization:
+                                WriteJsonSerialize(writer, model, jsonSerialization);
+                                WriteJsonDeserialize(writer, model, jsonSerialization);
+                                break;
+                            case XmlElementSerialization xmlSerialization:
+                                WriteXmlSerialize(writer, model, xmlSerialization);
+                                WriteXmlDeserialize(writer, model, xmlSerialization);
+                                break;
+                            default:
+                                throw new NotImplementedException(serialization.ToString());
+                        }
+                    }
                 }
             }
         }
 
-        private void WriteDeserialize(CodeWriter writer, ClientObject model, CSharpType cs)
+        private void WriteXmlSerialize(CodeWriter writer, ClientObject model, XmlElementSerialization serialization)
         {
+            const string namehint = "nameHint";
+            writer.Append($"void {typeof(IXmlSerializable)}.{nameof(IXmlSerializable.Write)}({typeof(XmlWriter)} writer, {typeof(string)} {namehint})");
+            using (writer.Scope())
+            {
+                writer.ToSerializeCall(
+                    serialization,
+                    _typeFactory,
+                    w => w.AppendRaw("this"),
+                    null,
+                    w => w.AppendRaw(namehint));
+            }
+        }
+
+        private void WriteXmlDeserialize(CodeWriter writer, ClientObject model, XmlElementSerialization serialization)
+        {
+            var cs = _typeFactory.CreateType(model);
+            var typeText = writer.Type(cs);
+            using (writer.Method("internal static", typeText, "Deserialize"+cs.Name, writer.Pair(typeof(XElement), "element")))
+            {
+                var resultVariable = "result";
+                writer.ToDeserializeCall(serialization,
+                    _typeFactory,
+                    w=> w.AppendRaw("element"), ref resultVariable, true);
+                writer.Line($"return {resultVariable};");
+            }
+        }
+
+        private void WriteJsonDeserialize(CodeWriter writer, ClientObject model, JsonSerialization jsonSerialization)
+        {
+            var cs = _typeFactory.CreateType(model);
             var typeText = writer.Type(cs);
             using (writer.Method("internal static", typeText, "Deserialize"+cs.Name, writer.Pair(typeof(JsonElement), "element")))
             {
@@ -72,17 +128,17 @@ namespace AutoRest.CSharp.V3.CodeGen
                 }
 
                 var resultVariable = "result";
-                writer.ToDeserializeCall(model.Serialization, _typeFactory, w=>w.AppendRaw("element"), ref resultVariable);
+                writer.ToDeserializeCall(jsonSerialization, _typeFactory, w=>w.AppendRaw("element"), ref resultVariable);
                 writer.Line($"return {resultVariable};");
             }
         }
 
-        private void WriteSerialize(CodeWriter writer, ClientObject model)
+        private void WriteJsonSerialize(CodeWriter writer, ClientObject model, JsonSerialization jsonSerialization)
         {
             writer.Append($"void {typeof(IUtf8JsonSerializable)}.{nameof(IUtf8JsonSerializable.Write)}({typeof(Utf8JsonWriter)} writer)");
             using (writer.Scope())
             {
-                writer.ToSerializeCall(model.Serialization, _typeFactory, w => w.AppendRaw("this"));
+                writer.ToSerializeCall(jsonSerialization, _typeFactory, w => w.AppendRaw("this"));
             }
         }
 

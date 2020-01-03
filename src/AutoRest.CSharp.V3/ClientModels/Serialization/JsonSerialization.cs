@@ -4,7 +4,7 @@
 
 namespace AutoRest.CSharp.V3.ClientModels.Serialization
 {
-    internal abstract class JsonSerialization
+    internal abstract class JsonSerialization: ObjectSerialization
     {
         public abstract ClientTypeReference Type { get; }
     }
