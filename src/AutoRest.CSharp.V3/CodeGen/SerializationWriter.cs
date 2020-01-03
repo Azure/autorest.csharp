@@ -147,7 +147,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             var cs = _typeFactory.CreateType(schema);
             using (writer.Namespace(cs.Namespace))
             {
-                using (writer.Class("internal", "static", $"{schema.CSharpName()}Extensions"))
+                using (writer.Class("internal", "static", $"{schema.Name}Extensions"))
                 {
                     var stringText = writer.Type(typeof(string));
                     var csTypeText = writer.Type(cs);
@@ -169,7 +169,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                         .Append("}")
                         .Prepend("{")
                         .Prepend("value switch"));
-                    writer.MethodExpression("public static", csTypeText, $"To{schema.CSharpName()}", new[] { writer.Pair($"this {stringText}", "value") }, toChoiceType);
+                    writer.MethodExpression("public static", csTypeText, $"To{schema.Name}", new[] { writer.Pair($"this {stringText}", "value") }, toChoiceType);
                 }
             }
         }
