@@ -70,6 +70,33 @@ namespace body_complex
                 throw;
             }
         }
+        public Response<Basic> GetValid(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("BasicOperations.GetValid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetValidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = Basic.DeserializeBasic(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreatePutValidRequest(Basic complexBody)
         {
             var message = pipeline.CreateMessage();
@@ -103,6 +130,33 @@ namespace body_complex
                         return message.Response;
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response PutValid(Basic complexBody, CancellationToken cancellationToken = default)
+        {
+            if (complexBody == null)
+            {
+                throw new ArgumentNullException(nameof(complexBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("BasicOperations.PutValid");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutValidRequest(complexBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -147,6 +201,33 @@ namespace body_complex
                 throw;
             }
         }
+        public Response<Basic> GetInvalid(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("BasicOperations.GetInvalid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetInvalidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = Basic.DeserializeBasic(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetEmptyRequest()
         {
             var message = pipeline.CreateMessage();
@@ -175,6 +256,33 @@ namespace body_complex
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<Basic> GetEmpty(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("BasicOperations.GetEmpty");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetEmptyRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = Basic.DeserializeBasic(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -219,6 +327,33 @@ namespace body_complex
                 throw;
             }
         }
+        public Response<Basic> GetNull(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("BasicOperations.GetNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetNullRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = Basic.DeserializeBasic(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetNotProvidedRequest()
         {
             var message = pipeline.CreateMessage();
@@ -247,6 +382,33 @@ namespace body_complex
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<Basic> GetNotProvided(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("BasicOperations.GetNotProvided");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetNotProvidedRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = Basic.DeserializeBasic(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)

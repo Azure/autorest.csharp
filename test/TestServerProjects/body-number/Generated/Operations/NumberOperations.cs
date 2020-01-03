@@ -63,6 +63,33 @@ namespace body_number
                 throw;
             }
         }
+        public Response<float> GetNull(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.GetNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetNullRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = document.RootElement.GetSingle();
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetInvalidFloatRequest()
         {
             var message = pipeline.CreateMessage();
@@ -91,6 +118,33 @@ namespace body_number
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<float> GetInvalidFloat(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.GetInvalidFloat");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetInvalidFloatRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = document.RootElement.GetSingle();
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -135,6 +189,33 @@ namespace body_number
                 throw;
             }
         }
+        public Response<double> GetInvalidDouble(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.GetInvalidDouble");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetInvalidDoubleRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = document.RootElement.GetDouble();
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetInvalidDecimalRequest()
         {
             var message = pipeline.CreateMessage();
@@ -163,6 +244,33 @@ namespace body_number
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<decimal> GetInvalidDecimal(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.GetInvalidDecimal");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetInvalidDecimalRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = document.RootElement.GetDecimal();
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -207,6 +315,29 @@ namespace body_number
                 throw;
             }
         }
+        public Response PutBigFloat(float numberBody, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.PutBigFloat");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutBigFloatRequest(numberBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetBigFloatRequest()
         {
             var message = pipeline.CreateMessage();
@@ -235,6 +366,33 @@ namespace body_number
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<float> GetBigFloat(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.GetBigFloat");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetBigFloatRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = document.RootElement.GetSingle();
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -279,6 +437,29 @@ namespace body_number
                 throw;
             }
         }
+        public Response PutBigDouble(double numberBody, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.PutBigDouble");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutBigDoubleRequest(numberBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetBigDoubleRequest()
         {
             var message = pipeline.CreateMessage();
@@ -307,6 +488,33 @@ namespace body_number
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<double> GetBigDouble(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.GetBigDouble");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetBigDoubleRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = document.RootElement.GetDouble();
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -351,6 +559,29 @@ namespace body_number
                 throw;
             }
         }
+        public Response PutBigDoublePositiveDecimal(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.PutBigDoublePositiveDecimal");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutBigDoublePositiveDecimalRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetBigDoublePositiveDecimalRequest()
         {
             var message = pipeline.CreateMessage();
@@ -379,6 +610,33 @@ namespace body_number
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<double> GetBigDoublePositiveDecimal(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.GetBigDoublePositiveDecimal");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetBigDoublePositiveDecimalRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = document.RootElement.GetDouble();
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -423,6 +681,29 @@ namespace body_number
                 throw;
             }
         }
+        public Response PutBigDoubleNegativeDecimal(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.PutBigDoubleNegativeDecimal");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutBigDoubleNegativeDecimalRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetBigDoubleNegativeDecimalRequest()
         {
             var message = pipeline.CreateMessage();
@@ -451,6 +732,33 @@ namespace body_number
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<double> GetBigDoubleNegativeDecimal(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.GetBigDoubleNegativeDecimal");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetBigDoubleNegativeDecimalRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = document.RootElement.GetDouble();
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -495,6 +803,29 @@ namespace body_number
                 throw;
             }
         }
+        public Response PutBigDecimal(decimal numberBody, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.PutBigDecimal");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutBigDecimalRequest(numberBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetBigDecimalRequest()
         {
             var message = pipeline.CreateMessage();
@@ -523,6 +854,33 @@ namespace body_number
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<decimal> GetBigDecimal(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.GetBigDecimal");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetBigDecimalRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = document.RootElement.GetDecimal();
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -567,6 +925,29 @@ namespace body_number
                 throw;
             }
         }
+        public Response PutBigDecimalPositiveDecimal(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.PutBigDecimalPositiveDecimal");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutBigDecimalPositiveDecimalRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetBigDecimalPositiveDecimalRequest()
         {
             var message = pipeline.CreateMessage();
@@ -595,6 +976,33 @@ namespace body_number
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<decimal> GetBigDecimalPositiveDecimal(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.GetBigDecimalPositiveDecimal");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetBigDecimalPositiveDecimalRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = document.RootElement.GetDecimal();
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -639,6 +1047,29 @@ namespace body_number
                 throw;
             }
         }
+        public Response PutBigDecimalNegativeDecimal(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.PutBigDecimalNegativeDecimal");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutBigDecimalNegativeDecimalRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetBigDecimalNegativeDecimalRequest()
         {
             var message = pipeline.CreateMessage();
@@ -667,6 +1098,33 @@ namespace body_number
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<decimal> GetBigDecimalNegativeDecimal(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.GetBigDecimalNegativeDecimal");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetBigDecimalNegativeDecimalRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = document.RootElement.GetDecimal();
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -711,6 +1169,29 @@ namespace body_number
                 throw;
             }
         }
+        public Response PutSmallFloat(float numberBody, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.PutSmallFloat");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutSmallFloatRequest(numberBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetSmallFloatRequest()
         {
             var message = pipeline.CreateMessage();
@@ -739,6 +1220,33 @@ namespace body_number
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<double> GetSmallFloat(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.GetSmallFloat");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetSmallFloatRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = document.RootElement.GetDouble();
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -783,6 +1291,29 @@ namespace body_number
                 throw;
             }
         }
+        public Response PutSmallDouble(double numberBody, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.PutSmallDouble");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutSmallDoubleRequest(numberBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetSmallDoubleRequest()
         {
             var message = pipeline.CreateMessage();
@@ -811,6 +1342,33 @@ namespace body_number
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<double> GetSmallDouble(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.GetSmallDouble");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetSmallDoubleRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = document.RootElement.GetDouble();
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -855,6 +1413,29 @@ namespace body_number
                 throw;
             }
         }
+        public Response PutSmallDecimal(decimal numberBody, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.PutSmallDecimal");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutSmallDecimalRequest(numberBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetSmallDecimalRequest()
         {
             var message = pipeline.CreateMessage();
@@ -883,6 +1464,33 @@ namespace body_number
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<decimal> GetSmallDecimal(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("NumberOperations.GetSmallDecimal");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetSmallDecimalRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = document.RootElement.GetDecimal();
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)

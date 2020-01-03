@@ -64,6 +64,33 @@ namespace body_complex
                 throw;
             }
         }
+        public Response<IntWrapper> GetInt(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.GetInt");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetIntRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = IntWrapper.DeserializeIntWrapper(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreatePutIntRequest(IntWrapper complexBody)
         {
             var message = pipeline.CreateMessage();
@@ -104,6 +131,33 @@ namespace body_complex
                 throw;
             }
         }
+        public Response PutInt(IntWrapper complexBody, CancellationToken cancellationToken = default)
+        {
+            if (complexBody == null)
+            {
+                throw new ArgumentNullException(nameof(complexBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.PutInt");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutIntRequest(complexBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetLongRequest()
         {
             var message = pipeline.CreateMessage();
@@ -132,6 +186,33 @@ namespace body_complex
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<LongWrapper> GetLong(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.GetLong");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetLongRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = LongWrapper.DeserializeLongWrapper(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -180,6 +261,33 @@ namespace body_complex
                 throw;
             }
         }
+        public Response PutLong(LongWrapper complexBody, CancellationToken cancellationToken = default)
+        {
+            if (complexBody == null)
+            {
+                throw new ArgumentNullException(nameof(complexBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.PutLong");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutLongRequest(complexBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetFloatRequest()
         {
             var message = pipeline.CreateMessage();
@@ -208,6 +316,33 @@ namespace body_complex
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<FloatWrapper> GetFloat(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.GetFloat");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetFloatRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = FloatWrapper.DeserializeFloatWrapper(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -256,6 +391,33 @@ namespace body_complex
                 throw;
             }
         }
+        public Response PutFloat(FloatWrapper complexBody, CancellationToken cancellationToken = default)
+        {
+            if (complexBody == null)
+            {
+                throw new ArgumentNullException(nameof(complexBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.PutFloat");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutFloatRequest(complexBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetDoubleRequest()
         {
             var message = pipeline.CreateMessage();
@@ -284,6 +446,33 @@ namespace body_complex
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<DoubleWrapper> GetDouble(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.GetDouble");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDoubleRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = DoubleWrapper.DeserializeDoubleWrapper(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -332,6 +521,33 @@ namespace body_complex
                 throw;
             }
         }
+        public Response PutDouble(DoubleWrapper complexBody, CancellationToken cancellationToken = default)
+        {
+            if (complexBody == null)
+            {
+                throw new ArgumentNullException(nameof(complexBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.PutDouble");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutDoubleRequest(complexBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetBoolRequest()
         {
             var message = pipeline.CreateMessage();
@@ -360,6 +576,33 @@ namespace body_complex
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<BooleanWrapper> GetBool(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.GetBool");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetBoolRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = BooleanWrapper.DeserializeBooleanWrapper(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -408,6 +651,33 @@ namespace body_complex
                 throw;
             }
         }
+        public Response PutBool(BooleanWrapper complexBody, CancellationToken cancellationToken = default)
+        {
+            if (complexBody == null)
+            {
+                throw new ArgumentNullException(nameof(complexBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.PutBool");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutBoolRequest(complexBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetStringRequest()
         {
             var message = pipeline.CreateMessage();
@@ -436,6 +706,33 @@ namespace body_complex
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<StringWrapper> GetString(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.GetString");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetStringRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = StringWrapper.DeserializeStringWrapper(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -484,6 +781,33 @@ namespace body_complex
                 throw;
             }
         }
+        public Response PutString(StringWrapper complexBody, CancellationToken cancellationToken = default)
+        {
+            if (complexBody == null)
+            {
+                throw new ArgumentNullException(nameof(complexBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.PutString");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutStringRequest(complexBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetDateRequest()
         {
             var message = pipeline.CreateMessage();
@@ -512,6 +836,33 @@ namespace body_complex
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<DateWrapper> GetDate(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.GetDate");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDateRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = DateWrapper.DeserializeDateWrapper(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -560,6 +911,33 @@ namespace body_complex
                 throw;
             }
         }
+        public Response PutDate(DateWrapper complexBody, CancellationToken cancellationToken = default)
+        {
+            if (complexBody == null)
+            {
+                throw new ArgumentNullException(nameof(complexBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.PutDate");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutDateRequest(complexBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetDateTimeRequest()
         {
             var message = pipeline.CreateMessage();
@@ -588,6 +966,33 @@ namespace body_complex
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<DatetimeWrapper> GetDateTime(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.GetDateTime");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDateTimeRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = DatetimeWrapper.DeserializeDatetimeWrapper(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -636,6 +1041,33 @@ namespace body_complex
                 throw;
             }
         }
+        public Response PutDateTime(DatetimeWrapper complexBody, CancellationToken cancellationToken = default)
+        {
+            if (complexBody == null)
+            {
+                throw new ArgumentNullException(nameof(complexBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.PutDateTime");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutDateTimeRequest(complexBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetDateTimeRfc1123Request()
         {
             var message = pipeline.CreateMessage();
@@ -664,6 +1096,33 @@ namespace body_complex
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<Datetimerfc1123Wrapper> GetDateTimeRfc1123(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.GetDateTimeRfc1123");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDateTimeRfc1123Request();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = Datetimerfc1123Wrapper.DeserializeDatetimerfc1123Wrapper(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -712,6 +1171,33 @@ namespace body_complex
                 throw;
             }
         }
+        public Response PutDateTimeRfc1123(Datetimerfc1123Wrapper complexBody, CancellationToken cancellationToken = default)
+        {
+            if (complexBody == null)
+            {
+                throw new ArgumentNullException(nameof(complexBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.PutDateTimeRfc1123");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutDateTimeRfc1123Request(complexBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetDurationRequest()
         {
             var message = pipeline.CreateMessage();
@@ -740,6 +1226,33 @@ namespace body_complex
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<DurationWrapper> GetDuration(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.GetDuration");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDurationRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = DurationWrapper.DeserializeDurationWrapper(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -788,6 +1301,33 @@ namespace body_complex
                 throw;
             }
         }
+        public Response PutDuration(DurationWrapper complexBody, CancellationToken cancellationToken = default)
+        {
+            if (complexBody == null)
+            {
+                throw new ArgumentNullException(nameof(complexBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.PutDuration");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutDurationRequest(complexBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetByteRequest()
         {
             var message = pipeline.CreateMessage();
@@ -816,6 +1356,33 @@ namespace body_complex
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<ByteWrapper> GetByte(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.GetByte");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetByteRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = ByteWrapper.DeserializeByteWrapper(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -856,6 +1423,33 @@ namespace body_complex
                         return message.Response;
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response PutByte(ByteWrapper complexBody, CancellationToken cancellationToken = default)
+        {
+            if (complexBody == null)
+            {
+                throw new ArgumentNullException(nameof(complexBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.PutByte");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutByteRequest(complexBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)

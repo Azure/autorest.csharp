@@ -63,6 +63,33 @@ namespace body_boolean
                 throw;
             }
         }
+        public Response<bool> GetTrue(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("BoolOperations.GetTrue");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetTrueRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = document.RootElement.GetBoolean();
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreatePutTrueRequest()
         {
             var message = pipeline.CreateMessage();
@@ -91,6 +118,29 @@ namespace body_boolean
                         return message.Response;
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response PutTrue(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("BoolOperations.PutTrue");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutTrueRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -135,6 +185,33 @@ namespace body_boolean
                 throw;
             }
         }
+        public Response<bool> GetFalse(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("BoolOperations.GetFalse");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetFalseRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = document.RootElement.GetBoolean();
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreatePutFalseRequest()
         {
             var message = pipeline.CreateMessage();
@@ -163,6 +240,29 @@ namespace body_boolean
                         return message.Response;
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response PutFalse(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("BoolOperations.PutFalse");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutFalseRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -207,6 +307,33 @@ namespace body_boolean
                 throw;
             }
         }
+        public Response<bool> GetNull(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("BoolOperations.GetNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetNullRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = document.RootElement.GetBoolean();
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetInvalidRequest()
         {
             var message = pipeline.CreateMessage();
@@ -235,6 +362,33 @@ namespace body_boolean
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<bool> GetInvalid(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("BoolOperations.GetInvalid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetInvalidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = document.RootElement.GetBoolean();
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)

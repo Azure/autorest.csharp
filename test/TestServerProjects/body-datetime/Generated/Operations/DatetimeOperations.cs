@@ -63,6 +63,33 @@ namespace body_datetime
                 throw;
             }
         }
+        public Response<DateTimeOffset> GetNull(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DatetimeOperations.GetNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetNullRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = document.RootElement.GetDateTimeOffset("S");
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetInvalidRequest()
         {
             var message = pipeline.CreateMessage();
@@ -91,6 +118,33 @@ namespace body_datetime
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<DateTimeOffset> GetInvalid(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DatetimeOperations.GetInvalid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetInvalidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = document.RootElement.GetDateTimeOffset("S");
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -135,6 +189,33 @@ namespace body_datetime
                 throw;
             }
         }
+        public Response<DateTimeOffset> GetOverflow(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DatetimeOperations.GetOverflow");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetOverflowRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = document.RootElement.GetDateTimeOffset("S");
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetUnderflowRequest()
         {
             var message = pipeline.CreateMessage();
@@ -163,6 +244,33 @@ namespace body_datetime
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<DateTimeOffset> GetUnderflow(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DatetimeOperations.GetUnderflow");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetUnderflowRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = document.RootElement.GetDateTimeOffset("S");
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -207,6 +315,29 @@ namespace body_datetime
                 throw;
             }
         }
+        public Response PutUtcMaxDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DatetimeOperations.PutUtcMaxDateTime");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutUtcMaxDateTimeRequest(datetimeBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetUtcLowercaseMaxDateTimeRequest()
         {
             var message = pipeline.CreateMessage();
@@ -235,6 +366,33 @@ namespace body_datetime
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<DateTimeOffset> GetUtcLowercaseMaxDateTime(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DatetimeOperations.GetUtcLowercaseMaxDateTime");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetUtcLowercaseMaxDateTimeRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = document.RootElement.GetDateTimeOffset("S");
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -279,6 +437,33 @@ namespace body_datetime
                 throw;
             }
         }
+        public Response<DateTimeOffset> GetUtcUppercaseMaxDateTime(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DatetimeOperations.GetUtcUppercaseMaxDateTime");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetUtcUppercaseMaxDateTimeRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = document.RootElement.GetDateTimeOffset("S");
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreatePutLocalPositiveOffsetMaxDateTimeRequest(DateTimeOffset datetimeBody)
         {
             var message = pipeline.CreateMessage();
@@ -307,6 +492,29 @@ namespace body_datetime
                         return message.Response;
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response PutLocalPositiveOffsetMaxDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DatetimeOperations.PutLocalPositiveOffsetMaxDateTime");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutLocalPositiveOffsetMaxDateTimeRequest(datetimeBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -351,6 +559,33 @@ namespace body_datetime
                 throw;
             }
         }
+        public Response<DateTimeOffset> GetLocalPositiveOffsetLowercaseMaxDateTime(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DatetimeOperations.GetLocalPositiveOffsetLowercaseMaxDateTime");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetLocalPositiveOffsetLowercaseMaxDateTimeRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = document.RootElement.GetDateTimeOffset("S");
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetLocalPositiveOffsetUppercaseMaxDateTimeRequest()
         {
             var message = pipeline.CreateMessage();
@@ -379,6 +614,33 @@ namespace body_datetime
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<DateTimeOffset> GetLocalPositiveOffsetUppercaseMaxDateTime(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DatetimeOperations.GetLocalPositiveOffsetUppercaseMaxDateTime");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetLocalPositiveOffsetUppercaseMaxDateTimeRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = document.RootElement.GetDateTimeOffset("S");
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -423,6 +685,29 @@ namespace body_datetime
                 throw;
             }
         }
+        public Response PutLocalNegativeOffsetMaxDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DatetimeOperations.PutLocalNegativeOffsetMaxDateTime");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutLocalNegativeOffsetMaxDateTimeRequest(datetimeBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetLocalNegativeOffsetUppercaseMaxDateTimeRequest()
         {
             var message = pipeline.CreateMessage();
@@ -451,6 +736,33 @@ namespace body_datetime
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<DateTimeOffset> GetLocalNegativeOffsetUppercaseMaxDateTime(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DatetimeOperations.GetLocalNegativeOffsetUppercaseMaxDateTime");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetLocalNegativeOffsetUppercaseMaxDateTimeRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = document.RootElement.GetDateTimeOffset("S");
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -495,6 +807,33 @@ namespace body_datetime
                 throw;
             }
         }
+        public Response<DateTimeOffset> GetLocalNegativeOffsetLowercaseMaxDateTime(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DatetimeOperations.GetLocalNegativeOffsetLowercaseMaxDateTime");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetLocalNegativeOffsetLowercaseMaxDateTimeRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = document.RootElement.GetDateTimeOffset("S");
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreatePutUtcMinDateTimeRequest(DateTimeOffset datetimeBody)
         {
             var message = pipeline.CreateMessage();
@@ -523,6 +862,29 @@ namespace body_datetime
                         return message.Response;
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response PutUtcMinDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DatetimeOperations.PutUtcMinDateTime");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutUtcMinDateTimeRequest(datetimeBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -567,6 +929,33 @@ namespace body_datetime
                 throw;
             }
         }
+        public Response<DateTimeOffset> GetUtcMinDateTime(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DatetimeOperations.GetUtcMinDateTime");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetUtcMinDateTimeRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = document.RootElement.GetDateTimeOffset("S");
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreatePutLocalPositiveOffsetMinDateTimeRequest(DateTimeOffset datetimeBody)
         {
             var message = pipeline.CreateMessage();
@@ -595,6 +984,29 @@ namespace body_datetime
                         return message.Response;
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response PutLocalPositiveOffsetMinDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DatetimeOperations.PutLocalPositiveOffsetMinDateTime");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutLocalPositiveOffsetMinDateTimeRequest(datetimeBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -639,6 +1051,33 @@ namespace body_datetime
                 throw;
             }
         }
+        public Response<DateTimeOffset> GetLocalPositiveOffsetMinDateTime(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DatetimeOperations.GetLocalPositiveOffsetMinDateTime");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetLocalPositiveOffsetMinDateTimeRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = document.RootElement.GetDateTimeOffset("S");
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreatePutLocalNegativeOffsetMinDateTimeRequest(DateTimeOffset datetimeBody)
         {
             var message = pipeline.CreateMessage();
@@ -675,6 +1114,29 @@ namespace body_datetime
                 throw;
             }
         }
+        public Response PutLocalNegativeOffsetMinDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DatetimeOperations.PutLocalNegativeOffsetMinDateTime");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutLocalNegativeOffsetMinDateTimeRequest(datetimeBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetLocalNegativeOffsetMinDateTimeRequest()
         {
             var message = pipeline.CreateMessage();
@@ -703,6 +1165,33 @@ namespace body_datetime
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<DateTimeOffset> GetLocalNegativeOffsetMinDateTime(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DatetimeOperations.GetLocalNegativeOffsetMinDateTime");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetLocalNegativeOffsetMinDateTimeRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = document.RootElement.GetDateTimeOffset("S");
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)

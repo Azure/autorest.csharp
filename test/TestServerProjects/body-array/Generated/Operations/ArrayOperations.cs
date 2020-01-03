@@ -69,6 +69,37 @@ namespace body_array
                 throw;
             }
         }
+        public Response<ICollection<int>> GetNull(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetNullRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<int> value = new List<int>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                value.Add(item.GetInt32());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetInvalidRequest()
         {
             var message = pipeline.CreateMessage();
@@ -109,6 +140,37 @@ namespace body_array
                 throw;
             }
         }
+        public Response<ICollection<int>> GetInvalid(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetInvalid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetInvalidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<int> value = new List<int>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                value.Add(item.GetInt32());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetEmptyRequest()
         {
             var message = pipeline.CreateMessage();
@@ -141,6 +203,37 @@ namespace body_array
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<ICollection<int>> GetEmpty(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetEmpty");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetEmptyRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<int> value = new List<int>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                value.Add(item.GetInt32());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -194,6 +287,33 @@ namespace body_array
                 throw;
             }
         }
+        public Response PutEmpty(IEnumerable<string> arrayBody, CancellationToken cancellationToken = default)
+        {
+            if (arrayBody == null)
+            {
+                throw new ArgumentNullException(nameof(arrayBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.PutEmpty");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutEmptyRequest(arrayBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetBooleanTfftRequest()
         {
             var message = pipeline.CreateMessage();
@@ -226,6 +346,37 @@ namespace body_array
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<ICollection<bool>> GetBooleanTfft(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetBooleanTfft");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetBooleanTfftRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<bool> value = new List<bool>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                value.Add(item.GetBoolean());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -279,6 +430,33 @@ namespace body_array
                 throw;
             }
         }
+        public Response PutBooleanTfft(IEnumerable<bool> arrayBody, CancellationToken cancellationToken = default)
+        {
+            if (arrayBody == null)
+            {
+                throw new ArgumentNullException(nameof(arrayBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.PutBooleanTfft");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutBooleanTfftRequest(arrayBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetBooleanInvalidNullRequest()
         {
             var message = pipeline.CreateMessage();
@@ -311,6 +489,37 @@ namespace body_array
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<ICollection<bool>> GetBooleanInvalidNull(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetBooleanInvalidNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetBooleanInvalidNullRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<bool> value = new List<bool>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                value.Add(item.GetBoolean());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -359,6 +568,37 @@ namespace body_array
                 throw;
             }
         }
+        public Response<ICollection<bool>> GetBooleanInvalidString(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetBooleanInvalidString");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetBooleanInvalidStringRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<bool> value = new List<bool>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                value.Add(item.GetBoolean());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetIntegerValidRequest()
         {
             var message = pipeline.CreateMessage();
@@ -391,6 +631,37 @@ namespace body_array
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<ICollection<int>> GetIntegerValid(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetIntegerValid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetIntegerValidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<int> value = new List<int>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                value.Add(item.GetInt32());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -444,6 +715,33 @@ namespace body_array
                 throw;
             }
         }
+        public Response PutIntegerValid(IEnumerable<int> arrayBody, CancellationToken cancellationToken = default)
+        {
+            if (arrayBody == null)
+            {
+                throw new ArgumentNullException(nameof(arrayBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.PutIntegerValid");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutIntegerValidRequest(arrayBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetIntInvalidNullRequest()
         {
             var message = pipeline.CreateMessage();
@@ -476,6 +774,37 @@ namespace body_array
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<ICollection<int>> GetIntInvalidNull(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetIntInvalidNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetIntInvalidNullRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<int> value = new List<int>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                value.Add(item.GetInt32());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -524,6 +853,37 @@ namespace body_array
                 throw;
             }
         }
+        public Response<ICollection<int>> GetIntInvalidString(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetIntInvalidString");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetIntInvalidStringRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<int> value = new List<int>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                value.Add(item.GetInt32());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetLongValidRequest()
         {
             var message = pipeline.CreateMessage();
@@ -556,6 +916,37 @@ namespace body_array
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<ICollection<long>> GetLongValid(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetLongValid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetLongValidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<long> value = new List<long>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                value.Add(item.GetInt64());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -609,6 +1000,33 @@ namespace body_array
                 throw;
             }
         }
+        public Response PutLongValid(IEnumerable<long> arrayBody, CancellationToken cancellationToken = default)
+        {
+            if (arrayBody == null)
+            {
+                throw new ArgumentNullException(nameof(arrayBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.PutLongValid");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutLongValidRequest(arrayBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetLongInvalidNullRequest()
         {
             var message = pipeline.CreateMessage();
@@ -641,6 +1059,37 @@ namespace body_array
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<ICollection<long>> GetLongInvalidNull(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetLongInvalidNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetLongInvalidNullRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<long> value = new List<long>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                value.Add(item.GetInt64());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -689,6 +1138,37 @@ namespace body_array
                 throw;
             }
         }
+        public Response<ICollection<long>> GetLongInvalidString(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetLongInvalidString");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetLongInvalidStringRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<long> value = new List<long>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                value.Add(item.GetInt64());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetFloatValidRequest()
         {
             var message = pipeline.CreateMessage();
@@ -721,6 +1201,37 @@ namespace body_array
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<ICollection<float>> GetFloatValid(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetFloatValid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetFloatValidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<float> value = new List<float>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                value.Add(item.GetSingle());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -774,6 +1285,33 @@ namespace body_array
                 throw;
             }
         }
+        public Response PutFloatValid(IEnumerable<float> arrayBody, CancellationToken cancellationToken = default)
+        {
+            if (arrayBody == null)
+            {
+                throw new ArgumentNullException(nameof(arrayBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.PutFloatValid");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutFloatValidRequest(arrayBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetFloatInvalidNullRequest()
         {
             var message = pipeline.CreateMessage();
@@ -806,6 +1344,37 @@ namespace body_array
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<ICollection<float>> GetFloatInvalidNull(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetFloatInvalidNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetFloatInvalidNullRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<float> value = new List<float>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                value.Add(item.GetSingle());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -854,6 +1423,37 @@ namespace body_array
                 throw;
             }
         }
+        public Response<ICollection<float>> GetFloatInvalidString(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetFloatInvalidString");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetFloatInvalidStringRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<float> value = new List<float>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                value.Add(item.GetSingle());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetDoubleValidRequest()
         {
             var message = pipeline.CreateMessage();
@@ -886,6 +1486,37 @@ namespace body_array
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<ICollection<double>> GetDoubleValid(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDoubleValid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDoubleValidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<double> value = new List<double>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                value.Add(item.GetDouble());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -939,6 +1570,33 @@ namespace body_array
                 throw;
             }
         }
+        public Response PutDoubleValid(IEnumerable<double> arrayBody, CancellationToken cancellationToken = default)
+        {
+            if (arrayBody == null)
+            {
+                throw new ArgumentNullException(nameof(arrayBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.PutDoubleValid");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutDoubleValidRequest(arrayBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetDoubleInvalidNullRequest()
         {
             var message = pipeline.CreateMessage();
@@ -971,6 +1629,37 @@ namespace body_array
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<ICollection<double>> GetDoubleInvalidNull(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDoubleInvalidNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDoubleInvalidNullRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<double> value = new List<double>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                value.Add(item.GetDouble());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -1019,6 +1708,37 @@ namespace body_array
                 throw;
             }
         }
+        public Response<ICollection<double>> GetDoubleInvalidString(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDoubleInvalidString");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDoubleInvalidStringRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<double> value = new List<double>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                value.Add(item.GetDouble());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetStringValidRequest()
         {
             var message = pipeline.CreateMessage();
@@ -1051,6 +1771,37 @@ namespace body_array
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<ICollection<string>> GetStringValid(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetStringValid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetStringValidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<string> value = new List<string>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                value.Add(item.GetString());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -1104,6 +1855,33 @@ namespace body_array
                 throw;
             }
         }
+        public Response PutStringValid(IEnumerable<string> arrayBody, CancellationToken cancellationToken = default)
+        {
+            if (arrayBody == null)
+            {
+                throw new ArgumentNullException(nameof(arrayBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.PutStringValid");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutStringValidRequest(arrayBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetEnumValidRequest()
         {
             var message = pipeline.CreateMessage();
@@ -1136,6 +1914,37 @@ namespace body_array
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<ICollection<FooEnum>> GetEnumValid(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetEnumValid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetEnumValidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<FooEnum> value = new List<FooEnum>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                value.Add(item.GetString().ToFooEnum());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -1189,6 +1998,33 @@ namespace body_array
                 throw;
             }
         }
+        public Response PutEnumValid(IEnumerable<FooEnum> arrayBody, CancellationToken cancellationToken = default)
+        {
+            if (arrayBody == null)
+            {
+                throw new ArgumentNullException(nameof(arrayBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.PutEnumValid");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutEnumValidRequest(arrayBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetStringEnumValidRequest()
         {
             var message = pipeline.CreateMessage();
@@ -1221,6 +2057,37 @@ namespace body_array
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<ICollection<Enum0>> GetStringEnumValid(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetStringEnumValid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetStringEnumValidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<Enum0> value = new List<Enum0>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                value.Add(new Enum0(item.GetString()));
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -1274,6 +2141,33 @@ namespace body_array
                 throw;
             }
         }
+        public Response PutStringEnumValid(IEnumerable<Enum0> arrayBody, CancellationToken cancellationToken = default)
+        {
+            if (arrayBody == null)
+            {
+                throw new ArgumentNullException(nameof(arrayBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.PutStringEnumValid");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutStringEnumValidRequest(arrayBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetStringWithNullRequest()
         {
             var message = pipeline.CreateMessage();
@@ -1306,6 +2200,37 @@ namespace body_array
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<ICollection<string>> GetStringWithNull(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetStringWithNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetStringWithNullRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<string> value = new List<string>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                value.Add(item.GetString());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -1354,6 +2279,37 @@ namespace body_array
                 throw;
             }
         }
+        public Response<ICollection<string>> GetStringWithInvalid(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetStringWithInvalid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetStringWithInvalidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<string> value = new List<string>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                value.Add(item.GetString());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetUuidValidRequest()
         {
             var message = pipeline.CreateMessage();
@@ -1386,6 +2342,37 @@ namespace body_array
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<ICollection<string>> GetUuidValid(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetUuidValid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetUuidValidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<string> value = new List<string>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                value.Add(item.GetString());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -1439,6 +2426,33 @@ namespace body_array
                 throw;
             }
         }
+        public Response PutUuidValid(IEnumerable<string> arrayBody, CancellationToken cancellationToken = default)
+        {
+            if (arrayBody == null)
+            {
+                throw new ArgumentNullException(nameof(arrayBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.PutUuidValid");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutUuidValidRequest(arrayBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetUuidInvalidCharsRequest()
         {
             var message = pipeline.CreateMessage();
@@ -1479,6 +2493,37 @@ namespace body_array
                 throw;
             }
         }
+        public Response<ICollection<string>> GetUuidInvalidChars(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetUuidInvalidChars");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetUuidInvalidCharsRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<string> value = new List<string>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                value.Add(item.GetString());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetDateValidRequest()
         {
             var message = pipeline.CreateMessage();
@@ -1511,6 +2556,37 @@ namespace body_array
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<ICollection<DateTimeOffset>> GetDateValid(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDateValid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDateValidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                value.Add(item.GetDateTimeOffset("D"));
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -1564,6 +2640,33 @@ namespace body_array
                 throw;
             }
         }
+        public Response PutDateValid(IEnumerable<DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
+        {
+            if (arrayBody == null)
+            {
+                throw new ArgumentNullException(nameof(arrayBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.PutDateValid");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutDateValidRequest(arrayBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetDateInvalidNullRequest()
         {
             var message = pipeline.CreateMessage();
@@ -1596,6 +2699,37 @@ namespace body_array
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<ICollection<DateTimeOffset>> GetDateInvalidNull(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDateInvalidNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDateInvalidNullRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                value.Add(item.GetDateTimeOffset("D"));
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -1644,6 +2778,37 @@ namespace body_array
                 throw;
             }
         }
+        public Response<ICollection<DateTimeOffset>> GetDateInvalidChars(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDateInvalidChars");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDateInvalidCharsRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                value.Add(item.GetDateTimeOffset("D"));
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetDateTimeValidRequest()
         {
             var message = pipeline.CreateMessage();
@@ -1676,6 +2841,37 @@ namespace body_array
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<ICollection<DateTimeOffset>> GetDateTimeValid(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDateTimeValid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDateTimeValidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                value.Add(item.GetDateTimeOffset("S"));
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -1729,6 +2925,33 @@ namespace body_array
                 throw;
             }
         }
+        public Response PutDateTimeValid(IEnumerable<DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
+        {
+            if (arrayBody == null)
+            {
+                throw new ArgumentNullException(nameof(arrayBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.PutDateTimeValid");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutDateTimeValidRequest(arrayBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetDateTimeInvalidNullRequest()
         {
             var message = pipeline.CreateMessage();
@@ -1761,6 +2984,37 @@ namespace body_array
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<ICollection<DateTimeOffset>> GetDateTimeInvalidNull(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDateTimeInvalidNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDateTimeInvalidNullRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                value.Add(item.GetDateTimeOffset("S"));
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -1809,6 +3063,37 @@ namespace body_array
                 throw;
             }
         }
+        public Response<ICollection<DateTimeOffset>> GetDateTimeInvalidChars(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDateTimeInvalidChars");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDateTimeInvalidCharsRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                value.Add(item.GetDateTimeOffset("S"));
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetDateTimeRfc1123ValidRequest()
         {
             var message = pipeline.CreateMessage();
@@ -1841,6 +3126,37 @@ namespace body_array
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<ICollection<DateTimeOffset>> GetDateTimeRfc1123Valid(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDateTimeRfc1123Valid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDateTimeRfc1123ValidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                value.Add(item.GetDateTimeOffset("R"));
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -1894,6 +3210,33 @@ namespace body_array
                 throw;
             }
         }
+        public Response PutDateTimeRfc1123Valid(IEnumerable<DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
+        {
+            if (arrayBody == null)
+            {
+                throw new ArgumentNullException(nameof(arrayBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.PutDateTimeRfc1123Valid");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutDateTimeRfc1123ValidRequest(arrayBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetDurationValidRequest()
         {
             var message = pipeline.CreateMessage();
@@ -1926,6 +3269,37 @@ namespace body_array
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<ICollection<TimeSpan>> GetDurationValid(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDurationValid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDurationValidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<TimeSpan> value = new List<TimeSpan>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                value.Add(item.GetTimeSpan("P"));
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -1979,6 +3353,33 @@ namespace body_array
                 throw;
             }
         }
+        public Response PutDurationValid(IEnumerable<TimeSpan> arrayBody, CancellationToken cancellationToken = default)
+        {
+            if (arrayBody == null)
+            {
+                throw new ArgumentNullException(nameof(arrayBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.PutDurationValid");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutDurationValidRequest(arrayBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetByteValidRequest()
         {
             var message = pipeline.CreateMessage();
@@ -2011,6 +3412,37 @@ namespace body_array
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<ICollection<byte[]>> GetByteValid(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetByteValid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetByteValidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<byte[]> value = new List<byte[]>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                value.Add(item.GetBytesFromBase64());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -2064,6 +3496,33 @@ namespace body_array
                 throw;
             }
         }
+        public Response PutByteValid(IEnumerable<byte[]> arrayBody, CancellationToken cancellationToken = default)
+        {
+            if (arrayBody == null)
+            {
+                throw new ArgumentNullException(nameof(arrayBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.PutByteValid");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutByteValidRequest(arrayBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetByteInvalidNullRequest()
         {
             var message = pipeline.CreateMessage();
@@ -2096,6 +3555,37 @@ namespace body_array
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<ICollection<byte[]>> GetByteInvalidNull(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetByteInvalidNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetByteInvalidNullRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<byte[]> value = new List<byte[]>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                value.Add(item.GetBytesFromBase64());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -2144,6 +3634,37 @@ namespace body_array
                 throw;
             }
         }
+        public Response<ICollection<byte[]>> GetBase64Url(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetBase64Url");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetBase64UrlRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<byte[]> value = new List<byte[]>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                value.Add(item.GetBytesFromBase64("U"));
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetComplexNullRequest()
         {
             var message = pipeline.CreateMessage();
@@ -2176,6 +3697,37 @@ namespace body_array
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<ICollection<Product>> GetComplexNull(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetComplexNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetComplexNullRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<Product> value = new List<Product>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                value.Add(Product.DeserializeProduct(item));
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -2224,6 +3776,37 @@ namespace body_array
                 throw;
             }
         }
+        public Response<ICollection<Product>> GetComplexEmpty(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetComplexEmpty");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetComplexEmptyRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<Product> value = new List<Product>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                value.Add(Product.DeserializeProduct(item));
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetComplexItemNullRequest()
         {
             var message = pipeline.CreateMessage();
@@ -2256,6 +3839,37 @@ namespace body_array
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<ICollection<Product>> GetComplexItemNull(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetComplexItemNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetComplexItemNullRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<Product> value = new List<Product>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                value.Add(Product.DeserializeProduct(item));
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -2304,6 +3918,37 @@ namespace body_array
                 throw;
             }
         }
+        public Response<ICollection<Product>> GetComplexItemEmpty(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetComplexItemEmpty");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetComplexItemEmptyRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<Product> value = new List<Product>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                value.Add(Product.DeserializeProduct(item));
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetComplexValidRequest()
         {
             var message = pipeline.CreateMessage();
@@ -2336,6 +3981,37 @@ namespace body_array
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<ICollection<Product>> GetComplexValid(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetComplexValid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetComplexValidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<Product> value = new List<Product>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                value.Add(Product.DeserializeProduct(item));
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -2389,6 +4065,33 @@ namespace body_array
                 throw;
             }
         }
+        public Response PutComplexValid(IEnumerable<Product> arrayBody, CancellationToken cancellationToken = default)
+        {
+            if (arrayBody == null)
+            {
+                throw new ArgumentNullException(nameof(arrayBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.PutComplexValid");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutComplexValidRequest(arrayBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetArrayNullRequest()
         {
             var message = pipeline.CreateMessage();
@@ -2426,6 +4129,42 @@ namespace body_array
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<ICollection<ICollection<string>>> GetArrayNull(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetArrayNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetArrayNullRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<ICollection<string>> value = new List<ICollection<string>>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                ICollection<string> value0 = new List<string>();
+                                foreach (var item0 in item.EnumerateArray())
+                                {
+                                    value0.Add(item0.GetString());
+                                }
+                                value.Add(value0);
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -2479,6 +4218,42 @@ namespace body_array
                 throw;
             }
         }
+        public Response<ICollection<ICollection<string>>> GetArrayEmpty(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetArrayEmpty");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetArrayEmptyRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<ICollection<string>> value = new List<ICollection<string>>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                ICollection<string> value0 = new List<string>();
+                                foreach (var item0 in item.EnumerateArray())
+                                {
+                                    value0.Add(item0.GetString());
+                                }
+                                value.Add(value0);
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetArrayItemNullRequest()
         {
             var message = pipeline.CreateMessage();
@@ -2516,6 +4291,42 @@ namespace body_array
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<ICollection<ICollection<string>>> GetArrayItemNull(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetArrayItemNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetArrayItemNullRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<ICollection<string>> value = new List<ICollection<string>>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                ICollection<string> value0 = new List<string>();
+                                foreach (var item0 in item.EnumerateArray())
+                                {
+                                    value0.Add(item0.GetString());
+                                }
+                                value.Add(value0);
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -2569,6 +4380,42 @@ namespace body_array
                 throw;
             }
         }
+        public Response<ICollection<ICollection<string>>> GetArrayItemEmpty(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetArrayItemEmpty");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetArrayItemEmptyRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<ICollection<string>> value = new List<ICollection<string>>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                ICollection<string> value0 = new List<string>();
+                                foreach (var item0 in item.EnumerateArray())
+                                {
+                                    value0.Add(item0.GetString());
+                                }
+                                value.Add(value0);
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetArrayValidRequest()
         {
             var message = pipeline.CreateMessage();
@@ -2606,6 +4453,42 @@ namespace body_array
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<ICollection<ICollection<string>>> GetArrayValid(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetArrayValid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetArrayValidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<ICollection<string>> value = new List<ICollection<string>>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                ICollection<string> value0 = new List<string>();
+                                foreach (var item0 in item.EnumerateArray())
+                                {
+                                    value0.Add(item0.GetString());
+                                }
+                                value.Add(value0);
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -2664,6 +4547,33 @@ namespace body_array
                 throw;
             }
         }
+        public Response PutArrayValid(IEnumerable<ICollection<string>> arrayBody, CancellationToken cancellationToken = default)
+        {
+            if (arrayBody == null)
+            {
+                throw new ArgumentNullException(nameof(arrayBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.PutArrayValid");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutArrayValidRequest(arrayBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetDictionaryNullRequest()
         {
             var message = pipeline.CreateMessage();
@@ -2701,6 +4611,42 @@ namespace body_array
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<ICollection<IDictionary<string, string>>> GetDictionaryNull(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDictionaryNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDictionaryNullRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                IDictionary<string, string> value0 = new Dictionary<string, string>();
+                                foreach (var property in item.EnumerateObject())
+                                {
+                                    value0.Add(property.Name, property.Value.GetString());
+                                }
+                                value.Add(value0);
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -2754,6 +4700,42 @@ namespace body_array
                 throw;
             }
         }
+        public Response<ICollection<IDictionary<string, string>>> GetDictionaryEmpty(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDictionaryEmpty");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDictionaryEmptyRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                IDictionary<string, string> value0 = new Dictionary<string, string>();
+                                foreach (var property in item.EnumerateObject())
+                                {
+                                    value0.Add(property.Name, property.Value.GetString());
+                                }
+                                value.Add(value0);
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetDictionaryItemNullRequest()
         {
             var message = pipeline.CreateMessage();
@@ -2791,6 +4773,42 @@ namespace body_array
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<ICollection<IDictionary<string, string>>> GetDictionaryItemNull(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDictionaryItemNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDictionaryItemNullRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                IDictionary<string, string> value0 = new Dictionary<string, string>();
+                                foreach (var property in item.EnumerateObject())
+                                {
+                                    value0.Add(property.Name, property.Value.GetString());
+                                }
+                                value.Add(value0);
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -2844,6 +4862,42 @@ namespace body_array
                 throw;
             }
         }
+        public Response<ICollection<IDictionary<string, string>>> GetDictionaryItemEmpty(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDictionaryItemEmpty");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDictionaryItemEmptyRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                IDictionary<string, string> value0 = new Dictionary<string, string>();
+                                foreach (var property in item.EnumerateObject())
+                                {
+                                    value0.Add(property.Name, property.Value.GetString());
+                                }
+                                value.Add(value0);
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetDictionaryValidRequest()
         {
             var message = pipeline.CreateMessage();
@@ -2881,6 +4935,42 @@ namespace body_array
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<ICollection<IDictionary<string, string>>> GetDictionaryValid(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDictionaryValid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDictionaryValidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            ICollection<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                IDictionary<string, string> value0 = new Dictionary<string, string>();
+                                foreach (var property in item.EnumerateObject())
+                                {
+                                    value0.Add(property.Name, property.Value.GetString());
+                                }
+                                value.Add(value0);
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -2932,6 +5022,33 @@ namespace body_array
                         return message.Response;
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response PutDictionaryValid(IEnumerable<IDictionary<string, string>> arrayBody, CancellationToken cancellationToken = default)
+        {
+            if (arrayBody == null)
+            {
+                throw new ArgumentNullException(nameof(arrayBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.PutDictionaryValid");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutDictionaryValidRequest(arrayBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)

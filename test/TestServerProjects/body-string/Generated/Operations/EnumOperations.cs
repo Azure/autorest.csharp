@@ -64,6 +64,33 @@ namespace body_string
                 throw;
             }
         }
+        public Response<Colors> GetNotExpandable(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("EnumOperations.GetNotExpandable");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetNotExpandableRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = document.RootElement.GetString().ToColors();
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreatePutNotExpandableRequest(Colors stringBody)
         {
             var message = pipeline.CreateMessage();
@@ -92,6 +119,29 @@ namespace body_string
                         return message.Response;
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response PutNotExpandable(Colors stringBody, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("EnumOperations.PutNotExpandable");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutNotExpandableRequest(stringBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -136,6 +186,33 @@ namespace body_string
                 throw;
             }
         }
+        public Response<Colors> GetReferenced(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("EnumOperations.GetReferenced");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetReferencedRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = document.RootElement.GetString().ToColors();
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreatePutReferencedRequest(Colors enumStringBody)
         {
             var message = pipeline.CreateMessage();
@@ -164,6 +241,29 @@ namespace body_string
                         return message.Response;
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response PutReferenced(Colors enumStringBody, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("EnumOperations.PutReferenced");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutReferencedRequest(enumStringBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -208,6 +308,33 @@ namespace body_string
                 throw;
             }
         }
+        public Response<RefColorConstant> GetReferencedConstant(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("EnumOperations.GetReferencedConstant");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetReferencedConstantRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = RefColorConstant.DeserializeRefColorConstant(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreatePutReferencedConstantRequest(RefColorConstant enumStringBody)
         {
             var message = pipeline.CreateMessage();
@@ -240,6 +367,33 @@ namespace body_string
                         return message.Response;
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response PutReferencedConstant(RefColorConstant enumStringBody, CancellationToken cancellationToken = default)
+        {
+            if (enumStringBody == null)
+            {
+                throw new ArgumentNullException(nameof(enumStringBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("EnumOperations.PutReferencedConstant");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutReferencedConstantRequest(enumStringBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)

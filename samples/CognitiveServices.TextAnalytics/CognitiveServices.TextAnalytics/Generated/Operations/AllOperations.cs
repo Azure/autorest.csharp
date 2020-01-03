@@ -81,6 +81,37 @@ namespace CognitiveServices.TextAnalytics
                 throw;
             }
         }
+        public Response<EntitiesResult> EntitiesRecognitionGeneral(string? modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput, CancellationToken cancellationToken = default)
+        {
+            if (multiLanguageBatchInput == null)
+            {
+                throw new ArgumentNullException(nameof(multiLanguageBatchInput));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("AllOperations.EntitiesRecognitionGeneral");
+            scope.Start();
+            try
+            {
+                using var message = CreateEntitiesRecognitionGeneralRequest(modelVersion, showStats, multiLanguageBatchInput);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = EntitiesResult.DeserializeEntitiesResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateEntitiesRecognitionPiiRequest(string? modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput)
         {
             var message = pipeline.CreateMessage();
@@ -126,6 +157,37 @@ namespace CognitiveServices.TextAnalytics
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<EntitiesResult> EntitiesRecognitionPii(string? modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput, CancellationToken cancellationToken = default)
+        {
+            if (multiLanguageBatchInput == null)
+            {
+                throw new ArgumentNullException(nameof(multiLanguageBatchInput));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("AllOperations.EntitiesRecognitionPii");
+            scope.Start();
+            try
+            {
+                using var message = CreateEntitiesRecognitionPiiRequest(modelVersion, showStats, multiLanguageBatchInput);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = EntitiesResult.DeserializeEntitiesResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -187,6 +249,37 @@ namespace CognitiveServices.TextAnalytics
                 throw;
             }
         }
+        public Response<EntityLinkingResult> EntitiesLinking(string? modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput, CancellationToken cancellationToken = default)
+        {
+            if (multiLanguageBatchInput == null)
+            {
+                throw new ArgumentNullException(nameof(multiLanguageBatchInput));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("AllOperations.EntitiesLinking");
+            scope.Start();
+            try
+            {
+                using var message = CreateEntitiesLinkingRequest(modelVersion, showStats, multiLanguageBatchInput);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = EntityLinkingResult.DeserializeEntityLinkingResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateKeyPhrasesRequest(string? modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput)
         {
             var message = pipeline.CreateMessage();
@@ -232,6 +325,37 @@ namespace CognitiveServices.TextAnalytics
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<KeyPhraseResult> KeyPhrases(string? modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput, CancellationToken cancellationToken = default)
+        {
+            if (multiLanguageBatchInput == null)
+            {
+                throw new ArgumentNullException(nameof(multiLanguageBatchInput));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("AllOperations.KeyPhrases");
+            scope.Start();
+            try
+            {
+                using var message = CreateKeyPhrasesRequest(modelVersion, showStats, multiLanguageBatchInput);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = KeyPhraseResult.DeserializeKeyPhraseResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -293,6 +417,37 @@ namespace CognitiveServices.TextAnalytics
                 throw;
             }
         }
+        public Response<LanguageResult> Languages(string? modelVersion, bool? showStats, LanguageBatchInput languageBatchInput, CancellationToken cancellationToken = default)
+        {
+            if (languageBatchInput == null)
+            {
+                throw new ArgumentNullException(nameof(languageBatchInput));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("AllOperations.Languages");
+            scope.Start();
+            try
+            {
+                using var message = CreateLanguagesRequest(modelVersion, showStats, languageBatchInput);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = LanguageResult.DeserializeLanguageResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateSentimentRequest(string? modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput)
         {
             var message = pipeline.CreateMessage();
@@ -338,6 +493,37 @@ namespace CognitiveServices.TextAnalytics
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<SentimentResponse> Sentiment(string? modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput, CancellationToken cancellationToken = default)
+        {
+            if (multiLanguageBatchInput == null)
+            {
+                throw new ArgumentNullException(nameof(multiLanguageBatchInput));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("AllOperations.Sentiment");
+            scope.Start();
+            try
+            {
+                using var message = CreateSentimentRequest(modelVersion, showStats, multiLanguageBatchInput);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = SentimentResponse.DeserializeSentimentResponse(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)

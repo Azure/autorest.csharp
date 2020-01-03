@@ -92,6 +92,37 @@ namespace url
                 throw;
             }
         }
+        public Response GetAllWithValues(string pathItemStringPath, string? pathItemStringQuery, string localStringPath, string? localStringQuery, CancellationToken cancellationToken = default)
+        {
+            if (pathItemStringPath == null)
+            {
+                throw new ArgumentNullException(nameof(pathItemStringPath));
+            }
+            if (localStringPath == null)
+            {
+                throw new ArgumentNullException(nameof(localStringPath));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("PathItemsOperations.GetAllWithValues");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetAllWithValuesRequest(pathItemStringPath, pathItemStringQuery, localStringPath, localStringQuery);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetGlobalQueryNullRequest(string pathItemStringPath, string? pathItemStringQuery, string localStringPath, string? localStringQuery)
         {
             var message = pipeline.CreateMessage();
@@ -142,6 +173,37 @@ namespace url
                         return message.Response;
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response GetGlobalQueryNull(string pathItemStringPath, string? pathItemStringQuery, string localStringPath, string? localStringQuery, CancellationToken cancellationToken = default)
+        {
+            if (pathItemStringPath == null)
+            {
+                throw new ArgumentNullException(nameof(pathItemStringPath));
+            }
+            if (localStringPath == null)
+            {
+                throw new ArgumentNullException(nameof(localStringPath));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("PathItemsOperations.GetGlobalQueryNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetGlobalQueryNullRequest(pathItemStringPath, pathItemStringQuery, localStringPath, localStringQuery);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -208,6 +270,37 @@ namespace url
                 throw;
             }
         }
+        public Response GetGlobalAndLocalQueryNull(string pathItemStringPath, string? pathItemStringQuery, string localStringPath, string? localStringQuery, CancellationToken cancellationToken = default)
+        {
+            if (pathItemStringPath == null)
+            {
+                throw new ArgumentNullException(nameof(pathItemStringPath));
+            }
+            if (localStringPath == null)
+            {
+                throw new ArgumentNullException(nameof(localStringPath));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("PathItemsOperations.GetGlobalAndLocalQueryNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetGlobalAndLocalQueryNullRequest(pathItemStringPath, pathItemStringQuery, localStringPath, localStringQuery);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetLocalPathItemQueryNullRequest(string pathItemStringPath, string? pathItemStringQuery, string localStringPath, string? localStringQuery)
         {
             var message = pipeline.CreateMessage();
@@ -258,6 +351,37 @@ namespace url
                         return message.Response;
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response GetLocalPathItemQueryNull(string pathItemStringPath, string? pathItemStringQuery, string localStringPath, string? localStringQuery, CancellationToken cancellationToken = default)
+        {
+            if (pathItemStringPath == null)
+            {
+                throw new ArgumentNullException(nameof(pathItemStringPath));
+            }
+            if (localStringPath == null)
+            {
+                throw new ArgumentNullException(nameof(localStringPath));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("PathItemsOperations.GetLocalPathItemQueryNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetLocalPathItemQueryNullRequest(pathItemStringPath, pathItemStringQuery, localStringPath, localStringQuery);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)

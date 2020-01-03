@@ -90,6 +90,34 @@ namespace AppConfiguration
                 throw;
             }
         }
+        public ResponseWithHeaders<KeyListResult, GetKeysHeaders> GetKeys(string? name, string? after, string? acceptDatetime, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("AllOperations.GetKeys");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetKeysRequest(name, after, acceptDatetime);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = KeyListResult.DeserializeKeyListResult(document.RootElement);
+                            var headers = new GetKeysHeaders(message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateCheckKeysRequest(string? name, string? after, string? acceptDatetime)
         {
             var message = pipeline.CreateMessage();
@@ -132,6 +160,30 @@ namespace AppConfiguration
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public ResponseWithHeaders<CheckKeysHeaders> CheckKeys(string? name, string? after, string? acceptDatetime, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("AllOperations.CheckKeys");
+            scope.Start();
+            try
+            {
+                using var message = CreateCheckKeysRequest(name, after, acceptDatetime);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        var headers = new CheckKeysHeaders(message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -202,6 +254,34 @@ namespace AppConfiguration
                 throw;
             }
         }
+        public ResponseWithHeaders<KeyValueListResult, GetKeyValuesHeaders> GetKeyValues(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Get6ItemsItem>? select, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("AllOperations.GetKeyValues");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetKeyValuesRequest(key, label, after, acceptDatetime, select);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
+                            var headers = new GetKeyValuesHeaders(message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateCheckKeyValuesRequest(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Head6ItemsItem>? select)
         {
             var message = pipeline.CreateMessage();
@@ -252,6 +332,30 @@ namespace AppConfiguration
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public ResponseWithHeaders<CheckKeyValuesHeaders> CheckKeyValues(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Head6ItemsItem>? select, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("AllOperations.CheckKeyValues");
+            scope.Start();
+            try
+            {
+                using var message = CreateCheckKeyValuesRequest(key, label, after, acceptDatetime, select);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        var headers = new CheckKeyValuesHeaders(message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -319,6 +423,38 @@ namespace AppConfiguration
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public ResponseWithHeaders<KeyValue, GetKeyValueHeaders> GetKeyValue(string key, string? label, string? acceptDatetime, string? ifMatch, string? ifNoneMatch, IEnumerable<Get7ItemsItem>? select, CancellationToken cancellationToken = default)
+        {
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("AllOperations.GetKeyValue");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetKeyValueRequest(key, label, acceptDatetime, ifMatch, ifNoneMatch, select);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = KeyValue.DeserializeKeyValue(document.RootElement);
+                            var headers = new GetKeyValueHeaders(message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -395,6 +531,38 @@ namespace AppConfiguration
                 throw;
             }
         }
+        public ResponseWithHeaders<KeyValue, PutKeyValueHeaders> PutKeyValue(string key, string? label, string? ifMatch, string? ifNoneMatch, KeyValue? entity, CancellationToken cancellationToken = default)
+        {
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("AllOperations.PutKeyValue");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutKeyValueRequest(key, label, ifMatch, ifNoneMatch, entity);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = KeyValue.DeserializeKeyValue(document.RootElement);
+                            var headers = new PutKeyValueHeaders(message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateDeleteKeyValueRequest(string key, string? label, string? ifMatch)
         {
             var message = pipeline.CreateMessage();
@@ -442,6 +610,38 @@ namespace AppConfiguration
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public ResponseWithHeaders<KeyValue, DeleteKeyValueHeaders> DeleteKeyValue(string key, string? label, string? ifMatch, CancellationToken cancellationToken = default)
+        {
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("AllOperations.DeleteKeyValue");
+            scope.Start();
+            try
+            {
+                using var message = CreateDeleteKeyValueRequest(key, label, ifMatch);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = KeyValue.DeserializeKeyValue(document.RootElement);
+                            var headers = new DeleteKeyValueHeaders(message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -513,6 +713,34 @@ namespace AppConfiguration
                 throw;
             }
         }
+        public ResponseWithHeaders<CheckKeyValueHeaders> CheckKeyValue(string key, string? label, string? acceptDatetime, string? ifMatch, string? ifNoneMatch, IEnumerable<Head7ItemsItem>? select, CancellationToken cancellationToken = default)
+        {
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("AllOperations.CheckKeyValue");
+            scope.Start();
+            try
+            {
+                using var message = CreateCheckKeyValueRequest(key, label, acceptDatetime, ifMatch, ifNoneMatch, select);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        var headers = new CheckKeyValueHeaders(message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetLabelsRequest(string? name, string? after, string? acceptDatetime, IEnumerable<string>? select)
         {
             var message = pipeline.CreateMessage();
@@ -571,6 +799,34 @@ namespace AppConfiguration
                 throw;
             }
         }
+        public ResponseWithHeaders<LabelListResult, GetLabelsHeaders> GetLabels(string? name, string? after, string? acceptDatetime, IEnumerable<string>? select, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("AllOperations.GetLabels");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetLabelsRequest(name, after, acceptDatetime, select);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = LabelListResult.DeserializeLabelListResult(document.RootElement);
+                            var headers = new GetLabelsHeaders(message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateCheckLabelsRequest(string? name, string? after, string? acceptDatetime, IEnumerable<string>? select)
         {
             var message = pipeline.CreateMessage();
@@ -617,6 +873,30 @@ namespace AppConfiguration
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public ResponseWithHeaders<CheckLabelsHeaders> CheckLabels(string? name, string? after, string? acceptDatetime, IEnumerable<string>? select, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("AllOperations.CheckLabels");
+            scope.Start();
+            try
+            {
+                using var message = CreateCheckLabelsRequest(name, after, acceptDatetime, select);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        var headers = new CheckLabelsHeaders(message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -684,6 +964,38 @@ namespace AppConfiguration
                 throw;
             }
         }
+        public ResponseWithHeaders<KeyValue, PutLockHeaders> PutLock(string key, string? label, string? ifMatch, string? ifNoneMatch, CancellationToken cancellationToken = default)
+        {
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("AllOperations.PutLock");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutLockRequest(key, label, ifMatch, ifNoneMatch);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = KeyValue.DeserializeKeyValue(document.RootElement);
+                            var headers = new PutLockHeaders(message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateDeleteLockRequest(string key, string? label, string? ifMatch, string? ifNoneMatch)
         {
             var message = pipeline.CreateMessage();
@@ -735,6 +1047,38 @@ namespace AppConfiguration
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public ResponseWithHeaders<KeyValue, DeleteLockHeaders> DeleteLock(string key, string? label, string? ifMatch, string? ifNoneMatch, CancellationToken cancellationToken = default)
+        {
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("AllOperations.DeleteLock");
+            scope.Start();
+            try
+            {
+                using var message = CreateDeleteLockRequest(key, label, ifMatch, ifNoneMatch);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = KeyValue.DeserializeKeyValue(document.RootElement);
+                            var headers = new DeleteLockHeaders(message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -805,6 +1149,34 @@ namespace AppConfiguration
                 throw;
             }
         }
+        public ResponseWithHeaders<KeyValueListResult, GetRevisionsHeaders> GetRevisions(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Enum0>? select, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("AllOperations.GetRevisions");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetRevisionsRequest(key, label, after, acceptDatetime, select);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
+                            var headers = new GetRevisionsHeaders(message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateCheckRevisionsRequest(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Enum0>? select)
         {
             var message = pipeline.CreateMessage();
@@ -855,6 +1227,30 @@ namespace AppConfiguration
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public ResponseWithHeaders<CheckRevisionsHeaders> CheckRevisions(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Enum0>? select, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("AllOperations.CheckRevisions");
+            scope.Start();
+            try
+            {
+                using var message = CreateCheckRevisionsRequest(key, label, after, acceptDatetime, select);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        var headers = new CheckRevisionsHeaders(message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)

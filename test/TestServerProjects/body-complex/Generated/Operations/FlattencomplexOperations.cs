@@ -64,5 +64,32 @@ namespace body_complex
                 throw;
             }
         }
+        public Response<MyBaseType> GetValid(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("FlattencomplexOperations.GetValid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetValidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = MyBaseType.DeserializeMyBaseType(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
     }
 }

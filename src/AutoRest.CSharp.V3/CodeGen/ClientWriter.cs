@@ -42,7 +42,8 @@ namespace AutoRest.CSharp.V3.CodeGen
                     foreach (var method in operationGroup.Methods)
                     {
                         WriteRequestCreation(writer, method);
-                        WriteOperation(writer, method);
+                        WriteOperation(writer, method, async: true);
+                        WriteOperation(writer, method, async: false);
                     }
                 }
             }
@@ -165,7 +166,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                 writer.Line($"return message;");
             }
         }
-        private void WriteOperation(CodeWriter writer, ClientMethod operation)
+        private void WriteOperation(CodeWriter writer, ClientMethod operation, bool async)
         {
             //TODO: Handle multiple responses
             var responseBody = operation.Response.ResponseBody;
@@ -180,10 +181,18 @@ namespace AutoRest.CSharp.V3.CodeGen
                 _ => new CSharpType(typeof(Response)),
             };
 
-            CSharpType returnType = new CSharpType(typeof(ValueTask<>), responseType);
 
             var methodName = operation.Name;
-            writer.Append($"public async {returnType} {methodName}Async(");
+            if (async)
+            {
+                CSharpType asyncReturnType = new CSharpType(typeof(ValueTask<>), responseType);
+                writer.Append($"public async {asyncReturnType} {methodName}Async(");
+            }
+            else
+            {
+                writer.Append($"public {responseType} {methodName}(");
+            }
+
             foreach (ServiceClientParameter parameter in operation.Parameters)
             {
                 WriteParameter(writer, parameter);
@@ -212,9 +221,16 @@ namespace AutoRest.CSharp.V3.CodeGen
                     writer.RemoveTrailingComma();
                     writer.Line($");");
 
-                    writer.Line($"await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);");
+                    if (async)
+                    {
+                        writer.Line($"await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);");
+                    }
+                    else
+                    {
+                        writer.Line($"pipeline.Send(message, cancellationToken);");
+                    }
 
-                    WriteStatusCodeSwitch(writer, responseBody, headerModelType, operation);
+                    WriteStatusCodeSwitch(writer, responseBody, headerModelType, operation, async);
                 }
 
                 using (writer.Scope($"catch ({typeof(Exception)} e)"))
@@ -375,7 +391,7 @@ namespace AutoRest.CSharp.V3.CodeGen
         }
 
         //TODO: Do multiple status codes
-        private void WriteStatusCodeSwitch(CodeWriter writer, ResponseBody? responseBody, CSharpType? headersModelType, ClientMethod operation)
+        private void WriteStatusCodeSwitch(CodeWriter writer, ResponseBody? responseBody, CSharpType? headersModelType, ClientMethod operation, bool async)
         {
             using (writer.Switch("message.Response.Status"))
             {
@@ -395,7 +411,16 @@ namespace AutoRest.CSharp.V3.CodeGen
                         switch (objectResponseBody.Serialization)
                         {
                             case JsonSerialization jsonSerialization:
-                                writer.Line($"using var {document:D} = await {writer.Type(typeof(JsonDocument))}.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);");
+                                writer.Append($"using var {document:D} = ");
+                                if (async)
+                                {
+                                    writer.Line($"await {typeof(JsonDocument)}.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);");
+                                }
+                                else
+                                {
+                                    writer.Line($"{typeof(JsonDocument)}.Parse(message.Response.ContentStream);");
+                                }
+
                                 writer.ToDeserializeCall(
                                     jsonSerialization,
                                     _typeFactory,
@@ -442,7 +467,14 @@ namespace AutoRest.CSharp.V3.CodeGen
                 }
 
                 writer.Line($"default:");
-                writer.Line($"throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);");
+                if (async)
+                {
+                    writer.Line($"throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);");
+                }
+                else
+                {
+                    writer.Line($"throw message.Response.CreateRequestFailedException();");
+                }
             }
         }
     }

@@ -71,6 +71,38 @@ namespace xml_service
                 throw;
             }
         }
+        public Response<RootWithRefAndNoMeta> GetComplexTypeRefNoMeta(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("XmlOperations.GetComplexTypeRefNoMeta");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetComplexTypeRefNoMetaRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            RootWithRefAndNoMeta value = default;
+                            var rootWithRefAndNoMeta = document.Element("RootWithRefAndNoMeta");
+                            if (rootWithRefAndNoMeta != null)
+                            {
+                                value = RootWithRefAndNoMeta.DeserializeRootWithRefAndNoMeta(rootWithRefAndNoMeta);
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreatePutComplexTypeRefNoMetaRequest(RootWithRefAndNoMeta model)
         {
             var message = pipeline.CreateMessage();
@@ -103,6 +135,33 @@ namespace xml_service
                         return message.Response;
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response PutComplexTypeRefNoMeta(RootWithRefAndNoMeta model, CancellationToken cancellationToken = default)
+        {
+            if (model == null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("XmlOperations.PutComplexTypeRefNoMeta");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutComplexTypeRefNoMetaRequest(model);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 201:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -152,6 +211,38 @@ namespace xml_service
                 throw;
             }
         }
+        public Response<RootWithRefAndMeta> GetComplexTypeRefWithMeta(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("XmlOperations.GetComplexTypeRefWithMeta");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetComplexTypeRefWithMetaRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            RootWithRefAndMeta value = default;
+                            var rootWithRefAndMeta = document.Element("RootWithRefAndMeta");
+                            if (rootWithRefAndMeta != null)
+                            {
+                                value = RootWithRefAndMeta.DeserializeRootWithRefAndMeta(rootWithRefAndMeta);
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreatePutComplexTypeRefWithMetaRequest(RootWithRefAndMeta model)
         {
             var message = pipeline.CreateMessage();
@@ -184,6 +275,33 @@ namespace xml_service
                         return message.Response;
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response PutComplexTypeRefWithMeta(RootWithRefAndMeta model, CancellationToken cancellationToken = default)
+        {
+            if (model == null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("XmlOperations.PutComplexTypeRefWithMeta");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutComplexTypeRefWithMetaRequest(model);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 201:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -233,6 +351,38 @@ namespace xml_service
                 throw;
             }
         }
+        public Response<Slideshow> GetSimple(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("XmlOperations.GetSimple");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetSimpleRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            Slideshow value = default;
+                            var slideshow = document.Element("slideshow");
+                            if (slideshow != null)
+                            {
+                                value = Slideshow.DeserializeSlideshow(slideshow);
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreatePutSimpleRequest(Slideshow slideshow)
         {
             var message = pipeline.CreateMessage();
@@ -265,6 +415,33 @@ namespace xml_service
                         return message.Response;
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response PutSimple(Slideshow slideshow, CancellationToken cancellationToken = default)
+        {
+            if (slideshow == null)
+            {
+                throw new ArgumentNullException(nameof(slideshow));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("XmlOperations.PutSimple");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutSimpleRequest(slideshow);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 201:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -314,6 +491,38 @@ namespace xml_service
                 throw;
             }
         }
+        public Response<AppleBarrel> GetWrappedLists(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("XmlOperations.GetWrappedLists");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetWrappedListsRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            AppleBarrel value = default;
+                            var appleBarrel = document.Element("AppleBarrel");
+                            if (appleBarrel != null)
+                            {
+                                value = AppleBarrel.DeserializeAppleBarrel(appleBarrel);
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreatePutWrappedListsRequest(AppleBarrel wrappedLists)
         {
             var message = pipeline.CreateMessage();
@@ -354,6 +563,33 @@ namespace xml_service
                 throw;
             }
         }
+        public Response PutWrappedLists(AppleBarrel wrappedLists, CancellationToken cancellationToken = default)
+        {
+            if (wrappedLists == null)
+            {
+                throw new ArgumentNullException(nameof(wrappedLists));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("XmlOperations.PutWrappedLists");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutWrappedListsRequest(wrappedLists);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 201:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetHeadersRequest()
         {
             var message = pipeline.CreateMessage();
@@ -379,6 +615,30 @@ namespace xml_service
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public ResponseWithHeaders<GetHeadersHeaders> GetHeaders(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("XmlOperations.GetHeaders");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetHeadersRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        var headers = new GetHeadersHeaders(message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -428,6 +688,38 @@ namespace xml_service
                 throw;
             }
         }
+        public Response<Slideshow> GetEmptyList(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("XmlOperations.GetEmptyList");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetEmptyListRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            Slideshow value = default;
+                            var slideshow = document.Element("slideshow");
+                            if (slideshow != null)
+                            {
+                                value = Slideshow.DeserializeSlideshow(slideshow);
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreatePutEmptyListRequest(Slideshow slideshow)
         {
             var message = pipeline.CreateMessage();
@@ -460,6 +752,33 @@ namespace xml_service
                         return message.Response;
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response PutEmptyList(Slideshow slideshow, CancellationToken cancellationToken = default)
+        {
+            if (slideshow == null)
+            {
+                throw new ArgumentNullException(nameof(slideshow));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("XmlOperations.PutEmptyList");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutEmptyListRequest(slideshow);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 201:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -509,6 +828,38 @@ namespace xml_service
                 throw;
             }
         }
+        public Response<AppleBarrel> GetEmptyWrappedLists(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("XmlOperations.GetEmptyWrappedLists");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetEmptyWrappedListsRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            AppleBarrel value = default;
+                            var appleBarrel = document.Element("AppleBarrel");
+                            if (appleBarrel != null)
+                            {
+                                value = AppleBarrel.DeserializeAppleBarrel(appleBarrel);
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreatePutEmptyWrappedListsRequest(AppleBarrel appleBarrel)
         {
             var message = pipeline.CreateMessage();
@@ -541,6 +892,33 @@ namespace xml_service
                         return message.Response;
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response PutEmptyWrappedLists(AppleBarrel appleBarrel, CancellationToken cancellationToken = default)
+        {
+            if (appleBarrel == null)
+            {
+                throw new ArgumentNullException(nameof(appleBarrel));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("XmlOperations.PutEmptyWrappedLists");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutEmptyWrappedListsRequest(appleBarrel);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 201:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -596,6 +974,44 @@ namespace xml_service
                 throw;
             }
         }
+        public Response<ICollection<Banana>> GetRootList(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("XmlOperations.GetRootList");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetRootListRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            ICollection<Banana> value = default;
+                            var bananas = document.Element("bananas");
+                            if (bananas != null)
+                            {
+                                value = new List<Banana>();
+                                foreach (var e in bananas.Elements("banana"))
+                                {
+                                    Banana value0 = default;
+                                    value0 = Banana.DeserializeBanana(e);
+                                    value.Add(value0);
+                                }
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreatePutRootListRequest(IEnumerable<Banana> bananas)
         {
             var message = pipeline.CreateMessage();
@@ -633,6 +1049,33 @@ namespace xml_service
                         return message.Response;
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response PutRootList(IEnumerable<Banana> bananas, CancellationToken cancellationToken = default)
+        {
+            if (bananas == null)
+            {
+                throw new ArgumentNullException(nameof(bananas));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("XmlOperations.PutRootList");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutRootListRequest(bananas);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 201:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -688,6 +1131,44 @@ namespace xml_service
                 throw;
             }
         }
+        public Response<ICollection<Banana>> GetRootListSingleItem(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("XmlOperations.GetRootListSingleItem");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetRootListSingleItemRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            ICollection<Banana> value = default;
+                            var bananas = document.Element("bananas");
+                            if (bananas != null)
+                            {
+                                value = new List<Banana>();
+                                foreach (var e in bananas.Elements("banana"))
+                                {
+                                    Banana value0 = default;
+                                    value0 = Banana.DeserializeBanana(e);
+                                    value.Add(value0);
+                                }
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreatePutRootListSingleItemRequest(IEnumerable<Banana> bananas)
         {
             var message = pipeline.CreateMessage();
@@ -725,6 +1206,33 @@ namespace xml_service
                         return message.Response;
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response PutRootListSingleItem(IEnumerable<Banana> bananas, CancellationToken cancellationToken = default)
+        {
+            if (bananas == null)
+            {
+                throw new ArgumentNullException(nameof(bananas));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("XmlOperations.PutRootListSingleItem");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutRootListSingleItemRequest(bananas);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 201:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -780,6 +1288,44 @@ namespace xml_service
                 throw;
             }
         }
+        public Response<ICollection<Banana>> GetEmptyRootList(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("XmlOperations.GetEmptyRootList");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetEmptyRootListRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            ICollection<Banana> value = default;
+                            var bananas = document.Element("bananas");
+                            if (bananas != null)
+                            {
+                                value = new List<Banana>();
+                                foreach (var e in bananas.Elements("banana"))
+                                {
+                                    Banana value0 = default;
+                                    value0 = Banana.DeserializeBanana(e);
+                                    value.Add(value0);
+                                }
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreatePutEmptyRootListRequest(IEnumerable<Banana> bananas)
         {
             var message = pipeline.CreateMessage();
@@ -817,6 +1363,33 @@ namespace xml_service
                         return message.Response;
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response PutEmptyRootList(IEnumerable<Banana> bananas, CancellationToken cancellationToken = default)
+        {
+            if (bananas == null)
+            {
+                throw new ArgumentNullException(nameof(bananas));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("XmlOperations.PutEmptyRootList");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutEmptyRootListRequest(bananas);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 201:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -866,6 +1439,38 @@ namespace xml_service
                 throw;
             }
         }
+        public Response<Banana> GetEmptyChildElement(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("XmlOperations.GetEmptyChildElement");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetEmptyChildElementRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            Banana value = default;
+                            var banana = document.Element("banana");
+                            if (banana != null)
+                            {
+                                value = Banana.DeserializeBanana(banana);
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreatePutEmptyChildElementRequest(Banana banana)
         {
             var message = pipeline.CreateMessage();
@@ -898,6 +1503,33 @@ namespace xml_service
                         return message.Response;
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response PutEmptyChildElement(Banana banana, CancellationToken cancellationToken = default)
+        {
+            if (banana == null)
+            {
+                throw new ArgumentNullException(nameof(banana));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("XmlOperations.PutEmptyChildElement");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutEmptyChildElementRequest(banana);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 201:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -940,6 +1572,38 @@ namespace xml_service
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<ListContainersResponse> ListContainers(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("XmlOperations.ListContainers");
+            scope.Start();
+            try
+            {
+                using var message = CreateListContainersRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            ListContainersResponse value = default;
+                            var enumerationResults = document.Element("EnumerationResults");
+                            if (enumerationResults != null)
+                            {
+                                value = ListContainersResponse.DeserializeListContainersResponse(enumerationResults);
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -991,6 +1655,38 @@ namespace xml_service
                 throw;
             }
         }
+        public Response<StorageServiceProperties> GetServiceProperties(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("XmlOperations.GetServiceProperties");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetServicePropertiesRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            StorageServiceProperties value = default;
+                            var storageServiceProperties = document.Element("StorageServiceProperties");
+                            if (storageServiceProperties != null)
+                            {
+                                value = StorageServiceProperties.DeserializeStorageServiceProperties(storageServiceProperties);
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreatePutServicePropertiesRequest(StorageServiceProperties properties)
         {
             var message = pipeline.CreateMessage();
@@ -1025,6 +1721,33 @@ namespace xml_service
                         return message.Response;
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response PutServiceProperties(StorageServiceProperties properties, CancellationToken cancellationToken = default)
+        {
+            if (properties == null)
+            {
+                throw new ArgumentNullException(nameof(properties));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("XmlOperations.PutServiceProperties");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutServicePropertiesRequest(properties);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 201:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -1082,6 +1805,44 @@ namespace xml_service
                 throw;
             }
         }
+        public Response<ICollection<SignedIdentifier>> GetAcls(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("XmlOperations.GetAcls");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetAclsRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            ICollection<SignedIdentifier> value = default;
+                            var signedIdentifiers = document.Element("SignedIdentifiers");
+                            if (signedIdentifiers != null)
+                            {
+                                value = new List<SignedIdentifier>();
+                                foreach (var e in signedIdentifiers.Elements("SignedIdentifier"))
+                                {
+                                    SignedIdentifier value0 = default;
+                                    value0 = SignedIdentifier.DeserializeSignedIdentifier(e);
+                                    value.Add(value0);
+                                }
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreatePutAclsRequest(IEnumerable<SignedIdentifier> properties)
         {
             var message = pipeline.CreateMessage();
@@ -1121,6 +1882,33 @@ namespace xml_service
                         return message.Response;
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response PutAcls(IEnumerable<SignedIdentifier> properties, CancellationToken cancellationToken = default)
+        {
+            if (properties == null)
+            {
+                throw new ArgumentNullException(nameof(properties));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("XmlOperations.PutAcls");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutAclsRequest(properties);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 201:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -1172,6 +1960,38 @@ namespace xml_service
                 throw;
             }
         }
+        public Response<ListBlobsResponse> ListBlobs(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("XmlOperations.ListBlobs");
+            scope.Start();
+            try
+            {
+                using var message = CreateListBlobsRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            ListBlobsResponse value = default;
+                            var enumerationResults = document.Element("EnumerationResults");
+                            if (enumerationResults != null)
+                            {
+                                value = ListBlobsResponse.DeserializeListBlobsResponse(enumerationResults);
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateJsonInputRequest(JSONInput properties)
         {
             var message = pipeline.CreateMessage();
@@ -1212,6 +2032,33 @@ namespace xml_service
                 throw;
             }
         }
+        public Response JsonInput(JSONInput properties, CancellationToken cancellationToken = default)
+        {
+            if (properties == null)
+            {
+                throw new ArgumentNullException(nameof(properties));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("XmlOperations.JsonInput");
+            scope.Start();
+            try
+            {
+                using var message = CreateJsonInputRequest(properties);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateJsonOutputRequest()
         {
             var message = pipeline.CreateMessage();
@@ -1240,6 +2087,33 @@ namespace xml_service
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<JSONOutput> JsonOutput(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("XmlOperations.JsonOutput");
+            scope.Start();
+            try
+            {
+                using var message = CreateJsonOutputRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = JSONOutput.DeserializeJSONOutput(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)

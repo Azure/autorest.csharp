@@ -86,6 +86,37 @@ namespace validation
                 throw;
             }
         }
+        public Response<Product> ValidationOfMethodParameters(string resourceGroupName, int id, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("AllOperations.ValidationOfMethodParameters");
+            scope.Start();
+            try
+            {
+                using var message = CreateValidationOfMethodParametersRequest(resourceGroupName, id);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = Product.DeserializeProduct(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateValidationOfBodyRequest(string resourceGroupName, int id, Product? body)
         {
             var message = pipeline.CreateMessage();
@@ -136,6 +167,37 @@ namespace validation
                 throw;
             }
         }
+        public Response<Product> ValidationOfBody(string resourceGroupName, int id, Product? body, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("AllOperations.ValidationOfBody");
+            scope.Start();
+            try
+            {
+                using var message = CreateValidationOfBodyRequest(resourceGroupName, id, body);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = Product.DeserializeProduct(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetWithConstantInPathRequest()
         {
             var message = pipeline.CreateMessage();
@@ -162,6 +224,29 @@ namespace validation
                         return message.Response;
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response GetWithConstantInPath(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("AllOperations.GetWithConstantInPath");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetWithConstantInPathRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -204,6 +289,33 @@ namespace validation
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<Product> PostWithConstantInBody(Product? body, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("AllOperations.PostWithConstantInBody");
+            scope.Start();
+            try
+            {
+                using var message = CreatePostWithConstantInBodyRequest(body);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = Product.DeserializeProduct(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)

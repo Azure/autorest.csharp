@@ -62,5 +62,32 @@ namespace custom_baseUrl
                 throw;
             }
         }
+        public Response GetEmpty(string accountName, CancellationToken cancellationToken = default)
+        {
+            if (accountName == null)
+            {
+                throw new ArgumentNullException(nameof(accountName));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("PathsOperations.GetEmpty");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetEmptyRequest(accountName);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
     }
 }

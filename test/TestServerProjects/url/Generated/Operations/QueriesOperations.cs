@@ -61,6 +61,29 @@ namespace url
                 throw;
             }
         }
+        public Response GetBooleanTrue(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("QueriesOperations.GetBooleanTrue");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetBooleanTrueRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetBooleanFalseRequest()
         {
             var message = pipeline.CreateMessage();
@@ -86,6 +109,29 @@ namespace url
                         return message.Response;
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response GetBooleanFalse(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("QueriesOperations.GetBooleanFalse");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetBooleanFalseRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -130,6 +176,29 @@ namespace url
                 throw;
             }
         }
+        public Response GetBooleanNull(bool? boolQuery, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("QueriesOperations.GetBooleanNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetBooleanNullRequest(boolQuery);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetIntOneMillionRequest()
         {
             var message = pipeline.CreateMessage();
@@ -163,6 +232,29 @@ namespace url
                 throw;
             }
         }
+        public Response GetIntOneMillion(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("QueriesOperations.GetIntOneMillion");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetIntOneMillionRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetIntNegativeOneMillionRequest()
         {
             var message = pipeline.CreateMessage();
@@ -188,6 +280,29 @@ namespace url
                         return message.Response;
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response GetIntNegativeOneMillion(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("QueriesOperations.GetIntNegativeOneMillion");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetIntNegativeOneMillionRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -232,6 +347,29 @@ namespace url
                 throw;
             }
         }
+        public Response GetIntNull(int? intQuery, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("QueriesOperations.GetIntNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetIntNullRequest(intQuery);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetTenBillionRequest()
         {
             var message = pipeline.CreateMessage();
@@ -265,6 +403,29 @@ namespace url
                 throw;
             }
         }
+        public Response GetTenBillion(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("QueriesOperations.GetTenBillion");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetTenBillionRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetNegativeTenBillionRequest()
         {
             var message = pipeline.CreateMessage();
@@ -290,6 +451,29 @@ namespace url
                         return message.Response;
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response GetNegativeTenBillion(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("QueriesOperations.GetNegativeTenBillion");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetNegativeTenBillionRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -334,6 +518,29 @@ namespace url
                 throw;
             }
         }
+        public Response GetLongNull(long? longQuery, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("QueriesOperations.GetLongNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetLongNullRequest(longQuery);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateFloatScientificPositiveRequest()
         {
             var message = pipeline.CreateMessage();
@@ -367,6 +574,29 @@ namespace url
                 throw;
             }
         }
+        public Response FloatScientificPositive(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("QueriesOperations.FloatScientificPositive");
+            scope.Start();
+            try
+            {
+                using var message = CreateFloatScientificPositiveRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateFloatScientificNegativeRequest()
         {
             var message = pipeline.CreateMessage();
@@ -392,6 +622,29 @@ namespace url
                         return message.Response;
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response FloatScientificNegative(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("QueriesOperations.FloatScientificNegative");
+            scope.Start();
+            try
+            {
+                using var message = CreateFloatScientificNegativeRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -436,6 +689,29 @@ namespace url
                 throw;
             }
         }
+        public Response FloatNull(float? floatQuery, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("QueriesOperations.FloatNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateFloatNullRequest(floatQuery);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateDoubleDecimalPositiveRequest()
         {
             var message = pipeline.CreateMessage();
@@ -469,6 +745,29 @@ namespace url
                 throw;
             }
         }
+        public Response DoubleDecimalPositive(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("QueriesOperations.DoubleDecimalPositive");
+            scope.Start();
+            try
+            {
+                using var message = CreateDoubleDecimalPositiveRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateDoubleDecimalNegativeRequest()
         {
             var message = pipeline.CreateMessage();
@@ -494,6 +793,29 @@ namespace url
                         return message.Response;
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response DoubleDecimalNegative(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("QueriesOperations.DoubleDecimalNegative");
+            scope.Start();
+            try
+            {
+                using var message = CreateDoubleDecimalNegativeRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -538,6 +860,29 @@ namespace url
                 throw;
             }
         }
+        public Response DoubleNull(double? doubleQuery, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("QueriesOperations.DoubleNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateDoubleNullRequest(doubleQuery);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateStringUnicodeRequest()
         {
             var message = pipeline.CreateMessage();
@@ -563,6 +908,29 @@ namespace url
                         return message.Response;
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response StringUnicode(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("QueriesOperations.StringUnicode");
+            scope.Start();
+            try
+            {
+                using var message = CreateStringUnicodeRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -604,6 +972,29 @@ namespace url
                 throw;
             }
         }
+        public Response StringUrlEncoded(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("QueriesOperations.StringUrlEncoded");
+            scope.Start();
+            try
+            {
+                using var message = CreateStringUrlEncodedRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateStringEmptyRequest()
         {
             var message = pipeline.CreateMessage();
@@ -629,6 +1020,29 @@ namespace url
                         return message.Response;
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response StringEmpty(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("QueriesOperations.StringEmpty");
+            scope.Start();
+            try
+            {
+                using var message = CreateStringEmptyRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -673,6 +1087,29 @@ namespace url
                 throw;
             }
         }
+        public Response StringNull(string? stringQuery, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("QueriesOperations.StringNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateStringNullRequest(stringQuery);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateEnumValidRequest(UriColor? enumQuery)
         {
             var message = pipeline.CreateMessage();
@@ -701,6 +1138,29 @@ namespace url
                         return message.Response;
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response EnumValid(UriColor? enumQuery, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("QueriesOperations.EnumValid");
+            scope.Start();
+            try
+            {
+                using var message = CreateEnumValidRequest(enumQuery);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -745,6 +1205,29 @@ namespace url
                 throw;
             }
         }
+        public Response EnumNull(UriColor? enumQuery, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("QueriesOperations.EnumNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateEnumNullRequest(enumQuery);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateByteMultiByteRequest(byte[]? byteQuery)
         {
             var message = pipeline.CreateMessage();
@@ -781,6 +1264,29 @@ namespace url
                 throw;
             }
         }
+        public Response ByteMultiByte(byte[]? byteQuery, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("QueriesOperations.ByteMultiByte");
+            scope.Start();
+            try
+            {
+                using var message = CreateByteMultiByteRequest(byteQuery);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateByteEmptyRequest()
         {
             var message = pipeline.CreateMessage();
@@ -806,6 +1312,29 @@ namespace url
                         return message.Response;
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response ByteEmpty(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("QueriesOperations.ByteEmpty");
+            scope.Start();
+            try
+            {
+                using var message = CreateByteEmptyRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -850,6 +1379,29 @@ namespace url
                 throw;
             }
         }
+        public Response ByteNull(byte[]? byteQuery, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("QueriesOperations.ByteNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateByteNullRequest(byteQuery);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateDateValidRequest()
         {
             var message = pipeline.CreateMessage();
@@ -875,6 +1427,29 @@ namespace url
                         return message.Response;
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response DateValid(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("QueriesOperations.DateValid");
+            scope.Start();
+            try
+            {
+                using var message = CreateDateValidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -919,6 +1494,29 @@ namespace url
                 throw;
             }
         }
+        public Response DateNull(DateTimeOffset? dateQuery, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("QueriesOperations.DateNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateDateNullRequest(dateQuery);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateDateTimeValidRequest()
         {
             var message = pipeline.CreateMessage();
@@ -944,6 +1542,29 @@ namespace url
                         return message.Response;
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response DateTimeValid(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("QueriesOperations.DateTimeValid");
+            scope.Start();
+            try
+            {
+                using var message = CreateDateTimeValidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -988,6 +1609,29 @@ namespace url
                 throw;
             }
         }
+        public Response DateTimeNull(DateTimeOffset? dateTimeQuery, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("QueriesOperations.DateTimeNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateDateTimeNullRequest(dateTimeQuery);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateArrayStringCsvValidRequest(IEnumerable<string>? arrayQuery)
         {
             var message = pipeline.CreateMessage();
@@ -1016,6 +1660,29 @@ namespace url
                         return message.Response;
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response ArrayStringCsvValid(IEnumerable<string>? arrayQuery, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringCsvValid");
+            scope.Start();
+            try
+            {
+                using var message = CreateArrayStringCsvValidRequest(arrayQuery);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -1060,6 +1727,29 @@ namespace url
                 throw;
             }
         }
+        public Response ArrayStringCsvNull(IEnumerable<string>? arrayQuery, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringCsvNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateArrayStringCsvNullRequest(arrayQuery);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateArrayStringCsvEmptyRequest(IEnumerable<string>? arrayQuery)
         {
             var message = pipeline.CreateMessage();
@@ -1088,6 +1778,29 @@ namespace url
                         return message.Response;
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response ArrayStringCsvEmpty(IEnumerable<string>? arrayQuery, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringCsvEmpty");
+            scope.Start();
+            try
+            {
+                using var message = CreateArrayStringCsvEmptyRequest(arrayQuery);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -1132,6 +1845,29 @@ namespace url
                 throw;
             }
         }
+        public Response ArrayStringSsvValid(IEnumerable<string>? arrayQuery, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringSsvValid");
+            scope.Start();
+            try
+            {
+                using var message = CreateArrayStringSsvValidRequest(arrayQuery);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateArrayStringTsvValidRequest(IEnumerable<string>? arrayQuery)
         {
             var message = pipeline.CreateMessage();
@@ -1168,6 +1904,29 @@ namespace url
                 throw;
             }
         }
+        public Response ArrayStringTsvValid(IEnumerable<string>? arrayQuery, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringTsvValid");
+            scope.Start();
+            try
+            {
+                using var message = CreateArrayStringTsvValidRequest(arrayQuery);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateArrayStringPipesValidRequest(IEnumerable<string>? arrayQuery)
         {
             var message = pipeline.CreateMessage();
@@ -1196,6 +1955,29 @@ namespace url
                         return message.Response;
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response ArrayStringPipesValid(IEnumerable<string>? arrayQuery, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringPipesValid");
+            scope.Start();
+            try
+            {
+                using var message = CreateArrayStringPipesValidRequest(arrayQuery);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)

@@ -72,6 +72,37 @@ namespace additionalProperties
                 throw;
             }
         }
+        public Response<PetAPTrue> CreateAPTrue(PetAPTrue createParameters, CancellationToken cancellationToken = default)
+        {
+            if (createParameters == null)
+            {
+                throw new ArgumentNullException(nameof(createParameters));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("PetsOperations.CreateAPTrue");
+            scope.Start();
+            try
+            {
+                using var message = CreateCreateAPTrueRequest(createParameters);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = PetAPTrue.DeserializePetAPTrue(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateCreateCatAPTrueRequest(CatAPTrue createParameters)
         {
             var message = pipeline.CreateMessage();
@@ -108,6 +139,37 @@ namespace additionalProperties
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<CatAPTrue> CreateCatAPTrue(CatAPTrue createParameters, CancellationToken cancellationToken = default)
+        {
+            if (createParameters == null)
+            {
+                throw new ArgumentNullException(nameof(createParameters));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("PetsOperations.CreateCatAPTrue");
+            scope.Start();
+            try
+            {
+                using var message = CreateCreateCatAPTrueRequest(createParameters);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = CatAPTrue.DeserializeCatAPTrue(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -160,6 +222,37 @@ namespace additionalProperties
                 throw;
             }
         }
+        public Response<PetAPObject> CreateAPObject(PetAPObject createParameters, CancellationToken cancellationToken = default)
+        {
+            if (createParameters == null)
+            {
+                throw new ArgumentNullException(nameof(createParameters));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("PetsOperations.CreateAPObject");
+            scope.Start();
+            try
+            {
+                using var message = CreateCreateAPObjectRequest(createParameters);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = PetAPObject.DeserializePetAPObject(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateCreateAPStringRequest(PetAPString createParameters)
         {
             var message = pipeline.CreateMessage();
@@ -196,6 +289,37 @@ namespace additionalProperties
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<PetAPString> CreateAPString(PetAPString createParameters, CancellationToken cancellationToken = default)
+        {
+            if (createParameters == null)
+            {
+                throw new ArgumentNullException(nameof(createParameters));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("PetsOperations.CreateAPString");
+            scope.Start();
+            try
+            {
+                using var message = CreateCreateAPStringRequest(createParameters);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = PetAPString.DeserializePetAPString(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -248,6 +372,37 @@ namespace additionalProperties
                 throw;
             }
         }
+        public Response<PetAPInProperties> CreateAPInProperties(PetAPInProperties createParameters, CancellationToken cancellationToken = default)
+        {
+            if (createParameters == null)
+            {
+                throw new ArgumentNullException(nameof(createParameters));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("PetsOperations.CreateAPInProperties");
+            scope.Start();
+            try
+            {
+                using var message = CreateCreateAPInPropertiesRequest(createParameters);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = PetAPInProperties.DeserializePetAPInProperties(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateCreateAPInPropertiesWithAPStringRequest(PetAPInPropertiesWithAPString createParameters)
         {
             var message = pipeline.CreateMessage();
@@ -284,6 +439,37 @@ namespace additionalProperties
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<PetAPInPropertiesWithAPString> CreateAPInPropertiesWithAPString(PetAPInPropertiesWithAPString createParameters, CancellationToken cancellationToken = default)
+        {
+            if (createParameters == null)
+            {
+                throw new ArgumentNullException(nameof(createParameters));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("PetsOperations.CreateAPInPropertiesWithAPString");
+            scope.Start();
+            try
+            {
+                using var message = CreateCreateAPInPropertiesWithAPStringRequest(createParameters);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = PetAPInPropertiesWithAPString.DeserializePetAPInPropertiesWithAPString(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)

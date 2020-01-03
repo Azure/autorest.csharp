@@ -69,6 +69,37 @@ namespace body_dictionary
                 throw;
             }
         }
+        public Response<IDictionary<string, int>> GetNull(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetNullRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, int> value = new Dictionary<string, int>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                value.Add(property.Name, property.Value.GetInt32());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetEmptyRequest()
         {
             var message = pipeline.CreateMessage();
@@ -101,6 +132,37 @@ namespace body_dictionary
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<IDictionary<string, int>> GetEmpty(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetEmpty");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetEmptyRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, int> value = new Dictionary<string, int>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                value.Add(property.Name, property.Value.GetInt32());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -155,6 +217,33 @@ namespace body_dictionary
                 throw;
             }
         }
+        public Response PutEmpty(IDictionary<string, string> arrayBody, CancellationToken cancellationToken = default)
+        {
+            if (arrayBody == null)
+            {
+                throw new ArgumentNullException(nameof(arrayBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.PutEmpty");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutEmptyRequest(arrayBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetNullValueRequest()
         {
             var message = pipeline.CreateMessage();
@@ -187,6 +276,37 @@ namespace body_dictionary
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<IDictionary<string, string>> GetNullValue(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetNullValue");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetNullValueRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, string> value = new Dictionary<string, string>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                value.Add(property.Name, property.Value.GetString());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -235,6 +355,37 @@ namespace body_dictionary
                 throw;
             }
         }
+        public Response<IDictionary<string, string>> GetNullKey(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetNullKey");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetNullKeyRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, string> value = new Dictionary<string, string>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                value.Add(property.Name, property.Value.GetString());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetEmptyStringKeyRequest()
         {
             var message = pipeline.CreateMessage();
@@ -267,6 +418,37 @@ namespace body_dictionary
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<IDictionary<string, string>> GetEmptyStringKey(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetEmptyStringKey");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetEmptyStringKeyRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, string> value = new Dictionary<string, string>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                value.Add(property.Name, property.Value.GetString());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -315,6 +497,37 @@ namespace body_dictionary
                 throw;
             }
         }
+        public Response<IDictionary<string, string>> GetInvalid(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetInvalid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetInvalidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, string> value = new Dictionary<string, string>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                value.Add(property.Name, property.Value.GetString());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetBooleanTfftRequest()
         {
             var message = pipeline.CreateMessage();
@@ -347,6 +560,37 @@ namespace body_dictionary
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<IDictionary<string, bool>> GetBooleanTfft(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetBooleanTfft");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetBooleanTfftRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, bool> value = new Dictionary<string, bool>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                value.Add(property.Name, property.Value.GetBoolean());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -401,6 +645,33 @@ namespace body_dictionary
                 throw;
             }
         }
+        public Response PutBooleanTfft(IDictionary<string, bool> arrayBody, CancellationToken cancellationToken = default)
+        {
+            if (arrayBody == null)
+            {
+                throw new ArgumentNullException(nameof(arrayBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.PutBooleanTfft");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutBooleanTfftRequest(arrayBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetBooleanInvalidNullRequest()
         {
             var message = pipeline.CreateMessage();
@@ -433,6 +704,37 @@ namespace body_dictionary
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<IDictionary<string, bool>> GetBooleanInvalidNull(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetBooleanInvalidNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetBooleanInvalidNullRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, bool> value = new Dictionary<string, bool>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                value.Add(property.Name, property.Value.GetBoolean());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -481,6 +783,37 @@ namespace body_dictionary
                 throw;
             }
         }
+        public Response<IDictionary<string, bool>> GetBooleanInvalidString(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetBooleanInvalidString");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetBooleanInvalidStringRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, bool> value = new Dictionary<string, bool>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                value.Add(property.Name, property.Value.GetBoolean());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetIntegerValidRequest()
         {
             var message = pipeline.CreateMessage();
@@ -513,6 +846,37 @@ namespace body_dictionary
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<IDictionary<string, int>> GetIntegerValid(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetIntegerValid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetIntegerValidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, int> value = new Dictionary<string, int>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                value.Add(property.Name, property.Value.GetInt32());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -567,6 +931,33 @@ namespace body_dictionary
                 throw;
             }
         }
+        public Response PutIntegerValid(IDictionary<string, int> arrayBody, CancellationToken cancellationToken = default)
+        {
+            if (arrayBody == null)
+            {
+                throw new ArgumentNullException(nameof(arrayBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.PutIntegerValid");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutIntegerValidRequest(arrayBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetIntInvalidNullRequest()
         {
             var message = pipeline.CreateMessage();
@@ -599,6 +990,37 @@ namespace body_dictionary
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<IDictionary<string, int>> GetIntInvalidNull(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetIntInvalidNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetIntInvalidNullRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, int> value = new Dictionary<string, int>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                value.Add(property.Name, property.Value.GetInt32());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -647,6 +1069,37 @@ namespace body_dictionary
                 throw;
             }
         }
+        public Response<IDictionary<string, int>> GetIntInvalidString(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetIntInvalidString");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetIntInvalidStringRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, int> value = new Dictionary<string, int>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                value.Add(property.Name, property.Value.GetInt32());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetLongValidRequest()
         {
             var message = pipeline.CreateMessage();
@@ -679,6 +1132,37 @@ namespace body_dictionary
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<IDictionary<string, long>> GetLongValid(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetLongValid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetLongValidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, long> value = new Dictionary<string, long>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                value.Add(property.Name, property.Value.GetInt64());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -733,6 +1217,33 @@ namespace body_dictionary
                 throw;
             }
         }
+        public Response PutLongValid(IDictionary<string, long> arrayBody, CancellationToken cancellationToken = default)
+        {
+            if (arrayBody == null)
+            {
+                throw new ArgumentNullException(nameof(arrayBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.PutLongValid");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutLongValidRequest(arrayBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetLongInvalidNullRequest()
         {
             var message = pipeline.CreateMessage();
@@ -765,6 +1276,37 @@ namespace body_dictionary
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<IDictionary<string, long>> GetLongInvalidNull(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetLongInvalidNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetLongInvalidNullRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, long> value = new Dictionary<string, long>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                value.Add(property.Name, property.Value.GetInt64());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -813,6 +1355,37 @@ namespace body_dictionary
                 throw;
             }
         }
+        public Response<IDictionary<string, long>> GetLongInvalidString(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetLongInvalidString");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetLongInvalidStringRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, long> value = new Dictionary<string, long>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                value.Add(property.Name, property.Value.GetInt64());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetFloatValidRequest()
         {
             var message = pipeline.CreateMessage();
@@ -845,6 +1418,37 @@ namespace body_dictionary
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<IDictionary<string, float>> GetFloatValid(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetFloatValid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetFloatValidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, float> value = new Dictionary<string, float>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                value.Add(property.Name, property.Value.GetSingle());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -899,6 +1503,33 @@ namespace body_dictionary
                 throw;
             }
         }
+        public Response PutFloatValid(IDictionary<string, float> arrayBody, CancellationToken cancellationToken = default)
+        {
+            if (arrayBody == null)
+            {
+                throw new ArgumentNullException(nameof(arrayBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.PutFloatValid");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutFloatValidRequest(arrayBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetFloatInvalidNullRequest()
         {
             var message = pipeline.CreateMessage();
@@ -931,6 +1562,37 @@ namespace body_dictionary
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<IDictionary<string, float>> GetFloatInvalidNull(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetFloatInvalidNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetFloatInvalidNullRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, float> value = new Dictionary<string, float>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                value.Add(property.Name, property.Value.GetSingle());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -979,6 +1641,37 @@ namespace body_dictionary
                 throw;
             }
         }
+        public Response<IDictionary<string, float>> GetFloatInvalidString(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetFloatInvalidString");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetFloatInvalidStringRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, float> value = new Dictionary<string, float>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                value.Add(property.Name, property.Value.GetSingle());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetDoubleValidRequest()
         {
             var message = pipeline.CreateMessage();
@@ -1011,6 +1704,37 @@ namespace body_dictionary
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<IDictionary<string, double>> GetDoubleValid(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDoubleValid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDoubleValidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, double> value = new Dictionary<string, double>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                value.Add(property.Name, property.Value.GetDouble());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -1065,6 +1789,33 @@ namespace body_dictionary
                 throw;
             }
         }
+        public Response PutDoubleValid(IDictionary<string, double> arrayBody, CancellationToken cancellationToken = default)
+        {
+            if (arrayBody == null)
+            {
+                throw new ArgumentNullException(nameof(arrayBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.PutDoubleValid");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutDoubleValidRequest(arrayBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetDoubleInvalidNullRequest()
         {
             var message = pipeline.CreateMessage();
@@ -1097,6 +1848,37 @@ namespace body_dictionary
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<IDictionary<string, double>> GetDoubleInvalidNull(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDoubleInvalidNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDoubleInvalidNullRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, double> value = new Dictionary<string, double>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                value.Add(property.Name, property.Value.GetDouble());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -1145,6 +1927,37 @@ namespace body_dictionary
                 throw;
             }
         }
+        public Response<IDictionary<string, double>> GetDoubleInvalidString(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDoubleInvalidString");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDoubleInvalidStringRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, double> value = new Dictionary<string, double>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                value.Add(property.Name, property.Value.GetDouble());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetStringValidRequest()
         {
             var message = pipeline.CreateMessage();
@@ -1177,6 +1990,37 @@ namespace body_dictionary
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<IDictionary<string, string>> GetStringValid(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetStringValid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetStringValidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, string> value = new Dictionary<string, string>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                value.Add(property.Name, property.Value.GetString());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -1231,6 +2075,33 @@ namespace body_dictionary
                 throw;
             }
         }
+        public Response PutStringValid(IDictionary<string, string> arrayBody, CancellationToken cancellationToken = default)
+        {
+            if (arrayBody == null)
+            {
+                throw new ArgumentNullException(nameof(arrayBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.PutStringValid");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutStringValidRequest(arrayBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetStringWithNullRequest()
         {
             var message = pipeline.CreateMessage();
@@ -1263,6 +2134,37 @@ namespace body_dictionary
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<IDictionary<string, string>> GetStringWithNull(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetStringWithNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetStringWithNullRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, string> value = new Dictionary<string, string>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                value.Add(property.Name, property.Value.GetString());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -1311,6 +2213,37 @@ namespace body_dictionary
                 throw;
             }
         }
+        public Response<IDictionary<string, string>> GetStringWithInvalid(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetStringWithInvalid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetStringWithInvalidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, string> value = new Dictionary<string, string>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                value.Add(property.Name, property.Value.GetString());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetDateValidRequest()
         {
             var message = pipeline.CreateMessage();
@@ -1343,6 +2276,37 @@ namespace body_dictionary
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<IDictionary<string, DateTimeOffset>> GetDateValid(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDateValid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDateValidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, DateTimeOffset> value = new Dictionary<string, DateTimeOffset>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                value.Add(property.Name, property.Value.GetDateTimeOffset("D"));
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -1397,6 +2361,33 @@ namespace body_dictionary
                 throw;
             }
         }
+        public Response PutDateValid(IDictionary<string, DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
+        {
+            if (arrayBody == null)
+            {
+                throw new ArgumentNullException(nameof(arrayBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.PutDateValid");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutDateValidRequest(arrayBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetDateInvalidNullRequest()
         {
             var message = pipeline.CreateMessage();
@@ -1429,6 +2420,37 @@ namespace body_dictionary
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<IDictionary<string, DateTimeOffset>> GetDateInvalidNull(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDateInvalidNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDateInvalidNullRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, DateTimeOffset> value = new Dictionary<string, DateTimeOffset>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                value.Add(property.Name, property.Value.GetDateTimeOffset("D"));
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -1477,6 +2499,37 @@ namespace body_dictionary
                 throw;
             }
         }
+        public Response<IDictionary<string, DateTimeOffset>> GetDateInvalidChars(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDateInvalidChars");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDateInvalidCharsRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, DateTimeOffset> value = new Dictionary<string, DateTimeOffset>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                value.Add(property.Name, property.Value.GetDateTimeOffset("D"));
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetDateTimeValidRequest()
         {
             var message = pipeline.CreateMessage();
@@ -1509,6 +2562,37 @@ namespace body_dictionary
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<IDictionary<string, DateTimeOffset>> GetDateTimeValid(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDateTimeValid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDateTimeValidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, DateTimeOffset> value = new Dictionary<string, DateTimeOffset>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                value.Add(property.Name, property.Value.GetDateTimeOffset("S"));
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -1563,6 +2647,33 @@ namespace body_dictionary
                 throw;
             }
         }
+        public Response PutDateTimeValid(IDictionary<string, DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
+        {
+            if (arrayBody == null)
+            {
+                throw new ArgumentNullException(nameof(arrayBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.PutDateTimeValid");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutDateTimeValidRequest(arrayBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetDateTimeInvalidNullRequest()
         {
             var message = pipeline.CreateMessage();
@@ -1595,6 +2706,37 @@ namespace body_dictionary
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<IDictionary<string, DateTimeOffset>> GetDateTimeInvalidNull(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDateTimeInvalidNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDateTimeInvalidNullRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, DateTimeOffset> value = new Dictionary<string, DateTimeOffset>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                value.Add(property.Name, property.Value.GetDateTimeOffset("S"));
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -1643,6 +2785,37 @@ namespace body_dictionary
                 throw;
             }
         }
+        public Response<IDictionary<string, DateTimeOffset>> GetDateTimeInvalidChars(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDateTimeInvalidChars");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDateTimeInvalidCharsRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, DateTimeOffset> value = new Dictionary<string, DateTimeOffset>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                value.Add(property.Name, property.Value.GetDateTimeOffset("S"));
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetDateTimeRfc1123ValidRequest()
         {
             var message = pipeline.CreateMessage();
@@ -1675,6 +2848,37 @@ namespace body_dictionary
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<IDictionary<string, DateTimeOffset>> GetDateTimeRfc1123Valid(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDateTimeRfc1123Valid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDateTimeRfc1123ValidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, DateTimeOffset> value = new Dictionary<string, DateTimeOffset>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                value.Add(property.Name, property.Value.GetDateTimeOffset("R"));
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -1729,6 +2933,33 @@ namespace body_dictionary
                 throw;
             }
         }
+        public Response PutDateTimeRfc1123Valid(IDictionary<string, DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
+        {
+            if (arrayBody == null)
+            {
+                throw new ArgumentNullException(nameof(arrayBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.PutDateTimeRfc1123Valid");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutDateTimeRfc1123ValidRequest(arrayBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetDurationValidRequest()
         {
             var message = pipeline.CreateMessage();
@@ -1761,6 +2992,37 @@ namespace body_dictionary
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<IDictionary<string, TimeSpan>> GetDurationValid(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDurationValid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDurationValidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, TimeSpan> value = new Dictionary<string, TimeSpan>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                value.Add(property.Name, property.Value.GetTimeSpan("P"));
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -1815,6 +3077,33 @@ namespace body_dictionary
                 throw;
             }
         }
+        public Response PutDurationValid(IDictionary<string, TimeSpan> arrayBody, CancellationToken cancellationToken = default)
+        {
+            if (arrayBody == null)
+            {
+                throw new ArgumentNullException(nameof(arrayBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.PutDurationValid");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutDurationValidRequest(arrayBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetByteValidRequest()
         {
             var message = pipeline.CreateMessage();
@@ -1847,6 +3136,37 @@ namespace body_dictionary
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<IDictionary<string, byte[]>> GetByteValid(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetByteValid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetByteValidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, byte[]> value = new Dictionary<string, byte[]>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                value.Add(property.Name, property.Value.GetBytesFromBase64());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -1901,6 +3221,33 @@ namespace body_dictionary
                 throw;
             }
         }
+        public Response PutByteValid(IDictionary<string, byte[]> arrayBody, CancellationToken cancellationToken = default)
+        {
+            if (arrayBody == null)
+            {
+                throw new ArgumentNullException(nameof(arrayBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.PutByteValid");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutByteValidRequest(arrayBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetByteInvalidNullRequest()
         {
             var message = pipeline.CreateMessage();
@@ -1933,6 +3280,37 @@ namespace body_dictionary
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<IDictionary<string, byte[]>> GetByteInvalidNull(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetByteInvalidNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetByteInvalidNullRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, byte[]> value = new Dictionary<string, byte[]>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                value.Add(property.Name, property.Value.GetBytesFromBase64());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -1981,6 +3359,37 @@ namespace body_dictionary
                 throw;
             }
         }
+        public Response<IDictionary<string, byte[]>> GetBase64Url(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetBase64Url");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetBase64UrlRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, byte[]> value = new Dictionary<string, byte[]>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                value.Add(property.Name, property.Value.GetBytesFromBase64("U"));
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetComplexNullRequest()
         {
             var message = pipeline.CreateMessage();
@@ -2013,6 +3422,37 @@ namespace body_dictionary
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<IDictionary<string, Widget>> GetComplexNull(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetComplexNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetComplexNullRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, Widget> value = new Dictionary<string, Widget>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                value.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -2061,6 +3501,37 @@ namespace body_dictionary
                 throw;
             }
         }
+        public Response<IDictionary<string, Widget>> GetComplexEmpty(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetComplexEmpty");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetComplexEmptyRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, Widget> value = new Dictionary<string, Widget>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                value.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetComplexItemNullRequest()
         {
             var message = pipeline.CreateMessage();
@@ -2093,6 +3564,37 @@ namespace body_dictionary
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<IDictionary<string, Widget>> GetComplexItemNull(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetComplexItemNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetComplexItemNullRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, Widget> value = new Dictionary<string, Widget>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                value.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -2141,6 +3643,37 @@ namespace body_dictionary
                 throw;
             }
         }
+        public Response<IDictionary<string, Widget>> GetComplexItemEmpty(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetComplexItemEmpty");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetComplexItemEmptyRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, Widget> value = new Dictionary<string, Widget>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                value.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetComplexValidRequest()
         {
             var message = pipeline.CreateMessage();
@@ -2173,6 +3706,37 @@ namespace body_dictionary
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<IDictionary<string, Widget>> GetComplexValid(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetComplexValid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetComplexValidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, Widget> value = new Dictionary<string, Widget>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                value.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -2227,6 +3791,33 @@ namespace body_dictionary
                 throw;
             }
         }
+        public Response PutComplexValid(IDictionary<string, Widget> arrayBody, CancellationToken cancellationToken = default)
+        {
+            if (arrayBody == null)
+            {
+                throw new ArgumentNullException(nameof(arrayBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.PutComplexValid");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutComplexValidRequest(arrayBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetArrayNullRequest()
         {
             var message = pipeline.CreateMessage();
@@ -2264,6 +3855,42 @@ namespace body_dictionary
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<IDictionary<string, ICollection<string>>> GetArrayNull(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetArrayNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetArrayNullRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, ICollection<string>> value = new Dictionary<string, ICollection<string>>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                ICollection<string> value0 = new List<string>();
+                                foreach (var item in property.Value.EnumerateArray())
+                                {
+                                    value0.Add(item.GetString());
+                                }
+                                value.Add(property.Name, value0);
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -2317,6 +3944,42 @@ namespace body_dictionary
                 throw;
             }
         }
+        public Response<IDictionary<string, ICollection<string>>> GetArrayEmpty(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetArrayEmpty");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetArrayEmptyRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, ICollection<string>> value = new Dictionary<string, ICollection<string>>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                ICollection<string> value0 = new List<string>();
+                                foreach (var item in property.Value.EnumerateArray())
+                                {
+                                    value0.Add(item.GetString());
+                                }
+                                value.Add(property.Name, value0);
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetArrayItemNullRequest()
         {
             var message = pipeline.CreateMessage();
@@ -2354,6 +4017,42 @@ namespace body_dictionary
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<IDictionary<string, ICollection<string>>> GetArrayItemNull(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetArrayItemNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetArrayItemNullRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, ICollection<string>> value = new Dictionary<string, ICollection<string>>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                ICollection<string> value0 = new List<string>();
+                                foreach (var item in property.Value.EnumerateArray())
+                                {
+                                    value0.Add(item.GetString());
+                                }
+                                value.Add(property.Name, value0);
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -2407,6 +4106,42 @@ namespace body_dictionary
                 throw;
             }
         }
+        public Response<IDictionary<string, ICollection<string>>> GetArrayItemEmpty(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetArrayItemEmpty");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetArrayItemEmptyRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, ICollection<string>> value = new Dictionary<string, ICollection<string>>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                ICollection<string> value0 = new List<string>();
+                                foreach (var item in property.Value.EnumerateArray())
+                                {
+                                    value0.Add(item.GetString());
+                                }
+                                value.Add(property.Name, value0);
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetArrayValidRequest()
         {
             var message = pipeline.CreateMessage();
@@ -2444,6 +4179,42 @@ namespace body_dictionary
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<IDictionary<string, ICollection<string>>> GetArrayValid(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetArrayValid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetArrayValidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, ICollection<string>> value = new Dictionary<string, ICollection<string>>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                ICollection<string> value0 = new List<string>();
+                                foreach (var item in property.Value.EnumerateArray())
+                                {
+                                    value0.Add(item.GetString());
+                                }
+                                value.Add(property.Name, value0);
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -2503,6 +4274,33 @@ namespace body_dictionary
                 throw;
             }
         }
+        public Response PutArrayValid(IDictionary<string, ICollection<string>> arrayBody, CancellationToken cancellationToken = default)
+        {
+            if (arrayBody == null)
+            {
+                throw new ArgumentNullException(nameof(arrayBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.PutArrayValid");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutArrayValidRequest(arrayBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetDictionaryNullRequest()
         {
             var message = pipeline.CreateMessage();
@@ -2535,6 +4333,37 @@ namespace body_dictionary
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<IDictionary<string, object>> GetDictionaryNull(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDictionaryNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDictionaryNullRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, object> value = new Dictionary<string, object>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                value.Add(property.Name, property.Value.GetObject());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -2583,6 +4412,37 @@ namespace body_dictionary
                 throw;
             }
         }
+        public Response<IDictionary<string, object>> GetDictionaryEmpty(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDictionaryEmpty");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDictionaryEmptyRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, object> value = new Dictionary<string, object>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                value.Add(property.Name, property.Value.GetObject());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetDictionaryItemNullRequest()
         {
             var message = pipeline.CreateMessage();
@@ -2615,6 +4475,37 @@ namespace body_dictionary
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<IDictionary<string, object>> GetDictionaryItemNull(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDictionaryItemNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDictionaryItemNullRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, object> value = new Dictionary<string, object>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                value.Add(property.Name, property.Value.GetObject());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -2663,6 +4554,37 @@ namespace body_dictionary
                 throw;
             }
         }
+        public Response<IDictionary<string, object>> GetDictionaryItemEmpty(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDictionaryItemEmpty");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDictionaryItemEmptyRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, object> value = new Dictionary<string, object>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                value.Add(property.Name, property.Value.GetObject());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetDictionaryValidRequest()
         {
             var message = pipeline.CreateMessage();
@@ -2695,6 +4617,37 @@ namespace body_dictionary
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<IDictionary<string, object>> GetDictionaryValid(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDictionaryValid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDictionaryValidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            IDictionary<string, object> value = new Dictionary<string, object>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                value.Add(property.Name, property.Value.GetObject());
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -2741,6 +4694,33 @@ namespace body_dictionary
                         return message.Response;
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response PutDictionaryValid(IDictionary<string, object> arrayBody, CancellationToken cancellationToken = default)
+        {
+            if (arrayBody == null)
+            {
+                throw new ArgumentNullException(nameof(arrayBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("DictionaryOperations.PutDictionaryValid");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutDictionaryValidRequest(arrayBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)

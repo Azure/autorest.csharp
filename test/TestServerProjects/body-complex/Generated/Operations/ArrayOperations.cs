@@ -64,6 +64,33 @@ namespace body_complex
                 throw;
             }
         }
+        public Response<ArrayWrapper> GetValid(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetValid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetValidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = ArrayWrapper.DeserializeArrayWrapper(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreatePutValidRequest(ArrayWrapper complexBody)
         {
             var message = pipeline.CreateMessage();
@@ -104,6 +131,33 @@ namespace body_complex
                 throw;
             }
         }
+        public Response PutValid(ArrayWrapper complexBody, CancellationToken cancellationToken = default)
+        {
+            if (complexBody == null)
+            {
+                throw new ArgumentNullException(nameof(complexBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.PutValid");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutValidRequest(complexBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetEmptyRequest()
         {
             var message = pipeline.CreateMessage();
@@ -132,6 +186,33 @@ namespace body_complex
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<ArrayWrapper> GetEmpty(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetEmpty");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetEmptyRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = ArrayWrapper.DeserializeArrayWrapper(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
@@ -180,6 +261,33 @@ namespace body_complex
                 throw;
             }
         }
+        public Response PutEmpty(ArrayWrapper complexBody, CancellationToken cancellationToken = default)
+        {
+            if (complexBody == null)
+            {
+                throw new ArgumentNullException(nameof(complexBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.PutEmpty");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutEmptyRequest(complexBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetNotProvidedRequest()
         {
             var message = pipeline.CreateMessage();
@@ -208,6 +316,33 @@ namespace body_complex
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<ArrayWrapper> GetNotProvided(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetNotProvided");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetNotProvidedRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = ArrayWrapper.DeserializeArrayWrapper(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)

@@ -83,5 +83,40 @@ namespace custom_baseUrl_more_options
                 throw;
             }
         }
+        public Response GetEmpty(string vault, string secret, string keyName, string? keyVersion, CancellationToken cancellationToken = default)
+        {
+            if (vault == null)
+            {
+                throw new ArgumentNullException(nameof(vault));
+            }
+            if (secret == null)
+            {
+                throw new ArgumentNullException(nameof(secret));
+            }
+            if (keyName == null)
+            {
+                throw new ArgumentNullException(nameof(keyName));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("PathsOperations.GetEmpty");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetEmptyRequest(vault, secret, keyName, keyVersion);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
     }
 }

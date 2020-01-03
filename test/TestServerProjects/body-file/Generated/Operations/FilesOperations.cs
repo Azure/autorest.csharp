@@ -62,6 +62,32 @@ namespace body_file
                 throw;
             }
         }
+        public Response<Stream> GetFile(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("FilesOperations.GetFile");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetFileRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            var value = message.ExtractResponseContent();
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetFileLargeRequest()
         {
             var message = pipeline.CreateMessage();
@@ -97,6 +123,32 @@ namespace body_file
                 throw;
             }
         }
+        public Response<Stream> GetFileLarge(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("FilesOperations.GetFileLarge");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetFileLargeRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            var value = message.ExtractResponseContent();
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetEmptyFileRequest()
         {
             var message = pipeline.CreateMessage();
@@ -124,6 +176,32 @@ namespace body_file
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<Stream> GetEmptyFile(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("FilesOperations.GetEmptyFile");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetEmptyFileRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            var value = message.ExtractResponseContent();
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)

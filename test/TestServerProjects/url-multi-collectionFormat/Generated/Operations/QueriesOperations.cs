@@ -63,6 +63,29 @@ namespace url_multi_collectionFormat
                 throw;
             }
         }
+        public Response ArrayStringMultiNull(IEnumerable<string>? arrayQuery, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringMultiNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateArrayStringMultiNullRequest(arrayQuery);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateArrayStringMultiEmptyRequest(IEnumerable<string>? arrayQuery)
         {
             var message = pipeline.CreateMessage();
@@ -99,6 +122,29 @@ namespace url_multi_collectionFormat
                 throw;
             }
         }
+        public Response ArrayStringMultiEmpty(IEnumerable<string>? arrayQuery, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringMultiEmpty");
+            scope.Start();
+            try
+            {
+                using var message = CreateArrayStringMultiEmptyRequest(arrayQuery);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateArrayStringMultiValidRequest(IEnumerable<string>? arrayQuery)
         {
             var message = pipeline.CreateMessage();
@@ -127,6 +173,29 @@ namespace url_multi_collectionFormat
                         return message.Response;
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response ArrayStringMultiValid(IEnumerable<string>? arrayQuery, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringMultiValid");
+            scope.Start();
+            try
+            {
+                using var message = CreateArrayStringMultiValidRequest(arrayQuery);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
