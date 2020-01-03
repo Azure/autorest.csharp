@@ -41,7 +41,7 @@ namespace AppConfiguration
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/keys", false);
             if (syncToken != null)
             {
@@ -123,7 +123,7 @@ namespace AppConfiguration
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Head;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/keys", false);
             if (syncToken != null)
             {
@@ -197,7 +197,7 @@ namespace AppConfiguration
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/kv", false);
             if (syncToken != null)
             {
@@ -287,7 +287,7 @@ namespace AppConfiguration
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Head;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/kv", false);
             if (syncToken != null)
             {
@@ -369,7 +369,7 @@ namespace AppConfiguration
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/kv/", false);
             request.Uri.AppendPath(key, true);
             if (syncToken != null)
@@ -468,7 +468,7 @@ namespace AppConfiguration
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/kv/", false);
             request.Uri.AppendPath(key, true);
             if (syncToken != null)
@@ -568,7 +568,7 @@ namespace AppConfiguration
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/kv/", false);
             request.Uri.AppendPath(key, true);
             if (syncToken != null)
@@ -655,7 +655,7 @@ namespace AppConfiguration
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Head;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/kv/", false);
             request.Uri.AppendPath(key, true);
             if (syncToken != null)
@@ -746,7 +746,7 @@ namespace AppConfiguration
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/labels", false);
             if (syncToken != null)
             {
@@ -832,7 +832,7 @@ namespace AppConfiguration
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Head;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/labels", false);
             if (syncToken != null)
             {
@@ -910,7 +910,7 @@ namespace AppConfiguration
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/locks/", false);
             request.Uri.AppendPath(key, true);
             if (syncToken != null)
@@ -1001,7 +1001,7 @@ namespace AppConfiguration
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/locks/", false);
             request.Uri.AppendPath(key, true);
             if (syncToken != null)
@@ -1092,7 +1092,7 @@ namespace AppConfiguration
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/revisions", false);
             if (syncToken != null)
             {
@@ -1182,7 +1182,7 @@ namespace AppConfiguration
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Head;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/revisions", false);
             if (syncToken != null)
             {

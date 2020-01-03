@@ -32,7 +32,7 @@ namespace body_datetime_rfc1123
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/datetimerfc1123/null", false);
             return message;
         }
@@ -95,7 +95,7 @@ namespace body_datetime_rfc1123
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/datetimerfc1123/invalid", false);
             return message;
         }
@@ -158,7 +158,7 @@ namespace body_datetime_rfc1123
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/datetimerfc1123/overflow", false);
             return message;
         }
@@ -221,7 +221,7 @@ namespace body_datetime_rfc1123
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/datetimerfc1123/underflow", false);
             return message;
         }
@@ -284,7 +284,7 @@ namespace body_datetime_rfc1123
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/datetimerfc1123/max", false);
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
@@ -343,7 +343,7 @@ namespace body_datetime_rfc1123
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/datetimerfc1123/max/lowercase", false);
             return message;
         }
@@ -406,7 +406,7 @@ namespace body_datetime_rfc1123
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/datetimerfc1123/max/uppercase", false);
             return message;
         }
@@ -469,7 +469,7 @@ namespace body_datetime_rfc1123
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/datetimerfc1123/min", false);
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
@@ -528,7 +528,7 @@ namespace body_datetime_rfc1123
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/datetimerfc1123/min", false);
             return message;
         }

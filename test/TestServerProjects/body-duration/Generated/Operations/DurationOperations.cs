@@ -32,7 +32,7 @@ namespace body_duration
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/duration/null", false);
             return message;
         }
@@ -95,7 +95,7 @@ namespace body_duration
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/duration/positiveduration", false);
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
@@ -154,7 +154,7 @@ namespace body_duration
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/duration/positiveduration", false);
             return message;
         }
@@ -217,7 +217,7 @@ namespace body_duration
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/duration/invalid", false);
             return message;
         }

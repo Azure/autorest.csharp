@@ -32,7 +32,7 @@ namespace header
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/header/param/existingkey", false);
             request.Headers.Add("User-Agent", userAgent);
             return message;
@@ -96,7 +96,7 @@ namespace header
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/header/response/existingkey", false);
             return message;
         }
@@ -153,7 +153,7 @@ namespace header
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/header/param/protectedkey", false);
             request.Headers.Add("Content-Type", contentType);
             return message;
@@ -217,7 +217,7 @@ namespace header
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/header/response/protectedkey", false);
             return message;
         }
@@ -274,7 +274,7 @@ namespace header
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/header/param/prim/integer", false);
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("value", value);
@@ -339,7 +339,7 @@ namespace header
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/header/response/prim/integer", false);
             request.Headers.Add("scenario", scenario);
             return message;
@@ -405,7 +405,7 @@ namespace header
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/header/param/prim/long", false);
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("value", value);
@@ -470,7 +470,7 @@ namespace header
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/header/response/prim/long", false);
             request.Headers.Add("scenario", scenario);
             return message;
@@ -536,7 +536,7 @@ namespace header
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/header/param/prim/float", false);
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("value", value);
@@ -601,7 +601,7 @@ namespace header
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/header/response/prim/float", false);
             request.Headers.Add("scenario", scenario);
             return message;
@@ -667,7 +667,7 @@ namespace header
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/header/param/prim/double", false);
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("value", value);
@@ -732,7 +732,7 @@ namespace header
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/header/response/prim/double", false);
             request.Headers.Add("scenario", scenario);
             return message;
@@ -798,7 +798,7 @@ namespace header
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/header/param/prim/bool", false);
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("value", value);
@@ -863,7 +863,7 @@ namespace header
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/header/response/prim/bool", false);
             request.Headers.Add("scenario", scenario);
             return message;
@@ -929,7 +929,7 @@ namespace header
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/header/param/prim/string", false);
             request.Headers.Add("scenario", scenario);
             if (value != null)
@@ -997,7 +997,7 @@ namespace header
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/header/response/prim/string", false);
             request.Headers.Add("scenario", scenario);
             return message;
@@ -1063,7 +1063,7 @@ namespace header
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/header/param/prim/date", false);
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("value", value, "D");
@@ -1128,7 +1128,7 @@ namespace header
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/header/response/prim/date", false);
             request.Headers.Add("scenario", scenario);
             return message;
@@ -1194,7 +1194,7 @@ namespace header
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/header/param/prim/datetime", false);
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("value", value, "S");
@@ -1259,7 +1259,7 @@ namespace header
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/header/response/prim/datetime", false);
             request.Headers.Add("scenario", scenario);
             return message;
@@ -1325,7 +1325,7 @@ namespace header
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/header/param/prim/datetimerfc1123", false);
             request.Headers.Add("scenario", scenario);
             if (value != null)
@@ -1393,7 +1393,7 @@ namespace header
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/header/response/prim/datetimerfc1123", false);
             request.Headers.Add("scenario", scenario);
             return message;
@@ -1459,7 +1459,7 @@ namespace header
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/header/param/prim/duration", false);
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("value", value, "P");
@@ -1524,7 +1524,7 @@ namespace header
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/header/response/prim/duration", false);
             request.Headers.Add("scenario", scenario);
             return message;
@@ -1590,7 +1590,7 @@ namespace header
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/header/param/prim/byte", false);
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("value", value);
@@ -1663,7 +1663,7 @@ namespace header
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/header/response/prim/byte", false);
             request.Headers.Add("scenario", scenario);
             return message;
@@ -1729,7 +1729,7 @@ namespace header
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/header/param/prim/enum", false);
             request.Headers.Add("scenario", scenario);
             if (value != null)
@@ -1797,7 +1797,7 @@ namespace header
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/header/response/prim/enum", false);
             request.Headers.Add("scenario", scenario);
             return message;
@@ -1863,7 +1863,7 @@ namespace header
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0", false);
             return message;
         }

@@ -32,7 +32,7 @@ namespace body_date
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/date/null", false);
             return message;
         }
@@ -95,7 +95,7 @@ namespace body_date
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/date/invaliddate", false);
             return message;
         }
@@ -158,7 +158,7 @@ namespace body_date
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/date/overflowdate", false);
             return message;
         }
@@ -221,7 +221,7 @@ namespace body_date
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/date/underflowdate", false);
             return message;
         }
@@ -284,7 +284,7 @@ namespace body_date
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/date/max", false);
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
@@ -343,7 +343,7 @@ namespace body_date
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/date/max", false);
             return message;
         }
@@ -406,7 +406,7 @@ namespace body_date
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/date/min", false);
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
@@ -465,7 +465,7 @@ namespace body_date
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/date/min", false);
             return message;
         }

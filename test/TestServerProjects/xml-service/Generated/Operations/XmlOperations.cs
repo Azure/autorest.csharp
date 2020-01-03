@@ -35,7 +35,7 @@ namespace xml_service
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/xml/complex-type-ref-no-meta", false);
             return message;
         }
@@ -108,7 +108,7 @@ namespace xml_service
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/xml/complex-type-ref-no-meta", false);
             request.Headers.Add("Content-Type", "application/xml");
             using var content = new XmlWriterContent();
@@ -175,7 +175,7 @@ namespace xml_service
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/xml/complex-type-ref-with-meta", false);
             return message;
         }
@@ -248,7 +248,7 @@ namespace xml_service
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/xml/complex-type-ref-with-meta", false);
             request.Headers.Add("Content-Type", "application/xml");
             using var content = new XmlWriterContent();
@@ -315,7 +315,7 @@ namespace xml_service
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/xml/simple", false);
             return message;
         }
@@ -388,7 +388,7 @@ namespace xml_service
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/xml/simple", false);
             request.Headers.Add("Content-Type", "application/xml");
             using var content = new XmlWriterContent();
@@ -455,7 +455,7 @@ namespace xml_service
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/xml/wrapped-lists", false);
             return message;
         }
@@ -528,7 +528,7 @@ namespace xml_service
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/xml/wrapped-lists", false);
             request.Headers.Add("Content-Type", "application/xml");
             using var content = new XmlWriterContent();
@@ -595,7 +595,7 @@ namespace xml_service
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/xml/headers", false);
             return message;
         }
@@ -652,7 +652,7 @@ namespace xml_service
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/xml/empty-list", false);
             return message;
         }
@@ -725,7 +725,7 @@ namespace xml_service
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/xml/empty-list", false);
             request.Headers.Add("Content-Type", "application/xml");
             using var content = new XmlWriterContent();
@@ -792,7 +792,7 @@ namespace xml_service
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/xml/empty-wrapped-lists", false);
             return message;
         }
@@ -865,7 +865,7 @@ namespace xml_service
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/xml/empty-wrapped-lists", false);
             request.Headers.Add("Content-Type", "application/xml");
             using var content = new XmlWriterContent();
@@ -932,7 +932,7 @@ namespace xml_service
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/xml/root-list", false);
             return message;
         }
@@ -1017,7 +1017,7 @@ namespace xml_service
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/xml/root-list", false);
             request.Headers.Add("Content-Type", "application/xml");
             using var content = new XmlWriterContent();
@@ -1089,7 +1089,7 @@ namespace xml_service
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/xml/root-list-single-item", false);
             return message;
         }
@@ -1174,7 +1174,7 @@ namespace xml_service
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/xml/root-list-single-item", false);
             request.Headers.Add("Content-Type", "application/xml");
             using var content = new XmlWriterContent();
@@ -1246,7 +1246,7 @@ namespace xml_service
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/xml/empty-root-list", false);
             return message;
         }
@@ -1331,7 +1331,7 @@ namespace xml_service
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/xml/empty-root-list", false);
             request.Headers.Add("Content-Type", "application/xml");
             using var content = new XmlWriterContent();
@@ -1403,7 +1403,7 @@ namespace xml_service
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/xml/empty-child-element", false);
             return message;
         }
@@ -1476,7 +1476,7 @@ namespace xml_service
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/xml/empty-child-element", false);
             request.Headers.Add("Content-Type", "application/xml");
             using var content = new XmlWriterContent();
@@ -1543,7 +1543,7 @@ namespace xml_service
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/xml/", false);
             request.Uri.AppendQuery("comp", "list", true);
             return message;
@@ -1617,7 +1617,7 @@ namespace xml_service
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/xml/", false);
             request.Uri.AppendQuery("comp", "properties", true);
             request.Uri.AppendQuery("restype", "service", true);
@@ -1692,7 +1692,7 @@ namespace xml_service
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/xml/", false);
             request.Headers.Add("Content-Type", "application/xml");
             request.Uri.AppendQuery("comp", "properties", true);
@@ -1761,7 +1761,7 @@ namespace xml_service
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/xml/mycontainer", false);
             request.Uri.AppendQuery("comp", "acl", true);
             request.Uri.AppendQuery("restype", "container", true);
@@ -1848,7 +1848,7 @@ namespace xml_service
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/xml/mycontainer", false);
             request.Headers.Add("Content-Type", "application/xml");
             request.Uri.AppendQuery("comp", "acl", true);
@@ -1922,7 +1922,7 @@ namespace xml_service
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/xml/mycontainer", false);
             request.Uri.AppendQuery("comp", "list", true);
             request.Uri.AppendQuery("restype", "container", true);
@@ -1997,7 +1997,7 @@ namespace xml_service
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/xml/jsoninput", false);
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
@@ -2064,7 +2064,7 @@ namespace xml_service
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/xml/jsonoutput", false);
             return message;
         }

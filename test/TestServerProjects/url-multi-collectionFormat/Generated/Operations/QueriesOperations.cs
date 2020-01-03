@@ -32,7 +32,7 @@ namespace url_multi_collectionFormat
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/queries/array/multi/string/null", false);
             if (arrayQuery != null)
             {
@@ -91,7 +91,7 @@ namespace url_multi_collectionFormat
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/queries/array/multi/string/empty", false);
             if (arrayQuery != null)
             {
@@ -150,7 +150,7 @@ namespace url_multi_collectionFormat
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/queries/array/multi/string/valid", false);
             if (arrayQuery != null)
             {

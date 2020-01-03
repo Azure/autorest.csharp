@@ -37,7 +37,7 @@ namespace custom_baseUrl_more_options
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{vault}{secret}{dnsSuffix}"));
+            request.Uri.Reset(new Uri($"{vault}{secret}{dnsSuffix}"));
             request.Uri.AppendPath("/customuri/", false);
             request.Uri.AppendPath(subscriptionId, true);
             request.Uri.AppendPath("/", false);

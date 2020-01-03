@@ -33,7 +33,7 @@ namespace body_complex
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/complex/primitive/integer", false);
             return message;
         }
@@ -96,7 +96,7 @@ namespace body_complex
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/complex/primitive/integer", false);
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
@@ -163,7 +163,7 @@ namespace body_complex
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/complex/primitive/long", false);
             return message;
         }
@@ -226,7 +226,7 @@ namespace body_complex
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/complex/primitive/long", false);
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
@@ -293,7 +293,7 @@ namespace body_complex
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/complex/primitive/float", false);
             return message;
         }
@@ -356,7 +356,7 @@ namespace body_complex
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/complex/primitive/float", false);
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
@@ -423,7 +423,7 @@ namespace body_complex
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/complex/primitive/double", false);
             return message;
         }
@@ -486,7 +486,7 @@ namespace body_complex
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/complex/primitive/double", false);
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
@@ -553,7 +553,7 @@ namespace body_complex
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/complex/primitive/bool", false);
             return message;
         }
@@ -616,7 +616,7 @@ namespace body_complex
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/complex/primitive/bool", false);
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
@@ -683,7 +683,7 @@ namespace body_complex
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/complex/primitive/string", false);
             return message;
         }
@@ -746,7 +746,7 @@ namespace body_complex
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/complex/primitive/string", false);
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
@@ -813,7 +813,7 @@ namespace body_complex
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/complex/primitive/date", false);
             return message;
         }
@@ -876,7 +876,7 @@ namespace body_complex
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/complex/primitive/date", false);
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
@@ -943,7 +943,7 @@ namespace body_complex
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/complex/primitive/datetime", false);
             return message;
         }
@@ -1006,7 +1006,7 @@ namespace body_complex
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/complex/primitive/datetime", false);
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
@@ -1073,7 +1073,7 @@ namespace body_complex
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/complex/primitive/datetimerfc1123", false);
             return message;
         }
@@ -1136,7 +1136,7 @@ namespace body_complex
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/complex/primitive/datetimerfc1123", false);
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
@@ -1203,7 +1203,7 @@ namespace body_complex
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/complex/primitive/duration", false);
             return message;
         }
@@ -1266,7 +1266,7 @@ namespace body_complex
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/complex/primitive/duration", false);
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
@@ -1333,7 +1333,7 @@ namespace body_complex
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/complex/primitive/byte", false);
             return message;
         }
@@ -1396,7 +1396,7 @@ namespace body_complex
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/complex/primitive/byte", false);
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();

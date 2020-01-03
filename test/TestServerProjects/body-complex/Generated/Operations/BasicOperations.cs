@@ -39,7 +39,7 @@ namespace body_complex
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/complex/basic/valid", false);
             return message;
         }
@@ -102,7 +102,7 @@ namespace body_complex
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/complex/basic/valid", false);
             request.Headers.Add("Content-Type", "application/json");
             request.Uri.AppendQuery("api-version", ApiVersion, true);
@@ -170,7 +170,7 @@ namespace body_complex
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/complex/basic/invalid", false);
             return message;
         }
@@ -233,7 +233,7 @@ namespace body_complex
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/complex/basic/empty", false);
             return message;
         }
@@ -296,7 +296,7 @@ namespace body_complex
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/complex/basic/null", false);
             return message;
         }
@@ -359,7 +359,7 @@ namespace body_complex
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/complex/basic/notprovided", false);
             return message;
         }

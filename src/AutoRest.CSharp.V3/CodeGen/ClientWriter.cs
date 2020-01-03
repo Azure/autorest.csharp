@@ -116,7 +116,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                 writer.Line($"request.Method = {writer.Type(typeof(RequestMethod))}.{method.ToRequestMethodName()};");
 
                 var urlText = String.Join(String.Empty, operation.Request.HostSegments.Select(s => s.IsConstant ? s.Constant.Value : "{" + s.Parameter.Name + "}"));
-                writer.Line($"request.Uri.Reset(new {writer.Type(typeof(Uri))}({urlText:L}));");
+                writer.Line($"request.Uri.Reset(new {writer.Type(typeof(Uri))}($\"{urlText}\"));");
 
                 foreach (var segment in operation.Request.PathSegments)
                 {

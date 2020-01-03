@@ -33,7 +33,7 @@ namespace CognitiveServices.TextAnalytics
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
-            request.Uri.Reset(new Uri("{endpoint}/text/analytics/v3.0-preview.1"));
+            request.Uri.Reset(new Uri($"{endpoint}/text/analytics/v3.0-preview.1"));
             request.Uri.AppendPath("/entities/recognition/general", false);
             request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Content-Type", "text/json");
@@ -117,7 +117,7 @@ namespace CognitiveServices.TextAnalytics
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
-            request.Uri.Reset(new Uri("{endpoint}/text/analytics/v3.0-preview.1"));
+            request.Uri.Reset(new Uri($"{endpoint}/text/analytics/v3.0-preview.1"));
             request.Uri.AppendPath("/entities/recognition/pii", false);
             request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Content-Type", "text/json");
@@ -201,7 +201,7 @@ namespace CognitiveServices.TextAnalytics
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
-            request.Uri.Reset(new Uri("{endpoint}/text/analytics/v3.0-preview.1"));
+            request.Uri.Reset(new Uri($"{endpoint}/text/analytics/v3.0-preview.1"));
             request.Uri.AppendPath("/entities/linking", false);
             request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Content-Type", "text/json");
@@ -285,7 +285,7 @@ namespace CognitiveServices.TextAnalytics
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
-            request.Uri.Reset(new Uri("{endpoint}/text/analytics/v3.0-preview.1"));
+            request.Uri.Reset(new Uri($"{endpoint}/text/analytics/v3.0-preview.1"));
             request.Uri.AppendPath("/keyPhrases", false);
             request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Content-Type", "text/json");
@@ -369,7 +369,7 @@ namespace CognitiveServices.TextAnalytics
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
-            request.Uri.Reset(new Uri("{endpoint}/text/analytics/v3.0-preview.1"));
+            request.Uri.Reset(new Uri($"{endpoint}/text/analytics/v3.0-preview.1"));
             request.Uri.AppendPath("/languages", false);
             request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Content-Type", "text/json");
@@ -453,7 +453,7 @@ namespace CognitiveServices.TextAnalytics
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
-            request.Uri.Reset(new Uri("{endpoint}/text/analytics/v3.0-preview.1"));
+            request.Uri.Reset(new Uri($"{endpoint}/text/analytics/v3.0-preview.1"));
             request.Uri.AppendPath("/sentiment", false);
             request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Content-Type", "text/json");

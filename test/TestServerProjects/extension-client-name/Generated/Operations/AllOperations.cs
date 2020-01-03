@@ -32,7 +32,7 @@ namespace extension_client_name
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Patch;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/originalOperation/", false);
             request.Uri.AppendPath(originalPathParameter, true);
             request.Headers.Add("Content-Type", "application/json");

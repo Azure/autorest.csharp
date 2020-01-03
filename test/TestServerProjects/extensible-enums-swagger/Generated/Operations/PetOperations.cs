@@ -33,7 +33,7 @@ namespace extensible_enums_swagger
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/extensibleenums/pet/", false);
             request.Uri.AppendPath(petId, true);
             return message;
@@ -105,7 +105,7 @@ namespace extensible_enums_swagger
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/extensibleenums/pet/addPet", false);
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();

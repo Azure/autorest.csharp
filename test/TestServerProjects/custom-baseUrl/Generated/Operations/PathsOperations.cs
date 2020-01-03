@@ -31,7 +31,7 @@ namespace custom_baseUrl
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("http://{accountName}{host}"));
+            request.Uri.Reset(new Uri($"http://{accountName}{host}"));
             request.Uri.AppendPath("/customuri", false);
             return message;
         }

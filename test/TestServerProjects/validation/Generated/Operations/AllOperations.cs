@@ -45,7 +45,7 @@ namespace validation
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/fakepath/", false);
             request.Uri.AppendPath(subscriptionId, true);
             request.Uri.AppendPath("/", false);
@@ -122,7 +122,7 @@ namespace validation
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/fakepath/", false);
             request.Uri.AppendPath(subscriptionId, true);
             request.Uri.AppendPath("/", false);
@@ -203,7 +203,7 @@ namespace validation
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/validation/constantsInPath/", false);
             request.Uri.AppendPath("constant", true);
             request.Uri.AppendPath("/value", false);
@@ -260,7 +260,7 @@ namespace validation
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/validation/constantsInPath/", false);
             request.Uri.AppendPath("constant", true);
             request.Uri.AppendPath("/value", false);

@@ -39,7 +39,7 @@ namespace url
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/pathitem/nullable/globalStringPath/", false);
             request.Uri.AppendPath(globalStringPath, true);
             request.Uri.AppendPath("/pathItemStringPath/", false);
@@ -128,7 +128,7 @@ namespace url
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/pathitem/nullable/globalStringPath/", false);
             request.Uri.AppendPath(globalStringPath, true);
             request.Uri.AppendPath("/pathItemStringPath/", false);
@@ -217,7 +217,7 @@ namespace url
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/pathitem/nullable/globalStringPath/", false);
             request.Uri.AppendPath(globalStringPath, true);
             request.Uri.AppendPath("/pathItemStringPath/", false);
@@ -306,7 +306,7 @@ namespace url
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri("{host}"));
+            request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/pathitem/nullable/globalStringPath/", false);
             request.Uri.AppendPath(globalStringPath, true);
             request.Uri.AppendPath("/pathItemStringPath/", false);
