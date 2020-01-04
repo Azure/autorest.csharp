@@ -56,11 +56,12 @@ namespace AutoRest.CSharp.V3.CodeGen
                     implementsTypes.Add(writer.Type(dictionaryType));
                 }
 
-
+                writer.WriteXmlDocumentationSummary(schema.Description);
                 using (writer.Class(null, "partial", schema.Name, implements: string.Join(", ", implementsTypes)))
                 {
                     if (schema.Discriminator != null)
                     {
+                        writer.WriteXmlDocumentationSummary($"Initializes a new instance of {cs.Name}");
                         using (writer.Method("public", null, cs.Name))
                         {
                             writer.Line($"{schema.Discriminator.Property} = {schema.Discriminator.Value:L};");
@@ -69,6 +70,8 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                     foreach (var property in schema.Properties)
                     {
+                        writer.WriteXmlDocumentationSummary(property.Description);
+
                         CSharpType propertyType = _typeFactory.CreateType(property.Type);
                         writer.Append($"public {propertyType} {property.Name:D}");
                         writer.AppendRaw(property.IsReadOnly ? "{ get; internal set; }" : "{ get; set; }");
@@ -103,23 +106,40 @@ namespace AutoRest.CSharp.V3.CodeGen
                         string additionalProperties = "_additionalProperties";
                         writer.Line($"private readonly {implementationType} {additionalProperties} = new {fieldType}();");
 
-                        writer.Line($"public {iEnumeratorKeyValuePairType} GetEnumerator() => {additionalProperties}.GetEnumerator();")
+                        writer
+                            .WriteXmlDocumentationInheritDoc()
+                            .Line($"public {iEnumeratorKeyValuePairType} GetEnumerator() => {additionalProperties}.GetEnumerator();")
+                            .WriteXmlDocumentationInheritDoc()
                             .Line($"{iEnumerator}  {iEnumerable}.GetEnumerator() => {additionalProperties}.GetEnumerator();")
                             .Line($"public {iCollectionKeyType} Keys => {additionalProperties}.Keys;")
+                            .WriteXmlDocumentationInheritDoc()
                             .Line($"public {iCollectionItemType} Values => {additionalProperties}.Values;")
+                            .WriteXmlDocumentationInheritDoc()
                             .Line($"public bool TryGetValue(string key, out {itemType} value) => {additionalProperties}.TryGetValue(key, out value);")
+                            .WriteXmlDocumentationInheritDoc()
                             .Line($"public void Add({keyType} key, {itemType} value) => {additionalProperties}.Add(key, value);")
+                            .WriteXmlDocumentationInheritDoc()
                             .Line($"public bool ContainsKey({keyType} key) => {additionalProperties}.ContainsKey(key);")
+                            .WriteXmlDocumentationInheritDoc()
                             .Line($"public bool Remove({keyType} key) => {additionalProperties}.Remove(key);")
+                            .WriteXmlDocumentationInheritDoc()
                             .Line($"public int Count => _additionalProperties.Count;")
+                            .WriteXmlDocumentationInheritDoc()
                             .Line($"bool {iCollectionKeyValuePairType}.IsReadOnly => {additionalProperties}.IsReadOnly;")
+                            .WriteXmlDocumentationInheritDoc()
                             .Line($"void {iCollectionKeyValuePairType}.Add({keyValuePairType} value) => {additionalProperties}.Add(value);")
+                            .WriteXmlDocumentationInheritDoc()
                             .Line($"bool {iCollectionKeyValuePairType}.Remove({keyValuePairType} value) => {additionalProperties}.Remove(value);")
+                            .WriteXmlDocumentationInheritDoc()
                             .Line($"bool {iCollectionKeyValuePairType}.Contains({keyValuePairType} value) => {additionalProperties}.Contains(value);")
+                            .WriteXmlDocumentationInheritDoc()
                             .Line($"void {iCollectionKeyValuePairType}.CopyTo({keyValuePairType}[] destination, int offset) => {additionalProperties}.CopyTo(destination, offset);")
+                            .WriteXmlDocumentationInheritDoc()
                             .Line($"void {iCollectionKeyValuePairType}.Clear() => {additionalProperties}.Clear();");
 
-                        using (writer.Append($"public {itemType} this[{keyType} key]").Scope())
+                        using (writer
+                            .WriteXmlDocumentationInheritDoc()
+                            .Scope($"public {itemType} this[{keyType} key]"))
                         {
                             writer
                                 .Line($"get => _additionalProperties[key];")
@@ -156,6 +176,8 @@ namespace AutoRest.CSharp.V3.CodeGen
             var cs = _typeFactory.CreateType(schema);
             using (writer.Namespace(cs.Namespace))
             {
+                writer.WriteXmlDocumentationSummary(schema.Description);
+
                 using (writer.Enum(null, null, cs.Name))
                 {
                     schema.Values.Select(c => c).ForEachLast(ccs => writer.EnumValue(ccs.Name), ccs => writer.EnumValue(ccs.Name, false));
@@ -168,6 +190,8 @@ namespace AutoRest.CSharp.V3.CodeGen
             var cs = _typeFactory.CreateType(schema);
             using (writer.Namespace(cs.Namespace))
             {
+                writer.WriteXmlDocumentationSummary(schema.Description);
+
                 var implementType = new CSharpType(typeof(IEquatable<>), cs);
                 using (writer.Struct(null, "readonly partial", schema.Name, writer.Type(implementType)))
                 {

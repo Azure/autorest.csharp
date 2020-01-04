@@ -5,8 +5,10 @@ using System.Collections.Generic;
 
 namespace CognitiveServices.TextAnalytics.Models.VV30Preview1
 {
+    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
     public partial class LanguageBatchInput
     {
+        /// <summary> MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA. </summary>
         public ICollection<LanguageInput> Documents { get; set; } = new List<LanguageInput>();
     }
 }

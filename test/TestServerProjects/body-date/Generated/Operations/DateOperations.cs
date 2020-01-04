@@ -16,6 +16,7 @@ namespace body_date
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+        /// <summary> Initializes a new instance of DateOperations. </summary>
         public DateOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
@@ -27,6 +28,7 @@ namespace body_date
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+        /// <summary> Get null date value. </summary>
         public async ValueTask<Response<DateTimeOffset>> GetNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -58,6 +60,7 @@ namespace body_date
                 throw;
             }
         }
+        /// <summary> Get invalid date value. </summary>
         public async ValueTask<Response<DateTimeOffset>> GetInvalidDateAsync(CancellationToken cancellationToken = default)
         {
 
@@ -89,6 +92,7 @@ namespace body_date
                 throw;
             }
         }
+        /// <summary> Get overflow date value. </summary>
         public async ValueTask<Response<DateTimeOffset>> GetOverflowDateAsync(CancellationToken cancellationToken = default)
         {
 
@@ -120,6 +124,7 @@ namespace body_date
                 throw;
             }
         }
+        /// <summary> Get underflow date value. </summary>
         public async ValueTask<Response<DateTimeOffset>> GetUnderflowDateAsync(CancellationToken cancellationToken = default)
         {
 
@@ -151,6 +156,8 @@ namespace body_date
                 throw;
             }
         }
+        /// <summary> Put max date value 9999-12-31. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutMaxDateAsync(DateTimeOffset dateBody, CancellationToken cancellationToken = default)
         {
 
@@ -182,6 +189,7 @@ namespace body_date
                 throw;
             }
         }
+        /// <summary> Get max date value 9999-12-31. </summary>
         public async ValueTask<Response<DateTimeOffset>> GetMaxDateAsync(CancellationToken cancellationToken = default)
         {
 
@@ -213,6 +221,8 @@ namespace body_date
                 throw;
             }
         }
+        /// <summary> Put min date value 0000-01-01. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutMinDateAsync(DateTimeOffset dateBody, CancellationToken cancellationToken = default)
         {
 
@@ -244,6 +254,7 @@ namespace body_date
                 throw;
             }
         }
+        /// <summary> Get min date value 0000-01-01. </summary>
         public async ValueTask<Response<DateTimeOffset>> GetMinDateAsync(CancellationToken cancellationToken = default)
         {
 

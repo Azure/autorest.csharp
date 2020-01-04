@@ -17,6 +17,7 @@ namespace body_string
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+        /// <summary> Initializes a new instance of EnumOperations. </summary>
         public EnumOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
@@ -28,6 +29,7 @@ namespace body_string
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+        /// <summary> Get enum value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
         public async ValueTask<Response<Colors>> GetNotExpandableAsync(CancellationToken cancellationToken = default)
         {
 
@@ -59,6 +61,8 @@ namespace body_string
                 throw;
             }
         }
+        /// <summary> Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutNotExpandableAsync(Colors stringBody, CancellationToken cancellationToken = default)
         {
 
@@ -90,6 +94,7 @@ namespace body_string
                 throw;
             }
         }
+        /// <summary> Get enum value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
         public async ValueTask<Response<Colors>> GetReferencedAsync(CancellationToken cancellationToken = default)
         {
 
@@ -121,6 +126,8 @@ namespace body_string
                 throw;
             }
         }
+        /// <summary> Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutReferencedAsync(Colors enumStringBody, CancellationToken cancellationToken = default)
         {
 
@@ -152,6 +159,7 @@ namespace body_string
                 throw;
             }
         }
+        /// <summary> Get value &apos;green-color&apos; from the constant. </summary>
         public async ValueTask<Response<RefColorConstant>> GetReferencedConstantAsync(CancellationToken cancellationToken = default)
         {
 
@@ -183,6 +191,8 @@ namespace body_string
                 throw;
             }
         }
+        /// <summary> Sends value &apos;green-color&apos; from a constant. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutReferencedConstantAsync(RefColorConstant enumStringBody, CancellationToken cancellationToken = default)
         {
             if (enumStringBody == null)

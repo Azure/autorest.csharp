@@ -3,9 +3,12 @@
 
 namespace body_dictionary.Models.V100
 {
+    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
     public partial class Widget
     {
+        /// <summary> MISSING·SCHEMA-DESCRIPTION-INTEGER. </summary>
         public int? Integer { get; set; }
+        /// <summary> MISSING·SCHEMA-DESCRIPTION-STRING. </summary>
         public string? String { get; set; }
     }
 }

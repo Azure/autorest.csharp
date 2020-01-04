@@ -15,6 +15,7 @@ namespace custom_baseUrl
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+        /// <summary> Initializes a new instance of PathsOperations. </summary>
         public PathsOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "host")
         {
             if (host == null)
@@ -26,6 +27,9 @@ namespace custom_baseUrl
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+        /// <summary> Get a 200 to test a valid base uri. </summary>
+        /// <param name="accountName"> Account Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetEmptyAsync(string accountName, CancellationToken cancellationToken = default)
         {
             if (accountName == null)

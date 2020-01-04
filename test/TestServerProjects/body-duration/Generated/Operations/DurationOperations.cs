@@ -16,6 +16,7 @@ namespace body_duration
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+        /// <summary> Initializes a new instance of DurationOperations. </summary>
         public DurationOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
@@ -27,6 +28,7 @@ namespace body_duration
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+        /// <summary> Get null duration value. </summary>
         public async ValueTask<Response<TimeSpan>> GetNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -58,6 +60,8 @@ namespace body_duration
                 throw;
             }
         }
+        /// <summary> Put a positive duration value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutPositiveDurationAsync(TimeSpan durationBody, CancellationToken cancellationToken = default)
         {
 
@@ -89,6 +93,7 @@ namespace body_duration
                 throw;
             }
         }
+        /// <summary> Get a positive duration value. </summary>
         public async ValueTask<Response<TimeSpan>> GetPositiveDurationAsync(CancellationToken cancellationToken = default)
         {
 
@@ -120,6 +125,7 @@ namespace body_duration
                 throw;
             }
         }
+        /// <summary> Get an invalid duration value. </summary>
         public async ValueTask<Response<TimeSpan>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
 

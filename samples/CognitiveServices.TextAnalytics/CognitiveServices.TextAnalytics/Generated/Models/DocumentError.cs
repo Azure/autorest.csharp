@@ -3,9 +3,12 @@
 
 namespace CognitiveServices.TextAnalytics.Models.VV30Preview1
 {
+    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
     public partial class DocumentError
     {
+        /// <summary> Document Id. </summary>
         public string Id { get; set; }
+        /// <summary> Document Error. </summary>
         public DocumentErrorError Error { get; set; } = new DocumentErrorError();
     }
 }

@@ -17,6 +17,7 @@ namespace additionalProperties
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+        /// <summary> Initializes a new instance of PetsOperations. </summary>
         public PetsOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
@@ -28,6 +29,8 @@ namespace additionalProperties
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+        /// <summary> Create a Pet which contains more properties than what is defined. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<PetAPTrue>> CreateAPTrueAsync(PetAPTrue createParameters, CancellationToken cancellationToken = default)
         {
             if (createParameters == null)
@@ -67,6 +70,8 @@ namespace additionalProperties
                 throw;
             }
         }
+        /// <summary> Create a CatAPTrue which contains more properties than what is defined. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<CatAPTrue>> CreateCatAPTrueAsync(CatAPTrue createParameters, CancellationToken cancellationToken = default)
         {
             if (createParameters == null)
@@ -106,6 +111,8 @@ namespace additionalProperties
                 throw;
             }
         }
+        /// <summary> Create a Pet which contains more properties than what is defined. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<PetAPObject>> CreateAPObjectAsync(PetAPObject createParameters, CancellationToken cancellationToken = default)
         {
             if (createParameters == null)
@@ -145,6 +152,8 @@ namespace additionalProperties
                 throw;
             }
         }
+        /// <summary> Create a Pet which contains more properties than what is defined. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<PetAPString>> CreateAPStringAsync(PetAPString createParameters, CancellationToken cancellationToken = default)
         {
             if (createParameters == null)
@@ -184,6 +193,8 @@ namespace additionalProperties
                 throw;
             }
         }
+        /// <summary> Create a Pet which contains more properties than what is defined. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<PetAPInProperties>> CreateAPInPropertiesAsync(PetAPInProperties createParameters, CancellationToken cancellationToken = default)
         {
             if (createParameters == null)
@@ -223,6 +234,8 @@ namespace additionalProperties
                 throw;
             }
         }
+        /// <summary> Create a Pet which contains more properties than what is defined. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<PetAPInPropertiesWithAPString>> CreateAPInPropertiesWithAPStringAsync(PetAPInPropertiesWithAPString createParameters, CancellationToken cancellationToken = default)
         {
             if (createParameters == null)

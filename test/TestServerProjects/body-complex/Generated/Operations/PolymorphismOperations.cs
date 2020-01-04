@@ -17,6 +17,7 @@ namespace body_complex
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+        /// <summary> Initializes a new instance of PolymorphismOperations. </summary>
         public PolymorphismOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
@@ -28,6 +29,7 @@ namespace body_complex
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+        /// <summary> Get complex types that are polymorphic. </summary>
         public async ValueTask<Response<Fish>> GetValidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -59,6 +61,43 @@ namespace body_complex
                 throw;
             }
         }
+        /// <summary> Put complex types that are polymorphic. </summary>
+        /// <param name="complexBody">
+        /// Please put a salmon that looks like this:
+        /// {
+        ///         &apos;fishtype&apos;:&apos;Salmon&apos;,
+        ///         &apos;location&apos;:&apos;alaska&apos;,
+        ///         &apos;iswild&apos;:true,
+        ///         &apos;species&apos;:&apos;king&apos;,
+        ///         &apos;length&apos;:1.0,
+        ///         &apos;siblings&apos;:[
+        ///           {
+        ///             &apos;fishtype&apos;:&apos;Shark&apos;,
+        ///             &apos;age&apos;:6,
+        ///             &apos;birthday&apos;: &apos;2012-01-05T01:00:00Z&apos;,
+        ///             &apos;length&apos;:20.0,
+        ///             &apos;species&apos;:&apos;predator&apos;,
+        ///           },
+        ///           {
+        ///             &apos;fishtype&apos;:&apos;Sawshark&apos;,
+        ///             &apos;age&apos;:105,
+        ///             &apos;birthday&apos;: &apos;1900-01-05T01:00:00Z&apos;,
+        ///             &apos;length&apos;:10.0,
+        ///             &apos;picture&apos;: new Buffer([255, 255, 255, 255, 254]).toString(&apos;base64&apos;),
+        ///             &apos;species&apos;:&apos;dangerous&apos;,
+        ///           },
+        ///           {
+        ///             &apos;fishtype&apos;: &apos;goblin&apos;,
+        ///             &apos;age&apos;: 1,
+        ///             &apos;birthday&apos;: &apos;2015-08-08T00:00:00Z&apos;,
+        ///             &apos;length&apos;: 30.0,
+        ///             &apos;species&apos;: &apos;scary&apos;,
+        ///             &apos;jawsize&apos;: 5
+        ///           }
+        ///         ]
+        ///       };.
+        /// </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutValidAsync(Fish complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -94,6 +133,7 @@ namespace body_complex
                 throw;
             }
         }
+        /// <summary> Get complex types that are polymorphic, JSON key contains a dot. </summary>
         public async ValueTask<Response<DotFish>> GetDotSyntaxAsync(CancellationToken cancellationToken = default)
         {
 
@@ -125,6 +165,7 @@ namespace body_complex
                 throw;
             }
         }
+        /// <summary> Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire. </summary>
         public async ValueTask<Response<DotFishMarket>> GetComposedWithDiscriminatorAsync(CancellationToken cancellationToken = default)
         {
 
@@ -156,6 +197,7 @@ namespace body_complex
                 throw;
             }
         }
+        /// <summary> Get complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property. </summary>
         public async ValueTask<Response<DotFishMarket>> GetComposedWithoutDiscriminatorAsync(CancellationToken cancellationToken = default)
         {
 
@@ -187,6 +229,7 @@ namespace body_complex
                 throw;
             }
         }
+        /// <summary> Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
         public async ValueTask<Response<Salmon>> GetComplicatedAsync(CancellationToken cancellationToken = default)
         {
 
@@ -218,6 +261,8 @@ namespace body_complex
                 throw;
             }
         }
+        /// <summary> Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutComplicatedAsync(Salmon complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -253,6 +298,8 @@ namespace body_complex
                 throw;
             }
         }
+        /// <summary> Put complex types that are polymorphic, omitting the discriminator. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Salmon>> PutMissingDiscriminatorAsync(Salmon complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -292,6 +339,43 @@ namespace body_complex
                 throw;
             }
         }
+        /// <summary> Put complex types that are polymorphic, attempting to omit required &apos;birthday&apos; field - the request should not be allowed from the client. </summary>
+        /// <param name="complexBody">
+        /// Please put a salmon that looks like this:
+        /// {
+        ///         &apos;fishtype&apos;:&apos;Salmon&apos;,
+        ///         &apos;location&apos;:&apos;alaska&apos;,
+        ///         &apos;iswild&apos;:true,
+        ///         &apos;species&apos;:&apos;king&apos;,
+        ///         &apos;length&apos;:1.0,
+        ///         &apos;siblings&apos;:[
+        ///           {
+        ///             &apos;fishtype&apos;:&apos;Shark&apos;,
+        ///             &apos;age&apos;:6,
+        ///             &apos;birthday&apos;: &apos;2012-01-05T01:00:00Z&apos;,
+        ///             &apos;length&apos;:20.0,
+        ///             &apos;species&apos;:&apos;predator&apos;,
+        ///           },
+        ///           {
+        ///             &apos;fishtype&apos;:&apos;Sawshark&apos;,
+        ///             &apos;age&apos;:105,
+        ///             &apos;birthday&apos;: &apos;1900-01-05T01:00:00Z&apos;,
+        ///             &apos;length&apos;:10.0,
+        ///             &apos;picture&apos;: new Buffer([255, 255, 255, 255, 254]).toString(&apos;base64&apos;),
+        ///             &apos;species&apos;:&apos;dangerous&apos;,
+        ///           },
+        ///           {
+        ///             &apos;fishtype&apos;: &apos;goblin&apos;,
+        ///             &apos;age&apos;: 1,
+        ///             &apos;birthday&apos;: &apos;2015-08-08T00:00:00Z&apos;,
+        ///             &apos;length&apos;: 30.0,
+        ///             &apos;species&apos;: &apos;scary&apos;,
+        ///             &apos;jawsize&apos;: 5
+        ///           }
+        ///         ]
+        ///       };.
+        /// </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutValidMissingRequiredAsync(Fish complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)

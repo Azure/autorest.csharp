@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text.Json;
 using System.Threading;
@@ -33,6 +32,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             var @namespace = cs.Namespace;
             using (writer.Namespace(@namespace))
             {
+                writer.WriteXmlDocumentationSummary(operationGroup.Description);
                 using (writer.Class("internal", "partial", cs.Name))
                 {
                     WriteClientFields(writer, operationGroup);
@@ -62,6 +62,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         private void WriteClientCtor(CodeWriter writer, ServiceClient operationGroup, CSharpType cs)
         {
+            writer.WriteXmlDocumentationSummary($"Initializes a new instance of {cs.Name}");
             writer.Append($"public {cs.Name:D}({typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline,");
             foreach (ServiceClientParameter clientParameter in operationGroup.Parameters)
             {
@@ -111,6 +112,14 @@ namespace AutoRest.CSharp.V3.CodeGen
             };
 
             CSharpType returnType = new CSharpType(typeof(ValueTask<>), responseType);
+
+            writer.WriteXmlDocumentationSummary(operation.Description);
+
+            foreach (ServiceClientParameter parameter in operation.Parameters)
+            {
+                writer.WriteParameterXmlDocumentation(parameter.Name, parameter.Description);
+                writer.WriteParameterXmlDocumentation("cancellationToken", "The cancellation token to use.");
+            }
 
             var methodName = operation.Name;
             writer.Append($"public async {returnType} {methodName}Async(");

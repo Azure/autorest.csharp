@@ -25,11 +25,13 @@ namespace AutoRest.CSharp.V3.ClientModels
         private static ClientModel BuildClientEnum(SealedChoiceSchema sealedChoiceSchema) => new ClientEnum(
             sealedChoiceSchema,
             sealedChoiceSchema.CSharpName(),
+            sealedChoiceSchema.Summary,
             sealedChoiceSchema.Choices.Select(c => new ClientEnumValue(c.CSharpName(), ClientModelBuilderHelpers.StringConstant(c.Value))));
 
         private static ClientModel BuildClientEnum(ChoiceSchema choiceSchema) => new ClientEnum(
             choiceSchema,
             choiceSchema.CSharpName(),
+            choiceSchema.Summary,
             choiceSchema.Choices.Select(c => new ClientEnumValue(c.CSharpName(), ClientModelBuilderHelpers.StringConstant(c.Value))),
             true);
 
@@ -85,11 +87,10 @@ namespace AutoRest.CSharp.V3.ClientModels
                     );
             }
 
-            var schemaTypeReference = ClientModelBuilderHelpers.CreateType(objectSchema, false);
-
             return new ClientObject(
                 objectSchema,
                 objectSchema.CSharpName(),
+                objectSchema.Language.Default.Description,
                 (SchemaTypeReference?) inheritsFromTypeReference,
                 properties.ToArray(),
                 discriminator,
@@ -150,6 +151,7 @@ namespace AutoRest.CSharp.V3.ClientModels
             }
 
             return new ClientObjectProperty(property.CSharpName(),
+                property.Language.Default.Description,
                 type,
                 isReadOnly,
                 defaultValue);

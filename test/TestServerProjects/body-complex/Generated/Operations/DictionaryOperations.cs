@@ -17,6 +17,7 @@ namespace body_complex
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+        /// <summary> Initializes a new instance of DictionaryOperations. </summary>
         public DictionaryOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
@@ -28,6 +29,7 @@ namespace body_complex
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+        /// <summary> Get complex types with dictionary property. </summary>
         public async ValueTask<Response<DictionaryWrapper>> GetValidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -59,6 +61,9 @@ namespace body_complex
                 throw;
             }
         }
+        /// <summary> Put complex types with dictionary property. </summary>
+        /// <param name="complexBody"> Please put a dictionary with 5 key-value pairs: &quot;txt&quot;:&quot;notepad&quot;, &quot;bmp&quot;:&quot;mspaint&quot;, &quot;xls&quot;:&quot;excel&quot;, &quot;exe&quot;:&quot;&quot;, &quot;&quot;:null. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutValidAsync(DictionaryWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -94,6 +99,7 @@ namespace body_complex
                 throw;
             }
         }
+        /// <summary> Get complex types with dictionary property which is empty. </summary>
         public async ValueTask<Response<DictionaryWrapper>> GetEmptyAsync(CancellationToken cancellationToken = default)
         {
 
@@ -125,6 +131,9 @@ namespace body_complex
                 throw;
             }
         }
+        /// <summary> Put complex types with dictionary property which is empty. </summary>
+        /// <param name="complexBody"> Please put a dictionary with 5 key-value pairs: &quot;txt&quot;:&quot;notepad&quot;, &quot;bmp&quot;:&quot;mspaint&quot;, &quot;xls&quot;:&quot;excel&quot;, &quot;exe&quot;:&quot;&quot;, &quot;&quot;:null. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutEmptyAsync(DictionaryWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -160,6 +169,7 @@ namespace body_complex
                 throw;
             }
         }
+        /// <summary> Get complex types with dictionary property which is null. </summary>
         public async ValueTask<Response<DictionaryWrapper>> GetNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -191,6 +201,7 @@ namespace body_complex
                 throw;
             }
         }
+        /// <summary> Get complex types with dictionary property while server doesn&apos;t provide a response payload. </summary>
         public async ValueTask<Response<DictionaryWrapper>> GetNotProvidedAsync(CancellationToken cancellationToken = default)
         {
 

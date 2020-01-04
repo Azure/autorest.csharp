@@ -16,6 +16,7 @@ namespace body_string
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+        /// <summary> Initializes a new instance of StringOperations. </summary>
         public StringOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
@@ -27,6 +28,7 @@ namespace body_string
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+        /// <summary> Get null string value value. </summary>
         public async ValueTask<Response<string>> GetNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -58,6 +60,7 @@ namespace body_string
                 throw;
             }
         }
+        /// <summary> Set string value null. </summary>
         public async ValueTask<Response> PutNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -89,6 +92,7 @@ namespace body_string
                 throw;
             }
         }
+        /// <summary> Get empty string value value &apos;&apos;. </summary>
         public async ValueTask<Response<string>> GetEmptyAsync(CancellationToken cancellationToken = default)
         {
 
@@ -120,6 +124,7 @@ namespace body_string
                 throw;
             }
         }
+        /// <summary> Set string value empty &apos;&apos;. </summary>
         public async ValueTask<Response> PutEmptyAsync(CancellationToken cancellationToken = default)
         {
 
@@ -151,6 +156,7 @@ namespace body_string
                 throw;
             }
         }
+        /// <summary> Get mbcs string value &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
         public async ValueTask<Response<string>> GetMbcsAsync(CancellationToken cancellationToken = default)
         {
 
@@ -182,6 +188,7 @@ namespace body_string
                 throw;
             }
         }
+        /// <summary> Set string value mbcs &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
         public async ValueTask<Response> PutMbcsAsync(CancellationToken cancellationToken = default)
         {
 
@@ -213,6 +220,7 @@ namespace body_string
                 throw;
             }
         }
+        /// <summary> Get string value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
         public async ValueTask<Response<string>> GetWhitespaceAsync(CancellationToken cancellationToken = default)
         {
 
@@ -244,6 +252,7 @@ namespace body_string
                 throw;
             }
         }
+        /// <summary> Set String value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
         public async ValueTask<Response> PutWhitespaceAsync(CancellationToken cancellationToken = default)
         {
 
@@ -275,6 +284,7 @@ namespace body_string
                 throw;
             }
         }
+        /// <summary> Get String value when no string value is sent in response payload. </summary>
         public async ValueTask<Response<string>> GetNotProvidedAsync(CancellationToken cancellationToken = default)
         {
 
@@ -306,6 +316,7 @@ namespace body_string
                 throw;
             }
         }
+        /// <summary> Get value that is base64 encoded. </summary>
         public async ValueTask<Response<byte[]>> GetBase64EncodedAsync(CancellationToken cancellationToken = default)
         {
 
@@ -337,6 +348,7 @@ namespace body_string
                 throw;
             }
         }
+        /// <summary> Get value that is base64url encoded. </summary>
         public async ValueTask<Response<byte[]>> GetBase64UrlEncodedAsync(CancellationToken cancellationToken = default)
         {
 
@@ -368,6 +380,8 @@ namespace body_string
                 throw;
             }
         }
+        /// <summary> Put value that is base64url encoded. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutBase64UrlEncodedAsync(byte[] stringBody, CancellationToken cancellationToken = default)
         {
             if (stringBody == null)
@@ -403,6 +417,7 @@ namespace body_string
                 throw;
             }
         }
+        /// <summary> Get null value that is expected to be base64url encoded. </summary>
         public async ValueTask<Response<byte[]>> GetNullBase64UrlEncodedAsync(CancellationToken cancellationToken = default)
         {
 

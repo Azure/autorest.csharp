@@ -17,6 +17,7 @@ namespace body_complex
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+        /// <summary> Initializes a new instance of InheritanceOperations. </summary>
         public InheritanceOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
@@ -28,6 +29,7 @@ namespace body_complex
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+        /// <summary> Get complex types that extend others. </summary>
         public async ValueTask<Response<Siamese>> GetValidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -59,6 +61,9 @@ namespace body_complex
                 throw;
             }
         }
+        /// <summary> Put complex types that extend others. </summary>
+        /// <param name="complexBody"> Please put a siamese with id=2, name=&quot;Siameee&quot;, color=green, breed=persion, which hates 2 dogs, the 1st one named &quot;Potato&quot; with id=1 and food=&quot;tomato&quot;, and the 2nd one named &quot;Tomato&quot; with id=-1 and food=&quot;french fries&quot;. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutValidAsync(Siamese complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)

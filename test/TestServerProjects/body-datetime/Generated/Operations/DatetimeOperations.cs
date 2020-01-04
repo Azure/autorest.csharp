@@ -16,6 +16,7 @@ namespace body_datetime
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+        /// <summary> Initializes a new instance of DatetimeOperations. </summary>
         public DatetimeOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
@@ -27,6 +28,7 @@ namespace body_datetime
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+        /// <summary> Get null datetime value. </summary>
         public async ValueTask<Response<DateTimeOffset>> GetNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -58,6 +60,7 @@ namespace body_datetime
                 throw;
             }
         }
+        /// <summary> Get invalid datetime value. </summary>
         public async ValueTask<Response<DateTimeOffset>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -89,6 +92,7 @@ namespace body_datetime
                 throw;
             }
         }
+        /// <summary> Get overflow datetime value. </summary>
         public async ValueTask<Response<DateTimeOffset>> GetOverflowAsync(CancellationToken cancellationToken = default)
         {
 
@@ -120,6 +124,7 @@ namespace body_datetime
                 throw;
             }
         }
+        /// <summary> Get underflow datetime value. </summary>
         public async ValueTask<Response<DateTimeOffset>> GetUnderflowAsync(CancellationToken cancellationToken = default)
         {
 
@@ -151,6 +156,8 @@ namespace body_datetime
                 throw;
             }
         }
+        /// <summary> Put max datetime value 9999-12-31T23:59:59.9999999Z. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutUtcMaxDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
 
@@ -182,6 +189,7 @@ namespace body_datetime
                 throw;
             }
         }
+        /// <summary> Get max datetime value 9999-12-31t23:59:59.9999999z. </summary>
         public async ValueTask<Response<DateTimeOffset>> GetUtcLowercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
         {
 
@@ -213,6 +221,7 @@ namespace body_datetime
                 throw;
             }
         }
+        /// <summary> Get max datetime value 9999-12-31T23:59:59.9999999Z. </summary>
         public async ValueTask<Response<DateTimeOffset>> GetUtcUppercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
         {
 
@@ -244,6 +253,8 @@ namespace body_datetime
                 throw;
             }
         }
+        /// <summary> Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999+14:00. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutLocalPositiveOffsetMaxDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
 
@@ -275,6 +286,7 @@ namespace body_datetime
                 throw;
             }
         }
+        /// <summary> Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999+14:00. </summary>
         public async ValueTask<Response<DateTimeOffset>> GetLocalPositiveOffsetLowercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
         {
 
@@ -306,6 +318,7 @@ namespace body_datetime
                 throw;
             }
         }
+        /// <summary> Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999+14:00. </summary>
         public async ValueTask<Response<DateTimeOffset>> GetLocalPositiveOffsetUppercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
         {
 
@@ -337,6 +350,8 @@ namespace body_datetime
                 throw;
             }
         }
+        /// <summary> Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999-14:00. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutLocalNegativeOffsetMaxDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
 
@@ -368,6 +383,7 @@ namespace body_datetime
                 throw;
             }
         }
+        /// <summary> Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999-14:00. </summary>
         public async ValueTask<Response<DateTimeOffset>> GetLocalNegativeOffsetUppercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
         {
 
@@ -399,6 +415,7 @@ namespace body_datetime
                 throw;
             }
         }
+        /// <summary> Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999-14:00. </summary>
         public async ValueTask<Response<DateTimeOffset>> GetLocalNegativeOffsetLowercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
         {
 
@@ -430,6 +447,8 @@ namespace body_datetime
                 throw;
             }
         }
+        /// <summary> Put min datetime value 0001-01-01T00:00:00Z. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutUtcMinDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
 
@@ -461,6 +480,7 @@ namespace body_datetime
                 throw;
             }
         }
+        /// <summary> Get min datetime value 0001-01-01T00:00:00Z. </summary>
         public async ValueTask<Response<DateTimeOffset>> GetUtcMinDateTimeAsync(CancellationToken cancellationToken = default)
         {
 
@@ -492,6 +512,8 @@ namespace body_datetime
                 throw;
             }
         }
+        /// <summary> Put min datetime value 0001-01-01T00:00:00+14:00. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutLocalPositiveOffsetMinDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
 
@@ -523,6 +545,7 @@ namespace body_datetime
                 throw;
             }
         }
+        /// <summary> Get min datetime value 0001-01-01T00:00:00+14:00. </summary>
         public async ValueTask<Response<DateTimeOffset>> GetLocalPositiveOffsetMinDateTimeAsync(CancellationToken cancellationToken = default)
         {
 
@@ -554,6 +577,8 @@ namespace body_datetime
                 throw;
             }
         }
+        /// <summary> Put min datetime value 0001-01-01T00:00:00-14:00. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutLocalNegativeOffsetMinDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
 
@@ -585,6 +610,7 @@ namespace body_datetime
                 throw;
             }
         }
+        /// <summary> Get min datetime value 0001-01-01T00:00:00-14:00. </summary>
         public async ValueTask<Response<DateTimeOffset>> GetLocalNegativeOffsetMinDateTimeAsync(CancellationToken cancellationToken = default)
         {
 

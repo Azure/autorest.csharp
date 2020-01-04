@@ -17,6 +17,7 @@ namespace body_complex
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+        /// <summary> Initializes a new instance of PolymorphicrecursiveOperations. </summary>
         public PolymorphicrecursiveOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
@@ -28,6 +29,7 @@ namespace body_complex
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+        /// <summary> Get complex types that are polymorphic and have recursive references. </summary>
         public async ValueTask<Response<Fish>> GetValidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -59,6 +61,43 @@ namespace body_complex
                 throw;
             }
         }
+        /// <summary> Put complex types that are polymorphic and have recursive references. </summary>
+        /// <param name="complexBody">
+        /// Please put a salmon that looks like this:
+        /// {
+        ///         &apos;fishtype&apos;:&apos;Salmon&apos;,
+        ///         &apos;location&apos;:&apos;alaska&apos;,
+        ///         &apos;iswild&apos;:true,
+        ///         &apos;species&apos;:&apos;king&apos;,
+        ///         &apos;length&apos;:1.0,
+        ///         &apos;siblings&apos;:[
+        ///           {
+        ///             &apos;fishtype&apos;:&apos;Shark&apos;,
+        ///             &apos;age&apos;:6,
+        ///             &apos;birthday&apos;: &apos;2012-01-05T01:00:00Z&apos;,
+        ///             &apos;length&apos;:20.0,
+        ///             &apos;species&apos;:&apos;predator&apos;,
+        ///           },
+        ///           {
+        ///             &apos;fishtype&apos;:&apos;Sawshark&apos;,
+        ///             &apos;age&apos;:105,
+        ///             &apos;birthday&apos;: &apos;1900-01-05T01:00:00Z&apos;,
+        ///             &apos;length&apos;:10.0,
+        ///             &apos;picture&apos;: new Buffer([255, 255, 255, 255, 254]).toString(&apos;base64&apos;),
+        ///             &apos;species&apos;:&apos;dangerous&apos;,
+        ///           },
+        ///           {
+        ///             &apos;fishtype&apos;: &apos;goblin&apos;,
+        ///             &apos;age&apos;: 1,
+        ///             &apos;birthday&apos;: &apos;2015-08-08T00:00:00Z&apos;,
+        ///             &apos;length&apos;: 30.0,
+        ///             &apos;species&apos;: &apos;scary&apos;,
+        ///             &apos;jawsize&apos;: 5
+        ///           }
+        ///         ]
+        ///       };.
+        /// </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutValidAsync(Fish complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)

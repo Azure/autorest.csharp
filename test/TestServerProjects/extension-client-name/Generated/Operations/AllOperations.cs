@@ -16,6 +16,7 @@ namespace extension_client_name
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+        /// <summary> Initializes a new instance of AllOperations. </summary>
         public AllOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
@@ -27,6 +28,12 @@ namespace extension_client_name
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+        /// <summary> MISSING·OPERATION-DESCRIPTION. </summary>
+        /// <param name="originalPathParameter"> MISSING·PARAMETER-DESCRIPTION. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <param name="originalQueryParameter"> MISSING·PARAMETER-DESCRIPTION. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<OriginalSchema, OriginalOperationHeaders>> OriginalOperationAsync(string originalPathParameter, string originalQueryParameter, OriginalSchema renamedBodyParameter, CancellationToken cancellationToken = default)
         {
             if (originalPathParameter == null)

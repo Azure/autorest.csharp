@@ -16,6 +16,7 @@ namespace body_boolean
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+        /// <summary> Initializes a new instance of BoolOperations. </summary>
         public BoolOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
@@ -27,6 +28,7 @@ namespace body_boolean
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+        /// <summary> Get true Boolean value. </summary>
         public async ValueTask<Response<bool>> GetTrueAsync(CancellationToken cancellationToken = default)
         {
 
@@ -58,6 +60,7 @@ namespace body_boolean
                 throw;
             }
         }
+        /// <summary> Set Boolean value true. </summary>
         public async ValueTask<Response> PutTrueAsync(CancellationToken cancellationToken = default)
         {
 
@@ -89,6 +92,7 @@ namespace body_boolean
                 throw;
             }
         }
+        /// <summary> Get false Boolean value. </summary>
         public async ValueTask<Response<bool>> GetFalseAsync(CancellationToken cancellationToken = default)
         {
 
@@ -120,6 +124,7 @@ namespace body_boolean
                 throw;
             }
         }
+        /// <summary> Set Boolean value false. </summary>
         public async ValueTask<Response> PutFalseAsync(CancellationToken cancellationToken = default)
         {
 
@@ -151,6 +156,7 @@ namespace body_boolean
                 throw;
             }
         }
+        /// <summary> Get null Boolean value. </summary>
         public async ValueTask<Response<bool>> GetNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -182,6 +188,7 @@ namespace body_boolean
                 throw;
             }
         }
+        /// <summary> Get invalid Boolean value. </summary>
         public async ValueTask<Response<bool>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
 

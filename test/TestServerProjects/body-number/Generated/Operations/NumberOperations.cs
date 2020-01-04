@@ -16,6 +16,7 @@ namespace body_number
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+        /// <summary> Initializes a new instance of NumberOperations. </summary>
         public NumberOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
@@ -27,6 +28,7 @@ namespace body_number
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+        /// <summary> Get null Number value. </summary>
         public async ValueTask<Response<float>> GetNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -58,6 +60,7 @@ namespace body_number
                 throw;
             }
         }
+        /// <summary> Get invalid float Number value. </summary>
         public async ValueTask<Response<float>> GetInvalidFloatAsync(CancellationToken cancellationToken = default)
         {
 
@@ -89,6 +92,7 @@ namespace body_number
                 throw;
             }
         }
+        /// <summary> Get invalid double Number value. </summary>
         public async ValueTask<Response<double>> GetInvalidDoubleAsync(CancellationToken cancellationToken = default)
         {
 
@@ -120,6 +124,7 @@ namespace body_number
                 throw;
             }
         }
+        /// <summary> Get invalid decimal Number value. </summary>
         public async ValueTask<Response<decimal>> GetInvalidDecimalAsync(CancellationToken cancellationToken = default)
         {
 
@@ -151,6 +156,8 @@ namespace body_number
                 throw;
             }
         }
+        /// <summary> Put big float value 3.402823e+20. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutBigFloatAsync(float numberBody, CancellationToken cancellationToken = default)
         {
 
@@ -182,6 +189,7 @@ namespace body_number
                 throw;
             }
         }
+        /// <summary> Get big float value 3.402823e+20. </summary>
         public async ValueTask<Response<float>> GetBigFloatAsync(CancellationToken cancellationToken = default)
         {
 
@@ -213,6 +221,8 @@ namespace body_number
                 throw;
             }
         }
+        /// <summary> Put big double value 2.5976931e+101. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutBigDoubleAsync(double numberBody, CancellationToken cancellationToken = default)
         {
 
@@ -244,6 +254,7 @@ namespace body_number
                 throw;
             }
         }
+        /// <summary> Get big double value 2.5976931e+101. </summary>
         public async ValueTask<Response<double>> GetBigDoubleAsync(CancellationToken cancellationToken = default)
         {
 
@@ -275,6 +286,7 @@ namespace body_number
                 throw;
             }
         }
+        /// <summary> Put big double value 99999999.99. </summary>
         public async ValueTask<Response> PutBigDoublePositiveDecimalAsync(CancellationToken cancellationToken = default)
         {
 
@@ -306,6 +318,7 @@ namespace body_number
                 throw;
             }
         }
+        /// <summary> Get big double value 99999999.99. </summary>
         public async ValueTask<Response<double>> GetBigDoublePositiveDecimalAsync(CancellationToken cancellationToken = default)
         {
 
@@ -337,6 +350,7 @@ namespace body_number
                 throw;
             }
         }
+        /// <summary> Put big double value -99999999.99. </summary>
         public async ValueTask<Response> PutBigDoubleNegativeDecimalAsync(CancellationToken cancellationToken = default)
         {
 
@@ -368,6 +382,7 @@ namespace body_number
                 throw;
             }
         }
+        /// <summary> Get big double value -99999999.99. </summary>
         public async ValueTask<Response<double>> GetBigDoubleNegativeDecimalAsync(CancellationToken cancellationToken = default)
         {
 
@@ -399,6 +414,8 @@ namespace body_number
                 throw;
             }
         }
+        /// <summary> Put big decimal value 2.5976931e+101. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutBigDecimalAsync(decimal numberBody, CancellationToken cancellationToken = default)
         {
 
@@ -430,6 +447,7 @@ namespace body_number
                 throw;
             }
         }
+        /// <summary> Get big decimal value 2.5976931e+101. </summary>
         public async ValueTask<Response<decimal>> GetBigDecimalAsync(CancellationToken cancellationToken = default)
         {
 
@@ -461,6 +479,7 @@ namespace body_number
                 throw;
             }
         }
+        /// <summary> Put big decimal value 99999999.99. </summary>
         public async ValueTask<Response> PutBigDecimalPositiveDecimalAsync(CancellationToken cancellationToken = default)
         {
 
@@ -492,6 +511,7 @@ namespace body_number
                 throw;
             }
         }
+        /// <summary> Get big decimal value 99999999.99. </summary>
         public async ValueTask<Response<decimal>> GetBigDecimalPositiveDecimalAsync(CancellationToken cancellationToken = default)
         {
 
@@ -523,6 +543,7 @@ namespace body_number
                 throw;
             }
         }
+        /// <summary> Put big decimal value -99999999.99. </summary>
         public async ValueTask<Response> PutBigDecimalNegativeDecimalAsync(CancellationToken cancellationToken = default)
         {
 
@@ -554,6 +575,7 @@ namespace body_number
                 throw;
             }
         }
+        /// <summary> Get big decimal value -99999999.99. </summary>
         public async ValueTask<Response<decimal>> GetBigDecimalNegativeDecimalAsync(CancellationToken cancellationToken = default)
         {
 
@@ -585,6 +607,8 @@ namespace body_number
                 throw;
             }
         }
+        /// <summary> Put small float value 3.402823e-20. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutSmallFloatAsync(float numberBody, CancellationToken cancellationToken = default)
         {
 
@@ -616,6 +640,7 @@ namespace body_number
                 throw;
             }
         }
+        /// <summary> Get big double value 3.402823e-20. </summary>
         public async ValueTask<Response<double>> GetSmallFloatAsync(CancellationToken cancellationToken = default)
         {
 
@@ -647,6 +672,8 @@ namespace body_number
                 throw;
             }
         }
+        /// <summary> Put small double value 2.5976931e-101. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutSmallDoubleAsync(double numberBody, CancellationToken cancellationToken = default)
         {
 
@@ -678,6 +705,7 @@ namespace body_number
                 throw;
             }
         }
+        /// <summary> Get big double value 2.5976931e-101. </summary>
         public async ValueTask<Response<double>> GetSmallDoubleAsync(CancellationToken cancellationToken = default)
         {
 
@@ -709,6 +737,8 @@ namespace body_number
                 throw;
             }
         }
+        /// <summary> Put small decimal value 2.5976931e-101. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutSmallDecimalAsync(decimal numberBody, CancellationToken cancellationToken = default)
         {
 
@@ -740,6 +770,7 @@ namespace body_number
                 throw;
             }
         }
+        /// <summary> Get small decimal value 2.5976931e-101. </summary>
         public async ValueTask<Response<decimal>> GetSmallDecimalAsync(CancellationToken cancellationToken = default)
         {
 

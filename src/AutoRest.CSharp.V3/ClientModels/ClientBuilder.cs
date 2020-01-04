@@ -42,6 +42,7 @@ namespace AutoRest.CSharp.V3.ClientModels
             }
 
             return new ServiceClient(arg.CSharpName(),
+                arg.Language.Default.Description,
                 OrderParameters(clientParameters.Values),
                 methods.ToArray());
         }
@@ -183,6 +184,7 @@ namespace AutoRest.CSharp.V3.ClientModels
 
             return new ClientMethod(
                 operation.CSharpName(),
+                operation.Language.Default.Description,
                 request,
                 OrderParameters(methodParameters),
                 clientResponse
@@ -199,6 +201,7 @@ namespace AutoRest.CSharp.V3.ClientModels
 
             return new ServiceClientParameter(
                 requestParameter.CSharpName(),
+                requestParameter.Language.Default.Description,
                 ClientModelBuilderHelpers.CreateType(requestParameter.Schema, requestParameter.IsNullable()),
                 CreateDefaultValueConstant(requestParameter) ?? defaultValue,
                 requestParameter.Required == true);
@@ -214,8 +217,11 @@ namespace AutoRest.CSharp.V3.ClientModels
             ResponseHeader CreateResponseHeader(HttpHeader header) =>
                 new ResponseHeader(header.Header.ToCleanName(), header.Header, ClientModelBuilderHelpers.CreateType(header.Schema, true));
 
+            string operationName = operation.CSharpName();
+
             return new ResponseHeaderModel(
-                operation.CSharpName() + "Headers",
+                operationName + "Headers",
+                $"Header model for {operationName}",
                 httpResponse.Headers.Select(CreateResponseHeader).ToArray()
                 );
         }

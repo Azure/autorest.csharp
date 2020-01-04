@@ -16,6 +16,7 @@ namespace body_file
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+        /// <summary> Initializes a new instance of FilesOperations. </summary>
         public FilesOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
@@ -27,6 +28,7 @@ namespace body_file
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+        /// <summary> Get file. </summary>
         public async ValueTask<Response<Stream>> GetFileAsync(CancellationToken cancellationToken = default)
         {
 
@@ -57,6 +59,7 @@ namespace body_file
                 throw;
             }
         }
+        /// <summary> Get a large file. </summary>
         public async ValueTask<Response<Stream>> GetFileLargeAsync(CancellationToken cancellationToken = default)
         {
 
@@ -87,6 +90,7 @@ namespace body_file
                 throw;
             }
         }
+        /// <summary> Get empty file. </summary>
         public async ValueTask<Response<Stream>> GetEmptyFileAsync(CancellationToken cancellationToken = default)
         {
 

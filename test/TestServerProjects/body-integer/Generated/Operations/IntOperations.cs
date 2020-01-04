@@ -16,6 +16,7 @@ namespace body_integer
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+        /// <summary> Initializes a new instance of IntOperations. </summary>
         public IntOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
@@ -27,6 +28,7 @@ namespace body_integer
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+        /// <summary> Get null Int value. </summary>
         public async ValueTask<Response<int>> GetNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -58,6 +60,7 @@ namespace body_integer
                 throw;
             }
         }
+        /// <summary> Get invalid Int value. </summary>
         public async ValueTask<Response<int>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -89,6 +92,7 @@ namespace body_integer
                 throw;
             }
         }
+        /// <summary> Get overflow Int32 value. </summary>
         public async ValueTask<Response<int>> GetOverflowInt32Async(CancellationToken cancellationToken = default)
         {
 
@@ -120,6 +124,7 @@ namespace body_integer
                 throw;
             }
         }
+        /// <summary> Get underflow Int32 value. </summary>
         public async ValueTask<Response<int>> GetUnderflowInt32Async(CancellationToken cancellationToken = default)
         {
 
@@ -151,6 +156,7 @@ namespace body_integer
                 throw;
             }
         }
+        /// <summary> Get overflow Int64 value. </summary>
         public async ValueTask<Response<long>> GetOverflowInt64Async(CancellationToken cancellationToken = default)
         {
 
@@ -182,6 +188,7 @@ namespace body_integer
                 throw;
             }
         }
+        /// <summary> Get underflow Int64 value. </summary>
         public async ValueTask<Response<long>> GetUnderflowInt64Async(CancellationToken cancellationToken = default)
         {
 
@@ -213,6 +220,8 @@ namespace body_integer
                 throw;
             }
         }
+        /// <summary> Put max int32 value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutMax32Async(int intBody, CancellationToken cancellationToken = default)
         {
 
@@ -244,6 +253,8 @@ namespace body_integer
                 throw;
             }
         }
+        /// <summary> Put max int64 value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutMax64Async(long intBody, CancellationToken cancellationToken = default)
         {
 
@@ -275,6 +286,8 @@ namespace body_integer
                 throw;
             }
         }
+        /// <summary> Put min int32 value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutMin32Async(int intBody, CancellationToken cancellationToken = default)
         {
 
@@ -306,6 +319,8 @@ namespace body_integer
                 throw;
             }
         }
+        /// <summary> Put min int64 value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutMin64Async(long intBody, CancellationToken cancellationToken = default)
         {
 
@@ -337,6 +352,7 @@ namespace body_integer
                 throw;
             }
         }
+        /// <summary> Get datetime encoded as Unix time value. </summary>
         public async ValueTask<Response<DateTimeOffset>> GetUnixTimeAsync(CancellationToken cancellationToken = default)
         {
 
@@ -368,6 +384,8 @@ namespace body_integer
                 throw;
             }
         }
+        /// <summary> Put datetime encoded as Unix time. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutUnixTimeDateAsync(DateTimeOffset intBody, CancellationToken cancellationToken = default)
         {
 
@@ -399,6 +417,7 @@ namespace body_integer
                 throw;
             }
         }
+        /// <summary> Get invalid Unix time value. </summary>
         public async ValueTask<Response<DateTimeOffset>> GetInvalidUnixTimeAsync(CancellationToken cancellationToken = default)
         {
 
@@ -430,6 +449,7 @@ namespace body_integer
                 throw;
             }
         }
+        /// <summary> Get null Unix time value. </summary>
         public async ValueTask<Response<DateTimeOffset>> GetNullUnixTimeAsync(CancellationToken cancellationToken = default)
         {
 
