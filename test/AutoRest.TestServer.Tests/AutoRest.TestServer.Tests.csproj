@@ -16,10 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Infrastructure\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Include="../../src/assets/**/*.cs" />
     <Compile Include="../TestServerProjects/**/*.cs" LinkBase="TestServerProjects" />
   </ItemGroup>
