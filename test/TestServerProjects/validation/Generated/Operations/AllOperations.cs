@@ -19,6 +19,7 @@ namespace validation
         private string ApiVersion;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+        /// <summary> Initializes a new instance of AllOperations. </summary>
         public AllOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "http://localhost:3000", string ApiVersion = "1.0.0")
         {
             if (subscriptionId == null)
@@ -55,6 +56,10 @@ namespace validation
             request.Uri.AppendQuery("apiVersion", ApiVersion, true);
             return message;
         }
+        /// <summary> Validates input parameters on the method. See swagger for details. </summary>
+        /// <param name="resourceGroupName"> Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+. </param>
+        /// <param name="id"> Required int multiple of 10 from 100 to 1000. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Product>> ValidationOfMethodParametersAsync(string resourceGroupName, int id, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
@@ -86,6 +91,10 @@ namespace validation
                 throw;
             }
         }
+        /// <summary> Validates input parameters on the method. See swagger for details. </summary>
+        /// <param name="resourceGroupName"> Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+. </param>
+        /// <param name="id"> Required int multiple of 10 from 100 to 1000. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Product> ValidationOfMethodParameters(string resourceGroupName, int id, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
@@ -136,6 +145,11 @@ namespace validation
             request.Content = content;
             return message;
         }
+        /// <summary> Validates body parameters on the method. See swagger for details. </summary>
+        /// <param name="resourceGroupName"> Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+. </param>
+        /// <param name="id"> Required int multiple of 10 from 100 to 1000. </param>
+        /// <param name="body"> The Product to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Product>> ValidationOfBodyAsync(string resourceGroupName, int id, Product? body, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
@@ -167,6 +181,11 @@ namespace validation
                 throw;
             }
         }
+        /// <summary> Validates body parameters on the method. See swagger for details. </summary>
+        /// <param name="resourceGroupName"> Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+. </param>
+        /// <param name="id"> Required int multiple of 10 from 100 to 1000. </param>
+        /// <param name="body"> The Product to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Product> ValidationOfBody(string resourceGroupName, int id, Product? body, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
@@ -209,6 +228,8 @@ namespace validation
             request.Uri.AppendPath("/value", false);
             return message;
         }
+        /// <summary> MISSING·OPERATION-DESCRIPTION. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetWithConstantInPathAsync(CancellationToken cancellationToken = default)
         {
 
@@ -232,6 +253,8 @@ namespace validation
                 throw;
             }
         }
+        /// <summary> MISSING·OPERATION-DESCRIPTION. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetWithConstantInPath(CancellationToken cancellationToken = default)
         {
 
@@ -270,6 +293,9 @@ namespace validation
             request.Content = content;
             return message;
         }
+        /// <summary> MISSING·OPERATION-DESCRIPTION. </summary>
+        /// <param name="body"> The Product to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Product>> PostWithConstantInBodyAsync(Product? body, CancellationToken cancellationToken = default)
         {
 
@@ -297,6 +323,9 @@ namespace validation
                 throw;
             }
         }
+        /// <summary> MISSING·OPERATION-DESCRIPTION. </summary>
+        /// <param name="body"> The Product to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Product> PostWithConstantInBody(Product? body, CancellationToken cancellationToken = default)
         {
 

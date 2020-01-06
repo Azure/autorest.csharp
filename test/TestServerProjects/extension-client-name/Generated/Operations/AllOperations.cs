@@ -16,6 +16,7 @@ namespace extension_client_name
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+        /// <summary> Initializes a new instance of AllOperations. </summary>
         public AllOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
@@ -42,6 +43,11 @@ namespace extension_client_name
             request.Content = content;
             return message;
         }
+        /// <summary> MISSING·OPERATION-DESCRIPTION. </summary>
+        /// <param name="originalPathParameter"> MISSING·PARAMETER-DESCRIPTION. </param>
+        /// <param name="originalQueryParameter"> MISSING·PARAMETER-DESCRIPTION. </param>
+        /// <param name="renamedBodyParameter"> The OriginalSchema to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<OriginalSchema, OriginalOperationHeaders>> OriginalOperationAsync(string originalPathParameter, string originalQueryParameter, OriginalSchema renamedBodyParameter, CancellationToken cancellationToken = default)
         {
             if (originalPathParameter == null)
@@ -82,6 +88,11 @@ namespace extension_client_name
                 throw;
             }
         }
+        /// <summary> MISSING·OPERATION-DESCRIPTION. </summary>
+        /// <param name="originalPathParameter"> MISSING·PARAMETER-DESCRIPTION. </param>
+        /// <param name="originalQueryParameter"> MISSING·PARAMETER-DESCRIPTION. </param>
+        /// <param name="renamedBodyParameter"> The OriginalSchema to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<OriginalSchema, OriginalOperationHeaders> OriginalOperation(string originalPathParameter, string originalQueryParameter, OriginalSchema renamedBodyParameter, CancellationToken cancellationToken = default)
         {
             if (originalPathParameter == null)
