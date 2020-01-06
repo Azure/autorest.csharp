@@ -26,7 +26,7 @@ namespace @Settings.Namespace
         {
             UrlResourceManager = ResourceManager.Create(baseUrls);
             PerRequestTimeout = perRequestTimeout.HasValue ? perRequestTimeout.Value : TimeSpan.FromMilliseconds(100);
-            ShouldRetryPredicate = GetRetryCountPredicate(3);
+            ShouldRetryPredicate = GetRetryCountPredicate(maxRetry);
             IsErrorResponse = isErrorResponse;
         }
 
