@@ -16,6 +16,7 @@ namespace body_boolean
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+        /// <summary> Initializes a new instance of BoolOperations. </summary>
         public BoolOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
@@ -36,6 +37,8 @@ namespace body_boolean
             request.Uri.AppendPath("/bool/true", false);
             return message;
         }
+        /// <summary> Get true Boolean value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<bool>> GetTrueAsync(CancellationToken cancellationToken = default)
         {
 
@@ -63,6 +66,8 @@ namespace body_boolean
                 throw;
             }
         }
+        /// <summary> Get true Boolean value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<bool> GetTrue(CancellationToken cancellationToken = default)
         {
 
@@ -103,6 +108,8 @@ namespace body_boolean
             request.Content = content;
             return message;
         }
+        /// <summary> Set Boolean value true. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutTrueAsync(CancellationToken cancellationToken = default)
         {
 
@@ -126,6 +133,8 @@ namespace body_boolean
                 throw;
             }
         }
+        /// <summary> Set Boolean value true. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutTrue(CancellationToken cancellationToken = default)
         {
 
@@ -158,6 +167,8 @@ namespace body_boolean
             request.Uri.AppendPath("/bool/false", false);
             return message;
         }
+        /// <summary> Get false Boolean value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<bool>> GetFalseAsync(CancellationToken cancellationToken = default)
         {
 
@@ -185,6 +196,8 @@ namespace body_boolean
                 throw;
             }
         }
+        /// <summary> Get false Boolean value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<bool> GetFalse(CancellationToken cancellationToken = default)
         {
 
@@ -225,6 +238,8 @@ namespace body_boolean
             request.Content = content;
             return message;
         }
+        /// <summary> Set Boolean value false. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutFalseAsync(CancellationToken cancellationToken = default)
         {
 
@@ -248,6 +263,8 @@ namespace body_boolean
                 throw;
             }
         }
+        /// <summary> Set Boolean value false. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutFalse(CancellationToken cancellationToken = default)
         {
 
@@ -280,6 +297,8 @@ namespace body_boolean
             request.Uri.AppendPath("/bool/null", false);
             return message;
         }
+        /// <summary> Get null Boolean value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<bool>> GetNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -307,6 +326,8 @@ namespace body_boolean
                 throw;
             }
         }
+        /// <summary> Get null Boolean value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<bool> GetNull(CancellationToken cancellationToken = default)
         {
 
@@ -343,6 +364,8 @@ namespace body_boolean
             request.Uri.AppendPath("/bool/invalid", false);
             return message;
         }
+        /// <summary> Get invalid Boolean value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<bool>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -370,6 +393,8 @@ namespace body_boolean
                 throw;
             }
         }
+        /// <summary> Get invalid Boolean value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<bool> GetInvalid(CancellationToken cancellationToken = default)
         {
 

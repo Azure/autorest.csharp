@@ -17,6 +17,7 @@ namespace body_complex
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+        /// <summary> Initializes a new instance of ArrayOperations. </summary>
         public ArrayOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
@@ -37,6 +38,8 @@ namespace body_complex
             request.Uri.AppendPath("/complex/array/valid", false);
             return message;
         }
+        /// <summary> Get complex types with array property. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ArrayWrapper>> GetValidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -64,6 +67,8 @@ namespace body_complex
                 throw;
             }
         }
+        /// <summary> Get complex types with array property. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ArrayWrapper> GetValid(CancellationToken cancellationToken = default)
         {
 
@@ -104,6 +109,9 @@ namespace body_complex
             request.Content = content;
             return message;
         }
+        /// <summary> Put complex types with array property. </summary>
+        /// <param name="complexBody"> Please put an array with 4 items: &quot;1, 2, 3, 4&quot;, &quot;&quot;, null, &quot;&amp;S#$(*Y&quot;, &quot;The quick brown fox jumps over the lazy dog&quot;. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutValidAsync(ArrayWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -131,6 +139,9 @@ namespace body_complex
                 throw;
             }
         }
+        /// <summary> Put complex types with array property. </summary>
+        /// <param name="complexBody"> Please put an array with 4 items: &quot;1, 2, 3, 4&quot;, &quot;&quot;, null, &quot;&amp;S#$(*Y&quot;, &quot;The quick brown fox jumps over the lazy dog&quot;. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutValid(ArrayWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -167,6 +178,8 @@ namespace body_complex
             request.Uri.AppendPath("/complex/array/empty", false);
             return message;
         }
+        /// <summary> Get complex types with array property which is empty. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ArrayWrapper>> GetEmptyAsync(CancellationToken cancellationToken = default)
         {
 
@@ -194,6 +207,8 @@ namespace body_complex
                 throw;
             }
         }
+        /// <summary> Get complex types with array property which is empty. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ArrayWrapper> GetEmpty(CancellationToken cancellationToken = default)
         {
 
@@ -234,6 +249,9 @@ namespace body_complex
             request.Content = content;
             return message;
         }
+        /// <summary> Put complex types with array property which is empty. </summary>
+        /// <param name="complexBody"> Please put an array with 4 items: &quot;1, 2, 3, 4&quot;, &quot;&quot;, null, &quot;&amp;S#$(*Y&quot;, &quot;The quick brown fox jumps over the lazy dog&quot;. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutEmptyAsync(ArrayWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -261,6 +279,9 @@ namespace body_complex
                 throw;
             }
         }
+        /// <summary> Put complex types with array property which is empty. </summary>
+        /// <param name="complexBody"> Please put an array with 4 items: &quot;1, 2, 3, 4&quot;, &quot;&quot;, null, &quot;&amp;S#$(*Y&quot;, &quot;The quick brown fox jumps over the lazy dog&quot;. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutEmpty(ArrayWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -297,6 +318,8 @@ namespace body_complex
             request.Uri.AppendPath("/complex/array/notprovided", false);
             return message;
         }
+        /// <summary> Get complex types with array property while server doesn&apos;t provide a response payload. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ArrayWrapper>> GetNotProvidedAsync(CancellationToken cancellationToken = default)
         {
 
@@ -324,6 +347,8 @@ namespace body_complex
                 throw;
             }
         }
+        /// <summary> Get complex types with array property while server doesn&apos;t provide a response payload. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ArrayWrapper> GetNotProvided(CancellationToken cancellationToken = default)
         {
 

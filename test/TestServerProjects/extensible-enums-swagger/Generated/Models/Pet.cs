@@ -3,10 +3,14 @@
 
 namespace extensible_enums_swagger.Models.V20160707
 {
+    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
     public partial class Pet
     {
+        /// <summary> MISSING·SCHEMA-DESCRIPTION-STRING. </summary>
         public string? Name { get; set; }
+        /// <summary> Type of Pet. </summary>
         public DaysOfWeekExtensibleEnum? DaysOfWeek { get; set; }
+        /// <summary> MISSING·SCHEMA-DESCRIPTION-CHOICE. </summary>
         public IntEnum IntEnum { get; set; }
     }
 }

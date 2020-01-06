@@ -18,6 +18,7 @@ namespace body_complex
         private string ApiVersion;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+        /// <summary> Initializes a new instance of BasicOperations. </summary>
         public BasicOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", string ApiVersion = "2016-02-29")
         {
             if (host == null)
@@ -43,6 +44,8 @@ namespace body_complex
             request.Uri.AppendPath("/complex/basic/valid", false);
             return message;
         }
+        /// <summary> Get complex type {id: 2, name: &apos;abc&apos;, color: &apos;YELLOW&apos;}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Basic>> GetValidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -70,6 +73,8 @@ namespace body_complex
                 throw;
             }
         }
+        /// <summary> Get complex type {id: 2, name: &apos;abc&apos;, color: &apos;YELLOW&apos;}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Basic> GetValid(CancellationToken cancellationToken = default)
         {
 
@@ -111,6 +116,9 @@ namespace body_complex
             request.Content = content;
             return message;
         }
+        /// <summary> Please put {id: 2, name: &apos;abc&apos;, color: &apos;Magenta&apos;}. </summary>
+        /// <param name="complexBody"> Please put {id: 2, name: &apos;abc&apos;, color: &apos;Magenta&apos;}. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutValidAsync(Basic complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -138,6 +146,9 @@ namespace body_complex
                 throw;
             }
         }
+        /// <summary> Please put {id: 2, name: &apos;abc&apos;, color: &apos;Magenta&apos;}. </summary>
+        /// <param name="complexBody"> Please put {id: 2, name: &apos;abc&apos;, color: &apos;Magenta&apos;}. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutValid(Basic complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -174,6 +185,8 @@ namespace body_complex
             request.Uri.AppendPath("/complex/basic/invalid", false);
             return message;
         }
+        /// <summary> Get a basic complex type that is invalid for the local strong type. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Basic>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -201,6 +214,8 @@ namespace body_complex
                 throw;
             }
         }
+        /// <summary> Get a basic complex type that is invalid for the local strong type. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Basic> GetInvalid(CancellationToken cancellationToken = default)
         {
 
@@ -237,6 +252,8 @@ namespace body_complex
             request.Uri.AppendPath("/complex/basic/empty", false);
             return message;
         }
+        /// <summary> Get a basic complex type that is empty. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Basic>> GetEmptyAsync(CancellationToken cancellationToken = default)
         {
 
@@ -264,6 +281,8 @@ namespace body_complex
                 throw;
             }
         }
+        /// <summary> Get a basic complex type that is empty. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Basic> GetEmpty(CancellationToken cancellationToken = default)
         {
 
@@ -300,6 +319,8 @@ namespace body_complex
             request.Uri.AppendPath("/complex/basic/null", false);
             return message;
         }
+        /// <summary> Get a basic complex type whose properties are null. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Basic>> GetNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -327,6 +348,8 @@ namespace body_complex
                 throw;
             }
         }
+        /// <summary> Get a basic complex type whose properties are null. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Basic> GetNull(CancellationToken cancellationToken = default)
         {
 
@@ -363,6 +386,8 @@ namespace body_complex
             request.Uri.AppendPath("/complex/basic/notprovided", false);
             return message;
         }
+        /// <summary> Get a basic complex type while the server doesn&apos;t provide a response payload. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Basic>> GetNotProvidedAsync(CancellationToken cancellationToken = default)
         {
 
@@ -390,6 +415,8 @@ namespace body_complex
                 throw;
             }
         }
+        /// <summary> Get a basic complex type while the server doesn&apos;t provide a response payload. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Basic> GetNotProvided(CancellationToken cancellationToken = default)
         {
 

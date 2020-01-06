@@ -5,9 +5,10 @@ namespace AutoRest.CSharp.V3.ClientModels
 {
     internal class ServiceClientParameter
     {
-        public ServiceClientParameter(string name, ClientTypeReference type, ClientConstant? defaultValue, bool isRequired)
+        public ServiceClientParameter(string name, string? description, ClientTypeReference type, ClientConstant? defaultValue, bool isRequired)
         {
             Name = name;
+            Description = description;
             Type = type;
             DefaultValue = defaultValue;
             IsRequired = isRequired;
@@ -15,6 +16,7 @@ namespace AutoRest.CSharp.V3.ClientModels
 
         public ClientTypeReference Type { get; }
         public string Name { get; }
+        public string? Description { get; }
         public ClientConstant? DefaultValue { get; }
         public bool IsRequired { get; }
     }

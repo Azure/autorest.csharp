@@ -17,6 +17,7 @@ namespace body_string
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+        /// <summary> Initializes a new instance of EnumOperations. </summary>
         public EnumOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
@@ -37,6 +38,8 @@ namespace body_string
             request.Uri.AppendPath("/string/enum/notExpandable", false);
             return message;
         }
+        /// <summary> Get enum value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Colors>> GetNotExpandableAsync(CancellationToken cancellationToken = default)
         {
 
@@ -64,6 +67,8 @@ namespace body_string
                 throw;
             }
         }
+        /// <summary> Get enum value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Colors> GetNotExpandable(CancellationToken cancellationToken = default)
         {
 
@@ -104,6 +109,9 @@ namespace body_string
             request.Content = content;
             return message;
         }
+        /// <summary> Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
+        /// <param name="stringBody"> The Colors to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutNotExpandableAsync(Colors stringBody, CancellationToken cancellationToken = default)
         {
 
@@ -127,6 +135,9 @@ namespace body_string
                 throw;
             }
         }
+        /// <summary> Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
+        /// <param name="stringBody"> The Colors to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutNotExpandable(Colors stringBody, CancellationToken cancellationToken = default)
         {
 
@@ -159,6 +170,8 @@ namespace body_string
             request.Uri.AppendPath("/string/enum/Referenced", false);
             return message;
         }
+        /// <summary> Get enum value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Colors>> GetReferencedAsync(CancellationToken cancellationToken = default)
         {
 
@@ -186,6 +199,8 @@ namespace body_string
                 throw;
             }
         }
+        /// <summary> Get enum value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Colors> GetReferenced(CancellationToken cancellationToken = default)
         {
 
@@ -226,6 +241,9 @@ namespace body_string
             request.Content = content;
             return message;
         }
+        /// <summary> Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
+        /// <param name="enumStringBody"> The Colors to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutReferencedAsync(Colors enumStringBody, CancellationToken cancellationToken = default)
         {
 
@@ -249,6 +267,9 @@ namespace body_string
                 throw;
             }
         }
+        /// <summary> Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
+        /// <param name="enumStringBody"> The Colors to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutReferenced(Colors enumStringBody, CancellationToken cancellationToken = default)
         {
 
@@ -281,6 +302,8 @@ namespace body_string
             request.Uri.AppendPath("/string/enum/ReferencedConstant", false);
             return message;
         }
+        /// <summary> Get value &apos;green-color&apos; from the constant. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<RefColorConstant>> GetReferencedConstantAsync(CancellationToken cancellationToken = default)
         {
 
@@ -308,6 +331,8 @@ namespace body_string
                 throw;
             }
         }
+        /// <summary> Get value &apos;green-color&apos; from the constant. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<RefColorConstant> GetReferencedConstant(CancellationToken cancellationToken = default)
         {
 
@@ -348,6 +373,9 @@ namespace body_string
             request.Content = content;
             return message;
         }
+        /// <summary> Sends value &apos;green-color&apos; from a constant. </summary>
+        /// <param name="enumStringBody"> The RefColorConstant to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutReferencedConstantAsync(RefColorConstant enumStringBody, CancellationToken cancellationToken = default)
         {
             if (enumStringBody == null)
@@ -375,6 +403,9 @@ namespace body_string
                 throw;
             }
         }
+        /// <summary> Sends value &apos;green-color&apos; from a constant. </summary>
+        /// <param name="enumStringBody"> The RefColorConstant to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutReferencedConstant(RefColorConstant enumStringBody, CancellationToken cancellationToken = default)
         {
             if (enumStringBody == null)

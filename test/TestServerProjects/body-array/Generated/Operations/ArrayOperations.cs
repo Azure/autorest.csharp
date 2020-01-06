@@ -18,6 +18,7 @@ namespace body_array
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+        /// <summary> Initializes a new instance of ArrayOperations. </summary>
         public ArrayOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
@@ -38,6 +39,8 @@ namespace body_array
             request.Uri.AppendPath("/array/null", false);
             return message;
         }
+        /// <summary> Get null array value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<int>>> GetNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -69,6 +72,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get null array value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<int>> GetNull(CancellationToken cancellationToken = default)
         {
 
@@ -109,6 +114,8 @@ namespace body_array
             request.Uri.AppendPath("/array/invalid", false);
             return message;
         }
+        /// <summary> Get invalid array [1, 2, 3. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<int>>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -140,6 +147,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get invalid array [1, 2, 3. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<int>> GetInvalid(CancellationToken cancellationToken = default)
         {
 
@@ -180,6 +189,8 @@ namespace body_array
             request.Uri.AppendPath("/array/empty", false);
             return message;
         }
+        /// <summary> Get empty array value []. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<int>>> GetEmptyAsync(CancellationToken cancellationToken = default)
         {
 
@@ -211,6 +222,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get empty array value []. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<int>> GetEmpty(CancellationToken cancellationToken = default)
         {
 
@@ -260,6 +273,9 @@ namespace body_array
             request.Content = content;
             return message;
         }
+        /// <summary> Set array value empty []. </summary>
+        /// <param name="arrayBody"> The ArrayOfput-content-schemaItem to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutEmptyAsync(IEnumerable<string> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
@@ -287,6 +303,9 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Set array value empty []. </summary>
+        /// <param name="arrayBody"> The ArrayOfput-content-schemaItem to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutEmpty(IEnumerable<string> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
@@ -323,6 +342,8 @@ namespace body_array
             request.Uri.AppendPath("/array/prim/boolean/tfft", false);
             return message;
         }
+        /// <summary> Get boolean array value [true, false, false, true]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<bool>>> GetBooleanTfftAsync(CancellationToken cancellationToken = default)
         {
 
@@ -354,6 +375,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get boolean array value [true, false, false, true]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<bool>> GetBooleanTfft(CancellationToken cancellationToken = default)
         {
 
@@ -403,6 +426,9 @@ namespace body_array
             request.Content = content;
             return message;
         }
+        /// <summary> Set array value empty [true, false, false, true]. </summary>
+        /// <param name="arrayBody"> The ArrayOfboolean to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutBooleanTfftAsync(IEnumerable<bool> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
@@ -430,6 +456,9 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Set array value empty [true, false, false, true]. </summary>
+        /// <param name="arrayBody"> The ArrayOfboolean to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutBooleanTfft(IEnumerable<bool> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
@@ -466,6 +495,8 @@ namespace body_array
             request.Uri.AppendPath("/array/prim/boolean/true.null.false", false);
             return message;
         }
+        /// <summary> Get boolean array value [true, null, false]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<bool>>> GetBooleanInvalidNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -497,6 +528,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get boolean array value [true, null, false]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<bool>> GetBooleanInvalidNull(CancellationToken cancellationToken = default)
         {
 
@@ -537,6 +570,8 @@ namespace body_array
             request.Uri.AppendPath("/array/prim/boolean/true.boolean.false", false);
             return message;
         }
+        /// <summary> Get boolean array value [true, &apos;boolean&apos;, false]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<bool>>> GetBooleanInvalidStringAsync(CancellationToken cancellationToken = default)
         {
 
@@ -568,6 +603,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get boolean array value [true, &apos;boolean&apos;, false]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<bool>> GetBooleanInvalidString(CancellationToken cancellationToken = default)
         {
 
@@ -608,6 +645,8 @@ namespace body_array
             request.Uri.AppendPath("/array/prim/integer/1.-1.3.300", false);
             return message;
         }
+        /// <summary> Get integer array value [1, -1, 3, 300]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<int>>> GetIntegerValidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -639,6 +678,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get integer array value [1, -1, 3, 300]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<int>> GetIntegerValid(CancellationToken cancellationToken = default)
         {
 
@@ -688,6 +729,9 @@ namespace body_array
             request.Content = content;
             return message;
         }
+        /// <summary> Set array value empty [1, -1, 3, 300]. </summary>
+        /// <param name="arrayBody"> The ArrayOfinteger to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutIntegerValidAsync(IEnumerable<int> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
@@ -715,6 +759,9 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Set array value empty [1, -1, 3, 300]. </summary>
+        /// <param name="arrayBody"> The ArrayOfinteger to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutIntegerValid(IEnumerable<int> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
@@ -751,6 +798,8 @@ namespace body_array
             request.Uri.AppendPath("/array/prim/integer/1.null.zero", false);
             return message;
         }
+        /// <summary> Get integer array value [1, null, 0]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<int>>> GetIntInvalidNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -782,6 +831,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get integer array value [1, null, 0]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<int>> GetIntInvalidNull(CancellationToken cancellationToken = default)
         {
 
@@ -822,6 +873,8 @@ namespace body_array
             request.Uri.AppendPath("/array/prim/integer/1.integer.0", false);
             return message;
         }
+        /// <summary> Get integer array value [1, &apos;integer&apos;, 0]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<int>>> GetIntInvalidStringAsync(CancellationToken cancellationToken = default)
         {
 
@@ -853,6 +906,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get integer array value [1, &apos;integer&apos;, 0]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<int>> GetIntInvalidString(CancellationToken cancellationToken = default)
         {
 
@@ -893,6 +948,8 @@ namespace body_array
             request.Uri.AppendPath("/array/prim/long/1.-1.3.300", false);
             return message;
         }
+        /// <summary> Get integer array value [1, -1, 3, 300]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<long>>> GetLongValidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -924,6 +981,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get integer array value [1, -1, 3, 300]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<long>> GetLongValid(CancellationToken cancellationToken = default)
         {
 
@@ -973,6 +1032,9 @@ namespace body_array
             request.Content = content;
             return message;
         }
+        /// <summary> Set array value empty [1, -1, 3, 300]. </summary>
+        /// <param name="arrayBody"> The ArrayOfinteger to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutLongValidAsync(IEnumerable<long> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
@@ -1000,6 +1062,9 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Set array value empty [1, -1, 3, 300]. </summary>
+        /// <param name="arrayBody"> The ArrayOfinteger to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutLongValid(IEnumerable<long> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
@@ -1036,6 +1101,8 @@ namespace body_array
             request.Uri.AppendPath("/array/prim/long/1.null.zero", false);
             return message;
         }
+        /// <summary> Get long array value [1, null, 0]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<long>>> GetLongInvalidNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -1067,6 +1134,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get long array value [1, null, 0]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<long>> GetLongInvalidNull(CancellationToken cancellationToken = default)
         {
 
@@ -1107,6 +1176,8 @@ namespace body_array
             request.Uri.AppendPath("/array/prim/long/1.integer.0", false);
             return message;
         }
+        /// <summary> Get long array value [1, &apos;integer&apos;, 0]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<long>>> GetLongInvalidStringAsync(CancellationToken cancellationToken = default)
         {
 
@@ -1138,6 +1209,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get long array value [1, &apos;integer&apos;, 0]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<long>> GetLongInvalidString(CancellationToken cancellationToken = default)
         {
 
@@ -1178,6 +1251,8 @@ namespace body_array
             request.Uri.AppendPath("/array/prim/float/0--0.01-1.2e20", false);
             return message;
         }
+        /// <summary> Get float array value [0, -0.01, 1.2e20]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<float>>> GetFloatValidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -1209,6 +1284,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get float array value [0, -0.01, 1.2e20]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<float>> GetFloatValid(CancellationToken cancellationToken = default)
         {
 
@@ -1258,6 +1335,9 @@ namespace body_array
             request.Content = content;
             return message;
         }
+        /// <summary> Set array value [0, -0.01, 1.2e20]. </summary>
+        /// <param name="arrayBody"> The ArrayOfnumber to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutFloatValidAsync(IEnumerable<float> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
@@ -1285,6 +1365,9 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Set array value [0, -0.01, 1.2e20]. </summary>
+        /// <param name="arrayBody"> The ArrayOfnumber to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutFloatValid(IEnumerable<float> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
@@ -1321,6 +1404,8 @@ namespace body_array
             request.Uri.AppendPath("/array/prim/float/0.0-null-1.2e20", false);
             return message;
         }
+        /// <summary> Get float array value [0.0, null, -1.2e20]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<float>>> GetFloatInvalidNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -1352,6 +1437,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get float array value [0.0, null, -1.2e20]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<float>> GetFloatInvalidNull(CancellationToken cancellationToken = default)
         {
 
@@ -1392,6 +1479,8 @@ namespace body_array
             request.Uri.AppendPath("/array/prim/float/1.number.0", false);
             return message;
         }
+        /// <summary> Get boolean array value [1.0, &apos;number&apos;, 0.0]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<float>>> GetFloatInvalidStringAsync(CancellationToken cancellationToken = default)
         {
 
@@ -1423,6 +1512,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get boolean array value [1.0, &apos;number&apos;, 0.0]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<float>> GetFloatInvalidString(CancellationToken cancellationToken = default)
         {
 
@@ -1463,6 +1554,8 @@ namespace body_array
             request.Uri.AppendPath("/array/prim/double/0--0.01-1.2e20", false);
             return message;
         }
+        /// <summary> Get float array value [0, -0.01, 1.2e20]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<double>>> GetDoubleValidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -1494,6 +1587,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get float array value [0, -0.01, 1.2e20]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<double>> GetDoubleValid(CancellationToken cancellationToken = default)
         {
 
@@ -1543,6 +1638,9 @@ namespace body_array
             request.Content = content;
             return message;
         }
+        /// <summary> Set array value [0, -0.01, 1.2e20]. </summary>
+        /// <param name="arrayBody"> The ArrayOfnumber to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutDoubleValidAsync(IEnumerable<double> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
@@ -1570,6 +1668,9 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Set array value [0, -0.01, 1.2e20]. </summary>
+        /// <param name="arrayBody"> The ArrayOfnumber to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutDoubleValid(IEnumerable<double> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
@@ -1606,6 +1707,8 @@ namespace body_array
             request.Uri.AppendPath("/array/prim/double/0.0-null-1.2e20", false);
             return message;
         }
+        /// <summary> Get float array value [0.0, null, -1.2e20]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<double>>> GetDoubleInvalidNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -1637,6 +1740,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get float array value [0.0, null, -1.2e20]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<double>> GetDoubleInvalidNull(CancellationToken cancellationToken = default)
         {
 
@@ -1677,6 +1782,8 @@ namespace body_array
             request.Uri.AppendPath("/array/prim/double/1.number.0", false);
             return message;
         }
+        /// <summary> Get boolean array value [1.0, &apos;number&apos;, 0.0]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<double>>> GetDoubleInvalidStringAsync(CancellationToken cancellationToken = default)
         {
 
@@ -1708,6 +1815,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get boolean array value [1.0, &apos;number&apos;, 0.0]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<double>> GetDoubleInvalidString(CancellationToken cancellationToken = default)
         {
 
@@ -1748,6 +1857,8 @@ namespace body_array
             request.Uri.AppendPath("/array/prim/string/foo1.foo2.foo3", false);
             return message;
         }
+        /// <summary> Get string array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<string>>> GetStringValidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -1779,6 +1890,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get string array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<string>> GetStringValid(CancellationToken cancellationToken = default)
         {
 
@@ -1828,6 +1941,9 @@ namespace body_array
             request.Content = content;
             return message;
         }
+        /// <summary> Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
+        /// <param name="arrayBody"> The ArrayOfstring to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutStringValidAsync(IEnumerable<string> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
@@ -1855,6 +1971,9 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
+        /// <param name="arrayBody"> The ArrayOfstring to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutStringValid(IEnumerable<string> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
@@ -1891,6 +2010,8 @@ namespace body_array
             request.Uri.AppendPath("/array/prim/enum/foo1.foo2.foo3", false);
             return message;
         }
+        /// <summary> Get enum array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<FooEnum>>> GetEnumValidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -1922,6 +2043,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get enum array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<FooEnum>> GetEnumValid(CancellationToken cancellationToken = default)
         {
 
@@ -1971,6 +2094,9 @@ namespace body_array
             request.Content = content;
             return message;
         }
+        /// <summary> Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
+        /// <param name="arrayBody"> The ArrayOfFooEnum to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutEnumValidAsync(IEnumerable<FooEnum> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
@@ -1998,6 +2124,9 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
+        /// <param name="arrayBody"> The ArrayOfFooEnum to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutEnumValid(IEnumerable<FooEnum> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
@@ -2034,6 +2163,8 @@ namespace body_array
             request.Uri.AppendPath("/array/prim/string-enum/foo1.foo2.foo3", false);
             return message;
         }
+        /// <summary> Get enum array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<Enum0>>> GetStringEnumValidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -2065,6 +2196,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get enum array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<Enum0>> GetStringEnumValid(CancellationToken cancellationToken = default)
         {
 
@@ -2114,6 +2247,9 @@ namespace body_array
             request.Content = content;
             return message;
         }
+        /// <summary> Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
+        /// <param name="arrayBody"> The ArrayOfEnum0 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutStringEnumValidAsync(IEnumerable<Enum0> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
@@ -2141,6 +2277,9 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
+        /// <param name="arrayBody"> The ArrayOfEnum0 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutStringEnumValid(IEnumerable<Enum0> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
@@ -2177,6 +2316,8 @@ namespace body_array
             request.Uri.AppendPath("/array/prim/string/foo.null.foo2", false);
             return message;
         }
+        /// <summary> Get string array value [&apos;foo&apos;, null, &apos;foo2&apos;]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<string>>> GetStringWithNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -2208,6 +2349,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get string array value [&apos;foo&apos;, null, &apos;foo2&apos;]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<string>> GetStringWithNull(CancellationToken cancellationToken = default)
         {
 
@@ -2248,6 +2391,8 @@ namespace body_array
             request.Uri.AppendPath("/array/prim/string/foo.123.foo2", false);
             return message;
         }
+        /// <summary> Get string array value [&apos;foo&apos;, 123, &apos;foo2&apos;]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<string>>> GetStringWithInvalidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -2279,6 +2424,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get string array value [&apos;foo&apos;, 123, &apos;foo2&apos;]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<string>> GetStringWithInvalid(CancellationToken cancellationToken = default)
         {
 
@@ -2319,6 +2466,8 @@ namespace body_array
             request.Uri.AppendPath("/array/prim/uuid/valid", false);
             return message;
         }
+        /// <summary> Get uuid array value [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;d1399005-30f7-40d6-8da6-dd7c89ad34db&apos;, &apos;f42f6aa1-a5bc-4ddf-907e-5f915de43205&apos;]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<Guid>>> GetUuidValidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -2350,6 +2499,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get uuid array value [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;d1399005-30f7-40d6-8da6-dd7c89ad34db&apos;, &apos;f42f6aa1-a5bc-4ddf-907e-5f915de43205&apos;]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<Guid>> GetUuidValid(CancellationToken cancellationToken = default)
         {
 
@@ -2399,6 +2550,9 @@ namespace body_array
             request.Content = content;
             return message;
         }
+        /// <summary> Set array value  [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;d1399005-30f7-40d6-8da6-dd7c89ad34db&apos;, &apos;f42f6aa1-a5bc-4ddf-907e-5f915de43205&apos;]. </summary>
+        /// <param name="arrayBody"> The ArrayOfuuid to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutUuidValidAsync(IEnumerable<Guid> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
@@ -2426,6 +2580,9 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Set array value  [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;d1399005-30f7-40d6-8da6-dd7c89ad34db&apos;, &apos;f42f6aa1-a5bc-4ddf-907e-5f915de43205&apos;]. </summary>
+        /// <param name="arrayBody"> The ArrayOfuuid to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutUuidValid(IEnumerable<Guid> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
@@ -2462,6 +2619,8 @@ namespace body_array
             request.Uri.AppendPath("/array/prim/uuid/invalidchars", false);
             return message;
         }
+        /// <summary> Get uuid array value [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;foo&apos;]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<Guid>>> GetUuidInvalidCharsAsync(CancellationToken cancellationToken = default)
         {
 
@@ -2493,6 +2652,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get uuid array value [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;foo&apos;]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<Guid>> GetUuidInvalidChars(CancellationToken cancellationToken = default)
         {
 
@@ -2533,6 +2694,8 @@ namespace body_array
             request.Uri.AppendPath("/array/prim/date/valid", false);
             return message;
         }
+        /// <summary> Get integer array value [&apos;2000-12-01&apos;, &apos;1980-01-02&apos;, &apos;1492-10-12&apos;]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<DateTimeOffset>>> GetDateValidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -2564,6 +2727,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get integer array value [&apos;2000-12-01&apos;, &apos;1980-01-02&apos;, &apos;1492-10-12&apos;]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<DateTimeOffset>> GetDateValid(CancellationToken cancellationToken = default)
         {
 
@@ -2613,6 +2778,9 @@ namespace body_array
             request.Content = content;
             return message;
         }
+        /// <summary> Set array value  [&apos;2000-12-01&apos;, &apos;1980-01-02&apos;, &apos;1492-10-12&apos;]. </summary>
+        /// <param name="arrayBody"> The ArrayOfdate to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutDateValidAsync(IEnumerable<DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
@@ -2640,6 +2808,9 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Set array value  [&apos;2000-12-01&apos;, &apos;1980-01-02&apos;, &apos;1492-10-12&apos;]. </summary>
+        /// <param name="arrayBody"> The ArrayOfdate to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutDateValid(IEnumerable<DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
@@ -2676,6 +2847,8 @@ namespace body_array
             request.Uri.AppendPath("/array/prim/date/invalidnull", false);
             return message;
         }
+        /// <summary> Get date array value [&apos;2012-01-01&apos;, null, &apos;1776-07-04&apos;]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<DateTimeOffset>>> GetDateInvalidNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -2707,6 +2880,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get date array value [&apos;2012-01-01&apos;, null, &apos;1776-07-04&apos;]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<DateTimeOffset>> GetDateInvalidNull(CancellationToken cancellationToken = default)
         {
 
@@ -2747,6 +2922,8 @@ namespace body_array
             request.Uri.AppendPath("/array/prim/date/invalidchars", false);
             return message;
         }
+        /// <summary> Get date array value [&apos;2011-03-22&apos;, &apos;date&apos;]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<DateTimeOffset>>> GetDateInvalidCharsAsync(CancellationToken cancellationToken = default)
         {
 
@@ -2778,6 +2955,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get date array value [&apos;2011-03-22&apos;, &apos;date&apos;]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<DateTimeOffset>> GetDateInvalidChars(CancellationToken cancellationToken = default)
         {
 
@@ -2818,6 +2997,8 @@ namespace body_array
             request.Uri.AppendPath("/array/prim/date-time/valid", false);
             return message;
         }
+        /// <summary> Get date-time array value [&apos;2000-12-01t00:00:01z&apos;, &apos;1980-01-02T00:11:35+01:00&apos;, &apos;1492-10-12T10:15:01-08:00&apos;]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<DateTimeOffset>>> GetDateTimeValidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -2849,6 +3030,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get date-time array value [&apos;2000-12-01t00:00:01z&apos;, &apos;1980-01-02T00:11:35+01:00&apos;, &apos;1492-10-12T10:15:01-08:00&apos;]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<DateTimeOffset>> GetDateTimeValid(CancellationToken cancellationToken = default)
         {
 
@@ -2898,6 +3081,9 @@ namespace body_array
             request.Content = content;
             return message;
         }
+        /// <summary> Set array value  [&apos;2000-12-01t00:00:01z&apos;, &apos;1980-01-02T00:11:35+01:00&apos;, &apos;1492-10-12T10:15:01-08:00&apos;]. </summary>
+        /// <param name="arrayBody"> The ArrayOfdate-time to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutDateTimeValidAsync(IEnumerable<DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
@@ -2925,6 +3111,9 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Set array value  [&apos;2000-12-01t00:00:01z&apos;, &apos;1980-01-02T00:11:35+01:00&apos;, &apos;1492-10-12T10:15:01-08:00&apos;]. </summary>
+        /// <param name="arrayBody"> The ArrayOfdate-time to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutDateTimeValid(IEnumerable<DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
@@ -2961,6 +3150,8 @@ namespace body_array
             request.Uri.AppendPath("/array/prim/date-time/invalidnull", false);
             return message;
         }
+        /// <summary> Get date array value [&apos;2000-12-01t00:00:01z&apos;, null]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<DateTimeOffset>>> GetDateTimeInvalidNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -2992,6 +3183,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get date array value [&apos;2000-12-01t00:00:01z&apos;, null]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<DateTimeOffset>> GetDateTimeInvalidNull(CancellationToken cancellationToken = default)
         {
 
@@ -3032,6 +3225,8 @@ namespace body_array
             request.Uri.AppendPath("/array/prim/date-time/invalidchars", false);
             return message;
         }
+        /// <summary> Get date array value [&apos;2000-12-01t00:00:01z&apos;, &apos;date-time&apos;]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<DateTimeOffset>>> GetDateTimeInvalidCharsAsync(CancellationToken cancellationToken = default)
         {
 
@@ -3063,6 +3258,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get date array value [&apos;2000-12-01t00:00:01z&apos;, &apos;date-time&apos;]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<DateTimeOffset>> GetDateTimeInvalidChars(CancellationToken cancellationToken = default)
         {
 
@@ -3103,6 +3300,8 @@ namespace body_array
             request.Uri.AppendPath("/array/prim/date-time-rfc1123/valid", false);
             return message;
         }
+        /// <summary> Get date-time array value [&apos;Fri, 01 Dec 2000 00:00:01 GMT&apos;, &apos;Wed, 02 Jan 1980 00:11:35 GMT&apos;, &apos;Wed, 12 Oct 1492 10:15:01 GMT&apos;]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<DateTimeOffset>>> GetDateTimeRfc1123ValidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -3134,6 +3333,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get date-time array value [&apos;Fri, 01 Dec 2000 00:00:01 GMT&apos;, &apos;Wed, 02 Jan 1980 00:11:35 GMT&apos;, &apos;Wed, 12 Oct 1492 10:15:01 GMT&apos;]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<DateTimeOffset>> GetDateTimeRfc1123Valid(CancellationToken cancellationToken = default)
         {
 
@@ -3183,6 +3384,9 @@ namespace body_array
             request.Content = content;
             return message;
         }
+        /// <summary> Set array value  [&apos;Fri, 01 Dec 2000 00:00:01 GMT&apos;, &apos;Wed, 02 Jan 1980 00:11:35 GMT&apos;, &apos;Wed, 12 Oct 1492 10:15:01 GMT&apos;]. </summary>
+        /// <param name="arrayBody"> The ArrayOfdate-time to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutDateTimeRfc1123ValidAsync(IEnumerable<DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
@@ -3210,6 +3414,9 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Set array value  [&apos;Fri, 01 Dec 2000 00:00:01 GMT&apos;, &apos;Wed, 02 Jan 1980 00:11:35 GMT&apos;, &apos;Wed, 12 Oct 1492 10:15:01 GMT&apos;]. </summary>
+        /// <param name="arrayBody"> The ArrayOfdate-time to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutDateTimeRfc1123Valid(IEnumerable<DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
@@ -3246,6 +3453,8 @@ namespace body_array
             request.Uri.AppendPath("/array/prim/duration/valid", false);
             return message;
         }
+        /// <summary> Get duration array value [&apos;P123DT22H14M12.011S&apos;, &apos;P5DT1H0M0S&apos;]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<TimeSpan>>> GetDurationValidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -3277,6 +3486,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get duration array value [&apos;P123DT22H14M12.011S&apos;, &apos;P5DT1H0M0S&apos;]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<TimeSpan>> GetDurationValid(CancellationToken cancellationToken = default)
         {
 
@@ -3326,6 +3537,9 @@ namespace body_array
             request.Content = content;
             return message;
         }
+        /// <summary> Set array value  [&apos;P123DT22H14M12.011S&apos;, &apos;P5DT1H0M0S&apos;]. </summary>
+        /// <param name="arrayBody"> The ArrayOfduration to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutDurationValidAsync(IEnumerable<TimeSpan> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
@@ -3353,6 +3567,9 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Set array value  [&apos;P123DT22H14M12.011S&apos;, &apos;P5DT1H0M0S&apos;]. </summary>
+        /// <param name="arrayBody"> The ArrayOfduration to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutDurationValid(IEnumerable<TimeSpan> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
@@ -3389,6 +3606,8 @@ namespace body_array
             request.Uri.AppendPath("/array/prim/byte/valid", false);
             return message;
         }
+        /// <summary> Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<byte[]>>> GetByteValidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -3420,6 +3639,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<byte[]>> GetByteValid(CancellationToken cancellationToken = default)
         {
 
@@ -3469,6 +3690,9 @@ namespace body_array
             request.Content = content;
             return message;
         }
+        /// <summary> Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64. </summary>
+        /// <param name="arrayBody"> The ArrayOfbyte-array to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutByteValidAsync(IEnumerable<byte[]> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
@@ -3496,6 +3720,9 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64. </summary>
+        /// <param name="arrayBody"> The ArrayOfbyte-array to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutByteValid(IEnumerable<byte[]> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
@@ -3532,6 +3759,8 @@ namespace body_array
             request.Uri.AppendPath("/array/prim/byte/invalidnull", false);
             return message;
         }
+        /// <summary> Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<byte[]>>> GetByteInvalidNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -3563,6 +3792,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<byte[]>> GetByteInvalidNull(CancellationToken cancellationToken = default)
         {
 
@@ -3603,6 +3834,8 @@ namespace body_array
             request.Uri.AppendPath("/array/prim/base64url/valid", false);
             return message;
         }
+        /// <summary> Get array value [&apos;a string that gets encoded with base64url&apos;, &apos;test string&apos; &apos;Lorem ipsum&apos;] with the items base64url encoded. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<byte[]>>> GetBase64UrlAsync(CancellationToken cancellationToken = default)
         {
 
@@ -3634,6 +3867,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get array value [&apos;a string that gets encoded with base64url&apos;, &apos;test string&apos; &apos;Lorem ipsum&apos;] with the items base64url encoded. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<byte[]>> GetBase64Url(CancellationToken cancellationToken = default)
         {
 
@@ -3674,6 +3909,8 @@ namespace body_array
             request.Uri.AppendPath("/array/complex/null", false);
             return message;
         }
+        /// <summary> Get array of complex type null value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<Product>>> GetComplexNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -3705,6 +3942,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get array of complex type null value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<Product>> GetComplexNull(CancellationToken cancellationToken = default)
         {
 
@@ -3745,6 +3984,8 @@ namespace body_array
             request.Uri.AppendPath("/array/complex/empty", false);
             return message;
         }
+        /// <summary> Get empty array of complex type []. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<Product>>> GetComplexEmptyAsync(CancellationToken cancellationToken = default)
         {
 
@@ -3776,6 +4017,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get empty array of complex type []. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<Product>> GetComplexEmpty(CancellationToken cancellationToken = default)
         {
 
@@ -3816,6 +4059,8 @@ namespace body_array
             request.Uri.AppendPath("/array/complex/itemnull", false);
             return message;
         }
+        /// <summary> Get array of complex type with null item [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, null, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<Product>>> GetComplexItemNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -3847,6 +4092,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get array of complex type with null item [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, null, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<Product>> GetComplexItemNull(CancellationToken cancellationToken = default)
         {
 
@@ -3887,6 +4134,8 @@ namespace body_array
             request.Uri.AppendPath("/array/complex/itemempty", false);
             return message;
         }
+        /// <summary> Get array of complex type with empty item [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<Product>>> GetComplexItemEmptyAsync(CancellationToken cancellationToken = default)
         {
 
@@ -3918,6 +4167,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get array of complex type with empty item [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<Product>> GetComplexItemEmpty(CancellationToken cancellationToken = default)
         {
 
@@ -3958,6 +4209,8 @@ namespace body_array
             request.Uri.AppendPath("/array/complex/valid", false);
             return message;
         }
+        /// <summary> Get array of complex type with [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {&apos;integer&apos;: 3, &apos;string&apos;: &apos;4&apos;}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<Product>>> GetComplexValidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -3989,6 +4242,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get array of complex type with [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {&apos;integer&apos;: 3, &apos;string&apos;: &apos;4&apos;}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<Product>> GetComplexValid(CancellationToken cancellationToken = default)
         {
 
@@ -4038,6 +4293,9 @@ namespace body_array
             request.Content = content;
             return message;
         }
+        /// <summary> Put an array of complex type with values [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {&apos;integer&apos;: 3, &apos;string&apos;: &apos;4&apos;}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
+        /// <param name="arrayBody"> The ArrayOfProduct to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutComplexValidAsync(IEnumerable<Product> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
@@ -4065,6 +4323,9 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Put an array of complex type with values [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {&apos;integer&apos;: 3, &apos;string&apos;: &apos;4&apos;}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
+        /// <param name="arrayBody"> The ArrayOfProduct to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutComplexValid(IEnumerable<Product> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
@@ -4101,6 +4362,8 @@ namespace body_array
             request.Uri.AppendPath("/array/array/null", false);
             return message;
         }
+        /// <summary> Get a null array. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<ICollection<string>>>> GetArrayNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -4137,6 +4400,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get a null array. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<ICollection<string>>> GetArrayNull(CancellationToken cancellationToken = default)
         {
 
@@ -4182,6 +4447,8 @@ namespace body_array
             request.Uri.AppendPath("/array/array/empty", false);
             return message;
         }
+        /// <summary> Get an empty array []. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<ICollection<string>>>> GetArrayEmptyAsync(CancellationToken cancellationToken = default)
         {
 
@@ -4218,6 +4485,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get an empty array []. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<ICollection<string>>> GetArrayEmpty(CancellationToken cancellationToken = default)
         {
 
@@ -4263,6 +4532,8 @@ namespace body_array
             request.Uri.AppendPath("/array/array/itemnull", false);
             return message;
         }
+        /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], null, [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<ICollection<string>>>> GetArrayItemNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -4299,6 +4570,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], null, [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<ICollection<string>>> GetArrayItemNull(CancellationToken cancellationToken = default)
         {
 
@@ -4344,6 +4617,8 @@ namespace body_array
             request.Uri.AppendPath("/array/array/itemempty", false);
             return message;
         }
+        /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<ICollection<string>>>> GetArrayItemEmptyAsync(CancellationToken cancellationToken = default)
         {
 
@@ -4380,6 +4655,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<ICollection<string>>> GetArrayItemEmpty(CancellationToken cancellationToken = default)
         {
 
@@ -4425,6 +4702,8 @@ namespace body_array
             request.Uri.AppendPath("/array/array/valid", false);
             return message;
         }
+        /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [&apos;4&apos;, &apos;5&apos;, &apos;6&apos;], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<ICollection<string>>>> GetArrayValidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -4461,6 +4740,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [&apos;4&apos;, &apos;5&apos;, &apos;6&apos;], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<ICollection<string>>> GetArrayValid(CancellationToken cancellationToken = default)
         {
 
@@ -4520,6 +4801,9 @@ namespace body_array
             request.Content = content;
             return message;
         }
+        /// <summary> Put An array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [&apos;4&apos;, &apos;5&apos;, &apos;6&apos;], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
+        /// <param name="arrayBody"> The ArrayOfArray of put-content-schema-itemsItem to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutArrayValidAsync(IEnumerable<ICollection<string>> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
@@ -4547,6 +4831,9 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Put An array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [&apos;4&apos;, &apos;5&apos;, &apos;6&apos;], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
+        /// <param name="arrayBody"> The ArrayOfArray of put-content-schema-itemsItem to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutArrayValid(IEnumerable<ICollection<string>> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
@@ -4583,6 +4870,8 @@ namespace body_array
             request.Uri.AppendPath("/array/dictionary/null", false);
             return message;
         }
+        /// <summary> Get an array of Dictionaries with value null. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<IDictionary<string, string>>>> GetDictionaryNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -4619,6 +4908,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get an array of Dictionaries with value null. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<IDictionary<string, string>>> GetDictionaryNull(CancellationToken cancellationToken = default)
         {
 
@@ -4664,6 +4955,8 @@ namespace body_array
             request.Uri.AppendPath("/array/dictionary/empty", false);
             return message;
         }
+        /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value []. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<IDictionary<string, string>>>> GetDictionaryEmptyAsync(CancellationToken cancellationToken = default)
         {
 
@@ -4700,6 +4993,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value []. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<IDictionary<string, string>>> GetDictionaryEmpty(CancellationToken cancellationToken = default)
         {
 
@@ -4745,6 +5040,8 @@ namespace body_array
             request.Uri.AppendPath("/array/dictionary/itemnull", false);
             return message;
         }
+        /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, null, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<IDictionary<string, string>>>> GetDictionaryItemNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -4781,6 +5078,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, null, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<IDictionary<string, string>>> GetDictionaryItemNull(CancellationToken cancellationToken = default)
         {
 
@@ -4826,6 +5125,8 @@ namespace body_array
             request.Uri.AppendPath("/array/dictionary/itemempty", false);
             return message;
         }
+        /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<IDictionary<string, string>>>> GetDictionaryItemEmptyAsync(CancellationToken cancellationToken = default)
         {
 
@@ -4862,6 +5163,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<IDictionary<string, string>>> GetDictionaryItemEmpty(CancellationToken cancellationToken = default)
         {
 
@@ -4907,6 +5210,8 @@ namespace body_array
             request.Uri.AppendPath("/array/dictionary/valid", false);
             return message;
         }
+        /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {&apos;4&apos;: &apos;four&apos;, &apos;5&apos;: &apos;five&apos;, &apos;6&apos;: &apos;six&apos;}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<IDictionary<string, string>>>> GetDictionaryValidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -4943,6 +5248,8 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {&apos;4&apos;: &apos;four&apos;, &apos;5&apos;: &apos;five&apos;, &apos;6&apos;: &apos;six&apos;}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<IDictionary<string, string>>> GetDictionaryValid(CancellationToken cancellationToken = default)
         {
 
@@ -5003,6 +5310,9 @@ namespace body_array
             request.Content = content;
             return message;
         }
+        /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {&apos;4&apos;: &apos;four&apos;, &apos;5&apos;: &apos;five&apos;, &apos;6&apos;: &apos;six&apos;}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
+        /// <param name="arrayBody"> The ArrayOfDictionary of string to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutDictionaryValidAsync(IEnumerable<IDictionary<string, string>> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
@@ -5030,6 +5340,9 @@ namespace body_array
                 throw;
             }
         }
+        /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {&apos;4&apos;: &apos;four&apos;, &apos;5&apos;: &apos;five&apos;, &apos;6&apos;: &apos;six&apos;}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
+        /// <param name="arrayBody"> The ArrayOfDictionary of string to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutDictionaryValid(IEnumerable<IDictionary<string, string>> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)

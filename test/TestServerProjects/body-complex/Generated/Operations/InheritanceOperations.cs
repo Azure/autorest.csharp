@@ -17,6 +17,7 @@ namespace body_complex
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+        /// <summary> Initializes a new instance of InheritanceOperations. </summary>
         public InheritanceOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
@@ -37,6 +38,8 @@ namespace body_complex
             request.Uri.AppendPath("/complex/inheritance/valid", false);
             return message;
         }
+        /// <summary> Get complex types that extend others. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Siamese>> GetValidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -64,6 +67,8 @@ namespace body_complex
                 throw;
             }
         }
+        /// <summary> Get complex types that extend others. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Siamese> GetValid(CancellationToken cancellationToken = default)
         {
 
@@ -104,6 +109,9 @@ namespace body_complex
             request.Content = content;
             return message;
         }
+        /// <summary> Put complex types that extend others. </summary>
+        /// <param name="complexBody"> Please put a siamese with id=2, name=&quot;Siameee&quot;, color=green, breed=persion, which hates 2 dogs, the 1st one named &quot;Potato&quot; with id=1 and food=&quot;tomato&quot;, and the 2nd one named &quot;Tomato&quot; with id=-1 and food=&quot;french fries&quot;. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutValidAsync(Siamese complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -131,6 +139,9 @@ namespace body_complex
                 throw;
             }
         }
+        /// <summary> Put complex types that extend others. </summary>
+        /// <param name="complexBody"> Please put a siamese with id=2, name=&quot;Siameee&quot;, color=green, breed=persion, which hates 2 dogs, the 1st one named &quot;Potato&quot; with id=1 and food=&quot;tomato&quot;, and the 2nd one named &quot;Tomato&quot; with id=-1 and food=&quot;french fries&quot;. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutValid(Siamese complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)

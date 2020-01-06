@@ -16,6 +16,7 @@ namespace body_byte
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+        /// <summary> Initializes a new instance of ByteOperations. </summary>
         public ByteOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
@@ -36,6 +37,8 @@ namespace body_byte
             request.Uri.AppendPath("/byte/null", false);
             return message;
         }
+        /// <summary> Get null byte value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<byte[]>> GetNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -63,6 +66,8 @@ namespace body_byte
                 throw;
             }
         }
+        /// <summary> Get null byte value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<byte[]> GetNull(CancellationToken cancellationToken = default)
         {
 
@@ -99,6 +104,8 @@ namespace body_byte
             request.Uri.AppendPath("/byte/empty", false);
             return message;
         }
+        /// <summary> Get empty byte value &apos;&apos;. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<byte[]>> GetEmptyAsync(CancellationToken cancellationToken = default)
         {
 
@@ -126,6 +133,8 @@ namespace body_byte
                 throw;
             }
         }
+        /// <summary> Get empty byte value &apos;&apos;. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<byte[]> GetEmpty(CancellationToken cancellationToken = default)
         {
 
@@ -162,6 +171,8 @@ namespace body_byte
             request.Uri.AppendPath("/byte/nonAscii", false);
             return message;
         }
+        /// <summary> Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6). </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<byte[]>> GetNonAsciiAsync(CancellationToken cancellationToken = default)
         {
 
@@ -189,6 +200,8 @@ namespace body_byte
                 throw;
             }
         }
+        /// <summary> Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6). </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<byte[]> GetNonAscii(CancellationToken cancellationToken = default)
         {
 
@@ -229,6 +242,9 @@ namespace body_byte
             request.Content = content;
             return message;
         }
+        /// <summary> Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6). </summary>
+        /// <param name="byteBody"> Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6). </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutNonAsciiAsync(byte[] byteBody, CancellationToken cancellationToken = default)
         {
             if (byteBody == null)
@@ -256,6 +272,9 @@ namespace body_byte
                 throw;
             }
         }
+        /// <summary> Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6). </summary>
+        /// <param name="byteBody"> Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6). </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutNonAscii(byte[] byteBody, CancellationToken cancellationToken = default)
         {
             if (byteBody == null)
@@ -292,6 +311,8 @@ namespace body_byte
             request.Uri.AppendPath("/byte/invalid", false);
             return message;
         }
+        /// <summary> Get invalid byte value &apos;:::SWAGGER::::&apos;. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<byte[]>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -319,6 +340,8 @@ namespace body_byte
                 throw;
             }
         }
+        /// <summary> Get invalid byte value &apos;:::SWAGGER::::&apos;. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<byte[]> GetInvalid(CancellationToken cancellationToken = default)
         {
 

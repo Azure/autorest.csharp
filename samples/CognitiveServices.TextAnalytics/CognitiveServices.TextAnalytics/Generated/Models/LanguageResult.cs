@@ -5,11 +5,16 @@ using System.Collections.Generic;
 
 namespace CognitiveServices.TextAnalytics.Models.VV30Preview1
 {
+    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
     public partial class LanguageResult
     {
+        /// <summary> Response by document. </summary>
         public ICollection<DocumentLanguage> Documents { get; set; } = new List<DocumentLanguage>();
+        /// <summary> Errors by document id. </summary>
         public ICollection<DocumentError> Errors { get; set; } = new List<DocumentError>();
+        /// <summary> if showStats=true was specified in the request this field will contain information about the request payload. </summary>
         public RequestStatistics? Statistics { get; set; }
+        /// <summary> This field indicates which model is used for scoring. </summary>
         public string ModelVersion { get; set; }
     }
 }

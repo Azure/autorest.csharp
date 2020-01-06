@@ -16,6 +16,7 @@ namespace body_duration
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+        /// <summary> Initializes a new instance of DurationOperations. </summary>
         public DurationOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
@@ -36,6 +37,8 @@ namespace body_duration
             request.Uri.AppendPath("/duration/null", false);
             return message;
         }
+        /// <summary> Get null duration value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<TimeSpan>> GetNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -63,6 +66,8 @@ namespace body_duration
                 throw;
             }
         }
+        /// <summary> Get null duration value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<TimeSpan> GetNull(CancellationToken cancellationToken = default)
         {
 
@@ -103,6 +108,9 @@ namespace body_duration
             request.Content = content;
             return message;
         }
+        /// <summary> Put a positive duration value. </summary>
+        /// <param name="durationBody"> The duration to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutPositiveDurationAsync(TimeSpan durationBody, CancellationToken cancellationToken = default)
         {
 
@@ -126,6 +134,9 @@ namespace body_duration
                 throw;
             }
         }
+        /// <summary> Put a positive duration value. </summary>
+        /// <param name="durationBody"> The duration to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutPositiveDuration(TimeSpan durationBody, CancellationToken cancellationToken = default)
         {
 
@@ -158,6 +169,8 @@ namespace body_duration
             request.Uri.AppendPath("/duration/positiveduration", false);
             return message;
         }
+        /// <summary> Get a positive duration value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<TimeSpan>> GetPositiveDurationAsync(CancellationToken cancellationToken = default)
         {
 
@@ -185,6 +198,8 @@ namespace body_duration
                 throw;
             }
         }
+        /// <summary> Get a positive duration value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<TimeSpan> GetPositiveDuration(CancellationToken cancellationToken = default)
         {
 
@@ -221,6 +236,8 @@ namespace body_duration
             request.Uri.AppendPath("/duration/invalid", false);
             return message;
         }
+        /// <summary> Get an invalid duration value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<TimeSpan>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -248,6 +265,8 @@ namespace body_duration
                 throw;
             }
         }
+        /// <summary> Get an invalid duration value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<TimeSpan> GetInvalid(CancellationToken cancellationToken = default)
         {
 

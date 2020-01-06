@@ -17,6 +17,7 @@ namespace body_complex
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+        /// <summary> Initializes a new instance of FlattencomplexOperations. </summary>
         public FlattencomplexOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
@@ -37,6 +38,8 @@ namespace body_complex
             request.Uri.AppendPath("/complex/flatten/valid", false);
             return message;
         }
+        /// <summary> MISSING·OPERATION-DESCRIPTION. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<MyBaseType>> GetValidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -64,6 +67,8 @@ namespace body_complex
                 throw;
             }
         }
+        /// <summary> MISSING·OPERATION-DESCRIPTION. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<MyBaseType> GetValid(CancellationToken cancellationToken = default)
         {
 

@@ -3,8 +3,10 @@
 
 namespace additionalProperties.Models.V100
 {
+    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
     public partial class CatAPTrue : PetAPTrue
     {
+        /// <summary> MISSING·SCHEMA-DESCRIPTION-BOOLEAN. </summary>
         public bool? Friendly { get; set; }
     }
 }

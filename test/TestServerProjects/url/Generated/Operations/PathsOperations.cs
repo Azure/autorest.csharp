@@ -17,6 +17,7 @@ namespace url
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+        /// <summary> Initializes a new instance of PathsOperations. </summary>
         public PathsOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
@@ -38,6 +39,8 @@ namespace url
             request.Uri.AppendPath(true, true);
             return message;
         }
+        /// <summary> Get true Boolean value on path. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetBooleanTrueAsync(CancellationToken cancellationToken = default)
         {
 
@@ -61,6 +64,8 @@ namespace url
                 throw;
             }
         }
+        /// <summary> Get true Boolean value on path. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetBooleanTrue(CancellationToken cancellationToken = default)
         {
 
@@ -94,6 +99,8 @@ namespace url
             request.Uri.AppendPath(false, true);
             return message;
         }
+        /// <summary> Get false Boolean value on path. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetBooleanFalseAsync(CancellationToken cancellationToken = default)
         {
 
@@ -117,6 +124,8 @@ namespace url
                 throw;
             }
         }
+        /// <summary> Get false Boolean value on path. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetBooleanFalse(CancellationToken cancellationToken = default)
         {
 
@@ -150,6 +159,8 @@ namespace url
             request.Uri.AppendPath(1000000F, true);
             return message;
         }
+        /// <summary> Get &apos;1000000&apos; integer value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetIntOneMillionAsync(CancellationToken cancellationToken = default)
         {
 
@@ -173,6 +184,8 @@ namespace url
                 throw;
             }
         }
+        /// <summary> Get &apos;1000000&apos; integer value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetIntOneMillion(CancellationToken cancellationToken = default)
         {
 
@@ -206,6 +219,8 @@ namespace url
             request.Uri.AppendPath(-1000000F, true);
             return message;
         }
+        /// <summary> Get &apos;-1000000&apos; integer value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetIntNegativeOneMillionAsync(CancellationToken cancellationToken = default)
         {
 
@@ -229,6 +244,8 @@ namespace url
                 throw;
             }
         }
+        /// <summary> Get &apos;-1000000&apos; integer value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetIntNegativeOneMillion(CancellationToken cancellationToken = default)
         {
 
@@ -262,6 +279,8 @@ namespace url
             request.Uri.AppendPath(1E+10F, true);
             return message;
         }
+        /// <summary> Get &apos;10000000000&apos; 64 bit integer value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetTenBillionAsync(CancellationToken cancellationToken = default)
         {
 
@@ -285,6 +304,8 @@ namespace url
                 throw;
             }
         }
+        /// <summary> Get &apos;10000000000&apos; 64 bit integer value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetTenBillion(CancellationToken cancellationToken = default)
         {
 
@@ -318,6 +339,8 @@ namespace url
             request.Uri.AppendPath(-1E+10F, true);
             return message;
         }
+        /// <summary> Get &apos;-10000000000&apos; 64 bit integer value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetNegativeTenBillionAsync(CancellationToken cancellationToken = default)
         {
 
@@ -341,6 +364,8 @@ namespace url
                 throw;
             }
         }
+        /// <summary> Get &apos;-10000000000&apos; 64 bit integer value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetNegativeTenBillion(CancellationToken cancellationToken = default)
         {
 
@@ -374,6 +399,8 @@ namespace url
             request.Uri.AppendPath(1.034E+20F, true);
             return message;
         }
+        /// <summary> Get &apos;1.034E+20&apos; numeric value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> FloatScientificPositiveAsync(CancellationToken cancellationToken = default)
         {
 
@@ -397,6 +424,8 @@ namespace url
                 throw;
             }
         }
+        /// <summary> Get &apos;1.034E+20&apos; numeric value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response FloatScientificPositive(CancellationToken cancellationToken = default)
         {
 
@@ -430,6 +459,8 @@ namespace url
             request.Uri.AppendPath(-1.034E-20F, true);
             return message;
         }
+        /// <summary> Get &apos;-1.034E-20&apos; numeric value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> FloatScientificNegativeAsync(CancellationToken cancellationToken = default)
         {
 
@@ -453,6 +484,8 @@ namespace url
                 throw;
             }
         }
+        /// <summary> Get &apos;-1.034E-20&apos; numeric value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response FloatScientificNegative(CancellationToken cancellationToken = default)
         {
 
@@ -486,6 +519,8 @@ namespace url
             request.Uri.AppendPath(9999999.999, true);
             return message;
         }
+        /// <summary> Get &apos;9999999.999&apos; numeric value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> DoubleDecimalPositiveAsync(CancellationToken cancellationToken = default)
         {
 
@@ -509,6 +544,8 @@ namespace url
                 throw;
             }
         }
+        /// <summary> Get &apos;9999999.999&apos; numeric value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response DoubleDecimalPositive(CancellationToken cancellationToken = default)
         {
 
@@ -542,6 +579,8 @@ namespace url
             request.Uri.AppendPath(-9999999.999, true);
             return message;
         }
+        /// <summary> Get &apos;-9999999.999&apos; numeric value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> DoubleDecimalNegativeAsync(CancellationToken cancellationToken = default)
         {
 
@@ -565,6 +604,8 @@ namespace url
                 throw;
             }
         }
+        /// <summary> Get &apos;-9999999.999&apos; numeric value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response DoubleDecimalNegative(CancellationToken cancellationToken = default)
         {
 
@@ -598,6 +639,8 @@ namespace url
             request.Uri.AppendPath("啊齄丂狛狜隣郎隣兀﨩", true);
             return message;
         }
+        /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multi-byte string value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> StringUnicodeAsync(CancellationToken cancellationToken = default)
         {
 
@@ -621,6 +664,8 @@ namespace url
                 throw;
             }
         }
+        /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multi-byte string value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response StringUnicode(CancellationToken cancellationToken = default)
         {
 
@@ -654,6 +699,8 @@ namespace url
             request.Uri.AppendPath("begin!*'();:@ &=+$,/?#[]end", true);
             return message;
         }
+        /// <summary> Get &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> StringUrlEncodedAsync(CancellationToken cancellationToken = default)
         {
 
@@ -677,6 +724,8 @@ namespace url
                 throw;
             }
         }
+        /// <summary> Get &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response StringUrlEncoded(CancellationToken cancellationToken = default)
         {
 
@@ -710,6 +759,8 @@ namespace url
             request.Uri.AppendPath("", true);
             return message;
         }
+        /// <summary> Get &apos;&apos;. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> StringEmptyAsync(CancellationToken cancellationToken = default)
         {
 
@@ -733,6 +784,8 @@ namespace url
                 throw;
             }
         }
+        /// <summary> Get &apos;&apos;. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response StringEmpty(CancellationToken cancellationToken = default)
         {
 
@@ -766,6 +819,9 @@ namespace url
             request.Uri.AppendPath(stringPath, true);
             return message;
         }
+        /// <summary> Get null (should throw). </summary>
+        /// <param name="stringPath"> null string value. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> StringNullAsync(string stringPath, CancellationToken cancellationToken = default)
         {
             if (stringPath == null)
@@ -793,6 +849,9 @@ namespace url
                 throw;
             }
         }
+        /// <summary> Get null (should throw). </summary>
+        /// <param name="stringPath"> null string value. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response StringNull(string stringPath, CancellationToken cancellationToken = default)
         {
             if (stringPath == null)
@@ -830,6 +889,9 @@ namespace url
             request.Uri.AppendPath(enumPath, true);
             return message;
         }
+        /// <summary> Get using uri with &apos;green color&apos; in path parameter. </summary>
+        /// <param name="enumPath"> send the value green. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> EnumValidAsync(UriColor enumPath, CancellationToken cancellationToken = default)
         {
 
@@ -853,6 +915,9 @@ namespace url
                 throw;
             }
         }
+        /// <summary> Get using uri with &apos;green color&apos; in path parameter. </summary>
+        /// <param name="enumPath"> send the value green. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response EnumValid(UriColor enumPath, CancellationToken cancellationToken = default)
         {
 
@@ -886,6 +951,9 @@ namespace url
             request.Uri.AppendPath(enumPath, true);
             return message;
         }
+        /// <summary> Get null (should throw on the client before the request is sent on wire). </summary>
+        /// <param name="enumPath"> send the value green. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> EnumNullAsync(UriColor enumPath, CancellationToken cancellationToken = default)
         {
 
@@ -909,6 +977,9 @@ namespace url
                 throw;
             }
         }
+        /// <summary> Get null (should throw on the client before the request is sent on wire). </summary>
+        /// <param name="enumPath"> send the value green. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response EnumNull(UriColor enumPath, CancellationToken cancellationToken = default)
         {
 
@@ -942,6 +1013,9 @@ namespace url
             request.Uri.AppendPath(bytePath, true);
             return message;
         }
+        /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </summary>
+        /// <param name="bytePath"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> ByteMultiByteAsync(byte[] bytePath, CancellationToken cancellationToken = default)
         {
             if (bytePath == null)
@@ -969,6 +1043,9 @@ namespace url
                 throw;
             }
         }
+        /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </summary>
+        /// <param name="bytePath"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response ByteMultiByte(byte[] bytePath, CancellationToken cancellationToken = default)
         {
             if (bytePath == null)
@@ -1006,6 +1083,8 @@ namespace url
             request.Uri.AppendPath(new byte[] { }, true);
             return message;
         }
+        /// <summary> Get &apos;&apos; as byte array. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> ByteEmptyAsync(CancellationToken cancellationToken = default)
         {
 
@@ -1029,6 +1108,8 @@ namespace url
                 throw;
             }
         }
+        /// <summary> Get &apos;&apos; as byte array. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response ByteEmpty(CancellationToken cancellationToken = default)
         {
 
@@ -1062,6 +1143,9 @@ namespace url
             request.Uri.AppendPath(bytePath, true);
             return message;
         }
+        /// <summary> Get null as byte array (should throw). </summary>
+        /// <param name="bytePath"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> ByteNullAsync(byte[] bytePath, CancellationToken cancellationToken = default)
         {
             if (bytePath == null)
@@ -1089,6 +1173,9 @@ namespace url
                 throw;
             }
         }
+        /// <summary> Get null as byte array (should throw). </summary>
+        /// <param name="bytePath"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response ByteNull(byte[] bytePath, CancellationToken cancellationToken = default)
         {
             if (bytePath == null)
@@ -1126,6 +1213,8 @@ namespace url
             request.Uri.AppendPath(new DateTimeOffset(2012, 1, 1, 0, 0, 0, 0, TimeSpan.Zero), "D", true);
             return message;
         }
+        /// <summary> Get &apos;2012-01-01&apos; as date. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> DateValidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -1149,6 +1238,8 @@ namespace url
                 throw;
             }
         }
+        /// <summary> Get &apos;2012-01-01&apos; as date. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response DateValid(CancellationToken cancellationToken = default)
         {
 
@@ -1182,6 +1273,9 @@ namespace url
             request.Uri.AppendPath(datePath, "D", true);
             return message;
         }
+        /// <summary> Get null as date - this should throw or be unusable on the client side, depending on date representation. </summary>
+        /// <param name="datePath"> null as date (should throw). </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> DateNullAsync(DateTimeOffset datePath, CancellationToken cancellationToken = default)
         {
 
@@ -1205,6 +1299,9 @@ namespace url
                 throw;
             }
         }
+        /// <summary> Get null as date - this should throw or be unusable on the client side, depending on date representation. </summary>
+        /// <param name="datePath"> null as date (should throw). </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response DateNull(DateTimeOffset datePath, CancellationToken cancellationToken = default)
         {
 
@@ -1238,6 +1335,8 @@ namespace url
             request.Uri.AppendPath(new DateTimeOffset(2012, 1, 1, 1, 1, 1, 0, TimeSpan.Zero), "S", true);
             return message;
         }
+        /// <summary> Get &apos;2012-01-01T01:01:01Z&apos; as date-time. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> DateTimeValidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -1261,6 +1360,8 @@ namespace url
                 throw;
             }
         }
+        /// <summary> Get &apos;2012-01-01T01:01:01Z&apos; as date-time. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response DateTimeValid(CancellationToken cancellationToken = default)
         {
 
@@ -1294,6 +1395,9 @@ namespace url
             request.Uri.AppendPath(dateTimePath, "S", true);
             return message;
         }
+        /// <summary> Get null as date-time, should be disallowed or throw depending on representation of date-time. </summary>
+        /// <param name="dateTimePath"> null as date-time. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> DateTimeNullAsync(DateTimeOffset dateTimePath, CancellationToken cancellationToken = default)
         {
 
@@ -1317,6 +1421,9 @@ namespace url
                 throw;
             }
         }
+        /// <summary> Get null as date-time, should be disallowed or throw depending on representation of date-time. </summary>
+        /// <param name="dateTimePath"> null as date-time. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response DateTimeNull(DateTimeOffset dateTimePath, CancellationToken cancellationToken = default)
         {
 
@@ -1350,6 +1457,9 @@ namespace url
             request.Uri.AppendPath(base64UrlPath, true);
             return message;
         }
+        /// <summary> Get &apos;lorem&apos; encoded value as &apos;bG9yZW0&apos; (base64url). </summary>
+        /// <param name="base64UrlPath"> base64url encoded value. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Base64UrlAsync(byte[] base64UrlPath, CancellationToken cancellationToken = default)
         {
             if (base64UrlPath == null)
@@ -1377,6 +1487,9 @@ namespace url
                 throw;
             }
         }
+        /// <summary> Get &apos;lorem&apos; encoded value as &apos;bG9yZW0&apos; (base64url). </summary>
+        /// <param name="base64UrlPath"> base64url encoded value. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Base64Url(byte[] base64UrlPath, CancellationToken cancellationToken = default)
         {
             if (base64UrlPath == null)
@@ -1414,6 +1527,9 @@ namespace url
             request.Uri.AppendPath(arrayPath, true);
             return message;
         }
+        /// <summary> Get an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </summary>
+        /// <param name="arrayPath"> an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> ArrayCsvInPathAsync(IEnumerable<string> arrayPath, CancellationToken cancellationToken = default)
         {
             if (arrayPath == null)
@@ -1441,6 +1557,9 @@ namespace url
                 throw;
             }
         }
+        /// <summary> Get an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </summary>
+        /// <param name="arrayPath"> an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response ArrayCsvInPath(IEnumerable<string> arrayPath, CancellationToken cancellationToken = default)
         {
             if (arrayPath == null)
@@ -1478,6 +1597,9 @@ namespace url
             request.Uri.AppendPath(unixTimeUrlPath, "U", true);
             return message;
         }
+        /// <summary> Get the date 2016-04-13 encoded value as &apos;1460505600&apos; (Unix time). </summary>
+        /// <param name="unixTimeUrlPath"> Unix time encoded value. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> UnixTimeUrlAsync(DateTimeOffset unixTimeUrlPath, CancellationToken cancellationToken = default)
         {
 
@@ -1501,6 +1623,9 @@ namespace url
                 throw;
             }
         }
+        /// <summary> Get the date 2016-04-13 encoded value as &apos;1460505600&apos; (Unix time). </summary>
+        /// <param name="unixTimeUrlPath"> Unix time encoded value. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response UnixTimeUrl(DateTimeOffset unixTimeUrlPath, CancellationToken cancellationToken = default)
         {
 

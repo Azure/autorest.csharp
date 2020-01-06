@@ -3,9 +3,12 @@
 
 namespace validation.Models.V100
 {
+    /// <summary> The product documentation. </summary>
     public partial class ChildProduct
     {
+        /// <summary> Constant string. </summary>
         public string ConstProperty { get; set; } = "constant";
+        /// <summary> Count. </summary>
         public int? Count { get; set; }
     }
 }

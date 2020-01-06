@@ -3,6 +3,7 @@
 
 namespace CognitiveServices.TextAnalytics.Models.VV30Preview1
 {
+    /// <summary> Document Error. </summary>
     public partial class DocumentErrorError
     {
     }

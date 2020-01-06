@@ -17,6 +17,7 @@ namespace extensible_enums_swagger
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+        /// <summary> Initializes a new instance of PetOperations. </summary>
         public PetOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
@@ -38,6 +39,9 @@ namespace extensible_enums_swagger
             request.Uri.AppendPath(petId, true);
             return message;
         }
+        /// <summary> MISSING·OPERATION-DESCRIPTION. </summary>
+        /// <param name="petId"> Pet id. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Pet>> GetByPetIdAsync(string petId, CancellationToken cancellationToken = default)
         {
             if (petId == null)
@@ -69,6 +73,9 @@ namespace extensible_enums_swagger
                 throw;
             }
         }
+        /// <summary> MISSING·OPERATION-DESCRIPTION. </summary>
+        /// <param name="petId"> Pet id. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Pet> GetByPetId(string petId, CancellationToken cancellationToken = default)
         {
             if (petId == null)
@@ -113,6 +120,9 @@ namespace extensible_enums_swagger
             request.Content = content;
             return message;
         }
+        /// <summary> MISSING·OPERATION-DESCRIPTION. </summary>
+        /// <param name="petParam"> The Pet to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Pet>> AddPetAsync(Pet? petParam, CancellationToken cancellationToken = default)
         {
 
@@ -140,6 +150,9 @@ namespace extensible_enums_swagger
                 throw;
             }
         }
+        /// <summary> MISSING·OPERATION-DESCRIPTION. </summary>
+        /// <param name="petParam"> The Pet to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Pet> AddPet(Pet? petParam, CancellationToken cancellationToken = default)
         {
 

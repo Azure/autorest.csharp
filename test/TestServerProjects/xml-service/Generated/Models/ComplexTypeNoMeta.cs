@@ -3,8 +3,10 @@
 
 namespace xml_service.Models.V100
 {
+    /// <summary> I am a complex type with no XML node. </summary>
     public partial class ComplexTypeNoMeta
     {
+        /// <summary> The id of the res. </summary>
         public string? ID { get; set; }
     }
 }

@@ -3,10 +3,14 @@
 
 namespace xml_service.Models.V100
 {
+    /// <summary> MISSING·SCHEMA-DESCRIPTION-CHOICE. </summary>
     public enum BlobType
     {
+        /// <summary> BlockBlob. </summary>
         BlockBlob,
+        /// <summary> PageBlob. </summary>
         PageBlob,
+        /// <summary> AppendBlob. </summary>
         AppendBlob
     }
 }
