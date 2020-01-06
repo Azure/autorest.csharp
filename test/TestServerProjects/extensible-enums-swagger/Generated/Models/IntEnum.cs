@@ -31,7 +31,7 @@ namespace extensible_enums_swagger.Models.V20160707
         public static bool operator ==(IntEnum left, IntEnum right) => left.Equals(right);
         /// <summary> Determines if two <see cref="IntEnum"/> values are not the same. </summary>
         public static bool operator !=(IntEnum left, IntEnum right) => !left.Equals(right);
-        /// <summary> Converts a string to a <cref="IntEnum"/>. </summary>
+        /// <summary> Converts a string to a <see cref="IntEnum"/>. </summary>
         public static implicit operator IntEnum(string value) => new IntEnum(value);
 
         /// <inheritdoc />

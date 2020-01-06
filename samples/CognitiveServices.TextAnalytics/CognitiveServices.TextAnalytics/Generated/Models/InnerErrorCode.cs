@@ -49,7 +49,7 @@ namespace CognitiveServices.TextAnalytics.Models.VV30Preview1
         public static bool operator ==(InnerErrorCode left, InnerErrorCode right) => left.Equals(right);
         /// <summary> Determines if two <see cref="InnerErrorCode"/> values are not the same. </summary>
         public static bool operator !=(InnerErrorCode left, InnerErrorCode right) => !left.Equals(right);
-        /// <summary> Converts a string to a <cref="InnerErrorCode"/>. </summary>
+        /// <summary> Converts a string to a <see cref="InnerErrorCode"/>. </summary>
         public static implicit operator InnerErrorCode(string value) => new InnerErrorCode(value);
 
         /// <inheritdoc />

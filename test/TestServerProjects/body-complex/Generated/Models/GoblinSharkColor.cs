@@ -31,7 +31,7 @@ namespace body_complex.Models.V20160229
         public static bool operator ==(GoblinSharkColor left, GoblinSharkColor right) => left.Equals(right);
         /// <summary> Determines if two <see cref="GoblinSharkColor"/> values are not the same. </summary>
         public static bool operator !=(GoblinSharkColor left, GoblinSharkColor right) => !left.Equals(right);
-        /// <summary> Converts a string to a <cref="GoblinSharkColor"/>. </summary>
+        /// <summary> Converts a string to a <see cref="GoblinSharkColor"/>. </summary>
         public static implicit operator GoblinSharkColor(string value) => new GoblinSharkColor(value);
 
         /// <inheritdoc />

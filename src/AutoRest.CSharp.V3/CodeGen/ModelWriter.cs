@@ -236,7 +236,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     writer.WriteXmlDocumentationSummary($"Determines if two <see cref=\"{cs.Name}\"/> values are not the same.");
                     writer.MethodExpression("public static", boolText, "operator !=", leftRightParams, "!left.Equals(right)");
 
-                    writer.WriteXmlDocumentationSummary($"Converts a string to a <cref=\"{cs.Name}\"/>.");
+                    writer.WriteXmlDocumentationSummary($"Converts a string to a <see cref=\"{cs.Name}\"/>.");
                     writer.MethodExpression("public static implicit", null, $"operator {csTypeText}", new[]{ writer.Pair(stringText, "value")}, $"new {csTypeText}(value)");
                     writer.Line();
 

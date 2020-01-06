@@ -34,7 +34,7 @@ namespace body_complex.Models.V20160229
         public static bool operator ==(CMYKColors left, CMYKColors right) => left.Equals(right);
         /// <summary> Determines if two <see cref="CMYKColors"/> values are not the same. </summary>
         public static bool operator !=(CMYKColors left, CMYKColors right) => !left.Equals(right);
-        /// <summary> Converts a string to a <cref="CMYKColors"/>. </summary>
+        /// <summary> Converts a string to a <see cref="CMYKColors"/>. </summary>
         public static implicit operator CMYKColors(string value) => new CMYKColors(value);
 
         /// <inheritdoc />

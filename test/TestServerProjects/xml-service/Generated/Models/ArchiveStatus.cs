@@ -28,7 +28,7 @@ namespace xml_service.Models.V100
         public static bool operator ==(ArchiveStatus left, ArchiveStatus right) => left.Equals(right);
         /// <summary> Determines if two <see cref="ArchiveStatus"/> values are not the same. </summary>
         public static bool operator !=(ArchiveStatus left, ArchiveStatus right) => !left.Equals(right);
-        /// <summary> Converts a string to a <cref="ArchiveStatus"/>. </summary>
+        /// <summary> Converts a string to a <see cref="ArchiveStatus"/>. </summary>
         public static implicit operator ArchiveStatus(string value) => new ArchiveStatus(value);
 
         /// <inheritdoc />

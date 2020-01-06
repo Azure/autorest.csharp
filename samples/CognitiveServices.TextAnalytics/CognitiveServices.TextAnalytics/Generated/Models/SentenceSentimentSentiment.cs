@@ -31,7 +31,7 @@ namespace CognitiveServices.TextAnalytics.Models.VV30Preview1
         public static bool operator ==(SentenceSentimentSentiment left, SentenceSentimentSentiment right) => left.Equals(right);
         /// <summary> Determines if two <see cref="SentenceSentimentSentiment"/> values are not the same. </summary>
         public static bool operator !=(SentenceSentimentSentiment left, SentenceSentimentSentiment right) => !left.Equals(right);
-        /// <summary> Converts a string to a <cref="SentenceSentimentSentiment"/>. </summary>
+        /// <summary> Converts a string to a <see cref="SentenceSentimentSentiment"/>. </summary>
         public static implicit operator SentenceSentimentSentiment(string value) => new SentenceSentimentSentiment(value);
 
         /// <inheritdoc />

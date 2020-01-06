@@ -46,7 +46,7 @@ namespace AppConfiguration.Models.V10
         public static bool operator ==(Get6ItemsItem left, Get6ItemsItem right) => left.Equals(right);
         /// <summary> Determines if two <see cref="Get6ItemsItem"/> values are not the same. </summary>
         public static bool operator !=(Get6ItemsItem left, Get6ItemsItem right) => !left.Equals(right);
-        /// <summary> Converts a string to a <cref="Get6ItemsItem"/>. </summary>
+        /// <summary> Converts a string to a <see cref="Get6ItemsItem"/>. </summary>
         public static implicit operator Get6ItemsItem(string value) => new Get6ItemsItem(value);
 
         /// <inheritdoc />
