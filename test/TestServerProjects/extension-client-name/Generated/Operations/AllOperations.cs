@@ -30,9 +30,8 @@ namespace extension_client_name
         }
         /// <summary> MISSING·OPERATION-DESCRIPTION. </summary>
         /// <param name="originalPathParameter"> MISSING·PARAMETER-DESCRIPTION. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="originalQueryParameter"> MISSING·PARAMETER-DESCRIPTION. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <param name="renamedBodyParameter"> The OriginalSchema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<OriginalSchema, OriginalOperationHeaders>> OriginalOperationAsync(string originalPathParameter, string originalQueryParameter, OriginalSchema renamedBodyParameter, CancellationToken cancellationToken = default)
         {

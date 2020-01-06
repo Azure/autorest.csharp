@@ -29,6 +29,7 @@ namespace body_file
             this.pipeline = pipeline;
         }
         /// <summary> Get file. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Stream>> GetFileAsync(CancellationToken cancellationToken = default)
         {
 
@@ -60,6 +61,7 @@ namespace body_file
             }
         }
         /// <summary> Get a large file. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Stream>> GetFileLargeAsync(CancellationToken cancellationToken = default)
         {
 
@@ -91,6 +93,7 @@ namespace body_file
             }
         }
         /// <summary> Get empty file. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Stream>> GetEmptyFileAsync(CancellationToken cancellationToken = default)
         {
 

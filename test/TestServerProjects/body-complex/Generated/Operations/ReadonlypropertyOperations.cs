@@ -30,6 +30,7 @@ namespace body_complex
             this.pipeline = pipeline;
         }
         /// <summary> Get complex types that have readonly properties. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ReadonlyObj>> GetValidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -62,6 +63,7 @@ namespace body_complex
             }
         }
         /// <summary> Put complex types that have readonly properties. </summary>
+        /// <param name="complexBody"> The readonly-obj to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutValidAsync(ReadonlyObj complexBody, CancellationToken cancellationToken = default)
         {

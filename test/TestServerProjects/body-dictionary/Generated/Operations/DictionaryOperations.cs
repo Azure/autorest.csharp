@@ -31,6 +31,7 @@ namespace body_dictionary
             this.pipeline = pipeline;
         }
         /// <summary> Get null dictionary value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, int>>> GetNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -67,6 +68,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get empty dictionary value {}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, int>>> GetEmptyAsync(CancellationToken cancellationToken = default)
         {
 
@@ -103,6 +105,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Set dictionary value empty {}. </summary>
+        /// <param name="arrayBody"> The Dictionary of string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutEmptyAsync(IDictionary<string, string> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -146,6 +149,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get Dictionary with null value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, string>>> GetNullValueAsync(CancellationToken cancellationToken = default)
         {
 
@@ -182,6 +186,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get Dictionary with null key. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, string>>> GetNullKeyAsync(CancellationToken cancellationToken = default)
         {
 
@@ -218,6 +223,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get Dictionary with key as empty string. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, string>>> GetEmptyStringKeyAsync(CancellationToken cancellationToken = default)
         {
 
@@ -254,6 +260,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get invalid Dictionary value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, string>>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -290,6 +297,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get boolean dictionary value {&quot;0&quot;: true, &quot;1&quot;: false, &quot;2&quot;: false, &quot;3&quot;: true }. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, bool>>> GetBooleanTfftAsync(CancellationToken cancellationToken = default)
         {
 
@@ -326,6 +334,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Set dictionary value empty {&quot;0&quot;: true, &quot;1&quot;: false, &quot;2&quot;: false, &quot;3&quot;: true }. </summary>
+        /// <param name="arrayBody"> The DictionaryOfboolean to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutBooleanTfftAsync(IDictionary<string, bool> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -369,6 +378,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get boolean dictionary value {&quot;0&quot;: true, &quot;1&quot;: null, &quot;2&quot;: false }. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, bool>>> GetBooleanInvalidNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -405,6 +415,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get boolean dictionary value &apos;{&quot;0&quot;: true, &quot;1&quot;: &quot;boolean&quot;, &quot;2&quot;: false}&apos;. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, bool>>> GetBooleanInvalidStringAsync(CancellationToken cancellationToken = default)
         {
 
@@ -441,6 +452,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get integer dictionary value {&quot;0&quot;: 1, &quot;1&quot;: -1, &quot;2&quot;: 3, &quot;3&quot;: 300}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, int>>> GetIntegerValidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -477,6 +489,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Set dictionary value empty {&quot;0&quot;: 1, &quot;1&quot;: -1, &quot;2&quot;: 3, &quot;3&quot;: 300}. </summary>
+        /// <param name="arrayBody"> The DictionaryOfinteger to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutIntegerValidAsync(IDictionary<string, int> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -520,6 +533,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get integer dictionary value {&quot;0&quot;: 1, &quot;1&quot;: null, &quot;2&quot;: 0}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, int>>> GetIntInvalidNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -556,6 +570,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get integer dictionary value {&quot;0&quot;: 1, &quot;1&quot;: &quot;integer&quot;, &quot;2&quot;: 0}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, int>>> GetIntInvalidStringAsync(CancellationToken cancellationToken = default)
         {
 
@@ -592,6 +607,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get integer dictionary value {&quot;0&quot;: 1, &quot;1&quot;: -1, &quot;2&quot;: 3, &quot;3&quot;: 300}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, long>>> GetLongValidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -628,6 +644,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Set dictionary value empty {&quot;0&quot;: 1, &quot;1&quot;: -1, &quot;2&quot;: 3, &quot;3&quot;: 300}. </summary>
+        /// <param name="arrayBody"> The DictionaryOfinteger to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutLongValidAsync(IDictionary<string, long> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -671,6 +688,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get long dictionary value {&quot;0&quot;: 1, &quot;1&quot;: null, &quot;2&quot;: 0}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, long>>> GetLongInvalidNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -707,6 +725,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get long dictionary value {&quot;0&quot;: 1, &quot;1&quot;: &quot;integer&quot;, &quot;2&quot;: 0}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, long>>> GetLongInvalidStringAsync(CancellationToken cancellationToken = default)
         {
 
@@ -743,6 +762,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get float dictionary value {&quot;0&quot;: 0, &quot;1&quot;: -0.01, &quot;2&quot;: 1.2e20}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, float>>> GetFloatValidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -779,6 +799,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Set dictionary value {&quot;0&quot;: 0, &quot;1&quot;: -0.01, &quot;2&quot;: 1.2e20}. </summary>
+        /// <param name="arrayBody"> The DictionaryOfnumber to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutFloatValidAsync(IDictionary<string, float> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -822,6 +843,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get float dictionary value {&quot;0&quot;: 0.0, &quot;1&quot;: null, &quot;2&quot;: 1.2e20}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, float>>> GetFloatInvalidNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -858,6 +880,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get boolean dictionary value {&quot;0&quot;: 1.0, &quot;1&quot;: &quot;number&quot;, &quot;2&quot;: 0.0}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, float>>> GetFloatInvalidStringAsync(CancellationToken cancellationToken = default)
         {
 
@@ -894,6 +917,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get float dictionary value {&quot;0&quot;: 0, &quot;1&quot;: -0.01, &quot;2&quot;: 1.2e20}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, double>>> GetDoubleValidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -930,6 +954,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Set dictionary value {&quot;0&quot;: 0, &quot;1&quot;: -0.01, &quot;2&quot;: 1.2e20}. </summary>
+        /// <param name="arrayBody"> The DictionaryOfnumber to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutDoubleValidAsync(IDictionary<string, double> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -973,6 +998,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get float dictionary value {&quot;0&quot;: 0.0, &quot;1&quot;: null, &quot;2&quot;: 1.2e20}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, double>>> GetDoubleInvalidNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -1009,6 +1035,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get boolean dictionary value {&quot;0&quot;: 1.0, &quot;1&quot;: &quot;number&quot;, &quot;2&quot;: 0.0}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, double>>> GetDoubleInvalidStringAsync(CancellationToken cancellationToken = default)
         {
 
@@ -1045,6 +1072,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get string dictionary value {&quot;0&quot;: &quot;foo1&quot;, &quot;1&quot;: &quot;foo2&quot;, &quot;2&quot;: &quot;foo3&quot;}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, string>>> GetStringValidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -1081,6 +1109,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Set dictionary value {&quot;0&quot;: &quot;foo1&quot;, &quot;1&quot;: &quot;foo2&quot;, &quot;2&quot;: &quot;foo3&quot;}. </summary>
+        /// <param name="arrayBody"> The Dictionary of string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutStringValidAsync(IDictionary<string, string> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -1124,6 +1153,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get string dictionary value {&quot;0&quot;: &quot;foo&quot;, &quot;1&quot;: null, &quot;2&quot;: &quot;foo2&quot;}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, string>>> GetStringWithNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -1160,6 +1190,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get string dictionary value {&quot;0&quot;: &quot;foo&quot;, &quot;1&quot;: 123, &quot;2&quot;: &quot;foo2&quot;}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, string>>> GetStringWithInvalidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -1196,6 +1227,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get integer dictionary value {&quot;0&quot;: &quot;2000-12-01&quot;, &quot;1&quot;: &quot;1980-01-02&quot;, &quot;2&quot;: &quot;1492-10-12&quot;}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateValidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -1232,6 +1264,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Set dictionary value  {&quot;0&quot;: &quot;2000-12-01&quot;, &quot;1&quot;: &quot;1980-01-02&quot;, &quot;2&quot;: &quot;1492-10-12&quot;}. </summary>
+        /// <param name="arrayBody"> The DictionaryOfdate to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutDateValidAsync(IDictionary<string, DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -1275,6 +1308,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get date dictionary value {&quot;0&quot;: &quot;2012-01-01&quot;, &quot;1&quot;: null, &quot;2&quot;: &quot;1776-07-04&quot;}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateInvalidNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -1311,6 +1345,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get date dictionary value {&quot;0&quot;: &quot;2011-03-22&quot;, &quot;1&quot;: &quot;date&quot;}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateInvalidCharsAsync(CancellationToken cancellationToken = default)
         {
 
@@ -1347,6 +1382,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get date-time dictionary value {&quot;0&quot;: &quot;2000-12-01t00:00:01z&quot;, &quot;1&quot;: &quot;1980-01-02T00:11:35+01:00&quot;, &quot;2&quot;: &quot;1492-10-12T10:15:01-08:00&quot;}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateTimeValidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -1383,6 +1419,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Set dictionary value  {&quot;0&quot;: &quot;2000-12-01t00:00:01z&quot;, &quot;1&quot;: &quot;1980-01-02T00:11:35+01:00&quot;, &quot;2&quot;: &quot;1492-10-12T10:15:01-08:00&quot;}. </summary>
+        /// <param name="arrayBody"> The DictionaryOfdate-time to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutDateTimeValidAsync(IDictionary<string, DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -1426,6 +1463,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get date dictionary value {&quot;0&quot;: &quot;2000-12-01t00:00:01z&quot;, &quot;1&quot;: null}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateTimeInvalidNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -1462,6 +1500,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get date dictionary value {&quot;0&quot;: &quot;2000-12-01t00:00:01z&quot;, &quot;1&quot;: &quot;date-time&quot;}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateTimeInvalidCharsAsync(CancellationToken cancellationToken = default)
         {
 
@@ -1498,6 +1537,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get date-time-rfc1123 dictionary value {&quot;0&quot;: &quot;Fri, 01 Dec 2000 00:00:01 GMT&quot;, &quot;1&quot;: &quot;Wed, 02 Jan 1980 00:11:35 GMT&quot;, &quot;2&quot;: &quot;Wed, 12 Oct 1492 10:15:01 GMT&quot;}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateTimeRfc1123ValidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -1534,6 +1574,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Set dictionary value empty {&quot;0&quot;: &quot;Fri, 01 Dec 2000 00:00:01 GMT&quot;, &quot;1&quot;: &quot;Wed, 02 Jan 1980 00:11:35 GMT&quot;, &quot;2&quot;: &quot;Wed, 12 Oct 1492 10:15:01 GMT&quot;}. </summary>
+        /// <param name="arrayBody"> The DictionaryOfdate-time to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutDateTimeRfc1123ValidAsync(IDictionary<string, DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -1577,6 +1618,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get duration dictionary value {&quot;0&quot;: &quot;P123DT22H14M12.011S&quot;, &quot;1&quot;: &quot;P5DT1H0M0S&quot;}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, TimeSpan>>> GetDurationValidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -1613,6 +1655,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Set dictionary value  {&quot;0&quot;: &quot;P123DT22H14M12.011S&quot;, &quot;1&quot;: &quot;P5DT1H0M0S&quot;}. </summary>
+        /// <param name="arrayBody"> The DictionaryOfduration to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutDurationValidAsync(IDictionary<string, TimeSpan> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -1656,6 +1699,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get byte dictionary value {&quot;0&quot;: hex(FF FF FF FA), &quot;1&quot;: hex(01 02 03), &quot;2&quot;: hex (25, 29, 43)} with each item encoded in base64. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, byte[]>>> GetByteValidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -1692,6 +1736,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Put the dictionary value {&quot;0&quot;: hex(FF FF FF FA), &quot;1&quot;: hex(01 02 03), &quot;2&quot;: hex (25, 29, 43)} with each elementencoded in base 64. </summary>
+        /// <param name="arrayBody"> The DictionaryOfbyte-array to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutByteValidAsync(IDictionary<string, byte[]> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -1735,6 +1780,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get byte dictionary value {&quot;0&quot;: hex(FF FF FF FA), &quot;1&quot;: null} with the first item base64 encoded. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, byte[]>>> GetByteInvalidNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -1771,6 +1817,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get base64url dictionary value {&quot;0&quot;: &quot;a string that gets encoded with base64url&quot;, &quot;1&quot;: &quot;test string&quot;, &quot;2&quot;: &quot;Lorem ipsum&quot;}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, byte[]>>> GetBase64UrlAsync(CancellationToken cancellationToken = default)
         {
 
@@ -1807,6 +1854,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get dictionary of complex type null value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, Widget>>> GetComplexNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -1843,6 +1891,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get empty dictionary of complex type {}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, Widget>>> GetComplexEmptyAsync(CancellationToken cancellationToken = default)
         {
 
@@ -1879,6 +1928,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get dictionary of complex type with null item {&quot;0&quot;: {&quot;integer&quot;: 1, &quot;string&quot;: &quot;2&quot;}, &quot;1&quot;: null, &quot;2&quot;: {&quot;integer&quot;: 5, &quot;string&quot;: &quot;6&quot;}}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, Widget>>> GetComplexItemNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -1915,6 +1965,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get dictionary of complex type with empty item {&quot;0&quot;: {&quot;integer&quot;: 1, &quot;string&quot;: &quot;2&quot;}, &quot;1:&quot; {}, &quot;2&quot;: {&quot;integer&quot;: 5, &quot;string&quot;: &quot;6&quot;}}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, Widget>>> GetComplexItemEmptyAsync(CancellationToken cancellationToken = default)
         {
 
@@ -1951,6 +2002,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get dictionary of complex type with {&quot;0&quot;: {&quot;integer&quot;: 1, &quot;string&quot;: &quot;2&quot;}, &quot;1&quot;: {&quot;integer&quot;: 3, &quot;string&quot;: &quot;4&quot;}, &quot;2&quot;: {&quot;integer&quot;: 5, &quot;string&quot;: &quot;6&quot;}}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, Widget>>> GetComplexValidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -1987,6 +2039,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Put an dictionary of complex type with values {&quot;0&quot;: {&quot;integer&quot;: 1, &quot;string&quot;: &quot;2&quot;}, &quot;1&quot;: {&quot;integer&quot;: 3, &quot;string&quot;: &quot;4&quot;}, &quot;2&quot;: {&quot;integer&quot;: 5, &quot;string&quot;: &quot;6&quot;}}. </summary>
+        /// <param name="arrayBody"> The DictionaryOfWidget to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutComplexValidAsync(IDictionary<string, Widget> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -2030,6 +2083,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get a null array. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, ICollection<string>>>> GetArrayNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -2071,6 +2125,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get an empty dictionary {}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, ICollection<string>>>> GetArrayEmptyAsync(CancellationToken cancellationToken = default)
         {
 
@@ -2112,6 +2167,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get an dictionary of array of strings {&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: null, &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, ICollection<string>>>> GetArrayItemNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -2153,6 +2209,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get an array of array of strings [{&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: [], &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, ICollection<string>>>> GetArrayItemEmptyAsync(CancellationToken cancellationToken = default)
         {
 
@@ -2194,6 +2251,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get an array of array of strings {&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: [&quot;4&quot;, &quot;5&quot;, &quot;6&quot;], &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, ICollection<string>>>> GetArrayValidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -2235,6 +2293,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Put An array of array of strings {&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: [&quot;4&quot;, &quot;5&quot;, &quot;6&quot;], &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
+        /// <param name="arrayBody"> The DictionaryOfpaths·dictionary-array-valid·put·requestbody·content·application-json·schema·additionalproperties to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutArrayValidAsync(IDictionary<string, ICollection<string>> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -2283,6 +2342,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get an dictionaries of dictionaries with value null. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, object>>> GetDictionaryNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -2319,6 +2379,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, object>>> GetDictionaryEmptyAsync(CancellationToken cancellationToken = default)
         {
 
@@ -2355,6 +2416,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;: &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;: null, &quot;2&quot;: {&quot;7&quot;: &quot;seven&quot;, &quot;8&quot;: &quot;eight&quot;, &quot;9&quot;: &quot;nine&quot;}}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, object>>> GetDictionaryItemNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -2391,6 +2453,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;: &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;: {}, &quot;2&quot;: {&quot;7&quot;: &quot;seven&quot;, &quot;8&quot;: &quot;eight&quot;, &quot;9&quot;: &quot;nine&quot;}}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, object>>> GetDictionaryItemEmptyAsync(CancellationToken cancellationToken = default)
         {
 
@@ -2427,6 +2490,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;: &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;: {&quot;4&quot;: &quot;four&quot;, &quot;5&quot;: &quot;five&quot;, &quot;6&quot;: &quot;six&quot;}, &quot;2&quot;: {&quot;7&quot;: &quot;seven&quot;, &quot;8&quot;: &quot;eight&quot;, &quot;9&quot;: &quot;nine&quot;}}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, object>>> GetDictionaryValidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -2463,6 +2527,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;: &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;: {&quot;4&quot;: &quot;four&quot;, &quot;5&quot;: &quot;five&quot;, &quot;6&quot;: &quot;six&quot;}, &quot;2&quot;: {&quot;7&quot;: &quot;seven&quot;, &quot;8&quot;: &quot;eight&quot;, &quot;9&quot;: &quot;nine&quot;}}. </summary>
+        /// <param name="arrayBody"> The DictionaryOfany to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutDictionaryValidAsync(IDictionary<string, object> arrayBody, CancellationToken cancellationToken = default)
         {

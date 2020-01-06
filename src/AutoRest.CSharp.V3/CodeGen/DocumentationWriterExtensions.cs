@@ -8,7 +8,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 {
     internal static class DocumentationWriterExtensions
     {
-        private static char[] _newLineChars = {'\r', '\n'};
+        private static readonly char[] _newLineChars = {'\r', '\n'};
 
         public static CodeWriter WriteXmlDocumentationInheritDoc(this CodeWriter writer)
         {
@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             return writer.WriteDocumentationLines($"<{tag}>", $"</{tag}>", text);
         }
 
-        public static CodeWriter WriteParameterXmlDocumentation(this CodeWriter writer, string name, string? text)
+        public static CodeWriter WriteXmlDocumentationParameter(this CodeWriter writer, string name, string? text)
         {
             return writer.WriteDocumentationLines($"<param name=\"{name}\">", "</param>", text);
         }
@@ -40,14 +40,14 @@ namespace AutoRest.CSharp.V3.CodeGen
             var splitLines = SplitDocLines(text);
             if (splitLines.Length == 1)
             {
-                writer.Line($"/// {prefix} {SecurityElement.Escape(splitLines[0])} {suffix}");
+                writer.Line($"/// {prefix} {splitLines[0]} {suffix}");
             }
             else
             {
                 writer.Line($"/// {prefix}");
                 foreach (string line in splitLines)
                 {
-                    writer.Line($"/// {SecurityElement.Escape(line)}");
+                    writer.Line($"/// {line}");
                 }
                 writer.Line($"/// {suffix}");
             }

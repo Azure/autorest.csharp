@@ -117,9 +117,10 @@ namespace AutoRest.CSharp.V3.CodeGen
 
             foreach (ServiceClientParameter parameter in operation.Parameters)
             {
-                writer.WriteParameterXmlDocumentation(parameter.Name, parameter.Description);
-                writer.WriteParameterXmlDocumentation("cancellationToken", "The cancellation token to use.");
+                writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
             }
+
+            writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
 
             var methodName = operation.Name;
             writer.Append($"public async {returnType} {methodName}Async(");

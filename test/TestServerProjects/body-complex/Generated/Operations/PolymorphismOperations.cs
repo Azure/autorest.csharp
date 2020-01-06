@@ -30,6 +30,7 @@ namespace body_complex
             this.pipeline = pipeline;
         }
         /// <summary> Get complex types that are polymorphic. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Fish>> GetValidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -134,6 +135,7 @@ namespace body_complex
             }
         }
         /// <summary> Get complex types that are polymorphic, JSON key contains a dot. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DotFish>> GetDotSyntaxAsync(CancellationToken cancellationToken = default)
         {
 
@@ -166,6 +168,7 @@ namespace body_complex
             }
         }
         /// <summary> Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DotFishMarket>> GetComposedWithDiscriminatorAsync(CancellationToken cancellationToken = default)
         {
 
@@ -198,6 +201,7 @@ namespace body_complex
             }
         }
         /// <summary> Get complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DotFishMarket>> GetComposedWithoutDiscriminatorAsync(CancellationToken cancellationToken = default)
         {
 
@@ -230,6 +234,7 @@ namespace body_complex
             }
         }
         /// <summary> Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Salmon>> GetComplicatedAsync(CancellationToken cancellationToken = default)
         {
 
@@ -262,6 +267,7 @@ namespace body_complex
             }
         }
         /// <summary> Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
+        /// <param name="complexBody"> The salmon to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutComplicatedAsync(Salmon complexBody, CancellationToken cancellationToken = default)
         {
@@ -299,6 +305,7 @@ namespace body_complex
             }
         }
         /// <summary> Put complex types that are polymorphic, omitting the discriminator. </summary>
+        /// <param name="complexBody"> The salmon to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Salmon>> PutMissingDiscriminatorAsync(Salmon complexBody, CancellationToken cancellationToken = default)
         {

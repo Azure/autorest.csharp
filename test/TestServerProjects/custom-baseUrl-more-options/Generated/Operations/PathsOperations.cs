@@ -35,11 +35,8 @@ namespace custom_baseUrl_more_options
         }
         /// <summary> Get a 200 to test a valid base uri. </summary>
         /// <param name="vault"> The vault name, e.g. https://myvault. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="secret"> Secret value. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="keyName"> The key name with value &apos;key1&apos;. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="keyVersion"> The key version. Default value &apos;v1&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetEmptyAsync(string vault, string secret, string keyName, string? keyVersion, CancellationToken cancellationToken = default)

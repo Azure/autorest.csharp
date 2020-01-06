@@ -25,14 +25,20 @@ namespace AutoRest.CSharp.V3.ClientModels
         private static ClientModel BuildClientEnum(SealedChoiceSchema sealedChoiceSchema) => new ClientEnum(
             sealedChoiceSchema,
             sealedChoiceSchema.CSharpName(),
-            sealedChoiceSchema.Summary,
-            sealedChoiceSchema.Choices.Select(c => new ClientEnumValue(c.CSharpName(), ClientModelBuilderHelpers.StringConstant(c.Value))));
+            CreateDescription(sealedChoiceSchema),
+            sealedChoiceSchema.Choices.Select(c => new ClientEnumValue(
+                c.CSharpName(),
+                CreateDescription(c),
+                ClientModelBuilderHelpers.StringConstant(c.Value))));
 
         private static ClientModel BuildClientEnum(ChoiceSchema choiceSchema) => new ClientEnum(
             choiceSchema,
             choiceSchema.CSharpName(),
-            choiceSchema.Summary,
-            choiceSchema.Choices.Select(c => new ClientEnumValue(c.CSharpName(), ClientModelBuilderHelpers.StringConstant(c.Value))),
+            CreateDescription(choiceSchema),
+            choiceSchema.Choices.Select(c => new ClientEnumValue(
+                c.CSharpName(),
+                CreateDescription(c),
+                ClientModelBuilderHelpers.StringConstant(c.Value))),
             true);
 
         private ClientModel BuildClientObject(ObjectSchema objectSchema)
@@ -90,7 +96,7 @@ namespace AutoRest.CSharp.V3.ClientModels
             return new ClientObject(
                 objectSchema,
                 objectSchema.CSharpName(),
-                objectSchema.Language.Default.Description,
+                CreateDescription(objectSchema),
                 (SchemaTypeReference?) inheritsFromTypeReference,
                 properties.ToArray(),
                 discriminator,
@@ -151,10 +157,24 @@ namespace AutoRest.CSharp.V3.ClientModels
             }
 
             return new ClientObjectProperty(property.CSharpName(),
-                property.Language.Default.Description,
+                ClientModelBuilderHelpers.EscapeXmlDescription(property.Language.Default.Description),
                 type,
                 isReadOnly,
                 defaultValue);
+        }
+
+        private static string CreateDescription(ChoiceValue choiceValue)
+        {
+            return string.IsNullOrWhiteSpace(choiceValue.Language.Default.Description) ?
+                choiceValue.Value :
+                ClientModelBuilderHelpers.EscapeXmlDescription(choiceValue.Language.Default.Description);
+        }
+
+        private static string CreateDescription(Schema objectSchema)
+        {
+            return string.IsNullOrWhiteSpace(objectSchema.Language.Default.Description) ?
+                $"The {objectSchema.Name}." :
+                ClientModelBuilderHelpers.EscapeXmlDescription(objectSchema.Language.Default.Description);
         }
     }
 }

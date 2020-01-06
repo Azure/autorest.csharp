@@ -30,6 +30,7 @@ namespace body_complex
             this.pipeline = pipeline;
         }
         /// <summary> Get complex types with array property. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ArrayWrapper>> GetValidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -100,6 +101,7 @@ namespace body_complex
             }
         }
         /// <summary> Get complex types with array property which is empty. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ArrayWrapper>> GetEmptyAsync(CancellationToken cancellationToken = default)
         {
 
@@ -170,6 +172,7 @@ namespace body_complex
             }
         }
         /// <summary> Get complex types with array property while server doesn&apos;t provide a response payload. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ArrayWrapper>> GetNotProvidedAsync(CancellationToken cancellationToken = default)
         {
 

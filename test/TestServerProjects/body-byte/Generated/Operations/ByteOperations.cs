@@ -29,6 +29,7 @@ namespace body_byte
             this.pipeline = pipeline;
         }
         /// <summary> Get null byte value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<byte[]>> GetNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -61,6 +62,7 @@ namespace body_byte
             }
         }
         /// <summary> Get empty byte value &apos;&apos;. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<byte[]>> GetEmptyAsync(CancellationToken cancellationToken = default)
         {
 
@@ -93,6 +95,7 @@ namespace body_byte
             }
         }
         /// <summary> Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6). </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<byte[]>> GetNonAsciiAsync(CancellationToken cancellationToken = default)
         {
 
@@ -163,6 +166,7 @@ namespace body_byte
             }
         }
         /// <summary> Get invalid byte value &apos;:::SWAGGER::::&apos;. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<byte[]>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
 

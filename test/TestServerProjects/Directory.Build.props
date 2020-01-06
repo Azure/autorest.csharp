@@ -4,6 +4,7 @@
   </ItemGroup>
   <PropertyGroup>
     <IncludeStyleCopAnalyzers>false</IncludeStyleCopAnalyzers>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
   <Import Project="..\..\Directory.Build.props" />
 </Project>

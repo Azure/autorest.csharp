@@ -30,6 +30,7 @@ namespace url
             this.pipeline = pipeline;
         }
         /// <summary> Get true Boolean value on path. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetBooleanTrueAsync(CancellationToken cancellationToken = default)
         {
 
@@ -59,6 +60,7 @@ namespace url
             }
         }
         /// <summary> Get false Boolean value on path. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetBooleanFalseAsync(CancellationToken cancellationToken = default)
         {
 
@@ -88,6 +90,7 @@ namespace url
             }
         }
         /// <summary> Get &apos;1000000&apos; integer value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetIntOneMillionAsync(CancellationToken cancellationToken = default)
         {
 
@@ -117,6 +120,7 @@ namespace url
             }
         }
         /// <summary> Get &apos;-1000000&apos; integer value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetIntNegativeOneMillionAsync(CancellationToken cancellationToken = default)
         {
 
@@ -146,6 +150,7 @@ namespace url
             }
         }
         /// <summary> Get &apos;10000000000&apos; 64 bit integer value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetTenBillionAsync(CancellationToken cancellationToken = default)
         {
 
@@ -175,6 +180,7 @@ namespace url
             }
         }
         /// <summary> Get &apos;-10000000000&apos; 64 bit integer value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetNegativeTenBillionAsync(CancellationToken cancellationToken = default)
         {
 
@@ -204,6 +210,7 @@ namespace url
             }
         }
         /// <summary> Get &apos;1.034E+20&apos; numeric value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> FloatScientificPositiveAsync(CancellationToken cancellationToken = default)
         {
 
@@ -233,6 +240,7 @@ namespace url
             }
         }
         /// <summary> Get &apos;-1.034E-20&apos; numeric value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> FloatScientificNegativeAsync(CancellationToken cancellationToken = default)
         {
 
@@ -262,6 +270,7 @@ namespace url
             }
         }
         /// <summary> Get &apos;9999999.999&apos; numeric value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> DoubleDecimalPositiveAsync(CancellationToken cancellationToken = default)
         {
 
@@ -291,6 +300,7 @@ namespace url
             }
         }
         /// <summary> Get &apos;-9999999.999&apos; numeric value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> DoubleDecimalNegativeAsync(CancellationToken cancellationToken = default)
         {
 
@@ -320,6 +330,7 @@ namespace url
             }
         }
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multi-byte string value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> StringUnicodeAsync(CancellationToken cancellationToken = default)
         {
 
@@ -349,6 +360,7 @@ namespace url
             }
         }
         /// <summary> Get &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> StringUrlEncodedAsync(CancellationToken cancellationToken = default)
         {
 
@@ -378,6 +390,7 @@ namespace url
             }
         }
         /// <summary> Get &apos;&apos;. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> StringEmptyAsync(CancellationToken cancellationToken = default)
         {
 
@@ -539,6 +552,7 @@ namespace url
             }
         }
         /// <summary> Get &apos;&apos; as byte array. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> ByteEmptyAsync(CancellationToken cancellationToken = default)
         {
 
@@ -603,6 +617,7 @@ namespace url
             }
         }
         /// <summary> Get &apos;2012-01-01&apos; as date. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> DateValidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -663,6 +678,7 @@ namespace url
             }
         }
         /// <summary> Get &apos;2012-01-01T01:01:01Z&apos; as date-time. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> DateTimeValidAsync(CancellationToken cancellationToken = default)
         {
 

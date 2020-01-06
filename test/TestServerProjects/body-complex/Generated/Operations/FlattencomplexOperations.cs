@@ -30,6 +30,7 @@ namespace body_complex
             this.pipeline = pipeline;
         }
         /// <summary> MISSING·OPERATION-DESCRIPTION. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<MyBaseType>> GetValidAsync(CancellationToken cancellationToken = default)
         {
 

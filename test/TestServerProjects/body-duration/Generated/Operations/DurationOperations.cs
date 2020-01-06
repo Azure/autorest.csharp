@@ -29,6 +29,7 @@ namespace body_duration
             this.pipeline = pipeline;
         }
         /// <summary> Get null duration value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<TimeSpan>> GetNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -61,6 +62,7 @@ namespace body_duration
             }
         }
         /// <summary> Put a positive duration value. </summary>
+        /// <param name="durationBody"> The duration to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutPositiveDurationAsync(TimeSpan durationBody, CancellationToken cancellationToken = default)
         {
@@ -94,6 +96,7 @@ namespace body_duration
             }
         }
         /// <summary> Get a positive duration value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<TimeSpan>> GetPositiveDurationAsync(CancellationToken cancellationToken = default)
         {
 
@@ -126,6 +129,7 @@ namespace body_duration
             }
         }
         /// <summary> Get an invalid duration value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<TimeSpan>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
 

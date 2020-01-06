@@ -20,6 +20,7 @@ namespace additionalProperties.Models.V100
         public IEnumerator<KeyValuePair<string, object>> GetEnumerator() => _additionalProperties.GetEnumerator();
         /// <inheritdoc />
         IEnumerator IEnumerable.GetEnumerator() => _additionalProperties.GetEnumerator();
+        /// <inheritdoc />
         public ICollection<string> Keys => _additionalProperties.Keys;
         /// <inheritdoc />
         public ICollection<object> Values => _additionalProperties.Values;

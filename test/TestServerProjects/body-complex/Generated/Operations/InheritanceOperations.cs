@@ -30,6 +30,7 @@ namespace body_complex
             this.pipeline = pipeline;
         }
         /// <summary> Get complex types that extend others. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Siamese>> GetValidAsync(CancellationToken cancellationToken = default)
         {
 

@@ -39,9 +39,7 @@ namespace AppConfiguration
         }
         /// <summary> Gets a list of keys. </summary>
         /// <param name="name"> A filter for the name of the returned keys. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<KeyListResult, GetKeysHeaders>> GetKeysAsync(string? name, string? after, string? acceptDatetime, CancellationToken cancellationToken = default)
@@ -95,9 +93,7 @@ namespace AppConfiguration
         }
         /// <summary> Requests the headers and status of the given resource. </summary>
         /// <param name="name"> A filter for the name of the returned keys. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<CheckKeysHeaders>> CheckKeysAsync(string? name, string? after, string? acceptDatetime, CancellationToken cancellationToken = default)
@@ -147,13 +143,9 @@ namespace AppConfiguration
         }
         /// <summary> Gets a list of key-values. </summary>
         /// <param name="key"> A filter used to match keys. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="label"> A filter used to match labels. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<KeyValueListResult, GetKeyValuesHeaders>> GetKeyValuesAsync(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Get6ItemsItem>? select, CancellationToken cancellationToken = default)
@@ -215,13 +207,9 @@ namespace AppConfiguration
         }
         /// <summary> Requests the headers and status of the given resource. </summary>
         /// <param name="key"> A filter used to match keys. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="label"> A filter used to match labels. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<CheckKeyValuesHeaders>> CheckKeyValuesAsync(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Head6ItemsItem>? select, CancellationToken cancellationToken = default)
@@ -279,15 +267,10 @@ namespace AppConfiguration
         }
         /// <summary> Gets a single key-value. </summary>
         /// <param name="key"> The key of the key-value to retrieve. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="label"> A filter used to match labels. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<KeyValue, GetKeyValueHeaders>> GetKeyValueAsync(string key, string? label, string? acceptDatetime, string? ifMatch, string? ifNoneMatch, IEnumerable<Get7ItemsItem>? select, CancellationToken cancellationToken = default)
@@ -354,13 +337,9 @@ namespace AppConfiguration
         }
         /// <summary> Creates a key-value. </summary>
         /// <param name="key"> The key of the key-value to retrieve. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="label"> A filter used to match labels. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="entity"> The key-value to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<KeyValue, PutKeyValueHeaders>> PutKeyValueAsync(string key, string? label, string? ifMatch, string? ifNoneMatch, KeyValue? entity, CancellationToken cancellationToken = default)
@@ -428,9 +407,7 @@ namespace AppConfiguration
         }
         /// <summary> Deletes a key-value. </summary>
         /// <param name="key"> The key of the key-value to retrieve. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="label"> A filter used to match labels. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<KeyValue, DeleteKeyValueHeaders>> DeleteKeyValueAsync(string key, string? label, string? ifMatch, CancellationToken cancellationToken = default)
@@ -485,15 +462,10 @@ namespace AppConfiguration
         }
         /// <summary> Requests the headers and status of the given resource. </summary>
         /// <param name="key"> The key of the key-value to retrieve. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="label"> A filter used to match labels. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<CheckKeyValueHeaders>> CheckKeyValueAsync(string key, string? label, string? acceptDatetime, string? ifMatch, string? ifNoneMatch, IEnumerable<Head7ItemsItem>? select, CancellationToken cancellationToken = default)
@@ -556,11 +528,8 @@ namespace AppConfiguration
         }
         /// <summary> Gets a list of labels. </summary>
         /// <param name="name"> A filter for the name of the returned keys. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<LabelListResult, GetLabelsHeaders>> GetLabelsAsync(string? name, string? after, string? acceptDatetime, IEnumerable<string>? select, CancellationToken cancellationToken = default)
@@ -618,11 +587,8 @@ namespace AppConfiguration
         }
         /// <summary> Requests the headers and status of the given resource. </summary>
         /// <param name="name"> A filter for the name of the returned keys. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<CheckLabelsHeaders>> CheckLabelsAsync(string? name, string? after, string? acceptDatetime, IEnumerable<string>? select, CancellationToken cancellationToken = default)
@@ -676,11 +642,8 @@ namespace AppConfiguration
         }
         /// <summary> Locks a key-value. </summary>
         /// <param name="key"> The key of the key-value to retrieve. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="label"> A filter used to match labels. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<KeyValue, PutLockHeaders>> PutLockAsync(string key, string? label, string? ifMatch, string? ifNoneMatch, CancellationToken cancellationToken = default)
@@ -739,11 +702,8 @@ namespace AppConfiguration
         }
         /// <summary> Unlocks a key-value. </summary>
         /// <param name="key"> The key of the key-value to retrieve. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="label"> A filter used to match labels. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<KeyValue, DeleteLockHeaders>> DeleteLockAsync(string key, string? label, string? ifMatch, string? ifNoneMatch, CancellationToken cancellationToken = default)
@@ -802,13 +762,9 @@ namespace AppConfiguration
         }
         /// <summary> Gets a list of key-value revisions. </summary>
         /// <param name="key"> A filter used to match keys. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="label"> A filter used to match labels. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<KeyValueListResult, GetRevisionsHeaders>> GetRevisionsAsync(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Enum0>? select, CancellationToken cancellationToken = default)
@@ -870,13 +826,9 @@ namespace AppConfiguration
         }
         /// <summary> Requests the headers and status of the given resource. </summary>
         /// <param name="key"> A filter used to match keys. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="label"> A filter used to match labels. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<CheckRevisionsHeaders>> CheckRevisionsAsync(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Enum0>? select, CancellationToken cancellationToken = default)

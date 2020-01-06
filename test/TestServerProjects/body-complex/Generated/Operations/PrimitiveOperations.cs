@@ -30,6 +30,7 @@ namespace body_complex
             this.pipeline = pipeline;
         }
         /// <summary> Get complex types with integer properties. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IntWrapper>> GetIntAsync(CancellationToken cancellationToken = default)
         {
 
@@ -100,6 +101,7 @@ namespace body_complex
             }
         }
         /// <summary> Get complex types with long properties. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<LongWrapper>> GetLongAsync(CancellationToken cancellationToken = default)
         {
 
@@ -170,6 +172,7 @@ namespace body_complex
             }
         }
         /// <summary> Get complex types with float properties. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<FloatWrapper>> GetFloatAsync(CancellationToken cancellationToken = default)
         {
 
@@ -240,6 +243,7 @@ namespace body_complex
             }
         }
         /// <summary> Get complex types with double properties. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DoubleWrapper>> GetDoubleAsync(CancellationToken cancellationToken = default)
         {
 
@@ -310,6 +314,7 @@ namespace body_complex
             }
         }
         /// <summary> Get complex types with bool properties. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<BooleanWrapper>> GetBoolAsync(CancellationToken cancellationToken = default)
         {
 
@@ -380,6 +385,7 @@ namespace body_complex
             }
         }
         /// <summary> Get complex types with string properties. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<StringWrapper>> GetStringAsync(CancellationToken cancellationToken = default)
         {
 
@@ -450,6 +456,7 @@ namespace body_complex
             }
         }
         /// <summary> Get complex types with date properties. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateWrapper>> GetDateAsync(CancellationToken cancellationToken = default)
         {
 
@@ -520,6 +527,7 @@ namespace body_complex
             }
         }
         /// <summary> Get complex types with datetime properties. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DatetimeWrapper>> GetDateTimeAsync(CancellationToken cancellationToken = default)
         {
 
@@ -590,6 +598,7 @@ namespace body_complex
             }
         }
         /// <summary> Get complex types with datetimeRfc1123 properties. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Datetimerfc1123Wrapper>> GetDateTimeRfc1123Async(CancellationToken cancellationToken = default)
         {
 
@@ -660,6 +669,7 @@ namespace body_complex
             }
         }
         /// <summary> Get complex types with duration properties. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DurationWrapper>> GetDurationAsync(CancellationToken cancellationToken = default)
         {
 
@@ -730,6 +740,7 @@ namespace body_complex
             }
         }
         /// <summary> Get complex types with byte properties. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ByteWrapper>> GetByteAsync(CancellationToken cancellationToken = default)
         {
 

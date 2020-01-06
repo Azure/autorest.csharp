@@ -30,6 +30,7 @@ namespace body_complex
             this.pipeline = pipeline;
         }
         /// <summary> Get complex types that are polymorphic and have recursive references. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Fish>> GetValidAsync(CancellationToken cancellationToken = default)
         {
 

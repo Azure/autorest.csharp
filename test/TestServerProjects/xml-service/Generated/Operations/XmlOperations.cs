@@ -32,6 +32,7 @@ namespace xml_service
             this.pipeline = pipeline;
         }
         /// <summary> Get a complex type that has a ref to a complex type with no XML node. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<RootWithRefAndNoMeta>> GetComplexTypeRefNoMetaAsync(CancellationToken cancellationToken = default)
         {
 
@@ -69,6 +70,7 @@ namespace xml_service
             }
         }
         /// <summary> Puts a complex type that has a ref to a complex type with no XML node. </summary>
+        /// <param name="model"> The RootWithRefAndNoMeta to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutComplexTypeRefNoMetaAsync(RootWithRefAndNoMeta model, CancellationToken cancellationToken = default)
         {
@@ -106,6 +108,7 @@ namespace xml_service
             }
         }
         /// <summary> Get a complex type that has a ref to a complex type with XML node. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<RootWithRefAndMeta>> GetComplexTypeRefWithMetaAsync(CancellationToken cancellationToken = default)
         {
 
@@ -143,6 +146,7 @@ namespace xml_service
             }
         }
         /// <summary> Puts a complex type that has a ref to a complex type with XML node. </summary>
+        /// <param name="model"> The RootWithRefAndMeta to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutComplexTypeRefWithMetaAsync(RootWithRefAndMeta model, CancellationToken cancellationToken = default)
         {
@@ -180,6 +184,7 @@ namespace xml_service
             }
         }
         /// <summary> Get a simple XML document. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Slideshow>> GetSimpleAsync(CancellationToken cancellationToken = default)
         {
 
@@ -217,6 +222,7 @@ namespace xml_service
             }
         }
         /// <summary> Put a simple XML document. </summary>
+        /// <param name="slideshow"> The Slideshow to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutSimpleAsync(Slideshow slideshow, CancellationToken cancellationToken = default)
         {
@@ -254,6 +260,7 @@ namespace xml_service
             }
         }
         /// <summary> Get an XML document with multiple wrapped lists. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<AppleBarrel>> GetWrappedListsAsync(CancellationToken cancellationToken = default)
         {
 
@@ -291,6 +298,7 @@ namespace xml_service
             }
         }
         /// <summary> Put an XML document with multiple wrapped lists. </summary>
+        /// <param name="wrappedLists"> The AppleBarrel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutWrappedListsAsync(AppleBarrel wrappedLists, CancellationToken cancellationToken = default)
         {
@@ -328,6 +336,7 @@ namespace xml_service
             }
         }
         /// <summary> Get strongly-typed response headers. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<GetHeadersHeaders>> GetHeadersAsync(CancellationToken cancellationToken = default)
         {
 
@@ -357,6 +366,7 @@ namespace xml_service
             }
         }
         /// <summary> Get an empty list. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Slideshow>> GetEmptyListAsync(CancellationToken cancellationToken = default)
         {
 
@@ -394,6 +404,7 @@ namespace xml_service
             }
         }
         /// <summary> Puts an empty list. </summary>
+        /// <param name="slideshow"> The Slideshow to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutEmptyListAsync(Slideshow slideshow, CancellationToken cancellationToken = default)
         {
@@ -431,6 +442,7 @@ namespace xml_service
             }
         }
         /// <summary> Gets some empty wrapped lists. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<AppleBarrel>> GetEmptyWrappedListsAsync(CancellationToken cancellationToken = default)
         {
 
@@ -468,6 +480,7 @@ namespace xml_service
             }
         }
         /// <summary> Puts some empty wrapped lists. </summary>
+        /// <param name="appleBarrel"> The AppleBarrel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutEmptyWrappedListsAsync(AppleBarrel appleBarrel, CancellationToken cancellationToken = default)
         {
@@ -505,6 +518,7 @@ namespace xml_service
             }
         }
         /// <summary> Gets a list as the root element. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<Banana>>> GetRootListAsync(CancellationToken cancellationToken = default)
         {
 
@@ -548,6 +562,7 @@ namespace xml_service
             }
         }
         /// <summary> Puts a list as the root element. </summary>
+        /// <param name="bananas"> The Array of Banana to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutRootListAsync(IEnumerable<Banana> bananas, CancellationToken cancellationToken = default)
         {
@@ -590,6 +605,7 @@ namespace xml_service
             }
         }
         /// <summary> Gets a list with a single item. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<Banana>>> GetRootListSingleItemAsync(CancellationToken cancellationToken = default)
         {
 
@@ -633,6 +649,7 @@ namespace xml_service
             }
         }
         /// <summary> Puts a list with a single item. </summary>
+        /// <param name="bananas"> The Array of Banana to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutRootListSingleItemAsync(IEnumerable<Banana> bananas, CancellationToken cancellationToken = default)
         {
@@ -675,6 +692,7 @@ namespace xml_service
             }
         }
         /// <summary> Gets an empty list as the root element. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<Banana>>> GetEmptyRootListAsync(CancellationToken cancellationToken = default)
         {
 
@@ -718,6 +736,7 @@ namespace xml_service
             }
         }
         /// <summary> Puts an empty list as the root element. </summary>
+        /// <param name="bananas"> The Array of Banana to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutEmptyRootListAsync(IEnumerable<Banana> bananas, CancellationToken cancellationToken = default)
         {
@@ -760,6 +779,7 @@ namespace xml_service
             }
         }
         /// <summary> Gets an XML document with an empty child element. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Banana>> GetEmptyChildElementAsync(CancellationToken cancellationToken = default)
         {
 
@@ -797,6 +817,7 @@ namespace xml_service
             }
         }
         /// <summary> Puts a value with an empty child element. </summary>
+        /// <param name="banana"> The Banana to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutEmptyChildElementAsync(Banana banana, CancellationToken cancellationToken = default)
         {
@@ -834,6 +855,7 @@ namespace xml_service
             }
         }
         /// <summary> Lists containers in a storage account. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ListContainersResponse>> ListContainersAsync(CancellationToken cancellationToken = default)
         {
 
@@ -872,6 +894,7 @@ namespace xml_service
             }
         }
         /// <summary> Gets storage service properties. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<StorageServiceProperties>> GetServicePropertiesAsync(CancellationToken cancellationToken = default)
         {
 
@@ -911,6 +934,7 @@ namespace xml_service
             }
         }
         /// <summary> Puts storage service properties. </summary>
+        /// <param name="properties"> The StorageServiceProperties to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutServicePropertiesAsync(StorageServiceProperties properties, CancellationToken cancellationToken = default)
         {
@@ -950,6 +974,7 @@ namespace xml_service
             }
         }
         /// <summary> Gets storage ACLs for a container. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<SignedIdentifier>>> GetAclsAsync(CancellationToken cancellationToken = default)
         {
 
@@ -995,6 +1020,7 @@ namespace xml_service
             }
         }
         /// <summary> Puts storage ACLs for a container. </summary>
+        /// <param name="properties"> The SignedIdentifiers to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutAclsAsync(IEnumerable<SignedIdentifier> properties, CancellationToken cancellationToken = default)
         {
@@ -1039,6 +1065,7 @@ namespace xml_service
             }
         }
         /// <summary> Lists blobs in a storage container. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ListBlobsResponse>> ListBlobsAsync(CancellationToken cancellationToken = default)
         {
 
@@ -1078,6 +1105,7 @@ namespace xml_service
             }
         }
         /// <summary> A Swagger with XML that has one operation that takes JSON as input. You need to send the ID number 42. </summary>
+        /// <param name="properties"> The JSONInput to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> JsonInputAsync(JSONInput properties, CancellationToken cancellationToken = default)
         {
@@ -1115,6 +1143,7 @@ namespace xml_service
             }
         }
         /// <summary> A Swagger with XML that has one operation that returns JSON. ID number 42. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<JSONOutput>> JsonOutputAsync(CancellationToken cancellationToken = default)
         {
 

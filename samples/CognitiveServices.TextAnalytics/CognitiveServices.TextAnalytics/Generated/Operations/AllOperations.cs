@@ -34,9 +34,7 @@ namespace CognitiveServices.TextAnalytics
         /// .
         /// </summary>
         /// <param name="modelVersion"> (Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="multiLanguageBatchInput"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<EntitiesResult>> EntitiesRecognitionGeneralAsync(string? modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput, CancellationToken cancellationToken = default)
@@ -92,9 +90,7 @@ namespace CognitiveServices.TextAnalytics
         /// .
         /// </summary>
         /// <param name="modelVersion"> (Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="multiLanguageBatchInput"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<EntitiesResult>> EntitiesRecognitionPiiAsync(string? modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput, CancellationToken cancellationToken = default)
@@ -150,9 +146,7 @@ namespace CognitiveServices.TextAnalytics
         /// .
         /// </summary>
         /// <param name="modelVersion"> (Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="multiLanguageBatchInput"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<EntityLinkingResult>> EntitiesLinkingAsync(string? modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput, CancellationToken cancellationToken = default)
@@ -205,9 +199,7 @@ namespace CognitiveServices.TextAnalytics
         }
         /// <summary> The API returns a list of strings denoting the key phrases in the input text. See the &amp;lt;a href=&quot;https://aka.ms/talangs&quot;&amp;gt;Supported languages in Text Analytics API&amp;lt;/a&amp;gt; for the list of enabled languages. </summary>
         /// <param name="modelVersion"> (Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="multiLanguageBatchInput"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<KeyPhraseResult>> KeyPhrasesAsync(string? modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput, CancellationToken cancellationToken = default)
@@ -260,9 +252,7 @@ namespace CognitiveServices.TextAnalytics
         }
         /// <summary> The API returns the detected language and a numeric score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true. See the &amp;lt;a href=&quot;https://aka.ms/talangs&quot;&amp;gt;Supported languages in Text Analytics API&amp;lt;/a&amp;gt; for the list of enabled languages. </summary>
         /// <param name="modelVersion"> (Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="languageBatchInput"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<LanguageResult>> LanguagesAsync(string? modelVersion, bool? showStats, LanguageBatchInput languageBatchInput, CancellationToken cancellationToken = default)
@@ -315,9 +305,7 @@ namespace CognitiveServices.TextAnalytics
         }
         /// <summary> The API returns a sentiment prediction, as well as sentiment scores for each sentiment class (Positive, Negative, and Neutral) for the document and each sentence within it. See the &amp;lt;a href=&quot;https://aka.ms/talangs&quot;&amp;gt;Supported languages in Text Analytics API&amp;lt;/a&amp;gt; for the list of enabled languages. </summary>
         /// <param name="modelVersion"> (Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <param name="multiLanguageBatchInput"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<SentimentResponse>> SentimentAsync(string? modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput, CancellationToken cancellationToken = default)

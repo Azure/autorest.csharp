@@ -69,6 +69,7 @@ namespace extensible_enums_swagger
             }
         }
         /// <summary> MISSING·OPERATION-DESCRIPTION. </summary>
+        /// <param name="petParam"> The Pet to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Pet>> AddPetAsync(Pet? petParam, CancellationToken cancellationToken = default)
         {

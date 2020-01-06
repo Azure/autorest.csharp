@@ -36,6 +36,7 @@ namespace body_complex
             this.pipeline = pipeline;
         }
         /// <summary> Get complex type {id: 2, name: &apos;abc&apos;, color: &apos;YELLOW&apos;}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Basic>> GetValidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -107,6 +108,7 @@ namespace body_complex
             }
         }
         /// <summary> Get a basic complex type that is invalid for the local strong type. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Basic>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -139,6 +141,7 @@ namespace body_complex
             }
         }
         /// <summary> Get a basic complex type that is empty. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Basic>> GetEmptyAsync(CancellationToken cancellationToken = default)
         {
 
@@ -171,6 +174,7 @@ namespace body_complex
             }
         }
         /// <summary> Get a basic complex type whose properties are null. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Basic>> GetNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -203,6 +207,7 @@ namespace body_complex
             }
         }
         /// <summary> Get a basic complex type while the server doesn&apos;t provide a response payload. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Basic>> GetNotProvidedAsync(CancellationToken cancellationToken = default)
         {
 

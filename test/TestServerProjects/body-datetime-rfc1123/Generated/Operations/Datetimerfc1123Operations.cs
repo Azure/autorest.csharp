@@ -29,6 +29,7 @@ namespace body_datetime_rfc1123
             this.pipeline = pipeline;
         }
         /// <summary> Get null datetime value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -61,6 +62,7 @@ namespace body_datetime_rfc1123
             }
         }
         /// <summary> Get invalid datetime value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -93,6 +95,7 @@ namespace body_datetime_rfc1123
             }
         }
         /// <summary> Get overflow datetime value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetOverflowAsync(CancellationToken cancellationToken = default)
         {
 
@@ -125,6 +128,7 @@ namespace body_datetime_rfc1123
             }
         }
         /// <summary> Get underflow datetime value. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetUnderflowAsync(CancellationToken cancellationToken = default)
         {
 
@@ -157,6 +161,7 @@ namespace body_datetime_rfc1123
             }
         }
         /// <summary> Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT. </summary>
+        /// <param name="datetimeBody"> The date-time to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutUtcMaxDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
@@ -190,6 +195,7 @@ namespace body_datetime_rfc1123
             }
         }
         /// <summary> Get max datetime value fri, 31 dec 9999 23:59:59 gmt. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetUtcLowercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
         {
 
@@ -222,6 +228,7 @@ namespace body_datetime_rfc1123
             }
         }
         /// <summary> Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetUtcUppercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
         {
 
@@ -254,6 +261,7 @@ namespace body_datetime_rfc1123
             }
         }
         /// <summary> Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT. </summary>
+        /// <param name="datetimeBody"> The date-time to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutUtcMinDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
@@ -287,6 +295,7 @@ namespace body_datetime_rfc1123
             }
         }
         /// <summary> Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetUtcMinDateTimeAsync(CancellationToken cancellationToken = default)
         {
 

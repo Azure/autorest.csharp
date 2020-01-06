@@ -184,7 +184,7 @@ namespace AutoRest.CSharp.V3.ClientModels
 
             return new ClientMethod(
                 operation.CSharpName(),
-                operation.Language.Default.Description,
+                ClientModelBuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description),
                 request,
                 OrderParameters(methodParameters),
                 clientResponse
@@ -201,7 +201,7 @@ namespace AutoRest.CSharp.V3.ClientModels
 
             return new ServiceClientParameter(
                 requestParameter.CSharpName(),
-                requestParameter.Language.Default.Description,
+                CreateDescription(requestParameter),
                 ClientModelBuilderHelpers.CreateType(requestParameter.Schema, requestParameter.IsNullable()),
                 CreateDefaultValueConstant(requestParameter) ?? defaultValue,
                 requestParameter.Required == true);
@@ -288,5 +288,11 @@ namespace AutoRest.CSharp.V3.ClientModels
             _ => null
         };
 
+        private static string CreateDescription(Parameter requestParameter)
+        {
+            return string.IsNullOrWhiteSpace(requestParameter.Language.Default.Description) ?
+                $"The {requestParameter.Schema.Name} to use." :
+                ClientModelBuilderHelpers.EscapeXmlDescription(requestParameter.Language.Default.Description);
+        }
     }
 }

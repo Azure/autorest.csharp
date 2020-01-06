@@ -30,6 +30,7 @@ namespace body_complex
             this.pipeline = pipeline;
         }
         /// <summary> Get complex types with dictionary property. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DictionaryWrapper>> GetValidAsync(CancellationToken cancellationToken = default)
         {
 
@@ -100,6 +101,7 @@ namespace body_complex
             }
         }
         /// <summary> Get complex types with dictionary property which is empty. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DictionaryWrapper>> GetEmptyAsync(CancellationToken cancellationToken = default)
         {
 
@@ -170,6 +172,7 @@ namespace body_complex
             }
         }
         /// <summary> Get complex types with dictionary property which is null. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DictionaryWrapper>> GetNullAsync(CancellationToken cancellationToken = default)
         {
 
@@ -202,6 +205,7 @@ namespace body_complex
             }
         }
         /// <summary> Get complex types with dictionary property while server doesn&apos;t provide a response payload. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DictionaryWrapper>> GetNotProvidedAsync(CancellationToken cancellationToken = default)
         {
 
