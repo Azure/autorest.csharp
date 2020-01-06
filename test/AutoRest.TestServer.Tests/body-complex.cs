@@ -469,6 +469,34 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
+        public Task PutComplexInheritanceValid_Sync() => TestStatus((host, pipeline) =>
+        {
+            var value = new Siamese
+            {
+                Breed = "persian",
+                Color = "green",
+                Hates = new[]
+                {
+                    new Dog()
+                    {
+                        Food = "tomato",
+                        Id = 1,
+                        Name = "Potato"
+                    },
+                    new Dog()
+                    {
+                        Food = "french fries",
+                        Id = -1,
+                        Name = "Tomato"
+                    },
+                },
+                Id = 2,
+                Name = "Siameeee"
+            };
+            return new InheritanceOperations(ClientDiagnostics, pipeline, host).PutValid(value);
+        });
+
+        [Test]
         public Task GetComplexPolymorphismValid() => Test(async (host, pipeline) =>
         {
             var result = await new PolymorphismOperations(ClientDiagnostics, pipeline, host).GetValidAsync();
@@ -727,6 +755,19 @@ namespace AutoRest.TestServer.Tests
         public Task GetComplexPolymorphismDotSyntax() => Test(async (host, pipeline) =>
         {
             var result = await new PolymorphismOperations(ClientDiagnostics, pipeline, host).GetDotSyntaxAsync();
+
+            var dotSalmon = (DotSalmon)result.Value;
+            Assert.AreEqual("DotSalmon", dotSalmon.FishType);
+            Assert.AreEqual("sweden", dotSalmon.Location);
+            Assert.AreEqual(true, dotSalmon.Iswild);
+            Assert.AreEqual("king", dotSalmon.Species);
+        });
+
+        [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
+        public Task GetComplexPolymorphismDotSyntax_Sync() => Test((host, pipeline) =>
+        {
+            var result = new PolymorphismOperations(ClientDiagnostics, pipeline, host).GetDotSyntax();
 
             var dotSalmon = (DotSalmon)result.Value;
             Assert.AreEqual("DotSalmon", dotSalmon.FishType);

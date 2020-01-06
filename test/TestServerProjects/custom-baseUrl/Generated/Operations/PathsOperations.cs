@@ -15,7 +15,6 @@ namespace custom_baseUrl
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
-        /// <summary> Initializes a new instance of PathsOperations. </summary>
         public PathsOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "host")
         {
             if (host == null)
@@ -27,9 +26,15 @@ namespace custom_baseUrl
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
-        /// <summary> Get a 200 to test a valid base uri. </summary>
-        /// <param name="accountName"> Account Name. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        internal HttpMessage CreateGetEmptyRequest(string accountName)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri($"http://{accountName}{host}"));
+            request.Uri.AppendPath("/customuri", false);
+            return message;
+        }
         public async ValueTask<Response> GetEmptyAsync(string accountName, CancellationToken cancellationToken = default)
         {
             if (accountName == null)
@@ -37,15 +42,11 @@ namespace custom_baseUrl
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("custom_baseUrl.GetEmpty");
+            using var scope = clientDiagnostics.CreateScope("PathsOperations.GetEmpty");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"http://{accountName}{host}"));
-                request.Uri.AppendPath("/customuri", false);
+                using var message = CreateGetEmptyRequest(accountName);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -53,6 +54,33 @@ namespace custom_baseUrl
                         return message.Response;
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response GetEmpty(string accountName, CancellationToken cancellationToken = default)
+        {
+            if (accountName == null)
+            {
+                throw new ArgumentNullException(nameof(accountName));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("PathsOperations.GetEmpty");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetEmptyRequest(accountName);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)

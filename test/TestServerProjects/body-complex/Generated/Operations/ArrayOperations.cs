@@ -17,7 +17,6 @@ namespace body_complex
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
-        /// <summary> Initializes a new instance of ArrayOperations. </summary>
         public ArrayOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
@@ -29,20 +28,23 @@ namespace body_complex
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
-        /// <summary> Get complex types with array property. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        internal HttpMessage CreateGetValidRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri($"{host}"));
+            request.Uri.AppendPath("/complex/array/valid", false);
+            return message;
+        }
         public async ValueTask<Response<ArrayWrapper>> GetValidAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.GetValid");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetValid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/array/valid", false);
+                using var message = CreateGetValidRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -62,9 +64,46 @@ namespace body_complex
                 throw;
             }
         }
-        /// <summary> Put complex types with array property. </summary>
-        /// <param name="complexBody"> Please put an array with 4 items: &quot;1, 2, 3, 4&quot;, &quot;&quot;, null, &quot;&amp;S#$(*Y&quot;, &quot;The quick brown fox jumps over the lazy dog&quot;. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response<ArrayWrapper> GetValid(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetValid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetValidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = ArrayWrapper.DeserializeArrayWrapper(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        internal HttpMessage CreatePutValidRequest(ArrayWrapper complexBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri($"{host}"));
+            request.Uri.AppendPath("/complex/array/valid", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(complexBody);
+            request.Content = content;
+            return message;
+        }
         public async ValueTask<Response> PutValidAsync(ArrayWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -72,19 +111,11 @@ namespace body_complex
                 throw new ArgumentNullException(nameof(complexBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.PutValid");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.PutValid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/array/valid", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(complexBody);
-                request.Content = content;
+                using var message = CreatePutValidRequest(complexBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -100,20 +131,50 @@ namespace body_complex
                 throw;
             }
         }
-        /// <summary> Get complex types with array property which is empty. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ArrayWrapper>> GetEmptyAsync(CancellationToken cancellationToken = default)
+        public Response PutValid(ArrayWrapper complexBody, CancellationToken cancellationToken = default)
         {
+            if (complexBody == null)
+            {
+                throw new ArgumentNullException(nameof(complexBody));
+            }
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.GetEmpty");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.PutValid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/array/empty", false);
+                using var message = CreatePutValidRequest(complexBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        internal HttpMessage CreateGetEmptyRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri($"{host}"));
+            request.Uri.AppendPath("/complex/array/empty", false);
+            return message;
+        }
+        public async ValueTask<Response<ArrayWrapper>> GetEmptyAsync(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetEmpty");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetEmptyRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -133,9 +194,46 @@ namespace body_complex
                 throw;
             }
         }
-        /// <summary> Put complex types with array property which is empty. </summary>
-        /// <param name="complexBody"> Please put an array with 4 items: &quot;1, 2, 3, 4&quot;, &quot;&quot;, null, &quot;&amp;S#$(*Y&quot;, &quot;The quick brown fox jumps over the lazy dog&quot;. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response<ArrayWrapper> GetEmpty(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetEmpty");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetEmptyRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = ArrayWrapper.DeserializeArrayWrapper(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        internal HttpMessage CreatePutEmptyRequest(ArrayWrapper complexBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri($"{host}"));
+            request.Uri.AppendPath("/complex/array/empty", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(complexBody);
+            request.Content = content;
+            return message;
+        }
         public async ValueTask<Response> PutEmptyAsync(ArrayWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -143,19 +241,11 @@ namespace body_complex
                 throw new ArgumentNullException(nameof(complexBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.PutEmpty");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.PutEmpty");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/array/empty", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(complexBody);
-                request.Content = content;
+                using var message = CreatePutEmptyRequest(complexBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -171,20 +261,50 @@ namespace body_complex
                 throw;
             }
         }
-        /// <summary> Get complex types with array property while server doesn&apos;t provide a response payload. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ArrayWrapper>> GetNotProvidedAsync(CancellationToken cancellationToken = default)
+        public Response PutEmpty(ArrayWrapper complexBody, CancellationToken cancellationToken = default)
         {
+            if (complexBody == null)
+            {
+                throw new ArgumentNullException(nameof(complexBody));
+            }
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.GetNotProvided");
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.PutEmpty");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/array/notprovided", false);
+                using var message = CreatePutEmptyRequest(complexBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        internal HttpMessage CreateGetNotProvidedRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri($"{host}"));
+            request.Uri.AppendPath("/complex/array/notprovided", false);
+            return message;
+        }
+        public async ValueTask<Response<ArrayWrapper>> GetNotProvidedAsync(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetNotProvided");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetNotProvidedRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -196,6 +316,33 @@ namespace body_complex
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<ArrayWrapper> GetNotProvided(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetNotProvided");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetNotProvidedRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = ArrayWrapper.DeserializeArrayWrapper(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)

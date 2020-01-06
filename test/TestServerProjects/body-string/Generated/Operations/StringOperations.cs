@@ -16,7 +16,6 @@ namespace body_string
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
-        /// <summary> Initializes a new instance of StringOperations. </summary>
         public StringOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
@@ -28,20 +27,23 @@ namespace body_string
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
-        /// <summary> Get null string value value. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        internal HttpMessage CreateGetNullRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri($"{host}"));
+            request.Uri.AppendPath("/string/null", false);
+            return message;
+        }
         public async ValueTask<Response<string>> GetNullAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_string.GetNull");
+            using var scope = clientDiagnostics.CreateScope("StringOperations.GetNull");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/string/null", false);
+                using var message = CreateGetNullRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -61,24 +63,54 @@ namespace body_string
                 throw;
             }
         }
-        /// <summary> Set string value null. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response<string> GetNull(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("StringOperations.GetNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetNullRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = document.RootElement.GetString();
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        internal HttpMessage CreatePutNullRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri($"{host}"));
+            request.Uri.AppendPath("/string/null", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteStringValue((string?)null);
+            request.Content = content;
+            return message;
+        }
         public async ValueTask<Response> PutNullAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_string.PutNull");
+            using var scope = clientDiagnostics.CreateScope("StringOperations.PutNull");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/string/null", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStringValue((string?)null);
-                request.Content = content;
+                using var message = CreatePutNullRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -94,20 +126,46 @@ namespace body_string
                 throw;
             }
         }
-        /// <summary> Get empty string value value &apos;&apos;. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response PutNull(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("StringOperations.PutNull");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutNullRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        internal HttpMessage CreateGetEmptyRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri($"{host}"));
+            request.Uri.AppendPath("/string/empty", false);
+            return message;
+        }
         public async ValueTask<Response<string>> GetEmptyAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_string.GetEmpty");
+            using var scope = clientDiagnostics.CreateScope("StringOperations.GetEmpty");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/string/empty", false);
+                using var message = CreateGetEmptyRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -127,24 +185,54 @@ namespace body_string
                 throw;
             }
         }
-        /// <summary> Set string value empty &apos;&apos;. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response<string> GetEmpty(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("StringOperations.GetEmpty");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetEmptyRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = document.RootElement.GetString();
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        internal HttpMessage CreatePutEmptyRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri($"{host}"));
+            request.Uri.AppendPath("/string/empty", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteStringValue("");
+            request.Content = content;
+            return message;
+        }
         public async ValueTask<Response> PutEmptyAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_string.PutEmpty");
+            using var scope = clientDiagnostics.CreateScope("StringOperations.PutEmpty");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/string/empty", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStringValue("");
-                request.Content = content;
+                using var message = CreatePutEmptyRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -160,20 +248,46 @@ namespace body_string
                 throw;
             }
         }
-        /// <summary> Get mbcs string value &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response PutEmpty(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("StringOperations.PutEmpty");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutEmptyRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        internal HttpMessage CreateGetMbcsRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri($"{host}"));
+            request.Uri.AppendPath("/string/mbcs", false);
+            return message;
+        }
         public async ValueTask<Response<string>> GetMbcsAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_string.GetMbcs");
+            using var scope = clientDiagnostics.CreateScope("StringOperations.GetMbcs");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/string/mbcs", false);
+                using var message = CreateGetMbcsRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -193,24 +307,54 @@ namespace body_string
                 throw;
             }
         }
-        /// <summary> Set string value mbcs &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response<string> GetMbcs(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("StringOperations.GetMbcs");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetMbcsRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = document.RootElement.GetString();
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        internal HttpMessage CreatePutMbcsRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri($"{host}"));
+            request.Uri.AppendPath("/string/mbcs", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteStringValue("啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€");
+            request.Content = content;
+            return message;
+        }
         public async ValueTask<Response> PutMbcsAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_string.PutMbcs");
+            using var scope = clientDiagnostics.CreateScope("StringOperations.PutMbcs");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/string/mbcs", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStringValue("啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€");
-                request.Content = content;
+                using var message = CreatePutMbcsRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -226,20 +370,46 @@ namespace body_string
                 throw;
             }
         }
-        /// <summary> Get string value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response PutMbcs(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("StringOperations.PutMbcs");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutMbcsRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        internal HttpMessage CreateGetWhitespaceRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri($"{host}"));
+            request.Uri.AppendPath("/string/whitespace", false);
+            return message;
+        }
         public async ValueTask<Response<string>> GetWhitespaceAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_string.GetWhitespace");
+            using var scope = clientDiagnostics.CreateScope("StringOperations.GetWhitespace");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/string/whitespace", false);
+                using var message = CreateGetWhitespaceRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -259,24 +429,54 @@ namespace body_string
                 throw;
             }
         }
-        /// <summary> Set String value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutWhitespaceAsync(CancellationToken cancellationToken = default)
+        public Response<string> GetWhitespace(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_string.PutWhitespace");
+            using var scope = clientDiagnostics.CreateScope("StringOperations.GetWhitespace");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/string/whitespace", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStringValue("    Now is the time for all good men to come to the aid of their country    ");
-                request.Content = content;
+                using var message = CreateGetWhitespaceRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = document.RootElement.GetString();
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        internal HttpMessage CreatePutWhitespaceRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri($"{host}"));
+            request.Uri.AppendPath("/string/whitespace", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteStringValue("    Now is the time for all good men to come to the aid of their country    ");
+            request.Content = content;
+            return message;
+        }
+        public async ValueTask<Response> PutWhitespaceAsync(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("StringOperations.PutWhitespace");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutWhitespaceRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -292,20 +492,46 @@ namespace body_string
                 throw;
             }
         }
-        /// <summary> Get String value when no string value is sent in response payload. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<string>> GetNotProvidedAsync(CancellationToken cancellationToken = default)
+        public Response PutWhitespace(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_string.GetNotProvided");
+            using var scope = clientDiagnostics.CreateScope("StringOperations.PutWhitespace");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/string/notProvided", false);
+                using var message = CreatePutWhitespaceRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        internal HttpMessage CreateGetNotProvidedRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri($"{host}"));
+            request.Uri.AppendPath("/string/notProvided", false);
+            return message;
+        }
+        public async ValueTask<Response<string>> GetNotProvidedAsync(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("StringOperations.GetNotProvided");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetNotProvidedRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -325,20 +551,50 @@ namespace body_string
                 throw;
             }
         }
-        /// <summary> Get value that is base64 encoded. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response<string> GetNotProvided(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("StringOperations.GetNotProvided");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetNotProvidedRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = document.RootElement.GetString();
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        internal HttpMessage CreateGetBase64EncodedRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri($"{host}"));
+            request.Uri.AppendPath("/string/base64Encoding", false);
+            return message;
+        }
         public async ValueTask<Response<byte[]>> GetBase64EncodedAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_string.GetBase64Encoded");
+            using var scope = clientDiagnostics.CreateScope("StringOperations.GetBase64Encoded");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/string/base64Encoding", false);
+                using var message = CreateGetBase64EncodedRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -358,20 +614,50 @@ namespace body_string
                 throw;
             }
         }
-        /// <summary> Get value that is base64url encoded. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response<byte[]> GetBase64Encoded(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("StringOperations.GetBase64Encoded");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetBase64EncodedRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = document.RootElement.GetBytesFromBase64("U");
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        internal HttpMessage CreateGetBase64UrlEncodedRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri($"{host}"));
+            request.Uri.AppendPath("/string/base64UrlEncoding", false);
+            return message;
+        }
         public async ValueTask<Response<byte[]>> GetBase64UrlEncodedAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_string.GetBase64UrlEncoded");
+            using var scope = clientDiagnostics.CreateScope("StringOperations.GetBase64UrlEncoded");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/string/base64UrlEncoding", false);
+                using var message = CreateGetBase64UrlEncodedRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -391,9 +677,46 @@ namespace body_string
                 throw;
             }
         }
-        /// <summary> Put value that is base64url encoded. </summary>
-        /// <param name="stringBody"> The byte-array to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response<byte[]> GetBase64UrlEncoded(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("StringOperations.GetBase64UrlEncoded");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetBase64UrlEncodedRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = document.RootElement.GetBytesFromBase64("U");
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        internal HttpMessage CreatePutBase64UrlEncodedRequest(byte[] stringBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri($"{host}"));
+            request.Uri.AppendPath("/string/base64UrlEncoding", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteBase64StringValue(stringBody, "U");
+            request.Content = content;
+            return message;
+        }
         public async ValueTask<Response> PutBase64UrlEncodedAsync(byte[] stringBody, CancellationToken cancellationToken = default)
         {
             if (stringBody == null)
@@ -401,19 +724,11 @@ namespace body_string
                 throw new ArgumentNullException(nameof(stringBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_string.PutBase64UrlEncoded");
+            using var scope = clientDiagnostics.CreateScope("StringOperations.PutBase64UrlEncoded");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/string/base64UrlEncoding", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteBase64StringValue(stringBody, "U");
-                request.Content = content;
+                using var message = CreatePutBase64UrlEncodedRequest(stringBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -429,20 +744,50 @@ namespace body_string
                 throw;
             }
         }
-        /// <summary> Get null value that is expected to be base64url encoded. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<byte[]>> GetNullBase64UrlEncodedAsync(CancellationToken cancellationToken = default)
+        public Response PutBase64UrlEncoded(byte[] stringBody, CancellationToken cancellationToken = default)
         {
+            if (stringBody == null)
+            {
+                throw new ArgumentNullException(nameof(stringBody));
+            }
 
-            using var scope = clientDiagnostics.CreateScope("body_string.GetNullBase64UrlEncoded");
+            using var scope = clientDiagnostics.CreateScope("StringOperations.PutBase64UrlEncoded");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/string/nullBase64UrlEncoding", false);
+                using var message = CreatePutBase64UrlEncodedRequest(stringBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        internal HttpMessage CreateGetNullBase64UrlEncodedRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri($"{host}"));
+            request.Uri.AppendPath("/string/nullBase64UrlEncoding", false);
+            return message;
+        }
+        public async ValueTask<Response<byte[]>> GetNullBase64UrlEncodedAsync(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("StringOperations.GetNullBase64UrlEncoded");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetNullBase64UrlEncodedRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -454,6 +799,33 @@ namespace body_string
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<byte[]> GetNullBase64UrlEncoded(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("StringOperations.GetNullBase64UrlEncoded");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetNullBase64UrlEncodedRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = document.RootElement.GetBytesFromBase64("U");
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)

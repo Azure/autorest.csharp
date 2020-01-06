@@ -109,10 +109,37 @@ namespace AutoRest.TestServer.Tests
             return await new XmlOperations(ClientDiagnostics, pipeline, host).PutComplexTypeRefNoMetaAsync(root);
         }, true);
 
+
+        [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
+        public Task PutComplexTypeRefNoMeta() => TestStatus((host, pipeline) =>
+        {
+            var root = new RootWithRefAndNoMeta
+            {
+                Something = "else",
+                RefToModel = new ComplexTypeNoMeta()
+                {
+                    ID = "myid"
+                }
+            };
+
+            return new XmlOperations(ClientDiagnostics, pipeline, host).PutComplexTypeRefNoMeta(root);
+        }, true);
+
         [Test]
         public Task GetComplexTypeRefNoMetaAsync() => Test(async (host, pipeline) =>
         {
             var result = await new XmlOperations(ClientDiagnostics, pipeline, host).GetComplexTypeRefNoMetaAsync();
+            var value = result.Value;
+
+            Assert.AreEqual("else", value.Something);
+            Assert.AreEqual("myid", value.RefToModel.ID);
+        }, true);
+
+        [Test]
+        public Task GetComplexTypeRefNoMeta() => Test((host, pipeline) =>
+        {
+            var result = new XmlOperations(ClientDiagnostics, pipeline, host).GetComplexTypeRefNoMeta();
             var value = result.Value;
 
             Assert.AreEqual("else", value.Something);

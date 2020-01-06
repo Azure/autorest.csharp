@@ -17,7 +17,6 @@ namespace body_complex
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
-        /// <summary> Initializes a new instance of InheritanceOperations. </summary>
         public InheritanceOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
@@ -29,20 +28,23 @@ namespace body_complex
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
-        /// <summary> Get complex types that extend others. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        internal HttpMessage CreateGetValidRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri($"{host}"));
+            request.Uri.AppendPath("/complex/inheritance/valid", false);
+            return message;
+        }
         public async ValueTask<Response<Siamese>> GetValidAsync(CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.GetValid");
+            using var scope = clientDiagnostics.CreateScope("InheritanceOperations.GetValid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/inheritance/valid", false);
+                using var message = CreateGetValidRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -62,9 +64,46 @@ namespace body_complex
                 throw;
             }
         }
-        /// <summary> Put complex types that extend others. </summary>
-        /// <param name="complexBody"> Please put a siamese with id=2, name=&quot;Siameee&quot;, color=green, breed=persion, which hates 2 dogs, the 1st one named &quot;Potato&quot; with id=1 and food=&quot;tomato&quot;, and the 2nd one named &quot;Tomato&quot; with id=-1 and food=&quot;french fries&quot;. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response<Siamese> GetValid(CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("InheritanceOperations.GetValid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetValidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = Siamese.DeserializeSiamese(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        internal HttpMessage CreatePutValidRequest(Siamese complexBody)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            request.Uri.Reset(new Uri($"{host}"));
+            request.Uri.AppendPath("/complex/inheritance/valid", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(complexBody);
+            request.Content = content;
+            return message;
+        }
         public async ValueTask<Response> PutValidAsync(Siamese complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -72,19 +111,11 @@ namespace body_complex
                 throw new ArgumentNullException(nameof(complexBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("body_complex.PutValid");
+            using var scope = clientDiagnostics.CreateScope("InheritanceOperations.PutValid");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Put;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/complex/inheritance/valid", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(complexBody);
-                request.Content = content;
+                using var message = CreatePutValidRequest(complexBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -92,6 +123,33 @@ namespace body_complex
                         return message.Response;
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response PutValid(Siamese complexBody, CancellationToken cancellationToken = default)
+        {
+            if (complexBody == null)
+            {
+                throw new ArgumentNullException(nameof(complexBody));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("InheritanceOperations.PutValid");
+            scope.Start();
+            try
+            {
+                using var message = CreatePutValidRequest(complexBody);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
