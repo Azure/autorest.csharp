@@ -3,8 +3,10 @@
 
 namespace body_complex.Models.V20160229
 {
+    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
     public partial class Dog : Pet
     {
+        /// <summary> MISSING·SCHEMA-DESCRIPTION-STRING. </summary>
         public string? Food { get; set; }
     }
 }

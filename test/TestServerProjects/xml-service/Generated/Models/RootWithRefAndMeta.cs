@@ -3,9 +3,12 @@
 
 namespace xml_service.Models.V100
 {
+    /// <summary> I am root, and I ref a model WITH meta. </summary>
     public partial class RootWithRefAndMeta
     {
+        /// <summary> I am a complex type with XML node. </summary>
         public ComplexTypeWithMeta? RefToModel { get; set; }
+        /// <summary> Something else (just to avoid flattening). </summary>
         public string? Something { get; set; }
     }
 }

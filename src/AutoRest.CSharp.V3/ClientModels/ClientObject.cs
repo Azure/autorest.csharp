@@ -9,10 +9,11 @@ namespace AutoRest.CSharp.V3.ClientModels
 {
     internal class ClientObject : ClientModel, ISchemaTypeProvider
     {
-        public ClientObject(Schema schema, string name, SchemaTypeReference? inherits, IEnumerable<ClientObjectProperty> properties, ClientObjectDiscriminator? discriminator, DictionaryTypeReference? implementsDictionary, ObjectSerialization[] serializations)
+        public ClientObject(Schema schema, string name, string? description, SchemaTypeReference? inherits, IEnumerable<ClientObjectProperty> properties, ClientObjectDiscriminator? discriminator, DictionaryTypeReference? implementsDictionary, ObjectSerialization[] serializations)
         {
             Schema = schema;
             Name = name;
+            Description = description;
             Inherits = inherits;
             Discriminator = discriminator;
             ImplementsDictionary = implementsDictionary;
@@ -21,6 +22,7 @@ namespace AutoRest.CSharp.V3.ClientModels
         }
 
         public override string Name { get; }
+        public string? Description { get; }
         public Schema Schema { get; }
         public SchemaTypeReference? Inherits { get; }
         public ObjectSerialization[] Serializations { get; }

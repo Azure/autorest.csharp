@@ -3,8 +3,10 @@
 
 namespace AppConfiguration.Models.V10
 {
+    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
     public partial class Label
     {
+        /// <summary> MISSING·SCHEMA-DESCRIPTION-STRING. </summary>
         public string? Name { get; internal set; }
     }
 }

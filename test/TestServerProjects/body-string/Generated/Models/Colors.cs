@@ -3,10 +3,14 @@
 
 namespace body_string.Models.V100
 {
+    /// <summary> MISSING·SCHEMA-DESCRIPTION-CHOICE. </summary>
     public enum Colors
     {
+        /// <summary> red color. </summary>
         RedColor,
+        /// <summary> green-color. </summary>
         GreenColor,
+        /// <summary> blue_color. </summary>
         BlueColor
     }
 }

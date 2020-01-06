@@ -5,8 +5,10 @@ using System.Collections.Generic;
 
 namespace body_complex.Models.V20160229
 {
+    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
     public partial class DictionaryWrapper
     {
+        /// <summary> Dictionary of &lt;components·schemas·dictionary_wrapper·properties·defaultprogram·additionalproperties&gt;. </summary>
         public IDictionary<string, string>? DefaultProgram { get; set; }
     }
 }

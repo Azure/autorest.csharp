@@ -6,10 +6,12 @@ using System.ComponentModel;
 
 namespace xml_service.Models.V100
 {
+    /// <summary> MISSING·SCHEMA-DESCRIPTION-CHOICE. </summary>
     public readonly partial struct AccessTier : IEquatable<AccessTier>
     {
         private readonly string? _value;
 
+        /// <summary> Determines if two <see cref="AccessTier"/> values are the same. </summary>
         public AccessTier(string value)
         {
             _value = value ?? throw new ArgumentNullException(nameof(value));
@@ -26,26 +28,43 @@ namespace xml_service.Models.V100
         private const string CoolValue = "Cool";
         private const string ArchiveValue = "Archive";
 
+        /// <summary> P4. </summary>
         public static AccessTier P4 { get; } = new AccessTier(P4Value);
+        /// <summary> P6. </summary>
         public static AccessTier P6 { get; } = new AccessTier(P6Value);
+        /// <summary> P10. </summary>
         public static AccessTier P10 { get; } = new AccessTier(P10Value);
+        /// <summary> P20. </summary>
         public static AccessTier P20 { get; } = new AccessTier(P20Value);
+        /// <summary> P30. </summary>
         public static AccessTier P30 { get; } = new AccessTier(P30Value);
+        /// <summary> P40. </summary>
         public static AccessTier P40 { get; } = new AccessTier(P40Value);
+        /// <summary> P50. </summary>
         public static AccessTier P50 { get; } = new AccessTier(P50Value);
+        /// <summary> Hot. </summary>
         public static AccessTier Hot { get; } = new AccessTier(HotValue);
+        /// <summary> Cool. </summary>
         public static AccessTier Cool { get; } = new AccessTier(CoolValue);
+        /// <summary> Archive. </summary>
         public static AccessTier Archive { get; } = new AccessTier(ArchiveValue);
+        /// <summary> Determines if two <see cref="AccessTier"/> values are the same. </summary>
         public static bool operator ==(AccessTier left, AccessTier right) => left.Equals(right);
+        /// <summary> Determines if two <see cref="AccessTier"/> values are not the same. </summary>
         public static bool operator !=(AccessTier left, AccessTier right) => !left.Equals(right);
+        /// <summary> Converts a string to a <see cref="AccessTier"/>. </summary>
         public static implicit operator AccessTier(string value) => new AccessTier(value);
 
+        /// <inheritdoc />
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override bool Equals(object? obj) => obj is AccessTier other && Equals(other);
+        /// <inheritdoc />
         public bool Equals(AccessTier other) => string.Equals(_value, other._value, StringComparison.Ordinal);
 
+        /// <inheritdoc />
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override int GetHashCode() => _value?.GetHashCode() ?? 0;
+        /// <inheritdoc />
         public override string? ToString() => _value;
     }
 }

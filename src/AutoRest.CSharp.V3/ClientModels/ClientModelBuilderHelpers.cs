@@ -3,6 +3,7 @@
 
 using System;
 using System.Globalization;
+using System.Security;
 using System.Xml;
 using AutoRest.CSharp.V3.ClientModels.Serialization;
 using AutoRest.CSharp.V3.Pipeline.Generated;
@@ -65,7 +66,7 @@ namespace AutoRest.CSharp.V3.ClientModels
             AllSchemaTypes.String => typeof(string),
             AllSchemaTypes.Unixtime => typeof(DateTimeOffset),
             AllSchemaTypes.Uri => typeof(Uri),
-            AllSchemaTypes.Uuid => typeof(string),
+            AllSchemaTypes.Uuid => typeof(Guid),
             AllSchemaTypes.Any => typeof(object),
             AllSchemaTypes.Binary => typeof(byte[]),
             _ => null
@@ -91,6 +92,11 @@ namespace AutoRest.CSharp.V3.ClientModels
         public static ClientConstant ParseClientConstant(ConstantSchema constant)
         {
             return ParseClientConstant(constant.Value.Value, CreateType(constant.ValueType, constant.Value.Value == null));
+        }
+
+        public static string EscapeXmlDescription(string s)
+        {
+            return SecurityElement.Escape(s) ?? s;
         }
     }
 }

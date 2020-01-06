@@ -177,9 +177,6 @@ namespace AutoRest.CSharp.V3.CodeGen
         public void MethodExpression(string modifiers, string? returnType, string name, string[]? parameters, string expression) =>
             LineRaw($"{MethodDeclaration(modifiers, returnType, name, parameters ?? new string[0])} => {expression};");
 
-        public void EnumValue(string value, bool includeComma = true) =>
-            LineRaw($"{value}{(includeComma ? "," : String.Empty)}");
-
         public void UseNamespace(CSharpNamespace @namespace)
         {
             _usingNamespaces.Add(@namespace);

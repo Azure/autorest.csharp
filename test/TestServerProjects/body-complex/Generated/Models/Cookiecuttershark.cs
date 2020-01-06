@@ -3,8 +3,10 @@
 
 namespace body_complex.Models.V20160229
 {
+    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
     public partial class Cookiecuttershark : Shark
     {
+        /// <summary> Initializes a new instance of Cookiecuttershark. </summary>
         public Cookiecuttershark()
         {
             Fishtype = "cookiecuttershark";
