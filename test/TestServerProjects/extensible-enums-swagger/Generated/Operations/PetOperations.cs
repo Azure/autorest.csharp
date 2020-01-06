@@ -28,6 +28,16 @@ namespace extensible_enums_swagger
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+        internal HttpMessage CreateGetByPetIdRequest(string petId)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri($"{host}"));
+            request.Uri.AppendPath("/extensibleenums/pet/", false);
+            request.Uri.AppendPath(petId, true);
+            return message;
+        }
         public async ValueTask<Response<Pet>> GetByPetIdAsync(string petId, CancellationToken cancellationToken = default)
         {
             if (petId == null)
@@ -35,16 +45,11 @@ namespace extensible_enums_swagger
                 throw new ArgumentNullException(nameof(petId));
             }
 
-            using var scope = clientDiagnostics.CreateScope("extensible_enums_swagger.GetByPetId");
+            using var scope = clientDiagnostics.CreateScope("PetOperations.GetByPetId");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/extensibleenums/pet/", false);
-                request.Uri.AppendPath(petId, true);
+                using var message = CreateGetByPetIdRequest(petId);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -64,22 +69,58 @@ namespace extensible_enums_swagger
                 throw;
             }
         }
-        public async ValueTask<Response<Pet>> AddPetAsync(Pet? petParam, CancellationToken cancellationToken = default)
+        public Response<Pet> GetByPetId(string petId, CancellationToken cancellationToken = default)
         {
+            if (petId == null)
+            {
+                throw new ArgumentNullException(nameof(petId));
+            }
 
-            using var scope = clientDiagnostics.CreateScope("extensible_enums_swagger.AddPet");
+            using var scope = clientDiagnostics.CreateScope("PetOperations.GetByPetId");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Post;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/extensibleenums/pet/addPet", false);
-                request.Headers.Add("Content-Type", "application/json");
-                using var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(petParam);
-                request.Content = content;
+                using var message = CreateGetByPetIdRequest(petId);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = Pet.DeserializePet(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        internal HttpMessage CreateAddPetRequest(Pet? petParam)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            request.Uri.Reset(new Uri($"{host}"));
+            request.Uri.AppendPath("/extensibleenums/pet/addPet", false);
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(petParam);
+            request.Content = content;
+            return message;
+        }
+        public async ValueTask<Response<Pet>> AddPetAsync(Pet? petParam, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("PetOperations.AddPet");
+            scope.Start();
+            try
+            {
+                using var message = CreateAddPetRequest(petParam);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -91,6 +132,33 @@ namespace extensible_enums_swagger
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response<Pet> AddPet(Pet? petParam, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("PetOperations.AddPet");
+            scope.Start();
+            try
+            {
+                using var message = CreateAddPetRequest(petParam);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = Pet.DeserializePet(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)

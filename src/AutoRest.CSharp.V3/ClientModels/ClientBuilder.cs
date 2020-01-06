@@ -32,16 +32,18 @@ namespace AutoRest.CSharp.V3.ClientModels
                 clientParameters[clientParameter.Language.Default.Name] = BuildParameter(clientParameter);
             }
 
+            string clientName = arg.CSharpName();
+
             foreach (Operation operation in arg.Operations)
             {
-                var method = BuildMethod(operation, clientParameters);
+                var method = BuildMethod(operation, clientName, clientParameters);
                 if (method != null)
                 {
                     methods.Add(method);
                 }
             }
 
-            return new ServiceClient(arg.CSharpName(),
+            return new ServiceClient(clientName,
                 OrderParameters(clientParameters.Values),
                 methods.ToArray());
         }
@@ -63,7 +65,7 @@ namespace AutoRest.CSharp.V3.ClientModels
             return null;
         }
 
-        private static ClientMethod? BuildMethod(Operation operation, Dictionary<string, ServiceClientParameter> clientParameters)
+        private static ClientMethod? BuildMethod(Operation operation, string clientName, Dictionary<string, ServiceClientParameter> clientParameters)
         {
             var httpRequest = operation.Request.Protocol.Http as HttpRequest;
             var httpRequestWithBody = httpRequest as HttpWithBodyRequest;
@@ -181,11 +183,13 @@ namespace AutoRest.CSharp.V3.ClientModels
                 BuildResponseHeaderModel(operation, httpResponse)
             );
 
+            string operationName = operation.CSharpName();
             return new ClientMethod(
-                operation.CSharpName(),
+                operationName,
                 request,
                 OrderParameters(methodParameters),
-                clientResponse
+                clientResponse,
+                new ClientMethodDiagnostics($"{clientName}.{operationName}", Array.Empty<DiagnosticScopeAttributes>())
             );
         }
 

@@ -27,22 +27,27 @@ namespace url_multi_collectionFormat
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+        internal HttpMessage CreateArrayStringMultiNullRequest(IEnumerable<string>? arrayQuery)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri($"{host}"));
+            request.Uri.AppendPath("/queries/array/multi/string/null", false);
+            if (arrayQuery != null)
+            {
+                request.Uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
+            }
+            return message;
+        }
         public async ValueTask<Response> ArrayStringMultiNullAsync(IEnumerable<string>? arrayQuery, CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("url_multi_collectionFormat.ArrayStringMultiNull");
+            using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringMultiNull");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/queries/array/multi/string/null", false);
-                if (arrayQuery != null)
-                {
-                    request.Uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
-                }
+                using var message = CreateArrayStringMultiNullRequest(arrayQuery);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -57,23 +62,51 @@ namespace url_multi_collectionFormat
                 scope.Failed(e);
                 throw;
             }
+        }
+        public Response ArrayStringMultiNull(IEnumerable<string>? arrayQuery, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringMultiNull");
+            scope.Start();
+            try
+            {
+                using var message = CreateArrayStringMultiNullRequest(arrayQuery);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        internal HttpMessage CreateArrayStringMultiEmptyRequest(IEnumerable<string>? arrayQuery)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri($"{host}"));
+            request.Uri.AppendPath("/queries/array/multi/string/empty", false);
+            if (arrayQuery != null)
+            {
+                request.Uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
+            }
+            return message;
         }
         public async ValueTask<Response> ArrayStringMultiEmptyAsync(IEnumerable<string>? arrayQuery, CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("url_multi_collectionFormat.ArrayStringMultiEmpty");
+            using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringMultiEmpty");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/queries/array/multi/string/empty", false);
-                if (arrayQuery != null)
-                {
-                    request.Uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
-                }
+                using var message = CreateArrayStringMultiEmptyRequest(arrayQuery);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -89,22 +122,50 @@ namespace url_multi_collectionFormat
                 throw;
             }
         }
-        public async ValueTask<Response> ArrayStringMultiValidAsync(IEnumerable<string>? arrayQuery, CancellationToken cancellationToken = default)
+        public Response ArrayStringMultiEmpty(IEnumerable<string>? arrayQuery, CancellationToken cancellationToken = default)
         {
 
-            using var scope = clientDiagnostics.CreateScope("url_multi_collectionFormat.ArrayStringMultiValid");
+            using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringMultiEmpty");
             scope.Start();
             try
             {
-                using var message = pipeline.CreateMessage();
-                var request = message.Request;
-                request.Method = RequestMethod.Get;
-                request.Uri.Reset(new Uri($"{host}"));
-                request.Uri.AppendPath("/queries/array/multi/string/valid", false);
-                if (arrayQuery != null)
+                using var message = CreateArrayStringMultiEmptyRequest(arrayQuery);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
                 {
-                    request.Uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        internal HttpMessage CreateArrayStringMultiValidRequest(IEnumerable<string>? arrayQuery)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            request.Uri.Reset(new Uri($"{host}"));
+            request.Uri.AppendPath("/queries/array/multi/string/valid", false);
+            if (arrayQuery != null)
+            {
+                request.Uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
+            }
+            return message;
+        }
+        public async ValueTask<Response> ArrayStringMultiValidAsync(IEnumerable<string>? arrayQuery, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringMultiValid");
+            scope.Start();
+            try
+            {
+                using var message = CreateArrayStringMultiValidRequest(arrayQuery);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -112,6 +173,29 @@ namespace url_multi_collectionFormat
                         return message.Response;
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        public Response ArrayStringMultiValid(IEnumerable<string>? arrayQuery, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringMultiValid");
+            scope.Start();
+            try
+            {
+                using var message = CreateArrayStringMultiValidRequest(arrayQuery);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw message.Response.CreateRequestFailedException();
                 }
             }
             catch (Exception e)
