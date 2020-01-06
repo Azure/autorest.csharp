@@ -26,51 +26,53 @@ namespace @Settings.Namespace
 
         public @(Model.Name)(HttpClient httpClient, ILoadBalancingConfig loadBalancingConfig) : this(httpClient, false)
         {
-            this.HttpClient.Timeout = loadBalancingConfig.PerRequestTimeout;
             this.loadBalancingConfig = loadBalancingConfig;
         }
 
-        private async Task<T> SendWithRetry<T>(System.Func<Task<T>> action, CancellationToken cancellationToken) where T : HttpOperationResponse
+        private async Task<T> SendWithRetry<T>(System.Func<CancellationToken, Task<T>> action, CancellationToken cancellationToken) where T : HttpOperationResponse
         {
             var retryResults = await loadBalancingConfig.UrlResourceManager.ExecuteAsyncWithDiag(async (source, _) =>
             {
                 this.BaseUri = new System.Uri(source);
 
-                try
+                using (var cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken))
                 {
-                    var operationResponse = await action();
-                    if (IsTransientHttpStatusCode(operationResponse.Response.StatusCode))
+                    cts.CancelAfter(loadBalancingConfig.PerRequestTimeout);
+                    try
                     {
-                        throw new Frameworks.Http.TransientHttpRequestException(
-                            operationResponse.Request.RequestUri.AbsolutePath,
-                            operationResponse.Request.RequestUri.GetLeftPart(System.UriPartial.Path),
-                            operationResponse.Response,
-                            $"Response status code does not indicate success: ${operationResponse.Response.StatusCode}");
-                    }
+                        var operationResponse = await action(cts.Token);
+                        if (IsTransientHttpStatusCode(operationResponse.Response.StatusCode))
+                        {
+                            throw new Frameworks.Http.TransientHttpRequestException(
+                                operationResponse.Request.RequestUri.AbsolutePath,
+                                operationResponse.Request.RequestUri.GetLeftPart(System.UriPartial.Path),
+                                operationResponse.Response,
+                                $"Response status code does not indicate success: ${operationResponse.Response.StatusCode}");
+                        }
 
-                    if (!operationResponse.Response.IsSuccessStatusCode)
-                    {
-                        throw new Frameworks.Http.HttpErrorResponseException(
-                            operationResponse.Request.RequestUri.AbsolutePath,
-                            operationResponse.Request.RequestUri.GetLeftPart(System.UriPartial.Path),
-                            operationResponse.Response);
-                    }
+                        if (!operationResponse.Response.IsSuccessStatusCode)
+                        {
+                            throw new Frameworks.Http.HttpErrorResponseException(
+                                operationResponse.Request.RequestUri.AbsolutePath,
+                                operationResponse.Request.RequestUri.GetLeftPart(System.UriPartial.Path),
+                                operationResponse.Response);
+                        }
 
-                    if (loadBalancingConfig.IsErrorResponse != null && loadBalancingConfig.IsErrorResponse(operationResponse.Response, await operationResponse.Response.Content.ReadAsStringAsync()))
-                    {
-                        throw new Frameworks.Http.HttpErrorResponseException(
-                            operationResponse.Request.RequestUri.AbsolutePath,
-                            operationResponse.Request.RequestUri.GetLeftPart(System.UriPartial.Path),
-                            operationResponse.Response);
+                        if (loadBalancingConfig.IsErrorResponse != null && loadBalancingConfig.IsErrorResponse(operationResponse.Response, await operationResponse.Response.Content.ReadAsStringAsync()))
+                        {
+                            throw new Frameworks.Http.HttpErrorResponseException(
+                                operationResponse.Request.RequestUri.AbsolutePath,
+                                operationResponse.Request.RequestUri.GetLeftPart(System.UriPartial.Path),
+                                operationResponse.Response);
+                        }
+                        return operationResponse;
                     }
-                    return operationResponse;
+                    catch (TaskCanceledException e)
+                        when (!cancellationToken.IsCancellationRequested)
+                    {
+                        throw new TimeoutException("Request timeout", e);
+                    }
                 }
-                catch (TaskCanceledException e)
-                    when (!cancellationToken.IsCancellationRequested)
-                {
-                    throw new Frameworks.Http.RequestTimeoutException(source, string.Empty, "Request Timeout", e);
-                }
-
             }, loadBalancingConfig.ShouldRetryPredicate);
 
             var result = retryResults.Last();
