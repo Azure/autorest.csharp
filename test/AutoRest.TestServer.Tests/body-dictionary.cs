@@ -4,7 +4,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
+using System.Xml;
 using AutoRest.TestServer.Tests.Infrastructure;
 using body_dictionary;
 using body_dictionary.Models.V100;
@@ -339,243 +341,215 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetDictionaryDoubleValid() => Test(async (host, pipeline) =>
         {
-            var result = await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetByteInvalidNullAsync();
-            CollectionAssert.AreEqual(new Dictionary<string, byte[]>
+            var result = await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetDoubleValidAsync();
+            CollectionAssert.AreEqual(new Dictionary<string, double>
             {
-                { "0", new byte[] { 171, 172, 173 } },
-                { "1", null }
+                { "0", 0d },
+                { "1", -0.01d },
+                { "2", -1.2e20d }
             }, result.Value);
         });
 
         [Test]
+        [Ignore("Null collection items: https://github.com/Azure/autorest.csharp/issues/366")]
         public Task GetDictionaryDoubleWithNull() => Test(async (host, pipeline) =>
         {
-            var result = await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetByteInvalidNullAsync();
-            CollectionAssert.AreEqual(new Dictionary<string, byte[]>
+            var result = await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetDoubleInvalidNullAsync();
+            CollectionAssert.AreEqual(new Dictionary<string, double?>
             {
-                { "0", new byte[] { 171, 172, 173 } },
-                { "1", null }
+                { "0", 0d },
+                { "1", null },
+                { "2", -1.2e20d }
             }, result.Value);
         });
 
         [Test]
-        public Task GetDictionaryDoubleWithString() => Test(async (host, pipeline) =>
+        public Task GetDictionaryDoubleWithString() => Test((host, pipeline) =>
         {
-            var result = await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetByteInvalidNullAsync();
-            CollectionAssert.AreEqual(new Dictionary<string, byte[]>
-            {
-                { "0", new byte[] { 171, 172, 173 } },
-                { "1", null }
-            }, result.Value);
+            Assert.ThrowsAsync<InvalidOperationException>(async () => await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetDoubleInvalidStringAsync());
         });
 
         [Test]
         public Task GetDictionaryDurationValid() => Test(async (host, pipeline) =>
         {
-            var result = await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetByteInvalidNullAsync();
-            CollectionAssert.AreEqual(new Dictionary<string, byte[]>
+            var result = await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetDurationValidAsync();
+            CollectionAssert.AreEqual(new Dictionary<string, TimeSpan>
             {
-                { "0", new byte[] { 171, 172, 173 } },
-                { "1", null }
+                { "0", XmlConvert.ToTimeSpan("P123DT22H14M12.011S") },
+                { "1", XmlConvert.ToTimeSpan("P5DT1H") }
             }, result.Value);
         });
 
         [Test]
         public Task GetDictionaryEmpty() => Test(async (host, pipeline) =>
         {
-            var result = await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetByteInvalidNullAsync();
-            CollectionAssert.AreEqual(new Dictionary<string, byte[]>
-            {
-                { "0", new byte[] { 171, 172, 173 } },
-                { "1", null }
-            }, result.Value);
+            var result = await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetEmptyAsync();
+            CollectionAssert.IsEmpty(result.Value);
         });
 
         [Test]
         public Task GetDictionaryFloatValid() => Test(async (host, pipeline) =>
         {
-            var result = await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetByteInvalidNullAsync();
-            CollectionAssert.AreEqual(new Dictionary<string, byte[]>
+            var result = await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetFloatValidAsync();
+            CollectionAssert.AreEqual(new Dictionary<string, float>
             {
-                { "0", new byte[] { 171, 172, 173 } },
-                { "1", null }
+                { "0", 0f },
+                { "1", -0.01f },
+                { "2", -1.2e20f }
             }, result.Value);
         });
 
         [Test]
+        [Ignore("Null collection items: https://github.com/Azure/autorest.csharp/issues/366")]
         public Task GetDictionaryFloatWithNull() => Test(async (host, pipeline) =>
         {
-            var result = await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetByteInvalidNullAsync();
-            CollectionAssert.AreEqual(new Dictionary<string, byte[]>
+            var result = await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetFloatInvalidNullAsync();
+            CollectionAssert.AreEqual(new Dictionary<string, float?>
             {
-                { "0", new byte[] { 171, 172, 173 } },
-                { "1", null }
+                { "0", 0f },
+                { "1", null },
+                { "2", -1.2e20f }
             }, result.Value);
         });
 
         [Test]
-        public Task GetDictionaryFloatWithString() => Test(async (host, pipeline) =>
+        public Task GetDictionaryFloatWithString() => Test((host, pipeline) =>
         {
-            var result = await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetByteInvalidNullAsync();
-            CollectionAssert.AreEqual(new Dictionary<string, byte[]>
-            {
-                { "0", new byte[] { 171, 172, 173 } },
-                { "1", null }
-            }, result.Value);
+            Assert.ThrowsAsync<InvalidOperationException>(async () => await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetFloatInvalidStringAsync());
         });
 
         [Test]
         public Task GetDictionaryIntegerValid() => Test(async (host, pipeline) =>
         {
-            var result = await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetByteInvalidNullAsync();
-            CollectionAssert.AreEqual(new Dictionary<string, byte[]>
+            var result = await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetIntegerValidAsync();
+            CollectionAssert.AreEqual(new Dictionary<string, int>
             {
-                { "0", new byte[] { 171, 172, 173 } },
-                { "1", null }
+                { "0", 1 },
+                { "1", -1 },
+                { "2", 3 },
+                { "3", 300 }
             }, result.Value);
         });
 
         [Test]
+        [Ignore("Null collection items: https://github.com/Azure/autorest.csharp/issues/366")]
         public Task GetDictionaryIntegerWithNull() => Test(async (host, pipeline) =>
         {
-            var result = await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetByteInvalidNullAsync();
-            CollectionAssert.AreEqual(new Dictionary<string, byte[]>
+            var result = await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetIntInvalidNullAsync();
+            CollectionAssert.AreEqual(new Dictionary<string, int?>
             {
-                { "0", new byte[] { 171, 172, 173 } },
-                { "1", null }
+                { "0", 1 },
+                { "1", null },
+                { "2", 0 }
             }, result.Value);
         });
 
         [Test]
-        public Task GetDictionaryIntegerWithString() => Test(async (host, pipeline) =>
+        public Task GetDictionaryIntegerWithString() => Test((host, pipeline) =>
         {
-            var result = await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetByteInvalidNullAsync();
-            CollectionAssert.AreEqual(new Dictionary<string, byte[]>
-            {
-                { "0", new byte[] { 171, 172, 173 } },
-                { "1", null }
-            }, result.Value);
+            Assert.ThrowsAsync<InvalidOperationException>(async () => await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetIntInvalidStringAsync());
         });
 
         [Test]
-        public Task GetDictionaryInvalid() => Test(async (host, pipeline) =>
+        public Task GetDictionaryInvalid() => Test((host, pipeline) =>
         {
-            var result = await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetByteInvalidNullAsync();
-            CollectionAssert.AreEqual(new Dictionary<string, byte[]>
-            {
-                { "0", new byte[] { 171, 172, 173 } },
-                { "1", null }
-            }, result.Value);
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetInvalidAsync());
         });
 
         [Test]
         public Task GetDictionaryKeyEmptyString() => Test(async (host, pipeline) =>
         {
-            var result = await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetByteInvalidNullAsync();
-            CollectionAssert.AreEqual(new Dictionary<string, byte[]>
+            var result = await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetEmptyStringKeyAsync();
+            CollectionAssert.AreEqual(new Dictionary<string, object>
             {
-                { "0", new byte[] { 171, 172, 173 } },
-                { "1", null }
+                { "", "val1" }
             }, result.Value);
         });
 
         [Test]
         public Task GetDictionaryLongValid() => Test(async (host, pipeline) =>
         {
-            var result = await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetByteInvalidNullAsync();
-            CollectionAssert.AreEqual(new Dictionary<string, byte[]>
+            var result = await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetLongValidAsync();
+            CollectionAssert.AreEqual(new Dictionary<string, long>
             {
-                { "0", new byte[] { 171, 172, 173 } },
-                { "1", null }
+                { "0", 1L },
+                { "1", -1L },
+                { "2", 3L },
+                { "3", 300L }
             }, result.Value);
         });
 
         [Test]
+        [Ignore("Null collection items: https://github.com/Azure/autorest.csharp/issues/366")]
         public Task GetDictionaryLongWithNull() => Test(async (host, pipeline) =>
         {
-            var result = await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetByteInvalidNullAsync();
-            CollectionAssert.AreEqual(new Dictionary<string, byte[]>
+            var result = await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetLongInvalidNullAsync();
+            CollectionAssert.AreEqual(new Dictionary<string, long?>
             {
-                { "0", new byte[] { 171, 172, 173 } },
-                { "1", null }
+                { "0", 1L },
+                { "1", null },
+                { "2", 0L }
             }, result.Value);
         });
 
         [Test]
-        public Task GetDictionaryLongWithString() => Test(async (host, pipeline) =>
+        public Task GetDictionaryLongWithString() => Test((host, pipeline) =>
         {
-            var result = await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetByteInvalidNullAsync();
-            CollectionAssert.AreEqual(new Dictionary<string, byte[]>
-            {
-                { "0", new byte[] { 171, 172, 173 } },
-                { "1", null }
-            }, result.Value);
+            Assert.ThrowsAsync<InvalidOperationException>(async () => await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetLongInvalidStringAsync());
         });
 
         [Test]
+        [Ignore("Null responses: https://github.com/Azure/autorest.csharp/issues/289")]
         public Task GetDictionaryNull() => Test(async (host, pipeline) =>
         {
-            var result = await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetByteInvalidNullAsync();
-            CollectionAssert.AreEqual(new Dictionary<string, byte[]>
-            {
-                { "0", new byte[] { 171, 172, 173 } },
-                { "1", null }
-            }, result.Value);
+            var result = await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetNullAsync();
+            Assert.IsNull(result.Value);
         });
 
         [Test]
-        public Task GetDictionaryNullkey() => Test(async (host, pipeline) =>
+        public Task GetDictionaryNullkey() => Test((host, pipeline) =>
         {
-            var result = await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetByteInvalidNullAsync();
-            CollectionAssert.AreEqual(new Dictionary<string, byte[]>
-            {
-                { "0", new byte[] { 171, 172, 173 } },
-                { "1", null }
-            }, result.Value);
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetNullKeyAsync());
         });
 
         [Test]
         public Task GetDictionaryNullValue() => Test(async (host, pipeline) =>
         {
-            var result = await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetByteInvalidNullAsync();
-            CollectionAssert.AreEqual(new Dictionary<string, byte[]>
+            var result = await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetNullValueAsync();
+            CollectionAssert.AreEqual(new Dictionary<string, string>
             {
-                { "0", new byte[] { 171, 172, 173 } },
-                { "1", null }
+                { "key1", null }
             }, result.Value);
         });
 
         [Test]
         public Task GetDictionaryStringValid() => Test(async (host, pipeline) =>
         {
-            var result = await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetByteInvalidNullAsync();
-            CollectionAssert.AreEqual(new Dictionary<string, byte[]>
+            var result = await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetStringValidAsync();
+            CollectionAssert.AreEqual(new Dictionary<string, string>
             {
-                { "0", new byte[] { 171, 172, 173 } },
-                { "1", null }
+                { "0", "foo1" },
+                { "1", "foo2" },
+                { "2", "foo3" }
             }, result.Value);
         });
 
         [Test]
         public Task GetDictionaryStringWithNull() => Test(async (host, pipeline) =>
         {
-            var result = await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetByteInvalidNullAsync();
-            CollectionAssert.AreEqual(new Dictionary<string, byte[]>
+            var result = await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetStringWithNullAsync();
+            CollectionAssert.AreEqual(new Dictionary<string, string?>
             {
-                { "0", new byte[] { 171, 172, 173 } },
-                { "1", null }
+                { "0", "foo" },
+                { "1", null },
+                { "2", "foo2" }
             }, result.Value);
         });
 
         [Test]
-        public Task GetDictionaryStringWithNumber() => Test(async (host, pipeline) =>
+        public Task GetDictionaryStringWithNumber() => Test((host, pipeline) =>
         {
-            var result = await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetByteInvalidNullAsync();
-            CollectionAssert.AreEqual(new Dictionary<string, byte[]>
-            {
-                { "0", new byte[] { 171, 172, 173 } },
-                { "1", null }
-            }, result.Value);
+            Assert.ThrowsAsync<InvalidOperationException>(async () => await new DictionaryOperations(ClientDiagnostics, pipeline, host).GetStringWithInvalidAsync());
         });
 
         [Test]
