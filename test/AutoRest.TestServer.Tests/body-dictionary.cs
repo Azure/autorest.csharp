@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Xml;
@@ -553,48 +552,184 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        public Task PutDictionaryArrayValid() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task PutDictionaryArrayValid() => TestStatus(async (host, pipeline) =>
+        {
+            var value = new Dictionary<string, ICollection<string>>
+            {
+                { "0", new[] { "1", "2", "3" } },
+                { "1", new[] { "4", "5", "6" } },
+                { "2", new[] { "7", "8", "9" } }
+            };
+            return await new DictionaryOperations(ClientDiagnostics, pipeline, host).PutArrayValidAsync(value);
+        });
 
         [Test]
-        public Task PutDictionaryBooleanValid() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task PutDictionaryBooleanValid() => TestStatus(async (host, pipeline) =>
+        {
+            var value = new Dictionary<string, bool>
+            {
+                { "0", true },
+                { "1", false },
+                { "2", false },
+                { "3", true }
+            };
+            return await new DictionaryOperations(ClientDiagnostics, pipeline, host).PutBooleanTfftAsync(value);
+        });
 
         [Test]
-        public Task PutDictionaryByteValid() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task PutDictionaryByteValid() => TestStatus(async (host, pipeline) =>
+        {
+            var value = new Dictionary<string, byte[]>
+            {
+                { "0", new byte[] { 255, 255, 255, 250 } },
+                { "1", new byte[] { 1, 2, 3 } },
+                { "2", new byte[] { 37, 41, 67 } }
+            };
+            return await new DictionaryOperations(ClientDiagnostics, pipeline, host).PutByteValidAsync(value);
+        });
 
         [Test]
-        public Task PutDictionaryComplexValid() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task PutDictionaryComplexValid() => TestStatus(async (host, pipeline) =>
+        {
+            var value = new Dictionary<string, Widget>
+            {
+                { "0", new Widget { Integer = 1, String = "2" } },
+                { "1", new Widget { Integer = 3, String = "4" } },
+                { "2", new Widget { Integer = 5, String = "6" } }
+            };
+            return await new DictionaryOperations(ClientDiagnostics, pipeline, host).PutComplexValidAsync(value);
+        });
 
         [Test]
-        public Task PutDictionaryDateTimeRfc1123Valid() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task PutDictionaryDateTimeRfc1123Valid() => TestStatus(async (host, pipeline) =>
+        {
+            var value = new Dictionary<string, DateTimeOffset>
+            {
+                { "0", DateTimeOffset.Parse("Fri, 01 Dec 2000 00:00:01 GMT") },
+                { "1", DateTimeOffset.Parse("Wed, 02 Jan 1980 00:11:35 GMT") },
+                { "2", DateTimeOffset.Parse("Wed, 12 Oct 1492 10:15:01 GMT") }
+            };
+            return await new DictionaryOperations(ClientDiagnostics, pipeline, host).PutDateTimeRfc1123ValidAsync(value);
+        });
 
         [Test]
-        public Task PutDictionaryDateTimeValid() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        [IgnoreOnTestServer(TestServerVersion.V2, "Unmatched request")]
+        public Task PutDictionaryDateTimeValid() => TestStatus(async (host, pipeline) =>
+        {
+            var value = new Dictionary<string, DateTimeOffset>
+            {
+                { "0", DateTimeOffset.Parse("2000-12-01T00:00:01Z") },
+                { "1", DateTimeOffset.Parse("1980-01-01T23:11:35Z") },
+                { "2", DateTimeOffset.Parse("1492-10-12T18:15:01Z") }
+            };
+            return await new DictionaryOperations(ClientDiagnostics, pipeline, host).PutDateTimeValidAsync(value);
+        });
 
         [Test]
-        public Task PutDictionaryDateValid() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task PutDictionaryDateValid() => TestStatus(async (host, pipeline) =>
+        {
+            var value = new Dictionary<string, DateTimeOffset>
+            {
+                { "0", DateTimeOffset.Parse("2000-12-01") },
+                { "1", DateTimeOffset.Parse("1980-01-02") },
+                { "2", DateTimeOffset.Parse("1492-10-12") }
+            };
+            return await new DictionaryOperations(ClientDiagnostics, pipeline, host).PutDateValidAsync(value);
+        });
 
         [Test]
-        public Task PutDictionaryDictionaryValid() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        //TODO: Passes but has a bug: https://github.com/Azure/autorest.modelerfour/issues/106
+        public Task PutDictionaryDictionaryValid() => TestStatus(async (host, pipeline) =>
+        {
+            var value = new Dictionary<string, object>
+            {
+                { "0", new Dictionary<string, object> { { "1", "one" }, { "2", "two" }, { "3", "three" } } },
+                { "1", new Dictionary<string, object> { { "4", "four" }, { "5", "five" }, { "6", "six" } } },
+                { "2", new Dictionary<string, object> { { "7", "seven" }, { "8", "eight" }, { "9", "nine" } } }
+            };
+            return await new DictionaryOperations(ClientDiagnostics, pipeline, host).PutDictionaryValidAsync(value);
+        });
 
         [Test]
-        public Task PutDictionaryDoubleValid() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        [IgnoreOnTestServer(TestServerVersion.V2, "Unmatched request")]
+        public Task PutDictionaryDoubleValid() => TestStatus(async (host, pipeline) =>
+        {
+            var value = new Dictionary<string, double>
+            {
+                { "0", 0d },
+                { "1", -0.01d },
+                { "2", -1.2e20d }
+            };
+            return await new DictionaryOperations(ClientDiagnostics, pipeline, host).PutDoubleValidAsync(value);
+        });
 
         [Test]
-        public Task PutDictionaryDurationValid() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task PutDictionaryDurationValid() => TestStatus(async (host, pipeline) =>
+        {
+            var value = new Dictionary<string, TimeSpan>
+            {
+                { "0", XmlConvert.ToTimeSpan("P123DT22H14M12.011S") },
+                { "1", XmlConvert.ToTimeSpan("P5DT1H") }
+            };
+            return await new DictionaryOperations(ClientDiagnostics, pipeline, host).PutDurationValidAsync(value);
+        });
 
         [Test]
-        public Task PutDictionaryEmpty() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task PutDictionaryEmpty() => TestStatus(async (host, pipeline) =>
+        {
+            var value = new Dictionary<string, string>();
+            return await new DictionaryOperations(ClientDiagnostics, pipeline, host).PutEmptyAsync(value);
+        });
 
         [Test]
-        public Task PutDictionaryFloatValid() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        [IgnoreOnTestServer(TestServerVersion.V2, "Unmatched request")]
+        public Task PutDictionaryFloatValid() => TestStatus(async (host, pipeline) =>
+        {
+            var value = new Dictionary<string, float>
+            {
+                { "0", 0f },
+                { "1", -0.01f },
+                { "2", -1.2e20f }
+            };
+            return await new DictionaryOperations(ClientDiagnostics, pipeline, host).PutFloatValidAsync(value);
+        });
 
         [Test]
-        public Task PutDictionaryIntegerValid() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task PutDictionaryIntegerValid() => TestStatus(async (host, pipeline) =>
+        {
+            var value = new Dictionary<string, int>
+            {
+                { "0", 1 },
+                { "1", -1 },
+                { "2", 3 },
+                { "3", 300 }
+            };
+            return await new DictionaryOperations(ClientDiagnostics, pipeline, host).PutIntegerValidAsync(value);
+        });
 
         [Test]
-        public Task PutDictionaryLongValid() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task PutDictionaryLongValid() => TestStatus(async (host, pipeline) =>
+        {
+            var value = new Dictionary<string, long>
+            {
+                { "0", 1L },
+                { "1", -1L },
+                { "2", 3L },
+                { "3", 300L }
+            };
+            return await new DictionaryOperations(ClientDiagnostics, pipeline, host).PutLongValidAsync(value);
+        });
 
         [Test]
-        public Task PutDictionaryStringValid() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task PutDictionaryStringValid() => TestStatus(async (host, pipeline) =>
+        {
+            var value = new Dictionary<string, string>
+            {
+                { "0", "foo1" },
+                { "1", "foo2" },
+                { "2", "foo3" }
+            };
+            return await new DictionaryOperations(ClientDiagnostics, pipeline, host).PutStringValidAsync(value);
+        });
     }
 }
