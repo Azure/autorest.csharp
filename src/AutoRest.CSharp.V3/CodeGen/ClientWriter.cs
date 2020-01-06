@@ -115,6 +115,9 @@ namespace AutoRest.CSharp.V3.CodeGen
                 var method = operation.Request.Method;
                 writer.Line($"request.Method = {writer.Type(typeof(RequestMethod))}.{method.ToRequestMethodName()};");
 
+                //TODO: Add logic to escape the strings when specified, using Uri.EscapeDataString(value);
+                //TODO: Need proper logic to convert the values to strings. Right now, everything is just using default ToString().
+                //TODO: Need logic to trim duplicate slashes (/) so when combined, you don't end  up with multiple // together
                 var urlText = String.Join(String.Empty, operation.Request.HostSegments.Select(s => s.IsConstant ? s.Constant.Value : "{" + s.Parameter.Name + "}"));
                 writer.Line($"request.Uri.Reset(new {writer.Type(typeof(Uri))}($\"{urlText}\"));");
 
