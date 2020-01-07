@@ -36,7 +36,7 @@ namespace AutoRest.TestServer.Tests
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
-        public Task PutSimpleAsync() => TestStatus(async (host, pipeline) =>
+        public Task PutSimpleXML() => TestStatus(async (host, pipeline) =>
         {
             var slideshow = new Slideshow();
             slideshow.Author = "Yours Truly";
@@ -64,10 +64,10 @@ namespace AutoRest.TestServer.Tests
             };
 
             return await new XmlOperations(ClientDiagnostics, pipeline, host).PutSimpleAsync(slideshow);
-        }, true);
+        });
 
         [Test]
-        public Task GetSimpleAsync() => Test(async (host, pipeline) =>
+        public Task GetSimpleXML() => Test(async (host, pipeline) =>
         {
             var result = await new XmlOperations(ClientDiagnostics, pipeline, host).GetSimpleAsync();
             var value = result.Value;
@@ -90,12 +90,12 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual("Why WonderWidgets are great", items[0]);
             Assert.AreEqual("", items[1]);
             Assert.AreEqual("Who buys WonderWidgets", items[2]);
-        }, true);
+        });
 
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
-        public Task PutComplexTypeRefNoMetaAsync() => TestStatus(async (host, pipeline) =>
+        public Task PutRootWithRefAndNoMetaXML() => TestStatus(async (host, pipeline) =>
         {
             var root = new RootWithRefAndNoMeta
             {
@@ -107,12 +107,12 @@ namespace AutoRest.TestServer.Tests
             };
 
             return await new XmlOperations(ClientDiagnostics, pipeline, host).PutComplexTypeRefNoMetaAsync(root);
-        }, true);
+        });
 
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
-        public Task PutComplexTypeRefNoMeta() => TestStatus((host, pipeline) =>
+        public Task PutRootWithRefAndNoMetaXML_Sync() => TestStatus((host, pipeline) =>
         {
             var root = new RootWithRefAndNoMeta
             {
@@ -124,31 +124,31 @@ namespace AutoRest.TestServer.Tests
             };
 
             return new XmlOperations(ClientDiagnostics, pipeline, host).PutComplexTypeRefNoMeta(root);
-        }, true);
+        });
 
         [Test]
-        public Task GetComplexTypeRefNoMetaAsync() => Test(async (host, pipeline) =>
+        public Task GetRootWithRefAndNoMetaXML() => Test(async (host, pipeline) =>
         {
             var result = await new XmlOperations(ClientDiagnostics, pipeline, host).GetComplexTypeRefNoMetaAsync();
             var value = result.Value;
 
             Assert.AreEqual("else", value.Something);
             Assert.AreEqual("myid", value.RefToModel.ID);
-        }, true);
+        });
 
         [Test]
-        public Task GetComplexTypeRefNoMeta() => Test((host, pipeline) =>
+        public Task GetRootWithRefAndNoMetaXML_Sync() => Test((host, pipeline) =>
         {
             var result = new XmlOperations(ClientDiagnostics, pipeline, host).GetComplexTypeRefNoMeta();
             var value = result.Value;
 
             Assert.AreEqual("else", value.Something);
             Assert.AreEqual("myid", value.RefToModel.ID);
-        }, true);
+        });
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
-        public Task PutComplexTypeRefWithMetaAsync() => TestStatus(async (host, pipeline) =>
+        public Task PutRootWithRefAndMetaXML() => TestStatus(async (host, pipeline) =>
         {
             var root = new RootWithRefAndMeta()
             {
@@ -160,21 +160,21 @@ namespace AutoRest.TestServer.Tests
             };
 
             return await new XmlOperations(ClientDiagnostics, pipeline, host).PutComplexTypeRefWithMetaAsync(root);
-        }, true);
+        });
 
         [Test]
-        public Task GetComplexTypeRefWithMetaAsync() => Test(async (host, pipeline) =>
+        public Task GetRootWithRefAndMetaXML() => Test(async (host, pipeline) =>
         {
             var result = await new XmlOperations(ClientDiagnostics, pipeline, host).GetComplexTypeRefWithMetaAsync();
             var value = result.Value;
 
             Assert.AreEqual("else", value.Something);
             Assert.AreEqual("myid", value.RefToModel.ID);
-        }, true);
+        });
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
-        public Task PutRootListSingleItemAsync() => TestStatus(async (host, pipeline) =>
+        public Task PutXMLListAtRootSingle() => TestStatus(async (host, pipeline) =>
         {
             var root = new[]
             {
@@ -187,10 +187,10 @@ namespace AutoRest.TestServer.Tests
             };
 
             return await new XmlOperations(ClientDiagnostics, pipeline, host).PutRootListSingleItemAsync(root);
-        }, true);
+        });
 
         [Test]
-        public Task GetRootListSingleItemAsync() => Test(async (host, pipeline) =>
+        public Task GetXMLListAtRootSingle() => Test(async (host, pipeline) =>
         {
             var result = await new XmlOperations(ClientDiagnostics, pipeline, host).GetRootListSingleItemAsync();
             var value = result.Value;
@@ -199,11 +199,11 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual("Cavendish", item.Name);
             Assert.AreEqual("Sweet", item.Flavor);
             Assert.AreEqual(DateTimeOffset.Parse("2018-02-28T00:40:00.123Z"), item.Expiration);
-        }, true);
+        });
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
-        public Task PutEmptyListAsync() => TestStatus(async (host, pipeline) =>
+        public Task PutEmptyXMLList() => TestStatus(async (host, pipeline) =>
         {
             var root = new Slideshow
             {
@@ -211,10 +211,10 @@ namespace AutoRest.TestServer.Tests
             };
 
             return await new XmlOperations(ClientDiagnostics, pipeline, host).PutEmptyListAsync(root);
-        }, true);
+        });
 
         [Test]
-        public Task GetEmptyListAsync() => Test(async (host, pipeline) =>
+        public Task GetEmptyXMLList() => Test(async (host, pipeline) =>
         {
             var result = await new XmlOperations(ClientDiagnostics, pipeline, host).GetEmptyListAsync();
             var value = result.Value;
@@ -223,11 +223,11 @@ namespace AutoRest.TestServer.Tests
             Assert.Null(value.Date);
             Assert.Null(value.Author);
             Assert.Null(value.Title);
-        }, true);
+        });
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
-        public Task PutEmptyChildElementAsync() => TestStatus(async (host, pipeline) =>
+        public Task PutXMLEmptyNode() => TestStatus(async (host, pipeline) =>
         {
             var root = new Banana()
             {
@@ -237,10 +237,10 @@ namespace AutoRest.TestServer.Tests
             };
 
             return await new XmlOperations(ClientDiagnostics, pipeline, host).PutEmptyChildElementAsync(root);
-        }, true);
+        });
 
         [Test]
-        public Task GetEmptyChildElementAsync() => Test(async (host, pipeline) =>
+        public Task GetXMLEmptyNode() => Test(async (host, pipeline) =>
         {
             var result = await new XmlOperations(ClientDiagnostics, pipeline, host).GetEmptyChildElementAsync();
             var value = result.Value;
@@ -248,11 +248,11 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual("Unknown Banana", value.Name);
             Assert.AreEqual("", value.Flavor);
             Assert.AreEqual(DateTimeOffset.Parse("2012-02-24T00:53:52.789Z"), value.Expiration);
-        }, true);
+        });
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
-        public Task PutWrappedListsAsync() => TestStatus(async (host, pipeline) =>
+        public Task PutWrappedXMLList() => TestStatus(async (host, pipeline) =>
         {
             var root = new AppleBarrel()
             {
@@ -261,21 +261,21 @@ namespace AutoRest.TestServer.Tests
             };
 
             return await new XmlOperations(ClientDiagnostics, pipeline, host).PutWrappedListsAsync(root);
-        }, true);
+        });
 
         [Test]
-        public Task GetWrappedListsAsync() => Test(async (host, pipeline) =>
+        public Task GetWrappedXMLList() => Test(async (host, pipeline) =>
         {
             var result = await new XmlOperations(ClientDiagnostics, pipeline, host).GetWrappedListsAsync();
             var value = result.Value;
 
             CollectionAssert.AreEqual(new[] {"Red Delicious"}, value.BadApples);
             CollectionAssert.AreEqual(new[] {"Fuji", "Gala"}, value.GoodApples);
-        }, true);
+        });
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
-        public Task PutEmptyWrappedListsAsync() => TestStatus(async (host, pipeline) =>
+        public Task PutEmptyWrappedXMLList() => TestStatus(async (host, pipeline) =>
         {
             var root = new AppleBarrel()
             {
@@ -284,21 +284,21 @@ namespace AutoRest.TestServer.Tests
             };
 
             return await new XmlOperations(ClientDiagnostics, pipeline, host).PutEmptyWrappedListsAsync(root);
-        }, true);
+        });
 
         [Test]
-        public Task GetEmptyWrappedListsAsync() => Test(async (host, pipeline) =>
+        public Task GetEmptyWrappedXMLList() => Test(async (host, pipeline) =>
         {
             var result = await new XmlOperations(ClientDiagnostics, pipeline, host).GetEmptyWrappedListsAsync();
             var value = result.Value;
 
             CollectionAssert.AreEqual(new string[] {}, value.BadApples);
             CollectionAssert.AreEqual(new string[] {}, value.GoodApples);
-        }, true);
+        });
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
-        public Task PutAclsAsync() => TestStatus(async (host, pipeline) =>
+        public Task StoragePutContainerACLXML() => TestStatus(async (host, pipeline) =>
         {
             var root = new List<SignedIdentifier>()
             {
@@ -315,10 +315,10 @@ namespace AutoRest.TestServer.Tests
             };
 
             return await new XmlOperations(ClientDiagnostics, pipeline, host).PutAclsAsync(root);
-        }, true);
+        });
 
         [Test]
-        public Task GetAclsAsync() => Test(async (host, pipeline) =>
+        public Task StorageGetContainerACLXML() => Test(async (host, pipeline) =>
         {
             var result = await new XmlOperations(ClientDiagnostics, pipeline, host).GetAclsAsync();
             var value = result.Value;
@@ -331,11 +331,11 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(DateTimeOffset.Parse("2009-09-28T08:49:37.123Z"), acl.AccessPolicy.Start);
             Assert.AreEqual("rwd", acl.AccessPolicy.Permission);
             Assert.AreEqual(DateTimeOffset.Parse("2009-09-29T08:49:37.123Z"), acl.AccessPolicy.Expiry);
-        }, true);
+        });
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
-        public Task PutRootListAsync() => TestStatus(async (host, pipeline) =>
+        public Task PutXMLListAtRoot() => TestStatus(async (host, pipeline) =>
         {
             var root = new List<Banana>()
             {
@@ -354,10 +354,10 @@ namespace AutoRest.TestServer.Tests
             };
 
             return await new XmlOperations(ClientDiagnostics, pipeline, host).PutRootListAsync(root);
-        }, true);
+        });
 
         [Test]
-        public Task GetRootListAsync() => Test(async (host, pipeline) =>
+        public Task GetXMLListAtRoot() => Test(async (host, pipeline) =>
         {
             var result = await new XmlOperations(ClientDiagnostics, pipeline, host).GetRootListAsync();
             var values = result.Value.ToArray();
@@ -371,28 +371,28 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual("Plantain", values[1].Name);
             Assert.AreEqual("Savory", values[1].Flavor);
             Assert.AreEqual(DateTimeOffset.Parse("2018-02-28T00:40:00.123Z"), values[1].Expiration);
-        }, true);
+        });
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
-        public Task PutEmptyRootListAsync() => TestStatus(async (host, pipeline) =>
+        public Task PutEmptyXMLListAtRoot() => TestStatus(async (host, pipeline) =>
         {
             var root = new List<Banana>();
 
             return await new XmlOperations(ClientDiagnostics, pipeline, host).PutEmptyRootListAsync(root);
-        }, true);
+        });
 
         [Test]
-        public Task GetEmptyRootListAsync() => Test(async (host, pipeline) =>
+        public Task GetEmptyXMLListAtRoot() => Test(async (host, pipeline) =>
         {
             var result = await new XmlOperations(ClientDiagnostics, pipeline, host).GetEmptyRootListAsync();
             var values = result.Value.ToArray();
 
             Assert.AreEqual(0, values.Length);
-        }, true);
+        });
 
         [Test]
-        public Task ListContainersAsync() => Test(async (host, pipeline) =>
+        public Task StorageListContainersXML() => Test(async (host, pipeline) =>
         {
             var result = await new XmlOperations(ClientDiagnostics, pipeline, host).ListContainersAsync();
             var value = result.Value;
@@ -415,7 +415,7 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual("textfiles", containers[2].Name);
             Assert.AreEqual("0x8CACB9BD7BACAC3", containers[2].Properties.Etag);
             Assert.AreEqual(DateTimeOffset.Parse("Wed, 26 Oct 2016 20:39:39 GMT"), containers[2].Properties.LastModified);
-        }, true);
+        });
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
@@ -428,7 +428,7 @@ namespace AutoRest.TestServer.Tests
         }, true);
 
         [Test]
-        public Task ListBlobsAsync() => Test(async (host, pipeline) =>
+        public Task StorageListBlobsXML() => Test(async (host, pipeline) =>
         {
             var result = await new XmlOperations(ClientDiagnostics, pipeline, host).ListBlobsAsync();
             var value = result.Value;
@@ -512,11 +512,11 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual("yellow", blobs[4].Metadata["Color"]);
             Assert.AreEqual("03", blobs[4].Metadata["BlobNumber"]);
             Assert.AreEqual("SomeMetadataValue", blobs[4].Metadata["SomeMetadataName"]);
-        }, true);
+        });
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
-        public Task PutServicePropertiesAsync() => TestStatus(async (host, pipeline) =>
+        public Task StoragePutServicePropertiesXML() => TestStatus(async (host, pipeline) =>
         {
             var properties = new StorageServiceProperties()
             {
@@ -556,10 +556,10 @@ namespace AutoRest.TestServer.Tests
                 }
             };
             return await new XmlOperations(ClientDiagnostics, pipeline, host).PutServicePropertiesAsync(properties);
-        }, true);
+        });
 
         [Test]
-        public Task GetServicePropertiesAsync() => Test(async (host, pipeline) =>
+        public Task StorageGetServicePropertiesXML() => Test(async (host, pipeline) =>
         {
             var result = await new XmlOperations(ClientDiagnostics, pipeline, host).GetServicePropertiesAsync();
             var value = result.Value;
@@ -582,6 +582,6 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(true, value.MinuteMetrics.IncludeAPIs);
             Assert.AreEqual(7, value.MinuteMetrics.RetentionPolicy.Days);
             Assert.AreEqual(true, value.MinuteMetrics.RetentionPolicy.Enabled);
-        }, true);
+        });
     }
 }
