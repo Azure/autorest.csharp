@@ -59,7 +59,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                         switch (serialization)
                         {
                             case JsonSerialization jsonSerialization:
-                                WriteJsonSerialize(writer, model, jsonSerialization);
+                                WriteJsonSerialize(writer, jsonSerialization);
                                 WriteJsonDeserialize(writer, model, jsonSerialization);
                                 break;
                             case XmlElementSerialization xmlSerialization:
@@ -133,7 +133,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
         }
 
-        private void WriteJsonSerialize(CodeWriter writer, ClientObject model, JsonSerialization jsonSerialization)
+        private void WriteJsonSerialize(CodeWriter writer, JsonSerialization jsonSerialization)
         {
             writer.Append($"void {typeof(IUtf8JsonSerializable)}.{nameof(IUtf8JsonSerializable.Write)}({typeof(Utf8JsonWriter)} writer)");
             using (writer.Scope())
@@ -147,29 +147,28 @@ namespace AutoRest.CSharp.V3.CodeGen
             var cs = _typeFactory.CreateType(schema);
             using (writer.Namespace(cs.Namespace))
             {
-                using (writer.Class("internal", "static", $"{schema.Name}Extensions"))
+                using (writer.Scope($"internal static class {schema.Name}Extensions"))
                 {
-                    var stringText = writer.Type(typeof(string));
-                    var csTypeText = writer.Type(cs);
-                    var nameMap = schema.Values.Select(c => (Choice: $"{csTypeText}.{c.Name}", Serial: $"\"{c.Value.Value}\"")).ToArray();
-                    var exceptionEntry = $"_ => throw new {writer.Type(typeof(ArgumentOutOfRangeException))}(nameof(value), value, \"Unknown {cs.Name} value.\")";
+                    using (writer.Scope($"public static string ToSerialString(this {cs} value) => value switch", end: "};"))
+                    {
+                        foreach (ClientEnumValue value in schema.Values)
+                        {
+                            writer.Line($"{cs}.{value.Name} => {value.Value.Value:L},");
+                        }
 
-                    var toSerialString = String.Join(Environment.NewLine, nameMap
-                        .Select(nm => $"{nm.Choice} => {nm.Serial},")
-                        .Append(exceptionEntry)
-                        .Append("}")
-                        .Prepend("{")
-                        .Prepend("value switch"));
-                    writer.MethodExpression("public static", stringText, "ToSerialString", new[] { writer.Pair($"this {csTypeText}", "value") }, toSerialString);
+                        writer.Line($"_ => throw new {typeof(ArgumentOutOfRangeException)}(nameof(value), value, \"Unknown {cs.Name} value.\")");
+                    }
                     writer.Line();
 
-                    var toChoiceType = String.Join(Environment.NewLine, nameMap
-                        .Select(nm => $"{nm.Serial} => {nm.Choice},")
-                        .Append(exceptionEntry)
-                        .Append("}")
-                        .Prepend("{")
-                        .Prepend("value switch"));
-                    writer.MethodExpression("public static", csTypeText, $"To{schema.Name}", new[] { writer.Pair($"this {stringText}", "value") }, toChoiceType);
+                    using (writer.Scope($"public static {cs} To{schema.Name}(this string value) => value switch", end: "};"))
+                    {
+                        foreach (ClientEnumValue value in schema.Values)
+                        {
+                            writer.Line($"{value.Value.Value:L} => {cs}.{value.Name},");
+                        }
+
+                        writer.Line($"_ => throw new {typeof(ArgumentOutOfRangeException)}(nameof(value), value, \"Unknown {cs.Name} value.\")");
+                    }
                 }
             }
         }
