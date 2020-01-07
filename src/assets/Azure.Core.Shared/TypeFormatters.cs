@@ -14,7 +14,6 @@ namespace Azure.Core
 
         public static string ToString(bool value) => value ? "true" : "false";
 
-        // TODO: remove useRealIso when https://github.com/Azure/autorest.testserver/pull/111 is in
         public static string ToString(DateTimeOffset value, string format) => format switch
         {
             "D" => value.ToString("yyyy-MM-dd"),
