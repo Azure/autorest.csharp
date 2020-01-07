@@ -101,11 +101,14 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         private void WriteRequestCreation(CodeWriter writer, ClientMethod operation)
         {
-
             writer.Append($"internal {typeof(HttpMessage)} {CreateRequestMethodName(operation)}(");
             foreach (ServiceClientParameter clientParameter in operation.Parameters)
             {
                 writer.Append($"{_typeFactory.CreateInputType(clientParameter.Type)} {clientParameter.Name},");
+            }
+            if (operation.IncludesPaging)
+            {
+                writer.Append($"{writer.Type(typeof(string), true)} nextLinkUrl = default");
             }
             writer.RemoveTrailingComma();
             writer.Line($")");
@@ -114,17 +117,24 @@ namespace AutoRest.CSharp.V3.CodeGen
                 writer.Line($"var message = pipeline.CreateMessage();");
                 writer.Line($"var request = message.Request;");
                 var method = operation.Request.Method;
-                writer.Line($"request.Method = {writer.Type(typeof(RequestMethod))}.{method.ToRequestMethodName()};");
+                writer.Line($"request.Method = {typeof(RequestMethod)}.{method.ToRequestMethodName()};");
 
-                //TODO: Add logic to escape the strings when specified, using Uri.EscapeDataString(value);
-                //TODO: Need proper logic to convert the values to strings. Right now, everything is just using default ToString().
-                //TODO: Need logic to trim duplicate slashes (/) so when combined, you don't end  up with multiple // together
-                var urlText = String.Join(String.Empty, operation.Request.HostSegments.Select(s => s.IsConstant ? s.Constant.Value : "{" + s.Parameter.Name + "}"));
-                writer.Line($"request.Uri.Reset(new {writer.Type(typeof(Uri))}($\"{urlText}\"));");
-
-                foreach (var segment in operation.Request.PathSegments)
+                using (operation.IncludesPaging ? writer.If("nextLinkUrl != null") : default)
                 {
-                    WritePathSegment(writer, segment);
+                    writer.Line($"request.Uri.Reset(new {typeof(Uri)}(nextLinkUrl));");
+                }
+                using (operation.IncludesPaging ? writer.Else() : default)
+                {
+                    //TODO: Add logic to escape the strings when specified, using Uri.EscapeDataString(value);
+                    //TODO: Need proper logic to convert the values to strings. Right now, everything is just using default ToString().
+                    //TODO: Need logic to trim duplicate slashes (/) so when combined, you don't end  up with multiple // together
+                    var urlText = String.Join(String.Empty, operation.Request.HostSegments.Select(s => s.IsConstant ? s.Constant.Value : "{" + s.Parameter.Name + "}"));
+                    writer.Line($"request.Uri.Reset(new {typeof(Uri)}($\"{urlText}\"));");
+
+                    foreach (var segment in operation.Request.PathSegments)
+                    {
+                        WritePathSegment(writer, segment);
+                    }
                 }
 
                 foreach (var header in operation.Request.Headers)

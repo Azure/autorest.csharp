@@ -16,12 +16,12 @@ namespace AutoRest.CSharp.V3.ClientModels
 {
     internal class ClientBuilder
     {
-        public static ServiceClient BuildClient(OperationGroup arg)
+        public static ServiceClient BuildClient(OperationGroup operationGroup)
         {
             List<ClientMethod> methods = new List<ClientMethod>();
             Dictionary<string, ServiceClientParameter> clientParameters = new Dictionary<string, ServiceClientParameter>();
 
-            var allClientParameters = arg.Operations
+            var allClientParameters = operationGroup.Operations
                 .SelectMany(op => op.Request.Parameters)
                 .Where(p => p.Implementation == ImplementationLocation.Client)
                 .Distinct();
@@ -32,19 +32,27 @@ namespace AutoRest.CSharp.V3.ClientModels
                 clientParameters[clientParameter.Language.Default.Name] = BuildParameter(clientParameter);
             }
 
-            string clientName = arg.CSharpName();
+            string clientName = operationGroup.CSharpName();
 
-            foreach (Operation operation in arg.Operations)
+            foreach (Operation operation in operationGroup.Operations)
             {
                 var method = BuildMethod(operation, clientName, clientParameters);
                 if (method != null)
                 {
                     methods.Add(method);
+
+                    //if ((operation.Extensions?.ContainsKey("x-ms-pageable") ?? false) && operation.Extensions["x-ms-pageable"] is IDictionary<string, object> pageable)
+                    //{
+                    //    if (pageable.ContainsKey("nextLinkName") && operation.Extensions["x-ms-pageable"] is string nextLinkName)
+                    //    {
+
+                    //    }
+                    //}
                 }
             }
 
             return new ServiceClient(clientName,
-                arg.Language.Default.Description,
+                operationGroup.Language.Default.Description,
                 OrderParameters(clientParameters.Values),
                 methods.ToArray());
         }
@@ -66,7 +74,7 @@ namespace AutoRest.CSharp.V3.ClientModels
             return null;
         }
 
-        private static ClientMethod? BuildMethod(Operation operation, string clientName, Dictionary<string, ServiceClientParameter> clientParameters)
+        private static ClientMethod? BuildMethod(Operation operation, string clientName, IReadOnlyDictionary<string, ServiceClientParameter> clientParameters)
         {
             var httpRequest = operation.Request.Protocol.Http as HttpRequest;
             var httpRequestWithBody = httpRequest as HttpWithBodyRequest;
@@ -184,6 +192,14 @@ namespace AutoRest.CSharp.V3.ClientModels
                 BuildResponseHeaderModel(operation, httpResponse)
             );
 
+            if ((operation.Extensions?.ContainsKey("x-ms-pageable") ?? false) && operation.Extensions["x-ms-pageable"] is IDictionary<string, object> pageable)
+            {
+                if (pageable.ContainsKey("nextLinkName") && operation.Extensions["x-ms-pageable"] is string nextLinkName)
+                {
+
+                }
+            }
+
             string operationName = operation.CSharpName();
             return new ClientMethod(
                 operationName,
@@ -194,6 +210,136 @@ namespace AutoRest.CSharp.V3.ClientModels
                 new ClientMethodDiagnostics($"{clientName}.{operationName}", Array.Empty<DiagnosticScopeAttributes>())
             );
         }
+
+        //private static ClientMethod? BuildNextPageMethod(Operation operation, string clientName, string nextLinkName, IReadOnlyDictionary<string, ServiceClientParameter> clientParameters)
+        //{
+        //    var httpRequest = operation.Request.Protocol.Http as HttpRequest;
+        //    var httpRequestWithBody = httpRequest as HttpWithBodyRequest;
+
+        //    //TODO: Handle multiple responses
+        //    var response = operation.Responses.FirstOrDefault();
+        //    var httpResponse = response?.Protocol.Http as HttpResponse;
+
+        //    if (httpRequest == null || httpResponse == null)
+        //    {
+        //        return null;
+        //    }
+
+        //    Dictionary<string, ConstantOrParameter> uriParameters = new Dictionary<string, ConstantOrParameter>();
+        //    Dictionary<string, PathSegment> pathParameters = new Dictionary<string, PathSegment>();
+        //    List<QueryParameter> query = new List<QueryParameter>();
+        //    List<RequestHeader> headers = new List<RequestHeader>();
+        //    List<ServiceClientParameter> methodParameters = new List<ServiceClientParameter>();
+
+        //    ObjectRequestBody? body = null;
+        //    foreach (Parameter requestParameter in operation.Request.Parameters ?? Array.Empty<Parameter>())
+        //    {
+        //        string defaultName = requestParameter.Language.Default.Name;
+        //        string serializedName = requestParameter.Language.Default.SerializedName ?? defaultName;
+        //        ConstantOrParameter constantOrParameter;
+        //        Schema valueSchema = requestParameter.Schema;
+
+        //        if (requestParameter.Implementation == ImplementationLocation.Method)
+        //        {
+        //            switch (requestParameter.Schema)
+        //            {
+        //                case ConstantSchema constant:
+        //                    constantOrParameter = ClientModelBuilderHelpers.ParseClientConstant(constant);
+        //                    valueSchema = constant.ValueType;
+        //                    break;
+        //                case BinarySchema _:
+        //                    // skip
+        //                    continue;
+        //                default:
+        //                    constantOrParameter = BuildParameter(requestParameter);
+        //                    break;
+        //            }
+
+        //            if (!constantOrParameter.IsConstant)
+        //            {
+        //                methodParameters.Add(constantOrParameter.Parameter);
+        //            }
+        //        }
+        //        else
+        //        {
+        //            constantOrParameter = clientParameters[defaultName];
+        //        }
+
+
+        //        if (requestParameter.Protocol.Http is HttpParameter httpParameter)
+        //        {
+        //            SerializationFormat serializationFormat = ClientModelBuilderHelpers.GetSerializationFormat(valueSchema);
+        //            switch (httpParameter.In)
+        //            {
+        //                case ParameterLocation.Header:
+        //                    headers.Add(new RequestHeader(serializedName, constantOrParameter, serializationFormat));
+        //                    break;
+        //                case ParameterLocation.Query:
+        //                    query.Add(new QueryParameter(serializedName, constantOrParameter, GetSerializationStyle(httpParameter, valueSchema), true, serializationFormat));
+        //                    break;
+        //                //case ParameterLocation.Path:
+        //                //    pathParameters.Add(serializedName, new PathSegment(constantOrParameter, true, serializationFormat));
+        //                //    break;
+        //                //case ParameterLocation.Body:
+        //                //    Debug.Assert(httpRequestWithBody != null);
+        //                //    var serialization = SerializationBuilder.Build(httpRequestWithBody.KnownMediaType, requestParameter.Schema, requestParameter.IsNullable());
+
+        //                //    body = new ObjectRequestBody(constantOrParameter, serialization);
+        //                //    break;
+        //                //case ParameterLocation.Uri:
+        //                //    uriParameters[defaultName] = constantOrParameter;
+        //                //    break;
+        //            }
+        //        }
+
+        //    }
+
+        //    if (httpRequestWithBody != null)
+        //    {
+        //        headers.AddRange(httpRequestWithBody.MediaTypes.Select(mediaType => new RequestHeader("Content-Type", ClientModelBuilderHelpers.StringConstant(mediaType))));
+        //    }
+
+        //    var request = new ClientMethodRequest(
+        //        ToCoreRequestMethod(httpRequest.Method) ?? RequestMethod.Get,
+        //        ToParts(httpRequest.Uri, uriParameters),
+        //        ToPathParts(httpRequest.Path, pathParameters),
+        //        query.ToArray(),
+        //        headers.ToArray(),
+        //        body
+        //    );
+
+        //    ResponseBody? responseBody = null;
+        //    if (response is SchemaResponse schemaResponse)
+        //    {
+        //        var schema = schemaResponse.Schema is ConstantSchema constantSchema ? constantSchema.ValueType : schemaResponse.Schema;
+        //        var responseType = ClientModelBuilderHelpers.CreateType(schema, isNullable: false);
+
+        //        ObjectSerialization serialization = SerializationBuilder.Build(httpResponse.KnownMediaType, schema, isNullable: false);
+
+        //        responseBody = new ObjectResponseBody(responseType, serialization);
+        //    }
+        //    else if (response is BinaryResponse)
+        //    {
+        //        responseBody = new StreamResponseBody();
+        //    }
+
+        //    ClientMethodResponse clientResponse = new ClientMethodResponse(
+        //        responseBody,
+        //        httpResponse.StatusCodes.Select(ToStatusCode).ToArray(),
+        //        BuildResponseHeaderModel(operation, httpResponse)
+        //    );
+
+        //    string operationName = operation.CSharpName();
+        //    return new ClientMethod(
+        //        operationName,
+        //        ClientModelBuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description),
+        //        request,
+        //        OrderParameters(methodParameters),
+        //        clientResponse,
+        //        new ClientMethodDiagnostics($"{clientName}.{operationName}", Array.Empty<DiagnosticScopeAttributes>())
+        //    );
+        //}
+
 
         private static ServiceClientParameter BuildParameter(Parameter requestParameter)
         {

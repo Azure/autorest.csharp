@@ -5,7 +5,7 @@ namespace AutoRest.CSharp.V3.ClientModels
 {
     internal class ClientMethod
     {
-        public ClientMethod(string name, string? description, ClientMethodRequest request, ServiceClientParameter[] parameters, ClientMethodResponse responseType, ClientMethodDiagnostics diagnostics)
+        public ClientMethod(string name, string? description, ClientMethodRequest request, ServiceClientParameter[] parameters, ClientMethodResponse responseType, ClientMethodDiagnostics diagnostics, bool includesPaging)
         {
             Name = name;
             Request = request;
@@ -13,14 +13,15 @@ namespace AutoRest.CSharp.V3.ClientModels
             Response = responseType;
             Description = description;
             Diagnostics = diagnostics;
+            IncludesPaging = includesPaging;
         }
 
         public string Name { get; }
-
         public string? Description { get; }
         public ClientMethodRequest Request { get; }
         public ServiceClientParameter[] Parameters { get; }
         public ClientMethodResponse Response { get; }
         public ClientMethodDiagnostics Diagnostics { get; }
+        public bool IncludesPaging { get; }
     }
 }
