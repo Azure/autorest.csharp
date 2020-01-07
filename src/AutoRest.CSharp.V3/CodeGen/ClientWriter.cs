@@ -10,10 +10,13 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using AutoRest.CSharp.V3.ClientModels;
 using AutoRest.CSharp.V3.ClientModels.Serialization;
+using AutoRest.CSharp.V3.Pipeline.Generated;
 using AutoRest.CSharp.V3.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Response = Azure.Response;
+using SerializationFormat = AutoRest.CSharp.V3.ClientModels.SerializationFormat;
 
 namespace AutoRest.CSharp.V3.CodeGen
 {
@@ -44,6 +47,11 @@ namespace AutoRest.CSharp.V3.CodeGen
                         WriteRequestCreation(writer, method);
                         WriteOperation(writer, method, async: true);
                         WriteOperation(writer, method, async: false);
+                        if (method.Paging != null)
+                        {
+                            WriteRequestCreation(writer, method, true);
+                            WriteOperation(writer, method, true, true);
+                        }
                     }
                 }
             }
@@ -96,19 +104,28 @@ namespace AutoRest.CSharp.V3.CodeGen
             writer.AppendRaw(",");
         }
 
-
         private string CreateRequestMethodName(ClientMethod operation) => $"Create{operation.Name}Request";
 
-        private void WriteRequestCreation(CodeWriter writer, ClientMethod operation)
+        private string CreatePagingRequestMethodName(ClientMethod operation) => $"Create{operation.Name}PageRequest";
+
+        private string GetPagingMethodName(ClientMethod operation) => $"{operation.Name}NextPage";
+
+        private void WriteRequestCreation(CodeWriter writer, ClientMethod operation, bool paging = false)
         {
-            writer.Append($"internal {typeof(HttpMessage)} {CreateRequestMethodName(operation)}(");
-            foreach (ServiceClientParameter clientParameter in operation.Parameters)
+            var methodName = paging ? CreatePagingRequestMethodName(operation) : CreateRequestMethodName(operation);
+            writer.Append($"internal {typeof(HttpMessage)} {methodName}(");
+            var parameters = paging
+                ? operation.Parameters.Where(p =>
+                    p.Location != ParameterLocation.Path && p.Location != ParameterLocation.Uri ||
+                    p.Location != ParameterLocation.Body).ToArray()
+                : operation.Parameters;
+            foreach (ServiceClientParameter clientParameter in parameters)
             {
                 writer.Append($"{_typeFactory.CreateInputType(clientParameter.Type)} {clientParameter.Name},");
             }
-            if (operation.IncludesPaging)
+            if (paging)
             {
-                writer.Append($"{writer.Type(typeof(string), true)} nextLinkUrl = default");
+                writer.Append($"{writer.Type(typeof(string), true)} nextLinkUrl");
             }
             writer.RemoveTrailingComma();
             writer.Line($")");
@@ -119,11 +136,15 @@ namespace AutoRest.CSharp.V3.CodeGen
                 var method = operation.Request.Method;
                 writer.Line($"request.Method = {typeof(RequestMethod)}.{method.ToRequestMethodName()};");
 
-                using (operation.IncludesPaging ? writer.If("nextLinkUrl != null") : default)
-                {
-                    writer.Line($"request.Uri.Reset(new {typeof(Uri)}(nextLinkUrl));");
-                }
-                using (operation.IncludesPaging ? writer.Else() : default)
+                //using (operation.Paging != null ? writer.If("nextLinkUrl != null") : default)
+                //{
+                    if (paging)
+                    {
+                        writer.Line($"request.Uri.Reset(new {typeof(Uri)}(nextLinkUrl));");
+                    }
+                //}
+                //using (operation.Paging != null ? writer.Else() : default)
+                else
                 {
                     //TODO: Add logic to escape the strings when specified, using Uri.EscapeDataString(value);
                     //TODO: Need proper logic to convert the values to strings. Right now, everything is just using default ToString().
@@ -148,7 +169,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     WriteQueryParameter(writer, queryParameter);
                 }
 
-                if (operation.Request.Body is ObjectRequestBody body && body.Serialization is JsonSerialization jsonSerialization)
+                if (!paging && operation.Request.Body is ObjectRequestBody body && body.Serialization is JsonSerialization jsonSerialization)
                 {
                     writer.Line($"using var content = new {typeof(Utf8JsonRequestContent)}();");
 
@@ -162,7 +183,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                     writer.Line($"request.Content = content;");
                 }
-                else if (operation.Request.Body is ObjectRequestBody xmlBody && xmlBody.Serialization is XmlElementSerialization xmlSerialization)
+                else if (!paging && operation.Request.Body is ObjectRequestBody xmlBody && xmlBody.Serialization is XmlElementSerialization xmlSerialization)
                 {
                     writer.Line($"using var content = new {typeof(XmlWriterContent)}();");
 
@@ -180,13 +201,13 @@ namespace AutoRest.CSharp.V3.CodeGen
                 writer.Line($"return message;");
             }
         }
-        private void WriteOperation(CodeWriter writer, ClientMethod operation, bool async)
+
+        private void WriteOperation(CodeWriter writer, ClientMethod operation, bool async, bool paging = false)
         {
             //TODO: Handle multiple responses
             var responseBody = operation.Response.ResponseBody;
             CSharpType? bodyType = responseBody != null ? _typeFactory.CreateType(responseBody.Type) : null;
             CSharpType? headerModelType = operation.Response.HeaderModel != null ? _typeFactory.CreateType(operation.Response.HeaderModel.Name) : null;
-
             CSharpType responseType = bodyType switch
             {
                 null when headerModelType != null => new CSharpType(typeof(ResponseWithHeaders<>), headerModelType),
@@ -194,21 +215,33 @@ namespace AutoRest.CSharp.V3.CodeGen
                 { } => new CSharpType(typeof(ResponseWithHeaders<>), bodyType, headerModelType),
                 _ => new CSharpType(typeof(Response)),
             };
-
+            var parameters = paging
+                ? operation.Parameters.Where(p =>
+                    p.Location != ParameterLocation.Path && p.Location != ParameterLocation.Uri ||
+                    p.Location != ParameterLocation.Body).ToArray()
+                : operation.Parameters;
 
             writer.WriteXmlDocumentationSummary(operation.Description);
 
-            foreach (ServiceClientParameter parameter in operation.Parameters)
+            foreach (ServiceClientParameter parameter in parameters)
             {
                 writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
             }
 
+            if (paging)
+            {
+                writer.WriteXmlDocumentationParameter("nextLinkUrl", "The URL to the next page of results.");
+            }
             writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
 
             var methodName = operation.Name;
-            if (async)
+            CSharpType asyncReturnType = new CSharpType(typeof(ValueTask<>), responseType);
+            if (paging)
             {
-                CSharpType asyncReturnType = new CSharpType(typeof(ValueTask<>), responseType);
+                writer.Append($"public async {asyncReturnType} {GetPagingMethodName(operation)}(");
+            }
+            else if (async)
+            {
                 writer.Append($"public async {asyncReturnType} {methodName}Async(");
             }
             else
@@ -216,15 +249,20 @@ namespace AutoRest.CSharp.V3.CodeGen
                 writer.Append($"public {responseType} {methodName}(");
             }
 
-            foreach (ServiceClientParameter parameter in operation.Parameters)
+            foreach (ServiceClientParameter parameter in parameters)
             {
                 WriteParameter(writer, parameter);
+            }
+
+            if (paging)
+            {
+                writer.Append($"{typeof(string)} nextLinkUrl, ");
             }
             writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
 
             using (writer.Scope())
             {
-                WriteParameterNullChecks(writer, operation.Parameters);
+                WriteParameterNullChecks(writer, parameters);
 
                 writer.Line($"using var scope = clientDiagnostics.CreateScope({operation.Diagnostics.ScopeName:L});");
                 foreach (DiagnosticScopeAttributes diagnosticScopeAttributes in operation.Diagnostics.Attributes)
@@ -235,11 +273,17 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                 using (writer.Scope($"try"))
                 {
-                    writer.Append($"using var message = {CreateRequestMethodName(operation)}(");
+                    var requestMethodName = paging ? CreatePagingRequestMethodName(operation) : CreateRequestMethodName(operation);
+                    writer.Append($"using var message = {requestMethodName}(");
 
-                    foreach (ServiceClientParameter parameter in operation.Parameters)
+                    foreach (ServiceClientParameter parameter in parameters)
                     {
                         writer.Append($"{parameter.Name}, ");
+                    }
+
+                    if (paging)
+                    {
+                        writer.Append($"nextLinkUrl");
                     }
                     writer.RemoveTrailingComma();
                     writer.Line($");");
