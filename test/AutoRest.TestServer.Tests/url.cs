@@ -132,6 +132,7 @@ namespace AutoRest.TestServer.Tests
             "UrlPathsDoublePositive",
             "UrlPathsDoubleNegative",
             "UrlPathsStringUrlEncoded",
+            "UrlPathsStringUrlNonEncoded",
             "UrlPathsStringEmpty",
             "UrlPathsEnumValid",
             "UrlPathsByteMultiByte",
