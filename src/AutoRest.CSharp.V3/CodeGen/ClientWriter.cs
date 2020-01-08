@@ -136,14 +136,10 @@ namespace AutoRest.CSharp.V3.CodeGen
                 var method = operation.Request.Method;
                 writer.Line($"request.Method = {typeof(RequestMethod)}.{method.ToRequestMethodName()};");
 
-                //using (operation.Paging != null ? writer.If("nextLinkUrl != null") : default)
-                //{
-                    if (paging)
-                    {
-                        writer.Line($"request.Uri.Reset(new {typeof(Uri)}(nextLinkUrl));");
-                    }
-                //}
-                //using (operation.Paging != null ? writer.Else() : default)
+                if (paging)
+                {
+                    writer.Line($"request.Uri.Reset(new {typeof(Uri)}(nextLinkUrl));");
+                }
                 else
                 {
                     //TODO: Add logic to escape the strings when specified, using Uri.EscapeDataString(value);
