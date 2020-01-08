@@ -15,9 +15,9 @@ namespace AutoRest.TestServer.Tests.Infrastructure
 {
     public class TestServerV1 : IDisposable, ITestServer
     {
-        private static Regex _scenariosRegex = new Regex("(coverage|optionalCoverage|optCoverage)\\[(\"|')(?<name>\\w+)(\"|')\\]", RegexOptions.Compiled);
+        private static readonly Regex _scenariosRegex = new Regex("(coverage|optionalCoverage|optCoverage)\\[(\"|')(?<name>\\w+)(\"|')\\]", RegexOptions.Compiled);
 
-        private Process _process;
+        private readonly Process _process;
         public HttpClient Client { get; }
         public string Host { get; }
 
@@ -25,30 +25,25 @@ namespace AutoRest.TestServer.Tests.Infrastructure
         {
             var portPhrase = "Server started at port ";
             var startup = Path.Combine(GetBaseDirectory(), "legacy", "startup", "www.js");
-
-            var processStartInfo = new ProcessStartInfo("node", startup);
-
-            // Use random port
-            processStartInfo.Environment["PORT"] = "0";
-            processStartInfo.RedirectStandardOutput = true;
-            processStartInfo.RedirectStandardError = true;
+            var port = new Random().Next(10000, 65536).ToString();
+            var processStartInfo = new ProcessStartInfo("node", startup)
+            {
+                RedirectStandardOutput = true,
+                RedirectStandardError = true
+            };
+            processStartInfo.Environment["PORT"] = port;
 
             _process = Process.Start(processStartInfo);
             ProcessTracker.Add(_process);
-            while (!_process.HasExited)
+            while (!(_process?.HasExited ?? false))
             {
-                var s = _process.StandardOutput.ReadLine();
-                if (s?.StartsWith(portPhrase) == true)
-                {
-                    Host = $"http://localhost:{s.Substring(portPhrase.Length).Trim()}";
-                    Client = new HttpClient()
-                    {
-                        BaseAddress = new Uri(Host)
-                    };
-                    _ = Task.Run(ReadOutput);
-                    return;
-                }
+                var s = _process?.StandardOutput.ReadLine();
+                if (s?.StartsWith(portPhrase) != true) continue;
 
+                Host = $"http://localhost:{port}";
+                Client = new HttpClient { BaseAddress = new Uri(Host) };
+                _ = Task.Run(ReadOutput);
+                return;
             }
 
             if (Client == null)

@@ -26,29 +26,26 @@ namespace AutoRest.TestServer.Tests.Infrastructure
             var wiremock = Path.Combine(nodeModules, "wiremock", "jdeploy-bundle");
             var wiremockJar = Directory.GetFiles(wiremock, "*.jar").Single();
             var root = GetBaseDirectory();
-
-            var processStartInfo = new ProcessStartInfo("java", $"-jar {wiremockJar} --root-dir {root} --port 0");
-            // Use random port
-            processStartInfo.Environment["PORT"] = "0";
-            processStartInfo.RedirectStandardOutput = true;
-            processStartInfo.RedirectStandardError = true;
+            var port = new Random().Next(10000, 65536).ToString();
+            var processStartInfo = new ProcessStartInfo("java", $"-jar {wiremockJar} --root-dir {root} --port {port}")
+            {
+                RedirectStandardOutput = true,
+                RedirectStandardError = true
+            };
+            processStartInfo.Environment["PORT"] = port;
 
             _process = Process.Start(processStartInfo);
             ProcessTracker.Add(_process);
-            while (!_process.HasExited)
+            while (!(_process?.HasExited ?? false))
             {
-                var s = _process.StandardOutput.ReadLine();
-                if (s?.StartsWith(portPhrase) == true)
-                {
-                    Host = $"http://localhost:{s.Substring(portPhrase.Length).Trim()}";
-                    Client = new HttpClient()
-                    {
-                        BaseAddress = new Uri(Host)
-                    };
-                    _ = Task.Run(() => ReadOutput(_process.StandardError));
-                    _ = Task.Run(() => ReadOutput(_process.StandardOutput));
-                    return;
-                }
+                var s = _process?.StandardOutput.ReadLine();
+                if (s?.StartsWith(portPhrase) != true) continue;
+
+                Host = $"http://localhost:{port}";
+                Client = new HttpClient { BaseAddress = new Uri(Host) };
+                _ = Task.Run(() => ReadOutput(_process.StandardError));
+                _ = Task.Run(() => ReadOutput(_process.StandardOutput));
+                return;
             }
 
             if (Client == null)
