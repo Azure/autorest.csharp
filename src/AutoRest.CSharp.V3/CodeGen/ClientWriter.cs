@@ -110,11 +110,11 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         private string GetPagingMethodName(ClientMethod operation) => $"{operation.Name}NextPage";
 
-        private void WriteRequestCreation(CodeWriter writer, ClientMethod operation, bool paging = false)
+        private void WriteRequestCreation(CodeWriter writer, ClientMethod operation, bool nextPage = false)
         {
-            var methodName = paging ? CreatePagingRequestMethodName(operation) : CreateRequestMethodName(operation);
+            var methodName = nextPage ? CreatePagingRequestMethodName(operation) : CreateRequestMethodName(operation);
             writer.Append($"internal {typeof(HttpMessage)} {methodName}(");
-            var parameters = paging
+            var parameters = nextPage
                 ? operation.Parameters.Where(p =>
                     p.Location != ParameterLocation.Path && p.Location != ParameterLocation.Uri ||
                     p.Location != ParameterLocation.Body).ToArray()
@@ -123,7 +123,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             {
                 writer.Append($"{_typeFactory.CreateInputType(clientParameter.Type)} {clientParameter.Name},");
             }
-            if (paging)
+            if (nextPage)
             {
                 writer.Append($"{writer.Type(typeof(string), true)} nextLinkUrl");
             }
@@ -136,7 +136,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                 var method = operation.Request.Method;
                 writer.Line($"request.Method = {typeof(RequestMethod)}.{method.ToRequestMethodName()};");
 
-                if (paging)
+                if (nextPage)
                 {
                     writer.Line($"request.Uri.Reset(new {typeof(Uri)}(nextLinkUrl));");
                 }
@@ -165,7 +165,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     WriteQueryParameter(writer, queryParameter);
                 }
 
-                if (!paging && operation.Request.Body is ObjectRequestBody body && body.Serialization is JsonSerialization jsonSerialization)
+                if (!nextPage && operation.Request.Body is ObjectRequestBody body && body.Serialization is JsonSerialization jsonSerialization)
                 {
                     writer.Line($"using var content = new {typeof(Utf8JsonRequestContent)}();");
 
@@ -179,7 +179,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                     writer.Line($"request.Content = content;");
                 }
-                else if (!paging && operation.Request.Body is ObjectRequestBody xmlBody && xmlBody.Serialization is XmlElementSerialization xmlSerialization)
+                else if (!nextPage && operation.Request.Body is ObjectRequestBody xmlBody && xmlBody.Serialization is XmlElementSerialization xmlSerialization)
                 {
                     writer.Line($"using var content = new {typeof(XmlWriterContent)}();");
 
@@ -198,7 +198,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
         }
 
-        private void WriteOperation(CodeWriter writer, ClientMethod operation, bool async, bool paging = false)
+        private void WriteOperation(CodeWriter writer, ClientMethod operation, bool async, bool nextPage = false)
         {
             //TODO: Handle multiple responses
             var responseBody = operation.Response.ResponseBody;
@@ -211,7 +211,10 @@ namespace AutoRest.CSharp.V3.CodeGen
                 { } => new CSharpType(typeof(ResponseWithHeaders<>), bodyType, headerModelType),
                 _ => new CSharpType(typeof(Response)),
             };
-            var parameters = paging
+            var supportsPaging = operation.Paging != null;
+            var pageType = operation.Paging?.ItemType != null ? _typeFactory.CreateType(operation.Paging.ItemType) : new CSharpType(typeof(string));
+            responseType = supportsPaging ? new CSharpType(typeof(Page<>), pageType) : responseType;
+            var parameters = nextPage
                 ? operation.Parameters.Where(p =>
                     p.Location != ParameterLocation.Path && p.Location != ParameterLocation.Uri ||
                     p.Location != ParameterLocation.Body).ToArray()
@@ -224,7 +227,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                 writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
             }
 
-            if (paging)
+            if (nextPage)
             {
                 writer.WriteXmlDocumentationParameter("nextLinkUrl", "The URL to the next page of results.");
             }
@@ -232,7 +235,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
             var methodName = operation.Name;
             CSharpType asyncReturnType = new CSharpType(typeof(ValueTask<>), responseType);
-            if (paging)
+            if (nextPage)
             {
                 writer.Append($"public async {asyncReturnType} {GetPagingMethodName(operation)}(");
             }
@@ -250,7 +253,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                 WriteParameter(writer, parameter);
             }
 
-            if (paging)
+            if (nextPage)
             {
                 writer.Append($"{typeof(string)} nextLinkUrl, ");
             }
@@ -269,7 +272,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                 using (writer.Scope($"try"))
                 {
-                    var requestMethodName = paging ? CreatePagingRequestMethodName(operation) : CreateRequestMethodName(operation);
+                    var requestMethodName = nextPage ? CreatePagingRequestMethodName(operation) : CreateRequestMethodName(operation);
                     writer.Append($"using var message = {requestMethodName}(");
 
                     foreach (ServiceClientParameter parameter in parameters)
@@ -277,7 +280,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                         writer.Append($"{parameter.Name}, ");
                     }
 
-                    if (paging)
+                    if (nextPage)
                     {
                         writer.Append($"nextLinkUrl");
                     }
@@ -293,7 +296,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                         writer.Line($"pipeline.Send(message, cancellationToken);");
                     }
 
-                    WriteStatusCodeSwitch(writer, responseBody, headerModelType, operation, async);
+                    WriteStatusCodeSwitch(writer, responseBody, headerModelType, operation, async, supportsPaging);
                 }
 
                 using (writer.Scope($"catch ({typeof(Exception)} e)"))
@@ -454,7 +457,7 @@ namespace AutoRest.CSharp.V3.CodeGen
         }
 
         //TODO: Do multiple status codes
-        private void WriteStatusCodeSwitch(CodeWriter writer, ResponseBody? responseBody, CSharpType? headersModelType, ClientMethod operation, bool async)
+        private void WriteStatusCodeSwitch(CodeWriter writer, ResponseBody? responseBody, CSharpType? headersModelType, ClientMethod operation, bool async, bool supportsPaging)
         {
             using (writer.Switch("message.Response.Status"))
             {
@@ -512,21 +515,39 @@ namespace AutoRest.CSharp.V3.CodeGen
                         writer.Line($"var headers = new {headersModelType}(message.Response);");
                     }
 
-                    switch (responseBody)
-                    {
-                        case null when headersModelType != null:
-                            writer.Append($"return {typeof(ResponseWithHeaders)}.FromValue(headers, message.Response);");
-                            break;
-                        case { } when headersModelType != null:
-                            writer.Append($"return {typeof(ResponseWithHeaders)}.FromValue({valueVariable}, headers, message.Response);");
-                            break;
-                        case { }:
-                            writer.Append($"return {typeof(Response)}.FromValue({valueVariable}, message.Response);");
-                            break;
-                        case null:
-                            writer.Append($"return message.Response;");
-                            break;
-                    }
+                    var responseCallText = supportsPaging
+                        ? $"{typeof(Page)}.FromValues({valueVariable}.{operation.Paging?.ItemName}, {valueVariable}.{operation.Paging?.NextLinkName}, message.Response)"
+                        : responseBody switch
+                        {
+                            null when headersModelType != null => $"{typeof(ResponseWithHeaders)}.FromValue(headers, message.Response)",
+                            { } when headersModelType != null => $"{typeof(ResponseWithHeaders)}.FromValue({valueVariable}, headers, message.Response)",
+                            { } => $"{typeof(Response)}.FromValue({valueVariable}, message.Response)",
+                            _ => "message.Response"
+                        };
+                    //Page<string>.FromValues(new List<string>(), "", null)
+                    //Page.FromValues(new List<string>(), "", null)
+                    //if (nextPage)
+                    //{
+                    //    writer.Line($"var response = {responseCallText};");
+                    //    responseCallText = $"{typeof(Page)}.FromValues(response.Value.{operation.Paging?.ItemName}, response.Value., message.Response)";
+                    //}
+                    //responseCallText = nextPage ? $"{typeof(Page)}.FromValues({valueVariable}.{operation.Paging?.ItemName}, {valueVariable}.{operation.Paging?.NextLinkName}, message.Response)" : responseCallText;
+                    writer.Line($"return {responseCallText};");
+                    //switch (responseBody)
+                    //{
+                    //    case null when headersModelType != null:
+                    //        writer.Append($"return {typeof(ResponseWithHeaders)}.FromValue(headers, message.Response);");
+                    //        break;
+                    //    case { } when headersModelType != null:
+                    //        writer.Append($"return {typeof(ResponseWithHeaders)}.FromValue({valueVariable}, headers, message.Response);");
+                    //        break;
+                    //    case { }:
+                    //        writer.Append($"return {typeof(Response)}.FromValue({valueVariable}, message.Response);");
+                    //        break;
+                    //    case null:
+                    //        writer.Append($"return message.Response;");
+                    //        break;
+                    //}
                 }
 
                 writer.Line($"default:");

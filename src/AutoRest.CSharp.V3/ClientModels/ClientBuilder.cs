@@ -120,7 +120,6 @@ namespace AutoRest.CSharp.V3.ClientModels
                     constantOrParameter = clientParameters[requestParameter.Language.Default.Name];
                 }
 
-
                 if (requestParameter.Protocol.Http is HttpParameter httpParameter)
                 {
                     SerializationFormat serializationFormat = ClientModelBuilderHelpers.GetSerializationFormat(valueSchema);
@@ -138,7 +137,6 @@ namespace AutoRest.CSharp.V3.ClientModels
                         case ParameterLocation.Body:
                             Debug.Assert(httpRequestWithBody != null);
                             var serialization = SerializationBuilder.Build(httpRequestWithBody.KnownMediaType, requestParameter.Schema, requestParameter.IsNullable());
-
                             body = new ObjectRequestBody(constantOrParameter, serialization);
                             break;
                         case ParameterLocation.Uri:
@@ -146,7 +144,6 @@ namespace AutoRest.CSharp.V3.ClientModels
                             break;
                     }
                 }
-
             }
 
             if (httpRequestWithBody != null)
@@ -185,6 +182,8 @@ namespace AutoRest.CSharp.V3.ClientModels
             );
 
             string operationName = operation.CSharpName();
+            //TODO: This is a hack since we don't have the model information at this point
+            var schemaForPaging = ((responseBody as ObjectResponseBody)?.Type as SchemaTypeReference)?.Schema as ObjectSchema;
             return new ClientMethod(
                 operationName,
                 ClientModelBuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description),
@@ -192,19 +191,30 @@ namespace AutoRest.CSharp.V3.ClientModels
                 OrderParameters(methodParameters),
                 clientResponse,
                 new ClientMethodDiagnostics($"{clientName}.{operationName}",Array.Empty<DiagnosticScopeAttributes>()),
-                GetClientMethodPaging(operation)
+                GetClientMethodPaging(operation, schemaForPaging)
             );
         }
 
-        private static ClientMethodPaging? GetClientMethodPaging(Operation operation)
+        private static ClientMethodPaging? GetClientMethodPaging(Operation operation, ObjectSchema? schema)
         {
             var pageable = operation.Extensions.GetValue<IDictionary<object, object>>("x-ms-pageable");
-            return pageable != null
-                ? new ClientMethodPaging(
-                    pageable.GetValue<string>("nextLinkName"),
-                    pageable.GetValue<string>("itemName"),
-                    pageable.GetValue<string>("operationName"))
-                : null;
+            var nextLinkName = pageable.GetValue<string>("nextLinkName");
+            if (nextLinkName == null) return null;
+
+            //TODO: This should actually reference an operation
+            var operationName = pageable.GetValue<string>("operationName");
+
+            var itemName = pageable.GetValue<string>("itemName");
+            //TODO: Hack to figure out the property name on the model
+            var itemProperty = schema?.Properties?.FirstOrDefault(p => p.SerializedName == itemName);
+            itemName = itemProperty?.CSharpName() ?? itemName ?? "Value";
+            var nextLinkProperty = schema?.Properties?.FirstOrDefault(p => p.SerializedName == nextLinkName);
+            nextLinkName = nextLinkProperty?.CSharpName() ?? nextLinkName;
+            // If itemName resolves to Value, we can't use itemProperty. So, get the correct property.
+            var itemTypeProperty = schema?.Properties?.FirstOrDefault(p => p.CSharpName() == itemName);
+            var itemTypeValueSchema = (itemTypeProperty?.Schema as ArraySchema)?.ElementType;
+            var itemType = ClientModelBuilderHelpers.CreateType(itemTypeValueSchema ?? new Schema(), false);
+            return new ClientMethodPaging(nextLinkName, itemName, itemType, operationName);
         }
 
         private static ServiceClientParameter BuildParameter(Parameter requestParameter)
