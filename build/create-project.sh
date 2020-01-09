@@ -11,6 +11,17 @@ curl -o $INPUT_PATH ${ENV_YML_FILE_URL}
 
 eolConverter "./input/swagger.yml"
 
+line=$(head -n 1 $INPUT_PATH)
+
+if echo "$line" | grep -q -E '^openapi: 3'
+then
+	echo "Open api version 3 found. Convert to version 2"
+	npm install -g api-spec-converter
+	cp $INPUT_PATH tmp.yaml
+	api-spec-converter --from=openapi_3 --to=swagger_2 $INPUT_PATH > $INPUT_PATH
+	rm tmp.yaml
+fi
+
 autorest --use=/app --csharp --output-folder=$OUTPUT_PATH --namespace=$NAMESPACE --input-file=$INPUT_PATH --add-credentials
 
 dotnet new classlib -n $NAMESPACE -o $OUTPUT_PATH
