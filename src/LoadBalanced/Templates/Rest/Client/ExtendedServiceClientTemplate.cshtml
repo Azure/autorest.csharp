@@ -29,8 +29,18 @@ namespace @Settings.Namespace
             this.loadBalancingConfig = loadBalancingConfig;
         }
 
+        public @(Model.Name)(ServiceClientCredentials credentials, HttpClient httpClient, ILoadBalancingConfig loadBalancingConfig) : this(credentials, httpClient, false)
+        {
+            this.loadBalancingConfig = loadBalancingConfig;
+        }
+
         private async Task<T> SendWithRetry<T>(System.Func<CancellationToken, Task<T>> action, CancellationToken cancellationToken) where T : HttpOperationResponse
         {
+            if (loadBalancingConfig == null)
+            {
+                return await action(cancellationToken);
+            }
+
             var retryResults = await loadBalancingConfig.UrlResourceManager.ExecuteAsyncWithDiag(async (source, _) =>
             {
                 this.BaseUri = new System.Uri(source);
