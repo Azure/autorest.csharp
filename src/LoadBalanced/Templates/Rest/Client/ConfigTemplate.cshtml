@@ -42,7 +42,7 @@ namespace @Settings.Namespace
         {
             if (e is TimeoutException ||
                 e is TransientHttpRequestException ||
-                e is ServiceUnavailableException)
+                e is HttpRequestException)
             {
                 return attemptCount < maxRetry;
             }
