@@ -19,7 +19,7 @@ then
 	echo "Open api version 3 found. Convert to version 2"
 	npm install -g api-spec-converter
 	cp $INPUT_PATH $INPUT_TMP
-	api-spec-converter --from=openapi_3 --to=swagger_2 $INPUT_TMP > $INPUT_PATH
+	api-spec-converter --from=openapi_3 --to=swagger_2 --syntax=yaml $INPUT_TMP > $INPUT_PATH
 	rm $INPUT_TMP
 fi
 
