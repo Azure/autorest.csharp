@@ -3,6 +3,7 @@
 OUTPUT_PATH=${ENV_OUTPUT_PATH}
 NAMESPACE=${ENV_NAMESPACE}
 INPUT_PATH=./input/swagger.yml
+INPUT_TMP=./input/swagger-tmp.yml
 
 mkdir -p input
 rm -rf input/*
@@ -17,9 +18,9 @@ if echo "$line" | grep -q -E '^openapi: 3'
 then
 	echo "Open api version 3 found. Convert to version 2"
 	npm install -g api-spec-converter
-	cp $INPUT_PATH tmp.yaml
-	api-spec-converter --from=openapi_3 --to=swagger_2 $INPUT_PATH > $INPUT_PATH
-	rm tmp.yaml
+	cp $INPUT_PATH $INPUT_TMP
+	api-spec-converter --from=openapi_3 --to=swagger_2 $INPUT_TMP > $INPUT_PATH
+	rm $INPUT_TMP
 fi
 
 autorest --use=/app --csharp --output-folder=$OUTPUT_PATH --namespace=$NAMESPACE --input-file=$INPUT_PATH --add-credentials
