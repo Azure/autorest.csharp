@@ -51,6 +51,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                         {
                             WriteRequestCreation(writer, method, true);
                             WriteOperation(writer, method, true, true);
+                            WritePagingOperation(writer, method, true);
                         }
                     }
                 }
@@ -104,20 +105,26 @@ namespace AutoRest.CSharp.V3.CodeGen
             writer.AppendRaw(",");
         }
 
-        private string CreateRequestMethodName(ClientMethod operation) => $"Create{operation.Name}Request";
+        private string CreateMethodName(ClientMethod operation, bool async, bool supportsPaging) => $"{operation.Name}{(supportsPaging ? "FirstPage" : string.Empty)}{(async ? "Async" : string.Empty)}";
 
-        private string CreatePagingRequestMethodName(ClientMethod operation) => $"Create{operation.Name}PageRequest";
+        private string CreateRequestMethodName(ClientMethod operation) => $"Create{operation.Name}{(operation.Paging != null ? "FirstPage" : string.Empty)}Request";
 
-        private string GetPagingMethodName(ClientMethod operation) => $"{operation.Name}NextPage";
+        private string CreateNextPageRequestMethodName(ClientMethod operation) => $"Create{operation.Name}NextPageRequest";
+
+        private string GetNextPageMethodName(ClientMethod operation) => $"{operation.Name}NextPageAsync";
+
+        private bool IsNextPageParameter(ServiceClientParameter parameter) =>
+            parameter.Location != ParameterLocation.Path
+            && parameter.Location != ParameterLocation.Uri
+            && parameter.Location != ParameterLocation.Body
+            && parameter.Location != ParameterLocation.Query;
 
         private void WriteRequestCreation(CodeWriter writer, ClientMethod operation, bool nextPage = false)
         {
-            var methodName = nextPage ? CreatePagingRequestMethodName(operation) : CreateRequestMethodName(operation);
+            var methodName = nextPage ? CreateNextPageRequestMethodName(operation) : CreateRequestMethodName(operation);
             writer.Append($"internal {typeof(HttpMessage)} {methodName}(");
             var parameters = nextPage
-                ? operation.Parameters.Where(p =>
-                    p.Location != ParameterLocation.Path && p.Location != ParameterLocation.Uri ||
-                    p.Location != ParameterLocation.Body).ToArray()
+                ? operation.Parameters.Where(IsNextPageParameter).ToArray()
                 : operation.Parameters;
             foreach (ServiceClientParameter clientParameter in parameters)
             {
@@ -159,10 +166,13 @@ namespace AutoRest.CSharp.V3.CodeGen
                     WriteHeader(writer, header);
                 }
 
-                //TODO: Duplicate code between query and header parameter processing logic
-                foreach (var queryParameter in operation.Request.Query)
+                if (!nextPage)
                 {
-                    WriteQueryParameter(writer, queryParameter);
+                    //TODO: Duplicate code between query and header parameter processing logic
+                    foreach (var queryParameter in operation.Request.Query)
+                    {
+                        WriteQueryParameter(writer, queryParameter);
+                    }
                 }
 
                 if (!nextPage && operation.Request.Body is ObjectRequestBody body && body.Serialization is JsonSerialization jsonSerialization)
@@ -215,9 +225,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             var pageType = operation.Paging?.ItemType != null ? _typeFactory.CreateType(operation.Paging.ItemType) : new CSharpType(typeof(string));
             responseType = supportsPaging ? new CSharpType(typeof(Page<>), pageType) : responseType;
             var parameters = nextPage
-                ? operation.Parameters.Where(p =>
-                    p.Location != ParameterLocation.Path && p.Location != ParameterLocation.Uri ||
-                    p.Location != ParameterLocation.Body).ToArray()
+                ? operation.Parameters.Where(IsNextPageParameter).ToArray()
                 : operation.Parameters;
 
             writer.WriteXmlDocumentationSummary(operation.Description);
@@ -233,20 +241,9 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
             writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
 
-            var methodName = operation.Name;
+            var methodName = nextPage ? GetNextPageMethodName(operation) : CreateMethodName(operation, async, supportsPaging);
             CSharpType asyncReturnType = new CSharpType(typeof(ValueTask<>), responseType);
-            if (nextPage)
-            {
-                writer.Append($"public async {asyncReturnType} {GetPagingMethodName(operation)}(");
-            }
-            else if (async)
-            {
-                writer.Append($"public async {asyncReturnType} {methodName}Async(");
-            }
-            else
-            {
-                writer.Append($"public {responseType} {methodName}(");
-            }
+            writer.Append($"public {(async ? "async " : string.Empty)}{(async ? asyncReturnType : responseType)} {methodName}(");
 
             foreach (ServiceClientParameter parameter in parameters)
             {
@@ -272,7 +269,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                 using (writer.Scope($"try"))
                 {
-                    var requestMethodName = nextPage ? CreatePagingRequestMethodName(operation) : CreateRequestMethodName(operation);
+                    var requestMethodName = nextPage ? CreateNextPageRequestMethodName(operation) : CreateRequestMethodName(operation);
                     writer.Append($"using var message = {requestMethodName}(");
 
                     foreach (ServiceClientParameter parameter in parameters)
@@ -304,6 +301,54 @@ namespace AutoRest.CSharp.V3.CodeGen
                     writer.Line($"scope.Failed(e);");
                     writer.Line($"throw;");
                 }
+            }
+        }
+
+        private void WritePagingOperation(CodeWriter writer, ClientMethod operation, bool async)
+        {
+            var pageType = operation.Paging?.ItemType != null ? _typeFactory.CreateType(operation.Paging.ItemType) : new CSharpType(typeof(string));
+            CSharpType responseType = async ? new CSharpType(typeof(AsyncPageable<>), pageType) : new CSharpType(typeof(Pageable<>), pageType);
+            var parameters = operation.Parameters;
+            var nextPageParameters = parameters.Where(IsNextPageParameter).ToArray();
+
+            writer.WriteXmlDocumentationSummary(operation.Description);
+
+            foreach (ServiceClientParameter parameter in parameters)
+            {
+                writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
+            }
+
+            writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
+
+            writer.Append($"public {responseType} {CreateMethodName(operation, async, false)}(");
+            foreach (ServiceClientParameter parameter in parameters)
+            {
+                WriteParameter(writer, parameter);
+            }
+
+            writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
+
+            using (writer.Scope())
+            {
+                WriteParameterNullChecks(writer, parameters);
+
+                var funcType = new CSharpType(typeof(Task<>), new CSharpType(typeof(Page<>), pageType));
+                var nullableInt = new CSharpType(typeof(int), true);
+
+                writer.Append($"{funcType} FirstPageFunc({nullableInt} pageSizeHint) => {CreateMethodName(operation, async, true)}(");
+                foreach (ServiceClientParameter parameter in parameters)
+                {
+                    writer.Append($"{parameter.Name}, ");
+                }
+                writer.Line($"cancellationToken).AsTask();");
+
+                writer.Append($"{funcType} NextPageFunc({typeof(string)} continuationToken, {nullableInt} pageSizeHint) => {GetNextPageMethodName(operation)}(");
+                foreach (ServiceClientParameter parameter in nextPageParameters)
+                {
+                    writer.Append($"{parameter.Name}, ");
+                }
+                writer.Line($"continuationToken, cancellationToken).AsTask();");
+                writer.Line($"return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);");
             }
         }
 
