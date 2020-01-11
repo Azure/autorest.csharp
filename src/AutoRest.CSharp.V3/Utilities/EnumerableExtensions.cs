@@ -61,10 +61,6 @@ namespace AutoRest.CSharp.V3.Utilities
             return resultList;
         }
 
-        //[return: MaybeNull]
-        //public static TValue GetValue<TValue, TKey>(this IDictionary<TKey, object>? dictionary, TKey key) where TKey : notnull =>
-        //    ((dictionary?.ContainsKey(key) ?? false) && dictionary![key] is TValue item) ? item : default;
-
         [return: MaybeNull]
         public static TValue GetValue<TValue>(this IDictionary<string, object>? dictionary, string key) =>
             ((dictionary?.ContainsKey(key) ?? false) && dictionary![key] is TValue item) ? item : default;

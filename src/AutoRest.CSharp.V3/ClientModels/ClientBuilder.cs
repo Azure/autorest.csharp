@@ -201,7 +201,7 @@ namespace AutoRest.CSharp.V3.ClientModels
             if (pageable == null) return null;
 
             var nextLinkName = pageable.GetValue<string>("nextLinkName");
-            //TODO: This should actually reference an operation
+            //TODO: This should actually reference an operation: https://github.com/Azure/autorest.csharp/issues/397
             var operationName = pageable.GetValue<string>("operationName");
 
             var itemName = pageable.GetValue<string>("itemName");

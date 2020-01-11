@@ -17,7 +17,6 @@ namespace AutoRest.CSharp.V3.ClientModels
         public string Description { get; }
 
         public ClientMethod[] Methods { get; }
-        //public ClientPagingMethod[] PagingMethods { get; }
 
         public ServiceClientParameter[] Parameters { get; }
     }
