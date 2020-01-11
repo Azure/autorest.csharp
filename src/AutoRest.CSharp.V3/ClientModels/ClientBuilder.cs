@@ -198,9 +198,9 @@ namespace AutoRest.CSharp.V3.ClientModels
         private static ClientMethodPaging? GetClientMethodPaging(Operation operation, ObjectSchema? schema)
         {
             var pageable = operation.Extensions.GetValue<IDictionary<object, object>>("x-ms-pageable");
-            var nextLinkName = pageable.GetValue<string>("nextLinkName");
-            if (nextLinkName == null) return null;
+            if (pageable == null) return null;
 
+            var nextLinkName = pageable.GetValue<string>("nextLinkName");
             //TODO: This should actually reference an operation
             var operationName = pageable.GetValue<string>("operationName");
 

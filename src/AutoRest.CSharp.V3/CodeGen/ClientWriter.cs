@@ -115,7 +115,6 @@ namespace AutoRest.CSharp.V3.CodeGen
 
         private bool IsNextPageParameter(ServiceClientParameter parameter) =>
             parameter.Location != ParameterLocation.Path
-            && parameter.Location != ParameterLocation.Uri
             && parameter.Location != ParameterLocation.Body
             && parameter.Location != ParameterLocation.Query;
 
@@ -143,36 +142,41 @@ namespace AutoRest.CSharp.V3.CodeGen
                 var method = operation.Request.Method;
                 writer.Line($"request.Method = {typeof(RequestMethod)}.{method.ToRequestMethodName()};");
 
-                if (nextPage)
+                var uriType = writer.Type(typeof(Uri));
+                using (nextPage ? writer.If($"{uriType}.IsWellFormedUriString(nextLinkUrl, UriKind.Absolute)") : default)
                 {
-                    writer.Line($"request.Uri.Reset(new {typeof(Uri)}(nextLinkUrl));");
+                    if (nextPage)
+                    {
+                        writer.Line($"request.Uri.Reset(new {uriType}(nextLinkUrl));");
+                    }
                 }
-                else
+                using (nextPage ? writer.Else() : default)
                 {
                     //TODO: Add logic to escape the strings when specified, using Uri.EscapeDataString(value);
                     //TODO: Need proper logic to convert the values to strings. Right now, everything is just using default ToString().
                     //TODO: Need logic to trim duplicate slashes (/) so when combined, you don't end  up with multiple // together
                     var urlText = String.Join(String.Empty, operation.Request.HostSegments.Select(s => s.IsConstant ? s.Constant.Value : "{" + s.Parameter.Name + "}"));
-                    writer.Line($"request.Uri.Reset(new {typeof(Uri)}($\"{urlText}\"));");
+                    var nextLinkText = nextPage ? "{nextLinkUrl}" : string.Empty;
+                    writer.Line($"request.Uri.Reset(new {uriType}($\"{urlText}{nextLinkText}\"));");
 
-                    foreach (var segment in operation.Request.PathSegments)
+                    if (!nextPage)
                     {
-                        WritePathSegment(writer, segment);
+                        foreach (var segment in operation.Request.PathSegments)
+                        {
+                            WritePathSegment(writer, segment);
+                        }
+
+                        //TODO: Duplicate code between query and header parameter processing logic
+                        foreach (var queryParameter in operation.Request.Query)
+                        {
+                            WriteQueryParameter(writer, queryParameter);
+                        }
                     }
                 }
 
                 foreach (var header in operation.Request.Headers)
                 {
                     WriteHeader(writer, header);
-                }
-
-                if (!nextPage)
-                {
-                    //TODO: Duplicate code between query and header parameter processing logic
-                    foreach (var queryParameter in operation.Request.Query)
-                    {
-                        WriteQueryParameter(writer, queryParameter);
-                    }
                 }
 
                 if (!nextPage && operation.Request.Body is ObjectRequestBody body && body.Serialization is JsonSerialization jsonSerialization)
@@ -560,8 +564,9 @@ namespace AutoRest.CSharp.V3.CodeGen
                         writer.Line($"var headers = new {headersModelType}(message.Response);");
                     }
 
+                    var continuationTokenText = operation.Paging?.NextLinkName != null ? $"{valueVariable}.{operation.Paging?.NextLinkName}" : "null";
                     var responseCallText = supportsPaging
-                        ? $"{typeof(Page)}.FromValues({valueVariable}.{operation.Paging?.ItemName}, {valueVariable}.{operation.Paging?.NextLinkName}, message.Response)"
+                        ? $"{typeof(Page)}.FromValues({valueVariable}.{operation.Paging?.ItemName}, {continuationTokenText}, message.Response)"
                         : responseBody switch
                         {
                             null when headersModelType != null => $"{typeof(ResponseWithHeaders)}.FromValue(headers, message.Response)",
@@ -569,30 +574,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                             { } => $"{typeof(Response)}.FromValue({valueVariable}, message.Response)",
                             _ => "message.Response"
                         };
-                    //Page<string>.FromValues(new List<string>(), "", null)
-                    //Page.FromValues(new List<string>(), "", null)
-                    //if (nextPage)
-                    //{
-                    //    writer.Line($"var response = {responseCallText};");
-                    //    responseCallText = $"{typeof(Page)}.FromValues(response.Value.{operation.Paging?.ItemName}, response.Value., message.Response)";
-                    //}
-                    //responseCallText = nextPage ? $"{typeof(Page)}.FromValues({valueVariable}.{operation.Paging?.ItemName}, {valueVariable}.{operation.Paging?.NextLinkName}, message.Response)" : responseCallText;
                     writer.Line($"return {responseCallText};");
-                    //switch (responseBody)
-                    //{
-                    //    case null when headersModelType != null:
-                    //        writer.Append($"return {typeof(ResponseWithHeaders)}.FromValue(headers, message.Response);");
-                    //        break;
-                    //    case { } when headersModelType != null:
-                    //        writer.Append($"return {typeof(ResponseWithHeaders)}.FromValue({valueVariable}, headers, message.Response);");
-                    //        break;
-                    //    case { }:
-                    //        writer.Append($"return {typeof(Response)}.FromValue({valueVariable}, message.Response);");
-                    //        break;
-                    //    case null:
-                    //        writer.Append($"return message.Response;");
-                    //        break;
-                    //}
                 }
 
                 writer.Line($"default:");

@@ -71,7 +71,7 @@ $testNames =
     #'composite-swagger.quirks',
     'custom-baseUrl',
     'custom-baseUrl-more-options',
-    #'custom-baseUrl-paging',
+    'custom-baseUrl-paging',
     'extensible-enums-swagger',
     #'head',
     'header',

@@ -101,7 +101,14 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri(nextLinkUrl));
+            if (Uri.IsWellFormedUriString(nextLinkUrl, UriKind.Absolute))
+            {
+                request.Uri.Reset(new Uri(nextLinkUrl));
+            }
+            else
+            {
+                request.Uri.Reset(new Uri($"{host}{nextLinkUrl}"));
+            }
             return message;
         }
         /// <summary> A paging operation that must return result of the default &apos;value&apos; node. </summary>
@@ -143,7 +150,7 @@ namespace paging
             Task<Page<Product>> NextPageFunc(string continuationToken, int? pageSizeHint) => GetNoItemNamePagesNextPageAsync(continuationToken, cancellationToken).AsTask();
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
-        internal HttpMessage CreateGetNullNextLinkNamePagesRequest()
+        internal HttpMessage CreateGetNullNextLinkNamePagesFirstPageRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -154,14 +161,14 @@ namespace paging
         }
         /// <summary> A paging operation that must ignore any kind of nextLink, and stop after page 1. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ProductResult>> GetNullNextLinkNamePagesAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Page<Product>> GetNullNextLinkNamePagesFirstPageAsync(CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetNullNextLinkNamePages");
             scope.Start();
             try
             {
-                using var message = CreateGetNullNextLinkNamePagesRequest();
+                using var message = CreateGetNullNextLinkNamePagesFirstPageRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -169,7 +176,7 @@ namespace paging
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Page.FromValues(value.Values, null, message.Response);
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
@@ -183,14 +190,14 @@ namespace paging
         }
         /// <summary> A paging operation that must ignore any kind of nextLink, and stop after page 1. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ProductResult> GetNullNextLinkNamePages(CancellationToken cancellationToken = default)
+        public Page<Product> GetNullNextLinkNamePagesFirstPage(CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetNullNextLinkNamePages");
             scope.Start();
             try
             {
-                using var message = CreateGetNullNextLinkNamePagesRequest();
+                using var message = CreateGetNullNextLinkNamePagesFirstPageRequest();
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -198,7 +205,7 @@ namespace paging
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Page.FromValues(value.Values, null, message.Response);
                         }
                     default:
                         throw message.Response.CreateRequestFailedException();
@@ -209,6 +216,60 @@ namespace paging
                 scope.Failed(e);
                 throw;
             }
+        }
+        internal HttpMessage CreateGetNullNextLinkNamePagesNextPageRequest(string? nextLinkUrl)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            if (Uri.IsWellFormedUriString(nextLinkUrl, UriKind.Absolute))
+            {
+                request.Uri.Reset(new Uri(nextLinkUrl));
+            }
+            else
+            {
+                request.Uri.Reset(new Uri($"{host}{nextLinkUrl}"));
+            }
+            return message;
+        }
+        /// <summary> A paging operation that must ignore any kind of nextLink, and stop after page 1. </summary>
+        /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Page<Product>> GetNullNextLinkNamePagesNextPageAsync(string nextLinkUrl, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("PagingOperations.GetNullNextLinkNamePages");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetNullNextLinkNamePagesNextPageRequest(nextLinkUrl);
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            var value = ProductResult.DeserializeProductResult(document.RootElement);
+                            return Page.FromValues(value.Values, null, message.Response);
+                        }
+                    default:
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        /// <summary> A paging operation that must ignore any kind of nextLink, and stop after page 1. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public AsyncPageable<Product> GetNullNextLinkNamePagesAsync(CancellationToken cancellationToken = default)
+        {
+
+            Task<Page<Product>> FirstPageFunc(int? pageSizeHint) => GetNullNextLinkNamePagesFirstPageAsync(cancellationToken).AsTask();
+            Task<Page<Product>> NextPageFunc(string continuationToken, int? pageSizeHint) => GetNullNextLinkNamePagesNextPageAsync(continuationToken, cancellationToken).AsTask();
+            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
         internal HttpMessage CreateGetSinglePagesFirstPageRequest()
         {
@@ -282,7 +343,14 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri(nextLinkUrl));
+            if (Uri.IsWellFormedUriString(nextLinkUrl, UriKind.Absolute))
+            {
+                request.Uri.Reset(new Uri(nextLinkUrl));
+            }
+            else
+            {
+                request.Uri.Reset(new Uri($"{host}{nextLinkUrl}"));
+            }
             return message;
         }
         /// <summary> A paging operation that finishes on the first call without a nextlink. </summary>
@@ -414,7 +482,14 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri(nextLinkUrl));
+            if (Uri.IsWellFormedUriString(nextLinkUrl, UriKind.Absolute))
+            {
+                request.Uri.Reset(new Uri(nextLinkUrl));
+            }
+            else
+            {
+                request.Uri.Reset(new Uri($"{host}{nextLinkUrl}"));
+            }
             if (clientRequestId != null)
             {
                 request.Headers.Add("client-request-id", clientRequestId);
@@ -564,7 +639,14 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri(nextLinkUrl));
+            if (Uri.IsWellFormedUriString(nextLinkUrl, UriKind.Absolute))
+            {
+                request.Uri.Reset(new Uri(nextLinkUrl));
+            }
+            else
+            {
+                request.Uri.Reset(new Uri($"{host}{nextLinkUrl}"));
+            }
             if (clientRequestId != null)
             {
                 request.Headers.Add("client-request-id", clientRequestId);
@@ -717,7 +799,14 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri(nextLinkUrl));
+            if (Uri.IsWellFormedUriString(nextLinkUrl, UriKind.Absolute))
+            {
+                request.Uri.Reset(new Uri(nextLinkUrl));
+            }
+            else
+            {
+                request.Uri.Reset(new Uri($"{host}{nextLinkUrl}"));
+            }
             if (clientRequestId != null)
             {
                 request.Headers.Add("client-request-id", clientRequestId);
@@ -850,7 +939,14 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri(nextLinkUrl));
+            if (Uri.IsWellFormedUriString(nextLinkUrl, UriKind.Absolute))
+            {
+                request.Uri.Reset(new Uri(nextLinkUrl));
+            }
+            else
+            {
+                request.Uri.Reset(new Uri($"{host}{nextLinkUrl}"));
+            }
             return message;
         }
         /// <summary> A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages. </summary>
@@ -964,7 +1060,14 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri(nextLinkUrl));
+            if (Uri.IsWellFormedUriString(nextLinkUrl, UriKind.Absolute))
+            {
+                request.Uri.Reset(new Uri(nextLinkUrl));
+            }
+            else
+            {
+                request.Uri.Reset(new Uri($"{host}{nextLinkUrl}"));
+            }
             return message;
         }
         /// <summary> A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually. </summary>
@@ -1078,7 +1181,14 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri(nextLinkUrl));
+            if (Uri.IsWellFormedUriString(nextLinkUrl, UriKind.Absolute))
+            {
+                request.Uri.Reset(new Uri(nextLinkUrl));
+            }
+            else
+            {
+                request.Uri.Reset(new Uri($"{host}{nextLinkUrl}"));
+            }
             return message;
         }
         /// <summary> A paging operation that receives a 400 on the first call. </summary>
@@ -1192,7 +1302,14 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri(nextLinkUrl));
+            if (Uri.IsWellFormedUriString(nextLinkUrl, UriKind.Absolute))
+            {
+                request.Uri.Reset(new Uri(nextLinkUrl));
+            }
+            else
+            {
+                request.Uri.Reset(new Uri($"{host}{nextLinkUrl}"));
+            }
             return message;
         }
         /// <summary> A paging operation that receives a 400 on the second call. </summary>
@@ -1306,7 +1423,14 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri(nextLinkUrl));
+            if (Uri.IsWellFormedUriString(nextLinkUrl, UriKind.Absolute))
+            {
+                request.Uri.Reset(new Uri(nextLinkUrl));
+            }
+            else
+            {
+                request.Uri.Reset(new Uri($"{host}{nextLinkUrl}"));
+            }
             return message;
         }
         /// <summary> A paging operation that receives an invalid nextLink. </summary>
@@ -1442,7 +1566,14 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri(nextLinkUrl));
+            if (Uri.IsWellFormedUriString(nextLinkUrl, UriKind.Absolute))
+            {
+                request.Uri.Reset(new Uri(nextLinkUrl));
+            }
+            else
+            {
+                request.Uri.Reset(new Uri($"{host}{nextLinkUrl}"));
+            }
             return message;
         }
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
@@ -1588,7 +1719,14 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri(nextLinkUrl));
+            if (Uri.IsWellFormedUriString(nextLinkUrl, UriKind.Absolute))
+            {
+                request.Uri.Reset(new Uri(nextLinkUrl));
+            }
+            else
+            {
+                request.Uri.Reset(new Uri($"{host}{nextLinkUrl}"));
+            }
             return message;
         }
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped. </summary>
@@ -1730,7 +1868,14 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
-            request.Uri.Reset(new Uri(nextLinkUrl));
+            if (Uri.IsWellFormedUriString(nextLinkUrl, UriKind.Absolute))
+            {
+                request.Uri.Reset(new Uri(nextLinkUrl));
+            }
+            else
+            {
+                request.Uri.Reset(new Uri($"{host}{nextLinkUrl}"));
+            }
             if (clientRequestId != null)
             {
                 request.Headers.Add("client-request-id", clientRequestId);
@@ -1896,7 +2041,14 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri(nextLinkUrl));
+            if (Uri.IsWellFormedUriString(nextLinkUrl, UriKind.Absolute))
+            {
+                request.Uri.Reset(new Uri(nextLinkUrl));
+            }
+            else
+            {
+                request.Uri.Reset(new Uri($"{host}{nextLinkUrl}"));
+            }
             return message;
         }
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
@@ -2059,7 +2211,14 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri(nextLinkUrl));
+            if (Uri.IsWellFormedUriString(nextLinkUrl, UriKind.Absolute))
+            {
+                request.Uri.Reset(new Uri(nextLinkUrl));
+            }
+            else
+            {
+                request.Uri.Reset(new Uri($"{host}{nextLinkUrl}"));
+            }
             return message;
         }
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
