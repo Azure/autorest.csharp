@@ -36,8 +36,6 @@ namespace CognitiveServices.TextAnalytics
             request.Method = RequestMethod.Post;
             request.Uri.Reset(new Uri($"{endpoint}/text/analytics/v3.0-preview.1"));
             request.Uri.AppendPath("/entities/recognition/general", false);
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Content-Type", "text/json");
             if (modelVersion != null)
             {
                 request.Uri.AppendQuery("model-version", modelVersion, true);
@@ -46,6 +44,8 @@ namespace CognitiveServices.TextAnalytics
             {
                 request.Uri.AppendQuery("showStats", showStats.Value, true);
             }
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Content-Type", "text/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(multiLanguageBatchInput);
             request.Content = content;
@@ -136,8 +136,6 @@ namespace CognitiveServices.TextAnalytics
             request.Method = RequestMethod.Post;
             request.Uri.Reset(new Uri($"{endpoint}/text/analytics/v3.0-preview.1"));
             request.Uri.AppendPath("/entities/recognition/pii", false);
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Content-Type", "text/json");
             if (modelVersion != null)
             {
                 request.Uri.AppendQuery("model-version", modelVersion, true);
@@ -146,6 +144,8 @@ namespace CognitiveServices.TextAnalytics
             {
                 request.Uri.AppendQuery("showStats", showStats.Value, true);
             }
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Content-Type", "text/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(multiLanguageBatchInput);
             request.Content = content;
@@ -236,8 +236,6 @@ namespace CognitiveServices.TextAnalytics
             request.Method = RequestMethod.Post;
             request.Uri.Reset(new Uri($"{endpoint}/text/analytics/v3.0-preview.1"));
             request.Uri.AppendPath("/entities/linking", false);
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Content-Type", "text/json");
             if (modelVersion != null)
             {
                 request.Uri.AppendQuery("model-version", modelVersion, true);
@@ -246,6 +244,8 @@ namespace CognitiveServices.TextAnalytics
             {
                 request.Uri.AppendQuery("showStats", showStats.Value, true);
             }
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Content-Type", "text/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(multiLanguageBatchInput);
             request.Content = content;
@@ -336,8 +336,6 @@ namespace CognitiveServices.TextAnalytics
             request.Method = RequestMethod.Post;
             request.Uri.Reset(new Uri($"{endpoint}/text/analytics/v3.0-preview.1"));
             request.Uri.AppendPath("/keyPhrases", false);
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Content-Type", "text/json");
             if (modelVersion != null)
             {
                 request.Uri.AppendQuery("model-version", modelVersion, true);
@@ -346,6 +344,8 @@ namespace CognitiveServices.TextAnalytics
             {
                 request.Uri.AppendQuery("showStats", showStats.Value, true);
             }
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Content-Type", "text/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(multiLanguageBatchInput);
             request.Content = content;
@@ -430,8 +430,6 @@ namespace CognitiveServices.TextAnalytics
             request.Method = RequestMethod.Post;
             request.Uri.Reset(new Uri($"{endpoint}/text/analytics/v3.0-preview.1"));
             request.Uri.AppendPath("/languages", false);
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Content-Type", "text/json");
             if (modelVersion != null)
             {
                 request.Uri.AppendQuery("model-version", modelVersion, true);
@@ -440,6 +438,8 @@ namespace CognitiveServices.TextAnalytics
             {
                 request.Uri.AppendQuery("showStats", showStats.Value, true);
             }
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Content-Type", "text/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(languageBatchInput);
             request.Content = content;
@@ -524,8 +524,6 @@ namespace CognitiveServices.TextAnalytics
             request.Method = RequestMethod.Post;
             request.Uri.Reset(new Uri($"{endpoint}/text/analytics/v3.0-preview.1"));
             request.Uri.AppendPath("/sentiment", false);
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Content-Type", "text/json");
             if (modelVersion != null)
             {
                 request.Uri.AppendQuery("model-version", modelVersion, true);
@@ -534,6 +532,8 @@ namespace CognitiveServices.TextAnalytics
             {
                 request.Uri.AppendQuery("showStats", showStats.Value, true);
             }
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Content-Type", "text/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(multiLanguageBatchInput);
             request.Content = content;

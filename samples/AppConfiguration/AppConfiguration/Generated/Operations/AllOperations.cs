@@ -7,6 +7,7 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using AppConfiguration.Models.V10;
+using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
@@ -37,21 +38,13 @@ namespace AppConfiguration
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
-        internal HttpMessage CreateGetKeysRequest(string? name, string? after, string? acceptDatetime)
+        internal HttpMessage CreateGetKeysFirstPageRequest(string? name, string? after, string? acceptDatetime)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/keys", false);
-            if (syncToken != null)
-            {
-                request.Headers.Add("Sync-Token", syncToken);
-            }
-            if (acceptDatetime != null)
-            {
-                request.Headers.Add("Accept-Datetime", acceptDatetime);
-            }
             if (name != null)
             {
                 request.Uri.AppendQuery("name", name, true);
@@ -61,6 +54,14 @@ namespace AppConfiguration
             {
                 request.Uri.AppendQuery("After", after, true);
             }
+            if (syncToken != null)
+            {
+                request.Headers.Add("Sync-Token", syncToken);
+            }
+            if (acceptDatetime != null)
+            {
+                request.Headers.Add("Accept-Datetime", acceptDatetime);
+            }
             return message;
         }
         /// <summary> Gets a list of keys. </summary>
@@ -68,14 +69,14 @@ namespace AppConfiguration
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<KeyListResult, GetKeysHeaders>> GetKeysAsync(string? name, string? after, string? acceptDatetime, CancellationToken cancellationToken = default)
+        public async ValueTask<Page<Key>> GetKeysFirstPageAsync(string? name, string? after, string? acceptDatetime, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("AllOperations.GetKeys");
             scope.Start();
             try
             {
-                using var message = CreateGetKeysRequest(name, after, acceptDatetime);
+                using var message = CreateGetKeysFirstPageRequest(name, after, acceptDatetime);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -84,7 +85,7 @@ namespace AppConfiguration
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = KeyListResult.DeserializeKeyListResult(document.RootElement);
                             var headers = new GetKeysHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            return Page.FromValues(value.Items, value.NextLink, message.Response);
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
@@ -101,14 +102,14 @@ namespace AppConfiguration
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<KeyListResult, GetKeysHeaders> GetKeys(string? name, string? after, string? acceptDatetime, CancellationToken cancellationToken = default)
+        public Page<Key> GetKeysFirstPage(string? name, string? after, string? acceptDatetime, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("AllOperations.GetKeys");
             scope.Start();
             try
             {
-                using var message = CreateGetKeysRequest(name, after, acceptDatetime);
+                using var message = CreateGetKeysFirstPageRequest(name, after, acceptDatetime);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -117,7 +118,7 @@ namespace AppConfiguration
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = KeyListResult.DeserializeKeyListResult(document.RootElement);
                             var headers = new GetKeysHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            return Page.FromValues(value.Items, value.NextLink, message.Response);
                         }
                     default:
                         throw message.Response.CreateRequestFailedException();
@@ -129,13 +130,19 @@ namespace AppConfiguration
                 throw;
             }
         }
-        internal HttpMessage CreateCheckKeysRequest(string? name, string? after, string? acceptDatetime)
+        internal HttpMessage CreateGetKeysNextPageRequest(string? acceptDatetime, string? nextLinkUrl)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Head;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/keys", false);
+            request.Method = RequestMethod.Get;
+            if (Uri.IsWellFormedUriString(nextLinkUrl, UriKind.Absolute))
+            {
+                request.Uri.Reset(new Uri(nextLinkUrl));
+            }
+            else
+            {
+                request.Uri.Reset(new Uri($"{host}{nextLinkUrl}"));
+            }
             if (syncToken != null)
             {
                 request.Headers.Add("Sync-Token", syncToken);
@@ -144,6 +151,59 @@ namespace AppConfiguration
             {
                 request.Headers.Add("Accept-Datetime", acceptDatetime);
             }
+            return message;
+        }
+        /// <summary> Gets a list of keys. </summary>
+        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
+        /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Page<Key>> GetKeysNextPageAsync(string? acceptDatetime, string nextLinkUrl, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("AllOperations.GetKeys");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetKeysNextPageRequest(acceptDatetime, nextLinkUrl);
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            var value = KeyListResult.DeserializeKeyListResult(document.RootElement);
+                            var headers = new GetKeysHeaders(message.Response);
+                            return Page.FromValues(value.Items, value.NextLink, message.Response);
+                        }
+                    default:
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        /// <summary> Gets a list of keys. </summary>
+        /// <param name="name"> A filter for the name of the returned keys. </param>
+        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
+        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public AsyncPageable<Key> GetKeysAsync(string? name, string? after, string? acceptDatetime, CancellationToken cancellationToken = default)
+        {
+
+            Task<Page<Key>> FirstPageFunc(int? pageSizeHint) => GetKeysFirstPageAsync(name, after, acceptDatetime, cancellationToken).AsTask();
+            Task<Page<Key>> NextPageFunc(string continuationToken, int? pageSizeHint) => GetKeysNextPageAsync(acceptDatetime, continuationToken, cancellationToken).AsTask();
+            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+        }
+        internal HttpMessage CreateCheckKeysRequest(string? name, string? after, string? acceptDatetime)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Head;
+            request.Uri.Reset(new Uri($"{host}"));
+            request.Uri.AppendPath("/keys", false);
             if (name != null)
             {
                 request.Uri.AppendQuery("name", name, true);
@@ -152,6 +212,14 @@ namespace AppConfiguration
             if (after != null)
             {
                 request.Uri.AppendQuery("After", after, true);
+            }
+            if (syncToken != null)
+            {
+                request.Headers.Add("Sync-Token", syncToken);
+            }
+            if (acceptDatetime != null)
+            {
+                request.Headers.Add("Accept-Datetime", acceptDatetime);
             }
             return message;
         }
@@ -213,21 +281,13 @@ namespace AppConfiguration
                 throw;
             }
         }
-        internal HttpMessage CreateGetKeyValuesRequest(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Get6ItemsItem>? select)
+        internal HttpMessage CreateGetKeyValuesFirstPageRequest(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Get6ItemsItem>? select)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/kv", false);
-            if (syncToken != null)
-            {
-                request.Headers.Add("Sync-Token", syncToken);
-            }
-            if (acceptDatetime != null)
-            {
-                request.Headers.Add("Accept-Datetime", acceptDatetime);
-            }
             if (key != null)
             {
                 request.Uri.AppendQuery("key", key, true);
@@ -245,6 +305,14 @@ namespace AppConfiguration
             {
                 request.Uri.AppendQueryDelimited("$Select", select, ",", true);
             }
+            if (syncToken != null)
+            {
+                request.Headers.Add("Sync-Token", syncToken);
+            }
+            if (acceptDatetime != null)
+            {
+                request.Headers.Add("Accept-Datetime", acceptDatetime);
+            }
             return message;
         }
         /// <summary> Gets a list of key-values. </summary>
@@ -254,14 +322,14 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<KeyValueListResult, GetKeyValuesHeaders>> GetKeyValuesAsync(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Get6ItemsItem>? select, CancellationToken cancellationToken = default)
+        public async ValueTask<Page<KeyValue>> GetKeyValuesFirstPageAsync(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Get6ItemsItem>? select, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("AllOperations.GetKeyValues");
             scope.Start();
             try
             {
-                using var message = CreateGetKeyValuesRequest(key, label, after, acceptDatetime, select);
+                using var message = CreateGetKeyValuesFirstPageRequest(key, label, after, acceptDatetime, select);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -270,7 +338,7 @@ namespace AppConfiguration
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
                             var headers = new GetKeyValuesHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            return Page.FromValues(value.Items, value.NextLink, message.Response);
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
@@ -289,14 +357,14 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<KeyValueListResult, GetKeyValuesHeaders> GetKeyValues(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Get6ItemsItem>? select, CancellationToken cancellationToken = default)
+        public Page<KeyValue> GetKeyValuesFirstPage(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Get6ItemsItem>? select, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("AllOperations.GetKeyValues");
             scope.Start();
             try
             {
-                using var message = CreateGetKeyValuesRequest(key, label, after, acceptDatetime, select);
+                using var message = CreateGetKeyValuesFirstPageRequest(key, label, after, acceptDatetime, select);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -305,7 +373,7 @@ namespace AppConfiguration
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
                             var headers = new GetKeyValuesHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            return Page.FromValues(value.Items, value.NextLink, message.Response);
                         }
                     default:
                         throw message.Response.CreateRequestFailedException();
@@ -317,13 +385,19 @@ namespace AppConfiguration
                 throw;
             }
         }
-        internal HttpMessage CreateCheckKeyValuesRequest(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Head6ItemsItem>? select)
+        internal HttpMessage CreateGetKeyValuesNextPageRequest(string? acceptDatetime, string? nextLinkUrl)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Head;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/kv", false);
+            request.Method = RequestMethod.Get;
+            if (Uri.IsWellFormedUriString(nextLinkUrl, UriKind.Absolute))
+            {
+                request.Uri.Reset(new Uri(nextLinkUrl));
+            }
+            else
+            {
+                request.Uri.Reset(new Uri($"{host}{nextLinkUrl}"));
+            }
             if (syncToken != null)
             {
                 request.Headers.Add("Sync-Token", syncToken);
@@ -332,6 +406,61 @@ namespace AppConfiguration
             {
                 request.Headers.Add("Accept-Datetime", acceptDatetime);
             }
+            return message;
+        }
+        /// <summary> Gets a list of key-values. </summary>
+        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
+        /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Page<KeyValue>> GetKeyValuesNextPageAsync(string? acceptDatetime, string nextLinkUrl, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("AllOperations.GetKeyValues");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetKeyValuesNextPageRequest(acceptDatetime, nextLinkUrl);
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            var value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
+                            var headers = new GetKeyValuesHeaders(message.Response);
+                            return Page.FromValues(value.Items, value.NextLink, message.Response);
+                        }
+                    default:
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        /// <summary> Gets a list of key-values. </summary>
+        /// <param name="key"> A filter used to match keys. </param>
+        /// <param name="label"> A filter used to match labels. </param>
+        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
+        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
+        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public AsyncPageable<KeyValue> GetKeyValuesAsync(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Get6ItemsItem>? select, CancellationToken cancellationToken = default)
+        {
+
+            Task<Page<KeyValue>> FirstPageFunc(int? pageSizeHint) => GetKeyValuesFirstPageAsync(key, label, after, acceptDatetime, select, cancellationToken).AsTask();
+            Task<Page<KeyValue>> NextPageFunc(string continuationToken, int? pageSizeHint) => GetKeyValuesNextPageAsync(acceptDatetime, continuationToken, cancellationToken).AsTask();
+            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+        }
+        internal HttpMessage CreateCheckKeyValuesRequest(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Head6ItemsItem>? select)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Head;
+            request.Uri.Reset(new Uri($"{host}"));
+            request.Uri.AppendPath("/kv", false);
             if (key != null)
             {
                 request.Uri.AppendQuery("key", key, true);
@@ -348,6 +477,14 @@ namespace AppConfiguration
             if (select != null)
             {
                 request.Uri.AppendQueryDelimited("$Select", select, ",", true);
+            }
+            if (syncToken != null)
+            {
+                request.Headers.Add("Sync-Token", syncToken);
+            }
+            if (acceptDatetime != null)
+            {
+                request.Headers.Add("Accept-Datetime", acceptDatetime);
             }
             return message;
         }
@@ -421,6 +558,15 @@ namespace AppConfiguration
             request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/kv/", false);
             request.Uri.AppendPath(key, true);
+            if (label != null)
+            {
+                request.Uri.AppendQuery("label", label, true);
+            }
+            request.Uri.AppendQuery("api-version", ApiVersion, true);
+            if (select != null)
+            {
+                request.Uri.AppendQueryDelimited("$Select", select, ",", true);
+            }
             if (syncToken != null)
             {
                 request.Headers.Add("Sync-Token", syncToken);
@@ -436,15 +582,6 @@ namespace AppConfiguration
             if (ifNoneMatch != null)
             {
                 request.Headers.Add("If-None-Match", ifNoneMatch);
-            }
-            if (label != null)
-            {
-                request.Uri.AppendQuery("label", label, true);
-            }
-            request.Uri.AppendQuery("api-version", ApiVersion, true);
-            if (select != null)
-            {
-                request.Uri.AppendQueryDelimited("$Select", select, ",", true);
             }
             return message;
         }
@@ -536,6 +673,11 @@ namespace AppConfiguration
             request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/kv/", false);
             request.Uri.AppendPath(key, true);
+            if (label != null)
+            {
+                request.Uri.AppendQuery("label", label, true);
+            }
+            request.Uri.AppendQuery("api-version", ApiVersion, true);
             if (syncToken != null)
             {
                 request.Headers.Add("Sync-Token", syncToken);
@@ -554,11 +696,6 @@ namespace AppConfiguration
             request.Headers.Add("Content-Type", "text/json");
             request.Headers.Add("Content-Type", "application/*+json");
             request.Headers.Add("Content-Type", "application/json-patch+json");
-            if (label != null)
-            {
-                request.Uri.AppendQuery("label", label, true);
-            }
-            request.Uri.AppendQuery("api-version", ApiVersion, true);
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(entity);
             request.Content = content;
@@ -650,6 +787,11 @@ namespace AppConfiguration
             request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/kv/", false);
             request.Uri.AppendPath(key, true);
+            if (label != null)
+            {
+                request.Uri.AppendQuery("label", label, true);
+            }
+            request.Uri.AppendQuery("api-version", ApiVersion, true);
             if (syncToken != null)
             {
                 request.Headers.Add("Sync-Token", syncToken);
@@ -658,11 +800,6 @@ namespace AppConfiguration
             {
                 request.Headers.Add("If-Match", ifMatch);
             }
-            if (label != null)
-            {
-                request.Uri.AppendQuery("label", label, true);
-            }
-            request.Uri.AppendQuery("api-version", ApiVersion, true);
             return message;
         }
         /// <summary> Deletes a key-value. </summary>
@@ -747,6 +884,15 @@ namespace AppConfiguration
             request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/kv/", false);
             request.Uri.AppendPath(key, true);
+            if (label != null)
+            {
+                request.Uri.AppendQuery("label", label, true);
+            }
+            request.Uri.AppendQuery("api-version", ApiVersion, true);
+            if (select != null)
+            {
+                request.Uri.AppendQueryDelimited("$Select", select, ",", true);
+            }
             if (syncToken != null)
             {
                 request.Headers.Add("Sync-Token", syncToken);
@@ -762,15 +908,6 @@ namespace AppConfiguration
             if (ifNoneMatch != null)
             {
                 request.Headers.Add("If-None-Match", ifNoneMatch);
-            }
-            if (label != null)
-            {
-                request.Uri.AppendQuery("label", label, true);
-            }
-            request.Uri.AppendQuery("api-version", ApiVersion, true);
-            if (select != null)
-            {
-                request.Uri.AppendQueryDelimited("$Select", select, ",", true);
             }
             return message;
         }
@@ -846,21 +983,13 @@ namespace AppConfiguration
                 throw;
             }
         }
-        internal HttpMessage CreateGetLabelsRequest(string? name, string? after, string? acceptDatetime, IEnumerable<string>? select)
+        internal HttpMessage CreateGetLabelsFirstPageRequest(string? name, string? after, string? acceptDatetime, IEnumerable<string>? select)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/labels", false);
-            if (syncToken != null)
-            {
-                request.Headers.Add("Sync-Token", syncToken);
-            }
-            if (acceptDatetime != null)
-            {
-                request.Headers.Add("Accept-Datetime", acceptDatetime);
-            }
             if (name != null)
             {
                 request.Uri.AppendQuery("name", name, true);
@@ -874,6 +1003,14 @@ namespace AppConfiguration
             {
                 request.Uri.AppendQueryDelimited("$Select", select, ",", true);
             }
+            if (syncToken != null)
+            {
+                request.Headers.Add("Sync-Token", syncToken);
+            }
+            if (acceptDatetime != null)
+            {
+                request.Headers.Add("Accept-Datetime", acceptDatetime);
+            }
             return message;
         }
         /// <summary> Gets a list of labels. </summary>
@@ -882,14 +1019,14 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<LabelListResult, GetLabelsHeaders>> GetLabelsAsync(string? name, string? after, string? acceptDatetime, IEnumerable<string>? select, CancellationToken cancellationToken = default)
+        public async ValueTask<Page<Label>> GetLabelsFirstPageAsync(string? name, string? after, string? acceptDatetime, IEnumerable<string>? select, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("AllOperations.GetLabels");
             scope.Start();
             try
             {
-                using var message = CreateGetLabelsRequest(name, after, acceptDatetime, select);
+                using var message = CreateGetLabelsFirstPageRequest(name, after, acceptDatetime, select);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -898,7 +1035,7 @@ namespace AppConfiguration
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = LabelListResult.DeserializeLabelListResult(document.RootElement);
                             var headers = new GetLabelsHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            return Page.FromValues(value.Items, value.NextLink, message.Response);
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
@@ -916,14 +1053,14 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<LabelListResult, GetLabelsHeaders> GetLabels(string? name, string? after, string? acceptDatetime, IEnumerable<string>? select, CancellationToken cancellationToken = default)
+        public Page<Label> GetLabelsFirstPage(string? name, string? after, string? acceptDatetime, IEnumerable<string>? select, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("AllOperations.GetLabels");
             scope.Start();
             try
             {
-                using var message = CreateGetLabelsRequest(name, after, acceptDatetime, select);
+                using var message = CreateGetLabelsFirstPageRequest(name, after, acceptDatetime, select);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -932,7 +1069,7 @@ namespace AppConfiguration
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = LabelListResult.DeserializeLabelListResult(document.RootElement);
                             var headers = new GetLabelsHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            return Page.FromValues(value.Items, value.NextLink, message.Response);
                         }
                     default:
                         throw message.Response.CreateRequestFailedException();
@@ -944,13 +1081,19 @@ namespace AppConfiguration
                 throw;
             }
         }
-        internal HttpMessage CreateCheckLabelsRequest(string? name, string? after, string? acceptDatetime, IEnumerable<string>? select)
+        internal HttpMessage CreateGetLabelsNextPageRequest(string? acceptDatetime, string? nextLinkUrl)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Head;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/labels", false);
+            request.Method = RequestMethod.Get;
+            if (Uri.IsWellFormedUriString(nextLinkUrl, UriKind.Absolute))
+            {
+                request.Uri.Reset(new Uri(nextLinkUrl));
+            }
+            else
+            {
+                request.Uri.Reset(new Uri($"{host}{nextLinkUrl}"));
+            }
             if (syncToken != null)
             {
                 request.Headers.Add("Sync-Token", syncToken);
@@ -959,6 +1102,60 @@ namespace AppConfiguration
             {
                 request.Headers.Add("Accept-Datetime", acceptDatetime);
             }
+            return message;
+        }
+        /// <summary> Gets a list of labels. </summary>
+        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
+        /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Page<Label>> GetLabelsNextPageAsync(string? acceptDatetime, string nextLinkUrl, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("AllOperations.GetLabels");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetLabelsNextPageRequest(acceptDatetime, nextLinkUrl);
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            var value = LabelListResult.DeserializeLabelListResult(document.RootElement);
+                            var headers = new GetLabelsHeaders(message.Response);
+                            return Page.FromValues(value.Items, value.NextLink, message.Response);
+                        }
+                    default:
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        /// <summary> Gets a list of labels. </summary>
+        /// <param name="name"> A filter for the name of the returned keys. </param>
+        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
+        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
+        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public AsyncPageable<Label> GetLabelsAsync(string? name, string? after, string? acceptDatetime, IEnumerable<string>? select, CancellationToken cancellationToken = default)
+        {
+
+            Task<Page<Label>> FirstPageFunc(int? pageSizeHint) => GetLabelsFirstPageAsync(name, after, acceptDatetime, select, cancellationToken).AsTask();
+            Task<Page<Label>> NextPageFunc(string continuationToken, int? pageSizeHint) => GetLabelsNextPageAsync(acceptDatetime, continuationToken, cancellationToken).AsTask();
+            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+        }
+        internal HttpMessage CreateCheckLabelsRequest(string? name, string? after, string? acceptDatetime, IEnumerable<string>? select)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Head;
+            request.Uri.Reset(new Uri($"{host}"));
+            request.Uri.AppendPath("/labels", false);
             if (name != null)
             {
                 request.Uri.AppendQuery("name", name, true);
@@ -971,6 +1168,14 @@ namespace AppConfiguration
             if (select != null)
             {
                 request.Uri.AppendQueryDelimited("$Select", select, ",", true);
+            }
+            if (syncToken != null)
+            {
+                request.Headers.Add("Sync-Token", syncToken);
+            }
+            if (acceptDatetime != null)
+            {
+                request.Headers.Add("Accept-Datetime", acceptDatetime);
             }
             return message;
         }
@@ -1042,6 +1247,11 @@ namespace AppConfiguration
             request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/locks/", false);
             request.Uri.AppendPath(key, true);
+            if (label != null)
+            {
+                request.Uri.AppendQuery("label", label, true);
+            }
+            request.Uri.AppendQuery("api-version", ApiVersion, true);
             if (syncToken != null)
             {
                 request.Headers.Add("Sync-Token", syncToken);
@@ -1054,11 +1264,6 @@ namespace AppConfiguration
             {
                 request.Headers.Add("If-None-Match", ifNoneMatch);
             }
-            if (label != null)
-            {
-                request.Uri.AppendQuery("label", label, true);
-            }
-            request.Uri.AppendQuery("api-version", ApiVersion, true);
             return message;
         }
         /// <summary> Locks a key-value. </summary>
@@ -1145,6 +1350,11 @@ namespace AppConfiguration
             request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/locks/", false);
             request.Uri.AppendPath(key, true);
+            if (label != null)
+            {
+                request.Uri.AppendQuery("label", label, true);
+            }
+            request.Uri.AppendQuery("api-version", ApiVersion, true);
             if (syncToken != null)
             {
                 request.Headers.Add("Sync-Token", syncToken);
@@ -1157,11 +1367,6 @@ namespace AppConfiguration
             {
                 request.Headers.Add("If-None-Match", ifNoneMatch);
             }
-            if (label != null)
-            {
-                request.Uri.AppendQuery("label", label, true);
-            }
-            request.Uri.AppendQuery("api-version", ApiVersion, true);
             return message;
         }
         /// <summary> Unlocks a key-value. </summary>
@@ -1240,21 +1445,13 @@ namespace AppConfiguration
                 throw;
             }
         }
-        internal HttpMessage CreateGetRevisionsRequest(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Enum0>? select)
+        internal HttpMessage CreateGetRevisionsFirstPageRequest(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Enum0>? select)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/revisions", false);
-            if (syncToken != null)
-            {
-                request.Headers.Add("Sync-Token", syncToken);
-            }
-            if (acceptDatetime != null)
-            {
-                request.Headers.Add("Accept-Datetime", acceptDatetime);
-            }
             if (key != null)
             {
                 request.Uri.AppendQuery("key", key, true);
@@ -1272,6 +1469,14 @@ namespace AppConfiguration
             {
                 request.Uri.AppendQueryDelimited("$Select", select, ",", true);
             }
+            if (syncToken != null)
+            {
+                request.Headers.Add("Sync-Token", syncToken);
+            }
+            if (acceptDatetime != null)
+            {
+                request.Headers.Add("Accept-Datetime", acceptDatetime);
+            }
             return message;
         }
         /// <summary> Gets a list of key-value revisions. </summary>
@@ -1281,14 +1486,14 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<KeyValueListResult, GetRevisionsHeaders>> GetRevisionsAsync(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Enum0>? select, CancellationToken cancellationToken = default)
+        public async ValueTask<Page<KeyValue>> GetRevisionsFirstPageAsync(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Enum0>? select, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("AllOperations.GetRevisions");
             scope.Start();
             try
             {
-                using var message = CreateGetRevisionsRequest(key, label, after, acceptDatetime, select);
+                using var message = CreateGetRevisionsFirstPageRequest(key, label, after, acceptDatetime, select);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1297,7 +1502,7 @@ namespace AppConfiguration
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
                             var headers = new GetRevisionsHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            return Page.FromValues(value.Items, value.NextLink, message.Response);
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
@@ -1316,14 +1521,14 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<KeyValueListResult, GetRevisionsHeaders> GetRevisions(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Enum0>? select, CancellationToken cancellationToken = default)
+        public Page<KeyValue> GetRevisionsFirstPage(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Enum0>? select, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("AllOperations.GetRevisions");
             scope.Start();
             try
             {
-                using var message = CreateGetRevisionsRequest(key, label, after, acceptDatetime, select);
+                using var message = CreateGetRevisionsFirstPageRequest(key, label, after, acceptDatetime, select);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -1332,7 +1537,7 @@ namespace AppConfiguration
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
                             var headers = new GetRevisionsHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            return Page.FromValues(value.Items, value.NextLink, message.Response);
                         }
                     default:
                         throw message.Response.CreateRequestFailedException();
@@ -1344,13 +1549,19 @@ namespace AppConfiguration
                 throw;
             }
         }
-        internal HttpMessage CreateCheckRevisionsRequest(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Enum0>? select)
+        internal HttpMessage CreateGetRevisionsNextPageRequest(string? acceptDatetime, string? nextLinkUrl)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Head;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/revisions", false);
+            request.Method = RequestMethod.Get;
+            if (Uri.IsWellFormedUriString(nextLinkUrl, UriKind.Absolute))
+            {
+                request.Uri.Reset(new Uri(nextLinkUrl));
+            }
+            else
+            {
+                request.Uri.Reset(new Uri($"{host}{nextLinkUrl}"));
+            }
             if (syncToken != null)
             {
                 request.Headers.Add("Sync-Token", syncToken);
@@ -1359,6 +1570,61 @@ namespace AppConfiguration
             {
                 request.Headers.Add("Accept-Datetime", acceptDatetime);
             }
+            return message;
+        }
+        /// <summary> Gets a list of key-value revisions. </summary>
+        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
+        /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Page<KeyValue>> GetRevisionsNextPageAsync(string? acceptDatetime, string nextLinkUrl, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("AllOperations.GetRevisions");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetRevisionsNextPageRequest(acceptDatetime, nextLinkUrl);
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            var value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
+                            var headers = new GetRevisionsHeaders(message.Response);
+                            return Page.FromValues(value.Items, value.NextLink, message.Response);
+                        }
+                    default:
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        /// <summary> Gets a list of key-value revisions. </summary>
+        /// <param name="key"> A filter used to match keys. </param>
+        /// <param name="label"> A filter used to match labels. </param>
+        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
+        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
+        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public AsyncPageable<KeyValue> GetRevisionsAsync(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Enum0>? select, CancellationToken cancellationToken = default)
+        {
+
+            Task<Page<KeyValue>> FirstPageFunc(int? pageSizeHint) => GetRevisionsFirstPageAsync(key, label, after, acceptDatetime, select, cancellationToken).AsTask();
+            Task<Page<KeyValue>> NextPageFunc(string continuationToken, int? pageSizeHint) => GetRevisionsNextPageAsync(acceptDatetime, continuationToken, cancellationToken).AsTask();
+            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+        }
+        internal HttpMessage CreateCheckRevisionsRequest(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Enum0>? select)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Head;
+            request.Uri.Reset(new Uri($"{host}"));
+            request.Uri.AppendPath("/revisions", false);
             if (key != null)
             {
                 request.Uri.AppendQuery("key", key, true);
@@ -1375,6 +1641,14 @@ namespace AppConfiguration
             if (select != null)
             {
                 request.Uri.AppendQueryDelimited("$Select", select, ",", true);
+            }
+            if (syncToken != null)
+            {
+                request.Headers.Add("Sync-Token", syncToken);
+            }
+            if (acceptDatetime != null)
+            {
+                request.Headers.Add("Accept-Datetime", acceptDatetime);
             }
             return message;
         }

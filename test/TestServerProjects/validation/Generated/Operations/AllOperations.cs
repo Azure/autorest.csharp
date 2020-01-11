@@ -138,8 +138,8 @@ namespace validation
             request.Uri.AppendPath(resourceGroupName, true);
             request.Uri.AppendPath("/", false);
             request.Uri.AppendPath(id, true);
-            request.Headers.Add("Content-Type", "application/json");
             request.Uri.AppendQuery("apiVersion", ApiVersion, true);
+            request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(body);
             request.Content = content;
