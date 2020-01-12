@@ -29,9 +29,7 @@ namespace AutoRest.CSharp.V3.Plugins
             var modelBuilder = new ModelBuilder(GetMediaTypes(codeModel));
             var models = schemas.Select(modelBuilder.BuildModel).ToArray();
             var clients = codeModel.OperationGroups.Select(ClientBuilder.BuildClient).ToArray();
-
-            var typeProviders = models.OfType<ISchemaTypeProvider>().ToArray();
-            var typeFactory = new TypeFactory(configuration.Namespace, typeProviders);
+            var typeFactory = new TypeFactory(configuration.Namespace, models);
 
             var modelWriter = new ModelWriter(typeFactory);
             var writer = new ClientWriter(typeFactory);

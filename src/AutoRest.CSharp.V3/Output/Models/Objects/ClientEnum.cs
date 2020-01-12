@@ -6,7 +6,7 @@ using AutoRest.CSharp.V3.Pipeline.Generated;
 
 namespace AutoRest.CSharp.V3.ClientModels
 {
-    internal class ClientEnum : ClientModel, ISchemaTypeProvider
+    internal class ClientEnum : ISchemaTypeProvider
     {
         public ClientEnum(Schema schema, string name, string? description, IEnumerable<ClientEnumValue> values, bool isStringBased = false)
         {
@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.V3.ClientModels
 
         public bool IsStringBased { get; }
         public Schema Schema { get; }
-        public override string Name { get; }
+        public string Name { get; }
         public string? Description { get; }
         public IList<ClientEnumValue> Values { get; }
     }

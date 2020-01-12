@@ -21,7 +21,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             _typeFactory = typeFactory;
         }
 
-        public void WriteModel(CodeWriter writer, ClientModel model)
+        public void WriteModel(CodeWriter writer, ISchemaTypeProvider model)
         {
             switch (model)
             {

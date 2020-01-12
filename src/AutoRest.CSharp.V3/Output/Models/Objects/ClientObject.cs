@@ -7,7 +7,7 @@ using AutoRest.CSharp.V3.Pipeline.Generated;
 
 namespace AutoRest.CSharp.V3.ClientModels
 {
-    internal class ClientObject : ClientModel, ISchemaTypeProvider
+    internal class ClientObject : ISchemaTypeProvider
     {
         public ClientObject(Schema schema, string name, string? description, SchemaTypeReference? inherits, IEnumerable<ClientObjectProperty> properties, ClientObjectDiscriminator? discriminator, DictionaryTypeReference? implementsDictionary, ObjectSerialization[] serializations)
         {
@@ -21,7 +21,7 @@ namespace AutoRest.CSharp.V3.ClientModels
             Properties = new List<ClientObjectProperty>(properties);
         }
 
-        public override string Name { get; }
+        public string Name { get; }
         public string? Description { get; }
         public Schema Schema { get; }
         public SchemaTypeReference? Inherits { get; }

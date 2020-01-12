@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             _typeFactory = typeFactory;
         }
 
-        public void WriteSerialization(CodeWriter writer, ClientModel schema)
+        public void WriteSerialization(CodeWriter writer, ISchemaTypeProvider schema)
         {
             switch (schema)
             {

@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.V3.ClientModels
             _mediaTypes = mediaTypes;
         }
 
-        private static ClientModel BuildClientEnum(SealedChoiceSchema sealedChoiceSchema) => new ClientEnum(
+        private static ISchemaTypeProvider BuildClientEnum(SealedChoiceSchema sealedChoiceSchema) => new ClientEnum(
             sealedChoiceSchema,
             sealedChoiceSchema.CSharpName(),
             CreateDescription(sealedChoiceSchema),
@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.V3.ClientModels
                 CreateDescription(c),
                 ClientModelBuilderHelpers.StringConstant(c.Value))));
 
-        private static ClientModel BuildClientEnum(ChoiceSchema choiceSchema) => new ClientEnum(
+        private static ISchemaTypeProvider BuildClientEnum(ChoiceSchema choiceSchema) => new ClientEnum(
             choiceSchema,
             choiceSchema.CSharpName(),
             CreateDescription(choiceSchema),
@@ -41,7 +41,7 @@ namespace AutoRest.CSharp.V3.ClientModels
                 ClientModelBuilderHelpers.StringConstant(c.Value))),
             true);
 
-        private ClientModel BuildClientObject(ObjectSchema objectSchema)
+        private ISchemaTypeProvider BuildClientObject(ObjectSchema objectSchema)
         {
             ClientTypeReference? inheritsFromTypeReference = null;
             DictionarySchema? inheritedDictionarySchema = null;
@@ -127,7 +127,7 @@ namespace AutoRest.CSharp.V3.ClientModels
             )).ToArray();
         }
 
-        public ClientModel BuildModel(Schema schema) => schema switch
+        public ISchemaTypeProvider BuildModel(Schema schema) => schema switch
         {
             SealedChoiceSchema sealedChoiceSchema => BuildClientEnum(sealedChoiceSchema),
             ChoiceSchema choiceSchema => BuildClientEnum(choiceSchema),
