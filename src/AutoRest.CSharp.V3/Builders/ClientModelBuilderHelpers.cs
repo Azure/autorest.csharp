@@ -53,7 +53,6 @@ namespace AutoRest.CSharp.V3.ClientModels
             _ => SerializationFormat.Default
         };
 
-
         private static Type? ToFrameworkType(AllSchemaTypes schemaType) => schemaType switch
         {
             AllSchemaTypes.Boolean => typeof(bool),

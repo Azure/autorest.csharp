@@ -24,7 +24,4 @@
     <None Include="../../src/assets/**/*.cs" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ClientModels\RequestModels\" />
-  </ItemGroup>
 </Project>
