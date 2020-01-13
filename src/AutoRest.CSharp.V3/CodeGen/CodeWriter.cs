@@ -152,9 +152,6 @@ namespace AutoRest.CSharp.V3.CodeGen
             return Scope();
         }
 
-        public void MethodExpression(string modifiers, string? returnType, string name, string[]? parameters, string expression) =>
-            LineRaw($"{MethodDeclaration(modifiers, returnType, name, parameters ?? new string[0])} => {expression};");
-
         public void UseNamespace(CSharpNamespace @namespace)
         {
             _usingNamespaces.Add(@namespace);
@@ -230,7 +227,6 @@ namespace AutoRest.CSharp.V3.CodeGen
         }
 
         public string Type(Type type, bool isNullable = false) => Type(new CSharpType(type, isNullable));
-        public string Pair(string typeText, string name) => $"{typeText} {name}";
         public string Pair(Type type, string name, bool isNullable = false) => $"{Type(type, isNullable)} {name}";
 
         private static string? GetKeywordMapping(Type? type) => type switch
