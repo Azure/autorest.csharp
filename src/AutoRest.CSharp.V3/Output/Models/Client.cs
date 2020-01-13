@@ -15,9 +15,7 @@ namespace AutoRest.CSharp.V3.ClientModels
 
         public string Name { get; }
         public string Description { get; }
-
         public ClientMethod[] Methods { get; }
-
         public ServiceClientParameter[] Parameters { get; }
     }
 }

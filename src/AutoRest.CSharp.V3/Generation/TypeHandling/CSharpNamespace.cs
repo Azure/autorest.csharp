@@ -14,12 +14,9 @@ namespace AutoRest.CSharp.V3.CodeGen
             ApiVersion = apiVersion;
         }
 
-        public string? Base { get; set; }
-
-        public string? Category { get; set; }
-
-        public string? ApiVersion { get; set; }
-
+        public string? Base { get; }
+        public string? Category { get; }
+        public string? ApiVersion { get; }
         public string FullName => new[] { Base, Category, ApiVersion }.JoinIgnoreEmpty(".");
     }
 }

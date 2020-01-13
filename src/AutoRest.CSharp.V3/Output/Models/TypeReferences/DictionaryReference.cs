@@ -5,9 +5,6 @@ namespace AutoRest.CSharp.V3.ClientModels
 {
     internal class DictionaryTypeReference: ClientTypeReference
     {
-        public ClientTypeReference KeyType { get; }
-        public ClientTypeReference ValueType { get; }
-
         public DictionaryTypeReference(ClientTypeReference keyType, ClientTypeReference valueType, bool isNullable)
         {
             KeyType = keyType;
@@ -15,6 +12,8 @@ namespace AutoRest.CSharp.V3.ClientModels
             IsNullable = isNullable;
         }
 
+        public ClientTypeReference KeyType { get; }
+        public ClientTypeReference ValueType { get; }
         public override bool IsNullable { get; }
     }
 }

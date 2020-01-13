@@ -22,6 +22,6 @@ namespace AutoRest.CSharp.V3.ClientModels
         public PathSegment[] PathSegments { get; }
         public QueryParameter[] Query { get; }
         public RequestHeader[] Headers { get; }
-        public ObjectRequestBody? Body { get; set; }
+        public ObjectRequestBody? Body { get; }
     }
 }

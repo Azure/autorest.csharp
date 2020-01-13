@@ -6,7 +6,6 @@ namespace AutoRest.CSharp.V3.ClientModels.Serialization
     internal abstract class XmlElementSerialization: ObjectSerialization
     {
         public abstract string Name { get; }
-
         public abstract ClientTypeReference Type { get; }
     }
 }

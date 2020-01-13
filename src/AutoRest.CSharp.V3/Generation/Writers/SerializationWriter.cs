@@ -8,7 +8,6 @@ using System.Xml;
 using System.Xml.Linq;
 using AutoRest.CSharp.V3.ClientModels;
 using AutoRest.CSharp.V3.ClientModels.Serialization;
-using AutoRest.CSharp.V3.Plugins;
 using Azure.Core;
 
 namespace AutoRest.CSharp.V3.CodeGen

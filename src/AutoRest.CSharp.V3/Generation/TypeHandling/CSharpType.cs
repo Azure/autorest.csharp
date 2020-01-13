@@ -30,15 +30,10 @@ namespace AutoRest.CSharp.V3.CodeGen
         }
 
         public CSharpNamespace Namespace { get; }
-
         public string Name { get; }
-
         public bool IsValueType { get; }
-
         public CSharpType[] Arguments { get; } = Array.Empty<CSharpType>();
-
         public Type? FrameworkType { get; }
-
         public bool IsNullable { get; }
 
         public CSharpType WithNullable(bool isNullable) => FrameworkType != null

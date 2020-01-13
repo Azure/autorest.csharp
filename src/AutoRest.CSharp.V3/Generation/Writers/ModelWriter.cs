@@ -7,8 +7,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using AutoRest.CSharp.V3.ClientModels;
-using AutoRest.CSharp.V3.Plugins;
-using AutoRest.CSharp.V3.Utilities;
 
 namespace AutoRest.CSharp.V3.CodeGen
 {

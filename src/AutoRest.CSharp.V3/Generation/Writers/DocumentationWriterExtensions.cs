@@ -1,9 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
-using System.Security;
-
 namespace AutoRest.CSharp.V3.CodeGen
 {
     internal static class DocumentationWriterExtensions

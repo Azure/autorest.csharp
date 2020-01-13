@@ -7,14 +7,13 @@ namespace AutoRest.CSharp.V3.ClientModels
 {
     internal class SchemaTypeReference: ClientTypeReference
     {
-        public Schema Schema { get; }
-
         public SchemaTypeReference(Schema schema, bool isNullable)
         {
             Schema = schema;
             IsNullable = isNullable;
         }
 
+        public Schema Schema { get; }
         public override bool IsNullable { get; }
     }
 }

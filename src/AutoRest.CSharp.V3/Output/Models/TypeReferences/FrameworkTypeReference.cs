@@ -7,13 +7,13 @@ namespace AutoRest.CSharp.V3.ClientModels
 {
     internal class FrameworkTypeReference: ClientTypeReference
     {
-        public Type Type { get; }
-        public override bool IsNullable { get; }
-
         public FrameworkTypeReference(Type type, bool isNullable = false)
         {
             Type = type;
             IsNullable = isNullable;
         }
+
+        public Type Type { get; }
+        public override bool IsNullable { get; }
     }
 }
