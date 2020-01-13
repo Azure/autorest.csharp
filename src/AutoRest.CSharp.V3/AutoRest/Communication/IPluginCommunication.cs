@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace AutoRest.CSharp.V3.JsonRpc.MessageModels
 {
-    internal interface IAutoRestInterface
+    internal interface IPluginCommunication
     {
         string PluginName { get; }
         Task<string> ReadFile(string filename);

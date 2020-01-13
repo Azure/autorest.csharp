@@ -8,13 +8,13 @@ using AutoRest.CSharp.V3.Utilities;
 
 namespace AutoRest.CSharp.V3.JsonRpc.Messaging
 {
-    internal delegate bool ProcessAction(Connection connection, string pluginName, string sessionId);
+    internal delegate bool ProcessAction(JsonRpcConnection connection, string pluginName, string sessionId);
 
-    internal static class IncomingMessages
+    internal static class IncomingMessageSerializer
     {
         public static string GetPluginNames(this IncomingRequest _, params string[] pluginNames) => pluginNames.ToJsonArray();
 
-        public static string Process(this IncomingRequest request, Connection connection, ProcessAction processAction)
+        public static string Process(this IncomingRequest request, JsonRpcConnection connection, ProcessAction processAction)
         {
             var parameters = request.Params.ToStringArray();
             var (pluginName, sessionId) = (parameters![0], parameters![1]);

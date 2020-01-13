@@ -8,7 +8,7 @@ using AutoRest.CSharp.V3.Utilities;
 
 namespace AutoRest.CSharp.V3.JsonRpc.Messaging
 {
-    internal static class PeekingBinaryReaderExtensions
+    internal static class PeekableBinaryStreamExtensions
     {
         public static bool IsJsonBlock(this byte? value) => '{' == value || '[' == value;
 

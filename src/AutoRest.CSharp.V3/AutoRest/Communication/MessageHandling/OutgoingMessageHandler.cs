@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 namespace AutoRest.CSharp.V3.JsonRpc.Messaging
 {
 #pragma warning disable IDE0069 // Disposable fields should be disposed
-    internal class OutgoingMessageProcessor : IDisposable
+    internal class OutgoingMessageHandler : IDisposable
     {
         private readonly Stream _stream;
         private readonly CancellationToken _cancellationToken;
         private readonly Semaphore _streamSemaphore = new Semaphore(1, 1);
 
-        public OutgoingMessageProcessor(Stream stream, CancellationToken cancellationToken)
+        public OutgoingMessageHandler(Stream stream, CancellationToken cancellationToken)
         {
             _stream = stream;
             _cancellationToken = cancellationToken;
@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.V3.JsonRpc.Messaging
             _streamSemaphore.WaitOne();
 
             var buffer = Encoding.UTF8.GetBytes(json);
-            var header = Encoding.ASCII.GetBytes(OutgoingMessages.Header(buffer.Length));
+            var header = Encoding.ASCII.GetBytes(OutgoingMessageSerializer.Header(buffer.Length));
             await _stream.WriteAsync(header, 0, header.Length, _cancellationToken);
             await _stream.WriteAsync(buffer, 0, buffer.Length, _cancellationToken);
 
@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.V3.JsonRpc.Messaging
 
         public async Task Respond(string id, string json)
         {
-            await Send(OutgoingMessages.Response(id, json)).ConfigureAwait(false);
+            await Send(OutgoingMessageSerializer.Response(id, json)).ConfigureAwait(false);
         }
 
         public void Dispose()

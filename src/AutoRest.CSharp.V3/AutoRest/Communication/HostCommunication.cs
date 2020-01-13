@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace AutoRest.CSharp.V3.JsonRpc.MessageModels
 {
-    internal class StandaloneAutoRestInterface : IAutoRestInterface
+    internal class HostCommunication : IPluginCommunication
     {
         private readonly Dictionary<string, string> _arguments;
         private readonly string _basePath;
 
-        public StandaloneAutoRestInterface(string[] args)
+        public HostCommunication(string[] args)
         {
             _arguments = new Dictionary<string, string>();
             foreach (string s in args)

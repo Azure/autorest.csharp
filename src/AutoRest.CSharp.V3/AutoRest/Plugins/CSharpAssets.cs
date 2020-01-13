@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.V3.Plugins
 </Project>
 
 ";
-        public async Task<bool> Execute(IAutoRestInterface autoRest, CodeModel codeModel, Configuration configuration)
+        public async Task<bool> Execute(IPluginCommunication autoRest, CodeModel codeModel, Configuration configuration)
         {
             if (configuration.IncludeCsProj)
             {

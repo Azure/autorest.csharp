@@ -12,13 +12,13 @@ namespace AutoRest.CSharp.V3.JsonRpc.Messaging
     internal delegate void IncomingRequestProcess(IncomingRequest request);
     internal delegate void IncomingResponseProcess(IncomingResponse request);
 
-    internal class IncomingMessageProcessor
+    internal class IncomingMessageHandler
     {
         private readonly PeekableBinaryStream _stream;
         private readonly IncomingRequestProcess _requestProcess;
         private readonly IncomingResponseProcess _responseProcess;
 
-        public IncomingMessageProcessor(PeekableBinaryStream stream, IncomingRequestProcess requestProcess, IncomingResponseProcess responseProcess)
+        public IncomingMessageHandler(PeekableBinaryStream stream, IncomingRequestProcess requestProcess, IncomingResponseProcess responseProcess)
         {
             _stream = stream;
             _requestProcess = requestProcess;

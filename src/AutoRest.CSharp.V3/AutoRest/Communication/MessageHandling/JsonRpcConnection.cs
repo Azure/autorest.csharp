@@ -12,10 +12,10 @@ using AutoRest.CSharp.V3.Utilities;
 
 namespace AutoRest.CSharp.V3.JsonRpc.MessageModels
 {
-    internal delegate string IncomingRequestAction(Connection connection, IncomingRequest request);
+    internal delegate string IncomingRequestAction(JsonRpcConnection connection, IncomingRequest request);
 
 #pragma warning disable IDE0069 // Disposable fields should be disposed
-    internal sealed class Connection : IDisposable
+    internal sealed class JsonRpcConnection : IDisposable
     {
         private readonly Stream _outputStream;
         private readonly PeekableBinaryStream _inputStream;
@@ -26,17 +26,17 @@ namespace AutoRest.CSharp.V3.JsonRpc.MessageModels
 
         private readonly ConcurrentDictionary<string, TaskCompletionSource<string>> _responses = new ConcurrentDictionary<string, TaskCompletionSource<string>>();
         private readonly Dictionary<string, IncomingRequestAction> _incomingRequestActions;
-        private readonly IncomingMessageProcessor _incomingMessageProcessor;
-        private readonly OutgoingMessageProcessor _outgoingMessageProcessor;
+        private readonly IncomingMessageHandler _incomingMessageHandler;
+        private readonly OutgoingMessageHandler _outgoingMessageHandler;
 
-        public Connection(Stream inputStream, Stream outputStream, Dictionary<string, IncomingRequestAction>? incomingRequestActions = null)
+        public JsonRpcConnection(Stream inputStream, Stream outputStream, Dictionary<string, IncomingRequestAction>? incomingRequestActions = null)
         {
             _cancellationToken = CancellationTokenSource.Token;
             _inputStream = new PeekableBinaryStream(inputStream);
             _outputStream = outputStream;
             _incomingRequestActions = incomingRequestActions ?? new Dictionary<string, IncomingRequestAction>();
-            _incomingMessageProcessor = new IncomingMessageProcessor(_inputStream, HandleIncomingRequest, HandleIncomingResponse);
-            _outgoingMessageProcessor = new OutgoingMessageProcessor(_outputStream, _cancellationToken);
+            _incomingMessageHandler = new IncomingMessageHandler(_inputStream, HandleIncomingRequest, HandleIncomingResponse);
+            _outgoingMessageHandler = new OutgoingMessageHandler(_outputStream, _cancellationToken);
             _listener = Task.Factory.StartNew(Listen).Unwrap();
         }
 
@@ -45,7 +45,7 @@ namespace AutoRest.CSharp.V3.JsonRpc.MessageModels
         private Task<bool> Listen()
         {
             bool IsAlive() => !_cancellationToken.IsCancellationRequested;
-            while (IsAlive() && _incomingMessageProcessor.ProcessStream()) { }
+            while (IsAlive() && _incomingMessageHandler.ProcessStream()) { }
             return Task.FromResult(false);
         }
 
@@ -58,7 +58,7 @@ namespace AutoRest.CSharp.V3.JsonRpc.MessageModels
                     var result = requestAction(this, request);
                     if (!request.Id.IsNullOrEmpty())
                     {
-                        _outgoingMessageProcessor.Respond(request.Id!, result).GetAwaiter().GetResult();
+                        _outgoingMessageHandler.Respond(request.Id!, result).GetAwaiter().GetResult();
                     }
                 }
             }, _cancellationToken);
@@ -76,13 +76,13 @@ namespace AutoRest.CSharp.V3.JsonRpc.MessageModels
             }, _cancellationToken);
         }
 
-        public async Task Notification(string json) => await _outgoingMessageProcessor.Send(json).ConfigureAwait(false);
+        public async Task Notification(string json) => await _outgoingMessageHandler.Send(json).ConfigureAwait(false);
 
         public async Task<T> Request<T>(string id, string json)
         {
             var response = new TaskCompletionSource<string>();
             _responses.AddOrUpdate(id, response, (k, e) => response);
-            await _outgoingMessageProcessor.Send(json).ConfigureAwait(false);
+            await _outgoingMessageHandler.Send(json).ConfigureAwait(false);
             return (await response.Task.ConfigureAwait(false)).Parse().ToType<T>();
         }
 

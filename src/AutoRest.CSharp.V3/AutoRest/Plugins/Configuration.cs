@@ -12,7 +12,7 @@ namespace AutoRest.CSharp.V3
         public string Title { get; }
         public bool IncludeCsProj { get; }
 
-        public Configuration(IAutoRestInterface autoRest)
+        public Configuration(IPluginCommunication autoRest)
         {
             OutputPath = autoRest.GetValue<string?>("output-folder").GetAwaiter().GetResult() ?? "Generated";
             Namespace = autoRest.GetValue<string?>("namespace").GetAwaiter().GetResult() ?? "Sample";
