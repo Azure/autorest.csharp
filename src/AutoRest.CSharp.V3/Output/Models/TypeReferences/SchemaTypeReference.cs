@@ -5,7 +5,7 @@ using AutoRest.CSharp.V3.Pipeline.Generated;
 
 namespace AutoRest.CSharp.V3.ClientModels
 {
-    internal class SchemaTypeReference: ClientTypeReference
+    internal class SchemaTypeReference: TypeReference
     {
         public SchemaTypeReference(Schema schema, bool isNullable)
         {

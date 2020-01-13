@@ -3,9 +3,9 @@
 
 namespace AutoRest.CSharp.V3.ClientModels
 {
-    internal class ClientObjectConstant
+    internal class ObjectTypeConstant
     {
-        public ClientObjectConstant(string name, FrameworkTypeReference type, ClientConstant value)
+        public ObjectTypeConstant(string name, FrameworkTypeReference type, Constant value)
         {
             Name = name;
             Type = type;
@@ -13,7 +13,7 @@ namespace AutoRest.CSharp.V3.ClientModels
         }
 
         public string Name { get; }
-        public ClientTypeReference Type { get; }
-        public ClientConstant Value { get; }
+        public TypeReference Type { get; }
+        public Constant Value { get; }
     }
 }

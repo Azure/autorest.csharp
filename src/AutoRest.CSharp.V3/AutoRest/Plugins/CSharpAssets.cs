@@ -8,9 +8,9 @@ using AutoRest.CSharp.V3.Pipeline.Generated;
 namespace AutoRest.CSharp.V3.Plugins
 {
     // ReSharper disable once StringLiteralTypo
-    [PluginName("cs-asseter")]
+    [PluginName("csharpassets")]
     // ReSharper disable once IdentifierTypo
-    internal class Asseter : IPlugin
+    internal class CSharpAssets : IPlugin
     {
         private string _csProjContent = @"<Project Sdk=""Microsoft.NET.Sdk"">
 

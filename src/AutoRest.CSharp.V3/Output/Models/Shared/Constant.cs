@@ -6,9 +6,9 @@ using System.Diagnostics;
 
 namespace AutoRest.CSharp.V3.ClientModels
 {
-    internal struct ClientConstant
+    internal struct Constant
     {
-        public ClientConstant(object? value, ClientTypeReference type)
+        public Constant(object? value, TypeReference type)
         {
             Debug.Assert(value == null || value.GetType().Namespace?.StartsWith("System") == true);
             Value = value;
@@ -40,6 +40,6 @@ namespace AutoRest.CSharp.V3.ClientModels
         }
 
         public object? Value { get; }
-        public ClientTypeReference Type { get; }
+        public TypeReference Type { get; }
     }
 }

@@ -3,15 +3,15 @@
 
 namespace AutoRest.CSharp.V3.ClientModels
 {
-    internal class DiagnosticScopeAttributes
+    internal class DiagnosticAttribute
     {
-        public DiagnosticScopeAttributes(string name, ConstantOrParameter value)
+        public DiagnosticAttribute(string name, RequestParameter value)
         {
             Name = name;
             Value = value;
         }
 
         public string Name { get; }
-        public ConstantOrParameter Value { get; }
+        public RequestParameter Value { get; }
     }
 }

@@ -3,7 +3,7 @@
 
 namespace AutoRest.CSharp.V3.ClientModels
 {
-    internal abstract class ClientTypeReference
+    internal abstract class TypeReference
     {
         public abstract bool IsNullable { get; }
     }

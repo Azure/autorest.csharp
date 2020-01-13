@@ -3,9 +3,9 @@
 
 namespace AutoRest.CSharp.V3.ClientModels
 {
-    internal class ClientObjectProperty
+    internal class ObjectTypeProperty
     {
-        public ClientObjectProperty(string name, string description, ClientTypeReference type, bool isReadOnly, ClientConstant? defaultValue = null)
+        public ObjectTypeProperty(string name, string description, TypeReference type, bool isReadOnly, Constant? defaultValue = null)
         {
             Name = name;
             Description = description;
@@ -16,8 +16,8 @@ namespace AutoRest.CSharp.V3.ClientModels
 
         public string Name { get; }
         public string Description { get; }
-        public ClientConstant? DefaultValue { get; }
-        public ClientTypeReference Type { get; }
+        public Constant? DefaultValue { get; }
+        public TypeReference Type { get; }
         public bool IsReadOnly { get; }
      }
 }

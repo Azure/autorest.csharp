@@ -3,15 +3,15 @@
 
 namespace AutoRest.CSharp.V3.ClientModels
 {
-    internal class ClientMethodDiagnostics
+    internal class Diagnostic
     {
-        public ClientMethodDiagnostics(string scopeName, DiagnosticScopeAttributes[] attributes)
+        public Diagnostic(string scopeName, DiagnosticAttribute[] attributes)
         {
             ScopeName = scopeName;
             Attributes = attributes;
         }
 
         public string ScopeName { get; }
-        public DiagnosticScopeAttributes[] Attributes { get; }
+        public DiagnosticAttribute[] Attributes { get; }
     }
 }

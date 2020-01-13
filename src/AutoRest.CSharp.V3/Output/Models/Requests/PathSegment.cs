@@ -5,14 +5,14 @@ namespace AutoRest.CSharp.V3.ClientModels
 {
     internal class PathSegment
     {
-        public PathSegment(ConstantOrParameter value, bool escape, SerializationFormat format)
+        public PathSegment(RequestParameter value, bool escape, SerializationFormat format)
         {
             Value = value;
             Escape = escape;
             Format = format;
         }
 
-        public ConstantOrParameter Value { get; }
+        public RequestParameter Value { get; }
         public bool Escape { get; }
         public SerializationFormat Format { get; }
     }

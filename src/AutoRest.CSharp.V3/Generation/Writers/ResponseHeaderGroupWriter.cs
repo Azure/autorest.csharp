@@ -4,24 +4,25 @@
 using AutoRest.CSharp.V3.ClientModels;
 using Azure;
 using Azure.Core;
+using Response = Azure.Response;
 
 namespace AutoRest.CSharp.V3.CodeGen
 {
-    internal class ResponseHeaderModelModelWriter
+    internal class ResponseHeaderGroupWriter
     {
         private const string ResponseParameter = "response";
         private const string ResponseField = "_" + ResponseParameter;
 
         private readonly TypeFactory _typeFactory;
 
-        public ResponseHeaderModelModelWriter(TypeFactory typeFactory)
+        public ResponseHeaderGroupWriter(TypeFactory typeFactory)
         {
             _typeFactory = typeFactory;
         }
 
-        public void WriteHeaderModel(CodeWriter writer, ResponseHeaderModel responseHeaderModel)
+        public void WriteHeaderModel(CodeWriter writer, ResponseHeaderGroup responseHeaderGroup)
         {
-            var cs = _typeFactory.CreateType(responseHeaderModel.Name);
+            var cs = _typeFactory.CreateType(responseHeaderGroup.Name);
             using (writer.Namespace(cs.Namespace))
             {
                 writer.UseNamespace(new CSharpType(typeof(ResponseHeadersExtensions)).Namespace);
@@ -31,7 +32,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     WriteField(writer);
                     WriteConstructor(writer, cs);
 
-                    foreach (var method in responseHeaderModel.Headers)
+                    foreach (var method in responseHeaderGroup.Headers)
                     {
                         WriteHeaderProperty(writer, method);
                     }

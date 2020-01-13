@@ -12,7 +12,7 @@ namespace AutoRest.CSharp.V3.ClientModels.Serialization
         }
 
         public override string Name { get; }
-        public override ClientTypeReference Type => Value.Type;
+        public override TypeReference Type => Value.Type;
         public XmlValueSerialization Value { get; }
     }
 }

@@ -5,14 +5,14 @@ namespace AutoRest.CSharp.V3.ClientModels.Serialization
 {
     internal class JsonObjectSerialization: JsonSerialization
     {
-        public JsonObjectSerialization(ClientTypeReference type, JsonPropertySerialization[] properties, JsonDynamicPropertiesSerialization? additionalProperties)
+        public JsonObjectSerialization(TypeReference type, JsonPropertySerialization[] properties, JsonDynamicPropertiesSerialization? additionalProperties)
         {
             Type = type;
             Properties = properties;
             AdditionalProperties = additionalProperties;
         }
 
-        public override ClientTypeReference Type { get; }
+        public override TypeReference Type { get; }
         public JsonPropertySerialization[] Properties { get; }
         public JsonDynamicPropertiesSerialization? AdditionalProperties { get; }
     }

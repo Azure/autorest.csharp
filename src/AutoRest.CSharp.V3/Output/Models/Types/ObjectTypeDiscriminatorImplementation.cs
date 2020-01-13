@@ -3,9 +3,9 @@
 
 namespace AutoRest.CSharp.V3.ClientModels
 {
-    internal class ClientObjectDiscriminatorImplementation
+    internal class ObjectTypeDiscriminatorImplementation
     {
-        public ClientObjectDiscriminatorImplementation(string key, SchemaTypeReference type, bool isDirect)
+        public ObjectTypeDiscriminatorImplementation(string key, SchemaTypeReference type, bool isDirect)
         {
             Key = key;
             Type = type;

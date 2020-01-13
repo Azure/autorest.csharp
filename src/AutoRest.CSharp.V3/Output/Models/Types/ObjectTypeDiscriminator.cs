@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace AutoRest.CSharp.V3.ClientModels
 {
-    internal class ClientObjectDiscriminator
+    internal class ObjectTypeDiscriminator
     {
         // TODO: I'm not a fan of addressing the property by a string name, should be represented by property reference
         public string Property { get; }
@@ -13,9 +13,9 @@ namespace AutoRest.CSharp.V3.ClientModels
 
         public string? Value { get; }
 
-        public ClientObjectDiscriminatorImplementation[] Implementations { get; }
+        public ObjectTypeDiscriminatorImplementation[] Implementations { get; }
 
-        public ClientObjectDiscriminator(string property, string serializedName, ClientObjectDiscriminatorImplementation[] implementations, string? value)
+        public ObjectTypeDiscriminator(string property, string serializedName, ObjectTypeDiscriminatorImplementation[] implementations, string? value)
         {
             Property = property;
             Implementations = implementations;

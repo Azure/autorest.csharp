@@ -16,10 +16,10 @@ namespace AutoRest.CSharp.V3.ClientModels
 {
     internal class ClientBuilder
     {
-        public static ServiceClient BuildClient(OperationGroup operationGroup)
+        public static Client BuildClient(OperationGroup operationGroup)
         {
-            List<ClientMethod> methods = new List<ClientMethod>();
-            Dictionary<string, ServiceClientParameter> clientParameters = new Dictionary<string, ServiceClientParameter>();
+            List<Method> methods = new List<Method>();
+            Dictionary<string, Parameter> clientParameters = new Dictionary<string, Parameter>();
 
             var allClientParameters = operationGroup.Operations
                 .SelectMany(op => op.Request.Parameters)
@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.V3.ClientModels
                 .Distinct();
 
             // Deduplication required because of https://github.com/Azure/autorest.modelerfour/issues/100
-            foreach (Parameter clientParameter in allClientParameters)
+            foreach (Pipeline.Generated.Parameter clientParameter in allClientParameters)
             {
                 clientParameters[clientParameter.Language.Default.Name] = BuildParameter(clientParameter);
             }
@@ -43,30 +43,30 @@ namespace AutoRest.CSharp.V3.ClientModels
                 }
             }
 
-            return new ServiceClient(clientName,
+            return new Client(clientName,
                 operationGroup.Language.Default.Description,
                 OrderParameters(clientParameters.Values),
                 methods.ToArray());
         }
 
-        private static ServiceClientParameter[] OrderParameters(IEnumerable<ServiceClientParameter> parameters)
+        private static Parameter[] OrderParameters(IEnumerable<Parameter> parameters)
         {
             return parameters.OrderBy(p => p.DefaultValue != null).ToArray();
         }
 
-        private static ClientConstant? CreateDefaultValueConstant(Parameter requestParameter)
+        private static Constant? CreateDefaultValueConstant(Pipeline.Generated.Parameter requestParameter)
         {
             if (requestParameter.ClientDefaultValue != null)
             {
-                return ClientModelBuilderHelpers.ParseClientConstant(
+                return BuilderHelpers.ParseClientConstant(
                     requestParameter.ClientDefaultValue,
-                    (FrameworkTypeReference)ClientModelBuilderHelpers.CreateType(requestParameter.Schema, requestParameter.IsNullable()));
+                    (FrameworkTypeReference)BuilderHelpers.CreateType(requestParameter.Schema, requestParameter.IsNullable()));
             }
 
             return null;
         }
 
-        private static ClientMethod? BuildMethod(Operation operation, string clientName, IReadOnlyDictionary<string, ServiceClientParameter> clientParameters)
+        private static Method? BuildMethod(Operation operation, string clientName, IReadOnlyDictionary<string, Parameter> clientParameters)
         {
             var httpRequest = operation.Request.Protocol.Http as HttpRequest;
             var httpRequestWithBody = httpRequest as HttpWithBodyRequest;
@@ -80,18 +80,18 @@ namespace AutoRest.CSharp.V3.ClientModels
                 return null;
             }
 
-            Dictionary<string, ConstantOrParameter> uriParameters = new Dictionary<string, ConstantOrParameter>();
+            Dictionary<string, RequestParameter> uriParameters = new Dictionary<string, RequestParameter>();
             Dictionary<string, PathSegment> pathParameters = new Dictionary<string, PathSegment>();
             List<QueryParameter> query = new List<QueryParameter>();
             List<RequestHeader> headers = new List<RequestHeader>();
-            List<ServiceClientParameter> methodParameters = new List<ServiceClientParameter>();
+            List<Parameter> methodParameters = new List<Parameter>();
 
-            ObjectRequestBody? body = null;
-            foreach (Parameter requestParameter in operation.Request.Parameters ?? Array.Empty<Parameter>())
+            RequestBody? body = null;
+            foreach (Pipeline.Generated.Parameter requestParameter in operation.Request.Parameters ?? Array.Empty<Pipeline.Generated.Parameter>())
             {
                 string defaultName = requestParameter.Language.Default.Name;
                 string serializedName = requestParameter.Language.Default.SerializedName ?? defaultName;
-                ConstantOrParameter constantOrParameter;
+                RequestParameter constantOrParameter;
                 Schema valueSchema = requestParameter.Schema;
 
                 if (requestParameter.Implementation == ImplementationLocation.Method)
@@ -99,7 +99,7 @@ namespace AutoRest.CSharp.V3.ClientModels
                     switch (requestParameter.Schema)
                     {
                         case ConstantSchema constant:
-                            constantOrParameter = ClientModelBuilderHelpers.ParseClientConstant(constant);
+                            constantOrParameter = BuilderHelpers.ParseClientConstant(constant);
                             valueSchema = constant.ValueType;
                             break;
                         case BinarySchema _:
@@ -122,7 +122,7 @@ namespace AutoRest.CSharp.V3.ClientModels
 
                 if (requestParameter.Protocol.Http is HttpParameter httpParameter)
                 {
-                    SerializationFormat serializationFormat = ClientModelBuilderHelpers.GetSerializationFormat(valueSchema);
+                    SerializationFormat serializationFormat = BuilderHelpers.GetSerializationFormat(valueSchema);
                     switch (httpParameter.In)
                     {
                         case ParameterLocation.Header:
@@ -137,7 +137,7 @@ namespace AutoRest.CSharp.V3.ClientModels
                         case ParameterLocation.Body:
                             Debug.Assert(httpRequestWithBody != null);
                             var serialization = SerializationBuilder.Build(httpRequestWithBody.KnownMediaType, requestParameter.Schema, requestParameter.IsNullable());
-                            body = new ObjectRequestBody(constantOrParameter, serialization);
+                            body = new RequestBody(constantOrParameter, serialization);
                             break;
                         case ParameterLocation.Uri:
                             uriParameters[defaultName] = constantOrParameter;
@@ -148,10 +148,10 @@ namespace AutoRest.CSharp.V3.ClientModels
 
             if (httpRequestWithBody != null)
             {
-                headers.AddRange(httpRequestWithBody.MediaTypes.Select(mediaType => new RequestHeader("Content-Type", ClientModelBuilderHelpers.StringConstant(mediaType))));
+                headers.AddRange(httpRequestWithBody.MediaTypes.Select(mediaType => new RequestHeader("Content-Type", BuilderHelpers.StringConstant(mediaType))));
             }
 
-            var request = new ClientMethodRequest(
+            var request = new Request(
                 ToCoreRequestMethod(httpRequest.Method) ?? RequestMethod.Get,
                 ToParts(httpRequest.Uri, uriParameters),
                 ToPathParts(httpRequest.Path, pathParameters),
@@ -164,7 +164,7 @@ namespace AutoRest.CSharp.V3.ClientModels
             if (response is SchemaResponse schemaResponse)
             {
                 var schema = schemaResponse.Schema is ConstantSchema constantSchema ? constantSchema.ValueType : schemaResponse.Schema;
-                var responseType = ClientModelBuilderHelpers.CreateType(schema, isNullable: false);
+                var responseType = BuilderHelpers.CreateType(schema, isNullable: false);
 
                 ObjectSerialization serialization = SerializationBuilder.Build(httpResponse.KnownMediaType, schema, isNullable: false);
 
@@ -175,7 +175,7 @@ namespace AutoRest.CSharp.V3.ClientModels
                 responseBody = new StreamResponseBody();
             }
 
-            ClientMethodResponse clientResponse = new ClientMethodResponse(
+            Response clientResponse = new Response(
                 responseBody,
                 httpResponse.StatusCodes.Select(ToStatusCode).ToArray(),
                 BuildResponseHeaderModel(operation, httpResponse)
@@ -184,18 +184,18 @@ namespace AutoRest.CSharp.V3.ClientModels
             string operationName = operation.CSharpName();
             //TODO: This is a hack since we don't have the model information at this point
             var schemaForPaging = ((responseBody as ObjectResponseBody)?.Type as SchemaTypeReference)?.Schema as ObjectSchema;
-            return new ClientMethod(
+            return new Method(
                 operationName,
-                ClientModelBuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description),
+                BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description),
                 request,
                 OrderParameters(methodParameters),
                 clientResponse,
-                new ClientMethodDiagnostics($"{clientName}.{operationName}",Array.Empty<DiagnosticScopeAttributes>()),
+                new Diagnostic($"{clientName}.{operationName}",Array.Empty<DiagnosticAttribute>()),
                 GetClientMethodPaging(operation, schemaForPaging)
             );
         }
 
-        private static ClientMethodPaging? GetClientMethodPaging(Operation operation, ObjectSchema? schema)
+        private static Paging? GetClientMethodPaging(Operation operation, ObjectSchema? schema)
         {
             var pageable = operation.Extensions.GetValue<IDictionary<object, object>>("x-ms-pageable");
             if (pageable == null) return null;
@@ -213,16 +213,16 @@ namespace AutoRest.CSharp.V3.ClientModels
             // If itemName resolves to Value, we can't use itemProperty. So, get the correct property.
             var itemTypeProperty = schema?.Properties?.FirstOrDefault(p => p.CSharpName() == itemName);
             var itemTypeValueSchema = (itemTypeProperty?.Schema as ArraySchema)?.ElementType;
-            var itemType = ClientModelBuilderHelpers.CreateType(itemTypeValueSchema ?? new Schema(), false);
-            return new ClientMethodPaging(nextLinkName, itemName, itemType, operationName);
+            var itemType = BuilderHelpers.CreateType(itemTypeValueSchema ?? new Schema(), false);
+            return new Paging(nextLinkName, itemName, itemType, operationName);
         }
 
-        private static ServiceClientParameter BuildParameter(Parameter requestParameter)
+        private static Parameter BuildParameter(Pipeline.Generated.Parameter requestParameter)
         {
-            ClientConstant? defaultValue = null;
+            Constant? defaultValue = null;
             if (requestParameter.Schema is ConstantSchema constantSchema)
             {
-                defaultValue = ClientModelBuilderHelpers.ParseClientConstant(constantSchema);
+                defaultValue = BuilderHelpers.ParseClientConstant(constantSchema);
             }
 
             ParameterLocation? location = null;
@@ -231,16 +231,16 @@ namespace AutoRest.CSharp.V3.ClientModels
                 location = httpParameter.In;
             }
 
-            return new ServiceClientParameter(
+            return new Parameter(
                 requestParameter.CSharpName(),
                 CreateDescription(requestParameter),
-                ClientModelBuilderHelpers.CreateType(requestParameter.Schema, requestParameter.IsNullable()),
+                BuilderHelpers.CreateType(requestParameter.Schema, requestParameter.IsNullable()),
                 CreateDefaultValueConstant(requestParameter) ?? defaultValue,
                 requestParameter.Required == true,
                 location);
         }
 
-        private static ResponseHeaderModel? BuildResponseHeaderModel(Operation operation, HttpResponse httpResponse)
+        private static ResponseHeaderGroup? BuildResponseHeaderModel(Operation operation, HttpResponse httpResponse)
         {
             if (!httpResponse.Headers.Any())
             {
@@ -248,11 +248,11 @@ namespace AutoRest.CSharp.V3.ClientModels
             }
 
             ResponseHeader CreateResponseHeader(HttpHeader header) =>
-                new ResponseHeader(header.Header.ToCleanName(), header.Header, ClientModelBuilderHelpers.CreateType(header.Schema, true));
+                new ResponseHeader(header.Header.ToCleanName(), header.Header, BuilderHelpers.CreateType(header.Schema, true));
 
             string operationName = operation.CSharpName();
 
-            return new ResponseHeaderModel(
+            return new ResponseHeaderGroup(
                 operationName + "Headers",
                 $"Header model for {operationName}",
                 httpResponse.Headers.Select(CreateResponseHeader).ToArray()
@@ -279,12 +279,12 @@ namespace AutoRest.CSharp.V3.ClientModels
             }
         }
 
-        private static ConstantOrParameter[] ToParts(string httpRequestUri, Dictionary<string, ConstantOrParameter> parameters)
+        private static RequestParameter[] ToParts(string httpRequestUri, Dictionary<string, RequestParameter> parameters)
         {
-            List<ConstantOrParameter> host = new List<ConstantOrParameter>();
+            List<RequestParameter> host = new List<RequestParameter>();
             foreach ((string text, bool isLiteral) in StringExtensions.GetPathParts(httpRequestUri))
             {
-                host.Add(isLiteral ? ClientModelBuilderHelpers.StringConstant(text) : parameters[text]);
+                host.Add(isLiteral ? BuilderHelpers.StringConstant(text) : parameters[text]);
             }
 
             return host.ToArray();
@@ -294,7 +294,7 @@ namespace AutoRest.CSharp.V3.ClientModels
         {
             PathSegment TextSegment(string text)
             {
-                return new PathSegment(ClientModelBuilderHelpers.StringConstant(text), false, SerializationFormat.Default);
+                return new PathSegment(BuilderHelpers.StringConstant(text), false, SerializationFormat.Default);
             }
 
             List<PathSegment> host = new List<PathSegment>();
@@ -321,11 +321,11 @@ namespace AutoRest.CSharp.V3.ClientModels
             _ => null
         };
 
-        private static string CreateDescription(Parameter requestParameter)
+        private static string CreateDescription(Pipeline.Generated.Parameter requestParameter)
         {
             return string.IsNullOrWhiteSpace(requestParameter.Language.Default.Description) ?
                 $"The {requestParameter.Schema.Name} to use." :
-                ClientModelBuilderHelpers.EscapeXmlDescription(requestParameter.Language.Default.Description);
+                BuilderHelpers.EscapeXmlDescription(requestParameter.Language.Default.Description);
         }
     }
 }

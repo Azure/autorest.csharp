@@ -3,9 +3,9 @@
 
 namespace AutoRest.CSharp.V3.ClientModels
 {
-    internal class ClientMethodResponse
+    internal class Response
     {
-        public ClientMethodResponse(ResponseBody? responseBody, int[] successfulStatusCodes, ResponseHeaderModel? headerModel)
+        public Response(ResponseBody? responseBody, int[] successfulStatusCodes, ResponseHeaderGroup? headerModel)
         {
             ResponseBody = responseBody;
             SuccessfulStatusCodes = successfulStatusCodes;
@@ -14,6 +14,6 @@ namespace AutoRest.CSharp.V3.ClientModels
 
         public ResponseBody? ResponseBody { get; }
         public int[] SuccessfulStatusCodes { get; }
-        public ResponseHeaderModel? HeaderModel { get; }
+        public ResponseHeaderGroup? HeaderModel { get; }
     }
 }

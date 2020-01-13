@@ -3,9 +3,9 @@
 
 namespace AutoRest.CSharp.V3.ClientModels
 {
-    internal class ResponseHeaderModel
+    internal class ResponseHeaderGroup
     {
-        public ResponseHeaderModel(string name, string description, ResponseHeader[] headers)
+        public ResponseHeaderGroup(string name, string description, ResponseHeader[] headers)
         {
             Name = name;
             Headers = headers;

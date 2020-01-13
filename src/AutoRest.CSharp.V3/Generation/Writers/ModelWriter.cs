@@ -19,17 +19,17 @@ namespace AutoRest.CSharp.V3.CodeGen
             _typeFactory = typeFactory;
         }
 
-        public void WriteModel(CodeWriter writer, ISchemaTypeProvider model)
+        public void WriteModel(CodeWriter writer, ISchemaType model)
         {
             switch (model)
             {
-                case ClientObject objectSchema:
+                case ObjectType objectSchema:
                     WriteObjectSchema(writer, objectSchema);
                     break;
-                case ClientEnum e when e.IsStringBased:
+                case EnumType e when e.IsStringBased:
                     WriteChoiceSchema(writer, e);
                     break;
-                case ClientEnum e when !e.IsStringBased:
+                case EnumType e when !e.IsStringBased:
                     WriteSealedChoiceSchema(writer, e);
                     break;
                 default:
@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
         }
 
-        private void WriteObjectSchema(CodeWriter writer, ClientObject schema)
+        private void WriteObjectSchema(CodeWriter writer, ObjectType schema)
         {
             var cs = _typeFactory.CreateType(schema);
             using (writer.Namespace(cs.Namespace))
@@ -149,7 +149,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
         }
 
-        private bool NeedsInitialization(ClientObjectProperty property)
+        private bool NeedsInitialization(ObjectTypeProperty property)
         {
             // TODO: This logic shouldn't be base only on type nullability
             if (property.Type.IsNullable)
@@ -164,13 +164,13 @@ namespace AutoRest.CSharp.V3.CodeGen
 
             if (property.Type is SchemaTypeReference schemaType)
             {
-                return _typeFactory.ResolveReference(schemaType) is ClientObject;
+                return _typeFactory.ResolveReference(schemaType) is ObjectType;
             }
 
             return false;
         }
 
-        private void WriteSealedChoiceSchema(CodeWriter writer, ClientEnum schema)
+        private void WriteSealedChoiceSchema(CodeWriter writer, EnumType schema)
         {
             var cs = _typeFactory.CreateType(schema);
             using (writer.Namespace(cs.Namespace))
@@ -179,7 +179,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                 using (writer.Scope($"public enum {cs.Name}"))
                 {
-                    foreach (ClientEnumValue value in schema.Values)
+                    foreach (EnumTypeValue value in schema.Values)
                     {
                         writer.WriteXmlDocumentationSummary(value.Description);
                         writer.Line($"{value.Name},");
@@ -189,7 +189,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
         }
 
-        private void WriteChoiceSchema(CodeWriter writer, ClientEnum schema)
+        private void WriteChoiceSchema(CodeWriter writer, EnumType schema)
         {
             var cs = _typeFactory.CreateType(schema);
             using (writer.Namespace(cs.Namespace))

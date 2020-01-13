@@ -7,9 +7,9 @@ using AutoRest.CSharp.V3.Pipeline.Generated;
 
 namespace AutoRest.CSharp.V3.ClientModels
 {
-    internal class ClientObject : ISchemaTypeProvider
+    internal class ObjectType : ISchemaType
     {
-        public ClientObject(Schema schema, string name, string? description, SchemaTypeReference? inherits, IEnumerable<ClientObjectProperty> properties, ClientObjectDiscriminator? discriminator, DictionaryTypeReference? implementsDictionary, ObjectSerialization[] serializations)
+        public ObjectType(Schema schema, string name, string? description, SchemaTypeReference? inherits, IEnumerable<ObjectTypeProperty> properties, ObjectTypeDiscriminator? discriminator, DictionaryTypeReference? implementsDictionary, ObjectSerialization[] serializations)
         {
             Schema = schema;
             Name = name;
@@ -18,7 +18,7 @@ namespace AutoRest.CSharp.V3.ClientModels
             Discriminator = discriminator;
             ImplementsDictionary = implementsDictionary;
             Serializations = serializations;
-            Properties = new List<ClientObjectProperty>(properties);
+            Properties = new List<ObjectTypeProperty>(properties);
         }
 
         public string Name { get; }
@@ -26,8 +26,8 @@ namespace AutoRest.CSharp.V3.ClientModels
         public Schema Schema { get; }
         public SchemaTypeReference? Inherits { get; }
         public ObjectSerialization[] Serializations { get; }
-        public IList<ClientObjectProperty> Properties { get; }
-        public ClientObjectDiscriminator? Discriminator { get; }
+        public IList<ObjectTypeProperty> Properties { get; }
+        public ObjectTypeDiscriminator? Discriminator { get; }
         public DictionaryTypeReference? ImplementsDictionary { get; }
     }
 }

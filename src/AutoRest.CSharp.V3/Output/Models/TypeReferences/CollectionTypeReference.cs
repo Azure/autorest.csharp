@@ -3,15 +3,15 @@
 
 namespace AutoRest.CSharp.V3.ClientModels
 {
-    internal class CollectionTypeReference : ClientTypeReference
+    internal class CollectionTypeReference : TypeReference
     {
-        public CollectionTypeReference(ClientTypeReference itemType, bool isNullable)
+        public CollectionTypeReference(TypeReference itemType, bool isNullable)
         {
             ItemType = itemType;
             IsNullable = isNullable;
         }
 
-        public ClientTypeReference ItemType { get; }
+        public TypeReference ItemType { get; }
         public override bool IsNullable { get; }
     }
 }

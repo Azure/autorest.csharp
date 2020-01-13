@@ -6,7 +6,7 @@ namespace AutoRest.CSharp.V3.ClientModels.Serialization
     internal class XmlObjectSerialization: XmlElementSerialization
     {
         public XmlObjectSerialization(string name,
-            ClientTypeReference type,
+            TypeReference type,
             XmlObjectElementSerialization[] elements,
             XmlObjectAttributeSerialization[] attributes,
             XmlObjectArraySerialization[] embeddedArrays)
@@ -22,6 +22,6 @@ namespace AutoRest.CSharp.V3.ClientModels.Serialization
         public XmlObjectElementSerialization[] Elements { get; }
         public XmlObjectAttributeSerialization[] Attributes { get; }
         public XmlObjectArraySerialization[] EmbeddedArrays { get; }
-        public override ClientTypeReference Type { get; }
+        public override TypeReference Type { get; }
     }
 }

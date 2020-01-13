@@ -45,7 +45,7 @@ namespace AutoRest.CSharp.V3
 
                     await autoRest.WriteFile("CodeModel.yaml", codeModelYaml, "source-file-csharp");
 
-                    codeModel = Serialization.DeserializeCodeModel(codeModelYaml);
+                    codeModel = CodeModelSerialization.DeserializeCodeModel(codeModelYaml);
                 }
                 var configuration = new Configuration(autoRest);
                 await plugin.Execute(autoRest, codeModel, configuration);

@@ -7,6 +7,6 @@ namespace AutoRest.CSharp.V3.ClientModels
 {
     internal class StreamResponseBody : ResponseBody
     {
-        public override ClientTypeReference Type { get; } = new FrameworkTypeReference(typeof(Stream));
+        public override TypeReference Type { get; } = new FrameworkTypeReference(typeof(Stream));
     }
 }

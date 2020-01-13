@@ -20,28 +20,28 @@ namespace AutoRest.CSharp.V3.ClientModels
             _mediaTypes = mediaTypes;
         }
 
-        private static ISchemaTypeProvider BuildClientEnum(SealedChoiceSchema sealedChoiceSchema) => new ClientEnum(
+        private static ISchemaType BuildClientEnum(SealedChoiceSchema sealedChoiceSchema) => new EnumType(
             sealedChoiceSchema,
             sealedChoiceSchema.CSharpName(),
             CreateDescription(sealedChoiceSchema),
-            sealedChoiceSchema.Choices.Select(c => new ClientEnumValue(
+            sealedChoiceSchema.Choices.Select(c => new EnumTypeValue(
                 c.CSharpName(),
                 CreateDescription(c),
-                ClientModelBuilderHelpers.StringConstant(c.Value))));
+                BuilderHelpers.StringConstant(c.Value))));
 
-        private static ISchemaTypeProvider BuildClientEnum(ChoiceSchema choiceSchema) => new ClientEnum(
+        private static ISchemaType BuildClientEnum(ChoiceSchema choiceSchema) => new EnumType(
             choiceSchema,
             choiceSchema.CSharpName(),
             CreateDescription(choiceSchema),
-            choiceSchema.Choices.Select(c => new ClientEnumValue(
+            choiceSchema.Choices.Select(c => new EnumTypeValue(
                 c.CSharpName(),
                 CreateDescription(c),
-                ClientModelBuilderHelpers.StringConstant(c.Value))),
+                BuilderHelpers.StringConstant(c.Value))),
             true);
 
-        private ISchemaTypeProvider BuildClientObject(ObjectSchema objectSchema)
+        private ISchemaType BuildClientObject(ObjectSchema objectSchema)
         {
-            ClientTypeReference? inheritsFromTypeReference = null;
+            TypeReference? inheritsFromTypeReference = null;
             DictionarySchema? inheritedDictionarySchema = null;
 
             foreach (ComplexSchema complexSchema in objectSchema.Parents!.Immediate)
@@ -49,7 +49,7 @@ namespace AutoRest.CSharp.V3.ClientModels
                 switch (complexSchema)
                 {
                     case ObjectSchema parentObjectSchema:
-                        inheritsFromTypeReference = ClientModelBuilderHelpers.CreateType(parentObjectSchema, false);
+                        inheritsFromTypeReference = BuilderHelpers.CreateType(parentObjectSchema, false);
                         break;
                     case DictionarySchema dictionarySchema:
                         inheritedDictionarySchema = dictionarySchema;
@@ -57,16 +57,16 @@ namespace AutoRest.CSharp.V3.ClientModels
                 }
             }
 
-            List<ClientObjectProperty> properties = new List<ClientObjectProperty>();
+            List<ObjectTypeProperty> properties = new List<ObjectTypeProperty>();
 
             foreach (Property property in objectSchema.Properties!)
             {
-                ClientObjectProperty clientObjectProperty = CreateProperty(property);
-                properties.Add(clientObjectProperty);
+                ObjectTypeProperty objectTypeProperty = CreateProperty(property);
+                properties.Add(objectTypeProperty);
             }
 
             Discriminator? schemaDiscriminator = objectSchema.Discriminator;
-            ClientObjectDiscriminator? discriminator = null;
+            ObjectTypeDiscriminator? discriminator = null;
 
             if (schemaDiscriminator == null && objectSchema.DiscriminatorValue != null)
             {
@@ -74,16 +74,16 @@ namespace AutoRest.CSharp.V3.ClientModels
 
                 Debug.Assert(schemaDiscriminator != null);
 
-                discriminator = new ClientObjectDiscriminator(
+                discriminator = new ObjectTypeDiscriminator(
                     schemaDiscriminator.Property.CSharpName(),
                     schemaDiscriminator.Property.SerializedName,
-                    Array.Empty<ClientObjectDiscriminatorImplementation>(),
+                    Array.Empty<ObjectTypeDiscriminatorImplementation>(),
                     objectSchema.DiscriminatorValue
                 );
             }
             else if (schemaDiscriminator != null)
             {
-                discriminator = new ClientObjectDiscriminator(
+                discriminator = new ObjectTypeDiscriminator(
                     schemaDiscriminator.Property.CSharpName(),
                     schemaDiscriminator.Property.SerializedName,
                     CreateDiscriminatorImplementations(schemaDiscriminator),
@@ -91,7 +91,7 @@ namespace AutoRest.CSharp.V3.ClientModels
                     );
             }
 
-            return new ClientObject(
+            return new ObjectType(
                 objectSchema,
                 objectSchema.CSharpName(),
                 CreateDescription(objectSchema),
@@ -112,20 +112,20 @@ namespace AutoRest.CSharp.V3.ClientModels
         {
             return new DictionaryTypeReference(
                 new FrameworkTypeReference(typeof(string)),
-                ClientModelBuilderHelpers.CreateType(inheritedDictionarySchema.ElementType, false),
+                BuilderHelpers.CreateType(inheritedDictionarySchema.ElementType, false),
                 false);
         }
 
-        private static ClientObjectDiscriminatorImplementation[] CreateDiscriminatorImplementations(Discriminator schemaDiscriminator)
+        private static ObjectTypeDiscriminatorImplementation[] CreateDiscriminatorImplementations(Discriminator schemaDiscriminator)
         {
-            return schemaDiscriminator.All.Select(implementation => new ClientObjectDiscriminatorImplementation(
+            return schemaDiscriminator.All.Select(implementation => new ObjectTypeDiscriminatorImplementation(
                 implementation.Key,
-                (SchemaTypeReference)ClientModelBuilderHelpers.CreateType(implementation.Value, false),
+                (SchemaTypeReference)BuilderHelpers.CreateType(implementation.Value, false),
                 schemaDiscriminator.Immediate.ContainsKey(implementation.Key)
             )).ToArray();
         }
 
-        public ISchemaTypeProvider BuildModel(Schema schema) => schema switch
+        public ISchemaType BuildModel(Schema schema) => schema switch
         {
             SealedChoiceSchema sealedChoiceSchema => BuildClientEnum(sealedChoiceSchema),
             ChoiceSchema choiceSchema => BuildClientEnum(choiceSchema),
@@ -133,29 +133,29 @@ namespace AutoRest.CSharp.V3.ClientModels
             _ => throw new NotImplementedException()
         };
 
-        private static ClientObjectProperty CreateProperty(Property property)
+        private static ObjectTypeProperty CreateProperty(Property property)
         {
             bool isReadOnly = property.IsDiscriminator == true || property.ReadOnly == true;
 
-            ClientConstant? defaultValue = null;
+            Constant? defaultValue = null;
 
-            ClientTypeReference type;
+            TypeReference type;
             if (property.Schema is ConstantSchema constantSchema)
             {
-                type = ClientModelBuilderHelpers.CreateType(constantSchema.ValueType, false);
-                defaultValue = ClientModelBuilderHelpers.ParseClientConstant(constantSchema.Value.Value, type);
+                type = BuilderHelpers.CreateType(constantSchema.ValueType, false);
+                defaultValue = BuilderHelpers.ParseClientConstant(constantSchema.Value.Value, type);
             }
             else
             {
-                type = ClientModelBuilderHelpers.CreateType(property.Schema, property.IsNullable());
+                type = BuilderHelpers.CreateType(property.Schema, property.IsNullable());
                 if (property.ClientDefaultValue != null)
                 {
-                    defaultValue = ClientModelBuilderHelpers.ParseClientConstant(property.ClientDefaultValue, type);
+                    defaultValue = BuilderHelpers.ParseClientConstant(property.ClientDefaultValue, type);
                 }
             }
 
-            return new ClientObjectProperty(property.CSharpName(),
-                ClientModelBuilderHelpers.EscapeXmlDescription(property.Language.Default.Description),
+            return new ObjectTypeProperty(property.CSharpName(),
+                BuilderHelpers.EscapeXmlDescription(property.Language.Default.Description),
                 type,
                 isReadOnly,
                 defaultValue);
@@ -165,14 +165,14 @@ namespace AutoRest.CSharp.V3.ClientModels
         {
             return string.IsNullOrWhiteSpace(choiceValue.Language.Default.Description) ?
                 choiceValue.Value :
-                ClientModelBuilderHelpers.EscapeXmlDescription(choiceValue.Language.Default.Description);
+                BuilderHelpers.EscapeXmlDescription(choiceValue.Language.Default.Description);
         }
 
         private static string CreateDescription(Schema objectSchema)
         {
             return string.IsNullOrWhiteSpace(objectSchema.Language.Default.Description) ?
                 $"The {objectSchema.Name}." :
-                ClientModelBuilderHelpers.EscapeXmlDescription(objectSchema.Language.Default.Description);
+                BuilderHelpers.EscapeXmlDescription(objectSchema.Language.Default.Description);
         }
     }
 }

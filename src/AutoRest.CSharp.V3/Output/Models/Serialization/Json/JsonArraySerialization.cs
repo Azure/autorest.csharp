@@ -5,13 +5,13 @@ namespace AutoRest.CSharp.V3.ClientModels.Serialization
 {
     internal class JsonArraySerialization: JsonSerialization
     {
-        public JsonArraySerialization(ClientTypeReference type, JsonSerialization valueSerialization)
+        public JsonArraySerialization(TypeReference type, JsonSerialization valueSerialization)
         {
             Type = type;
             ValueSerialization = valueSerialization;
         }
 
-        public override ClientTypeReference Type { get; }
+        public override TypeReference Type { get; }
         public JsonSerialization ValueSerialization { get; }
     }
 }

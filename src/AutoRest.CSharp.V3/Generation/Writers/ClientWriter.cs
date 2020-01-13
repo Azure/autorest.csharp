@@ -15,6 +15,7 @@ using AutoRest.CSharp.V3.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Parameter = AutoRest.CSharp.V3.ClientModels.Parameter;
 using Response = Azure.Response;
 using SerializationFormat = AutoRest.CSharp.V3.ClientModels.SerializationFormat;
 
@@ -29,7 +30,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             _typeFactory = typeFactory;
         }
 
-        public void WriteClient(CodeWriter writer, ServiceClient operationGroup)
+        public void WriteClient(CodeWriter writer, Client operationGroup)
         {
             var cs = _typeFactory.CreateType(operationGroup.Name);
             var @namespace = cs.Namespace;
@@ -58,9 +59,9 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
         }
 
-        private void WriteClientFields(CodeWriter writer, ServiceClient operationGroup)
+        private void WriteClientFields(CodeWriter writer, Client operationGroup)
         {
-            foreach (ServiceClientParameter clientParameter in operationGroup.Parameters)
+            foreach (Parameter clientParameter in operationGroup.Parameters)
             {
                 writer.Line($"private {_typeFactory.CreateType(clientParameter.Type)} {clientParameter.Name};");
             }
@@ -69,11 +70,11 @@ namespace AutoRest.CSharp.V3.CodeGen
             writer.Line($"private {typeof(HttpPipeline)} pipeline;");
         }
 
-        private void WriteClientCtor(CodeWriter writer, ServiceClient operationGroup, CSharpType cs)
+        private void WriteClientCtor(CodeWriter writer, Client operationGroup, CSharpType cs)
         {
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of {cs.Name}");
             writer.Append($"public {cs.Name:D}({typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline,");
-            foreach (ServiceClientParameter clientParameter in operationGroup.Parameters)
+            foreach (Parameter clientParameter in operationGroup.Parameters)
             {
                 WriteParameter(writer, clientParameter);
             }
@@ -84,7 +85,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             {
                 WriteParameterNullChecks(writer, operationGroup.Parameters);
 
-                foreach (ServiceClientParameter clientParameter in operationGroup.Parameters)
+                foreach (Parameter clientParameter in operationGroup.Parameters)
                 {
                     writer.Line($"this.{clientParameter.Name} = {clientParameter.Name};");
                 }
@@ -94,7 +95,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
         }
 
-        private void WriteParameter(CodeWriter writer, ServiceClientParameter clientParameter)
+        private void WriteParameter(CodeWriter writer, Parameter clientParameter)
         {
             writer.Append($"{_typeFactory.CreateInputType(clientParameter.Type)} {clientParameter.Name}");
             if (clientParameter.DefaultValue != null)
@@ -105,27 +106,27 @@ namespace AutoRest.CSharp.V3.CodeGen
             writer.AppendRaw(",");
         }
 
-        private string CreateMethodName(ClientMethod operation, bool async, bool supportsPaging) => $"{operation.Name}{(supportsPaging ? "FirstPage" : string.Empty)}{(async ? "Async" : string.Empty)}";
+        private string CreateMethodName(Method operation, bool async, bool supportsPaging) => $"{operation.Name}{(supportsPaging ? "FirstPage" : string.Empty)}{(async ? "Async" : string.Empty)}";
 
-        private string CreateRequestMethodName(ClientMethod operation) => $"Create{operation.Name}{(operation.Paging != null ? "FirstPage" : string.Empty)}Request";
+        private string CreateRequestMethodName(Method operation) => $"Create{operation.Name}{(operation.Paging != null ? "FirstPage" : string.Empty)}Request";
 
-        private string CreateNextPageRequestMethodName(ClientMethod operation) => $"Create{operation.Name}NextPageRequest";
+        private string CreateNextPageRequestMethodName(Method operation) => $"Create{operation.Name}NextPageRequest";
 
-        private string GetNextPageMethodName(ClientMethod operation) => $"{operation.Name}NextPageAsync";
+        private string GetNextPageMethodName(Method operation) => $"{operation.Name}NextPageAsync";
 
-        private bool IsNextPageParameter(ServiceClientParameter parameter) =>
+        private bool IsNextPageParameter(Parameter parameter) =>
             parameter.Location != ParameterLocation.Path
             && parameter.Location != ParameterLocation.Body
             && parameter.Location != ParameterLocation.Query;
 
-        private void WriteRequestCreation(CodeWriter writer, ClientMethod operation, bool nextPage = false)
+        private void WriteRequestCreation(CodeWriter writer, Method operation, bool nextPage = false)
         {
             var methodName = nextPage ? CreateNextPageRequestMethodName(operation) : CreateRequestMethodName(operation);
             writer.Append($"internal {typeof(HttpMessage)} {methodName}(");
             var parameters = nextPage
                 ? operation.Parameters.Where(IsNextPageParameter).ToArray()
                 : operation.Parameters;
-            foreach (ServiceClientParameter clientParameter in parameters)
+            foreach (Parameter clientParameter in parameters)
             {
                 writer.Append($"{_typeFactory.CreateInputType(clientParameter.Type)} {clientParameter.Name},");
             }
@@ -179,11 +180,11 @@ namespace AutoRest.CSharp.V3.CodeGen
                     WriteHeader(writer, header);
                 }
 
-                if (!nextPage && operation.Request.Body is ObjectRequestBody body && body.Serialization is JsonSerialization jsonSerialization)
+                if (!nextPage && operation.Request.Body is RequestBody body && body.Serialization is JsonSerialization jsonSerialization)
                 {
                     writer.Line($"using var content = new {typeof(Utf8JsonRequestContent)}();");
 
-                    ConstantOrParameter value = body.Value;
+                    RequestParameter value = body.Value;
 
                     writer.ToSerializeCall(
                         jsonSerialization,
@@ -193,11 +194,11 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                     writer.Line($"request.Content = content;");
                 }
-                else if (!nextPage && operation.Request.Body is ObjectRequestBody xmlBody && xmlBody.Serialization is XmlElementSerialization xmlSerialization)
+                else if (!nextPage && operation.Request.Body is RequestBody xmlBody && xmlBody.Serialization is XmlElementSerialization xmlSerialization)
                 {
                     writer.Line($"using var content = new {typeof(XmlWriterContent)}();");
 
-                    ConstantOrParameter value = xmlBody.Value;
+                    RequestParameter value = xmlBody.Value;
 
                     writer.ToSerializeCall(
                         xmlSerialization,
@@ -212,7 +213,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
         }
 
-        private void WriteOperation(CodeWriter writer, ClientMethod operation, bool async, bool nextPage = false)
+        private void WriteOperation(CodeWriter writer, Method operation, bool async, bool nextPage = false)
         {
             //TODO: Handle multiple responses
             var responseBody = operation.Response.ResponseBody;
@@ -234,7 +235,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
             writer.WriteXmlDocumentationSummary(operation.Description);
 
-            foreach (ServiceClientParameter parameter in parameters)
+            foreach (Parameter parameter in parameters)
             {
                 writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
             }
@@ -249,7 +250,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             CSharpType asyncReturnType = new CSharpType(typeof(ValueTask<>), responseType);
             writer.Append($"public {(async ? "async " : string.Empty)}{(async ? asyncReturnType : responseType)} {methodName}(");
 
-            foreach (ServiceClientParameter parameter in parameters)
+            foreach (Parameter parameter in parameters)
             {
                 WriteParameter(writer, parameter);
             }
@@ -265,7 +266,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                 WriteParameterNullChecks(writer, parameters);
 
                 writer.Line($"using var scope = clientDiagnostics.CreateScope({operation.Diagnostics.ScopeName:L});");
-                foreach (DiagnosticScopeAttributes diagnosticScopeAttributes in operation.Diagnostics.Attributes)
+                foreach (DiagnosticAttribute diagnosticScopeAttributes in operation.Diagnostics.Attributes)
                 {
                     writer.Line($"scope.AddAttribute({diagnosticScopeAttributes.Name:L}, {WriteConstantOrParameter(diagnosticScopeAttributes.Value)};");
                 }
@@ -276,7 +277,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     var requestMethodName = nextPage ? CreateNextPageRequestMethodName(operation) : CreateRequestMethodName(operation);
                     writer.Append($"using var message = {requestMethodName}(");
 
-                    foreach (ServiceClientParameter parameter in parameters)
+                    foreach (Parameter parameter in parameters)
                     {
                         writer.Append($"{parameter.Name}, ");
                     }
@@ -308,7 +309,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
         }
 
-        private void WritePagingOperation(CodeWriter writer, ClientMethod operation, bool async)
+        private void WritePagingOperation(CodeWriter writer, Method operation, bool async)
         {
             var pageType = operation.Paging?.ItemType != null ? _typeFactory.CreateType(operation.Paging.ItemType) : new CSharpType(typeof(string));
             CSharpType responseType = async ? new CSharpType(typeof(AsyncPageable<>), pageType) : new CSharpType(typeof(Pageable<>), pageType);
@@ -317,7 +318,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
             writer.WriteXmlDocumentationSummary(operation.Description);
 
-            foreach (ServiceClientParameter parameter in parameters)
+            foreach (Parameter parameter in parameters)
             {
                 writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
             }
@@ -325,7 +326,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
 
             writer.Append($"public {responseType} {CreateMethodName(operation, async, false)}(");
-            foreach (ServiceClientParameter parameter in parameters)
+            foreach (Parameter parameter in parameters)
             {
                 WriteParameter(writer, parameter);
             }
@@ -340,14 +341,14 @@ namespace AutoRest.CSharp.V3.CodeGen
                 var nullableInt = new CSharpType(typeof(int), true);
 
                 writer.Append($"{funcType} FirstPageFunc({nullableInt} pageSizeHint) => {CreateMethodName(operation, async, true)}(");
-                foreach (ServiceClientParameter parameter in parameters)
+                foreach (Parameter parameter in parameters)
                 {
                     writer.Append($"{parameter.Name}, ");
                 }
                 writer.Line($"cancellationToken).AsTask();");
 
                 writer.Append($"{funcType} NextPageFunc({typeof(string)} continuationToken, {nullableInt} pageSizeHint) => {GetNextPageMethodName(operation)}(");
-                foreach (ServiceClientParameter parameter in nextPageParameters)
+                foreach (Parameter parameter in nextPageParameters)
                 {
                     writer.Append($"{parameter.Name}, ");
                 }
@@ -356,7 +357,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
         }
 
-        private CodeWriterDelegate WriteConstantOrParameter(ConstantOrParameter constantOrParameter) => writer =>
+        private CodeWriterDelegate WriteConstantOrParameter(RequestParameter constantOrParameter) => writer =>
         {
             if (constantOrParameter.IsConstant)
             {
@@ -369,9 +370,9 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
         };
 
-        private void WriteParameterNullChecks(CodeWriter writer, IEnumerable<ServiceClientParameter> parameters)
+        private void WriteParameterNullChecks(CodeWriter writer, IEnumerable<Parameter> parameters)
         {
-            foreach (ServiceClientParameter parameter in parameters)
+            foreach (Parameter parameter in parameters)
             {
                 var cs = _typeFactory.CreateType(parameter.Type);
                 if (parameter.IsRequired && (cs.IsNullable || !cs.IsValueType))
@@ -385,7 +386,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             writer.Line();
         }
 
-        private void WriteConstant(CodeWriter writer, ClientConstant constant)
+        private void WriteConstant(CodeWriter writer, Constant constant)
         {
             if (constant.Value == null)
             {
@@ -435,7 +436,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
         }
 
-        private CodeWriter.CodeWriterScope? WriteValueNullCheck(CodeWriter writer, ConstantOrParameter value)
+        private CodeWriter.CodeWriterScope? WriteValueNullCheck(CodeWriter writer, RequestParameter value)
         {
             if (value.IsConstant)
                 return default;
@@ -492,7 +493,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     break;
             }
 
-            ConstantOrParameter value = queryParameter.Value;
+            RequestParameter value = queryParameter.Value;
             using (WriteValueNullCheck(writer, value))
             {
                 writer.Append($"request.Uri.{method}({queryParameter.Name:L}, {WriteConstantOrParameter(value)}");
@@ -506,7 +507,7 @@ namespace AutoRest.CSharp.V3.CodeGen
         }
 
         //TODO: Do multiple status codes
-        private void WriteStatusCodeSwitch(CodeWriter writer, ResponseBody? responseBody, CSharpType? headersModelType, ClientMethod operation, bool async, bool supportsPaging)
+        private void WriteStatusCodeSwitch(CodeWriter writer, ResponseBody? responseBody, CSharpType? headersModelType, Method operation, bool async, bool supportsPaging)
         {
             using (writer.Switch("message.Response.Status"))
             {

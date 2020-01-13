@@ -5,6 +5,6 @@ namespace AutoRest.CSharp.V3.ClientModels
 {
     internal abstract class ResponseBody
     {
-        public abstract ClientTypeReference Type { get; }
+        public abstract TypeReference Type { get; }
     }
 }

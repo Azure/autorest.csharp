@@ -5,9 +5,9 @@ using AutoRest.CSharp.V3.Pipeline.Generated;
 
 namespace AutoRest.CSharp.V3.ClientModels
 {
-    internal class ServiceClientParameter
+    internal class Parameter
     {
-        public ServiceClientParameter(string name, string? description, ClientTypeReference type, ClientConstant? defaultValue, bool isRequired, ParameterLocation? location)
+        public Parameter(string name, string? description, TypeReference type, Constant? defaultValue, bool isRequired, ParameterLocation? location)
         {
             Name = name;
             Description = description;
@@ -17,10 +17,10 @@ namespace AutoRest.CSharp.V3.ClientModels
             Location = location;
         }
 
-        public ClientTypeReference Type { get; }
+        public TypeReference Type { get; }
         public string Name { get; }
         public string? Description { get; }
-        public ClientConstant? DefaultValue { get; }
+        public Constant? DefaultValue { get; }
         public bool IsRequired { get; }
         public ParameterLocation? Location { get; }
     }

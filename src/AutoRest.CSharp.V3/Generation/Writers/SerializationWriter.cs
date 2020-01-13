@@ -21,20 +21,20 @@ namespace AutoRest.CSharp.V3.CodeGen
             _typeFactory = typeFactory;
         }
 
-        public void WriteSerialization(CodeWriter writer, ISchemaTypeProvider schema)
+        public void WriteSerialization(CodeWriter writer, ISchemaType schema)
         {
             switch (schema)
             {
-                case ClientObject objectSchema:
+                case ObjectType objectSchema:
                     WriteObjectSerialization(writer, objectSchema);
                     break;
-                case ClientEnum sealedChoiceSchema when !sealedChoiceSchema.IsStringBased:
+                case EnumType sealedChoiceSchema when !sealedChoiceSchema.IsStringBased:
                     WriteSealedChoiceSerialization(writer, sealedChoiceSchema);
                     break;
             }
         }
 
-        private void WriteObjectSerialization(CodeWriter writer, ClientObject model)
+        private void WriteObjectSerialization(CodeWriter writer, ObjectType model)
         {
             if (!model.Serializations.Any())
             {
@@ -73,7 +73,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
         }
 
-        private void WriteXmlSerialize(CodeWriter writer, ClientObject model, XmlElementSerialization serialization)
+        private void WriteXmlSerialize(CodeWriter writer, ObjectType model, XmlElementSerialization serialization)
         {
             const string namehint = "nameHint";
             writer.Append($"void {typeof(IXmlSerializable)}.{nameof(IXmlSerializable.Write)}({typeof(XmlWriter)} writer, {typeof(string)} {namehint})");
@@ -88,7 +88,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
         }
 
-        private void WriteXmlDeserialize(CodeWriter writer, ClientObject model, XmlElementSerialization serialization)
+        private void WriteXmlDeserialize(CodeWriter writer, ObjectType model, XmlElementSerialization serialization)
         {
             var cs = _typeFactory.CreateType(model);
             var typeText = writer.Type(cs);
@@ -102,7 +102,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
         }
 
-        private void WriteJsonDeserialize(CodeWriter writer, ClientObject model, JsonSerialization jsonSerialization)
+        private void WriteJsonDeserialize(CodeWriter writer, ObjectType model, JsonSerialization jsonSerialization)
         {
             var cs = _typeFactory.CreateType(model);
             var typeText = writer.Type(cs);
@@ -132,7 +132,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
         }
 
-        private void WriteJsonSerialize(CodeWriter writer, ClientObject model, JsonSerialization jsonSerialization)
+        private void WriteJsonSerialize(CodeWriter writer, ObjectType model, JsonSerialization jsonSerialization)
         {
             writer.Append($"void {typeof(IUtf8JsonSerializable)}.{nameof(IUtf8JsonSerializable.Write)}({typeof(Utf8JsonWriter)} writer)");
             using (writer.Scope())
@@ -141,7 +141,7 @@ namespace AutoRest.CSharp.V3.CodeGen
             }
         }
 
-        private void WriteSealedChoiceSerialization(CodeWriter writer, ClientEnum schema)
+        private void WriteSealedChoiceSerialization(CodeWriter writer, EnumType schema)
         {
             var cs = _typeFactory.CreateType(schema);
             using (writer.Namespace(cs.Namespace))

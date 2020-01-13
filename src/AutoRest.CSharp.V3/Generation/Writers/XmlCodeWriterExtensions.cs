@@ -8,7 +8,7 @@ using AutoRest.CSharp.V3.Utilities;
 
 namespace AutoRest.CSharp.V3.CodeGen
 {
-    internal static class XmlSerializerWriterExtensions
+    internal static class XmlCodeWriterExtensions
     {
         public static void ToSerializeCall(this CodeWriter writer, XmlElementSerialization serialization, TypeFactory typeFactory, CodeWriterDelegate name, CodeWriterDelegate? writerName = null, CodeWriterDelegate? nameHint = null)
         {
@@ -108,7 +108,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                     string elementName = elementValueSerialization.Name;
 
-                    if ((type is SchemaTypeReference schemaReference && typeFactory.ResolveReference(schemaReference) is ClientObject) ||
+                    if ((type is SchemaTypeReference schemaReference && typeFactory.ResolveReference(schemaReference) is ObjectType) ||
                         (type is FrameworkTypeReference frameworkReference && frameworkReference.Type == typeof(object)))
                     {
                         writer.Line($"{writerName}.WriteObjectValue({name}, {elementName:L});");
@@ -135,10 +135,10 @@ namespace AutoRest.CSharp.V3.CodeGen
                 case SchemaTypeReference schemaTypeReference:
                     switch (typeFactory.ResolveReference(schemaTypeReference))
                     {
-                        case ClientObject _:
+                        case ObjectType _:
                             throw new NotSupportedException("Object type references are only supported as elements");
 
-                        case ClientEnum clientEnum:
+                        case EnumType clientEnum:
                             writer.Append($"{writerName}.WriteValue({name}")
                                 .AppendNullableValue(implementationType)
                                 .AppendRaw(clientEnum.IsStringBased ? ".ToString()" : ".ToSerialString()")
@@ -325,15 +325,15 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                     switch (typeFactory.ResolveReference(schemaTypeReference))
                     {
-                        case ClientObject _:
+                        case ObjectType _:
                             writer.Append($"{cSharpType}.Deserialize{cSharpType.Name}({element})");
                             break;
 
-                        case ClientEnum clientEnum when clientEnum.IsStringBased:
+                        case EnumType clientEnum when clientEnum.IsStringBased:
                             writer.Append($"new {cSharpType}({element}.Value)");
                             break;
 
-                        case ClientEnum clientEnum when !clientEnum.IsStringBased:
+                        case EnumType clientEnum when !clientEnum.IsStringBased:
                             writer.Append($"{element}.Value.To{cSharpType.Name}()");
                             break;
                     }

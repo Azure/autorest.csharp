@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using System.Text.Json;
 using AutoRest.CSharp.V3.JsonRpc.MessageModels;
@@ -8,6 +9,7 @@ using AutoRest.CSharp.V3.Utilities;
 
 namespace AutoRest.CSharp.V3.JsonRpc.Messaging
 {
+    [SuppressMessage("ReSharper", "IdentifierTypo")]
     internal static class PeekableBinaryStreamExtensions
     {
         public static bool IsJsonBlock(this byte? value) => '{' == value || '[' == value;

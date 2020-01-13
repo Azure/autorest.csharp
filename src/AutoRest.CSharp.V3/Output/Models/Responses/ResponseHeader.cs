@@ -5,7 +5,7 @@ namespace AutoRest.CSharp.V3.ClientModels
 {
     internal class ResponseHeader
     {
-        public ResponseHeader(string name, string serializedName, ClientTypeReference type)
+        public ResponseHeader(string name, string serializedName, TypeReference type)
         {
             Name = name;
             SerializedName = serializedName;
@@ -14,6 +14,6 @@ namespace AutoRest.CSharp.V3.ClientModels
 
         public string Name { get; }
         public string SerializedName { get; }
-        public ClientTypeReference Type { get; }
+        public TypeReference Type { get; }
     }
 }

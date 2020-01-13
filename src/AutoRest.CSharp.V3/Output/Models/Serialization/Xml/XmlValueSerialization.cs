@@ -5,12 +5,12 @@ namespace AutoRest.CSharp.V3.ClientModels.Serialization
 {
     internal class XmlValueSerialization
     {
-        public XmlValueSerialization(ClientTypeReference type, SerializationFormat format)
+        public XmlValueSerialization(TypeReference type, SerializationFormat format)
         {
             Type = type;
             Format = format;
         }
-        public ClientTypeReference Type { get; }
+        public TypeReference Type { get; }
         public SerializationFormat Format { get; }
     }
 }

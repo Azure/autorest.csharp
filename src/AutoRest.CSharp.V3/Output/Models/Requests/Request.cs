@@ -5,9 +5,9 @@ using Azure.Core;
 
 namespace AutoRest.CSharp.V3.ClientModels
 {
-    internal class ClientMethodRequest
+    internal class Request
     {
-        public ClientMethodRequest(RequestMethod method, ConstantOrParameter[] hostSegments, PathSegment[] pathSegments, QueryParameter[] query, RequestHeader[] headers, ObjectRequestBody? body)
+        public Request(RequestMethod method, RequestParameter[] hostSegments, PathSegment[] pathSegments, QueryParameter[] query, RequestHeader[] headers, RequestBody? body)
         {
             Method = method;
             HostSegments = hostSegments;
@@ -18,10 +18,10 @@ namespace AutoRest.CSharp.V3.ClientModels
         }
 
         public RequestMethod Method { get; }
-        public ConstantOrParameter[] HostSegments { get; }
+        public RequestParameter[] HostSegments { get; }
         public PathSegment[] PathSegments { get; }
         public QueryParameter[] Query { get; }
         public RequestHeader[] Headers { get; }
-        public ObjectRequestBody? Body { get; }
+        public RequestBody? Body { get; }
     }
 }

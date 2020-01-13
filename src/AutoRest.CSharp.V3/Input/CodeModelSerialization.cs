@@ -14,7 +14,7 @@ using YamlDotNet.Serialization.Utilities;
 
 namespace AutoRest.CSharp.V3.Pipeline
 {
-    internal static class Serialization
+    internal static class CodeModelSerialization
     {
         public static readonly Type[] GeneratedTypes = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.Namespace == typeof(CodeModel).Namespace).ToArray();
 

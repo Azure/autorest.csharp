@@ -8,7 +8,7 @@ using AutoRest.CSharp.V3.ClientModels.Serialization;
 
 namespace AutoRest.CSharp.V3.CodeGen
 {
-    internal static class JsonSerializerWriterExtensions
+    internal static class JsonCodeWriterExtensions
     {
         public static void ToSerializeCall(this CodeWriter writer, JsonSerialization serialization, TypeFactory typeFactory, CodeWriterDelegate name, CodeWriterDelegate? writerName = null)
         {
@@ -74,11 +74,11 @@ namespace AutoRest.CSharp.V3.CodeGen
                         case SchemaTypeReference schemaTypeReference:
                             switch (typeFactory.ResolveReference(schemaTypeReference))
                             {
-                                case ClientObject _:
+                                case ObjectType _:
                                     writer.Line($"{writerName}.WriteObjectValue({name});");
                                     return;
 
-                                case ClientEnum clientEnum:
+                                case EnumType clientEnum:
                                     writer.Append($"{writerName}.WriteStringValue({name}")
                                         .AppendNullableValue(implementationType)
                                         .AppendRaw(clientEnum.IsStringBased ? ".ToString()" : ".ToSerialString()")
@@ -354,15 +354,15 @@ namespace AutoRest.CSharp.V3.CodeGen
 
             switch (typeFactory.ResolveReference(type))
             {
-                case ClientObject _:
+                case ObjectType _:
                     writer.Append($"{cSharpType}.Deserialize{cSharpType.Name}({element})");
                     break;
 
-                case ClientEnum clientEnum when clientEnum.IsStringBased:
+                case EnumType clientEnum when clientEnum.IsStringBased:
                     writer.Append($"new {cSharpType}({element}.GetString())");
                     break;
 
-                case ClientEnum clientEnum when !clientEnum.IsStringBased:
+                case EnumType clientEnum when !clientEnum.IsStringBased:
                     writer.Append($"{element}.GetString().To{cSharpType.Name}()");
                     break;
             }

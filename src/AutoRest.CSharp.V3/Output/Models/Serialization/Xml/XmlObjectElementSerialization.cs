@@ -14,7 +14,7 @@ namespace AutoRest.CSharp.V3.ClientModels.Serialization
         }
 
         public string MemberName { get; }
-        public ClientTypeReference Type => ValueSerialization.Type;
+        public TypeReference Type => ValueSerialization.Type;
         public XmlElementSerialization ValueSerialization { get; }
     }
 }

@@ -3,9 +3,9 @@
 
 namespace AutoRest.CSharp.V3.ClientModels
 {
-    internal class ClientEnumValue
+    internal class EnumTypeValue
     {
-        public ClientEnumValue(string name, string description, ClientConstant value)
+        public EnumTypeValue(string name, string description, Constant value)
         {
             Name = name;
             Description = description;
@@ -13,7 +13,7 @@ namespace AutoRest.CSharp.V3.ClientModels
         }
 
         public string Name { get; }
-        public ClientConstant Value { get; }
+        public Constant Value { get; }
         public string Description { get; }
     }
 }

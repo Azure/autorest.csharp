@@ -10,11 +10,11 @@ using AutoRest.CSharp.V3.Pipeline.Generated;
 
 namespace AutoRest.CSharp.V3.ClientModels
 {
-    internal class ClientModelBuilderHelpers
+    internal class BuilderHelpers
     {
-        public static ClientConstant StringConstant(string s) => ParseClientConstant(s, new FrameworkTypeReference(typeof(string)));
+        public static Constant StringConstant(string s) => ParseClientConstant(s, new FrameworkTypeReference(typeof(string)));
 
-        public static ClientTypeReference CreateType(Schema schema, bool isNullable) => schema switch
+        public static TypeReference CreateType(Schema schema, bool isNullable) => schema switch
         {
             ConstantSchema constantSchema => CreateType(constantSchema.ValueType, isNullable),
             BinarySchema _ => new FrameworkTypeReference(typeof(byte[]), isNullable),
@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.V3.ClientModels
             _ => new SchemaTypeReference(schema, isNullable)
         };
 
-        public static ClientConstant ParseClientConstant(object? value, ClientTypeReference type)
+        public static Constant ParseClientConstant(object? value, TypeReference type)
         {
             var normalizedValue = type switch
             {
@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.V3.ClientModels
                 FrameworkTypeReference frameworkType => Convert.ChangeType(value, frameworkType.Type),
                 _ => null
             };
-            return new ClientConstant(normalizedValue, type);
+            return new Constant(normalizedValue, type);
         }
 
         public static SerializationFormat GetSerializationFormat(Schema schema) => schema switch
@@ -88,7 +88,7 @@ namespace AutoRest.CSharp.V3.ClientModels
             }
         };
 
-        public static ClientConstant ParseClientConstant(ConstantSchema constant)
+        public static Constant ParseClientConstant(ConstantSchema constant)
         {
             return ParseClientConstant(constant.Value.Value, CreateType(constant.ValueType, constant.Value.Value == null));
         }

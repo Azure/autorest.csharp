@@ -5,32 +5,32 @@ using System;
 
 namespace AutoRest.CSharp.V3.ClientModels
 {
-    internal struct ConstantOrParameter
+    internal struct RequestParameter
     {
-        private readonly ClientConstant? _constant;
-        private readonly ServiceClientParameter? _parameter;
+        private readonly Constant? _constant;
+        private readonly Parameter? _parameter;
 
-        public ConstantOrParameter(ClientConstant constant)
+        public RequestParameter(Constant constant)
         {
             Type = constant.Type;
             _constant = constant;
             _parameter = null;
         }
 
-        public ConstantOrParameter(ServiceClientParameter parameter)
+        public RequestParameter(Parameter parameter)
         {
             Type = parameter.Type;
             _parameter = parameter;
             _constant = null;
         }
 
-        public ClientTypeReference Type { get; }
+        public TypeReference Type { get; }
         public bool IsConstant => _constant.HasValue;
 
-        public ClientConstant Constant => _constant ?? throw new InvalidOperationException("Not a constant");
-        public ServiceClientParameter Parameter => _parameter ?? throw new InvalidOperationException("Not a parameter");
+        public Constant Constant => _constant ?? throw new InvalidOperationException("Not a constant");
+        public Parameter Parameter => _parameter ?? throw new InvalidOperationException("Not a parameter");
 
-        public static implicit operator ConstantOrParameter(ClientConstant constant) => new ConstantOrParameter(constant);
-        public static implicit operator ConstantOrParameter(ServiceClientParameter parameter) => new ConstantOrParameter(parameter);
+        public static implicit operator RequestParameter(Constant constant) => new RequestParameter(constant);
+        public static implicit operator RequestParameter(Parameter parameter) => new RequestParameter(parameter);
     }
 }

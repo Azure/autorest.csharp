@@ -7,13 +7,13 @@ namespace AutoRest.CSharp.V3.ClientModels
 {
     internal class ObjectResponseBody: ResponseBody
     {
-        public ObjectResponseBody(ClientTypeReference type, ObjectSerialization serialization)
+        public ObjectResponseBody(TypeReference type, ObjectSerialization serialization)
         {
             Serialization = serialization;
             Type = type;
         }
 
         public ObjectSerialization Serialization { get; }
-        public override ClientTypeReference Type { get; }
+        public override TypeReference Type { get; }
     }
 }

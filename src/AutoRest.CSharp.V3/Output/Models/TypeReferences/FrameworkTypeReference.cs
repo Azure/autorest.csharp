@@ -5,7 +5,7 @@ using System;
 
 namespace AutoRest.CSharp.V3.ClientModels
 {
-    internal class FrameworkTypeReference: ClientTypeReference
+    internal class FrameworkTypeReference: TypeReference
     {
         public FrameworkTypeReference(Type type, bool isNullable = false)
         {

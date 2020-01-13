@@ -6,7 +6,7 @@ using AutoRest.CSharp.V3.Utilities;
 
 namespace AutoRest.CSharp.V3.Plugins
 {
-    internal static class ModelExtensions
+    internal static class CodeModelExtensions
     {
         public static bool IsNullable(this Parameter parameter) => !(parameter.Required ?? false);
         public static bool IsNullable(this Property parameter) => !(parameter.Required ?? false);

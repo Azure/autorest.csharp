@@ -14,11 +14,12 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Formatting;
 using Microsoft.CodeAnalysis.Simplification;
 using Microsoft.CodeAnalysis.Text;
+using Diagnostic = Microsoft.CodeAnalysis.Diagnostic;
 
 namespace AutoRest.CSharp.V3.Plugins
 {
-    [PluginName("cs-modeler")]
-    internal class Modeler : IPlugin
+    [PluginName("csharpgen")]
+    internal class CSharpGen : IPlugin
     {
         public async Task<bool> Execute(IPluginCommunication autoRest, CodeModel codeModel, Configuration configuration)
         {
@@ -34,7 +35,7 @@ namespace AutoRest.CSharp.V3.Plugins
             var modelWriter = new ModelWriter(typeFactory);
             var writer = new ClientWriter(typeFactory);
             var serializeWriter = new SerializationWriter(typeFactory);
-            var headerModelModelWriter = new ResponseHeaderModelModelWriter(typeFactory);
+            var headerModelModelWriter = new ResponseHeaderGroupWriter(typeFactory);
 
             var project = WorkspaceFactory.CreateGeneratedCodeProject();
 
@@ -58,9 +59,9 @@ namespace AutoRest.CSharp.V3.Plugins
 
                 project = project.AddDocument($"Generated/Operations/{client.Name}.cs", codeWriter.ToFormattedCode()).Project;
 
-                foreach (ClientMethod clientMethod in client.Methods)
+                foreach (Method clientMethod in client.Methods)
                 {
-                    ResponseHeaderModel? responseHeaderModel = clientMethod.Response.HeaderModel;
+                    ResponseHeaderGroup? responseHeaderModel = clientMethod.Response.HeaderModel;
                     if (responseHeaderModel == null)
                         continue;
 

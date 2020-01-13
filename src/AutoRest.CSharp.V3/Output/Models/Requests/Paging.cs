@@ -3,9 +3,9 @@
 
 namespace AutoRest.CSharp.V3.ClientModels
 {
-    internal class ClientMethodPaging
+    internal class Paging
     {
-        public ClientMethodPaging(string? nextLinkName, string itemName, ClientTypeReference itemType, string? operationName)
+        public Paging(string? nextLinkName, string itemName, TypeReference itemType, string? operationName)
         {
             NextLinkName = nextLinkName;
             ItemName = itemName;
@@ -15,7 +15,7 @@ namespace AutoRest.CSharp.V3.ClientModels
 
         public string? NextLinkName { get; }
         public string ItemName { get; }
-        public ClientTypeReference? ItemType { get; }
+        public TypeReference? ItemType { get; }
         public string? OperationName { get; }
     }
 }

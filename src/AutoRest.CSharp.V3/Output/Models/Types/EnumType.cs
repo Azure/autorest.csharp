@@ -6,14 +6,14 @@ using AutoRest.CSharp.V3.Pipeline.Generated;
 
 namespace AutoRest.CSharp.V3.ClientModels
 {
-    internal class ClientEnum : ISchemaTypeProvider
+    internal class EnumType : ISchemaType
     {
-        public ClientEnum(Schema schema, string name, string? description, IEnumerable<ClientEnumValue> values, bool isStringBased = false)
+        public EnumType(Schema schema, string name, string? description, IEnumerable<EnumTypeValue> values, bool isStringBased = false)
         {
             Schema = schema;
             Name = name;
             Description = description;
-            Values = new List<ClientEnumValue>(values);
+            Values = new List<EnumTypeValue>(values);
             IsStringBased = isStringBased;
         }
 
@@ -21,6 +21,6 @@ namespace AutoRest.CSharp.V3.ClientModels
         public Schema Schema { get; }
         public string Name { get; }
         public string? Description { get; }
-        public IList<ClientEnumValue> Values { get; }
+        public IList<EnumTypeValue> Values { get; }
     }
 }
