@@ -3,9 +3,11 @@
 
 using System;
 using System.Threading.Tasks;
-using AutoRest.CSharp.V3.JsonRpc.Messaging;
+using AutoRest.CSharp.V3.AutoRest.Communication.MessageHandling;
+using AutoRest.CSharp.V3.AutoRest.Communication.Serialization;
+using AutoRest.CSharp.V3.AutoRest.Communication.Serialization.Models;
 
-namespace AutoRest.CSharp.V3.JsonRpc.MessageModels
+namespace AutoRest.CSharp.V3.AutoRest.Communication
 {
     internal class JsonRpcCommunication : IPluginCommunication
     {

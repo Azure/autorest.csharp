@@ -3,7 +3,7 @@
 
 using System;
 
-namespace AutoRest.CSharp.V3.CodeGen
+namespace AutoRest.CSharp.V3.Generation.Types
 {
     internal class CSharpType
     {

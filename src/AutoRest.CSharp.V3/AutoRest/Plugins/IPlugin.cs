@@ -3,10 +3,10 @@
 
 using System;
 using System.Threading.Tasks;
-using AutoRest.CSharp.V3.JsonRpc.MessageModels;
-using AutoRest.CSharp.V3.Pipeline.Generated;
+using AutoRest.CSharp.V3.AutoRest.Communication;
+using AutoRest.CSharp.V3.Input.Generated;
 
-namespace AutoRest.CSharp.V3.Plugins
+namespace AutoRest.CSharp.V3.AutoRest.Plugins
 {
     internal interface IPlugin
     {

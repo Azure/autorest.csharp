@@ -4,10 +4,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using AutoRest.CSharp.V3.ClientModels;
+using AutoRest.CSharp.V3.Output.Models.TypeReferences;
+using AutoRest.CSharp.V3.Output.Models.Types;
 using AutoRest.CSharp.V3.Utilities;
 
-namespace AutoRest.CSharp.V3.CodeGen
+namespace AutoRest.CSharp.V3.Generation.Types
 {
     internal class TypeFactory
     {

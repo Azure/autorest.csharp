@@ -7,7 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Text;
 
-namespace AutoRest.CSharp.V3.JsonRpc.MessageModels
+namespace AutoRest.CSharp.V3.AutoRest.Communication.MessageHandling
 {
     [SuppressMessage("ReSharper", "IdentifierTypo")]
     internal class PeekableBinaryStream : IDisposable

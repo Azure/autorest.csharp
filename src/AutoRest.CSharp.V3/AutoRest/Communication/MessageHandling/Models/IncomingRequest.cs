@@ -3,7 +3,7 @@
 
 using System.Text.Json;
 
-namespace AutoRest.CSharp.V3.JsonRpc.Messaging
+namespace AutoRest.CSharp.V3.AutoRest.Communication.MessageHandling.Models
 {
     internal class IncomingRequest
     {

@@ -3,10 +3,13 @@
 
 using System;
 using System.Text.Json;
-using AutoRest.CSharp.V3.ClientModels;
-using AutoRest.CSharp.V3.ClientModels.Serialization;
+using AutoRest.CSharp.V3.Generation.Types;
+using AutoRest.CSharp.V3.Output.Models.Serialization;
+using AutoRest.CSharp.V3.Output.Models.Serialization.Json;
+using AutoRest.CSharp.V3.Output.Models.TypeReferences;
+using AutoRest.CSharp.V3.Output.Models.Types;
 
-namespace AutoRest.CSharp.V3.CodeGen
+namespace AutoRest.CSharp.V3.Generation.Writers
 {
     internal static class JsonCodeWriterExtensions
     {

@@ -2,11 +2,13 @@
 // Licensed under the MIT License.
 
 using System;
-using AutoRest.CSharp.V3.ClientModels;
-using AutoRest.CSharp.V3.ClientModels.Serialization;
+using AutoRest.CSharp.V3.Generation.Types;
+using AutoRest.CSharp.V3.Output.Models.Serialization.Xml;
+using AutoRest.CSharp.V3.Output.Models.TypeReferences;
+using AutoRest.CSharp.V3.Output.Models.Types;
 using AutoRest.CSharp.V3.Utilities;
 
-namespace AutoRest.CSharp.V3.CodeGen
+namespace AutoRest.CSharp.V3.Generation.Writers
 {
     internal static class XmlCodeWriterExtensions
     {

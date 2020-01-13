@@ -5,14 +5,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using AutoRest.CSharp.V3.Pipeline.Generated;
+using AutoRest.CSharp.V3.Input.Generated;
 using AutoRest.CSharp.V3.Utilities;
 using YamlDotNet.Core;
 using YamlDotNet.Core.Events;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.Utilities;
 
-namespace AutoRest.CSharp.V3.Pipeline
+namespace AutoRest.CSharp.V3.Input
 {
     internal static class CodeModelSerialization
     {

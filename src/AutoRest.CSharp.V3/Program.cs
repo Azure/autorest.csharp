@@ -5,8 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using AutoRest.CSharp.V3.JsonRpc.MessageModels;
-using AutoRest.CSharp.V3.JsonRpc.Messaging;
+using AutoRest.CSharp.V3.AutoRest.Communication;
+using AutoRest.CSharp.V3.AutoRest.Communication.MessageHandling;
+using AutoRest.CSharp.V3.AutoRest.Communication.Serialization;
+using AutoRest.CSharp.V3.AutoRest.Plugins;
 
 namespace AutoRest.CSharp.V3
 {

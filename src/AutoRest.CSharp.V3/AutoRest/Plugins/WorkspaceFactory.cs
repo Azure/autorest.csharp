@@ -6,7 +6,7 @@ using System.IO;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 
-namespace AutoRest.CSharp.V3.Plugins
+namespace AutoRest.CSharp.V3.AutoRest.Plugins
 {
     internal class WorkspaceFactory
     {

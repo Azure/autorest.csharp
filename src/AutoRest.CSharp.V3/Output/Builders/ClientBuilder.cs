@@ -5,14 +5,23 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using AutoRest.CSharp.V3.ClientModels.Serialization;
-using AutoRest.CSharp.V3.Pipeline.Generated;
-using AutoRest.CSharp.V3.Plugins;
+using AutoRest.CSharp.V3.Input;
+using AutoRest.CSharp.V3.Input.Generated;
+using AutoRest.CSharp.V3.Output.Models;
+using AutoRest.CSharp.V3.Output.Models.Requests;
+using AutoRest.CSharp.V3.Output.Models.Responses;
+using AutoRest.CSharp.V3.Output.Models.Serialization;
+using AutoRest.CSharp.V3.Output.Models.Shared;
+using AutoRest.CSharp.V3.Output.Models.TypeReferences;
 using AutoRest.CSharp.V3.Utilities;
 using Azure.Core;
-using HttpHeader = AutoRest.CSharp.V3.Pipeline.Generated.HttpHeader;
+using HttpHeader = AutoRest.CSharp.V3.Input.Generated.HttpHeader;
+using Parameter = AutoRest.CSharp.V3.Output.Models.Shared.Parameter;
+using Request = AutoRest.CSharp.V3.Output.Models.Requests.Request;
+using Response = AutoRest.CSharp.V3.Output.Models.Responses.Response;
+using SerializationFormat = AutoRest.CSharp.V3.Output.Models.Serialization.SerializationFormat;
 
-namespace AutoRest.CSharp.V3.ClientModels
+namespace AutoRest.CSharp.V3.Output.Builders
 {
     internal class ClientBuilder
     {
@@ -27,7 +36,7 @@ namespace AutoRest.CSharp.V3.ClientModels
                 .Distinct();
 
             // Deduplication required because of https://github.com/Azure/autorest.modelerfour/issues/100
-            foreach (Pipeline.Generated.Parameter clientParameter in allClientParameters)
+            foreach (Input.Generated.Parameter clientParameter in allClientParameters)
             {
                 clientParameters[clientParameter.Language.Default.Name] = BuildParameter(clientParameter);
             }
@@ -54,7 +63,7 @@ namespace AutoRest.CSharp.V3.ClientModels
             return parameters.OrderBy(p => p.DefaultValue != null).ToArray();
         }
 
-        private static Constant? CreateDefaultValueConstant(Pipeline.Generated.Parameter requestParameter)
+        private static Constant? CreateDefaultValueConstant(Input.Generated.Parameter requestParameter)
         {
             if (requestParameter.ClientDefaultValue != null)
             {
@@ -87,7 +96,7 @@ namespace AutoRest.CSharp.V3.ClientModels
             List<Parameter> methodParameters = new List<Parameter>();
 
             RequestBody? body = null;
-            foreach (Pipeline.Generated.Parameter requestParameter in operation.Request.Parameters ?? Array.Empty<Pipeline.Generated.Parameter>())
+            foreach (Input.Generated.Parameter requestParameter in operation.Request.Parameters ?? Array.Empty<Input.Generated.Parameter>())
             {
                 string defaultName = requestParameter.Language.Default.Name;
                 string serializedName = requestParameter.Language.Default.SerializedName ?? defaultName;
@@ -217,7 +226,7 @@ namespace AutoRest.CSharp.V3.ClientModels
             return new Paging(nextLinkName, itemName, itemType, operationName);
         }
 
-        private static Parameter BuildParameter(Pipeline.Generated.Parameter requestParameter)
+        private static Parameter BuildParameter(Input.Generated.Parameter requestParameter)
         {
             Constant? defaultValue = null;
             if (requestParameter.Schema is ConstantSchema constantSchema)
@@ -321,7 +330,7 @@ namespace AutoRest.CSharp.V3.ClientModels
             _ => null
         };
 
-        private static string CreateDescription(Pipeline.Generated.Parameter requestParameter)
+        private static string CreateDescription(Input.Generated.Parameter requestParameter)
         {
             return string.IsNullOrWhiteSpace(requestParameter.Language.Default.Description) ?
                 $"The {requestParameter.Schema.Name} to use." :

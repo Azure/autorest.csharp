@@ -3,10 +3,11 @@
 
 using System;
 using System.Threading;
-using AutoRest.CSharp.V3.JsonRpc.MessageModels;
+using AutoRest.CSharp.V3.AutoRest.Communication.MessageHandling;
+using AutoRest.CSharp.V3.AutoRest.Communication.MessageHandling.Models;
 using AutoRest.CSharp.V3.Utilities;
 
-namespace AutoRest.CSharp.V3.JsonRpc.Messaging
+namespace AutoRest.CSharp.V3.AutoRest.Communication.Serialization
 {
     internal delegate bool ProcessAction(JsonRpcConnection connection, string pluginName, string sessionId);
 

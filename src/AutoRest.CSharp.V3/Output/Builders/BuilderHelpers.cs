@@ -4,13 +4,14 @@
 using System;
 using System.Globalization;
 using System.Security;
-using System.Xml;
-using AutoRest.CSharp.V3.ClientModels.Serialization;
-using AutoRest.CSharp.V3.Pipeline.Generated;
+using AutoRest.CSharp.V3.Input.Generated;
+using AutoRest.CSharp.V3.Output.Models.Shared;
+using AutoRest.CSharp.V3.Output.Models.TypeReferences;
+using SerializationFormat = AutoRest.CSharp.V3.Output.Models.Serialization.SerializationFormat;
 
-namespace AutoRest.CSharp.V3.ClientModels
+namespace AutoRest.CSharp.V3.Output.Builders
 {
-    internal class BuilderHelpers
+    internal static class BuilderHelpers
     {
         public static Constant StringConstant(string s) => ParseClientConstant(s, new FrameworkTypeReference(typeof(string)));
 

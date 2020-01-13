@@ -5,13 +5,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using AutoRest.CSharp.V3.Input;
 using YamlDotNet.Serialization;
 
 #pragma warning disable SA1649
 #pragma warning disable SA1402
 #pragma warning disable CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.
 // ReSharper disable once CheckNamespace
-namespace AutoRest.CSharp.V3.Pipeline.Generated
+namespace AutoRest.CSharp.V3.Input.Generated
 {
     internal partial class ObjectSchema
     {

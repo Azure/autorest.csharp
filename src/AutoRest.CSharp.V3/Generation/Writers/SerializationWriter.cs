@@ -6,11 +6,13 @@ using System.Linq;
 using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
-using AutoRest.CSharp.V3.ClientModels;
-using AutoRest.CSharp.V3.ClientModels.Serialization;
+using AutoRest.CSharp.V3.Generation.Types;
+using AutoRest.CSharp.V3.Output.Models.Serialization.Json;
+using AutoRest.CSharp.V3.Output.Models.Serialization.Xml;
+using AutoRest.CSharp.V3.Output.Models.Types;
 using Azure.Core;
 
-namespace AutoRest.CSharp.V3.CodeGen
+namespace AutoRest.CSharp.V3.Generation.Writers
 {
     internal class SerializationWriter
     {

@@ -2,10 +2,10 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using AutoRest.CSharp.V3.JsonRpc.MessageModels;
+using AutoRest.CSharp.V3.AutoRest.Communication.Serialization.Models;
 using AutoRest.CSharp.V3.Utilities;
 
-namespace AutoRest.CSharp.V3.JsonRpc.Messaging
+namespace AutoRest.CSharp.V3.AutoRest.Communication.Serialization
 {
     internal static class OutgoingMessageSerializer
     {

@@ -2,8 +2,9 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Threading.Tasks;
+using AutoRest.CSharp.V3.AutoRest.Communication.Serialization.Models;
 
-namespace AutoRest.CSharp.V3.JsonRpc.MessageModels
+namespace AutoRest.CSharp.V3.AutoRest.Communication
 {
     internal interface IPluginCommunication
     {

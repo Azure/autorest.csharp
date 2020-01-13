@@ -4,10 +4,9 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using System.Text.Json;
-using AutoRest.CSharp.V3.JsonRpc.MessageModels;
 using AutoRest.CSharp.V3.Utilities;
 
-namespace AutoRest.CSharp.V3.JsonRpc.Messaging
+namespace AutoRest.CSharp.V3.AutoRest.Communication.MessageHandling
 {
     [SuppressMessage("ReSharper", "IdentifierTypo")]
     internal static class PeekableBinaryStreamExtensions

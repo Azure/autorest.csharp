@@ -3,7 +3,7 @@
 
 using AutoRest.CSharp.V3.Utilities;
 
-namespace AutoRest.CSharp.V3.CodeGen
+namespace AutoRest.CSharp.V3.Generation.Types
 {
     internal class CSharpNamespace
     {

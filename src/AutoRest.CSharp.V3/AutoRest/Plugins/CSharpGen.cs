@@ -6,17 +6,20 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoRest.CSharp.V3.ClientModels;
-using AutoRest.CSharp.V3.CodeGen;
-using AutoRest.CSharp.V3.JsonRpc.MessageModels;
-using AutoRest.CSharp.V3.Pipeline.Generated;
+using AutoRest.CSharp.V3.AutoRest.Communication;
+using AutoRest.CSharp.V3.Generation.Types;
+using AutoRest.CSharp.V3.Generation.Writers;
+using AutoRest.CSharp.V3.Input.Generated;
+using AutoRest.CSharp.V3.Output.Builders;
+using AutoRest.CSharp.V3.Output.Models.Requests;
+using AutoRest.CSharp.V3.Output.Models.Responses;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Formatting;
 using Microsoft.CodeAnalysis.Simplification;
 using Microsoft.CodeAnalysis.Text;
 using Diagnostic = Microsoft.CodeAnalysis.Diagnostic;
 
-namespace AutoRest.CSharp.V3.Plugins
+namespace AutoRest.CSharp.V3.AutoRest.Plugins
 {
     [PluginName("csharpgen")]
     internal class CSharpGen : IPlugin

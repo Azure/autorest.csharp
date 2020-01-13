@@ -3,7 +3,7 @@
 
 using AutoRest.CSharp.V3.Utilities;
 
-namespace AutoRest.CSharp.V3.JsonRpc.MessageModels
+namespace AutoRest.CSharp.V3.AutoRest.Communication.Serialization.Models
 {
     internal class ArtifactMessage : IMessage
     {

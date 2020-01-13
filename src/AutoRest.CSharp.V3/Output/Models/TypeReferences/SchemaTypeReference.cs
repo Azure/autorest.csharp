@@ -1,9 +1,9 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using AutoRest.CSharp.V3.Pipeline.Generated;
+using AutoRest.CSharp.V3.Input.Generated;
 
-namespace AutoRest.CSharp.V3.ClientModels
+namespace AutoRest.CSharp.V3.Output.Models.TypeReferences
 {
     internal class SchemaTypeReference: TypeReference
     {

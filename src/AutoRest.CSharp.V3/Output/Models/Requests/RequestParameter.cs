@@ -2,8 +2,10 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using AutoRest.CSharp.V3.Output.Models.Shared;
+using AutoRest.CSharp.V3.Output.Models.TypeReferences;
 
-namespace AutoRest.CSharp.V3.ClientModels
+namespace AutoRest.CSharp.V3.Output.Models.Requests
 {
     internal struct RequestParameter
     {

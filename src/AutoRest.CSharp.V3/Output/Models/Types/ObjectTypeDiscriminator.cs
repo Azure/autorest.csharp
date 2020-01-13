@@ -3,7 +3,7 @@
 
 using System.Linq;
 
-namespace AutoRest.CSharp.V3.ClientModels
+namespace AutoRest.CSharp.V3.Output.Models.Types
 {
     internal class ObjectTypeDiscriminator
     {

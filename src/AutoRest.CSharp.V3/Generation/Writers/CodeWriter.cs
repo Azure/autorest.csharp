@@ -6,10 +6,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Utilities;
 using Microsoft.CodeAnalysis.CSharp;
 
-namespace AutoRest.CSharp.V3.CodeGen
+namespace AutoRest.CSharp.V3.Generation.Writers
 {
     internal class CodeWriter
     {

@@ -5,8 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using AutoRest.CSharp.V3.AutoRest.Communication.Serialization.Models;
 
-namespace AutoRest.CSharp.V3.JsonRpc.MessageModels
+namespace AutoRest.CSharp.V3.AutoRest.Communication
 {
     internal class HostCommunication : IPluginCommunication
     {

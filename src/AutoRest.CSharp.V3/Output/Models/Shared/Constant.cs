@@ -3,8 +3,9 @@
 
 using System;
 using System.Diagnostics;
+using AutoRest.CSharp.V3.Output.Models.TypeReferences;
 
-namespace AutoRest.CSharp.V3.ClientModels
+namespace AutoRest.CSharp.V3.Output.Models.Shared
 {
     internal struct Constant
     {
