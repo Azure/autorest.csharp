@@ -1803,12 +1803,12 @@ namespace AppConfiguration
 
             async Task<Page<Key>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await GetKeysAsync(name, after, acceptDatetime, cancellationToken);
+                var response = await GetKeysAsync(name, after, acceptDatetime, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
             async Task<Page<Key>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
             {
-                var response = await GetKeysNextPageAsync(acceptDatetime, nextLinkUrl, cancellationToken);
+                var response = await GetKeysNextPageAsync(acceptDatetime, nextLinkUrl, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
@@ -1845,12 +1845,12 @@ namespace AppConfiguration
 
             async Task<Page<KeyValue>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await GetKeyValuesAsync(key, label, after, acceptDatetime, select, cancellationToken);
+                var response = await GetKeyValuesAsync(key, label, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
             async Task<Page<KeyValue>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
             {
-                var response = await GetKeyValuesNextPageAsync(acceptDatetime, nextLinkUrl, cancellationToken);
+                var response = await GetKeyValuesNextPageAsync(acceptDatetime, nextLinkUrl, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
@@ -1888,12 +1888,12 @@ namespace AppConfiguration
 
             async Task<Page<Label>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await GetLabelsAsync(name, after, acceptDatetime, select, cancellationToken);
+                var response = await GetLabelsAsync(name, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
             async Task<Page<Label>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
             {
-                var response = await GetLabelsNextPageAsync(acceptDatetime, nextLinkUrl, cancellationToken);
+                var response = await GetLabelsNextPageAsync(acceptDatetime, nextLinkUrl, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
@@ -1931,12 +1931,12 @@ namespace AppConfiguration
 
             async Task<Page<KeyValue>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await GetRevisionsAsync(key, label, after, acceptDatetime, select, cancellationToken);
+                var response = await GetRevisionsAsync(key, label, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
             async Task<Page<KeyValue>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
             {
-                var response = await GetRevisionsNextPageAsync(acceptDatetime, nextLinkUrl, cancellationToken);
+                var response = await GetRevisionsNextPageAsync(acceptDatetime, nextLinkUrl, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
