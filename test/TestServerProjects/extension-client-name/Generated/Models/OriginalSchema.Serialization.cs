@@ -12,16 +12,21 @@ namespace extension_client_name.Models.V100
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (OriginalProperty != null)
+            if (RenamedProperty != null)
             {
                 writer.WritePropertyName("originalProperty");
                 writer.WriteStartObject();
-                foreach (var item in OriginalProperty)
+                foreach (var item in RenamedProperty)
                 {
                     writer.WritePropertyName(item.Key);
                     writer.WriteStringValue(item.Value);
                 }
                 writer.WriteEndObject();
+            }
+            if (RenamedPropertyString != null)
+            {
+                writer.WritePropertyName("originalPropertyString");
+                writer.WriteStringValue(RenamedPropertyString);
             }
             writer.WriteEndObject();
         }
@@ -36,11 +41,20 @@ namespace extension_client_name.Models.V100
                     {
                         continue;
                     }
-                    result.OriginalProperty = new Dictionary<string, string>();
+                    result.RenamedProperty = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        result.OriginalProperty.Add(property0.Name, property0.Value.GetString());
+                        result.RenamedProperty.Add(property0.Name, property0.Value.GetString());
                     }
+                    continue;
+                }
+                if (property.NameEquals("originalPropertyString"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    result.RenamedPropertyString = property.Value.GetString();
                     continue;
                 }
             }

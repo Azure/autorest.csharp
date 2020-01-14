@@ -27,7 +27,7 @@ namespace xml_service.Models.V100
         /// <summary> MISSING·SCHEMA-DESCRIPTION-STRING. </summary>
         public string? CacheControl { get; set; }
         /// <summary> MISSING·SCHEMA-DESCRIPTION-INTEGER. </summary>
-        public int? XMsBlobSequenceNumber { get; set; }
+        public int? BlobSequenceNumber { get; set; }
         /// <summary> MISSING·SCHEMA-DESCRIPTION-CHOICE. </summary>
         public BlobType? BlobType { get; set; }
         /// <summary> MISSING·SCHEMA-DESCRIPTION-CHOICE. </summary>
