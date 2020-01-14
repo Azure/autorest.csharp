@@ -5,11 +5,12 @@ namespace AutoRest.CSharp.V3.ClientModels
 {
     internal class ServiceClient
     {
-        public ServiceClient(string name, string description, ServiceClientParameter[] parameters, ClientMethod[] methods)
+        public ServiceClient(string name, string description, ServiceClientParameter[] parameters, ClientMethod[] methods, ClientMethodPaging[] pagingMethods)
         {
             Name = name;
             Parameters = parameters;
             Methods = methods;
+            PagingMethods = pagingMethods;
             Description = description;
         }
 
@@ -17,7 +18,7 @@ namespace AutoRest.CSharp.V3.ClientModels
         public string Description { get; }
 
         public ClientMethod[] Methods { get; }
-
+        public ClientMethodPaging[] PagingMethods { get; }
         public ServiceClientParameter[] Parameters { get; }
     }
 }

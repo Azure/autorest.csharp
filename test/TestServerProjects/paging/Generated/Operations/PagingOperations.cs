@@ -29,7 +29,7 @@ namespace paging
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
-        internal HttpMessage CreateGetNoItemNamePagesFirstPageRequest()
+        internal HttpMessage CreateGetNoItemNamePagesRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -40,14 +40,14 @@ namespace paging
         }
         /// <summary> A paging operation that must return result of the default &apos;value&apos; node. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Page<Product>> GetNoItemNamePagesFirstPageAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ProductResultValue>> GetNoItemNamePagesAsync(CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetNoItemNamePages");
             scope.Start();
             try
             {
-                using var message = CreateGetNoItemNamePagesFirstPageRequest();
+                using var message = CreateGetNoItemNamePagesRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -55,7 +55,7 @@ namespace paging
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = ProductResultValue.DeserializeProductResultValue(document.RootElement);
-                            return Page.FromValues(value.Value, value.NextLink, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
@@ -69,14 +69,14 @@ namespace paging
         }
         /// <summary> A paging operation that must return result of the default &apos;value&apos; node. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Page<Product> GetNoItemNamePagesFirstPage(CancellationToken cancellationToken = default)
+        public Response<ProductResultValue> GetNoItemNamePages(CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetNoItemNamePages");
             scope.Start();
             try
             {
-                using var message = CreateGetNoItemNamePagesFirstPageRequest();
+                using var message = CreateGetNoItemNamePagesRequest();
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -84,7 +84,7 @@ namespace paging
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = ProductResultValue.DeserializeProductResultValue(document.RootElement);
-                            return Page.FromValues(value.Value, value.NextLink, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw message.Response.CreateRequestFailedException();
@@ -96,26 +96,23 @@ namespace paging
                 throw;
             }
         }
-        internal HttpMessage CreateGetNoItemNamePagesNextPageRequest(string? nextLinkUrl)
+        internal HttpMessage CreateGetNoItemNamePagesNextPageRequest(string nextLinkUrl)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            if (Uri.IsWellFormedUriString(nextLinkUrl, UriKind.Absolute))
-            {
-                request.Uri.Reset(new Uri(nextLinkUrl));
-            }
-            else
-            {
-                request.Uri.Reset(new Uri($"{host}{nextLinkUrl}"));
-            }
+            request.Uri.Reset(new Uri($"{nextLinkUrl}"));
             return message;
         }
         /// <summary> A paging operation that must return result of the default &apos;value&apos; node. </summary>
         /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Page<Product>> GetNoItemNamePagesNextPageAsync(string nextLinkUrl, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ProductResultValue>> GetNoItemNamePagesNextPageAsync(string nextLinkUrl, CancellationToken cancellationToken = default)
         {
+            if (nextLinkUrl == null)
+            {
+                throw new ArgumentNullException(nameof(nextLinkUrl));
+            }
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetNoItemNamePages");
             scope.Start();
@@ -129,7 +126,7 @@ namespace paging
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = ProductResultValue.DeserializeProductResultValue(document.RootElement);
-                            return Page.FromValues(value.Value, value.NextLink, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
@@ -142,15 +139,40 @@ namespace paging
             }
         }
         /// <summary> A paging operation that must return result of the default &apos;value&apos; node. </summary>
+        /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public AsyncPageable<Product> GetNoItemNamePagesAsync(CancellationToken cancellationToken = default)
+        public Response<ProductResultValue> GetNoItemNamePagesNextPage(string nextLinkUrl, CancellationToken cancellationToken = default)
         {
+            if (nextLinkUrl == null)
+            {
+                throw new ArgumentNullException(nameof(nextLinkUrl));
+            }
 
-            Task<Page<Product>> FirstPageFunc(int? pageSizeHint) => GetNoItemNamePagesFirstPageAsync(cancellationToken).AsTask();
-            Task<Page<Product>> NextPageFunc(string continuationToken, int? pageSizeHint) => GetNoItemNamePagesNextPageAsync(continuationToken, cancellationToken).AsTask();
-            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            using var scope = clientDiagnostics.CreateScope("PagingOperations.GetNoItemNamePages");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetNoItemNamePagesNextPageRequest(nextLinkUrl);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = ProductResultValue.DeserializeProductResultValue(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
-        internal HttpMessage CreateGetNullNextLinkNamePagesFirstPageRequest()
+        internal HttpMessage CreateGetNullNextLinkNamePagesRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -161,14 +183,14 @@ namespace paging
         }
         /// <summary> A paging operation that must ignore any kind of nextLink, and stop after page 1. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Page<Product>> GetNullNextLinkNamePagesFirstPageAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ProductResult>> GetNullNextLinkNamePagesAsync(CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetNullNextLinkNamePages");
             scope.Start();
             try
             {
-                using var message = CreateGetNullNextLinkNamePagesFirstPageRequest();
+                using var message = CreateGetNullNextLinkNamePagesRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -176,7 +198,7 @@ namespace paging
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Page.FromValues(value.Values, null, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
@@ -190,14 +212,14 @@ namespace paging
         }
         /// <summary> A paging operation that must ignore any kind of nextLink, and stop after page 1. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Page<Product> GetNullNextLinkNamePagesFirstPage(CancellationToken cancellationToken = default)
+        public Response<ProductResult> GetNullNextLinkNamePages(CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetNullNextLinkNamePages");
             scope.Start();
             try
             {
-                using var message = CreateGetNullNextLinkNamePagesFirstPageRequest();
+                using var message = CreateGetNullNextLinkNamePagesRequest();
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -205,7 +227,7 @@ namespace paging
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Page.FromValues(value.Values, null, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw message.Response.CreateRequestFailedException();
@@ -217,26 +239,23 @@ namespace paging
                 throw;
             }
         }
-        internal HttpMessage CreateGetNullNextLinkNamePagesNextPageRequest(string? nextLinkUrl)
+        internal HttpMessage CreateGetNullNextLinkNamePagesNextPageRequest(string nextLinkUrl)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            if (Uri.IsWellFormedUriString(nextLinkUrl, UriKind.Absolute))
-            {
-                request.Uri.Reset(new Uri(nextLinkUrl));
-            }
-            else
-            {
-                request.Uri.Reset(new Uri($"{host}{nextLinkUrl}"));
-            }
+            request.Uri.Reset(new Uri($"{nextLinkUrl}"));
             return message;
         }
         /// <summary> A paging operation that must ignore any kind of nextLink, and stop after page 1. </summary>
         /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Page<Product>> GetNullNextLinkNamePagesNextPageAsync(string nextLinkUrl, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ProductResult>> GetNullNextLinkNamePagesNextPageAsync(string nextLinkUrl, CancellationToken cancellationToken = default)
         {
+            if (nextLinkUrl == null)
+            {
+                throw new ArgumentNullException(nameof(nextLinkUrl));
+            }
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetNullNextLinkNamePages");
             scope.Start();
@@ -250,7 +269,7 @@ namespace paging
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Page.FromValues(value.Values, null, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
@@ -263,15 +282,40 @@ namespace paging
             }
         }
         /// <summary> A paging operation that must ignore any kind of nextLink, and stop after page 1. </summary>
+        /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public AsyncPageable<Product> GetNullNextLinkNamePagesAsync(CancellationToken cancellationToken = default)
+        public Response<ProductResult> GetNullNextLinkNamePagesNextPage(string nextLinkUrl, CancellationToken cancellationToken = default)
         {
+            if (nextLinkUrl == null)
+            {
+                throw new ArgumentNullException(nameof(nextLinkUrl));
+            }
 
-            Task<Page<Product>> FirstPageFunc(int? pageSizeHint) => GetNullNextLinkNamePagesFirstPageAsync(cancellationToken).AsTask();
-            Task<Page<Product>> NextPageFunc(string continuationToken, int? pageSizeHint) => GetNullNextLinkNamePagesNextPageAsync(continuationToken, cancellationToken).AsTask();
-            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            using var scope = clientDiagnostics.CreateScope("PagingOperations.GetNullNextLinkNamePages");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetNullNextLinkNamePagesNextPageRequest(nextLinkUrl);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = ProductResult.DeserializeProductResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
-        internal HttpMessage CreateGetSinglePagesFirstPageRequest()
+        internal HttpMessage CreateGetSinglePagesRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -282,14 +326,14 @@ namespace paging
         }
         /// <summary> A paging operation that finishes on the first call without a nextlink. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Page<Product>> GetSinglePagesFirstPageAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ProductResult>> GetSinglePagesAsync(CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetSinglePages");
             scope.Start();
             try
             {
-                using var message = CreateGetSinglePagesFirstPageRequest();
+                using var message = CreateGetSinglePagesRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -297,7 +341,7 @@ namespace paging
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Page.FromValues(value.Values, value.NextLink, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
@@ -311,14 +355,14 @@ namespace paging
         }
         /// <summary> A paging operation that finishes on the first call without a nextlink. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Page<Product> GetSinglePagesFirstPage(CancellationToken cancellationToken = default)
+        public Response<ProductResult> GetSinglePages(CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetSinglePages");
             scope.Start();
             try
             {
-                using var message = CreateGetSinglePagesFirstPageRequest();
+                using var message = CreateGetSinglePagesRequest();
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -326,7 +370,7 @@ namespace paging
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Page.FromValues(value.Values, value.NextLink, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw message.Response.CreateRequestFailedException();
@@ -338,26 +382,23 @@ namespace paging
                 throw;
             }
         }
-        internal HttpMessage CreateGetSinglePagesNextPageRequest(string? nextLinkUrl)
+        internal HttpMessage CreateGetSinglePagesNextPageRequest(string nextLinkUrl)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            if (Uri.IsWellFormedUriString(nextLinkUrl, UriKind.Absolute))
-            {
-                request.Uri.Reset(new Uri(nextLinkUrl));
-            }
-            else
-            {
-                request.Uri.Reset(new Uri($"{host}{nextLinkUrl}"));
-            }
+            request.Uri.Reset(new Uri($"{nextLinkUrl}"));
             return message;
         }
         /// <summary> A paging operation that finishes on the first call without a nextlink. </summary>
         /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Page<Product>> GetSinglePagesNextPageAsync(string nextLinkUrl, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ProductResult>> GetSinglePagesNextPageAsync(string nextLinkUrl, CancellationToken cancellationToken = default)
         {
+            if (nextLinkUrl == null)
+            {
+                throw new ArgumentNullException(nameof(nextLinkUrl));
+            }
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetSinglePages");
             scope.Start();
@@ -371,7 +412,7 @@ namespace paging
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Page.FromValues(value.Values, value.NextLink, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
@@ -384,15 +425,40 @@ namespace paging
             }
         }
         /// <summary> A paging operation that finishes on the first call without a nextlink. </summary>
+        /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public AsyncPageable<Product> GetSinglePagesAsync(CancellationToken cancellationToken = default)
+        public Response<ProductResult> GetSinglePagesNextPage(string nextLinkUrl, CancellationToken cancellationToken = default)
         {
+            if (nextLinkUrl == null)
+            {
+                throw new ArgumentNullException(nameof(nextLinkUrl));
+            }
 
-            Task<Page<Product>> FirstPageFunc(int? pageSizeHint) => GetSinglePagesFirstPageAsync(cancellationToken).AsTask();
-            Task<Page<Product>> NextPageFunc(string continuationToken, int? pageSizeHint) => GetSinglePagesNextPageAsync(continuationToken, cancellationToken).AsTask();
-            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            using var scope = clientDiagnostics.CreateScope("PagingOperations.GetSinglePages");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetSinglePagesNextPageRequest(nextLinkUrl);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = ProductResult.DeserializeProductResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
-        internal HttpMessage CreateGetMultiplePagesFirstPageRequest(string? clientRequestId, int? maxresults, int? timeout)
+        internal HttpMessage CreateGetMultiplePagesRequest(string? clientRequestId, int? maxresults, int? timeout)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -418,14 +484,14 @@ namespace paging
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Page<Product>> GetMultiplePagesFirstPageAsync(string? clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ProductResult>> GetMultiplePagesAsync(string? clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePages");
             scope.Start();
             try
             {
-                using var message = CreateGetMultiplePagesFirstPageRequest(clientRequestId, maxresults, timeout);
+                using var message = CreateGetMultiplePagesRequest(clientRequestId, maxresults, timeout);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -433,7 +499,7 @@ namespace paging
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Page.FromValues(value.Values, value.NextLink, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
@@ -450,14 +516,14 @@ namespace paging
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Page<Product> GetMultiplePagesFirstPage(string? clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        public Response<ProductResult> GetMultiplePages(string? clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePages");
             scope.Start();
             try
             {
-                using var message = CreateGetMultiplePagesFirstPageRequest(clientRequestId, maxresults, timeout);
+                using var message = CreateGetMultiplePagesRequest(clientRequestId, maxresults, timeout);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -465,7 +531,7 @@ namespace paging
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Page.FromValues(value.Values, value.NextLink, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw message.Response.CreateRequestFailedException();
@@ -477,19 +543,12 @@ namespace paging
                 throw;
             }
         }
-        internal HttpMessage CreateGetMultiplePagesNextPageRequest(string? clientRequestId, int? maxresults, int? timeout, string? nextLinkUrl)
+        internal HttpMessage CreateGetMultiplePagesNextPageRequest(string? clientRequestId, int? maxresults, int? timeout, string nextLinkUrl)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            if (Uri.IsWellFormedUriString(nextLinkUrl, UriKind.Absolute))
-            {
-                request.Uri.Reset(new Uri(nextLinkUrl));
-            }
-            else
-            {
-                request.Uri.Reset(new Uri($"{host}{nextLinkUrl}"));
-            }
+            request.Uri.Reset(new Uri($"{nextLinkUrl}"));
             if (clientRequestId != null)
             {
                 request.Headers.Add("client-request-id", clientRequestId);
@@ -510,8 +569,12 @@ namespace paging
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Page<Product>> GetMultiplePagesNextPageAsync(string? clientRequestId, int? maxresults, int? timeout, string nextLinkUrl, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ProductResult>> GetMultiplePagesNextPageAsync(string? clientRequestId, int? maxresults, int? timeout, string nextLinkUrl, CancellationToken cancellationToken = default)
         {
+            if (nextLinkUrl == null)
+            {
+                throw new ArgumentNullException(nameof(nextLinkUrl));
+            }
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePages");
             scope.Start();
@@ -525,7 +588,7 @@ namespace paging
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Page.FromValues(value.Values, value.NextLink, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
@@ -541,15 +604,40 @@ namespace paging
         /// <param name="clientRequestId"> MISSING·PARAMETER-DESCRIPTION. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
+        /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public AsyncPageable<Product> GetMultiplePagesAsync(string? clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        public Response<ProductResult> GetMultiplePagesNextPage(string? clientRequestId, int? maxresults, int? timeout, string nextLinkUrl, CancellationToken cancellationToken = default)
         {
+            if (nextLinkUrl == null)
+            {
+                throw new ArgumentNullException(nameof(nextLinkUrl));
+            }
 
-            Task<Page<Product>> FirstPageFunc(int? pageSizeHint) => GetMultiplePagesFirstPageAsync(clientRequestId, maxresults, timeout, cancellationToken).AsTask();
-            Task<Page<Product>> NextPageFunc(string continuationToken, int? pageSizeHint) => GetMultiplePagesNextPageAsync(clientRequestId, maxresults, timeout, continuationToken, cancellationToken).AsTask();
-            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePages");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetMultiplePagesNextPageRequest(clientRequestId, maxresults, timeout, nextLinkUrl);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = ProductResult.DeserializeProductResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
-        internal HttpMessage CreateGetOdataMultiplePagesFirstPageRequest(string? clientRequestId, int? maxresults, int? timeout)
+        internal HttpMessage CreateGetOdataMultiplePagesRequest(string? clientRequestId, int? maxresults, int? timeout)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -575,14 +663,14 @@ namespace paging
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Page<Product>> GetOdataMultiplePagesFirstPageAsync(string? clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<OdataProductResult>> GetOdataMultiplePagesAsync(string? clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetOdataMultiplePages");
             scope.Start();
             try
             {
-                using var message = CreateGetOdataMultiplePagesFirstPageRequest(clientRequestId, maxresults, timeout);
+                using var message = CreateGetOdataMultiplePagesRequest(clientRequestId, maxresults, timeout);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -590,7 +678,7 @@ namespace paging
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
-                            return Page.FromValues(value.Values, value.OdataNextLink, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
@@ -607,14 +695,14 @@ namespace paging
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Page<Product> GetOdataMultiplePagesFirstPage(string? clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        public Response<OdataProductResult> GetOdataMultiplePages(string? clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetOdataMultiplePages");
             scope.Start();
             try
             {
-                using var message = CreateGetOdataMultiplePagesFirstPageRequest(clientRequestId, maxresults, timeout);
+                using var message = CreateGetOdataMultiplePagesRequest(clientRequestId, maxresults, timeout);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -622,7 +710,7 @@ namespace paging
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
-                            return Page.FromValues(value.Values, value.OdataNextLink, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw message.Response.CreateRequestFailedException();
@@ -634,19 +722,12 @@ namespace paging
                 throw;
             }
         }
-        internal HttpMessage CreateGetOdataMultiplePagesNextPageRequest(string? clientRequestId, int? maxresults, int? timeout, string? nextLinkUrl)
+        internal HttpMessage CreateGetOdataMultiplePagesNextPageRequest(string? clientRequestId, int? maxresults, int? timeout, string nextLinkUrl)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            if (Uri.IsWellFormedUriString(nextLinkUrl, UriKind.Absolute))
-            {
-                request.Uri.Reset(new Uri(nextLinkUrl));
-            }
-            else
-            {
-                request.Uri.Reset(new Uri($"{host}{nextLinkUrl}"));
-            }
+            request.Uri.Reset(new Uri($"{nextLinkUrl}"));
             if (clientRequestId != null)
             {
                 request.Headers.Add("client-request-id", clientRequestId);
@@ -667,8 +748,12 @@ namespace paging
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Page<Product>> GetOdataMultiplePagesNextPageAsync(string? clientRequestId, int? maxresults, int? timeout, string nextLinkUrl, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<OdataProductResult>> GetOdataMultiplePagesNextPageAsync(string? clientRequestId, int? maxresults, int? timeout, string nextLinkUrl, CancellationToken cancellationToken = default)
         {
+            if (nextLinkUrl == null)
+            {
+                throw new ArgumentNullException(nameof(nextLinkUrl));
+            }
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetOdataMultiplePages");
             scope.Start();
@@ -682,7 +767,7 @@ namespace paging
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
-                            return Page.FromValues(value.Values, value.OdataNextLink, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
@@ -698,15 +783,40 @@ namespace paging
         /// <param name="clientRequestId"> MISSING·PARAMETER-DESCRIPTION. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
+        /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public AsyncPageable<Product> GetOdataMultiplePagesAsync(string? clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        public Response<OdataProductResult> GetOdataMultiplePagesNextPage(string? clientRequestId, int? maxresults, int? timeout, string nextLinkUrl, CancellationToken cancellationToken = default)
         {
+            if (nextLinkUrl == null)
+            {
+                throw new ArgumentNullException(nameof(nextLinkUrl));
+            }
 
-            Task<Page<Product>> FirstPageFunc(int? pageSizeHint) => GetOdataMultiplePagesFirstPageAsync(clientRequestId, maxresults, timeout, cancellationToken).AsTask();
-            Task<Page<Product>> NextPageFunc(string continuationToken, int? pageSizeHint) => GetOdataMultiplePagesNextPageAsync(clientRequestId, maxresults, timeout, continuationToken, cancellationToken).AsTask();
-            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            using var scope = clientDiagnostics.CreateScope("PagingOperations.GetOdataMultiplePages");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetOdataMultiplePagesNextPageRequest(clientRequestId, maxresults, timeout, nextLinkUrl);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
-        internal HttpMessage CreateGetMultiplePagesWithOffsetFirstPageRequest(string? clientRequestId, int? maxresults, int offset, int? timeout)
+        internal HttpMessage CreateGetMultiplePagesWithOffsetRequest(string? clientRequestId, int? maxresults, int offset, int? timeout)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -734,14 +844,14 @@ namespace paging
         /// <param name="offset"> Offset of return value. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Page<Product>> GetMultiplePagesWithOffsetFirstPageAsync(string? clientRequestId, int? maxresults, int offset, int? timeout, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ProductResult>> GetMultiplePagesWithOffsetAsync(string? clientRequestId, int? maxresults, int offset, int? timeout, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesWithOffset");
             scope.Start();
             try
             {
-                using var message = CreateGetMultiplePagesWithOffsetFirstPageRequest(clientRequestId, maxresults, offset, timeout);
+                using var message = CreateGetMultiplePagesWithOffsetRequest(clientRequestId, maxresults, offset, timeout);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -749,7 +859,7 @@ namespace paging
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Page.FromValues(value.Values, value.NextLink, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
@@ -767,14 +877,14 @@ namespace paging
         /// <param name="offset"> Offset of return value. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Page<Product> GetMultiplePagesWithOffsetFirstPage(string? clientRequestId, int? maxresults, int offset, int? timeout, CancellationToken cancellationToken = default)
+        public Response<ProductResult> GetMultiplePagesWithOffset(string? clientRequestId, int? maxresults, int offset, int? timeout, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesWithOffset");
             scope.Start();
             try
             {
-                using var message = CreateGetMultiplePagesWithOffsetFirstPageRequest(clientRequestId, maxresults, offset, timeout);
+                using var message = CreateGetMultiplePagesWithOffsetRequest(clientRequestId, maxresults, offset, timeout);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -782,7 +892,7 @@ namespace paging
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Page.FromValues(value.Values, value.NextLink, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw message.Response.CreateRequestFailedException();
@@ -794,19 +904,12 @@ namespace paging
                 throw;
             }
         }
-        internal HttpMessage CreateGetMultiplePagesWithOffsetNextPageRequest(string? clientRequestId, int? maxresults, int? timeout, string? nextLinkUrl)
+        internal HttpMessage CreateGetMultiplePagesWithOffsetNextPageRequest(string? clientRequestId, int? maxresults, int? timeout, string nextLinkUrl)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            if (Uri.IsWellFormedUriString(nextLinkUrl, UriKind.Absolute))
-            {
-                request.Uri.Reset(new Uri(nextLinkUrl));
-            }
-            else
-            {
-                request.Uri.Reset(new Uri($"{host}{nextLinkUrl}"));
-            }
+            request.Uri.Reset(new Uri($"{nextLinkUrl}"));
             if (clientRequestId != null)
             {
                 request.Headers.Add("client-request-id", clientRequestId);
@@ -827,8 +930,12 @@ namespace paging
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Page<Product>> GetMultiplePagesWithOffsetNextPageAsync(string? clientRequestId, int? maxresults, int? timeout, string nextLinkUrl, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ProductResult>> GetMultiplePagesWithOffsetNextPageAsync(string? clientRequestId, int? maxresults, int? timeout, string nextLinkUrl, CancellationToken cancellationToken = default)
         {
+            if (nextLinkUrl == null)
+            {
+                throw new ArgumentNullException(nameof(nextLinkUrl));
+            }
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesWithOffset");
             scope.Start();
@@ -842,7 +949,7 @@ namespace paging
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Page.FromValues(value.Values, value.NextLink, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
@@ -857,17 +964,41 @@ namespace paging
         /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
         /// <param name="clientRequestId"> MISSING·PARAMETER-DESCRIPTION. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
-        /// <param name="offset"> Offset of return value. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
+        /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public AsyncPageable<Product> GetMultiplePagesWithOffsetAsync(string? clientRequestId, int? maxresults, int offset, int? timeout, CancellationToken cancellationToken = default)
+        public Response<ProductResult> GetMultiplePagesWithOffsetNextPage(string? clientRequestId, int? maxresults, int? timeout, string nextLinkUrl, CancellationToken cancellationToken = default)
         {
+            if (nextLinkUrl == null)
+            {
+                throw new ArgumentNullException(nameof(nextLinkUrl));
+            }
 
-            Task<Page<Product>> FirstPageFunc(int? pageSizeHint) => GetMultiplePagesWithOffsetFirstPageAsync(clientRequestId, maxresults, offset, timeout, cancellationToken).AsTask();
-            Task<Page<Product>> NextPageFunc(string continuationToken, int? pageSizeHint) => GetMultiplePagesWithOffsetNextPageAsync(clientRequestId, maxresults, timeout, continuationToken, cancellationToken).AsTask();
-            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesWithOffset");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetMultiplePagesWithOffsetNextPageRequest(clientRequestId, maxresults, timeout, nextLinkUrl);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = ProductResult.DeserializeProductResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
-        internal HttpMessage CreateGetMultiplePagesRetryFirstFirstPageRequest()
+        internal HttpMessage CreateGetMultiplePagesRetryFirstRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -878,14 +1009,14 @@ namespace paging
         }
         /// <summary> A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Page<Product>> GetMultiplePagesRetryFirstFirstPageAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ProductResult>> GetMultiplePagesRetryFirstAsync(CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesRetryFirst");
             scope.Start();
             try
             {
-                using var message = CreateGetMultiplePagesRetryFirstFirstPageRequest();
+                using var message = CreateGetMultiplePagesRetryFirstRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -893,7 +1024,7 @@ namespace paging
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Page.FromValues(value.Values, value.NextLink, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
@@ -907,14 +1038,14 @@ namespace paging
         }
         /// <summary> A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Page<Product> GetMultiplePagesRetryFirstFirstPage(CancellationToken cancellationToken = default)
+        public Response<ProductResult> GetMultiplePagesRetryFirst(CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesRetryFirst");
             scope.Start();
             try
             {
-                using var message = CreateGetMultiplePagesRetryFirstFirstPageRequest();
+                using var message = CreateGetMultiplePagesRetryFirstRequest();
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -922,7 +1053,7 @@ namespace paging
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Page.FromValues(value.Values, value.NextLink, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw message.Response.CreateRequestFailedException();
@@ -934,26 +1065,23 @@ namespace paging
                 throw;
             }
         }
-        internal HttpMessage CreateGetMultiplePagesRetryFirstNextPageRequest(string? nextLinkUrl)
+        internal HttpMessage CreateGetMultiplePagesRetryFirstNextPageRequest(string nextLinkUrl)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            if (Uri.IsWellFormedUriString(nextLinkUrl, UriKind.Absolute))
-            {
-                request.Uri.Reset(new Uri(nextLinkUrl));
-            }
-            else
-            {
-                request.Uri.Reset(new Uri($"{host}{nextLinkUrl}"));
-            }
+            request.Uri.Reset(new Uri($"{nextLinkUrl}"));
             return message;
         }
         /// <summary> A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages. </summary>
         /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Page<Product>> GetMultiplePagesRetryFirstNextPageAsync(string nextLinkUrl, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ProductResult>> GetMultiplePagesRetryFirstNextPageAsync(string nextLinkUrl, CancellationToken cancellationToken = default)
         {
+            if (nextLinkUrl == null)
+            {
+                throw new ArgumentNullException(nameof(nextLinkUrl));
+            }
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesRetryFirst");
             scope.Start();
@@ -967,7 +1095,7 @@ namespace paging
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Page.FromValues(value.Values, value.NextLink, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
@@ -980,15 +1108,40 @@ namespace paging
             }
         }
         /// <summary> A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages. </summary>
+        /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public AsyncPageable<Product> GetMultiplePagesRetryFirstAsync(CancellationToken cancellationToken = default)
+        public Response<ProductResult> GetMultiplePagesRetryFirstNextPage(string nextLinkUrl, CancellationToken cancellationToken = default)
         {
+            if (nextLinkUrl == null)
+            {
+                throw new ArgumentNullException(nameof(nextLinkUrl));
+            }
 
-            Task<Page<Product>> FirstPageFunc(int? pageSizeHint) => GetMultiplePagesRetryFirstFirstPageAsync(cancellationToken).AsTask();
-            Task<Page<Product>> NextPageFunc(string continuationToken, int? pageSizeHint) => GetMultiplePagesRetryFirstNextPageAsync(continuationToken, cancellationToken).AsTask();
-            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesRetryFirst");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetMultiplePagesRetryFirstNextPageRequest(nextLinkUrl);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = ProductResult.DeserializeProductResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
-        internal HttpMessage CreateGetMultiplePagesRetrySecondFirstPageRequest()
+        internal HttpMessage CreateGetMultiplePagesRetrySecondRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -999,14 +1152,14 @@ namespace paging
         }
         /// <summary> A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Page<Product>> GetMultiplePagesRetrySecondFirstPageAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ProductResult>> GetMultiplePagesRetrySecondAsync(CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesRetrySecond");
             scope.Start();
             try
             {
-                using var message = CreateGetMultiplePagesRetrySecondFirstPageRequest();
+                using var message = CreateGetMultiplePagesRetrySecondRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1014,7 +1167,7 @@ namespace paging
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Page.FromValues(value.Values, value.NextLink, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
@@ -1028,14 +1181,14 @@ namespace paging
         }
         /// <summary> A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Page<Product> GetMultiplePagesRetrySecondFirstPage(CancellationToken cancellationToken = default)
+        public Response<ProductResult> GetMultiplePagesRetrySecond(CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesRetrySecond");
             scope.Start();
             try
             {
-                using var message = CreateGetMultiplePagesRetrySecondFirstPageRequest();
+                using var message = CreateGetMultiplePagesRetrySecondRequest();
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -1043,7 +1196,7 @@ namespace paging
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Page.FromValues(value.Values, value.NextLink, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw message.Response.CreateRequestFailedException();
@@ -1055,26 +1208,23 @@ namespace paging
                 throw;
             }
         }
-        internal HttpMessage CreateGetMultiplePagesRetrySecondNextPageRequest(string? nextLinkUrl)
+        internal HttpMessage CreateGetMultiplePagesRetrySecondNextPageRequest(string nextLinkUrl)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            if (Uri.IsWellFormedUriString(nextLinkUrl, UriKind.Absolute))
-            {
-                request.Uri.Reset(new Uri(nextLinkUrl));
-            }
-            else
-            {
-                request.Uri.Reset(new Uri($"{host}{nextLinkUrl}"));
-            }
+            request.Uri.Reset(new Uri($"{nextLinkUrl}"));
             return message;
         }
         /// <summary> A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually. </summary>
         /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Page<Product>> GetMultiplePagesRetrySecondNextPageAsync(string nextLinkUrl, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ProductResult>> GetMultiplePagesRetrySecondNextPageAsync(string nextLinkUrl, CancellationToken cancellationToken = default)
         {
+            if (nextLinkUrl == null)
+            {
+                throw new ArgumentNullException(nameof(nextLinkUrl));
+            }
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesRetrySecond");
             scope.Start();
@@ -1088,7 +1238,7 @@ namespace paging
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Page.FromValues(value.Values, value.NextLink, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
@@ -1101,15 +1251,40 @@ namespace paging
             }
         }
         /// <summary> A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually. </summary>
+        /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public AsyncPageable<Product> GetMultiplePagesRetrySecondAsync(CancellationToken cancellationToken = default)
+        public Response<ProductResult> GetMultiplePagesRetrySecondNextPage(string nextLinkUrl, CancellationToken cancellationToken = default)
         {
+            if (nextLinkUrl == null)
+            {
+                throw new ArgumentNullException(nameof(nextLinkUrl));
+            }
 
-            Task<Page<Product>> FirstPageFunc(int? pageSizeHint) => GetMultiplePagesRetrySecondFirstPageAsync(cancellationToken).AsTask();
-            Task<Page<Product>> NextPageFunc(string continuationToken, int? pageSizeHint) => GetMultiplePagesRetrySecondNextPageAsync(continuationToken, cancellationToken).AsTask();
-            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesRetrySecond");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetMultiplePagesRetrySecondNextPageRequest(nextLinkUrl);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = ProductResult.DeserializeProductResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
-        internal HttpMessage CreateGetSinglePagesFailureFirstPageRequest()
+        internal HttpMessage CreateGetSinglePagesFailureRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1120,14 +1295,14 @@ namespace paging
         }
         /// <summary> A paging operation that receives a 400 on the first call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Page<Product>> GetSinglePagesFailureFirstPageAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ProductResult>> GetSinglePagesFailureAsync(CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetSinglePagesFailure");
             scope.Start();
             try
             {
-                using var message = CreateGetSinglePagesFailureFirstPageRequest();
+                using var message = CreateGetSinglePagesFailureRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1135,7 +1310,7 @@ namespace paging
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Page.FromValues(value.Values, value.NextLink, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
@@ -1149,14 +1324,14 @@ namespace paging
         }
         /// <summary> A paging operation that receives a 400 on the first call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Page<Product> GetSinglePagesFailureFirstPage(CancellationToken cancellationToken = default)
+        public Response<ProductResult> GetSinglePagesFailure(CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetSinglePagesFailure");
             scope.Start();
             try
             {
-                using var message = CreateGetSinglePagesFailureFirstPageRequest();
+                using var message = CreateGetSinglePagesFailureRequest();
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -1164,7 +1339,7 @@ namespace paging
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Page.FromValues(value.Values, value.NextLink, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw message.Response.CreateRequestFailedException();
@@ -1176,26 +1351,23 @@ namespace paging
                 throw;
             }
         }
-        internal HttpMessage CreateGetSinglePagesFailureNextPageRequest(string? nextLinkUrl)
+        internal HttpMessage CreateGetSinglePagesFailureNextPageRequest(string nextLinkUrl)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            if (Uri.IsWellFormedUriString(nextLinkUrl, UriKind.Absolute))
-            {
-                request.Uri.Reset(new Uri(nextLinkUrl));
-            }
-            else
-            {
-                request.Uri.Reset(new Uri($"{host}{nextLinkUrl}"));
-            }
+            request.Uri.Reset(new Uri($"{nextLinkUrl}"));
             return message;
         }
         /// <summary> A paging operation that receives a 400 on the first call. </summary>
         /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Page<Product>> GetSinglePagesFailureNextPageAsync(string nextLinkUrl, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ProductResult>> GetSinglePagesFailureNextPageAsync(string nextLinkUrl, CancellationToken cancellationToken = default)
         {
+            if (nextLinkUrl == null)
+            {
+                throw new ArgumentNullException(nameof(nextLinkUrl));
+            }
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetSinglePagesFailure");
             scope.Start();
@@ -1209,7 +1381,7 @@ namespace paging
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Page.FromValues(value.Values, value.NextLink, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
@@ -1222,15 +1394,40 @@ namespace paging
             }
         }
         /// <summary> A paging operation that receives a 400 on the first call. </summary>
+        /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public AsyncPageable<Product> GetSinglePagesFailureAsync(CancellationToken cancellationToken = default)
+        public Response<ProductResult> GetSinglePagesFailureNextPage(string nextLinkUrl, CancellationToken cancellationToken = default)
         {
+            if (nextLinkUrl == null)
+            {
+                throw new ArgumentNullException(nameof(nextLinkUrl));
+            }
 
-            Task<Page<Product>> FirstPageFunc(int? pageSizeHint) => GetSinglePagesFailureFirstPageAsync(cancellationToken).AsTask();
-            Task<Page<Product>> NextPageFunc(string continuationToken, int? pageSizeHint) => GetSinglePagesFailureNextPageAsync(continuationToken, cancellationToken).AsTask();
-            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            using var scope = clientDiagnostics.CreateScope("PagingOperations.GetSinglePagesFailure");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetSinglePagesFailureNextPageRequest(nextLinkUrl);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = ProductResult.DeserializeProductResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
-        internal HttpMessage CreateGetMultiplePagesFailureFirstPageRequest()
+        internal HttpMessage CreateGetMultiplePagesFailureRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1241,14 +1438,14 @@ namespace paging
         }
         /// <summary> A paging operation that receives a 400 on the second call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Page<Product>> GetMultiplePagesFailureFirstPageAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ProductResult>> GetMultiplePagesFailureAsync(CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesFailure");
             scope.Start();
             try
             {
-                using var message = CreateGetMultiplePagesFailureFirstPageRequest();
+                using var message = CreateGetMultiplePagesFailureRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1256,7 +1453,7 @@ namespace paging
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Page.FromValues(value.Values, value.NextLink, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
@@ -1270,14 +1467,14 @@ namespace paging
         }
         /// <summary> A paging operation that receives a 400 on the second call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Page<Product> GetMultiplePagesFailureFirstPage(CancellationToken cancellationToken = default)
+        public Response<ProductResult> GetMultiplePagesFailure(CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesFailure");
             scope.Start();
             try
             {
-                using var message = CreateGetMultiplePagesFailureFirstPageRequest();
+                using var message = CreateGetMultiplePagesFailureRequest();
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -1285,7 +1482,7 @@ namespace paging
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Page.FromValues(value.Values, value.NextLink, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw message.Response.CreateRequestFailedException();
@@ -1297,26 +1494,23 @@ namespace paging
                 throw;
             }
         }
-        internal HttpMessage CreateGetMultiplePagesFailureNextPageRequest(string? nextLinkUrl)
+        internal HttpMessage CreateGetMultiplePagesFailureNextPageRequest(string nextLinkUrl)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            if (Uri.IsWellFormedUriString(nextLinkUrl, UriKind.Absolute))
-            {
-                request.Uri.Reset(new Uri(nextLinkUrl));
-            }
-            else
-            {
-                request.Uri.Reset(new Uri($"{host}{nextLinkUrl}"));
-            }
+            request.Uri.Reset(new Uri($"{nextLinkUrl}"));
             return message;
         }
         /// <summary> A paging operation that receives a 400 on the second call. </summary>
         /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Page<Product>> GetMultiplePagesFailureNextPageAsync(string nextLinkUrl, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ProductResult>> GetMultiplePagesFailureNextPageAsync(string nextLinkUrl, CancellationToken cancellationToken = default)
         {
+            if (nextLinkUrl == null)
+            {
+                throw new ArgumentNullException(nameof(nextLinkUrl));
+            }
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesFailure");
             scope.Start();
@@ -1330,7 +1524,7 @@ namespace paging
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Page.FromValues(value.Values, value.NextLink, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
@@ -1343,15 +1537,40 @@ namespace paging
             }
         }
         /// <summary> A paging operation that receives a 400 on the second call. </summary>
+        /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public AsyncPageable<Product> GetMultiplePagesFailureAsync(CancellationToken cancellationToken = default)
+        public Response<ProductResult> GetMultiplePagesFailureNextPage(string nextLinkUrl, CancellationToken cancellationToken = default)
         {
+            if (nextLinkUrl == null)
+            {
+                throw new ArgumentNullException(nameof(nextLinkUrl));
+            }
 
-            Task<Page<Product>> FirstPageFunc(int? pageSizeHint) => GetMultiplePagesFailureFirstPageAsync(cancellationToken).AsTask();
-            Task<Page<Product>> NextPageFunc(string continuationToken, int? pageSizeHint) => GetMultiplePagesFailureNextPageAsync(continuationToken, cancellationToken).AsTask();
-            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesFailure");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetMultiplePagesFailureNextPageRequest(nextLinkUrl);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = ProductResult.DeserializeProductResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
-        internal HttpMessage CreateGetMultiplePagesFailureUriFirstPageRequest()
+        internal HttpMessage CreateGetMultiplePagesFailureUriRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1362,14 +1581,14 @@ namespace paging
         }
         /// <summary> A paging operation that receives an invalid nextLink. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Page<Product>> GetMultiplePagesFailureUriFirstPageAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ProductResult>> GetMultiplePagesFailureUriAsync(CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesFailureUri");
             scope.Start();
             try
             {
-                using var message = CreateGetMultiplePagesFailureUriFirstPageRequest();
+                using var message = CreateGetMultiplePagesFailureUriRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1377,7 +1596,7 @@ namespace paging
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Page.FromValues(value.Values, value.NextLink, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
@@ -1391,14 +1610,14 @@ namespace paging
         }
         /// <summary> A paging operation that receives an invalid nextLink. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Page<Product> GetMultiplePagesFailureUriFirstPage(CancellationToken cancellationToken = default)
+        public Response<ProductResult> GetMultiplePagesFailureUri(CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesFailureUri");
             scope.Start();
             try
             {
-                using var message = CreateGetMultiplePagesFailureUriFirstPageRequest();
+                using var message = CreateGetMultiplePagesFailureUriRequest();
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -1406,7 +1625,7 @@ namespace paging
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Page.FromValues(value.Values, value.NextLink, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw message.Response.CreateRequestFailedException();
@@ -1418,26 +1637,23 @@ namespace paging
                 throw;
             }
         }
-        internal HttpMessage CreateGetMultiplePagesFailureUriNextPageRequest(string? nextLinkUrl)
+        internal HttpMessage CreateGetMultiplePagesFailureUriNextPageRequest(string nextLinkUrl)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            if (Uri.IsWellFormedUriString(nextLinkUrl, UriKind.Absolute))
-            {
-                request.Uri.Reset(new Uri(nextLinkUrl));
-            }
-            else
-            {
-                request.Uri.Reset(new Uri($"{host}{nextLinkUrl}"));
-            }
+            request.Uri.Reset(new Uri($"{nextLinkUrl}"));
             return message;
         }
         /// <summary> A paging operation that receives an invalid nextLink. </summary>
         /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Page<Product>> GetMultiplePagesFailureUriNextPageAsync(string nextLinkUrl, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ProductResult>> GetMultiplePagesFailureUriNextPageAsync(string nextLinkUrl, CancellationToken cancellationToken = default)
         {
+            if (nextLinkUrl == null)
+            {
+                throw new ArgumentNullException(nameof(nextLinkUrl));
+            }
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesFailureUri");
             scope.Start();
@@ -1451,7 +1667,7 @@ namespace paging
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Page.FromValues(value.Values, value.NextLink, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
@@ -1464,15 +1680,40 @@ namespace paging
             }
         }
         /// <summary> A paging operation that receives an invalid nextLink. </summary>
+        /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public AsyncPageable<Product> GetMultiplePagesFailureUriAsync(CancellationToken cancellationToken = default)
+        public Response<ProductResult> GetMultiplePagesFailureUriNextPage(string nextLinkUrl, CancellationToken cancellationToken = default)
         {
+            if (nextLinkUrl == null)
+            {
+                throw new ArgumentNullException(nameof(nextLinkUrl));
+            }
 
-            Task<Page<Product>> FirstPageFunc(int? pageSizeHint) => GetMultiplePagesFailureUriFirstPageAsync(cancellationToken).AsTask();
-            Task<Page<Product>> NextPageFunc(string continuationToken, int? pageSizeHint) => GetMultiplePagesFailureUriNextPageAsync(continuationToken, cancellationToken).AsTask();
-            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesFailureUri");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetMultiplePagesFailureUriNextPageRequest(nextLinkUrl);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = ProductResult.DeserializeProductResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
-        internal HttpMessage CreateGetMultiplePagesFragmentNextLinkFirstPageRequest(string apiVersion, string tenant)
+        internal HttpMessage CreateGetMultiplePagesFragmentNextLinkRequest(string apiVersion, string tenant)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1487,7 +1728,7 @@ namespace paging
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Page<Product>> GetMultiplePagesFragmentNextLinkFirstPageAsync(string apiVersion, string tenant, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<OdataProductResult>> GetMultiplePagesFragmentNextLinkAsync(string apiVersion, string tenant, CancellationToken cancellationToken = default)
         {
             if (apiVersion == null)
             {
@@ -1502,7 +1743,7 @@ namespace paging
             scope.Start();
             try
             {
-                using var message = CreateGetMultiplePagesFragmentNextLinkFirstPageRequest(apiVersion, tenant);
+                using var message = CreateGetMultiplePagesFragmentNextLinkRequest(apiVersion, tenant);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1510,7 +1751,7 @@ namespace paging
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
-                            return Page.FromValues(value.Values, value.OdataNextLink, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
@@ -1526,7 +1767,7 @@ namespace paging
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Page<Product> GetMultiplePagesFragmentNextLinkFirstPage(string apiVersion, string tenant, CancellationToken cancellationToken = default)
+        public Response<OdataProductResult> GetMultiplePagesFragmentNextLink(string apiVersion, string tenant, CancellationToken cancellationToken = default)
         {
             if (apiVersion == null)
             {
@@ -1541,7 +1782,7 @@ namespace paging
             scope.Start();
             try
             {
-                using var message = CreateGetMultiplePagesFragmentNextLinkFirstPageRequest(apiVersion, tenant);
+                using var message = CreateGetMultiplePagesFragmentNextLinkRequest(apiVersion, tenant);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -1549,7 +1790,7 @@ namespace paging
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
-                            return Page.FromValues(value.Values, value.OdataNextLink, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw message.Response.CreateRequestFailedException();
@@ -1561,26 +1802,23 @@ namespace paging
                 throw;
             }
         }
-        internal HttpMessage CreateGetMultiplePagesFragmentNextLinkNextPageRequest(string? nextLinkUrl)
+        internal HttpMessage CreateGetMultiplePagesFragmentNextLinkNextPageRequest(string nextLinkUrl)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            if (Uri.IsWellFormedUriString(nextLinkUrl, UriKind.Absolute))
-            {
-                request.Uri.Reset(new Uri(nextLinkUrl));
-            }
-            else
-            {
-                request.Uri.Reset(new Uri($"{host}{nextLinkUrl}"));
-            }
+            request.Uri.Reset(new Uri($"{nextLinkUrl}"));
             return message;
         }
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
         /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Page<Product>> GetMultiplePagesFragmentNextLinkNextPageAsync(string nextLinkUrl, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<OdataProductResult>> GetMultiplePagesFragmentNextLinkNextPageAsync(string nextLinkUrl, CancellationToken cancellationToken = default)
         {
+            if (nextLinkUrl == null)
+            {
+                throw new ArgumentNullException(nameof(nextLinkUrl));
+            }
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesFragmentNextLink");
             scope.Start();
@@ -1594,7 +1832,7 @@ namespace paging
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
-                            return Page.FromValues(value.Values, value.OdataNextLink, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
@@ -1607,25 +1845,40 @@ namespace paging
             }
         }
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
-        /// <param name="apiVersion"> Sets the api version to use. </param>
-        /// <param name="tenant"> Sets the tenant to use. </param>
+        /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public AsyncPageable<Product> GetMultiplePagesFragmentNextLinkAsync(string apiVersion, string tenant, CancellationToken cancellationToken = default)
+        public Response<OdataProductResult> GetMultiplePagesFragmentNextLinkNextPage(string nextLinkUrl, CancellationToken cancellationToken = default)
         {
-            if (apiVersion == null)
+            if (nextLinkUrl == null)
             {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
-            if (tenant == null)
-            {
-                throw new ArgumentNullException(nameof(tenant));
+                throw new ArgumentNullException(nameof(nextLinkUrl));
             }
 
-            Task<Page<Product>> FirstPageFunc(int? pageSizeHint) => GetMultiplePagesFragmentNextLinkFirstPageAsync(apiVersion, tenant, cancellationToken).AsTask();
-            Task<Page<Product>> NextPageFunc(string continuationToken, int? pageSizeHint) => GetMultiplePagesFragmentNextLinkNextPageAsync(continuationToken, cancellationToken).AsTask();
-            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesFragmentNextLink");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetMultiplePagesFragmentNextLinkNextPageRequest(nextLinkUrl);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
-        internal HttpMessage CreateGetMultiplePagesFragmentWithGroupingNextLinkFirstPageRequest(string apiVersion, string tenant)
+        internal HttpMessage CreateGetMultiplePagesFragmentWithGroupingNextLinkRequest(string apiVersion, string tenant)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1640,7 +1893,7 @@ namespace paging
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Page<Product>> GetMultiplePagesFragmentWithGroupingNextLinkFirstPageAsync(string apiVersion, string tenant, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<OdataProductResult>> GetMultiplePagesFragmentWithGroupingNextLinkAsync(string apiVersion, string tenant, CancellationToken cancellationToken = default)
         {
             if (apiVersion == null)
             {
@@ -1655,7 +1908,7 @@ namespace paging
             scope.Start();
             try
             {
-                using var message = CreateGetMultiplePagesFragmentWithGroupingNextLinkFirstPageRequest(apiVersion, tenant);
+                using var message = CreateGetMultiplePagesFragmentWithGroupingNextLinkRequest(apiVersion, tenant);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1663,7 +1916,7 @@ namespace paging
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
-                            return Page.FromValues(value.Values, value.OdataNextLink, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
@@ -1679,7 +1932,7 @@ namespace paging
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Page<Product> GetMultiplePagesFragmentWithGroupingNextLinkFirstPage(string apiVersion, string tenant, CancellationToken cancellationToken = default)
+        public Response<OdataProductResult> GetMultiplePagesFragmentWithGroupingNextLink(string apiVersion, string tenant, CancellationToken cancellationToken = default)
         {
             if (apiVersion == null)
             {
@@ -1694,7 +1947,7 @@ namespace paging
             scope.Start();
             try
             {
-                using var message = CreateGetMultiplePagesFragmentWithGroupingNextLinkFirstPageRequest(apiVersion, tenant);
+                using var message = CreateGetMultiplePagesFragmentWithGroupingNextLinkRequest(apiVersion, tenant);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -1702,7 +1955,7 @@ namespace paging
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
-                            return Page.FromValues(value.Values, value.OdataNextLink, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw message.Response.CreateRequestFailedException();
@@ -1714,26 +1967,23 @@ namespace paging
                 throw;
             }
         }
-        internal HttpMessage CreateGetMultiplePagesFragmentWithGroupingNextLinkNextPageRequest(string? nextLinkUrl)
+        internal HttpMessage CreateGetMultiplePagesFragmentWithGroupingNextLinkNextPageRequest(string nextLinkUrl)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            if (Uri.IsWellFormedUriString(nextLinkUrl, UriKind.Absolute))
-            {
-                request.Uri.Reset(new Uri(nextLinkUrl));
-            }
-            else
-            {
-                request.Uri.Reset(new Uri($"{host}{nextLinkUrl}"));
-            }
+            request.Uri.Reset(new Uri($"{nextLinkUrl}"));
             return message;
         }
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped. </summary>
         /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Page<Product>> GetMultiplePagesFragmentWithGroupingNextLinkNextPageAsync(string nextLinkUrl, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<OdataProductResult>> GetMultiplePagesFragmentWithGroupingNextLinkNextPageAsync(string nextLinkUrl, CancellationToken cancellationToken = default)
         {
+            if (nextLinkUrl == null)
+            {
+                throw new ArgumentNullException(nameof(nextLinkUrl));
+            }
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesFragmentWithGroupingNextLink");
             scope.Start();
@@ -1747,7 +1997,7 @@ namespace paging
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
-                            return Page.FromValues(value.Values, value.OdataNextLink, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
@@ -1760,25 +2010,40 @@ namespace paging
             }
         }
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped. </summary>
-        /// <param name="apiVersion"> Sets the api version to use. </param>
-        /// <param name="tenant"> Sets the tenant to use. </param>
+        /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public AsyncPageable<Product> GetMultiplePagesFragmentWithGroupingNextLinkAsync(string apiVersion, string tenant, CancellationToken cancellationToken = default)
+        public Response<OdataProductResult> GetMultiplePagesFragmentWithGroupingNextLinkNextPage(string nextLinkUrl, CancellationToken cancellationToken = default)
         {
-            if (apiVersion == null)
+            if (nextLinkUrl == null)
             {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
-            if (tenant == null)
-            {
-                throw new ArgumentNullException(nameof(tenant));
+                throw new ArgumentNullException(nameof(nextLinkUrl));
             }
 
-            Task<Page<Product>> FirstPageFunc(int? pageSizeHint) => GetMultiplePagesFragmentWithGroupingNextLinkFirstPageAsync(apiVersion, tenant, cancellationToken).AsTask();
-            Task<Page<Product>> NextPageFunc(string continuationToken, int? pageSizeHint) => GetMultiplePagesFragmentWithGroupingNextLinkNextPageAsync(continuationToken, cancellationToken).AsTask();
-            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesFragmentWithGroupingNextLink");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetMultiplePagesFragmentWithGroupingNextLinkNextPageRequest(nextLinkUrl);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
-        internal HttpMessage CreateGetMultiplePagesLROFirstPageRequest(string? clientRequestId, int? maxresults, int? timeout)
+        internal HttpMessage CreateGetMultiplePagesLRORequest(string? clientRequestId, int? maxresults, int? timeout)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1804,14 +2069,14 @@ namespace paging
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Page<Product>> GetMultiplePagesLROFirstPageAsync(string? clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ProductResult>> GetMultiplePagesLROAsync(string? clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesLRO");
             scope.Start();
             try
             {
-                using var message = CreateGetMultiplePagesLROFirstPageRequest(clientRequestId, maxresults, timeout);
+                using var message = CreateGetMultiplePagesLRORequest(clientRequestId, maxresults, timeout);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1819,7 +2084,7 @@ namespace paging
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Page.FromValues(value.Values, value.NextLink, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
@@ -1836,14 +2101,14 @@ namespace paging
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Page<Product> GetMultiplePagesLROFirstPage(string? clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        public Response<ProductResult> GetMultiplePagesLRO(string? clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesLRO");
             scope.Start();
             try
             {
-                using var message = CreateGetMultiplePagesLROFirstPageRequest(clientRequestId, maxresults, timeout);
+                using var message = CreateGetMultiplePagesLRORequest(clientRequestId, maxresults, timeout);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -1851,7 +2116,7 @@ namespace paging
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Page.FromValues(value.Values, value.NextLink, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw message.Response.CreateRequestFailedException();
@@ -1863,19 +2128,12 @@ namespace paging
                 throw;
             }
         }
-        internal HttpMessage CreateGetMultiplePagesLRONextPageRequest(string? clientRequestId, int? maxresults, int? timeout, string? nextLinkUrl)
+        internal HttpMessage CreateGetMultiplePagesLRONextPageRequest(string? clientRequestId, int? maxresults, int? timeout, string nextLinkUrl)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
-            if (Uri.IsWellFormedUriString(nextLinkUrl, UriKind.Absolute))
-            {
-                request.Uri.Reset(new Uri(nextLinkUrl));
-            }
-            else
-            {
-                request.Uri.Reset(new Uri($"{host}{nextLinkUrl}"));
-            }
+            request.Uri.Reset(new Uri($"{nextLinkUrl}"));
             if (clientRequestId != null)
             {
                 request.Headers.Add("client-request-id", clientRequestId);
@@ -1896,8 +2154,12 @@ namespace paging
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Page<Product>> GetMultiplePagesLRONextPageAsync(string? clientRequestId, int? maxresults, int? timeout, string nextLinkUrl, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ProductResult>> GetMultiplePagesLRONextPageAsync(string? clientRequestId, int? maxresults, int? timeout, string nextLinkUrl, CancellationToken cancellationToken = default)
         {
+            if (nextLinkUrl == null)
+            {
+                throw new ArgumentNullException(nameof(nextLinkUrl));
+            }
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesLRO");
             scope.Start();
@@ -1911,7 +2173,7 @@ namespace paging
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Page.FromValues(value.Values, value.NextLink, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
@@ -1927,15 +2189,40 @@ namespace paging
         /// <param name="clientRequestId"> MISSING·PARAMETER-DESCRIPTION. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
+        /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public AsyncPageable<Product> GetMultiplePagesLROAsync(string? clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        public Response<ProductResult> GetMultiplePagesLRONextPage(string? clientRequestId, int? maxresults, int? timeout, string nextLinkUrl, CancellationToken cancellationToken = default)
         {
+            if (nextLinkUrl == null)
+            {
+                throw new ArgumentNullException(nameof(nextLinkUrl));
+            }
 
-            Task<Page<Product>> FirstPageFunc(int? pageSizeHint) => GetMultiplePagesLROFirstPageAsync(clientRequestId, maxresults, timeout, cancellationToken).AsTask();
-            Task<Page<Product>> NextPageFunc(string continuationToken, int? pageSizeHint) => GetMultiplePagesLRONextPageAsync(clientRequestId, maxresults, timeout, continuationToken, cancellationToken).AsTask();
-            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesLRO");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetMultiplePagesLRONextPageRequest(clientRequestId, maxresults, timeout, nextLinkUrl);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 202:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = ProductResult.DeserializeProductResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
-        internal HttpMessage CreateNextFragmentFirstPageRequest(string apiVersion, string tenant, string nextLink)
+        internal HttpMessage CreateNextFragmentRequest(string apiVersion, string tenant, string nextLink)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1953,7 +2240,7 @@ namespace paging
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="nextLink"> Next link for list operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Page<Product>> NextFragmentFirstPageAsync(string apiVersion, string tenant, string nextLink, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<OdataProductResult>> NextFragmentAsync(string apiVersion, string tenant, string nextLink, CancellationToken cancellationToken = default)
         {
             if (apiVersion == null)
             {
@@ -1972,7 +2259,7 @@ namespace paging
             scope.Start();
             try
             {
-                using var message = CreateNextFragmentFirstPageRequest(apiVersion, tenant, nextLink);
+                using var message = CreateNextFragmentRequest(apiVersion, tenant, nextLink);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1980,7 +2267,7 @@ namespace paging
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
-                            return Page.FromValues(value.Values, value.OdataNextLink, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
@@ -1997,7 +2284,7 @@ namespace paging
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="nextLink"> Next link for list operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Page<Product> NextFragmentFirstPage(string apiVersion, string tenant, string nextLink, CancellationToken cancellationToken = default)
+        public Response<OdataProductResult> NextFragment(string apiVersion, string tenant, string nextLink, CancellationToken cancellationToken = default)
         {
             if (apiVersion == null)
             {
@@ -2016,7 +2303,7 @@ namespace paging
             scope.Start();
             try
             {
-                using var message = CreateNextFragmentFirstPageRequest(apiVersion, tenant, nextLink);
+                using var message = CreateNextFragmentRequest(apiVersion, tenant, nextLink);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -2024,7 +2311,7 @@ namespace paging
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
-                            return Page.FromValues(value.Values, value.OdataNextLink, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw message.Response.CreateRequestFailedException();
@@ -2036,26 +2323,23 @@ namespace paging
                 throw;
             }
         }
-        internal HttpMessage CreateNextFragmentNextPageRequest(string? nextLinkUrl)
+        internal HttpMessage CreateNextFragmentNextPageRequest(string nextLinkUrl)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            if (Uri.IsWellFormedUriString(nextLinkUrl, UriKind.Absolute))
-            {
-                request.Uri.Reset(new Uri(nextLinkUrl));
-            }
-            else
-            {
-                request.Uri.Reset(new Uri($"{host}{nextLinkUrl}"));
-            }
+            request.Uri.Reset(new Uri($"{nextLinkUrl}"));
             return message;
         }
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
         /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Page<Product>> NextFragmentNextPageAsync(string nextLinkUrl, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<OdataProductResult>> NextFragmentNextPageAsync(string nextLinkUrl, CancellationToken cancellationToken = default)
         {
+            if (nextLinkUrl == null)
+            {
+                throw new ArgumentNullException(nameof(nextLinkUrl));
+            }
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.NextFragment");
             scope.Start();
@@ -2069,7 +2353,7 @@ namespace paging
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
-                            return Page.FromValues(value.Values, value.OdataNextLink, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
@@ -2082,30 +2366,40 @@ namespace paging
             }
         }
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
-        /// <param name="apiVersion"> Sets the api version to use. </param>
-        /// <param name="tenant"> Sets the tenant to use. </param>
-        /// <param name="nextLink"> Next link for list operation. </param>
+        /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public AsyncPageable<Product> NextFragmentAsync(string apiVersion, string tenant, string nextLink, CancellationToken cancellationToken = default)
+        public Response<OdataProductResult> NextFragmentNextPage(string nextLinkUrl, CancellationToken cancellationToken = default)
         {
-            if (apiVersion == null)
+            if (nextLinkUrl == null)
             {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
-            if (tenant == null)
-            {
-                throw new ArgumentNullException(nameof(tenant));
-            }
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
+                throw new ArgumentNullException(nameof(nextLinkUrl));
             }
 
-            Task<Page<Product>> FirstPageFunc(int? pageSizeHint) => NextFragmentFirstPageAsync(apiVersion, tenant, nextLink, cancellationToken).AsTask();
-            Task<Page<Product>> NextPageFunc(string continuationToken, int? pageSizeHint) => NextFragmentNextPageAsync(continuationToken, cancellationToken).AsTask();
-            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            using var scope = clientDiagnostics.CreateScope("PagingOperations.NextFragment");
+            scope.Start();
+            try
+            {
+                using var message = CreateNextFragmentNextPageRequest(nextLinkUrl);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
-        internal HttpMessage CreateNextFragmentWithGroupingFirstPageRequest(string apiVersion, string tenant, string nextLink)
+        internal HttpMessage CreateNextFragmentWithGroupingRequest(string apiVersion, string tenant, string nextLink)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -2123,7 +2417,7 @@ namespace paging
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="nextLink"> Next link for list operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Page<Product>> NextFragmentWithGroupingFirstPageAsync(string apiVersion, string tenant, string nextLink, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<OdataProductResult>> NextFragmentWithGroupingAsync(string apiVersion, string tenant, string nextLink, CancellationToken cancellationToken = default)
         {
             if (apiVersion == null)
             {
@@ -2142,7 +2436,7 @@ namespace paging
             scope.Start();
             try
             {
-                using var message = CreateNextFragmentWithGroupingFirstPageRequest(apiVersion, tenant, nextLink);
+                using var message = CreateNextFragmentWithGroupingRequest(apiVersion, tenant, nextLink);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -2150,7 +2444,7 @@ namespace paging
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
-                            return Page.FromValues(value.Values, value.OdataNextLink, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
@@ -2167,7 +2461,7 @@ namespace paging
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="nextLink"> Next link for list operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Page<Product> NextFragmentWithGroupingFirstPage(string apiVersion, string tenant, string nextLink, CancellationToken cancellationToken = default)
+        public Response<OdataProductResult> NextFragmentWithGrouping(string apiVersion, string tenant, string nextLink, CancellationToken cancellationToken = default)
         {
             if (apiVersion == null)
             {
@@ -2186,7 +2480,7 @@ namespace paging
             scope.Start();
             try
             {
-                using var message = CreateNextFragmentWithGroupingFirstPageRequest(apiVersion, tenant, nextLink);
+                using var message = CreateNextFragmentWithGroupingRequest(apiVersion, tenant, nextLink);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -2194,7 +2488,7 @@ namespace paging
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
-                            return Page.FromValues(value.Values, value.OdataNextLink, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw message.Response.CreateRequestFailedException();
@@ -2206,26 +2500,23 @@ namespace paging
                 throw;
             }
         }
-        internal HttpMessage CreateNextFragmentWithGroupingNextPageRequest(string? nextLinkUrl)
+        internal HttpMessage CreateNextFragmentWithGroupingNextPageRequest(string nextLinkUrl)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            if (Uri.IsWellFormedUriString(nextLinkUrl, UriKind.Absolute))
-            {
-                request.Uri.Reset(new Uri(nextLinkUrl));
-            }
-            else
-            {
-                request.Uri.Reset(new Uri($"{host}{nextLinkUrl}"));
-            }
+            request.Uri.Reset(new Uri($"{nextLinkUrl}"));
             return message;
         }
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
         /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Page<Product>> NextFragmentWithGroupingNextPageAsync(string nextLinkUrl, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<OdataProductResult>> NextFragmentWithGroupingNextPageAsync(string nextLinkUrl, CancellationToken cancellationToken = default)
         {
+            if (nextLinkUrl == null)
+            {
+                throw new ArgumentNullException(nameof(nextLinkUrl));
+            }
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.NextFragmentWithGrouping");
             scope.Start();
@@ -2239,7 +2530,7 @@ namespace paging
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
-                            return Page.FromValues(value.Values, value.OdataNextLink, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
@@ -2252,11 +2543,587 @@ namespace paging
             }
         }
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
+        /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response<OdataProductResult> NextFragmentWithGroupingNextPage(string nextLinkUrl, CancellationToken cancellationToken = default)
+        {
+            if (nextLinkUrl == null)
+            {
+                throw new ArgumentNullException(nameof(nextLinkUrl));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("PagingOperations.NextFragmentWithGrouping");
+            scope.Start();
+            try
+            {
+                using var message = CreateNextFragmentWithGroupingNextPageRequest(nextLinkUrl);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        /// <summary> A paging operation that must return result of the default &apos;value&apos; node. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public AsyncPageable<Product> GetNoItemNamePagesPageableAsync(CancellationToken cancellationToken = default)
+        {
+
+            Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
+            {
+                var response = GetNoItemNamePagesAsync(cancellationToken).GetAwaiter().GetResult();
+                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse()));
+            }
+            Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            {
+                var response = GetNoItemNamePagesNextPageAsync(nextLinkUrl, cancellationToken).GetAwaiter().GetResult();
+                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse()));
+            }
+            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+        }
+        /// <summary> A paging operation that must return result of the default &apos;value&apos; node. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Pageable<Product> GetNoItemNamePagesPageable(CancellationToken cancellationToken = default)
+        {
+
+            Page<Product> FirstPageFunc(int? pageSizeHint)
+            {
+                var response = GetNoItemNamePages(cancellationToken);
+                return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+            }
+            Page<Product> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            {
+                var response = GetNoItemNamePagesNextPage(nextLinkUrl, cancellationToken);
+                return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+            }
+            return PageResponseEnumerator.CreateEnumerable(FirstPageFunc, NextPageFunc);
+        }
+        /// <summary> A paging operation that must ignore any kind of nextLink, and stop after page 1. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public AsyncPageable<Product> GetNullNextLinkNamePagesPageableAsync(CancellationToken cancellationToken = default)
+        {
+
+            Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
+            {
+                var response = GetNullNextLinkNamePagesAsync(cancellationToken).GetAwaiter().GetResult();
+                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, null, response.GetRawResponse()));
+            }
+            Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            {
+                var response = GetNullNextLinkNamePagesNextPageAsync(nextLinkUrl, cancellationToken).GetAwaiter().GetResult();
+                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, null, response.GetRawResponse()));
+            }
+            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+        }
+        /// <summary> A paging operation that must ignore any kind of nextLink, and stop after page 1. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Pageable<Product> GetNullNextLinkNamePagesPageable(CancellationToken cancellationToken = default)
+        {
+
+            Page<Product> FirstPageFunc(int? pageSizeHint)
+            {
+                var response = GetNullNextLinkNamePages(cancellationToken);
+                return Page.FromValues(response.Value.Values, null, response.GetRawResponse());
+            }
+            Page<Product> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            {
+                var response = GetNullNextLinkNamePagesNextPage(nextLinkUrl, cancellationToken);
+                return Page.FromValues(response.Value.Values, null, response.GetRawResponse());
+            }
+            return PageResponseEnumerator.CreateEnumerable(FirstPageFunc, NextPageFunc);
+        }
+        /// <summary> A paging operation that finishes on the first call without a nextlink. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public AsyncPageable<Product> GetSinglePagesPageableAsync(CancellationToken cancellationToken = default)
+        {
+
+            Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
+            {
+                var response = GetSinglePagesAsync(cancellationToken).GetAwaiter().GetResult();
+                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse()));
+            }
+            Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            {
+                var response = GetSinglePagesNextPageAsync(nextLinkUrl, cancellationToken).GetAwaiter().GetResult();
+                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse()));
+            }
+            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+        }
+        /// <summary> A paging operation that finishes on the first call without a nextlink. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Pageable<Product> GetSinglePagesPageable(CancellationToken cancellationToken = default)
+        {
+
+            Page<Product> FirstPageFunc(int? pageSizeHint)
+            {
+                var response = GetSinglePages(cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+            }
+            Page<Product> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            {
+                var response = GetSinglePagesNextPage(nextLinkUrl, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+            }
+            return PageResponseEnumerator.CreateEnumerable(FirstPageFunc, NextPageFunc);
+        }
+        /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
+        /// <param name="clientRequestId"> MISSING·PARAMETER-DESCRIPTION. </param>
+        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
+        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public AsyncPageable<Product> GetMultiplePagesPageableAsync(string? clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        {
+
+            Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
+            {
+                var response = GetMultiplePagesAsync(clientRequestId, maxresults, timeout, cancellationToken).GetAwaiter().GetResult();
+                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse()));
+            }
+            Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            {
+                var response = GetMultiplePagesNextPageAsync(clientRequestId, maxresults, timeout, nextLinkUrl, cancellationToken).GetAwaiter().GetResult();
+                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse()));
+            }
+            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+        }
+        /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
+        /// <param name="clientRequestId"> MISSING·PARAMETER-DESCRIPTION. </param>
+        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
+        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Pageable<Product> GetMultiplePagesPageable(string? clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        {
+
+            Page<Product> FirstPageFunc(int? pageSizeHint)
+            {
+                var response = GetMultiplePages(clientRequestId, maxresults, timeout, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+            }
+            Page<Product> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            {
+                var response = GetMultiplePagesNextPage(clientRequestId, maxresults, timeout, nextLinkUrl, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+            }
+            return PageResponseEnumerator.CreateEnumerable(FirstPageFunc, NextPageFunc);
+        }
+        /// <summary> A paging operation that includes a nextLink in odata format that has 10 pages. </summary>
+        /// <param name="clientRequestId"> MISSING·PARAMETER-DESCRIPTION. </param>
+        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
+        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public AsyncPageable<Product> GetOdataMultiplePagesPageableAsync(string? clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        {
+
+            Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
+            {
+                var response = GetOdataMultiplePagesAsync(clientRequestId, maxresults, timeout, cancellationToken).GetAwaiter().GetResult();
+                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse()));
+            }
+            Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            {
+                var response = GetOdataMultiplePagesNextPageAsync(clientRequestId, maxresults, timeout, nextLinkUrl, cancellationToken).GetAwaiter().GetResult();
+                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse()));
+            }
+            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+        }
+        /// <summary> A paging operation that includes a nextLink in odata format that has 10 pages. </summary>
+        /// <param name="clientRequestId"> MISSING·PARAMETER-DESCRIPTION. </param>
+        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
+        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Pageable<Product> GetOdataMultiplePagesPageable(string? clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        {
+
+            Page<Product> FirstPageFunc(int? pageSizeHint)
+            {
+                var response = GetOdataMultiplePages(clientRequestId, maxresults, timeout, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+            }
+            Page<Product> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            {
+                var response = GetOdataMultiplePagesNextPage(clientRequestId, maxresults, timeout, nextLinkUrl, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+            }
+            return PageResponseEnumerator.CreateEnumerable(FirstPageFunc, NextPageFunc);
+        }
+        /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
+        /// <param name="clientRequestId"> MISSING·PARAMETER-DESCRIPTION. </param>
+        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
+        /// <param name="offset"> Offset of return value. </param>
+        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public AsyncPageable<Product> GetMultiplePagesWithOffsetPageableAsync(string? clientRequestId, int? maxresults, int offset, int? timeout, CancellationToken cancellationToken = default)
+        {
+
+            Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
+            {
+                var response = GetMultiplePagesWithOffsetAsync(clientRequestId, maxresults, offset, timeout, cancellationToken).GetAwaiter().GetResult();
+                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse()));
+            }
+            Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            {
+                var response = GetMultiplePagesWithOffsetNextPageAsync(clientRequestId, maxresults, timeout, nextLinkUrl, cancellationToken).GetAwaiter().GetResult();
+                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse()));
+            }
+            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+        }
+        /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
+        /// <param name="clientRequestId"> MISSING·PARAMETER-DESCRIPTION. </param>
+        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
+        /// <param name="offset"> Offset of return value. </param>
+        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Pageable<Product> GetMultiplePagesWithOffsetPageable(string? clientRequestId, int? maxresults, int offset, int? timeout, CancellationToken cancellationToken = default)
+        {
+
+            Page<Product> FirstPageFunc(int? pageSizeHint)
+            {
+                var response = GetMultiplePagesWithOffset(clientRequestId, maxresults, offset, timeout, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+            }
+            Page<Product> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            {
+                var response = GetMultiplePagesWithOffsetNextPage(clientRequestId, maxresults, timeout, nextLinkUrl, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+            }
+            return PageResponseEnumerator.CreateEnumerable(FirstPageFunc, NextPageFunc);
+        }
+        /// <summary> A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public AsyncPageable<Product> GetMultiplePagesRetryFirstPageableAsync(CancellationToken cancellationToken = default)
+        {
+
+            Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
+            {
+                var response = GetMultiplePagesRetryFirstAsync(cancellationToken).GetAwaiter().GetResult();
+                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse()));
+            }
+            Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            {
+                var response = GetMultiplePagesRetryFirstNextPageAsync(nextLinkUrl, cancellationToken).GetAwaiter().GetResult();
+                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse()));
+            }
+            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+        }
+        /// <summary> A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Pageable<Product> GetMultiplePagesRetryFirstPageable(CancellationToken cancellationToken = default)
+        {
+
+            Page<Product> FirstPageFunc(int? pageSizeHint)
+            {
+                var response = GetMultiplePagesRetryFirst(cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+            }
+            Page<Product> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            {
+                var response = GetMultiplePagesRetryFirstNextPage(nextLinkUrl, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+            }
+            return PageResponseEnumerator.CreateEnumerable(FirstPageFunc, NextPageFunc);
+        }
+        /// <summary> A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public AsyncPageable<Product> GetMultiplePagesRetrySecondPageableAsync(CancellationToken cancellationToken = default)
+        {
+
+            Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
+            {
+                var response = GetMultiplePagesRetrySecondAsync(cancellationToken).GetAwaiter().GetResult();
+                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse()));
+            }
+            Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            {
+                var response = GetMultiplePagesRetrySecondNextPageAsync(nextLinkUrl, cancellationToken).GetAwaiter().GetResult();
+                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse()));
+            }
+            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+        }
+        /// <summary> A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Pageable<Product> GetMultiplePagesRetrySecondPageable(CancellationToken cancellationToken = default)
+        {
+
+            Page<Product> FirstPageFunc(int? pageSizeHint)
+            {
+                var response = GetMultiplePagesRetrySecond(cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+            }
+            Page<Product> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            {
+                var response = GetMultiplePagesRetrySecondNextPage(nextLinkUrl, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+            }
+            return PageResponseEnumerator.CreateEnumerable(FirstPageFunc, NextPageFunc);
+        }
+        /// <summary> A paging operation that receives a 400 on the first call. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public AsyncPageable<Product> GetSinglePagesFailurePageableAsync(CancellationToken cancellationToken = default)
+        {
+
+            Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
+            {
+                var response = GetSinglePagesFailureAsync(cancellationToken).GetAwaiter().GetResult();
+                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse()));
+            }
+            Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            {
+                var response = GetSinglePagesFailureNextPageAsync(nextLinkUrl, cancellationToken).GetAwaiter().GetResult();
+                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse()));
+            }
+            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+        }
+        /// <summary> A paging operation that receives a 400 on the first call. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Pageable<Product> GetSinglePagesFailurePageable(CancellationToken cancellationToken = default)
+        {
+
+            Page<Product> FirstPageFunc(int? pageSizeHint)
+            {
+                var response = GetSinglePagesFailure(cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+            }
+            Page<Product> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            {
+                var response = GetSinglePagesFailureNextPage(nextLinkUrl, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+            }
+            return PageResponseEnumerator.CreateEnumerable(FirstPageFunc, NextPageFunc);
+        }
+        /// <summary> A paging operation that receives a 400 on the second call. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public AsyncPageable<Product> GetMultiplePagesFailurePageableAsync(CancellationToken cancellationToken = default)
+        {
+
+            Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
+            {
+                var response = GetMultiplePagesFailureAsync(cancellationToken).GetAwaiter().GetResult();
+                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse()));
+            }
+            Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            {
+                var response = GetMultiplePagesFailureNextPageAsync(nextLinkUrl, cancellationToken).GetAwaiter().GetResult();
+                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse()));
+            }
+            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+        }
+        /// <summary> A paging operation that receives a 400 on the second call. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Pageable<Product> GetMultiplePagesFailurePageable(CancellationToken cancellationToken = default)
+        {
+
+            Page<Product> FirstPageFunc(int? pageSizeHint)
+            {
+                var response = GetMultiplePagesFailure(cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+            }
+            Page<Product> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            {
+                var response = GetMultiplePagesFailureNextPage(nextLinkUrl, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+            }
+            return PageResponseEnumerator.CreateEnumerable(FirstPageFunc, NextPageFunc);
+        }
+        /// <summary> A paging operation that receives an invalid nextLink. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public AsyncPageable<Product> GetMultiplePagesFailureUriPageableAsync(CancellationToken cancellationToken = default)
+        {
+
+            Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
+            {
+                var response = GetMultiplePagesFailureUriAsync(cancellationToken).GetAwaiter().GetResult();
+                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse()));
+            }
+            Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            {
+                var response = GetMultiplePagesFailureUriNextPageAsync(nextLinkUrl, cancellationToken).GetAwaiter().GetResult();
+                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse()));
+            }
+            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+        }
+        /// <summary> A paging operation that receives an invalid nextLink. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Pageable<Product> GetMultiplePagesFailureUriPageable(CancellationToken cancellationToken = default)
+        {
+
+            Page<Product> FirstPageFunc(int? pageSizeHint)
+            {
+                var response = GetMultiplePagesFailureUri(cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+            }
+            Page<Product> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            {
+                var response = GetMultiplePagesFailureUriNextPage(nextLinkUrl, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+            }
+            return PageResponseEnumerator.CreateEnumerable(FirstPageFunc, NextPageFunc);
+        }
+        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
+        /// <param name="apiVersion"> Sets the api version to use. </param>
+        /// <param name="tenant"> Sets the tenant to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public AsyncPageable<Product> GetMultiplePagesFragmentNextLinkPageableAsync(string apiVersion, string tenant, CancellationToken cancellationToken = default)
+        {
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
+            if (tenant == null)
+            {
+                throw new ArgumentNullException(nameof(tenant));
+            }
+
+            Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
+            {
+                var response = GetMultiplePagesFragmentNextLinkAsync(apiVersion, tenant, cancellationToken).GetAwaiter().GetResult();
+                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse()));
+            }
+            Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            {
+                var response = GetMultiplePagesFragmentNextLinkNextPageAsync(nextLinkUrl, cancellationToken).GetAwaiter().GetResult();
+                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse()));
+            }
+            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+        }
+        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
+        /// <param name="apiVersion"> Sets the api version to use. </param>
+        /// <param name="tenant"> Sets the tenant to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Pageable<Product> GetMultiplePagesFragmentNextLinkPageable(string apiVersion, string tenant, CancellationToken cancellationToken = default)
+        {
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
+            if (tenant == null)
+            {
+                throw new ArgumentNullException(nameof(tenant));
+            }
+
+            Page<Product> FirstPageFunc(int? pageSizeHint)
+            {
+                var response = GetMultiplePagesFragmentNextLink(apiVersion, tenant, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+            }
+            Page<Product> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            {
+                var response = GetMultiplePagesFragmentNextLinkNextPage(nextLinkUrl, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+            }
+            return PageResponseEnumerator.CreateEnumerable(FirstPageFunc, NextPageFunc);
+        }
+        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped. </summary>
+        /// <param name="apiVersion"> Sets the api version to use. </param>
+        /// <param name="tenant"> Sets the tenant to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public AsyncPageable<Product> GetMultiplePagesFragmentWithGroupingNextLinkPageableAsync(string apiVersion, string tenant, CancellationToken cancellationToken = default)
+        {
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
+            if (tenant == null)
+            {
+                throw new ArgumentNullException(nameof(tenant));
+            }
+
+            Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
+            {
+                var response = GetMultiplePagesFragmentWithGroupingNextLinkAsync(apiVersion, tenant, cancellationToken).GetAwaiter().GetResult();
+                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse()));
+            }
+            Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            {
+                var response = GetMultiplePagesFragmentWithGroupingNextLinkNextPageAsync(nextLinkUrl, cancellationToken).GetAwaiter().GetResult();
+                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse()));
+            }
+            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+        }
+        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped. </summary>
+        /// <param name="apiVersion"> Sets the api version to use. </param>
+        /// <param name="tenant"> Sets the tenant to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Pageable<Product> GetMultiplePagesFragmentWithGroupingNextLinkPageable(string apiVersion, string tenant, CancellationToken cancellationToken = default)
+        {
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
+            if (tenant == null)
+            {
+                throw new ArgumentNullException(nameof(tenant));
+            }
+
+            Page<Product> FirstPageFunc(int? pageSizeHint)
+            {
+                var response = GetMultiplePagesFragmentWithGroupingNextLink(apiVersion, tenant, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+            }
+            Page<Product> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            {
+                var response = GetMultiplePagesFragmentWithGroupingNextLinkNextPage(nextLinkUrl, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+            }
+            return PageResponseEnumerator.CreateEnumerable(FirstPageFunc, NextPageFunc);
+        }
+        /// <summary> A long-running paging operation that includes a nextLink that has 10 pages. </summary>
+        /// <param name="clientRequestId"> MISSING·PARAMETER-DESCRIPTION. </param>
+        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
+        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public AsyncPageable<Product> GetMultiplePagesLROPageableAsync(string? clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        {
+
+            Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
+            {
+                var response = GetMultiplePagesLROAsync(clientRequestId, maxresults, timeout, cancellationToken).GetAwaiter().GetResult();
+                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse()));
+            }
+            Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            {
+                var response = GetMultiplePagesLRONextPageAsync(clientRequestId, maxresults, timeout, nextLinkUrl, cancellationToken).GetAwaiter().GetResult();
+                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse()));
+            }
+            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+        }
+        /// <summary> A long-running paging operation that includes a nextLink that has 10 pages. </summary>
+        /// <param name="clientRequestId"> MISSING·PARAMETER-DESCRIPTION. </param>
+        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
+        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Pageable<Product> GetMultiplePagesLROPageable(string? clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        {
+
+            Page<Product> FirstPageFunc(int? pageSizeHint)
+            {
+                var response = GetMultiplePagesLRO(clientRequestId, maxresults, timeout, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+            }
+            Page<Product> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            {
+                var response = GetMultiplePagesLRONextPage(clientRequestId, maxresults, timeout, nextLinkUrl, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+            }
+            return PageResponseEnumerator.CreateEnumerable(FirstPageFunc, NextPageFunc);
+        }
+        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="nextLink"> Next link for list operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public AsyncPageable<Product> NextFragmentWithGroupingAsync(string apiVersion, string tenant, string nextLink, CancellationToken cancellationToken = default)
+        public AsyncPageable<Product> NextFragmentPageableAsync(string apiVersion, string tenant, string nextLink, CancellationToken cancellationToken = default)
         {
             if (apiVersion == null)
             {
@@ -2271,9 +3138,113 @@ namespace paging
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            Task<Page<Product>> FirstPageFunc(int? pageSizeHint) => NextFragmentWithGroupingFirstPageAsync(apiVersion, tenant, nextLink, cancellationToken).AsTask();
-            Task<Page<Product>> NextPageFunc(string continuationToken, int? pageSizeHint) => NextFragmentWithGroupingNextPageAsync(continuationToken, cancellationToken).AsTask();
+            Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
+            {
+                var response = NextFragmentAsync(apiVersion, tenant, nextLink, cancellationToken).GetAwaiter().GetResult();
+                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse()));
+            }
+            Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            {
+                var response = NextFragmentNextPageAsync(nextLinkUrl, cancellationToken).GetAwaiter().GetResult();
+                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse()));
+            }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+        }
+        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
+        /// <param name="apiVersion"> Sets the api version to use. </param>
+        /// <param name="tenant"> Sets the tenant to use. </param>
+        /// <param name="nextLink"> Next link for list operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Pageable<Product> NextFragmentPageable(string apiVersion, string tenant, string nextLink, CancellationToken cancellationToken = default)
+        {
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
+            if (tenant == null)
+            {
+                throw new ArgumentNullException(nameof(tenant));
+            }
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+
+            Page<Product> FirstPageFunc(int? pageSizeHint)
+            {
+                var response = NextFragment(apiVersion, tenant, nextLink, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+            }
+            Page<Product> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            {
+                var response = NextFragmentNextPage(nextLinkUrl, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+            }
+            return PageResponseEnumerator.CreateEnumerable(FirstPageFunc, NextPageFunc);
+        }
+        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
+        /// <param name="apiVersion"> Sets the api version to use. </param>
+        /// <param name="tenant"> Sets the tenant to use. </param>
+        /// <param name="nextLink"> Next link for list operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public AsyncPageable<Product> NextFragmentWithGroupingPageableAsync(string apiVersion, string tenant, string nextLink, CancellationToken cancellationToken = default)
+        {
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
+            if (tenant == null)
+            {
+                throw new ArgumentNullException(nameof(tenant));
+            }
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+
+            Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
+            {
+                var response = NextFragmentWithGroupingAsync(apiVersion, tenant, nextLink, cancellationToken).GetAwaiter().GetResult();
+                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse()));
+            }
+            Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            {
+                var response = NextFragmentWithGroupingNextPageAsync(nextLinkUrl, cancellationToken).GetAwaiter().GetResult();
+                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse()));
+            }
+            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+        }
+        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
+        /// <param name="apiVersion"> Sets the api version to use. </param>
+        /// <param name="tenant"> Sets the tenant to use. </param>
+        /// <param name="nextLink"> Next link for list operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Pageable<Product> NextFragmentWithGroupingPageable(string apiVersion, string tenant, string nextLink, CancellationToken cancellationToken = default)
+        {
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
+            if (tenant == null)
+            {
+                throw new ArgumentNullException(nameof(tenant));
+            }
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+
+            Page<Product> FirstPageFunc(int? pageSizeHint)
+            {
+                var response = NextFragmentWithGrouping(apiVersion, tenant, nextLink, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+            }
+            Page<Product> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            {
+                var response = NextFragmentWithGroupingNextPage(nextLinkUrl, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+            }
+            return PageResponseEnumerator.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
     }
 }
