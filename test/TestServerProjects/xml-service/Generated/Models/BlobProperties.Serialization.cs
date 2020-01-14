@@ -53,10 +53,10 @@ namespace xml_service.Models.V100
                 writer.WritePropertyName("Cache-Control");
                 writer.WriteStringValue(CacheControl);
             }
-            if (BlobSequenceNumber != null)
+            if (XMsBlobSequenceNumber != null)
             {
                 writer.WritePropertyName("x-ms-blob-sequence-number");
-                writer.WriteNumberValue(BlobSequenceNumber.Value);
+                writer.WriteNumberValue(XMsBlobSequenceNumber.Value);
             }
             if (BlobType != null)
             {
@@ -234,7 +234,7 @@ namespace xml_service.Models.V100
                     {
                         continue;
                     }
-                    result.BlobSequenceNumber = property.Value.GetInt32();
+                    result.XMsBlobSequenceNumber = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("BlobType"))
@@ -453,10 +453,10 @@ namespace xml_service.Models.V100
                 writer.WriteValue(CacheControl);
                 writer.WriteEndElement();
             }
-            if (BlobSequenceNumber != null)
+            if (XMsBlobSequenceNumber != null)
             {
                 writer.WriteStartElement("x-ms-blob-sequence-number");
-                writer.WriteValue(BlobSequenceNumber.Value);
+                writer.WriteValue(XMsBlobSequenceNumber.Value);
                 writer.WriteEndElement();
             }
             if (BlobType != null)
@@ -641,7 +641,7 @@ namespace xml_service.Models.V100
             {
                 value8 = (int?)xMsBlobSequenceNumber;
             }
-            result.BlobSequenceNumber = value8;
+            result.XMsBlobSequenceNumber = value8;
             BlobType? value9 = default;
             var blobType = element.Element("BlobType");
             if (blobType != null)

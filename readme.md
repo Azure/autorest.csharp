@@ -17,7 +17,7 @@
 ```yaml
 version: 3.0.6184
 use-extension:
-  "@autorest/modelerfour": "https://github.com/Azure/autorest.modelerfour/releases/download/v4.2.108/autorest-modelerfour-4.2.108.tgz"
+  "@autorest/modelerfour": "4.2.95"
 pipeline:
   cs-modeler:
     input: modelerfour/identity
