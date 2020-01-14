@@ -294,38 +294,28 @@ namespace AutoRest.CSharp.V3.CodeGen
                 var nullableInt = new CSharpType(typeof(int), true);
 
                 var continuationTokenText = pagingMethod.NextLinkName != null ? $"response.Value.{pagingMethod.NextLinkName}" : "null";
-                using (writer.Scope($"{funcType} FirstPageFunc({nullableInt} pageSizeHint)"))
+                var asyncText = async ? "async " : string.Empty;
+                var awaitText = async ? "await " : string.Empty;
+                using (writer.Scope($"{asyncText}{funcType} FirstPageFunc({nullableInt} pageSizeHint)"))
                 {
-                    writer.Append($"var response = {CreateMethodName(pagingMethod.Method.Name, async)}(");
+                    writer.Append($"var response = {awaitText}{CreateMethodName(pagingMethod.Method.Name, async)}(");
                     foreach (ServiceClientParameter parameter in parameters)
                     {
                         writer.Append($"{parameter.Name}, ");
                     }
-                    writer.Line($"cancellationToken){(async ? ".GetAwaiter().GetResult()" : string.Empty)};");
-                    writer.Append($"return ");
-                    if (async)
-                    {
-                        writer.Append($"new {funcType}(() => ");
-                    }
-                    writer.Append($"{typeof(Page)}.FromValues(response.Value.{pagingMethod.ItemName}, {continuationTokenText}, response.GetRawResponse())");
-                    writer.Line($"{(async ? ")" : string.Empty)};");
+                    writer.Line($"cancellationToken);");
+                    writer.Line($"return {typeof(Page)}.FromValues(response.Value.{pagingMethod.ItemName}, {continuationTokenText}, response.GetRawResponse());");
                 }
 
-                using (writer.Scope($"{funcType} NextPageFunc({typeof(string)} nextLinkUrl, {nullableInt} pageSizeHint)"))
+                using (writer.Scope($"{asyncText}{funcType} NextPageFunc({typeof(string)} nextLinkUrl, {nullableInt} pageSizeHint)"))
                 {
-                    writer.Append($"var response = {CreateMethodName(pagingMethod.NextPageMethod.Name, async)}(");
+                    writer.Append($"var response = {awaitText}{CreateMethodName(pagingMethod.NextPageMethod.Name, async)}(");
                     foreach (ServiceClientParameter parameter in nextPageParameters)
                     {
                         writer.Append($"{parameter.Name}, ");
                     }
-                    writer.Line($"cancellationToken){(async ? ".GetAwaiter().GetResult()" : string.Empty)};");
-                    writer.Append($"return ");
-                    if (async)
-                    {
-                        writer.Append($"new {funcType}(() => ");
-                    }
-                    writer.Append($"{typeof(Page)}.FromValues(response.Value.{pagingMethod.ItemName}, {continuationTokenText}, response.GetRawResponse())");
-                    writer.Line($"{(async ? ")" : string.Empty)};");
+                    writer.Line($"cancellationToken);");
+                    writer.Line($"return {typeof(Page)}.FromValues(response.Value.{pagingMethod.ItemName}, {continuationTokenText}, response.GetRawResponse());");
                 }
                 writer.Line($"return PageResponseEnumerator.Create{(async ? "Async" : string.Empty)}Enumerable(FirstPageFunc, NextPageFunc);");
             }

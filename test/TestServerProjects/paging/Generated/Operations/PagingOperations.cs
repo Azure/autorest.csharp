@@ -2581,15 +2581,15 @@ namespace paging
         public AsyncPageable<Product> GetNoItemNamePagesPageableAsync(CancellationToken cancellationToken = default)
         {
 
-            Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = GetNoItemNamePagesAsync(cancellationToken).GetAwaiter().GetResult();
-                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse()));
+                var response = await GetNoItemNamePagesAsync(cancellationToken);
+                return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
             }
-            Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            async Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
             {
-                var response = GetNoItemNamePagesNextPageAsync(nextLinkUrl, cancellationToken).GetAwaiter().GetResult();
-                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse()));
+                var response = await GetNoItemNamePagesNextPageAsync(nextLinkUrl, cancellationToken);
+                return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -2615,15 +2615,15 @@ namespace paging
         public AsyncPageable<Product> GetNullNextLinkNamePagesPageableAsync(CancellationToken cancellationToken = default)
         {
 
-            Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = GetNullNextLinkNamePagesAsync(cancellationToken).GetAwaiter().GetResult();
-                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, null, response.GetRawResponse()));
+                var response = await GetNullNextLinkNamePagesAsync(cancellationToken);
+                return Page.FromValues(response.Value.Values, null, response.GetRawResponse());
             }
-            Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            async Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
             {
-                var response = GetNullNextLinkNamePagesNextPageAsync(nextLinkUrl, cancellationToken).GetAwaiter().GetResult();
-                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, null, response.GetRawResponse()));
+                var response = await GetNullNextLinkNamePagesNextPageAsync(nextLinkUrl, cancellationToken);
+                return Page.FromValues(response.Value.Values, null, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -2649,15 +2649,15 @@ namespace paging
         public AsyncPageable<Product> GetSinglePagesPageableAsync(CancellationToken cancellationToken = default)
         {
 
-            Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = GetSinglePagesAsync(cancellationToken).GetAwaiter().GetResult();
-                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse()));
+                var response = await GetSinglePagesAsync(cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
-            Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            async Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
             {
-                var response = GetSinglePagesNextPageAsync(nextLinkUrl, cancellationToken).GetAwaiter().GetResult();
-                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse()));
+                var response = await GetSinglePagesNextPageAsync(nextLinkUrl, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -2686,15 +2686,15 @@ namespace paging
         public AsyncPageable<Product> GetMultiplePagesPageableAsync(string? clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
 
-            Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = GetMultiplePagesAsync(clientRequestId, maxresults, timeout, cancellationToken).GetAwaiter().GetResult();
-                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse()));
+                var response = await GetMultiplePagesAsync(clientRequestId, maxresults, timeout, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
-            Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            async Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
             {
-                var response = GetMultiplePagesNextPageAsync(clientRequestId, maxresults, timeout, nextLinkUrl, cancellationToken).GetAwaiter().GetResult();
-                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse()));
+                var response = await GetMultiplePagesNextPageAsync(clientRequestId, maxresults, timeout, nextLinkUrl, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -2726,15 +2726,15 @@ namespace paging
         public AsyncPageable<Product> GetOdataMultiplePagesPageableAsync(string? clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
 
-            Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = GetOdataMultiplePagesAsync(clientRequestId, maxresults, timeout, cancellationToken).GetAwaiter().GetResult();
-                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse()));
+                var response = await GetOdataMultiplePagesAsync(clientRequestId, maxresults, timeout, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
-            Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            async Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
             {
-                var response = GetOdataMultiplePagesNextPageAsync(clientRequestId, maxresults, timeout, nextLinkUrl, cancellationToken).GetAwaiter().GetResult();
-                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse()));
+                var response = await GetOdataMultiplePagesNextPageAsync(clientRequestId, maxresults, timeout, nextLinkUrl, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -2767,15 +2767,15 @@ namespace paging
         public AsyncPageable<Product> GetMultiplePagesWithOffsetPageableAsync(string? clientRequestId, int? maxresults, int offset, int? timeout, CancellationToken cancellationToken = default)
         {
 
-            Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = GetMultiplePagesWithOffsetAsync(clientRequestId, maxresults, offset, timeout, cancellationToken).GetAwaiter().GetResult();
-                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse()));
+                var response = await GetMultiplePagesWithOffsetAsync(clientRequestId, maxresults, offset, timeout, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
-            Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            async Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
             {
-                var response = GetMultiplePagesWithOffsetNextPageAsync(clientRequestId, maxresults, timeout, nextLinkUrl, cancellationToken).GetAwaiter().GetResult();
-                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse()));
+                var response = await GetMultiplePagesWithOffsetNextPageAsync(clientRequestId, maxresults, timeout, nextLinkUrl, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -2805,15 +2805,15 @@ namespace paging
         public AsyncPageable<Product> GetMultiplePagesRetryFirstPageableAsync(CancellationToken cancellationToken = default)
         {
 
-            Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = GetMultiplePagesRetryFirstAsync(cancellationToken).GetAwaiter().GetResult();
-                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse()));
+                var response = await GetMultiplePagesRetryFirstAsync(cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
-            Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            async Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
             {
-                var response = GetMultiplePagesRetryFirstNextPageAsync(nextLinkUrl, cancellationToken).GetAwaiter().GetResult();
-                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse()));
+                var response = await GetMultiplePagesRetryFirstNextPageAsync(nextLinkUrl, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -2839,15 +2839,15 @@ namespace paging
         public AsyncPageable<Product> GetMultiplePagesRetrySecondPageableAsync(CancellationToken cancellationToken = default)
         {
 
-            Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = GetMultiplePagesRetrySecondAsync(cancellationToken).GetAwaiter().GetResult();
-                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse()));
+                var response = await GetMultiplePagesRetrySecondAsync(cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
-            Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            async Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
             {
-                var response = GetMultiplePagesRetrySecondNextPageAsync(nextLinkUrl, cancellationToken).GetAwaiter().GetResult();
-                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse()));
+                var response = await GetMultiplePagesRetrySecondNextPageAsync(nextLinkUrl, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -2873,15 +2873,15 @@ namespace paging
         public AsyncPageable<Product> GetSinglePagesFailurePageableAsync(CancellationToken cancellationToken = default)
         {
 
-            Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = GetSinglePagesFailureAsync(cancellationToken).GetAwaiter().GetResult();
-                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse()));
+                var response = await GetSinglePagesFailureAsync(cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
-            Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            async Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
             {
-                var response = GetSinglePagesFailureNextPageAsync(nextLinkUrl, cancellationToken).GetAwaiter().GetResult();
-                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse()));
+                var response = await GetSinglePagesFailureNextPageAsync(nextLinkUrl, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -2907,15 +2907,15 @@ namespace paging
         public AsyncPageable<Product> GetMultiplePagesFailurePageableAsync(CancellationToken cancellationToken = default)
         {
 
-            Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = GetMultiplePagesFailureAsync(cancellationToken).GetAwaiter().GetResult();
-                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse()));
+                var response = await GetMultiplePagesFailureAsync(cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
-            Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            async Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
             {
-                var response = GetMultiplePagesFailureNextPageAsync(nextLinkUrl, cancellationToken).GetAwaiter().GetResult();
-                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse()));
+                var response = await GetMultiplePagesFailureNextPageAsync(nextLinkUrl, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -2941,15 +2941,15 @@ namespace paging
         public AsyncPageable<Product> GetMultiplePagesFailureUriPageableAsync(CancellationToken cancellationToken = default)
         {
 
-            Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = GetMultiplePagesFailureUriAsync(cancellationToken).GetAwaiter().GetResult();
-                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse()));
+                var response = await GetMultiplePagesFailureUriAsync(cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
-            Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            async Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
             {
-                var response = GetMultiplePagesFailureUriNextPageAsync(nextLinkUrl, cancellationToken).GetAwaiter().GetResult();
-                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse()));
+                var response = await GetMultiplePagesFailureUriNextPageAsync(nextLinkUrl, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -2985,15 +2985,15 @@ namespace paging
                 throw new ArgumentNullException(nameof(tenant));
             }
 
-            Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = GetMultiplePagesFragmentNextLinkAsync(apiVersion, tenant, cancellationToken).GetAwaiter().GetResult();
-                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse()));
+                var response = await GetMultiplePagesFragmentNextLinkAsync(apiVersion, tenant, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
-            Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            async Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
             {
-                var response = GetMultiplePagesFragmentNextLinkNextPageAsync(nextLinkUrl, cancellationToken).GetAwaiter().GetResult();
-                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse()));
+                var response = await GetMultiplePagesFragmentNextLinkNextPageAsync(nextLinkUrl, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -3039,15 +3039,15 @@ namespace paging
                 throw new ArgumentNullException(nameof(tenant));
             }
 
-            Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = GetMultiplePagesFragmentWithGroupingNextLinkAsync(apiVersion, tenant, cancellationToken).GetAwaiter().GetResult();
-                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse()));
+                var response = await GetMultiplePagesFragmentWithGroupingNextLinkAsync(apiVersion, tenant, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
-            Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            async Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
             {
-                var response = GetMultiplePagesFragmentWithGroupingNextLinkNextPageAsync(nextLinkUrl, cancellationToken).GetAwaiter().GetResult();
-                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse()));
+                var response = await GetMultiplePagesFragmentWithGroupingNextLinkNextPageAsync(nextLinkUrl, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -3086,15 +3086,15 @@ namespace paging
         public AsyncPageable<Product> GetMultiplePagesLROPageableAsync(string? clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
 
-            Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = GetMultiplePagesLROAsync(clientRequestId, maxresults, timeout, cancellationToken).GetAwaiter().GetResult();
-                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse()));
+                var response = await GetMultiplePagesLROAsync(clientRequestId, maxresults, timeout, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
-            Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            async Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
             {
-                var response = GetMultiplePagesLRONextPageAsync(clientRequestId, maxresults, timeout, nextLinkUrl, cancellationToken).GetAwaiter().GetResult();
-                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse()));
+                var response = await GetMultiplePagesLRONextPageAsync(clientRequestId, maxresults, timeout, nextLinkUrl, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -3138,15 +3138,15 @@ namespace paging
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = NextFragmentAsync(apiVersion, tenant, nextLink, cancellationToken).GetAwaiter().GetResult();
-                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse()));
+                var response = await NextFragmentAsync(apiVersion, tenant, nextLink, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
-            Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            async Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
             {
-                var response = NextFragmentNextPageAsync(nextLinkUrl, cancellationToken).GetAwaiter().GetResult();
-                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse()));
+                var response = await NextFragmentNextPageAsync(nextLinkUrl, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -3202,15 +3202,15 @@ namespace paging
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = NextFragmentWithGroupingAsync(apiVersion, tenant, nextLink, cancellationToken).GetAwaiter().GetResult();
-                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse()));
+                var response = await NextFragmentWithGroupingAsync(apiVersion, tenant, nextLink, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
-            Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            async Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
             {
-                var response = NextFragmentWithGroupingNextPageAsync(nextLinkUrl, cancellationToken).GetAwaiter().GetResult();
-                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse()));
+                var response = await NextFragmentWithGroupingNextPageAsync(nextLinkUrl, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }

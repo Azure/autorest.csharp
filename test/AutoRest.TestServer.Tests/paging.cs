@@ -272,7 +272,7 @@ namespace AutoRest.TestServer.Tests
         public Task PagingNextLinkNameNull() => Test(async (host, pipeline) =>
         {
             var result = await new PagingOperations(ClientDiagnostics, pipeline, host).GetNullNextLinkNamePagesAsync();
-            var resultPage = Page.FromValues(result.Value.Values, result.Value.NextLink, result.GetRawResponse());
+            var resultPage = Page.FromValues(result.Value.Values, null, result.GetRawResponse());
             Assert.AreEqual(1, resultPage.Values.First().Properties.Id);
             Assert.AreEqual("Product", resultPage.Values.First().Properties.Name);
             Assert.IsNull(resultPage.ContinuationToken);

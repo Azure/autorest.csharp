@@ -1801,15 +1801,15 @@ namespace AppConfiguration
         public AsyncPageable<Key> GetKeysPageableAsync(string? name, string? after, string? acceptDatetime, CancellationToken cancellationToken = default)
         {
 
-            Task<Page<Key>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<Key>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = GetKeysAsync(name, after, acceptDatetime, cancellationToken).GetAwaiter().GetResult();
-                return new Task<Page<Key>>(() => Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse()));
+                var response = await GetKeysAsync(name, after, acceptDatetime, cancellationToken);
+                return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
-            Task<Page<Key>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            async Task<Page<Key>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
             {
-                var response = GetKeysNextPageAsync(acceptDatetime, nextLinkUrl, cancellationToken).GetAwaiter().GetResult();
-                return new Task<Page<Key>>(() => Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse()));
+                var response = await GetKeysNextPageAsync(acceptDatetime, nextLinkUrl, cancellationToken);
+                return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -1843,15 +1843,15 @@ namespace AppConfiguration
         public AsyncPageable<KeyValue> GetKeyValuesPageableAsync(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Get6ItemsItem>? select, CancellationToken cancellationToken = default)
         {
 
-            Task<Page<KeyValue>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<KeyValue>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = GetKeyValuesAsync(key, label, after, acceptDatetime, select, cancellationToken).GetAwaiter().GetResult();
-                return new Task<Page<KeyValue>>(() => Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse()));
+                var response = await GetKeyValuesAsync(key, label, after, acceptDatetime, select, cancellationToken);
+                return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
-            Task<Page<KeyValue>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            async Task<Page<KeyValue>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
             {
-                var response = GetKeyValuesNextPageAsync(acceptDatetime, nextLinkUrl, cancellationToken).GetAwaiter().GetResult();
-                return new Task<Page<KeyValue>>(() => Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse()));
+                var response = await GetKeyValuesNextPageAsync(acceptDatetime, nextLinkUrl, cancellationToken);
+                return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -1886,15 +1886,15 @@ namespace AppConfiguration
         public AsyncPageable<Label> GetLabelsPageableAsync(string? name, string? after, string? acceptDatetime, IEnumerable<string>? select, CancellationToken cancellationToken = default)
         {
 
-            Task<Page<Label>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<Label>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = GetLabelsAsync(name, after, acceptDatetime, select, cancellationToken).GetAwaiter().GetResult();
-                return new Task<Page<Label>>(() => Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse()));
+                var response = await GetLabelsAsync(name, after, acceptDatetime, select, cancellationToken);
+                return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
-            Task<Page<Label>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            async Task<Page<Label>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
             {
-                var response = GetLabelsNextPageAsync(acceptDatetime, nextLinkUrl, cancellationToken).GetAwaiter().GetResult();
-                return new Task<Page<Label>>(() => Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse()));
+                var response = await GetLabelsNextPageAsync(acceptDatetime, nextLinkUrl, cancellationToken);
+                return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -1929,15 +1929,15 @@ namespace AppConfiguration
         public AsyncPageable<KeyValue> GetRevisionsPageableAsync(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Enum0>? select, CancellationToken cancellationToken = default)
         {
 
-            Task<Page<KeyValue>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<KeyValue>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = GetRevisionsAsync(key, label, after, acceptDatetime, select, cancellationToken).GetAwaiter().GetResult();
-                return new Task<Page<KeyValue>>(() => Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse()));
+                var response = await GetRevisionsAsync(key, label, after, acceptDatetime, select, cancellationToken);
+                return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
-            Task<Page<KeyValue>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            async Task<Page<KeyValue>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
             {
-                var response = GetRevisionsNextPageAsync(acceptDatetime, nextLinkUrl, cancellationToken).GetAwaiter().GetResult();
-                return new Task<Page<KeyValue>>(() => Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse()));
+                var response = await GetRevisionsNextPageAsync(acceptDatetime, nextLinkUrl, cancellationToken);
+                return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }

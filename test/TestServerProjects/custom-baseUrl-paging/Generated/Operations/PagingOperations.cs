@@ -539,15 +539,15 @@ namespace custom_baseUrl_paging
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = GetPagesPartialUrlAsync(accountName, cancellationToken).GetAwaiter().GetResult();
-                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse()));
+                var response = await GetPagesPartialUrlAsync(accountName, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
-            Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            async Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
             {
-                var response = GetPagesPartialUrlNextPageAsync(accountName, nextLinkUrl, cancellationToken).GetAwaiter().GetResult();
-                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse()));
+                var response = await GetPagesPartialUrlNextPageAsync(accountName, nextLinkUrl, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -583,15 +583,15 @@ namespace custom_baseUrl_paging
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = GetPagesPartialUrlOperationAsync(accountName, cancellationToken).GetAwaiter().GetResult();
-                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse()));
+                var response = await GetPagesPartialUrlOperationAsync(accountName, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
-            Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            async Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
             {
-                var response = GetPagesPartialUrlOperationNextPageAsync(accountName, nextLinkUrl, cancellationToken).GetAwaiter().GetResult();
-                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse()));
+                var response = await GetPagesPartialUrlOperationNextPageAsync(accountName, nextLinkUrl, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -632,15 +632,15 @@ namespace custom_baseUrl_paging
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = GetPagesPartialUrlOperationNextAsync(accountName, nextLink, cancellationToken).GetAwaiter().GetResult();
-                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse()));
+                var response = await GetPagesPartialUrlOperationNextAsync(accountName, nextLink, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
-            Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            async Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
             {
-                var response = GetPagesPartialUrlOperationNextNextPageAsync(accountName, nextLinkUrl, cancellationToken).GetAwaiter().GetResult();
-                return new Task<Page<Product>>(() => Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse()));
+                var response = await GetPagesPartialUrlOperationNextNextPageAsync(accountName, nextLinkUrl, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }

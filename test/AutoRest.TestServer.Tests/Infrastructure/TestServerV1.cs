@@ -35,7 +35,8 @@ namespace AutoRest.TestServer.Tests.Infrastructure
 
             _process = Process.Start(processStartInfo);
             ProcessTracker.Add(_process);
-            while (!(_process?.HasExited ?? false))
+            Debug.Assert(_process != null);
+            while (!_process.HasExited)
             {
                 var s = _process?.StandardOutput.ReadLine();
                 if (s?.StartsWith(portPhrase) != true) continue;
