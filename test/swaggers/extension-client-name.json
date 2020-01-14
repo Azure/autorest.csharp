@@ -68,10 +68,17 @@
         "originalProperty": {
           "type": "object",
           "title": "A set of tags.",
+          "x-ms-client-name": "RenamedProperty",
           "description": "A description about the set of tags.",
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "originalPropertyString": {
+          "type": "string",
+          "title": "A set of tags.",
+          "x-ms-client-name": "RenamedPropertyString",
+          "description": "A description about the set of tags."
         }
       },
       "required": [

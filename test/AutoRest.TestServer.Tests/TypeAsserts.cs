@@ -23,5 +23,12 @@ namespace AutoRest.TestServer.Tests
             Assert.NotNull(parameterInfo);
             return parameterInfo;
         }
+
+        public static PropertyInfo HasProperty(Type type, string name)
+        {
+            var parameterInfo = type.GetProperties().FirstOrDefault(p=>p.Name == name);
+            Assert.NotNull(parameterInfo, $"Property '{name}' is not found");
+            return parameterInfo;
+        }
     }
 }
