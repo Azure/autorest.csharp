@@ -10,7 +10,7 @@ namespace CognitiveServices.TextAnalytics.Models.VV30Preview1
     {
         /// <summary> The predicted Sentiment for the sentence. </summary>
         public SentenceSentimentSentiment Sentiment { get; set; }
-        /// <summary> The sentiment confidence score between 0 and 1 for the sentence for all classes. </summary>
+        /// <summary> &lt;Any object&gt;. </summary>
         public object SentenceScores { get; set; }
         /// <summary> The sentence offset from the start of the document. </summary>
         public int Offset { get; set; }
