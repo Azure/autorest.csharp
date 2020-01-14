@@ -127,13 +127,11 @@ namespace AutoRest.CSharp.V3.CodeGen
                 var method = operation.Request.Method;
                 writer.Line($"request.Method = {typeof(RequestMethod)}.{method.ToRequestMethodName()};");
 
-                var uriType = writer.Type(typeof(Uri));
-
                 //TODO: Add logic to escape the strings when specified, using Uri.EscapeDataString(value);
                 //TODO: Need proper logic to convert the values to strings. Right now, everything is just using default ToString().
                 //TODO: Need logic to trim duplicate slashes (/) so when combined, you don't end  up with multiple // together
                 var urlText = String.Join(String.Empty, operation.Request.HostSegments.Select(s => s.IsConstant ? s.Constant.Value : "{" + s.Parameter.Name + "}"));
-                writer.Line($"request.Uri.Reset(new {uriType}($\"{urlText}\"));");
+                writer.Line($"request.Uri.Reset(new {typeof(Uri)}($\"{urlText}\"));");
 
                 foreach (var segment in operation.Request.PathSegments)
                 {
@@ -197,6 +195,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                 { } => new CSharpType(typeof(ResponseWithHeaders<>), bodyType, headerModelType),
                 _ => new CSharpType(typeof(Response)),
             };
+            responseType = async ? new CSharpType(typeof(ValueTask<>), responseType) : responseType;
             var parameters = operation.Parameters;
             writer.WriteXmlDocumentationSummary(operation.Description);
 
@@ -208,8 +207,8 @@ namespace AutoRest.CSharp.V3.CodeGen
             writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
 
             var methodName = CreateMethodName(operation.Name, async);
-            CSharpType asyncReturnType = new CSharpType(typeof(ValueTask<>), responseType);
-            writer.Append($"public {(async ? "async " : string.Empty)}{(async ? asyncReturnType : responseType)} {methodName}(");
+            var asyncText = async ? "async " : string.Empty;
+            writer.Append($"public {asyncText}{responseType} {methodName}(");
 
             foreach (ServiceClientParameter parameter in parameters)
             {
@@ -296,6 +295,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                 var continuationTokenText = pagingMethod.NextLinkName != null ? $"response.Value.{pagingMethod.NextLinkName}" : "null";
                 var asyncText = async ? "async " : string.Empty;
                 var awaitText = async ? "await " : string.Empty;
+                var configureAwaitText = async ? ".ConfigureAwait(false)" : string.Empty;
                 using (writer.Scope($"{asyncText}{funcType} FirstPageFunc({nullableInt} pageSizeHint)"))
                 {
                     writer.Append($"var response = {awaitText}{CreateMethodName(pagingMethod.Method.Name, async)}(");
@@ -303,7 +303,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     {
                         writer.Append($"{parameter.Name}, ");
                     }
-                    writer.Line($"cancellationToken);");
+                    writer.Line($"cancellationToken){configureAwaitText};");
                     writer.Line($"return {typeof(Page)}.FromValues(response.Value.{pagingMethod.ItemName}, {continuationTokenText}, response.GetRawResponse());");
                 }
 
@@ -314,7 +314,7 @@ namespace AutoRest.CSharp.V3.CodeGen
                     {
                         writer.Append($"{parameter.Name}, ");
                     }
-                    writer.Line($"cancellationToken);");
+                    writer.Line($"cancellationToken){configureAwaitText};");
                     writer.Line($"return {typeof(Page)}.FromValues(response.Value.{pagingMethod.ItemName}, {continuationTokenText}, response.GetRawResponse());");
                 }
                 writer.Line($"return PageResponseEnumerator.Create{(async ? "Async" : string.Empty)}Enumerable(FirstPageFunc, NextPageFunc);");
@@ -529,14 +529,21 @@ namespace AutoRest.CSharp.V3.CodeGen
                         writer.Line($"var headers = new {headersModelType}(message.Response);");
                     }
 
-                    var responseCallText = responseBody switch
+                    switch (responseBody)
                     {
-                        null when headersModelType != null => $"{typeof(ResponseWithHeaders)}.FromValue(headers, message.Response)",
-                        { } when headersModelType != null => $"{typeof(ResponseWithHeaders)}.FromValue({valueVariable}, headers, message.Response)",
-                        { } => $"{typeof(Response)}.FromValue({valueVariable}, message.Response)",
-                        _ => "message.Response"
-                    };
-                    writer.Line($"return {responseCallText};");
+                        case null when headersModelType != null:
+                            writer.Append($"return {typeof(ResponseWithHeaders)}.FromValue(headers, message.Response);");
+                            break;
+                        case { } when headersModelType != null:
+                            writer.Append($"return {typeof(ResponseWithHeaders)}.FromValue({valueVariable}, headers, message.Response);");
+                            break;
+                        case { }:
+                            writer.Append($"return {typeof(Response)}.FromValue({valueVariable}, message.Response);");
+                            break;
+                        case null:
+                            writer.Append($"return message.Response;");
+                            break;
+                    }
                 }
 
                 writer.Line($"default:");

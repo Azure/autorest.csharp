@@ -197,7 +197,7 @@ namespace AutoRest.CSharp.V3.ClientModels
                 request,
                 OrderParameters(methodParameters),
                 clientResponse,
-                new ClientMethodDiagnostics($"{clientName}.{operationName}",Array.Empty<DiagnosticScopeAttributes>())
+                new ClientMethodDiagnostics($"{clientName}.{operationName}", Array.Empty<DiagnosticScopeAttributes>())
             );
         }
 
@@ -219,8 +219,8 @@ namespace AutoRest.CSharp.V3.ClientModels
             var request = new ClientMethodRequest(
                 method.Request.Method,
                 parameters.Where(p => p.Location == ParameterLocation.Uri).Select(p => new ConstantOrParameter(p)).ToArray(),
-                new PathSegment[0],
-                new QueryParameter[0],
+                Array.Empty<PathSegment>(),
+                Array.Empty<QueryParameter>(),
                 method.Request.Headers,
                 null
             );

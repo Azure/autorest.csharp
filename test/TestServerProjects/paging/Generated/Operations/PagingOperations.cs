@@ -2583,12 +2583,12 @@ namespace paging
 
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await GetNoItemNamePagesAsync(cancellationToken);
+                var response = await GetNoItemNamePagesAsync(cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
             }
             async Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
             {
-                var response = await GetNoItemNamePagesNextPageAsync(nextLinkUrl, cancellationToken);
+                var response = await GetNoItemNamePagesNextPageAsync(nextLinkUrl, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
@@ -2617,12 +2617,12 @@ namespace paging
 
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await GetNullNextLinkNamePagesAsync(cancellationToken);
+                var response = await GetNullNextLinkNamePagesAsync(cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, null, response.GetRawResponse());
             }
             async Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
             {
-                var response = await GetNullNextLinkNamePagesNextPageAsync(nextLinkUrl, cancellationToken);
+                var response = await GetNullNextLinkNamePagesNextPageAsync(nextLinkUrl, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, null, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
@@ -2651,12 +2651,12 @@ namespace paging
 
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await GetSinglePagesAsync(cancellationToken);
+                var response = await GetSinglePagesAsync(cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             async Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
             {
-                var response = await GetSinglePagesNextPageAsync(nextLinkUrl, cancellationToken);
+                var response = await GetSinglePagesNextPageAsync(nextLinkUrl, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
@@ -2688,12 +2688,12 @@ namespace paging
 
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await GetMultiplePagesAsync(clientRequestId, maxresults, timeout, cancellationToken);
+                var response = await GetMultiplePagesAsync(clientRequestId, maxresults, timeout, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             async Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
             {
-                var response = await GetMultiplePagesNextPageAsync(clientRequestId, maxresults, timeout, nextLinkUrl, cancellationToken);
+                var response = await GetMultiplePagesNextPageAsync(clientRequestId, maxresults, timeout, nextLinkUrl, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
@@ -2728,12 +2728,12 @@ namespace paging
 
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await GetOdataMultiplePagesAsync(clientRequestId, maxresults, timeout, cancellationToken);
+                var response = await GetOdataMultiplePagesAsync(clientRequestId, maxresults, timeout, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
             async Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
             {
-                var response = await GetOdataMultiplePagesNextPageAsync(clientRequestId, maxresults, timeout, nextLinkUrl, cancellationToken);
+                var response = await GetOdataMultiplePagesNextPageAsync(clientRequestId, maxresults, timeout, nextLinkUrl, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
@@ -2769,12 +2769,12 @@ namespace paging
 
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await GetMultiplePagesWithOffsetAsync(clientRequestId, maxresults, offset, timeout, cancellationToken);
+                var response = await GetMultiplePagesWithOffsetAsync(clientRequestId, maxresults, offset, timeout, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             async Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
             {
-                var response = await GetMultiplePagesWithOffsetNextPageAsync(clientRequestId, maxresults, timeout, nextLinkUrl, cancellationToken);
+                var response = await GetMultiplePagesWithOffsetNextPageAsync(clientRequestId, maxresults, timeout, nextLinkUrl, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
@@ -2807,12 +2807,12 @@ namespace paging
 
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await GetMultiplePagesRetryFirstAsync(cancellationToken);
+                var response = await GetMultiplePagesRetryFirstAsync(cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             async Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
             {
-                var response = await GetMultiplePagesRetryFirstNextPageAsync(nextLinkUrl, cancellationToken);
+                var response = await GetMultiplePagesRetryFirstNextPageAsync(nextLinkUrl, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
@@ -2841,12 +2841,12 @@ namespace paging
 
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await GetMultiplePagesRetrySecondAsync(cancellationToken);
+                var response = await GetMultiplePagesRetrySecondAsync(cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             async Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
             {
-                var response = await GetMultiplePagesRetrySecondNextPageAsync(nextLinkUrl, cancellationToken);
+                var response = await GetMultiplePagesRetrySecondNextPageAsync(nextLinkUrl, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
@@ -2875,12 +2875,12 @@ namespace paging
 
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await GetSinglePagesFailureAsync(cancellationToken);
+                var response = await GetSinglePagesFailureAsync(cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             async Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
             {
-                var response = await GetSinglePagesFailureNextPageAsync(nextLinkUrl, cancellationToken);
+                var response = await GetSinglePagesFailureNextPageAsync(nextLinkUrl, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
@@ -2909,12 +2909,12 @@ namespace paging
 
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await GetMultiplePagesFailureAsync(cancellationToken);
+                var response = await GetMultiplePagesFailureAsync(cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             async Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
             {
-                var response = await GetMultiplePagesFailureNextPageAsync(nextLinkUrl, cancellationToken);
+                var response = await GetMultiplePagesFailureNextPageAsync(nextLinkUrl, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
@@ -2943,12 +2943,12 @@ namespace paging
 
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await GetMultiplePagesFailureUriAsync(cancellationToken);
+                var response = await GetMultiplePagesFailureUriAsync(cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             async Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
             {
-                var response = await GetMultiplePagesFailureUriNextPageAsync(nextLinkUrl, cancellationToken);
+                var response = await GetMultiplePagesFailureUriNextPageAsync(nextLinkUrl, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
@@ -2987,12 +2987,12 @@ namespace paging
 
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await GetMultiplePagesFragmentNextLinkAsync(apiVersion, tenant, cancellationToken);
+                var response = await GetMultiplePagesFragmentNextLinkAsync(apiVersion, tenant, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
             async Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
             {
-                var response = await GetMultiplePagesFragmentNextLinkNextPageAsync(nextLinkUrl, cancellationToken);
+                var response = await GetMultiplePagesFragmentNextLinkNextPageAsync(nextLinkUrl, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
@@ -3041,12 +3041,12 @@ namespace paging
 
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await GetMultiplePagesFragmentWithGroupingNextLinkAsync(apiVersion, tenant, cancellationToken);
+                var response = await GetMultiplePagesFragmentWithGroupingNextLinkAsync(apiVersion, tenant, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
             async Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
             {
-                var response = await GetMultiplePagesFragmentWithGroupingNextLinkNextPageAsync(nextLinkUrl, cancellationToken);
+                var response = await GetMultiplePagesFragmentWithGroupingNextLinkNextPageAsync(nextLinkUrl, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
@@ -3088,12 +3088,12 @@ namespace paging
 
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await GetMultiplePagesLROAsync(clientRequestId, maxresults, timeout, cancellationToken);
+                var response = await GetMultiplePagesLROAsync(clientRequestId, maxresults, timeout, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             async Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
             {
-                var response = await GetMultiplePagesLRONextPageAsync(clientRequestId, maxresults, timeout, nextLinkUrl, cancellationToken);
+                var response = await GetMultiplePagesLRONextPageAsync(clientRequestId, maxresults, timeout, nextLinkUrl, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
@@ -3140,12 +3140,12 @@ namespace paging
 
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await NextFragmentAsync(apiVersion, tenant, nextLink, cancellationToken);
+                var response = await NextFragmentAsync(apiVersion, tenant, nextLink, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
             async Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
             {
-                var response = await NextFragmentNextPageAsync(nextLinkUrl, cancellationToken);
+                var response = await NextFragmentNextPageAsync(nextLinkUrl, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
@@ -3204,12 +3204,12 @@ namespace paging
 
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await NextFragmentWithGroupingAsync(apiVersion, tenant, nextLink, cancellationToken);
+                var response = await NextFragmentWithGroupingAsync(apiVersion, tenant, nextLink, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
             async Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
             {
-                var response = await NextFragmentWithGroupingNextPageAsync(nextLinkUrl, cancellationToken);
+                var response = await NextFragmentWithGroupingNextPageAsync(nextLinkUrl, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
