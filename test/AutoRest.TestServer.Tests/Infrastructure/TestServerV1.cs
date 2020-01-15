@@ -25,7 +25,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
         {
             var portPhrase = "Server started at port ";
             var startup = Path.Combine(GetBaseDirectory(), "legacy", "startup", "www.js");
-            var port = new Random().Next(10000, 65536).ToString();
+            var port = "0";
             var processStartInfo = new ProcessStartInfo("node", startup)
             {
                 RedirectStandardOutput = true,
@@ -38,10 +38,10 @@ namespace AutoRest.TestServer.Tests.Infrastructure
             Debug.Assert(_process != null);
             while (!_process.HasExited)
             {
-                var s = _process?.StandardOutput.ReadLine();
+                var s = _process.StandardOutput.ReadLine();
                 if (s?.StartsWith(portPhrase) != true) continue;
 
-                Host = $"http://localhost:{port}";
+                Host = $"http://localhost:{s.Substring(portPhrase.Length).Trim()}";
                 Client = new HttpClient { BaseAddress = new Uri(Host) };
                 _ = Task.Run(ReadOutput);
                 return;
