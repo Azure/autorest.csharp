@@ -33,7 +33,8 @@ namespace AutoRest.TestServer.Tests
                 Assert.AreEqual(id, resultPage.Values.First().Properties.Id);
                 Assert.AreEqual(product, resultPage.Values.First().Properties.Name);
                 StringAssert.EndsWith($"{linkPart}{++id}", resultPage.ContinuationToken);
-                result = await new CustomPagingOperations(ClientDiagnostics, pipeline, host).GetPagesPartialUrlNextPageAsync(string.Empty, resultPage.ContinuationToken);
+                result = await new CustomPagingOperations(ClientDiagnostics, pipeline, host).GetPagesPartialUrlNextPageAsync(resultPage.ContinuationToken);
+                resultPage = Page.FromValues(result.Value.Values, result.Value.NextLink, result.GetRawResponse());
             }
             Assert.AreEqual(2, id);
             Assert.AreEqual(id, resultPage.Values.First().Properties.Id);
