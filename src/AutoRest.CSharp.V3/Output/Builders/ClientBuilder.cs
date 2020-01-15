@@ -15,10 +15,7 @@ using AutoRest.CSharp.V3.Output.Models.Shared;
 using AutoRest.CSharp.V3.Output.Models.TypeReferences;
 using AutoRest.CSharp.V3.Utilities;
 using Azure.Core;
-using Parameter = AutoRest.CSharp.V3.Output.Models.Shared.Parameter;
 using Request = AutoRest.CSharp.V3.Output.Models.Requests.Request;
-using Response = AutoRest.CSharp.V3.Output.Models.Responses.Response;
-using SerializationFormat = AutoRest.CSharp.V3.Output.Models.Serialization.SerializationFormat;
 
 namespace AutoRest.CSharp.V3.Output.Builders
 {

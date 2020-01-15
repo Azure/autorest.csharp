@@ -62,7 +62,15 @@ namespace AutoRest.CodeModel
                 // Class names that conflict with project class names
                 .Replace("HttpHeader", "HttpResponseHeader")
                 .Replace("class Parameter", "class RequestParameter")
-                .Replace("<Parameter>", "<RequestParameter>");
+                .Replace("<Parameter>", "<RequestParameter>")
+                .Replace("class Request ", "class ServiceRequest ")
+                .Replace("public Request Request { get; set; } = new Request();", "public ServiceRequest Request { get; set; } = new ServiceRequest();")
+                .Replace("class Response ", "class ServiceResponse ")
+                .Replace(": Response", ": ServiceResponse")
+                .Replace("<Response>", "<ServiceResponse>")
+                .Replace($"class SerializationFormat{Environment.NewLine}", $"class SerializationFormatMetadata{Environment.NewLine}")
+                .Replace("public SerializationFormat ", "public SerializationFormatMetadata ")
+                .Replace(": SerializationFormat", ": SerializationFormatMetadata");
 
             var lines = cleanFile.ToLines().ToArray();
             var fileWithNullable = String.Join(Environment.NewLine, lines.Zip(lines.Skip(1).Append(String.Empty))

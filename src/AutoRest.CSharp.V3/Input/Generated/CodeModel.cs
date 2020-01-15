@@ -552,7 +552,7 @@ namespace AutoRest.CSharp.V3.Input.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
-    internal partial class XmlSerlializationFormat : SerializationFormat
+    internal partial class XmlSerlializationFormat : SerializationFormatMetadata
     {
         [YamlDotNet.Serialization.YamlMember(Alias = "name")]
         public string? Name { get; set; }
@@ -575,20 +575,20 @@ namespace AutoRest.CSharp.V3.Input.Generated
     internal partial class SerializationFormats
     {
         [YamlDotNet.Serialization.YamlMember(Alias = "json")]
-        public SerializationFormat? Json { get; set; }
+        public SerializationFormatMetadata? Json { get; set; }
 
         [YamlDotNet.Serialization.YamlMember(Alias = "xml")]
         public XmlSerlializationFormat? Xml { get; set; }
 
         [YamlDotNet.Serialization.YamlMember(Alias = "protobuf")]
-        public SerializationFormat? Protobuf { get; set; }
+        public SerializationFormatMetadata? Protobuf { get; set; }
 
         [YamlDotNet.Serialization.YamlMember(Alias = "binary")]
-        public SerializationFormat? Binary { get; set; }
+        public SerializationFormatMetadata? Binary { get; set; }
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
-    internal partial class SerializationFormat
+    internal partial class SerializationFormatMetadata
     {
         /// <summary>additional metadata extensions dictionary</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "extensions")]
@@ -1349,13 +1349,13 @@ namespace AutoRest.CSharp.V3.Input.Generated
 
     /// <summary>a response from a service.</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
-    internal partial class Response : Metadata
+    internal partial class ServiceResponse : Metadata
     {
     }
 
     /// <summary>a response where the content should be treated as a binary instead of a value or object</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
-    internal partial class BinaryResponse : Response
+    internal partial class BinaryResponse : ServiceResponse
     {
         /// <summary>indicates that this response is a binary stream</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "binary")]
@@ -1364,7 +1364,7 @@ namespace AutoRest.CSharp.V3.Input.Generated
 
     /// <summary>a response that should be deserialized into a result of type(schema)</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
-    internal partial class SchemaResponse : Response
+    internal partial class SchemaResponse : ServiceResponse
     {
         /// <summary>the content returned by the service for a given operaiton</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "schema")]
@@ -1379,15 +1379,15 @@ namespace AutoRest.CSharp.V3.Input.Generated
         /// <summary>the inputs that are used to build the request.</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "request")]
         [System.ComponentModel.DataAnnotations.Required]
-        public Request Request { get; set; } = new Request();
+        public ServiceRequest Request { get; set; } = new ServiceRequest();
 
         /// <summary>responses that indicate a successful call</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "responses")]
-        public System.Collections.Generic.ICollection<Response>? Responses { get; set; }
+        public System.Collections.Generic.ICollection<ServiceResponse>? Responses { get; set; }
 
         /// <summary>responses that indicate a failed call</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "exceptions")]
-        public System.Collections.Generic.ICollection<Response>? Exceptions { get; set; }
+        public System.Collections.Generic.ICollection<ServiceResponse>? Exceptions { get; set; }
 
         /// <summary>the apiVersion to use for a given profile name</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "profile")]
@@ -1425,7 +1425,7 @@ namespace AutoRest.CSharp.V3.Input.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
-    internal partial class Request : Metadata
+    internal partial class ServiceRequest : Metadata
     {
         /// <summary>the parameter inputs to the operation</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "parameters")]

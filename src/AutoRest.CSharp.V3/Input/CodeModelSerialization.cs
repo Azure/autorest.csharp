@@ -18,7 +18,17 @@ namespace AutoRest.CSharp.V3.Input
     {
         public static readonly Type[] GeneratedTypes = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.Namespace == typeof(CodeModel).Namespace).ToArray();
 
-        private static KeyValuePair<string, Type> CreateTagPair(this Type type) => new KeyValuePair<string, Type>($"!{type.Name}", type);
+        private static readonly Dictionary<Type, string> TagOverrides = new Dictionary<Type, string>
+        {
+            { typeof(HttpResponseHeader), "HttpHeader" },
+            { typeof(RequestParameter), "Parameter" },
+            { typeof(ServiceRequest), "Request" },
+            { typeof(ServiceResponse), "Response" },
+            { typeof(SerializationFormatMetadata), "SerializationFormat" }
+        };
+
+        private static string GetTagName(Type type) => TagOverrides.ContainsKey(type) ? TagOverrides[type] : type.Name;
+        private static KeyValuePair<string, Type> CreateTagPair(this Type type) => new KeyValuePair<string, Type>($"!{GetTagName(type)}", type);
         private static readonly IEnumerable<KeyValuePair<string, Type>> TagMap = GeneratedTypes.Where(t => t.IsClass).Select(CreateTagPair);
 
         private static BuilderSkeleton<TBuilder> WithTagMapping<TBuilder>(this BuilderSkeleton<TBuilder> builder, IEnumerable<KeyValuePair<string, Type>> mapping) where TBuilder : BuilderSkeleton<TBuilder>

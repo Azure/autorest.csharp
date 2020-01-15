@@ -9,10 +9,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using AutoRest.CSharp.V3.Generation.Types;
-using AutoRest.CSharp.V3.Input.Generated;
 using AutoRest.CSharp.V3.Output.Models;
 using AutoRest.CSharp.V3.Output.Models.Requests;
 using AutoRest.CSharp.V3.Output.Models.Responses;
+using AutoRest.CSharp.V3.Output.Models.Serialization;
 using AutoRest.CSharp.V3.Output.Models.Serialization.Json;
 using AutoRest.CSharp.V3.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.V3.Output.Models.Shared;
@@ -21,9 +21,7 @@ using AutoRest.CSharp.V3.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Parameter = AutoRest.CSharp.V3.Output.Models.Shared.Parameter;
-using Response = Azure.Response;
-using SerializationFormat = AutoRest.CSharp.V3.Output.Models.Serialization.SerializationFormat;
+using Response = AutoRest.CSharp.V3.Output.Models.Responses.Response;
 
 namespace AutoRest.CSharp.V3.Generation.Writers
 {
