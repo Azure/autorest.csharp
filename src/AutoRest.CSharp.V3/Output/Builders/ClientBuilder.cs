@@ -218,12 +218,11 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 new FrameworkTypeReference(typeof(string)),
                 null,
                 true);
-            var uriParameterNames = method.Request.HostSegments.Where(hs => !hs.IsConstant).Select(hs => hs.Parameter.Name).ToArray();
             var headerParameterNames = method.Request.Headers.Where(h => !h.Value.IsConstant).Select(h => h.Value.Parameter.Name).ToArray();
-            var parameters = method.Parameters.Where(p => uriParameterNames.Contains(p.Name) || headerParameterNames.Contains(p.Name)).Append(nextPageUrlParameter).ToArray();
+            var parameters = method.Parameters.Where(p =>  headerParameterNames.Contains(p.Name)).Append(nextPageUrlParameter).ToArray();
             var request = new Request(
                 method.Request.Method,
-                parameters.Where(p => uriParameterNames.Contains(p.Name) || p.Name == nextPageUrlParameter.Name).Select(p => new RequestParameterOrConstant(p)).ToArray(),
+                new[] { new RequestParameterOrConstant(nextPageUrlParameter) },
                 Array.Empty<PathSegment>(),
                 Array.Empty<QueryParameter>(),
                 method.Request.Headers,
