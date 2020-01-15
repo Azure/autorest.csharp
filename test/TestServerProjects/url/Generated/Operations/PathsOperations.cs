@@ -749,66 +749,6 @@ namespace url
                 throw;
             }
         }
-        internal HttpMessage CreateStringUrlNonEncodedRequest()
-        {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/paths/string/begin!*'();:@&=+$,end/", false);
-            request.Uri.AppendPath("begin!*'();:@&=+$,end", true);
-            return message;
-        }
-        /// <summary> Get &apos;begin!*&apos;();:@&amp;=+$,end. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> StringUrlNonEncodedAsync(CancellationToken cancellationToken = default)
-        {
-
-            using var scope = clientDiagnostics.CreateScope("PathsOperations.StringUrlNonEncoded");
-            scope.Start();
-            try
-            {
-                using var message = CreateStringUrlNonEncodedRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        /// <summary> Get &apos;begin!*&apos;();:@&amp;=+$,end. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response StringUrlNonEncoded(CancellationToken cancellationToken = default)
-        {
-
-            using var scope = clientDiagnostics.CreateScope("PathsOperations.StringUrlNonEncoded");
-            scope.Start();
-            try
-            {
-                using var message = CreateStringUrlNonEncodedRequest();
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw message.Response.CreateRequestFailedException();
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
         internal HttpMessage CreateStringEmptyRequest()
         {
             var message = pipeline.CreateMessage();

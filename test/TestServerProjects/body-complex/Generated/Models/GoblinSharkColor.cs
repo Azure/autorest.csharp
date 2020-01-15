@@ -20,8 +20,6 @@ namespace body_complex.Models.V20160229
         private const string PinkValue = "pink";
         private const string GrayValue = "gray";
         private const string BrownValue = "brown";
-        private const string REDValue = "RED";
-        private const string RedValue = "red";
 
         /// <summary> pink. </summary>
         public static GoblinSharkColor Pink { get; } = new GoblinSharkColor(PinkValue);
@@ -29,10 +27,6 @@ namespace body_complex.Models.V20160229
         public static GoblinSharkColor Gray { get; } = new GoblinSharkColor(GrayValue);
         /// <summary> brown. </summary>
         public static GoblinSharkColor Brown { get; } = new GoblinSharkColor(BrownValue);
-        /// <summary> RED. </summary>
-        public static GoblinSharkColor RED { get; } = new GoblinSharkColor(REDValue);
-        /// <summary> red. </summary>
-        public static GoblinSharkColor Red { get; } = new GoblinSharkColor(RedValue);
         /// <summary> Determines if two <see cref="GoblinSharkColor"/> values are the same. </summary>
         public static bool operator ==(GoblinSharkColor left, GoblinSharkColor right) => left.Equals(right);
         /// <summary> Determines if two <see cref="GoblinSharkColor"/> values are not the same. </summary>
