@@ -105,6 +105,7 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task AdditionalPropertiesTrue() => Test(async (host, pipeline) =>
         {
             PetAPTrue catApTrue = new PetAPTrue()
@@ -130,6 +131,7 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task AdditionalPropertiesTypeObject() => Test(async (host, pipeline) =>
         {
             PetAPObject petApObject = new PetAPObject()

@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using extension_client_name;
+using extension_client_name.Models.V100;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests
@@ -14,6 +15,13 @@ namespace AutoRest.TestServer.Tests
             var method = TypeAsserts.HasPublicInstanceMethod(typeof(AllOperations), "OriginalOperationAsync");
             // TODO: Add more tests here
             TypeAsserts.HasParameter(method, "renamedBodyParameter");
+        }
+
+        [Test]
+        public void PropertiesAreRenamed()
+        {
+            TypeAsserts.HasProperty(typeof(OriginalSchema), "RenamedProperty");
+            TypeAsserts.HasProperty(typeof(OriginalSchema), "RenamedPropertyString");
         }
     }
 }

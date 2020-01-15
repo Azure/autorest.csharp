@@ -9,6 +9,8 @@ namespace extension_client_name.Models.V100
     public partial class OriginalSchema
     {
         /// <summary> A description about the set of tags. </summary>
-        public IDictionary<string, string>? OriginalProperty { get; set; }
+        public IDictionary<string, string>? RenamedProperty { get; set; }
+        /// <summary> A description about the set of tags. </summary>
+        public string? RenamedPropertyString { get; set; }
     }
 }
