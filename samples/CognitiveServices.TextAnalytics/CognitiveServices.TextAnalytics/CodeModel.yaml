@@ -1,0 +1,2665 @@
+!<!CodeModel> 
+schemas: !<!Schemas> 
+  objects:
+  - !<!ObjectSchema> &ref_98
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: V3.0-Preview.1
+    properties:
+    - !<!Property> 
+      schema: !<!ArraySchema> &ref_23
+        type: array
+        apiVersions:
+        - !<!ApiVersion> 
+          version: V3.0-Preview.1
+        elementType: !<!ObjectSchema> &ref_0
+          type: object
+          apiVersions:
+          - !<!ApiVersion> 
+            version: V3.0-Preview.1
+          properties:
+          - !<!Property> 
+            schema: !<!StringSchema> &ref_61
+              type: string
+              apiVersions:
+              - !<!ApiVersion> 
+                version: V3.0-Preview.1
+              language: !<!Languages> 
+                default:
+                  name: MultiLanguageInput-id
+                  description: 'A unique, non-empty document identifier.'
+              protocol: !<!Protocols> {}
+            required: true
+            serializedName: id
+            language: !<!Languages> 
+              default:
+                name: id
+                description: 'A unique, non-empty document identifier.'
+            protocol: !<!Protocols> {}
+          - !<!Property> 
+            schema: !<!StringSchema> &ref_62
+              type: string
+              apiVersions:
+              - !<!ApiVersion> 
+                version: V3.0-Preview.1
+              language: !<!Languages> 
+                default:
+                  name: MultiLanguageInput-text
+                  description: The input text to process.
+              protocol: !<!Protocols> {}
+            required: true
+            serializedName: text
+            language: !<!Languages> 
+              default:
+                name: text
+                description: The input text to process.
+            protocol: !<!Protocols> {}
+          - !<!Property> 
+            schema: !<!StringSchema> &ref_63
+              type: string
+              apiVersions:
+              - !<!ApiVersion> 
+                version: V3.0-Preview.1
+              language: !<!Languages> 
+                default:
+                  name: MultiLanguageInput-language
+                  description: '(Optional) This is the 2 letter ISO 639-1 representation of a language. For example, use "en" for English; "es" for Spanish etc. If not set, use "en" for English as default.'
+              protocol: !<!Protocols> {}
+            required: false
+            serializedName: language
+            language: !<!Languages> 
+              default:
+                name: language
+                description: '(Optional) This is the 2 letter ISO 639-1 representation of a language. For example, use "en" for English; "es" for Spanish etc. If not set, use "en" for English as default.'
+            protocol: !<!Protocols> {}
+          language: !<!Languages> 
+            default:
+              name: MultiLanguageInput
+              description: Contains an input document to be analyzed by the service.
+              namespace: ApiV30Preview1
+          protocol: !<!Protocols> {}
+        language: !<!Languages> 
+          default:
+            name: MultiLanguageBatchInput-documents
+            description: The set of documents to process as part of this batch.
+        protocol: !<!Protocols> {}
+      required: true
+      serializedName: documents
+      language: !<!Languages> 
+        default:
+          name: documents
+          description: The set of documents to process as part of this batch.
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: MultiLanguageBatchInput
+        description: Contains a set of input documents to be analyzed by the service.
+        namespace: ApiV30Preview1
+    protocol: !<!Protocols> {}
+  - *ref_0
+  - !<!ObjectSchema> &ref_99
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: V3.0-Preview.1
+    properties:
+    - !<!Property> 
+      schema: !<!ArraySchema> &ref_25
+        type: array
+        apiVersions:
+        - !<!ApiVersion> 
+          version: V3.0-Preview.1
+        elementType: !<!ObjectSchema> &ref_1
+          type: object
+          apiVersions:
+          - !<!ApiVersion> 
+            version: V3.0-Preview.1
+          properties:
+          - !<!Property> 
+            schema: !<!StringSchema> &ref_64
+              type: string
+              apiVersions:
+              - !<!ApiVersion> 
+                version: V3.0-Preview.1
+              language: !<!Languages> 
+                default:
+                  name: DocumentEntities-id
+                  description: 'Unique, non-empty document identifier.'
+              protocol: !<!Protocols> {}
+            required: true
+            serializedName: id
+            language: !<!Languages> 
+              default:
+                name: id
+                description: 'Unique, non-empty document identifier.'
+            protocol: !<!Protocols> {}
+          - !<!Property> 
+            schema: !<!ArraySchema> &ref_24
+              type: array
+              apiVersions:
+              - !<!ApiVersion> 
+                version: V3.0-Preview.1
+              elementType: !<!ObjectSchema> &ref_2
+                type: object
+                apiVersions:
+                - !<!ApiVersion> 
+                  version: V3.0-Preview.1
+                properties:
+                - !<!Property> 
+                  schema: !<!StringSchema> &ref_65
+                    type: string
+                    apiVersions:
+                    - !<!ApiVersion> 
+                      version: V3.0-Preview.1
+                    language: !<!Languages> 
+                      default:
+                        name: Entity-text
+                        description: Entity text as appears in the request.
+                    protocol: !<!Protocols> {}
+                  required: true
+                  serializedName: text
+                  language: !<!Languages> 
+                    default:
+                      name: text
+                      description: Entity text as appears in the request.
+                  protocol: !<!Protocols> {}
+                - !<!Property> 
+                  schema: !<!StringSchema> &ref_66
+                    type: string
+                    apiVersions:
+                    - !<!ApiVersion> 
+                      version: V3.0-Preview.1
+                    language: !<!Languages> 
+                      default:
+                        name: Entity-type
+                        description: 'Entity type, such as Person/Location/Org/SSN etc'
+                    protocol: !<!Protocols> {}
+                  required: true
+                  serializedName: type
+                  language: !<!Languages> 
+                    default:
+                      name: type
+                      description: 'Entity type, such as Person/Location/Org/SSN etc'
+                  protocol: !<!Protocols> {}
+                - !<!Property> 
+                  schema: !<!StringSchema> &ref_67
+                    type: string
+                    apiVersions:
+                    - !<!ApiVersion> 
+                      version: V3.0-Preview.1
+                    language: !<!Languages> 
+                      default:
+                        name: Entity-subType
+                        description: 'Entity sub type, such as Age/Year/TimeRange etc'
+                    protocol: !<!Protocols> {}
+                  required: false
+                  serializedName: subType
+                  language: !<!Languages> 
+                    default:
+                      name: subType
+                      description: 'Entity sub type, such as Age/Year/TimeRange etc'
+                  protocol: !<!Protocols> {}
+                - !<!Property> 
+                  schema: !<!NumberSchema> &ref_43
+                    type: integer
+                    precision: 32
+                    language: !<!Languages> 
+                      default:
+                        name: typeForoffset
+                        description: Start position (in Unicode characters) for the entity text.
+                    protocol: !<!Protocols> {}
+                  required: true
+                  serializedName: offset
+                  language: !<!Languages> 
+                    default:
+                      name: offset
+                      description: Start position (in Unicode characters) for the entity text.
+                  protocol: !<!Protocols> {}
+                - !<!Property> 
+                  schema: !<!NumberSchema> &ref_44
+                    type: integer
+                    precision: 32
+                    language: !<!Languages> 
+                      default:
+                        name: typeForlength
+                        description: Length (in Unicode characters) for the entity text.
+                    protocol: !<!Protocols> {}
+                  required: true
+                  serializedName: length
+                  language: !<!Languages> 
+                    default:
+                      name: length
+                      description: Length (in Unicode characters) for the entity text.
+                  protocol: !<!Protocols> {}
+                - !<!Property> 
+                  schema: !<!NumberSchema> &ref_45
+                    type: number
+                    precision: 64
+                    language: !<!Languages> 
+                      default:
+                        name: typeForscore
+                        description: Confidence score between 0 and 1 of the extracted entity.
+                    protocol: !<!Protocols> {}
+                  required: true
+                  serializedName: score
+                  language: !<!Languages> 
+                    default:
+                      name: score
+                      description: Confidence score between 0 and 1 of the extracted entity.
+                  protocol: !<!Protocols> {}
+                language: !<!Languages> 
+                  default:
+                    name: Entity
+                    description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+                    namespace: ApiV30Preview1
+                protocol: !<!Protocols> {}
+              language: !<!Languages> 
+                default:
+                  name: DocumentEntities-entities
+                  description: Recognized entities in the document.
+              protocol: !<!Protocols> {}
+            required: true
+            serializedName: entities
+            language: !<!Languages> 
+              default:
+                name: entities
+                description: Recognized entities in the document.
+            protocol: !<!Protocols> {}
+          - !<!Property> 
+            schema: !<!ObjectSchema> &ref_3
+              type: object
+              apiVersions:
+              - !<!ApiVersion> 
+                version: V3.0-Preview.1
+              properties:
+              - !<!Property> 
+                schema: !<!NumberSchema> &ref_46
+                  type: integer
+                  precision: 32
+                  language: !<!Languages> 
+                    default:
+                      name: typeForcharactersCount
+                      description: Number of text elements recognized in the document.
+                  protocol: !<!Protocols> {}
+                required: true
+                serializedName: charactersCount
+                language: !<!Languages> 
+                  default:
+                    name: charactersCount
+                    description: Number of text elements recognized in the document.
+                protocol: !<!Protocols> {}
+              - !<!Property> 
+                schema: !<!NumberSchema> &ref_47
+                  type: integer
+                  precision: 32
+                  language: !<!Languages> 
+                    default:
+                      name: typeFortransactionsCount
+                      description: Number of transactions for the document.
+                  protocol: !<!Protocols> {}
+                required: true
+                serializedName: transactionsCount
+                language: !<!Languages> 
+                  default:
+                    name: transactionsCount
+                    description: Number of transactions for the document.
+                protocol: !<!Protocols> {}
+              language: !<!Languages> 
+                default:
+                  name: DocumentStatistics
+                  description: if showStats=true was specified in the request this field will contain information about the document payload.
+                  namespace: ApiV30Preview1
+              protocol: !<!Protocols> {}
+            required: false
+            serializedName: statistics
+            language: !<!Languages> 
+              default:
+                name: statistics
+                description: if showStats=true was specified in the request this field will contain information about the document payload.
+            protocol: !<!Protocols> {}
+          language: !<!Languages> 
+            default:
+              name: DocumentEntities
+              description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+              namespace: ApiV30Preview1
+          protocol: !<!Protocols> {}
+        language: !<!Languages> 
+          default:
+            name: EntitiesResult-documents
+            description: Response by document
+        protocol: !<!Protocols> {}
+      required: true
+      serializedName: documents
+      language: !<!Languages> 
+        default:
+          name: documents
+          description: Response by document
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: !<!ArraySchema> &ref_26
+        type: array
+        apiVersions:
+        - !<!ApiVersion> 
+          version: V3.0-Preview.1
+        elementType: !<!ObjectSchema> &ref_4
+          type: object
+          apiVersions:
+          - !<!ApiVersion> 
+            version: V3.0-Preview.1
+          properties:
+          - !<!Property> 
+            schema: !<!StringSchema> &ref_68
+              type: string
+              apiVersions:
+              - !<!ApiVersion> 
+                version: V3.0-Preview.1
+              language: !<!Languages> 
+                default:
+                  name: DocumentError-id
+                  description: Document Id.
+              protocol: !<!Protocols> {}
+            required: true
+            serializedName: id
+            language: !<!Languages> 
+              default:
+                name: id
+                description: Document Id.
+            protocol: !<!Protocols> {}
+          - !<!Property> 
+            schema: !<!ObjectSchema> &ref_5
+              type: object
+              apiVersions:
+              - !<!ApiVersion> 
+                version: V3.0-Preview.1
+              language: !<!Languages> 
+                default:
+                  name: DocumentError-error
+                  description: Document Error.
+                  namespace: ApiV30Preview1
+              protocol: !<!Protocols> {}
+            required: true
+            serializedName: error
+            language: !<!Languages> 
+              default:
+                name: error
+                description: Document Error.
+            protocol: !<!Protocols> {}
+          language: !<!Languages> 
+            default:
+              name: DocumentError
+              description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+              namespace: ApiV30Preview1
+          protocol: !<!Protocols> {}
+        language: !<!Languages> 
+          default:
+            name: EntitiesResult-errors
+            description: Errors by document id.
+        protocol: !<!Protocols> {}
+      required: true
+      serializedName: errors
+      language: !<!Languages> 
+        default:
+          name: errors
+          description: Errors by document id.
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: !<!ObjectSchema> &ref_6
+        type: object
+        apiVersions:
+        - !<!ApiVersion> 
+          version: V3.0-Preview.1
+        properties:
+        - !<!Property> 
+          schema: !<!NumberSchema> &ref_48
+            type: integer
+            precision: 32
+            language: !<!Languages> 
+              default:
+                name: typeFordocumentsCount
+                description: Number of documents submitted in the request.
+            protocol: !<!Protocols> {}
+          required: true
+          serializedName: documentsCount
+          language: !<!Languages> 
+            default:
+              name: documentsCount
+              description: Number of documents submitted in the request.
+          protocol: !<!Protocols> {}
+        - !<!Property> 
+          schema: !<!NumberSchema> &ref_49
+            type: integer
+            precision: 32
+            language: !<!Languages> 
+              default:
+                name: typeForvalidDocumentsCount
+                description: 'Number of valid documents. This excludes empty, over-size limit or non-supported languages documents.'
+            protocol: !<!Protocols> {}
+          required: true
+          serializedName: validDocumentsCount
+          language: !<!Languages> 
+            default:
+              name: validDocumentsCount
+              description: 'Number of valid documents. This excludes empty, over-size limit or non-supported languages documents.'
+          protocol: !<!Protocols> {}
+        - !<!Property> 
+          schema: !<!NumberSchema> &ref_50
+            type: integer
+            precision: 32
+            language: !<!Languages> 
+              default:
+                name: typeForerroneousDocumentsCount
+                description: 'Number of invalid documents. This includes empty, over-size limit or non-supported languages documents.'
+            protocol: !<!Protocols> {}
+          required: true
+          serializedName: erroneousDocumentsCount
+          language: !<!Languages> 
+            default:
+              name: erroneousDocumentsCount
+              description: 'Number of invalid documents. This includes empty, over-size limit or non-supported languages documents.'
+          protocol: !<!Protocols> {}
+        - !<!Property> 
+          schema: !<!NumberSchema> &ref_51
+            type: integer
+            precision: 64
+            language: !<!Languages> 
+              default:
+                name: typeFortransactionsCount
+                description: Number of transactions for the request.
+            protocol: !<!Protocols> {}
+          required: true
+          serializedName: transactionsCount
+          language: !<!Languages> 
+            default:
+              name: transactionsCount
+              description: Number of transactions for the request.
+          protocol: !<!Protocols> {}
+        language: !<!Languages> 
+          default:
+            name: RequestStatistics
+            description: if showStats=true was specified in the request this field will contain information about the request payload.
+            namespace: ApiV30Preview1
+        protocol: !<!Protocols> {}
+      required: false
+      serializedName: statistics
+      language: !<!Languages> 
+        default:
+          name: statistics
+          description: if showStats=true was specified in the request this field will contain information about the request payload.
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: !<!StringSchema> &ref_69
+        type: string
+        apiVersions:
+        - !<!ApiVersion> 
+          version: V3.0-Preview.1
+        language: !<!Languages> 
+          default:
+            name: EntitiesResult-modelVersion
+            description: This field indicates which model is used for scoring.
+        protocol: !<!Protocols> {}
+      required: true
+      serializedName: modelVersion
+      language: !<!Languages> 
+        default:
+          name: modelVersion
+          description: This field indicates which model is used for scoring.
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: EntitiesResult
+        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        namespace: ApiV30Preview1
+    protocol: !<!Protocols> {}
+  - *ref_1
+  - *ref_2
+  - *ref_3
+  - *ref_4
+  - *ref_5
+  - *ref_6
+  - !<!ObjectSchema> &ref_9
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: V3.0-Preview.1
+    properties:
+    - !<!Property> 
+      schema: !<!ChoiceSchema> &ref_19
+        choices:
+        - !<!ChoiceValue> 
+          value: invalidRequest
+          language:
+            default:
+              name: invalidRequest
+              description: ''
+        - !<!ChoiceValue> 
+          value: invalidArgument
+          language:
+            default:
+              name: invalidArgument
+              description: ''
+        - !<!ChoiceValue> 
+          value: internalServerError
+          language:
+            default:
+              name: internalServerError
+              description: ''
+        - !<!ChoiceValue> 
+          value: serviceUnavailable
+          language:
+            default:
+              name: serviceUnavailable
+              description: ''
+        type: choice
+        apiVersions:
+        - !<!ApiVersion> 
+          version: V3.0-Preview.1
+        choiceType: !<!StringSchema> &ref_7
+          type: string
+          language: !<!Languages> 
+            default:
+              name: string
+              description: simple string
+          protocol: !<!Protocols> {}
+        language: !<!Languages> 
+          default:
+            name: Error-code
+            description: Error code.
+        protocol: !<!Protocols> {}
+      required: true
+      serializedName: code
+      language: !<!Languages> 
+        default:
+          name: code
+          description: Error code.
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: !<!StringSchema> &ref_70
+        type: string
+        apiVersions:
+        - !<!ApiVersion> 
+          version: V3.0-Preview.1
+        language: !<!Languages> 
+          default:
+            name: Error-message
+            description: Error message.
+        protocol: !<!Protocols> {}
+      required: true
+      serializedName: message
+      language: !<!Languages> 
+        default:
+          name: message
+          description: Error message.
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: !<!StringSchema> &ref_71
+        type: string
+        apiVersions:
+        - !<!ApiVersion> 
+          version: V3.0-Preview.1
+        language: !<!Languages> 
+          default:
+            name: Error-target
+            description: Error target.
+        protocol: !<!Protocols> {}
+      required: false
+      serializedName: target
+      language: !<!Languages> 
+        default:
+          name: target
+          description: Error target.
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: !<!ObjectSchema> &ref_8
+        type: object
+        apiVersions:
+        - !<!ApiVersion> 
+          version: V3.0-Preview.1
+        properties:
+        - !<!Property> 
+          schema: !<!ChoiceSchema> &ref_20
+            choices:
+            - !<!ChoiceValue> 
+              value: invalidParameterValue
+              language:
+                default:
+                  name: invalidParameterValue
+                  description: ''
+            - !<!ChoiceValue> 
+              value: invalidRequestBodyFormat
+              language:
+                default:
+                  name: invalidRequestBodyFormat
+                  description: ''
+            - !<!ChoiceValue> 
+              value: emptyRequest
+              language:
+                default:
+                  name: emptyRequest
+                  description: ''
+            - !<!ChoiceValue> 
+              value: missingInputRecords
+              language:
+                default:
+                  name: missingInputRecords
+                  description: ''
+            - !<!ChoiceValue> 
+              value: invalidDocument
+              language:
+                default:
+                  name: invalidDocument
+                  description: ''
+            - !<!ChoiceValue> 
+              value: modelVersionIncorrect
+              language:
+                default:
+                  name: modelVersionIncorrect
+                  description: ''
+            - !<!ChoiceValue> 
+              value: invalidDocumentBatch
+              language:
+                default:
+                  name: invalidDocumentBatch
+                  description: ''
+            - !<!ChoiceValue> 
+              value: unsupportedLanguageCode
+              language:
+                default:
+                  name: unsupportedLanguageCode
+                  description: ''
+            - !<!ChoiceValue> 
+              value: invalidCountryHint
+              language:
+                default:
+                  name: invalidCountryHint
+                  description: ''
+            type: choice
+            apiVersions:
+            - !<!ApiVersion> 
+              version: V3.0-Preview.1
+            choiceType: *ref_7
+            language: !<!Languages> 
+              default:
+                name: InnerError-code
+                description: Error code.
+            protocol: !<!Protocols> {}
+          required: true
+          serializedName: code
+          language: !<!Languages> 
+            default:
+              name: code
+              description: Error code.
+          protocol: !<!Protocols> {}
+        - !<!Property> 
+          schema: !<!StringSchema> &ref_72
+            type: string
+            apiVersions:
+            - !<!ApiVersion> 
+              version: V3.0-Preview.1
+            language: !<!Languages> 
+              default:
+                name: InnerError-message
+                description: Error message.
+            protocol: !<!Protocols> {}
+          required: true
+          serializedName: message
+          language: !<!Languages> 
+            default:
+              name: message
+              description: Error message.
+          protocol: !<!Protocols> {}
+        - !<!Property> 
+          schema: !<!StringSchema> &ref_73
+            type: string
+            apiVersions:
+            - !<!ApiVersion> 
+              version: V3.0-Preview.1
+            language: !<!Languages> 
+              default:
+                name: InnerError-target
+                description: Error target.
+            protocol: !<!Protocols> {}
+          required: false
+          serializedName: target
+          language: !<!Languages> 
+            default:
+              name: target
+              description: Error target.
+          protocol: !<!Protocols> {}
+        - !<!Property> 
+          schema: *ref_8
+          required: false
+          serializedName: innererror
+          language: !<!Languages> 
+            default:
+              name: innererror
+              description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+          protocol: !<!Protocols> {}
+        language: !<!Languages> 
+          default:
+            name: InnerError
+            description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+            namespace: ApiV30Preview1
+        protocol: !<!Protocols> {}
+      required: false
+      serializedName: innererror
+      language: !<!Languages> 
+        default:
+          name: innererror
+          description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: !<!ArraySchema> &ref_27
+        type: array
+        apiVersions:
+        - !<!ApiVersion> 
+          version: V3.0-Preview.1
+        elementType: *ref_9
+        language: !<!Languages> 
+          default:
+            name: Error-details
+            description: Details about specific errors that led to this reported error.
+        protocol: !<!Protocols> {}
+      required: false
+      serializedName: details
+      language: !<!Languages> 
+        default:
+          name: details
+          description: Details about specific errors that led to this reported error.
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: Error
+        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        namespace: ApiV30Preview1
+    protocol: !<!Protocols> {}
+  - *ref_8
+  - !<!ObjectSchema> &ref_100
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: V3.0-Preview.1
+    properties:
+    - !<!Property> 
+      schema: !<!ArraySchema> &ref_30
+        type: array
+        apiVersions:
+        - !<!ApiVersion> 
+          version: V3.0-Preview.1
+        elementType: !<!ObjectSchema> &ref_10
+          type: object
+          apiVersions:
+          - !<!ApiVersion> 
+            version: V3.0-Preview.1
+          properties:
+          - !<!Property> 
+            schema: !<!StringSchema> &ref_74
+              type: string
+              apiVersions:
+              - !<!ApiVersion> 
+                version: V3.0-Preview.1
+              language: !<!Languages> 
+                default:
+                  name: DocumentLinkedEntities-id
+                  description: 'Unique, non-empty document identifier.'
+              protocol: !<!Protocols> {}
+            required: true
+            serializedName: id
+            language: !<!Languages> 
+              default:
+                name: id
+                description: 'Unique, non-empty document identifier.'
+            protocol: !<!Protocols> {}
+          - !<!Property> 
+            schema: !<!ArraySchema> &ref_29
+              type: array
+              apiVersions:
+              - !<!ApiVersion> 
+                version: V3.0-Preview.1
+              elementType: !<!ObjectSchema> &ref_11
+                type: object
+                apiVersions:
+                - !<!ApiVersion> 
+                  version: V3.0-Preview.1
+                properties:
+                - !<!Property> 
+                  schema: !<!StringSchema> &ref_75
+                    type: string
+                    apiVersions:
+                    - !<!ApiVersion> 
+                      version: V3.0-Preview.1
+                    language: !<!Languages> 
+                      default:
+                        name: LinkedEntity-name
+                        description: Entity Linking formal name.
+                    protocol: !<!Protocols> {}
+                  required: true
+                  serializedName: name
+                  language: !<!Languages> 
+                    default:
+                      name: name
+                      description: Entity Linking formal name.
+                  protocol: !<!Protocols> {}
+                - !<!Property> 
+                  schema: !<!ArraySchema> &ref_28
+                    type: array
+                    apiVersions:
+                    - !<!ApiVersion> 
+                      version: V3.0-Preview.1
+                    elementType: !<!ObjectSchema> &ref_12
+                      type: object
+                      apiVersions:
+                      - !<!ApiVersion> 
+                        version: V3.0-Preview.1
+                      properties:
+                      - !<!Property> 
+                        schema: !<!NumberSchema> &ref_52
+                          type: number
+                          precision: 64
+                          language: !<!Languages> 
+                            default:
+                              name: typeForscore
+                              description: 'If a well-known item is recognized, a decimal number denoting the confidence level between 0 and 1 will be returned.'
+                          protocol: !<!Protocols> {}
+                        required: true
+                        serializedName: score
+                        language: !<!Languages> 
+                          default:
+                            name: score
+                            description: 'If a well-known item is recognized, a decimal number denoting the confidence level between 0 and 1 will be returned.'
+                        protocol: !<!Protocols> {}
+                      - !<!Property> 
+                        schema: !<!StringSchema> &ref_76
+                          type: string
+                          apiVersions:
+                          - !<!ApiVersion> 
+                            version: V3.0-Preview.1
+                          language: !<!Languages> 
+                            default:
+                              name: Match-text
+                              description: Entity text as appears in the request.
+                          protocol: !<!Protocols> {}
+                        required: true
+                        serializedName: text
+                        language: !<!Languages> 
+                          default:
+                            name: text
+                            description: Entity text as appears in the request.
+                        protocol: !<!Protocols> {}
+                      - !<!Property> 
+                        schema: !<!NumberSchema> &ref_53
+                          type: integer
+                          precision: 32
+                          language: !<!Languages> 
+                            default:
+                              name: typeForoffset
+                              description: Start position (in Unicode characters) for the entity match text.
+                          protocol: !<!Protocols> {}
+                        required: true
+                        serializedName: offset
+                        language: !<!Languages> 
+                          default:
+                            name: offset
+                            description: Start position (in Unicode characters) for the entity match text.
+                        protocol: !<!Protocols> {}
+                      - !<!Property> 
+                        schema: !<!NumberSchema> &ref_54
+                          type: integer
+                          precision: 32
+                          language: !<!Languages> 
+                            default:
+                              name: typeForlength
+                              description: Length (in Unicode characters) for the entity match text.
+                          protocol: !<!Protocols> {}
+                        required: true
+                        serializedName: length
+                        language: !<!Languages> 
+                          default:
+                            name: length
+                            description: Length (in Unicode characters) for the entity match text.
+                        protocol: !<!Protocols> {}
+                      language: !<!Languages> 
+                        default:
+                          name: Match
+                          description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+                          namespace: ApiV30Preview1
+                      protocol: !<!Protocols> {}
+                    language: !<!Languages> 
+                      default:
+                        name: LinkedEntity-matches
+                        description: List of instances this entity appears in the text.
+                    protocol: !<!Protocols> {}
+                  required: true
+                  serializedName: matches
+                  language: !<!Languages> 
+                    default:
+                      name: matches
+                      description: List of instances this entity appears in the text.
+                  protocol: !<!Protocols> {}
+                - !<!Property> 
+                  schema: !<!StringSchema> &ref_77
+                    type: string
+                    apiVersions:
+                    - !<!ApiVersion> 
+                      version: V3.0-Preview.1
+                    language: !<!Languages> 
+                      default:
+                        name: LinkedEntity-language
+                        description: Language used in the data source.
+                    protocol: !<!Protocols> {}
+                  required: true
+                  serializedName: language
+                  language: !<!Languages> 
+                    default:
+                      name: language
+                      description: Language used in the data source.
+                  protocol: !<!Protocols> {}
+                - !<!Property> 
+                  schema: !<!StringSchema> &ref_78
+                    type: string
+                    apiVersions:
+                    - !<!ApiVersion> 
+                      version: V3.0-Preview.1
+                    language: !<!Languages> 
+                      default:
+                        name: LinkedEntity-id
+                        description: Unique identifier of the recognized entity from the data source.
+                    protocol: !<!Protocols> {}
+                  required: false
+                  serializedName: id
+                  language: !<!Languages> 
+                    default:
+                      name: id
+                      description: Unique identifier of the recognized entity from the data source.
+                  protocol: !<!Protocols> {}
+                - !<!Property> 
+                  schema: !<!StringSchema> &ref_79
+                    type: string
+                    apiVersions:
+                    - !<!ApiVersion> 
+                      version: V3.0-Preview.1
+                    language: !<!Languages> 
+                      default:
+                        name: LinkedEntity-url
+                        description: URL for the entity's page from the data source.
+                    protocol: !<!Protocols> {}
+                  required: true
+                  serializedName: url
+                  language: !<!Languages> 
+                    default:
+                      name: url
+                      description: URL for the entity's page from the data source.
+                  protocol: !<!Protocols> {}
+                - !<!Property> 
+                  schema: !<!StringSchema> &ref_80
+                    type: string
+                    apiVersions:
+                    - !<!ApiVersion> 
+                      version: V3.0-Preview.1
+                    language: !<!Languages> 
+                      default:
+                        name: LinkedEntity-dataSource
+                        description: 'Data source used to extract entity linking, such as Wiki/Bing etc.'
+                    protocol: !<!Protocols> {}
+                  required: true
+                  serializedName: dataSource
+                  language: !<!Languages> 
+                    default:
+                      name: dataSource
+                      description: 'Data source used to extract entity linking, such as Wiki/Bing etc.'
+                  protocol: !<!Protocols> {}
+                language: !<!Languages> 
+                  default:
+                    name: LinkedEntity
+                    description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+                    namespace: ApiV30Preview1
+                protocol: !<!Protocols> {}
+              language: !<!Languages> 
+                default:
+                  name: DocumentLinkedEntities-entities
+                  description: Recognized well-known entities in the document.
+              protocol: !<!Protocols> {}
+            required: true
+            serializedName: entities
+            language: !<!Languages> 
+              default:
+                name: entities
+                description: Recognized well-known entities in the document.
+            protocol: !<!Protocols> {}
+          - !<!Property> 
+            schema: *ref_3
+            required: false
+            serializedName: statistics
+            language: !<!Languages> 
+              default:
+                name: statistics
+                description: if showStats=true was specified in the request this field will contain information about the document payload.
+            protocol: !<!Protocols> {}
+          language: !<!Languages> 
+            default:
+              name: DocumentLinkedEntities
+              description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+              namespace: ApiV30Preview1
+          protocol: !<!Protocols> {}
+        language: !<!Languages> 
+          default:
+            name: EntityLinkingResult-documents
+            description: Response by document
+        protocol: !<!Protocols> {}
+      required: true
+      serializedName: documents
+      language: !<!Languages> 
+        default:
+          name: documents
+          description: Response by document
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: !<!ArraySchema> &ref_31
+        type: array
+        apiVersions:
+        - !<!ApiVersion> 
+          version: V3.0-Preview.1
+        elementType: *ref_4
+        language: !<!Languages> 
+          default:
+            name: EntityLinkingResult-errors
+            description: Errors by document id.
+        protocol: !<!Protocols> {}
+      required: true
+      serializedName: errors
+      language: !<!Languages> 
+        default:
+          name: errors
+          description: Errors by document id.
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: *ref_6
+      required: false
+      serializedName: statistics
+      language: !<!Languages> 
+        default:
+          name: statistics
+          description: if showStats=true was specified in the request this field will contain information about the request payload.
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: !<!StringSchema> &ref_81
+        type: string
+        apiVersions:
+        - !<!ApiVersion> 
+          version: V3.0-Preview.1
+        language: !<!Languages> 
+          default:
+            name: EntityLinkingResult-modelVersion
+            description: This field indicates which model is used for scoring.
+        protocol: !<!Protocols> {}
+      required: true
+      serializedName: modelVersion
+      language: !<!Languages> 
+        default:
+          name: modelVersion
+          description: This field indicates which model is used for scoring.
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: EntityLinkingResult
+        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        namespace: ApiV30Preview1
+    protocol: !<!Protocols> {}
+  - *ref_10
+  - *ref_11
+  - *ref_12
+  - !<!ObjectSchema> &ref_101
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: V3.0-Preview.1
+    properties:
+    - !<!Property> 
+      schema: !<!ArraySchema> &ref_33
+        type: array
+        apiVersions:
+        - !<!ApiVersion> 
+          version: V3.0-Preview.1
+        elementType: !<!ObjectSchema> &ref_13
+          type: object
+          apiVersions:
+          - !<!ApiVersion> 
+            version: V3.0-Preview.1
+          properties:
+          - !<!Property> 
+            schema: !<!StringSchema> &ref_82
+              type: string
+              apiVersions:
+              - !<!ApiVersion> 
+                version: V3.0-Preview.1
+              language: !<!Languages> 
+                default:
+                  name: DocumentKeyPhrases-id
+                  description: 'Unique, non-empty document identifier.'
+              protocol: !<!Protocols> {}
+            required: true
+            serializedName: id
+            language: !<!Languages> 
+              default:
+                name: id
+                description: 'Unique, non-empty document identifier.'
+            protocol: !<!Protocols> {}
+          - !<!Property> 
+            schema: !<!ArraySchema> &ref_32
+              type: array
+              apiVersions:
+              - !<!ApiVersion> 
+                version: V3.0-Preview.1
+              elementType: !<!StringSchema> &ref_83
+                type: string
+                apiVersions:
+                - !<!ApiVersion> 
+                  version: V3.0-Preview.1
+                language: !<!Languages> 
+                  default:
+                    name: DocumentKeyPhrases-keyPhrasesItem
+                    description: MISSING·SCHEMA-DESCRIPTION-STRING
+                protocol: !<!Protocols> {}
+              language: !<!Languages> 
+                default:
+                  name: DocumentKeyPhrases-keyPhrases
+                  description: A list of representative words or phrases. The number of key phrases returned is proportional to the number of words in the input document.
+              protocol: !<!Protocols> {}
+            required: true
+            serializedName: keyPhrases
+            language: !<!Languages> 
+              default:
+                name: keyPhrases
+                description: A list of representative words or phrases. The number of key phrases returned is proportional to the number of words in the input document.
+            protocol: !<!Protocols> {}
+          - !<!Property> 
+            schema: *ref_3
+            required: false
+            serializedName: statistics
+            language: !<!Languages> 
+              default:
+                name: statistics
+                description: if showStats=true was specified in the request this field will contain information about the document payload.
+            protocol: !<!Protocols> {}
+          language: !<!Languages> 
+            default:
+              name: DocumentKeyPhrases
+              description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+              namespace: ApiV30Preview1
+          protocol: !<!Protocols> {}
+        language: !<!Languages> 
+          default:
+            name: KeyPhraseResult-documents
+            description: Response by document
+        protocol: !<!Protocols> {}
+      required: true
+      serializedName: documents
+      language: !<!Languages> 
+        default:
+          name: documents
+          description: Response by document
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: !<!ArraySchema> &ref_34
+        type: array
+        apiVersions:
+        - !<!ApiVersion> 
+          version: V3.0-Preview.1
+        elementType: *ref_4
+        language: !<!Languages> 
+          default:
+            name: KeyPhraseResult-errors
+            description: Errors by document id.
+        protocol: !<!Protocols> {}
+      required: true
+      serializedName: errors
+      language: !<!Languages> 
+        default:
+          name: errors
+          description: Errors by document id.
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: *ref_6
+      required: false
+      serializedName: statistics
+      language: !<!Languages> 
+        default:
+          name: statistics
+          description: if showStats=true was specified in the request this field will contain information about the request payload.
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: !<!StringSchema> &ref_84
+        type: string
+        apiVersions:
+        - !<!ApiVersion> 
+          version: V3.0-Preview.1
+        language: !<!Languages> 
+          default:
+            name: KeyPhraseResult-modelVersion
+            description: This field indicates which model is used for scoring.
+        protocol: !<!Protocols> {}
+      required: true
+      serializedName: modelVersion
+      language: !<!Languages> 
+        default:
+          name: modelVersion
+          description: This field indicates which model is used for scoring.
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: KeyPhraseResult
+        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        namespace: ApiV30Preview1
+    protocol: !<!Protocols> {}
+  - *ref_13
+  - !<!ObjectSchema> &ref_102
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: V3.0-Preview.1
+    properties:
+    - !<!Property> 
+      schema: !<!ArraySchema> &ref_35
+        type: array
+        apiVersions:
+        - !<!ApiVersion> 
+          version: V3.0-Preview.1
+        elementType: !<!ObjectSchema> &ref_14
+          type: object
+          apiVersions:
+          - !<!ApiVersion> 
+            version: V3.0-Preview.1
+          properties:
+          - !<!Property> 
+            schema: !<!StringSchema> &ref_85
+              type: string
+              apiVersions:
+              - !<!ApiVersion> 
+                version: V3.0-Preview.1
+              language: !<!Languages> 
+                default:
+                  name: LanguageInput-id
+                  description: 'Unique, non-empty document identifier.'
+              protocol: !<!Protocols> {}
+            required: true
+            serializedName: id
+            language: !<!Languages> 
+              default:
+                name: id
+                description: 'Unique, non-empty document identifier.'
+            protocol: !<!Protocols> {}
+          - !<!Property> 
+            schema: !<!StringSchema> &ref_86
+              type: string
+              apiVersions:
+              - !<!ApiVersion> 
+                version: V3.0-Preview.1
+              language: !<!Languages> 
+                default:
+                  name: LanguageInput-text
+                  description: MISSING·SCHEMA-DESCRIPTION-STRING
+              protocol: !<!Protocols> {}
+            required: true
+            serializedName: text
+            language: !<!Languages> 
+              default:
+                name: text
+                description: MISSING·SCHEMA-DESCRIPTION-STRING
+            protocol: !<!Protocols> {}
+          - !<!Property> 
+            schema: !<!StringSchema> &ref_87
+              type: string
+              apiVersions:
+              - !<!ApiVersion> 
+                version: V3.0-Preview.1
+              language: !<!Languages> 
+                default:
+                  name: LanguageInput-countryHint
+                  description: MISSING·SCHEMA-DESCRIPTION-STRING
+              protocol: !<!Protocols> {}
+            required: false
+            serializedName: countryHint
+            language: !<!Languages> 
+              default:
+                name: countryHint
+                description: MISSING·SCHEMA-DESCRIPTION-STRING
+            protocol: !<!Protocols> {}
+          language: !<!Languages> 
+            default:
+              name: LanguageInput
+              description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+              namespace: ApiV30Preview1
+          protocol: !<!Protocols> {}
+        language: !<!Languages> 
+          default:
+            name: LanguageBatchInput-documents
+            description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+        protocol: !<!Protocols> {}
+      required: true
+      serializedName: documents
+      language: !<!Languages> 
+        default:
+          name: documents
+          description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: LanguageBatchInput
+        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        namespace: ApiV30Preview1
+    protocol: !<!Protocols> {}
+  - *ref_14
+  - !<!ObjectSchema> &ref_103
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: V3.0-Preview.1
+    properties:
+    - !<!Property> 
+      schema: !<!ArraySchema> &ref_37
+        type: array
+        apiVersions:
+        - !<!ApiVersion> 
+          version: V3.0-Preview.1
+        elementType: !<!ObjectSchema> &ref_15
+          type: object
+          apiVersions:
+          - !<!ApiVersion> 
+            version: V3.0-Preview.1
+          properties:
+          - !<!Property> 
+            schema: !<!StringSchema> &ref_88
+              type: string
+              apiVersions:
+              - !<!ApiVersion> 
+                version: V3.0-Preview.1
+              language: !<!Languages> 
+                default:
+                  name: DocumentLanguage-id
+                  description: 'Unique, non-empty document identifier.'
+              protocol: !<!Protocols> {}
+            required: true
+            serializedName: id
+            language: !<!Languages> 
+              default:
+                name: id
+                description: 'Unique, non-empty document identifier.'
+            protocol: !<!Protocols> {}
+          - !<!Property> 
+            schema: !<!ArraySchema> &ref_36
+              type: array
+              apiVersions:
+              - !<!ApiVersion> 
+                version: V3.0-Preview.1
+              elementType: !<!ObjectSchema> &ref_16
+                type: object
+                apiVersions:
+                - !<!ApiVersion> 
+                  version: V3.0-Preview.1
+                properties:
+                - !<!Property> 
+                  schema: !<!StringSchema> &ref_89
+                    type: string
+                    apiVersions:
+                    - !<!ApiVersion> 
+                      version: V3.0-Preview.1
+                    language: !<!Languages> 
+                      default:
+                        name: DetectedLanguage-name
+                        description: 'Long name of a detected language (e.g. English, French).'
+                    protocol: !<!Protocols> {}
+                  required: true
+                  serializedName: name
+                  language: !<!Languages> 
+                    default:
+                      name: name
+                      description: 'Long name of a detected language (e.g. English, French).'
+                  protocol: !<!Protocols> {}
+                - !<!Property> 
+                  schema: !<!StringSchema> &ref_90
+                    type: string
+                    apiVersions:
+                    - !<!ApiVersion> 
+                      version: V3.0-Preview.1
+                    language: !<!Languages> 
+                      default:
+                        name: DetectedLanguage-iso6391Name
+                        description: 'A two letter representation of the detected language according to the ISO 639-1 standard (e.g. en, fr).'
+                    protocol: !<!Protocols> {}
+                  required: true
+                  serializedName: iso6391Name
+                  language: !<!Languages> 
+                    default:
+                      name: iso6391Name
+                      description: 'A two letter representation of the detected language according to the ISO 639-1 standard (e.g. en, fr).'
+                  protocol: !<!Protocols> {}
+                - !<!Property> 
+                  schema: !<!NumberSchema> &ref_55
+                    type: number
+                    precision: 64
+                    language: !<!Languages> 
+                      default:
+                        name: typeForscore
+                        description: A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true.
+                    protocol: !<!Protocols> {}
+                  required: true
+                  serializedName: score
+                  language: !<!Languages> 
+                    default:
+                      name: score
+                      description: A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true.
+                  protocol: !<!Protocols> {}
+                language: !<!Languages> 
+                  default:
+                    name: DetectedLanguage
+                    description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+                    namespace: ApiV30Preview1
+                protocol: !<!Protocols> {}
+              language: !<!Languages> 
+                default:
+                  name: DocumentLanguage-detectedLanguages
+                  description: A list of extracted languages.
+              protocol: !<!Protocols> {}
+            required: true
+            serializedName: detectedLanguages
+            language: !<!Languages> 
+              default:
+                name: detectedLanguages
+                description: A list of extracted languages.
+            protocol: !<!Protocols> {}
+          - !<!Property> 
+            schema: *ref_3
+            required: false
+            serializedName: statistics
+            language: !<!Languages> 
+              default:
+                name: statistics
+                description: if showStats=true was specified in the request this field will contain information about the document payload.
+            protocol: !<!Protocols> {}
+          language: !<!Languages> 
+            default:
+              name: DocumentLanguage
+              description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+              namespace: ApiV30Preview1
+          protocol: !<!Protocols> {}
+        language: !<!Languages> 
+          default:
+            name: LanguageResult-documents
+            description: Response by document
+        protocol: !<!Protocols> {}
+      required: true
+      serializedName: documents
+      language: !<!Languages> 
+        default:
+          name: documents
+          description: Response by document
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: !<!ArraySchema> &ref_38
+        type: array
+        apiVersions:
+        - !<!ApiVersion> 
+          version: V3.0-Preview.1
+        elementType: *ref_4
+        language: !<!Languages> 
+          default:
+            name: LanguageResult-errors
+            description: Errors by document id.
+        protocol: !<!Protocols> {}
+      required: true
+      serializedName: errors
+      language: !<!Languages> 
+        default:
+          name: errors
+          description: Errors by document id.
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: *ref_6
+      required: false
+      serializedName: statistics
+      language: !<!Languages> 
+        default:
+          name: statistics
+          description: if showStats=true was specified in the request this field will contain information about the request payload.
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: !<!StringSchema> &ref_91
+        type: string
+        apiVersions:
+        - !<!ApiVersion> 
+          version: V3.0-Preview.1
+        language: !<!Languages> 
+          default:
+            name: LanguageResult-modelVersion
+            description: This field indicates which model is used for scoring.
+        protocol: !<!Protocols> {}
+      required: true
+      serializedName: modelVersion
+      language: !<!Languages> 
+        default:
+          name: modelVersion
+          description: This field indicates which model is used for scoring.
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: LanguageResult
+        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        namespace: ApiV30Preview1
+    protocol: !<!Protocols> {}
+  - *ref_15
+  - *ref_16
+  - !<!ObjectSchema> &ref_104
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: V3.0-Preview.1
+    properties:
+    - !<!Property> 
+      schema: !<!ArraySchema> &ref_41
+        type: array
+        apiVersions:
+        - !<!ApiVersion> 
+          version: V3.0-Preview.1
+        elementType: !<!ObjectSchema> &ref_17
+          type: object
+          apiVersions:
+          - !<!ApiVersion> 
+            version: V3.0-Preview.1
+          properties:
+          - !<!Property> 
+            schema: !<!StringSchema> &ref_92
+              type: string
+              apiVersions:
+              - !<!ApiVersion> 
+                version: V3.0-Preview.1
+              language: !<!Languages> 
+                default:
+                  name: DocumentSentiment-id
+                  description: 'Unique, non-empty document identifier.'
+              protocol: !<!Protocols> {}
+            required: true
+            serializedName: id
+            language: !<!Languages> 
+              default:
+                name: id
+                description: 'Unique, non-empty document identifier.'
+            protocol: !<!Protocols> {}
+          - !<!Property> 
+            schema: !<!ChoiceSchema> &ref_21
+              choices:
+              - !<!ChoiceValue> 
+                value: positive
+                language:
+                  default:
+                    name: positive
+                    description: ''
+              - !<!ChoiceValue> 
+                value: neutral
+                language:
+                  default:
+                    name: neutral
+                    description: ''
+              - !<!ChoiceValue> 
+                value: negative
+                language:
+                  default:
+                    name: negative
+                    description: ''
+              - !<!ChoiceValue> 
+                value: mixed
+                language:
+                  default:
+                    name: mixed
+                    description: ''
+              type: choice
+              apiVersions:
+              - !<!ApiVersion> 
+                version: V3.0-Preview.1
+              choiceType: *ref_7
+              language: !<!Languages> 
+                default:
+                  name: DocumentSentiment-sentiment
+                  description: 'Predicted sentiment for document (Negative, Neutral, Positive, or Mixed).'
+              protocol: !<!Protocols> {}
+            required: true
+            serializedName: sentiment
+            language: !<!Languages> 
+              default:
+                name: sentiment
+                description: 'Predicted sentiment for document (Negative, Neutral, Positive, or Mixed).'
+            protocol: !<!Protocols> {}
+          - !<!Property> 
+            schema: *ref_3
+            required: false
+            serializedName: statistics
+            language: !<!Languages> 
+              default:
+                name: statistics
+                description: if showStats=true was specified in the request this field will contain information about the document payload.
+            protocol: !<!Protocols> {}
+          - !<!Property> 
+            schema: !<!AnySchema> 
+              type: any
+              language: !<!Languages> 
+                default:
+                  name: any
+                  description: <Any object>
+              protocol: !<!Protocols> {}
+            required: true
+            serializedName: documentScores
+            language: !<!Languages> 
+              default:
+                name: documentScores
+                description: <Any object>
+            protocol: !<!Protocols> {}
+          - !<!Property> 
+            schema: !<!ArraySchema> &ref_40
+              type: array
+              apiVersions:
+              - !<!ApiVersion> 
+                version: V3.0-Preview.1
+              elementType: !<!ObjectSchema> &ref_18
+                type: object
+                apiVersions:
+                - !<!ApiVersion> 
+                  version: V3.0-Preview.1
+                properties:
+                - !<!Property> 
+                  schema: !<!ChoiceSchema> &ref_22
+                    choices:
+                    - !<!ChoiceValue> 
+                      value: positive
+                      language:
+                        default:
+                          name: positive
+                          description: ''
+                    - !<!ChoiceValue> 
+                      value: neutral
+                      language:
+                        default:
+                          name: neutral
+                          description: ''
+                    - !<!ChoiceValue> 
+                      value: negative
+                      language:
+                        default:
+                          name: negative
+                          description: ''
+                    type: choice
+                    apiVersions:
+                    - !<!ApiVersion> 
+                      version: V3.0-Preview.1
+                    choiceType: *ref_7
+                    language: !<!Languages> 
+                      default:
+                        name: SentenceSentiment-sentiment
+                        description: The predicted Sentiment for the sentence.
+                    protocol: !<!Protocols> {}
+                  required: true
+                  serializedName: sentiment
+                  language: !<!Languages> 
+                    default:
+                      name: sentiment
+                      description: The predicted Sentiment for the sentence.
+                  protocol: !<!Protocols> {}
+                - !<!Property> 
+                  schema: !<!AnySchema> 
+                    type: any
+                    language: !<!Languages> 
+                      default:
+                        name: any
+                        description: <Any object>
+                    protocol: !<!Protocols> {}
+                  required: true
+                  serializedName: sentenceScores
+                  language: !<!Languages> 
+                    default:
+                      name: sentenceScores
+                      description: <Any object>
+                  protocol: !<!Protocols> {}
+                - !<!Property> 
+                  schema: !<!NumberSchema> &ref_56
+                    type: integer
+                    precision: 32
+                    language: !<!Languages> 
+                      default:
+                        name: typeForoffset
+                        description: The sentence offset from the start of the document.
+                    protocol: !<!Protocols> {}
+                  required: true
+                  serializedName: offset
+                  language: !<!Languages> 
+                    default:
+                      name: offset
+                      description: The sentence offset from the start of the document.
+                  protocol: !<!Protocols> {}
+                - !<!Property> 
+                  schema: !<!NumberSchema> &ref_57
+                    type: integer
+                    precision: 32
+                    language: !<!Languages> 
+                      default:
+                        name: typeForlength
+                        description: The length of the sentence by Unicode standard.
+                    protocol: !<!Protocols> {}
+                  required: true
+                  serializedName: length
+                  language: !<!Languages> 
+                    default:
+                      name: length
+                      description: The length of the sentence by Unicode standard.
+                  protocol: !<!Protocols> {}
+                - !<!Property> 
+                  schema: !<!ArraySchema> &ref_39
+                    type: array
+                    apiVersions:
+                    - !<!ApiVersion> 
+                      version: V3.0-Preview.1
+                    elementType: !<!StringSchema> &ref_93
+                      type: string
+                      apiVersions:
+                      - !<!ApiVersion> 
+                        version: V3.0-Preview.1
+                      language: !<!Languages> 
+                        default:
+                          name: SentenceSentiment-warningsItem
+                          description: MISSING·SCHEMA-DESCRIPTION-STRING
+                      protocol: !<!Protocols> {}
+                    language: !<!Languages> 
+                      default:
+                        name: SentenceSentiment-warnings
+                        description: The warnings generated for the sentence.
+                    protocol: !<!Protocols> {}
+                  required: true
+                  serializedName: warnings
+                  language: !<!Languages> 
+                    default:
+                      name: warnings
+                      description: The warnings generated for the sentence.
+                  protocol: !<!Protocols> {}
+                language: !<!Languages> 
+                  default:
+                    name: SentenceSentiment
+                    description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+                    namespace: ApiV30Preview1
+                protocol: !<!Protocols> {}
+              language: !<!Languages> 
+                default:
+                  name: DocumentSentiment-sentences
+                  description: Sentence level sentiment analysis.
+              protocol: !<!Protocols> {}
+            required: true
+            serializedName: sentences
+            language: !<!Languages> 
+              default:
+                name: sentences
+                description: Sentence level sentiment analysis.
+            protocol: !<!Protocols> {}
+          language: !<!Languages> 
+            default:
+              name: DocumentSentiment
+              description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+              namespace: ApiV30Preview1
+          protocol: !<!Protocols> {}
+        language: !<!Languages> 
+          default:
+            name: SentimentResponse-documents
+            description: Sentiment analysis per document.
+        protocol: !<!Protocols> {}
+      required: true
+      serializedName: documents
+      language: !<!Languages> 
+        default:
+          name: documents
+          description: Sentiment analysis per document.
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: !<!ArraySchema> &ref_42
+        type: array
+        apiVersions:
+        - !<!ApiVersion> 
+          version: V3.0-Preview.1
+        elementType: *ref_4
+        language: !<!Languages> 
+          default:
+            name: SentimentResponse-errors
+            description: Errors by document id.
+        protocol: !<!Protocols> {}
+      required: true
+      serializedName: errors
+      language: !<!Languages> 
+        default:
+          name: errors
+          description: Errors by document id.
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: *ref_6
+      required: false
+      serializedName: statistics
+      language: !<!Languages> 
+        default:
+          name: statistics
+          description: if showStats=true was specified in the request this field will contain information about the request payload.
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: !<!StringSchema> &ref_94
+        type: string
+        apiVersions:
+        - !<!ApiVersion> 
+          version: V3.0-Preview.1
+        language: !<!Languages> 
+          default:
+            name: SentimentResponse-modelVersion
+            description: This field indicates which model is used for scoring.
+        protocol: !<!Protocols> {}
+      required: true
+      serializedName: modelVersion
+      language: !<!Languages> 
+        default:
+          name: modelVersion
+          description: This field indicates which model is used for scoring.
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: SentimentResponse
+        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        namespace: ApiV30Preview1
+    protocol: !<!Protocols> {}
+  - *ref_17
+  - *ref_18
+  - !<!ObjectSchema> 
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: V3.0-Preview.1
+    properties:
+    - !<!Property> 
+      schema: !<!NumberSchema> &ref_58
+        type: number
+        precision: 64
+        language: !<!Languages> 
+          default:
+            name: typeForpositive
+            description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+        protocol: !<!Protocols> {}
+      required: true
+      serializedName: positive
+      language: !<!Languages> 
+        default:
+          name: positive
+          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: !<!NumberSchema> &ref_59
+        type: number
+        precision: 64
+        language: !<!Languages> 
+          default:
+            name: typeForneutral
+            description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+        protocol: !<!Protocols> {}
+      required: true
+      serializedName: neutral
+      language: !<!Languages> 
+        default:
+          name: neutral
+          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: !<!NumberSchema> &ref_60
+        type: number
+        precision: 64
+        language: !<!Languages> 
+          default:
+            name: typeFornegative
+            description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+        protocol: !<!Protocols> {}
+      required: true
+      serializedName: negative
+      language: !<!Languages> 
+        default:
+          name: negative
+          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: SentimentConfidenceScorePerLabel
+        description: 'Represents the confidence scores between 0 and 1 across all sentiment classes: positive, neutral, negative.'
+        namespace: ApiV30Preview1
+    protocol: !<!Protocols> {}
+  choices:
+  - *ref_19
+  - *ref_20
+  - *ref_21
+  - *ref_22
+  arrays:
+  - *ref_23
+  - *ref_24
+  - *ref_25
+  - *ref_26
+  - *ref_27
+  - *ref_28
+  - *ref_29
+  - *ref_30
+  - *ref_31
+  - *ref_32
+  - *ref_33
+  - *ref_34
+  - *ref_35
+  - *ref_36
+  - *ref_37
+  - *ref_38
+  - *ref_39
+  - *ref_40
+  - *ref_41
+  - *ref_42
+  booleans:
+  - !<!BooleanSchema> &ref_97
+    type: boolean
+    apiVersions:
+    - !<!ApiVersion> 
+      version: V3.0-Preview.1
+    language: !<!Languages> 
+      default:
+        name: boolean
+        description: MISSING·SCHEMA-DESCRIPTION-BOOLEAN
+    protocol: !<!Protocols> {}
+  numbers:
+  - *ref_43
+  - *ref_44
+  - *ref_45
+  - *ref_46
+  - *ref_47
+  - *ref_48
+  - *ref_49
+  - *ref_50
+  - *ref_51
+  - *ref_52
+  - *ref_53
+  - *ref_54
+  - *ref_55
+  - *ref_56
+  - *ref_57
+  - *ref_58
+  - *ref_59
+  - *ref_60
+  strings:
+  - *ref_7
+  - !<!StringSchema> &ref_96
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: V3.0-Preview.1
+    language: !<!Languages> 
+      default:
+        name: string
+        description: MISSING·SCHEMA-DESCRIPTION-STRING
+    protocol: !<!Protocols> {}
+  - *ref_61
+  - *ref_62
+  - *ref_63
+  - *ref_64
+  - *ref_65
+  - *ref_66
+  - *ref_67
+  - *ref_68
+  - *ref_69
+  - *ref_70
+  - *ref_71
+  - *ref_72
+  - *ref_73
+  - *ref_74
+  - *ref_75
+  - *ref_76
+  - *ref_77
+  - *ref_78
+  - *ref_79
+  - *ref_80
+  - *ref_81
+  - *ref_82
+  - *ref_83
+  - *ref_84
+  - *ref_85
+  - *ref_86
+  - *ref_87
+  - *ref_88
+  - *ref_89
+  - *ref_90
+  - *ref_91
+  - *ref_92
+  - *ref_93
+  - *ref_94
+globalParameters:
+- !<!Parameter> &ref_95
+  schema: *ref_7
+  implementation: Client
+  required: true
+  extensions:
+    x-in: path
+    x-ms-priority: 0
+    x-ms-skip-url-encoding: true
+    x-name: Endpoint
+    x-required: true
+    x-type: string
+  language: !<!Languages> 
+    default:
+      name: Endpoint
+      description: 'Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).'
+      serializedName: Endpoint
+  protocol: !<!Protocols> 
+    http: !<!HttpParameter> 
+      in: uri
+info: !<!Info> 
+  description: |-
+    The Text Analytics API is a suite of text analytics web services built with best-in-class Microsoft machine learning algorithms. 
+    The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase and entity extraction as well as language detection. 
+    No training data is needed to use this API; just bring your text data. 
+    This API uses advanced natural language processing techniques to deliver best in class predictions.
+
+    Further documentation can be found in https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview
+
+    This API is currently available in:
+
+    * Australia East - australiaeast.api.cognitive.microsoft.com
+    * Brazil South - brazilsouth.api.cognitive.microsoft.com
+    * Canada Central - canadacentral.api.cognitive.microsoft.com
+    * Central India - centralindia.api.cognitive.microsoft.com
+    * Central US - centralus.api.cognitive.microsoft.com
+    * East Asia - eastasia.api.cognitive.microsoft.com
+    * East US - eastus.api.cognitive.microsoft.com
+    * East US 2 - eastus2.api.cognitive.microsoft.com
+    * France Central - francecentral.api.cognitive.microsoft.com
+    * Japan East - japaneast.api.cognitive.microsoft.com
+    * Japan West - japanwest.api.cognitive.microsoft.com
+    * Korea Central - koreacentral.api.cognitive.microsoft.com
+    * North Central US - northcentralus.api.cognitive.microsoft.com
+    * North Europe - northeurope.api.cognitive.microsoft.com
+    * South Africa North - southafricanorth.api.cognitive.microsoft.com
+    * South Central US - southcentralus.api.cognitive.microsoft.com
+    * Southeast Asia - southeastasia.api.cognitive.microsoft.com
+    * UK South - uksouth.api.cognitive.microsoft.com
+    * West Central US - westcentralus.api.cognitive.microsoft.com
+    * West Europe - westeurope.api.cognitive.microsoft.com
+    * West US - westus.api.cognitive.microsoft.com
+    * West US 2 - westus2.api.cognitive.microsoft.com
+  contact:
+    name: Microsoft Cognitive Services
+    email: mlapi@microsoft.com
+    url: 'https://azure.microsoft.com/en-us/services/cognitive-services/text-analytics/'
+  title: CognitiveServices.TextAnalytics
+operationGroups:
+- !<!OperationGroup> 
+  $key: ''
+  operations:
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: V3.0-Preview.1
+    request: !<!Request> 
+      parameters:
+      - *ref_95
+      - !<!Parameter> 
+        schema: *ref_96
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: model-version
+            description: '(Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. '
+            serializedName: model-version
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      - !<!Parameter> 
+        schema: *ref_97
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: showStats
+            description: '(Optional) if set to true, response will contain input and document level statistics.'
+            serializedName: showStats
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      - !<!Parameter> 
+        schema: *ref_98
+        implementation: Method
+        required: true
+        extensions:
+          x-ms-requestBody-name: multiLanguageBatchInput
+        language: !<!Languages> 
+          default:
+            name: multiLanguageBatchInput
+            description: Collection of documents to analyze.
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /entities/recognition/general
+          method: post
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          - text/json
+          uri: '{Endpoint}/text/analytics/v3.0-preview.1'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_99
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          - text/json
+          statusCodes:
+          - '200'
+    - !<!SchemaResponse> 
+      schema: *ref_9
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          - text/json
+          statusCodes:
+          - '500'
+    extensions:
+      x-ms-requestBody-index: 2
+    language: !<!Languages> 
+      default:
+        name: EntitiesRecognitionGeneral
+        description: >
+          The API returns a list of general named entities in a given document. For the list of supported entity types, check <a href="https://aka.ms/taner">Supported Entity Types in Text Analytics API</a>. For the list of enabled
+          languages, check <a href="https://aka.ms/talangs">Supported languages in Text Analytics API</a>.
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: V3.0-Preview.1
+    request: !<!Request> 
+      parameters:
+      - *ref_95
+      - !<!Parameter> 
+        schema: *ref_96
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: model-version
+            description: '(Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. '
+            serializedName: model-version
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      - !<!Parameter> 
+        schema: *ref_97
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: showStats
+            description: '(Optional) if set to true, response will contain input and document level statistics.'
+            serializedName: showStats
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      - !<!Parameter> 
+        schema: *ref_98
+        implementation: Method
+        required: true
+        extensions:
+          x-ms-requestBody-name: multiLanguageBatchInput
+        language: !<!Languages> 
+          default:
+            name: multiLanguageBatchInput
+            description: Collection of documents to analyze.
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /entities/recognition/pii
+          method: post
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          - text/json
+          uri: '{Endpoint}/text/analytics/v3.0-preview.1'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_99
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          - text/json
+          statusCodes:
+          - '200'
+    - !<!SchemaResponse> 
+      schema: *ref_9
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          - text/json
+          statusCodes:
+          - '500'
+    extensions:
+      x-ms-requestBody-index: 2
+    language: !<!Languages> 
+      default:
+        name: EntitiesRecognitionPii
+        description: >
+          The API returns a list of entities with personal information (\"SSN\", \"Bank Account\" etc) in the document. See the &lt;a href="https://aka.ms/talangs"&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of
+          enabled languages.
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: V3.0-Preview.1
+    request: !<!Request> 
+      parameters:
+      - *ref_95
+      - !<!Parameter> 
+        schema: *ref_96
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: model-version
+            description: '(Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. '
+            serializedName: model-version
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      - !<!Parameter> 
+        schema: *ref_97
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: showStats
+            description: '(Optional) if set to true, response will contain input and document level statistics.'
+            serializedName: showStats
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      - !<!Parameter> 
+        schema: *ref_98
+        implementation: Method
+        required: true
+        extensions:
+          x-ms-requestBody-name: multiLanguageBatchInput
+        language: !<!Languages> 
+          default:
+            name: multiLanguageBatchInput
+            description: Collection of documents to analyze.
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /entities/linking
+          method: post
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          - text/json
+          uri: '{Endpoint}/text/analytics/v3.0-preview.1'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_100
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          - text/json
+          statusCodes:
+          - '200'
+    - !<!SchemaResponse> 
+      schema: *ref_9
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          - text/json
+          statusCodes:
+          - '500'
+    extensions:
+      x-ms-requestBody-index: 2
+    language: !<!Languages> 
+      default:
+        name: EntitiesLinking
+        description: |
+          The API returns a list of recognized entities with links to a well-known knowledge base. See the &lt;a href="https://aka.ms/talangs"&gt;Supported languages in Text Analytics API.
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: V3.0-Preview.1
+    request: !<!Request> 
+      parameters:
+      - *ref_95
+      - !<!Parameter> 
+        schema: *ref_96
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: model-version
+            description: '(Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. '
+            serializedName: model-version
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      - !<!Parameter> 
+        schema: *ref_97
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: showStats
+            description: '(Optional) if set to true, response will contain input and document level statistics.'
+            serializedName: showStats
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      - !<!Parameter> 
+        schema: *ref_98
+        implementation: Method
+        required: true
+        extensions:
+          x-ms-requestBody-name: multiLanguageBatchInput
+        language: !<!Languages> 
+          default:
+            name: multiLanguageBatchInput
+            description: Collection of documents to analyze.
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /keyPhrases
+          method: post
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          - text/json
+          uri: '{Endpoint}/text/analytics/v3.0-preview.1'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_101
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          - text/json
+          statusCodes:
+          - '200'
+    - !<!SchemaResponse> 
+      schema: *ref_9
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          - text/json
+          statusCodes:
+          - '500'
+    extensions:
+      x-ms-requestBody-index: 2
+    language: !<!Languages> 
+      default:
+        name: KeyPhrases
+        description: 'The API returns a list of strings denoting the key phrases in the input text. See the &lt;a href="https://aka.ms/talangs"&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages.'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: V3.0-Preview.1
+    request: !<!Request> 
+      parameters:
+      - *ref_95
+      - !<!Parameter> 
+        schema: *ref_96
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: model-version
+            description: '(Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. '
+            serializedName: model-version
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      - !<!Parameter> 
+        schema: *ref_97
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: showStats
+            description: '(Optional) if set to true, response will contain input and document level statistics.'
+            serializedName: showStats
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      - !<!Parameter> 
+        schema: *ref_102
+        implementation: Method
+        required: true
+        extensions:
+          x-ms-requestBody-name: languageBatchInput
+        language: !<!Languages> 
+          default:
+            name: languageBatchInput
+            description: Collection of documents to analyze.
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /languages
+          method: post
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          - text/json
+          uri: '{Endpoint}/text/analytics/v3.0-preview.1'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_103
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          - text/json
+          statusCodes:
+          - '200'
+    - !<!SchemaResponse> 
+      schema: *ref_9
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          - text/json
+          statusCodes:
+          - '500'
+    extensions:
+      x-ms-requestBody-index: 2
+    language: !<!Languages> 
+      default:
+        name: Languages
+        description: >-
+          The API returns the detected language and a numeric score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true. See the &lt;a href="https://aka.ms/talangs"&gt;Supported languages in Text
+          Analytics API&lt;/a&gt; for the list of enabled languages.
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: V3.0-Preview.1
+    request: !<!Request> 
+      parameters:
+      - *ref_95
+      - !<!Parameter> 
+        schema: *ref_96
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: model-version
+            description: '(Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. '
+            serializedName: model-version
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      - !<!Parameter> 
+        schema: *ref_97
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: showStats
+            description: '(Optional) if set to true, response will contain input and document level statistics.'
+            serializedName: showStats
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      - !<!Parameter> 
+        schema: *ref_98
+        implementation: Method
+        required: true
+        extensions:
+          x-ms-requestBody-name: multiLanguageBatchInput
+        language: !<!Languages> 
+          default:
+            name: multiLanguageBatchInput
+            description: Collection of documents to analyze.
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /sentiment
+          method: post
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          - text/json
+          uri: '{Endpoint}/text/analytics/v3.0-preview.1'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_104
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          - text/json
+          statusCodes:
+          - '200'
+    - !<!SchemaResponse> 
+      schema: *ref_9
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          - text/json
+          statusCodes:
+          - '500'
+    extensions:
+      x-ms-requestBody-index: 2
+    language: !<!Languages> 
+      default:
+        name: Sentiment
+        description: >-
+          The API returns a sentiment prediction, as well as sentiment scores for each sentiment class (Positive, Negative, and Neutral) for the document and each sentence within it. See the &lt;a href="https://aka.ms/talangs"&gt;Supported
+          languages in Text Analytics API&lt;/a&gt; for the list of enabled languages.
+    protocol: !<!Protocols> {}
+  language: !<!Languages> 
+    default:
+      name: ''
+      description: ''
+  protocol: !<!Protocols> {}
+language: !<!Languages> 
+  default:
+    name: ''
+    description: ''
+protocol: !<!Protocols> 
+  http: !<!HttpModel> {}

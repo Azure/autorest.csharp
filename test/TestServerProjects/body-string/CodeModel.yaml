@@ -1,0 +1,1327 @@
+!<!CodeModel> 
+schemas: !<!Schemas> 
+  objects:
+  - !<!ObjectSchema> &ref_6
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    properties:
+    - !<!Property> 
+      schema: !<!NumberSchema> &ref_2
+        type: integer
+        precision: 32
+        language: !<!Languages> 
+          default:
+            name: typeForstatus
+            description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+        protocol: !<!Protocols> {}
+      serializedName: status
+      language: !<!Languages> 
+        default:
+          name: status
+          description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: !<!StringSchema> &ref_3
+        type: string
+        apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+        language: !<!Languages> 
+          default:
+            name: Error-message
+            description: MISSING·SCHEMA-DESCRIPTION-STRING
+        protocol: !<!Protocols> {}
+      serializedName: message
+      language: !<!Languages> 
+        default:
+          name: message
+          description: MISSING·SCHEMA-DESCRIPTION-STRING
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: Error
+        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        namespace: Api100
+    protocol: !<!Protocols> {}
+  - !<!ObjectSchema> &ref_14
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    properties:
+    - !<!Property> 
+      schema: !<!ConstantSchema> &ref_1
+        type: constant
+        apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+        value: !<!ConstantValue> 
+          value: green-color
+          language:
+            default:
+              name: ''
+              description: ''
+        valueType: !<!StringSchema> &ref_0
+          type: string
+          language: !<!Languages> 
+            default:
+              name: string
+              description: simple string
+          protocol: !<!Protocols> {}
+        language: !<!Languages> 
+          default:
+            name: ColorConstant
+            description: Referenced Color Constant Description.
+        protocol: !<!Protocols> {}
+      required: true
+      serializedName: ColorConstant
+      language: !<!Languages> 
+        default:
+          name: ColorConstant
+          description: Referenced Color Constant Description.
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: !<!StringSchema> &ref_4
+        type: string
+        apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+        language: !<!Languages> 
+          default:
+            name: RefColorConstant-field1
+            description: Sample string.
+        protocol: !<!Protocols> {}
+      required: false
+      serializedName: field1
+      language: !<!Languages> 
+        default:
+          name: field1
+          description: Sample string.
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: RefColorConstant
+        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        namespace: Api100
+    protocol: !<!Protocols> {}
+  byteArrays:
+  - !<!ByteArraySchema> &ref_12
+    type: byte-array
+    format: base64url
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: byte-array
+        description: MISSING·SCHEMA-DESCRIPTION-BYTEARRAY
+    protocol: !<!Protocols> {}
+  constants:
+  - !<!ConstantSchema> &ref_7
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: null
+      language:
+        default:
+          name: ''
+          description: ''
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant0
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_8
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: ''
+      language:
+        default:
+          name: ''
+          description: ''
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant1
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_9
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: 啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€
+      language:
+        default:
+          name: ''
+          description: ''
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant2
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_10
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: '    Now is the time for all good men to come to the aid of their country    '
+      language:
+        default:
+          name: ''
+          description: ''
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant3
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+    protocol: !<!Protocols> {}
+  - *ref_1
+  numbers:
+  - *ref_2
+  sealedChoices:
+  - !<!SealedChoiceSchema> &ref_13
+    choices:
+    - !<!ChoiceValue> 
+      value: red color
+      language:
+        default:
+          name: red color
+          description: ''
+    - !<!ChoiceValue> 
+      value: green-color
+      language:
+        default:
+          name: green-color
+          description: ''
+    - !<!ChoiceValue> 
+      value: blue_color
+      language:
+        default:
+          name: blue_color
+          description: ''
+    type: sealed-choice
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    choiceType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Colors
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+    protocol: !<!Protocols> {}
+  strings:
+  - *ref_0
+  - *ref_3
+  - *ref_4
+  - !<!StringSchema> &ref_11
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: string
+        description: MISSING·SCHEMA-DESCRIPTION-STRING
+    protocol: !<!Protocols> {}
+globalParameters:
+- !<!Parameter> &ref_5
+  schema: *ref_0
+  clientDefaultValue: 'http://localhost:3000'
+  implementation: Client
+  required: true
+  language: !<!Languages> 
+    default:
+      name: $host
+      description: server parameter
+      serializedName: $host
+  protocol: !<!Protocols> 
+    http: !<!HttpParameter> 
+      in: uri
+info: !<!Info> 
+  description: Test Infrastructure for AutoRest Swagger BAT
+  title: body-string
+operationGroups:
+- !<!OperationGroup> 
+  $key: string
+  operations:
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_5
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /string/null
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_0
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_6
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: getNull
+        description: Get null string value value
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_5
+      - !<!Parameter> 
+        schema: *ref_7
+        implementation: Method
+        extensions:
+          x-ms-requestBody-name: stringBody
+        language: !<!Languages> 
+          default:
+            name: stringBody
+            description: ''
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /string/null
+          method: put
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_6
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    extensions:
+      x-ms-requestBody-index: 0
+    language: !<!Languages> 
+      default:
+        name: putNull
+        description: Set string value null
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_5
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /string/empty
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_0
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_6
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: getEmpty
+        description: Get empty string value value ''
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_5
+      - !<!Parameter> 
+        schema: *ref_8
+        implementation: Method
+        required: true
+        extensions:
+          x-ms-requestBody-name: stringBody
+        language: !<!Languages> 
+          default:
+            name: stringBody
+            description: ''
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /string/empty
+          method: put
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_6
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    extensions:
+      x-ms-requestBody-index: 0
+    language: !<!Languages> 
+      default:
+        name: putEmpty
+        description: Set string value empty ''
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_5
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /string/mbcs
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_0
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_6
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: getMbcs
+        description: Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_5
+      - !<!Parameter> 
+        schema: *ref_9
+        implementation: Method
+        required: true
+        extensions:
+          x-ms-requestBody-name: stringBody
+        language: !<!Languages> 
+          default:
+            name: stringBody
+            description: ''
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /string/mbcs
+          method: put
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_6
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    extensions:
+      x-ms-requestBody-index: 0
+    language: !<!Languages> 
+      default:
+        name: putMbcs
+        description: Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_5
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /string/whitespace
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_0
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_6
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: getWhitespace
+        description: Get string value with leading and trailing whitespace '<tab><space><space>Now is the time for all good men to come to the aid of their country<tab><space><space>'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_5
+      - !<!Parameter> 
+        schema: *ref_10
+        implementation: Method
+        required: true
+        extensions:
+          x-ms-requestBody-name: stringBody
+        language: !<!Languages> 
+          default:
+            name: stringBody
+            description: ''
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /string/whitespace
+          method: put
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_6
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    extensions:
+      x-ms-requestBody-index: 0
+    language: !<!Languages> 
+      default:
+        name: putWhitespace
+        description: Set String value with leading and trailing whitespace '<tab><space><space>Now is the time for all good men to come to the aid of their country<tab><space><space>'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_5
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /string/notProvided
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_11
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_6
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: getNotProvided
+        description: Get String value when no string value is sent in response payload
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_5
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /string/base64Encoding
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_12
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_6
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: getBase64Encoded
+        description: Get value that is base64 encoded
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_5
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /string/base64UrlEncoding
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_12
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_6
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: getBase64UrlEncoded
+        description: Get value that is base64url encoded
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_5
+      - !<!Parameter> 
+        schema: *ref_12
+        implementation: Method
+        required: true
+        extensions:
+          x-ms-requestBody-name: stringBody
+        language: !<!Languages> 
+          default:
+            name: stringBody
+            description: ''
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /string/base64UrlEncoding
+          method: put
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_6
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    extensions:
+      x-ms-requestBody-index: 0
+    language: !<!Languages> 
+      default:
+        name: putBase64UrlEncoded
+        description: Put value that is base64url encoded
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_5
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /string/nullBase64UrlEncoding
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_12
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_6
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: getNullBase64UrlEncoded
+        description: Get null value that is expected to be base64url encoded
+    protocol: !<!Protocols> {}
+  language: !<!Languages> 
+    default:
+      name: string
+      description: ''
+  protocol: !<!Protocols> {}
+- !<!OperationGroup> 
+  $key: enum
+  operations:
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_5
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /string/enum/notExpandable
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_13
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_6
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: getNotExpandable
+        description: 'Get enum value ''red color'' from enumeration of ''red color'', ''green-color'', ''blue_color''.'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_5
+      - !<!Parameter> 
+        schema: *ref_13
+        implementation: Method
+        required: true
+        extensions:
+          x-ms-requestBody-name: stringBody
+        language: !<!Languages> 
+          default:
+            name: stringBody
+            description: ''
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /string/enum/notExpandable
+          method: put
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_6
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    extensions:
+      x-ms-requestBody-index: 0
+    language: !<!Languages> 
+      default:
+        name: putNotExpandable
+        description: 'Sends value ''red color'' from enumeration of ''red color'', ''green-color'', ''blue_color'''
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_5
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /string/enum/Referenced
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_13
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_6
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: getReferenced
+        description: 'Get enum value ''red color'' from enumeration of ''red color'', ''green-color'', ''blue_color''.'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_5
+      - !<!Parameter> 
+        schema: *ref_13
+        implementation: Method
+        required: true
+        extensions:
+          x-ms-requestBody-name: enumStringBody
+        language: !<!Languages> 
+          default:
+            name: enumStringBody
+            description: ''
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /string/enum/Referenced
+          method: put
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_6
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    extensions:
+      x-ms-requestBody-index: 0
+    language: !<!Languages> 
+      default:
+        name: putReferenced
+        description: 'Sends value ''red color'' from enumeration of ''red color'', ''green-color'', ''blue_color'''
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_5
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /string/enum/ReferencedConstant
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_14
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_6
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: getReferencedConstant
+        description: Get value 'green-color' from the constant.
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_5
+      - !<!Parameter> 
+        schema: *ref_14
+        implementation: Method
+        required: true
+        extensions:
+          x-ms-requestBody-name: enumStringBody
+        language: !<!Languages> 
+          default:
+            name: enumStringBody
+            description: ''
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /string/enum/ReferencedConstant
+          method: put
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_6
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    extensions:
+      x-ms-requestBody-index: 0
+    language: !<!Languages> 
+      default:
+        name: putReferencedConstant
+        description: Sends value 'green-color' from a constant
+    protocol: !<!Protocols> {}
+  language: !<!Languages> 
+    default:
+      name: enum
+      description: ''
+  protocol: !<!Protocols> {}
+language: !<!Languages> 
+  default:
+    name: ''
+    description: ''
+protocol: !<!Protocols> 
+  http: !<!HttpModel> {}
