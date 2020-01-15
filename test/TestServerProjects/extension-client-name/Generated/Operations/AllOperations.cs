@@ -36,8 +36,8 @@ namespace extension_client_name
             request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/originalOperation/", false);
             request.Uri.AppendPath(originalPathParameter, true);
-            request.Headers.Add("Content-Type", "application/json");
             request.Uri.AppendQuery("originalQueryParameter", originalQueryParameter, true);
+            request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(renamedBodyParameter);
             request.Content = content;

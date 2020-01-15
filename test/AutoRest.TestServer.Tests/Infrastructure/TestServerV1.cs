@@ -15,9 +15,9 @@ namespace AutoRest.TestServer.Tests.Infrastructure
 {
     public class TestServerV1 : IDisposable, ITestServer
     {
-        private static Regex _scenariosRegex = new Regex("(coverage|optionalCoverage|optCoverage)\\[(\"|')(?<name>\\w+)(\"|')\\]", RegexOptions.Compiled);
+        private static readonly Regex _scenariosRegex = new Regex("(coverage|optionalCoverage|optCoverage)\\[(\"|')(?<name>\\w+)(\"|')\\]", RegexOptions.Compiled);
 
-        private Process _process;
+        private readonly Process _process;
         public HttpClient Client { get; }
         public string Host { get; }
 
@@ -35,20 +35,20 @@ namespace AutoRest.TestServer.Tests.Infrastructure
 
             _process = Process.Start(processStartInfo);
             ProcessTracker.Add(_process);
+            Debug.Assert(_process != null);
             while (!_process.HasExited)
             {
                 var s = _process.StandardOutput.ReadLine();
                 if (s?.StartsWith(portPhrase) == true)
                 {
                     Host = $"http://localhost:{s.Substring(portPhrase.Length).Trim()}";
-                    Client = new HttpClient()
+                    Client = new HttpClient
                     {
                         BaseAddress = new Uri(Host)
                     };
                     _ = Task.Run(ReadOutput);
                     return;
                 }
-
             }
 
             if (Client == null)

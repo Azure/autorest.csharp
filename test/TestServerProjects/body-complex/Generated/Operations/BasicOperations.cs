@@ -109,8 +109,8 @@ namespace body_complex
             request.Method = RequestMethod.Put;
             request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/complex/basic/valid", false);
-            request.Headers.Add("Content-Type", "application/json");
             request.Uri.AppendQuery("api-version", ApiVersion, true);
+            request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(complexBody);
             request.Content = content;

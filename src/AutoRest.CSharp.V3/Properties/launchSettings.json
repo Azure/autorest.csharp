@@ -95,6 +95,14 @@
     "body-datetime": {
       "commandName": "Project",
       "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\body-datetime\\CodeModel.yaml --plugin=cs-modeler --output-path=$(SolutionDir)\\test\\TestServerProjects\\body-datetime --namespace=body_datetime"
+    },
+    "paging": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\paging\\CodeModel.yaml --plugin=cs-modeler --output-path=$(SolutionDir)\\test\\TestServerProjects\\paging --namespace=paging"
+    },
+    "custom-baseUrl-paging": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\custom-baseUrl-paging\\CodeModel.yaml --plugin=cs-modeler --output-path=$(SolutionDir)\\test\\TestServerProjects\\custom-baseUrl-paging --namespace=custom_baseUrl_paging"
     }
   }
 }
