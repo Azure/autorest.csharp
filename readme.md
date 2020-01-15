@@ -30,14 +30,14 @@ output-scope:
 
 ```yaml $(include-csproj)
 pipeline:
-  csharpassets:
+  csharpproj:
     input: modelerfour/identity
-  csharpassets/emitter:
-    input: csharpassets
+  csharpproj/emitter:
+    input: csharpproj
     scope: output-scope
-  csharpassets/emitter/command:
+  csharpproj/emitter/command:
     input:
     - csharpgen/emitter
-    - csharpassets/emitter
+    - csharpproj/emitter
     run: dotnet build $(title).csproj --verbosity quiet /nologo
 ```

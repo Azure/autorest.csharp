@@ -160,7 +160,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 {
                     writer.Line($"using var content = new {typeof(Utf8JsonRequestContent)}();");
 
-                    RequestParameter value = body.Value;
+                    RequestParameterOrConstant value = body.Value;
 
                     writer.ToSerializeCall(
                         jsonSerialization,
@@ -174,7 +174,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 {
                     writer.Line($"using var content = new {typeof(XmlWriterContent)}();");
 
-                    RequestParameter value = xmlBody.Value;
+                    RequestParameterOrConstant value = xmlBody.Value;
 
                     writer.ToSerializeCall(
                         xmlSerialization,
@@ -328,7 +328,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
         }
 
-        private CodeWriterDelegate WriteConstantOrParameter(RequestParameter constantOrParameter) => writer =>
+        private CodeWriterDelegate WriteConstantOrParameter(RequestParameterOrConstant constantOrParameter) => writer =>
         {
             if (constantOrParameter.IsConstant)
             {
@@ -407,7 +407,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
         }
 
-        private CodeWriter.CodeWriterScope? WriteValueNullCheck(CodeWriter writer, RequestParameter value)
+        private CodeWriter.CodeWriterScope? WriteValueNullCheck(CodeWriter writer, RequestParameterOrConstant value)
         {
             if (value.IsConstant)
                 return default;
@@ -464,7 +464,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     break;
             }
 
-            RequestParameter value = queryParameter.Value;
+            RequestParameterOrConstant value = queryParameter.Value;
             using (WriteValueNullCheck(writer, value))
             {
                 writer.Append($"request.Uri.{method}({queryParameter.Name:L}, {WriteConstantOrParameter(value)}");

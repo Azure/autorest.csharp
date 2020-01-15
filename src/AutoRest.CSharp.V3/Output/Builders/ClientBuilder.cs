@@ -98,7 +98,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 return null;
             }
 
-            Dictionary<string, RequestParameter> uriParameters = new Dictionary<string, RequestParameter>();
+            Dictionary<string, RequestParameterOrConstant> uriParameters = new Dictionary<string, RequestParameterOrConstant>();
             Dictionary<string, PathSegment> pathParameters = new Dictionary<string, PathSegment>();
             List<QueryParameter> query = new List<QueryParameter>();
             List<RequestHeader> headers = new List<RequestHeader>();
@@ -109,7 +109,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             {
                 string defaultName = requestParameter.Language.Default.Name;
                 string serializedName = requestParameter.Language.Default.SerializedName ?? defaultName;
-                RequestParameter constantOrParameter;
+                RequestParameterOrConstant constantOrParameter;
                 Schema valueSchema = requestParameter.Schema;
 
                 if (requestParameter.Implementation == ImplementationLocation.Method)
@@ -223,7 +223,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             var parameters = method.Parameters.Where(p => uriParameterNames.Contains(p.Name) || headerParameterNames.Contains(p.Name)).Append(nextPageUrlParameter).ToArray();
             var request = new Request(
                 method.Request.Method,
-                parameters.Where(p => uriParameterNames.Contains(p.Name) || p.Name == nextPageUrlParameter.Name).Select(p => new RequestParameter(p)).ToArray(),
+                parameters.Where(p => uriParameterNames.Contains(p.Name) || p.Name == nextPageUrlParameter.Name).Select(p => new RequestParameterOrConstant(p)).ToArray(),
                 Array.Empty<PathSegment>(),
                 Array.Empty<QueryParameter>(),
                 method.Request.Headers,
@@ -275,7 +275,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 requestParameter.Required == true);
         }
 
-        private static ResponseHeaderGroup? BuildResponseHeaderModel(Operation operation, HttpResponse httpResponse)
+        private static ResponseHeaderGroupType? BuildResponseHeaderModel(Operation operation, HttpResponse httpResponse)
         {
             if (!httpResponse.Headers.Any())
             {
@@ -287,7 +287,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
             string operationName = operation.CSharpName();
 
-            return new ResponseHeaderGroup(
+            return new ResponseHeaderGroupType(
                 operationName + "Headers",
                 $"Header model for {operationName}",
                 httpResponse.Headers.Select(CreateResponseHeader).ToArray()
@@ -314,9 +314,9 @@ namespace AutoRest.CSharp.V3.Output.Builders
             }
         }
 
-        private static RequestParameter[] ToParts(string httpRequestUri, Dictionary<string, RequestParameter> parameters)
+        private static RequestParameterOrConstant[] ToParts(string httpRequestUri, Dictionary<string, RequestParameterOrConstant> parameters)
         {
-            List<RequestParameter> host = new List<RequestParameter>();
+            List<RequestParameterOrConstant> host = new List<RequestParameterOrConstant>();
             foreach ((string text, bool isLiteral) in StringExtensions.GetPathParts(httpRequestUri))
             {
                 host.Add(isLiteral ? BuilderHelpers.StringConstant(text) : parameters[text]);

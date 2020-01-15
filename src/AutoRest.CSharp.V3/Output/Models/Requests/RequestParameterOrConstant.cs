@@ -7,19 +7,19 @@ using AutoRest.CSharp.V3.Output.Models.TypeReferences;
 
 namespace AutoRest.CSharp.V3.Output.Models.Requests
 {
-    internal struct RequestParameter
+    internal struct RequestParameterOrConstant
     {
         private readonly Constant? _constant;
         private readonly Parameter? _parameter;
 
-        public RequestParameter(Constant constant)
+        public RequestParameterOrConstant(Constant constant)
         {
             Type = constant.Type;
             _constant = constant;
             _parameter = null;
         }
 
-        public RequestParameter(Parameter parameter)
+        public RequestParameterOrConstant(Parameter parameter)
         {
             Type = parameter.Type;
             _parameter = parameter;
@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Requests
         public Constant Constant => _constant ?? throw new InvalidOperationException("Not a constant");
         public Parameter Parameter => _parameter ?? throw new InvalidOperationException("Not a parameter");
 
-        public static implicit operator RequestParameter(Constant constant) => new RequestParameter(constant);
-        public static implicit operator RequestParameter(Parameter parameter) => new RequestParameter(parameter);
+        public static implicit operator RequestParameterOrConstant(Constant constant) => new RequestParameterOrConstant(constant);
+        public static implicit operator RequestParameterOrConstant(Parameter parameter) => new RequestParameterOrConstant(parameter);
     }
 }

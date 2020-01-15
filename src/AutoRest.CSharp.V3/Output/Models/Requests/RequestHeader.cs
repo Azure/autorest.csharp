@@ -8,10 +8,10 @@ namespace AutoRest.CSharp.V3.Output.Models.Requests
     internal class RequestHeader
     {
         public string Name { get; }
-        public RequestParameter Value { get; }
+        public RequestParameterOrConstant Value { get; }
         public SerializationFormat Format { get; }
 
-        public RequestHeader(string name, RequestParameter value, SerializationFormat format = SerializationFormat.Default)
+        public RequestHeader(string name, RequestParameterOrConstant value, SerializationFormat format = SerializationFormat.Default)
         {
             Name = name;
             Value = value;

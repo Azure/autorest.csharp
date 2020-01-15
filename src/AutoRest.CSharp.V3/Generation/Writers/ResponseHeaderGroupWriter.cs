@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             _typeFactory = typeFactory;
         }
 
-        public void WriteHeaderModel(CodeWriter writer, ResponseHeaderGroup responseHeaderGroup)
+        public void WriteHeaderModel(CodeWriter writer, ResponseHeaderGroupType responseHeaderGroup)
         {
             var cs = _typeFactory.CreateType(responseHeaderGroup.Name);
             using (writer.Namespace(cs.Namespace))

@@ -3,9 +3,9 @@
 
 namespace AutoRest.CSharp.V3.Output.Models.Responses
 {
-    internal class ResponseHeaderGroup
+    internal class ResponseHeaderGroupType
     {
-        public ResponseHeaderGroup(string name, string description, ResponseHeader[] headers)
+        public ResponseHeaderGroupType(string name, string description, ResponseHeader[] headers)
         {
             Name = name;
             Headers = headers;
