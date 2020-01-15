@@ -210,11 +210,6 @@ namespace AutoRest.CSharp.V3.Output.Builders
             );
         }
 
-        private static bool IsNextPageParameter(Parameter parameter) =>
-            parameter.Location != ParameterLocation.Path
-            && parameter.Location != ParameterLocation.Body
-            && parameter.Location != ParameterLocation.Query;
-
         private static Method BuildNextPageMethod(Method method)
         {
             var nextPageUrlParameter = new Parameter(
@@ -222,12 +217,13 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 "The URL to the next page of results.",
                 new FrameworkTypeReference(typeof(string)),
                 null,
-                true,
-                ParameterLocation.Uri);
-            var parameters = method.Parameters.Where(IsNextPageParameter).Append(nextPageUrlParameter).ToArray();
+                true);
+            var uriParameterNames = method.Request.HostSegments.Where(hs => !hs.IsConstant).Select(hs => hs.Parameter.Name).ToArray();
+            var headerParameterNames = method.Request.Headers.Where(h => !h.Value.IsConstant).Select(h => h.Value.Parameter.Name).ToArray();
+            var parameters = method.Parameters.Where(p => uriParameterNames.Contains(p.Name) || headerParameterNames.Contains(p.Name)).Append(nextPageUrlParameter).ToArray();
             var request = new Request(
                 method.Request.Method,
-                parameters.Where(p => p.Location == ParameterLocation.Uri).Select(p => new RequestParameter(p)).ToArray(),
+                parameters.Where(p => uriParameterNames.Contains(p.Name) || p.Name == nextPageUrlParameter.Name).Select(p => new RequestParameter(p)).ToArray(),
                 Array.Empty<PathSegment>(),
                 Array.Empty<QueryParameter>(),
                 method.Request.Headers,
@@ -271,19 +267,12 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 defaultValue = BuilderHelpers.ParseClientConstant(constantSchema);
             }
 
-            ParameterLocation? location = null;
-            if (requestParameter.Protocol.Http is HttpParameter httpParameter)
-            {
-                location = httpParameter.In;
-            }
-
             return new Parameter(
                 requestParameter.CSharpName(),
                 CreateDescription(requestParameter),
                 BuilderHelpers.CreateType(requestParameter.Schema, requestParameter.IsNullable()),
                 CreateDefaultValueConstant(requestParameter) ?? defaultValue,
-                requestParameter.Required == true,
-                location);
+                requestParameter.Required == true);
         }
 
         private static ResponseHeaderGroup? BuildResponseHeaderModel(Operation operation, HttpResponse httpResponse)

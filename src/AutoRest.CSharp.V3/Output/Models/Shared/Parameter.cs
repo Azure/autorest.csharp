@@ -8,14 +8,13 @@ namespace AutoRest.CSharp.V3.Output.Models.Shared
 {
     internal class Parameter
     {
-        public Parameter(string name, string? description, TypeReference type, Constant? defaultValue, bool isRequired, ParameterLocation? location)
+        public Parameter(string name, string? description, TypeReference type, Constant? defaultValue, bool isRequired)
         {
             Name = name;
             Description = description;
             Type = type;
             DefaultValue = defaultValue;
             IsRequired = isRequired;
-            Location = location;
         }
 
         public TypeReference Type { get; }
@@ -23,6 +22,5 @@ namespace AutoRest.CSharp.V3.Output.Models.Shared
         public string? Description { get; }
         public Constant? DefaultValue { get; }
         public bool IsRequired { get; }
-        public ParameterLocation? Location { get; }
     }
 }

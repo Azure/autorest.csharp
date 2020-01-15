@@ -14,7 +14,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
 {
     public class TestServerV2 : IDisposable, ITestServer
     {
-        private Process _process;
+        private readonly Process _process;
 
         public HttpClient Client { get; }
         public string Host { get; }
@@ -26,13 +26,12 @@ namespace AutoRest.TestServer.Tests.Infrastructure
             var wiremock = Path.Combine(nodeModules, "wiremock", "jdeploy-bundle");
             var wiremockJar = Directory.GetFiles(wiremock, "*.jar").Single();
             var root = GetBaseDirectory();
-            var port = "0";
-            var processStartInfo = new ProcessStartInfo("java", $"-jar {wiremockJar} --root-dir {root} --port {port}")
-            {
-                RedirectStandardOutput = true,
-                RedirectStandardError = true
-            };
-            processStartInfo.Environment["PORT"] = port;
+
+            var processStartInfo = new ProcessStartInfo("java", $"-jar {wiremockJar} --root-dir {root} --port 0");
+            // Use random port
+            processStartInfo.Environment["PORT"] = "0";
+            processStartInfo.RedirectStandardOutput = true;
+            processStartInfo.RedirectStandardError = true;
 
             _process = Process.Start(processStartInfo);
             ProcessTracker.Add(_process);
@@ -40,13 +39,17 @@ namespace AutoRest.TestServer.Tests.Infrastructure
             while (!_process.HasExited)
             {
                 var s = _process.StandardOutput.ReadLine();
-                if (s?.StartsWith(portPhrase) != true) continue;
-
-                Host = $"http://localhost:{s.Substring(portPhrase.Length).Trim()}";
-                Client = new HttpClient { BaseAddress = new Uri(Host) };
-                _ = Task.Run(() => ReadOutput(_process.StandardError));
-                _ = Task.Run(() => ReadOutput(_process.StandardOutput));
-                return;
+                if (s?.StartsWith(portPhrase) == true)
+                {
+                    Host = $"http://localhost:{s.Substring(portPhrase.Length).Trim()}";
+                    Client = new HttpClient
+                    {
+                        BaseAddress = new Uri(Host)
+                    };
+                    _ = Task.Run(() => ReadOutput(_process.StandardError));
+                    _ = Task.Run(() => ReadOutput(_process.StandardOutput));
+                    return;
+                }
             }
 
             if (Client == null)
