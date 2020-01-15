@@ -287,13 +287,13 @@ schemas: !<!Schemas>
                   version: '1.0'
                 language: !<!Languages> 
                   default:
-                    name: string
+                    name: paths·keys·get·parameters·0·schema
                     description: MISSING·SCHEMA-DESCRIPTION-STRING
                     header: Sync-Token
                 protocol: !<!Protocols> {}
               language: !<!Languages> 
                 default:
-                  name: Dictionary of string
+                  name: KeyValue-tags
                   description: Dictionary of <paths·keys·get·parameters·0·schema>
               protocol: !<!Protocols> {}
             serializedName: tags
@@ -757,7 +757,7 @@ schemas: !<!Schemas>
     choiceType: *ref_4
     language: !<!Languages> 
       default:
-        name: Enum0
+        name: paths·revisions·get·parameters·6·schema·items
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   arrays:
@@ -770,7 +770,7 @@ schemas: !<!Schemas>
     elementType: *ref_6
     language: !<!Languages> 
       default:
-        name: Array of get-6-itemsItem
+        name: paths·kv·get·parameters·6·schema
         description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
     protocol: !<!Protocols> {}
   - *ref_7
@@ -782,7 +782,7 @@ schemas: !<!Schemas>
     elementType: *ref_8
     language: !<!Languages> 
       default:
-        name: Array of head-6-itemsItem
+        name: paths·kv·head·parameters·6·schema
         description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
     protocol: !<!Protocols> {}
   - !<!ArraySchema> &ref_42
@@ -793,7 +793,7 @@ schemas: !<!Schemas>
     elementType: *ref_9
     language: !<!Languages> 
       default:
-        name: Array of get-7-itemsItem
+        name: paths·kv-key·get·parameters·7·schema
         description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
     protocol: !<!Protocols> {}
   - !<!ArraySchema> &ref_43
@@ -804,7 +804,7 @@ schemas: !<!Schemas>
     elementType: *ref_10
     language: !<!Languages> 
       default:
-        name: Array of head-7-itemsItem
+        name: paths·kv-key·head·parameters·7·schema
         description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
     protocol: !<!Protocols> {}
   - !<!ArraySchema> &ref_44
@@ -831,7 +831,7 @@ schemas: !<!Schemas>
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Array of get-5-itemsItem
+        name: paths·labels·get·parameters·5·schema
         description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
     protocol: !<!Protocols> {}
   - *ref_11
@@ -859,7 +859,7 @@ schemas: !<!Schemas>
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Array of head-5-itemsItem
+        name: paths·labels·head·parameters·5·schema
         description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
     protocol: !<!Protocols> {}
   - !<!ArraySchema> &ref_47
@@ -870,7 +870,7 @@ schemas: !<!Schemas>
     elementType: *ref_12
     language: !<!Languages> 
       default:
-        name: Array of Enum0
+        name: paths·revisions·get·parameters·6·schema
         description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
     protocol: !<!Protocols> {}
   booleans:

@@ -53,7 +53,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: boolean
+        name: paths·header-param-prim-bool·post·parameters·1·schema
         description: MISSING·SCHEMA-DESCRIPTION-BOOLEAN
         header: value
     protocol: !<!Protocols> {}
@@ -66,7 +66,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: byte-array
+        name: paths·header-param-prim-byte·post·parameters·1·schema
         description: MISSING·SCHEMA-DESCRIPTION-BYTEARRAY
         header: value
     protocol: !<!Protocols> {}
@@ -79,7 +79,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: date-time
+        name: paths·header-param-prim-datetime·post·parameters·1·schema
         description: MISSING·SCHEMA-DESCRIPTION-DATETIME
         header: value
     protocol: !<!Protocols> {}
@@ -91,7 +91,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: date-time
+        name: paths·header-param-prim-datetimerfc1123·post·parameters·1·schema
         description: MISSING·SCHEMA-DESCRIPTION-DATETIME
         header: value
     protocol: !<!Protocols> {}
@@ -103,7 +103,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: date
+        name: paths·header-param-prim-date·post·parameters·1·schema
         description: MISSING·SCHEMA-DESCRIPTION-DATE
         header: value
     protocol: !<!Protocols> {}
@@ -115,7 +115,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: duration
+        name: paths·header-param-prim-duration·post·parameters·1·schema
         description: MISSING·SCHEMA-DESCRIPTION-DURATION
         header: value
     protocol: !<!Protocols> {}
@@ -129,7 +129,7 @@ schemas: !<!Schemas>
     precision: 32
     language: !<!Languages> 
       default:
-        name: integer
+        name: paths·header-param-prim-integer·post·parameters·1·schema
         description: MISSING·SCHEMA-DESCRIPTION-INTEGER
         header: value
     protocol: !<!Protocols> {}
@@ -141,7 +141,7 @@ schemas: !<!Schemas>
     precision: 64
     language: !<!Languages> 
       default:
-        name: integer
+        name: paths·header-param-prim-long·post·parameters·1·schema
         description: MISSING·SCHEMA-DESCRIPTION-INTEGER
         header: value
     protocol: !<!Protocols> {}
@@ -153,7 +153,7 @@ schemas: !<!Schemas>
     precision: 32
     language: !<!Languages> 
       default:
-        name: number
+        name: paths·header-param-prim-float·post·parameters·1·schema
         description: MISSING·SCHEMA-DESCRIPTION-NUMBER
         header: value
     protocol: !<!Protocols> {}
@@ -165,7 +165,7 @@ schemas: !<!Schemas>
     precision: 64
     language: !<!Languages> 
       default:
-        name: number
+        name: paths·header-param-prim-double·post·parameters·1·schema
         description: MISSING·SCHEMA-DESCRIPTION-NUMBER
         header: value
     protocol: !<!Protocols> {}
@@ -216,7 +216,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: string
+        name: paths·header-param-existingkey·post·parameters·0·schema
         description: MISSING·SCHEMA-DESCRIPTION-STRING
         header: value
     protocol: !<!Protocols> {}

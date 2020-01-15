@@ -99,12 +99,12 @@ schemas: !<!Schemas>
         version: 1.0.0
       language: !<!Languages> 
         default:
-          name: string
+          name: paths·array-prim-string-foo1-foo2-foo3·get·responses·200·content·application-json·schema·items
           description: MISSING·SCHEMA-DESCRIPTION-STRING
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Dictionary of string
+        name: paths·array-dictionary-null·get·responses·200·content·application-json·schema·items
         description: Dictionary of <paths·array-prim-string-foo1-foo2-foo3·get·responses·200·content·application-json·schema·items>
     protocol: !<!Protocols> {}
   choices:
@@ -141,7 +141,7 @@ schemas: !<!Schemas>
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Enum0
+        name: paths·array-prim-string_enum-foo1-foo2-foo3·get·responses·200·content·application-json·schema·items
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   arrays:
@@ -163,7 +163,7 @@ schemas: !<!Schemas>
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: ArrayOfget-200-application-json-itemsItem
+        name: paths·array-null·get·responses·200·content·application-json·schema
         description: The null Array value
     protocol: !<!Protocols> {}
   - !<!ArraySchema> &ref_30
@@ -179,12 +179,12 @@ schemas: !<!Schemas>
       precision: 32
       language: !<!Languages> 
         default:
-          name: integer
+          name: paths·array-invalid·get·responses·200·content·application-json·schema·items
           description: MISSING·SCHEMA-DESCRIPTION-INTEGER
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: ArrayOfinteger
+        name: paths·array-invalid·get·responses·200·content·application-json·schema
         description: 'The invalid Array [1, 2, 3'
     protocol: !<!Protocols> {}
   - !<!ArraySchema> &ref_31
@@ -204,7 +204,7 @@ schemas: !<!Schemas>
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: ArrayOfput-content-schemaItem
+        name: paths·array-empty·put·requestbody·content·application-json·schema
         description: 'The empty array value []'
     protocol: !<!Protocols> {}
   - !<!ArraySchema> &ref_32
@@ -219,12 +219,12 @@ schemas: !<!Schemas>
         version: 1.0.0
       language: !<!Languages> 
         default:
-          name: boolean
+          name: paths·array-prim-boolean-tfft·get·responses·200·content·application-json·schema·items
           description: MISSING·SCHEMA-DESCRIPTION-BOOLEAN
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: ArrayOfboolean
+        name: paths·array-prim-boolean-tfft·get·responses·200·content·application-json·schema
         description: 'The array value [true, false, false, true]'
     protocol: !<!Protocols> {}
   - !<!ArraySchema> &ref_33
@@ -240,12 +240,12 @@ schemas: !<!Schemas>
       precision: 64
       language: !<!Languages> 
         default:
-          name: integer
+          name: paths·array-prim-long-1-_1-3-300·get·responses·200·content·application-json·schema·items
           description: MISSING·SCHEMA-DESCRIPTION-INTEGER
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: ArrayOfinteger
+        name: paths·array-prim-long-1-_1-3-300·get·responses·200·content·application-json·schema
         description: 'The array value [1, -1, 3, 300]'
     protocol: !<!Protocols> {}
   - !<!ArraySchema> &ref_34
@@ -261,12 +261,12 @@ schemas: !<!Schemas>
       precision: 32
       language: !<!Languages> 
         default:
-          name: number
+          name: paths·array-prim-float-0_0-01_1-2e20·get·responses·200·content·application-json·schema·items
           description: MISSING·SCHEMA-DESCRIPTION-NUMBER
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: ArrayOfnumber
+        name: paths·array-prim-float-0_0-01_1-2e20·get·responses·200·content·application-json·schema
         description: 'The array value [0, -0.01, 1.2e20]'
     protocol: !<!Protocols> {}
   - !<!ArraySchema> &ref_35
@@ -282,12 +282,12 @@ schemas: !<!Schemas>
       precision: 64
       language: !<!Languages> 
         default:
-          name: number
+          name: paths·array-prim-double-0_0-01_1-2e20·get·responses·200·content·application-json·schema·items
           description: MISSING·SCHEMA-DESCRIPTION-NUMBER
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: ArrayOfnumber
+        name: paths·array-prim-double-0_0-01_1-2e20·get·responses·200·content·application-json·schema
         description: 'The array value [0, -0.01, 1.2e20]'
     protocol: !<!Protocols> {}
   - !<!ArraySchema> &ref_4
@@ -298,7 +298,7 @@ schemas: !<!Schemas>
     elementType: *ref_0
     language: !<!Languages> 
       default:
-        name: ArrayOfstring
+        name: paths·array-prim-string-foo1-foo2-foo3·get·responses·200·content·application-json·schema
         description: 'The array value [''foo1'', ''foo2'', ''foo3'']'
     protocol: !<!Protocols> {}
   - !<!ArraySchema> &ref_36
@@ -338,7 +338,7 @@ schemas: !<!Schemas>
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: ArrayOfFooEnum
+        name: paths·array-prim-enum-foo1-foo2-foo3·get·responses·200·content·application-json·schema
         description: 'The array value [''foo1'', ''foo2'', ''foo3'']'
     protocol: !<!Protocols> {}
   - !<!ArraySchema> &ref_37
@@ -349,7 +349,7 @@ schemas: !<!Schemas>
     elementType: *ref_2
     language: !<!Languages> 
       default:
-        name: ArrayOfEnum0
+        name: paths·array-prim-string_enum-foo1-foo2-foo3·get·responses·200·content·application-json·schema
         description: 'The array value [''foo1'', ''foo2'', ''foo3'']'
     protocol: !<!Protocols> {}
   - !<!ArraySchema> &ref_38
@@ -364,12 +364,12 @@ schemas: !<!Schemas>
         version: 1.0.0
       language: !<!Languages> 
         default:
-          name: uuid
+          name: paths·array-prim-uuid-valid·get·responses·200·content·application-json·schema·items
           description: MISSING·SCHEMA-DESCRIPTION-UUID
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: ArrayOfuuid
+        name: paths·array-prim-uuid-valid·get·responses·200·content·application-json·schema
         description: 'The array value [''6dcc7237-45fe-45c4-8a6b-3a8a3f625652'', ''d1399005-30f7-40d6-8da6-dd7c89ad34db'', ''f42f6aa1-a5bc-4ddf-907e-5f915de43205'']'
     protocol: !<!Protocols> {}
   - !<!ArraySchema> &ref_39
@@ -384,12 +384,12 @@ schemas: !<!Schemas>
         version: 1.0.0
       language: !<!Languages> 
         default:
-          name: date
+          name: paths·array-prim-date-valid·get·responses·200·content·application-json·schema·items
           description: MISSING·SCHEMA-DESCRIPTION-DATE
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: ArrayOfdate
+        name: paths·array-prim-date-valid·get·responses·200·content·application-json·schema
         description: 'The array value [''2000-12-01'', ''1980-01-02'', ''1492-10-12'']'
     protocol: !<!Protocols> {}
   - !<!ArraySchema> &ref_40
@@ -405,12 +405,12 @@ schemas: !<!Schemas>
         version: 1.0.0
       language: !<!Languages> 
         default:
-          name: date-time
+          name: paths·array-prim-date_time-valid·get·responses·200·content·application-json·schema·items
           description: MISSING·SCHEMA-DESCRIPTION-DATETIME
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: ArrayOfdate-time
+        name: paths·array-prim-date_time-valid·get·responses·200·content·application-json·schema
         description: 'The array value [''2000-12-01t00:00:01z'', ''1980-01-02T00:11:35+01:00'', ''1492-10-12T10:15:01-08:00'']'
     protocol: !<!Protocols> {}
   - !<!ArraySchema> &ref_41
@@ -426,12 +426,12 @@ schemas: !<!Schemas>
         version: 1.0.0
       language: !<!Languages> 
         default:
-          name: date-time
+          name: paths·array-prim-date_time_rfc1123-valid·get·responses·200·content·application-json·schema·items
           description: MISSING·SCHEMA-DESCRIPTION-DATETIME
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: ArrayOfdate-time
+        name: paths·array-prim-date_time_rfc1123-valid·get·responses·200·content·application-json·schema
         description: 'The array value [''Fri, 01 Dec 2000 00:00:01 GMT'', ''Wed, 02 Jan 1980 00:11:35 GMT'', ''Wed, 12 Oct 1492 10:15:01 GMT'']'
     protocol: !<!Protocols> {}
   - !<!ArraySchema> &ref_42
@@ -446,12 +446,12 @@ schemas: !<!Schemas>
         version: 1.0.0
       language: !<!Languages> 
         default:
-          name: duration
+          name: paths·array-prim-duration-valid·get·responses·200·content·application-json·schema·items
           description: MISSING·SCHEMA-DESCRIPTION-DURATION
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: ArrayOfduration
+        name: paths·array-prim-duration-valid·get·responses·200·content·application-json·schema
         description: 'The array value [''P123DT22H14M12.011S'', ''P5DT1H0M0S'']'
     protocol: !<!Protocols> {}
   - !<!ArraySchema> &ref_43
@@ -467,12 +467,12 @@ schemas: !<!Schemas>
         version: 1.0.0
       language: !<!Languages> 
         default:
-          name: byte-array
+          name: paths·array-prim-byte-valid·get·responses·200·content·application-json·schema·items
           description: MISSING·SCHEMA-DESCRIPTION-BYTEARRAY
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: ArrayOfbyte-array
+        name: paths·array-prim-byte-valid·get·responses·200·content·application-json·schema
         description: 'The array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64'
     protocol: !<!Protocols> {}
   - !<!ArraySchema> &ref_44
@@ -488,12 +488,12 @@ schemas: !<!Schemas>
         version: 1.0.0
       language: !<!Languages> 
         default:
-          name: byte-array
+          name: paths·array-prim-base64url-valid·get·responses·200·content·application-json·schema·items
           description: MISSING·SCHEMA-DESCRIPTION-BYTEARRAY
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: ArrayOfbyte-array
+        name: paths·array-prim-base64url-valid·get·responses·200·content·application-json·schema
         description: 'Get array value [''a string that gets encoded with base64url'', ''test string'' ''Lorem ipsum''] with the items base64url encoded'
     protocol: !<!Protocols> {}
   - !<!ArraySchema> &ref_45
@@ -504,7 +504,7 @@ schemas: !<!Schemas>
     elementType: *ref_3
     language: !<!Languages> 
       default:
-        name: ArrayOfProduct
+        name: paths·array-complex-null·get·responses·200·content·application-json·schema
         description: array of complex type with null value
     protocol: !<!Protocols> {}
   - !<!ArraySchema> &ref_46
@@ -515,7 +515,7 @@ schemas: !<!Schemas>
     elementType: *ref_4
     language: !<!Languages> 
       default:
-        name: ArrayOfArrayOfstring
+        name: paths·array-array-null·get·responses·200·content·application-json·schema
         description: a null array
     protocol: !<!Protocols> {}
   - !<!ArraySchema> &ref_5
@@ -535,7 +535,7 @@ schemas: !<!Schemas>
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Array of put-content-schema-itemsItem
+        name: paths·array-array-valid·put·requestbody·content·application-json·schema·items
         description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
     protocol: !<!Protocols> {}
   - !<!ArraySchema> &ref_47
@@ -546,7 +546,7 @@ schemas: !<!Schemas>
     elementType: *ref_5
     language: !<!Languages> 
       default:
-        name: ArrayOfArray of put-content-schema-itemsItem
+        name: paths·array-array-valid·put·requestbody·content·application-json·schema
         description: 'An array of array of strings [[''1'', ''2'', ''3''], [''4'', ''5'', ''6''], [''7'', ''8'', ''9'']]'
     protocol: !<!Protocols> {}
   - !<!ArraySchema> &ref_48
@@ -557,7 +557,7 @@ schemas: !<!Schemas>
     elementType: *ref_6
     language: !<!Languages> 
       default:
-        name: ArrayOfDictionary of string
+        name: paths·array-dictionary-null·get·responses·200·content·application-json·schema
         description: An array of Dictionaries with value null
     protocol: !<!Protocols> {}
   booleans:

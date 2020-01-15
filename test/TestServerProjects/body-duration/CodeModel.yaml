@@ -53,7 +53,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: duration
+        name: paths·duration-null·get·responses·200·content·application-json·schema
         description: MISSING·SCHEMA-DESCRIPTION-DURATION
     protocol: !<!Protocols> {}
   numbers:

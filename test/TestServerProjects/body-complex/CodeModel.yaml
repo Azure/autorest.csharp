@@ -665,12 +665,12 @@ schemas: !<!Schemas>
             version: '2016-02-29'
           language: !<!Languages> 
             default:
-              name: string
+              name: components·schemas·dictionary_wrapper·properties·defaultprogram·additionalproperties
               description: MISSING·SCHEMA-DESCRIPTION-STRING
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
-            name: Dictionary of string
+            name: dictionary-wrapper-defaultProgram
             description: Dictionary of <components·schemas·dictionary_wrapper·properties·defaultprogram·additionalproperties>
         protocol: !<!Protocols> {}
       serializedName: defaultProgram
@@ -1637,6 +1637,8 @@ schemas: !<!Schemas>
         protocol: !<!Protocols> {}
       required: false
       serializedName: helper
+      extensions:
+        x-ms-client-flatten: true
       language: !<!Languages> 
         default:
           name: helper

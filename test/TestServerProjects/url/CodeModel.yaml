@@ -63,7 +63,7 @@ schemas: !<!Schemas>
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Array of get-0-itemsItem
+        name: paths·paths-array-arraypath1-2cbegin-21-2a-27-28-29-3b-3a-40-20-26-3d-2b-24-2c-2f-3f-23-5b-5dend-2c-2c-arraypath·get·parameters·0·schema
         description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
     protocol: !<!Protocols> {}
   - !<!ArraySchema> &ref_75
@@ -78,12 +78,12 @@ schemas: !<!Schemas>
         version: 1.0.0
       language: !<!Languages> 
         default:
-          name: string
+          name: paths·paths-string-null-stringpath·get·parameters·0·schema
           description: MISSING·SCHEMA-DESCRIPTION-STRING
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Array of string
+        name: paths·queries-array-csv-string-valid·get·parameters·0·schema
         description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
     protocol: !<!Protocols> {}
   booleans:
@@ -101,7 +101,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: boolean
+        name: paths·queries-bool-null·get·parameters·0·schema
         description: MISSING·SCHEMA-DESCRIPTION-BOOLEAN
     protocol: !<!Protocols> {}
   byteArrays:
@@ -113,7 +113,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: byte-array
+        name: paths·paths-byte-multibyte-bytepath·get·parameters·0·schema
         description: MISSING·SCHEMA-DESCRIPTION-BYTEARRAY
     protocol: !<!Protocols> {}
   - !<!ByteArraySchema> &ref_2
@@ -121,7 +121,7 @@ schemas: !<!Schemas>
     format: byte
     language: !<!Languages> 
       default:
-        name: byte-array
+        name: ''
         description: MISSING·SCHEMA-DESCRIPTION-BYTEARRAY
     protocol: !<!Protocols> {}
   - !<!ByteArraySchema> &ref_51
@@ -132,7 +132,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: byte-array
+        name: paths·paths-string-bg9yzw0-base64urlpath·get·parameters·0·schema
         description: MISSING·SCHEMA-DESCRIPTION-BYTEARRAY
     protocol: !<!Protocols> {}
   - !<!ByteArraySchema> &ref_3
@@ -140,7 +140,7 @@ schemas: !<!Schemas>
     format: byte
     language: !<!Languages> 
       default:
-        name: byte-array
+        name: ''
         description: MISSING·SCHEMA-DESCRIPTION-BYTEARRAY
     protocol: !<!Protocols> {}
   constants:
@@ -155,7 +155,7 @@ schemas: !<!Schemas>
     valueType: *ref_0
     language: !<!Languages> 
       default:
-        name: Constant0
+        name: ''
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_31
@@ -169,7 +169,7 @@ schemas: !<!Schemas>
     valueType: *ref_0
     language: !<!Languages> 
       default:
-        name: Constant1
+        name: ''
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_32
@@ -190,7 +190,7 @@ schemas: !<!Schemas>
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant2
+        name: ''
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_33
@@ -211,7 +211,7 @@ schemas: !<!Schemas>
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant3
+        name: ''
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_34
@@ -232,7 +232,7 @@ schemas: !<!Schemas>
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant4
+        name: ''
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_35
@@ -253,7 +253,7 @@ schemas: !<!Schemas>
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant5
+        name: ''
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_36
@@ -274,7 +274,7 @@ schemas: !<!Schemas>
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant6
+        name: ''
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_37
@@ -295,7 +295,7 @@ schemas: !<!Schemas>
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant7
+        name: ''
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_38
@@ -316,7 +316,7 @@ schemas: !<!Schemas>
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant8
+        name: ''
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_39
@@ -337,7 +337,7 @@ schemas: !<!Schemas>
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant9
+        name: ''
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_40
@@ -357,7 +357,7 @@ schemas: !<!Schemas>
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant10
+        name: ''
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_41
@@ -371,7 +371,7 @@ schemas: !<!Schemas>
     valueType: *ref_1
     language: !<!Languages> 
       default:
-        name: Constant11
+        name: ''
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_42
@@ -385,7 +385,7 @@ schemas: !<!Schemas>
     valueType: *ref_1
     language: !<!Languages> 
       default:
-        name: Constant12
+        name: ''
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_43
@@ -399,7 +399,7 @@ schemas: !<!Schemas>
     valueType: *ref_1
     language: !<!Languages> 
       default:
-        name: Constant13
+        name: ''
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_46
@@ -413,7 +413,7 @@ schemas: !<!Schemas>
     valueType: *ref_2
     language: !<!Languages> 
       default:
-        name: Constant14
+        name: ''
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_47
@@ -428,12 +428,12 @@ schemas: !<!Schemas>
       type: date
       language: !<!Languages> 
         default:
-          name: date
+          name: ''
           description: MISSING·SCHEMA-DESCRIPTION-DATE
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant15
+        name: ''
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_49
@@ -449,12 +449,12 @@ schemas: !<!Schemas>
       format: date-time
       language: !<!Languages> 
         default:
-          name: date-time
+          name: ''
           description: MISSING·SCHEMA-DESCRIPTION-DATETIME
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant16
+        name: ''
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_54
@@ -468,7 +468,7 @@ schemas: !<!Schemas>
     valueType: *ref_0
     language: !<!Languages> 
       default:
-        name: Constant17
+        name: ''
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_55
@@ -482,7 +482,7 @@ schemas: !<!Schemas>
     valueType: *ref_0
     language: !<!Languages> 
       default:
-        name: Constant18
+        name: ''
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_57
@@ -503,7 +503,7 @@ schemas: !<!Schemas>
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant19
+        name: ''
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_58
@@ -524,7 +524,7 @@ schemas: !<!Schemas>
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant20
+        name: ''
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_60
@@ -545,7 +545,7 @@ schemas: !<!Schemas>
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant21
+        name: ''
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_61
@@ -566,7 +566,7 @@ schemas: !<!Schemas>
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant22
+        name: ''
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_63
@@ -587,7 +587,7 @@ schemas: !<!Schemas>
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant23
+        name: ''
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_64
@@ -608,7 +608,7 @@ schemas: !<!Schemas>
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant24
+        name: ''
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_66
@@ -629,7 +629,7 @@ schemas: !<!Schemas>
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant25
+        name: ''
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_67
@@ -650,7 +650,7 @@ schemas: !<!Schemas>
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant26
+        name: ''
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_69
@@ -664,7 +664,7 @@ schemas: !<!Schemas>
     valueType: *ref_1
     language: !<!Languages> 
       default:
-        name: Constant27
+        name: ''
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_70
@@ -678,7 +678,7 @@ schemas: !<!Schemas>
     valueType: *ref_1
     language: !<!Languages> 
       default:
-        name: Constant28
+        name: ''
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_71
@@ -692,7 +692,7 @@ schemas: !<!Schemas>
     valueType: *ref_1
     language: !<!Languages> 
       default:
-        name: Constant29
+        name: ''
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_72
@@ -706,7 +706,7 @@ schemas: !<!Schemas>
     valueType: *ref_3
     language: !<!Languages> 
       default:
-        name: Constant30
+        name: ''
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_73
@@ -721,12 +721,12 @@ schemas: !<!Schemas>
       type: date
       language: !<!Languages> 
         default:
-          name: date
+          name: ''
           description: MISSING·SCHEMA-DESCRIPTION-DATE
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant31
+        name: ''
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_74
@@ -742,12 +742,12 @@ schemas: !<!Schemas>
       format: date-time
       language: !<!Languages> 
         default:
-          name: date-time
+          name: ''
           description: MISSING·SCHEMA-DESCRIPTION-DATETIME
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant32
+        name: ''
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   dateTimes:
@@ -760,7 +760,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: date-time
+        name: paths·paths-datetime-null-datetimepath·get·parameters·0·schema
         description: MISSING·SCHEMA-DESCRIPTION-DATETIME
     protocol: !<!Protocols> {}
   - *ref_5
@@ -773,7 +773,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: date
+        name: paths·paths-date-null-datepath·get·parameters·0·schema
         description: MISSING·SCHEMA-DESCRIPTION-DATE
     protocol: !<!Protocols> {}
   - *ref_7
@@ -797,7 +797,7 @@ schemas: !<!Schemas>
     precision: 32
     language: !<!Languages> 
       default:
-        name: integer
+        name: paths·queries-int-null·get·parameters·0·schema
         description: MISSING·SCHEMA-DESCRIPTION-INTEGER
     protocol: !<!Protocols> {}
   - *ref_19
@@ -810,7 +810,7 @@ schemas: !<!Schemas>
     precision: 64
     language: !<!Languages> 
       default:
-        name: integer
+        name: paths·queries-long-null·get·parameters·0·schema
         description: MISSING·SCHEMA-DESCRIPTION-INTEGER
     protocol: !<!Protocols> {}
   - *ref_21
@@ -823,7 +823,7 @@ schemas: !<!Schemas>
     precision: 32
     language: !<!Languages> 
       default:
-        name: number
+        name: paths·queries-float-null·get·parameters·0·schema
         description: MISSING·SCHEMA-DESCRIPTION-NUMBER
     protocol: !<!Protocols> {}
   - *ref_23
@@ -836,7 +836,7 @@ schemas: !<!Schemas>
     precision: 64
     language: !<!Languages> 
       default:
-        name: number
+        name: paths·queries-double-null·get·parameters·0·schema
         description: MISSING·SCHEMA-DESCRIPTION-NUMBER
     protocol: !<!Protocols> {}
   sealedChoices:
@@ -883,8 +883,8 @@ schemas: !<!Schemas>
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: unixtime
-        description: 'date in seconds since 1970-01-01T00:00:00Z.'
+        name: paths·paths-int-1460505600-unixtimeurlpath·get·parameters·0·schema
+        description: MISSING·SCHEMA-DESCRIPTION-UNIXTIME
     protocol: !<!Protocols> {}
 globalParameters:
 - !<!Parameter> &ref_76

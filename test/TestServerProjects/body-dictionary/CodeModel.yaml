@@ -100,12 +100,12 @@ schemas: !<!Schemas>
       precision: 32
       language: !<!Languages> 
         default:
-          name: integer
+          name: paths·dictionary-null·get·responses·200·content·application-json·schema·additionalproperties
           description: MISSING·SCHEMA-DESCRIPTION-INTEGER
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: DictionaryOfinteger
+        name: paths·dictionary-null·get·responses·200·content·application-json·schema
         description: The null dictionary value
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_26
@@ -117,12 +117,12 @@ schemas: !<!Schemas>
         version: 1.0.0
       language: !<!Languages> 
         default:
-          name: string
+          name: paths·dictionary-nullvalue·get·responses·200·content·application-json·schema·additionalproperties
           description: MISSING·SCHEMA-DESCRIPTION-STRING
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Dictionary of string
+        name: paths·dictionary-nullvalue·get·responses·200·content·application-json·schema
         description: Dictionary of <paths·dictionary-nullvalue·get·responses·200·content·application-json·schema·additionalproperties>
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_27
@@ -134,12 +134,12 @@ schemas: !<!Schemas>
         version: 1.0.0
       language: !<!Languages> 
         default:
-          name: boolean
+          name: paths·dictionary-prim-boolean-tfft·get·responses·200·content·application-json·schema·additionalproperties
           description: MISSING·SCHEMA-DESCRIPTION-BOOLEAN
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: DictionaryOfboolean
+        name: paths·dictionary-prim-boolean-tfft·get·responses·200·content·application-json·schema
         description: 'The dictionary value {"0": true, "1": false, "2": false, "3": true }'
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_28
@@ -152,12 +152,12 @@ schemas: !<!Schemas>
       precision: 64
       language: !<!Languages> 
         default:
-          name: integer
+          name: paths·dictionary-prim-long-1-_1-3-300·get·responses·200·content·application-json·schema·additionalproperties
           description: MISSING·SCHEMA-DESCRIPTION-INTEGER
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: DictionaryOfinteger
+        name: paths·dictionary-prim-long-1-_1-3-300·get·responses·200·content·application-json·schema
         description: 'The dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}'
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_29
@@ -170,12 +170,12 @@ schemas: !<!Schemas>
       precision: 32
       language: !<!Languages> 
         default:
-          name: number
+          name: paths·dictionary-prim-float-0_0-01_1-2e20·get·responses·200·content·application-json·schema·additionalproperties
           description: MISSING·SCHEMA-DESCRIPTION-NUMBER
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: DictionaryOfnumber
+        name: paths·dictionary-prim-float-0_0-01_1-2e20·get·responses·200·content·application-json·schema
         description: 'The dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}'
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_30
@@ -188,12 +188,12 @@ schemas: !<!Schemas>
       precision: 64
       language: !<!Languages> 
         default:
-          name: number
+          name: paths·dictionary-prim-double-0_0-01_1-2e20·get·responses·200·content·application-json·schema·additionalproperties
           description: MISSING·SCHEMA-DESCRIPTION-NUMBER
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: DictionaryOfnumber
+        name: paths·dictionary-prim-double-0_0-01_1-2e20·get·responses·200·content·application-json·schema
         description: 'The dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}'
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_31
@@ -205,12 +205,12 @@ schemas: !<!Schemas>
         version: 1.0.0
       language: !<!Languages> 
         default:
-          name: date
+          name: paths·dictionary-prim-date-valid·get·responses·200·content·application-json·schema·additionalproperties
           description: MISSING·SCHEMA-DESCRIPTION-DATE
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: DictionaryOfdate
+        name: paths·dictionary-prim-date-valid·get·responses·200·content·application-json·schema
         description: 'The dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}'
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_32
@@ -223,12 +223,12 @@ schemas: !<!Schemas>
         version: 1.0.0
       language: !<!Languages> 
         default:
-          name: date-time
+          name: paths·dictionary-prim-date_time-valid·get·responses·200·content·application-json·schema·additionalproperties
           description: MISSING·SCHEMA-DESCRIPTION-DATETIME
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: DictionaryOfdate-time
+        name: paths·dictionary-prim-date_time-valid·get·responses·200·content·application-json·schema
         description: 'The dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}'
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_33
@@ -241,12 +241,12 @@ schemas: !<!Schemas>
         version: 1.0.0
       language: !<!Languages> 
         default:
-          name: date-time
+          name: paths·dictionary-prim-date_time_rfc1123-valid·get·responses·200·content·application-json·schema·additionalproperties
           description: MISSING·SCHEMA-DESCRIPTION-DATETIME
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: DictionaryOfdate-time
+        name: paths·dictionary-prim-date_time_rfc1123-valid·get·responses·200·content·application-json·schema
         description: 'The dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}'
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_34
@@ -258,12 +258,12 @@ schemas: !<!Schemas>
         version: 1.0.0
       language: !<!Languages> 
         default:
-          name: duration
+          name: paths·dictionary-prim-duration-valid·get·responses·200·content·application-json·schema·additionalproperties
           description: MISSING·SCHEMA-DESCRIPTION-DURATION
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: DictionaryOfduration
+        name: paths·dictionary-prim-duration-valid·get·responses·200·content·application-json·schema
         description: 'The dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}'
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_35
@@ -276,12 +276,12 @@ schemas: !<!Schemas>
         version: 1.0.0
       language: !<!Languages> 
         default:
-          name: byte-array
+          name: paths·dictionary-prim-byte-valid·get·responses·200·content·application-json·schema·additionalproperties
           description: MISSING·SCHEMA-DESCRIPTION-BYTEARRAY
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: DictionaryOfbyte-array
+        name: paths·dictionary-prim-byte-valid·get·responses·200·content·application-json·schema
         description: 'The dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each elementencoded in base 64'
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_36
@@ -294,12 +294,12 @@ schemas: !<!Schemas>
         version: 1.0.0
       language: !<!Languages> 
         default:
-          name: byte-array
+          name: paths·dictionary-prim-base64url-valid·get·responses·200·content·application-json·schema·additionalproperties
           description: MISSING·SCHEMA-DESCRIPTION-BYTEARRAY
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: DictionaryOfbyte-array
+        name: paths·dictionary-prim-base64url-valid·get·responses·200·content·application-json·schema
         description: 'The base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem ipsum"}'
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_37
@@ -307,7 +307,7 @@ schemas: !<!Schemas>
     elementType: *ref_0
     language: !<!Languages> 
       default:
-        name: DictionaryOfWidget
+        name: paths·dictionary-complex-null·get·responses·200·content·application-json·schema
         description: Dictionary of complex type with null value
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_38
@@ -329,12 +329,12 @@ schemas: !<!Schemas>
         protocol: !<!Protocols> {}
       language: !<!Languages> 
         default:
-          name: Array of get-200-application-json-additionalPropertiesItem
+          name: paths·dictionary-array-null·get·responses·200·content·application-json·schema·additionalproperties
           description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: DictionaryOfpaths·dictionary-array-null·get·responses·200·content·application-json·schema·additionalproperties
+        name: paths·dictionary-array-null·get·responses·200·content·application-json·schema
         description: a null array
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_39
@@ -347,12 +347,12 @@ schemas: !<!Schemas>
       elementType: *ref_1
       language: !<!Languages> 
         default:
-          name: Array of string
+          name: paths·dictionary-array-empty·get·responses·200·content·application-json·schema·additionalproperties
           description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: DictionaryOfpaths·dictionary-array-empty·get·responses·200·content·application-json·schema·additionalproperties
+        name: paths·dictionary-array-empty·get·responses·200·content·application-json·schema
         description: 'An empty dictionary {}'
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_40
@@ -374,12 +374,12 @@ schemas: !<!Schemas>
         protocol: !<!Protocols> {}
       language: !<!Languages> 
         default:
-          name: Array of put-content-schema-itemsItem
+          name: paths·dictionary-array-valid·put·requestbody·content·application-json·schema·additionalproperties
           description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: DictionaryOfpaths·dictionary-array-valid·put·requestbody·content·application-json·schema·additionalproperties
+        name: paths·dictionary-array-valid·put·requestbody·content·application-json·schema
         description: 'An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}'
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_41
@@ -393,7 +393,7 @@ schemas: !<!Schemas>
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: DictionaryOfany
+        name: paths·dictionary-dictionary-null·get·responses·200·content·application-json·schema
         description: An dictionaries of dictionaries with value null
     protocol: !<!Protocols> {}
   arrays:

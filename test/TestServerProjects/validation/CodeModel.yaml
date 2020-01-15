@@ -409,7 +409,7 @@ schemas: !<!Schemas>
     valueType: *ref_0
     language: !<!Languages> 
       default:
-        name: Constant0
+        name: ''
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   numbers:
@@ -424,7 +424,7 @@ schemas: !<!Schemas>
     precision: 32
     language: !<!Languages> 
       default:
-        name: integer
+        name: paths·fakepath-subscriptionid-resourcegroupname-id-api_version-apiversion·get·parameters·2·schema
         description: MISSING·SCHEMA-DESCRIPTION-INTEGER
     protocol: !<!Protocols> {}
   - *ref_10
@@ -440,7 +440,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: string
+        name: components·parameters·subscriptionidparamterer·schema
         description: MISSING·SCHEMA-DESCRIPTION-STRING
     protocol: !<!Protocols> {}
   - !<!StringSchema> &ref_22
@@ -453,7 +453,7 @@ schemas: !<!Schemas>
     pattern: '[a-zA-Z0-9]+'
     language: !<!Languages> 
       default:
-        name: string
+        name: paths·fakepath-subscriptionid-resourcegroupname-id-api_version-apiversion·get·parameters·1·schema
         description: MISSING·SCHEMA-DESCRIPTION-STRING
     protocol: !<!Protocols> {}
   - *ref_14
@@ -468,7 +468,7 @@ schemas: !<!Schemas>
     pattern: '\d{2}-\d{2}-\d{4}'
     language: !<!Languages> 
       default:
-        name: string
+        name: components·parameters·apiversionparameter·schema
         description: MISSING·SCHEMA-DESCRIPTION-STRING
     protocol: !<!Protocols> {}
 globalParameters:

@@ -17,7 +17,7 @@ schemas: !<!Schemas>
             version: 1.0.0
           language: !<!Languages> 
             default:
-              name: string
+              name: paths·originaloperation-originalpathparameter·patch·parameters·0·schema
               description: MISSING·SCHEMA-DESCRIPTION-STRING
               header: originalHeader
           protocol: !<!Protocols> {}
@@ -104,7 +104,7 @@ operationGroups:
         required: true
         language: !<!Languages> 
           default:
-            name: originalPathParameter
+            name: RenamedPathParameter
             description: MISSING·PARAMETER-DESCRIPTION
             serializedName: originalPathParameter
         protocol: !<!Protocols> 
@@ -116,7 +116,7 @@ operationGroups:
         required: true
         language: !<!Languages> 
           default:
-            name: originalQueryParameter
+            name: RenamedQueryParameter
             description: MISSING·PARAMETER-DESCRIPTION
             serializedName: originalQueryParameter
         protocol: !<!Protocols> 

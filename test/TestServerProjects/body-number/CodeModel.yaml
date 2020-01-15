@@ -65,12 +65,12 @@ schemas: !<!Schemas>
       precision: 32
       language: !<!Languages> 
         default:
-          name: number
+          name: paths·number-big-float-3-402823e-20·get·responses·200·content·application-json·schema
           description: MISSING·SCHEMA-DESCRIPTION-NUMBER
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant0
+        name: paths·number-big-float-3-402823e-20·get·responses·200·content·application-json·schema
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> 
@@ -92,12 +92,12 @@ schemas: !<!Schemas>
       precision: 64
       language: !<!Languages> 
         default:
-          name: number
+          name: paths·number-big-double-2-5976931e-101·get·responses·200·content·application-json·schema
           description: MISSING·SCHEMA-DESCRIPTION-NUMBER
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant1
+        name: paths·number-big-double-2-5976931e-101·get·responses·200·content·application-json·schema
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_19
@@ -119,12 +119,12 @@ schemas: !<!Schemas>
       precision: 64
       language: !<!Languages> 
         default:
-          name: number
+          name: paths·number-big-double-99999999-99·get·responses·200·content·application-json·schema
           description: MISSING·SCHEMA-DESCRIPTION-NUMBER
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant2
+        name: paths·number-big-double-99999999-99·get·responses·200·content·application-json·schema
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_20
@@ -146,12 +146,12 @@ schemas: !<!Schemas>
       precision: 64
       language: !<!Languages> 
         default:
-          name: number
+          name: paths·number-big-double-_99999999-99·get·responses·200·content·application-json·schema
           description: MISSING·SCHEMA-DESCRIPTION-NUMBER
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant3
+        name: paths·number-big-double-_99999999-99·get·responses·200·content·application-json·schema
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> 
@@ -173,12 +173,12 @@ schemas: !<!Schemas>
       precision: 128
       language: !<!Languages> 
         default:
-          name: number
+          name: paths·number-big-decimal-2-5976931e-101·get·responses·200·content·application-json·schema
           description: MISSING·SCHEMA-DESCRIPTION-NUMBER
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant4
+        name: paths·number-big-decimal-2-5976931e-101·get·responses·200·content·application-json·schema
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_21
@@ -200,12 +200,12 @@ schemas: !<!Schemas>
       precision: 128
       language: !<!Languages> 
         default:
-          name: number
+          name: paths·number-big-decimal-99999999-99·get·responses·200·content·application-json·schema
           description: MISSING·SCHEMA-DESCRIPTION-NUMBER
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant5
+        name: paths·number-big-decimal-99999999-99·get·responses·200·content·application-json·schema
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_22
@@ -227,12 +227,12 @@ schemas: !<!Schemas>
       precision: 128
       language: !<!Languages> 
         default:
-          name: number
+          name: paths·number-big-decimal-_99999999-99·get·responses·200·content·application-json·schema
           description: MISSING·SCHEMA-DESCRIPTION-NUMBER
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant6
+        name: paths·number-big-decimal-_99999999-99·get·responses·200·content·application-json·schema
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> 
@@ -254,12 +254,12 @@ schemas: !<!Schemas>
       precision: 64
       language: !<!Languages> 
         default:
-          name: number
+          name: paths·number-small-float-3-402823e_20·get·responses·200·content·application-json·schema
           description: MISSING·SCHEMA-DESCRIPTION-NUMBER
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant7
+        name: paths·number-small-float-3-402823e_20·get·responses·200·content·application-json·schema
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> 
@@ -281,12 +281,12 @@ schemas: !<!Schemas>
       precision: 64
       language: !<!Languages> 
         default:
-          name: number
+          name: paths·number-small-double-2-5976931e_101·get·responses·200·content·application-json·schema
           description: MISSING·SCHEMA-DESCRIPTION-NUMBER
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant8
+        name: paths·number-small-double-2-5976931e_101·get·responses·200·content·application-json·schema
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> 
@@ -308,12 +308,12 @@ schemas: !<!Schemas>
       precision: 128
       language: !<!Languages> 
         default:
-          name: number
+          name: paths·number-small-decimal-2-5976931e_101·get·responses·200·content·application-json·schema
           description: MISSING·SCHEMA-DESCRIPTION-NUMBER
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant9
+        name: paths·number-small-decimal-2-5976931e_101·get·responses·200·content·application-json·schema
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   numbers:
@@ -325,7 +325,7 @@ schemas: !<!Schemas>
     precision: 32
     language: !<!Languages> 
       default:
-        name: number
+        name: paths·number-null·get·responses·200·content·application-json·schema
         description: MISSING·SCHEMA-DESCRIPTION-NUMBER
     protocol: !<!Protocols> {}
   - *ref_0
@@ -337,7 +337,7 @@ schemas: !<!Schemas>
     precision: 32
     language: !<!Languages> 
       default:
-        name: number
+        name: paths·number-invalidfloat·get·responses·200·content·application-json·schema
         description: MISSING·SCHEMA-DESCRIPTION-NUMBER
     protocol: !<!Protocols> {}
   - !<!NumberSchema> &ref_17
@@ -348,7 +348,7 @@ schemas: !<!Schemas>
     precision: 64
     language: !<!Languages> 
       default:
-        name: number
+        name: paths·number-invaliddouble·get·responses·200·content·application-json·schema
         description: MISSING·SCHEMA-DESCRIPTION-NUMBER
     protocol: !<!Protocols> {}
   - !<!NumberSchema> &ref_18
@@ -359,7 +359,7 @@ schemas: !<!Schemas>
     precision: 128
     language: !<!Languages> 
       default:
-        name: number
+        name: paths·number-invaliddecimal·get·responses·200·content·application-json·schema
         description: MISSING·SCHEMA-DESCRIPTION-NUMBER
     protocol: !<!Protocols> {}
   - *ref_1

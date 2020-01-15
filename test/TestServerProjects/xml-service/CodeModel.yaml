@@ -864,13 +864,13 @@ schemas: !<!Schemas>
                   version: 1.0.0
                 language: !<!Languages> 
                   default:
-                    name: string
+                    name: paths·xml-headers·get·responses·200·headers·custom_header·schema
                     description: MISSING·SCHEMA-DESCRIPTION-STRING
                     header: Custom-Header
                 protocol: !<!Protocols> {}
               language: !<!Languages> 
                 default:
-                  name: Dictionary of string
+                  name: Metadata
                   description: Dictionary of <paths·xml-headers·get·responses·200·headers·custom_header·schema>
               protocol: !<!Protocols> {}
             required: false
@@ -2436,7 +2436,7 @@ schemas: !<!Schemas>
         wrapped: false
     language: !<!Languages> 
       default:
-        name: Array of Banana
+        name: paths·xml-root_list·get·responses·200·content·application-xml·schema
         description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
     protocol: !<!Protocols> {}
   - !<!ArraySchema> &ref_120
@@ -2452,7 +2452,7 @@ schemas: !<!Schemas>
         wrapped: true
     language: !<!Languages> 
       default:
-        name: Array of Banana
+        name: paths·xml-root_list·put·requestbody·content·application-xml·schema
         description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
     protocol: !<!Protocols> {}
   - *ref_27
@@ -2498,7 +2498,7 @@ schemas: !<!Schemas>
     valueType: *ref_3
     language: !<!Languages> 
       default:
-        name: Constant0
+        name: ''
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_123
@@ -2512,7 +2512,7 @@ schemas: !<!Schemas>
     valueType: *ref_3
     language: !<!Languages> 
       default:
-        name: Constant1
+        name: ''
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_124
@@ -2526,7 +2526,7 @@ schemas: !<!Schemas>
     valueType: *ref_3
     language: !<!Languages> 
       default:
-        name: Constant2
+        name: ''
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_126
@@ -2540,7 +2540,7 @@ schemas: !<!Schemas>
     valueType: *ref_3
     language: !<!Languages> 
       default:
-        name: Constant3
+        name: ''
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_127
@@ -2554,7 +2554,7 @@ schemas: !<!Schemas>
     valueType: *ref_3
     language: !<!Languages> 
       default:
-        name: Constant4
+        name: ''
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   dateTimes:

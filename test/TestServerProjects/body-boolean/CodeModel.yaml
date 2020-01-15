@@ -60,7 +60,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: boolean
+        name: paths·bool-null·get·responses·200·content·application-json·schema
         description: MISSING·SCHEMA-DESCRIPTION-BOOLEAN
     protocol: !<!Protocols> {}
   constants:
@@ -78,7 +78,7 @@ schemas: !<!Schemas>
     valueType: *ref_0
     language: !<!Languages> 
       default:
-        name: Constant0
+        name: paths·bool-true·get·responses·200·content·application-json·schema
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_7
@@ -95,7 +95,7 @@ schemas: !<!Schemas>
     valueType: *ref_0
     language: !<!Languages> 
       default:
-        name: Constant1
+        name: paths·bool-false·get·responses·200·content·application-json·schema
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   numbers:

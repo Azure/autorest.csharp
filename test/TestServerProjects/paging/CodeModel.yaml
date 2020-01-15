@@ -1,7 +1,7 @@
 !<!CodeModel> 
 schemas: !<!Schemas> 
   objects:
-  - !<!ObjectSchema> &ref_11
+  - !<!ObjectSchema> &ref_13
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -27,7 +27,7 @@ schemas: !<!Schemas>
                 version: 1.0.0
               properties:
               - !<!Property> 
-                schema: !<!NumberSchema> &ref_5
+                schema: !<!NumberSchema> &ref_6
                   type: integer
                   precision: 32
                   language: !<!Languages> 
@@ -42,7 +42,7 @@ schemas: !<!Schemas>
                     description: MISSING·SCHEMA-DESCRIPTION-INTEGER
                 protocol: !<!Protocols> {}
               - !<!Property> 
-                schema: !<!StringSchema> &ref_7
+                schema: !<!StringSchema> &ref_8
                   type: string
                   apiVersions:
                   - !<!ApiVersion> 
@@ -78,6 +78,55 @@ schemas: !<!Schemas>
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
+            name: ProductResultValue-value
+            description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+        protocol: !<!Protocols> {}
+      serializedName: value
+      language: !<!Languages> 
+        default:
+          name: value
+          description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: !<!StringSchema> &ref_9
+        type: string
+        apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+        language: !<!Languages> 
+          default:
+            name: ProductResultValue-nextLink
+            description: MISSING·SCHEMA-DESCRIPTION-STRING
+        protocol: !<!Protocols> {}
+      serializedName: nextLink
+      language: !<!Languages> 
+        default:
+          name: nextLink
+          description: MISSING·SCHEMA-DESCRIPTION-STRING
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: ProductResultValue
+        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        namespace: Api100
+    protocol: !<!Protocols> {}
+  - *ref_0
+  - *ref_1
+  - !<!ObjectSchema> &ref_14
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    properties:
+    - !<!Property> 
+      schema: !<!ArraySchema> &ref_4
+        type: array
+        apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+        elementType: *ref_0
+        language: !<!Languages> 
+          default:
             name: ProductResult-values
             description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
         protocol: !<!Protocols> {}
@@ -88,7 +137,7 @@ schemas: !<!Schemas>
           description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_8
+      schema: !<!StringSchema> &ref_10
         type: string
         apiVersions:
         - !<!ApiVersion> 
@@ -110,16 +159,14 @@ schemas: !<!Schemas>
         description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
         namespace: Api100
     protocol: !<!Protocols> {}
-  - *ref_0
-  - *ref_1
-  - !<!ObjectSchema> &ref_17
+  - !<!ObjectSchema> &ref_20
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
     properties:
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_4
+      schema: !<!ArraySchema> &ref_5
         type: array
         apiVersions:
         - !<!ApiVersion> 
@@ -137,7 +184,7 @@ schemas: !<!Schemas>
           description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_9
+      schema: !<!StringSchema> &ref_11
         type: string
         apiVersions:
         - !<!ApiVersion> 
@@ -238,7 +285,7 @@ schemas: !<!Schemas>
         apiVersions:
         - !<!ApiVersion> 
           version: 1.0.0
-        choiceType: !<!StringSchema> &ref_6
+        choiceType: !<!StringSchema> &ref_7
           type: string
           language: !<!Languages> 
             default:
@@ -267,9 +314,10 @@ schemas: !<!Schemas>
   arrays:
   - *ref_3
   - *ref_4
-  numbers:
   - *ref_5
-  - !<!NumberSchema> &ref_13
+  numbers:
+  - *ref_6
+  - !<!NumberSchema> &ref_16
     type: integer
     apiVersions:
     - !<!ApiVersion> 
@@ -277,10 +325,10 @@ schemas: !<!Schemas>
     precision: 32
     language: !<!Languages> 
       default:
-        name: integer
+        name: paths·paging-multiple·get·parameters·1·schema
         description: MISSING·SCHEMA-DESCRIPTION-INTEGER
     protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_14
+  - !<!NumberSchema> &ref_17
     type: integer
     apiVersions:
     - !<!ApiVersion> 
@@ -289,27 +337,28 @@ schemas: !<!Schemas>
     precision: 32
     language: !<!Languages> 
       default:
-        name: integer
+        name: paths·paging-multiple·get·parameters·2·schema
         description: MISSING·SCHEMA-DESCRIPTION-INTEGER
     protocol: !<!Protocols> {}
   strings:
-  - *ref_6
   - *ref_7
   - *ref_8
-  - !<!StringSchema> &ref_12
+  - *ref_9
+  - *ref_10
+  - !<!StringSchema> &ref_15
     type: string
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: string
+        name: paths·paging-multiple·get·parameters·0·schema
         description: MISSING·SCHEMA-DESCRIPTION-STRING
     protocol: !<!Protocols> {}
-  - *ref_9
+  - *ref_11
 globalParameters:
-- !<!Parameter> &ref_10
-  schema: *ref_6
+- !<!Parameter> &ref_12
+  schema: *ref_7
   clientDefaultValue: 'http://localhost:3000'
   implementation: Client
   required: true
@@ -317,6 +366,7 @@ globalParameters:
     default:
       name: $host
       description: server parameter
+      serializedName: $host
   protocol: !<!Protocols> 
     http: !<!HttpParameter> 
       in: uri
@@ -333,7 +383,104 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_10
+      - *ref_12
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /paging/noitemname
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_13
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - default
+    extensions:
+      x-ms-pageable:
+        nextLinkName: nextLink
+    language: !<!Languages> 
+      default:
+        name: getNoItemNamePages
+        description: A paging operation that must return result of the default 'value' node.
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_12
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /paging/nullnextlink
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_14
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - default
+    extensions:
+      x-ms-pageable:
+        itemName: values
+        nextLinkName: {}
+    language: !<!Languages> 
+      default:
+        name: getNullNextLinkNamePages
+        description: 'A paging operation that must ignore any kind of nextLink, and stop after page 1.'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_12
       language: !<!Languages> 
         default:
           name: ''
@@ -345,7 +492,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_11
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -382,9 +529,9 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_10
+      - *ref_12
       - !<!Parameter> 
-        schema: *ref_12
+        schema: *ref_15
         implementation: Method
         language: !<!Languages> 
           default:
@@ -395,10 +542,10 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - !<!Parameter> 
-        schema: *ref_13
+        schema: *ref_16
         implementation: Method
         extensions:
-          x-ms-parameter-grouping: &ref_15
+          x-ms-parameter-grouping: &ref_18
             postfix: Options
         language: !<!Languages> 
           default:
@@ -409,10 +556,10 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - !<!Parameter> 
-        schema: *ref_14
+        schema: *ref_17
         implementation: Method
         extensions:
-          x-ms-parameter-grouping: &ref_16
+          x-ms-parameter-grouping: &ref_19
             postfix: Options
         language: !<!Languages> 
           default:
@@ -433,7 +580,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_11
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -470,9 +617,9 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_10
+      - *ref_12
       - !<!Parameter> 
-        schema: *ref_12
+        schema: *ref_15
         implementation: Method
         language: !<!Languages> 
           default:
@@ -483,10 +630,10 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - !<!Parameter> 
-        schema: *ref_13
+        schema: *ref_16
         implementation: Method
         extensions:
-          x-ms-parameter-grouping: *ref_15
+          x-ms-parameter-grouping: *ref_18
         language: !<!Languages> 
           default:
             name: maxresults
@@ -496,10 +643,10 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - !<!Parameter> 
-        schema: *ref_14
+        schema: *ref_17
         implementation: Method
         extensions:
-          x-ms-parameter-grouping: *ref_16
+          x-ms-parameter-grouping: *ref_19
         language: !<!Languages> 
           default:
             name: timeout
@@ -519,7 +666,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_17
+      schema: *ref_20
       language: !<!Languages> 
         default:
           name: ''
@@ -556,9 +703,9 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_10
+      - *ref_12
       - !<!Parameter> 
-        schema: *ref_12
+        schema: *ref_15
         implementation: Method
         language: !<!Languages> 
           default:
@@ -569,10 +716,10 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - !<!Parameter> 
-        schema: *ref_13
+        schema: *ref_16
         implementation: Method
         extensions:
-          x-ms-parameter-grouping: *ref_15
+          x-ms-parameter-grouping: *ref_18
         language: !<!Languages> 
           default:
             name: maxresults
@@ -582,7 +729,7 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - !<!Parameter> 
-        schema: *ref_13
+        schema: *ref_16
         implementation: Method
         required: true
         extensions:
@@ -597,10 +744,10 @@ operationGroups:
           http: !<!HttpParameter> 
             in: path
       - !<!Parameter> 
-        schema: *ref_14
+        schema: *ref_17
         implementation: Method
         extensions:
-          x-ms-parameter-grouping: *ref_16
+          x-ms-parameter-grouping: *ref_19
         language: !<!Languages> 
           default:
             name: timeout
@@ -620,7 +767,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_11
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -657,7 +804,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_10
+      - *ref_12
       language: !<!Languages> 
         default:
           name: ''
@@ -669,7 +816,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_11
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -706,7 +853,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_10
+      - *ref_12
       language: !<!Languages> 
         default:
           name: ''
@@ -718,7 +865,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_11
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -755,7 +902,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_10
+      - *ref_12
       language: !<!Languages> 
         default:
           name: ''
@@ -767,7 +914,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_11
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -804,7 +951,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_10
+      - *ref_12
       language: !<!Languages> 
         default:
           name: ''
@@ -816,7 +963,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_11
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -853,7 +1000,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_10
+      - *ref_12
       language: !<!Languages> 
         default:
           name: ''
@@ -865,7 +1012,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_11
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -902,9 +1049,9 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_10
+      - *ref_12
       - !<!Parameter> 
-        schema: *ref_12
+        schema: *ref_15
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -916,7 +1063,7 @@ operationGroups:
           http: !<!HttpParameter> 
             in: query
       - !<!Parameter> 
-        schema: *ref_12
+        schema: *ref_15
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -938,7 +1085,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_17
+      schema: *ref_20
       language: !<!Languages> 
         default:
           name: ''
@@ -976,13 +1123,13 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_10
+      - *ref_12
       - !<!Parameter> 
-        schema: *ref_12
+        schema: *ref_15
         implementation: Method
         required: true
         extensions:
-          x-ms-parameter-grouping: &ref_18
+          x-ms-parameter-grouping: &ref_21
             name: custom-parameter-group
         language: !<!Languages> 
           default:
@@ -993,11 +1140,11 @@ operationGroups:
           http: !<!HttpParameter> 
             in: query
       - !<!Parameter> 
-        schema: *ref_12
+        schema: *ref_15
         implementation: Method
         required: true
         extensions:
-          x-ms-parameter-grouping: &ref_19
+          x-ms-parameter-grouping: &ref_22
             name: custom-parameter-group
         language: !<!Languages> 
           default:
@@ -1018,7 +1165,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_17
+      schema: *ref_20
       language: !<!Languages> 
         default:
           name: ''
@@ -1056,9 +1203,9 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_10
+      - *ref_12
       - !<!Parameter> 
-        schema: *ref_12
+        schema: *ref_15
         implementation: Method
         language: !<!Languages> 
           default:
@@ -1069,10 +1216,10 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - !<!Parameter> 
-        schema: *ref_13
+        schema: *ref_16
         implementation: Method
         extensions:
-          x-ms-parameter-grouping: *ref_15
+          x-ms-parameter-grouping: *ref_18
         language: !<!Languages> 
           default:
             name: maxresults
@@ -1082,10 +1229,10 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - !<!Parameter> 
-        schema: *ref_14
+        schema: *ref_17
         implementation: Method
         extensions:
-          x-ms-parameter-grouping: *ref_16
+          x-ms-parameter-grouping: *ref_19
         language: !<!Languages> 
           default:
             name: timeout
@@ -1105,7 +1252,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_11
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -1143,9 +1290,9 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_10
+      - *ref_12
       - !<!Parameter> 
-        schema: *ref_12
+        schema: *ref_15
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -1157,7 +1304,7 @@ operationGroups:
           http: !<!HttpParameter> 
             in: query
       - !<!Parameter> 
-        schema: *ref_12
+        schema: *ref_15
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -1169,7 +1316,7 @@ operationGroups:
           http: !<!HttpParameter> 
             in: path
       - !<!Parameter> 
-        schema: *ref_12
+        schema: *ref_15
         implementation: Method
         required: true
         extensions:
@@ -1193,7 +1340,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_17
+      schema: *ref_20
       language: !<!Languages> 
         default:
           name: ''
@@ -1231,13 +1378,13 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_10
+      - *ref_12
       - !<!Parameter> 
-        schema: *ref_12
+        schema: *ref_15
         implementation: Method
         required: true
         extensions:
-          x-ms-parameter-grouping: *ref_18
+          x-ms-parameter-grouping: *ref_21
         language: !<!Languages> 
           default:
             name: api_version
@@ -1247,11 +1394,11 @@ operationGroups:
           http: !<!HttpParameter> 
             in: query
       - !<!Parameter> 
-        schema: *ref_12
+        schema: *ref_15
         implementation: Method
         required: true
         extensions:
-          x-ms-parameter-grouping: *ref_19
+          x-ms-parameter-grouping: *ref_22
         language: !<!Languages> 
           default:
             name: tenant
@@ -1261,7 +1408,7 @@ operationGroups:
           http: !<!HttpParameter> 
             in: path
       - !<!Parameter> 
-        schema: *ref_12
+        schema: *ref_15
         implementation: Method
         required: true
         extensions:
@@ -1285,7 +1432,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_17
+      schema: *ref_20
       language: !<!Languages> 
         default:
           name: ''

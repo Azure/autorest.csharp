@@ -274,7 +274,7 @@ namespace body_array
             return message;
         }
         /// <summary> Set array value empty []. </summary>
-        /// <param name="arrayBody"> The ArrayOfput-content-schemaItem to use. </param>
+        /// <param name="arrayBody"> The paths·array-empty·put·requestbody·content·application-json·schema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutEmptyAsync(IEnumerable<string> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -304,7 +304,7 @@ namespace body_array
             }
         }
         /// <summary> Set array value empty []. </summary>
-        /// <param name="arrayBody"> The ArrayOfput-content-schemaItem to use. </param>
+        /// <param name="arrayBody"> The paths·array-empty·put·requestbody·content·application-json·schema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutEmpty(IEnumerable<string> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -427,7 +427,7 @@ namespace body_array
             return message;
         }
         /// <summary> Set array value empty [true, false, false, true]. </summary>
-        /// <param name="arrayBody"> The ArrayOfboolean to use. </param>
+        /// <param name="arrayBody"> The paths·array-prim-boolean-tfft·get·responses·200·content·application-json·schema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutBooleanTfftAsync(IEnumerable<bool> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -457,7 +457,7 @@ namespace body_array
             }
         }
         /// <summary> Set array value empty [true, false, false, true]. </summary>
-        /// <param name="arrayBody"> The ArrayOfboolean to use. </param>
+        /// <param name="arrayBody"> The paths·array-prim-boolean-tfft·get·responses·200·content·application-json·schema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutBooleanTfft(IEnumerable<bool> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -730,7 +730,7 @@ namespace body_array
             return message;
         }
         /// <summary> Set array value empty [1, -1, 3, 300]. </summary>
-        /// <param name="arrayBody"> The ArrayOfinteger to use. </param>
+        /// <param name="arrayBody"> The paths·array-invalid·get·responses·200·content·application-json·schema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutIntegerValidAsync(IEnumerable<int> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -760,7 +760,7 @@ namespace body_array
             }
         }
         /// <summary> Set array value empty [1, -1, 3, 300]. </summary>
-        /// <param name="arrayBody"> The ArrayOfinteger to use. </param>
+        /// <param name="arrayBody"> The paths·array-invalid·get·responses·200·content·application-json·schema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutIntegerValid(IEnumerable<int> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -1033,7 +1033,7 @@ namespace body_array
             return message;
         }
         /// <summary> Set array value empty [1, -1, 3, 300]. </summary>
-        /// <param name="arrayBody"> The ArrayOfinteger to use. </param>
+        /// <param name="arrayBody"> The paths·array-prim-long-1-_1-3-300·get·responses·200·content·application-json·schema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutLongValidAsync(IEnumerable<long> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -1063,7 +1063,7 @@ namespace body_array
             }
         }
         /// <summary> Set array value empty [1, -1, 3, 300]. </summary>
-        /// <param name="arrayBody"> The ArrayOfinteger to use. </param>
+        /// <param name="arrayBody"> The paths·array-prim-long-1-_1-3-300·get·responses·200·content·application-json·schema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutLongValid(IEnumerable<long> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -1336,7 +1336,7 @@ namespace body_array
             return message;
         }
         /// <summary> Set array value [0, -0.01, 1.2e20]. </summary>
-        /// <param name="arrayBody"> The ArrayOfnumber to use. </param>
+        /// <param name="arrayBody"> The paths·array-prim-float-0_0-01_1-2e20·get·responses·200·content·application-json·schema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutFloatValidAsync(IEnumerable<float> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -1366,7 +1366,7 @@ namespace body_array
             }
         }
         /// <summary> Set array value [0, -0.01, 1.2e20]. </summary>
-        /// <param name="arrayBody"> The ArrayOfnumber to use. </param>
+        /// <param name="arrayBody"> The paths·array-prim-float-0_0-01_1-2e20·get·responses·200·content·application-json·schema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutFloatValid(IEnumerable<float> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -1639,7 +1639,7 @@ namespace body_array
             return message;
         }
         /// <summary> Set array value [0, -0.01, 1.2e20]. </summary>
-        /// <param name="arrayBody"> The ArrayOfnumber to use. </param>
+        /// <param name="arrayBody"> The paths·array-prim-double-0_0-01_1-2e20·get·responses·200·content·application-json·schema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutDoubleValidAsync(IEnumerable<double> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -1669,7 +1669,7 @@ namespace body_array
             }
         }
         /// <summary> Set array value [0, -0.01, 1.2e20]. </summary>
-        /// <param name="arrayBody"> The ArrayOfnumber to use. </param>
+        /// <param name="arrayBody"> The paths·array-prim-double-0_0-01_1-2e20·get·responses·200·content·application-json·schema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutDoubleValid(IEnumerable<double> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -1942,7 +1942,7 @@ namespace body_array
             return message;
         }
         /// <summary> Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
-        /// <param name="arrayBody"> The ArrayOfstring to use. </param>
+        /// <param name="arrayBody"> The paths·array-prim-string-foo1-foo2-foo3·get·responses·200·content·application-json·schema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutStringValidAsync(IEnumerable<string> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -1972,7 +1972,7 @@ namespace body_array
             }
         }
         /// <summary> Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
-        /// <param name="arrayBody"> The ArrayOfstring to use. </param>
+        /// <param name="arrayBody"> The paths·array-prim-string-foo1-foo2-foo3·get·responses·200·content·application-json·schema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutStringValid(IEnumerable<string> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -2095,7 +2095,7 @@ namespace body_array
             return message;
         }
         /// <summary> Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
-        /// <param name="arrayBody"> The ArrayOfFooEnum to use. </param>
+        /// <param name="arrayBody"> The paths·array-prim-enum-foo1-foo2-foo3·get·responses·200·content·application-json·schema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutEnumValidAsync(IEnumerable<FooEnum> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -2125,7 +2125,7 @@ namespace body_array
             }
         }
         /// <summary> Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
-        /// <param name="arrayBody"> The ArrayOfFooEnum to use. </param>
+        /// <param name="arrayBody"> The paths·array-prim-enum-foo1-foo2-foo3·get·responses·200·content·application-json·schema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutEnumValid(IEnumerable<FooEnum> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -2165,7 +2165,7 @@ namespace body_array
         }
         /// <summary> Get enum array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<Enum0>>> GetStringEnumValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ICollection<PathsArrayPrimStringEnumFoo1Foo2Foo3GetResponses200ContentApplicationJsonSchemaItems>>> GetStringEnumValidAsync(CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetStringEnumValid");
@@ -2179,10 +2179,10 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<Enum0> value = new List<Enum0>();
+                            ICollection<PathsArrayPrimStringEnumFoo1Foo2Foo3GetResponses200ContentApplicationJsonSchemaItems> value = new List<PathsArrayPrimStringEnumFoo1Foo2Foo3GetResponses200ContentApplicationJsonSchemaItems>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                value.Add(new Enum0(item.GetString()));
+                                value.Add(new PathsArrayPrimStringEnumFoo1Foo2Foo3GetResponses200ContentApplicationJsonSchemaItems(item.GetString()));
                             }
                             return Response.FromValue(value, message.Response);
                         }
@@ -2198,7 +2198,7 @@ namespace body_array
         }
         /// <summary> Get enum array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<Enum0>> GetStringEnumValid(CancellationToken cancellationToken = default)
+        public Response<ICollection<PathsArrayPrimStringEnumFoo1Foo2Foo3GetResponses200ContentApplicationJsonSchemaItems>> GetStringEnumValid(CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetStringEnumValid");
@@ -2212,10 +2212,10 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<Enum0> value = new List<Enum0>();
+                            ICollection<PathsArrayPrimStringEnumFoo1Foo2Foo3GetResponses200ContentApplicationJsonSchemaItems> value = new List<PathsArrayPrimStringEnumFoo1Foo2Foo3GetResponses200ContentApplicationJsonSchemaItems>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                value.Add(new Enum0(item.GetString()));
+                                value.Add(new PathsArrayPrimStringEnumFoo1Foo2Foo3GetResponses200ContentApplicationJsonSchemaItems(item.GetString()));
                             }
                             return Response.FromValue(value, message.Response);
                         }
@@ -2229,7 +2229,7 @@ namespace body_array
                 throw;
             }
         }
-        internal HttpMessage CreatePutStringEnumValidRequest(IEnumerable<Enum0> arrayBody)
+        internal HttpMessage CreatePutStringEnumValidRequest(IEnumerable<PathsArrayPrimStringEnumFoo1Foo2Foo3GetResponses200ContentApplicationJsonSchemaItems> arrayBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -2248,9 +2248,9 @@ namespace body_array
             return message;
         }
         /// <summary> Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
-        /// <param name="arrayBody"> The ArrayOfEnum0 to use. </param>
+        /// <param name="arrayBody"> The paths·array-prim-string_enum-foo1-foo2-foo3·get·responses·200·content·application-json·schema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutStringEnumValidAsync(IEnumerable<Enum0> arrayBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutStringEnumValidAsync(IEnumerable<PathsArrayPrimStringEnumFoo1Foo2Foo3GetResponses200ContentApplicationJsonSchemaItems> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -2278,9 +2278,9 @@ namespace body_array
             }
         }
         /// <summary> Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
-        /// <param name="arrayBody"> The ArrayOfEnum0 to use. </param>
+        /// <param name="arrayBody"> The paths·array-prim-string_enum-foo1-foo2-foo3·get·responses·200·content·application-json·schema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutStringEnumValid(IEnumerable<Enum0> arrayBody, CancellationToken cancellationToken = default)
+        public Response PutStringEnumValid(IEnumerable<PathsArrayPrimStringEnumFoo1Foo2Foo3GetResponses200ContentApplicationJsonSchemaItems> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -2551,7 +2551,7 @@ namespace body_array
             return message;
         }
         /// <summary> Set array value  [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;d1399005-30f7-40d6-8da6-dd7c89ad34db&apos;, &apos;f42f6aa1-a5bc-4ddf-907e-5f915de43205&apos;]. </summary>
-        /// <param name="arrayBody"> The ArrayOfuuid to use. </param>
+        /// <param name="arrayBody"> The paths·array-prim-uuid-valid·get·responses·200·content·application-json·schema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutUuidValidAsync(IEnumerable<Guid> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -2581,7 +2581,7 @@ namespace body_array
             }
         }
         /// <summary> Set array value  [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;d1399005-30f7-40d6-8da6-dd7c89ad34db&apos;, &apos;f42f6aa1-a5bc-4ddf-907e-5f915de43205&apos;]. </summary>
-        /// <param name="arrayBody"> The ArrayOfuuid to use. </param>
+        /// <param name="arrayBody"> The paths·array-prim-uuid-valid·get·responses·200·content·application-json·schema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutUuidValid(IEnumerable<Guid> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -2779,7 +2779,7 @@ namespace body_array
             return message;
         }
         /// <summary> Set array value  [&apos;2000-12-01&apos;, &apos;1980-01-02&apos;, &apos;1492-10-12&apos;]. </summary>
-        /// <param name="arrayBody"> The ArrayOfdate to use. </param>
+        /// <param name="arrayBody"> The paths·array-prim-date-valid·get·responses·200·content·application-json·schema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutDateValidAsync(IEnumerable<DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -2809,7 +2809,7 @@ namespace body_array
             }
         }
         /// <summary> Set array value  [&apos;2000-12-01&apos;, &apos;1980-01-02&apos;, &apos;1492-10-12&apos;]. </summary>
-        /// <param name="arrayBody"> The ArrayOfdate to use. </param>
+        /// <param name="arrayBody"> The paths·array-prim-date-valid·get·responses·200·content·application-json·schema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutDateValid(IEnumerable<DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -3082,7 +3082,7 @@ namespace body_array
             return message;
         }
         /// <summary> Set array value  [&apos;2000-12-01t00:00:01z&apos;, &apos;1980-01-02T00:11:35+01:00&apos;, &apos;1492-10-12T10:15:01-08:00&apos;]. </summary>
-        /// <param name="arrayBody"> The ArrayOfdate-time to use. </param>
+        /// <param name="arrayBody"> The paths·array-prim-date_time-valid·get·responses·200·content·application-json·schema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutDateTimeValidAsync(IEnumerable<DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -3112,7 +3112,7 @@ namespace body_array
             }
         }
         /// <summary> Set array value  [&apos;2000-12-01t00:00:01z&apos;, &apos;1980-01-02T00:11:35+01:00&apos;, &apos;1492-10-12T10:15:01-08:00&apos;]. </summary>
-        /// <param name="arrayBody"> The ArrayOfdate-time to use. </param>
+        /// <param name="arrayBody"> The paths·array-prim-date_time-valid·get·responses·200·content·application-json·schema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutDateTimeValid(IEnumerable<DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -3385,7 +3385,7 @@ namespace body_array
             return message;
         }
         /// <summary> Set array value  [&apos;Fri, 01 Dec 2000 00:00:01 GMT&apos;, &apos;Wed, 02 Jan 1980 00:11:35 GMT&apos;, &apos;Wed, 12 Oct 1492 10:15:01 GMT&apos;]. </summary>
-        /// <param name="arrayBody"> The ArrayOfdate-time to use. </param>
+        /// <param name="arrayBody"> The paths·array-prim-date_time_rfc1123-valid·get·responses·200·content·application-json·schema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutDateTimeRfc1123ValidAsync(IEnumerable<DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -3415,7 +3415,7 @@ namespace body_array
             }
         }
         /// <summary> Set array value  [&apos;Fri, 01 Dec 2000 00:00:01 GMT&apos;, &apos;Wed, 02 Jan 1980 00:11:35 GMT&apos;, &apos;Wed, 12 Oct 1492 10:15:01 GMT&apos;]. </summary>
-        /// <param name="arrayBody"> The ArrayOfdate-time to use. </param>
+        /// <param name="arrayBody"> The paths·array-prim-date_time_rfc1123-valid·get·responses·200·content·application-json·schema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutDateTimeRfc1123Valid(IEnumerable<DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -3538,7 +3538,7 @@ namespace body_array
             return message;
         }
         /// <summary> Set array value  [&apos;P123DT22H14M12.011S&apos;, &apos;P5DT1H0M0S&apos;]. </summary>
-        /// <param name="arrayBody"> The ArrayOfduration to use. </param>
+        /// <param name="arrayBody"> The paths·array-prim-duration-valid·get·responses·200·content·application-json·schema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutDurationValidAsync(IEnumerable<TimeSpan> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -3568,7 +3568,7 @@ namespace body_array
             }
         }
         /// <summary> Set array value  [&apos;P123DT22H14M12.011S&apos;, &apos;P5DT1H0M0S&apos;]. </summary>
-        /// <param name="arrayBody"> The ArrayOfduration to use. </param>
+        /// <param name="arrayBody"> The paths·array-prim-duration-valid·get·responses·200·content·application-json·schema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutDurationValid(IEnumerable<TimeSpan> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -3691,7 +3691,7 @@ namespace body_array
             return message;
         }
         /// <summary> Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64. </summary>
-        /// <param name="arrayBody"> The ArrayOfbyte-array to use. </param>
+        /// <param name="arrayBody"> The paths·array-prim-byte-valid·get·responses·200·content·application-json·schema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutByteValidAsync(IEnumerable<byte[]> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -3721,7 +3721,7 @@ namespace body_array
             }
         }
         /// <summary> Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64. </summary>
-        /// <param name="arrayBody"> The ArrayOfbyte-array to use. </param>
+        /// <param name="arrayBody"> The paths·array-prim-byte-valid·get·responses·200·content·application-json·schema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutByteValid(IEnumerable<byte[]> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -4294,7 +4294,7 @@ namespace body_array
             return message;
         }
         /// <summary> Put an array of complex type with values [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {&apos;integer&apos;: 3, &apos;string&apos;: &apos;4&apos;}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
-        /// <param name="arrayBody"> The ArrayOfProduct to use. </param>
+        /// <param name="arrayBody"> The paths·array-complex-null·get·responses·200·content·application-json·schema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutComplexValidAsync(IEnumerable<Product> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -4324,7 +4324,7 @@ namespace body_array
             }
         }
         /// <summary> Put an array of complex type with values [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {&apos;integer&apos;: 3, &apos;string&apos;: &apos;4&apos;}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
-        /// <param name="arrayBody"> The ArrayOfProduct to use. </param>
+        /// <param name="arrayBody"> The paths·array-complex-null·get·responses·200·content·application-json·schema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutComplexValid(IEnumerable<Product> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -4802,7 +4802,7 @@ namespace body_array
             return message;
         }
         /// <summary> Put An array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [&apos;4&apos;, &apos;5&apos;, &apos;6&apos;], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
-        /// <param name="arrayBody"> The ArrayOfArray of put-content-schema-itemsItem to use. </param>
+        /// <param name="arrayBody"> The paths·array-array-valid·put·requestbody·content·application-json·schema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutArrayValidAsync(IEnumerable<ICollection<string>> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -4832,7 +4832,7 @@ namespace body_array
             }
         }
         /// <summary> Put An array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [&apos;4&apos;, &apos;5&apos;, &apos;6&apos;], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
-        /// <param name="arrayBody"> The ArrayOfArray of put-content-schema-itemsItem to use. </param>
+        /// <param name="arrayBody"> The paths·array-array-valid·put·requestbody·content·application-json·schema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutArrayValid(IEnumerable<ICollection<string>> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -5311,7 +5311,7 @@ namespace body_array
             return message;
         }
         /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {&apos;4&apos;: &apos;four&apos;, &apos;5&apos;: &apos;five&apos;, &apos;6&apos;: &apos;six&apos;}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
-        /// <param name="arrayBody"> The ArrayOfDictionary of string to use. </param>
+        /// <param name="arrayBody"> The paths·array-dictionary-null·get·responses·200·content·application-json·schema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutDictionaryValidAsync(IEnumerable<IDictionary<string, string>> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -5341,7 +5341,7 @@ namespace body_array
             }
         }
         /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {&apos;4&apos;: &apos;four&apos;, &apos;5&apos;: &apos;five&apos;, &apos;6&apos;: &apos;six&apos;}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
-        /// <param name="arrayBody"> The ArrayOfDictionary of string to use. </param>
+        /// <param name="arrayBody"> The paths·array-dictionary-null·get·responses·200·content·application-json·schema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutDictionaryValid(IEnumerable<IDictionary<string, string>> arrayBody, CancellationToken cancellationToken = default)
         {

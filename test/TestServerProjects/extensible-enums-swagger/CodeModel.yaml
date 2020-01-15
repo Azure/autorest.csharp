@@ -150,7 +150,7 @@ schemas: !<!Schemas>
       version: '2016-07-07'
     language: !<!Languages> 
       default:
-        name: string
+        name: components·parameters·petid·schema
         description: MISSING·SCHEMA-DESCRIPTION-STRING
     protocol: !<!Protocols> {}
   - *ref_3

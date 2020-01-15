@@ -115,7 +115,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: byte-array
+        name: paths·string-base64encoding·get·responses·200·content·application-json·schema
         description: MISSING·SCHEMA-DESCRIPTION-BYTEARRAY
     protocol: !<!Protocols> {}
   constants:
@@ -133,7 +133,7 @@ schemas: !<!Schemas>
     valueType: *ref_0
     language: !<!Languages> 
       default:
-        name: Constant0
+        name: paths·string-null·get·responses·200·content·application-json·schema
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_8
@@ -150,7 +150,7 @@ schemas: !<!Schemas>
     valueType: *ref_0
     language: !<!Languages> 
       default:
-        name: Constant1
+        name: paths·string-empty·get·responses·200·content·application-json·schema
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_9
@@ -167,7 +167,7 @@ schemas: !<!Schemas>
     valueType: *ref_0
     language: !<!Languages> 
       default:
-        name: Constant2
+        name: paths·string-mbcs·get·responses·200·content·application-json·schema
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_10
@@ -184,7 +184,7 @@ schemas: !<!Schemas>
     valueType: *ref_0
     language: !<!Languages> 
       default:
-        name: Constant3
+        name: paths·string-whitespace·get·responses·200·content·application-json·schema
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - *ref_1
@@ -232,7 +232,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: string
+        name: paths·string-notprovided·get·responses·200·content·application-json·schema
         description: MISSING·SCHEMA-DESCRIPTION-STRING
     protocol: !<!Protocols> {}
 globalParameters:

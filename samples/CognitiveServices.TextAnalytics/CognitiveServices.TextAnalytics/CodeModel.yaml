@@ -1961,7 +1961,7 @@ schemas: !<!Schemas>
       version: V3.0-Preview.1
     language: !<!Languages> 
       default:
-        name: boolean
+        name: paths·entities-recognition-general·post·parameters·1·schema
         description: MISSING·SCHEMA-DESCRIPTION-BOOLEAN
     protocol: !<!Protocols> {}
   numbers:
@@ -1992,7 +1992,7 @@ schemas: !<!Schemas>
       version: V3.0-Preview.1
     language: !<!Languages> 
       default:
-        name: string
+        name: components·parameters·endpoint·schema
         description: MISSING·SCHEMA-DESCRIPTION-STRING
     protocol: !<!Protocols> {}
   - *ref_61

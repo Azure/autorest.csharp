@@ -62,7 +62,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: string
+        name: paths·customuri-subscriptionid-keyname·get·parameters·0·schema
         description: MISSING·SCHEMA-DESCRIPTION-STRING
     protocol: !<!Protocols> {}
   - !<!StringSchema> &ref_6
@@ -73,7 +73,7 @@ schemas: !<!Schemas>
     defaultValue: v1
     language: !<!Languages> 
       default:
-        name: string
+        name: paths·customuri-subscriptionid-keyname·get·parameters·2·schema
         description: MISSING·SCHEMA-DESCRIPTION-STRING
     protocol: !<!Protocols> {}
   - *ref_1
@@ -85,7 +85,7 @@ schemas: !<!Schemas>
     defaultValue: host
     language: !<!Languages> 
       default:
-        name: string
+        name: components·parameters·dnssuffix·schema
         description: MISSING·SCHEMA-DESCRIPTION-STRING
     protocol: !<!Protocols> {}
 globalParameters:
