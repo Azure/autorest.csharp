@@ -5,7 +5,7 @@ $ErrorActionPreference = 'Stop'
 
 function Invoke-AutoRest($baseOutput, $title, $autoRestArguments)
 {
-    $command = "npx autorest-beta $script:debugFlags $autoRestArguments"
+    $command = "npx  @autorest/autorest $script:debugFlags $autoRestArguments"
     if ($title)
     {
         $namespace = $title.Replace('-', '_')
@@ -20,8 +20,10 @@ function Invoke-AutoRest($baseOutput, $title, $autoRestArguments)
     }
 
     Write-Host "> $command"
+    pushd $repoRoot
     cmd /c "$command 2>&1"
-
+    popd
+    
     if($LastExitCode -ne 0)
     {
         Write-Error "Command failed to execute: $command"
@@ -71,7 +73,7 @@ $testNames =
     #'composite-swagger.quirks',
     'custom-baseUrl',
     'custom-baseUrl-more-options',
-    #'custom-baseUrl-paging',
+    'custom-baseUrl-paging',
     'extensible-enums-swagger',
     #'head',
     'header',
@@ -80,7 +82,7 @@ $testNames =
     #'httpInfrastructure.quirks',
     #'lro',
     #'model-flattening',
-    #'paging',
+    'paging',
     #'parameter-flattening',
     #'report',
     #'required-optional',

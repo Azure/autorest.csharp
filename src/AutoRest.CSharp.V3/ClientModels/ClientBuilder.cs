@@ -16,37 +16,46 @@ namespace AutoRest.CSharp.V3.ClientModels
 {
     internal class ClientBuilder
     {
-        public static ServiceClient BuildClient(OperationGroup arg)
+        public static ServiceClient BuildClient(OperationGroup operationGroup)
         {
-            List<ClientMethod> methods = new List<ClientMethod>();
-            Dictionary<string, ServiceClientParameter> clientParameters = new Dictionary<string, ServiceClientParameter>();
-
-            var allClientParameters = arg.Operations
+            var allClientParameters = operationGroup.Operations
                 .SelectMany(op => op.Request.Parameters)
                 .Where(p => p.Implementation == ImplementationLocation.Client)
                 .Distinct();
-
+            Dictionary<string, ServiceClientParameter> clientParameters = new Dictionary<string, ServiceClientParameter>();
             // Deduplication required because of https://github.com/Azure/autorest.modelerfour/issues/100
             foreach (Parameter clientParameter in allClientParameters)
             {
                 clientParameters[clientParameter.Language.Default.Name] = BuildParameter(clientParameter);
             }
 
-            string clientName = arg.CSharpName();
-
-            foreach (Operation operation in arg.Operations)
+            string clientName = operationGroup.CSharpName();
+            List<ClientMethod> methods = new List<ClientMethod>();
+            List<ClientMethodPaging> pagingMethods = new List<ClientMethodPaging>();
+            foreach (Operation operation in operationGroup.Operations)
             {
                 var method = BuildMethod(operation, clientName, clientParameters);
                 if (method != null)
                 {
                     methods.Add(method);
+                    var pageable = operation.Extensions.GetValue<IDictionary<object, object>>("x-ms-pageable");
+                    if (pageable != null)
+                    {
+                        ClientMethod nextPageMethod = BuildNextPageMethod(method);
+                        methods.Add(nextPageMethod);
+                        //TODO: This is a hack since we don't have the model information at this point
+                        var schemaForPaging = ((method.Response.ResponseBody as ObjectResponseBody)?.Type as SchemaTypeReference)?.Schema as ObjectSchema;
+                        ClientMethodPaging pagingMethod = GetClientMethodPaging(method, nextPageMethod, pageable, schemaForPaging);
+                        pagingMethods.Add(pagingMethod);
+                    }
                 }
             }
 
             return new ServiceClient(clientName,
-                arg.Language.Default.Description,
+                operationGroup.Language.Default.Description,
                 OrderParameters(clientParameters.Values),
-                methods.ToArray());
+                methods.ToArray(),
+                pagingMethods.ToArray());
         }
 
         private static ServiceClientParameter[] OrderParameters(IEnumerable<ServiceClientParameter> parameters)
@@ -66,7 +75,7 @@ namespace AutoRest.CSharp.V3.ClientModels
             return null;
         }
 
-        private static ClientMethod? BuildMethod(Operation operation, string clientName, Dictionary<string, ServiceClientParameter> clientParameters)
+        private static ClientMethod? BuildMethod(Operation operation, string clientName, IReadOnlyDictionary<string, ServiceClientParameter> clientParameters)
         {
             var httpRequest = operation.Request.Protocol.Http as HttpRequest;
             var httpRequestWithBody = httpRequest as HttpWithBodyRequest;
@@ -120,7 +129,6 @@ namespace AutoRest.CSharp.V3.ClientModels
                     constantOrParameter = clientParameters[requestParameter.Language.Default.Name];
                 }
 
-
                 if (requestParameter.Protocol.Http is HttpParameter httpParameter)
                 {
                     SerializationFormat serializationFormat = ClientModelBuilderHelpers.GetSerializationFormat(valueSchema);
@@ -138,7 +146,6 @@ namespace AutoRest.CSharp.V3.ClientModels
                         case ParameterLocation.Body:
                             Debug.Assert(httpRequestWithBody != null);
                             var serialization = SerializationBuilder.Build(httpRequestWithBody.KnownMediaType, requestParameter.Schema, requestParameter.IsNullable());
-
                             body = new ObjectRequestBody(constantOrParameter, serialization);
                             break;
                         case ParameterLocation.Uri:
@@ -146,7 +153,6 @@ namespace AutoRest.CSharp.V3.ClientModels
                             break;
                     }
                 }
-
             }
 
             if (httpRequestWithBody != null)
@@ -193,6 +199,54 @@ namespace AutoRest.CSharp.V3.ClientModels
                 clientResponse,
                 new ClientMethodDiagnostics($"{clientName}.{operationName}", Array.Empty<DiagnosticScopeAttributes>())
             );
+        }
+
+        private static ClientMethod BuildNextPageMethod(ClientMethod method)
+        {
+            var nextPageUrlParameter = new ServiceClientParameter(
+                "nextLinkUrl",
+                "The URL to the next page of results.",
+                new FrameworkTypeReference(typeof(string)),
+                null,
+                true);
+            var headerParameterNames = method.Request.Headers.Where(h => !h.Value.IsConstant).Select(h => h.Value.Parameter.Name).ToArray();
+            var parameters = method.Parameters.Where(p =>  headerParameterNames.Contains(p.Name)).Append(nextPageUrlParameter).ToArray();
+            var request = new ClientMethodRequest(
+                method.Request.Method,
+                new[] { new ConstantOrParameter(nextPageUrlParameter) },
+                Array.Empty<PathSegment>(),
+                Array.Empty<QueryParameter>(),
+                method.Request.Headers,
+                null
+            );
+
+            return new ClientMethod(
+                $"{method.Name}NextPage",
+                method.Description,
+                request,
+                parameters,
+                method.Response,
+                method.Diagnostics);
+        }
+
+        private static ClientMethodPaging GetClientMethodPaging(ClientMethod method, ClientMethod nextPageMethod, IDictionary<object, object> pageable, ObjectSchema? schema)
+        {
+            var nextLinkName = pageable.GetValue<string>("nextLinkName");
+            //TODO: This should actually reference an operation: https://github.com/Azure/autorest.csharp/issues/397
+            var operationName = pageable.GetValue<string>("operationName");
+
+            var itemName = pageable.GetValue<string>("itemName");
+            //TODO: Hack to figure out the property name on the model
+            var itemProperty = schema?.Properties?.FirstOrDefault(p => p.SerializedName == itemName);
+            itemName = itemProperty?.CSharpName() ?? itemName ?? "Value";
+            var nextLinkProperty = schema?.Properties?.FirstOrDefault(p => p.SerializedName == nextLinkName);
+            nextLinkName = nextLinkProperty?.CSharpName() ?? nextLinkName;
+            // If itemName resolves to Value, we can't use itemProperty. So, get the correct property.
+            var itemTypeProperty = schema?.Properties?.FirstOrDefault(p => p.CSharpName() == itemName);
+            var itemTypeValueSchema = (itemTypeProperty?.Schema as ArraySchema)?.ElementType;
+            var itemType = ClientModelBuilderHelpers.CreateType(itemTypeValueSchema ?? new Schema(), false);
+            var name = $"{method.Name}Pageable";
+            return new ClientMethodPaging(method, nextPageMethod, name, nextLinkName, itemName, itemType, operationName);
         }
 
         private static ServiceClientParameter BuildParameter(Parameter requestParameter)

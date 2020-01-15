@@ -14,7 +14,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
 {
     public class TestServerV2 : IDisposable, ITestServer
     {
-        private Process _process;
+        private readonly Process _process;
 
         public HttpClient Client { get; }
         public string Host { get; }
@@ -35,13 +35,14 @@ namespace AutoRest.TestServer.Tests.Infrastructure
 
             _process = Process.Start(processStartInfo);
             ProcessTracker.Add(_process);
+            Debug.Assert(_process != null);
             while (!_process.HasExited)
             {
                 var s = _process.StandardOutput.ReadLine();
                 if (s?.StartsWith(portPhrase) == true)
                 {
                     Host = $"http://localhost:{s.Substring(portPhrase.Length).Trim()}";
-                    Client = new HttpClient()
+                    Client = new HttpClient
                     {
                         BaseAddress = new Uri(Host)
                     };

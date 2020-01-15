@@ -1807,9 +1807,9 @@ namespace xml_service
             request.Method = RequestMethod.Put;
             request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/xml/", false);
-            request.Headers.Add("Content-Type", "application/xml");
             request.Uri.AppendQuery("comp", "properties", true);
             request.Uri.AppendQuery("restype", "service", true);
+            request.Headers.Add("Content-Type", "application/xml");
             using var content = new XmlWriterContent();
             content.XmlWriter.WriteObjectValue(properties, "StorageServiceProperties");
             request.Content = content;
@@ -1973,9 +1973,9 @@ namespace xml_service
             request.Method = RequestMethod.Put;
             request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/xml/mycontainer", false);
-            request.Headers.Add("Content-Type", "application/xml");
             request.Uri.AppendQuery("comp", "acl", true);
             request.Uri.AppendQuery("restype", "container", true);
+            request.Headers.Add("Content-Type", "application/xml");
             using var content = new XmlWriterContent();
             content.XmlWriter.WriteStartElement("SignedIdentifiers");
             foreach (var item in properties)

@@ -10,10 +10,13 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using AutoRest.CSharp.V3.ClientModels;
 using AutoRest.CSharp.V3.ClientModels.Serialization;
+using AutoRest.CSharp.V3.Pipeline.Generated;
 using AutoRest.CSharp.V3.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Response = Azure.Response;
+using SerializationFormat = AutoRest.CSharp.V3.ClientModels.SerializationFormat;
 
 namespace AutoRest.CSharp.V3.CodeGen
 {
@@ -42,8 +45,14 @@ namespace AutoRest.CSharp.V3.CodeGen
                     foreach (var method in operationGroup.Methods)
                     {
                         WriteRequestCreation(writer, method);
-                        WriteOperation(writer, method, async: true);
-                        WriteOperation(writer, method, async: false);
+                        WriteOperation(writer, method, true);
+                        WriteOperation(writer, method, false);
+                    }
+
+                    foreach (var pagingMethod in operationGroup.PagingMethods)
+                    {
+                        WritePagingOperation(writer, pagingMethod, true);
+                        WritePagingOperation(writer, pagingMethod, false);
                     }
                 }
             }
@@ -96,14 +105,16 @@ namespace AutoRest.CSharp.V3.CodeGen
             writer.AppendRaw(",");
         }
 
+        private string CreateMethodName(string name, bool async) => $"{name}{(async ? "Async" : string.Empty)}";
 
-        private string CreateRequestMethodName(ClientMethod operation) => $"Create{operation.Name}Request";
+        private string CreateRequestMethodName(string name) => $"Create{name}Request";
 
         private void WriteRequestCreation(CodeWriter writer, ClientMethod operation)
         {
-
-            writer.Append($"internal {typeof(HttpMessage)} {CreateRequestMethodName(operation)}(");
-            foreach (ServiceClientParameter clientParameter in operation.Parameters)
+            var methodName = CreateRequestMethodName(operation.Name);
+            writer.Append($"internal {typeof(HttpMessage)} {methodName}(");
+            var parameters = operation.Parameters;
+            foreach (ServiceClientParameter clientParameter in parameters)
             {
                 writer.Append($"{_typeFactory.CreateInputType(clientParameter.Type)} {clientParameter.Name},");
             }
@@ -127,15 +138,15 @@ namespace AutoRest.CSharp.V3.CodeGen
                     WritePathSegment(writer, segment);
                 }
 
-                foreach (var header in operation.Request.Headers)
-                {
-                    WriteHeader(writer, header);
-                }
-
                 //TODO: Duplicate code between query and header parameter processing logic
                 foreach (var queryParameter in operation.Request.Query)
                 {
                     WriteQueryParameter(writer, queryParameter);
+                }
+
+                foreach (var header in operation.Request.Headers)
+                {
+                    WriteHeader(writer, header);
                 }
 
                 if (operation.Request.Body is ObjectRequestBody body && body.Serialization is JsonSerialization jsonSerialization)
@@ -170,13 +181,13 @@ namespace AutoRest.CSharp.V3.CodeGen
                 writer.Line($"return message;");
             }
         }
+
         private void WriteOperation(CodeWriter writer, ClientMethod operation, bool async)
         {
             //TODO: Handle multiple responses
             var responseBody = operation.Response.ResponseBody;
             CSharpType? bodyType = responseBody != null ? _typeFactory.CreateType(responseBody.Type) : null;
             CSharpType? headerModelType = operation.Response.HeaderModel != null ? _typeFactory.CreateType(operation.Response.HeaderModel.Name) : null;
-
             CSharpType responseType = bodyType switch
             {
                 null when headerModelType != null => new CSharpType(typeof(ResponseWithHeaders<>), headerModelType),
@@ -184,29 +195,22 @@ namespace AutoRest.CSharp.V3.CodeGen
                 { } => new CSharpType(typeof(ResponseWithHeaders<>), bodyType, headerModelType),
                 _ => new CSharpType(typeof(Response)),
             };
-
-
+            responseType = async ? new CSharpType(typeof(ValueTask<>), responseType) : responseType;
+            var parameters = operation.Parameters;
             writer.WriteXmlDocumentationSummary(operation.Description);
 
-            foreach (ServiceClientParameter parameter in operation.Parameters)
+            foreach (ServiceClientParameter parameter in parameters)
             {
                 writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
             }
 
             writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
 
-            var methodName = operation.Name;
-            if (async)
-            {
-                CSharpType asyncReturnType = new CSharpType(typeof(ValueTask<>), responseType);
-                writer.Append($"public async {asyncReturnType} {methodName}Async(");
-            }
-            else
-            {
-                writer.Append($"public {responseType} {methodName}(");
-            }
+            var methodName = CreateMethodName(operation.Name, async);
+            var asyncText = async ? "async " : string.Empty;
+            writer.Append($"public {asyncText}{responseType} {methodName}(");
 
-            foreach (ServiceClientParameter parameter in operation.Parameters)
+            foreach (ServiceClientParameter parameter in parameters)
             {
                 WriteParameter(writer, parameter);
             }
@@ -214,7 +218,7 @@ namespace AutoRest.CSharp.V3.CodeGen
 
             using (writer.Scope())
             {
-                WriteParameterNullChecks(writer, operation.Parameters);
+                WriteParameterNullChecks(writer, parameters);
 
                 writer.Line($"using var scope = clientDiagnostics.CreateScope({operation.Diagnostics.ScopeName:L});");
                 foreach (DiagnosticScopeAttributes diagnosticScopeAttributes in operation.Diagnostics.Attributes)
@@ -225,12 +229,14 @@ namespace AutoRest.CSharp.V3.CodeGen
 
                 using (writer.Scope($"try"))
                 {
-                    writer.Append($"using var message = {CreateRequestMethodName(operation)}(");
+                    var requestMethodName = CreateRequestMethodName(operation.Name);
+                    writer.Append($"using var message = {requestMethodName}(");
 
-                    foreach (ServiceClientParameter parameter in operation.Parameters)
+                    foreach (ServiceClientParameter parameter in parameters)
                     {
                         writer.Append($"{parameter.Name}, ");
                     }
+
                     writer.RemoveTrailingComma();
                     writer.Line($");");
 
@@ -251,6 +257,67 @@ namespace AutoRest.CSharp.V3.CodeGen
                     writer.Line($"scope.Failed(e);");
                     writer.Line($"throw;");
                 }
+            }
+        }
+
+        private void WritePagingOperation(CodeWriter writer, ClientMethodPaging pagingMethod, bool async)
+        {
+            var pageType = _typeFactory.CreateType(pagingMethod.ItemType);
+            CSharpType responseType = async ? new CSharpType(typeof(AsyncPageable<>), pageType) : new CSharpType(typeof(Pageable<>), pageType);
+            var parameters = pagingMethod.Method.Parameters;
+            var nextPageParameters = pagingMethod.NextPageMethod.Parameters;
+
+            writer.WriteXmlDocumentationSummary(pagingMethod.Method.Description);
+
+            foreach (ServiceClientParameter parameter in parameters)
+            {
+                writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
+            }
+
+            writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
+
+            writer.Append($"public {responseType} {CreateMethodName(pagingMethod.Name, async)}(");
+            foreach (ServiceClientParameter parameter in parameters)
+            {
+                WriteParameter(writer, parameter);
+            }
+
+            writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
+
+            using (writer.Scope())
+            {
+                WriteParameterNullChecks(writer, parameters);
+
+                var pageWrappedType = new CSharpType(typeof(Page<>), pageType);
+                var funcType = async ? new CSharpType(typeof(Task<>), pageWrappedType) : pageWrappedType;
+                var nullableInt = new CSharpType(typeof(int), true);
+
+                var continuationTokenText = pagingMethod.NextLinkName != null ? $"response.Value.{pagingMethod.NextLinkName}" : "null";
+                var asyncText = async ? "async " : string.Empty;
+                var awaitText = async ? "await " : string.Empty;
+                var configureAwaitText = async ? ".ConfigureAwait(false)" : string.Empty;
+                using (writer.Scope($"{asyncText}{funcType} FirstPageFunc({nullableInt} pageSizeHint)"))
+                {
+                    writer.Append($"var response = {awaitText}{CreateMethodName(pagingMethod.Method.Name, async)}(");
+                    foreach (ServiceClientParameter parameter in parameters)
+                    {
+                        writer.Append($"{parameter.Name}, ");
+                    }
+                    writer.Line($"cancellationToken){configureAwaitText};");
+                    writer.Line($"return {typeof(Page)}.FromValues(response.Value.{pagingMethod.ItemName}, {continuationTokenText}, response.GetRawResponse());");
+                }
+
+                using (writer.Scope($"{asyncText}{funcType} NextPageFunc({typeof(string)} nextLinkUrl, {nullableInt} pageSizeHint)"))
+                {
+                    writer.Append($"var response = {awaitText}{CreateMethodName(pagingMethod.NextPageMethod.Name, async)}(");
+                    foreach (ServiceClientParameter parameter in nextPageParameters)
+                    {
+                        writer.Append($"{parameter.Name}, ");
+                    }
+                    writer.Line($"cancellationToken){configureAwaitText};");
+                    writer.Line($"return {typeof(Page)}.FromValues(response.Value.{pagingMethod.ItemName}, {continuationTokenText}, response.GetRawResponse());");
+                }
+                writer.Line($"return {typeof(PageResponseEnumerator)}.Create{(async ? "Async" : string.Empty)}Enumerable(FirstPageFunc, NextPageFunc);");
             }
         }
 
