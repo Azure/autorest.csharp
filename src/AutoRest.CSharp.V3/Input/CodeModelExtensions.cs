@@ -8,10 +8,10 @@ namespace AutoRest.CSharp.V3.Input
 {
     internal static class CodeModelExtensions
     {
-        public static bool IsNullable(this Parameter parameter) => !(parameter.Required ?? false);
+        public static bool IsNullable(this RequestParameter parameter) => !(parameter.Required ?? false);
         public static bool IsNullable(this Property parameter) => !(parameter.Required ?? false);
 
-        public static string CSharpName(this Parameter parameter) => parameter.Schema is ConstantSchema ?
+        public static string CSharpName(this RequestParameter parameter) => parameter.Schema is ConstantSchema ?
             parameter.Language.Default.Name.ToCleanName() :
             parameter.Language.Default.Name.ToVariableName();
 

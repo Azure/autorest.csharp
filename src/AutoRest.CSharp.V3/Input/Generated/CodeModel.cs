@@ -1340,7 +1340,7 @@ namespace AutoRest.CSharp.V3.Input.Generated
 
     /// <summary>a definition of an discrete input for an operation</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
-    internal partial class Parameter : Value
+    internal partial class RequestParameter : Value
     {
         /// <summary>suggested implementation location for this parameter</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "implementation")]
@@ -1429,7 +1429,7 @@ namespace AutoRest.CSharp.V3.Input.Generated
     {
         /// <summary>the parameter inputs to the operation</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "parameters")]
-        public System.Collections.Generic.ICollection<Parameter>? Parameters { get; set; }
+        public System.Collections.Generic.ICollection<RequestParameter>? Parameters { get; set; }
     }
 
     /// <summary>an operation group represents a container around set of operations</summary>
@@ -2161,7 +2161,7 @@ namespace AutoRest.CSharp.V3.Input.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
-    internal partial class HttpHeader
+    internal partial class HttpResponseHeader
     {
         [YamlDotNet.Serialization.YamlMember(Alias = "header")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -2196,7 +2196,7 @@ namespace AutoRest.CSharp.V3.Input.Generated
 
         /// <summary>content returned by the service in the HTTP headers</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "headers")]
-        public System.Collections.Generic.ICollection<HttpHeader>? Headers { get; set; }
+        public System.Collections.Generic.ICollection<HttpResponseHeader>? Headers { get; set; }
 
         /// <summary>sets of HTTP headers grouped together into a single schema</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "headerGroups")]
@@ -2337,7 +2337,7 @@ namespace AutoRest.CSharp.V3.Input.Generated
 
         /// <summary>all global parameters (ie, ImplementationLocation = client )</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "globalParameters")]
-        public System.Collections.Generic.ICollection<Parameter>? GlobalParameters { get; set; }
+        public System.Collections.Generic.ICollection<RequestParameter>? GlobalParameters { get; set; }
 
         /// <summary>per-language information for this aspect</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "language")]

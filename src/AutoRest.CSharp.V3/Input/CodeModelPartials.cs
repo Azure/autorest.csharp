@@ -5,7 +5,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
-using AutoRest.CSharp.V3.Input;
 using YamlDotNet.Serialization;
 
 #pragma warning disable SA1649
@@ -43,7 +42,7 @@ namespace AutoRest.CSharp.V3.Input.Generated
     {
         public HttpResponse()
         {
-            Headers = Array.Empty<HttpHeader>();
+            Headers = Array.Empty<HttpResponseHeader>();
         }
     }
 

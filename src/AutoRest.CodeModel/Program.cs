@@ -58,7 +58,11 @@ namespace AutoRest.CodeModel
                 .Replace("CSharpLanguage Csharp", "CSharpLanguage CSharp")
                 // Fix for issue with Solution Error Visualizer
                 // https://marketplace.visualstudio.com/items?itemName=VisualStudioPlatformTeam.SolutionErrorVisualizer&ssr=false#review-details
-                .Replace("#pragma warning disable // Disable all warnings", $"#pragma warning disable // Disable all warnings{Environment.NewLine}    #nullable enable");
+                .Replace("#pragma warning disable // Disable all warnings", $"#pragma warning disable // Disable all warnings{Environment.NewLine}    #nullable enable")
+                // Class names that conflict with project class names
+                .Replace("HttpHeader", "HttpResponseHeader")
+                .Replace("class Parameter", "class RequestParameter")
+                .Replace("<Parameter>", "<RequestParameter>");
 
             var lines = cleanFile.ToLines().ToArray();
             var fileWithNullable = String.Join(Environment.NewLine, lines.Zip(lines.Skip(1).Append(String.Empty))

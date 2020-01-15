@@ -15,7 +15,6 @@ using AutoRest.CSharp.V3.Output.Models.Shared;
 using AutoRest.CSharp.V3.Output.Models.TypeReferences;
 using AutoRest.CSharp.V3.Utilities;
 using Azure.Core;
-using HttpHeader = AutoRest.CSharp.V3.Input.Generated.HttpHeader;
 using Parameter = AutoRest.CSharp.V3.Output.Models.Shared.Parameter;
 using Request = AutoRest.CSharp.V3.Output.Models.Requests.Request;
 using Response = AutoRest.CSharp.V3.Output.Models.Responses.Response;
@@ -33,7 +32,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 .Distinct();
             Dictionary<string, Parameter> clientParameters = new Dictionary<string, Parameter>();
             // Deduplication required because of https://github.com/Azure/autorest.modelerfour/issues/100
-            foreach (Input.Generated.Parameter clientParameter in allClientParameters)
+            foreach (RequestParameter clientParameter in allClientParameters)
             {
                 clientParameters[clientParameter.Language.Default.Name] = BuildParameter(clientParameter);
             }
@@ -72,7 +71,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             return parameters.OrderBy(p => p.DefaultValue != null).ToArray();
         }
 
-        private static Constant? CreateDefaultValueConstant(Input.Generated.Parameter requestParameter)
+        private static Constant? CreateDefaultValueConstant(RequestParameter requestParameter)
         {
             if (requestParameter.ClientDefaultValue != null)
             {
@@ -105,7 +104,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             List<Parameter> methodParameters = new List<Parameter>();
 
             RequestBody? body = null;
-            foreach (Input.Generated.Parameter requestParameter in operation.Request.Parameters ?? Array.Empty<Input.Generated.Parameter>())
+            foreach (RequestParameter requestParameter in operation.Request.Parameters ?? Array.Empty<RequestParameter>())
             {
                 string defaultName = requestParameter.Language.Default.Name;
                 string serializedName = requestParameter.Language.Default.SerializedName ?? defaultName;
@@ -258,7 +257,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             return new Paging(method, nextPageMethod, name, nextLinkName, itemName, itemType, operationName);
         }
 
-        private static Parameter BuildParameter(Input.Generated.Parameter requestParameter)
+        private static Parameter BuildParameter(RequestParameter requestParameter)
         {
             Constant? defaultValue = null;
             if (requestParameter.Schema is ConstantSchema constantSchema)
@@ -281,7 +280,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 return null;
             }
 
-            ResponseHeader CreateResponseHeader(HttpHeader header) =>
+            ResponseHeader CreateResponseHeader(HttpResponseHeader header) =>
                 new ResponseHeader(header.Header.ToCleanName(), header.Header, BuilderHelpers.CreateType(header.Schema, true));
 
             string operationName = operation.CSharpName();
@@ -355,7 +354,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             _ => null
         };
 
-        private static string CreateDescription(Input.Generated.Parameter requestParameter)
+        private static string CreateDescription(RequestParameter requestParameter)
         {
             return string.IsNullOrWhiteSpace(requestParameter.Language.Default.Description) ?
                 $"The {requestParameter.Schema.Name} to use." :
