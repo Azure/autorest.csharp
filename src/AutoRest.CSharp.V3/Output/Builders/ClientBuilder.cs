@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 .SelectMany(op => op.Request.Parameters)
                 .Where(p => p.Implementation == ImplementationLocation.Client)
                 .Distinct();
-            Dictionary<string, ServiceClientParameter> clientParameters = new Dictionary<string, ServiceClientParameter>();
+            Dictionary<string, Parameter> clientParameters = new Dictionary<string, Parameter>();
             // Deduplication required because of https://github.com/Azure/autorest.modelerfour/issues/100
             foreach (Input.Generated.Parameter clientParameter in allClientParameters)
             {
@@ -39,8 +39,8 @@ namespace AutoRest.CSharp.V3.Output.Builders
             }
 
             string clientName = operationGroup.CSharpName();
-            List<ClientMethod> methods = new List<ClientMethod>();
-            List<ClientMethodPaging> pagingMethods = new List<ClientMethodPaging>();
+            List<Method> methods = new List<Method>();
+            List<Paging> pagingMethods = new List<Paging>();
             foreach (Operation operation in operationGroup.Operations)
             {
                 var method = BuildMethod(operation, clientName, clientParameters);
@@ -50,11 +50,11 @@ namespace AutoRest.CSharp.V3.Output.Builders
                     var pageable = operation.Extensions.GetValue<IDictionary<object, object>>("x-ms-pageable");
                     if (pageable != null)
                     {
-                        ClientMethod nextPageMethod = BuildNextPageMethod(method);
+                        Method nextPageMethod = BuildNextPageMethod(method);
                         methods.Add(nextPageMethod);
                         //TODO: This is a hack since we don't have the model information at this point
                         var schemaForPaging = ((method.Response.ResponseBody as ObjectResponseBody)?.Type as SchemaTypeReference)?.Schema as ObjectSchema;
-                        ClientMethodPaging pagingMethod = GetClientMethodPaging(method, nextPageMethod, pageable, schemaForPaging);
+                        Paging pagingMethod = GetClientMethodPaging(method, nextPageMethod, pageable, schemaForPaging);
                         pagingMethods.Add(pagingMethod);
                     }
                 }
@@ -217,7 +217,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
         private static Method BuildNextPageMethod(Method method)
         {
-            var nextPageUrlParameter = new ServiceClientParameter(
+            var nextPageUrlParameter = new Parameter(
                 "nextLinkUrl",
                 "The URL to the next page of results.",
                 new FrameworkTypeReference(typeof(string)),
@@ -225,16 +225,16 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 true,
                 ParameterLocation.Uri);
             var parameters = method.Parameters.Where(IsNextPageParameter).Append(nextPageUrlParameter).ToArray();
-            var request = new ClientMethodRequest(
+            var request = new Request(
                 method.Request.Method,
-                parameters.Where(p => p.Location == ParameterLocation.Uri).Select(p => new ConstantOrParameter(p)).ToArray(),
+                parameters.Where(p => p.Location == ParameterLocation.Uri).Select(p => new RequestParameter(p)).ToArray(),
                 Array.Empty<PathSegment>(),
                 Array.Empty<QueryParameter>(),
                 method.Request.Headers,
                 null
             );
 
-            return new ClientMethod(
+            return new Method(
                 $"{method.Name}NextPage",
                 method.Description,
                 request,
@@ -243,7 +243,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 method.Diagnostics);
         }
 
-        private static ClientMethodPaging GetClientMethodPaging(ClientMethod method, ClientMethod nextPageMethod, IDictionary<object, object> pageable, ObjectSchema? schema)
+        private static Paging GetClientMethodPaging(Method method, Method nextPageMethod, IDictionary<object, object> pageable, ObjectSchema? schema)
         {
             var nextLinkName = pageable.GetValue<string>("nextLinkName");
             //TODO: This should actually reference an operation: https://github.com/Azure/autorest.csharp/issues/397

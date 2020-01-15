@@ -19,8 +19,8 @@ namespace AutoRest.CSharp.V3.Output.Models.Requests
         }
 
         public string Name { get; }
-        public ClientMethod Method { get; }
-        public ClientMethod NextPageMethod { get; }
+        public Method Method { get; }
+        public Method NextPageMethod { get; }
         public string? NextLinkName { get; }
         public string ItemName { get; }
         public TypeReference ItemType { get; }

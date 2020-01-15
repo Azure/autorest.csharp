@@ -306,7 +306,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 using (writer.Scope($"{asyncText}{funcType} FirstPageFunc({nullableInt} pageSizeHint)"))
                 {
                     writer.Append($"var response = {awaitText}{CreateMethodName(pagingMethod.Method.Name, async)}(");
-                    foreach (ServiceClientParameter parameter in parameters)
+                    foreach (Parameter parameter in parameters)
                     {
                         writer.Append($"{parameter.Name}, ");
                     }
@@ -317,7 +317,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 using (writer.Scope($"{asyncText}{funcType} NextPageFunc({typeof(string)} nextLinkUrl, {nullableInt} pageSizeHint)"))
                 {
                     writer.Append($"var response = {awaitText}{CreateMethodName(pagingMethod.NextPageMethod.Name, async)}(");
-                    foreach (ServiceClientParameter parameter in nextPageParameters)
+                    foreach (Parameter parameter in nextPageParameters)
                     {
                         writer.Append($"{parameter.Name}, ");
                     }
