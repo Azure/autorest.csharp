@@ -1590,6 +1590,9 @@ namespace AutoRest.CSharp.V3.Input.Generated
 
         [System.Runtime.Serialization.EnumMember(Value = @"uri")]
         Uri = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"virtual")]
+        Virtual = 7,
     }
 
     /// <summary>A catch-all for all un-handled response codes.</summary>
@@ -1654,143 +1657,146 @@ namespace AutoRest.CSharp.V3.Input.Generated
         [System.Runtime.Serialization.EnumMember(Value = @"302")]
         _302 = 16,
 
+        [System.Runtime.Serialization.EnumMember(Value = @"303")]
+        _303 = 17,
+
         [System.Runtime.Serialization.EnumMember(Value = @"304")]
-        _304 = 17,
+        _304 = 18,
 
         [System.Runtime.Serialization.EnumMember(Value = @"305")]
-        _305 = 18,
+        _305 = 19,
 
         [System.Runtime.Serialization.EnumMember(Value = @"306")]
-        _306 = 19,
+        _306 = 20,
 
         [System.Runtime.Serialization.EnumMember(Value = @"307")]
-        _307 = 20,
+        _307 = 21,
 
         [System.Runtime.Serialization.EnumMember(Value = @"308")]
-        _308 = 21,
+        _308 = 22,
 
         [System.Runtime.Serialization.EnumMember(Value = @"400")]
-        _400 = 22,
+        _400 = 23,
 
         [System.Runtime.Serialization.EnumMember(Value = @"401")]
-        _401 = 23,
+        _401 = 24,
 
         [System.Runtime.Serialization.EnumMember(Value = @"402")]
-        _402 = 24,
+        _402 = 25,
 
         [System.Runtime.Serialization.EnumMember(Value = @"403")]
-        _403 = 25,
+        _403 = 26,
 
         [System.Runtime.Serialization.EnumMember(Value = @"404")]
-        _404 = 26,
+        _404 = 27,
 
         [System.Runtime.Serialization.EnumMember(Value = @"405")]
-        _405 = 27,
+        _405 = 28,
 
         [System.Runtime.Serialization.EnumMember(Value = @"406")]
-        _406 = 28,
+        _406 = 29,
 
         [System.Runtime.Serialization.EnumMember(Value = @"407")]
-        _407 = 29,
+        _407 = 30,
 
         [System.Runtime.Serialization.EnumMember(Value = @"408")]
-        _408 = 30,
+        _408 = 31,
 
         [System.Runtime.Serialization.EnumMember(Value = @"409")]
-        _409 = 31,
+        _409 = 32,
 
         [System.Runtime.Serialization.EnumMember(Value = @"410")]
-        _410 = 32,
+        _410 = 33,
 
         [System.Runtime.Serialization.EnumMember(Value = @"411")]
-        _411 = 33,
+        _411 = 34,
 
         [System.Runtime.Serialization.EnumMember(Value = @"412")]
-        _412 = 34,
+        _412 = 35,
 
         [System.Runtime.Serialization.EnumMember(Value = @"413")]
-        _413 = 35,
+        _413 = 36,
 
         [System.Runtime.Serialization.EnumMember(Value = @"414")]
-        _414 = 36,
+        _414 = 37,
 
         [System.Runtime.Serialization.EnumMember(Value = @"415")]
-        _415 = 37,
+        _415 = 38,
 
         [System.Runtime.Serialization.EnumMember(Value = @"416")]
-        _416 = 38,
+        _416 = 39,
 
         [System.Runtime.Serialization.EnumMember(Value = @"417")]
-        _417 = 39,
+        _417 = 40,
 
         [System.Runtime.Serialization.EnumMember(Value = @"418")]
-        _418 = 40,
+        _418 = 41,
 
         [System.Runtime.Serialization.EnumMember(Value = @"421")]
-        _421 = 41,
+        _421 = 42,
 
         [System.Runtime.Serialization.EnumMember(Value = @"422")]
-        _422 = 42,
+        _422 = 43,
 
         [System.Runtime.Serialization.EnumMember(Value = @"423")]
-        _423 = 43,
+        _423 = 44,
 
         [System.Runtime.Serialization.EnumMember(Value = @"424")]
-        _424 = 44,
+        _424 = 45,
 
         [System.Runtime.Serialization.EnumMember(Value = @"425")]
-        _425 = 45,
+        _425 = 46,
 
         [System.Runtime.Serialization.EnumMember(Value = @"426")]
-        _426 = 46,
+        _426 = 47,
 
         [System.Runtime.Serialization.EnumMember(Value = @"428")]
-        _428 = 47,
+        _428 = 48,
 
         [System.Runtime.Serialization.EnumMember(Value = @"429")]
-        _429 = 48,
+        _429 = 49,
 
         [System.Runtime.Serialization.EnumMember(Value = @"431")]
-        _431 = 49,
+        _431 = 50,
 
         [System.Runtime.Serialization.EnumMember(Value = @"451")]
-        _451 = 50,
+        _451 = 51,
 
         [System.Runtime.Serialization.EnumMember(Value = @"500")]
-        _500 = 51,
+        _500 = 52,
 
         [System.Runtime.Serialization.EnumMember(Value = @"501")]
-        _501 = 52,
+        _501 = 53,
 
         [System.Runtime.Serialization.EnumMember(Value = @"502")]
-        _502 = 53,
+        _502 = 54,
 
         [System.Runtime.Serialization.EnumMember(Value = @"503")]
-        _503 = 54,
+        _503 = 55,
 
         [System.Runtime.Serialization.EnumMember(Value = @"504")]
-        _504 = 55,
+        _504 = 56,
 
         [System.Runtime.Serialization.EnumMember(Value = @"505")]
-        _505 = 56,
+        _505 = 57,
 
         [System.Runtime.Serialization.EnumMember(Value = @"506")]
-        _506 = 57,
+        _506 = 58,
 
         [System.Runtime.Serialization.EnumMember(Value = @"507")]
-        _507 = 58,
+        _507 = 59,
 
         [System.Runtime.Serialization.EnumMember(Value = @"508")]
-        _508 = 59,
+        _508 = 60,
 
         [System.Runtime.Serialization.EnumMember(Value = @"510")]
-        _510 = 60,
+        _510 = 61,
 
         [System.Runtime.Serialization.EnumMember(Value = @"511")]
-        _511 = 61,
+        _511 = 62,
 
         [System.Runtime.Serialization.EnumMember(Value = @"default")]
-        Default = 62,
+        Default = 63,
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
@@ -2480,142 +2486,145 @@ namespace AutoRest.CSharp.V3.Input.Generated
         [System.Runtime.Serialization.EnumMember(Value = @"302")]
         _302 = 16,
 
+        [System.Runtime.Serialization.EnumMember(Value = @"303")]
+        _303 = 17,
+
         [System.Runtime.Serialization.EnumMember(Value = @"304")]
-        _304 = 17,
+        _304 = 18,
 
         [System.Runtime.Serialization.EnumMember(Value = @"305")]
-        _305 = 18,
+        _305 = 19,
 
         [System.Runtime.Serialization.EnumMember(Value = @"306")]
-        _306 = 19,
+        _306 = 20,
 
         [System.Runtime.Serialization.EnumMember(Value = @"307")]
-        _307 = 20,
+        _307 = 21,
 
         [System.Runtime.Serialization.EnumMember(Value = @"308")]
-        _308 = 21,
+        _308 = 22,
 
         [System.Runtime.Serialization.EnumMember(Value = @"400")]
-        _400 = 22,
+        _400 = 23,
 
         [System.Runtime.Serialization.EnumMember(Value = @"401")]
-        _401 = 23,
+        _401 = 24,
 
         [System.Runtime.Serialization.EnumMember(Value = @"402")]
-        _402 = 24,
+        _402 = 25,
 
         [System.Runtime.Serialization.EnumMember(Value = @"403")]
-        _403 = 25,
+        _403 = 26,
 
         [System.Runtime.Serialization.EnumMember(Value = @"404")]
-        _404 = 26,
+        _404 = 27,
 
         [System.Runtime.Serialization.EnumMember(Value = @"405")]
-        _405 = 27,
+        _405 = 28,
 
         [System.Runtime.Serialization.EnumMember(Value = @"406")]
-        _406 = 28,
+        _406 = 29,
 
         [System.Runtime.Serialization.EnumMember(Value = @"407")]
-        _407 = 29,
+        _407 = 30,
 
         [System.Runtime.Serialization.EnumMember(Value = @"408")]
-        _408 = 30,
+        _408 = 31,
 
         [System.Runtime.Serialization.EnumMember(Value = @"409")]
-        _409 = 31,
+        _409 = 32,
 
         [System.Runtime.Serialization.EnumMember(Value = @"410")]
-        _410 = 32,
+        _410 = 33,
 
         [System.Runtime.Serialization.EnumMember(Value = @"411")]
-        _411 = 33,
+        _411 = 34,
 
         [System.Runtime.Serialization.EnumMember(Value = @"412")]
-        _412 = 34,
+        _412 = 35,
 
         [System.Runtime.Serialization.EnumMember(Value = @"413")]
-        _413 = 35,
+        _413 = 36,
 
         [System.Runtime.Serialization.EnumMember(Value = @"414")]
-        _414 = 36,
+        _414 = 37,
 
         [System.Runtime.Serialization.EnumMember(Value = @"415")]
-        _415 = 37,
+        _415 = 38,
 
         [System.Runtime.Serialization.EnumMember(Value = @"416")]
-        _416 = 38,
+        _416 = 39,
 
         [System.Runtime.Serialization.EnumMember(Value = @"417")]
-        _417 = 39,
+        _417 = 40,
 
         [System.Runtime.Serialization.EnumMember(Value = @"418")]
-        _418 = 40,
+        _418 = 41,
 
         [System.Runtime.Serialization.EnumMember(Value = @"421")]
-        _421 = 41,
+        _421 = 42,
 
         [System.Runtime.Serialization.EnumMember(Value = @"422")]
-        _422 = 42,
+        _422 = 43,
 
         [System.Runtime.Serialization.EnumMember(Value = @"423")]
-        _423 = 43,
+        _423 = 44,
 
         [System.Runtime.Serialization.EnumMember(Value = @"424")]
-        _424 = 44,
+        _424 = 45,
 
         [System.Runtime.Serialization.EnumMember(Value = @"425")]
-        _425 = 45,
+        _425 = 46,
 
         [System.Runtime.Serialization.EnumMember(Value = @"426")]
-        _426 = 46,
+        _426 = 47,
 
         [System.Runtime.Serialization.EnumMember(Value = @"428")]
-        _428 = 47,
+        _428 = 48,
 
         [System.Runtime.Serialization.EnumMember(Value = @"429")]
-        _429 = 48,
+        _429 = 49,
 
         [System.Runtime.Serialization.EnumMember(Value = @"431")]
-        _431 = 49,
+        _431 = 50,
 
         [System.Runtime.Serialization.EnumMember(Value = @"451")]
-        _451 = 50,
+        _451 = 51,
 
         [System.Runtime.Serialization.EnumMember(Value = @"500")]
-        _500 = 51,
+        _500 = 52,
 
         [System.Runtime.Serialization.EnumMember(Value = @"501")]
-        _501 = 52,
+        _501 = 53,
 
         [System.Runtime.Serialization.EnumMember(Value = @"502")]
-        _502 = 53,
+        _502 = 54,
 
         [System.Runtime.Serialization.EnumMember(Value = @"503")]
-        _503 = 54,
+        _503 = 55,
 
         [System.Runtime.Serialization.EnumMember(Value = @"504")]
-        _504 = 55,
+        _504 = 56,
 
         [System.Runtime.Serialization.EnumMember(Value = @"505")]
-        _505 = 56,
+        _505 = 57,
 
         [System.Runtime.Serialization.EnumMember(Value = @"506")]
-        _506 = 57,
+        _506 = 58,
 
         [System.Runtime.Serialization.EnumMember(Value = @"507")]
-        _507 = 58,
+        _507 = 59,
 
         [System.Runtime.Serialization.EnumMember(Value = @"508")]
-        _508 = 59,
+        _508 = 60,
 
         [System.Runtime.Serialization.EnumMember(Value = @"510")]
-        _510 = 60,
+        _510 = 61,
 
         [System.Runtime.Serialization.EnumMember(Value = @"511")]
-        _511 = 61,
+        _511 = 62,
 
         [System.Runtime.Serialization.EnumMember(Value = @"default")]
-        Default = 62,
+        Default = 63,
     }
 }

@@ -199,65 +199,61 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.WriteXmlDocumentationSummary(schema.Description);
 
                 var implementType = new CSharpType(typeof(IEquatable<>), cs);
-                using (writer.Struct(null, "readonly partial", schema.Name, writer.Type(implementType)))
+                using (writer.Scope($"public readonly partial struct {schema.Name}: {implementType}"))
                 {
-                    var stringText = writer.Type(typeof(string));
-                    var nullableStringText = writer.Type(typeof(string), true);
-                    var csTypeText = writer.Type(cs);
-
-                    writer.LineRaw($"private readonly {writer.Pair(nullableStringText, "_value")};");
+                    writer.Line($"private readonly string? _value;");
                     writer.Line();
 
                     writer.WriteXmlDocumentationSummary($"Determines if two <see cref=\"{cs.Name}\"/> values are the same.");
-                    using (writer.Method("public", null, schema.Name, writer.Pair(stringText, "value")))
+                    using (writer.Scope($"public {schema.Name}(string value)"))
                     {
-                        writer.LineRaw($"_value = value ?? throw new {writer.Type(typeof(ArgumentNullException))}(nameof(value));");
+                        writer.Line($"_value = value ?? throw new {typeof(ArgumentNullException)}(nameof(value));");
                     }
                     writer.Line();
 
-                    foreach (var choice in schema.Values.Select(c => c))
+                    foreach (var choice in schema.Values)
                     {
-                        writer.LineRaw($"private const {writer.Pair(stringText, $"{choice.Name}Value")} = \"{choice.Value.Value}\";");
+                        writer.Line($"private const string {choice.Name}Value = {choice.Value.Value:L};");
                     }
                     writer.Line();
 
                     foreach (var choice in schema.Values)
                     {
                         writer.WriteXmlDocumentationSummary(choice.Description);
-                        writer.LineRaw($"public static {writer.Pair(csTypeText, choice.Name)} {{ get; }} = new {csTypeText}({choice.Name}Value);");
+                        writer.Append($"public static {cs} {choice.Name}").AppendRaw("{ get; }").Append($" = new {cs}({choice.Name}Value);").Line();
                     }
 
-                    var boolText = writer.Type(typeof(bool));
-                    var leftRightParams = new[] { writer.Pair(csTypeText, "left"), writer.Pair(csTypeText, "right")};
-
                     writer.WriteXmlDocumentationSummary($"Determines if two <see cref=\"{cs.Name}\"/> values are the same.");
-                    writer.MethodExpression("public static", boolText, "operator ==", leftRightParams, "left.Equals(right)");
+                    writer.Line($"public static bool operator ==({cs} left, {cs} right) => left.Equals(right);");
 
                     writer.WriteXmlDocumentationSummary($"Determines if two <see cref=\"{cs.Name}\"/> values are not the same.");
-                    writer.MethodExpression("public static", boolText, "operator !=", leftRightParams, "!left.Equals(right)");
+                    writer.Line($"public static bool operator !=({cs} left, {cs} right) => !left.Equals(right);");
 
                     writer.WriteXmlDocumentationSummary($"Converts a string to a <see cref=\"{cs.Name}\"/>.");
-                    writer.MethodExpression("public static implicit", null, $"operator {csTypeText}", new[]{ writer.Pair(stringText, "value")}, $"new {csTypeText}(value)");
-                    writer.Line();
-
-                    var editorBrowsableNever = $"[{writer.AttributeType(typeof(EditorBrowsableAttribute))}({writer.Type(typeof(EditorBrowsableState))}.Never)]";
-
-                    writer.WriteXmlDocumentationInheritDoc();
-                    writer.LineRaw(editorBrowsableNever);
-                    writer.MethodExpression("public override", boolText, "Equals", new[]{ writer.Pair(typeof(object), "obj", true)}, $"obj is {csTypeText} other && Equals(other)");
-
-                    writer.WriteXmlDocumentationInheritDoc();
-                    writer.MethodExpression("public", boolText, "Equals", new[] { writer.Pair(csTypeText, "other") }, $"{stringText}.Equals(_value, other._value, {writer.Type(typeof(StringComparison))}.Ordinal)");
+                    writer.Line($"public static implicit operator {cs}(string value) => new {cs}(value);");
                     writer.Line();
 
                     writer.WriteXmlDocumentationInheritDoc();
-                    writer.LineRaw(editorBrowsableNever);
-                    writer.MethodExpression("public override", writer.Type(typeof(int)), "GetHashCode", null, "_value?.GetHashCode() ?? 0");
+                    WriteEditorBrowsableFalse(writer);
+                    writer.Line($"public override bool Equals(object? obj) => obj is {cs} other && Equals(other);");
 
                     writer.WriteXmlDocumentationInheritDoc();
-                    writer.MethodExpression("public override", nullableStringText, "ToString", null, "_value");
+                    writer.Line($"public bool Equals({cs} other) => string.Equals(_value, other._value, {typeof(StringComparison)}.Ordinal);");
+                    writer.Line();
+
+                    writer.WriteXmlDocumentationInheritDoc();
+                    WriteEditorBrowsableFalse(writer);
+                    writer.Line($"public override int GetHashCode() => _value?.GetHashCode() ?? 0;");
+
+                    writer.WriteXmlDocumentationInheritDoc();
+                    writer.Line($"public override string? ToString() => _value;");
                 }
             }
+        }
+
+        private void WriteEditorBrowsableFalse(CodeWriter writer)
+        {
+            writer.Line($"[{typeof(EditorBrowsableAttribute)}({typeof(EditorBrowsableState)}.{nameof(EditorBrowsableState.Never)})]");
         }
     }
 }
