@@ -65,12 +65,12 @@ schemas: !<!Schemas>
         version: 1.0.0
       language: !<!Languages> 
         default:
-          name: paths·datetime-min-utc·get·responses·200·content·application-json·schema
+          name: date-time
           description: MISSING·SCHEMA-DESCRIPTION-DATETIME
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: paths·datetime-min-utc·get·responses·200·content·application-json·schema
+        name: Constant0
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> 
@@ -92,12 +92,12 @@ schemas: !<!Schemas>
         version: 1.0.0
       language: !<!Languages> 
         default:
-          name: paths·datetime-min-localpositiveoffset·get·responses·200·content·application-json·schema
+          name: date-time
           description: MISSING·SCHEMA-DESCRIPTION-DATETIME
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: paths·datetime-min-localpositiveoffset·get·responses·200·content·application-json·schema
+        name: Constant1
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   dateTimes:
@@ -109,7 +109,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: paths·datetime-null·get·responses·200·content·application-json·schema
+        name: date-time
         description: MISSING·SCHEMA-DESCRIPTION-DATETIME
     protocol: !<!Protocols> {}
   - *ref_0

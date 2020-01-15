@@ -64,12 +64,12 @@ schemas: !<!Schemas>
         version: 1.0.0
       language: !<!Languages> 
         default:
-          name: paths·date-min·get·responses·200·content·application-json·schema
+          name: date
           description: MISSING·SCHEMA-DESCRIPTION-DATE
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: paths·date-min·get·responses·200·content·application-json·schema
+        name: Constant0
         description: MISSING·SCHEMA-DESCRIPTION-CHOICE
     protocol: !<!Protocols> {}
   dates:
@@ -80,7 +80,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: paths·date-null·get·responses·200·content·application-json·schema
+        name: date
         description: MISSING·SCHEMA-DESCRIPTION-DATE
     protocol: !<!Protocols> {}
   - *ref_0

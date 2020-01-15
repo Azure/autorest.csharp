@@ -1100,7 +1100,7 @@ namespace xml_service
             return message;
         }
         /// <summary> Puts a list as the root element. </summary>
-        /// <param name="bananas"> The paths·xml-root_list·put·requestbody·content·application-xml·schema to use. </param>
+        /// <param name="bananas"> The Array of Banana to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutRootListAsync(IEnumerable<Banana> bananas, CancellationToken cancellationToken = default)
         {
@@ -1130,7 +1130,7 @@ namespace xml_service
             }
         }
         /// <summary> Puts a list as the root element. </summary>
-        /// <param name="bananas"> The paths·xml-root_list·put·requestbody·content·application-xml·schema to use. </param>
+        /// <param name="bananas"> The Array of Banana to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutRootList(IEnumerable<Banana> bananas, CancellationToken cancellationToken = default)
         {
@@ -1267,7 +1267,7 @@ namespace xml_service
             return message;
         }
         /// <summary> Puts a list with a single item. </summary>
-        /// <param name="bananas"> The paths·xml-root_list·put·requestbody·content·application-xml·schema to use. </param>
+        /// <param name="bananas"> The Array of Banana to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutRootListSingleItemAsync(IEnumerable<Banana> bananas, CancellationToken cancellationToken = default)
         {
@@ -1297,7 +1297,7 @@ namespace xml_service
             }
         }
         /// <summary> Puts a list with a single item. </summary>
-        /// <param name="bananas"> The paths·xml-root_list·put·requestbody·content·application-xml·schema to use. </param>
+        /// <param name="bananas"> The Array of Banana to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutRootListSingleItem(IEnumerable<Banana> bananas, CancellationToken cancellationToken = default)
         {
@@ -1434,7 +1434,7 @@ namespace xml_service
             return message;
         }
         /// <summary> Puts an empty list as the root element. </summary>
-        /// <param name="bananas"> The paths·xml-root_list·put·requestbody·content·application-xml·schema to use. </param>
+        /// <param name="bananas"> The Array of Banana to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutEmptyRootListAsync(IEnumerable<Banana> bananas, CancellationToken cancellationToken = default)
         {
@@ -1464,7 +1464,7 @@ namespace xml_service
             }
         }
         /// <summary> Puts an empty list as the root element. </summary>
-        /// <param name="bananas"> The paths·xml-root_list·put·requestbody·content·application-xml·schema to use. </param>
+        /// <param name="bananas"> The Array of Banana to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutEmptyRootList(IEnumerable<Banana> bananas, CancellationToken cancellationToken = default)
         {

@@ -416,9 +416,9 @@ namespace AutoRest.TestServer.Tests
 
             CollectionAssert.AreEqual(new[]
             {
-                PathsArrayPrimStringEnumFoo1Foo2Foo3GetResponses200ContentApplicationJsonSchemaItems.Foo1,
-                PathsArrayPrimStringEnumFoo1Foo2Foo3GetResponses200ContentApplicationJsonSchemaItems.Foo2,
-                PathsArrayPrimStringEnumFoo1Foo2Foo3GetResponses200ContentApplicationJsonSchemaItems.Foo3
+                Enum0.Foo1,
+                Enum0.Foo2,
+                Enum0.Foo3
             }, result.Value);
         });
 
@@ -552,9 +552,9 @@ namespace AutoRest.TestServer.Tests
         public Task PutArrayStringEnumValid() => TestStatus(async (host, pipeline) => await new ArrayOperations(ClientDiagnostics, pipeline, host).PutStringEnumValidAsync(
             new[]
             {
-                PathsArrayPrimStringEnumFoo1Foo2Foo3GetResponses200ContentApplicationJsonSchemaItems.Foo1,
-                PathsArrayPrimStringEnumFoo1Foo2Foo3GetResponses200ContentApplicationJsonSchemaItems.Foo2,
-                PathsArrayPrimStringEnumFoo1Foo2Foo3GetResponses200ContentApplicationJsonSchemaItems.Foo3
+                Enum0.Foo1,
+                Enum0.Foo2,
+                Enum0.Foo3
             }));
 
         [Test]

@@ -63,7 +63,7 @@ schemas: !<!Schemas>
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: paths·queries-array-multi-string-null·get·parameters·0·schema
+        name: Array of get-0-itemsItem
         description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
     protocol: !<!Protocols> {}
   - !<!ArraySchema> &ref_8
@@ -78,12 +78,12 @@ schemas: !<!Schemas>
         version: 1.0.0
       language: !<!Languages> 
         default:
-          name: paths·queries-array-multi-string-empty·get·parameters·0·schema·items
+          name: string
           description: MISSING·SCHEMA-DESCRIPTION-STRING
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: paths·queries-array-multi-string-empty·get·parameters·0·schema
+        name: Array of string
         description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
     protocol: !<!Protocols> {}
   numbers:

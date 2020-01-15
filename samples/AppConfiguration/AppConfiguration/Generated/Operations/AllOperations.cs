@@ -1505,7 +1505,7 @@ namespace AppConfiguration
                 throw;
             }
         }
-        internal HttpMessage CreateGetRevisionsRequest(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<PathsRevisionsGetParameters6SchemaItems>? select)
+        internal HttpMessage CreateGetRevisionsRequest(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Enum0>? select)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1546,7 +1546,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<KeyValueListResult, GetRevisionsHeaders>> GetRevisionsAsync(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<PathsRevisionsGetParameters6SchemaItems>? select, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<KeyValueListResult, GetRevisionsHeaders>> GetRevisionsAsync(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Enum0>? select, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("AllOperations.GetRevisions");
@@ -1581,7 +1581,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<KeyValueListResult, GetRevisionsHeaders> GetRevisions(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<PathsRevisionsGetParameters6SchemaItems>? select, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<KeyValueListResult, GetRevisionsHeaders> GetRevisions(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Enum0>? select, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("AllOperations.GetRevisions");
@@ -1697,7 +1697,7 @@ namespace AppConfiguration
                 throw;
             }
         }
-        internal HttpMessage CreateCheckRevisionsRequest(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<PathsRevisionsGetParameters6SchemaItems>? select)
+        internal HttpMessage CreateCheckRevisionsRequest(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Enum0>? select)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1738,7 +1738,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<CheckRevisionsHeaders>> CheckRevisionsAsync(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<PathsRevisionsGetParameters6SchemaItems>? select, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<CheckRevisionsHeaders>> CheckRevisionsAsync(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Enum0>? select, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("AllOperations.CheckRevisions");
@@ -1769,7 +1769,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<CheckRevisionsHeaders> CheckRevisions(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<PathsRevisionsGetParameters6SchemaItems>? select, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<CheckRevisionsHeaders> CheckRevisions(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Enum0>? select, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("AllOperations.CheckRevisions");
@@ -1926,7 +1926,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public AsyncPageable<KeyValue> GetRevisionsPageableAsync(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<PathsRevisionsGetParameters6SchemaItems>? select, CancellationToken cancellationToken = default)
+        public AsyncPageable<KeyValue> GetRevisionsPageableAsync(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Enum0>? select, CancellationToken cancellationToken = default)
         {
 
             async Task<Page<KeyValue>> FirstPageFunc(int? pageSizeHint)
@@ -1948,7 +1948,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Pageable<KeyValue> GetRevisionsPageable(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<PathsRevisionsGetParameters6SchemaItems>? select, CancellationToken cancellationToken = default)
+        public Pageable<KeyValue> GetRevisionsPageable(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Enum0>? select, CancellationToken cancellationToken = default)
         {
 
             Page<KeyValue> FirstPageFunc(int? pageSizeHint)

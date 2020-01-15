@@ -665,12 +665,12 @@ schemas: !<!Schemas>
             version: '2016-02-29'
           language: !<!Languages> 
             default:
-              name: components·schemas·dictionary_wrapper·properties·defaultprogram·additionalproperties
+              name: string
               description: MISSING·SCHEMA-DESCRIPTION-STRING
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
-            name: dictionary-wrapper-defaultProgram
+            name: Dictionary of string
             description: Dictionary of <components·schemas·dictionary_wrapper·properties·defaultprogram·additionalproperties>
         protocol: !<!Protocols> {}
       serializedName: defaultProgram

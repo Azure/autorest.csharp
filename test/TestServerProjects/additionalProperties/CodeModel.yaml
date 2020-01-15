@@ -258,12 +258,12 @@ schemas: !<!Schemas>
             version: 1.0.0
           language: !<!Languages> 
             default:
-              name: components·schemas·petapstring·additionalproperties
+              name: string
               description: MISSING·SCHEMA-DESCRIPTION-STRING
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
-            name: PetAPString
+            name: Dictionary of string
             description: Dictionary of <components·schemas·petapstring·additionalproperties>
         protocol: !<!Protocols> {}
       immediate:
@@ -392,12 +392,12 @@ schemas: !<!Schemas>
           precision: 32
           language: !<!Languages> 
             default:
-              name: components·schemas·petapinproperties·properties·additionalproperties·additionalproperties
+              name: number
               description: MISSING·SCHEMA-DESCRIPTION-NUMBER
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
-            name: PetAPInProperties-additionalProperties
+            name: Dictionary of number
             description: Dictionary of <components·schemas·petapinproperties·properties·additionalproperties·additionalproperties>
         protocol: !<!Protocols> {}
       required: false
@@ -425,7 +425,7 @@ schemas: !<!Schemas>
         elementType: *ref_5
         language: !<!Languages> 
           default:
-            name: PetAPInPropertiesWithAPString
+            name: Dictionary of string
             description: Dictionary of <components·schemas·petapstring·additionalproperties>
         protocol: !<!Protocols> {}
       immediate:
@@ -505,7 +505,7 @@ schemas: !<!Schemas>
         elementType: *ref_7
         language: !<!Languages> 
           default:
-            name: PetAPInPropertiesWithAPString-additionalProperties
+            name: Dictionary of number
             description: Dictionary of <components·schemas·petapinproperties·properties·additionalproperties·additionalproperties>
         protocol: !<!Protocols> {}
       required: false

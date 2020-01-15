@@ -64,7 +64,7 @@ schemas: !<!Schemas>
     defaultValue: host
     language: !<!Languages> 
       default:
-        name: components·parameters·host·schema
+        name: string
         description: MISSING·SCHEMA-DESCRIPTION-STRING
     protocol: !<!Protocols> {}
 globalParameters:

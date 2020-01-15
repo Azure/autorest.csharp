@@ -54,7 +54,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: paths·byte-null·get·responses·200·content·application-json·schema
+        name: byte-array
         description: The null byte value
     protocol: !<!Protocols> {}
   - !<!ByteArraySchema> &ref_1
@@ -65,7 +65,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: paths·byte-empty·get·responses·200·content·application-json·schema
+        name: byte-array
         description: The empty byte value ''
     protocol: !<!Protocols> {}
   - !<!ByteArraySchema> &ref_7
@@ -76,7 +76,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: paths·byte-nonascii·get·responses·200·content·application-json·schema
+        name: byte-array
         description: Non-ascii base-64 encoded byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
     protocol: !<!Protocols> {}
   constants:
@@ -94,7 +94,7 @@ schemas: !<!Schemas>
     valueType: *ref_0
     language: !<!Languages> 
       default:
-        name: paths·byte-null·get·responses·200·content·application-json·schema
+        name: Constant0
         description: The null byte value
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> 
@@ -111,7 +111,7 @@ schemas: !<!Schemas>
     valueType: *ref_1
     language: !<!Languages> 
       default:
-        name: paths·byte-empty·get·responses·200·content·application-json·schema
+        name: Constant1
         description: The empty byte value ''
     protocol: !<!Protocols> {}
   numbers:

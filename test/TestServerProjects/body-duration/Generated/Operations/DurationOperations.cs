@@ -109,7 +109,7 @@ namespace body_duration
             return message;
         }
         /// <summary> Put a positive duration value. </summary>
-        /// <param name="durationBody"> The paths·duration-null·get·responses·200·content·application-json·schema to use. </param>
+        /// <param name="durationBody"> The duration to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutPositiveDurationAsync(TimeSpan durationBody, CancellationToken cancellationToken = default)
         {
@@ -135,7 +135,7 @@ namespace body_duration
             }
         }
         /// <summary> Put a positive duration value. </summary>
-        /// <param name="durationBody"> The paths·duration-null·get·responses·200·content·application-json·schema to use. </param>
+        /// <param name="durationBody"> The duration to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutPositiveDuration(TimeSpan durationBody, CancellationToken cancellationToken = default)
         {

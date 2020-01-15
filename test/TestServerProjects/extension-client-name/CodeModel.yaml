@@ -17,7 +17,7 @@ schemas: !<!Schemas>
             version: 1.0.0
           language: !<!Languages> 
             default:
-              name: paths·originaloperation-originalpathparameter·patch·parameters·0·schema
+              name: string
               description: MISSING·SCHEMA-DESCRIPTION-STRING
               header: originalHeader
           protocol: !<!Protocols> {}

@@ -325,7 +325,7 @@ schemas: !<!Schemas>
     precision: 32
     language: !<!Languages> 
       default:
-        name: paths·paging-multiple·get·parameters·1·schema
+        name: integer
         description: MISSING·SCHEMA-DESCRIPTION-INTEGER
     protocol: !<!Protocols> {}
   - !<!NumberSchema> &ref_17
@@ -337,7 +337,7 @@ schemas: !<!Schemas>
     precision: 32
     language: !<!Languages> 
       default:
-        name: paths·paging-multiple·get·parameters·2·schema
+        name: integer
         description: MISSING·SCHEMA-DESCRIPTION-INTEGER
     protocol: !<!Protocols> {}
   strings:
@@ -352,7 +352,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: paths·paging-multiple·get·parameters·0·schema
+        name: string
         description: MISSING·SCHEMA-DESCRIPTION-STRING
     protocol: !<!Protocols> {}
   - *ref_11
