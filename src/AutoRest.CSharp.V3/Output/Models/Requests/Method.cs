@@ -8,7 +8,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Requests
 {
     internal class Method
     {
-        public Method(string name, string? description, Request request, Parameter[] parameters, Response responseType, Diagnostic diagnostics, Paging? paging)
+        public Method(string name, string? description, Request request, Parameter[] parameters, Response responseType, Diagnostic diagnostics)
         {
             Name = name;
             Request = request;
@@ -16,7 +16,6 @@ namespace AutoRest.CSharp.V3.Output.Models.Requests
             Response = responseType;
             Description = description;
             Diagnostics = diagnostics;
-            Paging = paging;
         }
 
         public string Name { get; }
@@ -25,6 +24,5 @@ namespace AutoRest.CSharp.V3.Output.Models.Requests
         public Parameter[] Parameters { get; }
         public Response Response { get; }
         public Diagnostic Diagnostics { get; }
-        public Paging? Paging { get; }
     }
 }

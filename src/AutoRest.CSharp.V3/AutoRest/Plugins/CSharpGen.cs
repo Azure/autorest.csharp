@@ -62,12 +62,9 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
 
                 project = project.AddDocument($"Generated/Operations/{client.Name}.cs", codeWriter.ToFormattedCode()).Project;
 
-                foreach (Method clientMethod in client.Methods)
+                var headerModels = client.Methods.Select(m => m.Response.HeaderModel).OfType<ResponseHeaderGroup>().Distinct();
+                foreach (ResponseHeaderGroup responseHeaderModel in headerModels)
                 {
-                    ResponseHeaderGroup? responseHeaderModel = clientMethod.Response.HeaderModel;
-                    if (responseHeaderModel == null)
-                        continue;
-
                     var headerModelCodeWriter = new CodeWriter();
                     headerModelModelWriter.WriteHeaderModel(headerModelCodeWriter, responseHeaderModel);
 

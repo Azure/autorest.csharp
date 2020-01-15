@@ -52,14 +52,14 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     foreach (var method in operationGroup.Methods)
                     {
                         WriteRequestCreation(writer, method);
-                        WriteOperation(writer, method, async: true);
-                        WriteOperation(writer, method, async: false);
-                        if (method.Paging != null)
-                        {
-                            WriteRequestCreation(writer, method, true);
-                            WriteOperation(writer, method, true, true);
-                            WritePagingOperation(writer, method, true);
-                        }
+                        WriteOperation(writer, method, true);
+                        WriteOperation(writer, method, false);
+                    }
+
+                    foreach (var pagingMethod in operationGroup.PagingMethods)
+                    {
+                        WritePagingOperation(writer, pagingMethod, true);
+                        WritePagingOperation(writer, pagingMethod, false);
                     }
                 }
             }
@@ -112,33 +112,18 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             writer.AppendRaw(",");
         }
 
-        private string CreateMethodName(Method operation, bool async, bool supportsPaging) => $"{operation.Name}{(supportsPaging ? "FirstPage" : string.Empty)}{(async ? "Async" : string.Empty)}";
+        private string CreateMethodName(string name, bool async) => $"{name}{(async ? "Async" : string.Empty)}";
 
-        private string CreateRequestMethodName(Method operation) => $"Create{operation.Name}{(operation.Paging != null ? "FirstPage" : string.Empty)}Request";
+        private string CreateRequestMethodName(string name) => $"Create{name}Request";
 
-        private string CreateNextPageRequestMethodName(Method operation) => $"Create{operation.Name}NextPageRequest";
-
-        private string GetNextPageMethodName(Method operation) => $"{operation.Name}NextPageAsync";
-
-        private bool IsNextPageParameter(Parameter parameter) =>
-            parameter.Location != ParameterLocation.Path
-            && parameter.Location != ParameterLocation.Body
-            && parameter.Location != ParameterLocation.Query;
-
-        private void WriteRequestCreation(CodeWriter writer, Method operation, bool nextPage = false)
+        private void WriteRequestCreation(CodeWriter writer, Method operation)
         {
-            var methodName = nextPage ? CreateNextPageRequestMethodName(operation) : CreateRequestMethodName(operation);
+            var methodName = CreateRequestMethodName(operation.Name);
             writer.Append($"internal {typeof(HttpMessage)} {methodName}(");
-            var parameters = nextPage
-                ? operation.Parameters.Where(IsNextPageParameter).ToArray()
-                : operation.Parameters;
+            var parameters = operation.Parameters;
             foreach (Parameter clientParameter in parameters)
             {
                 writer.Append($"{_typeFactory.CreateInputType(clientParameter.Type)} {clientParameter.Name},");
-            }
-            if (nextPage)
-            {
-                writer.Append($"{writer.Type(typeof(string), true)} nextLinkUrl");
             }
             writer.RemoveTrailingComma();
             writer.Line($")");
@@ -149,36 +134,21 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 var method = operation.Request.Method;
                 writer.Line($"request.Method = {typeof(RequestMethod)}.{method.ToRequestMethodName()};");
 
-                var uriType = writer.Type(typeof(Uri));
-                using (nextPage ? writer.If($"{uriType}.IsWellFormedUriString(nextLinkUrl, UriKind.Absolute)") : default)
+                //TODO: Add logic to escape the strings when specified, using Uri.EscapeDataString(value);
+                //TODO: Need proper logic to convert the values to strings. Right now, everything is just using default ToString().
+                //TODO: Need logic to trim duplicate slashes (/) so when combined, you don't end  up with multiple // together
+                var urlText = String.Join(String.Empty, operation.Request.HostSegments.Select(s => s.IsConstant ? s.Constant.Value : "{" + s.Parameter.Name + "}"));
+                writer.Line($"request.Uri.Reset(new {typeof(Uri)}($\"{urlText}\"));");
+
+                foreach (var segment in operation.Request.PathSegments)
                 {
-                    if (nextPage)
-                    {
-                        writer.Line($"request.Uri.Reset(new {uriType}(nextLinkUrl));");
-                    }
+                    WritePathSegment(writer, segment);
                 }
-                using (nextPage ? writer.Else() : default)
+
+                //TODO: Duplicate code between query and header parameter processing logic
+                foreach (var queryParameter in operation.Request.Query)
                 {
-                    //TODO: Add logic to escape the strings when specified, using Uri.EscapeDataString(value);
-                    //TODO: Need proper logic to convert the values to strings. Right now, everything is just using default ToString().
-                    //TODO: Need logic to trim duplicate slashes (/) so when combined, you don't end  up with multiple // together
-                    var urlText = String.Join(String.Empty, operation.Request.HostSegments.Select(s => s.IsConstant ? s.Constant.Value : "{" + s.Parameter.Name + "}"));
-                    var nextLinkText = nextPage ? "{nextLinkUrl}" : string.Empty;
-                    writer.Line($"request.Uri.Reset(new {uriType}($\"{urlText}{nextLinkText}\"));");
-
-                    if (!nextPage)
-                    {
-                        foreach (var segment in operation.Request.PathSegments)
-                        {
-                            WritePathSegment(writer, segment);
-                        }
-
-                        //TODO: Duplicate code between query and header parameter processing logic
-                        foreach (var queryParameter in operation.Request.Query)
-                        {
-                            WriteQueryParameter(writer, queryParameter);
-                        }
-                    }
+                    WriteQueryParameter(writer, queryParameter);
                 }
 
                 foreach (var header in operation.Request.Headers)
@@ -186,7 +156,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     WriteHeader(writer, header);
                 }
 
-                if (!nextPage && operation.Request.Body is RequestBody body && body.Serialization is JsonSerialization jsonSerialization)
+                if (operation.Request.Body is RequestBody body && body.Serialization is JsonSerialization jsonSerialization)
                 {
                     writer.Line($"using var content = new {typeof(Utf8JsonRequestContent)}();");
 
@@ -200,7 +170,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     writer.Line($"request.Content = content;");
                 }
-                else if (!nextPage && operation.Request.Body is RequestBody xmlBody && xmlBody.Serialization is XmlElementSerialization xmlSerialization)
+                else if (operation.Request.Body is RequestBody xmlBody && xmlBody.Serialization is XmlElementSerialization xmlSerialization)
                 {
                     writer.Line($"using var content = new {typeof(XmlWriterContent)}();");
 
@@ -219,7 +189,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
         }
 
-        private void WriteOperation(CodeWriter writer, Method operation, bool async, bool nextPage = false)
+        private void WriteOperation(CodeWriter writer, Method operation, bool async)
         {
             //TODO: Handle multiple responses
             var responseBody = operation.Response.ResponseBody;
@@ -232,13 +202,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 { } => new CSharpType(typeof(ResponseWithHeaders<>), bodyType, headerModelType),
                 _ => new CSharpType(typeof(Response)),
             };
-            var supportsPaging = operation.Paging != null;
-            var pageType = operation.Paging?.ItemType != null ? _typeFactory.CreateType(operation.Paging.ItemType) : new CSharpType(typeof(string));
-            responseType = supportsPaging ? new CSharpType(typeof(Page<>), pageType) : responseType;
-            var parameters = nextPage
-                ? operation.Parameters.Where(IsNextPageParameter).ToArray()
-                : operation.Parameters;
-
+            responseType = async ? new CSharpType(typeof(ValueTask<>), responseType) : responseType;
+            var parameters = operation.Parameters;
             writer.WriteXmlDocumentationSummary(operation.Description);
 
             foreach (Parameter parameter in parameters)
@@ -246,24 +211,15 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
             }
 
-            if (nextPage)
-            {
-                writer.WriteXmlDocumentationParameter("nextLinkUrl", "The URL to the next page of results.");
-            }
             writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
 
-            var methodName = nextPage ? GetNextPageMethodName(operation) : CreateMethodName(operation, async, supportsPaging);
-            CSharpType asyncReturnType = new CSharpType(typeof(ValueTask<>), responseType);
-            writer.Append($"public {(async ? "async " : string.Empty)}{(async ? asyncReturnType : responseType)} {methodName}(");
+            var methodName = CreateMethodName(operation.Name, async);
+            var asyncText = async ? "async " : string.Empty;
+            writer.Append($"public {asyncText}{responseType} {methodName}(");
 
             foreach (Parameter parameter in parameters)
             {
                 WriteParameter(writer, parameter);
-            }
-
-            if (nextPage)
-            {
-                writer.Append($"{typeof(string)} nextLinkUrl, ");
             }
             writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
 
@@ -280,7 +236,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                 using (writer.Scope($"try"))
                 {
-                    var requestMethodName = nextPage ? CreateNextPageRequestMethodName(operation) : CreateRequestMethodName(operation);
+                    var requestMethodName = CreateRequestMethodName(operation.Name);
                     writer.Append($"using var message = {requestMethodName}(");
 
                     foreach (Parameter parameter in parameters)
@@ -288,10 +244,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         writer.Append($"{parameter.Name}, ");
                     }
 
-                    if (nextPage)
-                    {
-                        writer.Append($"nextLinkUrl");
-                    }
                     writer.RemoveTrailingComma();
                     writer.Line($");");
 
@@ -304,7 +256,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         writer.Line($"pipeline.Send(message, cancellationToken);");
                     }
 
-                    WriteStatusCodeSwitch(writer, responseBody, headerModelType, operation, async, supportsPaging);
+                    WriteStatusCodeSwitch(writer, responseBody, headerModelType, operation, async);
                 }
 
                 using (writer.Scope($"catch ({typeof(Exception)} e)"))
@@ -315,14 +267,14 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
         }
 
-        private void WritePagingOperation(CodeWriter writer, Method operation, bool async)
+        private void WritePagingOperation(CodeWriter writer, Paging pagingMethod, bool async)
         {
-            var pageType = operation.Paging?.ItemType != null ? _typeFactory.CreateType(operation.Paging.ItemType) : new CSharpType(typeof(string));
+            var pageType = _typeFactory.CreateType(pagingMethod.ItemType);
             CSharpType responseType = async ? new CSharpType(typeof(AsyncPageable<>), pageType) : new CSharpType(typeof(Pageable<>), pageType);
-            var parameters = operation.Parameters;
-            var nextPageParameters = parameters.Where(IsNextPageParameter).ToArray();
+            var parameters = pagingMethod.Method.Parameters;
+            var nextPageParameters = pagingMethod.NextPageMethod.Parameters;
 
-            writer.WriteXmlDocumentationSummary(operation.Description);
+            writer.WriteXmlDocumentationSummary(pagingMethod.Method.Description);
 
             foreach (Parameter parameter in parameters)
             {
@@ -331,7 +283,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
             writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
 
-            writer.Append($"public {responseType} {CreateMethodName(operation, async, false)}(");
+            writer.Append($"public {responseType} {CreateMethodName(pagingMethod.Name, async)}(");
             foreach (Parameter parameter in parameters)
             {
                 WriteParameter(writer, parameter);
@@ -343,23 +295,36 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             {
                 WriteParameterNullChecks(writer, parameters);
 
-                var funcType = new CSharpType(typeof(Task<>), new CSharpType(typeof(Page<>), pageType));
+                var pageWrappedType = new CSharpType(typeof(Page<>), pageType);
+                var funcType = async ? new CSharpType(typeof(Task<>), pageWrappedType) : pageWrappedType;
                 var nullableInt = new CSharpType(typeof(int), true);
 
-                writer.Append($"{funcType} FirstPageFunc({nullableInt} pageSizeHint) => {CreateMethodName(operation, async, true)}(");
-                foreach (Parameter parameter in parameters)
+                var continuationTokenText = pagingMethod.NextLinkName != null ? $"response.Value.{pagingMethod.NextLinkName}" : "null";
+                var asyncText = async ? "async " : string.Empty;
+                var awaitText = async ? "await " : string.Empty;
+                var configureAwaitText = async ? ".ConfigureAwait(false)" : string.Empty;
+                using (writer.Scope($"{asyncText}{funcType} FirstPageFunc({nullableInt} pageSizeHint)"))
                 {
-                    writer.Append($"{parameter.Name}, ");
+                    writer.Append($"var response = {awaitText}{CreateMethodName(pagingMethod.Method.Name, async)}(");
+                    foreach (ServiceClientParameter parameter in parameters)
+                    {
+                        writer.Append($"{parameter.Name}, ");
+                    }
+                    writer.Line($"cancellationToken){configureAwaitText};");
+                    writer.Line($"return {typeof(Page)}.FromValues(response.Value.{pagingMethod.ItemName}, {continuationTokenText}, response.GetRawResponse());");
                 }
-                writer.Line($"cancellationToken).AsTask();");
 
-                writer.Append($"{funcType} NextPageFunc({typeof(string)} continuationToken, {nullableInt} pageSizeHint) => {GetNextPageMethodName(operation)}(");
-                foreach (Parameter parameter in nextPageParameters)
+                using (writer.Scope($"{asyncText}{funcType} NextPageFunc({typeof(string)} nextLinkUrl, {nullableInt} pageSizeHint)"))
                 {
-                    writer.Append($"{parameter.Name}, ");
+                    writer.Append($"var response = {awaitText}{CreateMethodName(pagingMethod.NextPageMethod.Name, async)}(");
+                    foreach (ServiceClientParameter parameter in nextPageParameters)
+                    {
+                        writer.Append($"{parameter.Name}, ");
+                    }
+                    writer.Line($"cancellationToken){configureAwaitText};");
+                    writer.Line($"return {typeof(Page)}.FromValues(response.Value.{pagingMethod.ItemName}, {continuationTokenText}, response.GetRawResponse());");
                 }
-                writer.Line($"continuationToken, cancellationToken).AsTask();");
-                writer.Line($"return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);");
+                writer.Line($"return {typeof(PageResponseEnumerator)}.Create{(async ? "Async" : string.Empty)}Enumerable(FirstPageFunc, NextPageFunc);");
             }
         }
 
@@ -513,7 +478,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         }
 
         //TODO: Do multiple status codes
-        private void WriteStatusCodeSwitch(CodeWriter writer, ResponseBody? responseBody, CSharpType? headersModelType, Method operation, bool async, bool supportsPaging)
+        private void WriteStatusCodeSwitch(CodeWriter writer, ResponseBody? responseBody, CSharpType? headersModelType, Method operation, bool async)
         {
             using (writer.Switch("message.Response.Status"))
             {
@@ -571,17 +536,21 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         writer.Line($"var headers = new {headersModelType}(message.Response);");
                     }
 
-                    var continuationTokenText = operation.Paging?.NextLinkName != null ? $"{valueVariable}.{operation.Paging?.NextLinkName}" : "null";
-                    var responseCallText = supportsPaging
-                        ? $"{typeof(Page)}.FromValues({valueVariable}.{operation.Paging?.ItemName}, {continuationTokenText}, message.Response)"
-                        : responseBody switch
-                        {
-                            null when headersModelType != null => $"{typeof(ResponseWithHeaders)}.FromValue(headers, message.Response)",
-                            { } when headersModelType != null => $"{typeof(ResponseWithHeaders)}.FromValue({valueVariable}, headers, message.Response)",
-                            { } => $"{typeof(Response)}.FromValue({valueVariable}, message.Response)",
-                            _ => "message.Response"
-                        };
-                    writer.Line($"return {responseCallText};");
+                    switch (responseBody)
+                    {
+                        case null when headersModelType != null:
+                            writer.Append($"return {typeof(ResponseWithHeaders)}.FromValue(headers, message.Response);");
+                            break;
+                        case { } when headersModelType != null:
+                            writer.Append($"return {typeof(ResponseWithHeaders)}.FromValue({valueVariable}, headers, message.Response);");
+                            break;
+                        case { }:
+                            writer.Append($"return {typeof(Response)}.FromValue({valueVariable}, message.Response);");
+                            break;
+                        case null:
+                            writer.Append($"return message.Response;");
+                            break;
+                    }
                 }
 
                 writer.Line($"default:");

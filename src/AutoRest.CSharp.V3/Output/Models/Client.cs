@@ -8,17 +8,20 @@ namespace AutoRest.CSharp.V3.Output.Models
 {
     internal class Client
     {
-        public Client(string name, string description, Parameter[] parameters, Method[] methods)
+        public Client(string name, string description, Parameter[] parameters, Method[] methods, Paging[] pagingMethods)
         {
             Name = name;
             Parameters = parameters;
             Methods = methods;
+            PagingMethods = pagingMethods;
             Description = description;
         }
 
         public string Name { get; }
         public string Description { get; }
+
         public Method[] Methods { get; }
+        public Paging[] PagingMethods { get; }
         public Parameter[] Parameters { get; }
     }
 }

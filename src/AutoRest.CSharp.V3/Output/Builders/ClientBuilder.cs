@@ -27,14 +27,11 @@ namespace AutoRest.CSharp.V3.Output.Builders
     {
         public static Client BuildClient(OperationGroup operationGroup)
         {
-            List<Method> methods = new List<Method>();
-            Dictionary<string, Parameter> clientParameters = new Dictionary<string, Parameter>();
-
             var allClientParameters = operationGroup.Operations
                 .SelectMany(op => op.Request.Parameters)
                 .Where(p => p.Implementation == ImplementationLocation.Client)
                 .Distinct();
-
+            Dictionary<string, ServiceClientParameter> clientParameters = new Dictionary<string, ServiceClientParameter>();
             // Deduplication required because of https://github.com/Azure/autorest.modelerfour/issues/100
             foreach (Input.Generated.Parameter clientParameter in allClientParameters)
             {
@@ -42,20 +39,32 @@ namespace AutoRest.CSharp.V3.Output.Builders
             }
 
             string clientName = operationGroup.CSharpName();
-
+            List<ClientMethod> methods = new List<ClientMethod>();
+            List<ClientMethodPaging> pagingMethods = new List<ClientMethodPaging>();
             foreach (Operation operation in operationGroup.Operations)
             {
                 var method = BuildMethod(operation, clientName, clientParameters);
                 if (method != null)
                 {
                     methods.Add(method);
+                    var pageable = operation.Extensions.GetValue<IDictionary<object, object>>("x-ms-pageable");
+                    if (pageable != null)
+                    {
+                        ClientMethod nextPageMethod = BuildNextPageMethod(method);
+                        methods.Add(nextPageMethod);
+                        //TODO: This is a hack since we don't have the model information at this point
+                        var schemaForPaging = ((method.Response.ResponseBody as ObjectResponseBody)?.Type as SchemaTypeReference)?.Schema as ObjectSchema;
+                        ClientMethodPaging pagingMethod = GetClientMethodPaging(method, nextPageMethod, pageable, schemaForPaging);
+                        pagingMethods.Add(pagingMethod);
+                    }
                 }
             }
 
             return new Client(clientName,
                 operationGroup.Language.Default.Description,
                 OrderParameters(clientParameters.Values),
-                methods.ToArray());
+                methods.ToArray(),
+                pagingMethods.ToArray());
         }
 
         private static Parameter[] OrderParameters(IEnumerable<Parameter> parameters)
@@ -191,24 +200,51 @@ namespace AutoRest.CSharp.V3.Output.Builders
             );
 
             string operationName = operation.CSharpName();
-            //TODO: This is a hack since we don't have the model information at this point
-            var schemaForPaging = ((responseBody as ObjectResponseBody)?.Type as SchemaTypeReference)?.Schema as ObjectSchema;
             return new Method(
                 operationName,
                 BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description),
                 request,
                 OrderParameters(methodParameters),
                 clientResponse,
-                new Diagnostic($"{clientName}.{operationName}",Array.Empty<DiagnosticAttribute>()),
-                GetClientMethodPaging(operation, schemaForPaging)
+                new Diagnostic($"{clientName}.{operationName}", Array.Empty<DiagnosticAttribute>())
             );
         }
 
-        private static Paging? GetClientMethodPaging(Operation operation, ObjectSchema? schema)
-        {
-            var pageable = operation.Extensions.GetValue<IDictionary<object, object>>("x-ms-pageable");
-            if (pageable == null) return null;
+        private static bool IsNextPageParameter(Parameter parameter) =>
+            parameter.Location != ParameterLocation.Path
+            && parameter.Location != ParameterLocation.Body
+            && parameter.Location != ParameterLocation.Query;
 
+        private static Method BuildNextPageMethod(Method method)
+        {
+            var nextPageUrlParameter = new ServiceClientParameter(
+                "nextLinkUrl",
+                "The URL to the next page of results.",
+                new FrameworkTypeReference(typeof(string)),
+                null,
+                true,
+                ParameterLocation.Uri);
+            var parameters = method.Parameters.Where(IsNextPageParameter).Append(nextPageUrlParameter).ToArray();
+            var request = new ClientMethodRequest(
+                method.Request.Method,
+                parameters.Where(p => p.Location == ParameterLocation.Uri).Select(p => new ConstantOrParameter(p)).ToArray(),
+                Array.Empty<PathSegment>(),
+                Array.Empty<QueryParameter>(),
+                method.Request.Headers,
+                null
+            );
+
+            return new ClientMethod(
+                $"{method.Name}NextPage",
+                method.Description,
+                request,
+                parameters,
+                method.Response,
+                method.Diagnostics);
+        }
+
+        private static ClientMethodPaging GetClientMethodPaging(ClientMethod method, ClientMethod nextPageMethod, IDictionary<object, object> pageable, ObjectSchema? schema)
+        {
             var nextLinkName = pageable.GetValue<string>("nextLinkName");
             //TODO: This should actually reference an operation: https://github.com/Azure/autorest.csharp/issues/397
             var operationName = pageable.GetValue<string>("operationName");
@@ -223,7 +259,8 @@ namespace AutoRest.CSharp.V3.Output.Builders
             var itemTypeProperty = schema?.Properties?.FirstOrDefault(p => p.CSharpName() == itemName);
             var itemTypeValueSchema = (itemTypeProperty?.Schema as ArraySchema)?.ElementType;
             var itemType = BuilderHelpers.CreateType(itemTypeValueSchema ?? new Schema(), false);
-            return new Paging(nextLinkName, itemName, itemType, operationName);
+            var name = $"{method.Name}Pageable";
+            return new Paging(method, nextPageMethod, name, nextLinkName, itemName, itemType, operationName);
         }
 
         private static Parameter BuildParameter(Input.Generated.Parameter requestParameter)
