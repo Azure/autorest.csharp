@@ -21,7 +21,7 @@ namespace Azure.Core
         }
 
         public static void WriteValue(this XmlWriter writer, DateTimeOffset value, string format) =>
-            writer.WriteValue(TypeFormatters.ToString(value, format, workaroundFullIsoFormat: true));
+            writer.WriteValue(TypeFormatters.ToString(value, format));
 
         public static void WriteValue(this XmlWriter writer, TimeSpan value, string format) =>
             writer.WriteValue(TypeFormatters.ToString(value, format));

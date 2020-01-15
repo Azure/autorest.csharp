@@ -67,6 +67,22 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "Request not matched")]
+        public Task GetDateTimeMaxUtc7MSUppercase() => Test(async (host, pipeline) =>
+        {
+            var result = await new DatetimeOperations(ClientDiagnostics, pipeline, host).GetUtcUppercaseMaxDateTime7DigitsAsync();
+            Assert.AreEqual(DateTimeOffset.Parse("9999-12-31T23:59:59.9999999Z"), result.Value);
+        });
+
+        [Test]
+        [Ignore("https://github.com/Azure/autorest.csharp/issues/391")]
+        public Task PutDateTimeMaxUtc7MS() => TestStatus(async (host, pipeline) =>
+        {
+            var value = DateTimeOffset.Parse("9999-12-31T23:59:59.9999999Z");
+            return await new DatetimeOperations(ClientDiagnostics, pipeline, host).PutUtcMaxDateTime7DigitsAsync( value);
+        });
+
+        [Test]
         [Ignore("https://github.com/Azure/autorest.csharp/issues/346")]
         public Task PutDateTimeMaxLocalNegativeOffset() => TestStatus(async (host, pipeline) =>
         {
@@ -94,15 +110,15 @@ namespace AutoRest.TestServer.Tests
         [IgnoreOnTestServer(TestServerVersion.V2, "Request not matched")]
         public Task PutDateTimeMinLocalNegativeOffset() => TestStatus(async (host, pipeline) =>
         {
-            var value = DateTimeOffset.Parse("0001-01-01T14:00:00Z");
+            var value = DateTimeOffset.Parse("0001-01-01T00:00:00-14:00");
             return await new DatetimeOperations(ClientDiagnostics, pipeline, host).PutLocalNegativeOffsetMinDateTimeAsync( value);
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Request not matched")]
+        [Ignore("Value outside the DateTimeOffset range")]
         public Task PutDateTimeMinLocalPositiveOffset() => TestStatus(async (host, pipeline) =>
         {
-            var value = DateTimeOffset.Parse("0001-01-01T10:00:00Z");
+            var value = DateTimeOffset.Parse("0001-01-01T00:00:00+14:00");
             return await new DatetimeOperations(ClientDiagnostics, pipeline, host).PutLocalPositiveOffsetMinDateTimeAsync( value);
         });
 

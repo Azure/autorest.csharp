@@ -28,6 +28,10 @@ namespace AutoRest.TestServer.Tests
         public Task UrlPathsStringUrlEncoded() => TestStatus(async (host, pipeline) => await new PathsOperations(ClientDiagnostics, pipeline, host).StringUrlEncodedAsync());
 
         [Test]
+        [Ignore("https://github.com/Azure/autorest.csharp/issues/393")]
+        public Task UrlPathsStringUrlNonEncoded() => TestStatus(async (host, pipeline) => await new PathsOperations(ClientDiagnostics, pipeline, host).StringUrlNonEncodedAsync());
+
+        [Test]
         [Ignore("Don't have null-checks yet")]
         public Task UrlStringNullAsync() => TestStatus(async (host, pipeline) => await new PathsOperations(ClientDiagnostics, pipeline, host).StringNullAsync( null));
 
@@ -128,6 +132,7 @@ namespace AutoRest.TestServer.Tests
             "UrlPathsDoublePositive",
             "UrlPathsDoubleNegative",
             "UrlPathsStringUrlEncoded",
+            "UrlPathsStringUrlNonEncoded",
             "UrlPathsStringEmpty",
             "UrlPathsEnumValid",
             "UrlPathsByteMultiByte",

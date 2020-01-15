@@ -8,8 +8,8 @@
     "debug": "dotnet ./artifacts/bin/AutoRest.CSharp.V3/Debug/netcoreapp3.0/AutoRest.CSharp.V3.dll --server --launch-debugger"
   },
   "devDependencies": {
-    "@autorest/autorest": "https://github.com/Azure/autorest/releases/download/autorest-3.0.6151/autorest-autorest-3.0.6151.tgz",
-    "@microsoft.azure/autorest.testserver": "^2.9.1"
+    "@autorest/autorest": "https://github.com/Azure/autorest/releases/download/autorest-3.0.6153/autorest-3.0.6153.tgz",
+    "@microsoft.azure/autorest.testserver": "^2.10.5"
   },
   "dependencies": {}
 }
