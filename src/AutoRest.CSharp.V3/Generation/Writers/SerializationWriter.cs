@@ -152,7 +152,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 {
                     using (writer.Scope($"public static string ToSerialString(this {cs} value) => value switch", end: "};"))
                     {
-                        foreach (ClientEnumValue value in schema.Values)
+                        foreach (EnumTypeValue value in schema.Values)
                         {
                             writer.Line($"{cs}.{value.Name} => {value.Value.Value:L},");
                         }
@@ -163,7 +163,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     using (writer.Scope($"public static {cs} To{schema.Name}(this string value) => value switch", end: "};"))
                     {
-                        foreach (ClientEnumValue value in schema.Values)
+                        foreach (EnumTypeValue value in schema.Values)
                         {
                             writer.Line($"{value.Value.Value:L} => {cs}.{value.Name},");
                         }

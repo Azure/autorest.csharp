@@ -21,7 +21,7 @@ using AutoRest.CSharp.V3.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Response = AutoRest.CSharp.V3.Output.Models.Responses.Response;
+using Response = Azure.Response;
 
 namespace AutoRest.CSharp.V3.Generation.Writers
 {
