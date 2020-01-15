@@ -13,7 +13,6 @@ using CustomPagingOperations = custom_baseUrl_paging.PagingOperations;
 
 namespace AutoRest.TestServer.Tests
 {
-    [IgnoreOnTestServer(TestServerVersion.V2, "Doesn't resolve port value properly to create nextLink URLs.")]
     public class PagingTests : TestServerTestBase
     {
         public PagingTests(TestServerVersion version) : base(version, "paging") { }
@@ -139,6 +138,7 @@ namespace AutoRest.TestServer.Tests
         }, true);
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "Refused connection.")]
         public Task PagingMultiple() => Test(async (host, pipeline) =>
         {
             var id = 1;
@@ -286,12 +286,13 @@ namespace AutoRest.TestServer.Tests
         public Task PagingMultipleLRO() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "Refused connection.")]
         public Task PagingMultiplePath() => Test(async (host, pipeline) =>
         {
             var id = 1;
             var pageNumber = 1;
             var product = "Product";
-            var offset = 42;
+            var offset = 100;
             var linkPart = $"/paging/multiple/withpath/page/{offset}/";
             var result = await new PagingOperations(ClientDiagnostics, pipeline, host).GetMultiplePagesWithOffsetAsync(null, null, offset, null);
             var resultPage = Page.FromValues(result.Value.Values, result.Value.NextLink, result.GetRawResponse());
@@ -376,6 +377,7 @@ namespace AutoRest.TestServer.Tests
         public Task PagingMultipleRetrySecond() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "Request not matched.")]
         public Task PagingNextLinkNameNull() => Test(async (host, pipeline) =>
         {
             var result = await new PagingOperations(ClientDiagnostics, pipeline, host).GetNullNextLinkNamePagesAsync();
@@ -402,6 +404,7 @@ namespace AutoRest.TestServer.Tests
         }, true);
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "Request not matched.")]
         public Task PagingNoItemName() => Test(async (host, pipeline) =>
         {
             var result = await new PagingOperations(ClientDiagnostics, pipeline, host).GetNoItemNamePagesAsync();
@@ -428,6 +431,7 @@ namespace AutoRest.TestServer.Tests
         }, true);
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "Refused connection.")]
         public Task PagingOdataMultiple() => Test(async (host, pipeline) =>
         {
             var id = 1;
