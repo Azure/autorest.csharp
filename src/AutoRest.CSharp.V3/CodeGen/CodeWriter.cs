@@ -25,15 +25,20 @@ namespace AutoRest.CSharp.V3.CodeGen
             _scopes.Push(new CodeWriterScope(this, ""));
         }
 
-        public CodeWriterScope Scope(FormattableString line)
+        public CodeWriterScope Scope(FormattableString line, string start = "{", string end = "}")
         {
-            return Line(line).Scope();
+            return Line(line).ScopeRaw(start, end);
         }
 
         public CodeWriterScope Scope()
         {
-            LineRaw("{");
-            CodeWriterScope codeWriterScope = new CodeWriterScope(this, "}");
+            return ScopeRaw();
+        }
+
+        public CodeWriterScope ScopeRaw(string start = "{", string end = "}")
+        {
+            LineRaw(start);
+            CodeWriterScope codeWriterScope = new CodeWriterScope(this, end);
             _scopes.Push(codeWriterScope);
             return codeWriterScope;
         }
@@ -116,19 +121,11 @@ namespace AutoRest.CSharp.V3.CodeGen
         private string DefinitionLine(string? access, string? modifiers, string kind, string? name, string? implements = null) =>
             new[] { access ?? _definitionAccessDefault, modifiers, kind, name , !string.IsNullOrWhiteSpace(implements)? $": {implements}" : null }.JoinIgnoreEmpty(" ");
 
-        private CodeWriterScope Definition(string? access, string? modifiers, string kind, string? name, string? implements = null)
-        {
-            LineRaw(DefinitionLine(access, modifiers, kind, name, implements));
-            return Scope();
-        }
-
         public CodeWriterScope Class(string? access, string? modifiers, string? name, string? implements = null)
         {
             LineRaw(DefinitionLine(access, modifiers, "class", name, implements));
             return Scope();
         }
-        public CodeWriterScope Enum(string? access, string? modifiers, string? name, string? implements = null) => Definition(access, modifiers, "enum", name, implements);
-        public CodeWriterScope Struct(string? access, string? modifiers, string? name, string? implements = null) => Definition(access, modifiers, "struct", name, implements);
 
         private static string MethodDeclaration(string? modifiers, string? returnType, string? name, params string[] parameters)
         {
@@ -143,28 +140,9 @@ namespace AutoRest.CSharp.V3.CodeGen
             return Scope();
         }
 
-        public CodeWriterScope Try()
-        {
-            Line($"try");
-            return Scope();
-        }
-
-        public CodeWriterScope Catch(params string[] parameters)
-        {
-            var parametersText = parameters.JoinIgnoreEmpty(", ");
-            LineRaw($"catch{(parameters.Length > 0 ? $"({parametersText})" : String.Empty)}");
-            return Scope();
-        }
-
         public CodeWriterScope If(string condition)
         {
             LineRaw($"if({condition})");
-            return Scope();
-        }
-
-        public CodeWriterScope Else()
-        {
-            Line($"else");
             return Scope();
         }
 
@@ -173,9 +151,6 @@ namespace AutoRest.CSharp.V3.CodeGen
             LineRaw($"switch({value})");
             return Scope();
         }
-
-        public void MethodExpression(string modifiers, string? returnType, string name, string[]? parameters, string expression) =>
-            LineRaw($"{MethodDeclaration(modifiers, returnType, name, parameters ?? new string[0])} => {expression};");
 
         public void UseNamespace(CSharpNamespace @namespace)
         {
@@ -252,9 +227,6 @@ namespace AutoRest.CSharp.V3.CodeGen
         }
 
         public string Type(Type type, bool isNullable = false) => Type(new CSharpType(type, isNullable));
-        public string AttributeType(Type type) => Type(type).Replace("Attribute", String.Empty);
-
-        public string Pair(string typeText, string name) => $"{typeText} {name}";
         public string Pair(Type type, string name, bool isNullable = false) => $"{Type(type, isNullable)} {name}";
 
         private static string? GetKeywordMapping(Type? type) => type switch
