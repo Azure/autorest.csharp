@@ -7,10 +7,10 @@ namespace AutoRest.CSharp.V3.Output.Models.Requests
 {
     internal class RequestBody
     {
-        public RequestParameterOrConstant Value { get; }
+        public ParameterOrConstant Value { get; }
         public ObjectSerialization Serialization { get; }
 
-        public RequestBody(RequestParameterOrConstant value, ObjectSerialization serialization)
+        public RequestBody(ParameterOrConstant value, ObjectSerialization serialization)
         {
             Value = value;
             Serialization = serialization;

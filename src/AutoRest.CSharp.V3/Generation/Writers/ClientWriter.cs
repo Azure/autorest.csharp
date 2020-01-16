@@ -158,7 +158,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 {
                     writer.Line($"using var content = new {typeof(Utf8JsonRequestContent)}();");
 
-                    RequestParameterOrConstant value = body.Value;
+                    ParameterOrConstant value = body.Value;
 
                     writer.ToSerializeCall(
                         jsonSerialization,
@@ -172,7 +172,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 {
                     writer.Line($"using var content = new {typeof(XmlWriterContent)}();");
 
-                    RequestParameterOrConstant value = xmlBody.Value;
+                    ParameterOrConstant value = xmlBody.Value;
 
                     writer.ToSerializeCall(
                         xmlSerialization,
@@ -326,7 +326,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
         }
 
-        private CodeWriterDelegate WriteConstantOrParameter(RequestParameterOrConstant constantOrParameter) => writer =>
+        private CodeWriterDelegate WriteConstantOrParameter(ParameterOrConstant constantOrParameter) => writer =>
         {
             if (constantOrParameter.IsConstant)
             {
@@ -405,7 +405,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
         }
 
-        private CodeWriter.CodeWriterScope? WriteValueNullCheck(CodeWriter writer, RequestParameterOrConstant value)
+        private CodeWriter.CodeWriterScope? WriteValueNullCheck(CodeWriter writer, ParameterOrConstant value)
         {
             if (value.IsConstant)
                 return default;
@@ -462,7 +462,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     break;
             }
 
-            RequestParameterOrConstant value = queryParameter.Value;
+            ParameterOrConstant value = queryParameter.Value;
             using (WriteValueNullCheck(writer, value))
             {
                 writer.Append($"request.Uri.{method}({queryParameter.Name:L}, {WriteConstantOrParameter(value)}");

@@ -94,7 +94,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 return null;
             }
 
-            Dictionary<string, RequestParameterOrConstant> uriParameters = new Dictionary<string, RequestParameterOrConstant>();
+            Dictionary<string, ParameterOrConstant> uriParameters = new Dictionary<string, ParameterOrConstant>();
             Dictionary<string, PathSegment> pathParameters = new Dictionary<string, PathSegment>();
             List<QueryParameter> query = new List<QueryParameter>();
             List<RequestHeader> headers = new List<RequestHeader>();
@@ -105,7 +105,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             {
                 string defaultName = requestParameter.Language.Default.Name;
                 string serializedName = requestParameter.Language.Default.SerializedName ?? defaultName;
-                RequestParameterOrConstant constantOrParameter;
+                ParameterOrConstant constantOrParameter;
                 Schema valueSchema = requestParameter.Schema;
 
                 if (requestParameter.Implementation == ImplementationLocation.Method)
@@ -218,7 +218,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             var parameters = method.Parameters.Where(p =>  headerParameterNames.Contains(p.Name)).Append(nextPageUrlParameter).ToArray();
             var request = new Request(
                 method.Request.Method,
-                new[] { new RequestParameterOrConstant(nextPageUrlParameter) },
+                new[] { new ParameterOrConstant(nextPageUrlParameter) },
                 Array.Empty<PathSegment>(),
                 Array.Empty<QueryParameter>(),
                 method.Request.Headers,
@@ -309,9 +309,9 @@ namespace AutoRest.CSharp.V3.Output.Builders
             }
         }
 
-        private static RequestParameterOrConstant[] ToParts(string httpRequestUri, Dictionary<string, RequestParameterOrConstant> parameters)
+        private static ParameterOrConstant[] ToParts(string httpRequestUri, Dictionary<string, ParameterOrConstant> parameters)
         {
-            List<RequestParameterOrConstant> host = new List<RequestParameterOrConstant>();
+            List<ParameterOrConstant> host = new List<ParameterOrConstant>();
             foreach ((string text, bool isLiteral) in StringExtensions.GetPathParts(httpRequestUri))
             {
                 host.Add(isLiteral ? BuilderHelpers.StringConstant(text) : parameters[text]);
