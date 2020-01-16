@@ -132,7 +132,7 @@ namespace AutoRest.CSharp.V3.ClientModels
                 if (requestParameter.Protocol.Http is HttpParameter httpParameter)
                 {
                     SerializationFormat serializationFormat = ClientModelBuilderHelpers.GetSerializationFormat(valueSchema);
-                    bool skipEncoding = requestParameter.Extensions!.TryGetValue("x-ms-skip-url-encoding", out var value) && (value is true || value is "true");
+                    bool skipEncoding = requestParameter.Extensions!.TryGetValue("x-ms-skip-url-encoding", out var value) && Convert.ToBoolean(value);
                     switch (httpParameter.In)
                     {
                         case ParameterLocation.Header:
