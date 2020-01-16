@@ -2288,7 +2288,7 @@ namespace paging
             uri.AppendPath("/paging/multiple/fragment/", false);
             uri.AppendPath(tenant, true);
             uri.AppendPath("/", false);
-            uri.AppendPath(nextLink, true);
+            uri.AppendPath(nextLink, false);
             uri.AppendQuery("api_version", apiVersion, true);
             request.Uri = uri;
             return message;
@@ -2469,7 +2469,7 @@ namespace paging
             uri.AppendPath("/paging/multiple/fragmentwithgrouping/", false);
             uri.AppendPath(tenant, true);
             uri.AppendPath("/", false);
-            uri.AppendPath(nextLink, true);
+            uri.AppendPath(nextLink, false);
             uri.AppendQuery("api_version", apiVersion, true);
             request.Uri = uri;
             return message;

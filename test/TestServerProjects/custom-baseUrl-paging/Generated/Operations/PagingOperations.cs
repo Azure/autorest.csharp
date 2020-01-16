@@ -36,8 +36,8 @@ namespace custom_baseUrl_paging
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw("http://", false);
-            uri.AppendRaw(accountName, true);
-            uri.AppendRaw(host, true);
+            uri.AppendRaw(accountName, false);
+            uri.AppendRaw(host, false);
             uri.AppendPath("/paging/customurl/partialnextlink", false);
             request.Uri = uri;
             return message;
@@ -195,8 +195,8 @@ namespace custom_baseUrl_paging
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw("http://", false);
-            uri.AppendRaw(accountName, true);
-            uri.AppendRaw(host, true);
+            uri.AppendRaw(accountName, false);
+            uri.AppendRaw(host, false);
             uri.AppendPath("/paging/customurl/partialnextlinkop", false);
             request.Uri = uri;
             return message;
@@ -354,10 +354,10 @@ namespace custom_baseUrl_paging
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw("http://", false);
-            uri.AppendRaw(accountName, true);
-            uri.AppendRaw(host, true);
+            uri.AppendRaw(accountName, false);
+            uri.AppendRaw(host, false);
             uri.AppendPath("/paging/customurl/", false);
-            uri.AppendPath(nextLink, true);
+            uri.AppendPath(nextLink, false);
             request.Uri = uri;
             return message;
         }

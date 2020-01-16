@@ -34,8 +34,8 @@ namespace custom_baseUrl
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw("http://", false);
-            uri.AppendRaw(accountName, true);
-            uri.AppendRaw(host, true);
+            uri.AppendRaw(accountName, false);
+            uri.AppendRaw(host, false);
             uri.AppendPath("/customuri", false);
             request.Uri = uri;
             return message;

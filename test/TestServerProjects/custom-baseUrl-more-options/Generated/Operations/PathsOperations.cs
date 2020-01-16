@@ -39,9 +39,9 @@ namespace custom_baseUrl_more_options
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(vault, true);
-            uri.AppendRaw(secret, true);
-            uri.AppendRaw(dnsSuffix, true);
+            uri.AppendRaw(vault, false);
+            uri.AppendRaw(secret, false);
+            uri.AppendRaw(dnsSuffix, false);
             uri.AppendPath("/customuri/", false);
             uri.AppendPath(subscriptionId, true);
             uri.AppendPath("/", false);

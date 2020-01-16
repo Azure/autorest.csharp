@@ -35,7 +35,7 @@ namespace CognitiveServices.TextAnalytics
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, true);
+            uri.AppendRaw(endpoint, false);
             uri.AppendRaw("/text/analytics/v3.0-preview.1", false);
             uri.AppendPath("/entities/recognition/general", false);
             if (modelVersion != null)
@@ -138,7 +138,7 @@ namespace CognitiveServices.TextAnalytics
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, true);
+            uri.AppendRaw(endpoint, false);
             uri.AppendRaw("/text/analytics/v3.0-preview.1", false);
             uri.AppendPath("/entities/recognition/pii", false);
             if (modelVersion != null)
@@ -241,7 +241,7 @@ namespace CognitiveServices.TextAnalytics
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, true);
+            uri.AppendRaw(endpoint, false);
             uri.AppendRaw("/text/analytics/v3.0-preview.1", false);
             uri.AppendPath("/entities/linking", false);
             if (modelVersion != null)
@@ -344,7 +344,7 @@ namespace CognitiveServices.TextAnalytics
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, true);
+            uri.AppendRaw(endpoint, false);
             uri.AppendRaw("/text/analytics/v3.0-preview.1", false);
             uri.AppendPath("/keyPhrases", false);
             if (modelVersion != null)
@@ -441,7 +441,7 @@ namespace CognitiveServices.TextAnalytics
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, true);
+            uri.AppendRaw(endpoint, false);
             uri.AppendRaw("/text/analytics/v3.0-preview.1", false);
             uri.AppendPath("/languages", false);
             if (modelVersion != null)
@@ -538,7 +538,7 @@ namespace CognitiveServices.TextAnalytics
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, true);
+            uri.AppendRaw(endpoint, false);
             uri.AppendRaw("/text/analytics/v3.0-preview.1", false);
             uri.AppendPath("/sentiment", false);
             if (modelVersion != null)
