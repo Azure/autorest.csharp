@@ -4,7 +4,7 @@
 // </auto-generated>
 //----------------------
 
-namespace AutoRest.CSharp.V3.Input.Generated
+namespace AutoRest.CSharp.V3.Input
 {
     #pragma warning disable // Disable all warnings
     #nullable enable

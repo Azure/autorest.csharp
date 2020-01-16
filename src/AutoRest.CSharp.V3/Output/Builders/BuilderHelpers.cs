@@ -4,7 +4,7 @@
 using System;
 using System.Globalization;
 using System.Security;
-using AutoRest.CSharp.V3.Input.Generated;
+using AutoRest.CSharp.V3.Input;
 using AutoRest.CSharp.V3.Output.Models.Shared;
 using AutoRest.CSharp.V3.Output.Models.TypeReferences;
 using SerializationFormat = AutoRest.CSharp.V3.Output.Models.Serialization.SerializationFormat;

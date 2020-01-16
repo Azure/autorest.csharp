@@ -11,7 +11,7 @@ using YamlDotNet.Serialization;
 #pragma warning disable SA1402
 #pragma warning disable CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.
 // ReSharper disable once CheckNamespace
-namespace AutoRest.CSharp.V3.Input.Generated
+namespace AutoRest.CSharp.V3.Input
 {
     internal partial class ObjectSchema
     {

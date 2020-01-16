@@ -9,7 +9,6 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using AutoRest.CSharp.V3.AutoRest.Communication;
 using AutoRest.CSharp.V3.Input;
-using AutoRest.CSharp.V3.Input.Generated;
 using AutoRest.CSharp.V3.Utilities;
 
 namespace AutoRest.CSharp.V3.AutoRest.Plugins
