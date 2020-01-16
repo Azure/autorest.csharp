@@ -15,6 +15,8 @@ namespace AutoRest.TestServer.Tests
             var method = TypeAsserts.HasPublicInstanceMethod(typeof(AllOperations), "OriginalOperationAsync");
             // TODO: Add more tests here
             TypeAsserts.HasParameter(method, "renamedBodyParameter");
+            TypeAsserts.HasParameter(method, "renamedPathParameter");
+            TypeAsserts.HasParameter(method, "renamedQueryParameter");
         }
 
         [Test]

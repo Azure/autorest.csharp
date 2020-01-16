@@ -414,7 +414,12 @@ namespace AutoRest.TestServer.Tests
         {
             var result = await new ArrayOperations(ClientDiagnostics, pipeline, host).GetStringEnumValidAsync();
 
-            CollectionAssert.AreEqual(new[] { Enum0.Foo1, Enum0.Foo2, Enum0.Foo3 }, result.Value);
+            CollectionAssert.AreEqual(new[]
+            {
+                Enum0.Foo1,
+                Enum0.Foo2,
+                Enum0.Foo3
+            }, result.Value);
         });
 
         [Test]
@@ -545,7 +550,12 @@ namespace AutoRest.TestServer.Tests
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "no match")]
         public Task PutArrayStringEnumValid() => TestStatus(async (host, pipeline) => await new ArrayOperations(ClientDiagnostics, pipeline, host).PutStringEnumValidAsync(
-           new[] { Enum0.Foo1, Enum0.Foo2, Enum0.Foo3 }));
+            new[]
+            {
+                Enum0.Foo1,
+                Enum0.Foo2,
+                Enum0.Foo3
+            }));
 
         [Test]
         public Task PutArrayStringValid() => TestStatus(async (host, pipeline) => await new ArrayOperations(ClientDiagnostics, pipeline, host).PutStringValidAsync(
