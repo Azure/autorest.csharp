@@ -51,7 +51,7 @@ namespace Azure.Core
                 }
                 else if (_position == RawWritingPosition.Port)
                 {
-                    int separator = value.IndexOf(hostSeparator, StringComparison.InvariantCultureIgnoreCase);
+                    int separator = value.IndexOf(hostSeparator);
                     if (separator == -1)
                     {
                         Port = int.Parse(value);
