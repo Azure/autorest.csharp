@@ -33,8 +33,10 @@ namespace body_number
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/number/null", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/number/null", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get null Number value. </summary>
@@ -100,8 +102,10 @@ namespace body_number
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/number/invalidfloat", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/number/invalidfloat", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get invalid float Number value. </summary>
@@ -167,8 +171,10 @@ namespace body_number
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/number/invaliddouble", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/number/invaliddouble", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get invalid double Number value. </summary>
@@ -234,8 +240,10 @@ namespace body_number
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/number/invaliddecimal", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/number/invaliddecimal", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get invalid decimal Number value. </summary>
@@ -301,8 +309,10 @@ namespace body_number
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/number/big/float/3.402823e+20", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/number/big/float/3.402823e+20", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteNumberValue(numberBody);
@@ -366,8 +376,10 @@ namespace body_number
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/number/big/float/3.402823e+20", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/number/big/float/3.402823e+20", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get big float value 3.402823e+20. </summary>
@@ -433,8 +445,10 @@ namespace body_number
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/number/big/double/2.5976931e+101", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/number/big/double/2.5976931e+101", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteNumberValue(numberBody);
@@ -498,8 +512,10 @@ namespace body_number
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/number/big/double/2.5976931e+101", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/number/big/double/2.5976931e+101", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get big double value 2.5976931e+101. </summary>
@@ -565,8 +581,10 @@ namespace body_number
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/number/big/double/99999999.99", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/number/big/double/99999999.99", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteNumberValue(99999999.99);
@@ -628,8 +646,10 @@ namespace body_number
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/number/big/double/99999999.99", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/number/big/double/99999999.99", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get big double value 99999999.99. </summary>
@@ -695,8 +715,10 @@ namespace body_number
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/number/big/double/-99999999.99", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/number/big/double/-99999999.99", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteNumberValue(-99999999.99);
@@ -758,8 +780,10 @@ namespace body_number
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/number/big/double/-99999999.99", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/number/big/double/-99999999.99", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get big double value -99999999.99. </summary>
@@ -825,8 +849,10 @@ namespace body_number
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/number/big/decimal/2.5976931e+101", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/number/big/decimal/2.5976931e+101", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteNumberValue(numberBody);
@@ -890,8 +916,10 @@ namespace body_number
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/number/big/decimal/2.5976931e+101", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/number/big/decimal/2.5976931e+101", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get big decimal value 2.5976931e+101. </summary>
@@ -957,8 +985,10 @@ namespace body_number
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/number/big/decimal/99999999.99", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/number/big/decimal/99999999.99", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteNumberValue(99999999.99M);
@@ -1020,8 +1050,10 @@ namespace body_number
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/number/big/decimal/99999999.99", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/number/big/decimal/99999999.99", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get big decimal value 99999999.99. </summary>
@@ -1087,8 +1119,10 @@ namespace body_number
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/number/big/decimal/-99999999.99", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/number/big/decimal/-99999999.99", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteNumberValue(-99999999.99M);
@@ -1150,8 +1184,10 @@ namespace body_number
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/number/big/decimal/-99999999.99", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/number/big/decimal/-99999999.99", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get big decimal value -99999999.99. </summary>
@@ -1217,8 +1253,10 @@ namespace body_number
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/number/small/float/3.402823e-20", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/number/small/float/3.402823e-20", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteNumberValue(numberBody);
@@ -1282,8 +1320,10 @@ namespace body_number
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/number/small/float/3.402823e-20", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/number/small/float/3.402823e-20", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get big double value 3.402823e-20. </summary>
@@ -1349,8 +1389,10 @@ namespace body_number
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/number/small/double/2.5976931e-101", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/number/small/double/2.5976931e-101", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteNumberValue(numberBody);
@@ -1414,8 +1456,10 @@ namespace body_number
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/number/small/double/2.5976931e-101", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/number/small/double/2.5976931e-101", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get big double value 2.5976931e-101. </summary>
@@ -1481,8 +1525,10 @@ namespace body_number
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/number/small/decimal/2.5976931e-101", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/number/small/decimal/2.5976931e-101", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteNumberValue(numberBody);
@@ -1546,8 +1592,10 @@ namespace body_number
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/number/small/decimal/2.5976931e-101", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/number/small/decimal/2.5976931e-101", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get small decimal value 2.5976931e-101. </summary>

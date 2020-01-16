@@ -34,8 +34,10 @@ namespace body_complex
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/complex/flatten/valid", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/complex/flatten/valid", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> MISSING·OPERATION-DESCRIPTION. </summary>

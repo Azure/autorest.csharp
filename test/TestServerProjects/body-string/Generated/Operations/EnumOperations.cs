@@ -34,8 +34,10 @@ namespace body_string
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/string/enum/notExpandable", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/string/enum/notExpandable", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get enum value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
@@ -101,8 +103,10 @@ namespace body_string
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/string/enum/notExpandable", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/string/enum/notExpandable", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStringValue(stringBody.ToSerialString());
@@ -166,8 +170,10 @@ namespace body_string
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/string/enum/Referenced", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/string/enum/Referenced", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get enum value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
@@ -233,8 +239,10 @@ namespace body_string
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/string/enum/Referenced", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/string/enum/Referenced", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStringValue(enumStringBody.ToSerialString());
@@ -298,8 +306,10 @@ namespace body_string
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/string/enum/ReferencedConstant", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/string/enum/ReferencedConstant", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get value &apos;green-color&apos; from the constant. </summary>
@@ -365,8 +375,10 @@ namespace body_string
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/string/enum/ReferencedConstant", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/string/enum/ReferencedConstant", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(enumStringBody);

@@ -33,8 +33,10 @@ namespace body_date
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/date/null", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/date/null", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get null date value. </summary>
@@ -100,8 +102,10 @@ namespace body_date
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/date/invaliddate", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/date/invaliddate", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get invalid date value. </summary>
@@ -167,8 +171,10 @@ namespace body_date
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/date/overflowdate", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/date/overflowdate", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get overflow date value. </summary>
@@ -234,8 +240,10 @@ namespace body_date
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/date/underflowdate", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/date/underflowdate", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get underflow date value. </summary>
@@ -301,8 +309,10 @@ namespace body_date
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/date/max", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/date/max", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStringValue(dateBody, "D");
@@ -366,8 +376,10 @@ namespace body_date
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/date/max", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/date/max", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get max date value 9999-12-31. </summary>
@@ -433,8 +445,10 @@ namespace body_date
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/date/min", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/date/min", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStringValue(dateBody, "D");
@@ -498,8 +512,10 @@ namespace body_date
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/date/min", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/date/min", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get min date value 0000-01-01. </summary>

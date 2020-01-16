@@ -33,8 +33,10 @@ namespace body_string
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/string/null", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/string/null", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get null string value value. </summary>
@@ -100,8 +102,10 @@ namespace body_string
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/string/null", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/string/null", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStringValue((string?)null);
@@ -163,8 +167,10 @@ namespace body_string
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/string/empty", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/string/empty", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get empty string value value &apos;&apos;. </summary>
@@ -230,8 +236,10 @@ namespace body_string
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/string/empty", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/string/empty", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStringValue("");
@@ -293,8 +301,10 @@ namespace body_string
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/string/mbcs", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/string/mbcs", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get mbcs string value &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
@@ -360,8 +370,10 @@ namespace body_string
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/string/mbcs", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/string/mbcs", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStringValue("啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€");
@@ -423,8 +435,10 @@ namespace body_string
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/string/whitespace", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/string/whitespace", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get string value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
@@ -490,8 +504,10 @@ namespace body_string
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/string/whitespace", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/string/whitespace", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStringValue("    Now is the time for all good men to come to the aid of their country    ");
@@ -553,8 +569,10 @@ namespace body_string
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/string/notProvided", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/string/notProvided", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get String value when no string value is sent in response payload. </summary>
@@ -620,8 +638,10 @@ namespace body_string
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/string/base64Encoding", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/string/base64Encoding", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get value that is base64 encoded. </summary>
@@ -687,8 +707,10 @@ namespace body_string
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/string/base64UrlEncoding", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/string/base64UrlEncoding", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get value that is base64url encoded. </summary>
@@ -754,8 +776,10 @@ namespace body_string
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/string/base64UrlEncoding", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/string/base64UrlEncoding", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteBase64StringValue(stringBody, "U");
@@ -827,8 +851,10 @@ namespace body_string
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/string/nullBase64UrlEncoding", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/string/nullBase64UrlEncoding", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get null value that is expected to be base64url encoded. </summary>

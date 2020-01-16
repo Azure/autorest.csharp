@@ -40,26 +40,28 @@ namespace url
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/pathitem/nullable/globalStringPath/", false);
-            request.Uri.AppendPath(globalStringPath, true);
-            request.Uri.AppendPath("/pathItemStringPath/", false);
-            request.Uri.AppendPath(pathItemStringPath, true);
-            request.Uri.AppendPath("/localStringPath/", false);
-            request.Uri.AppendPath(localStringPath, true);
-            request.Uri.AppendPath("/globalStringQuery/pathItemStringQuery/localStringQuery", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/pathitem/nullable/globalStringPath/", false);
+            uri.AppendPath(globalStringPath, true);
+            uri.AppendPath("/pathItemStringPath/", false);
+            uri.AppendPath(pathItemStringPath, true);
+            uri.AppendPath("/localStringPath/", false);
+            uri.AppendPath(localStringPath, true);
+            uri.AppendPath("/globalStringQuery/pathItemStringQuery/localStringQuery", false);
             if (pathItemStringQuery != null)
             {
-                request.Uri.AppendQuery("pathItemStringQuery", pathItemStringQuery, true);
+                uri.AppendQuery("pathItemStringQuery", pathItemStringQuery, true);
             }
             if (globalStringQuery != null)
             {
-                request.Uri.AppendQuery("globalStringQuery", globalStringQuery, true);
+                uri.AppendQuery("globalStringQuery", globalStringQuery, true);
             }
             if (localStringQuery != null)
             {
-                request.Uri.AppendQuery("localStringQuery", localStringQuery, true);
+                uri.AppendQuery("localStringQuery", localStringQuery, true);
             }
+            request.Uri = uri;
             return message;
         }
         /// <summary> send globalStringPath=&apos;globalStringPath&apos;, pathItemStringPath=&apos;pathItemStringPath&apos;, localStringPath=&apos;localStringPath&apos;, globalStringQuery=&apos;globalStringQuery&apos;, pathItemStringQuery=&apos;pathItemStringQuery&apos;, localStringQuery=&apos;localStringQuery&apos;. </summary>
@@ -141,26 +143,28 @@ namespace url
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/pathitem/nullable/globalStringPath/", false);
-            request.Uri.AppendPath(globalStringPath, true);
-            request.Uri.AppendPath("/pathItemStringPath/", false);
-            request.Uri.AppendPath(pathItemStringPath, true);
-            request.Uri.AppendPath("/localStringPath/", false);
-            request.Uri.AppendPath(localStringPath, true);
-            request.Uri.AppendPath("/null/pathItemStringQuery/localStringQuery", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/pathitem/nullable/globalStringPath/", false);
+            uri.AppendPath(globalStringPath, true);
+            uri.AppendPath("/pathItemStringPath/", false);
+            uri.AppendPath(pathItemStringPath, true);
+            uri.AppendPath("/localStringPath/", false);
+            uri.AppendPath(localStringPath, true);
+            uri.AppendPath("/null/pathItemStringQuery/localStringQuery", false);
             if (pathItemStringQuery != null)
             {
-                request.Uri.AppendQuery("pathItemStringQuery", pathItemStringQuery, true);
+                uri.AppendQuery("pathItemStringQuery", pathItemStringQuery, true);
             }
             if (globalStringQuery != null)
             {
-                request.Uri.AppendQuery("globalStringQuery", globalStringQuery, true);
+                uri.AppendQuery("globalStringQuery", globalStringQuery, true);
             }
             if (localStringQuery != null)
             {
-                request.Uri.AppendQuery("localStringQuery", localStringQuery, true);
+                uri.AppendQuery("localStringQuery", localStringQuery, true);
             }
+            request.Uri = uri;
             return message;
         }
         /// <summary> send globalStringPath=&apos;globalStringPath&apos;, pathItemStringPath=&apos;pathItemStringPath&apos;, localStringPath=&apos;localStringPath&apos;, globalStringQuery=null, pathItemStringQuery=&apos;pathItemStringQuery&apos;, localStringQuery=&apos;localStringQuery&apos;. </summary>
@@ -242,26 +246,28 @@ namespace url
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/pathitem/nullable/globalStringPath/", false);
-            request.Uri.AppendPath(globalStringPath, true);
-            request.Uri.AppendPath("/pathItemStringPath/", false);
-            request.Uri.AppendPath(pathItemStringPath, true);
-            request.Uri.AppendPath("/localStringPath/", false);
-            request.Uri.AppendPath(localStringPath, true);
-            request.Uri.AppendPath("/null/pathItemStringQuery/null", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/pathitem/nullable/globalStringPath/", false);
+            uri.AppendPath(globalStringPath, true);
+            uri.AppendPath("/pathItemStringPath/", false);
+            uri.AppendPath(pathItemStringPath, true);
+            uri.AppendPath("/localStringPath/", false);
+            uri.AppendPath(localStringPath, true);
+            uri.AppendPath("/null/pathItemStringQuery/null", false);
             if (pathItemStringQuery != null)
             {
-                request.Uri.AppendQuery("pathItemStringQuery", pathItemStringQuery, true);
+                uri.AppendQuery("pathItemStringQuery", pathItemStringQuery, true);
             }
             if (globalStringQuery != null)
             {
-                request.Uri.AppendQuery("globalStringQuery", globalStringQuery, true);
+                uri.AppendQuery("globalStringQuery", globalStringQuery, true);
             }
             if (localStringQuery != null)
             {
-                request.Uri.AppendQuery("localStringQuery", localStringQuery, true);
+                uri.AppendQuery("localStringQuery", localStringQuery, true);
             }
+            request.Uri = uri;
             return message;
         }
         /// <summary> send globalStringPath=globalStringPath, pathItemStringPath=&apos;pathItemStringPath&apos;, localStringPath=&apos;localStringPath&apos;, globalStringQuery=null, pathItemStringQuery=&apos;pathItemStringQuery&apos;, localStringQuery=null. </summary>
@@ -343,26 +349,28 @@ namespace url
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/pathitem/nullable/globalStringPath/", false);
-            request.Uri.AppendPath(globalStringPath, true);
-            request.Uri.AppendPath("/pathItemStringPath/", false);
-            request.Uri.AppendPath(pathItemStringPath, true);
-            request.Uri.AppendPath("/localStringPath/", false);
-            request.Uri.AppendPath(localStringPath, true);
-            request.Uri.AppendPath("/globalStringQuery/null/null", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/pathitem/nullable/globalStringPath/", false);
+            uri.AppendPath(globalStringPath, true);
+            uri.AppendPath("/pathItemStringPath/", false);
+            uri.AppendPath(pathItemStringPath, true);
+            uri.AppendPath("/localStringPath/", false);
+            uri.AppendPath(localStringPath, true);
+            uri.AppendPath("/globalStringQuery/null/null", false);
             if (pathItemStringQuery != null)
             {
-                request.Uri.AppendQuery("pathItemStringQuery", pathItemStringQuery, true);
+                uri.AppendQuery("pathItemStringQuery", pathItemStringQuery, true);
             }
             if (globalStringQuery != null)
             {
-                request.Uri.AppendQuery("globalStringQuery", globalStringQuery, true);
+                uri.AppendQuery("globalStringQuery", globalStringQuery, true);
             }
             if (localStringQuery != null)
             {
-                request.Uri.AppendQuery("localStringQuery", localStringQuery, true);
+                uri.AppendQuery("localStringQuery", localStringQuery, true);
             }
+            request.Uri = uri;
             return message;
         }
         /// <summary> send globalStringPath=&apos;globalStringPath&apos;, pathItemStringPath=&apos;pathItemStringPath&apos;, localStringPath=&apos;localStringPath&apos;, globalStringQuery=&apos;globalStringQuery&apos;, pathItemStringQuery=null, localStringQuery=null. </summary>

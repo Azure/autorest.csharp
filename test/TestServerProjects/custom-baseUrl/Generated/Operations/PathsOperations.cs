@@ -32,8 +32,12 @@ namespace custom_baseUrl
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"http://{accountName}{host}"));
-            request.Uri.AppendPath("/customuri", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw("http://", false);
+            uri.AppendRaw(accountName, true);
+            uri.AppendRaw(host, true);
+            uri.AppendPath("/customuri", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get a 200 to test a valid base uri. </summary>

@@ -34,8 +34,10 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/paging/noitemname", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/paging/noitemname", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> A paging operation that must return result of the default &apos;value&apos; node. </summary>
@@ -101,7 +103,9 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{nextLinkUrl}"));
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(nextLinkUrl, false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> A paging operation that must return result of the default &apos;value&apos; node. </summary>
@@ -177,8 +181,10 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/paging/nullnextlink", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/paging/nullnextlink", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> A paging operation that must ignore any kind of nextLink, and stop after page 1. </summary>
@@ -244,7 +250,9 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{nextLinkUrl}"));
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(nextLinkUrl, false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> A paging operation that must ignore any kind of nextLink, and stop after page 1. </summary>
@@ -320,8 +328,10 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/paging/single", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/paging/single", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> A paging operation that finishes on the first call without a nextlink. </summary>
@@ -387,7 +397,9 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{nextLinkUrl}"));
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(nextLinkUrl, false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> A paging operation that finishes on the first call without a nextlink. </summary>
@@ -463,8 +475,10 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/paging/multiple", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/paging/multiple", false);
+            request.Uri = uri;
             if (clientRequestId != null)
             {
                 request.Headers.Add("client-request-id", clientRequestId);
@@ -548,7 +562,9 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{nextLinkUrl}"));
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(nextLinkUrl, false);
+            request.Uri = uri;
             if (clientRequestId != null)
             {
                 request.Headers.Add("client-request-id", clientRequestId);
@@ -642,8 +658,10 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/paging/multiple/odata", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/paging/multiple/odata", false);
+            request.Uri = uri;
             if (clientRequestId != null)
             {
                 request.Headers.Add("client-request-id", clientRequestId);
@@ -727,7 +745,9 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{nextLinkUrl}"));
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(nextLinkUrl, false);
+            request.Uri = uri;
             if (clientRequestId != null)
             {
                 request.Headers.Add("client-request-id", clientRequestId);
@@ -821,9 +841,11 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/paging/multiple/withpath/", false);
-            request.Uri.AppendPath(offset, true);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/paging/multiple/withpath/", false);
+            uri.AppendPath(offset, true);
+            request.Uri = uri;
             if (clientRequestId != null)
             {
                 request.Headers.Add("client-request-id", clientRequestId);
@@ -909,7 +931,9 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{nextLinkUrl}"));
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(nextLinkUrl, false);
+            request.Uri = uri;
             if (clientRequestId != null)
             {
                 request.Headers.Add("client-request-id", clientRequestId);
@@ -1003,8 +1027,10 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/paging/multiple/retryfirst", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/paging/multiple/retryfirst", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages. </summary>
@@ -1070,7 +1096,9 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{nextLinkUrl}"));
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(nextLinkUrl, false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages. </summary>
@@ -1146,8 +1174,10 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/paging/multiple/retrysecond", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/paging/multiple/retrysecond", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually. </summary>
@@ -1213,7 +1243,9 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{nextLinkUrl}"));
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(nextLinkUrl, false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually. </summary>
@@ -1289,8 +1321,10 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/paging/single/failure", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/paging/single/failure", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> A paging operation that receives a 400 on the first call. </summary>
@@ -1356,7 +1390,9 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{nextLinkUrl}"));
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(nextLinkUrl, false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> A paging operation that receives a 400 on the first call. </summary>
@@ -1432,8 +1468,10 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/paging/multiple/failure", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/paging/multiple/failure", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> A paging operation that receives a 400 on the second call. </summary>
@@ -1499,7 +1537,9 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{nextLinkUrl}"));
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(nextLinkUrl, false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> A paging operation that receives a 400 on the second call. </summary>
@@ -1575,8 +1615,10 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/paging/multiple/failureuri", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/paging/multiple/failureuri", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> A paging operation that receives an invalid nextLink. </summary>
@@ -1642,7 +1684,9 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{nextLinkUrl}"));
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(nextLinkUrl, false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> A paging operation that receives an invalid nextLink. </summary>
@@ -1718,10 +1762,12 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/paging/multiple/fragment/", false);
-            request.Uri.AppendPath(tenant, true);
-            request.Uri.AppendQuery("api_version", apiVersion, true);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/paging/multiple/fragment/", false);
+            uri.AppendPath(tenant, true);
+            uri.AppendQuery("api_version", apiVersion, true);
+            request.Uri = uri;
             return message;
         }
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
@@ -1807,7 +1853,9 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{nextLinkUrl}"));
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(nextLinkUrl, false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
@@ -1883,10 +1931,12 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/paging/multiple/fragmentwithgrouping/", false);
-            request.Uri.AppendPath(tenant, true);
-            request.Uri.AppendQuery("api_version", apiVersion, true);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/paging/multiple/fragmentwithgrouping/", false);
+            uri.AppendPath(tenant, true);
+            uri.AppendQuery("api_version", apiVersion, true);
+            request.Uri = uri;
             return message;
         }
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped. </summary>
@@ -1972,7 +2022,9 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{nextLinkUrl}"));
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(nextLinkUrl, false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped. </summary>
@@ -2048,8 +2100,10 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/paging/multiple/lro", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/paging/multiple/lro", false);
+            request.Uri = uri;
             if (clientRequestId != null)
             {
                 request.Headers.Add("client-request-id", clientRequestId);
@@ -2133,7 +2187,9 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
-            request.Uri.Reset(new Uri($"{nextLinkUrl}"));
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(nextLinkUrl, false);
+            request.Uri = uri;
             if (clientRequestId != null)
             {
                 request.Headers.Add("client-request-id", clientRequestId);
@@ -2227,12 +2283,14 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/paging/multiple/fragment/", false);
-            request.Uri.AppendPath(tenant, true);
-            request.Uri.AppendPath("/", false);
-            request.Uri.AppendPath(nextLink, true);
-            request.Uri.AppendQuery("api_version", apiVersion, true);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/paging/multiple/fragment/", false);
+            uri.AppendPath(tenant, true);
+            uri.AppendPath("/", false);
+            uri.AppendPath(nextLink, true);
+            uri.AppendQuery("api_version", apiVersion, true);
+            request.Uri = uri;
             return message;
         }
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
@@ -2328,7 +2386,9 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{nextLinkUrl}"));
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(nextLinkUrl, false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
@@ -2404,12 +2464,14 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/paging/multiple/fragmentwithgrouping/", false);
-            request.Uri.AppendPath(tenant, true);
-            request.Uri.AppendPath("/", false);
-            request.Uri.AppendPath(nextLink, true);
-            request.Uri.AppendQuery("api_version", apiVersion, true);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/paging/multiple/fragmentwithgrouping/", false);
+            uri.AppendPath(tenant, true);
+            uri.AppendPath("/", false);
+            uri.AppendPath(nextLink, true);
+            uri.AppendQuery("api_version", apiVersion, true);
+            request.Uri = uri;
             return message;
         }
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
@@ -2505,7 +2567,9 @@ namespace paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{nextLinkUrl}"));
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(nextLinkUrl, false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>

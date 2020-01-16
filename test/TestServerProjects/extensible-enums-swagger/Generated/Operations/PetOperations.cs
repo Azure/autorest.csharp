@@ -34,9 +34,11 @@ namespace extensible_enums_swagger
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/extensibleenums/pet/", false);
-            request.Uri.AppendPath(petId, true);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/extensibleenums/pet/", false);
+            uri.AppendPath(petId, true);
+            request.Uri = uri;
             return message;
         }
         /// <summary> MISSING·OPERATION-DESCRIPTION. </summary>
@@ -112,8 +114,10 @@ namespace extensible_enums_swagger
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/extensibleenums/pet/addPet", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/extensibleenums/pet/addPet", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(petParam);

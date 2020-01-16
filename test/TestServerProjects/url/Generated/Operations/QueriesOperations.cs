@@ -34,9 +34,11 @@ namespace url
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/queries/bool/true", false);
-            request.Uri.AppendQuery("boolQuery", true, true);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/queries/bool/true", false);
+            uri.AppendQuery("boolQuery", true, true);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get true Boolean value on path. </summary>
@@ -94,9 +96,11 @@ namespace url
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/queries/bool/false", false);
-            request.Uri.AppendQuery("boolQuery", false, true);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/queries/bool/false", false);
+            uri.AppendQuery("boolQuery", false, true);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get false Boolean value on path. </summary>
@@ -154,12 +158,14 @@ namespace url
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/queries/bool/null", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/queries/bool/null", false);
             if (boolQuery != null)
             {
-                request.Uri.AppendQuery("boolQuery", boolQuery.Value, true);
+                uri.AppendQuery("boolQuery", boolQuery.Value, true);
             }
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get null Boolean value on query (query string should be absent). </summary>
@@ -219,9 +225,11 @@ namespace url
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/queries/int/1000000", false);
-            request.Uri.AppendQuery("intQuery", 1000000F, true);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/queries/int/1000000", false);
+            uri.AppendQuery("intQuery", 1000000F, true);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get &apos;1000000&apos; integer value. </summary>
@@ -279,9 +287,11 @@ namespace url
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/queries/int/-1000000", false);
-            request.Uri.AppendQuery("intQuery", -1000000F, true);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/queries/int/-1000000", false);
+            uri.AppendQuery("intQuery", -1000000F, true);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get &apos;-1000000&apos; integer value. </summary>
@@ -339,12 +349,14 @@ namespace url
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/queries/int/null", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/queries/int/null", false);
             if (intQuery != null)
             {
-                request.Uri.AppendQuery("intQuery", intQuery.Value, true);
+                uri.AppendQuery("intQuery", intQuery.Value, true);
             }
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get null integer value (no query parameter). </summary>
@@ -404,9 +416,11 @@ namespace url
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/queries/long/10000000000", false);
-            request.Uri.AppendQuery("longQuery", 1E+10F, true);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/queries/long/10000000000", false);
+            uri.AppendQuery("longQuery", 1E+10F, true);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get &apos;10000000000&apos; 64 bit integer value. </summary>
@@ -464,9 +478,11 @@ namespace url
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/queries/long/-10000000000", false);
-            request.Uri.AppendQuery("longQuery", -1E+10F, true);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/queries/long/-10000000000", false);
+            uri.AppendQuery("longQuery", -1E+10F, true);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get &apos;-10000000000&apos; 64 bit integer value. </summary>
@@ -524,12 +540,14 @@ namespace url
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/queries/long/null", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/queries/long/null", false);
             if (longQuery != null)
             {
-                request.Uri.AppendQuery("longQuery", longQuery.Value, true);
+                uri.AppendQuery("longQuery", longQuery.Value, true);
             }
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get &apos;null 64 bit integer value (no query param in uri). </summary>
@@ -589,9 +607,11 @@ namespace url
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/queries/float/1.034E+20", false);
-            request.Uri.AppendQuery("floatQuery", 1.034E+20F, true);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/queries/float/1.034E+20", false);
+            uri.AppendQuery("floatQuery", 1.034E+20F, true);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get &apos;1.034E+20&apos; numeric value. </summary>
@@ -649,9 +669,11 @@ namespace url
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/queries/float/-1.034E-20", false);
-            request.Uri.AppendQuery("floatQuery", -1.034E-20F, true);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/queries/float/-1.034E-20", false);
+            uri.AppendQuery("floatQuery", -1.034E-20F, true);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get &apos;-1.034E-20&apos; numeric value. </summary>
@@ -709,12 +731,14 @@ namespace url
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/queries/float/null", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/queries/float/null", false);
             if (floatQuery != null)
             {
-                request.Uri.AppendQuery("floatQuery", floatQuery.Value, true);
+                uri.AppendQuery("floatQuery", floatQuery.Value, true);
             }
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get null numeric value (no query parameter). </summary>
@@ -774,9 +798,11 @@ namespace url
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/queries/double/9999999.999", false);
-            request.Uri.AppendQuery("doubleQuery", 9999999.999, true);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/queries/double/9999999.999", false);
+            uri.AppendQuery("doubleQuery", 9999999.999, true);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get &apos;9999999.999&apos; numeric value. </summary>
@@ -834,9 +860,11 @@ namespace url
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/queries/double/-9999999.999", false);
-            request.Uri.AppendQuery("doubleQuery", -9999999.999, true);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/queries/double/-9999999.999", false);
+            uri.AppendQuery("doubleQuery", -9999999.999, true);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get &apos;-9999999.999&apos; numeric value. </summary>
@@ -894,12 +922,14 @@ namespace url
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/queries/double/null", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/queries/double/null", false);
             if (doubleQuery != null)
             {
-                request.Uri.AppendQuery("doubleQuery", doubleQuery.Value, true);
+                uri.AppendQuery("doubleQuery", doubleQuery.Value, true);
             }
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get null numeric value (no query parameter). </summary>
@@ -959,9 +989,11 @@ namespace url
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/queries/string/unicode/", false);
-            request.Uri.AppendQuery("stringQuery", "啊齄丂狛狜隣郎隣兀﨩", true);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/queries/string/unicode/", false);
+            uri.AppendQuery("stringQuery", "啊齄丂狛狜隣郎隣兀﨩", true);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multi-byte string value. </summary>
@@ -1019,9 +1051,11 @@ namespace url
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend", false);
-            request.Uri.AppendQuery("stringQuery", "begin!*'();:@ &=+$,/?#[]end", true);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend", false);
+            uri.AppendQuery("stringQuery", "begin!*'();:@ &=+$,/?#[]end", true);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end. </summary>
@@ -1079,9 +1113,11 @@ namespace url
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/queries/string/empty", false);
-            request.Uri.AppendQuery("stringQuery", "", true);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/queries/string/empty", false);
+            uri.AppendQuery("stringQuery", "", true);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get &apos;&apos;. </summary>
@@ -1139,12 +1175,14 @@ namespace url
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/queries/string/null", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/queries/string/null", false);
             if (stringQuery != null)
             {
-                request.Uri.AppendQuery("stringQuery", stringQuery, true);
+                uri.AppendQuery("stringQuery", stringQuery, true);
             }
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get null (no query parameter in url). </summary>
@@ -1204,12 +1242,14 @@ namespace url
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/queries/enum/green%20color", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/queries/enum/green%20color", false);
             if (enumQuery != null)
             {
-                request.Uri.AppendQuery("enumQuery", enumQuery.Value, true);
+                uri.AppendQuery("enumQuery", enumQuery.Value, true);
             }
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get using uri with query parameter &apos;green color&apos;. </summary>
@@ -1269,12 +1309,14 @@ namespace url
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/queries/enum/null", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/queries/enum/null", false);
             if (enumQuery != null)
             {
-                request.Uri.AppendQuery("enumQuery", enumQuery.Value, true);
+                uri.AppendQuery("enumQuery", enumQuery.Value, true);
             }
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get null (no query parameter in url). </summary>
@@ -1334,12 +1376,14 @@ namespace url
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/queries/byte/multibyte", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/queries/byte/multibyte", false);
             if (byteQuery != null)
             {
-                request.Uri.AppendQuery("byteQuery", byteQuery, true);
+                uri.AppendQuery("byteQuery", byteQuery, true);
             }
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </summary>
@@ -1399,9 +1443,11 @@ namespace url
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/queries/byte/empty", false);
-            request.Uri.AppendQuery("byteQuery", new byte[] { }, true);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/queries/byte/empty", false);
+            uri.AppendQuery("byteQuery", new byte[] { }, true);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get &apos;&apos; as byte array. </summary>
@@ -1459,12 +1505,14 @@ namespace url
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/queries/byte/null", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/queries/byte/null", false);
             if (byteQuery != null)
             {
-                request.Uri.AppendQuery("byteQuery", byteQuery, true);
+                uri.AppendQuery("byteQuery", byteQuery, true);
             }
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get null as byte array (no query parameters in uri). </summary>
@@ -1524,9 +1572,11 @@ namespace url
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/queries/date/2012-01-01", false);
-            request.Uri.AppendQuery("dateQuery", new DateTimeOffset(2012, 1, 1, 0, 0, 0, 0, TimeSpan.Zero), "D", true);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/queries/date/2012-01-01", false);
+            uri.AppendQuery("dateQuery", new DateTimeOffset(2012, 1, 1, 0, 0, 0, 0, TimeSpan.Zero), "D", true);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get &apos;2012-01-01&apos; as date. </summary>
@@ -1584,12 +1634,14 @@ namespace url
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/queries/date/null", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/queries/date/null", false);
             if (dateQuery != null)
             {
-                request.Uri.AppendQuery("dateQuery", dateQuery.Value, "D", true);
+                uri.AppendQuery("dateQuery", dateQuery.Value, "D", true);
             }
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get null as date - this should result in no query parameters in uri. </summary>
@@ -1649,9 +1701,11 @@ namespace url
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/queries/datetime/2012-01-01T01%3A01%3A01Z", false);
-            request.Uri.AppendQuery("dateTimeQuery", new DateTimeOffset(2012, 1, 1, 1, 1, 1, 0, TimeSpan.Zero), "S", true);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/queries/datetime/2012-01-01T01%3A01%3A01Z", false);
+            uri.AppendQuery("dateTimeQuery", new DateTimeOffset(2012, 1, 1, 1, 1, 1, 0, TimeSpan.Zero), "S", true);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get &apos;2012-01-01T01:01:01Z&apos; as date-time. </summary>
@@ -1709,12 +1763,14 @@ namespace url
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/queries/datetime/null", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/queries/datetime/null", false);
             if (dateTimeQuery != null)
             {
-                request.Uri.AppendQuery("dateTimeQuery", dateTimeQuery.Value, "S", true);
+                uri.AppendQuery("dateTimeQuery", dateTimeQuery.Value, "S", true);
             }
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get null as date-time, should result in no query parameters in uri. </summary>
@@ -1774,12 +1830,14 @@ namespace url
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/queries/array/csv/string/valid", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/queries/array/csv/string/valid", false);
             if (arrayQuery != null)
             {
-                request.Uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
+                uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
             }
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </summary>
@@ -1839,12 +1897,14 @@ namespace url
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/queries/array/csv/string/null", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/queries/array/csv/string/null", false);
             if (arrayQuery != null)
             {
-                request.Uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
+                uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
             }
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get a null array of string using the csv-array format. </summary>
@@ -1904,12 +1964,14 @@ namespace url
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/queries/array/csv/string/empty", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/queries/array/csv/string/empty", false);
             if (arrayQuery != null)
             {
-                request.Uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
+                uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
             }
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get an empty array [] of string using the csv-array format. </summary>
@@ -1969,12 +2031,14 @@ namespace url
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/queries/array/ssv/string/valid", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/queries/array/ssv/string/valid", false);
             if (arrayQuery != null)
             {
-                request.Uri.AppendQueryDelimited("arrayQuery", arrayQuery, " ", true);
+                uri.AppendQueryDelimited("arrayQuery", arrayQuery, " ", true);
             }
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format. </summary>
@@ -2034,12 +2098,14 @@ namespace url
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/queries/array/tsv/string/valid", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/queries/array/tsv/string/valid", false);
             if (arrayQuery != null)
             {
-                request.Uri.AppendQueryDelimited("arrayQuery", arrayQuery, "\t", true);
+                uri.AppendQueryDelimited("arrayQuery", arrayQuery, "\t", true);
             }
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format. </summary>
@@ -2099,12 +2165,14 @@ namespace url
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/queries/array/pipes/string/valid", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/queries/array/pipes/string/valid", false);
             if (arrayQuery != null)
             {
-                request.Uri.AppendQueryDelimited("arrayQuery", arrayQuery, "|", true);
+                uri.AppendQueryDelimited("arrayQuery", arrayQuery, "|", true);
             }
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format. </summary>

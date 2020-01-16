@@ -89,7 +89,7 @@ namespace AutoRest.CSharp.V3.ClientModels
                 return null;
             }
 
-            Dictionary<string, ConstantOrParameter> uriParameters = new Dictionary<string, ConstantOrParameter>();
+            Dictionary<string, PathSegment> uriParameters = new Dictionary<string, PathSegment>();
             Dictionary<string, PathSegment> pathParameters = new Dictionary<string, PathSegment>();
             List<QueryParameter> query = new List<QueryParameter>();
             List<RequestHeader> headers = new List<RequestHeader>();
@@ -132,16 +132,17 @@ namespace AutoRest.CSharp.V3.ClientModels
                 if (requestParameter.Protocol.Http is HttpParameter httpParameter)
                 {
                     SerializationFormat serializationFormat = ClientModelBuilderHelpers.GetSerializationFormat(valueSchema);
+                    bool skipEncoding = requestParameter.Extensions!.TryGetValue("x-ms-skip-url-encoding", out var value) && (value is true || value is "true");
                     switch (httpParameter.In)
                     {
                         case ParameterLocation.Header:
                             headers.Add(new RequestHeader(serializedName, constantOrParameter, serializationFormat));
                             break;
                         case ParameterLocation.Query:
-                            query.Add(new QueryParameter(serializedName, constantOrParameter, GetSerializationStyle(httpParameter, valueSchema), true, serializationFormat));
+                            query.Add(new QueryParameter(serializedName, constantOrParameter, GetSerializationStyle(httpParameter, valueSchema), !skipEncoding, serializationFormat));
                             break;
                         case ParameterLocation.Path:
-                            pathParameters.Add(serializedName, new PathSegment(constantOrParameter, true, serializationFormat));
+                            pathParameters.Add(serializedName, new PathSegment(constantOrParameter, !skipEncoding, serializationFormat));
                             break;
                         case ParameterLocation.Body:
                             Debug.Assert(httpRequestWithBody != null);
@@ -149,7 +150,11 @@ namespace AutoRest.CSharp.V3.ClientModels
                             body = new ObjectRequestBody(constantOrParameter, serialization);
                             break;
                         case ParameterLocation.Uri:
-                            uriParameters[defaultName] = constantOrParameter;
+                            if (defaultName == "$host")
+                            {
+                                skipEncoding = true;
+                            }
+                            uriParameters[defaultName] = new PathSegment(constantOrParameter, !skipEncoding, serializationFormat);
                             break;
                     }
                 }
@@ -162,7 +167,7 @@ namespace AutoRest.CSharp.V3.ClientModels
 
             var request = new ClientMethodRequest(
                 ToCoreRequestMethod(httpRequest.Method) ?? RequestMethod.Get,
-                ToParts(httpRequest.Uri, uriParameters),
+                ToPathParts(httpRequest.Uri, uriParameters),
                 ToPathParts(httpRequest.Path, pathParameters),
                 query.ToArray(),
                 headers.ToArray(),
@@ -213,7 +218,7 @@ namespace AutoRest.CSharp.V3.ClientModels
             var parameters = method.Parameters.Where(p =>  headerParameterNames.Contains(p.Name)).Append(nextPageUrlParameter).ToArray();
             var request = new ClientMethodRequest(
                 method.Request.Method,
-                new[] { new ConstantOrParameter(nextPageUrlParameter) },
+                new[] { new PathSegment(nextPageUrlParameter, false, SerializationFormat.Default) },
                 Array.Empty<PathSegment>(),
                 Array.Empty<QueryParameter>(),
                 method.Request.Headers,
@@ -302,17 +307,6 @@ namespace AutoRest.CSharp.V3.ClientModels
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-        }
-
-        private static ConstantOrParameter[] ToParts(string httpRequestUri, Dictionary<string, ConstantOrParameter> parameters)
-        {
-            List<ConstantOrParameter> host = new List<ConstantOrParameter>();
-            foreach ((string text, bool isLiteral) in StringExtensions.GetPathParts(httpRequestUri))
-            {
-                host.Add(isLiteral ? ClientModelBuilderHelpers.StringConstant(text) : parameters[text]);
-            }
-
-            return host.ToArray();
         }
 
         private static PathSegment[] ToPathParts(string httpRequestUri, Dictionary<string, PathSegment> parameters)

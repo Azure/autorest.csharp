@@ -35,8 +35,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/null", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/null", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get null array value. </summary>
@@ -110,8 +112,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/invalid", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/invalid", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get invalid array [1, 2, 3. </summary>
@@ -185,8 +189,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/empty", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/empty", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get empty array value []. </summary>
@@ -260,8 +266,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/empty", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/empty", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
@@ -338,8 +346,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/boolean/tfft", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/boolean/tfft", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get boolean array value [true, false, false, true]. </summary>
@@ -413,8 +423,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/boolean/tfft", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/boolean/tfft", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
@@ -491,8 +503,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/boolean/true.null.false", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/boolean/true.null.false", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get boolean array value [true, null, false]. </summary>
@@ -566,8 +580,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/boolean/true.boolean.false", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/boolean/true.boolean.false", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get boolean array value [true, &apos;boolean&apos;, false]. </summary>
@@ -641,8 +657,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/integer/1.-1.3.300", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/integer/1.-1.3.300", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get integer array value [1, -1, 3, 300]. </summary>
@@ -716,8 +734,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/integer/1.-1.3.300", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/integer/1.-1.3.300", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
@@ -794,8 +814,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/integer/1.null.zero", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/integer/1.null.zero", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get integer array value [1, null, 0]. </summary>
@@ -869,8 +891,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/integer/1.integer.0", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/integer/1.integer.0", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get integer array value [1, &apos;integer&apos;, 0]. </summary>
@@ -944,8 +968,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/long/1.-1.3.300", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/long/1.-1.3.300", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get integer array value [1, -1, 3, 300]. </summary>
@@ -1019,8 +1045,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/long/1.-1.3.300", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/long/1.-1.3.300", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
@@ -1097,8 +1125,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/long/1.null.zero", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/long/1.null.zero", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get long array value [1, null, 0]. </summary>
@@ -1172,8 +1202,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/long/1.integer.0", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/long/1.integer.0", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get long array value [1, &apos;integer&apos;, 0]. </summary>
@@ -1247,8 +1279,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/float/0--0.01-1.2e20", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/float/0--0.01-1.2e20", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get float array value [0, -0.01, 1.2e20]. </summary>
@@ -1322,8 +1356,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/float/0--0.01-1.2e20", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/float/0--0.01-1.2e20", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
@@ -1400,8 +1436,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/float/0.0-null-1.2e20", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/float/0.0-null-1.2e20", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get float array value [0.0, null, -1.2e20]. </summary>
@@ -1475,8 +1513,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/float/1.number.0", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/float/1.number.0", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get boolean array value [1.0, &apos;number&apos;, 0.0]. </summary>
@@ -1550,8 +1590,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/double/0--0.01-1.2e20", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/double/0--0.01-1.2e20", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get float array value [0, -0.01, 1.2e20]. </summary>
@@ -1625,8 +1667,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/double/0--0.01-1.2e20", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/double/0--0.01-1.2e20", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
@@ -1703,8 +1747,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/double/0.0-null-1.2e20", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/double/0.0-null-1.2e20", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get float array value [0.0, null, -1.2e20]. </summary>
@@ -1778,8 +1824,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/double/1.number.0", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/double/1.number.0", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get boolean array value [1.0, &apos;number&apos;, 0.0]. </summary>
@@ -1853,8 +1901,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/string/foo1.foo2.foo3", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/string/foo1.foo2.foo3", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get string array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
@@ -1928,8 +1978,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/string/foo1.foo2.foo3", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/string/foo1.foo2.foo3", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
@@ -2006,8 +2058,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/enum/foo1.foo2.foo3", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/enum/foo1.foo2.foo3", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get enum array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
@@ -2081,8 +2135,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/enum/foo1.foo2.foo3", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/enum/foo1.foo2.foo3", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
@@ -2159,8 +2215,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/string-enum/foo1.foo2.foo3", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/string-enum/foo1.foo2.foo3", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get enum array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
@@ -2234,8 +2292,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/string-enum/foo1.foo2.foo3", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/string-enum/foo1.foo2.foo3", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
@@ -2312,8 +2372,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/string/foo.null.foo2", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/string/foo.null.foo2", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get string array value [&apos;foo&apos;, null, &apos;foo2&apos;]. </summary>
@@ -2387,8 +2449,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/string/foo.123.foo2", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/string/foo.123.foo2", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get string array value [&apos;foo&apos;, 123, &apos;foo2&apos;]. </summary>
@@ -2462,8 +2526,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/uuid/valid", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/uuid/valid", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get uuid array value [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;d1399005-30f7-40d6-8da6-dd7c89ad34db&apos;, &apos;f42f6aa1-a5bc-4ddf-907e-5f915de43205&apos;]. </summary>
@@ -2537,8 +2603,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/uuid/valid", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/uuid/valid", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
@@ -2615,8 +2683,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/uuid/invalidchars", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/uuid/invalidchars", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get uuid array value [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;foo&apos;]. </summary>
@@ -2690,8 +2760,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/date/valid", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/date/valid", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get integer array value [&apos;2000-12-01&apos;, &apos;1980-01-02&apos;, &apos;1492-10-12&apos;]. </summary>
@@ -2765,8 +2837,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/date/valid", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/date/valid", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
@@ -2843,8 +2917,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/date/invalidnull", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/date/invalidnull", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get date array value [&apos;2012-01-01&apos;, null, &apos;1776-07-04&apos;]. </summary>
@@ -2918,8 +2994,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/date/invalidchars", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/date/invalidchars", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get date array value [&apos;2011-03-22&apos;, &apos;date&apos;]. </summary>
@@ -2993,8 +3071,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/date-time/valid", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/date-time/valid", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get date-time array value [&apos;2000-12-01t00:00:01z&apos;, &apos;1980-01-02T00:11:35+01:00&apos;, &apos;1492-10-12T10:15:01-08:00&apos;]. </summary>
@@ -3068,8 +3148,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/date-time/valid", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/date-time/valid", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
@@ -3146,8 +3228,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/date-time/invalidnull", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/date-time/invalidnull", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get date array value [&apos;2000-12-01t00:00:01z&apos;, null]. </summary>
@@ -3221,8 +3305,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/date-time/invalidchars", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/date-time/invalidchars", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get date array value [&apos;2000-12-01t00:00:01z&apos;, &apos;date-time&apos;]. </summary>
@@ -3296,8 +3382,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/date-time-rfc1123/valid", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/date-time-rfc1123/valid", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get date-time array value [&apos;Fri, 01 Dec 2000 00:00:01 GMT&apos;, &apos;Wed, 02 Jan 1980 00:11:35 GMT&apos;, &apos;Wed, 12 Oct 1492 10:15:01 GMT&apos;]. </summary>
@@ -3371,8 +3459,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/date-time-rfc1123/valid", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/date-time-rfc1123/valid", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
@@ -3449,8 +3539,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/duration/valid", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/duration/valid", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get duration array value [&apos;P123DT22H14M12.011S&apos;, &apos;P5DT1H0M0S&apos;]. </summary>
@@ -3524,8 +3616,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/duration/valid", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/duration/valid", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
@@ -3602,8 +3696,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/byte/valid", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/byte/valid", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64. </summary>
@@ -3677,8 +3773,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/byte/valid", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/byte/valid", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
@@ -3755,8 +3853,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/byte/invalidnull", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/byte/invalidnull", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded. </summary>
@@ -3830,8 +3930,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/prim/base64url/valid", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/prim/base64url/valid", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get array value [&apos;a string that gets encoded with base64url&apos;, &apos;test string&apos; &apos;Lorem ipsum&apos;] with the items base64url encoded. </summary>
@@ -3905,8 +4007,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/complex/null", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/complex/null", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get array of complex type null value. </summary>
@@ -3980,8 +4084,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/complex/empty", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/complex/empty", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get empty array of complex type []. </summary>
@@ -4055,8 +4161,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/complex/itemnull", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/complex/itemnull", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get array of complex type with null item [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, null, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
@@ -4130,8 +4238,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/complex/itemempty", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/complex/itemempty", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get array of complex type with empty item [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
@@ -4205,8 +4315,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/complex/valid", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/complex/valid", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get array of complex type with [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {&apos;integer&apos;: 3, &apos;string&apos;: &apos;4&apos;}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
@@ -4280,8 +4392,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/complex/valid", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/complex/valid", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
@@ -4358,8 +4472,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/array/null", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/array/null", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get a null array. </summary>
@@ -4443,8 +4559,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/array/empty", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/array/empty", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get an empty array []. </summary>
@@ -4528,8 +4646,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/array/itemnull", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/array/itemnull", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], null, [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
@@ -4613,8 +4733,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/array/itemempty", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/array/itemempty", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
@@ -4698,8 +4820,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/array/valid", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/array/valid", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [&apos;4&apos;, &apos;5&apos;, &apos;6&apos;], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
@@ -4783,8 +4907,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/array/valid", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/array/valid", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
@@ -4866,8 +4992,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/dictionary/null", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/dictionary/null", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get an array of Dictionaries with value null. </summary>
@@ -4951,8 +5079,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/dictionary/empty", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/dictionary/empty", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value []. </summary>
@@ -5036,8 +5166,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/dictionary/itemnull", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/dictionary/itemnull", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, null, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
@@ -5121,8 +5253,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/dictionary/itemempty", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/dictionary/itemempty", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
@@ -5206,8 +5340,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/dictionary/valid", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/dictionary/valid", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {&apos;4&apos;: &apos;four&apos;, &apos;5&apos;: &apos;five&apos;, &apos;6&apos;: &apos;six&apos;}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
@@ -5291,8 +5427,10 @@ namespace body_array
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/array/dictionary/valid", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/array/dictionary/valid", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();

@@ -7,7 +7,7 @@ namespace AutoRest.CSharp.V3.ClientModels
 {
     internal class ClientMethodRequest
     {
-        public ClientMethodRequest(RequestMethod method, ConstantOrParameter[] hostSegments, PathSegment[] pathSegments, QueryParameter[] query, RequestHeader[] headers, ObjectRequestBody? body)
+        public ClientMethodRequest(RequestMethod method, PathSegment[] hostSegments, PathSegment[] pathSegments, QueryParameter[] query, RequestHeader[] headers, ObjectRequestBody? body)
         {
             Method = method;
             HostSegments = hostSegments;
@@ -18,7 +18,7 @@ namespace AutoRest.CSharp.V3.ClientModels
         }
 
         public RequestMethod Method { get; }
-        public ConstantOrParameter[] HostSegments { get; }
+        public PathSegment[] HostSegments { get; }
         public PathSegment[] PathSegments { get; }
         public QueryParameter[] Query { get; }
         public RequestHeader[] Headers { get; }

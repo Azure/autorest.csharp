@@ -46,14 +46,16 @@ namespace validation
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/fakepath/", false);
-            request.Uri.AppendPath(subscriptionId, true);
-            request.Uri.AppendPath("/", false);
-            request.Uri.AppendPath(resourceGroupName, true);
-            request.Uri.AppendPath("/", false);
-            request.Uri.AppendPath(id, true);
-            request.Uri.AppendQuery("apiVersion", ApiVersion, true);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/fakepath/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/", false);
+            uri.AppendPath(id, true);
+            uri.AppendQuery("apiVersion", ApiVersion, true);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Validates input parameters on the method. See swagger for details. </summary>
@@ -131,14 +133,16 @@ namespace validation
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/fakepath/", false);
-            request.Uri.AppendPath(subscriptionId, true);
-            request.Uri.AppendPath("/", false);
-            request.Uri.AppendPath(resourceGroupName, true);
-            request.Uri.AppendPath("/", false);
-            request.Uri.AppendPath(id, true);
-            request.Uri.AppendQuery("apiVersion", ApiVersion, true);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/fakepath/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/", false);
+            uri.AppendPath(id, true);
+            uri.AppendQuery("apiVersion", ApiVersion, true);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(body);
@@ -222,10 +226,12 @@ namespace validation
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/validation/constantsInPath/", false);
-            request.Uri.AppendPath("constant", true);
-            request.Uri.AppendPath("/value", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/validation/constantsInPath/", false);
+            uri.AppendPath("constant", true);
+            uri.AppendPath("/value", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> MISSING·OPERATION-DESCRIPTION. </summary>
@@ -283,10 +289,12 @@ namespace validation
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/validation/constantsInPath/", false);
-            request.Uri.AppendPath("constant", true);
-            request.Uri.AppendPath("/value", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/validation/constantsInPath/", false);
+            uri.AppendPath("constant", true);
+            uri.AppendPath("/value", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(body);
