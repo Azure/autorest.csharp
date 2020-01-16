@@ -2,3 +2,4 @@
 
 **/Generated/**/*.cs linguist-generated=true
 **/Generated/**/*.csproj linguist-generated=true
+**/*.yaml linguist-generated=true

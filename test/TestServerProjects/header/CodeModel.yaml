@@ -1,0 +1,2069 @@
+!<!CodeModel> 
+schemas: !<!Schemas> 
+  objects:
+  - !<!ObjectSchema> &ref_5
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    properties:
+    - !<!Property> 
+      schema: !<!NumberSchema> &ref_0
+        type: integer
+        precision: 32
+        language: !<!Languages> 
+          default:
+            name: typeForstatus
+            description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+        protocol: !<!Protocols> {}
+      serializedName: status
+      language: !<!Languages> 
+        default:
+          name: status
+          description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: !<!StringSchema> &ref_2
+        type: string
+        apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+        language: !<!Languages> 
+          default:
+            name: Error-message
+            description: MISSING·SCHEMA-DESCRIPTION-STRING
+        protocol: !<!Protocols> {}
+      serializedName: message
+      language: !<!Languages> 
+        default:
+          name: message
+          description: MISSING·SCHEMA-DESCRIPTION-STRING
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: Error
+        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        namespace: Api100
+    protocol: !<!Protocols> {}
+  booleans:
+  - !<!BooleanSchema> &ref_10
+    type: boolean
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: boolean
+        description: MISSING·SCHEMA-DESCRIPTION-BOOLEAN
+        header: value
+    protocol: !<!Protocols> {}
+  byteArrays:
+  - !<!ByteArraySchema> &ref_15
+    type: byte-array
+    format: byte
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: byte-array
+        description: MISSING·SCHEMA-DESCRIPTION-BYTEARRAY
+        header: value
+    protocol: !<!Protocols> {}
+  dateTimes:
+  - !<!DateTimeSchema> &ref_12
+    type: date-time
+    format: date-time
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: date-time
+        description: MISSING·SCHEMA-DESCRIPTION-DATETIME
+        header: value
+    protocol: !<!Protocols> {}
+  - !<!DateTimeSchema> &ref_13
+    type: date-time
+    format: date-time-rfc1123
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: date-time
+        description: MISSING·SCHEMA-DESCRIPTION-DATETIME
+        header: value
+    protocol: !<!Protocols> {}
+  dates:
+  - !<!DateSchema> &ref_11
+    type: date
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: date
+        description: MISSING·SCHEMA-DESCRIPTION-DATE
+        header: value
+    protocol: !<!Protocols> {}
+  durations:
+  - !<!DurationSchema> &ref_14
+    type: duration
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: duration
+        description: MISSING·SCHEMA-DESCRIPTION-DURATION
+        header: value
+    protocol: !<!Protocols> {}
+  numbers:
+  - *ref_0
+  - !<!NumberSchema> &ref_6
+    type: integer
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    precision: 32
+    language: !<!Languages> 
+      default:
+        name: integer
+        description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+        header: value
+    protocol: !<!Protocols> {}
+  - !<!NumberSchema> &ref_7
+    type: integer
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    precision: 64
+    language: !<!Languages> 
+      default:
+        name: integer
+        description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+        header: value
+    protocol: !<!Protocols> {}
+  - !<!NumberSchema> &ref_8
+    type: number
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    precision: 32
+    language: !<!Languages> 
+      default:
+        name: number
+        description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+        header: value
+    protocol: !<!Protocols> {}
+  - !<!NumberSchema> &ref_9
+    type: number
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    precision: 64
+    language: !<!Languages> 
+      default:
+        name: number
+        description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+        header: value
+    protocol: !<!Protocols> {}
+  sealedChoices:
+  - !<!SealedChoiceSchema> &ref_16
+    choices:
+    - !<!ChoiceValue> 
+      value: White
+      language:
+        default:
+          name: White
+          description: ''
+    - !<!ChoiceValue> 
+      value: black
+      language:
+        default:
+          name: black
+          description: ''
+    - !<!ChoiceValue> 
+      value: GREY
+      language:
+        default:
+          name: GREY
+          description: ''
+    type: sealed-choice
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    choiceType: !<!StringSchema> &ref_1
+      type: string
+      language: !<!Languages> 
+        default:
+          name: string
+          description: simple string
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: GreyscaleColors
+        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        header: value
+    protocol: !<!Protocols> {}
+  strings:
+  - *ref_1
+  - !<!StringSchema> &ref_4
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: string
+        description: MISSING·SCHEMA-DESCRIPTION-STRING
+        header: value
+    protocol: !<!Protocols> {}
+  - *ref_2
+globalParameters:
+- !<!Parameter> &ref_3
+  schema: *ref_1
+  clientDefaultValue: 'http://localhost:3000'
+  implementation: Client
+  required: true
+  language: !<!Languages> 
+    default:
+      name: $host
+      description: server parameter
+      serializedName: $host
+  protocol: !<!Protocols> 
+    http: !<!HttpParameter> 
+      in: uri
+info: !<!Info> 
+  description: Test Infrastructure for AutoRest
+  title: header
+operationGroups:
+- !<!OperationGroup> 
+  $key: header
+  operations:
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_3
+      - !<!Parameter> 
+        schema: *ref_4
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: User-Agent
+            description: 'Send a post request with header value "User-Agent": "overwrite"'
+            serializedName: User-Agent
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /header/param/existingkey
+          method: post
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_5
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: paramExistingKey
+        description: 'Send a post request with header value "User-Agent": "overwrite"'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_3
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /header/response/existingkey
+          method: post
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          headers:
+          - !<!HttpHeader> 
+            schema: *ref_4
+            header: User-Agent
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_5
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: responseExistingKey
+        description: 'Get a response with header value "User-Agent": "overwrite"'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_3
+      - !<!Parameter> 
+        schema: *ref_4
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: Content-Type
+            description: 'Send a post request with header value "Content-Type": "text/html"'
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /header/param/protectedkey
+          method: post
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_5
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: paramProtectedKey
+        description: 'Send a post request with header value "Content-Type": "text/html"'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_3
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /header/response/protectedkey
+          method: post
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          headers:
+          - !<!HttpHeader> 
+            schema: *ref_4
+            header: Content-Type
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_5
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: responseProtectedKey
+        description: 'Get a response with header value "Content-Type": "text/html"'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_3
+      - !<!Parameter> 
+        schema: *ref_4
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: scenario
+            description: 'Send a post request with header values "scenario": "positive" or "negative"'
+            serializedName: scenario
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_6
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: value
+            description: Send a post request with header values 1 or -2
+            serializedName: value
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /header/param/prim/integer
+          method: post
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_5
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: paramInteger
+        description: 'Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2 '
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_3
+      - !<!Parameter> 
+        schema: *ref_4
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: scenario
+            description: 'Send a post request with header values "scenario": "positive" or "negative"'
+            serializedName: scenario
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /header/response/prim/integer
+          method: post
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          headers:
+          - !<!HttpHeader> 
+            schema: *ref_6
+            header: value
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_5
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: responseInteger
+        description: 'Get a response with header value "value": 1 or -2'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_3
+      - !<!Parameter> 
+        schema: *ref_4
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: scenario
+            description: 'Send a post request with header values "scenario": "positive" or "negative"'
+            serializedName: scenario
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_7
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: value
+            description: Send a post request with header values 105 or -2
+            serializedName: value
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /header/param/prim/long
+          method: post
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_5
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: paramLong
+        description: 'Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value": -2 '
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_3
+      - !<!Parameter> 
+        schema: *ref_4
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: scenario
+            description: 'Send a post request with header values "scenario": "positive" or "negative"'
+            serializedName: scenario
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /header/response/prim/long
+          method: post
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          headers:
+          - !<!HttpHeader> 
+            schema: *ref_7
+            header: value
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_5
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: responseLong
+        description: 'Get a response with header value "value": 105 or -2'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_3
+      - !<!Parameter> 
+        schema: *ref_4
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: scenario
+            description: 'Send a post request with header values "scenario": "positive" or "negative"'
+            serializedName: scenario
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_8
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: value
+            description: Send a post request with header values 0.07 or -3.0
+            serializedName: value
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /header/param/prim/float
+          method: post
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_5
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: paramFloat
+        description: 'Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value": -3.0'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_3
+      - !<!Parameter> 
+        schema: *ref_4
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: scenario
+            description: 'Send a post request with header values "scenario": "positive" or "negative"'
+            serializedName: scenario
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /header/response/prim/float
+          method: post
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          headers:
+          - !<!HttpHeader> 
+            schema: *ref_8
+            header: value
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_5
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: responseFloat
+        description: 'Get a response with header value "value": 0.07 or -3.0'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_3
+      - !<!Parameter> 
+        schema: *ref_4
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: scenario
+            description: 'Send a post request with header values "scenario": "positive" or "negative"'
+            serializedName: scenario
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_9
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: value
+            description: Send a post request with header values 7e120 or -3.0
+            serializedName: value
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /header/param/prim/double
+          method: post
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_5
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: paramDouble
+        description: 'Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value": -3.0'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_3
+      - !<!Parameter> 
+        schema: *ref_4
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: scenario
+            description: 'Send a post request with header values "scenario": "positive" or "negative"'
+            serializedName: scenario
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /header/response/prim/double
+          method: post
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          headers:
+          - !<!HttpHeader> 
+            schema: *ref_9
+            header: value
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_5
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: responseDouble
+        description: 'Get a response with header value "value": 7e120 or -3.0'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_3
+      - !<!Parameter> 
+        schema: *ref_4
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: scenario
+            description: 'Send a post request with header values "scenario": "positive" or "negative"'
+            serializedName: scenario
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_10
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: value
+            description: Send a post request with header values true or false
+            serializedName: value
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /header/param/prim/bool
+          method: post
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_5
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: paramBool
+        description: 'Send a post request with header values "scenario": "true", "value": true or "scenario": "false", "value": false'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_3
+      - !<!Parameter> 
+        schema: *ref_4
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: scenario
+            description: 'Send a post request with header values "scenario": "positive" or "negative"'
+            serializedName: scenario
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /header/response/prim/bool
+          method: post
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          headers:
+          - !<!HttpHeader> 
+            schema: *ref_10
+            header: value
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_5
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: responseBool
+        description: 'Get a response with header value "value": true or false'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_3
+      - !<!Parameter> 
+        schema: *ref_4
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: scenario
+            description: 'Send a post request with header values "scenario": "positive" or "negative"'
+            serializedName: scenario
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_4
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: value
+            description: Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""
+            serializedName: value
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /header/param/prim/string
+          method: post
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_5
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: paramString
+        description: 'Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy dog" or "scenario": "null", "value": null or "scenario": "empty", "value": ""'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_3
+      - !<!Parameter> 
+        schema: *ref_4
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: scenario
+            description: 'Send a post request with header values "scenario": "positive" or "negative"'
+            serializedName: scenario
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /header/response/prim/string
+          method: post
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          headers:
+          - !<!HttpHeader> 
+            schema: *ref_4
+            header: value
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_5
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: responseString
+        description: Get a response with header values "The quick brown fox jumps over the lazy dog" or null or ""
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_3
+      - !<!Parameter> 
+        schema: *ref_4
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: scenario
+            description: 'Send a post request with header values "scenario": "positive" or "negative"'
+            serializedName: scenario
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_11
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: value
+            description: Send a post request with header values "2010-01-01" or "0001-01-01"
+            serializedName: value
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /header/param/prim/date
+          method: post
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_5
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: paramDate
+        description: 'Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value": "0001-01-01"'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_3
+      - !<!Parameter> 
+        schema: *ref_4
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: scenario
+            description: 'Send a post request with header values "scenario": "positive" or "negative"'
+            serializedName: scenario
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /header/response/prim/date
+          method: post
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          headers:
+          - !<!HttpHeader> 
+            schema: *ref_11
+            header: value
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_5
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: responseDate
+        description: Get a response with header values "2010-01-01" or "0001-01-01"
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_3
+      - !<!Parameter> 
+        schema: *ref_4
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: scenario
+            description: 'Send a post request with header values "scenario": "positive" or "negative"'
+            serializedName: scenario
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_12
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: value
+            description: 'Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"'
+            serializedName: value
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /header/param/prim/datetime
+          method: post
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_5
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: paramDatetime
+        description: 'Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min", "value": "0001-01-01T00:00:00Z"'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_3
+      - !<!Parameter> 
+        schema: *ref_4
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: scenario
+            description: 'Send a post request with header values "scenario": "positive" or "negative"'
+            serializedName: scenario
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /header/response/prim/datetime
+          method: post
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          headers:
+          - !<!HttpHeader> 
+            schema: *ref_12
+            header: value
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_5
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: responseDatetime
+        description: 'Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_3
+      - !<!Parameter> 
+        schema: *ref_4
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: scenario
+            description: 'Send a post request with header values "scenario": "positive" or "negative"'
+            serializedName: scenario
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_13
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: value
+            description: 'Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"'
+            serializedName: value
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /header/param/prim/datetimerfc1123
+          method: post
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_5
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: paramDatetimeRfc1123
+        description: 'Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT"'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_3
+      - !<!Parameter> 
+        schema: *ref_4
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: scenario
+            description: 'Send a post request with header values "scenario": "positive" or "negative"'
+            serializedName: scenario
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /header/response/prim/datetimerfc1123
+          method: post
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          headers:
+          - !<!HttpHeader> 
+            schema: *ref_13
+            header: value
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_5
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: responseDatetimeRfc1123
+        description: 'Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_3
+      - !<!Parameter> 
+        schema: *ref_4
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: scenario
+            description: 'Send a post request with header values "scenario": "positive" or "negative"'
+            serializedName: scenario
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_14
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: value
+            description: Send a post request with header values "P123DT22H14M12.011S"
+            serializedName: value
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /header/param/prim/duration
+          method: post
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_5
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: paramDuration
+        description: 'Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S"'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_3
+      - !<!Parameter> 
+        schema: *ref_4
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: scenario
+            description: 'Send a post request with header values "scenario": "positive" or "negative"'
+            serializedName: scenario
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /header/response/prim/duration
+          method: post
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          headers:
+          - !<!HttpHeader> 
+            schema: *ref_14
+            header: value
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_5
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: responseDuration
+        description: Get a response with header values "P123DT22H14M12.011S"
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_3
+      - !<!Parameter> 
+        schema: *ref_4
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: scenario
+            description: 'Send a post request with header values "scenario": "positive" or "negative"'
+            serializedName: scenario
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_15
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: value
+            description: Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"
+            serializedName: value
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /header/param/prim/byte
+          method: post
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_5
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: paramByte
+        description: 'Send a post request with header values "scenario": "valid", "value": "啊齄丂狛狜隣郎隣兀﨩"'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_3
+      - !<!Parameter> 
+        schema: *ref_4
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: scenario
+            description: 'Send a post request with header values "scenario": "positive" or "negative"'
+            serializedName: scenario
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /header/response/prim/byte
+          method: post
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          headers:
+          - !<!HttpHeader> 
+            schema: *ref_15
+            header: value
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_5
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: responseByte
+        description: Get a response with header values "啊齄丂狛狜隣郎隣兀﨩"
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_3
+      - !<!Parameter> 
+        schema: *ref_4
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: scenario
+            description: 'Send a post request with header values "scenario": "positive" or "negative"'
+            serializedName: scenario
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_16
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: value
+            description: 'Send a post request with header values ''GREY'' '
+            serializedName: value
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /header/param/prim/enum
+          method: post
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_5
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: paramEnum
+        description: 'Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_3
+      - !<!Parameter> 
+        schema: *ref_4
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: scenario
+            description: 'Send a post request with header values "scenario": "positive" or "negative"'
+            serializedName: scenario
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /header/response/prim/enum
+          method: post
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          headers:
+          - !<!HttpHeader> 
+            schema: *ref_16
+            header: value
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_5
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: responseEnum
+        description: Get a response with header values "GREY" or null
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_3
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0
+          method: post
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_5
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: customRequestId
+        description: Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request
+    protocol: !<!Protocols> {}
+  language: !<!Languages> 
+    default:
+      name: header
+      description: ''
+  protocol: !<!Protocols> {}
+language: !<!Languages> 
+  default:
+    name: ''
+    description: ''
+protocol: !<!Protocols> 
+  http: !<!HttpModel> {}

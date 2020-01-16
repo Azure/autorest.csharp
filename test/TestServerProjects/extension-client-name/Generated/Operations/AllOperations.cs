@@ -28,15 +28,15 @@ namespace extension_client_name
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
-        internal HttpMessage CreateOriginalOperationRequest(string originalPathParameter, string originalQueryParameter, OriginalSchema renamedBodyParameter)
+        internal HttpMessage CreateOriginalOperationRequest(string renamedPathParameter, string renamedQueryParameter, OriginalSchema renamedBodyParameter)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             request.Uri.Reset(new Uri($"{host}"));
             request.Uri.AppendPath("/originalOperation/", false);
-            request.Uri.AppendPath(originalPathParameter, true);
-            request.Uri.AppendQuery("originalQueryParameter", originalQueryParameter, true);
+            request.Uri.AppendPath(renamedPathParameter, true);
+            request.Uri.AppendQuery("originalQueryParameter", renamedQueryParameter, true);
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(renamedBodyParameter);
@@ -44,19 +44,19 @@ namespace extension_client_name
             return message;
         }
         /// <summary> MISSING·OPERATION-DESCRIPTION. </summary>
-        /// <param name="originalPathParameter"> MISSING·PARAMETER-DESCRIPTION. </param>
-        /// <param name="originalQueryParameter"> MISSING·PARAMETER-DESCRIPTION. </param>
+        /// <param name="renamedPathParameter"> MISSING·PARAMETER-DESCRIPTION. </param>
+        /// <param name="renamedQueryParameter"> MISSING·PARAMETER-DESCRIPTION. </param>
         /// <param name="renamedBodyParameter"> The OriginalSchema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<OriginalSchema, OriginalOperationHeaders>> OriginalOperationAsync(string originalPathParameter, string originalQueryParameter, OriginalSchema renamedBodyParameter, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<OriginalSchema, OriginalOperationHeaders>> OriginalOperationAsync(string renamedPathParameter, string renamedQueryParameter, OriginalSchema renamedBodyParameter, CancellationToken cancellationToken = default)
         {
-            if (originalPathParameter == null)
+            if (renamedPathParameter == null)
             {
-                throw new ArgumentNullException(nameof(originalPathParameter));
+                throw new ArgumentNullException(nameof(renamedPathParameter));
             }
-            if (originalQueryParameter == null)
+            if (renamedQueryParameter == null)
             {
-                throw new ArgumentNullException(nameof(originalQueryParameter));
+                throw new ArgumentNullException(nameof(renamedQueryParameter));
             }
             if (renamedBodyParameter == null)
             {
@@ -67,7 +67,7 @@ namespace extension_client_name
             scope.Start();
             try
             {
-                using var message = CreateOriginalOperationRequest(originalPathParameter, originalQueryParameter, renamedBodyParameter);
+                using var message = CreateOriginalOperationRequest(renamedPathParameter, renamedQueryParameter, renamedBodyParameter);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -89,19 +89,19 @@ namespace extension_client_name
             }
         }
         /// <summary> MISSING·OPERATION-DESCRIPTION. </summary>
-        /// <param name="originalPathParameter"> MISSING·PARAMETER-DESCRIPTION. </param>
-        /// <param name="originalQueryParameter"> MISSING·PARAMETER-DESCRIPTION. </param>
+        /// <param name="renamedPathParameter"> MISSING·PARAMETER-DESCRIPTION. </param>
+        /// <param name="renamedQueryParameter"> MISSING·PARAMETER-DESCRIPTION. </param>
         /// <param name="renamedBodyParameter"> The OriginalSchema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<OriginalSchema, OriginalOperationHeaders> OriginalOperation(string originalPathParameter, string originalQueryParameter, OriginalSchema renamedBodyParameter, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<OriginalSchema, OriginalOperationHeaders> OriginalOperation(string renamedPathParameter, string renamedQueryParameter, OriginalSchema renamedBodyParameter, CancellationToken cancellationToken = default)
         {
-            if (originalPathParameter == null)
+            if (renamedPathParameter == null)
             {
-                throw new ArgumentNullException(nameof(originalPathParameter));
+                throw new ArgumentNullException(nameof(renamedPathParameter));
             }
-            if (originalQueryParameter == null)
+            if (renamedQueryParameter == null)
             {
-                throw new ArgumentNullException(nameof(originalQueryParameter));
+                throw new ArgumentNullException(nameof(renamedQueryParameter));
             }
             if (renamedBodyParameter == null)
             {
@@ -112,7 +112,7 @@ namespace extension_client_name
             scope.Start();
             try
             {
-                using var message = CreateOriginalOperationRequest(originalPathParameter, originalQueryParameter, renamedBodyParameter);
+                using var message = CreateOriginalOperationRequest(renamedPathParameter, renamedQueryParameter, renamedBodyParameter);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {

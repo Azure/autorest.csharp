@@ -1,0 +1,304 @@
+!<!CodeModel> 
+schemas: !<!Schemas> 
+  objects:
+  - !<!ObjectSchema> &ref_7
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    properties:
+    - !<!Property> 
+      schema: !<!NumberSchema> &ref_0
+        type: integer
+        precision: 32
+        language: !<!Languages> 
+          default:
+            name: typeForstatus
+            description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+        protocol: !<!Protocols> {}
+      serializedName: status
+      language: !<!Languages> 
+        default:
+          name: status
+          description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: !<!StringSchema> &ref_2
+        type: string
+        apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+        language: !<!Languages> 
+          default:
+            name: Error-message
+            description: MISSING·SCHEMA-DESCRIPTION-STRING
+        protocol: !<!Protocols> {}
+      serializedName: message
+      language: !<!Languages> 
+        default:
+          name: message
+          description: MISSING·SCHEMA-DESCRIPTION-STRING
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: Error
+        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        namespace: Api100
+    protocol: !<!Protocols> {}
+  arrays:
+  - !<!ArraySchema> &ref_6
+    type: array
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    elementType: !<!StringSchema> &ref_1
+      type: string
+      apiVersions:
+      - !<!ApiVersion> 
+        version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: get-0-itemsItem
+          description: MISSING·SCHEMA-DESCRIPTION-STRING
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: Array of get-0-itemsItem
+        description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+    protocol: !<!Protocols> {}
+  - !<!ArraySchema> &ref_8
+    type: array
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    elementType: !<!StringSchema> &ref_3
+      type: string
+      apiVersions:
+      - !<!ApiVersion> 
+        version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: string
+          description: MISSING·SCHEMA-DESCRIPTION-STRING
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: Array of string
+        description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+    protocol: !<!Protocols> {}
+  numbers:
+  - *ref_0
+  strings:
+  - !<!StringSchema> &ref_4
+    type: string
+    language: !<!Languages> 
+      default:
+        name: string
+        description: simple string
+    protocol: !<!Protocols> {}
+  - *ref_1
+  - *ref_2
+  - *ref_3
+globalParameters:
+- !<!Parameter> &ref_5
+  schema: *ref_4
+  clientDefaultValue: 'http://localhost:3000'
+  implementation: Client
+  required: true
+  language: !<!Languages> 
+    default:
+      name: $host
+      description: server parameter
+      serializedName: $host
+  protocol: !<!Protocols> 
+    http: !<!HttpParameter> 
+      in: uri
+info: !<!Info> 
+  description: Test Infrastructure for AutoRest
+  title: url-multi-collectionFormat
+operationGroups:
+- !<!OperationGroup> 
+  $key: queries
+  operations:
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_5
+      - !<!Parameter> 
+        schema: *ref_6
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: arrayQuery
+            description: a null array of string using the multi-array format
+            serializedName: arrayQuery
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+            style: form
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /queries/array/multi/string/null
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_7
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: ArrayStringMultiNull
+        description: Get a null array of string using the multi-array format
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_5
+      - !<!Parameter> 
+        schema: *ref_8
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: arrayQuery
+            description: 'an empty array [] of string using the multi-array format'
+            serializedName: arrayQuery
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+            style: form
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /queries/array/multi/string/empty
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_7
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: ArrayStringMultiEmpty
+        description: 'Get an empty array [] of string using the multi-array format'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_5
+      - !<!Parameter> 
+        schema: *ref_8
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: arrayQuery
+            description: 'an empty array [] of string using the multi-array format'
+            serializedName: arrayQuery
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+            style: form
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /queries/array/multi/string/valid
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_7
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: ArrayStringMultiValid
+        description: 'Get an array of string [''ArrayQuery1'', ''begin!*''();:@ &=+$,/?#[]end'' , null, ''''] using the mult-array format'
+    protocol: !<!Protocols> {}
+  language: !<!Languages> 
+    default:
+      name: queries
+      description: ''
+  protocol: !<!Protocols> {}
+language: !<!Languages> 
+  default:
+    name: ''
+    description: ''
+protocol: !<!Protocols> 
+  http: !<!HttpModel> {}
