@@ -21,6 +21,13 @@ then
 	cp $INPUT_PATH $INPUT_TMP
 	api-spec-converter --from=openapi_3 --to=swagger_2 --syntax=yaml $INPUT_TMP > $INPUT_PATH
 	rm $INPUT_TMP
+elif echo "$line" | grep -q -E '^apiVersion: 1'
+then
+	echo "API version 1 found. Convert to version 2"
+	npm install -g api-spec-converter
+	cp $INPUT_PATH $INPUT_TMP
+	api-spec-converter --from=swagger_1 --to=swagger_2 --syntax=yaml $INPUT_TMP > $INPUT_PATH
+	rm $INPUT_TMP
 fi
 
 autorest --use=/app --csharp --output-folder=$OUTPUT_PATH --namespace=$NAMESPACE --input-file=$INPUT_PATH --add-credentials
