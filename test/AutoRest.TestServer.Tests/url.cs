@@ -28,7 +28,8 @@ namespace AutoRest.TestServer.Tests
         public Task UrlPathsStringUrlEncoded() => TestStatus(async (host, pipeline) => await new PathsOperations(ClientDiagnostics, pipeline, host).StringUrlEncodedAsync());
 
         [Test]
-        public Task UrlPathsStringUrlNonEncoded() => TestStatus(async (host, pipeline) => await new PathsOperations(ClientDiagnostics, pipeline).StringUrlNonEncodedAsync());
+        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
+        public Task UrlPathsStringUrlNonEncoded() => TestStatus(async (host, pipeline) => await new PathsOperations(ClientDiagnostics, pipeline, host).StringUrlNonEncodedAsync());
 
         [Test]
         [Ignore("Don't have null-checks yet")]
