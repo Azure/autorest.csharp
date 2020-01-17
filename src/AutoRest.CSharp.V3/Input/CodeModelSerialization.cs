@@ -16,7 +16,8 @@ namespace AutoRest.CSharp.V3.Input
 {
     internal static class CodeModelSerialization
     {
-        public static readonly Type[] GeneratedTypes = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.Namespace == typeof(CodeModel).Namespace).ToArray();
+        //https://stackoverflow.com/a/4145127/294804
+        public static readonly Type[] GeneratedTypes = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.Namespace == typeof(CodeModel).Namespace && !(t.IsAbstract && t.IsSealed)).ToArray();
 
         private static readonly Dictionary<Type, string> TagOverrides = new Dictionary<Type, string>
         {
