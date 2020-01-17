@@ -12,14 +12,14 @@ namespace AutoRest.CSharp.V3.Output.Models.Requests
         private readonly Constant? _constant;
         private readonly Parameter? _parameter;
 
-        public ParameterOrConstant(Constant constant)
+        private ParameterOrConstant(Constant constant)
         {
             Type = constant.Type;
             _constant = constant;
             _parameter = null;
         }
 
-        public ParameterOrConstant(Parameter parameter)
+        private ParameterOrConstant(Parameter parameter)
         {
             Type = parameter.Type;
             _parameter = parameter;

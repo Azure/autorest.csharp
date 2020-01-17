@@ -145,14 +145,14 @@ namespace AutoRest.CSharp.V3.Output.Builders
             if (property.Schema is ConstantSchema constantSchema)
             {
                 type = BuilderHelpers.CreateType(constantSchema.ValueType, false);
-                defaultValue = BuilderHelpers.ParseClientConstant(constantSchema.Value.Value, type);
+                defaultValue = BuilderHelpers.ParseConstant(constantSchema.Value.Value, type);
             }
             else
             {
                 type = BuilderHelpers.CreateType(property.Schema, property.IsNullable());
                 if (property.ClientDefaultValue != null)
                 {
-                    defaultValue = BuilderHelpers.ParseClientConstant(property.ClientDefaultValue, type);
+                    defaultValue = BuilderHelpers.ParseConstant(property.ClientDefaultValue, type);
                 }
             }
 
