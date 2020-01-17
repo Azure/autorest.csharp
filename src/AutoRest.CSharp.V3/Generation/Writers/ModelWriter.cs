@@ -5,7 +5,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Output.Models.TypeReferences;
 using AutoRest.CSharp.V3.Output.Models.Types;

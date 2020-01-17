@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 
 using extension_client_name;
-using extension_client_name.Models.V100;
+using extension_client_name.Models;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests

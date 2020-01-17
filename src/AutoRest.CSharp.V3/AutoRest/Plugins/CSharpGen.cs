@@ -11,7 +11,6 @@ using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Generation.Writers;
 using AutoRest.CSharp.V3.Input;
 using AutoRest.CSharp.V3.Output.Builders;
-using AutoRest.CSharp.V3.Output.Models.Requests;
 using AutoRest.CSharp.V3.Output.Models.Responses;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Formatting;

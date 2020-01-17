@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using additionalProperties;
-using additionalProperties.Models.V100;
+using additionalProperties.Models;
 using AutoRest.TestServer.Tests.Infrastructure;
 using NUnit.Framework;
 

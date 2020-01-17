@@ -6,10 +6,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
-using Azure.Core.Pipeline;
 using NUnit.Framework;
 using url;
-using url.Models.V100;
+using url.Models;
 
 namespace AutoRest.TestServer.Tests
 {
