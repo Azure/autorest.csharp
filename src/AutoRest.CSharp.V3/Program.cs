@@ -5,15 +5,17 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using AutoRest.CSharp.V3.JsonRpc.MessageModels;
-using AutoRest.CSharp.V3.JsonRpc.Messaging;
+using AutoRest.CSharp.V3.AutoRest.Communication;
+using AutoRest.CSharp.V3.AutoRest.Communication.MessageHandling;
+using AutoRest.CSharp.V3.AutoRest.Communication.Serialization;
+using AutoRest.CSharp.V3.AutoRest.Plugins;
 
 namespace AutoRest.CSharp.V3
 {
     internal static class Program
     {
         private static bool HasServerArgument(IEnumerable<string> args) => args?.Any(a => a.Equals("--server", StringComparison.InvariantCultureIgnoreCase)) ?? false;
-        private static bool PluginStart(Connection connection, string pluginName, string sessionId) => PluginProcessor.Start(new AutoRestInterface(connection, pluginName, sessionId)).GetAwaiter().GetResult();
+        private static bool PluginStart(JsonRpcConnection connection, string pluginName, string sessionId) => PluginProcessor.Start(new JsonRpcCommunication(connection, pluginName, sessionId)).GetAwaiter().GetResult();
 
         public static int Main(string[] args)
         {
@@ -33,12 +35,12 @@ namespace AutoRest.CSharp.V3
                 return 1;
             }
 
-            var connection = new Connection(Console.OpenStandardInput(), Console.OpenStandardOutput(),
+            var connection = new JsonRpcConnection(Console.OpenStandardInput(), Console.OpenStandardOutput(),
                 new Dictionary<string, IncomingRequestAction>
                 {
-                    { nameof(IncomingMessages.GetPluginNames), (c, r) => r.GetPluginNames(PluginProcessor.PluginNames) },
-                    { nameof(IncomingMessages.Process),        (c, r) => r.Process(c, PluginStart) },
-                    { nameof(IncomingMessages.Shutdown),       (c, r) => r.Shutdown(c.CancellationTokenSource) }
+                    { nameof(IncomingMessageSerializer.GetPluginNames), (c, r) => r.GetPluginNames(PluginProcessor.PluginNames) },
+                    { nameof(IncomingMessageSerializer.Process),        (c, r) => r.Process(c, PluginStart) },
+                    { nameof(IncomingMessageSerializer.Shutdown),       (c, r) => r.Shutdown(c.CancellationTokenSource) }
                 });
             connection.Start();
 
@@ -48,7 +50,7 @@ namespace AutoRest.CSharp.V3
 
         private static int RunStandalone(string[] args)
         {
-            return PluginProcessor.Start(new StandaloneAutoRestInterface(args)).GetAwaiter().GetResult() ? 0 : 1;
+            return PluginProcessor.Start(new HostCommunication(args)).GetAwaiter().GetResult() ? 0 : 1;
         }
     }
 }

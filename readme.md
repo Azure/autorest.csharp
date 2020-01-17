@@ -19,10 +19,10 @@ version: 3.0.6184
 use-extension:
   "@autorest/modelerfour": "4.3.121"
 pipeline:
-  cs-modeler:
+  csharpgen:
     input: modelerfour/identity
-  cs-modeler/emitter:
-    input: cs-modeler
+  csharpgen/emitter:
+    input: csharpgen
     scope: output-scope
 output-scope:
   output-artifact: source-file-csharp
@@ -30,14 +30,14 @@ output-scope:
 
 ```yaml $(include-csproj)
 pipeline:
-  cs-asseter:
+  csharpproj:
     input: modelerfour/identity
-  cs-asseter/emitter:
-    input: cs-asseter
+  csharpproj/emitter:
+    input: csharpproj
     scope: output-scope
-  cs-asseter/emitter/command:
+  csharpproj/emitter/command:
     input:
-    - cs-modeler/emitter
-    - cs-asseter/emitter
+    - csharpgen/emitter
+    - csharpproj/emitter
     run: dotnet build $(title).csproj --verbosity quiet /nologo
 ```
