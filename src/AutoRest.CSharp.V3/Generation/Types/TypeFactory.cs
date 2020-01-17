@@ -81,13 +81,13 @@ namespace AutoRest.CSharp.V3.Generation.Types
             var schema = type.Schema;
             var apiVersion = schema.ApiVersions?.FirstOrDefault()?.Version.RemoveNonWordCharacters();
             return new CSharpType(
-                new CSharpNamespace(_namespace.NullIfEmpty(), "Models", apiVersion != null ? $"V{apiVersion}" : schema.Language.Default.Namespace),
+                $"{_namespace}.Models",
                 type.Name,
                 isNullable: schemaReference.IsNullable,
                 isValueType: type is EnumType);
         }
 
         public CSharpType CreateType(string name) =>
-            new CSharpType(new CSharpNamespace(_namespace.NullIfEmpty()), name, isNullable: false);
+            new CSharpType(_namespace, name, isNullable: false);
     }
 }

@@ -4,7 +4,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace CognitiveServices.TextAnalytics.Models.VV30Preview1
+namespace CognitiveServices.TextAnalytics.Models
 {
     public partial class DocumentError : IUtf8JsonSerializable
     {

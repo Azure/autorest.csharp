@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-namespace validation.Models.V100
+namespace validation.Models
 {
     /// <summary> The product documentation. </summary>
     public partial class ConstantProduct

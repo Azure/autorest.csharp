@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
-namespace body_complex.Models.V20160229
+namespace body_complex.Models
 {
     public partial class Shark : Azure.Core.IUtf8JsonSerializable
     {
@@ -40,18 +40,18 @@ namespace body_complex.Models.V20160229
             }
             writer.WriteEndObject();
         }
-        internal static body_complex.Models.V20160229.Shark DeserializeShark(System.Text.Json.JsonElement element)
+        internal static body_complex.Models.Shark DeserializeShark(System.Text.Json.JsonElement element)
         {
             if (element.TryGetProperty("fishtype", out System.Text.Json.JsonElement discriminator))
             {
                 switch (discriminator.GetString())
                 {
-                    case "cookiecuttershark": return body_complex.Models.V20160229.Cookiecuttershark.DeserializeCookiecuttershark(element);
-                    case "goblin": return body_complex.Models.V20160229.Goblinshark.DeserializeGoblinshark(element);
-                    case "sawshark": return body_complex.Models.V20160229.Sawshark.DeserializeSawshark(element);
+                    case "cookiecuttershark": return body_complex.Models.Cookiecuttershark.DeserializeCookiecuttershark(element);
+                    case "goblin": return body_complex.Models.Goblinshark.DeserializeGoblinshark(element);
+                    case "sawshark": return body_complex.Models.Sawshark.DeserializeSawshark(element);
                 }
             }
-            body_complex.Models.V20160229.Shark result = new body_complex.Models.V20160229.Shark();
+            body_complex.Models.Shark result = new body_complex.Models.Shark();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("age"))
@@ -93,10 +93,10 @@ namespace body_complex.Models.V20160229
                     {
                         continue;
                     }
-                    result.Siblings = new System.Collections.Generic.List<body_complex.Models.V20160229.Fish>();
+                    result.Siblings = new System.Collections.Generic.List<body_complex.Models.Fish>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Siblings.Add(body_complex.Models.V20160229.Fish.DeserializeFish(item));
+                        result.Siblings.Add(body_complex.Models.Fish.DeserializeFish(item));
                     }
                     continue;
                 }

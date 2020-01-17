@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Diagnostics;
 
 namespace AutoRest.CSharp.V3.Generation.Types
 {
@@ -13,7 +14,9 @@ namespace AutoRest.CSharp.V3.Generation.Types
 
         public CSharpType(Type type, bool isNullable, params CSharpType[] arguments)
         {
-            Namespace = new CSharpNamespace(type.Namespace);
+            Debug.Assert(type.Namespace != null, "type.Namespace != null");
+
+            Namespace = type.Namespace;
             Name = type.IsGenericType ? type.Name.Substring(0, type.Name.IndexOf('`')) : type.Name;
             IsNullable = isNullable;
             Arguments = arguments;
@@ -21,7 +24,7 @@ namespace AutoRest.CSharp.V3.Generation.Types
             FrameworkType = type;
         }
 
-        public CSharpType(CSharpNamespace ns, string name, bool isValueType = false, bool isNullable = false)
+        public CSharpType(string ns, string name, bool isValueType = false, bool isNullable = false)
         {
             Name = name;
             IsValueType = isValueType;
@@ -29,7 +32,7 @@ namespace AutoRest.CSharp.V3.Generation.Types
             Namespace = ns;
         }
 
-        public CSharpNamespace Namespace { get; }
+        public string Namespace { get; }
         public string Name { get; }
         public bool IsValueType { get; }
         public CSharpType[] Arguments { get; } = Array.Empty<CSharpType>();

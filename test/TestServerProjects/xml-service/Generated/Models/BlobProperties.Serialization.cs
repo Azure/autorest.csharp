@@ -7,7 +7,7 @@ using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
-namespace xml_service.Models.V100
+namespace xml_service.Models
 {
     public partial class BlobProperties : IUtf8JsonSerializable, IXmlSerializable
     {

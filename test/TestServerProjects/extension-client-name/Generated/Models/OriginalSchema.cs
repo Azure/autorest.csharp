@@ -3,7 +3,7 @@
 
 using System.Collections.Generic;
 
-namespace extension_client_name.Models.V100
+namespace extension_client_name.Models
 {
     /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
     public partial class OriginalSchema

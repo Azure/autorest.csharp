@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using AppConfiguration.Models.V10;
+using AppConfiguration.Models;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;

@@ -3,7 +3,7 @@
 
 using System;
 
-namespace header.Models.V100
+namespace header.Models
 {
     internal static class GreyscaleColorsExtensions
     {

@@ -4,7 +4,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace paging.Models.V100
+namespace paging.Models
 {
     public partial class ProductProperties : IUtf8JsonSerializable
     {

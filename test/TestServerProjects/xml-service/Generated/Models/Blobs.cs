@@ -3,7 +3,7 @@
 
 using System.Collections.Generic;
 
-namespace xml_service.Models.V100
+namespace xml_service.Models
 {
     /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
     public partial class Blobs

@@ -4,7 +4,7 @@
 using System;
 using System.ComponentModel;
 
-namespace CognitiveServices.TextAnalytics.Models.VV30Preview1
+namespace CognitiveServices.TextAnalytics.Models
 {
     /// <summary> Predicted sentiment for document (Negative, Neutral, Positive, or Mixed). </summary>
     public readonly partial struct DocumentSentimentSentiment : IEquatable<DocumentSentimentSentiment>

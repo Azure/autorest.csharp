@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using extensible_enums_swagger;
-using extensible_enums_swagger.Models.V20160707;
+using extensible_enums_swagger.Models;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests

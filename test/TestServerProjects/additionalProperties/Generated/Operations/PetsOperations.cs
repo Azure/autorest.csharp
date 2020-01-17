@@ -5,7 +5,7 @@ using System;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using additionalProperties.Models.V100;
+using additionalProperties.Models;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;

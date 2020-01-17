@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using AutoRest.TestServer.Tests.Infrastructure;
 using header;
-using header.Models.V100;
+using header.Models;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using paging.Models.V100;
+using paging.Models;
 
 namespace paging
 {

@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-namespace body_string.Models.V100
+namespace body_string.Models
 {
     /// <summary> MISSING·SCHEMA-DESCRIPTION-CHOICE. </summary>
     public enum Colors

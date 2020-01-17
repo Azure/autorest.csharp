@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using body_array.Models.V100;
+using body_array.Models;
 
 namespace body_array
 {

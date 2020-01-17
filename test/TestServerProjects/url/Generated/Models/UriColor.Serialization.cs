@@ -3,7 +3,7 @@
 
 using System;
 
-namespace url.Models.V100
+namespace url.Models
 {
     internal static class UriColorExtensions
     {

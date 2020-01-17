@@ -10,7 +10,7 @@ using System.Xml.Linq;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using xml_service.Models.V100;
+using xml_service.Models;
 
 namespace xml_service
 {

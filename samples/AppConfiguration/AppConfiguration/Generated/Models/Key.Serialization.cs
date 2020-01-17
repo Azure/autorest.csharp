@@ -4,7 +4,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace AppConfiguration.Models.V10
+namespace AppConfiguration.Models
 {
     public partial class Key : IUtf8JsonSerializable
     {

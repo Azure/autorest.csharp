@@ -3,7 +3,7 @@
 
 using System;
 
-namespace body_string.Models.V100
+namespace body_string.Models
 {
     internal static class ColorsExtensions
     {

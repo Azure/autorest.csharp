@@ -3,7 +3,7 @@
 
 using System.Collections.Generic;
 
-namespace validation.Models.V100
+namespace validation.Models
 {
     /// <summary> The product documentation. </summary>
     public partial class Product

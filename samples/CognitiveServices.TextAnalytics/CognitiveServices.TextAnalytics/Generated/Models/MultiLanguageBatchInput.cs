@@ -3,7 +3,7 @@
 
 using System.Collections.Generic;
 
-namespace CognitiveServices.TextAnalytics.Models.VV30Preview1
+namespace CognitiveServices.TextAnalytics.Models
 {
     /// <summary> Contains a set of input documents to be analyzed by the service. </summary>
     public partial class MultiLanguageBatchInput

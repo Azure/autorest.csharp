@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
-namespace additionalProperties.Models.V100
+namespace additionalProperties.Models
 {
     public partial class PetAPInPropertiesWithAPString : IUtf8JsonSerializable
     {

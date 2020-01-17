@@ -3,7 +3,7 @@
 
 using System;
 
-namespace xml_service.Models.V100
+namespace xml_service.Models
 {
     /// <summary> An Access policy. </summary>
     public partial class AccessPolicy

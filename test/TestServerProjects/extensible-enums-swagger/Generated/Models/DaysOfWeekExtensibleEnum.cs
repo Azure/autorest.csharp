@@ -4,7 +4,7 @@
 using System;
 using System.ComponentModel;
 
-namespace extensible_enums_swagger.Models.V20160707
+namespace extensible_enums_swagger.Models
 {
     /// <summary> Type of Pet. </summary>
     public readonly partial struct DaysOfWeekExtensibleEnum : IEquatable<DaysOfWeekExtensibleEnum>

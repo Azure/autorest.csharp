@@ -4,7 +4,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace body_string.Models.V100
+namespace body_string.Models
 {
     public partial class RefColorConstant : IUtf8JsonSerializable
     {
