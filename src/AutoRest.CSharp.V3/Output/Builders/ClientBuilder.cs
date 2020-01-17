@@ -93,7 +93,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 return null;
             }
 
-            Dictionary<string, ConstantOrParameter> uriParameters = new Dictionary<string, ConstantOrParameter>();
+            Dictionary<string, PathSegment> uriParameters = new Dictionary<string, PathSegment>();
             Dictionary<string, PathSegment> pathParameters = new Dictionary<string, PathSegment>();
             List<QueryParameter> query = new List<QueryParameter>();
             List<RequestHeader> headers = new List<RequestHeader>();
@@ -222,7 +222,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             var parameters = method.Parameters.Where(p =>  headerParameterNames.Contains(p.Name)).Append(nextPageUrlParameter).ToArray();
             var request = new Request(
                 method.Request.Method,
-                new[] { new ConstantOrParameter(nextPageUrlParameter) },
+                new[] { new PathSegment(nextPageUrlParameter, false, SerializationFormat.Default),  },
                 Array.Empty<PathSegment>(),
                 Array.Empty<QueryParameter>(),
                 method.Request.Headers,

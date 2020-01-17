@@ -7,7 +7,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Requests
 {
     internal class Request
     {
-        public ClientMethodRequest(RequestMethod method, PathSegment[] hostSegments, PathSegment[] pathSegments, QueryParameter[] query, RequestHeader[] headers, ObjectRequestBody? body)
+        public Request(RequestMethod method, PathSegment[] hostSegments, PathSegment[] pathSegments, QueryParameter[] query, RequestHeader[] headers, RequestBody? body)
         {
             Method = method;
             HostSegments = hostSegments;
