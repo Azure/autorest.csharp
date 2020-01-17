@@ -4,7 +4,7 @@
 using System;
 using System.ComponentModel;
 
-namespace xml_service.Models.V100
+namespace xml_service.Models
 {
     /// <summary> MISSING·SCHEMA-DESCRIPTION-CHOICE. </summary>
     public readonly partial struct ArchiveStatus : IEquatable<ArchiveStatus>

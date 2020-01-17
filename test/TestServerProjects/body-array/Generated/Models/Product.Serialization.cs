@@ -4,7 +4,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace body_array.Models.V100
+namespace body_array.Models
 {
     public partial class Product : IUtf8JsonSerializable
     {

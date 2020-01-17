@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
-namespace AppConfiguration.Models.V10
+namespace AppConfiguration.Models
 {
     public partial class KeyValue : IUtf8JsonSerializable
     {

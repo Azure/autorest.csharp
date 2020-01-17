@@ -14,11 +14,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 {
     internal class CodeWriter
     {
-        private readonly List<CSharpNamespace> _usingNamespaces = new List<CSharpNamespace>();
+        private readonly List<string> _usingNamespaces = new List<string>();
         private readonly StringBuilder _builder = new StringBuilder();
         private readonly string _definitionAccessDefault = "public";
         private readonly Stack<CodeWriterScope> _scopes;
-        private CSharpNamespace? _currentNamespace;
+        private string? _currentNamespace;
 
         public CodeWriter()
         {
@@ -44,10 +44,10 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             return codeWriterScope;
         }
 
-        public CodeWriterScope Namespace(CSharpNamespace @namespace)
+        public CodeWriterScope Namespace(string @namespace)
         {
             _currentNamespace = @namespace;
-            Line($"namespace {@namespace?.FullName}");
+            Line($"namespace {@namespace}");
             return Scope();
         }
 
@@ -153,7 +153,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             return Scope();
         }
 
-        public void UseNamespace(CSharpNamespace @namespace)
+        public void UseNamespace(string @namespace)
         {
             _usingNamespaces.Add(@namespace);
         }
@@ -195,12 +195,12 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             string name = mappedName ?? type.Name;
             if (mappedName == null)
             {
-                if (_currentNamespace?.FullName != type.Namespace.FullName)
+                if (_currentNamespace != type.Namespace)
                 {
                     UseNamespace(type.Namespace);
                 }
 
-                name = type.Namespace.FullName + "." + type.Name;
+                name = type.Namespace + "." + type.Name;
             }
 
             if (type.Arguments.Any())
@@ -313,7 +313,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
             var builder = new StringBuilder();
             string[] namespaces = _usingNamespaces
-                    .Select(ns=>ns.FullName)
                     .Distinct()
                     .OrderByDescending(ns => ns.StartsWith("System"))
                     .ThenBy(ns=>ns)

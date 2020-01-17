@@ -3,7 +3,7 @@
 
 using System.Collections.Generic;
 
-namespace AppConfiguration.Models.V10
+namespace AppConfiguration.Models
 {
     /// <summary> The result of a list request. </summary>
     public partial class LabelListResult

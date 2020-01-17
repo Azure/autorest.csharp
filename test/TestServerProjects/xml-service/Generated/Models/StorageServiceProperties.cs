@@ -3,7 +3,7 @@
 
 using System.Collections.Generic;
 
-namespace xml_service.Models.V100
+namespace xml_service.Models
 {
     /// <summary> Storage Service Properties. </summary>
     public partial class StorageServiceProperties

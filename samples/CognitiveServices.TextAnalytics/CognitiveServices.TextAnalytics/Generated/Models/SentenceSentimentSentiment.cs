@@ -4,7 +4,7 @@
 using System;
 using System.ComponentModel;
 
-namespace CognitiveServices.TextAnalytics.Models.VV30Preview1
+namespace CognitiveServices.TextAnalytics.Models
 {
     /// <summary> The predicted Sentiment for the sentence. </summary>
     public readonly partial struct SentenceSentimentSentiment : IEquatable<SentenceSentimentSentiment>

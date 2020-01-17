@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-namespace AppConfiguration.Models.V10
+namespace AppConfiguration.Models
 {
     /// <summary> Azure App Configuration error object. </summary>
     public partial class Error

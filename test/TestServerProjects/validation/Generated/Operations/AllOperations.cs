@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using validation.Models.V100;
+using validation.Models;
 
 namespace validation
 {

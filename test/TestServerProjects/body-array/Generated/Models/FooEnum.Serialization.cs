@@ -3,7 +3,7 @@
 
 using System;
 
-namespace body_array.Models.V100
+namespace body_array.Models
 {
     internal static class FooEnumExtensions
     {

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using extensible_enums_swagger.Models.V20160707;
+using extensible_enums_swagger.Models;
 
 namespace extensible_enums_swagger
 {

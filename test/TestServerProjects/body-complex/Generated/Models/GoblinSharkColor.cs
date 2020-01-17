@@ -4,7 +4,7 @@
 using System;
 using System.ComponentModel;
 
-namespace body_complex.Models.V20160229
+namespace body_complex.Models
 {
     /// <summary> Colors possible. </summary>
     public readonly partial struct GoblinSharkColor : IEquatable<GoblinSharkColor>

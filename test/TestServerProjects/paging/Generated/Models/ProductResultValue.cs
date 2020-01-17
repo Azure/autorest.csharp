@@ -3,7 +3,7 @@
 
 using System.Collections.Generic;
 
-namespace paging.Models.V100
+namespace paging.Models
 {
     /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
     public partial class ProductResultValue

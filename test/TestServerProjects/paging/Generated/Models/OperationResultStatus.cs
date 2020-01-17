@@ -4,7 +4,7 @@
 using System;
 using System.ComponentModel;
 
-namespace paging.Models.V100
+namespace paging.Models
 {
     /// <summary> The status of the request. </summary>
     public readonly partial struct OperationResultStatus : IEquatable<OperationResultStatus>
