@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using AutoRest.CSharp.V3.Input;
+using System.Runtime.CompilerServices;
 using AutoRest.CSharp.V3.Utilities;
 using YamlDotNet.Core;
 using YamlDotNet.Core.Events;
@@ -16,8 +16,11 @@ namespace AutoRest.CSharp.V3.Input
 {
     internal static class CodeModelSerialization
     {
-        //https://stackoverflow.com/a/4145127/294804
-        public static readonly Type[] GeneratedTypes = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.Namespace == typeof(CodeModel).Namespace && !(t.IsAbstract && t.IsSealed)).ToArray();
+        private static readonly Type[] GeneratedTypes = Assembly.GetExecutingAssembly().GetTypes().Where(t =>
+            t.Namespace == typeof(CodeModel).Namespace
+            //https://stackoverflow.com/a/4145127/294804
+            && !(t.IsAbstract && t.IsSealed)
+            && t.CustomAttributes.All(ca => ca.AttributeType != typeof(CompilerGeneratedAttribute))).ToArray();
 
         private static readonly Dictionary<Type, string> TagOverrides = new Dictionary<Type, string>
         {
