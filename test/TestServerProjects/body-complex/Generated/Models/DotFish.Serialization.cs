@@ -4,7 +4,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace body_complex.Models.V20160229
+namespace body_complex.Models
 {
     public partial class DotFish : Azure.Core.IUtf8JsonSerializable
     {
@@ -20,16 +20,16 @@ namespace body_complex.Models.V20160229
             }
             writer.WriteEndObject();
         }
-        internal static body_complex.Models.V20160229.DotFish DeserializeDotFish(System.Text.Json.JsonElement element)
+        internal static body_complex.Models.DotFish DeserializeDotFish(System.Text.Json.JsonElement element)
         {
             if (element.TryGetProperty("fish.type", out System.Text.Json.JsonElement discriminator))
             {
                 switch (discriminator.GetString())
                 {
-                    case "DotSalmon": return body_complex.Models.V20160229.DotSalmon.DeserializeDotSalmon(element);
+                    case "DotSalmon": return body_complex.Models.DotSalmon.DeserializeDotSalmon(element);
                 }
             }
-            body_complex.Models.V20160229.DotFish result = new body_complex.Models.V20160229.DotFish();
+            body_complex.Models.DotFish result = new body_complex.Models.DotFish();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("fish.type"))

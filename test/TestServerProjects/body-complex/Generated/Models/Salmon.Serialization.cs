@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
-namespace body_complex.Models.V20160229
+namespace body_complex.Models
 {
     public partial class Salmon : Azure.Core.IUtf8JsonSerializable
     {
@@ -43,16 +43,16 @@ namespace body_complex.Models.V20160229
             }
             writer.WriteEndObject();
         }
-        internal static body_complex.Models.V20160229.Salmon DeserializeSalmon(System.Text.Json.JsonElement element)
+        internal static body_complex.Models.Salmon DeserializeSalmon(System.Text.Json.JsonElement element)
         {
             if (element.TryGetProperty("fishtype", out System.Text.Json.JsonElement discriminator))
             {
                 switch (discriminator.GetString())
                 {
-                    case "smart_salmon": return body_complex.Models.V20160229.SmartSalmon.DeserializeSmartSalmon(element);
+                    case "smart_salmon": return body_complex.Models.SmartSalmon.DeserializeSmartSalmon(element);
                 }
             }
-            body_complex.Models.V20160229.Salmon result = new body_complex.Models.V20160229.Salmon();
+            body_complex.Models.Salmon result = new body_complex.Models.Salmon();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("location"))
@@ -98,10 +98,10 @@ namespace body_complex.Models.V20160229
                     {
                         continue;
                     }
-                    result.Siblings = new System.Collections.Generic.List<body_complex.Models.V20160229.Fish>();
+                    result.Siblings = new System.Collections.Generic.List<body_complex.Models.Fish>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Siblings.Add(body_complex.Models.V20160229.Fish.DeserializeFish(item));
+                        result.Siblings.Add(body_complex.Models.Fish.DeserializeFish(item));
                     }
                     continue;
                 }

@@ -4,7 +4,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace additionalProperties.Models.V100
+namespace additionalProperties.Models
 {
     public partial class CatAPTrue : IUtf8JsonSerializable
     {

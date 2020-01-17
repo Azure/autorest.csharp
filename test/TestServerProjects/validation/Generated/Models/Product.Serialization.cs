@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
-namespace validation.Models.V100
+namespace validation.Models
 {
     public partial class Product : IUtf8JsonSerializable
     {

@@ -4,7 +4,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace body_date.Models.V100
+namespace body_date.Models
 {
     public partial class Error : IUtf8JsonSerializable
     {

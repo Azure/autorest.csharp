@@ -4,7 +4,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace body_complex.Models.V20160229
+namespace body_complex.Models
 {
     public partial class MyBaseType : Azure.Core.IUtf8JsonSerializable
     {
@@ -25,16 +25,16 @@ namespace body_complex.Models.V20160229
             }
             writer.WriteEndObject();
         }
-        internal static body_complex.Models.V20160229.MyBaseType DeserializeMyBaseType(System.Text.Json.JsonElement element)
+        internal static body_complex.Models.MyBaseType DeserializeMyBaseType(System.Text.Json.JsonElement element)
         {
             if (element.TryGetProperty("kind", out System.Text.Json.JsonElement discriminator))
             {
                 switch (discriminator.GetString())
                 {
-                    case "Kind1": return body_complex.Models.V20160229.MyDerivedType.DeserializeMyDerivedType(element);
+                    case "Kind1": return body_complex.Models.MyDerivedType.DeserializeMyDerivedType(element);
                 }
             }
-            body_complex.Models.V20160229.MyBaseType result = new body_complex.Models.V20160229.MyBaseType();
+            body_complex.Models.MyBaseType result = new body_complex.Models.MyBaseType();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("kind"))
@@ -57,7 +57,7 @@ namespace body_complex.Models.V20160229
                     {
                         continue;
                     }
-                    result.Helper = body_complex.Models.V20160229.MyBaseHelperType.DeserializeMyBaseHelperType(property.Value);
+                    result.Helper = body_complex.Models.MyBaseHelperType.DeserializeMyBaseHelperType(property.Value);
                     continue;
                 }
             }

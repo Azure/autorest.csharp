@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using NUnit.Framework;
 using validation;
-using validation.Models.V100;
+using validation.Models;
 
 namespace AutoRest.TestServer.Tests
 {

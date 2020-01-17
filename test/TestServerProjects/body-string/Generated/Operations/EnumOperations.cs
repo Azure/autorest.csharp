@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using body_string.Models.V100;
+using body_string.Models;
 
 namespace body_string
 {

@@ -4,7 +4,7 @@
 using System;
 using System.ComponentModel;
 
-namespace extensible_enums_swagger.Models.V20160707
+namespace extensible_enums_swagger.Models
 {
     /// <summary> MISSING·SCHEMA-DESCRIPTION-CHOICE. </summary>
     public readonly partial struct IntEnum : IEquatable<IntEnum>

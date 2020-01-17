@@ -3,7 +3,7 @@
 
 using System.Collections.Generic;
 
-namespace custom_baseUrl_paging.Models.V100
+namespace custom_baseUrl_paging.Models
 {
     /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
     public partial class ProductResult

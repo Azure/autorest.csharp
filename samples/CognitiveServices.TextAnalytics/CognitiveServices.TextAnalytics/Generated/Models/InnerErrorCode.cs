@@ -4,7 +4,7 @@
 using System;
 using System.ComponentModel;
 
-namespace CognitiveServices.TextAnalytics.Models.VV30Preview1
+namespace CognitiveServices.TextAnalytics.Models
 {
     /// <summary> Error code. </summary>
     public readonly partial struct InnerErrorCode : IEquatable<InnerErrorCode>

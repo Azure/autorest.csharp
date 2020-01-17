@@ -4,7 +4,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace body_complex.Models.V20160229
+namespace body_complex.Models
 {
     public partial class ByteWrapper : IUtf8JsonSerializable
     {

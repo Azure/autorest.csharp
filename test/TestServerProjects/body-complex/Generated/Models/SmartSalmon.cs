@@ -4,7 +4,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace body_complex.Models.V20160229
+namespace body_complex.Models
 {
     /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
     public partial class SmartSalmon : Salmon, IDictionary<string, object>

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
-namespace paging.Models.V100
+namespace paging.Models
 {
     public partial class ProductResultValue : IUtf8JsonSerializable
     {

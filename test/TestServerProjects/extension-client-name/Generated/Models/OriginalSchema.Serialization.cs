@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
-namespace extension_client_name.Models.V100
+namespace extension_client_name.Models
 {
     public partial class OriginalSchema : IUtf8JsonSerializable
     {

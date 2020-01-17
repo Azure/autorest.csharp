@@ -4,7 +4,7 @@
 using System;
 using System.ComponentModel;
 
-namespace body_array.Models.V100
+namespace body_array.Models
 {
     /// <summary> MISSING·SCHEMA-DESCRIPTION-CHOICE. </summary>
     public readonly partial struct Enum0 : IEquatable<Enum0>

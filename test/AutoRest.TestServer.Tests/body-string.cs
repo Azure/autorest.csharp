@@ -4,7 +4,7 @@
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using body_string;
-using body_string.Models.V100;
+using body_string.Models;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests

@@ -7,7 +7,7 @@ using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
-namespace xml_service.Models.V100
+namespace xml_service.Models
 {
     public partial class Blobs : IUtf8JsonSerializable, IXmlSerializable
     {
@@ -50,7 +50,7 @@ namespace xml_service.Models.V100
                     result.BlobPrefix = new List<BlobPrefix>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.BlobPrefix.Add(V100.BlobPrefix.DeserializeBlobPrefix(item));
+                        result.BlobPrefix.Add(Models.BlobPrefix.DeserializeBlobPrefix(item));
                     }
                     continue;
                 }
@@ -63,7 +63,7 @@ namespace xml_service.Models.V100
                     result.Blob = new List<Blob>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Blob.Add(V100.Blob.DeserializeBlob(item));
+                        result.Blob.Add(Models.Blob.DeserializeBlob(item));
                     }
                     continue;
                 }
@@ -96,14 +96,14 @@ namespace xml_service.Models.V100
             foreach (var e in element.Elements("BlobPrefix"))
             {
                 BlobPrefix value = default;
-                value = V100.BlobPrefix.DeserializeBlobPrefix(e);
+                value = Models.BlobPrefix.DeserializeBlobPrefix(e);
                 result.BlobPrefix.Add(value);
             }
             result.Blob = new List<Blob>();
             foreach (var e0 in element.Elements("Blob"))
             {
                 Blob value = default;
-                value = V100.Blob.DeserializeBlob(e0);
+                value = Models.Blob.DeserializeBlob(e0);
                 result.Blob.Add(value);
             }
             return result;

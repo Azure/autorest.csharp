@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using CognitiveServices.TextAnalytics.Models.VV30Preview1;
+using CognitiveServices.TextAnalytics.Models;
 
 namespace CognitiveServices.TextAnalytics
 {

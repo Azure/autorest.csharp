@@ -4,7 +4,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace AppConfiguration.Models.V10
+namespace AppConfiguration.Models
 {
     /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
     public partial class KeyValue

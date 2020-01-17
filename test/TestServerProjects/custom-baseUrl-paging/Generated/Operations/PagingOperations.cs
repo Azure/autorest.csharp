@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using custom_baseUrl_paging.Models.V100;
+using custom_baseUrl_paging.Models;
 
 namespace custom_baseUrl_paging
 {

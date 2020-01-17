@@ -3,7 +3,7 @@
 
 using System;
 
-namespace xml_service.Models.V100
+namespace xml_service.Models
 {
     internal static class LeaseStatusTypeExtensions
     {

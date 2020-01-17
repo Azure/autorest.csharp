@@ -4,7 +4,7 @@
 using System;
 using System.ComponentModel;
 
-namespace AppConfiguration.Models.V10
+namespace AppConfiguration.Models
 {
     /// <summary> MISSING·SCHEMA-DESCRIPTION-CHOICE. </summary>
     public readonly partial struct Head7ItemsItem : IEquatable<Head7ItemsItem>

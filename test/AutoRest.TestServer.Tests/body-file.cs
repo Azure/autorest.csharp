@@ -4,7 +4,6 @@
 using System.IO;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
-using body_boolean;
 using body_file;
 using NUnit.Framework;
 

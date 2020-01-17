@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using AutoRest.TestServer.Tests.Infrastructure;
 using body_dictionary;
-using body_dictionary.Models.V100;
+using body_dictionary.Models;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests

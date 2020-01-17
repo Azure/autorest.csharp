@@ -3,14 +3,13 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Xml;
 using AutoRest.TestServer.Tests.Infrastructure;
 using body_complex;
-using body_complex.Models.V20160229;
+using body_complex.Models;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests
