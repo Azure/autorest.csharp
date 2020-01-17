@@ -13,8 +13,8 @@ namespace AutoRest.CodeModel
 {
     internal static class Program
     {
-        private const string Path = "AutoRest.CSharp.V3/Pipeline/Generated";
-        private static readonly string Namespace = Path.Replace("/", ".");
+        private const string Path = "AutoRest.CSharp.V3/Input/Generated";
+        private static readonly string Namespace = "AutoRest.CSharp.V3.Input";
 
         private static void Main()
         {
@@ -58,7 +58,19 @@ namespace AutoRest.CodeModel
                 .Replace("CSharpLanguage Csharp", "CSharpLanguage CSharp")
                 // Fix for issue with Solution Error Visualizer
                 // https://marketplace.visualstudio.com/items?itemName=VisualStudioPlatformTeam.SolutionErrorVisualizer&ssr=false#review-details
-                .Replace("#pragma warning disable // Disable all warnings", $"#pragma warning disable // Disable all warnings{Environment.NewLine}    #nullable enable");
+                .Replace("#pragma warning disable // Disable all warnings", $"#pragma warning disable // Disable all warnings{Environment.NewLine}    #nullable enable")
+                // Class names that conflict with project class names
+                .Replace("HttpHeader", "HttpResponseHeader")
+                .Replace("class Parameter", "class RequestParameter")
+                .Replace("<Parameter>", "<RequestParameter>")
+                .Replace("class Request ", "class ServiceRequest ")
+                .Replace("public Request Request { get; set; } = new Request();", "public ServiceRequest Request { get; set; } = new ServiceRequest();")
+                .Replace("class Response ", "class ServiceResponse ")
+                .Replace(": Response", ": ServiceResponse")
+                .Replace("<Response>", "<ServiceResponse>")
+                .Replace($"class SerializationFormat{Environment.NewLine}", $"class SerializationFormatMetadata{Environment.NewLine}")
+                .Replace("public SerializationFormat ", "public SerializationFormatMetadata ")
+                .Replace(": SerializationFormat", ": SerializationFormatMetadata");
 
             var lines = cleanFile.ToLines().ToArray();
             var fileWithNullable = String.Join(Environment.NewLine, lines.Zip(lines.Skip(1).Append(String.Empty))
