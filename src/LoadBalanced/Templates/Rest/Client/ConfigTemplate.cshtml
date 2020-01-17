@@ -18,14 +18,12 @@ namespace @Settings.Namespace
     public abstract class LoadBalancingConfigBase : ILoadBalancingConfig
     {
         public IResourceManager<string> UrlResourceManager { get; }
-        public TimeSpan PerRequestTimeout { get; }
         public ShouldRetryPredicate ShouldRetryPredicate { get; }
         public CustomCheckIsErrorResponse IsErrorResponse { get; }
 
-        protected LoadBalancingConfigBase(IEnumerable<string> baseUrls, TimeSpan? perRequestTimeout, int maxRetry = 3, CustomCheckIsErrorResponse isErrorResponse = null)
+        protected LoadBalancingConfigBase(IEnumerable<string> baseUrls, int maxRetry = 3, CustomCheckIsErrorResponse isErrorResponse = null)
         {
             UrlResourceManager = ResourceManager.Create(baseUrls);
-            PerRequestTimeout = perRequestTimeout.HasValue ? perRequestTimeout.Value : TimeSpan.FromMilliseconds(100);
             ShouldRetryPredicate = GetRetryCountPredicate(maxRetry);
             IsErrorResponse = isErrorResponse;
         }
