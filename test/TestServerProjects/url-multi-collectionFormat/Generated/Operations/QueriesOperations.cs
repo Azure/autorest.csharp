@@ -33,12 +33,14 @@ namespace url_multi_collectionFormat
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/queries/array/multi/string/null", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/queries/array/multi/string/null", false);
             if (arrayQuery != null)
             {
-                request.Uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
+                uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
             }
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get a null array of string using the multi-array format. </summary>
@@ -98,12 +100,14 @@ namespace url_multi_collectionFormat
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/queries/array/multi/string/empty", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/queries/array/multi/string/empty", false);
             if (arrayQuery != null)
             {
-                request.Uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
+                uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
             }
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get an empty array [] of string using the multi-array format. </summary>
@@ -163,12 +167,14 @@ namespace url_multi_collectionFormat
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/queries/array/multi/string/valid", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/queries/array/multi/string/valid", false);
             if (arrayQuery != null)
             {
-                request.Uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
+                uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
             }
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </summary>

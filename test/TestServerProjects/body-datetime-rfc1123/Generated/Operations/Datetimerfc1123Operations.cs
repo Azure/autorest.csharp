@@ -33,8 +33,10 @@ namespace body_datetime_rfc1123
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/datetimerfc1123/null", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/datetimerfc1123/null", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get null datetime value. </summary>
@@ -100,8 +102,10 @@ namespace body_datetime_rfc1123
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/datetimerfc1123/invalid", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/datetimerfc1123/invalid", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get invalid datetime value. </summary>
@@ -167,8 +171,10 @@ namespace body_datetime_rfc1123
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/datetimerfc1123/overflow", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/datetimerfc1123/overflow", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get overflow datetime value. </summary>
@@ -234,8 +240,10 @@ namespace body_datetime_rfc1123
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/datetimerfc1123/underflow", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/datetimerfc1123/underflow", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get underflow datetime value. </summary>
@@ -301,8 +309,10 @@ namespace body_datetime_rfc1123
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/datetimerfc1123/max", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/datetimerfc1123/max", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStringValue(datetimeBody, "R");
@@ -366,8 +376,10 @@ namespace body_datetime_rfc1123
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/datetimerfc1123/max/lowercase", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/datetimerfc1123/max/lowercase", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get max datetime value fri, 31 dec 9999 23:59:59 gmt. </summary>
@@ -433,8 +445,10 @@ namespace body_datetime_rfc1123
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/datetimerfc1123/max/uppercase", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/datetimerfc1123/max/uppercase", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT. </summary>
@@ -500,8 +514,10 @@ namespace body_datetime_rfc1123
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/datetimerfc1123/min", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/datetimerfc1123/min", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStringValue(datetimeBody, "R");
@@ -565,8 +581,10 @@ namespace body_datetime_rfc1123
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/datetimerfc1123/min", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/datetimerfc1123/min", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT. </summary>

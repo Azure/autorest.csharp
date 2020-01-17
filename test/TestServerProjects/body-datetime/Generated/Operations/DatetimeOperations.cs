@@ -33,8 +33,10 @@ namespace body_datetime
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/datetime/null", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/datetime/null", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get null datetime value. </summary>
@@ -100,8 +102,10 @@ namespace body_datetime
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/datetime/invalid", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/datetime/invalid", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get invalid datetime value. </summary>
@@ -167,8 +171,10 @@ namespace body_datetime
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/datetime/overflow", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/datetime/overflow", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get overflow datetime value. </summary>
@@ -234,8 +240,10 @@ namespace body_datetime
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/datetime/underflow", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/datetime/underflow", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get underflow datetime value. </summary>
@@ -301,8 +309,10 @@ namespace body_datetime
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/datetime/max/utc", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/datetime/max/utc", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStringValue(datetimeBody, "S");
@@ -366,8 +376,10 @@ namespace body_datetime
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/datetime/max/utc7ms", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/datetime/max/utc7ms", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStringValue(datetimeBody, "S");
@@ -431,8 +443,10 @@ namespace body_datetime
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/datetime/max/utc/lowercase", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/datetime/max/utc/lowercase", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get max datetime value 9999-12-31t23:59:59.999z. </summary>
@@ -498,8 +512,10 @@ namespace body_datetime
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/datetime/max/utc/uppercase", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/datetime/max/utc/uppercase", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get max datetime value 9999-12-31T23:59:59.999Z. </summary>
@@ -565,8 +581,10 @@ namespace body_datetime
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/datetime/max/utc7ms/uppercase", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/datetime/max/utc7ms/uppercase", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get max datetime value 9999-12-31T23:59:59.9999999Z. </summary>
@@ -632,8 +650,10 @@ namespace body_datetime
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/datetime/max/localpositiveoffset", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/datetime/max/localpositiveoffset", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStringValue(datetimeBody, "S");
@@ -697,8 +717,10 @@ namespace body_datetime
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/datetime/max/localpositiveoffset/lowercase", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/datetime/max/localpositiveoffset/lowercase", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get max datetime value with positive num offset 9999-12-31t23:59:59.999+14:00. </summary>
@@ -764,8 +786,10 @@ namespace body_datetime
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/datetime/max/localpositiveoffset/uppercase", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/datetime/max/localpositiveoffset/uppercase", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get max datetime value with positive num offset 9999-12-31T23:59:59.999+14:00. </summary>
@@ -831,8 +855,10 @@ namespace body_datetime
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/datetime/max/localnegativeoffset", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/datetime/max/localnegativeoffset", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStringValue(datetimeBody, "S");
@@ -896,8 +922,10 @@ namespace body_datetime
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/datetime/max/localnegativeoffset/uppercase", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/datetime/max/localnegativeoffset/uppercase", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get max datetime value with positive num offset 9999-12-31T23:59:59.999-14:00. </summary>
@@ -963,8 +991,10 @@ namespace body_datetime
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/datetime/max/localnegativeoffset/lowercase", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/datetime/max/localnegativeoffset/lowercase", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get max datetime value with positive num offset 9999-12-31t23:59:59.999-14:00. </summary>
@@ -1030,8 +1060,10 @@ namespace body_datetime
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/datetime/min/utc", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/datetime/min/utc", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStringValue(datetimeBody, "S");
@@ -1095,8 +1127,10 @@ namespace body_datetime
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/datetime/min/utc", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/datetime/min/utc", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get min datetime value 0001-01-01T00:00:00Z. </summary>
@@ -1162,8 +1196,10 @@ namespace body_datetime
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/datetime/min/localpositiveoffset", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/datetime/min/localpositiveoffset", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStringValue(datetimeBody, "S");
@@ -1227,8 +1263,10 @@ namespace body_datetime
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/datetime/min/localpositiveoffset", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/datetime/min/localpositiveoffset", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get min datetime value 0001-01-01T00:00:00+14:00. </summary>
@@ -1294,8 +1332,10 @@ namespace body_datetime
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/datetime/min/localnegativeoffset", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/datetime/min/localnegativeoffset", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStringValue(datetimeBody, "S");
@@ -1359,8 +1399,10 @@ namespace body_datetime
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/datetime/min/localnegativeoffset", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/datetime/min/localnegativeoffset", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get min datetime value 0001-01-01T00:00:00-14:00. </summary>

@@ -33,10 +33,12 @@ namespace extension_client_name
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Patch;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/originalOperation/", false);
-            request.Uri.AppendPath(renamedPathParameter, true);
-            request.Uri.AppendQuery("originalQueryParameter", renamedQueryParameter, true);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/originalOperation/", false);
+            uri.AppendPath(renamedPathParameter, true);
+            uri.AppendQuery("originalQueryParameter", renamedQueryParameter, true);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(renamedBodyParameter);

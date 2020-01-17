@@ -34,8 +34,12 @@ namespace custom_baseUrl_paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"http://{accountName}{host}"));
-            request.Uri.AppendPath("/paging/customurl/partialnextlink", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw("http://", false);
+            uri.AppendRaw(accountName, false);
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/paging/customurl/partialnextlink", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> A paging operation that combines custom url, paging and partial URL and expect to concat after host. </summary>
@@ -111,7 +115,9 @@ namespace custom_baseUrl_paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{nextLinkUrl}"));
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(nextLinkUrl, false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> A paging operation that combines custom url, paging and partial URL and expect to concat after host. </summary>
@@ -187,8 +193,12 @@ namespace custom_baseUrl_paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"http://{accountName}{host}"));
-            request.Uri.AppendPath("/paging/customurl/partialnextlinkop", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw("http://", false);
+            uri.AppendRaw(accountName, false);
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/paging/customurl/partialnextlinkop", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> A paging operation that combines custom url, paging and partial URL with next operation. </summary>
@@ -264,7 +274,9 @@ namespace custom_baseUrl_paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{nextLinkUrl}"));
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(nextLinkUrl, false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> A paging operation that combines custom url, paging and partial URL with next operation. </summary>
@@ -340,9 +352,13 @@ namespace custom_baseUrl_paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"http://{accountName}{host}"));
-            request.Uri.AppendPath("/paging/customurl/", false);
-            request.Uri.AppendPath(nextLink, true);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw("http://", false);
+            uri.AppendRaw(accountName, false);
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/paging/customurl/", false);
+            uri.AppendPath(nextLink, false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> A paging operation that combines custom url, paging and partial URL. </summary>
@@ -428,7 +444,9 @@ namespace custom_baseUrl_paging
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{nextLinkUrl}"));
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(nextLinkUrl, false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> A paging operation that combines custom url, paging and partial URL. </summary>

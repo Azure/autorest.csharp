@@ -13,6 +13,13 @@ using YamlDotNet.Serialization;
 // ReSharper disable once CheckNamespace
 namespace AutoRest.CSharp.V3.Input
 {
+    internal partial class Value
+    {
+        public Value()
+        {
+            Extensions = new DictionaryOfAny();
+        }
+    }
     internal partial class ObjectSchema
     {
         public ObjectSchema()

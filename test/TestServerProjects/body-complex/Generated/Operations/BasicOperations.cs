@@ -40,8 +40,10 @@ namespace body_complex
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/complex/basic/valid", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/complex/basic/valid", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get complex type {id: 2, name: &apos;abc&apos;, color: &apos;YELLOW&apos;}. </summary>
@@ -107,9 +109,11 @@ namespace body_complex
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/complex/basic/valid", false);
-            request.Uri.AppendQuery("api-version", ApiVersion, true);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/complex/basic/valid", false);
+            uri.AppendQuery("api-version", ApiVersion, true);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(complexBody);
@@ -181,8 +185,10 @@ namespace body_complex
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/complex/basic/invalid", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/complex/basic/invalid", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get a basic complex type that is invalid for the local strong type. </summary>
@@ -248,8 +254,10 @@ namespace body_complex
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/complex/basic/empty", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/complex/basic/empty", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get a basic complex type that is empty. </summary>
@@ -315,8 +323,10 @@ namespace body_complex
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/complex/basic/null", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/complex/basic/null", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get a basic complex type whose properties are null. </summary>
@@ -382,8 +392,10 @@ namespace body_complex
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/complex/basic/notprovided", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/complex/basic/notprovided", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get a basic complex type while the server doesn&apos;t provide a response payload. </summary>

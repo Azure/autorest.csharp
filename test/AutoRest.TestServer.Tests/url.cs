@@ -28,12 +28,14 @@ namespace AutoRest.TestServer.Tests
         public Task UrlPathsStringUrlEncoded() => TestStatus(async (host, pipeline) => await new PathsOperations(ClientDiagnostics, pipeline, host).StringUrlEncodedAsync());
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/393")]
+        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task UrlPathsStringUrlNonEncoded() => TestStatus(async (host, pipeline) => await new PathsOperations(ClientDiagnostics, pipeline, host).StringUrlNonEncodedAsync());
 
         [Test]
-        [Ignore("Don't have null-checks yet")]
-        public Task UrlStringNullAsync() => TestStatus(async (host, pipeline) => await new PathsOperations(ClientDiagnostics, pipeline, host).StringNullAsync( null));
+        public Task UrlStringNullAsync() => Test((host, pipeline) =>
+        {
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await new PathsOperations(ClientDiagnostics, pipeline, host).StringNullAsync(null));
+        }, ignoreScenario: true);
 
         [Test]
         [Ignore("Wasn't able to find a server endpoint for this")]

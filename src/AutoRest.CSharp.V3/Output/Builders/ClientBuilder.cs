@@ -93,7 +93,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 return null;
             }
 
-            Dictionary<string, ParameterOrConstant> uriParameters = new Dictionary<string, ParameterOrConstant>();
+            Dictionary<string, PathSegment> uriParameters = new Dictionary<string, PathSegment>();
             Dictionary<string, PathSegment> pathParameters = new Dictionary<string, PathSegment>();
             List<QueryParameter> query = new List<QueryParameter>();
             List<RequestHeader> headers = new List<RequestHeader>();
@@ -136,16 +136,17 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 if (requestParameter.Protocol.Http is HttpParameter httpParameter)
                 {
                     SerializationFormat serializationFormat = BuilderHelpers.GetSerializationFormat(valueSchema);
+                    bool skipEncoding = requestParameter.Extensions!.TryGetValue("x-ms-skip-url-encoding", out var value) && Convert.ToBoolean(value);
                     switch (httpParameter.In)
                     {
                         case ParameterLocation.Header:
                             headers.Add(new RequestHeader(serializedName, constantOrParameter, serializationFormat));
                             break;
                         case ParameterLocation.Query:
-                            query.Add(new QueryParameter(serializedName, constantOrParameter, GetSerializationStyle(httpParameter, valueSchema), true, serializationFormat));
+                            query.Add(new QueryParameter(serializedName, constantOrParameter, GetSerializationStyle(httpParameter, valueSchema), !skipEncoding, serializationFormat));
                             break;
                         case ParameterLocation.Path:
-                            pathParameters.Add(serializedName, new PathSegment(constantOrParameter, true, serializationFormat));
+                            pathParameters.Add(serializedName, new PathSegment(constantOrParameter, !skipEncoding, serializationFormat));
                             break;
                         case ParameterLocation.Body:
                             Debug.Assert(httpRequestWithBody != null);
@@ -153,7 +154,11 @@ namespace AutoRest.CSharp.V3.Output.Builders
                             body = new RequestBody(constantOrParameter, serialization);
                             break;
                         case ParameterLocation.Uri:
-                            uriParameters[defaultName] = constantOrParameter;
+                            if (defaultName == "$host")
+                            {
+                                skipEncoding = true;
+                            }
+                            uriParameters[defaultName] = new PathSegment(constantOrParameter, !skipEncoding, serializationFormat);
                             break;
                     }
                 }
@@ -166,7 +171,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
             var request = new Request(
                 ToCoreRequestMethod(httpRequest.Method) ?? RequestMethod.Get,
-                ToParts(httpRequest.Uri, uriParameters),
+                ToPathParts(httpRequest.Uri, uriParameters),
                 ToPathParts(httpRequest.Path, pathParameters),
                 query.ToArray(),
                 headers.ToArray(),
@@ -217,7 +222,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             var parameters = method.Parameters.Where(p =>  headerParameterNames.Contains(p.Name)).Append(nextPageUrlParameter).ToArray();
             var request = new Request(
                 method.Request.Method,
-                new[] { new ParameterOrConstant(nextPageUrlParameter) },
+                new[] { new PathSegment(nextPageUrlParameter, false, SerializationFormat.Default),  },
                 Array.Empty<PathSegment>(),
                 Array.Empty<QueryParameter>(),
                 method.Request.Headers,

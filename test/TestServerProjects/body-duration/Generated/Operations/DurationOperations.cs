@@ -33,8 +33,10 @@ namespace body_duration
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/duration/null", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/duration/null", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get null duration value. </summary>
@@ -100,8 +102,10 @@ namespace body_duration
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/duration/positiveduration", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/duration/positiveduration", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStringValue(durationBody, "P");
@@ -165,8 +169,10 @@ namespace body_duration
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/duration/positiveduration", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/duration/positiveduration", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get a positive duration value. </summary>
@@ -232,8 +238,10 @@ namespace body_duration
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/duration/invalid", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/duration/invalid", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get an invalid duration value. </summary>

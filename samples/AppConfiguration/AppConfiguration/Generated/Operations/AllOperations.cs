@@ -43,17 +43,19 @@ namespace AppConfiguration
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/keys", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/keys", false);
             if (name != null)
             {
-                request.Uri.AppendQuery("name", name, true);
+                uri.AppendQuery("name", name, true);
             }
-            request.Uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", ApiVersion, true);
             if (after != null)
             {
-                request.Uri.AppendQuery("After", after, true);
+                uri.AppendQuery("After", after, true);
             }
+            request.Uri = uri;
             if (syncToken != null)
             {
                 request.Headers.Add("Sync-Token", syncToken);
@@ -135,7 +137,9 @@ namespace AppConfiguration
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{nextLinkUrl}"));
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(nextLinkUrl, false);
+            request.Uri = uri;
             if (syncToken != null)
             {
                 request.Headers.Add("Sync-Token", syncToken);
@@ -223,17 +227,19 @@ namespace AppConfiguration
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Head;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/keys", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/keys", false);
             if (name != null)
             {
-                request.Uri.AppendQuery("name", name, true);
+                uri.AppendQuery("name", name, true);
             }
-            request.Uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", ApiVersion, true);
             if (after != null)
             {
-                request.Uri.AppendQuery("After", after, true);
+                uri.AppendQuery("After", after, true);
             }
+            request.Uri = uri;
             if (syncToken != null)
             {
                 request.Headers.Add("Sync-Token", syncToken);
@@ -307,25 +313,27 @@ namespace AppConfiguration
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/kv", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/kv", false);
             if (key != null)
             {
-                request.Uri.AppendQuery("key", key, true);
+                uri.AppendQuery("key", key, true);
             }
             if (label != null)
             {
-                request.Uri.AppendQuery("label", label, true);
+                uri.AppendQuery("label", label, true);
             }
-            request.Uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", ApiVersion, true);
             if (after != null)
             {
-                request.Uri.AppendQuery("After", after, true);
+                uri.AppendQuery("After", after, true);
             }
             if (select != null)
             {
-                request.Uri.AppendQueryDelimited("$Select", select, ",", true);
+                uri.AppendQueryDelimited("$Select", select, ",", true);
             }
+            request.Uri = uri;
             if (syncToken != null)
             {
                 request.Headers.Add("Sync-Token", syncToken);
@@ -411,7 +419,9 @@ namespace AppConfiguration
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{nextLinkUrl}"));
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(nextLinkUrl, false);
+            request.Uri = uri;
             if (syncToken != null)
             {
                 request.Headers.Add("Sync-Token", syncToken);
@@ -499,25 +509,27 @@ namespace AppConfiguration
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Head;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/kv", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/kv", false);
             if (key != null)
             {
-                request.Uri.AppendQuery("key", key, true);
+                uri.AppendQuery("key", key, true);
             }
             if (label != null)
             {
-                request.Uri.AppendQuery("label", label, true);
+                uri.AppendQuery("label", label, true);
             }
-            request.Uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", ApiVersion, true);
             if (after != null)
             {
-                request.Uri.AppendQuery("After", after, true);
+                uri.AppendQuery("After", after, true);
             }
             if (select != null)
             {
-                request.Uri.AppendQueryDelimited("$Select", select, ",", true);
+                uri.AppendQueryDelimited("$Select", select, ",", true);
             }
+            request.Uri = uri;
             if (syncToken != null)
             {
                 request.Headers.Add("Sync-Token", syncToken);
@@ -595,18 +607,20 @@ namespace AppConfiguration
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/kv/", false);
-            request.Uri.AppendPath(key, true);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/kv/", false);
+            uri.AppendPath(key, true);
             if (label != null)
             {
-                request.Uri.AppendQuery("label", label, true);
+                uri.AppendQuery("label", label, true);
             }
-            request.Uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", ApiVersion, true);
             if (select != null)
             {
-                request.Uri.AppendQueryDelimited("$Select", select, ",", true);
+                uri.AppendQueryDelimited("$Select", select, ",", true);
             }
+            request.Uri = uri;
             if (syncToken != null)
             {
                 request.Headers.Add("Sync-Token", syncToken);
@@ -710,14 +724,16 @@ namespace AppConfiguration
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/kv/", false);
-            request.Uri.AppendPath(key, true);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/kv/", false);
+            uri.AppendPath(key, true);
             if (label != null)
             {
-                request.Uri.AppendQuery("label", label, true);
+                uri.AppendQuery("label", label, true);
             }
-            request.Uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", ApiVersion, true);
+            request.Uri = uri;
             if (syncToken != null)
             {
                 request.Headers.Add("Sync-Token", syncToken);
@@ -824,14 +840,16 @@ namespace AppConfiguration
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/kv/", false);
-            request.Uri.AppendPath(key, true);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/kv/", false);
+            uri.AppendPath(key, true);
             if (label != null)
             {
-                request.Uri.AppendQuery("label", label, true);
+                uri.AppendQuery("label", label, true);
             }
-            request.Uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", ApiVersion, true);
+            request.Uri = uri;
             if (syncToken != null)
             {
                 request.Headers.Add("Sync-Token", syncToken);
@@ -921,18 +939,20 @@ namespace AppConfiguration
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Head;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/kv/", false);
-            request.Uri.AppendPath(key, true);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/kv/", false);
+            uri.AppendPath(key, true);
             if (label != null)
             {
-                request.Uri.AppendQuery("label", label, true);
+                uri.AppendQuery("label", label, true);
             }
-            request.Uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", ApiVersion, true);
             if (select != null)
             {
-                request.Uri.AppendQueryDelimited("$Select", select, ",", true);
+                uri.AppendQueryDelimited("$Select", select, ",", true);
             }
+            request.Uri = uri;
             if (syncToken != null)
             {
                 request.Headers.Add("Sync-Token", syncToken);
@@ -1028,21 +1048,23 @@ namespace AppConfiguration
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/labels", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/labels", false);
             if (name != null)
             {
-                request.Uri.AppendQuery("name", name, true);
+                uri.AppendQuery("name", name, true);
             }
-            request.Uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", ApiVersion, true);
             if (after != null)
             {
-                request.Uri.AppendQuery("After", after, true);
+                uri.AppendQuery("After", after, true);
             }
             if (select != null)
             {
-                request.Uri.AppendQueryDelimited("$Select", select, ",", true);
+                uri.AppendQueryDelimited("$Select", select, ",", true);
             }
+            request.Uri = uri;
             if (syncToken != null)
             {
                 request.Headers.Add("Sync-Token", syncToken);
@@ -1126,7 +1148,9 @@ namespace AppConfiguration
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{nextLinkUrl}"));
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(nextLinkUrl, false);
+            request.Uri = uri;
             if (syncToken != null)
             {
                 request.Headers.Add("Sync-Token", syncToken);
@@ -1214,21 +1238,23 @@ namespace AppConfiguration
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Head;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/labels", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/labels", false);
             if (name != null)
             {
-                request.Uri.AppendQuery("name", name, true);
+                uri.AppendQuery("name", name, true);
             }
-            request.Uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", ApiVersion, true);
             if (after != null)
             {
-                request.Uri.AppendQuery("After", after, true);
+                uri.AppendQuery("After", after, true);
             }
             if (select != null)
             {
-                request.Uri.AppendQueryDelimited("$Select", select, ",", true);
+                uri.AppendQueryDelimited("$Select", select, ",", true);
             }
+            request.Uri = uri;
             if (syncToken != null)
             {
                 request.Headers.Add("Sync-Token", syncToken);
@@ -1304,14 +1330,16 @@ namespace AppConfiguration
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/locks/", false);
-            request.Uri.AppendPath(key, true);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/locks/", false);
+            uri.AppendPath(key, true);
             if (label != null)
             {
-                request.Uri.AppendQuery("label", label, true);
+                uri.AppendQuery("label", label, true);
             }
-            request.Uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", ApiVersion, true);
+            request.Uri = uri;
             if (syncToken != null)
             {
                 request.Headers.Add("Sync-Token", syncToken);
@@ -1407,14 +1435,16 @@ namespace AppConfiguration
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/locks/", false);
-            request.Uri.AppendPath(key, true);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/locks/", false);
+            uri.AppendPath(key, true);
             if (label != null)
             {
-                request.Uri.AppendQuery("label", label, true);
+                uri.AppendQuery("label", label, true);
             }
-            request.Uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", ApiVersion, true);
+            request.Uri = uri;
             if (syncToken != null)
             {
                 request.Headers.Add("Sync-Token", syncToken);
@@ -1510,25 +1540,27 @@ namespace AppConfiguration
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/revisions", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/revisions", false);
             if (key != null)
             {
-                request.Uri.AppendQuery("key", key, true);
+                uri.AppendQuery("key", key, true);
             }
             if (label != null)
             {
-                request.Uri.AppendQuery("label", label, true);
+                uri.AppendQuery("label", label, true);
             }
-            request.Uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", ApiVersion, true);
             if (after != null)
             {
-                request.Uri.AppendQuery("After", after, true);
+                uri.AppendQuery("After", after, true);
             }
             if (select != null)
             {
-                request.Uri.AppendQueryDelimited("$Select", select, ",", true);
+                uri.AppendQueryDelimited("$Select", select, ",", true);
             }
+            request.Uri = uri;
             if (syncToken != null)
             {
                 request.Headers.Add("Sync-Token", syncToken);
@@ -1614,7 +1646,9 @@ namespace AppConfiguration
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{nextLinkUrl}"));
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(nextLinkUrl, false);
+            request.Uri = uri;
             if (syncToken != null)
             {
                 request.Headers.Add("Sync-Token", syncToken);
@@ -1702,25 +1736,27 @@ namespace AppConfiguration
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Head;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/revisions", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/revisions", false);
             if (key != null)
             {
-                request.Uri.AppendQuery("key", key, true);
+                uri.AppendQuery("key", key, true);
             }
             if (label != null)
             {
-                request.Uri.AppendQuery("label", label, true);
+                uri.AppendQuery("label", label, true);
             }
-            request.Uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", ApiVersion, true);
             if (after != null)
             {
-                request.Uri.AppendQuery("After", after, true);
+                uri.AppendQuery("After", after, true);
             }
             if (select != null)
             {
-                request.Uri.AppendQueryDelimited("$Select", select, ",", true);
+                uri.AppendQueryDelimited("$Select", select, ",", true);
             }
+            request.Uri = uri;
             if (syncToken != null)
             {
                 request.Headers.Add("Sync-Token", syncToken);

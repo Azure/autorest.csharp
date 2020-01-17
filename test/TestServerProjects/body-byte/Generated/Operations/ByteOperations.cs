@@ -33,8 +33,10 @@ namespace body_byte
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/byte/null", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/byte/null", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get null byte value. </summary>
@@ -100,8 +102,10 @@ namespace body_byte
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/byte/empty", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/byte/empty", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get empty byte value &apos;&apos;. </summary>
@@ -167,8 +171,10 @@ namespace body_byte
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/byte/nonAscii", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/byte/nonAscii", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6). </summary>
@@ -234,8 +240,10 @@ namespace body_byte
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/byte/nonAscii", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/byte/nonAscii", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteBase64StringValue(byteBody);
@@ -307,8 +315,10 @@ namespace body_byte
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/byte/invalid", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/byte/invalid", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get invalid byte value &apos;:::SWAGGER::::&apos;. </summary>

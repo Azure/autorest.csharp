@@ -33,8 +33,10 @@ namespace body_file
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/files/stream/nonempty", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/files/stream/nonempty", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get file. </summary>
@@ -98,8 +100,10 @@ namespace body_file
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/files/stream/verylarge", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/files/stream/verylarge", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get a large file. </summary>
@@ -163,8 +167,10 @@ namespace body_file
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri($"{host}"));
-            request.Uri.AppendPath("/files/stream/empty", false);
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/files/stream/empty", false);
+            request.Uri = uri;
             return message;
         }
         /// <summary> Get empty file. </summary>

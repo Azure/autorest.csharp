@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text.Json;
 using System.Threading;
@@ -135,8 +136,13 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 //TODO: Add logic to escape the strings when specified, using Uri.EscapeDataString(value);
                 //TODO: Need proper logic to convert the values to strings. Right now, everything is just using default ToString().
                 //TODO: Need logic to trim duplicate slashes (/) so when combined, you don't end  up with multiple // together
-                var urlText = String.Join(String.Empty, operation.Request.HostSegments.Select(s => s.IsConstant ? s.Constant.Value : "{" + s.Parameter.Name + "}"));
-                writer.Line($"request.Uri.Reset(new {typeof(Uri)}($\"{urlText}\"));");
+
+                writer.Line($"var uri = new RawRequestUriBuilder();");
+                foreach (var segment in operation.Request.HostSegments)
+                {
+                    WriteUriFragment(writer, segment);
+                }
+                writer.RemoveTrailingComma();
 
                 foreach (var segment in operation.Request.PathSegments)
                 {
@@ -148,6 +154,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 {
                     WriteQueryParameter(writer, queryParameter);
                 }
+
+                writer.Line($"request.Uri = uri;");
 
                 foreach (var header in operation.Request.Headers)
                 {
@@ -185,6 +193,13 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                 writer.Line($"return message;");
             }
+        }
+
+        private void WriteUriFragment(CodeWriter writer, PathSegment segment)
+        {
+            writer.Append($"uri.AppendRaw({WriteConstantOrParameter(segment.Value)}");
+            WriteSerializationFormat(writer, segment.Format);
+            writer.Line($", {segment.Escape:L});");
         }
 
         private void WriteOperation(CodeWriter writer, Method operation, bool async)
@@ -390,7 +405,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private void WritePathSegment(CodeWriter writer, PathSegment segment)
         {
-            writer.Append($"request.Uri.AppendPath({WriteConstantOrParameter(segment.Value)}");
+            writer.Append($"uri.AppendPath({WriteConstantOrParameter(segment.Value)}");
             WriteSerializationFormat(writer, segment.Format);
             writer.Line($", {segment.Escape:L});");
         }
@@ -465,7 +480,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             ParameterOrConstant value = queryParameter.Value;
             using (WriteValueNullCheck(writer, value))
             {
-                writer.Append($"request.Uri.{method}({queryParameter.Name:L}, {WriteConstantOrParameter(value)}");
+                writer.Append($"uri.{method}({queryParameter.Name:L}, {WriteConstantOrParameter(value)}");
                 if (delimiter != null)
                 {
                     writer.Append($", {delimiter:L}");

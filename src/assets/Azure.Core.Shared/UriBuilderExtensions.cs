@@ -9,7 +9,6 @@ namespace Azure.Core
 {
     internal static class UriBuilderExtensions
     {
-
         public static void AppendPath(this RequestUriBuilder builder, bool value, bool escape = false)
         {
             builder.AppendPath(TypeFormatters.ToString(value), escape);
