@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             List<Paging> pagingMethods = new List<Paging>();
             foreach (Operation operation in operationGroup.Operations)
             {
-                var method = BuildMethod(operation, clientName, clientParameters);
+                Method? method = BuildMethod(operation, clientName, clientParameters);
                 if (method != null)
                 {
                     methods.Add(method);
@@ -62,37 +62,20 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 pagingMethods.ToArray());
         }
 
-        private static Parameter[] OrderParameters(IEnumerable<Parameter> parameters)
-        {
-            return parameters.OrderBy(p => p.DefaultValue != null).ToArray();
-        }
-
-        private static Constant? CreateDefaultValueConstant(RequestParameter requestParameter)
-        {
-            if (requestParameter.ClientDefaultValue != null)
-            {
-                return BuilderHelpers.ParseClientConstant(
-                    requestParameter.ClientDefaultValue,
-                    (FrameworkTypeReference)BuilderHelpers.CreateType(requestParameter.Schema, requestParameter.IsNullable()));
-            }
-
-            return null;
-        }
+        private static Parameter[] OrderParameters(IEnumerable<Parameter> parameters) => parameters.OrderBy(p => p.DefaultValue != null).ToArray();
 
         private static Method? BuildMethod(Operation operation, string clientName, IReadOnlyDictionary<string, Parameter> clientParameters)
         {
-            var httpRequest = operation.Request.Protocol.Http as HttpRequest;
-            var httpRequestWithBody = httpRequest as HttpWithBodyRequest;
-
+            HttpRequest? httpRequest = operation.Request.Protocol.Http as HttpRequest;
             //TODO: Handle multiple responses
-            var response = operation.Responses.FirstOrDefault();
-            var httpResponse = response?.Protocol.Http as HttpResponse;
-
+            ServiceResponse? response = operation.Responses.FirstOrDefault();
+            HttpResponse? httpResponse = response?.Protocol.Http as HttpResponse;
             if (httpRequest == null || httpResponse == null)
             {
                 return null;
             }
 
+            HttpWithBodyRequest? httpRequestWithBody = httpRequest as HttpWithBodyRequest;
             Dictionary<string, PathSegment> uriParameters = new Dictionary<string, PathSegment>();
             Dictionary<string, PathSegment> pathParameters = new Dictionary<string, PathSegment>();
             List<QueryParameter> query = new List<QueryParameter>();
@@ -112,7 +95,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                     switch (requestParameter.Schema)
                     {
                         case ConstantSchema constant:
-                            constantOrParameter = BuilderHelpers.ParseClientConstant(constant);
+                            constantOrParameter = BuilderHelpers.ParseConstant(constant);
                             valueSchema = constant.ValueType;
                             break;
                         case BinarySchema _:
@@ -169,7 +152,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 headers.AddRange(httpRequestWithBody.MediaTypes.Select(mediaType => new RequestHeader("Content-Type", BuilderHelpers.StringConstant(mediaType))));
             }
 
-            var request = new Request(
+            Request request = new Request(
                 ToCoreRequestMethod(httpRequest.Method) ?? RequestMethod.Get,
                 ToPathParts(httpRequest.Uri, uriParameters),
                 ToPathParts(httpRequest.Path, pathParameters),
@@ -181,8 +164,8 @@ namespace AutoRest.CSharp.V3.Output.Builders
             ResponseBody? responseBody = null;
             if (response is SchemaResponse schemaResponse)
             {
-                var schema = schemaResponse.Schema is ConstantSchema constantSchema ? constantSchema.ValueType : schemaResponse.Schema;
-                var responseType = BuilderHelpers.CreateType(schema, isNullable: false);
+                Schema schema = schemaResponse.Schema is ConstantSchema constantSchema ? constantSchema.ValueType : schemaResponse.Schema;
+                TypeReference responseType = BuilderHelpers.CreateType(schema, isNullable: false);
 
                 ObjectSerialization serialization = SerializationBuilder.Build(httpResponse.KnownMediaType, schema, isNullable: false);
 
@@ -221,7 +204,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             var headerParameterNames = method.Request.Headers.Where(h => !h.Value.IsConstant).Select(h => h.Value.Parameter.Name).ToArray();
             var parameters = method.Parameters.Where(p =>  headerParameterNames.Contains(p.Name)).Append(nextPageUrlParameter).ToArray();
             var request = new Request(
-                method.Request.Method,
+                method.Request.HttpMethod,
                 new[] { new PathSegment(nextPageUrlParameter, false, SerializationFormat.Default),  },
                 Array.Empty<PathSegment>(),
                 Array.Empty<QueryParameter>(),
@@ -258,21 +241,12 @@ namespace AutoRest.CSharp.V3.Output.Builders
             return new Paging(method, nextPageMethod, name, nextLinkName, itemName, itemType, operationName);
         }
 
-        private static Parameter BuildParameter(RequestParameter requestParameter)
-        {
-            Constant? defaultValue = null;
-            if (requestParameter.Schema is ConstantSchema constantSchema)
-            {
-                defaultValue = BuilderHelpers.ParseClientConstant(constantSchema);
-            }
-
-            return new Parameter(
-                requestParameter.CSharpName(),
-                CreateDescription(requestParameter),
-                BuilderHelpers.CreateType(requestParameter.Schema, requestParameter.IsNullable()),
-                CreateDefaultValueConstant(requestParameter) ?? defaultValue,
-                requestParameter.Required == true);
-        }
+        private static Parameter BuildParameter(RequestParameter requestParameter) => new Parameter(
+            requestParameter.CSharpName(),
+            CreateDescription(requestParameter),
+            BuilderHelpers.CreateType(requestParameter.Schema, requestParameter.IsNullable()),
+            BuilderHelpers.ParseConstant(requestParameter),
+            requestParameter.Required == true);
 
         private static ResponseHeaderGroupType? BuildResponseHeaderModel(Operation operation, HttpResponse httpResponse)
         {

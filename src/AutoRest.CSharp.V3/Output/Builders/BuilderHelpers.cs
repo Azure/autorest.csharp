@@ -7,13 +7,14 @@ using System.Security;
 using AutoRest.CSharp.V3.Input;
 using AutoRest.CSharp.V3.Output.Models.Shared;
 using AutoRest.CSharp.V3.Output.Models.TypeReferences;
+using AutoRest.CSharp.V3.Utilities;
 using SerializationFormat = AutoRest.CSharp.V3.Output.Models.Serialization.SerializationFormat;
 
 namespace AutoRest.CSharp.V3.Output.Builders
 {
     internal static class BuilderHelpers
     {
-        public static Constant StringConstant(string s) => ParseClientConstant(s, new FrameworkTypeReference(typeof(string)));
+        public static Constant StringConstant(string s) => ParseConstant(s, new FrameworkTypeReference(typeof(string)));
 
         public static TypeReference CreateType(Schema schema, bool isNullable) => schema switch
         {
@@ -22,12 +23,12 @@ namespace AutoRest.CSharp.V3.Output.Builders
             ByteArraySchema _ => new FrameworkTypeReference(typeof(byte[]), isNullable),
             ArraySchema array => new CollectionTypeReference(CreateType(array.ElementType, false), isNullable),
             DictionarySchema dictionary => new DictionaryTypeReference(new FrameworkTypeReference(typeof(string)), CreateType(dictionary.ElementType, false), isNullable),
-            NumberSchema number => new FrameworkTypeReference(ToFrameworkNumberType(number), isNullable),
+            NumberSchema number => new FrameworkTypeReference(ToFrameworkNumericType(number), isNullable),
             _ when ToFrameworkType(schema.Type) is Type type => new FrameworkTypeReference(type, isNullable),
             _ => new SchemaTypeReference(schema, isNullable)
         };
 
-        public static Constant ParseClientConstant(object? value, TypeReference type)
+        public static Constant ParseConstant(object? value, TypeReference type)
         {
             var normalizedValue = type switch
             {
@@ -41,6 +42,25 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 _ => null
             };
             return new Constant(normalizedValue, type);
+        }
+
+        public static Constant ParseConstant(ConstantSchema constant) =>
+            ParseConstant(constant.Value.Value, CreateType(constant.ValueType, constant.Value.Value == null));
+
+        public static Constant? ParseConstant(RequestParameter parameter)
+        {
+            if (parameter.ClientDefaultValue != null)
+            {
+                TypeReference constantTypeReference = CreateType(parameter.Schema, parameter.IsNullable());
+                return ParseConstant(parameter.ClientDefaultValue, constantTypeReference);
+            }
+
+            if (parameter.Schema is ConstantSchema constantSchema)
+            {
+                return ParseConstant(constantSchema);
+            }
+
+            return null;
         }
 
         public static SerializationFormat GetSerializationFormat(Schema schema) => schema switch
@@ -72,7 +92,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             _ => null
         };
 
-        private static Type ToFrameworkNumberType(NumberSchema schema) => schema.Type switch
+        private static Type ToFrameworkNumericType(NumberSchema schema) => schema.Type switch
         {
             AllSchemaTypes.Number => schema.Precision switch
             {
@@ -89,14 +109,27 @@ namespace AutoRest.CSharp.V3.Output.Builders
             }
         };
 
-        public static Constant ParseClientConstant(ConstantSchema constant)
-        {
-            return ParseClientConstant(constant.Value.Value, CreateType(constant.ValueType, constant.Value.Value == null));
-        }
+        public static string EscapeXmlDescription(string s) => SecurityElement.Escape(s) ?? s;
 
-        public static string EscapeXmlDescription(string s)
-        {
-            return SecurityElement.Escape(s) ?? s;
-        }
+        public static bool IsNullable(this RequestParameter parameter) => !(parameter.Required ?? false);
+        public static bool IsNullable(this Property parameter) => !(parameter.Required ?? false);
+
+        public static string CSharpName(this RequestParameter parameter) => parameter.Schema is ConstantSchema ?
+            parameter.Language.Default.Name.ToCleanName() :
+            parameter.Language.Default.Name.ToVariableName();
+
+        public static string CSharpName(this ChoiceValue choice) => choice.Language.Default.Name.ToCleanName();
+
+        public static string CSharpName(this Property property) =>
+            (property.Language.Default.Name == null || property.Language.Default.Name == "null") ? "NullProperty" : property.Language.Default.Name.ToCleanName();
+
+        public static string CSharpName(this OperationGroup operationGroup) =>
+            $"{(!operationGroup.Language.Default.Name.IsNullOrEmpty() ? operationGroup.Language.Default.Name.ToCleanName() : "All")}Operations";
+
+        public static string CSharpName(this Operation operation) =>
+            operation.Language.Default.Name.ToCleanName();
+
+        public static string CSharpName(this Schema operation) =>
+            operation.Language.Default.Name.ToCleanName();
     }
 }

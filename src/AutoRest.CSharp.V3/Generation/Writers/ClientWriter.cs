@@ -128,7 +128,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             {
                 writer.Line($"var message = pipeline.CreateMessage();");
                 writer.Line($"var request = message.Request;");
-                var method = operation.Request.Method;
+                var method = operation.Request.HttpMethod;
                 writer.Line($"request.Method = {typeof(RequestMethod)}.{method.ToRequestMethodName()};");
 
                 //TODO: Add logic to escape the strings when specified, using Uri.EscapeDataString(value);
