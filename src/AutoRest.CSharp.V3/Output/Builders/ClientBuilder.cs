@@ -34,31 +34,36 @@ namespace AutoRest.CSharp.V3.Output.Builders
             }
 
             string clientName = operationGroup.CSharpName();
-            List<Method> methods = new List<Method>();
-            List<Paging> pagingMethods = new List<Paging>();
+            List<(Operation Operation, Method Method)> operationMethods = new List<(Operation, Method)>();
             foreach (Operation operation in operationGroup.Operations)
             {
                 Method? method = BuildMethod(operation, clientName, clientParameters);
                 if (method != null)
                 {
-                    methods.Add(method);
-                    var pageable = operation.Extensions.GetValue<IDictionary<object, object>>("x-ms-pageable");
-                    if (pageable != null)
-                    {
-                        Method nextPageMethod = BuildNextPageMethod(method);
-                        methods.Add(nextPageMethod);
-                        //TODO: This is a hack since we don't have the model information at this point
-                        var schemaForPaging = ((method.Response.ResponseBody as ObjectResponseBody)?.Type as SchemaTypeReference)?.Schema as ObjectSchema;
-                        Paging pagingMethod = GetClientMethodPaging(method, nextPageMethod, pageable, schemaForPaging);
-                        pagingMethods.Add(pagingMethod);
-                    }
+                    operationMethods.Add((operation, method));
+                }
+            }
+
+            List<Paging> pagingMethods = new List<Paging>();
+            foreach ((Operation operation, Method method) in operationMethods)
+            {
+                IDictionary<object, object>? pageable = operation.Extensions.GetValue<IDictionary<object, object>>("x-ms-pageable");
+                if (pageable != null)
+                {
+                    string originalOperationName = operation.Language.Default.Name;
+                    Method nextPageMethod = BuildNextPageMethod(method);
+                    operationMethods.Add((operation, nextPageMethod));
+                    //TODO: This is a hack since we don't have the model information at this point
+                    ObjectSchema? schemaForPaging = ((method.Response.ResponseBody as ObjectResponseBody)?.Type as SchemaTypeReference)?.Schema as ObjectSchema;
+                    Paging pagingMethod = GetClientMethodPaging(method, nextPageMethod, pageable, schemaForPaging);
+                    pagingMethods.Add(pagingMethod);
                 }
             }
 
             return new Client(clientName,
                 operationGroup.Language.Default.Description,
                 OrderParameters(clientParameters.Values),
-                methods.ToArray(),
+                operationMethods.Select(om => om.Method).ToArray(),
                 pagingMethods.ToArray());
         }
 
