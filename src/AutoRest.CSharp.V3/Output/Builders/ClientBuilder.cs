@@ -34,25 +34,31 @@ namespace AutoRest.CSharp.V3.Output.Builders
             }
 
             string clientName = operationGroup.CSharpName();
-            List<(Operation Operation, Method Method)> operationMethods = new List<(Operation, Method)>();
+            Dictionary<string, (Operation Operation, Method Method)> operationMethods = new Dictionary<string, (Operation, Method)>();
             foreach (Operation operation in operationGroup.Operations)
             {
                 Method? method = BuildMethod(operation, clientName, clientParameters);
                 if (method != null)
                 {
-                    operationMethods.Add((operation, method));
+                    operationMethods.Add(operation.Language.Default.Name, (operation, method));
                 }
             }
 
             List<Paging> pagingMethods = new List<Paging>();
-            foreach ((Operation operation, Method method) in operationMethods)
+            foreach ((string defaultOperationName, (Operation operation, Method method)) in operationMethods)
             {
                 IDictionary<object, object>? pageable = operation.Extensions.GetValue<IDictionary<object, object>>("x-ms-pageable");
                 if (pageable != null)
                 {
-                    string originalOperationName = operation.Language.Default.Name;
-                    Method nextPageMethod = BuildNextPageMethod(method);
-                    operationMethods.Add((operation, nextPageMethod));
+                    string? operationName = pageable.GetValue<string>("operationName");
+                    (Operation NextOperation, Method NextMethod)? next =
+                        operationName != null && operationMethods.TryGetValue(operationName,
+                            out (Operation NextOperation, Method NextMethod) nextOperationMethod)
+                            ? nextOperationMethod
+                            : ((Operation NextOperation, Method NextMethod)?)null;
+                    // If there is no operationName or we didn't find an existing operation, we use the original method to construct the nextPageMethod.
+                    Method nextPageMethod = BuildNextPageMethod(next?.NextMethod ?? method);
+                    operationMethods.Add(defaultOperationName, (operation, nextPageMethod));
                     //TODO: This is a hack since we don't have the model information at this point
                     ObjectSchema? schemaForPaging = ((method.Response.ResponseBody as ObjectResponseBody)?.Type as SchemaTypeReference)?.Schema as ObjectSchema;
                     Paging pagingMethod = GetClientMethodPaging(method, nextPageMethod, pageable, schemaForPaging);
@@ -63,7 +69,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             return new Client(clientName,
                 operationGroup.Language.Default.Description,
                 OrderParameters(clientParameters.Values),
-                operationMethods.Select(om => om.Method).ToArray(),
+                operationMethods.Select(om => om.Value.Method).ToArray(),
                 pagingMethods.ToArray());
         }
 
@@ -229,9 +235,6 @@ namespace AutoRest.CSharp.V3.Output.Builders
         private static Paging GetClientMethodPaging(Method method, Method nextPageMethod, IDictionary<object, object> pageable, ObjectSchema? schema)
         {
             var nextLinkName = pageable.GetValue<string>("nextLinkName");
-            //TODO: This should actually reference an operation: https://github.com/Azure/autorest.csharp/issues/397
-            var operationName = pageable.GetValue<string>("operationName");
-
             var itemName = pageable.GetValue<string>("itemName");
             //TODO: Hack to figure out the property name on the model
             var itemProperty = schema?.Properties?.FirstOrDefault(p => p.SerializedName == itemName);
@@ -243,7 +246,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             var itemTypeValueSchema = (itemTypeProperty?.Schema as ArraySchema)?.ElementType;
             var itemType = BuilderHelpers.CreateType(itemTypeValueSchema ?? new Schema(), false);
             var name = $"{method.Name}Pageable";
-            return new Paging(method, nextPageMethod, name, nextLinkName, itemName, itemType, operationName);
+            return new Paging(method, nextPageMethod, name, nextLinkName, itemName, itemType);
         }
 
         private static Parameter BuildParameter(RequestParameter requestParameter) => new Parameter(
