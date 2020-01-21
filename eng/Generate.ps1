@@ -16,7 +16,7 @@ function Invoke-AutoRest($baseOutput, $title, $autoRestArguments)
     {
         $codeModel = Join-Path $baseOutput $title "CodeModel.yaml"
         $outputPath = Join-Path $baseOutput $title
-        $command = "dotnet run --project $script:autorestPluginProject --no-build -- --plugin=csharpgen --title=$title --namespace=$namespace --standalone --input-file=$codeModel --output-path=$outputPath"
+        $command = "dotnet run --project $script:autorestPluginProject --no-build -- --plugin=csharpgen --title=$title --namespace=$namespace --standalone --input-file=$codeModel --output-folder=$outputPath"
     }
 
     Write-Host "> $command"
@@ -104,16 +104,17 @@ foreach ($testName in $testNames)
     }
 }
 
-# Local test swaggers
-$testSwaggerPath = Join-Path $repoRoot 'test' 'swaggers'
+# Local test projects
+$testSwaggerPath = Join-Path $repoRoot 'test' 'TestProjects'
+$configurationPath = Join-Path $testSwaggerPath 'readme.md'
 
-foreach ($file in Get-ChildItem $testSwaggerPath)
+foreach ($directory in Get-ChildItem $testSwaggerPath -Directory)
 {
-    $testName = [System.IO.Path]::GetFileNameWithoutExtension($file.Name)
-    $inputFile = Join-Path $testSwaggerPath "$testName.json"
+    $testName = $directory.Name
+    $inputFile = Join-Path $directory "$testName.json"
     $swaggerDefinitions[$testName] = @{
         'title'=$testName;
-        'output'=$testServerDirectory;
+        'output'=$testSwaggerPath;
         'arguments'="--require=$configurationPath --input-file=$inputFile"
     }
 }
@@ -138,7 +139,7 @@ if ($updateLaunchSettings)
         'profiles' = @{}
     };
 
-    foreach ($key in $swaggerDefinitions.Keys)
+    foreach ($key in $swaggerDefinitions.Keys | Sort-Object)
     {
         $definition = $swaggerDefinitions[$key];
         $outputPath = (Join-Path $definition.output $key).Replace($repoRoot, "`$(SolutionDir)")

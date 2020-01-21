@@ -19,6 +19,7 @@
     <None Include="../swaggers/*.json" LinkBase="swaggers" />
     <Compile Include="../../src/assets/**/*.cs" />
     <Compile Include="../TestServerProjects/**/*.cs" LinkBase="TestServerProjects" />
+    <Compile Include="../TestProjects/**/*.cs" LinkBase="TestProjects" />
     <None Include="../TestServerProjects/**/*.yaml" LinkBase="TestServerProjects" />
   </ItemGroup>
 
