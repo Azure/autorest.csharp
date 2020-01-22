@@ -34,50 +34,70 @@ namespace AutoRest.CSharp.V3.Output.Builders
             }
 
             string clientName = operationGroup.CSharpName();
-            Dictionary<string, (Operation Operation, Method Method)> operationMethods = new Dictionary<string, (Operation, Method)>();
+            Dictionary<string, OperationMethod> processedMethods = new Dictionary<string, OperationMethod>();
             foreach (Operation operation in operationGroup.Operations)
             {
                 Method? method = BuildMethod(operation, clientName, clientParameters);
                 if (method != null)
                 {
-                    operationMethods.Add(operation.Language.Default.Name, (operation, method));
+                    processedMethods.Add(operation.Language.Default.Name, new OperationMethod(operation, method));
                 }
             }
 
             List<Method> nextPageMethods = new List<Method>();
             List<Paging> pagingMethods = new List<Paging>();
-            foreach ((string _, (Operation operation, Method method)) in operationMethods)
+            foreach (OperationMethod processed in processedMethods.Values)
             {
-                IDictionary<object, object>? pageable = operation.Extensions.GetValue<IDictionary<object, object>>("x-ms-pageable");
+                IDictionary<object, object>? pageable = processed.Operation.Extensions.GetValue<IDictionary<object, object>>("x-ms-pageable");
                 if (pageable != null)
                 {
                     //TODO: Assuming operationName is in this operation group: https://github.com/Azure/autorest.modelerfour/issues/85
                     string? operationName = pageable.GetValue<string>("operationName")?.Split('_').Last();
-                    (Operation NextOperation, Method NextMethod)? next =
-                        operationName != null && operationMethods.TryGetValue(operationName,
-                            out (Operation NextOperation, Method NextMethod) nextOperationMethod)
-                            ? nextOperationMethod
-                            : ((Operation NextOperation, Method NextMethod)?)null;
+
+                    OperationMethod? next = null;
+                    if (operationName != null)
+                    {
+                        if (!processedMethods.TryGetValue(operationName, out OperationMethod nextOperationMethod))
+                        {
+                            string processedOperationName = processed.Operation.Language.Default.Name;
+                            throw new Exception(
+                                $"The x-ms-pageable operationName \"{operationGroup.Key}_{operationName}\" for operation {operationGroup.Key}_{processedOperationName} was not found.");
+                        }
+
+                        next = nextOperationMethod;
+                    }
                     // If there is no operationName or we didn't find an existing operation, we use the original method to construct the nextPageMethod.
-                    Method nextPageMethod = next?.NextMethod ?? BuildNextPageMethod(method);
+                    Method nextPageMethod = next?.Method ?? BuildNextPageMethod(processed.Method);
                     // Only add the method if it didn't previously exist
                     if (next == null)
                     {
                         nextPageMethods.Add(nextPageMethod);
                     }
                     //TODO: This is a hack since we don't have the model information at this point
-                    ObjectSchema? schemaForPaging = ((method.Response.ResponseBody as ObjectResponseBody)?.Type as SchemaTypeReference)?.Schema as ObjectSchema;
-                    Paging pagingMethod = GetClientMethodPaging(method, nextPageMethod, pageable, schemaForPaging);
+                    ObjectSchema? schemaForPaging = ((processed.Method.Response.ResponseBody as ObjectResponseBody)?.Type as SchemaTypeReference)?.Schema as ObjectSchema;
+                    Paging pagingMethod = GetClientMethodPaging(processed.Method, nextPageMethod, pageable, schemaForPaging);
                     pagingMethods.Add(pagingMethod);
                 }
             }
 
-            Method[] methods = operationMethods.Select(om => om.Value.Method).Concat(nextPageMethods).ToArray();
+            Method[] methods = processedMethods.Select(om => om.Value.Method).Concat(nextPageMethods).ToArray();
             return new Client(clientName,
                 operationGroup.Language.Default.Description,
                 OrderParameters(clientParameters.Values),
                 methods,
                 pagingMethods.ToArray());
+        }
+
+        private struct OperationMethod
+        {
+            public OperationMethod(Operation operation, Method method)
+            {
+                Operation = operation;
+                Method = method;
+            }
+
+            public Operation Operation { get; }
+            public Method Method { get; }
         }
 
         private static Parameter[] OrderParameters(IEnumerable<Parameter> parameters) => parameters.OrderBy(p => p.DefaultValue != null).ToArray();
