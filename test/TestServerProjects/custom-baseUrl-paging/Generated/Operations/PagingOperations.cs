@@ -110,84 +110,6 @@ namespace custom_baseUrl_paging
                 throw;
             }
         }
-        internal HttpMessage CreateGetPagesPartialUrlNextPageRequest(string nextLinkUrl)
-        {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(nextLinkUrl, false);
-            request.Uri = uri;
-            return message;
-        }
-        /// <summary> A paging operation that combines custom url, paging and partial URL and expect to concat after host. </summary>
-        /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ProductResult>> GetPagesPartialUrlNextPageAsync(string nextLinkUrl, CancellationToken cancellationToken = default)
-        {
-            if (nextLinkUrl == null)
-            {
-                throw new ArgumentNullException(nameof(nextLinkUrl));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("PagingOperations.GetPagesPartialUrl");
-            scope.Start();
-            try
-            {
-                using var message = CreateGetPagesPartialUrlNextPageRequest(nextLinkUrl);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        /// <summary> A paging operation that combines custom url, paging and partial URL and expect to concat after host. </summary>
-        /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ProductResult> GetPagesPartialUrlNextPage(string nextLinkUrl, CancellationToken cancellationToken = default)
-        {
-            if (nextLinkUrl == null)
-            {
-                throw new ArgumentNullException(nameof(nextLinkUrl));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("PagingOperations.GetPagesPartialUrl");
-            scope.Start();
-            try
-            {
-                using var message = CreateGetPagesPartialUrlNextPageRequest(nextLinkUrl);
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw message.Response.CreateRequestFailedException();
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
         internal HttpMessage CreateGetPagesPartialUrlOperationRequest(string accountName)
         {
             var message = pipeline.CreateMessage();
@@ -250,84 +172,6 @@ namespace custom_baseUrl_paging
             try
             {
                 using var message = CreateGetPagesPartialUrlOperationRequest(accountName);
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw message.Response.CreateRequestFailedException();
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        internal HttpMessage CreateGetPagesPartialUrlOperationNextPageRequest(string nextLinkUrl)
-        {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(nextLinkUrl, false);
-            request.Uri = uri;
-            return message;
-        }
-        /// <summary> A paging operation that combines custom url, paging and partial URL with next operation. </summary>
-        /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ProductResult>> GetPagesPartialUrlOperationNextPageAsync(string nextLinkUrl, CancellationToken cancellationToken = default)
-        {
-            if (nextLinkUrl == null)
-            {
-                throw new ArgumentNullException(nameof(nextLinkUrl));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("PagingOperations.GetPagesPartialUrlOperation");
-            scope.Start();
-            try
-            {
-                using var message = CreateGetPagesPartialUrlOperationNextPageRequest(nextLinkUrl);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        /// <summary> A paging operation that combines custom url, paging and partial URL with next operation. </summary>
-        /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ProductResult> GetPagesPartialUrlOperationNextPage(string nextLinkUrl, CancellationToken cancellationToken = default)
-        {
-            if (nextLinkUrl == null)
-            {
-                throw new ArgumentNullException(nameof(nextLinkUrl));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("PagingOperations.GetPagesPartialUrlOperation");
-            scope.Start();
-            try
-            {
-                using var message = CreateGetPagesPartialUrlOperationNextPageRequest(nextLinkUrl);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -439,31 +283,31 @@ namespace custom_baseUrl_paging
                 throw;
             }
         }
-        internal HttpMessage CreateGetPagesPartialUrlOperationNextNextPageRequest(string nextLinkUrl)
+        internal HttpMessage CreateGetPagesPartialUrlNextPageRequest(string nextLink)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(nextLinkUrl, false);
+            uri.AppendRaw(nextLink, false);
             request.Uri = uri;
             return message;
         }
-        /// <summary> A paging operation that combines custom url, paging and partial URL. </summary>
-        /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
+        /// <summary> A paging operation that combines custom url, paging and partial URL and expect to concat after host. </summary>
+        /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ProductResult>> GetPagesPartialUrlOperationNextNextPageAsync(string nextLinkUrl, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ProductResult>> GetPagesPartialUrlNextPageAsync(string nextLink, CancellationToken cancellationToken = default)
         {
-            if (nextLinkUrl == null)
+            if (nextLink == null)
             {
-                throw new ArgumentNullException(nameof(nextLinkUrl));
+                throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingOperations.GetPagesPartialUrlOperationNext");
+            using var scope = clientDiagnostics.CreateScope("PagingOperations.GetPagesPartialUrl");
             scope.Start();
             try
             {
-                using var message = CreateGetPagesPartialUrlOperationNextNextPageRequest(nextLinkUrl);
+                using var message = CreateGetPagesPartialUrlNextPageRequest(nextLink);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -483,21 +327,21 @@ namespace custom_baseUrl_paging
                 throw;
             }
         }
-        /// <summary> A paging operation that combines custom url, paging and partial URL. </summary>
-        /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
+        /// <summary> A paging operation that combines custom url, paging and partial URL and expect to concat after host. </summary>
+        /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ProductResult> GetPagesPartialUrlOperationNextNextPage(string nextLinkUrl, CancellationToken cancellationToken = default)
+        public Response<ProductResult> GetPagesPartialUrlNextPage(string nextLink, CancellationToken cancellationToken = default)
         {
-            if (nextLinkUrl == null)
+            if (nextLink == null)
             {
-                throw new ArgumentNullException(nameof(nextLinkUrl));
+                throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingOperations.GetPagesPartialUrlOperationNext");
+            using var scope = clientDiagnostics.CreateScope("PagingOperations.GetPagesPartialUrl");
             scope.Start();
             try
             {
-                using var message = CreateGetPagesPartialUrlOperationNextNextPageRequest(nextLinkUrl);
+                using var message = CreateGetPagesPartialUrlNextPageRequest(nextLink);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -532,9 +376,9 @@ namespace custom_baseUrl_paging
                 var response = await GetPagesPartialUrlAsync(accountName, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
-            async Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            async Task<Page<Product>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await GetPagesPartialUrlNextPageAsync(nextLinkUrl, cancellationToken).ConfigureAwait(false);
+                var response = await GetPagesPartialUrlNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
@@ -554,9 +398,9 @@ namespace custom_baseUrl_paging
                 var response = GetPagesPartialUrl(accountName, cancellationToken);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
-            Page<Product> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            Page<Product> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = GetPagesPartialUrlNextPage(nextLinkUrl, cancellationToken);
+                var response = GetPagesPartialUrlNextPage(nextLink, cancellationToken);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateEnumerable(FirstPageFunc, NextPageFunc);
@@ -576,9 +420,9 @@ namespace custom_baseUrl_paging
                 var response = await GetPagesPartialUrlOperationAsync(accountName, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
-            async Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            async Task<Page<Product>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await GetPagesPartialUrlOperationNextPageAsync(nextLinkUrl, cancellationToken).ConfigureAwait(false);
+                var response = await GetPagesPartialUrlOperationNextAsync(accountName, nextLink, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
@@ -598,9 +442,9 @@ namespace custom_baseUrl_paging
                 var response = GetPagesPartialUrlOperation(accountName, cancellationToken);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
-            Page<Product> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            Page<Product> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = GetPagesPartialUrlOperationNextPage(nextLinkUrl, cancellationToken);
+                var response = GetPagesPartialUrlOperationNext(accountName, nextLink, cancellationToken);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateEnumerable(FirstPageFunc, NextPageFunc);
@@ -625,9 +469,9 @@ namespace custom_baseUrl_paging
                 var response = await GetPagesPartialUrlOperationNextAsync(accountName, nextLink, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
-            async Task<Page<Product>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            async Task<Page<Product>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await GetPagesPartialUrlOperationNextNextPageAsync(nextLinkUrl, cancellationToken).ConfigureAwait(false);
+                var response = await GetPagesPartialUrlOperationNextAsync(accountName, nextLink, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
@@ -652,9 +496,9 @@ namespace custom_baseUrl_paging
                 var response = GetPagesPartialUrlOperationNext(accountName, nextLink, cancellationToken);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
-            Page<Product> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            Page<Product> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = GetPagesPartialUrlOperationNextNextPage(nextLinkUrl, cancellationToken);
+                var response = GetPagesPartialUrlOperationNext(accountName, nextLink, cancellationToken);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateEnumerable(FirstPageFunc, NextPageFunc);

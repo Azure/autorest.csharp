@@ -76,17 +76,72 @@ namespace AutoRest.TestServer.Tests
         }, true);
 
         [Test]
-        [Ignore("operationName is not supported: https://github.com/Azure/autorest.csharp/issues/397")]
-        public Task PagingCustomUrlPartialOperationNextLink() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        [IgnoreOnTestServer(TestServerVersion.V2, "Request not matched.")]
+        public Task PagingCustomUrlPartialOperationNextLink() => Test(async (host, pipeline) =>
+        {
+            var id = 1;
+            var accountName = "";
+            var product = "Product";
+            // host is not a full hostname for CustomPagingOperations; it is a partial host
+            host = host.Replace("http://", String.Empty);
+            var linkPart = "partialnextlinkop/page/";
+            var result = await new CustomPagingOperations(ClientDiagnostics, pipeline, host).GetPagesPartialUrlOperationAsync(accountName);
+            var resultPage = Page.FromValues(result.Value.Values, result.Value.NextLink, result.GetRawResponse());
+            while (resultPage.ContinuationToken != null)
+            {
+                Assert.AreEqual(id, resultPage.Values.First().Properties.Id);
+                Assert.AreEqual(product, resultPage.Values.First().Properties.Name);
+                StringAssert.EndsWith($"{linkPart}{++id}", resultPage.ContinuationToken);
+                result = await new CustomPagingOperations(ClientDiagnostics, pipeline, host).GetPagesPartialUrlOperationNextAsync(accountName, resultPage.ContinuationToken);
+                resultPage = Page.FromValues(result.Value.Values, result.Value.NextLink, result.GetRawResponse());
+            }
+            Assert.AreEqual(2, id);
+            Assert.AreEqual(id, resultPage.Values.First().Properties.Id);
+            Assert.AreEqual(product, resultPage.Values.First().Properties.Name);
+
+            id = 1;
+            var pageableAsync = new CustomPagingOperations(ClientDiagnostics, pipeline, host).GetPagesPartialUrlOperationPageableAsync(accountName);
+            await foreach (var page in pageableAsync.AsPages())
+            {
+                Assert.AreEqual(id, page.Values.First().Properties.Id);
+                Assert.AreEqual(product, page.Values.First().Properties.Name);
+                if (id == 2)
+                {
+                    Assert.IsNull(page.ContinuationToken);
+                }
+                else
+                {
+                    StringAssert.EndsWith($"{linkPart}{++id}", page.ContinuationToken);
+                }
+            }
+            Assert.AreEqual(2, id);
+
+            id = 1;
+            var pageable = new CustomPagingOperations(ClientDiagnostics, pipeline, host).GetPagesPartialUrlOperationPageable(accountName);
+            foreach (var page in pageable.AsPages())
+            {
+                Assert.AreEqual(id, page.Values.First().Properties.Id);
+                Assert.AreEqual(product, page.Values.First().Properties.Name);
+                if (id == 2)
+                {
+                    Assert.IsNull(page.ContinuationToken);
+                }
+                else
+                {
+                    StringAssert.EndsWith($"{linkPart}{++id}", page.ContinuationToken);
+                }
+            }
+            Assert.AreEqual(2, id);
+        }, true);
 
         [Test]
-        [Ignore("operationName is not supported: https://github.com/Azure/autorest.csharp/issues/397")]
+        [Ignore("Change path appending strategy: https://github.com/Azure/autorest.csharp/issues/411")]
         public Task PagingFragment() => Test(async (host, pipeline) =>
         {
             var id = 1;
             var product = "product";
             var tenant = "test_user";
-            var linkPart = $"/paging/multiple/fragment/{tenant}";
+            var linkPart = "next?page=";
             var result = await new PagingOperations(ClientDiagnostics, pipeline, host).GetMultiplePagesFragmentNextLinkAsync("1.6", tenant);
             var resultPage = Page.FromValues(result.Value.Values, result.Value.OdataNextLink, result.GetRawResponse());
             while (resultPage.ContinuationToken != null)
@@ -94,7 +149,7 @@ namespace AutoRest.TestServer.Tests
                 Assert.AreEqual(id, resultPage.Values.First().Properties.Id);
                 Assert.AreEqual(product, resultPage.Values.First().Properties.Name);
                 StringAssert.EndsWith($"{linkPart}{++id}", resultPage.ContinuationToken);
-                result = await new PagingOperations(ClientDiagnostics, pipeline, host).GetMultiplePagesFragmentNextLinkNextPageAsync(resultPage.ContinuationToken);
+                result = await new PagingOperations(ClientDiagnostics, pipeline, host).NextFragmentAsync("1.6", tenant, resultPage.ContinuationToken);
                 resultPage = Page.FromValues(result.Value.Values, result.Value.OdataNextLink, result.GetRawResponse());
             }
             Assert.AreEqual(10, id);

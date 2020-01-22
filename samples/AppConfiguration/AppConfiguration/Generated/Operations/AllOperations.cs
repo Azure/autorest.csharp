@@ -132,96 +132,6 @@ namespace AppConfiguration
                 throw;
             }
         }
-        internal HttpMessage CreateGetKeysNextPageRequest(string? acceptDatetime, string nextLinkUrl)
-        {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(nextLinkUrl, false);
-            request.Uri = uri;
-            if (syncToken != null)
-            {
-                request.Headers.Add("Sync-Token", syncToken);
-            }
-            if (acceptDatetime != null)
-            {
-                request.Headers.Add("Accept-Datetime", acceptDatetime);
-            }
-            return message;
-        }
-        /// <summary> Gets a list of keys. </summary>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<KeyListResult, GetKeysHeaders>> GetKeysNextPageAsync(string? acceptDatetime, string nextLinkUrl, CancellationToken cancellationToken = default)
-        {
-            if (nextLinkUrl == null)
-            {
-                throw new ArgumentNullException(nameof(nextLinkUrl));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("AllOperations.GetKeys");
-            scope.Start();
-            try
-            {
-                using var message = CreateGetKeysNextPageRequest(acceptDatetime, nextLinkUrl);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = KeyListResult.DeserializeKeyListResult(document.RootElement);
-                            var headers = new GetKeysHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                        }
-                    default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        /// <summary> Gets a list of keys. </summary>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<KeyListResult, GetKeysHeaders> GetKeysNextPage(string? acceptDatetime, string nextLinkUrl, CancellationToken cancellationToken = default)
-        {
-            if (nextLinkUrl == null)
-            {
-                throw new ArgumentNullException(nameof(nextLinkUrl));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("AllOperations.GetKeys");
-            scope.Start();
-            try
-            {
-                using var message = CreateGetKeysNextPageRequest(acceptDatetime, nextLinkUrl);
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = KeyListResult.DeserializeKeyListResult(document.RootElement);
-                            var headers = new GetKeysHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                        }
-                    default:
-                        throw message.Response.CreateRequestFailedException();
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
         internal HttpMessage CreateCheckKeysRequest(string? name, string? after, string? acceptDatetime)
         {
             var message = pipeline.CreateMessage();
@@ -394,96 +304,6 @@ namespace AppConfiguration
             try
             {
                 using var message = CreateGetKeyValuesRequest(key, label, after, acceptDatetime, select);
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
-                            var headers = new GetKeyValuesHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                        }
-                    default:
-                        throw message.Response.CreateRequestFailedException();
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        internal HttpMessage CreateGetKeyValuesNextPageRequest(string? acceptDatetime, string nextLinkUrl)
-        {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(nextLinkUrl, false);
-            request.Uri = uri;
-            if (syncToken != null)
-            {
-                request.Headers.Add("Sync-Token", syncToken);
-            }
-            if (acceptDatetime != null)
-            {
-                request.Headers.Add("Accept-Datetime", acceptDatetime);
-            }
-            return message;
-        }
-        /// <summary> Gets a list of key-values. </summary>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<KeyValueListResult, GetKeyValuesHeaders>> GetKeyValuesNextPageAsync(string? acceptDatetime, string nextLinkUrl, CancellationToken cancellationToken = default)
-        {
-            if (nextLinkUrl == null)
-            {
-                throw new ArgumentNullException(nameof(nextLinkUrl));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("AllOperations.GetKeyValues");
-            scope.Start();
-            try
-            {
-                using var message = CreateGetKeyValuesNextPageRequest(acceptDatetime, nextLinkUrl);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
-                            var headers = new GetKeyValuesHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                        }
-                    default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        /// <summary> Gets a list of key-values. </summary>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<KeyValueListResult, GetKeyValuesHeaders> GetKeyValuesNextPage(string? acceptDatetime, string nextLinkUrl, CancellationToken cancellationToken = default)
-        {
-            if (nextLinkUrl == null)
-            {
-                throw new ArgumentNullException(nameof(nextLinkUrl));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("AllOperations.GetKeyValues");
-            scope.Start();
-            try
-            {
-                using var message = CreateGetKeyValuesNextPageRequest(acceptDatetime, nextLinkUrl);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -1143,96 +963,6 @@ namespace AppConfiguration
                 throw;
             }
         }
-        internal HttpMessage CreateGetLabelsNextPageRequest(string? acceptDatetime, string nextLinkUrl)
-        {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(nextLinkUrl, false);
-            request.Uri = uri;
-            if (syncToken != null)
-            {
-                request.Headers.Add("Sync-Token", syncToken);
-            }
-            if (acceptDatetime != null)
-            {
-                request.Headers.Add("Accept-Datetime", acceptDatetime);
-            }
-            return message;
-        }
-        /// <summary> Gets a list of labels. </summary>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<LabelListResult, GetLabelsHeaders>> GetLabelsNextPageAsync(string? acceptDatetime, string nextLinkUrl, CancellationToken cancellationToken = default)
-        {
-            if (nextLinkUrl == null)
-            {
-                throw new ArgumentNullException(nameof(nextLinkUrl));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("AllOperations.GetLabels");
-            scope.Start();
-            try
-            {
-                using var message = CreateGetLabelsNextPageRequest(acceptDatetime, nextLinkUrl);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = LabelListResult.DeserializeLabelListResult(document.RootElement);
-                            var headers = new GetLabelsHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                        }
-                    default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        /// <summary> Gets a list of labels. </summary>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<LabelListResult, GetLabelsHeaders> GetLabelsNextPage(string? acceptDatetime, string nextLinkUrl, CancellationToken cancellationToken = default)
-        {
-            if (nextLinkUrl == null)
-            {
-                throw new ArgumentNullException(nameof(nextLinkUrl));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("AllOperations.GetLabels");
-            scope.Start();
-            try
-            {
-                using var message = CreateGetLabelsNextPageRequest(acceptDatetime, nextLinkUrl);
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = LabelListResult.DeserializeLabelListResult(document.RootElement);
-                            var headers = new GetLabelsHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                        }
-                    default:
-                        throw message.Response.CreateRequestFailedException();
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
         internal HttpMessage CreateCheckLabelsRequest(string? name, string? after, string? acceptDatetime, IEnumerable<string>? select)
         {
             var message = pipeline.CreateMessage();
@@ -1641,96 +1371,6 @@ namespace AppConfiguration
                 throw;
             }
         }
-        internal HttpMessage CreateGetRevisionsNextPageRequest(string? acceptDatetime, string nextLinkUrl)
-        {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(nextLinkUrl, false);
-            request.Uri = uri;
-            if (syncToken != null)
-            {
-                request.Headers.Add("Sync-Token", syncToken);
-            }
-            if (acceptDatetime != null)
-            {
-                request.Headers.Add("Accept-Datetime", acceptDatetime);
-            }
-            return message;
-        }
-        /// <summary> Gets a list of key-value revisions. </summary>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<KeyValueListResult, GetRevisionsHeaders>> GetRevisionsNextPageAsync(string? acceptDatetime, string nextLinkUrl, CancellationToken cancellationToken = default)
-        {
-            if (nextLinkUrl == null)
-            {
-                throw new ArgumentNullException(nameof(nextLinkUrl));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("AllOperations.GetRevisions");
-            scope.Start();
-            try
-            {
-                using var message = CreateGetRevisionsNextPageRequest(acceptDatetime, nextLinkUrl);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
-                            var headers = new GetRevisionsHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                        }
-                    default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        /// <summary> Gets a list of key-value revisions. </summary>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="nextLinkUrl"> The URL to the next page of results. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<KeyValueListResult, GetRevisionsHeaders> GetRevisionsNextPage(string? acceptDatetime, string nextLinkUrl, CancellationToken cancellationToken = default)
-        {
-            if (nextLinkUrl == null)
-            {
-                throw new ArgumentNullException(nameof(nextLinkUrl));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("AllOperations.GetRevisions");
-            scope.Start();
-            try
-            {
-                using var message = CreateGetRevisionsNextPageRequest(acceptDatetime, nextLinkUrl);
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
-                            var headers = new GetRevisionsHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                        }
-                    default:
-                        throw message.Response.CreateRequestFailedException();
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
         internal HttpMessage CreateCheckRevisionsRequest(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Enum0>? select)
         {
             var message = pipeline.CreateMessage();
@@ -1829,6 +1469,366 @@ namespace AppConfiguration
                 throw;
             }
         }
+        internal HttpMessage CreateGetKeysNextPageRequest(string? acceptDatetime, string nextLink)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(nextLink, false);
+            request.Uri = uri;
+            if (syncToken != null)
+            {
+                request.Headers.Add("Sync-Token", syncToken);
+            }
+            if (acceptDatetime != null)
+            {
+                request.Headers.Add("Accept-Datetime", acceptDatetime);
+            }
+            return message;
+        }
+        /// <summary> Gets a list of keys. </summary>
+        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
+        /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<ResponseWithHeaders<KeyListResult, GetKeysHeaders>> GetKeysNextPageAsync(string? acceptDatetime, string nextLink, CancellationToken cancellationToken = default)
+        {
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("AllOperations.GetKeys");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetKeysNextPageRequest(acceptDatetime, nextLink);
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            var value = KeyListResult.DeserializeKeyListResult(document.RootElement);
+                            var headers = new GetKeysHeaders(message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                        }
+                    default:
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        /// <summary> Gets a list of keys. </summary>
+        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
+        /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public ResponseWithHeaders<KeyListResult, GetKeysHeaders> GetKeysNextPage(string? acceptDatetime, string nextLink, CancellationToken cancellationToken = default)
+        {
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("AllOperations.GetKeys");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetKeysNextPageRequest(acceptDatetime, nextLink);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = KeyListResult.DeserializeKeyListResult(document.RootElement);
+                            var headers = new GetKeysHeaders(message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        internal HttpMessage CreateGetKeyValuesNextPageRequest(string? acceptDatetime, string nextLink)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(nextLink, false);
+            request.Uri = uri;
+            if (syncToken != null)
+            {
+                request.Headers.Add("Sync-Token", syncToken);
+            }
+            if (acceptDatetime != null)
+            {
+                request.Headers.Add("Accept-Datetime", acceptDatetime);
+            }
+            return message;
+        }
+        /// <summary> Gets a list of key-values. </summary>
+        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
+        /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<ResponseWithHeaders<KeyValueListResult, GetKeyValuesHeaders>> GetKeyValuesNextPageAsync(string? acceptDatetime, string nextLink, CancellationToken cancellationToken = default)
+        {
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("AllOperations.GetKeyValues");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetKeyValuesNextPageRequest(acceptDatetime, nextLink);
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            var value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
+                            var headers = new GetKeyValuesHeaders(message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                        }
+                    default:
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        /// <summary> Gets a list of key-values. </summary>
+        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
+        /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public ResponseWithHeaders<KeyValueListResult, GetKeyValuesHeaders> GetKeyValuesNextPage(string? acceptDatetime, string nextLink, CancellationToken cancellationToken = default)
+        {
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("AllOperations.GetKeyValues");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetKeyValuesNextPageRequest(acceptDatetime, nextLink);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
+                            var headers = new GetKeyValuesHeaders(message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        internal HttpMessage CreateGetLabelsNextPageRequest(string? acceptDatetime, string nextLink)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(nextLink, false);
+            request.Uri = uri;
+            if (syncToken != null)
+            {
+                request.Headers.Add("Sync-Token", syncToken);
+            }
+            if (acceptDatetime != null)
+            {
+                request.Headers.Add("Accept-Datetime", acceptDatetime);
+            }
+            return message;
+        }
+        /// <summary> Gets a list of labels. </summary>
+        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
+        /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<ResponseWithHeaders<LabelListResult, GetLabelsHeaders>> GetLabelsNextPageAsync(string? acceptDatetime, string nextLink, CancellationToken cancellationToken = default)
+        {
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("AllOperations.GetLabels");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetLabelsNextPageRequest(acceptDatetime, nextLink);
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            var value = LabelListResult.DeserializeLabelListResult(document.RootElement);
+                            var headers = new GetLabelsHeaders(message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                        }
+                    default:
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        /// <summary> Gets a list of labels. </summary>
+        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
+        /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public ResponseWithHeaders<LabelListResult, GetLabelsHeaders> GetLabelsNextPage(string? acceptDatetime, string nextLink, CancellationToken cancellationToken = default)
+        {
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("AllOperations.GetLabels");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetLabelsNextPageRequest(acceptDatetime, nextLink);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = LabelListResult.DeserializeLabelListResult(document.RootElement);
+                            var headers = new GetLabelsHeaders(message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        internal HttpMessage CreateGetRevisionsNextPageRequest(string? acceptDatetime, string nextLink)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(nextLink, false);
+            request.Uri = uri;
+            if (syncToken != null)
+            {
+                request.Headers.Add("Sync-Token", syncToken);
+            }
+            if (acceptDatetime != null)
+            {
+                request.Headers.Add("Accept-Datetime", acceptDatetime);
+            }
+            return message;
+        }
+        /// <summary> Gets a list of key-value revisions. </summary>
+        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
+        /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<ResponseWithHeaders<KeyValueListResult, GetRevisionsHeaders>> GetRevisionsNextPageAsync(string? acceptDatetime, string nextLink, CancellationToken cancellationToken = default)
+        {
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("AllOperations.GetRevisions");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetRevisionsNextPageRequest(acceptDatetime, nextLink);
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            var value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
+                            var headers = new GetRevisionsHeaders(message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                        }
+                    default:
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        /// <summary> Gets a list of key-value revisions. </summary>
+        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
+        /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public ResponseWithHeaders<KeyValueListResult, GetRevisionsHeaders> GetRevisionsNextPage(string? acceptDatetime, string nextLink, CancellationToken cancellationToken = default)
+        {
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("AllOperations.GetRevisions");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetRevisionsNextPageRequest(acceptDatetime, nextLink);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
+                            var headers = new GetRevisionsHeaders(message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                        }
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         /// <summary> Gets a list of keys. </summary>
         /// <param name="name"> A filter for the name of the returned keys. </param>
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
@@ -1842,9 +1842,9 @@ namespace AppConfiguration
                 var response = await GetKeysAsync(name, after, acceptDatetime, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
-            async Task<Page<Key>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            async Task<Page<Key>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await GetKeysNextPageAsync(acceptDatetime, nextLinkUrl, cancellationToken).ConfigureAwait(false);
+                var response = await GetKeysNextPageAsync(acceptDatetime, nextLink, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
@@ -1862,9 +1862,9 @@ namespace AppConfiguration
                 var response = GetKeys(name, after, acceptDatetime, cancellationToken);
                 return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
-            Page<Key> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            Page<Key> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = GetKeysNextPage(acceptDatetime, nextLinkUrl, cancellationToken);
+                var response = GetKeysNextPage(acceptDatetime, nextLink, cancellationToken);
                 return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateEnumerable(FirstPageFunc, NextPageFunc);
@@ -1884,9 +1884,9 @@ namespace AppConfiguration
                 var response = await GetKeyValuesAsync(key, label, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
-            async Task<Page<KeyValue>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            async Task<Page<KeyValue>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await GetKeyValuesNextPageAsync(acceptDatetime, nextLinkUrl, cancellationToken).ConfigureAwait(false);
+                var response = await GetKeyValuesNextPageAsync(acceptDatetime, nextLink, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
@@ -1906,9 +1906,9 @@ namespace AppConfiguration
                 var response = GetKeyValues(key, label, after, acceptDatetime, select, cancellationToken);
                 return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
-            Page<KeyValue> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            Page<KeyValue> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = GetKeyValuesNextPage(acceptDatetime, nextLinkUrl, cancellationToken);
+                var response = GetKeyValuesNextPage(acceptDatetime, nextLink, cancellationToken);
                 return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateEnumerable(FirstPageFunc, NextPageFunc);
@@ -1927,9 +1927,9 @@ namespace AppConfiguration
                 var response = await GetLabelsAsync(name, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
-            async Task<Page<Label>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            async Task<Page<Label>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await GetLabelsNextPageAsync(acceptDatetime, nextLinkUrl, cancellationToken).ConfigureAwait(false);
+                var response = await GetLabelsNextPageAsync(acceptDatetime, nextLink, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
@@ -1948,9 +1948,9 @@ namespace AppConfiguration
                 var response = GetLabels(name, after, acceptDatetime, select, cancellationToken);
                 return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
-            Page<Label> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            Page<Label> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = GetLabelsNextPage(acceptDatetime, nextLinkUrl, cancellationToken);
+                var response = GetLabelsNextPage(acceptDatetime, nextLink, cancellationToken);
                 return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateEnumerable(FirstPageFunc, NextPageFunc);
@@ -1970,9 +1970,9 @@ namespace AppConfiguration
                 var response = await GetRevisionsAsync(key, label, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
-            async Task<Page<KeyValue>> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            async Task<Page<KeyValue>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await GetRevisionsNextPageAsync(acceptDatetime, nextLinkUrl, cancellationToken).ConfigureAwait(false);
+                var response = await GetRevisionsNextPageAsync(acceptDatetime, nextLink, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
@@ -1992,9 +1992,9 @@ namespace AppConfiguration
                 var response = GetRevisions(key, label, after, acceptDatetime, select, cancellationToken);
                 return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
-            Page<KeyValue> NextPageFunc(string nextLinkUrl, int? pageSizeHint)
+            Page<KeyValue> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = GetRevisionsNextPage(acceptDatetime, nextLinkUrl, cancellationToken);
+                var response = GetRevisionsNextPage(acceptDatetime, nextLink, cancellationToken);
                 return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
             return PageResponseEnumerator.CreateEnumerable(FirstPageFunc, NextPageFunc);

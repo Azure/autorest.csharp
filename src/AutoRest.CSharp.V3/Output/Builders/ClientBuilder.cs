@@ -44,21 +44,27 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 }
             }
 
+            List<Method> nextPageMethods = new List<Method>();
             List<Paging> pagingMethods = new List<Paging>();
-            foreach ((string defaultOperationName, (Operation operation, Method method)) in operationMethods)
+            foreach ((string _, (Operation operation, Method method)) in operationMethods)
             {
                 IDictionary<object, object>? pageable = operation.Extensions.GetValue<IDictionary<object, object>>("x-ms-pageable");
                 if (pageable != null)
                 {
-                    string? operationName = pageable.GetValue<string>("operationName");
+                    //TODO: Assuming operationName is in this operation group: https://github.com/Azure/autorest.modelerfour/issues/85
+                    string? operationName = pageable.GetValue<string>("operationName")?.Split('_').Last();
                     (Operation NextOperation, Method NextMethod)? next =
                         operationName != null && operationMethods.TryGetValue(operationName,
                             out (Operation NextOperation, Method NextMethod) nextOperationMethod)
                             ? nextOperationMethod
                             : ((Operation NextOperation, Method NextMethod)?)null;
                     // If there is no operationName or we didn't find an existing operation, we use the original method to construct the nextPageMethod.
-                    Method nextPageMethod = BuildNextPageMethod(next?.NextMethod ?? method);
-                    operationMethods.Add(defaultOperationName, (operation, nextPageMethod));
+                    Method nextPageMethod = next?.NextMethod ?? BuildNextPageMethod(method);
+                    // Only add the method if it didn't previously exist
+                    if (next == null)
+                    {
+                        nextPageMethods.Add(nextPageMethod);
+                    }
                     //TODO: This is a hack since we don't have the model information at this point
                     ObjectSchema? schemaForPaging = ((method.Response.ResponseBody as ObjectResponseBody)?.Type as SchemaTypeReference)?.Schema as ObjectSchema;
                     Paging pagingMethod = GetClientMethodPaging(method, nextPageMethod, pageable, schemaForPaging);
@@ -66,10 +72,11 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 }
             }
 
+            Method[] methods = operationMethods.Select(om => om.Value.Method).Concat(nextPageMethods).ToArray();
             return new Client(clientName,
                 operationGroup.Language.Default.Description,
                 OrderParameters(clientParameters.Values),
-                operationMethods.Select(om => om.Value.Method).ToArray(),
+                methods,
                 pagingMethods.ToArray());
         }
 
@@ -207,7 +214,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
         private static Method BuildNextPageMethod(Method method)
         {
             var nextPageUrlParameter = new Parameter(
-                "nextLinkUrl",
+                "nextLink",
                 "The URL to the next page of results.",
                 new FrameworkTypeReference(typeof(string)),
                 null,
