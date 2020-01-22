@@ -325,7 +325,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     writer.Line($"return {typeof(Page)}.FromValues(response.Value.{pagingMethod.ItemName}, {continuationTokenText}, response.GetRawResponse());");
                 }
 
-                using (writer.Scope($"{asyncText}{funcType} NextPageFunc({typeof(string)} nextLinkUrl, {nullableInt} pageSizeHint)"))
+                using (writer.Scope($"{asyncText}{funcType} NextPageFunc({typeof(string)} nextLink, {nullableInt} pageSizeHint)"))
                 {
                     writer.Append($"var response = {awaitText}{CreateMethodName(pagingMethod.NextPageMethod.Name, async)}(");
                     foreach (Parameter parameter in nextPageParameters)
