@@ -238,7 +238,6 @@ namespace validation
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetWithConstantInPathAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("AllOperations.GetWithConstantInPath");
             scope.Start();
             try
@@ -263,7 +262,6 @@ namespace validation
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetWithConstantInPath(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("AllOperations.GetWithConstantInPath");
             scope.Start();
             try

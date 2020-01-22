@@ -115,7 +115,6 @@ namespace header
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<ResponseExistingKeyHeaders>> ResponseExistingKeyAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("HeaderOperations.ResponseExistingKey");
             scope.Start();
             try
@@ -141,7 +140,6 @@ namespace header
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<ResponseExistingKeyHeaders> ResponseExistingKey(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("HeaderOperations.ResponseExistingKey");
             scope.Start();
             try
@@ -250,7 +248,6 @@ namespace header
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<ResponseProtectedKeyHeaders>> ResponseProtectedKeyAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("HeaderOperations.ResponseProtectedKey");
             scope.Start();
             try
@@ -276,7 +273,6 @@ namespace header
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<ResponseProtectedKeyHeaders> ResponseProtectedKey(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("HeaderOperations.ResponseProtectedKey");
             scope.Start();
             try
@@ -2118,7 +2114,6 @@ namespace header
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> CustomRequestIdAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("HeaderOperations.CustomRequestId");
             scope.Start();
             try
@@ -2143,7 +2138,6 @@ namespace header
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response CustomRequestId(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("HeaderOperations.CustomRequestId");
             scope.Start();
             try

@@ -50,7 +50,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Basic>> GetValidAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("BasicOperations.GetValid");
             scope.Start();
             try
@@ -79,7 +78,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Basic> GetValid(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("BasicOperations.GetValid");
             scope.Start();
             try
@@ -195,7 +193,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Basic>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("BasicOperations.GetInvalid");
             scope.Start();
             try
@@ -224,7 +221,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Basic> GetInvalid(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("BasicOperations.GetInvalid");
             scope.Start();
             try
@@ -264,7 +260,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Basic>> GetEmptyAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("BasicOperations.GetEmpty");
             scope.Start();
             try
@@ -293,7 +288,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Basic> GetEmpty(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("BasicOperations.GetEmpty");
             scope.Start();
             try
@@ -333,7 +327,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Basic>> GetNullAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("BasicOperations.GetNull");
             scope.Start();
             try
@@ -362,7 +355,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Basic> GetNull(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("BasicOperations.GetNull");
             scope.Start();
             try
@@ -402,7 +394,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Basic>> GetNotProvidedAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("BasicOperations.GetNotProvided");
             scope.Start();
             try
@@ -431,7 +422,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Basic> GetNotProvided(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("BasicOperations.GetNotProvided");
             scope.Start();
             try

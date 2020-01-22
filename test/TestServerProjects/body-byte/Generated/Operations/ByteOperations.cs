@@ -43,7 +43,6 @@ namespace body_byte
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<byte[]>> GetNullAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ByteOperations.GetNull");
             scope.Start();
             try
@@ -72,7 +71,6 @@ namespace body_byte
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<byte[]> GetNull(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ByteOperations.GetNull");
             scope.Start();
             try
@@ -112,7 +110,6 @@ namespace body_byte
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<byte[]>> GetEmptyAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ByteOperations.GetEmpty");
             scope.Start();
             try
@@ -141,7 +138,6 @@ namespace body_byte
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<byte[]> GetEmpty(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ByteOperations.GetEmpty");
             scope.Start();
             try
@@ -181,7 +177,6 @@ namespace body_byte
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<byte[]>> GetNonAsciiAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ByteOperations.GetNonAscii");
             scope.Start();
             try
@@ -210,7 +205,6 @@ namespace body_byte
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<byte[]> GetNonAscii(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ByteOperations.GetNonAscii");
             scope.Start();
             try
@@ -325,7 +319,6 @@ namespace body_byte
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<byte[]>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ByteOperations.GetInvalid");
             scope.Start();
             try
@@ -354,7 +347,6 @@ namespace body_byte
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<byte[]> GetInvalid(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ByteOperations.GetInvalid");
             scope.Start();
             try

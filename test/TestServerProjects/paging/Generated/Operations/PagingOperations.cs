@@ -44,7 +44,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ProductResultValue>> GetNoItemNamePagesAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetNoItemNamePages");
             scope.Start();
             try
@@ -73,7 +72,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ProductResultValue> GetNoItemNamePages(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetNoItemNamePages");
             scope.Start();
             try
@@ -113,7 +111,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ProductResult>> GetNullNextLinkNamePagesAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetNullNextLinkNamePages");
             scope.Start();
             try
@@ -142,7 +139,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ProductResult> GetNullNextLinkNamePages(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetNullNextLinkNamePages");
             scope.Start();
             try
@@ -182,7 +178,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ProductResult>> GetSinglePagesAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetSinglePages");
             scope.Start();
             try
@@ -211,7 +206,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ProductResult> GetSinglePages(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetSinglePages");
             scope.Start();
             try
@@ -515,7 +509,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ProductResult>> GetMultiplePagesRetryFirstAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesRetryFirst");
             scope.Start();
             try
@@ -544,7 +537,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ProductResult> GetMultiplePagesRetryFirst(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesRetryFirst");
             scope.Start();
             try
@@ -584,7 +576,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ProductResult>> GetMultiplePagesRetrySecondAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesRetrySecond");
             scope.Start();
             try
@@ -613,7 +604,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ProductResult> GetMultiplePagesRetrySecond(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesRetrySecond");
             scope.Start();
             try
@@ -653,7 +643,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ProductResult>> GetSinglePagesFailureAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetSinglePagesFailure");
             scope.Start();
             try
@@ -682,7 +671,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ProductResult> GetSinglePagesFailure(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetSinglePagesFailure");
             scope.Start();
             try
@@ -722,7 +710,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ProductResult>> GetMultiplePagesFailureAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesFailure");
             scope.Start();
             try
@@ -751,7 +738,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ProductResult> GetMultiplePagesFailure(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesFailure");
             scope.Start();
             try
@@ -791,7 +777,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ProductResult>> GetMultiplePagesFailureUriAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesFailureUri");
             scope.Start();
             try
@@ -820,7 +805,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ProductResult> GetMultiplePagesFailureUri(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesFailureUri");
             scope.Start();
             try
@@ -2332,7 +2316,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public AsyncPageable<Product> GetNoItemNamePagesPageableAsync(CancellationToken cancellationToken = default)
         {
-
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
                 var response = await GetNoItemNamePagesAsync(cancellationToken).ConfigureAwait(false);
@@ -2349,7 +2332,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Pageable<Product> GetNoItemNamePagesPageable(CancellationToken cancellationToken = default)
         {
-
             Page<Product> FirstPageFunc(int? pageSizeHint)
             {
                 var response = GetNoItemNamePages(cancellationToken);
@@ -2366,7 +2348,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public AsyncPageable<Product> GetNullNextLinkNamePagesPageableAsync(CancellationToken cancellationToken = default)
         {
-
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
                 var response = await GetNullNextLinkNamePagesAsync(cancellationToken).ConfigureAwait(false);
@@ -2383,7 +2364,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Pageable<Product> GetNullNextLinkNamePagesPageable(CancellationToken cancellationToken = default)
         {
-
             Page<Product> FirstPageFunc(int? pageSizeHint)
             {
                 var response = GetNullNextLinkNamePages(cancellationToken);
@@ -2400,7 +2380,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public AsyncPageable<Product> GetSinglePagesPageableAsync(CancellationToken cancellationToken = default)
         {
-
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
                 var response = await GetSinglePagesAsync(cancellationToken).ConfigureAwait(false);
@@ -2417,7 +2396,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Pageable<Product> GetSinglePagesPageable(CancellationToken cancellationToken = default)
         {
-
             Page<Product> FirstPageFunc(int? pageSizeHint)
             {
                 var response = GetSinglePages(cancellationToken);
@@ -2556,7 +2534,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public AsyncPageable<Product> GetMultiplePagesRetryFirstPageableAsync(CancellationToken cancellationToken = default)
         {
-
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
                 var response = await GetMultiplePagesRetryFirstAsync(cancellationToken).ConfigureAwait(false);
@@ -2573,7 +2550,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Pageable<Product> GetMultiplePagesRetryFirstPageable(CancellationToken cancellationToken = default)
         {
-
             Page<Product> FirstPageFunc(int? pageSizeHint)
             {
                 var response = GetMultiplePagesRetryFirst(cancellationToken);
@@ -2590,7 +2566,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public AsyncPageable<Product> GetMultiplePagesRetrySecondPageableAsync(CancellationToken cancellationToken = default)
         {
-
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
                 var response = await GetMultiplePagesRetrySecondAsync(cancellationToken).ConfigureAwait(false);
@@ -2607,7 +2582,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Pageable<Product> GetMultiplePagesRetrySecondPageable(CancellationToken cancellationToken = default)
         {
-
             Page<Product> FirstPageFunc(int? pageSizeHint)
             {
                 var response = GetMultiplePagesRetrySecond(cancellationToken);
@@ -2624,7 +2598,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public AsyncPageable<Product> GetSinglePagesFailurePageableAsync(CancellationToken cancellationToken = default)
         {
-
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
                 var response = await GetSinglePagesFailureAsync(cancellationToken).ConfigureAwait(false);
@@ -2641,7 +2614,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Pageable<Product> GetSinglePagesFailurePageable(CancellationToken cancellationToken = default)
         {
-
             Page<Product> FirstPageFunc(int? pageSizeHint)
             {
                 var response = GetSinglePagesFailure(cancellationToken);
@@ -2658,7 +2630,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public AsyncPageable<Product> GetMultiplePagesFailurePageableAsync(CancellationToken cancellationToken = default)
         {
-
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
                 var response = await GetMultiplePagesFailureAsync(cancellationToken).ConfigureAwait(false);
@@ -2675,7 +2646,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Pageable<Product> GetMultiplePagesFailurePageable(CancellationToken cancellationToken = default)
         {
-
             Page<Product> FirstPageFunc(int? pageSizeHint)
             {
                 var response = GetMultiplePagesFailure(cancellationToken);
@@ -2692,7 +2662,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public AsyncPageable<Product> GetMultiplePagesFailureUriPageableAsync(CancellationToken cancellationToken = default)
         {
-
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
                 var response = await GetMultiplePagesFailureUriAsync(cancellationToken).ConfigureAwait(false);
@@ -2709,7 +2678,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Pageable<Product> GetMultiplePagesFailureUriPageable(CancellationToken cancellationToken = default)
         {
-
             Page<Product> FirstPageFunc(int? pageSizeHint)
             {
                 var response = GetMultiplePagesFailureUri(cancellationToken);
