@@ -178,6 +178,8 @@ schemas: !<!Schemas>
                 namespace: Api100
             protocol: !<!Protocols> {}
           serializedName: properties
+          extensions:
+            x-ms-client-flatten: true
           language: !<!Languages> 
             default:
               name: properties
@@ -385,6 +387,8 @@ schemas: !<!Schemas>
     - !<!Property> 
       schema: *ref_4
       serializedName: property
+      extensions:
+        x-ms-client-flatten: true
       language: !<!Languages> 
         default:
           name: property
@@ -514,7 +518,7 @@ schemas: !<!Schemas>
               serializedName: max_product_capacity
               language: !<!Languages> 
                 default:
-                  name: max_product_capacity
+                  name: capacity
                   description: 'Capacity of product. For example, 4 people.'
               protocol: !<!Protocols> {}
             - !<!Property> 
@@ -587,6 +591,8 @@ schemas: !<!Schemas>
                 protocol: !<!Protocols> {}
               required: false
               serializedName: max_product_image
+              extensions:
+                x-ms-client-flatten: true
               language: !<!Languages> 
                 default:
                   name: max_product_image
@@ -599,6 +605,8 @@ schemas: !<!Schemas>
                 namespace: Api100
             protocol: !<!Protocols> {}
           serializedName: details
+          extensions:
+            x-ms-client-flatten: true
           language: !<!Languages> 
             default:
               name: details
@@ -628,7 +636,7 @@ schemas: !<!Schemas>
       serializedName: base_product_id
       language: !<!Languages> 
         default:
-          name: base_product_id
+          name: productId
           description: 'Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.'
       protocol: !<!Protocols> {}
     - !<!Property> 
@@ -646,7 +654,7 @@ schemas: !<!Schemas>
       serializedName: base_product_description
       language: !<!Languages> 
         default:
-          name: base_product_description
+          name: description
           description: Description of product.
       protocol: !<!Protocols> {}
     language: !<!Languages> 
