@@ -46,22 +46,22 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
             List<Method> nextPageMethods = new List<Method>();
             List<Paging> pagingMethods = new List<Paging>();
-            foreach (OperationMethod processed in processedMethods.Values)
+            foreach ((string processedName, OperationMethod processed) in processedMethods)
             {
                 IDictionary<object, object>? pageable = processed.Operation.Extensions.GetValue<IDictionary<object, object>>("x-ms-pageable");
                 if (pageable != null)
                 {
                     //TODO: Assuming operationName is in this operation group: https://github.com/Azure/autorest.modelerfour/issues/85
-                    string? operationName = pageable.GetValue<string>("operationName")?.Split('_').Last();
+                    string? extensionOperationName = pageable.GetValue<string>("operationName");
+                    string? operationName = extensionOperationName?.Split('_').Last();
 
                     OperationMethod? next = null;
                     if (operationName != null)
                     {
                         if (!processedMethods.TryGetValue(operationName, out OperationMethod nextOperationMethod))
                         {
-                            string processedOperationName = processed.Operation.Language.Default.Name;
                             throw new Exception(
-                                $"The x-ms-pageable operationName \"{operationGroup.Key}_{operationName}\" for operation {operationGroup.Key}_{processedOperationName} was not found.");
+                                $"The x-ms-pageable operationName \"{extensionOperationName}\" for operation {operationGroup.Key}_{processedName} was not found.");
                         }
 
                         next = nextOperationMethod;
