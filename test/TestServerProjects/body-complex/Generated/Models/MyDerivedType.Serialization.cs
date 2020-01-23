@@ -23,10 +23,10 @@ namespace body_complex.Models
                 writer.WritePropertyName("propB1");
                 writer.WriteStringValue(PropB1);
             }
-            if (Helper != null)
+            if (PropBH1 != null)
             {
-                writer.WritePropertyName("helper");
-                writer.WriteObjectValue(Helper);
+                writer.WritePropertyName("propBH1");
+                writer.WriteStringValue(PropBH1);
             }
             writer.WriteEndObject();
         }
@@ -58,13 +58,13 @@ namespace body_complex.Models
                     result.PropB1 = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("helper"))
+                if (property.NameEquals("propBH1"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         continue;
                     }
-                    result.Helper = MyBaseHelperType.DeserializeMyBaseHelperType(property.Value);
+                    result.PropBH1 = property.Value.GetString();
                     continue;
                 }
             }

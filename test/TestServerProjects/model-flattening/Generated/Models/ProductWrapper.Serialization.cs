@@ -11,10 +11,10 @@ namespace model_flattening.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Property != null)
+            if (Value != null)
             {
-                writer.WritePropertyName("property");
-                writer.WriteObjectValue(Property);
+                writer.WritePropertyName("value");
+                writer.WriteStringValue(Value);
             }
             writer.WriteEndObject();
         }
@@ -23,13 +23,13 @@ namespace model_flattening.Models
             ProductWrapper result = new ProductWrapper();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("property"))
+                if (property.NameEquals("value"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         continue;
                     }
-                    result.Property = WrappedProduct.DeserializeWrappedProduct(property.Value);
+                    result.Value = property.Value.GetString();
                     continue;
                 }
             }

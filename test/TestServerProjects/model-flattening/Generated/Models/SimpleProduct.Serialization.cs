@@ -11,10 +11,17 @@ namespace model_flattening.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Details != null)
+            if (MaxProductDisplayName != null)
             {
-                writer.WritePropertyName("details");
-                writer.WriteObjectValue(Details);
+                writer.WritePropertyName("max_product_display_name");
+                writer.WriteStringValue(MaxProductDisplayName);
+            }
+            writer.WritePropertyName("max_product_capacity");
+            writer.WriteStringValue(Capacity);
+            if (OdataValue != null)
+            {
+                writer.WritePropertyName("@odata.value");
+                writer.WriteStringValue(OdataValue);
             }
             writer.WritePropertyName("base_product_id");
             writer.WriteStringValue(ProductId);
@@ -30,13 +37,27 @@ namespace model_flattening.Models
             SimpleProduct result = new SimpleProduct();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("details"))
+                if (property.NameEquals("max_product_display_name"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         continue;
                     }
-                    result.Details = SimpleProductProperties.DeserializeSimpleProductProperties(property.Value);
+                    result.MaxProductDisplayName = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("max_product_capacity"))
+                {
+                    result.Capacity = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("@odata.value"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    result.OdataValue = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("base_product_id"))

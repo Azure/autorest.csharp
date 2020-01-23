@@ -6,7 +6,7 @@ namespace model_flattening.Models
     /// <summary> The wrapped produc. </summary>
     public partial class ProductWrapper
     {
-        /// <summary> The wrapped produc. </summary>
-        public WrappedProduct? Property { get; set; }
+        /// <summary> the product value. </summary>
+        public string? Value { get; set; }
     }
 }

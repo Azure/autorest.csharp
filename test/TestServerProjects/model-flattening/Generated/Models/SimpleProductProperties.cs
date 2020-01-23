@@ -10,7 +10,7 @@ namespace model_flattening.Models
         public string MaxProductDisplayName { get; set; }
         /// <summary> Capacity of product. For example, 4 people. </summary>
         public string Capacity { get; set; } = "Large";
-        /// <summary> The product URL. </summary>
-        public ProductUrl? MaxProductImage { get; set; }
+        /// <summary> URL value. </summary>
+        public string? OdataValue { get; set; }
     }
 }

@@ -18,6 +18,8 @@
 version: 3.0.6184
 use-extension:
   "@autorest/modelerfour": "4.3.121"
+modelerfour:
+  flatten-models: true
 pipeline:
   csharpgen:
     input: modelerfour/identity

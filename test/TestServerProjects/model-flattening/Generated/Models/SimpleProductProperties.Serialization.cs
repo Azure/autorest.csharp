@@ -15,10 +15,10 @@ namespace model_flattening.Models
             writer.WriteStringValue(MaxProductDisplayName);
             writer.WritePropertyName("max_product_capacity");
             writer.WriteStringValue(Capacity);
-            if (MaxProductImage != null)
+            if (OdataValue != null)
             {
-                writer.WritePropertyName("max_product_image");
-                writer.WriteObjectValue(MaxProductImage);
+                writer.WritePropertyName("@odata.value");
+                writer.WriteStringValue(OdataValue);
             }
             writer.WriteEndObject();
         }
@@ -37,13 +37,13 @@ namespace model_flattening.Models
                     result.Capacity = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("max_product_image"))
+                if (property.NameEquals("@odata.value"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         continue;
                     }
-                    result.MaxProductImage = ProductUrl.DeserializeProductUrl(property.Value);
+                    result.OdataValue = property.Value.GetString();
                     continue;
                 }
             }
