@@ -28,25 +28,25 @@ namespace xml_service.Models
         private const string CoolValue = "Cool";
         private const string ArchiveValue = "Archive";
 
-        /// <summary> P4. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static AccessTier P4 { get; } = new AccessTier(P4Value);
-        /// <summary> P6. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static AccessTier P6 { get; } = new AccessTier(P6Value);
-        /// <summary> P10. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static AccessTier P10 { get; } = new AccessTier(P10Value);
-        /// <summary> P20. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static AccessTier P20 { get; } = new AccessTier(P20Value);
-        /// <summary> P30. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static AccessTier P30 { get; } = new AccessTier(P30Value);
-        /// <summary> P40. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static AccessTier P40 { get; } = new AccessTier(P40Value);
-        /// <summary> P50. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static AccessTier P50 { get; } = new AccessTier(P50Value);
-        /// <summary> Hot. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static AccessTier Hot { get; } = new AccessTier(HotValue);
-        /// <summary> Cool. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static AccessTier Cool { get; } = new AccessTier(CoolValue);
-        /// <summary> Archive. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static AccessTier Archive { get; } = new AccessTier(ArchiveValue);
         /// <summary> Determines if two <see cref="AccessTier"/> values are the same. </summary>
         public static bool operator ==(AccessTier left, AccessTier right) => left.Equals(right);

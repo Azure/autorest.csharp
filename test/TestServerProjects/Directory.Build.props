@@ -5,6 +5,7 @@
   <PropertyGroup>
     <IncludeStyleCopAnalyzers>false</IncludeStyleCopAnalyzers>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>CS1591</NoWarn>
   </PropertyGroup>
   <Import Project="..\..\Directory.Build.props" />
 </Project>

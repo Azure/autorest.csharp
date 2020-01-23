@@ -11,9 +11,7 @@ namespace CognitiveSearch.Models
         {
             OdataType = null;
         }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-STRING. </summary>
         public string OdataType { get; internal set; }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-STRING. </summary>
         public string? Description { get; set; }
     }
 }

@@ -11,7 +11,6 @@ namespace body_complex.Models
         {
             Fishtype = "salmon";
         }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-STRING. </summary>
         public string? Location { get; set; }
         /// <summary> MISSING·SCHEMA-DESCRIPTION-BOOLEAN. </summary>
         public bool? Iswild { get; set; }

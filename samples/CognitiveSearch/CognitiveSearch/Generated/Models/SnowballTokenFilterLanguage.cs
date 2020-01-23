@@ -6,49 +6,49 @@ namespace CognitiveSearch.Models
     /// <summary> The language to use for a Snowball token filter. </summary>
     public enum SnowballTokenFilterLanguage
     {
-        /// <summary> armenian. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Armenian,
-        /// <summary> basque. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Basque,
-        /// <summary> catalan. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Catalan,
-        /// <summary> danish. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Danish,
-        /// <summary> dutch. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Dutch,
-        /// <summary> english. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         English,
-        /// <summary> finnish. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Finnish,
-        /// <summary> french. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         French,
-        /// <summary> german. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         German,
-        /// <summary> german2. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         German2,
-        /// <summary> hungarian. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Hungarian,
-        /// <summary> italian. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Italian,
-        /// <summary> kp. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Kp,
-        /// <summary> lovins. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Lovins,
-        /// <summary> norwegian. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Norwegian,
-        /// <summary> porter. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Porter,
-        /// <summary> portuguese. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Portuguese,
-        /// <summary> romanian. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Romanian,
-        /// <summary> russian. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Russian,
-        /// <summary> spanish. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Spanish,
-        /// <summary> swedish. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Swedish,
-        /// <summary> turkish. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Turkish
     }
 }

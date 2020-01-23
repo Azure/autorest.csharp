@@ -8,7 +8,6 @@ namespace xml_service.Models
     /// <summary> An Azure Storage container. </summary>
     public partial class Container
     {
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-STRING. </summary>
         public string Name { get; set; }
         /// <summary> Properties of a container. </summary>
         public ContainerProperties Properties { get; set; } = new ContainerProperties();

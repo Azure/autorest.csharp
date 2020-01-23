@@ -21,6 +21,7 @@ schemas: !<!Schemas>
         default:
           name: id
           description: Basic Id
+          originalName: id
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_59
@@ -38,6 +39,7 @@ schemas: !<!Schemas>
         default:
           name: name
           description: Name property with a very long description that does not fit on a single line and a line break.
+          originalName: name
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!ChoiceSchema> &ref_22
@@ -47,25 +49,25 @@ schemas: !<!Schemas>
           language:
             default:
               name: cyan
-              description: ''
+              description: The value 'undefined'
         - !<!ChoiceValue> 
           value: Magenta
           language:
             default:
               name: Magenta
-              description: ''
+              description: The value 'undefined'
         - !<!ChoiceValue> 
           value: YELLOW
           language:
             default:
               name: YELLOW
-              description: ''
+              description: The value 'undefined'
         - !<!ChoiceValue> 
           value: blacK
           language:
             default:
               name: blacK
-              description: ''
+              description: The value 'undefined'
         type: choice
         apiVersions:
         - !<!ApiVersion> 
@@ -87,6 +89,7 @@ schemas: !<!Schemas>
         default:
           name: color
           description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+          originalName: color
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -114,6 +117,7 @@ schemas: !<!Schemas>
         default:
           name: status
           description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+          originalName: status
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_60
@@ -124,13 +128,14 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: Error-message
-            description: MISSING·SCHEMA-DESCRIPTION-STRING
+            description: ''
         protocol: !<!Protocols> {}
       serializedName: message
       language: !<!Languages> 
         default:
           name: message
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          description: ''
+          originalName: message
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -158,6 +163,7 @@ schemas: !<!Schemas>
         default:
           name: field1
           description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+          originalName: field1
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!NumberSchema> &ref_47
@@ -173,6 +179,7 @@ schemas: !<!Schemas>
         default:
           name: field2
           description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+          originalName: field2
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -200,6 +207,7 @@ schemas: !<!Schemas>
         default:
           name: field1
           description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+          originalName: field1
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!NumberSchema> &ref_49
@@ -215,6 +223,7 @@ schemas: !<!Schemas>
         default:
           name: field2
           description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+          originalName: field2
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -235,13 +244,14 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: typeForfield1
-            description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+            description: ''
         protocol: !<!Protocols> {}
       serializedName: field1
       language: !<!Languages> 
         default:
           name: field1
-          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+          description: ''
+          originalName: field1
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!NumberSchema> &ref_51
@@ -250,13 +260,14 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: typeForfield2
-            description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+            description: ''
         protocol: !<!Protocols> {}
       serializedName: field2
       language: !<!Languages> 
         default:
           name: field2
-          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+          description: ''
+          originalName: field2
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -277,13 +288,14 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: typeForfield1
-            description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+            description: ''
         protocol: !<!Protocols> {}
       serializedName: field1
       language: !<!Languages> 
         default:
           name: field1
-          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+          description: ''
+          originalName: field1
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!NumberSchema> &ref_53
@@ -292,13 +304,14 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: typeForfield_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose
-            description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+            description: ''
         protocol: !<!Protocols> {}
       serializedName: field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose
       language: !<!Languages> 
         default:
-          name: field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose
-          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+          name: field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose
+          description: ''
+          originalName: field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -323,8 +336,9 @@ schemas: !<!Schemas>
       serializedName: field_true
       language: !<!Languages> 
         default:
-          name: field_true
+          name: fieldTrue
           description: MISSING·SCHEMA-DESCRIPTION-BOOLEAN
+          originalName: field_true
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!BooleanSchema> &ref_30
@@ -337,8 +351,9 @@ schemas: !<!Schemas>
       serializedName: field_false
       language: !<!Languages> 
         default:
-          name: field_false
+          name: fieldFalse
           description: MISSING·SCHEMA-DESCRIPTION-BOOLEAN
+          originalName: field_false
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -361,13 +376,14 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: string-wrapper-field
-            description: MISSING·SCHEMA-DESCRIPTION-STRING
+            description: ''
         protocol: !<!Protocols> {}
       serializedName: field
       language: !<!Languages> 
         default:
           name: field
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          description: ''
+          originalName: field
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_62
@@ -378,13 +394,14 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: string-wrapper-empty
-            description: MISSING·SCHEMA-DESCRIPTION-STRING
+            description: ''
         protocol: !<!Protocols> {}
       serializedName: empty
       language: !<!Languages> 
         default:
           name: empty
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          description: ''
+          originalName: empty
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_63
@@ -395,13 +412,14 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: string-wrapper-null
-            description: MISSING·SCHEMA-DESCRIPTION-STRING
+            description: ''
         protocol: !<!Protocols> {}
       serializedName: 'null'
       language: !<!Languages> 
         default:
           name: 'null'
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          description: ''
+          originalName: 'null'
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -431,6 +449,7 @@ schemas: !<!Schemas>
         default:
           name: field
           description: MISSING·SCHEMA-DESCRIPTION-DATE
+          originalName: field
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!DateSchema> &ref_42
@@ -448,6 +467,7 @@ schemas: !<!Schemas>
         default:
           name: leap
           description: MISSING·SCHEMA-DESCRIPTION-DATE
+          originalName: leap
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -478,6 +498,7 @@ schemas: !<!Schemas>
         default:
           name: field
           description: MISSING·SCHEMA-DESCRIPTION-DATETIME
+          originalName: field
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!DateTimeSchema> &ref_37
@@ -496,6 +517,7 @@ schemas: !<!Schemas>
         default:
           name: now
           description: MISSING·SCHEMA-DESCRIPTION-DATETIME
+          originalName: now
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -526,6 +548,7 @@ schemas: !<!Schemas>
         default:
           name: field
           description: MISSING·SCHEMA-DESCRIPTION-DATETIME
+          originalName: field
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!DateTimeSchema> &ref_39
@@ -544,6 +567,7 @@ schemas: !<!Schemas>
         default:
           name: now
           description: MISSING·SCHEMA-DESCRIPTION-DATETIME
+          originalName: now
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -573,6 +597,7 @@ schemas: !<!Schemas>
         default:
           name: field
           description: MISSING·SCHEMA-DESCRIPTION-DURATION
+          originalName: field
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -603,6 +628,7 @@ schemas: !<!Schemas>
         default:
           name: field
           description: MISSING·SCHEMA-DESCRIPTION-BYTEARRAY
+          originalName: field
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -630,7 +656,7 @@ schemas: !<!Schemas>
           language: !<!Languages> 
             default:
               name: array-wrapper-arrayItem
-              description: MISSING·SCHEMA-DESCRIPTION-STRING
+              description: ''
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
@@ -642,6 +668,7 @@ schemas: !<!Schemas>
         default:
           name: array
           description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+          originalName: array
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -666,7 +693,7 @@ schemas: !<!Schemas>
           language: !<!Languages> 
             default:
               name: string
-              description: MISSING·SCHEMA-DESCRIPTION-STRING
+              description: ''
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
@@ -678,6 +705,7 @@ schemas: !<!Schemas>
         default:
           name: defaultProgram
           description: Dictionary of <components·schemas·dictionary_wrapper·properties·defaultprogram·additionalproperties>
+          originalName: defaultProgram
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -712,13 +740,14 @@ schemas: !<!Schemas>
             language: !<!Languages> 
               default:
                 name: dog-food
-                description: MISSING·SCHEMA-DESCRIPTION-STRING
+                description: ''
             protocol: !<!Protocols> {}
           serializedName: food
           language: !<!Languages> 
             default:
               name: food
-              description: MISSING·SCHEMA-DESCRIPTION-STRING
+              description: ''
+              originalName: food
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
@@ -754,13 +783,14 @@ schemas: !<!Schemas>
                 language: !<!Languages> 
                   default:
                     name: siamese-breed
-                    description: MISSING·SCHEMA-DESCRIPTION-STRING
+                    description: ''
                 protocol: !<!Protocols> {}
               serializedName: breed
               language: !<!Languages> 
                 default:
                   name: breed
-                  description: MISSING·SCHEMA-DESCRIPTION-STRING
+                  description: ''
+                  originalName: breed
               protocol: !<!Protocols> {}
             language: !<!Languages> 
               default:
@@ -785,13 +815,14 @@ schemas: !<!Schemas>
             language: !<!Languages> 
               default:
                 name: cat-color
-                description: MISSING·SCHEMA-DESCRIPTION-STRING
+                description: ''
             protocol: !<!Protocols> {}
           serializedName: color
           language: !<!Languages> 
             default:
               name: color
-              description: MISSING·SCHEMA-DESCRIPTION-STRING
+              description: ''
+              originalName: color
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: !<!ArraySchema> &ref_25
@@ -810,6 +841,7 @@ schemas: !<!Schemas>
             default:
               name: hates
               description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+              originalName: hates
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
@@ -836,6 +868,7 @@ schemas: !<!Schemas>
         default:
           name: id
           description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+          originalName: id
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_66
@@ -846,13 +879,14 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: pet-name
-            description: MISSING·SCHEMA-DESCRIPTION-STRING
+            description: ''
         protocol: !<!Protocols> {}
       serializedName: name
       language: !<!Languages> 
         default:
           name: name
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          description: ''
+          originalName: name
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -915,13 +949,14 @@ schemas: !<!Schemas>
                 language: !<!Languages> 
                   default:
                     name: smart_salmon-college_degree
-                    description: MISSING·SCHEMA-DESCRIPTION-STRING
+                    description: ''
                 protocol: !<!Protocols> {}
               serializedName: college_degree
               language: !<!Languages> 
                 default:
-                  name: college_degree
-                  description: MISSING·SCHEMA-DESCRIPTION-STRING
+                  name: collegeDegree
+                  description: ''
+                  originalName: college_degree
               protocol: !<!Protocols> {}
             language: !<!Languages> 
               default:
@@ -945,7 +980,7 @@ schemas: !<!Schemas>
               language: !<!Languages> 
                 default:
                   name: Fish-fishtype
-                  description: MISSING·SCHEMA-DESCRIPTION-STRING
+                  description: ''
               protocol: !<!Protocols> {}
             isDiscriminator: true
             required: true
@@ -953,7 +988,8 @@ schemas: !<!Schemas>
             language: !<!Languages> 
               default:
                 name: fishtype
-                description: MISSING·SCHEMA-DESCRIPTION-STRING
+                description: ''
+                originalName: fishtype
             protocol: !<!Protocols> {}
         discriminatorValue: salmon
         parents: !<!Relations> 
@@ -971,13 +1007,14 @@ schemas: !<!Schemas>
             language: !<!Languages> 
               default:
                 name: salmon-location
-                description: MISSING·SCHEMA-DESCRIPTION-STRING
+                description: ''
             protocol: !<!Protocols> {}
           serializedName: location
           language: !<!Languages> 
             default:
               name: location
-              description: MISSING·SCHEMA-DESCRIPTION-STRING
+              description: ''
+              originalName: location
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: !<!BooleanSchema> &ref_32
@@ -992,6 +1029,7 @@ schemas: !<!Schemas>
             default:
               name: iswild
               description: MISSING·SCHEMA-DESCRIPTION-BOOLEAN
+              originalName: iswild
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
@@ -1037,6 +1075,7 @@ schemas: !<!Schemas>
                 default:
                   name: picture
                   description: MISSING·SCHEMA-DESCRIPTION-BYTEARRAY
+                  originalName: picture
               protocol: !<!Protocols> {}
             language: !<!Languages> 
               default:
@@ -1071,6 +1110,7 @@ schemas: !<!Schemas>
                 default:
                   name: jawsize
                   description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+                  originalName: jawsize
               protocol: !<!Protocols> {}
             - !<!Property> 
               schema: !<!ChoiceSchema> &ref_23
@@ -1080,31 +1120,31 @@ schemas: !<!Schemas>
                   language:
                     default:
                       name: pink
-                      description: ''
+                      description: The value 'pink'
                 - !<!ChoiceValue> 
                   value: gray
                   language:
                     default:
                       name: gray
-                      description: ''
+                      description: The value 'gray'
                 - !<!ChoiceValue> 
                   value: brown
                   language:
                     default:
                       name: brown
-                      description: ''
+                      description: The value 'brown'
                 - !<!ChoiceValue> 
                   value: RED
                   language:
                     default:
-                      name: RED
-                      description: ''
+                      name: upperRed
+                      description: Uppercase RED
                 - !<!ChoiceValue> 
                   value: red
                   language:
                     default:
-                      name: red
-                      description: ''
+                      name: lowerRed
+                      description: Lowercase RED
                 type: choice
                 apiVersions:
                 - !<!ApiVersion> 
@@ -1121,6 +1161,7 @@ schemas: !<!Schemas>
                 default:
                   name: color
                   description: Colors possible
+                  originalName: color
               protocol: !<!Protocols> {}
             extensions:
               x-ms-discriminator-value: goblin
@@ -1184,6 +1225,7 @@ schemas: !<!Schemas>
             default:
               name: age
               description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+              originalName: age
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: !<!DateTimeSchema> &ref_40
@@ -1203,6 +1245,7 @@ schemas: !<!Schemas>
             default:
               name: birthday
               description: MISSING·SCHEMA-DESCRIPTION-DATETIME
+              originalName: birthday
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
@@ -1239,14 +1282,15 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: Fish-species
-            description: MISSING·SCHEMA-DESCRIPTION-STRING
+            description: ''
         protocol: !<!Protocols> {}
       required: false
       serializedName: species
       language: !<!Languages> 
         default:
           name: species
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          description: ''
+          originalName: species
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!NumberSchema> &ref_55
@@ -1255,14 +1299,15 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: typeForlength
-            description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+            description: ''
         protocol: !<!Protocols> {}
       required: true
       serializedName: length
       language: !<!Languages> 
         default:
           name: length
-          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+          description: ''
+          originalName: length
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!ArraySchema> &ref_26
@@ -1282,6 +1327,7 @@ schemas: !<!Schemas>
         default:
           name: siblings
           description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+          originalName: siblings
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -1317,13 +1363,14 @@ schemas: !<!Schemas>
             language: !<!Languages> 
               default:
                 name: DotSalmon-location
-                description: MISSING·SCHEMA-DESCRIPTION-STRING
+                description: ''
             protocol: !<!Protocols> {}
           serializedName: location
           language: !<!Languages> 
             default:
               name: location
-              description: MISSING·SCHEMA-DESCRIPTION-STRING
+              description: ''
+              originalName: location
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: !<!BooleanSchema> &ref_31
@@ -1338,6 +1385,7 @@ schemas: !<!Schemas>
             default:
               name: iswild
               description: MISSING·SCHEMA-DESCRIPTION-BOOLEAN
+              originalName: iswild
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
@@ -1361,15 +1409,16 @@ schemas: !<!Schemas>
           language: !<!Languages> 
             default:
               name: DotFish-fish.type
-              description: MISSING·SCHEMA-DESCRIPTION-STRING
+              description: ''
           protocol: !<!Protocols> {}
         isDiscriminator: true
         required: true
         serializedName: fish.type
         language: !<!Languages> 
           default:
-            name: fish.type
-            description: MISSING·SCHEMA-DESCRIPTION-STRING
+            name: fishType
+            description: ''
+            originalName: fish.type
         protocol: !<!Protocols> {}
     properties:
     - *ref_16
@@ -1382,14 +1431,15 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: DotFish-species
-            description: MISSING·SCHEMA-DESCRIPTION-STRING
+            description: ''
         protocol: !<!Protocols> {}
       required: false
       serializedName: species
       language: !<!Languages> 
         default:
           name: species
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          description: ''
+          originalName: species
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -1410,6 +1460,7 @@ schemas: !<!Schemas>
         default:
           name: sampleSalmon
           description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+          originalName: sampleSalmon
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!ArraySchema> &ref_27
@@ -1428,6 +1479,7 @@ schemas: !<!Schemas>
         default:
           name: salmons
           description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+          originalName: salmons
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: *ref_14
@@ -1436,6 +1488,7 @@ schemas: !<!Schemas>
         default:
           name: sampleFish
           description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+          originalName: sampleFish
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!ArraySchema> &ref_28
@@ -1454,6 +1507,7 @@ schemas: !<!Schemas>
         default:
           name: fishes
           description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+          originalName: fishes
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -1478,14 +1532,15 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: readonly-obj-id
-            description: MISSING·SCHEMA-DESCRIPTION-STRING
+            description: ''
         protocol: !<!Protocols> {}
       readOnly: true
       serializedName: id
       language: !<!Languages> 
         default:
           name: id
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          description: ''
+          originalName: id
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!NumberSchema> &ref_56
@@ -1501,6 +1556,7 @@ schemas: !<!Schemas>
         default:
           name: size
           description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+          originalName: size
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -1536,13 +1592,14 @@ schemas: !<!Schemas>
             language: !<!Languages> 
               default:
                 name: MyDerivedType-propD1
-                description: MISSING·SCHEMA-DESCRIPTION-STRING
+                description: ''
             protocol: !<!Protocols> {}
           serializedName: propD1
           language: !<!Languages> 
             default:
               name: propD1
-              description: MISSING·SCHEMA-DESCRIPTION-STRING
+              description: ''
+              originalName: propD1
           protocol: !<!Protocols> {}
         extensions:
           x-ms-discriminator-value: Kind1
@@ -1575,7 +1632,7 @@ schemas: !<!Schemas>
           language: !<!Languages> 
             default:
               name: MyKind
-              description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+              description: The constant value Kind1
           protocol: !<!Protocols> {}
         isDiscriminator: true
         required: true
@@ -1583,7 +1640,8 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: kind
-            description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+            description: The constant value Kind1
+            originalName: kind
         protocol: !<!Protocols> {}
     properties:
     - *ref_19
@@ -1596,14 +1654,15 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: MyBaseType-propB1
-            description: MISSING·SCHEMA-DESCRIPTION-STRING
+            description: ''
         protocol: !<!Protocols> {}
       required: false
       serializedName: propB1
       language: !<!Languages> 
         default:
           name: propB1
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          description: ''
+          originalName: propB1
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!ObjectSchema> &ref_20
@@ -1621,13 +1680,14 @@ schemas: !<!Schemas>
             language: !<!Languages> 
               default:
                 name: MyBaseHelperType-propBH1
-                description: MISSING·SCHEMA-DESCRIPTION-STRING
+                description: ''
             protocol: !<!Protocols> {}
           serializedName: propBH1
           language: !<!Languages> 
             default:
               name: propBH1
-              description: MISSING·SCHEMA-DESCRIPTION-STRING
+              description: ''
+              originalName: propBH1
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
@@ -1643,6 +1703,7 @@ schemas: !<!Schemas>
         default:
           name: helper
           description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+          originalName: helper
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -1750,6 +1811,8 @@ globalParameters:
   clientDefaultValue: 'http://localhost:3000'
   implementation: Client
   required: true
+  extensions:
+    x-ms-skip-url-encoding: true
   language: !<!Languages> 
     default:
       name: $host

@@ -15,9 +15,10 @@
 
 ## Configuration
 ```yaml
-version: 3.0.6184
+# autorest-core version
+version: 3.0.6198
 use-extension:
-  "@autorest/modelerfour": "4.3.121"
+  "@autorest/modelerfour": "4.3.144"
 pipeline:
   csharpgen:
     input: modelerfour/identity

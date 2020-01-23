@@ -14,7 +14,6 @@ namespace body_complex.Models
         {
             Fishtype = "smart_salmon";
         }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-STRING. </summary>
         public string? CollegeDegree { get; set; }
         private readonly IDictionary<string, object> _additionalProperties = new Dictionary<string, object>();
         /// <inheritdoc />

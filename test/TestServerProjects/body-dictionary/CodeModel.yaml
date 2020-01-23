@@ -21,6 +21,7 @@ schemas: !<!Schemas>
         default:
           name: status
           description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+          originalName: status
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_18
@@ -31,13 +32,14 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: Error-message
-            description: MISSING·SCHEMA-DESCRIPTION-STRING
+            description: ''
         protocol: !<!Protocols> {}
       serializedName: message
       language: !<!Languages> 
         default:
           name: message
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          description: ''
+          originalName: message
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -65,6 +67,7 @@ schemas: !<!Schemas>
         default:
           name: integer
           description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+          originalName: integer
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_19
@@ -75,13 +78,14 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: Widget-string
-            description: MISSING·SCHEMA-DESCRIPTION-STRING
+            description: ''
         protocol: !<!Protocols> {}
       serializedName: string
       language: !<!Languages> 
         default:
           name: string
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          description: ''
+          originalName: string
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -118,7 +122,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: string
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -171,7 +175,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: number
-          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+          description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -189,7 +193,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: number
-          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+          description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -325,7 +329,7 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: get-200-application-json-additionalPropertiesItem
-            description: MISSING·SCHEMA-DESCRIPTION-STRING
+            description: ''
         protocol: !<!Protocols> {}
       language: !<!Languages> 
         default:
@@ -370,7 +374,7 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: put-content-schema-itemsItem
-            description: MISSING·SCHEMA-DESCRIPTION-STRING
+            description: ''
         protocol: !<!Protocols> {}
       language: !<!Languages> 
         default:
@@ -438,6 +442,8 @@ globalParameters:
   clientDefaultValue: 'http://localhost:3000'
   implementation: Client
   required: true
+  extensions:
+    x-ms-skip-url-encoding: true
   language: !<!Languages> 
     default:
       name: $host

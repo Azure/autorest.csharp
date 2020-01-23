@@ -26,21 +26,21 @@ namespace AppConfiguration.Models
         private const string LockedValue = "locked";
         private const string EtagValue = "etag";
 
-        /// <summary> key. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static Get7ItemsItem Key { get; } = new Get7ItemsItem(KeyValue);
-        /// <summary> label. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static Get7ItemsItem Label { get; } = new Get7ItemsItem(LabelValue);
-        /// <summary> content_type. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static Get7ItemsItem ContentType { get; } = new Get7ItemsItem(ContentTypeValue);
-        /// <summary> value. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static Get7ItemsItem Value { get; } = new Get7ItemsItem(ValueValue);
-        /// <summary> last_modified. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static Get7ItemsItem LastModified { get; } = new Get7ItemsItem(LastModifiedValue);
-        /// <summary> tags. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static Get7ItemsItem Tags { get; } = new Get7ItemsItem(TagsValue);
-        /// <summary> locked. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static Get7ItemsItem Locked { get; } = new Get7ItemsItem(LockedValue);
-        /// <summary> etag. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static Get7ItemsItem Etag { get; } = new Get7ItemsItem(EtagValue);
         /// <summary> Determines if two <see cref="Get7ItemsItem"/> values are the same. </summary>
         public static bool operator ==(Get7ItemsItem left, Get7ItemsItem right) => left.Equals(right);

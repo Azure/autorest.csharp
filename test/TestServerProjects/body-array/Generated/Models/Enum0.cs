@@ -21,11 +21,11 @@ namespace body_array.Models
         private const string Foo2Value = "foo2";
         private const string Foo3Value = "foo3";
 
-        /// <summary> foo1. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static Enum0 Foo1 { get; } = new Enum0(Foo1Value);
-        /// <summary> foo2. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static Enum0 Foo2 { get; } = new Enum0(Foo2Value);
-        /// <summary> foo3. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static Enum0 Foo3 { get; } = new Enum0(Foo3Value);
         /// <summary> Determines if two <see cref="Enum0"/> values are the same. </summary>
         public static bool operator ==(Enum0 left, Enum0 right) => left.Equals(right);

@@ -11,7 +11,6 @@ namespace additionalProperties.Models
     {
         /// <summary> MISSING·SCHEMA-DESCRIPTION-INTEGER. </summary>
         public int Id { get; set; }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-STRING. </summary>
         public string? Name { get; set; }
         /// <summary> MISSING·SCHEMA-DESCRIPTION-BOOLEAN. </summary>
         public bool? Status { get; internal set; }

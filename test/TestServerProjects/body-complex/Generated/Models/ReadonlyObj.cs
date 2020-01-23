@@ -6,7 +6,6 @@ namespace body_complex.Models
     /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
     public partial class ReadonlyObj
     {
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-STRING. </summary>
         public string? Id { get; internal set; }
         /// <summary> MISSING·SCHEMA-DESCRIPTION-INTEGER. </summary>
         public int? Size { get; set; }

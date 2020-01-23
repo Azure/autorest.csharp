@@ -27,23 +27,23 @@ namespace CognitiveServices.TextAnalytics.Models
         private const string UnsupportedLanguageCodeValue = "unsupportedLanguageCode";
         private const string InvalidCountryHintValue = "invalidCountryHint";
 
-        /// <summary> invalidParameterValue. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static InnerErrorCode InvalidParameterValue { get; } = new InnerErrorCode(InvalidParameterValueValue);
-        /// <summary> invalidRequestBodyFormat. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static InnerErrorCode InvalidRequestBodyFormat { get; } = new InnerErrorCode(InvalidRequestBodyFormatValue);
-        /// <summary> emptyRequest. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static InnerErrorCode EmptyRequest { get; } = new InnerErrorCode(EmptyRequestValue);
-        /// <summary> missingInputRecords. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static InnerErrorCode MissingInputRecords { get; } = new InnerErrorCode(MissingInputRecordsValue);
-        /// <summary> invalidDocument. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static InnerErrorCode InvalidDocument { get; } = new InnerErrorCode(InvalidDocumentValue);
-        /// <summary> modelVersionIncorrect. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static InnerErrorCode ModelVersionIncorrect { get; } = new InnerErrorCode(ModelVersionIncorrectValue);
-        /// <summary> invalidDocumentBatch. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static InnerErrorCode InvalidDocumentBatch { get; } = new InnerErrorCode(InvalidDocumentBatchValue);
-        /// <summary> unsupportedLanguageCode. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static InnerErrorCode UnsupportedLanguageCode { get; } = new InnerErrorCode(UnsupportedLanguageCodeValue);
-        /// <summary> invalidCountryHint. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static InnerErrorCode InvalidCountryHint { get; } = new InnerErrorCode(InvalidCountryHintValue);
         /// <summary> Determines if two <see cref="InnerErrorCode"/> values are the same. </summary>
         public static bool operator ==(InnerErrorCode left, InnerErrorCode right) => left.Equals(right);

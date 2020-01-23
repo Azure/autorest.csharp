@@ -21,6 +21,7 @@ schemas: !<!Schemas>
         default:
           name: status
           description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+          originalName: status
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_2
@@ -31,13 +32,14 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: Error-message
-            description: MISSING·SCHEMA-DESCRIPTION-STRING
+            description: ''
         protocol: !<!Protocols> {}
       serializedName: message
       language: !<!Languages> 
         default:
           name: message
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          description: ''
+          originalName: message
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -154,7 +156,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: number
-        description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+        description: ''
         header: value
     protocol: !<!Protocols> {}
   - !<!NumberSchema> &ref_9
@@ -166,7 +168,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: number
-        description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+        description: ''
         header: value
     protocol: !<!Protocols> {}
   sealedChoices:
@@ -177,19 +179,19 @@ schemas: !<!Schemas>
       language:
         default:
           name: White
-          description: ''
+          description: The value 'undefined'
     - !<!ChoiceValue> 
       value: black
       language:
         default:
           name: black
-          description: ''
+          description: The value 'undefined'
     - !<!ChoiceValue> 
       value: GREY
       language:
         default:
           name: GREY
-          description: ''
+          description: The value 'undefined'
     type: sealed-choice
     apiVersions:
     - !<!ApiVersion> 
@@ -217,7 +219,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: string
-        description: MISSING·SCHEMA-DESCRIPTION-STRING
+        description: ''
         header: value
     protocol: !<!Protocols> {}
   - *ref_2
@@ -227,6 +229,8 @@ globalParameters:
   clientDefaultValue: 'http://localhost:3000'
   implementation: Client
   required: true
+  extensions:
+    x-ms-skip-url-encoding: true
   language: !<!Languages> 
     default:
       name: $host

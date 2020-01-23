@@ -6,89 +6,89 @@ namespace CognitiveSearch.Models
     /// <summary> Lists the languages supported by the Microsoft language tokenizer. </summary>
     public enum MicrosoftTokenizerLanguage
     {
-        /// <summary> bangla. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Bangla,
-        /// <summary> bulgarian. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Bulgarian,
-        /// <summary> catalan. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Catalan,
-        /// <summary> chineseSimplified. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         ChineseSimplified,
-        /// <summary> chineseTraditional. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         ChineseTraditional,
-        /// <summary> croatian. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Croatian,
-        /// <summary> czech. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Czech,
-        /// <summary> danish. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Danish,
-        /// <summary> dutch. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Dutch,
-        /// <summary> english. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         English,
-        /// <summary> french. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         French,
-        /// <summary> german. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         German,
-        /// <summary> greek. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Greek,
-        /// <summary> gujarati. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Gujarati,
-        /// <summary> hindi. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Hindi,
-        /// <summary> icelandic. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Icelandic,
-        /// <summary> indonesian. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Indonesian,
-        /// <summary> italian. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Italian,
-        /// <summary> japanese. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Japanese,
-        /// <summary> kannada. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Kannada,
-        /// <summary> korean. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Korean,
-        /// <summary> malay. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Malay,
-        /// <summary> malayalam. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Malayalam,
-        /// <summary> marathi. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Marathi,
-        /// <summary> norwegianBokmaal. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         NorwegianBokmaal,
-        /// <summary> polish. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Polish,
-        /// <summary> portuguese. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Portuguese,
-        /// <summary> portugueseBrazilian. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         PortugueseBrazilian,
-        /// <summary> punjabi. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Punjabi,
-        /// <summary> romanian. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Romanian,
-        /// <summary> russian. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Russian,
-        /// <summary> serbianCyrillic. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         SerbianCyrillic,
-        /// <summary> serbianLatin. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         SerbianLatin,
-        /// <summary> slovenian. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Slovenian,
-        /// <summary> spanish. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Spanish,
-        /// <summary> swedish. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Swedish,
-        /// <summary> tamil. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Tamil,
-        /// <summary> telugu. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Telugu,
-        /// <summary> thai. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Thai,
-        /// <summary> ukrainian. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Ukrainian,
-        /// <summary> urdu. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Urdu,
-        /// <summary> vietnamese. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Vietnamese
     }
 }

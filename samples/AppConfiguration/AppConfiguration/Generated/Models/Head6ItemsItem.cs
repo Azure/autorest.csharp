@@ -26,21 +26,21 @@ namespace AppConfiguration.Models
         private const string LockedValue = "locked";
         private const string EtagValue = "etag";
 
-        /// <summary> key. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static Head6ItemsItem Key { get; } = new Head6ItemsItem(KeyValue);
-        /// <summary> label. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static Head6ItemsItem Label { get; } = new Head6ItemsItem(LabelValue);
-        /// <summary> content_type. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static Head6ItemsItem ContentType { get; } = new Head6ItemsItem(ContentTypeValue);
-        /// <summary> value. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static Head6ItemsItem Value { get; } = new Head6ItemsItem(ValueValue);
-        /// <summary> last_modified. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static Head6ItemsItem LastModified { get; } = new Head6ItemsItem(LastModifiedValue);
-        /// <summary> tags. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static Head6ItemsItem Tags { get; } = new Head6ItemsItem(TagsValue);
-        /// <summary> locked. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static Head6ItemsItem Locked { get; } = new Head6ItemsItem(LockedValue);
-        /// <summary> etag. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static Head6ItemsItem Etag { get; } = new Head6ItemsItem(EtagValue);
         /// <summary> Determines if two <see cref="Head6ItemsItem"/> values are the same. </summary>
         public static bool operator ==(Head6ItemsItem left, Head6ItemsItem right) => left.Equals(right);

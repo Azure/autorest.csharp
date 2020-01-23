@@ -36,6 +36,7 @@ schemas: !<!Schemas>
               default:
                 name: id
                 description: 'A unique, non-empty document identifier.'
+                originalName: id
             protocol: !<!Protocols> {}
           - !<!Property> 
             schema: !<!StringSchema> &ref_62
@@ -54,6 +55,7 @@ schemas: !<!Schemas>
               default:
                 name: text
                 description: The input text to process.
+                originalName: text
             protocol: !<!Protocols> {}
           - !<!Property> 
             schema: !<!StringSchema> &ref_63
@@ -72,6 +74,7 @@ schemas: !<!Schemas>
               default:
                 name: language
                 description: '(Optional) This is the 2 letter ISO 639-1 representation of a language. For example, use "en" for English; "es" for Spanish etc. If not set, use "en" for English as default.'
+                originalName: language
             protocol: !<!Protocols> {}
           language: !<!Languages> 
             default:
@@ -90,6 +93,7 @@ schemas: !<!Schemas>
         default:
           name: documents
           description: The set of documents to process as part of this batch.
+          originalName: documents
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -133,6 +137,7 @@ schemas: !<!Schemas>
               default:
                 name: id
                 description: 'Unique, non-empty document identifier.'
+                originalName: id
             protocol: !<!Protocols> {}
           - !<!Property> 
             schema: !<!ArraySchema> &ref_24
@@ -163,6 +168,7 @@ schemas: !<!Schemas>
                     default:
                       name: text
                       description: Entity text as appears in the request.
+                      originalName: text
                   protocol: !<!Protocols> {}
                 - !<!Property> 
                   schema: !<!StringSchema> &ref_66
@@ -181,6 +187,7 @@ schemas: !<!Schemas>
                     default:
                       name: type
                       description: 'Entity type, such as Person/Location/Org/SSN etc'
+                      originalName: type
                   protocol: !<!Protocols> {}
                 - !<!Property> 
                   schema: !<!StringSchema> &ref_67
@@ -199,6 +206,7 @@ schemas: !<!Schemas>
                     default:
                       name: subType
                       description: 'Entity sub type, such as Age/Year/TimeRange etc'
+                      originalName: subType
                   protocol: !<!Protocols> {}
                 - !<!Property> 
                   schema: !<!NumberSchema> &ref_43
@@ -215,6 +223,7 @@ schemas: !<!Schemas>
                     default:
                       name: offset
                       description: Start position (in Unicode characters) for the entity text.
+                      originalName: offset
                   protocol: !<!Protocols> {}
                 - !<!Property> 
                   schema: !<!NumberSchema> &ref_44
@@ -231,6 +240,7 @@ schemas: !<!Schemas>
                     default:
                       name: length
                       description: Length (in Unicode characters) for the entity text.
+                      originalName: length
                   protocol: !<!Protocols> {}
                 - !<!Property> 
                   schema: !<!NumberSchema> &ref_45
@@ -247,6 +257,7 @@ schemas: !<!Schemas>
                     default:
                       name: score
                       description: Confidence score between 0 and 1 of the extracted entity.
+                      originalName: score
                   protocol: !<!Protocols> {}
                 language: !<!Languages> 
                   default:
@@ -265,6 +276,7 @@ schemas: !<!Schemas>
               default:
                 name: entities
                 description: Recognized entities in the document.
+                originalName: entities
             protocol: !<!Protocols> {}
           - !<!Property> 
             schema: !<!ObjectSchema> &ref_3
@@ -288,6 +300,7 @@ schemas: !<!Schemas>
                   default:
                     name: charactersCount
                     description: Number of text elements recognized in the document.
+                    originalName: charactersCount
                 protocol: !<!Protocols> {}
               - !<!Property> 
                 schema: !<!NumberSchema> &ref_47
@@ -304,6 +317,7 @@ schemas: !<!Schemas>
                   default:
                     name: transactionsCount
                     description: Number of transactions for the document.
+                    originalName: transactionsCount
                 protocol: !<!Protocols> {}
               language: !<!Languages> 
                 default:
@@ -317,6 +331,7 @@ schemas: !<!Schemas>
               default:
                 name: statistics
                 description: if showStats=true was specified in the request this field will contain information about the document payload.
+                originalName: statistics
             protocol: !<!Protocols> {}
           language: !<!Languages> 
             default:
@@ -335,6 +350,7 @@ schemas: !<!Schemas>
         default:
           name: documents
           description: Response by document
+          originalName: documents
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!ArraySchema> &ref_26
@@ -365,6 +381,7 @@ schemas: !<!Schemas>
               default:
                 name: id
                 description: Document Id.
+                originalName: id
             protocol: !<!Protocols> {}
           - !<!Property> 
             schema: !<!ObjectSchema> &ref_5
@@ -384,6 +401,7 @@ schemas: !<!Schemas>
               default:
                 name: error
                 description: Document Error.
+                originalName: error
             protocol: !<!Protocols> {}
           language: !<!Languages> 
             default:
@@ -402,6 +420,7 @@ schemas: !<!Schemas>
         default:
           name: errors
           description: Errors by document id.
+          originalName: errors
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!ObjectSchema> &ref_6
@@ -425,6 +444,7 @@ schemas: !<!Schemas>
             default:
               name: documentsCount
               description: Number of documents submitted in the request.
+              originalName: documentsCount
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: !<!NumberSchema> &ref_49
@@ -441,6 +461,7 @@ schemas: !<!Schemas>
             default:
               name: validDocumentsCount
               description: 'Number of valid documents. This excludes empty, over-size limit or non-supported languages documents.'
+              originalName: validDocumentsCount
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: !<!NumberSchema> &ref_50
@@ -457,6 +478,7 @@ schemas: !<!Schemas>
             default:
               name: erroneousDocumentsCount
               description: 'Number of invalid documents. This includes empty, over-size limit or non-supported languages documents.'
+              originalName: erroneousDocumentsCount
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: !<!NumberSchema> &ref_51
@@ -473,6 +495,7 @@ schemas: !<!Schemas>
             default:
               name: transactionsCount
               description: Number of transactions for the request.
+              originalName: transactionsCount
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
@@ -486,6 +509,7 @@ schemas: !<!Schemas>
         default:
           name: statistics
           description: if showStats=true was specified in the request this field will contain information about the request payload.
+          originalName: statistics
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_69
@@ -504,6 +528,7 @@ schemas: !<!Schemas>
         default:
           name: modelVersion
           description: This field indicates which model is used for scoring.
+          originalName: modelVersion
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -531,25 +556,25 @@ schemas: !<!Schemas>
           language:
             default:
               name: invalidRequest
-              description: ''
+              description: The value 'undefined'
         - !<!ChoiceValue> 
           value: invalidArgument
           language:
             default:
               name: invalidArgument
-              description: ''
+              description: The value 'undefined'
         - !<!ChoiceValue> 
           value: internalServerError
           language:
             default:
               name: internalServerError
-              description: ''
+              description: The value 'undefined'
         - !<!ChoiceValue> 
           value: serviceUnavailable
           language:
             default:
               name: serviceUnavailable
-              description: ''
+              description: The value 'undefined'
         type: choice
         apiVersions:
         - !<!ApiVersion> 
@@ -572,6 +597,7 @@ schemas: !<!Schemas>
         default:
           name: code
           description: Error code.
+          originalName: code
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_70
@@ -590,6 +616,7 @@ schemas: !<!Schemas>
         default:
           name: message
           description: Error message.
+          originalName: message
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_71
@@ -608,6 +635,7 @@ schemas: !<!Schemas>
         default:
           name: target
           description: Error target.
+          originalName: target
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!ObjectSchema> &ref_8
@@ -624,55 +652,55 @@ schemas: !<!Schemas>
               language:
                 default:
                   name: invalidParameterValue
-                  description: ''
+                  description: The value 'undefined'
             - !<!ChoiceValue> 
               value: invalidRequestBodyFormat
               language:
                 default:
                   name: invalidRequestBodyFormat
-                  description: ''
+                  description: The value 'undefined'
             - !<!ChoiceValue> 
               value: emptyRequest
               language:
                 default:
                   name: emptyRequest
-                  description: ''
+                  description: The value 'undefined'
             - !<!ChoiceValue> 
               value: missingInputRecords
               language:
                 default:
                   name: missingInputRecords
-                  description: ''
+                  description: The value 'undefined'
             - !<!ChoiceValue> 
               value: invalidDocument
               language:
                 default:
                   name: invalidDocument
-                  description: ''
+                  description: The value 'undefined'
             - !<!ChoiceValue> 
               value: modelVersionIncorrect
               language:
                 default:
                   name: modelVersionIncorrect
-                  description: ''
+                  description: The value 'undefined'
             - !<!ChoiceValue> 
               value: invalidDocumentBatch
               language:
                 default:
                   name: invalidDocumentBatch
-                  description: ''
+                  description: The value 'undefined'
             - !<!ChoiceValue> 
               value: unsupportedLanguageCode
               language:
                 default:
                   name: unsupportedLanguageCode
-                  description: ''
+                  description: The value 'undefined'
             - !<!ChoiceValue> 
               value: invalidCountryHint
               language:
                 default:
                   name: invalidCountryHint
-                  description: ''
+                  description: The value 'undefined'
             type: choice
             apiVersions:
             - !<!ApiVersion> 
@@ -689,6 +717,7 @@ schemas: !<!Schemas>
             default:
               name: code
               description: Error code.
+              originalName: code
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: !<!StringSchema> &ref_72
@@ -707,6 +736,7 @@ schemas: !<!Schemas>
             default:
               name: message
               description: Error message.
+              originalName: message
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: !<!StringSchema> &ref_73
@@ -725,6 +755,7 @@ schemas: !<!Schemas>
             default:
               name: target
               description: Error target.
+              originalName: target
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: *ref_8
@@ -734,6 +765,7 @@ schemas: !<!Schemas>
             default:
               name: innererror
               description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+              originalName: innererror
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
@@ -747,6 +779,7 @@ schemas: !<!Schemas>
         default:
           name: innererror
           description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+          originalName: innererror
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!ArraySchema> &ref_27
@@ -766,6 +799,7 @@ schemas: !<!Schemas>
         default:
           name: details
           description: Details about specific errors that led to this reported error.
+          originalName: details
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -809,6 +843,7 @@ schemas: !<!Schemas>
               default:
                 name: id
                 description: 'Unique, non-empty document identifier.'
+                originalName: id
             protocol: !<!Protocols> {}
           - !<!Property> 
             schema: !<!ArraySchema> &ref_29
@@ -839,6 +874,7 @@ schemas: !<!Schemas>
                     default:
                       name: name
                       description: Entity Linking formal name.
+                      originalName: name
                   protocol: !<!Protocols> {}
                 - !<!Property> 
                   schema: !<!ArraySchema> &ref_28
@@ -867,6 +903,7 @@ schemas: !<!Schemas>
                           default:
                             name: score
                             description: 'If a well-known item is recognized, a decimal number denoting the confidence level between 0 and 1 will be returned.'
+                            originalName: score
                         protocol: !<!Protocols> {}
                       - !<!Property> 
                         schema: !<!StringSchema> &ref_76
@@ -885,6 +922,7 @@ schemas: !<!Schemas>
                           default:
                             name: text
                             description: Entity text as appears in the request.
+                            originalName: text
                         protocol: !<!Protocols> {}
                       - !<!Property> 
                         schema: !<!NumberSchema> &ref_53
@@ -901,6 +939,7 @@ schemas: !<!Schemas>
                           default:
                             name: offset
                             description: Start position (in Unicode characters) for the entity match text.
+                            originalName: offset
                         protocol: !<!Protocols> {}
                       - !<!Property> 
                         schema: !<!NumberSchema> &ref_54
@@ -917,6 +956,7 @@ schemas: !<!Schemas>
                           default:
                             name: length
                             description: Length (in Unicode characters) for the entity match text.
+                            originalName: length
                         protocol: !<!Protocols> {}
                       language: !<!Languages> 
                         default:
@@ -935,6 +975,7 @@ schemas: !<!Schemas>
                     default:
                       name: matches
                       description: List of instances this entity appears in the text.
+                      originalName: matches
                   protocol: !<!Protocols> {}
                 - !<!Property> 
                   schema: !<!StringSchema> &ref_77
@@ -953,6 +994,7 @@ schemas: !<!Schemas>
                     default:
                       name: language
                       description: Language used in the data source.
+                      originalName: language
                   protocol: !<!Protocols> {}
                 - !<!Property> 
                   schema: !<!StringSchema> &ref_78
@@ -971,6 +1013,7 @@ schemas: !<!Schemas>
                     default:
                       name: id
                       description: Unique identifier of the recognized entity from the data source.
+                      originalName: id
                   protocol: !<!Protocols> {}
                 - !<!Property> 
                   schema: !<!StringSchema> &ref_79
@@ -989,6 +1032,7 @@ schemas: !<!Schemas>
                     default:
                       name: url
                       description: URL for the entity's page from the data source.
+                      originalName: url
                   protocol: !<!Protocols> {}
                 - !<!Property> 
                   schema: !<!StringSchema> &ref_80
@@ -1007,6 +1051,7 @@ schemas: !<!Schemas>
                     default:
                       name: dataSource
                       description: 'Data source used to extract entity linking, such as Wiki/Bing etc.'
+                      originalName: dataSource
                   protocol: !<!Protocols> {}
                 language: !<!Languages> 
                   default:
@@ -1025,6 +1070,7 @@ schemas: !<!Schemas>
               default:
                 name: entities
                 description: Recognized well-known entities in the document.
+                originalName: entities
             protocol: !<!Protocols> {}
           - !<!Property> 
             schema: *ref_3
@@ -1034,6 +1080,7 @@ schemas: !<!Schemas>
               default:
                 name: statistics
                 description: if showStats=true was specified in the request this field will contain information about the document payload.
+                originalName: statistics
             protocol: !<!Protocols> {}
           language: !<!Languages> 
             default:
@@ -1052,6 +1099,7 @@ schemas: !<!Schemas>
         default:
           name: documents
           description: Response by document
+          originalName: documents
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!ArraySchema> &ref_31
@@ -1071,6 +1119,7 @@ schemas: !<!Schemas>
         default:
           name: errors
           description: Errors by document id.
+          originalName: errors
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: *ref_6
@@ -1080,6 +1129,7 @@ schemas: !<!Schemas>
         default:
           name: statistics
           description: if showStats=true was specified in the request this field will contain information about the request payload.
+          originalName: statistics
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_81
@@ -1098,6 +1148,7 @@ schemas: !<!Schemas>
         default:
           name: modelVersion
           description: This field indicates which model is used for scoring.
+          originalName: modelVersion
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -1143,6 +1194,7 @@ schemas: !<!Schemas>
               default:
                 name: id
                 description: 'Unique, non-empty document identifier.'
+                originalName: id
             protocol: !<!Protocols> {}
           - !<!Property> 
             schema: !<!ArraySchema> &ref_32
@@ -1158,7 +1210,7 @@ schemas: !<!Schemas>
                 language: !<!Languages> 
                   default:
                     name: DocumentKeyPhrases-keyPhrasesItem
-                    description: MISSING·SCHEMA-DESCRIPTION-STRING
+                    description: ''
                 protocol: !<!Protocols> {}
               language: !<!Languages> 
                 default:
@@ -1171,6 +1223,7 @@ schemas: !<!Schemas>
               default:
                 name: keyPhrases
                 description: A list of representative words or phrases. The number of key phrases returned is proportional to the number of words in the input document.
+                originalName: keyPhrases
             protocol: !<!Protocols> {}
           - !<!Property> 
             schema: *ref_3
@@ -1180,6 +1233,7 @@ schemas: !<!Schemas>
               default:
                 name: statistics
                 description: if showStats=true was specified in the request this field will contain information about the document payload.
+                originalName: statistics
             protocol: !<!Protocols> {}
           language: !<!Languages> 
             default:
@@ -1198,6 +1252,7 @@ schemas: !<!Schemas>
         default:
           name: documents
           description: Response by document
+          originalName: documents
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!ArraySchema> &ref_34
@@ -1217,6 +1272,7 @@ schemas: !<!Schemas>
         default:
           name: errors
           description: Errors by document id.
+          originalName: errors
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: *ref_6
@@ -1226,6 +1282,7 @@ schemas: !<!Schemas>
         default:
           name: statistics
           description: if showStats=true was specified in the request this field will contain information about the request payload.
+          originalName: statistics
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_84
@@ -1244,6 +1301,7 @@ schemas: !<!Schemas>
         default:
           name: modelVersion
           description: This field indicates which model is used for scoring.
+          originalName: modelVersion
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -1287,6 +1345,7 @@ schemas: !<!Schemas>
               default:
                 name: id
                 description: 'Unique, non-empty document identifier.'
+                originalName: id
             protocol: !<!Protocols> {}
           - !<!Property> 
             schema: !<!StringSchema> &ref_86
@@ -1297,14 +1356,15 @@ schemas: !<!Schemas>
               language: !<!Languages> 
                 default:
                   name: LanguageInput-text
-                  description: MISSING·SCHEMA-DESCRIPTION-STRING
+                  description: ''
               protocol: !<!Protocols> {}
             required: true
             serializedName: text
             language: !<!Languages> 
               default:
                 name: text
-                description: MISSING·SCHEMA-DESCRIPTION-STRING
+                description: ''
+                originalName: text
             protocol: !<!Protocols> {}
           - !<!Property> 
             schema: !<!StringSchema> &ref_87
@@ -1315,14 +1375,15 @@ schemas: !<!Schemas>
               language: !<!Languages> 
                 default:
                   name: LanguageInput-countryHint
-                  description: MISSING·SCHEMA-DESCRIPTION-STRING
+                  description: ''
               protocol: !<!Protocols> {}
             required: false
             serializedName: countryHint
             language: !<!Languages> 
               default:
                 name: countryHint
-                description: MISSING·SCHEMA-DESCRIPTION-STRING
+                description: ''
+                originalName: countryHint
             protocol: !<!Protocols> {}
           language: !<!Languages> 
             default:
@@ -1341,6 +1402,7 @@ schemas: !<!Schemas>
         default:
           name: documents
           description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+          originalName: documents
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -1384,6 +1446,7 @@ schemas: !<!Schemas>
               default:
                 name: id
                 description: 'Unique, non-empty document identifier.'
+                originalName: id
             protocol: !<!Protocols> {}
           - !<!Property> 
             schema: !<!ArraySchema> &ref_36
@@ -1414,6 +1477,7 @@ schemas: !<!Schemas>
                     default:
                       name: name
                       description: 'Long name of a detected language (e.g. English, French).'
+                      originalName: name
                   protocol: !<!Protocols> {}
                 - !<!Property> 
                   schema: !<!StringSchema> &ref_90
@@ -1432,6 +1496,7 @@ schemas: !<!Schemas>
                     default:
                       name: iso6391Name
                       description: 'A two letter representation of the detected language according to the ISO 639-1 standard (e.g. en, fr).'
+                      originalName: iso6391Name
                   protocol: !<!Protocols> {}
                 - !<!Property> 
                   schema: !<!NumberSchema> &ref_55
@@ -1448,6 +1513,7 @@ schemas: !<!Schemas>
                     default:
                       name: score
                       description: A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true.
+                      originalName: score
                   protocol: !<!Protocols> {}
                 language: !<!Languages> 
                   default:
@@ -1466,6 +1532,7 @@ schemas: !<!Schemas>
               default:
                 name: detectedLanguages
                 description: A list of extracted languages.
+                originalName: detectedLanguages
             protocol: !<!Protocols> {}
           - !<!Property> 
             schema: *ref_3
@@ -1475,6 +1542,7 @@ schemas: !<!Schemas>
               default:
                 name: statistics
                 description: if showStats=true was specified in the request this field will contain information about the document payload.
+                originalName: statistics
             protocol: !<!Protocols> {}
           language: !<!Languages> 
             default:
@@ -1493,6 +1561,7 @@ schemas: !<!Schemas>
         default:
           name: documents
           description: Response by document
+          originalName: documents
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!ArraySchema> &ref_38
@@ -1512,6 +1581,7 @@ schemas: !<!Schemas>
         default:
           name: errors
           description: Errors by document id.
+          originalName: errors
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: *ref_6
@@ -1521,6 +1591,7 @@ schemas: !<!Schemas>
         default:
           name: statistics
           description: if showStats=true was specified in the request this field will contain information about the request payload.
+          originalName: statistics
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_91
@@ -1539,6 +1610,7 @@ schemas: !<!Schemas>
         default:
           name: modelVersion
           description: This field indicates which model is used for scoring.
+          originalName: modelVersion
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -1583,6 +1655,7 @@ schemas: !<!Schemas>
               default:
                 name: id
                 description: 'Unique, non-empty document identifier.'
+                originalName: id
             protocol: !<!Protocols> {}
           - !<!Property> 
             schema: !<!ChoiceSchema> &ref_21
@@ -1592,25 +1665,25 @@ schemas: !<!Schemas>
                 language:
                   default:
                     name: positive
-                    description: ''
+                    description: The value 'undefined'
               - !<!ChoiceValue> 
                 value: neutral
                 language:
                   default:
                     name: neutral
-                    description: ''
+                    description: The value 'undefined'
               - !<!ChoiceValue> 
                 value: negative
                 language:
                   default:
                     name: negative
-                    description: ''
+                    description: The value 'undefined'
               - !<!ChoiceValue> 
                 value: mixed
                 language:
                   default:
                     name: mixed
-                    description: ''
+                    description: The value 'undefined'
               type: choice
               apiVersions:
               - !<!ApiVersion> 
@@ -1627,6 +1700,7 @@ schemas: !<!Schemas>
               default:
                 name: sentiment
                 description: 'Predicted sentiment for document (Negative, Neutral, Positive, or Mixed).'
+                originalName: sentiment
             protocol: !<!Protocols> {}
           - !<!Property> 
             schema: *ref_3
@@ -1636,6 +1710,7 @@ schemas: !<!Schemas>
               default:
                 name: statistics
                 description: if showStats=true was specified in the request this field will contain information about the document payload.
+                originalName: statistics
             protocol: !<!Protocols> {}
           - !<!Property> 
             schema: !<!AnySchema> 
@@ -1651,6 +1726,7 @@ schemas: !<!Schemas>
               default:
                 name: documentScores
                 description: <Any object>
+                originalName: documentScores
             protocol: !<!Protocols> {}
           - !<!Property> 
             schema: !<!ArraySchema> &ref_40
@@ -1672,19 +1748,19 @@ schemas: !<!Schemas>
                       language:
                         default:
                           name: positive
-                          description: ''
+                          description: The value 'undefined'
                     - !<!ChoiceValue> 
                       value: neutral
                       language:
                         default:
                           name: neutral
-                          description: ''
+                          description: The value 'undefined'
                     - !<!ChoiceValue> 
                       value: negative
                       language:
                         default:
                           name: negative
-                          description: ''
+                          description: The value 'undefined'
                     type: choice
                     apiVersions:
                     - !<!ApiVersion> 
@@ -1701,6 +1777,7 @@ schemas: !<!Schemas>
                     default:
                       name: sentiment
                       description: The predicted Sentiment for the sentence.
+                      originalName: sentiment
                   protocol: !<!Protocols> {}
                 - !<!Property> 
                   schema: !<!AnySchema> 
@@ -1716,6 +1793,7 @@ schemas: !<!Schemas>
                     default:
                       name: sentenceScores
                       description: <Any object>
+                      originalName: sentenceScores
                   protocol: !<!Protocols> {}
                 - !<!Property> 
                   schema: !<!NumberSchema> &ref_56
@@ -1732,6 +1810,7 @@ schemas: !<!Schemas>
                     default:
                       name: offset
                       description: The sentence offset from the start of the document.
+                      originalName: offset
                   protocol: !<!Protocols> {}
                 - !<!Property> 
                   schema: !<!NumberSchema> &ref_57
@@ -1748,6 +1827,7 @@ schemas: !<!Schemas>
                     default:
                       name: length
                       description: The length of the sentence by Unicode standard.
+                      originalName: length
                   protocol: !<!Protocols> {}
                 - !<!Property> 
                   schema: !<!ArraySchema> &ref_39
@@ -1763,7 +1843,7 @@ schemas: !<!Schemas>
                       language: !<!Languages> 
                         default:
                           name: SentenceSentiment-warningsItem
-                          description: MISSING·SCHEMA-DESCRIPTION-STRING
+                          description: ''
                       protocol: !<!Protocols> {}
                     language: !<!Languages> 
                       default:
@@ -1776,6 +1856,7 @@ schemas: !<!Schemas>
                     default:
                       name: warnings
                       description: The warnings generated for the sentence.
+                      originalName: warnings
                   protocol: !<!Protocols> {}
                 language: !<!Languages> 
                   default:
@@ -1794,6 +1875,7 @@ schemas: !<!Schemas>
               default:
                 name: sentences
                 description: Sentence level sentiment analysis.
+                originalName: sentences
             protocol: !<!Protocols> {}
           language: !<!Languages> 
             default:
@@ -1812,6 +1894,7 @@ schemas: !<!Schemas>
         default:
           name: documents
           description: Sentiment analysis per document.
+          originalName: documents
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!ArraySchema> &ref_42
@@ -1831,6 +1914,7 @@ schemas: !<!Schemas>
         default:
           name: errors
           description: Errors by document id.
+          originalName: errors
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: *ref_6
@@ -1840,6 +1924,7 @@ schemas: !<!Schemas>
         default:
           name: statistics
           description: if showStats=true was specified in the request this field will contain information about the request payload.
+          originalName: statistics
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_94
@@ -1858,6 +1943,7 @@ schemas: !<!Schemas>
         default:
           name: modelVersion
           description: This field indicates which model is used for scoring.
+          originalName: modelVersion
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -1880,14 +1966,15 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: typeForpositive
-            description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+            description: ''
         protocol: !<!Protocols> {}
       required: true
       serializedName: positive
       language: !<!Languages> 
         default:
           name: positive
-          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+          description: ''
+          originalName: positive
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!NumberSchema> &ref_59
@@ -1896,14 +1983,15 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: typeForneutral
-            description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+            description: ''
         protocol: !<!Protocols> {}
       required: true
       serializedName: neutral
       language: !<!Languages> 
         default:
           name: neutral
-          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+          description: ''
+          originalName: neutral
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!NumberSchema> &ref_60
@@ -1912,14 +2000,15 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: typeFornegative
-            description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+            description: ''
         protocol: !<!Protocols> {}
       required: true
       serializedName: negative
       language: !<!Languages> 
         default:
           name: negative
-          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+          description: ''
+          originalName: negative
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -1993,7 +2082,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: string
-        description: MISSING·SCHEMA-DESCRIPTION-STRING
+        description: ''
     protocol: !<!Protocols> {}
   - *ref_61
   - *ref_62
@@ -2184,6 +2273,7 @@ operationGroups:
         description: >
           The API returns a list of general named entities in a given document. For the list of supported entity types, check <a href="https://aka.ms/taner">Supported Entity Types in Text Analytics API</a>. For the list of enabled
           languages, check <a href="https://aka.ms/talangs">Supported languages in Text Analytics API</a>.
+        summary: Named Entity Recognition
     protocol: !<!Protocols> {}
   - !<!Operation> 
     apiVersions:
@@ -2278,6 +2368,7 @@ operationGroups:
         description: >
           The API returns a list of entities with personal information (\"SSN\", \"Bank Account\" etc) in the document. See the &lt;a href="https://aka.ms/talangs"&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of
           enabled languages.
+        summary: Entities containing personal information
     protocol: !<!Protocols> {}
   - !<!Operation> 
     apiVersions:
@@ -2371,6 +2462,7 @@ operationGroups:
         name: EntitiesLinking
         description: |
           The API returns a list of recognized entities with links to a well-known knowledge base. See the &lt;a href="https://aka.ms/talangs"&gt;Supported languages in Text Analytics API.
+        summary: Linked entities from a well-known knowledge base
     protocol: !<!Protocols> {}
   - !<!Operation> 
     apiVersions:
@@ -2463,6 +2555,7 @@ operationGroups:
       default:
         name: KeyPhrases
         description: 'The API returns a list of strings denoting the key phrases in the input text. See the &lt;a href="https://aka.ms/talangs"&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages.'
+        summary: Key Phrases
     protocol: !<!Protocols> {}
   - !<!Operation> 
     apiVersions:
@@ -2557,6 +2650,7 @@ operationGroups:
         description: >-
           The API returns the detected language and a numeric score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true. See the &lt;a href="https://aka.ms/talangs"&gt;Supported languages in Text
           Analytics API&lt;/a&gt; for the list of enabled languages.
+        summary: Detect Language
     protocol: !<!Protocols> {}
   - !<!Operation> 
     apiVersions:
@@ -2651,6 +2745,7 @@ operationGroups:
         description: >-
           The API returns a sentiment prediction, as well as sentiment scores for each sentiment class (Positive, Negative, and Neutral) for the document and each sentence within it. See the &lt;a href="https://aka.ms/talangs"&gt;Supported
           languages in Text Analytics API&lt;/a&gt; for the list of enabled languages.
+        summary: Sentiment
     protocol: !<!Protocols> {}
   language: !<!Languages> 
     default:

@@ -16,14 +16,15 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: Pet-name
-            description: MISSING·SCHEMA-DESCRIPTION-STRING
+            description: ''
         protocol: !<!Protocols> {}
       required: false
       serializedName: name
       language: !<!Languages> 
         default:
           name: name
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          description: ''
+          originalName: name
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!ChoiceSchema> &ref_1
@@ -33,43 +34,43 @@ schemas: !<!Schemas>
           language:
             default:
               name: Monday
-              description: ''
+              description: The value 'undefined'
         - !<!ChoiceValue> 
           value: Tuesday
           language:
             default:
               name: Tuesday
-              description: ''
+              description: The value 'undefined'
         - !<!ChoiceValue> 
           value: Wednesday
           language:
             default:
               name: Wednesday
-              description: ''
+              description: The value 'undefined'
         - !<!ChoiceValue> 
           value: Thursday
           language:
             default:
               name: Thursday
-              description: ''
+              description: The value 'undefined'
         - !<!ChoiceValue> 
           value: Friday
           language:
             default:
               name: Friday
-              description: ''
+              description: The value 'undefined'
         - !<!ChoiceValue> 
           value: Saturday
           language:
             default:
               name: Saturday
-              description: ''
+              description: The value 'undefined'
         - !<!ChoiceValue> 
           value: Sunday
           language:
             default:
               name: Sunday
-              description: ''
+              description: The value 'undefined'
         type: choice
         apiVersions:
         - !<!ApiVersion> 
@@ -93,6 +94,7 @@ schemas: !<!Schemas>
         default:
           name: DaysOfWeek
           description: Type of Pet
+          originalName: DaysOfWeek
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!ChoiceSchema> &ref_2
@@ -131,6 +133,7 @@ schemas: !<!Schemas>
         default:
           name: IntEnum
           description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+          originalName: IntEnum
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -151,7 +154,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: string
-        description: MISSING·SCHEMA-DESCRIPTION-STRING
+        description: ''
     protocol: !<!Protocols> {}
   - *ref_3
 globalParameters:
@@ -160,6 +163,8 @@ globalParameters:
   clientDefaultValue: 'http://localhost:3000'
   implementation: Client
   required: true
+  extensions:
+    x-ms-skip-url-encoding: true
   language: !<!Languages> 
     default:
       name: $host

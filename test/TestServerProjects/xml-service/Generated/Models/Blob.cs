@@ -8,11 +8,9 @@ namespace xml_service.Models
     /// <summary> An Azure Storage blob. </summary>
     public partial class Blob
     {
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-STRING. </summary>
         public string Name { get; set; }
         /// <summary> MISSING·SCHEMA-DESCRIPTION-BOOLEAN. </summary>
         public bool Deleted { get; set; }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-STRING. </summary>
         public string Snapshot { get; set; }
         /// <summary> Properties of a blob. </summary>
         public BlobProperties Properties { get; set; } = new BlobProperties();

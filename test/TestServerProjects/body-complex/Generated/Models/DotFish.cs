@@ -11,9 +11,7 @@ namespace body_complex.Models
         {
             FishType = null;
         }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-STRING. </summary>
         public string FishType { get; internal set; }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-STRING. </summary>
         public string? Species { get; set; }
     }
 }

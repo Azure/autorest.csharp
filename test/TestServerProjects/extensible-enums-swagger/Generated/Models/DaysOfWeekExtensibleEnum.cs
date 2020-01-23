@@ -25,19 +25,19 @@ namespace extensible_enums_swagger.Models
         private const string SaturdayValue = "Saturday";
         private const string SundayValue = "Sunday";
 
-        /// <summary> Monday. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static DaysOfWeekExtensibleEnum Monday { get; } = new DaysOfWeekExtensibleEnum(MondayValue);
-        /// <summary> Tuesday. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static DaysOfWeekExtensibleEnum Tuesday { get; } = new DaysOfWeekExtensibleEnum(TuesdayValue);
-        /// <summary> Wednesday. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static DaysOfWeekExtensibleEnum Wednesday { get; } = new DaysOfWeekExtensibleEnum(WednesdayValue);
-        /// <summary> Thursday. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static DaysOfWeekExtensibleEnum Thursday { get; } = new DaysOfWeekExtensibleEnum(ThursdayValue);
-        /// <summary> Friday. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static DaysOfWeekExtensibleEnum Friday { get; } = new DaysOfWeekExtensibleEnum(FridayValue);
-        /// <summary> Saturday. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static DaysOfWeekExtensibleEnum Saturday { get; } = new DaysOfWeekExtensibleEnum(SaturdayValue);
-        /// <summary> Sunday. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static DaysOfWeekExtensibleEnum Sunday { get; } = new DaysOfWeekExtensibleEnum(SundayValue);
         /// <summary> Determines if two <see cref="DaysOfWeekExtensibleEnum"/> values are the same. </summary>
         public static bool operator ==(DaysOfWeekExtensibleEnum left, DaysOfWeekExtensibleEnum right) => left.Equals(right);

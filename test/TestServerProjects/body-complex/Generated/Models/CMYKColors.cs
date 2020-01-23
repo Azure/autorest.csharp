@@ -22,13 +22,13 @@ namespace body_complex.Models
         private const string YELLOWValue = "YELLOW";
         private const string BlacKValue = "blacK";
 
-        /// <summary> cyan. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static CMYKColors Cyan { get; } = new CMYKColors(CyanValue);
-        /// <summary> Magenta. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static CMYKColors Magenta { get; } = new CMYKColors(MagentaValue);
-        /// <summary> YELLOW. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static CMYKColors YELLOW { get; } = new CMYKColors(YELLOWValue);
-        /// <summary> blacK. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static CMYKColors BlacK { get; } = new CMYKColors(BlacKValue);
         /// <summary> Determines if two <see cref="CMYKColors"/> values are the same. </summary>
         public static bool operator ==(CMYKColors left, CMYKColors right) => left.Equals(right);

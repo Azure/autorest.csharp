@@ -6,11 +6,11 @@ namespace CognitiveSearch.Models
     /// <summary> MISSING·SCHEMA-DESCRIPTION-CHOICE. </summary>
     public enum AutocompleteMode
     {
-        /// <summary> oneTerm. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         OneTerm,
-        /// <summary> twoTerms. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         TwoTerms,
-        /// <summary> oneTermWithContext. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         OneTermWithContext
     }
 }

@@ -6,11 +6,11 @@ namespace url.Models
     /// <summary> MISSING·SCHEMA-DESCRIPTION-CHOICE. </summary>
     public enum UriColor
     {
-        /// <summary> red color. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         RedColor,
-        /// <summary> green color. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         GreenColor,
-        /// <summary> blue color. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         BlueColor
     }
 }
