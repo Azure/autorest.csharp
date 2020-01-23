@@ -45,7 +45,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, int>>> GetNullAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetNull");
             scope.Start();
             try
@@ -78,7 +77,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, int>> GetNull(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetNull");
             scope.Start();
             try
@@ -122,7 +120,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, int>>> GetEmptyAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetEmpty");
             scope.Start();
             try
@@ -155,7 +152,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, int>> GetEmpty(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetEmpty");
             scope.Start();
             try
@@ -280,7 +276,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, string>>> GetNullValueAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetNullValue");
             scope.Start();
             try
@@ -313,7 +308,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, string>> GetNullValue(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetNullValue");
             scope.Start();
             try
@@ -357,7 +351,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, string>>> GetNullKeyAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetNullKey");
             scope.Start();
             try
@@ -390,7 +383,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, string>> GetNullKey(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetNullKey");
             scope.Start();
             try
@@ -434,7 +426,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, string>>> GetEmptyStringKeyAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetEmptyStringKey");
             scope.Start();
             try
@@ -467,7 +458,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, string>> GetEmptyStringKey(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetEmptyStringKey");
             scope.Start();
             try
@@ -511,7 +501,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, string>>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetInvalid");
             scope.Start();
             try
@@ -544,7 +533,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, string>> GetInvalid(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetInvalid");
             scope.Start();
             try
@@ -588,7 +576,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, bool>>> GetBooleanTfftAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetBooleanTfft");
             scope.Start();
             try
@@ -621,7 +608,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, bool>> GetBooleanTfft(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetBooleanTfft");
             scope.Start();
             try
@@ -746,7 +732,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, bool>>> GetBooleanInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetBooleanInvalidNull");
             scope.Start();
             try
@@ -779,7 +764,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, bool>> GetBooleanInvalidNull(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetBooleanInvalidNull");
             scope.Start();
             try
@@ -823,7 +807,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, bool>>> GetBooleanInvalidStringAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetBooleanInvalidString");
             scope.Start();
             try
@@ -856,7 +839,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, bool>> GetBooleanInvalidString(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetBooleanInvalidString");
             scope.Start();
             try
@@ -900,7 +882,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, int>>> GetIntegerValidAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetIntegerValid");
             scope.Start();
             try
@@ -933,7 +914,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, int>> GetIntegerValid(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetIntegerValid");
             scope.Start();
             try
@@ -1058,7 +1038,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, int>>> GetIntInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetIntInvalidNull");
             scope.Start();
             try
@@ -1091,7 +1070,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, int>> GetIntInvalidNull(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetIntInvalidNull");
             scope.Start();
             try
@@ -1135,7 +1113,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, int>>> GetIntInvalidStringAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetIntInvalidString");
             scope.Start();
             try
@@ -1168,7 +1145,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, int>> GetIntInvalidString(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetIntInvalidString");
             scope.Start();
             try
@@ -1212,7 +1188,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, long>>> GetLongValidAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetLongValid");
             scope.Start();
             try
@@ -1245,7 +1220,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, long>> GetLongValid(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetLongValid");
             scope.Start();
             try
@@ -1370,7 +1344,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, long>>> GetLongInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetLongInvalidNull");
             scope.Start();
             try
@@ -1403,7 +1376,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, long>> GetLongInvalidNull(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetLongInvalidNull");
             scope.Start();
             try
@@ -1447,7 +1419,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, long>>> GetLongInvalidStringAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetLongInvalidString");
             scope.Start();
             try
@@ -1480,7 +1451,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, long>> GetLongInvalidString(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetLongInvalidString");
             scope.Start();
             try
@@ -1524,7 +1494,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, float>>> GetFloatValidAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetFloatValid");
             scope.Start();
             try
@@ -1557,7 +1526,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, float>> GetFloatValid(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetFloatValid");
             scope.Start();
             try
@@ -1682,7 +1650,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, float>>> GetFloatInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetFloatInvalidNull");
             scope.Start();
             try
@@ -1715,7 +1682,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, float>> GetFloatInvalidNull(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetFloatInvalidNull");
             scope.Start();
             try
@@ -1759,7 +1725,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, float>>> GetFloatInvalidStringAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetFloatInvalidString");
             scope.Start();
             try
@@ -1792,7 +1757,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, float>> GetFloatInvalidString(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetFloatInvalidString");
             scope.Start();
             try
@@ -1836,7 +1800,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, double>>> GetDoubleValidAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDoubleValid");
             scope.Start();
             try
@@ -1869,7 +1832,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, double>> GetDoubleValid(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDoubleValid");
             scope.Start();
             try
@@ -1994,7 +1956,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, double>>> GetDoubleInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDoubleInvalidNull");
             scope.Start();
             try
@@ -2027,7 +1988,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, double>> GetDoubleInvalidNull(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDoubleInvalidNull");
             scope.Start();
             try
@@ -2071,7 +2031,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, double>>> GetDoubleInvalidStringAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDoubleInvalidString");
             scope.Start();
             try
@@ -2104,7 +2063,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, double>> GetDoubleInvalidString(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDoubleInvalidString");
             scope.Start();
             try
@@ -2148,7 +2106,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, string>>> GetStringValidAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetStringValid");
             scope.Start();
             try
@@ -2181,7 +2138,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, string>> GetStringValid(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetStringValid");
             scope.Start();
             try
@@ -2306,7 +2262,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, string>>> GetStringWithNullAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetStringWithNull");
             scope.Start();
             try
@@ -2339,7 +2294,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, string>> GetStringWithNull(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetStringWithNull");
             scope.Start();
             try
@@ -2383,7 +2337,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, string>>> GetStringWithInvalidAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetStringWithInvalid");
             scope.Start();
             try
@@ -2416,7 +2369,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, string>> GetStringWithInvalid(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetStringWithInvalid");
             scope.Start();
             try
@@ -2460,7 +2412,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateValidAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDateValid");
             scope.Start();
             try
@@ -2493,7 +2444,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, DateTimeOffset>> GetDateValid(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDateValid");
             scope.Start();
             try
@@ -2618,7 +2568,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDateInvalidNull");
             scope.Start();
             try
@@ -2651,7 +2600,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, DateTimeOffset>> GetDateInvalidNull(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDateInvalidNull");
             scope.Start();
             try
@@ -2695,7 +2643,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateInvalidCharsAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDateInvalidChars");
             scope.Start();
             try
@@ -2728,7 +2675,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, DateTimeOffset>> GetDateInvalidChars(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDateInvalidChars");
             scope.Start();
             try
@@ -2772,7 +2718,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateTimeValidAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDateTimeValid");
             scope.Start();
             try
@@ -2805,7 +2750,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, DateTimeOffset>> GetDateTimeValid(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDateTimeValid");
             scope.Start();
             try
@@ -2930,7 +2874,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateTimeInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDateTimeInvalidNull");
             scope.Start();
             try
@@ -2963,7 +2906,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, DateTimeOffset>> GetDateTimeInvalidNull(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDateTimeInvalidNull");
             scope.Start();
             try
@@ -3007,7 +2949,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateTimeInvalidCharsAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDateTimeInvalidChars");
             scope.Start();
             try
@@ -3040,7 +2981,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, DateTimeOffset>> GetDateTimeInvalidChars(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDateTimeInvalidChars");
             scope.Start();
             try
@@ -3084,7 +3024,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateTimeRfc1123ValidAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDateTimeRfc1123Valid");
             scope.Start();
             try
@@ -3117,7 +3056,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, DateTimeOffset>> GetDateTimeRfc1123Valid(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDateTimeRfc1123Valid");
             scope.Start();
             try
@@ -3242,7 +3180,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, TimeSpan>>> GetDurationValidAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDurationValid");
             scope.Start();
             try
@@ -3275,7 +3212,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, TimeSpan>> GetDurationValid(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDurationValid");
             scope.Start();
             try
@@ -3400,7 +3336,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, byte[]>>> GetByteValidAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetByteValid");
             scope.Start();
             try
@@ -3433,7 +3368,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, byte[]>> GetByteValid(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetByteValid");
             scope.Start();
             try
@@ -3558,7 +3492,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, byte[]>>> GetByteInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetByteInvalidNull");
             scope.Start();
             try
@@ -3591,7 +3524,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, byte[]>> GetByteInvalidNull(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetByteInvalidNull");
             scope.Start();
             try
@@ -3635,7 +3567,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, byte[]>>> GetBase64UrlAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetBase64Url");
             scope.Start();
             try
@@ -3668,7 +3599,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, byte[]>> GetBase64Url(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetBase64Url");
             scope.Start();
             try
@@ -3712,7 +3642,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, Widget>>> GetComplexNullAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetComplexNull");
             scope.Start();
             try
@@ -3745,7 +3674,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, Widget>> GetComplexNull(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetComplexNull");
             scope.Start();
             try
@@ -3789,7 +3717,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, Widget>>> GetComplexEmptyAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetComplexEmpty");
             scope.Start();
             try
@@ -3822,7 +3749,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, Widget>> GetComplexEmpty(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetComplexEmpty");
             scope.Start();
             try
@@ -3866,7 +3792,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, Widget>>> GetComplexItemNullAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetComplexItemNull");
             scope.Start();
             try
@@ -3899,7 +3824,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, Widget>> GetComplexItemNull(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetComplexItemNull");
             scope.Start();
             try
@@ -3943,7 +3867,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, Widget>>> GetComplexItemEmptyAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetComplexItemEmpty");
             scope.Start();
             try
@@ -3976,7 +3899,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, Widget>> GetComplexItemEmpty(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetComplexItemEmpty");
             scope.Start();
             try
@@ -4020,7 +3942,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, Widget>>> GetComplexValidAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetComplexValid");
             scope.Start();
             try
@@ -4053,7 +3974,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, Widget>> GetComplexValid(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetComplexValid");
             scope.Start();
             try
@@ -4178,7 +4098,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, ICollection<string>>>> GetArrayNullAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetArrayNull");
             scope.Start();
             try
@@ -4216,7 +4135,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, ICollection<string>>> GetArrayNull(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetArrayNull");
             scope.Start();
             try
@@ -4265,7 +4183,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, ICollection<string>>>> GetArrayEmptyAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetArrayEmpty");
             scope.Start();
             try
@@ -4303,7 +4220,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, ICollection<string>>> GetArrayEmpty(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetArrayEmpty");
             scope.Start();
             try
@@ -4352,7 +4268,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, ICollection<string>>>> GetArrayItemNullAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetArrayItemNull");
             scope.Start();
             try
@@ -4390,7 +4305,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, ICollection<string>>> GetArrayItemNull(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetArrayItemNull");
             scope.Start();
             try
@@ -4439,7 +4353,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, ICollection<string>>>> GetArrayItemEmptyAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetArrayItemEmpty");
             scope.Start();
             try
@@ -4477,7 +4390,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, ICollection<string>>> GetArrayItemEmpty(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetArrayItemEmpty");
             scope.Start();
             try
@@ -4526,7 +4438,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, ICollection<string>>>> GetArrayValidAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetArrayValid");
             scope.Start();
             try
@@ -4564,7 +4475,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, ICollection<string>>> GetArrayValid(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetArrayValid");
             scope.Start();
             try
@@ -4699,7 +4609,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, object>>> GetDictionaryNullAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDictionaryNull");
             scope.Start();
             try
@@ -4732,7 +4641,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, object>> GetDictionaryNull(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDictionaryNull");
             scope.Start();
             try
@@ -4776,7 +4684,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, object>>> GetDictionaryEmptyAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDictionaryEmpty");
             scope.Start();
             try
@@ -4809,7 +4716,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, object>> GetDictionaryEmpty(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDictionaryEmpty");
             scope.Start();
             try
@@ -4853,7 +4759,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, object>>> GetDictionaryItemNullAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDictionaryItemNull");
             scope.Start();
             try
@@ -4886,7 +4791,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, object>> GetDictionaryItemNull(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDictionaryItemNull");
             scope.Start();
             try
@@ -4930,7 +4834,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, object>>> GetDictionaryItemEmptyAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDictionaryItemEmpty");
             scope.Start();
             try
@@ -4963,7 +4866,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, object>> GetDictionaryItemEmpty(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDictionaryItemEmpty");
             scope.Start();
             try
@@ -5007,7 +4909,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, object>>> GetDictionaryValidAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDictionaryValid");
             scope.Start();
             try
@@ -5040,7 +4941,6 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, object>> GetDictionaryValid(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DictionaryOperations.GetDictionaryValid");
             scope.Start();
             try

@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -325,7 +326,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     writer.Line($"return {typeof(Page)}.FromValues(response.Value.{pagingMethod.ItemName}, {continuationTokenText}, response.GetRawResponse());");
                 }
 
-                using (writer.Scope($"{asyncText}{funcType} NextPageFunc({typeof(string)} nextLinkUrl, {nullableInt} pageSizeHint)"))
+                using (writer.Scope($"{asyncText}{funcType} NextPageFunc({typeof(string)} nextLink, {nullableInt} pageSizeHint)"))
                 {
                     writer.Append($"var response = {awaitText}{CreateMethodName(pagingMethod.NextPageMethod.Name, async)}(");
                     foreach (Parameter parameter in nextPageParameters)
@@ -352,11 +353,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
         };
 
-        private void WriteParameterNullChecks(CodeWriter writer, IEnumerable<Parameter> parameters)
+        private void WriteParameterNullChecks(CodeWriter writer, IReadOnlyCollection<Parameter> parameters)
         {
             foreach (Parameter parameter in parameters)
             {
-                var cs = _typeFactory.CreateType(parameter.Type);
+                CSharpType cs = _typeFactory.CreateType(parameter.Type);
                 if (parameter.IsRequired && (cs.IsNullable || !cs.IsValueType))
                 {
                     using (writer.If($"{parameter.Name} == null"))
@@ -365,7 +366,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     }
                 }
             }
-            writer.Line();
+
+            if (parameters.Any())
+            {
+                writer.Line();
+            }
         }
 
         private void WriteConstant(CodeWriter writer, Constant constant)

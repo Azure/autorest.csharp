@@ -44,7 +44,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IntWrapper>> GetIntAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.GetInt");
             scope.Start();
             try
@@ -73,7 +72,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IntWrapper> GetInt(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.GetInt");
             scope.Start();
             try
@@ -188,7 +186,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<LongWrapper>> GetLongAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.GetLong");
             scope.Start();
             try
@@ -217,7 +214,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<LongWrapper> GetLong(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.GetLong");
             scope.Start();
             try
@@ -332,7 +328,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<FloatWrapper>> GetFloatAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.GetFloat");
             scope.Start();
             try
@@ -361,7 +356,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<FloatWrapper> GetFloat(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.GetFloat");
             scope.Start();
             try
@@ -476,7 +470,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DoubleWrapper>> GetDoubleAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.GetDouble");
             scope.Start();
             try
@@ -505,7 +498,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DoubleWrapper> GetDouble(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.GetDouble");
             scope.Start();
             try
@@ -620,7 +612,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<BooleanWrapper>> GetBoolAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.GetBool");
             scope.Start();
             try
@@ -649,7 +640,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<BooleanWrapper> GetBool(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.GetBool");
             scope.Start();
             try
@@ -764,7 +754,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<StringWrapper>> GetStringAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.GetString");
             scope.Start();
             try
@@ -793,7 +782,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<StringWrapper> GetString(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.GetString");
             scope.Start();
             try
@@ -908,7 +896,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateWrapper>> GetDateAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.GetDate");
             scope.Start();
             try
@@ -937,7 +924,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateWrapper> GetDate(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.GetDate");
             scope.Start();
             try
@@ -1052,7 +1038,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DatetimeWrapper>> GetDateTimeAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.GetDateTime");
             scope.Start();
             try
@@ -1081,7 +1066,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DatetimeWrapper> GetDateTime(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.GetDateTime");
             scope.Start();
             try
@@ -1196,7 +1180,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Datetimerfc1123Wrapper>> GetDateTimeRfc1123Async(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.GetDateTimeRfc1123");
             scope.Start();
             try
@@ -1225,7 +1208,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Datetimerfc1123Wrapper> GetDateTimeRfc1123(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.GetDateTimeRfc1123");
             scope.Start();
             try
@@ -1340,7 +1322,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DurationWrapper>> GetDurationAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.GetDuration");
             scope.Start();
             try
@@ -1369,7 +1350,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DurationWrapper> GetDuration(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.GetDuration");
             scope.Start();
             try
@@ -1484,7 +1464,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ByteWrapper>> GetByteAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.GetByte");
             scope.Start();
             try
@@ -1513,7 +1492,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ByteWrapper> GetByte(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PrimitiveOperations.GetByte");
             scope.Start();
             try

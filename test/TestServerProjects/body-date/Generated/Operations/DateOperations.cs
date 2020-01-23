@@ -43,7 +43,6 @@ namespace body_date
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetNullAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DateOperations.GetNull");
             scope.Start();
             try
@@ -72,7 +71,6 @@ namespace body_date
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetNull(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DateOperations.GetNull");
             scope.Start();
             try
@@ -112,7 +110,6 @@ namespace body_date
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetInvalidDateAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DateOperations.GetInvalidDate");
             scope.Start();
             try
@@ -141,7 +138,6 @@ namespace body_date
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetInvalidDate(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DateOperations.GetInvalidDate");
             scope.Start();
             try
@@ -181,7 +177,6 @@ namespace body_date
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetOverflowDateAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DateOperations.GetOverflowDate");
             scope.Start();
             try
@@ -210,7 +205,6 @@ namespace body_date
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetOverflowDate(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DateOperations.GetOverflowDate");
             scope.Start();
             try
@@ -250,7 +244,6 @@ namespace body_date
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetUnderflowDateAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DateOperations.GetUnderflowDate");
             scope.Start();
             try
@@ -279,7 +272,6 @@ namespace body_date
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetUnderflowDate(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DateOperations.GetUnderflowDate");
             scope.Start();
             try
@@ -386,7 +378,6 @@ namespace body_date
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetMaxDateAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DateOperations.GetMaxDate");
             scope.Start();
             try
@@ -415,7 +406,6 @@ namespace body_date
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetMaxDate(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DateOperations.GetMaxDate");
             scope.Start();
             try
@@ -522,7 +512,6 @@ namespace body_date
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetMinDateAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DateOperations.GetMinDate");
             scope.Start();
             try
@@ -551,7 +540,6 @@ namespace body_date
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetMinDate(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DateOperations.GetMinDate");
             scope.Start();
             try

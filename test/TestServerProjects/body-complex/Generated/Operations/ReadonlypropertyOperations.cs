@@ -44,7 +44,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ReadonlyObj>> GetValidAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ReadonlypropertyOperations.GetValid");
             scope.Start();
             try
@@ -73,7 +72,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ReadonlyObj> GetValid(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ReadonlypropertyOperations.GetValid");
             scope.Start();
             try

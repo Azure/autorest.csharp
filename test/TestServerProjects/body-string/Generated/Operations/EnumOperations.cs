@@ -44,7 +44,6 @@ namespace body_string
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Colors>> GetNotExpandableAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("EnumOperations.GetNotExpandable");
             scope.Start();
             try
@@ -73,7 +72,6 @@ namespace body_string
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Colors> GetNotExpandable(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("EnumOperations.GetNotExpandable");
             scope.Start();
             try
@@ -180,7 +178,6 @@ namespace body_string
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Colors>> GetReferencedAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("EnumOperations.GetReferenced");
             scope.Start();
             try
@@ -209,7 +206,6 @@ namespace body_string
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Colors> GetReferenced(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("EnumOperations.GetReferenced");
             scope.Start();
             try
@@ -316,7 +312,6 @@ namespace body_string
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<RefColorConstant>> GetReferencedConstantAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("EnumOperations.GetReferencedConstant");
             scope.Start();
             try
@@ -345,7 +340,6 @@ namespace body_string
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<RefColorConstant> GetReferencedConstant(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("EnumOperations.GetReferencedConstant");
             scope.Start();
             try

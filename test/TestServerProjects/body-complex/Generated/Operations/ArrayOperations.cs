@@ -44,7 +44,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ArrayWrapper>> GetValidAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetValid");
             scope.Start();
             try
@@ -73,7 +72,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ArrayWrapper> GetValid(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetValid");
             scope.Start();
             try
@@ -188,7 +186,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ArrayWrapper>> GetEmptyAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetEmpty");
             scope.Start();
             try
@@ -217,7 +214,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ArrayWrapper> GetEmpty(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetEmpty");
             scope.Start();
             try
@@ -332,7 +328,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ArrayWrapper>> GetNotProvidedAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetNotProvided");
             scope.Start();
             try
@@ -361,7 +356,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ArrayWrapper> GetNotProvided(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetNotProvided");
             scope.Start();
             try

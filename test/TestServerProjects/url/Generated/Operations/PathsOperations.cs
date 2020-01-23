@@ -45,7 +45,6 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetBooleanTrueAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PathsOperations.GetBooleanTrue");
             scope.Start();
             try
@@ -70,7 +69,6 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetBooleanTrue(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PathsOperations.GetBooleanTrue");
             scope.Start();
             try
@@ -107,7 +105,6 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetBooleanFalseAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PathsOperations.GetBooleanFalse");
             scope.Start();
             try
@@ -132,7 +129,6 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetBooleanFalse(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PathsOperations.GetBooleanFalse");
             scope.Start();
             try
@@ -169,7 +165,6 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetIntOneMillionAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PathsOperations.GetIntOneMillion");
             scope.Start();
             try
@@ -194,7 +189,6 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetIntOneMillion(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PathsOperations.GetIntOneMillion");
             scope.Start();
             try
@@ -231,7 +225,6 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetIntNegativeOneMillionAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PathsOperations.GetIntNegativeOneMillion");
             scope.Start();
             try
@@ -256,7 +249,6 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetIntNegativeOneMillion(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PathsOperations.GetIntNegativeOneMillion");
             scope.Start();
             try
@@ -293,7 +285,6 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetTenBillionAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PathsOperations.GetTenBillion");
             scope.Start();
             try
@@ -318,7 +309,6 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetTenBillion(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PathsOperations.GetTenBillion");
             scope.Start();
             try
@@ -355,7 +345,6 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetNegativeTenBillionAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PathsOperations.GetNegativeTenBillion");
             scope.Start();
             try
@@ -380,7 +369,6 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetNegativeTenBillion(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PathsOperations.GetNegativeTenBillion");
             scope.Start();
             try
@@ -417,7 +405,6 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> FloatScientificPositiveAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PathsOperations.FloatScientificPositive");
             scope.Start();
             try
@@ -442,7 +429,6 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response FloatScientificPositive(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PathsOperations.FloatScientificPositive");
             scope.Start();
             try
@@ -479,7 +465,6 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> FloatScientificNegativeAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PathsOperations.FloatScientificNegative");
             scope.Start();
             try
@@ -504,7 +489,6 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response FloatScientificNegative(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PathsOperations.FloatScientificNegative");
             scope.Start();
             try
@@ -541,7 +525,6 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> DoubleDecimalPositiveAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PathsOperations.DoubleDecimalPositive");
             scope.Start();
             try
@@ -566,7 +549,6 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response DoubleDecimalPositive(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PathsOperations.DoubleDecimalPositive");
             scope.Start();
             try
@@ -603,7 +585,6 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> DoubleDecimalNegativeAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PathsOperations.DoubleDecimalNegative");
             scope.Start();
             try
@@ -628,7 +609,6 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response DoubleDecimalNegative(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PathsOperations.DoubleDecimalNegative");
             scope.Start();
             try
@@ -665,7 +645,6 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> StringUnicodeAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PathsOperations.StringUnicode");
             scope.Start();
             try
@@ -690,7 +669,6 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response StringUnicode(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PathsOperations.StringUnicode");
             scope.Start();
             try
@@ -727,7 +705,6 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> StringUrlEncodedAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PathsOperations.StringUrlEncoded");
             scope.Start();
             try
@@ -752,7 +729,6 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response StringUrlEncoded(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PathsOperations.StringUrlEncoded");
             scope.Start();
             try
@@ -789,7 +765,6 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> StringUrlNonEncodedAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PathsOperations.StringUrlNonEncoded");
             scope.Start();
             try
@@ -814,7 +789,6 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response StringUrlNonEncoded(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PathsOperations.StringUrlNonEncoded");
             scope.Start();
             try
@@ -851,7 +825,6 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> StringEmptyAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PathsOperations.StringEmpty");
             scope.Start();
             try
@@ -876,7 +849,6 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response StringEmpty(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PathsOperations.StringEmpty");
             scope.Start();
             try
@@ -1185,7 +1157,6 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> ByteEmptyAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PathsOperations.ByteEmpty");
             scope.Start();
             try
@@ -1210,7 +1181,6 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response ByteEmpty(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PathsOperations.ByteEmpty");
             scope.Start();
             try
@@ -1319,7 +1289,6 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> DateValidAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PathsOperations.DateValid");
             scope.Start();
             try
@@ -1344,7 +1313,6 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response DateValid(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PathsOperations.DateValid");
             scope.Start();
             try
@@ -1445,7 +1413,6 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> DateTimeValidAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PathsOperations.DateTimeValid");
             scope.Start();
             try
@@ -1470,7 +1437,6 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response DateTimeValid(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PathsOperations.DateTimeValid");
             scope.Start();
             try

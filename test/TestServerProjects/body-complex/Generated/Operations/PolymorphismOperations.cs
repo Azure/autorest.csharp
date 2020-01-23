@@ -44,7 +44,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Fish>> GetValidAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PolymorphismOperations.GetValid");
             scope.Start();
             try
@@ -73,7 +72,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Fish> GetValid(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PolymorphismOperations.GetValid");
             scope.Start();
             try
@@ -256,7 +254,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DotFish>> GetDotSyntaxAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PolymorphismOperations.GetDotSyntax");
             scope.Start();
             try
@@ -285,7 +282,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DotFish> GetDotSyntax(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PolymorphismOperations.GetDotSyntax");
             scope.Start();
             try
@@ -325,7 +321,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DotFishMarket>> GetComposedWithDiscriminatorAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PolymorphismOperations.GetComposedWithDiscriminator");
             scope.Start();
             try
@@ -354,7 +349,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DotFishMarket> GetComposedWithDiscriminator(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PolymorphismOperations.GetComposedWithDiscriminator");
             scope.Start();
             try
@@ -394,7 +388,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DotFishMarket>> GetComposedWithoutDiscriminatorAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PolymorphismOperations.GetComposedWithoutDiscriminator");
             scope.Start();
             try
@@ -423,7 +416,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DotFishMarket> GetComposedWithoutDiscriminator(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PolymorphismOperations.GetComposedWithoutDiscriminator");
             scope.Start();
             try
@@ -463,7 +455,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Salmon>> GetComplicatedAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PolymorphismOperations.GetComplicated");
             scope.Start();
             try
@@ -492,7 +483,6 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Salmon> GetComplicated(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PolymorphismOperations.GetComplicated");
             scope.Start();
             try

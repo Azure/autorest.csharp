@@ -303,7 +303,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     if (frameworkType == typeof(bool))
                         writer.AppendRaw("GetBoolean");
                     if (frameworkType == typeof(char))
-                        writer.AppendRaw("GetString");
+                        writer.AppendRaw("GetChar");
                     if (frameworkType == typeof(short))
                         writer.AppendRaw("GetInt16");
                     if (frameworkType == typeof(int))

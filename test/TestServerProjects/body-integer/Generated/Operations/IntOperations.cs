@@ -43,7 +43,6 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<int>> GetNullAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("IntOperations.GetNull");
             scope.Start();
             try
@@ -72,7 +71,6 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<int> GetNull(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("IntOperations.GetNull");
             scope.Start();
             try
@@ -112,7 +110,6 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<int>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("IntOperations.GetInvalid");
             scope.Start();
             try
@@ -141,7 +138,6 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<int> GetInvalid(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("IntOperations.GetInvalid");
             scope.Start();
             try
@@ -181,7 +177,6 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<int>> GetOverflowInt32Async(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("IntOperations.GetOverflowInt32");
             scope.Start();
             try
@@ -210,7 +205,6 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<int> GetOverflowInt32(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("IntOperations.GetOverflowInt32");
             scope.Start();
             try
@@ -250,7 +244,6 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<int>> GetUnderflowInt32Async(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("IntOperations.GetUnderflowInt32");
             scope.Start();
             try
@@ -279,7 +272,6 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<int> GetUnderflowInt32(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("IntOperations.GetUnderflowInt32");
             scope.Start();
             try
@@ -319,7 +311,6 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<long>> GetOverflowInt64Async(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("IntOperations.GetOverflowInt64");
             scope.Start();
             try
@@ -348,7 +339,6 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<long> GetOverflowInt64(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("IntOperations.GetOverflowInt64");
             scope.Start();
             try
@@ -388,7 +378,6 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<long>> GetUnderflowInt64Async(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("IntOperations.GetUnderflowInt64");
             scope.Start();
             try
@@ -417,7 +406,6 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<long> GetUnderflowInt64(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("IntOperations.GetUnderflowInt64");
             scope.Start();
             try
@@ -725,7 +713,6 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetUnixTimeAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("IntOperations.GetUnixTime");
             scope.Start();
             try
@@ -754,7 +741,6 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetUnixTime(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("IntOperations.GetUnixTime");
             scope.Start();
             try
@@ -861,7 +847,6 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetInvalidUnixTimeAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("IntOperations.GetInvalidUnixTime");
             scope.Start();
             try
@@ -890,7 +875,6 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetInvalidUnixTime(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("IntOperations.GetInvalidUnixTime");
             scope.Start();
             try
@@ -930,7 +914,6 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetNullUnixTimeAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("IntOperations.GetNullUnixTime");
             scope.Start();
             try
@@ -959,7 +942,6 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetNullUnixTime(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("IntOperations.GetNullUnixTime");
             scope.Start();
             try

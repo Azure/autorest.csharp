@@ -43,7 +43,6 @@ namespace body_datetime_rfc1123
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetNullAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Operations.GetNull");
             scope.Start();
             try
@@ -72,7 +71,6 @@ namespace body_datetime_rfc1123
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetNull(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Operations.GetNull");
             scope.Start();
             try
@@ -112,7 +110,6 @@ namespace body_datetime_rfc1123
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Operations.GetInvalid");
             scope.Start();
             try
@@ -141,7 +138,6 @@ namespace body_datetime_rfc1123
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetInvalid(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Operations.GetInvalid");
             scope.Start();
             try
@@ -181,7 +177,6 @@ namespace body_datetime_rfc1123
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetOverflowAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Operations.GetOverflow");
             scope.Start();
             try
@@ -210,7 +205,6 @@ namespace body_datetime_rfc1123
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetOverflow(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Operations.GetOverflow");
             scope.Start();
             try
@@ -250,7 +244,6 @@ namespace body_datetime_rfc1123
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetUnderflowAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Operations.GetUnderflow");
             scope.Start();
             try
@@ -279,7 +272,6 @@ namespace body_datetime_rfc1123
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetUnderflow(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Operations.GetUnderflow");
             scope.Start();
             try
@@ -386,7 +378,6 @@ namespace body_datetime_rfc1123
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetUtcLowercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Operations.GetUtcLowercaseMaxDateTime");
             scope.Start();
             try
@@ -415,7 +406,6 @@ namespace body_datetime_rfc1123
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetUtcLowercaseMaxDateTime(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Operations.GetUtcLowercaseMaxDateTime");
             scope.Start();
             try
@@ -455,7 +445,6 @@ namespace body_datetime_rfc1123
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetUtcUppercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Operations.GetUtcUppercaseMaxDateTime");
             scope.Start();
             try
@@ -484,7 +473,6 @@ namespace body_datetime_rfc1123
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetUtcUppercaseMaxDateTime(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Operations.GetUtcUppercaseMaxDateTime");
             scope.Start();
             try
@@ -591,7 +579,6 @@ namespace body_datetime_rfc1123
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetUtcMinDateTimeAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Operations.GetUtcMinDateTime");
             scope.Start();
             try
@@ -620,7 +607,6 @@ namespace body_datetime_rfc1123
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetUtcMinDateTime(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Operations.GetUtcMinDateTime");
             scope.Start();
             try
