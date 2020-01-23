@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo", "Demo.csproj", "{38400135-5330-4D7B-8CBC-D5515DAACF06}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3278371B-26DD-471E-8513-270401359D03} = {3278371B-26DD-471E-8513-270401359D03}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CognitiveSearch", "..\CognitiveSearch\CognitiveSearch.csproj", "{3278371B-26DD-471E-8513-270401359D03}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{38400135-5330-4D7B-8CBC-D5515DAACF06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38400135-5330-4D7B-8CBC-D5515DAACF06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38400135-5330-4D7B-8CBC-D5515DAACF06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38400135-5330-4D7B-8CBC-D5515DAACF06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3278371B-26DD-471E-8513-270401359D03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3278371B-26DD-471E-8513-270401359D03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3278371B-26DD-471E-8513-270401359D03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3278371B-26DD-471E-8513-270401359D03}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F5FAA57A-577F-4654-BDCD-EA7A8D11F4D1}
+	EndGlobalSection
+EndGlobal
