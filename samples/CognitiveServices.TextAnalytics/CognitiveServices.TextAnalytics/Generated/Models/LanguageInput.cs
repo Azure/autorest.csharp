@@ -8,9 +8,7 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         /// <summary> Unique, non-empty document identifier. </summary>
         public string Id { get; set; }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-STRING. </summary>
         public string Text { get; set; }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-STRING. </summary>
         public string? CountryHint { get; set; }
     }
 }

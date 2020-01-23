@@ -1782,6 +1782,10 @@
         "implementation": {
           "$ref": "#/definitions/ImplementationLocation",
           "description": "suggested implementation location for this parameter"
+        },
+        "hidden": {
+          "description": "When a parameter is flattened, it will be left in the list, but marked hidden (so, don't generate those!)",
+          "type": "boolean"
         }
       },
       "defaultProperties": [],
@@ -1794,6 +1798,41 @@
       "allOf": [
         {
           "$ref": "#/definitions/Value"
+        }
+      ]
+    },
+    "VirtualParameter": {
+      "type": "object",
+      "properties": {
+        "originalParameter": {
+          "$ref": "#/definitions/Parameter",
+          "description": "the original body parameter that this parameter is in effect replacing"
+        },
+        "pathToProperty": {
+          "description": "if this parameter is for a nested property, this is the path of properties it takes to get there",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Property"
+          }
+        },
+        "targetProperty": {
+          "$ref": "#/definitions/Property",
+          "description": "the target property this virtual parameter represents"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "language",
+        "originalParameter",
+        "pathToProperty",
+        "protocol",
+        "schema",
+        "targetProperty"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Parameter"
         }
       ]
     },

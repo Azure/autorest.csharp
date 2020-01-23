@@ -10,7 +10,6 @@ namespace xml_service.Models
     {
         /// <summary> MISSING·SCHEMA-DESCRIPTION-DATETIME. </summary>
         public DateTimeOffset LastModified { get; set; }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-STRING. </summary>
         public string Etag { get; set; }
         /// <summary> MISSING·SCHEMA-DESCRIPTION-CHOICE. </summary>
         public LeaseStatusType? LeaseStatus { get; set; }

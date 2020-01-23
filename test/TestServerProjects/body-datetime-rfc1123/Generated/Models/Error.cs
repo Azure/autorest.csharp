@@ -8,7 +8,6 @@ namespace body_datetime_rfc1123.Models
     {
         /// <summary> MISSING·SCHEMA-DESCRIPTION-INTEGER. </summary>
         public int? Status { get; set; }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-STRING. </summary>
         public string? Message { get; set; }
     }
 }

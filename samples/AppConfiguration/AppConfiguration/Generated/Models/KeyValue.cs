@@ -9,13 +9,9 @@ namespace AppConfiguration.Models
     /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
     public partial class KeyValue
     {
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-STRING. </summary>
         public string? Key { get; set; }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-STRING. </summary>
         public string? Label { get; set; }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-STRING. </summary>
         public string? ContentType { get; set; }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-STRING. </summary>
         public string? Value { get; set; }
         /// <summary> MISSING·SCHEMA-DESCRIPTION-DATETIME. </summary>
         public DateTimeOffset? LastModified { get; set; }
@@ -23,7 +19,6 @@ namespace AppConfiguration.Models
         public IDictionary<string, string>? Tags { get; set; }
         /// <summary> MISSING·SCHEMA-DESCRIPTION-BOOLEAN. </summary>
         public bool? Locked { get; set; }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-STRING. </summary>
         public string? Etag { get; set; }
     }
 }

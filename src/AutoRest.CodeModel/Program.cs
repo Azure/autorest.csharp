@@ -62,7 +62,9 @@ namespace AutoRest.CodeModel
                 // Class names that conflict with project class names
                 .Replace("HttpHeader", "HttpResponseHeader")
                 .Replace("class Parameter", "class RequestParameter")
+                .Replace(": Parameter", ": RequestParameter")
                 .Replace("<Parameter>", "<RequestParameter>")
+                .Replace("public Parameter OriginalParameter { get; set; } = new Parameter();", "public RequestParameter OriginalParameter { get; set; } = new RequestParameter();")
                 .Replace("class Request ", "class ServiceRequest ")
                 .Replace("public Request Request { get; set; } = new Request();", "public ServiceRequest Request { get; set; } = new ServiceRequest();")
                 .Replace("class Response ", "class ServiceResponse ")

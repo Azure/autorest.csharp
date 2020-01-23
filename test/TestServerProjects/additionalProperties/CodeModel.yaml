@@ -46,6 +46,7 @@ schemas: !<!Schemas>
             default:
               name: friendly
               description: MISSING·SCHEMA-DESCRIPTION-BOOLEAN
+              originalName: friendly
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
@@ -76,6 +77,7 @@ schemas: !<!Schemas>
         default:
           name: id
           description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+          originalName: id
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_22
@@ -86,14 +88,15 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: PetAPTrue-name
-            description: MISSING·SCHEMA-DESCRIPTION-STRING
+            description: ''
         protocol: !<!Protocols> {}
       required: false
       serializedName: name
       language: !<!Languages> 
         default:
           name: name
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          description: ''
+          originalName: name
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!BooleanSchema> &ref_10
@@ -110,6 +113,7 @@ schemas: !<!Schemas>
         default:
           name: status
           description: MISSING·SCHEMA-DESCRIPTION-BOOLEAN
+          originalName: status
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -137,6 +141,7 @@ schemas: !<!Schemas>
         default:
           name: status
           description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+          originalName: status
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_23
@@ -147,13 +152,14 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: Error-message
-            description: MISSING·SCHEMA-DESCRIPTION-STRING
+            description: ''
         protocol: !<!Protocols> {}
       serializedName: message
       language: !<!Languages> 
         default:
           name: message
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          description: ''
+          originalName: message
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -201,6 +207,7 @@ schemas: !<!Schemas>
         default:
           name: id
           description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+          originalName: id
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_24
@@ -211,14 +218,15 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: PetAPObject-name
-            description: MISSING·SCHEMA-DESCRIPTION-STRING
+            description: ''
         protocol: !<!Protocols> {}
       required: false
       serializedName: name
       language: !<!Languages> 
         default:
           name: name
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          description: ''
+          originalName: name
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!BooleanSchema> &ref_12
@@ -235,6 +243,7 @@ schemas: !<!Schemas>
         default:
           name: status
           description: MISSING·SCHEMA-DESCRIPTION-BOOLEAN
+          originalName: status
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -259,7 +268,7 @@ schemas: !<!Schemas>
           language: !<!Languages> 
             default:
               name: string
-              description: MISSING·SCHEMA-DESCRIPTION-STRING
+              description: ''
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
@@ -284,6 +293,7 @@ schemas: !<!Schemas>
         default:
           name: id
           description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+          originalName: id
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_25
@@ -294,14 +304,15 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: PetAPString-name
-            description: MISSING·SCHEMA-DESCRIPTION-STRING
+            description: ''
         protocol: !<!Protocols> {}
       required: false
       serializedName: name
       language: !<!Languages> 
         default:
           name: name
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          description: ''
+          originalName: name
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!BooleanSchema> &ref_13
@@ -318,6 +329,7 @@ schemas: !<!Schemas>
         default:
           name: status
           description: MISSING·SCHEMA-DESCRIPTION-BOOLEAN
+          originalName: status
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -346,6 +358,7 @@ schemas: !<!Schemas>
         default:
           name: id
           description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+          originalName: id
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_26
@@ -356,14 +369,15 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: PetAPInProperties-name
-            description: MISSING·SCHEMA-DESCRIPTION-STRING
+            description: ''
         protocol: !<!Protocols> {}
       required: false
       serializedName: name
       language: !<!Languages> 
         default:
           name: name
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          description: ''
+          originalName: name
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!BooleanSchema> &ref_14
@@ -380,6 +394,7 @@ schemas: !<!Schemas>
         default:
           name: status
           description: MISSING·SCHEMA-DESCRIPTION-BOOLEAN
+          originalName: status
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!DictionarySchema> &ref_8
@@ -393,7 +408,7 @@ schemas: !<!Schemas>
           language: !<!Languages> 
             default:
               name: number
-              description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+              description: ''
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
@@ -406,6 +421,7 @@ schemas: !<!Schemas>
         default:
           name: additionalProperties
           description: Dictionary of <components·schemas·petapinproperties·properties·additionalproperties·additionalproperties>
+          originalName: additionalProperties
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -446,6 +462,7 @@ schemas: !<!Schemas>
         default:
           name: id
           description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+          originalName: id
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_27
@@ -456,14 +473,15 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: PetAPInPropertiesWithAPString-name
-            description: MISSING·SCHEMA-DESCRIPTION-STRING
+            description: ''
         protocol: !<!Protocols> {}
       required: false
       serializedName: name
       language: !<!Languages> 
         default:
           name: name
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          description: ''
+          originalName: name
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!BooleanSchema> &ref_15
@@ -480,6 +498,7 @@ schemas: !<!Schemas>
         default:
           name: status
           description: MISSING·SCHEMA-DESCRIPTION-BOOLEAN
+          originalName: status
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_28
@@ -490,14 +509,15 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: PetAPInPropertiesWithAPString-@odata.location
-            description: MISSING·SCHEMA-DESCRIPTION-STRING
+            description: ''
         protocol: !<!Protocols> {}
       required: true
       serializedName: '@odata.location'
       language: !<!Languages> 
         default:
-          name: '@odata.location'
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          name: OdataLocation
+          description: ''
+          originalName: '@odata.location'
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!DictionarySchema> &ref_9
@@ -514,6 +534,7 @@ schemas: !<!Schemas>
         default:
           name: additionalProperties
           description: Dictionary of <components·schemas·petapinproperties·properties·additionalproperties·additionalproperties>
+          originalName: additionalProperties
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -565,6 +586,8 @@ globalParameters:
   clientDefaultValue: 'http://localhost:3000'
   implementation: Client
   required: true
+  extensions:
+    x-ms-skip-url-encoding: true
   language: !<!Languages> 
     default:
       name: $host

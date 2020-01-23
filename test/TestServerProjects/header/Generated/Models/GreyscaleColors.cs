@@ -6,11 +6,11 @@ namespace header.Models
     /// <summary> MISSING·SCHEMA-DESCRIPTION-CHOICE. </summary>
     public enum GreyscaleColors
     {
-        /// <summary> White. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         White,
-        /// <summary> black. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Black,
-        /// <summary> GREY. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         GREY
     }
 }

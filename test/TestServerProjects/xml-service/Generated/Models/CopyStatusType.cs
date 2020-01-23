@@ -6,13 +6,13 @@ namespace xml_service.Models
     /// <summary> MISSING·SCHEMA-DESCRIPTION-CHOICE. </summary>
     public enum CopyStatusType
     {
-        /// <summary> pending. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Pending,
-        /// <summary> success. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Success,
-        /// <summary> aborted. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Aborted,
-        /// <summary> failed. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Failed
     }
 }

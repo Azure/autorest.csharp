@@ -29,27 +29,27 @@ namespace paging.Models
         private const string DeletedValue = "Deleted";
         private const string OKValue = "OK";
 
-        /// <summary> Succeeded. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static OperationResultStatus Succeeded { get; } = new OperationResultStatus(SucceededValue);
-        /// <summary> Failed. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static OperationResultStatus Failed { get; } = new OperationResultStatus(FailedValue);
-        /// <summary> canceled. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static OperationResultStatus Canceled { get; } = new OperationResultStatus(CanceledValue);
-        /// <summary> Accepted. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static OperationResultStatus Accepted { get; } = new OperationResultStatus(AcceptedValue);
-        /// <summary> Creating. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static OperationResultStatus Creating { get; } = new OperationResultStatus(CreatingValue);
-        /// <summary> Created. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static OperationResultStatus Created { get; } = new OperationResultStatus(CreatedValue);
-        /// <summary> Updating. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static OperationResultStatus Updating { get; } = new OperationResultStatus(UpdatingValue);
-        /// <summary> Updated. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static OperationResultStatus Updated { get; } = new OperationResultStatus(UpdatedValue);
-        /// <summary> Deleting. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static OperationResultStatus Deleting { get; } = new OperationResultStatus(DeletingValue);
-        /// <summary> Deleted. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static OperationResultStatus Deleted { get; } = new OperationResultStatus(DeletedValue);
-        /// <summary> OK. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static OperationResultStatus OK { get; } = new OperationResultStatus(OKValue);
         /// <summary> Determines if two <see cref="OperationResultStatus"/> values are the same. </summary>
         public static bool operator ==(OperationResultStatus left, OperationResultStatus right) => left.Equals(right);

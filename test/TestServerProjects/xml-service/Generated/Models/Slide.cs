@@ -8,9 +8,7 @@ namespace xml_service.Models
     /// <summary> A slide in a slideshow. </summary>
     public partial class Slide
     {
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-STRING. </summary>
         public string? Type { get; set; }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-STRING. </summary>
         public string? Title { get; set; }
         /// <summary> MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA. </summary>
         public ICollection<string>? Items { get; set; }

@@ -20,19 +20,19 @@ namespace body_complex.Models
         private const string PinkValue = "pink";
         private const string GrayValue = "gray";
         private const string BrownValue = "brown";
-        private const string REDValue = "RED";
-        private const string RedValue = "red";
+        private const string UpperRedValue = "RED";
+        private const string LowerRedValue = "red";
 
-        /// <summary> pink. </summary>
+        /// <summary> The value &apos;pink&apos;. </summary>
         public static GoblinSharkColor Pink { get; } = new GoblinSharkColor(PinkValue);
-        /// <summary> gray. </summary>
+        /// <summary> The value &apos;gray&apos;. </summary>
         public static GoblinSharkColor Gray { get; } = new GoblinSharkColor(GrayValue);
-        /// <summary> brown. </summary>
+        /// <summary> The value &apos;brown&apos;. </summary>
         public static GoblinSharkColor Brown { get; } = new GoblinSharkColor(BrownValue);
-        /// <summary> RED. </summary>
-        public static GoblinSharkColor RED { get; } = new GoblinSharkColor(REDValue);
-        /// <summary> red. </summary>
-        public static GoblinSharkColor Red { get; } = new GoblinSharkColor(RedValue);
+        /// <summary> Uppercase RED. </summary>
+        public static GoblinSharkColor UpperRed { get; } = new GoblinSharkColor(UpperRedValue);
+        /// <summary> Lowercase RED. </summary>
+        public static GoblinSharkColor LowerRed { get; } = new GoblinSharkColor(LowerRedValue);
         /// <summary> Determines if two <see cref="GoblinSharkColor"/> values are the same. </summary>
         public static bool operator ==(GoblinSharkColor left, GoblinSharkColor right) => left.Equals(right);
         /// <summary> Determines if two <see cref="GoblinSharkColor"/> values are not the same. </summary>

@@ -20,9 +20,9 @@ namespace xml_service.Models
         private const string RehydratePendingToHotValue = "rehydrate-pending-to-hot";
         private const string RehydratePendingToCoolValue = "rehydrate-pending-to-cool";
 
-        /// <summary> rehydrate-pending-to-hot. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static ArchiveStatus RehydratePendingToHot { get; } = new ArchiveStatus(RehydratePendingToHotValue);
-        /// <summary> rehydrate-pending-to-cool. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static ArchiveStatus RehydratePendingToCool { get; } = new ArchiveStatus(RehydratePendingToCoolValue);
         /// <summary> Determines if two <see cref="ArchiveStatus"/> values are the same. </summary>
         public static bool operator ==(ArchiveStatus left, ArchiveStatus right) => left.Equals(right);
