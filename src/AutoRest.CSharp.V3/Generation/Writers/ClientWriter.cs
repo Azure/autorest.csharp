@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -366,7 +367,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 }
             }
 
-            if (parameters.Count > 0)
+            if (parameters.Any())
             {
                 writer.Line();
             }
