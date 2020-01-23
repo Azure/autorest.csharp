@@ -14,12 +14,12 @@ namespace CognitiveSearch.Models
             if (Delimiter != null)
             {
                 writer.WritePropertyName("delimiter");
-                writer.WriteStringValue(Delimiter.Value.ToString());
+                writer.WriteStringValue(Delimiter.Value);
             }
             if (Replacement != null)
             {
                 writer.WritePropertyName("replacement");
-                writer.WriteStringValue(Replacement.Value.ToString());
+                writer.WriteStringValue(Replacement.Value);
             }
             if (BufferSize != null)
             {
@@ -53,7 +53,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Delimiter = property.Value.GetString()?[0];
+                    result.Delimiter = property.Value.GetChar();
                     continue;
                 }
                 if (property.NameEquals("replacement"))
@@ -62,7 +62,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Replacement = property.Value.GetString()?[0];
+                    result.Replacement = property.Value.GetChar();
                     continue;
                 }
                 if (property.NameEquals("bufferSize"))
