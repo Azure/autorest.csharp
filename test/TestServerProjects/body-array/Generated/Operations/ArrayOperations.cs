@@ -45,7 +45,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<int>>> GetNullAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetNull");
             scope.Start();
             try
@@ -78,7 +77,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<int>> GetNull(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetNull");
             scope.Start();
             try
@@ -122,7 +120,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<int>>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetInvalid");
             scope.Start();
             try
@@ -155,7 +152,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<int>> GetInvalid(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetInvalid");
             scope.Start();
             try
@@ -199,7 +195,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<int>>> GetEmptyAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetEmpty");
             scope.Start();
             try
@@ -232,7 +227,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<int>> GetEmpty(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetEmpty");
             scope.Start();
             try
@@ -356,7 +350,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<bool>>> GetBooleanTfftAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetBooleanTfft");
             scope.Start();
             try
@@ -389,7 +382,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<bool>> GetBooleanTfft(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetBooleanTfft");
             scope.Start();
             try
@@ -513,7 +505,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<bool>>> GetBooleanInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetBooleanInvalidNull");
             scope.Start();
             try
@@ -546,7 +537,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<bool>> GetBooleanInvalidNull(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetBooleanInvalidNull");
             scope.Start();
             try
@@ -590,7 +580,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<bool>>> GetBooleanInvalidStringAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetBooleanInvalidString");
             scope.Start();
             try
@@ -623,7 +612,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<bool>> GetBooleanInvalidString(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetBooleanInvalidString");
             scope.Start();
             try
@@ -667,7 +655,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<int>>> GetIntegerValidAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetIntegerValid");
             scope.Start();
             try
@@ -700,7 +687,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<int>> GetIntegerValid(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetIntegerValid");
             scope.Start();
             try
@@ -824,7 +810,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<int>>> GetIntInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetIntInvalidNull");
             scope.Start();
             try
@@ -857,7 +842,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<int>> GetIntInvalidNull(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetIntInvalidNull");
             scope.Start();
             try
@@ -901,7 +885,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<int>>> GetIntInvalidStringAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetIntInvalidString");
             scope.Start();
             try
@@ -934,7 +917,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<int>> GetIntInvalidString(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetIntInvalidString");
             scope.Start();
             try
@@ -978,7 +960,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<long>>> GetLongValidAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetLongValid");
             scope.Start();
             try
@@ -1011,7 +992,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<long>> GetLongValid(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetLongValid");
             scope.Start();
             try
@@ -1135,7 +1115,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<long>>> GetLongInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetLongInvalidNull");
             scope.Start();
             try
@@ -1168,7 +1147,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<long>> GetLongInvalidNull(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetLongInvalidNull");
             scope.Start();
             try
@@ -1212,7 +1190,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<long>>> GetLongInvalidStringAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetLongInvalidString");
             scope.Start();
             try
@@ -1245,7 +1222,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<long>> GetLongInvalidString(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetLongInvalidString");
             scope.Start();
             try
@@ -1289,7 +1265,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<float>>> GetFloatValidAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetFloatValid");
             scope.Start();
             try
@@ -1322,7 +1297,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<float>> GetFloatValid(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetFloatValid");
             scope.Start();
             try
@@ -1446,7 +1420,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<float>>> GetFloatInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetFloatInvalidNull");
             scope.Start();
             try
@@ -1479,7 +1452,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<float>> GetFloatInvalidNull(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetFloatInvalidNull");
             scope.Start();
             try
@@ -1523,7 +1495,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<float>>> GetFloatInvalidStringAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetFloatInvalidString");
             scope.Start();
             try
@@ -1556,7 +1527,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<float>> GetFloatInvalidString(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetFloatInvalidString");
             scope.Start();
             try
@@ -1600,7 +1570,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<double>>> GetDoubleValidAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDoubleValid");
             scope.Start();
             try
@@ -1633,7 +1602,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<double>> GetDoubleValid(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDoubleValid");
             scope.Start();
             try
@@ -1757,7 +1725,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<double>>> GetDoubleInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDoubleInvalidNull");
             scope.Start();
             try
@@ -1790,7 +1757,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<double>> GetDoubleInvalidNull(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDoubleInvalidNull");
             scope.Start();
             try
@@ -1834,7 +1800,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<double>>> GetDoubleInvalidStringAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDoubleInvalidString");
             scope.Start();
             try
@@ -1867,7 +1832,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<double>> GetDoubleInvalidString(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDoubleInvalidString");
             scope.Start();
             try
@@ -1911,7 +1875,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<string>>> GetStringValidAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetStringValid");
             scope.Start();
             try
@@ -1944,7 +1907,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<string>> GetStringValid(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetStringValid");
             scope.Start();
             try
@@ -2068,7 +2030,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<FooEnum>>> GetEnumValidAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetEnumValid");
             scope.Start();
             try
@@ -2101,7 +2062,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<FooEnum>> GetEnumValid(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetEnumValid");
             scope.Start();
             try
@@ -2225,7 +2185,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<Enum0>>> GetStringEnumValidAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetStringEnumValid");
             scope.Start();
             try
@@ -2258,7 +2217,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<Enum0>> GetStringEnumValid(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetStringEnumValid");
             scope.Start();
             try
@@ -2382,7 +2340,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<string>>> GetStringWithNullAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetStringWithNull");
             scope.Start();
             try
@@ -2415,7 +2372,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<string>> GetStringWithNull(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetStringWithNull");
             scope.Start();
             try
@@ -2459,7 +2415,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<string>>> GetStringWithInvalidAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetStringWithInvalid");
             scope.Start();
             try
@@ -2492,7 +2447,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<string>> GetStringWithInvalid(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetStringWithInvalid");
             scope.Start();
             try
@@ -2536,7 +2490,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<Guid>>> GetUuidValidAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetUuidValid");
             scope.Start();
             try
@@ -2569,7 +2522,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<Guid>> GetUuidValid(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetUuidValid");
             scope.Start();
             try
@@ -2693,7 +2645,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<Guid>>> GetUuidInvalidCharsAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetUuidInvalidChars");
             scope.Start();
             try
@@ -2726,7 +2677,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<Guid>> GetUuidInvalidChars(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetUuidInvalidChars");
             scope.Start();
             try
@@ -2770,7 +2720,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<DateTimeOffset>>> GetDateValidAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDateValid");
             scope.Start();
             try
@@ -2803,7 +2752,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<DateTimeOffset>> GetDateValid(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDateValid");
             scope.Start();
             try
@@ -2927,7 +2875,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<DateTimeOffset>>> GetDateInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDateInvalidNull");
             scope.Start();
             try
@@ -2960,7 +2907,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<DateTimeOffset>> GetDateInvalidNull(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDateInvalidNull");
             scope.Start();
             try
@@ -3004,7 +2950,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<DateTimeOffset>>> GetDateInvalidCharsAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDateInvalidChars");
             scope.Start();
             try
@@ -3037,7 +2982,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<DateTimeOffset>> GetDateInvalidChars(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDateInvalidChars");
             scope.Start();
             try
@@ -3081,7 +3025,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<DateTimeOffset>>> GetDateTimeValidAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDateTimeValid");
             scope.Start();
             try
@@ -3114,7 +3057,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<DateTimeOffset>> GetDateTimeValid(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDateTimeValid");
             scope.Start();
             try
@@ -3238,7 +3180,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<DateTimeOffset>>> GetDateTimeInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDateTimeInvalidNull");
             scope.Start();
             try
@@ -3271,7 +3212,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<DateTimeOffset>> GetDateTimeInvalidNull(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDateTimeInvalidNull");
             scope.Start();
             try
@@ -3315,7 +3255,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<DateTimeOffset>>> GetDateTimeInvalidCharsAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDateTimeInvalidChars");
             scope.Start();
             try
@@ -3348,7 +3287,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<DateTimeOffset>> GetDateTimeInvalidChars(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDateTimeInvalidChars");
             scope.Start();
             try
@@ -3392,7 +3330,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<DateTimeOffset>>> GetDateTimeRfc1123ValidAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDateTimeRfc1123Valid");
             scope.Start();
             try
@@ -3425,7 +3362,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<DateTimeOffset>> GetDateTimeRfc1123Valid(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDateTimeRfc1123Valid");
             scope.Start();
             try
@@ -3549,7 +3485,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<TimeSpan>>> GetDurationValidAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDurationValid");
             scope.Start();
             try
@@ -3582,7 +3517,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<TimeSpan>> GetDurationValid(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDurationValid");
             scope.Start();
             try
@@ -3706,7 +3640,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<byte[]>>> GetByteValidAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetByteValid");
             scope.Start();
             try
@@ -3739,7 +3672,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<byte[]>> GetByteValid(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetByteValid");
             scope.Start();
             try
@@ -3863,7 +3795,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<byte[]>>> GetByteInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetByteInvalidNull");
             scope.Start();
             try
@@ -3896,7 +3827,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<byte[]>> GetByteInvalidNull(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetByteInvalidNull");
             scope.Start();
             try
@@ -3940,7 +3870,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<byte[]>>> GetBase64UrlAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetBase64Url");
             scope.Start();
             try
@@ -3973,7 +3902,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<byte[]>> GetBase64Url(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetBase64Url");
             scope.Start();
             try
@@ -4017,7 +3945,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<Product>>> GetComplexNullAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetComplexNull");
             scope.Start();
             try
@@ -4050,7 +3977,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<Product>> GetComplexNull(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetComplexNull");
             scope.Start();
             try
@@ -4094,7 +4020,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<Product>>> GetComplexEmptyAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetComplexEmpty");
             scope.Start();
             try
@@ -4127,7 +4052,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<Product>> GetComplexEmpty(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetComplexEmpty");
             scope.Start();
             try
@@ -4171,7 +4095,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<Product>>> GetComplexItemNullAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetComplexItemNull");
             scope.Start();
             try
@@ -4204,7 +4127,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<Product>> GetComplexItemNull(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetComplexItemNull");
             scope.Start();
             try
@@ -4248,7 +4170,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<Product>>> GetComplexItemEmptyAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetComplexItemEmpty");
             scope.Start();
             try
@@ -4281,7 +4202,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<Product>> GetComplexItemEmpty(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetComplexItemEmpty");
             scope.Start();
             try
@@ -4325,7 +4245,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<Product>>> GetComplexValidAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetComplexValid");
             scope.Start();
             try
@@ -4358,7 +4277,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<Product>> GetComplexValid(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetComplexValid");
             scope.Start();
             try
@@ -4482,7 +4400,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<ICollection<string>>>> GetArrayNullAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetArrayNull");
             scope.Start();
             try
@@ -4520,7 +4437,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<ICollection<string>>> GetArrayNull(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetArrayNull");
             scope.Start();
             try
@@ -4569,7 +4485,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<ICollection<string>>>> GetArrayEmptyAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetArrayEmpty");
             scope.Start();
             try
@@ -4607,7 +4522,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<ICollection<string>>> GetArrayEmpty(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetArrayEmpty");
             scope.Start();
             try
@@ -4656,7 +4570,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<ICollection<string>>>> GetArrayItemNullAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetArrayItemNull");
             scope.Start();
             try
@@ -4694,7 +4607,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<ICollection<string>>> GetArrayItemNull(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetArrayItemNull");
             scope.Start();
             try
@@ -4743,7 +4655,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<ICollection<string>>>> GetArrayItemEmptyAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetArrayItemEmpty");
             scope.Start();
             try
@@ -4781,7 +4692,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<ICollection<string>>> GetArrayItemEmpty(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetArrayItemEmpty");
             scope.Start();
             try
@@ -4830,7 +4740,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<ICollection<string>>>> GetArrayValidAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetArrayValid");
             scope.Start();
             try
@@ -4868,7 +4777,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<ICollection<string>>> GetArrayValid(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetArrayValid");
             scope.Start();
             try
@@ -5002,7 +4910,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<IDictionary<string, string>>>> GetDictionaryNullAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDictionaryNull");
             scope.Start();
             try
@@ -5040,7 +4947,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<IDictionary<string, string>>> GetDictionaryNull(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDictionaryNull");
             scope.Start();
             try
@@ -5089,7 +4995,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<IDictionary<string, string>>>> GetDictionaryEmptyAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDictionaryEmpty");
             scope.Start();
             try
@@ -5127,7 +5032,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<IDictionary<string, string>>> GetDictionaryEmpty(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDictionaryEmpty");
             scope.Start();
             try
@@ -5176,7 +5080,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<IDictionary<string, string>>>> GetDictionaryItemNullAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDictionaryItemNull");
             scope.Start();
             try
@@ -5214,7 +5117,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<IDictionary<string, string>>> GetDictionaryItemNull(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDictionaryItemNull");
             scope.Start();
             try
@@ -5263,7 +5165,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<IDictionary<string, string>>>> GetDictionaryItemEmptyAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDictionaryItemEmpty");
             scope.Start();
             try
@@ -5301,7 +5202,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<IDictionary<string, string>>> GetDictionaryItemEmpty(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDictionaryItemEmpty");
             scope.Start();
             try
@@ -5350,7 +5250,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<IDictionary<string, string>>>> GetDictionaryValidAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDictionaryValid");
             scope.Start();
             try
@@ -5388,7 +5287,6 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<IDictionary<string, string>>> GetDictionaryValid(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ArrayOperations.GetDictionaryValid");
             scope.Start();
             try

@@ -43,7 +43,6 @@ namespace body_duration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<TimeSpan>> GetNullAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DurationOperations.GetNull");
             scope.Start();
             try
@@ -72,7 +71,6 @@ namespace body_duration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<TimeSpan> GetNull(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DurationOperations.GetNull");
             scope.Start();
             try
@@ -179,7 +177,6 @@ namespace body_duration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<TimeSpan>> GetPositiveDurationAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DurationOperations.GetPositiveDuration");
             scope.Start();
             try
@@ -208,7 +205,6 @@ namespace body_duration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<TimeSpan> GetPositiveDuration(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DurationOperations.GetPositiveDuration");
             scope.Start();
             try
@@ -248,7 +244,6 @@ namespace body_duration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<TimeSpan>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DurationOperations.GetInvalid");
             scope.Start();
             try
@@ -277,7 +272,6 @@ namespace body_duration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<TimeSpan> GetInvalid(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DurationOperations.GetInvalid");
             scope.Start();
             try

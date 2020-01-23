@@ -43,7 +43,6 @@ namespace body_boolean
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<bool>> GetTrueAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("BoolOperations.GetTrue");
             scope.Start();
             try
@@ -72,7 +71,6 @@ namespace body_boolean
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<bool> GetTrue(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("BoolOperations.GetTrue");
             scope.Start();
             try
@@ -116,7 +114,6 @@ namespace body_boolean
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutTrueAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("BoolOperations.PutTrue");
             scope.Start();
             try
@@ -141,7 +138,6 @@ namespace body_boolean
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutTrue(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("BoolOperations.PutTrue");
             scope.Start();
             try
@@ -177,7 +173,6 @@ namespace body_boolean
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<bool>> GetFalseAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("BoolOperations.GetFalse");
             scope.Start();
             try
@@ -206,7 +201,6 @@ namespace body_boolean
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<bool> GetFalse(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("BoolOperations.GetFalse");
             scope.Start();
             try
@@ -250,7 +244,6 @@ namespace body_boolean
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutFalseAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("BoolOperations.PutFalse");
             scope.Start();
             try
@@ -275,7 +268,6 @@ namespace body_boolean
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutFalse(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("BoolOperations.PutFalse");
             scope.Start();
             try
@@ -311,7 +303,6 @@ namespace body_boolean
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<bool>> GetNullAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("BoolOperations.GetNull");
             scope.Start();
             try
@@ -340,7 +331,6 @@ namespace body_boolean
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<bool> GetNull(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("BoolOperations.GetNull");
             scope.Start();
             try
@@ -380,7 +370,6 @@ namespace body_boolean
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<bool>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("BoolOperations.GetInvalid");
             scope.Start();
             try
@@ -409,7 +398,6 @@ namespace body_boolean
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<bool> GetInvalid(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("BoolOperations.GetInvalid");
             scope.Start();
             try
