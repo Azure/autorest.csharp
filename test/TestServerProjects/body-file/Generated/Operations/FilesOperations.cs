@@ -43,7 +43,6 @@ namespace body_file
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Stream>> GetFileAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("FilesOperations.GetFile");
             scope.Start();
             try
@@ -71,7 +70,6 @@ namespace body_file
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Stream> GetFile(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("FilesOperations.GetFile");
             scope.Start();
             try
@@ -110,7 +108,6 @@ namespace body_file
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Stream>> GetFileLargeAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("FilesOperations.GetFileLarge");
             scope.Start();
             try
@@ -138,7 +135,6 @@ namespace body_file
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Stream> GetFileLarge(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("FilesOperations.GetFileLarge");
             scope.Start();
             try
@@ -177,7 +173,6 @@ namespace body_file
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Stream>> GetEmptyFileAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("FilesOperations.GetEmptyFile");
             scope.Start();
             try
@@ -205,7 +200,6 @@ namespace body_file
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Stream> GetEmptyFile(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("FilesOperations.GetEmptyFile");
             scope.Start();
             try

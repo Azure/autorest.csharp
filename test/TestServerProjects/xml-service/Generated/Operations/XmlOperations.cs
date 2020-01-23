@@ -46,7 +46,6 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<RootWithRefAndNoMeta>> GetComplexTypeRefNoMetaAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("XmlOperations.GetComplexTypeRefNoMeta");
             scope.Start();
             try
@@ -80,7 +79,6 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<RootWithRefAndNoMeta> GetComplexTypeRefNoMeta(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("XmlOperations.GetComplexTypeRefNoMeta");
             scope.Start();
             try
@@ -200,7 +198,6 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<RootWithRefAndMeta>> GetComplexTypeRefWithMetaAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("XmlOperations.GetComplexTypeRefWithMeta");
             scope.Start();
             try
@@ -234,7 +231,6 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<RootWithRefAndMeta> GetComplexTypeRefWithMeta(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("XmlOperations.GetComplexTypeRefWithMeta");
             scope.Start();
             try
@@ -354,7 +350,6 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Slideshow>> GetSimpleAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("XmlOperations.GetSimple");
             scope.Start();
             try
@@ -388,7 +383,6 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Slideshow> GetSimple(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("XmlOperations.GetSimple");
             scope.Start();
             try
@@ -508,7 +502,6 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<AppleBarrel>> GetWrappedListsAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("XmlOperations.GetWrappedLists");
             scope.Start();
             try
@@ -542,7 +535,6 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<AppleBarrel> GetWrappedLists(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("XmlOperations.GetWrappedLists");
             scope.Start();
             try
@@ -662,7 +654,6 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<GetHeadersHeaders>> GetHeadersAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("XmlOperations.GetHeaders");
             scope.Start();
             try
@@ -688,7 +679,6 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<GetHeadersHeaders> GetHeaders(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("XmlOperations.GetHeaders");
             scope.Start();
             try
@@ -725,7 +715,6 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Slideshow>> GetEmptyListAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("XmlOperations.GetEmptyList");
             scope.Start();
             try
@@ -759,7 +748,6 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Slideshow> GetEmptyList(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("XmlOperations.GetEmptyList");
             scope.Start();
             try
@@ -879,7 +867,6 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<AppleBarrel>> GetEmptyWrappedListsAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("XmlOperations.GetEmptyWrappedLists");
             scope.Start();
             try
@@ -913,7 +900,6 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<AppleBarrel> GetEmptyWrappedLists(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("XmlOperations.GetEmptyWrappedLists");
             scope.Start();
             try
@@ -1033,7 +1019,6 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<Banana>>> GetRootListAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("XmlOperations.GetRootList");
             scope.Start();
             try
@@ -1073,7 +1058,6 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<Banana>> GetRootList(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("XmlOperations.GetRootList");
             scope.Start();
             try
@@ -1204,7 +1188,6 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<Banana>>> GetRootListSingleItemAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("XmlOperations.GetRootListSingleItem");
             scope.Start();
             try
@@ -1244,7 +1227,6 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<Banana>> GetRootListSingleItem(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("XmlOperations.GetRootListSingleItem");
             scope.Start();
             try
@@ -1375,7 +1357,6 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<Banana>>> GetEmptyRootListAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("XmlOperations.GetEmptyRootList");
             scope.Start();
             try
@@ -1415,7 +1396,6 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<Banana>> GetEmptyRootList(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("XmlOperations.GetEmptyRootList");
             scope.Start();
             try
@@ -1546,7 +1526,6 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Banana>> GetEmptyChildElementAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("XmlOperations.GetEmptyChildElement");
             scope.Start();
             try
@@ -1580,7 +1559,6 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Banana> GetEmptyChildElement(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("XmlOperations.GetEmptyChildElement");
             scope.Start();
             try
@@ -1701,7 +1679,6 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ListContainersResponse>> ListContainersAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("XmlOperations.ListContainers");
             scope.Start();
             try
@@ -1735,7 +1712,6 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ListContainersResponse> ListContainers(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("XmlOperations.ListContainers");
             scope.Start();
             try
@@ -1782,7 +1758,6 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<StorageServiceProperties>> GetServicePropertiesAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("XmlOperations.GetServiceProperties");
             scope.Start();
             try
@@ -1816,7 +1791,6 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<StorageServiceProperties> GetServiceProperties(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("XmlOperations.GetServiceProperties");
             scope.Start();
             try
@@ -1940,7 +1914,6 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ICollection<SignedIdentifier>>> GetAclsAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("XmlOperations.GetAcls");
             scope.Start();
             try
@@ -1980,7 +1953,6 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ICollection<SignedIdentifier>> GetAcls(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("XmlOperations.GetAcls");
             scope.Start();
             try
@@ -2115,7 +2087,6 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ListBlobsResponse>> ListBlobsAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("XmlOperations.ListBlobs");
             scope.Start();
             try
@@ -2149,7 +2120,6 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ListBlobsResponse> ListBlobs(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("XmlOperations.ListBlobs");
             scope.Start();
             try
@@ -2269,7 +2239,6 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<JSONOutput>> JsonOutputAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("XmlOperations.JsonOutput");
             scope.Start();
             try
@@ -2298,7 +2267,6 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<JSONOutput> JsonOutput(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("XmlOperations.JsonOutput");
             scope.Start();
             try

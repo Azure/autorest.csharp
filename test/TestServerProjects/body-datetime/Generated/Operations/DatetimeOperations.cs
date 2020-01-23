@@ -43,7 +43,6 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetNullAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DatetimeOperations.GetNull");
             scope.Start();
             try
@@ -72,7 +71,6 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetNull(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DatetimeOperations.GetNull");
             scope.Start();
             try
@@ -112,7 +110,6 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DatetimeOperations.GetInvalid");
             scope.Start();
             try
@@ -141,7 +138,6 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetInvalid(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DatetimeOperations.GetInvalid");
             scope.Start();
             try
@@ -181,7 +177,6 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetOverflowAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DatetimeOperations.GetOverflow");
             scope.Start();
             try
@@ -210,7 +205,6 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetOverflow(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DatetimeOperations.GetOverflow");
             scope.Start();
             try
@@ -250,7 +244,6 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetUnderflowAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DatetimeOperations.GetUnderflow");
             scope.Start();
             try
@@ -279,7 +272,6 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetUnderflow(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DatetimeOperations.GetUnderflow");
             scope.Start();
             try
@@ -453,7 +445,6 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetUtcLowercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DatetimeOperations.GetUtcLowercaseMaxDateTime");
             scope.Start();
             try
@@ -482,7 +473,6 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetUtcLowercaseMaxDateTime(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DatetimeOperations.GetUtcLowercaseMaxDateTime");
             scope.Start();
             try
@@ -522,7 +512,6 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetUtcUppercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DatetimeOperations.GetUtcUppercaseMaxDateTime");
             scope.Start();
             try
@@ -551,7 +540,6 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetUtcUppercaseMaxDateTime(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DatetimeOperations.GetUtcUppercaseMaxDateTime");
             scope.Start();
             try
@@ -591,7 +579,6 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetUtcUppercaseMaxDateTime7DigitsAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DatetimeOperations.GetUtcUppercaseMaxDateTime7Digits");
             scope.Start();
             try
@@ -620,7 +607,6 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetUtcUppercaseMaxDateTime7Digits(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DatetimeOperations.GetUtcUppercaseMaxDateTime7Digits");
             scope.Start();
             try
@@ -727,7 +713,6 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetLocalPositiveOffsetLowercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DatetimeOperations.GetLocalPositiveOffsetLowercaseMaxDateTime");
             scope.Start();
             try
@@ -756,7 +741,6 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetLocalPositiveOffsetLowercaseMaxDateTime(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DatetimeOperations.GetLocalPositiveOffsetLowercaseMaxDateTime");
             scope.Start();
             try
@@ -796,7 +780,6 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetLocalPositiveOffsetUppercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DatetimeOperations.GetLocalPositiveOffsetUppercaseMaxDateTime");
             scope.Start();
             try
@@ -825,7 +808,6 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetLocalPositiveOffsetUppercaseMaxDateTime(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DatetimeOperations.GetLocalPositiveOffsetUppercaseMaxDateTime");
             scope.Start();
             try
@@ -932,7 +914,6 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetLocalNegativeOffsetUppercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DatetimeOperations.GetLocalNegativeOffsetUppercaseMaxDateTime");
             scope.Start();
             try
@@ -961,7 +942,6 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetLocalNegativeOffsetUppercaseMaxDateTime(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DatetimeOperations.GetLocalNegativeOffsetUppercaseMaxDateTime");
             scope.Start();
             try
@@ -1001,7 +981,6 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetLocalNegativeOffsetLowercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DatetimeOperations.GetLocalNegativeOffsetLowercaseMaxDateTime");
             scope.Start();
             try
@@ -1030,7 +1009,6 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetLocalNegativeOffsetLowercaseMaxDateTime(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DatetimeOperations.GetLocalNegativeOffsetLowercaseMaxDateTime");
             scope.Start();
             try
@@ -1137,7 +1115,6 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetUtcMinDateTimeAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DatetimeOperations.GetUtcMinDateTime");
             scope.Start();
             try
@@ -1166,7 +1143,6 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetUtcMinDateTime(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DatetimeOperations.GetUtcMinDateTime");
             scope.Start();
             try
@@ -1273,7 +1249,6 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetLocalPositiveOffsetMinDateTimeAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DatetimeOperations.GetLocalPositiveOffsetMinDateTime");
             scope.Start();
             try
@@ -1302,7 +1277,6 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetLocalPositiveOffsetMinDateTime(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DatetimeOperations.GetLocalPositiveOffsetMinDateTime");
             scope.Start();
             try
@@ -1409,7 +1383,6 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetLocalNegativeOffsetMinDateTimeAsync(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DatetimeOperations.GetLocalNegativeOffsetMinDateTime");
             scope.Start();
             try
@@ -1438,7 +1411,6 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetLocalNegativeOffsetMinDateTime(CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DatetimeOperations.GetLocalNegativeOffsetMinDateTime");
             scope.Start();
             try
