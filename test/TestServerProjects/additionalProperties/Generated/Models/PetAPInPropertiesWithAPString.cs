@@ -35,7 +35,7 @@ namespace additionalProperties.Models
         /// <inheritdoc />
         public bool Remove(string key) => _additionalProperties.Remove(key);
         /// <inheritdoc />
-        public int Count => _additionalProperties.Count;
+        int ICollection<KeyValuePair<string, string>>.Count => _additionalProperties.Count;
         /// <inheritdoc />
         bool ICollection<KeyValuePair<string, string>>.IsReadOnly => _additionalProperties.IsReadOnly;
         /// <inheritdoc />

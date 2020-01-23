@@ -123,7 +123,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                             .WriteXmlDocumentationInheritDoc()
                             .Line($"public bool Remove({keyType} key) => {additionalProperties}.Remove(key);")
                             .WriteXmlDocumentationInheritDoc()
-                            .Line($"public int Count => _additionalProperties.Count;")
+                            .Line($"int {iCollectionKeyValuePairType}.Count => _additionalProperties.Count;")
                             .WriteXmlDocumentationInheritDoc()
                             .Line($"bool {iCollectionKeyValuePairType}.IsReadOnly => {additionalProperties}.IsReadOnly;")
                             .WriteXmlDocumentationInheritDoc()

@@ -67,5 +67,22 @@ namespace Azure.Core
             "P" => XmlConvert.ToTimeSpan(element.GetString()),
             _ => throw new ArgumentException("Format is not supported", nameof(format))
         };
+
+        public static char GetChar(this in JsonElement element)
+        {
+            if (element.ValueKind == JsonValueKind.String)
+            {
+                var text = element.GetString();
+                if (text == null || text.Length != 1)
+                {
+                    throw new NotSupportedException("Cannot convert \"" + text + "\" to a Char");
+                }
+                return text[0];
+            }
+            else
+            {
+                throw new NotSupportedException("Cannot convert " + element.ValueKind + " to a Char");
+            }
+        }
     }
 }
