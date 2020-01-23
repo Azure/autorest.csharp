@@ -11,7 +11,6 @@ namespace CognitiveSearch.Models
         {
             OdataType = "#Microsoft.Azure.Search.CognitiveServicesByKey";
         }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-STRING. </summary>
         public string Key { get; set; }
     }
 }

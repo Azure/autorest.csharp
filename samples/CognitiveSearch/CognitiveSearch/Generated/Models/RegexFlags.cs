@@ -26,21 +26,21 @@ namespace CognitiveSearch.Models
         private const string UNICODECASEValue = "UNICODE_CASE";
         private const string UNIXLINESValue = "UNIX_LINES";
 
-        /// <summary> CANON_EQ. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static RegexFlags CANONEQ { get; } = new RegexFlags(CANONEQValue);
-        /// <summary> CASE_INSENSITIVE. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static RegexFlags CASEINSENSITIVE { get; } = new RegexFlags(CASEINSENSITIVEValue);
-        /// <summary> COMMENTS. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static RegexFlags COMMENTS { get; } = new RegexFlags(COMMENTSValue);
-        /// <summary> DOTALL. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static RegexFlags DOTALL { get; } = new RegexFlags(DOTALLValue);
-        /// <summary> LITERAL. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static RegexFlags LITERAL { get; } = new RegexFlags(LITERALValue);
-        /// <summary> MULTILINE. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static RegexFlags MULTILINE { get; } = new RegexFlags(MULTILINEValue);
-        /// <summary> UNICODE_CASE. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static RegexFlags UNICODECASE { get; } = new RegexFlags(UNICODECASEValue);
-        /// <summary> UNIX_LINES. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static RegexFlags UNIXLINES { get; } = new RegexFlags(UNIXLINESValue);
         /// <summary> Determines if two <see cref="RegexFlags"/> values are the same. </summary>
         public static bool operator ==(RegexFlags left, RegexFlags right) => left.Equals(right);
