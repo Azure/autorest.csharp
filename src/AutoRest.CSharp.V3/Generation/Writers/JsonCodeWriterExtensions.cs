@@ -134,6 +134,12 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                             writer.Append($"({name}")
                                 .AppendNullableValue(implementationType);
 
+                            // TODO: Turn a char into a string so it can be passed to WriteStringValue
+                            if (frameworkType == typeof(char))
+                            {
+                                writer.Append($".ToString()");
+                            }
+
                             if (writeFormat && valueSerialization.Format.ToFormatSpecifier() is string formatString)
                             {
                                 writer.Append($", {formatString:L}");
@@ -347,6 +353,14 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     }
 
                     writer.AppendRaw(")");
+
+                    // TODO: Turn a GetString() into a char in a safer way
+                    if (frameworkType == typeof(char))
+                    {
+                        // Empty strings will throw
+                        writer.AppendRaw("?[0]");
+                    }
+
                     return;
             }
         }
