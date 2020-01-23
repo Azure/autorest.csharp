@@ -42,9 +42,15 @@ namespace Azure.Core
                     }
                     else
                     {
-                        Host = value.Substring(0, separator);
+                        Host += value.Substring(0, separator);
 
                         _position = value[separator] == hostSeparator ? RawWritingPosition.Rest : RawWritingPosition.Port;
+
+                        if (_position == RawWritingPosition.Rest && Port == 0)
+                        {
+                            // TODO: Find a better way to map schemes to default ports
+                            Port = string.Equals(Scheme, "https", StringComparison.OrdinalIgnoreCase) ? 443 : 80;
+                        }
 
                         value = value.Substring(separator + 1);
                     }

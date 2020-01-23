@@ -34,7 +34,7 @@ namespace body_complex.Models
         /// <inheritdoc />
         public bool Remove(string key) => _additionalProperties.Remove(key);
         /// <inheritdoc />
-        public int Count => _additionalProperties.Count;
+        int ICollection<KeyValuePair<string, object>>.Count => _additionalProperties.Count;
         /// <inheritdoc />
         bool ICollection<KeyValuePair<string, object>>.IsReadOnly => _additionalProperties.IsReadOnly;
         /// <inheritdoc />
