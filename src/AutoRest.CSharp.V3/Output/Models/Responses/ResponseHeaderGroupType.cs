@@ -1,19 +1,23 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using AutoRest.CSharp.V3.Generation.Types;
+using AutoRest.CSharp.V3.Output.Models.Types;
+
 namespace AutoRest.CSharp.V3.Output.Models.Responses
 {
-    internal class ResponseHeaderGroupType
+    internal class ResponseHeaderGroupType: ITypeProvider
     {
-        public ResponseHeaderGroupType(string name, string description, ResponseHeader[] headers)
+        public ResponseHeaderGroupType(TypeDeclarationOptions declaration, string description, ResponseHeader[] headers)
         {
-            Name = name;
+            Declaration = declaration;
             Headers = headers;
             Description = description;
         }
 
-        public string Name { get; }
         public string Description { get; }
+        public TypeDeclarationOptions Declaration { get; }
         public ResponseHeader[] Headers { get; }
+        public CSharpType Type => new CSharpType(Declaration.Namespace, Declaration.Name);
     }
 }

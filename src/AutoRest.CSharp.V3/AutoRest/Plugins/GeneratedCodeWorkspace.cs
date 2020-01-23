@@ -100,5 +100,12 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
 
             return new GeneratedCodeWorkspace(generatedCodeProject);
         }
+
+        public async Task<CSharpCompilation> GetCompilationAsync()
+        {
+            var compilation = await _project.GetCompilationAsync() as CSharpCompilation;
+            Debug.Assert(compilation != null);
+            return compilation;
+        }
     }
 }

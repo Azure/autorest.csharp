@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
+using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Input;
 using AutoRest.CSharp.V3.Output.Models.Serialization;
 using AutoRest.CSharp.V3.Output.Models.TypeReferences;
@@ -10,10 +11,10 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 {
     internal class ObjectType : ISchemaType
     {
-        public ObjectType(Schema schema, string name, string? description, SchemaTypeReference? inherits, IEnumerable<ObjectTypeProperty> properties, ObjectTypeDiscriminator? discriminator, DictionaryTypeReference? implementsDictionary, ObjectSerialization[] serializations)
+        public ObjectType(Schema schema, TypeDeclarationOptions declaration, string? description, SchemaTypeReference? inherits, IEnumerable<ObjectTypeProperty> properties, ObjectTypeDiscriminator? discriminator, DictionaryTypeReference? implementsDictionary, ObjectSerialization[] serializations)
         {
             Schema = schema;
-            Name = name;
+            Declaration = declaration;
             Description = description;
             Inherits = inherits;
             Discriminator = discriminator;
@@ -22,7 +23,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             Properties = new List<ObjectTypeProperty>(properties);
         }
 
-        public string Name { get; }
+        public TypeDeclarationOptions Declaration { get; }
         public string? Description { get; }
         public Schema Schema { get; }
         public SchemaTypeReference? Inherits { get; }
@@ -30,5 +31,6 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         public IList<ObjectTypeProperty> Properties { get; }
         public ObjectTypeDiscriminator? Discriminator { get; }
         public DictionaryTypeReference? ImplementsDictionary { get; }
+        public CSharpType Type => new CSharpType(Declaration.Namespace, Declaration.Name, isValueType: false);
     }
 }

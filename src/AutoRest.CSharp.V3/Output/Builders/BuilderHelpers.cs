@@ -7,7 +7,10 @@ using System.Security;
 using AutoRest.CSharp.V3.Input;
 using AutoRest.CSharp.V3.Output.Models.Shared;
 using AutoRest.CSharp.V3.Output.Models.TypeReferences;
+using AutoRest.CSharp.V3.Output.Models.Types;
 using AutoRest.CSharp.V3.Utilities;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using SerializationFormat = AutoRest.CSharp.V3.Output.Models.Serialization.SerializationFormat;
 
 namespace AutoRest.CSharp.V3.Output.Builders
@@ -131,5 +134,14 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
         public static string CSharpName(this Schema operation) =>
             operation.Language.Default.Name.ToCleanName();
+
+        public static TypeDeclarationOptions CreateTypeAttributes(string defaultName, string defaultNamespace, Accessibility defaultAccessibility, INamedTypeSymbol? existingType = null)
+        {
+            return new TypeDeclarationOptions(
+                existingType?.Name ?? defaultName,
+                existingType?.ContainingNamespace.ToDisplayString() ?? defaultNamespace,
+                SyntaxFacts.GetText(existingType?.DeclaredAccessibility ?? defaultAccessibility)
+            );
+        }
     }
 }

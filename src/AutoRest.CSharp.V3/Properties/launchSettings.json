@@ -1,116 +1,116 @@
 {
   "profiles": {
-    "ExtensionClientName": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestProjects\\ExtensionClientName\\CodeModel.yaml --plugin=csharpgen --output-path=$(SolutionDir)\\test\\TestProjects\\ExtensionClientName --namespace=ExtensionClientName"
-    },
-    "body-dictionary": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\body-dictionary\\CodeModel.yaml --plugin=csharpgen --output-path=$(SolutionDir)\\test\\TestServerProjects\\body-dictionary --namespace=body_dictionary"
-    },
-    "xml-service": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\xml-service\\CodeModel.yaml --plugin=csharpgen --output-path=$(SolutionDir)\\test\\TestServerProjects\\xml-service --namespace=xml_service"
-    },
-    "body-datetime": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\body-datetime\\CodeModel.yaml --plugin=csharpgen --output-path=$(SolutionDir)\\test\\TestServerProjects\\body-datetime --namespace=body_datetime"
-    },
     "TypeSchemaMapping": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestProjects\\TypeSchemaMapping\\CodeModel.yaml --plugin=csharpgen --output-path=$(SolutionDir)\\test\\TestProjects\\TypeSchemaMapping --namespace=TypeSchemaMapping"
-    },
-    "url-multi-collectionFormat": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\url-multi-collectionFormat\\CodeModel.yaml --plugin=csharpgen --output-path=$(SolutionDir)\\test\\TestServerProjects\\url-multi-collectionFormat --namespace=url_multi_collectionFormat"
-    },
-    "custom-baseUrl-paging": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\custom-baseUrl-paging\\CodeModel.yaml --plugin=csharpgen --output-path=$(SolutionDir)\\test\\TestServerProjects\\custom-baseUrl-paging --namespace=custom_baseUrl_paging"
-    },
-    "body-datetime-rfc1123": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\body-datetime-rfc1123\\CodeModel.yaml --plugin=csharpgen --output-path=$(SolutionDir)\\test\\TestServerProjects\\body-datetime-rfc1123 --namespace=body_datetime_rfc1123"
-    },
-    "body-number": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\body-number\\CodeModel.yaml --plugin=csharpgen --output-path=$(SolutionDir)\\test\\TestServerProjects\\body-number --namespace=body_number"
-    },
-    "body-string": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\body-string\\CodeModel.yaml --plugin=csharpgen --output-path=$(SolutionDir)\\test\\TestServerProjects\\body-string --namespace=body_string"
-    },
-    "additionalProperties": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\additionalProperties\\CodeModel.yaml --plugin=csharpgen --output-path=$(SolutionDir)\\test\\TestServerProjects\\additionalProperties --namespace=additionalProperties"
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestProjects\\TypeSchemaMapping\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestProjects\\TypeSchemaMapping --namespace=TypeSchemaMapping"
     },
     "paging": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\paging\\CodeModel.yaml --plugin=csharpgen --output-path=$(SolutionDir)\\test\\TestServerProjects\\paging --namespace=paging"
-    },
-    "extensible-enums-swagger": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\extensible-enums-swagger\\CodeModel.yaml --plugin=csharpgen --output-path=$(SolutionDir)\\test\\TestServerProjects\\extensible-enums-swagger --namespace=extensible_enums_swagger"
-    },
-    "AppConfiguration": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\AppConfiguration\\AppConfiguration\\CodeModel.yaml --plugin=csharpgen --output-path=$(SolutionDir)\\samples\\AppConfiguration\\AppConfiguration --namespace=AppConfiguration"
-    },
-    "body-complex": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\body-complex\\CodeModel.yaml --plugin=csharpgen --output-path=$(SolutionDir)\\test\\TestServerProjects\\body-complex --namespace=body_complex"
-    },
-    "body-date": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\body-date\\CodeModel.yaml --plugin=csharpgen --output-path=$(SolutionDir)\\test\\TestServerProjects\\body-date --namespace=body_date"
-    },
-    "body-integer": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\body-integer\\CodeModel.yaml --plugin=csharpgen --output-path=$(SolutionDir)\\test\\TestServerProjects\\body-integer --namespace=body_integer"
-    },
-    "url": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\url\\CodeModel.yaml --plugin=csharpgen --output-path=$(SolutionDir)\\test\\TestServerProjects\\url --namespace=url"
-    },
-    "body-byte": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\body-byte\\CodeModel.yaml --plugin=csharpgen --output-path=$(SolutionDir)\\test\\TestServerProjects\\body-byte --namespace=body_byte"
-    },
-    "body-duration": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\body-duration\\CodeModel.yaml --plugin=csharpgen --output-path=$(SolutionDir)\\test\\TestServerProjects\\body-duration --namespace=body_duration"
-    },
-    "CognitiveServices.TextAnalytics": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\CognitiveServices.TextAnalytics\\CognitiveServices.TextAnalytics\\CodeModel.yaml --plugin=csharpgen --output-path=$(SolutionDir)\\samples\\CognitiveServices.TextAnalytics\\CognitiveServices.TextAnalytics --namespace=CognitiveServices.TextAnalytics"
-    },
-    "body-boolean": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\body-boolean\\CodeModel.yaml --plugin=csharpgen --output-path=$(SolutionDir)\\test\\TestServerProjects\\body-boolean --namespace=body_boolean"
-    },
-    "validation": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\validation\\CodeModel.yaml --plugin=csharpgen --output-path=$(SolutionDir)\\test\\TestServerProjects\\validation --namespace=validation"
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\paging\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\paging --namespace=paging"
     },
     "body-file": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\body-file\\CodeModel.yaml --plugin=csharpgen --output-path=$(SolutionDir)\\test\\TestServerProjects\\body-file --namespace=body_file"
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\body-file\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\body-file --namespace=body_file"
     },
-    "header": {
+    "body-byte": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\header\\CodeModel.yaml --plugin=csharpgen --output-path=$(SolutionDir)\\test\\TestServerProjects\\header --namespace=header"
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\body-byte\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\body-byte --namespace=body_byte"
     },
-    "custom-baseUrl": {
+    "body-complex": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\custom-baseUrl\\CodeModel.yaml --plugin=csharpgen --output-path=$(SolutionDir)\\test\\TestServerProjects\\custom-baseUrl --namespace=custom_baseUrl"
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\body-complex\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\body-complex --namespace=body_complex"
+    },
+    "url": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\url\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\url --namespace=url"
+    },
+    "extensible-enums-swagger": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\extensible-enums-swagger\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\extensible-enums-swagger --namespace=extensible_enums_swagger"
+    },
+    "additionalProperties": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\additionalProperties\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\additionalProperties --namespace=additionalProperties"
+    },
+    "body-number": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\body-number\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\body-number --namespace=body_number"
+    },
+    "body-datetime": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\body-datetime\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\body-datetime --namespace=body_datetime"
+    },
+    "AppConfiguration": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\AppConfiguration\\AppConfiguration\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\AppConfiguration\\AppConfiguration --namespace=AppConfiguration"
     },
     "body-array": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\body-array\\CodeModel.yaml --plugin=csharpgen --output-path=$(SolutionDir)\\test\\TestServerProjects\\body-array --namespace=body_array"
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\body-array\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\body-array --namespace=body_array"
+    },
+    "body-boolean": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\body-boolean\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\body-boolean --namespace=body_boolean"
+    },
+    "body-duration": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\body-duration\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\body-duration --namespace=body_duration"
+    },
+    "ExtensionClientName": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestProjects\\ExtensionClientName\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestProjects\\ExtensionClientName --namespace=ExtensionClientName"
+    },
+    "xml-service": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\xml-service\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\xml-service --namespace=xml_service"
+    },
+    "validation": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\validation\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\validation --namespace=validation"
+    },
+    "body-date": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\body-date\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\body-date --namespace=body_date"
+    },
+    "url-multi-collectionFormat": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\url-multi-collectionFormat\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\url-multi-collectionFormat --namespace=url_multi_collectionFormat"
+    },
+    "CognitiveServices.TextAnalytics": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\CognitiveServices.TextAnalytics\\CognitiveServices.TextAnalytics\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\CognitiveServices.TextAnalytics\\CognitiveServices.TextAnalytics --namespace=CognitiveServices.TextAnalytics"
+    },
+    "body-datetime-rfc1123": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\body-datetime-rfc1123\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\body-datetime-rfc1123 --namespace=body_datetime_rfc1123"
+    },
+    "body-dictionary": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\body-dictionary\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\body-dictionary --namespace=body_dictionary"
+    },
+    "header": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\header\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\header --namespace=header"
+    },
+    "custom-baseUrl": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\custom-baseUrl\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\custom-baseUrl --namespace=custom_baseUrl"
     },
     "custom-baseUrl-more-options": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\custom-baseUrl-more-options\\CodeModel.yaml --plugin=csharpgen --output-path=$(SolutionDir)\\test\\TestServerProjects\\custom-baseUrl-more-options --namespace=custom_baseUrl_more_options"
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\custom-baseUrl-more-options\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\custom-baseUrl-more-options --namespace=custom_baseUrl_more_options"
+    },
+    "custom-baseUrl-paging": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\custom-baseUrl-paging\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\custom-baseUrl-paging --namespace=custom_baseUrl_paging"
+    },
+    "body-integer": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\body-integer\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\body-integer --namespace=body_integer"
+    },
+    "body-string": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\body-string\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\body-string --namespace=body_string"
     }
   }
 }

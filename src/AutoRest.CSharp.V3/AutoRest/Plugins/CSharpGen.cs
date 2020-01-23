@@ -10,6 +10,7 @@ using AutoRest.CSharp.V3.AutoRest.Communication;
 using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Generation.Writers;
 using AutoRest.CSharp.V3.Input;
+using AutoRest.CSharp.V3.Input.Source;
 using AutoRest.CSharp.V3.Output.Builders;
 using AutoRest.CSharp.V3.Output.Models.Responses;
 using Microsoft.CodeAnalysis;
@@ -31,10 +32,13 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                 .Concat(codeModel.Schemas.Objects ?? Enumerable.Empty<ObjectSchema>());
 
             var project = GeneratedCodeWorkspace.Create(configuration.OutputFolder);
-            var modelBuilder = new ModelBuilder(GetMediaTypes(codeModel));
+            var sourceInputModel = SourceInputModelBuilder.Build(await project.GetCompilationAsync());
+
+            var modelBuilder = new ModelBuilder(configuration.Namespace, GetMediaTypes(codeModel), sourceInputModel);
+            var clientBuilder = new ClientBuilder(configuration.Namespace, sourceInputModel);
             var models = schemas.Select(modelBuilder.BuildModel).ToArray();
-            var clients = codeModel.OperationGroups.Select(ClientBuilder.BuildClient).ToArray();
-            var typeFactory = new TypeFactory(configuration.Namespace, models);
+            var clients = codeModel.OperationGroups.Select(clientBuilder.BuildClient).ToArray();
+            var typeFactory = new TypeFactory(models);
 
             var modelWriter = new ModelWriter(typeFactory);
             var writer = new ClientWriter(typeFactory);
@@ -49,7 +53,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                 var serializerCodeWriter = new CodeWriter();
                 serializeWriter.WriteSerialization(serializerCodeWriter, model);
 
-                var name = model.Name;
+                var name = model.Type.Name;
                 project.AddGeneratedFile($"Models/{name}.cs", codeWriter.ToFormattedCode());
                 project.AddGeneratedFile($"Models/{name}.Serialization.cs", serializerCodeWriter.ToFormattedCode());
             }
@@ -59,7 +63,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                 var codeWriter = new CodeWriter();
                 writer.WriteClient(codeWriter, client);
 
-                project.AddGeneratedFile($"Operations/{client.Name}.cs", codeWriter.ToFormattedCode());
+                project.AddGeneratedFile($"Operations/{client.Type.Name}.cs", codeWriter.ToFormattedCode());
 
                 var headerModels = client.Methods.Select(m => m.Response.HeaderModel).OfType<ResponseHeaderGroupType>().Distinct();
                 foreach (ResponseHeaderGroupType responseHeaderModel in headerModels)
@@ -67,7 +71,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                     var headerModelCodeWriter = new CodeWriter();
                     headerModelModelWriter.WriteHeaderModel(headerModelCodeWriter, responseHeaderModel);
 
-                    project.AddGeneratedFile($"Operations/{responseHeaderModel.Name}.cs", headerModelCodeWriter.ToFormattedCode());
+                    project.AddGeneratedFile($"Operations/{responseHeaderModel.Type.Name}.cs", headerModelCodeWriter.ToFormattedCode());
                 }
             }
 

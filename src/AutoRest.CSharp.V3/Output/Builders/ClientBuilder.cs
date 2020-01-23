@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.V3.Input;
+using AutoRest.CSharp.V3.Input.Source;
 using AutoRest.CSharp.V3.Output.Models;
 using AutoRest.CSharp.V3.Output.Models.Requests;
 using AutoRest.CSharp.V3.Output.Models.Responses;
@@ -14,13 +15,24 @@ using AutoRest.CSharp.V3.Output.Models.Shared;
 using AutoRest.CSharp.V3.Output.Models.TypeReferences;
 using AutoRest.CSharp.V3.Utilities;
 using Azure.Core;
+using Microsoft.CodeAnalysis;
+using Diagnostic = AutoRest.CSharp.V3.Output.Models.Requests.Diagnostic;
 using Request = AutoRest.CSharp.V3.Output.Models.Requests.Request;
 
 namespace AutoRest.CSharp.V3.Output.Builders
 {
     internal class ClientBuilder
     {
-        public static Client BuildClient(OperationGroup operationGroup)
+        private readonly SourceInputModel _sourceInputModel;
+        private readonly string _defaultOperationsNamespace;
+
+        public ClientBuilder(string @namespace, SourceInputModel sourceInputModel)
+        {
+            _sourceInputModel = sourceInputModel;
+            _defaultOperationsNamespace = $"{@namespace}.Operations";
+        }
+
+        public Client BuildClient(OperationGroup operationGroup)
         {
             var allClientParameters = operationGroup.Operations
                 .SelectMany(op => op.Request.Parameters)
@@ -55,7 +67,8 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 }
             }
 
-            return new Client(clientName,
+            return new Client(
+                BuilderHelpers.CreateTypeAttributes(clientName, _defaultOperationsNamespace, Accessibility.Internal),
                 operationGroup.Language.Default.Description,
                 OrderParameters(clientParameters.Values),
                 methods.ToArray(),
@@ -64,7 +77,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
         private static Parameter[] OrderParameters(IEnumerable<Parameter> parameters) => parameters.OrderBy(p => p.DefaultValue != null).ToArray();
 
-        private static Method? BuildMethod(Operation operation, string clientName, IReadOnlyDictionary<string, Parameter> clientParameters)
+        private Method? BuildMethod(Operation operation, string clientName, IReadOnlyDictionary<string, Parameter> clientParameters)
         {
             HttpRequest? httpRequest = operation.Request.Protocol.Http as HttpRequest;
             //TODO: Handle multiple responses
@@ -248,7 +261,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             BuilderHelpers.ParseConstant(requestParameter),
             requestParameter.Required == true);
 
-        private static ResponseHeaderGroupType? BuildResponseHeaderModel(Operation operation, HttpResponse httpResponse)
+        private ResponseHeaderGroupType? BuildResponseHeaderModel(Operation operation, HttpResponse httpResponse)
         {
             if (!httpResponse.Headers.Any())
             {
@@ -261,7 +274,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             string operationName = operation.CSharpName();
 
             return new ResponseHeaderGroupType(
-                operationName + "Headers",
+                BuilderHelpers.CreateTypeAttributes(operationName + "Headers", _defaultOperationsNamespace, Accessibility.Internal),
                 $"Header model for {operationName}",
                 httpResponse.Headers.Select(CreateResponseHeader).ToArray()
                 );

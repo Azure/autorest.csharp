@@ -148,7 +148,7 @@ if ($updateLaunchSettings)
 
         $settings.profiles[$key] = @{
             'commandName'='Project';
-            'commandLineArgs'="--standalone --input-codemodel=$codeModel --plugin=csharpgen --output-path=$outputPath --namespace=$namespace"
+            'commandLineArgs'="--standalone --input-codemodel=$codeModel --plugin=csharpgen --output-folder=$outputPath --namespace=$namespace"
         }
     }
 

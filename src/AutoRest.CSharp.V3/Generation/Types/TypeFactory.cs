@@ -12,20 +12,16 @@ namespace AutoRest.CSharp.V3.Generation.Types
 {
     internal class TypeFactory
     {
-        private readonly string _namespace;
         private readonly ISchemaType[] _schemaTypes;
 
-        public TypeFactory(string @namespace, ISchemaType[] schemaTypes)
+        public TypeFactory(ISchemaType[] schemaTypes)
         {
-            _namespace = @namespace;
             _schemaTypes = schemaTypes;
         }
 
-        public CSharpType CreateType(ISchemaType typeProvider) => CreateTypeInfo(new SchemaTypeReference(typeProvider.Schema, false));
         public CSharpType CreateType(TypeReference typeProvider) => CreateTypeInfo(typeProvider);
         public CSharpType CreateConcreteType(TypeReference typeProvider) => CreateTypeInfo(typeProvider, useConcrete: true);
         public CSharpType CreateInputType(TypeReference typeProvider) => CreateTypeInfo(typeProvider, useInput: true);
-
         public ISchemaType ResolveReference(SchemaTypeReference reference) => _schemaTypes.Single(s => s.Schema == reference.Schema);
 
         private CSharpType CreateTypeInfo(TypeReference schema, bool useConcrete = false, bool useInput = false) => schema switch
@@ -77,17 +73,7 @@ namespace AutoRest.CSharp.V3.Generation.Types
 
         private CSharpType DefaultTypeInfo(SchemaTypeReference schemaReference)
         {
-            var type = ResolveReference(schemaReference);
-            var schema = type.Schema;
-            var apiVersion = schema.ApiVersions?.FirstOrDefault()?.Version.RemoveNonWordCharacters();
-            return new CSharpType(
-                $"{_namespace}.Models",
-                type.Name,
-                isNullable: schemaReference.IsNullable,
-                isValueType: type is EnumType);
+            return ResolveReference(schemaReference).Type;
         }
-
-        public CSharpType CreateType(string name) =>
-            new CSharpType(_namespace, name, isNullable: false);
     }
 }

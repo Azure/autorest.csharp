@@ -14,25 +14,33 @@ namespace AutoRest.CSharp.V3.Input.Source
         private readonly Compilation _compilation;
         private readonly INamedTypeSymbol _schemaNameAttribute;
 
-        public SourceInputModelBuilder(Compilation compilation)
+        private SourceInputModelBuilder(Compilation compilation)
         {
             _compilation = compilation;
             _schemaNameAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenSchemaAttribute).FullName);
         }
 
-        public SourceInputModel Build()
+        public static SourceInputModel Build(Compilation compilation)
+        {
+            return new SourceInputModelBuilder(compilation).BuildInternal();
+        }
+
+        private SourceInputModel BuildInternal()
         {
             var assembly = _compilation.Assembly;
 
-            var definedSchemas = new List<SourceSchemaType>();
+            var definedSchemas = new List<SourceTypeMapping>();
 
             foreach (IModuleSymbol module in assembly.Modules)
             {
                 foreach (var type in GetSymbols(module.GlobalNamespace))
                 {
-                    if (TryGetSchemaName(type, out var name))
+                    if (type is INamedTypeSymbol namedTypeSymbol)
                     {
-                        definedSchemas.Add(new SourceSchemaType(name, type.DeclaredAccessibility));
+                        if (TryGetSchemaName(type, out var schemaName))
+                        {
+                            definedSchemas.Add(new SourceTypeMapping(schemaName, namedTypeSymbol));
+                        }
                     }
                 }
             }

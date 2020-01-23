@@ -35,12 +35,12 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         public void WriteClient(CodeWriter writer, Client operationGroup)
         {
-            var cs = _typeFactory.CreateType(operationGroup.Name);
+            var cs = operationGroup.Type;
             var @namespace = cs.Namespace;
             using (writer.Namespace(@namespace))
             {
                 writer.WriteXmlDocumentationSummary(operationGroup.Description);
-                using (writer.Class("internal", "partial", cs.Name))
+                using (writer.Class(operationGroup.DeclaredType.Accessibility, "partial", cs.Name))
                 {
                     WriteClientFields(writer, operationGroup);
 
@@ -205,7 +205,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             //TODO: Handle multiple responses
             var responseBody = operation.Response.ResponseBody;
             CSharpType? bodyType = responseBody != null ? _typeFactory.CreateType(responseBody.Type) : null;
-            CSharpType? headerModelType = operation.Response.HeaderModel != null ? _typeFactory.CreateType(operation.Response.HeaderModel.Name) : null;
+            CSharpType? headerModelType = operation.Response.HeaderModel.Type;
             CSharpType responseType = bodyType switch
             {
                 null when headerModelType != null => new CSharpType(typeof(ResponseWithHeaders<>), headerModelType),
