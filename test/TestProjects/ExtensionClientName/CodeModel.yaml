@@ -1,0 +1,186 @@
+!<!CodeModel> 
+schemas: !<!Schemas> 
+  objects:
+  - !<!ObjectSchema> &ref_5
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    properties:
+    - !<!Property> 
+      schema: !<!DictionarySchema> &ref_0
+        type: dictionary
+        elementType: !<!StringSchema> &ref_1
+          type: string
+          apiVersions:
+          - !<!ApiVersion> 
+            version: 1.0.0
+          language: !<!Languages> 
+            default:
+              name: string
+              description: MISSING·SCHEMA-DESCRIPTION-STRING
+              header: originalHeader
+          protocol: !<!Protocols> {}
+        language: !<!Languages> 
+          default:
+            name: RenamedProperty
+            description: A description about the set of tags.
+        protocol: !<!Protocols> {}
+      required: false
+      serializedName: originalProperty
+      language: !<!Languages> 
+        default:
+          name: RenamedProperty
+          description: A description about the set of tags.
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: !<!StringSchema> &ref_2
+        type: string
+        apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+        summary: A set of tags.
+        language: !<!Languages> 
+          default:
+            name: RenamedPropertyString
+            description: A description about the set of tags.
+        protocol: !<!Protocols> {}
+      required: false
+      serializedName: originalPropertyString
+      language: !<!Languages> 
+        default:
+          name: RenamedPropertyString
+          description: A description about the set of tags.
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: OriginalSchema
+        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        namespace: Api100
+    protocol: !<!Protocols> {}
+  dictionaries:
+  - *ref_0
+  strings:
+  - !<!StringSchema> &ref_3
+    type: string
+    language: !<!Languages> 
+      default:
+        name: string
+        description: simple string
+    protocol: !<!Protocols> {}
+  - *ref_1
+  - *ref_2
+globalParameters:
+- !<!Parameter> &ref_4
+  schema: *ref_3
+  clientDefaultValue: 'http://localhost:3000'
+  implementation: Client
+  required: true
+  language: !<!Languages> 
+    default:
+      name: $host
+      description: server parameter
+      serializedName: $host
+  protocol: !<!Protocols> 
+    http: !<!HttpParameter> 
+      in: uri
+info: !<!Info> 
+  description: Resource Flattening for AutoRest
+  title: ExtensionClientName
+operationGroups:
+- !<!OperationGroup> 
+  $key: ''
+  operations:
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_4
+      - !<!Parameter> 
+        schema: *ref_1
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: RenamedPathParameter
+            description: MISSING·PARAMETER-DESCRIPTION
+            serializedName: originalPathParameter
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: path
+      - !<!Parameter> 
+        schema: *ref_1
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: RenamedQueryParameter
+            description: MISSING·PARAMETER-DESCRIPTION
+            serializedName: originalQueryParameter
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      - !<!Parameter> 
+        schema: *ref_5
+        implementation: Method
+        required: true
+        extensions:
+          x-ms-requestBody-name: RenamedBodyParameter
+        language: !<!Languages> 
+          default:
+            name: RenamedBodyParameter
+            description: ''
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: '/originalOperation/{originalPathParameter}'
+          method: patch
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_5
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          headers:
+          - !<!HttpHeader> 
+            schema: *ref_1
+            header: originalHeader
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    extensions:
+      x-ms-requestBody-index: 2
+    language: !<!Languages> 
+      default:
+        name: originalOperation
+        description: MISSING·OPERATION-DESCRIPTION
+    protocol: !<!Protocols> {}
+  language: !<!Languages> 
+    default:
+      name: ''
+      description: ''
+  protocol: !<!Protocols> {}
+language: !<!Languages> 
+  default:
+    name: ''
+    description: ''
+protocol: !<!Protocols> 
+  http: !<!HttpModel> {}

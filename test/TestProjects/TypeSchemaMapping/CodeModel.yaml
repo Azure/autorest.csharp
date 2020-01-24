@@ -1,0 +1,130 @@
+!<!CodeModel> 
+schemas: !<!Schemas> 
+  objects:
+  - !<!ObjectSchema> &ref_3
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    properties:
+    - !<!Property> 
+      schema: !<!StringSchema> &ref_0
+        type: string
+        apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+        language: !<!Languages> 
+          default:
+            name: Model-ModelProperty
+            description: A description about the set of tags.
+        protocol: !<!Protocols> {}
+      required: false
+      serializedName: ModelProperty
+      language: !<!Languages> 
+        default:
+          name: ModelProperty
+          description: A description about the set of tags.
+          originalName: ModelProperty
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: Model
+        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        namespace: Api100
+    protocol: !<!Protocols> {}
+  strings:
+  - !<!StringSchema> &ref_1
+    type: string
+    language: !<!Languages> 
+      default:
+        name: string
+        description: simple string
+    protocol: !<!Protocols> {}
+  - *ref_0
+globalParameters:
+- !<!Parameter> &ref_2
+  schema: *ref_1
+  clientDefaultValue: 'http://localhost:3000'
+  implementation: Client
+  required: true
+  extensions:
+    x-ms-skip-url-encoding: true
+  language: !<!Languages> 
+    default:
+      name: $host
+      description: server parameter
+      serializedName: $host
+  protocol: !<!Protocols> 
+    http: !<!HttpParameter> 
+      in: uri
+info: !<!Info> 
+  description: Schema mapping
+  title: TypeSchemaMapping
+operationGroups:
+- !<!OperationGroup> 
+  $key: ''
+  operations:
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_2
+      - !<!Parameter> 
+        schema: *ref_3
+        implementation: Method
+        extensions:
+          x-ms-requestBody-name: body
+        language: !<!Languages> 
+          default:
+            name: body
+            description: ''
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /Operation/
+          method: patch
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_3
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    extensions:
+      x-ms-requestBody-index: 0
+    language: !<!Languages> 
+      default:
+        name: Operation
+        description: MISSING·OPERATION-DESCRIPTION
+    protocol: !<!Protocols> {}
+  language: !<!Languages> 
+    default:
+      name: ''
+      description: ''
+  protocol: !<!Protocols> {}
+language: !<!Languages> 
+  default:
+    name: ''
+    description: ''
+protocol: !<!Protocols> 
+  http: !<!HttpModel> {}
