@@ -39,9 +39,9 @@ jobs:
           DOTNET_CLI_TELEMETRY_OPTOUT: 1
           DOTNET_MULTILEVEL_LOOKUP: 0
       - script: |
-          dotnet msbuild /t:NpmPack AutoRest.CSharp.V3.sln
+          dotnet msbuild /t:NpmPackage src/AutoRest.CSharp.V3/AutoRest.CSharp.V3.csproj
       - task: PublishBuildArtifacts@1
         inputs:
           contents: artifacts/bin/AutoRest.CSharp.V3/Debug/netcoreapp3.0/*.tgz
-          pathtoPublish: '$(Build.ArtifactStagingDirectory)
+          pathtoPublish: '$(Build.ArtifactStagingDirectory)'
           
