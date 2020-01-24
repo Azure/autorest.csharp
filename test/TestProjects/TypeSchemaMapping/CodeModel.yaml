@@ -1,14 +1,14 @@
 !<!CodeModel> 
 schemas: !<!Schemas> 
   objects:
-  - !<!ObjectSchema> &ref_3
+  - !<!ObjectSchema> &ref_5
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
     properties:
     - !<!Property> 
-      schema: !<!StringSchema> &ref_0
+      schema: !<!StringSchema> &ref_3
         type: string
         apiVersions:
         - !<!ApiVersion> 
@@ -26,24 +26,123 @@ schemas: !<!Schemas>
           description: A description about the set of tags.
           originalName: ModelProperty
       protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: !<!ChoiceSchema> &ref_1
+        choices:
+        - !<!ChoiceValue> 
+          value: apple
+          language:
+            default:
+              name: apple
+              description: The value 'undefined'
+        - !<!ChoiceValue> 
+          value: pear
+          language:
+            default:
+              name: pear
+              description: The value 'undefined'
+        type: choice
+        apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+        choiceType: !<!StringSchema> &ref_0
+          type: string
+          language: !<!Languages> 
+            default:
+              name: string
+              description: simple string
+          protocol: !<!Protocols> {}
+        language: !<!Languages> 
+          default:
+            name: Fruit
+            description: Fruit
+        protocol: !<!Protocols> {}
+      required: true
+      serializedName: Fruit
+      language: !<!Languages> 
+        default:
+          name: Fruit
+          description: Fruit
+          originalName: Fruit
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: !<!ChoiceSchema> &ref_2
+        choices:
+        - !<!ChoiceValue> 
+          value: Monday
+          language:
+            default:
+              name: Monday
+              description: The value 'undefined'
+        - !<!ChoiceValue> 
+          value: Tuesday
+          language:
+            default:
+              name: Tuesday
+              description: The value 'undefined'
+        - !<!ChoiceValue> 
+          value: Wednesday
+          language:
+            default:
+              name: Wednesday
+              description: The value 'undefined'
+        - !<!ChoiceValue> 
+          value: Thursday
+          language:
+            default:
+              name: Thursday
+              description: The value 'undefined'
+        - !<!ChoiceValue> 
+          value: Friday
+          language:
+            default:
+              name: Friday
+              description: The value 'undefined'
+        - !<!ChoiceValue> 
+          value: Saturday
+          language:
+            default:
+              name: Saturday
+              description: The value 'undefined'
+        - !<!ChoiceValue> 
+          value: Sunday
+          language:
+            default:
+              name: Sunday
+              description: The value 'undefined'
+        type: choice
+        apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+        choiceType: *ref_0
+        language: !<!Languages> 
+          default:
+            name: DaysOfWeek
+            description: Day of week
+        protocol: !<!Protocols> {}
+      required: true
+      serializedName: DaysOfWeek
+      language: !<!Languages> 
+        default:
+          name: DaysOfWeek
+          description: Day of week
+          originalName: DaysOfWeek
+      protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
         name: Model
         description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
         namespace: Api100
     protocol: !<!Protocols> {}
+  choices:
+  - *ref_1
+  - *ref_2
   strings:
-  - !<!StringSchema> &ref_1
-    type: string
-    language: !<!Languages> 
-      default:
-        name: string
-        description: simple string
-    protocol: !<!Protocols> {}
   - *ref_0
+  - *ref_3
 globalParameters:
-- !<!Parameter> &ref_2
-  schema: *ref_1
+- !<!Parameter> &ref_4
+  schema: *ref_0
   clientDefaultValue: 'http://localhost:3000'
   implementation: Client
   required: true
@@ -70,9 +169,9 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_2
+      - *ref_4
       - !<!Parameter> 
-        schema: *ref_3
+        schema: *ref_5
         implementation: Method
         extensions:
           x-ms-requestBody-name: body
@@ -98,7 +197,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_3
+      schema: *ref_5
       language: !<!Languages> 
         default:
           name: ''

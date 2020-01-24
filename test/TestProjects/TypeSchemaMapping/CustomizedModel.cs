@@ -1,6 +1,6 @@
 using Azure.Core;
 
-namespace AutoRest.TestServer.Tests.TypeSchemaMapping
+namespace CustomNamespace
 {
     [CodeGenSchema("Model")]
     internal partial class CustomizedModel

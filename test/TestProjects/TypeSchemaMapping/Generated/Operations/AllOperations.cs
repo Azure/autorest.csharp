@@ -5,10 +5,10 @@ using System;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoRest.TestServer.Tests.TypeSchemaMapping;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using CustomNamespace;
 
 namespace TypeSchemaMapping
 {

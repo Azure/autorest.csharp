@@ -197,7 +197,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.WriteXmlDocumentationSummary(schema.Description);
 
                 var implementType = new CSharpType(typeof(IEquatable<>), cs);
-                using (writer.Scope($"public readonly partial struct {name}: {implementType}"))
+                using (writer.Scope($"{schema.Declaration.Accessibility} readonly partial struct {name}: {implementType}"))
                 {
                     writer.Line($"private readonly string? _value;");
                     writer.Line();

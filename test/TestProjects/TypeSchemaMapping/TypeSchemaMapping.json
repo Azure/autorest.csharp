@@ -41,15 +41,45 @@
   },
   "definitions": {
     "Model": {
-      "type":  "object",
+      "type": "object",
       "properties": {
         "ModelProperty": {
           "type": "string",
           "description": "A description about the set of tags."
+        },
+        "Fruit": {
+          "type": "string",
+          "description": "Fruit",
+          "enum": [
+            "apple",
+            "pear"
+          ],
+          "x-ms-enum": {
+            "name": "Fruit",
+            "modelAsString": true
+          }
+        },
+        "DaysOfWeek": {
+          "type": "string",
+          "description": "Day of week",
+          "enum": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "x-ms-enum": {
+            "name": "DaysOfWeek",
+            "modelAsString": true
+          }
         }
       },
       "required": [
-        "tags"
+        "DaysOfWeek",
+        "Fruit"
       ]
     }
   }

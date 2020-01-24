@@ -136,7 +136,7 @@ foreach ($projectName in $projectNames)
 if ($updateLaunchSettings)
 {
     $settings = @{
-        'profiles' = @{}
+        'profiles' = [ordered]@{}
     };
 
     foreach ($key in $swaggerDefinitions.Keys | Sort-Object)
