@@ -6,9 +6,9 @@ namespace CognitiveSearch.Models
     /// <summary> MISSING·SCHEMA-DESCRIPTION-CHOICE. </summary>
     public enum QueryType
     {
-        /// <summary> simple. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Simple,
-        /// <summary> full. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Full
     }
 }

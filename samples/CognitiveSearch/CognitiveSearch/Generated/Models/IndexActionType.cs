@@ -6,13 +6,13 @@ namespace CognitiveSearch.Models
     /// <summary> The operation to perform on a document in an indexing batch. </summary>
     public enum IndexActionType
     {
-        /// <summary> upload. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Upload,
-        /// <summary> merge. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Merge,
-        /// <summary> mergeOrUpload. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         MergeOrUpload,
-        /// <summary> delete. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Delete
     }
 }

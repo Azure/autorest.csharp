@@ -18,7 +18,7 @@ schemas: !<!Schemas>
           language: !<!Languages> 
             default:
               name: string
-              description: MISSING·SCHEMA-DESCRIPTION-STRING
+              description: ''
               header: originalHeader
           protocol: !<!Protocols> {}
         language: !<!Languages> 
@@ -32,6 +32,7 @@ schemas: !<!Schemas>
         default:
           name: RenamedProperty
           description: A description about the set of tags.
+          originalName: RenamedProperty
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_2
@@ -51,6 +52,7 @@ schemas: !<!Schemas>
         default:
           name: RenamedPropertyString
           description: A description about the set of tags.
+          originalName: RenamedPropertyString
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -76,6 +78,8 @@ globalParameters:
   clientDefaultValue: 'http://localhost:3000'
   implementation: Client
   required: true
+  extensions:
+    x-ms-skip-url-encoding: true
   language: !<!Languages> 
     default:
       name: $host

@@ -6,9 +6,9 @@ namespace CognitiveSearch.Models
     /// <summary> MISSING·SCHEMA-DESCRIPTION-CHOICE. </summary>
     public enum SearchMode
     {
-        /// <summary> any. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Any,
-        /// <summary> all. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         All
     }
 }
