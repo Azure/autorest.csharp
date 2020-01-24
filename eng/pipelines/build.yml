@@ -46,3 +46,10 @@ jobs:
         inputs:
           artifactName: packages
           path: $(Build.ArtifactStagingDirectory)
+      - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
+        - task: GithubRelease@0
+          displayName: "Create GitHub Release"
+          inputs:
+            githubConnection: azure
+            repositoryName: azure/autorest.csharp
+            assets: $(Build.ArtifactStagingDirectory)/packages/* 
