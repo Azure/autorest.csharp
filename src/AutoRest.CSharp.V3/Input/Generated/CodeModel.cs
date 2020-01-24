@@ -1345,6 +1345,29 @@ namespace AutoRest.CSharp.V3.Input
         /// <summary>suggested implementation location for this parameter</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "implementation")]
         public ImplementationLocation? Implementation { get; set; }
+
+        /// <summary>When a parameter is flattened, it will be left in the list, but marked hidden (so, don't generate those!)</summary>
+        [YamlDotNet.Serialization.YamlMember(Alias = "hidden")]
+        public bool? Hidden { get; set; }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
+    internal partial class VirtualParameter : RequestParameter
+    {
+        /// <summary>the original body parameter that this parameter is in effect replacing</summary>
+        [YamlDotNet.Serialization.YamlMember(Alias = "originalParameter")]
+        [System.ComponentModel.DataAnnotations.Required]
+        public RequestParameter OriginalParameter { get; set; } = new RequestParameter();
+
+        /// <summary>if this parameter is for a nested property, this is the path of properties it takes to get there</summary>
+        [YamlDotNet.Serialization.YamlMember(Alias = "pathToProperty")]
+        [System.ComponentModel.DataAnnotations.Required]
+        public System.Collections.Generic.ICollection<Property> PathToProperty { get; set; } = new System.Collections.ObjectModel.Collection<Property>();
+
+        /// <summary>the target property this virtual parameter represents</summary>
+        [YamlDotNet.Serialization.YamlMember(Alias = "targetProperty")]
+        [System.ComponentModel.DataAnnotations.Required]
+        public Property TargetProperty { get; set; } = new Property();
     }
 
     /// <summary>a response from a service.</summary>

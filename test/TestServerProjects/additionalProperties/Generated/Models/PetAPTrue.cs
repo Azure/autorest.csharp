@@ -11,7 +11,6 @@ namespace additionalProperties.Models
     {
         /// <summary> MISSING·SCHEMA-DESCRIPTION-INTEGER. </summary>
         public int Id { get; set; }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-STRING. </summary>
         public string? Name { get; set; }
         /// <summary> MISSING·SCHEMA-DESCRIPTION-BOOLEAN. </summary>
         public bool? Status { get; internal set; }
@@ -33,7 +32,7 @@ namespace additionalProperties.Models
         /// <inheritdoc />
         public bool Remove(string key) => _additionalProperties.Remove(key);
         /// <inheritdoc />
-        public int Count => _additionalProperties.Count;
+        int ICollection<KeyValuePair<string, object>>.Count => _additionalProperties.Count;
         /// <inheritdoc />
         bool ICollection<KeyValuePair<string, object>>.IsReadOnly => _additionalProperties.IsReadOnly;
         /// <inheritdoc />

@@ -26,21 +26,21 @@ namespace AppConfiguration.Models
         private const string LockedValue = "locked";
         private const string EtagValue = "etag";
 
-        /// <summary> key. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static Enum0 Key { get; } = new Enum0(KeyValue);
-        /// <summary> label. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static Enum0 Label { get; } = new Enum0(LabelValue);
-        /// <summary> content_type. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static Enum0 ContentType { get; } = new Enum0(ContentTypeValue);
-        /// <summary> value. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static Enum0 Value { get; } = new Enum0(ValueValue);
-        /// <summary> last_modified. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static Enum0 LastModified { get; } = new Enum0(LastModifiedValue);
-        /// <summary> tags. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static Enum0 Tags { get; } = new Enum0(TagsValue);
-        /// <summary> locked. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static Enum0 Locked { get; } = new Enum0(LockedValue);
-        /// <summary> etag. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static Enum0 Etag { get; } = new Enum0(EtagValue);
         /// <summary> Determines if two <see cref="Enum0"/> values are the same. </summary>
         public static bool operator ==(Enum0 left, Enum0 right) => left.Equals(right);

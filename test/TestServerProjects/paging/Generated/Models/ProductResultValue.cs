@@ -10,7 +10,6 @@ namespace paging.Models
     {
         /// <summary> MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA. </summary>
         public ICollection<Product>? Value { get; set; }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-STRING. </summary>
         public string? NextLink { get; set; }
     }
 }

@@ -40,6 +40,7 @@ schemas: !<!Schemas>
                   default:
                     name: id
                     description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+                    originalName: id
                 protocol: !<!Protocols> {}
               - !<!Property> 
                 schema: !<!StringSchema> &ref_8
@@ -50,13 +51,14 @@ schemas: !<!Schemas>
                   language: !<!Languages> 
                     default:
                       name: Product-properties-name
-                      description: MISSING·SCHEMA-DESCRIPTION-STRING
+                      description: ''
                   protocol: !<!Protocols> {}
                 serializedName: name
                 language: !<!Languages> 
                   default:
                     name: name
-                    description: MISSING·SCHEMA-DESCRIPTION-STRING
+                    description: ''
+                    originalName: name
                 protocol: !<!Protocols> {}
               language: !<!Languages> 
                 default:
@@ -69,6 +71,7 @@ schemas: !<!Schemas>
               default:
                 name: properties
                 description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+                originalName: properties
             protocol: !<!Protocols> {}
           language: !<!Languages> 
             default:
@@ -86,6 +89,7 @@ schemas: !<!Schemas>
         default:
           name: value
           description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+          originalName: value
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_9
@@ -96,13 +100,14 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: ProductResultValue-nextLink
-            description: MISSING·SCHEMA-DESCRIPTION-STRING
+            description: ''
         protocol: !<!Protocols> {}
       serializedName: nextLink
       language: !<!Languages> 
         default:
           name: nextLink
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          description: ''
+          originalName: nextLink
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -135,6 +140,7 @@ schemas: !<!Schemas>
         default:
           name: values
           description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+          originalName: values
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_10
@@ -145,13 +151,14 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: ProductResult-nextLink
-            description: MISSING·SCHEMA-DESCRIPTION-STRING
+            description: ''
         protocol: !<!Protocols> {}
       serializedName: nextLink
       language: !<!Languages> 
         default:
           name: nextLink
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          description: ''
+          originalName: nextLink
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -182,6 +189,7 @@ schemas: !<!Schemas>
         default:
           name: values
           description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+          originalName: values
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_11
@@ -192,13 +200,14 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: OdataProductResult-odata.nextLink
-            description: MISSING·SCHEMA-DESCRIPTION-STRING
+            description: ''
         protocol: !<!Protocols> {}
       serializedName: odata.nextLink
       language: !<!Languages> 
         default:
-          name: odata.nextLink
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          name: odataNextLink
+          description: ''
+          originalName: odata.nextLink
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -220,67 +229,67 @@ schemas: !<!Schemas>
           language:
             default:
               name: Succeeded
-              description: ''
+              description: The value 'undefined'
         - !<!ChoiceValue> 
           value: Failed
           language:
             default:
               name: Failed
-              description: ''
+              description: The value 'undefined'
         - !<!ChoiceValue> 
           value: canceled
           language:
             default:
               name: canceled
-              description: ''
+              description: The value 'undefined'
         - !<!ChoiceValue> 
           value: Accepted
           language:
             default:
               name: Accepted
-              description: ''
+              description: The value 'undefined'
         - !<!ChoiceValue> 
           value: Creating
           language:
             default:
               name: Creating
-              description: ''
+              description: The value 'undefined'
         - !<!ChoiceValue> 
           value: Created
           language:
             default:
               name: Created
-              description: ''
+              description: The value 'undefined'
         - !<!ChoiceValue> 
           value: Updating
           language:
             default:
               name: Updating
-              description: ''
+              description: The value 'undefined'
         - !<!ChoiceValue> 
           value: Updated
           language:
             default:
               name: Updated
-              description: ''
+              description: The value 'undefined'
         - !<!ChoiceValue> 
           value: Deleting
           language:
             default:
               name: Deleting
-              description: ''
+              description: The value 'undefined'
         - !<!ChoiceValue> 
           value: Deleted
           language:
             default:
               name: Deleted
-              description: ''
+              description: The value 'undefined'
         - !<!ChoiceValue> 
           value: OK
           language:
             default:
               name: OK
-              description: ''
+              description: The value 'undefined'
         type: choice
         apiVersions:
         - !<!ApiVersion> 
@@ -302,6 +311,7 @@ schemas: !<!Schemas>
         default:
           name: status
           description: The status of the request
+          originalName: status
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -353,7 +363,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: string
-        description: MISSING·SCHEMA-DESCRIPTION-STRING
+        description: ''
     protocol: !<!Protocols> {}
   - *ref_11
 globalParameters:
@@ -362,6 +372,8 @@ globalParameters:
   clientDefaultValue: 'http://localhost:3000'
   implementation: Client
   required: true
+  extensions:
+    x-ms-skip-url-encoding: true
   language: !<!Languages> 
     default:
       name: $host

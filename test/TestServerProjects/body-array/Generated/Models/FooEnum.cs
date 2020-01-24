@@ -6,11 +6,11 @@ namespace body_array.Models
     /// <summary> MISSING·SCHEMA-DESCRIPTION-CHOICE. </summary>
     public enum FooEnum
     {
-        /// <summary> foo1. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Foo1,
-        /// <summary> foo2. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Foo2,
-        /// <summary> foo3. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Foo3
     }
 }

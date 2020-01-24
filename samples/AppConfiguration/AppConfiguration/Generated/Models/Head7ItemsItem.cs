@@ -26,21 +26,21 @@ namespace AppConfiguration.Models
         private const string LockedValue = "locked";
         private const string EtagValue = "etag";
 
-        /// <summary> key. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static Head7ItemsItem Key { get; } = new Head7ItemsItem(KeyValue);
-        /// <summary> label. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static Head7ItemsItem Label { get; } = new Head7ItemsItem(LabelValue);
-        /// <summary> content_type. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static Head7ItemsItem ContentType { get; } = new Head7ItemsItem(ContentTypeValue);
-        /// <summary> value. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static Head7ItemsItem Value { get; } = new Head7ItemsItem(ValueValue);
-        /// <summary> last_modified. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static Head7ItemsItem LastModified { get; } = new Head7ItemsItem(LastModifiedValue);
-        /// <summary> tags. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static Head7ItemsItem Tags { get; } = new Head7ItemsItem(TagsValue);
-        /// <summary> locked. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static Head7ItemsItem Locked { get; } = new Head7ItemsItem(LockedValue);
-        /// <summary> etag. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static Head7ItemsItem Etag { get; } = new Head7ItemsItem(EtagValue);
         /// <summary> Determines if two <see cref="Head7ItemsItem"/> values are the same. </summary>
         public static bool operator ==(Head7ItemsItem left, Head7ItemsItem right) => left.Equals(right);

@@ -21,6 +21,7 @@ schemas: !<!Schemas>
         default:
           name: status
           description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+          originalName: status
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_3
@@ -31,13 +32,14 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: Error-message
-            description: MISSING·SCHEMA-DESCRIPTION-STRING
+            description: ''
         protocol: !<!Protocols> {}
       serializedName: message
       language: !<!Languages> 
         default:
           name: message
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          description: ''
+          originalName: message
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -81,6 +83,7 @@ schemas: !<!Schemas>
         default:
           name: ColorConstant
           description: Referenced Color Constant Description.
+          originalName: ColorConstant
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_4
@@ -99,6 +102,7 @@ schemas: !<!Schemas>
         default:
           name: field1
           description: Sample string.
+          originalName: field1
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -134,7 +138,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Constant0
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: The constant value null
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_8
     type: constant
@@ -151,7 +155,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Constant1
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: 'The constant value '
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_9
     type: constant
@@ -168,7 +172,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Constant2
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: The constant value 啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_10
     type: constant
@@ -185,7 +189,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Constant3
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: 'The constant value     Now is the time for all good men to come to the aid of their country    '
     protocol: !<!Protocols> {}
   - *ref_1
   numbers:
@@ -198,19 +202,19 @@ schemas: !<!Schemas>
       language:
         default:
           name: red color
-          description: ''
+          description: The value 'undefined'
     - !<!ChoiceValue> 
       value: green-color
       language:
         default:
           name: green-color
-          description: ''
+          description: The value 'undefined'
     - !<!ChoiceValue> 
       value: blue_color
       language:
         default:
           name: blue_color
-          description: ''
+          description: The value 'undefined'
     type: sealed-choice
     apiVersions:
     - !<!ApiVersion> 
@@ -233,7 +237,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: string
-        description: MISSING·SCHEMA-DESCRIPTION-STRING
+        description: ''
     protocol: !<!Protocols> {}
 globalParameters:
 - !<!Parameter> &ref_5
@@ -241,6 +245,8 @@ globalParameters:
   clientDefaultValue: 'http://localhost:3000'
   implementation: Client
   required: true
+  extensions:
+    x-ms-skip-url-encoding: true
   language: !<!Languages> 
     default:
       name: $host

@@ -14,7 +14,6 @@ namespace body_complex.Models
         {
             Fishtype = "smart_salmon";
         }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-STRING. </summary>
         public string? CollegeDegree { get; set; }
         private readonly IDictionary<string, object> _additionalProperties = new Dictionary<string, object>();
         /// <inheritdoc />
@@ -34,7 +33,7 @@ namespace body_complex.Models
         /// <inheritdoc />
         public bool Remove(string key) => _additionalProperties.Remove(key);
         /// <inheritdoc />
-        public int Count => _additionalProperties.Count;
+        int ICollection<KeyValuePair<string, object>>.Count => _additionalProperties.Count;
         /// <inheritdoc />
         bool ICollection<KeyValuePair<string, object>>.IsReadOnly => _additionalProperties.IsReadOnly;
         /// <inheritdoc />

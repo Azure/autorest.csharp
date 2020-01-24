@@ -6,11 +6,11 @@ namespace body_string.Models
     /// <summary> MISSING·SCHEMA-DESCRIPTION-CHOICE. </summary>
     public enum Colors
     {
-        /// <summary> red color. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         RedColor,
-        /// <summary> green-color. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         GreenColor,
-        /// <summary> blue_color. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         BlueColor
     }
 }

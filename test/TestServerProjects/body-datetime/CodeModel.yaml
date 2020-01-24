@@ -21,6 +21,7 @@ schemas: !<!Schemas>
         default:
           name: status
           description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+          originalName: status
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_3
@@ -31,13 +32,14 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: Error-message
-            description: MISSING·SCHEMA-DESCRIPTION-STRING
+            description: ''
         protocol: !<!Protocols> {}
       serializedName: message
       language: !<!Languages> 
         default:
           name: message
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          description: ''
+          originalName: message
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -71,7 +73,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Constant0
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: 'The constant value 0001-01-01T00:00:00Z'
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> 
     type: constant
@@ -98,7 +100,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Constant1
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: 'The constant value 0001-01-01t00:00:00+14:00'
     protocol: !<!Protocols> {}
   dateTimes:
   - !<!DateTimeSchema> &ref_6
@@ -131,6 +133,8 @@ globalParameters:
   clientDefaultValue: 'http://localhost:3000'
   implementation: Client
   required: true
+  extensions:
+    x-ms-skip-url-encoding: true
   language: !<!Languages> 
     default:
       name: $host
@@ -469,6 +473,7 @@ operationGroups:
       default:
         name: putUtcMaxDateTime7Digits
         description: 'Put max datetime value 9999-12-31T23:59:59.9999999Z'
+        summary: 'This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario'
     protocol: !<!Protocols> {}
   - !<!Operation> 
     apiVersions:
@@ -616,6 +621,7 @@ operationGroups:
       default:
         name: getUtcUppercaseMaxDateTime7Digits
         description: 'Get max datetime value 9999-12-31T23:59:59.9999999Z'
+        summary: 'This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario'
     protocol: !<!Protocols> {}
   - !<!Operation> 
     apiVersions:
