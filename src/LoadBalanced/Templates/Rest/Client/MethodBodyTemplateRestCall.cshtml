@@ -44,7 +44,7 @@ if (_shouldTrace)
     Microsoft.Rest.ServiceClientTracing.Enter(_invocationId, this, "@(Model.Name)", tracingParameters);
 }
 
-return await this.SendWithRetry(async () => 
+return await this.SendWithRetry(_invocationId, async () => 
 {
     // Construct URL
     @if (Model.IsAbsoluteUrl)
