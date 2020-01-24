@@ -21,6 +21,7 @@ schemas: !<!Schemas>
         default:
           name: status
           description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+          originalName: status
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_5
@@ -31,13 +32,14 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: Error-message
-            description: MISSING·SCHEMA-DESCRIPTION-STRING
+            description: ''
         protocol: !<!Protocols> {}
       serializedName: message
       language: !<!Languages> 
         default:
           name: message
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          description: ''
+          originalName: message
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -72,13 +74,14 @@ schemas: !<!Schemas>
             language: !<!Languages> 
               default:
                 name: B-textStatusCode
-                description: MISSING·SCHEMA-DESCRIPTION-STRING
+                description: ''
             protocol: !<!Protocols> {}
           serializedName: textStatusCode
           language: !<!Languages> 
             default:
               name: textStatusCode
-              description: MISSING·SCHEMA-DESCRIPTION-STRING
+              description: ''
+              originalName: textStatusCode
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
@@ -98,13 +101,14 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: A-statusCode
-            description: MISSING·SCHEMA-DESCRIPTION-STRING
+            description: ''
         protocol: !<!Protocols> {}
       serializedName: statusCode
       language: !<!Languages> 
         default:
           name: statusCode
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          description: ''
+          originalName: statusCode
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -128,13 +132,14 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: C-httpCode
-            description: MISSING·SCHEMA-DESCRIPTION-STRING
+            description: ''
         protocol: !<!Protocols> {}
       serializedName: httpCode
       language: !<!Languages> 
         default:
           name: httpCode
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          description: ''
+          originalName: httpCode
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -157,13 +162,14 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: D-httpStatusCode
-            description: MISSING·SCHEMA-DESCRIPTION-STRING
+            description: ''
         protocol: !<!Protocols> {}
       serializedName: httpStatusCode
       language: !<!Languages> 
         default:
           name: httpStatusCode
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          description: ''
+          originalName: httpStatusCode
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -185,7 +191,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: get-300-application-json-itemsItem
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -239,7 +245,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Constant1
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: The constant value /http/success/head/200
         header: Location
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_16
@@ -257,7 +263,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Constant2
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: The constant value /http/success/get/200
         header: Location
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_17
@@ -275,7 +281,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Constant3
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: The constant value /http/failure/500
         header: Location
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_18
@@ -293,7 +299,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Constant4
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: The constant value /http/success/options/200
         header: Location
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_19
@@ -311,7 +317,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Constant5
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: The constant value /http/success/put/200
         header: Location
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_20
@@ -329,7 +335,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Constant6
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: The constant value /http/success/patch/200
         header: Location
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_21
@@ -347,7 +353,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Constant7
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: The constant value /http/success/post/200
         header: Location
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_22
@@ -365,7 +371,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Constant8
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: The constant value /http/success/delete/200
         header: Location
     protocol: !<!Protocols> {}
   numbers:
@@ -384,6 +390,8 @@ globalParameters:
   clientDefaultValue: 'http://localhost:3000'
   implementation: Client
   required: true
+  extensions:
+    x-ms-skip-url-encoding: true
   language: !<!Languages> 
     default:
       name: $host
