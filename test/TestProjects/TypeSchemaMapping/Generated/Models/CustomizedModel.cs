@@ -6,7 +6,7 @@ namespace AutoRest.TestServer.Tests.TypeSchemaMapping
     /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
     internal partial class CustomizedModel
     {
-        /// <summary> &lt;Any object&gt;. </summary>
-        public object? ModelProperty { get; set; }
+        /// <summary> A description about the set of tags. </summary>
+        public string? ModelProperty { get; set; }
     }
 }

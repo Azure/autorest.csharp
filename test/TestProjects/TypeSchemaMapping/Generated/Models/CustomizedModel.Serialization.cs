@@ -14,7 +14,7 @@ namespace AutoRest.TestServer.Tests.TypeSchemaMapping
             if (ModelProperty != null)
             {
                 writer.WritePropertyName("ModelProperty");
-                writer.WriteObjectValue(ModelProperty);
+                writer.WriteStringValue(ModelProperty);
             }
             writer.WriteEndObject();
         }
@@ -29,7 +29,7 @@ namespace AutoRest.TestServer.Tests.TypeSchemaMapping
                     {
                         continue;
                     }
-                    result.ModelProperty = property.Value.GetObject();
+                    result.ModelProperty = property.Value.GetString();
                     continue;
                 }
             }
