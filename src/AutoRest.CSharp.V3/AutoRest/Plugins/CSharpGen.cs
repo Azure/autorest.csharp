@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
             var sourceInputModel = SourceInputModelBuilder.Build(await project.GetCompilationAsync());
 
             var modelBuilder = new ModelBuilder(configuration.Namespace, GetMediaTypes(codeModel), sourceInputModel);
-            var clientBuilder = new ClientBuilder(configuration.Namespace, sourceInputModel);
+            var clientBuilder = new ClientBuilder(configuration.Namespace);
             var models = schemas.Select(modelBuilder.BuildModel).ToArray();
             var clients = codeModel.OperationGroups.Select(clientBuilder.BuildClient).ToArray();
             var typeFactory = new TypeFactory(models);

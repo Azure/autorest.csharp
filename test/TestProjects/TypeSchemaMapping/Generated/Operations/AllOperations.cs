@@ -9,7 +9,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace TypeSchemaMapping.Operations
+namespace TypeSchemaMapping
 {
     internal partial class AllOperations
     {

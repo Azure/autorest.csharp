@@ -191,18 +191,19 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         private void WriteChoiceSchema(CodeWriter writer, EnumType schema)
         {
             var cs = schema.Type;
+            string name = schema.Declaration.Name;
             using (writer.Namespace(schema.Declaration.Namespace))
             {
                 writer.WriteXmlDocumentationSummary(schema.Description);
 
-                var implementType = new CSharpType(typeof(IEquatable<>));
-                using (writer.Scope($"public readonly partial struct {schema.Declaration.Name}: {implementType}"))
+                var implementType = new CSharpType(typeof(IEquatable<>), cs);
+                using (writer.Scope($"public readonly partial struct {name}: {implementType}"))
                 {
                     writer.Line($"private readonly string? _value;");
                     writer.Line();
 
-                    writer.WriteXmlDocumentationSummary($"Determines if two <see cref=\"{schema.Declaration.Name}\"/> values are the same.");
-                    using (writer.Scope($"public {schema.Declaration.Name}(string value)"))
+                    writer.WriteXmlDocumentationSummary($"Determines if two <see cref=\"{name}\"/> values are the same.");
+                    using (writer.Scope($"public {name}(string value)"))
                     {
                         writer.Line($"_value = value ?? throw new {typeof(ArgumentNullException)}(nameof(value));");
                     }
@@ -220,13 +221,13 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         writer.Append($"public static {cs} {choice.Name}").AppendRaw("{ get; }").Append($" = new {cs}({choice.Name}Value);").Line();
                     }
 
-                    writer.WriteXmlDocumentationSummary($"Determines if two <see cref=\"{cs}\"/> values are the same.");
+                    writer.WriteXmlDocumentationSummary($"Determines if two <see cref=\"{name}\"/> values are the same.");
                     writer.Line($"public static bool operator ==({cs} left, {cs} right) => left.Equals(right);");
 
-                    writer.WriteXmlDocumentationSummary($"Determines if two <see cref=\"{cs}\"/> values are not the same.");
+                    writer.WriteXmlDocumentationSummary($"Determines if two <see cref=\"{name}\"/> values are not the same.");
                     writer.Line($"public static bool operator !=({cs} left, {cs} right) => !left.Equals(right);");
 
-                    writer.WriteXmlDocumentationSummary($"Converts a string to a <see cref=\"{cs}\"/>.");
+                    writer.WriteXmlDocumentationSummary($"Converts a string to a <see cref=\"{name}\"/>.");
                     writer.Line($"public static implicit operator {cs}(string value) => new {cs}(value);");
                     writer.Line();
 

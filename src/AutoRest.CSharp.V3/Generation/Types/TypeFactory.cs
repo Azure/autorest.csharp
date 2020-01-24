@@ -73,7 +73,7 @@ namespace AutoRest.CSharp.V3.Generation.Types
 
         private CSharpType DefaultTypeInfo(SchemaTypeReference schemaReference)
         {
-            return ResolveReference(schemaReference).Type;
+            return ResolveReference(schemaReference).Type.WithNullable(schemaReference.IsNullable);
         }
     }
 }

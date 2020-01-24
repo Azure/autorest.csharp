@@ -91,7 +91,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private void WriteXmlDeserialize(CodeWriter writer, ObjectType model, XmlElementSerialization serialization)
         {
-            using (writer.Method("internal static", model.Declaration.Name, "Deserialize" + model.Declaration.Name, writer.Pair(typeof(XElement), "element")))
+            using (writer.Scope($"internal static {model.Type} Deserialize{model.Declaration.Name}({typeof(XElement)} element)"))
             {
                 var resultVariable = "result";
                 writer.ToDeserializeCall(serialization,
@@ -103,7 +103,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private void WriteJsonDeserialize(CodeWriter writer, ObjectType model, JsonSerialization jsonSerialization)
         {
-            using (writer.Method($"{model.Declaration.Accessibility} static", model.Declaration.Name, "Deserialize" + model.Declaration.Name, writer.Pair(typeof(JsonElement), "element")))
+            using (writer.Scope($"internal static {model.Type} Deserialize{model.Declaration.Name}({typeof(JsonElement)} element)"))
             {
                 if (model.Discriminator?.HasDescendants == true)
                 {

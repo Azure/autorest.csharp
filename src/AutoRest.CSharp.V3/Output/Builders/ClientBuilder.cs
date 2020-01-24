@@ -23,13 +23,11 @@ namespace AutoRest.CSharp.V3.Output.Builders
 {
     internal class ClientBuilder
     {
-        private readonly SourceInputModel _sourceInputModel;
         private readonly string _defaultOperationsNamespace;
 
-        public ClientBuilder(string @namespace, SourceInputModel sourceInputModel)
+        public ClientBuilder(string @namespace)
         {
-            _sourceInputModel = sourceInputModel;
-            _defaultOperationsNamespace = $"{@namespace}.Operations";
+            _defaultOperationsNamespace = @namespace;
         }
 
         public Client BuildClient(OperationGroup operationGroup)

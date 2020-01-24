@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
         private readonly KnownMediaType[] _mediaTypes;
         private readonly SourceInputModel _sourceInputModel;
         private readonly string _defaultModelsNamespace;
-        private Accessibility _defaultAccessibility;
+        private readonly Accessibility _defaultAccessibility = Accessibility.Public;
 
         public ModelBuilder(string @namespace, KnownMediaType[] mediaTypes, SourceInputModel sourceInputModel)
         {
@@ -35,7 +35,6 @@ namespace AutoRest.CSharp.V3.Output.Builders
         {
             var codeInput = _sourceInputModel.FindForSchema(sealedChoiceSchema.Name);
 
-            _defaultAccessibility = Accessibility.Public;
             return new EnumType(
                 sealedChoiceSchema,
                 BuilderHelpers.CreateTypeAttributes(sealedChoiceSchema.CSharpName(), _defaultModelsNamespace, _defaultAccessibility, codeInput?.ExistingType),
