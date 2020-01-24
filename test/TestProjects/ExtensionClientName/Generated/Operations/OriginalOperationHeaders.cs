@@ -4,7 +4,7 @@
 using Azure;
 using Azure.Core;
 
-namespace extension_client_name
+namespace ExtensionClientName
 {
     internal class OriginalOperationHeaders
     {

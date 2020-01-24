@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Communication
                 _arguments[name] = parts.Length == 1 ? "true" : parts[1];
             }
 
-            _basePath = _arguments["output-path"];
+            _basePath = _arguments["output-folder"];
             PluginName = _arguments["plugin"];
         }
 

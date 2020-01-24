@@ -7,9 +7,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using extension_client_name.Models;
+using ExtensionClientName.Models;
 
-namespace extension_client_name
+namespace ExtensionClientName
 {
     internal partial class AllOperations
     {
