@@ -6,9 +6,9 @@ namespace CognitiveSearch.Models
     /// <summary> A string indicating which domain-specific details to return. </summary>
     public enum ImageDetail
     {
-        /// <summary> celebrities. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Celebrities,
-        /// <summary> landmarks. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Landmarks
     }
 }

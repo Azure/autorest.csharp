@@ -20,9 +20,9 @@ namespace xml_service.Models
         private const string ContainerValue = "container";
         private const string BlobValue = "blob";
 
-        /// <summary> container. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static PublicAccessType Container { get; } = new PublicAccessType(ContainerValue);
-        /// <summary> blob. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static PublicAccessType Blob { get; } = new PublicAccessType(BlobValue);
         /// <summary> Determines if two <see cref="PublicAccessType"/> values are the same. </summary>
         public static bool operator ==(PublicAccessType left, PublicAccessType right) => left.Equals(right);

@@ -38,10 +38,10 @@ namespace xml_service.Models
                 writer.WritePropertyName("Content-Language");
                 writer.WriteStringValue(ContentLanguage);
             }
-            if (ContentMD5 != null)
+            if (ContentMd5 != null)
             {
                 writer.WritePropertyName("Content-MD5");
-                writer.WriteStringValue(ContentMD5);
+                writer.WriteStringValue(ContentMd5);
             }
             if (ContentDisposition != null)
             {
@@ -207,7 +207,7 @@ namespace xml_service.Models
                     {
                         continue;
                     }
-                    result.ContentMD5 = property.Value.GetString();
+                    result.ContentMd5 = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("Content-Disposition"))
@@ -435,10 +435,10 @@ namespace xml_service.Models
                 writer.WriteValue(ContentLanguage);
                 writer.WriteEndElement();
             }
-            if (ContentMD5 != null)
+            if (ContentMd5 != null)
             {
                 writer.WriteStartElement("Content-MD5");
-                writer.WriteValue(ContentMD5);
+                writer.WriteValue(ContentMd5);
                 writer.WriteEndElement();
             }
             if (ContentDisposition != null)
@@ -620,7 +620,7 @@ namespace xml_service.Models
             {
                 value5 = (string?)contentMD5;
             }
-            result.ContentMD5 = value5;
+            result.ContentMd5 = value5;
             string? value6 = default;
             var contentDisposition = element.Element("Content-Disposition");
             if (contentDisposition != null)

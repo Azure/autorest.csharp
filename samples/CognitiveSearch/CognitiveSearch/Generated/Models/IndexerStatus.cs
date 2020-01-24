@@ -6,11 +6,11 @@ namespace CognitiveSearch.Models
     /// <summary> Represents the overall indexer status. </summary>
     public enum IndexerStatus
     {
-        /// <summary> unknown. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Unknown,
-        /// <summary> error. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Error,
-        /// <summary> running. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Running
     }
 }

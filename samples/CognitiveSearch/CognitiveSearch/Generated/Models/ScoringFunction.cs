@@ -11,7 +11,6 @@ namespace CognitiveSearch.Models
         {
             Type = null;
         }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-STRING. </summary>
         public string Type { get; internal set; }
         /// <summary> The name of the field used as input to the scoring function. </summary>
         public string FieldName { get; set; }

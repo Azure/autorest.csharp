@@ -21,6 +21,7 @@ schemas: !<!Schemas>
         default:
           name: status
           description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+          originalName: status
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_22
@@ -31,13 +32,14 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: Error-message
-            description: MISSING·SCHEMA-DESCRIPTION-STRING
+            description: ''
         protocol: !<!Protocols> {}
       serializedName: message
       language: !<!Languages> 
         default:
           name: message
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          description: ''
+          originalName: message
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -65,6 +67,7 @@ schemas: !<!Schemas>
         default:
           name: integer
           description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+          originalName: integer
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_24
@@ -75,13 +78,14 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: Product-string
-            description: MISSING·SCHEMA-DESCRIPTION-STRING
+            description: ''
         protocol: !<!Protocols> {}
       serializedName: string
       language: !<!Languages> 
         default:
           name: string
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          description: ''
+          originalName: string
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -100,7 +104,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: string
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -115,19 +119,19 @@ schemas: !<!Schemas>
       language:
         default:
           name: foo1
-          description: ''
+          description: The value 'undefined'
     - !<!ChoiceValue> 
       value: foo2
       language:
         default:
           name: foo2
-          description: ''
+          description: The value 'undefined'
     - !<!ChoiceValue> 
       value: foo3
       language:
         default:
           name: foo3
-          description: ''
+          description: The value 'undefined'
     type: choice
     apiVersions:
     - !<!ApiVersion> 
@@ -200,7 +204,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: put-content-schemaItem
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -262,7 +266,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: number
-          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+          description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -283,7 +287,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: number
-          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+          description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -313,19 +317,19 @@ schemas: !<!Schemas>
         language:
           default:
             name: foo1
-            description: ''
+            description: The value 'undefined'
       - !<!ChoiceValue> 
         value: foo2
         language:
           default:
             name: foo2
-            description: ''
+            description: The value 'undefined'
       - !<!ChoiceValue> 
         value: foo3
         language:
           default:
             name: foo3
-            description: ''
+            description: The value 'undefined'
       type: sealed-choice
       apiVersions:
       - !<!ApiVersion> 
@@ -531,7 +535,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: put-content-schema-itemsItem
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -597,6 +601,8 @@ globalParameters:
   clientDefaultValue: 'http://localhost:3000'
   implementation: Client
   required: true
+  extensions:
+    x-ms-skip-url-encoding: true
   language: !<!Languages> 
     default:
       name: $host

@@ -6,13 +6,13 @@ namespace CognitiveSearch.Models
     /// <summary> Defines the function used to interpolate score boosting across a range of documents. </summary>
     public enum ScoringFunctionInterpolation
     {
-        /// <summary> linear. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Linear,
-        /// <summary> constant. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Constant,
-        /// <summary> quadratic. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Quadratic,
-        /// <summary> logarithmic. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         Logarithmic
     }
 }

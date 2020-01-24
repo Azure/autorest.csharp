@@ -8,11 +8,8 @@ namespace xml_service.Models
     /// <summary> Data about a slideshow. </summary>
     public partial class Slideshow
     {
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-STRING. </summary>
         public string? Title { get; set; }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-STRING. </summary>
         public string? Date { get; set; }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-STRING. </summary>
         public string? Author { get; set; }
         /// <summary> MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA. </summary>
         public ICollection<Slide>? Slides { get; set; }

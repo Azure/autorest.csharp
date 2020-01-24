@@ -11,9 +11,8 @@ namespace body_complex.Models
         {
             Kind = null;
         }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-CHOICE. </summary>
+        /// <summary> The constant value Kind1. </summary>
         public string Kind { get; internal set; } = "Kind1";
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-STRING. </summary>
         public string? PropB1 { get; set; }
         /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
         public MyBaseHelperType? Helper { get; set; }

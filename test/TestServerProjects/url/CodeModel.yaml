@@ -21,6 +21,7 @@ schemas: !<!Schemas>
         default:
           name: status
           description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+          originalName: status
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_25
@@ -31,13 +32,14 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: Error-message
-            description: MISSING·SCHEMA-DESCRIPTION-STRING
+            description: ''
         protocol: !<!Protocols> {}
       serializedName: message
       language: !<!Languages> 
         default:
           name: message
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          description: ''
+          originalName: message
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -59,7 +61,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: get-0-itemsItem
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -79,7 +81,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: string
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -156,7 +158,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Constant0
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: The constant value true
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_31
     type: constant
@@ -170,7 +172,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Constant1
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: The constant value false
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_32
     type: constant
@@ -186,12 +188,12 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: number
-          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+          description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
         name: Constant2
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: The constant value 1000000
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_33
     type: constant
@@ -207,12 +209,12 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: number
-          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+          description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
         name: Constant3
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: The constant value -1000000
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_34
     type: constant
@@ -228,12 +230,12 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: number
-          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+          description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
         name: Constant4
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: The constant value 10000000000
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_35
     type: constant
@@ -249,12 +251,12 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: number
-          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+          description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
         name: Constant5
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: The constant value -10000000000
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_36
     type: constant
@@ -270,12 +272,12 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: number
-          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+          description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
         name: Constant6
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: The constant value 103400000000000000000
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_37
     type: constant
@@ -291,12 +293,12 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: number
-          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+          description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
         name: Constant7
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: The constant value -1.034e-20
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_38
     type: constant
@@ -312,12 +314,12 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: number
-          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+          description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
         name: Constant8
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: The constant value 9999999.999
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_39
     type: constant
@@ -333,12 +335,12 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: number
-          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+          description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
         name: Constant9
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: The constant value -9999999.999
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_40
     type: constant
@@ -358,7 +360,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Constant10
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: The constant value 啊齄丂狛狜隣郎隣兀﨩
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_41
     type: constant
@@ -372,7 +374,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Constant11
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: 'The constant value begin!*''();:@ &=+$,/?#[]end'
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_42
     type: constant
@@ -386,7 +388,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Constant12
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: 'The constant value begin!*''();:@&=+$,end'
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_43
     type: constant
@@ -400,7 +402,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Constant13
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: 'The constant value '
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_46
     type: constant
@@ -414,7 +416,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Constant14
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: 'The constant value '
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_47
     type: constant
@@ -434,7 +436,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Constant15
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: The constant value 2012-01-01
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_49
     type: constant
@@ -455,7 +457,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Constant16
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: 'The constant value 2012-01-01T01:01:01Z'
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_54
     type: constant
@@ -469,7 +471,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Constant17
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: The constant value true
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_55
     type: constant
@@ -483,7 +485,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Constant18
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: The constant value false
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_57
     type: constant
@@ -499,12 +501,12 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: number
-          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+          description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
         name: Constant19
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: The constant value 1000000
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_58
     type: constant
@@ -520,12 +522,12 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: number
-          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+          description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
         name: Constant20
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: The constant value -1000000
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_60
     type: constant
@@ -541,12 +543,12 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: number
-          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+          description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
         name: Constant21
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: The constant value 10000000000
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_61
     type: constant
@@ -562,12 +564,12 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: number
-          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+          description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
         name: Constant22
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: The constant value -10000000000
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_63
     type: constant
@@ -583,12 +585,12 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: number
-          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+          description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
         name: Constant23
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: The constant value 103400000000000000000
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_64
     type: constant
@@ -604,12 +606,12 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: number
-          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+          description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
         name: Constant24
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: The constant value -1.034e-20
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_66
     type: constant
@@ -625,12 +627,12 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: number
-          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+          description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
         name: Constant25
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: The constant value 9999999.999
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_67
     type: constant
@@ -646,12 +648,12 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: number
-          description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+          description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
         name: Constant26
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: The constant value -9999999.999
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_69
     type: constant
@@ -665,7 +667,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Constant27
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: The constant value 啊齄丂狛狜隣郎隣兀﨩
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_70
     type: constant
@@ -679,7 +681,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Constant28
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: 'The constant value begin!*''();:@ &=+$,/?#[]end'
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_71
     type: constant
@@ -693,7 +695,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Constant29
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: 'The constant value '
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_72
     type: constant
@@ -707,7 +709,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Constant30
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: 'The constant value '
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_73
     type: constant
@@ -727,7 +729,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Constant31
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: The constant value 2012-01-01
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_74
     type: constant
@@ -748,7 +750,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Constant32
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: 'The constant value 2012-01-01T01:01:01Z'
     protocol: !<!Protocols> {}
   dateTimes:
   - *ref_4
@@ -824,7 +826,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: number
-        description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+        description: ''
     protocol: !<!Protocols> {}
   - *ref_23
   - *ref_24
@@ -837,7 +839,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: number
-        description: MISSING·SCHEMA-DESCRIPTION-NUMBER
+        description: ''
     protocol: !<!Protocols> {}
   sealedChoices:
   - !<!SealedChoiceSchema> &ref_44
@@ -847,19 +849,19 @@ schemas: !<!Schemas>
       language:
         default:
           name: red color
-          description: ''
+          description: The value 'undefined'
     - !<!ChoiceValue> 
       value: green color
       language:
         default:
           name: green color
-          description: ''
+          description: The value 'undefined'
     - !<!ChoiceValue> 
       value: blue color
       language:
         default:
           name: blue color
-          description: ''
+          description: The value 'undefined'
     type: sealed-choice
     apiVersions:
     - !<!ApiVersion> 
@@ -919,6 +921,8 @@ globalParameters:
   clientDefaultValue: 'http://localhost:3000'
   implementation: Client
   required: true
+  extensions:
+    x-ms-skip-url-encoding: true
   language: !<!Languages> 
     default:
       name: $host
@@ -1676,6 +1680,7 @@ operationGroups:
       default:
         name: stringUrlNonEncoded
         description: 'Get ''begin!*''();:@&=+$,end'
+        summary: 'https://tools.ietf.org/html/rfc3986#appendix-A ''path'' accept any ''pchar'' not encoded'
     protocol: !<!Protocols> {}
   - !<!Operation> 
     apiVersions:

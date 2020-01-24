@@ -11,7 +11,6 @@ namespace body_complex.Models
         {
             Kind = "Kind1";
         }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-STRING. </summary>
         public string? PropD1 { get; set; }
     }
 }

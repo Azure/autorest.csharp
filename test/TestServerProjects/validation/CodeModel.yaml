@@ -21,7 +21,7 @@ schemas: !<!Schemas>
           language: !<!Languages> 
             default:
               name: Product-display_namesItem
-              description: MISSING·SCHEMA-DESCRIPTION-STRING
+              description: ''
           protocol: !<!Protocols> {}
         maxItems: 6
         uniqueItems: true
@@ -34,8 +34,9 @@ schemas: !<!Schemas>
       serializedName: display_names
       language: !<!Languages> 
         default:
-          name: display_names
+          name: displayNames
           description: Non required array of unique items from 0 to 6 elements.
+          originalName: display_names
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!NumberSchema> &ref_10
@@ -56,6 +57,7 @@ schemas: !<!Schemas>
         default:
           name: capacity
           description: Non required int betwen 0 and 100 exclusive.
+          originalName: capacity
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_15
@@ -75,6 +77,7 @@ schemas: !<!Schemas>
         default:
           name: image
           description: Image URL representing the product.
+          originalName: image
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!ObjectSchema> &ref_1
@@ -113,6 +116,7 @@ schemas: !<!Schemas>
             default:
               name: constProperty
               description: Constant string
+              originalName: constProperty
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: !<!NumberSchema> &ref_11
@@ -129,6 +133,7 @@ schemas: !<!Schemas>
             default:
               name: count
               description: Count
+              originalName: count
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
@@ -142,6 +147,7 @@ schemas: !<!Schemas>
         default:
           name: child
           description: The product documentation.
+          originalName: child
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!ObjectSchema> &ref_2
@@ -174,6 +180,7 @@ schemas: !<!Schemas>
             default:
               name: constProperty
               description: Constant string
+              originalName: constProperty
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: !<!ConstantSchema> &ref_6
@@ -199,6 +206,7 @@ schemas: !<!Schemas>
             default:
               name: constProperty2
               description: Constant string2
+              originalName: constProperty2
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
@@ -212,6 +220,7 @@ schemas: !<!Schemas>
         default:
           name: constChild
           description: The product documentation.
+          originalName: constChild
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!ConstantSchema> &ref_7
@@ -241,6 +250,7 @@ schemas: !<!Schemas>
         default:
           name: constInt
           description: Constant int
+          originalName: constInt
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!ConstantSchema> &ref_8
@@ -266,6 +276,7 @@ schemas: !<!Schemas>
         default:
           name: constString
           description: Constant string
+          originalName: constString
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!ConstantSchema> &ref_9
@@ -291,6 +302,7 @@ schemas: !<!Schemas>
         default:
           name: constStringAsEnum
           description: Constant string as Enum
+          originalName: constStringAsEnum
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -320,6 +332,7 @@ schemas: !<!Schemas>
         default:
           name: code
           description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+          originalName: code
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_16
@@ -330,13 +343,14 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: Error-message
-            description: MISSING·SCHEMA-DESCRIPTION-STRING
+            description: ''
         protocol: !<!Protocols> {}
       serializedName: message
       language: !<!Languages> 
         default:
           name: message
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          description: ''
+          originalName: message
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_17
@@ -347,13 +361,14 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: Error-fields
-            description: MISSING·SCHEMA-DESCRIPTION-STRING
+            description: ''
         protocol: !<!Protocols> {}
       serializedName: fields
       language: !<!Languages> 
         default:
           name: fields
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          description: ''
+          originalName: fields
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -410,7 +425,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Constant0
-        description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+        description: The constant value constant
     protocol: !<!Protocols> {}
   numbers:
   - !<!NumberSchema> &ref_23
@@ -441,7 +456,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: string
-        description: MISSING·SCHEMA-DESCRIPTION-STRING
+        description: ''
     protocol: !<!Protocols> {}
   - !<!StringSchema> &ref_22
     type: string
@@ -454,7 +469,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: string
-        description: MISSING·SCHEMA-DESCRIPTION-STRING
+        description: ''
     protocol: !<!Protocols> {}
   - *ref_14
   - *ref_15
@@ -469,7 +484,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: string
-        description: MISSING·SCHEMA-DESCRIPTION-STRING
+        description: ''
     protocol: !<!Protocols> {}
 globalParameters:
 - !<!Parameter> &ref_21
@@ -491,6 +506,8 @@ globalParameters:
   clientDefaultValue: 'http://localhost:3000'
   implementation: Client
   required: true
+  extensions:
+    x-ms-skip-url-encoding: true
   language: !<!Languages> 
     default:
       name: $host
@@ -592,6 +609,7 @@ operationGroups:
       default:
         name: validationOfMethodParameters
         description: Validates input parameters on the method. See swagger for details.
+        summary: ''
     protocol: !<!Protocols> {}
   - !<!Operation> 
     apiVersions:
@@ -685,6 +703,7 @@ operationGroups:
       default:
         name: validationOfBody
         description: Validates body parameters on the method. See swagger for details.
+        summary: ''
     protocol: !<!Protocols> {}
   - !<!Operation> 
     apiVersions:

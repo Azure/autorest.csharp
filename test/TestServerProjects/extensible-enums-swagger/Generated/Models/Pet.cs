@@ -6,7 +6,6 @@ namespace extensible_enums_swagger.Models
     /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
     public partial class Pet
     {
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-STRING. </summary>
         public string? Name { get; set; }
         /// <summary> Type of Pet. </summary>
         public DaysOfWeekExtensibleEnum? DaysOfWeek { get; set; }
