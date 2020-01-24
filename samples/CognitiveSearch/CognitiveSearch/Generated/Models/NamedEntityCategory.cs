@@ -21,11 +21,11 @@ namespace CognitiveSearch.Models
         private const string OrganizationValue = "organization";
         private const string PersonValue = "person";
 
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> location. </summary>
         public static NamedEntityCategory Location { get; } = new NamedEntityCategory(LocationValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> organization. </summary>
         public static NamedEntityCategory Organization { get; } = new NamedEntityCategory(OrganizationValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> person. </summary>
         public static NamedEntityCategory Person { get; } = new NamedEntityCategory(PersonValue);
         /// <summary> Determines if two <see cref="NamedEntityCategory"/> values are the same. </summary>
         public static bool operator ==(NamedEntityCategory left, NamedEntityCategory right) => left.Equals(right);

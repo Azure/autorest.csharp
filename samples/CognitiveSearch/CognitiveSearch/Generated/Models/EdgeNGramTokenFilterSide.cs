@@ -6,9 +6,9 @@ namespace CognitiveSearch.Models
     /// <summary> Specifies which side of the input an n-gram should be generated from. </summary>
     public enum EdgeNGramTokenFilterSide
     {
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> front. </summary>
         Front,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> back. </summary>
         Back
     }
 }

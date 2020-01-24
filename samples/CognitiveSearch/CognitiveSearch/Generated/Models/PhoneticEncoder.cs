@@ -6,27 +6,27 @@ namespace CognitiveSearch.Models
     /// <summary> Identifies the type of phonetic encoder to use with a PhoneticTokenFilter. </summary>
     public enum PhoneticEncoder
     {
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> metaphone. </summary>
         Metaphone,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> doubleMetaphone. </summary>
         DoubleMetaphone,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> soundex. </summary>
         Soundex,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> refinedSoundex. </summary>
         RefinedSoundex,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> caverphone1. </summary>
         Caverphone1,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> caverphone2. </summary>
         Caverphone2,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> cologne. </summary>
         Cologne,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> nysiis. </summary>
         Nysiis,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> koelnerPhonetik. </summary>
         KoelnerPhonetik,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> haasePhonetik. </summary>
         HaasePhonetik,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> beiderMorse. </summary>
         BeiderMorse
     }
 }

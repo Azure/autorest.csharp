@@ -13,6 +13,7 @@ namespace CognitiveSearch.Models
         {
             OdataType = null;
         }
+        /// <summary> MISSING·SCHEMA-DESCRIPTION-STRING. </summary>
         public string OdataType { get; internal set; }
         /// <summary> The name of the skill which uniquely identifies it within the skillset. A skill with no name defined will be given a default name of its 1-based index in the skills array, prefixed with the character &apos;#&apos;. </summary>
         public string? Name { get; set; }

@@ -111,191 +111,191 @@ namespace CognitiveSearch.Models
         private const string StopValue = "stop";
         private const string WhitespaceValue = "whitespace";
 
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> ar.microsoft. </summary>
         public static AnalyzerName ArMicrosoft { get; } = new AnalyzerName(ArMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> ar.lucene. </summary>
         public static AnalyzerName ArLucene { get; } = new AnalyzerName(ArLuceneValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> hy.lucene. </summary>
         public static AnalyzerName HyLucene { get; } = new AnalyzerName(HyLuceneValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> bn.microsoft. </summary>
         public static AnalyzerName BnMicrosoft { get; } = new AnalyzerName(BnMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> eu.lucene. </summary>
         public static AnalyzerName EuLucene { get; } = new AnalyzerName(EuLuceneValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> bg.microsoft. </summary>
         public static AnalyzerName BgMicrosoft { get; } = new AnalyzerName(BgMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> bg.lucene. </summary>
         public static AnalyzerName BgLucene { get; } = new AnalyzerName(BgLuceneValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> ca.microsoft. </summary>
         public static AnalyzerName CaMicrosoft { get; } = new AnalyzerName(CaMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> ca.lucene. </summary>
         public static AnalyzerName CaLucene { get; } = new AnalyzerName(CaLuceneValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> zh-Hans.microsoft. </summary>
         public static AnalyzerName ZhHansMicrosoft { get; } = new AnalyzerName(ZhHansMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> zh-Hans.lucene. </summary>
         public static AnalyzerName ZhHansLucene { get; } = new AnalyzerName(ZhHansLuceneValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> zh-Hant.microsoft. </summary>
         public static AnalyzerName ZhHantMicrosoft { get; } = new AnalyzerName(ZhHantMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> zh-Hant.lucene. </summary>
         public static AnalyzerName ZhHantLucene { get; } = new AnalyzerName(ZhHantLuceneValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> hr.microsoft. </summary>
         public static AnalyzerName HrMicrosoft { get; } = new AnalyzerName(HrMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> cs.microsoft. </summary>
         public static AnalyzerName CsMicrosoft { get; } = new AnalyzerName(CsMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> cs.lucene. </summary>
         public static AnalyzerName CsLucene { get; } = new AnalyzerName(CsLuceneValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> da.microsoft. </summary>
         public static AnalyzerName DaMicrosoft { get; } = new AnalyzerName(DaMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> da.lucene. </summary>
         public static AnalyzerName DaLucene { get; } = new AnalyzerName(DaLuceneValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> nl.microsoft. </summary>
         public static AnalyzerName NlMicrosoft { get; } = new AnalyzerName(NlMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> nl.lucene. </summary>
         public static AnalyzerName NlLucene { get; } = new AnalyzerName(NlLuceneValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> en.microsoft. </summary>
         public static AnalyzerName EnMicrosoft { get; } = new AnalyzerName(EnMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> en.lucene. </summary>
         public static AnalyzerName EnLucene { get; } = new AnalyzerName(EnLuceneValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> et.microsoft. </summary>
         public static AnalyzerName EtMicrosoft { get; } = new AnalyzerName(EtMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> fi.microsoft. </summary>
         public static AnalyzerName FiMicrosoft { get; } = new AnalyzerName(FiMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> fi.lucene. </summary>
         public static AnalyzerName FiLucene { get; } = new AnalyzerName(FiLuceneValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> fr.microsoft. </summary>
         public static AnalyzerName FrMicrosoft { get; } = new AnalyzerName(FrMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> fr.lucene. </summary>
         public static AnalyzerName FrLucene { get; } = new AnalyzerName(FrLuceneValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> gl.lucene. </summary>
         public static AnalyzerName GlLucene { get; } = new AnalyzerName(GlLuceneValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> de.microsoft. </summary>
         public static AnalyzerName DeMicrosoft { get; } = new AnalyzerName(DeMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> de.lucene. </summary>
         public static AnalyzerName DeLucene { get; } = new AnalyzerName(DeLuceneValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> el.microsoft. </summary>
         public static AnalyzerName ElMicrosoft { get; } = new AnalyzerName(ElMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> el.lucene. </summary>
         public static AnalyzerName ElLucene { get; } = new AnalyzerName(ElLuceneValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> gu.microsoft. </summary>
         public static AnalyzerName GuMicrosoft { get; } = new AnalyzerName(GuMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> he.microsoft. </summary>
         public static AnalyzerName HeMicrosoft { get; } = new AnalyzerName(HeMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> hi.microsoft. </summary>
         public static AnalyzerName HiMicrosoft { get; } = new AnalyzerName(HiMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> hi.lucene. </summary>
         public static AnalyzerName HiLucene { get; } = new AnalyzerName(HiLuceneValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> hu.microsoft. </summary>
         public static AnalyzerName HuMicrosoft { get; } = new AnalyzerName(HuMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> hu.lucene. </summary>
         public static AnalyzerName HuLucene { get; } = new AnalyzerName(HuLuceneValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> is.microsoft. </summary>
         public static AnalyzerName IsMicrosoft { get; } = new AnalyzerName(IsMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> id.microsoft. </summary>
         public static AnalyzerName IdMicrosoft { get; } = new AnalyzerName(IdMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> id.lucene. </summary>
         public static AnalyzerName IdLucene { get; } = new AnalyzerName(IdLuceneValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> ga.lucene. </summary>
         public static AnalyzerName GaLucene { get; } = new AnalyzerName(GaLuceneValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> it.microsoft. </summary>
         public static AnalyzerName ItMicrosoft { get; } = new AnalyzerName(ItMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> it.lucene. </summary>
         public static AnalyzerName ItLucene { get; } = new AnalyzerName(ItLuceneValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> ja.microsoft. </summary>
         public static AnalyzerName JaMicrosoft { get; } = new AnalyzerName(JaMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> ja.lucene. </summary>
         public static AnalyzerName JaLucene { get; } = new AnalyzerName(JaLuceneValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> kn.microsoft. </summary>
         public static AnalyzerName KnMicrosoft { get; } = new AnalyzerName(KnMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> ko.microsoft. </summary>
         public static AnalyzerName KoMicrosoft { get; } = new AnalyzerName(KoMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> ko.lucene. </summary>
         public static AnalyzerName KoLucene { get; } = new AnalyzerName(KoLuceneValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> lv.microsoft. </summary>
         public static AnalyzerName LvMicrosoft { get; } = new AnalyzerName(LvMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> lv.lucene. </summary>
         public static AnalyzerName LvLucene { get; } = new AnalyzerName(LvLuceneValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> lt.microsoft. </summary>
         public static AnalyzerName LtMicrosoft { get; } = new AnalyzerName(LtMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> ml.microsoft. </summary>
         public static AnalyzerName MlMicrosoft { get; } = new AnalyzerName(MlMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> ms.microsoft. </summary>
         public static AnalyzerName MsMicrosoft { get; } = new AnalyzerName(MsMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> mr.microsoft. </summary>
         public static AnalyzerName MrMicrosoft { get; } = new AnalyzerName(MrMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> nb.microsoft. </summary>
         public static AnalyzerName NbMicrosoft { get; } = new AnalyzerName(NbMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> no.lucene. </summary>
         public static AnalyzerName NoLucene { get; } = new AnalyzerName(NoLuceneValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> fa.lucene. </summary>
         public static AnalyzerName FaLucene { get; } = new AnalyzerName(FaLuceneValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> pl.microsoft. </summary>
         public static AnalyzerName PlMicrosoft { get; } = new AnalyzerName(PlMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> pl.lucene. </summary>
         public static AnalyzerName PlLucene { get; } = new AnalyzerName(PlLuceneValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> pt-BR.microsoft. </summary>
         public static AnalyzerName PtBRMicrosoft { get; } = new AnalyzerName(PtBRMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> pt-BR.lucene. </summary>
         public static AnalyzerName PtBRLucene { get; } = new AnalyzerName(PtBRLuceneValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> pt-PT.microsoft. </summary>
         public static AnalyzerName PtPTMicrosoft { get; } = new AnalyzerName(PtPTMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> pt-PT.lucene. </summary>
         public static AnalyzerName PtPTLucene { get; } = new AnalyzerName(PtPTLuceneValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> pa.microsoft. </summary>
         public static AnalyzerName PaMicrosoft { get; } = new AnalyzerName(PaMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> ro.microsoft. </summary>
         public static AnalyzerName RoMicrosoft { get; } = new AnalyzerName(RoMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> ro.lucene. </summary>
         public static AnalyzerName RoLucene { get; } = new AnalyzerName(RoLuceneValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> ru.microsoft. </summary>
         public static AnalyzerName RuMicrosoft { get; } = new AnalyzerName(RuMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> ru.lucene. </summary>
         public static AnalyzerName RuLucene { get; } = new AnalyzerName(RuLuceneValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> sr-cyrillic.microsoft. </summary>
         public static AnalyzerName SrCyrillicMicrosoft { get; } = new AnalyzerName(SrCyrillicMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> sr-latin.microsoft. </summary>
         public static AnalyzerName SrLatinMicrosoft { get; } = new AnalyzerName(SrLatinMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> sk.microsoft. </summary>
         public static AnalyzerName SkMicrosoft { get; } = new AnalyzerName(SkMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> sl.microsoft. </summary>
         public static AnalyzerName SlMicrosoft { get; } = new AnalyzerName(SlMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> es.microsoft. </summary>
         public static AnalyzerName EsMicrosoft { get; } = new AnalyzerName(EsMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> es.lucene. </summary>
         public static AnalyzerName EsLucene { get; } = new AnalyzerName(EsLuceneValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> sv.microsoft. </summary>
         public static AnalyzerName SvMicrosoft { get; } = new AnalyzerName(SvMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> sv.lucene. </summary>
         public static AnalyzerName SvLucene { get; } = new AnalyzerName(SvLuceneValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> ta.microsoft. </summary>
         public static AnalyzerName TaMicrosoft { get; } = new AnalyzerName(TaMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> te.microsoft. </summary>
         public static AnalyzerName TeMicrosoft { get; } = new AnalyzerName(TeMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> th.microsoft. </summary>
         public static AnalyzerName ThMicrosoft { get; } = new AnalyzerName(ThMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> th.lucene. </summary>
         public static AnalyzerName ThLucene { get; } = new AnalyzerName(ThLuceneValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> tr.microsoft. </summary>
         public static AnalyzerName TrMicrosoft { get; } = new AnalyzerName(TrMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> tr.lucene. </summary>
         public static AnalyzerName TrLucene { get; } = new AnalyzerName(TrLuceneValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> uk.microsoft. </summary>
         public static AnalyzerName UkMicrosoft { get; } = new AnalyzerName(UkMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> ur.microsoft. </summary>
         public static AnalyzerName UrMicrosoft { get; } = new AnalyzerName(UrMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> vi.microsoft. </summary>
         public static AnalyzerName ViMicrosoft { get; } = new AnalyzerName(ViMicrosoftValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> standard.lucene. </summary>
         public static AnalyzerName StandardLucene { get; } = new AnalyzerName(StandardLuceneValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> standardasciifolding.lucene. </summary>
         public static AnalyzerName StandardasciifoldingLucene { get; } = new AnalyzerName(StandardasciifoldingLuceneValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> keyword. </summary>
         public static AnalyzerName Keyword { get; } = new AnalyzerName(KeywordValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> pattern. </summary>
         public static AnalyzerName Pattern { get; } = new AnalyzerName(PatternValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> simple. </summary>
         public static AnalyzerName Simple { get; } = new AnalyzerName(SimpleValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> stop. </summary>
         public static AnalyzerName Stop { get; } = new AnalyzerName(StopValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> whitespace. </summary>
         public static AnalyzerName Whitespace { get; } = new AnalyzerName(WhitespaceValue);
         /// <summary> Determines if two <see cref="AnalyzerName"/> values are the same. </summary>
         public static bool operator ==(AnalyzerName left, AnalyzerName right) => left.Equals(right);

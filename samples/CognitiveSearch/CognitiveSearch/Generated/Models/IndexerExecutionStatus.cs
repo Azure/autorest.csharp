@@ -6,13 +6,13 @@ namespace CognitiveSearch.Models
     /// <summary> Represents the status of an individual indexer execution. </summary>
     public enum IndexerExecutionStatus
     {
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> transientFailure. </summary>
         TransientFailure,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> success. </summary>
         Success,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> inProgress. </summary>
         InProgress,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> reset. </summary>
         Reset
     }
 }

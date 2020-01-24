@@ -11,6 +11,7 @@ namespace CognitiveSearch.Models
         {
             OdataType = null;
         }
+        /// <summary> MISSING·SCHEMA-DESCRIPTION-STRING. </summary>
         public string OdataType { get; internal set; }
         /// <summary> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </summary>
         public string Name { get; set; }

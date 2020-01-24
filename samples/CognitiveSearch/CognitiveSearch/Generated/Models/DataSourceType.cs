@@ -22,13 +22,13 @@ namespace CognitiveSearch.Models
         private const string AzureBlobValue = "azureblob";
         private const string AzureTableValue = "azuretable";
 
-        /// <summary> The value &apos;azuresql&apos;. </summary>
+        /// <summary> azuresql. </summary>
         public static DataSourceType AzureSql { get; } = new DataSourceType(AzureSqlValue);
-        /// <summary> The value &apos;cosmosdb&apos;. </summary>
+        /// <summary> cosmosdb. </summary>
         public static DataSourceType CosmosDb { get; } = new DataSourceType(CosmosDbValue);
-        /// <summary> The value &apos;azureblob&apos;. </summary>
+        /// <summary> azureblob. </summary>
         public static DataSourceType AzureBlob { get; } = new DataSourceType(AzureBlobValue);
-        /// <summary> The value &apos;azuretable&apos;. </summary>
+        /// <summary> azuretable. </summary>
         public static DataSourceType AzureTable { get; } = new DataSourceType(AzureTableValue);
         /// <summary> Determines if two <see cref="DataSourceType"/> values are the same. </summary>
         public static bool operator ==(DataSourceType left, DataSourceType right) => left.Equals(right);
