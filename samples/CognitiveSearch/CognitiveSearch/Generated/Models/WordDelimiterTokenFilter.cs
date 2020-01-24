@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System.Collections.Generic;
 
 namespace CognitiveSearch.Models
@@ -32,6 +34,6 @@ namespace CognitiveSearch.Models
         /// <summary> A value indicating whether to remove trailing &quot;&apos;s&quot; for each subword. Default is true. </summary>
         public bool? StemEnglishPossessive { get; set; }
         /// <summary> A list of tokens to protect from being delimited. </summary>
-        public ICollection<string>? ProtectedWords { get; set; }
+        public ICollection<string> ProtectedWords { get; set; }
     }
 }

@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System;
 
 namespace body_complex.Models
@@ -14,6 +16,6 @@ namespace body_complex.Models
             Fishtype = "sawshark";
         }
         /// <summary> MISSING·SCHEMA-DESCRIPTION-BYTEARRAY. </summary>
-        public byte[]? Picture { get; set; }
+        public byte[] Picture { get; set; }
     }
 }

@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System.Collections.Generic;
 
 namespace CognitiveSearch.Models
@@ -17,6 +19,6 @@ namespace CognitiveSearch.Models
         /// <summary> Whether indexer will base64-encode all values that are inserted into key field of the target index. This is needed if keys can contain characters that are invalid in keys (such as dot &apos;.&apos;). Default is false. </summary>
         public bool? Base64EncodeKeys { get; set; }
         /// <summary> A dictionary of indexer-specific configuration properties. Each name is the name of a specific property. Each value must be of a primitive type. </summary>
-        public IDictionary<string, object>? Configuration { get; set; }
+        public IDictionary<string, object> Configuration { get; set; }
     }
 }

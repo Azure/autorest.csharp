@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 namespace CognitiveServices.TextAnalytics.Models
 {
     /// <summary> Contains an input document to be analyzed by the service. </summary>

@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Xml;
@@ -116,7 +118,7 @@ namespace xml_service.Models
                 value = (string)title;
             }
             result.Title = value;
-            result.Items = new List<string>();
+            result.Items = new System.Collections.Generic.List<string>();
             foreach (var e in element.Elements("item"))
             {
                 string value0 = default;

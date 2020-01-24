@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System.Collections.Generic;
 
 namespace CognitiveServices.TextAnalytics.Models
@@ -9,6 +11,6 @@ namespace CognitiveServices.TextAnalytics.Models
     public partial class MultiLanguageBatchInput
     {
         /// <summary> The set of documents to process as part of this batch. </summary>
-        public ICollection<MultiLanguageInput> Documents { get; set; } = new List<MultiLanguageInput>();
+        public ICollection<MultiLanguageInput> Documents { get; set; } = new System.Collections.Generic.List<CognitiveServices.TextAnalytics.Models.MultiLanguageInput>();
     }
 }

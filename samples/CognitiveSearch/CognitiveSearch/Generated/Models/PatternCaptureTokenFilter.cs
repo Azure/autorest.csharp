@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System.Collections.Generic;
 
 namespace CognitiveSearch.Models
@@ -14,7 +16,7 @@ namespace CognitiveSearch.Models
             OdataType = "#Microsoft.Azure.Search.PatternCaptureTokenFilter";
         }
         /// <summary> A list of patterns to match against each token. </summary>
-        public ICollection<string> Patterns { get; set; } = new List<string>();
+        public ICollection<string> Patterns { get; set; } = new System.Collections.Generic.List<string>();
         /// <summary> A value indicating whether to return the original token even if one of the patterns matches. Default is true. </summary>
         public bool? PreserveOriginal { get; set; }
     }

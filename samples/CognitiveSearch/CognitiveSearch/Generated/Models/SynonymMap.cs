@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 namespace CognitiveSearch.Models
 {
     /// <summary> Represents a synonym map definition. </summary>
@@ -13,6 +15,6 @@ namespace CognitiveSearch.Models
         /// <summary> A series of synonym rules in the specified synonym map format. The rules must be separated by newlines. </summary>
         public string Synonyms { get; set; }
         /// <summary> The ETag of the synonym map. </summary>
-        public string? ETag { get; set; }
+        public string ETag { get; set; }
     }
 }

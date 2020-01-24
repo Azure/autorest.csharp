@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Xml;
@@ -97,11 +99,11 @@ namespace xml_service.Models
                 value0 = ContainerProperties.DeserializeContainerProperties(properties);
             }
             result.Properties = value0;
-            IDictionary<string, string> value1 = default;
+            System.Collections.Generic.IDictionary<string, string> value1 = default;
             var metadata = element.Element("Metadata");
             if (metadata != null)
             {
-                value1 = new Dictionary<string, string>(); var elements = metadata.Elements();
+                value1 = new System.Collections.Generic.Dictionary<string, string>(); var elements = metadata.Elements();
                 foreach (var e in elements)
                 {
                     string value2 = default;

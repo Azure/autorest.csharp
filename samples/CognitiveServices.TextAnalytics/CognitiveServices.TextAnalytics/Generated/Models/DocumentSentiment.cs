@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System.Collections.Generic;
 
 namespace CognitiveServices.TextAnalytics.Models
@@ -17,6 +19,6 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <summary> &lt;Any object&gt;. </summary>
         public object DocumentScores { get; set; }
         /// <summary> Sentence level sentiment analysis. </summary>
-        public ICollection<SentenceSentiment> Sentences { get; set; } = new List<SentenceSentiment>();
+        public ICollection<SentenceSentiment> Sentences { get; set; } = new System.Collections.Generic.List<CognitiveServices.TextAnalytics.Models.SentenceSentiment>();
     }
 }

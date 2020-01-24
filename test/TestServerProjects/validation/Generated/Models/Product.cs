@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System.Collections.Generic;
 
 namespace validation.Models
@@ -9,11 +11,11 @@ namespace validation.Models
     public partial class Product
     {
         /// <summary> Non required array of unique items from 0 to 6 elements. </summary>
-        public ICollection<string>? DisplayNames { get; set; }
+        public ICollection<string> DisplayNames { get; set; }
         /// <summary> Non required int betwen 0 and 100 exclusive. </summary>
         public int? Capacity { get; set; }
         /// <summary> Image URL representing the product. </summary>
-        public string? Image { get; set; }
+        public string Image { get; set; }
         /// <summary> The product documentation. </summary>
         public ChildProduct Child { get; set; } = new ChildProduct();
         /// <summary> The product documentation. </summary>

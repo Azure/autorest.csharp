@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System.Collections.Generic;
 
 namespace CognitiveSearch.Models
@@ -18,6 +20,6 @@ namespace CognitiveSearch.Models
         /// <summary> The maximum n-gram length. Default is 2. Maximum is 300. </summary>
         public int? MaxGram { get; set; }
         /// <summary> Character classes to keep in the tokens. </summary>
-        public ICollection<TokenCharacterKind>? TokenChars { get; set; }
+        public ICollection<TokenCharacterKind> TokenChars { get; set; }
     }
 }

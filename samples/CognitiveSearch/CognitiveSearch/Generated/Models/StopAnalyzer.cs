@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System.Collections.Generic;
 
 namespace CognitiveSearch.Models
@@ -14,6 +16,6 @@ namespace CognitiveSearch.Models
             OdataType = "#Microsoft.Azure.Search.StopAnalyzer";
         }
         /// <summary> A list of stopwords. </summary>
-        public ICollection<string>? Stopwords { get; set; }
+        public ICollection<string> Stopwords { get; set; }
     }
 }

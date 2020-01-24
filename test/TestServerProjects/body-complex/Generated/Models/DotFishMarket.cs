@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System.Collections.Generic;
 
 namespace body_complex.Models
@@ -9,12 +11,12 @@ namespace body_complex.Models
     public partial class DotFishMarket
     {
         /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
-        public DotSalmon? SampleSalmon { get; set; }
+        public DotSalmon SampleSalmon { get; set; }
         /// <summary> MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA. </summary>
-        public ICollection<DotSalmon>? Salmons { get; set; }
+        public ICollection<DotSalmon> Salmons { get; set; }
         /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
-        public DotFish? SampleFish { get; set; }
+        public DotFish SampleFish { get; set; }
         /// <summary> MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA. </summary>
-        public ICollection<DotFish>? Fishes { get; set; }
+        public ICollection<DotFish> Fishes { get; set; }
     }
 }

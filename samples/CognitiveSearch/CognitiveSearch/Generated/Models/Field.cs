@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System.Collections.Generic;
 
 namespace CognitiveSearch.Models
@@ -31,8 +33,8 @@ namespace CognitiveSearch.Models
         /// <summary> Defines the names of all text analyzers supported by Azure Cognitive Search. </summary>
         public AnalyzerName? IndexAnalyzer { get; set; }
         /// <summary> A list of the names of synonym maps to associate with this field. This option can be used only with searchable fields. Currently only one synonym map per field is supported. Assigning a synonym map to a field ensures that query terms targeting that field are expanded at query-time using the rules in the synonym map. This attribute can be changed on existing fields. Must be null or an empty collection for complex fields. </summary>
-        public ICollection<string>? SynonymMaps { get; set; }
+        public ICollection<string> SynonymMaps { get; set; }
         /// <summary> A list of sub-fields if this is a field of type Edm.ComplexType or Collection(Edm.ComplexType). Must be null or empty for simple fields. </summary>
-        public ICollection<Field>? Fields { get; set; }
+        public ICollection<Field> Fields { get; set; }
     }
 }

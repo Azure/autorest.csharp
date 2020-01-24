@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -1144,7 +1146,7 @@ namespace url
                 throw;
             }
         }
-        internal HttpMessage CreateStringNullRequest(string? stringQuery)
+        internal HttpMessage CreateStringNullRequest(string stringQuery)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1162,7 +1164,7 @@ namespace url
         /// <summary> Get null (no query parameter in url). </summary>
         /// <param name="stringQuery"> null string value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> StringNullAsync(string? stringQuery, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> StringNullAsync(string stringQuery, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("QueriesOperations.StringNull");
@@ -1188,7 +1190,7 @@ namespace url
         /// <summary> Get null (no query parameter in url). </summary>
         /// <param name="stringQuery"> null string value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response StringNull(string? stringQuery, CancellationToken cancellationToken = default)
+        public Response StringNull(string stringQuery, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("QueriesOperations.StringNull");
@@ -1345,7 +1347,7 @@ namespace url
                 throw;
             }
         }
-        internal HttpMessage CreateByteMultiByteRequest(byte[]? byteQuery)
+        internal HttpMessage CreateByteMultiByteRequest(byte[] byteQuery)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1363,7 +1365,7 @@ namespace url
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </summary>
         /// <param name="byteQuery"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> ByteMultiByteAsync(byte[]? byteQuery, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ByteMultiByteAsync(byte[] byteQuery, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("QueriesOperations.ByteMultiByte");
@@ -1389,7 +1391,7 @@ namespace url
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </summary>
         /// <param name="byteQuery"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response ByteMultiByte(byte[]? byteQuery, CancellationToken cancellationToken = default)
+        public Response ByteMultiByte(byte[] byteQuery, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("QueriesOperations.ByteMultiByte");
@@ -1472,7 +1474,7 @@ namespace url
                 throw;
             }
         }
-        internal HttpMessage CreateByteNullRequest(byte[]? byteQuery)
+        internal HttpMessage CreateByteNullRequest(byte[] byteQuery)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1490,7 +1492,7 @@ namespace url
         /// <summary> Get null as byte array (no query parameters in uri). </summary>
         /// <param name="byteQuery"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> ByteNullAsync(byte[]? byteQuery, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ByteNullAsync(byte[] byteQuery, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("QueriesOperations.ByteNull");
@@ -1516,7 +1518,7 @@ namespace url
         /// <summary> Get null as byte array (no query parameters in uri). </summary>
         /// <param name="byteQuery"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response ByteNull(byte[]? byteQuery, CancellationToken cancellationToken = default)
+        public Response ByteNull(byte[] byteQuery, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("QueriesOperations.ByteNull");
@@ -1793,7 +1795,7 @@ namespace url
                 throw;
             }
         }
-        internal HttpMessage CreateArrayStringCsvValidRequest(IEnumerable<string>? arrayQuery)
+        internal HttpMessage CreateArrayStringCsvValidRequest(IEnumerable<string> arrayQuery)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1811,7 +1813,7 @@ namespace url
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> ArrayStringCsvValidAsync(IEnumerable<string>? arrayQuery, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ArrayStringCsvValidAsync(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringCsvValid");
@@ -1837,7 +1839,7 @@ namespace url
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response ArrayStringCsvValid(IEnumerable<string>? arrayQuery, CancellationToken cancellationToken = default)
+        public Response ArrayStringCsvValid(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringCsvValid");
@@ -1860,7 +1862,7 @@ namespace url
                 throw;
             }
         }
-        internal HttpMessage CreateArrayStringCsvNullRequest(IEnumerable<string>? arrayQuery)
+        internal HttpMessage CreateArrayStringCsvNullRequest(IEnumerable<string> arrayQuery)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1878,7 +1880,7 @@ namespace url
         /// <summary> Get a null array of string using the csv-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> ArrayStringCsvNullAsync(IEnumerable<string>? arrayQuery, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ArrayStringCsvNullAsync(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringCsvNull");
@@ -1904,7 +1906,7 @@ namespace url
         /// <summary> Get a null array of string using the csv-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response ArrayStringCsvNull(IEnumerable<string>? arrayQuery, CancellationToken cancellationToken = default)
+        public Response ArrayStringCsvNull(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringCsvNull");
@@ -1927,7 +1929,7 @@ namespace url
                 throw;
             }
         }
-        internal HttpMessage CreateArrayStringCsvEmptyRequest(IEnumerable<string>? arrayQuery)
+        internal HttpMessage CreateArrayStringCsvEmptyRequest(IEnumerable<string> arrayQuery)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1945,7 +1947,7 @@ namespace url
         /// <summary> Get an empty array [] of string using the csv-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> ArrayStringCsvEmptyAsync(IEnumerable<string>? arrayQuery, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ArrayStringCsvEmptyAsync(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringCsvEmpty");
@@ -1971,7 +1973,7 @@ namespace url
         /// <summary> Get an empty array [] of string using the csv-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response ArrayStringCsvEmpty(IEnumerable<string>? arrayQuery, CancellationToken cancellationToken = default)
+        public Response ArrayStringCsvEmpty(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringCsvEmpty");
@@ -1994,7 +1996,7 @@ namespace url
                 throw;
             }
         }
-        internal HttpMessage CreateArrayStringSsvValidRequest(IEnumerable<string>? arrayQuery)
+        internal HttpMessage CreateArrayStringSsvValidRequest(IEnumerable<string> arrayQuery)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -2012,7 +2014,7 @@ namespace url
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> ArrayStringSsvValidAsync(IEnumerable<string>? arrayQuery, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ArrayStringSsvValidAsync(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringSsvValid");
@@ -2038,7 +2040,7 @@ namespace url
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response ArrayStringSsvValid(IEnumerable<string>? arrayQuery, CancellationToken cancellationToken = default)
+        public Response ArrayStringSsvValid(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringSsvValid");
@@ -2061,7 +2063,7 @@ namespace url
                 throw;
             }
         }
-        internal HttpMessage CreateArrayStringTsvValidRequest(IEnumerable<string>? arrayQuery)
+        internal HttpMessage CreateArrayStringTsvValidRequest(IEnumerable<string> arrayQuery)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -2079,7 +2081,7 @@ namespace url
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> ArrayStringTsvValidAsync(IEnumerable<string>? arrayQuery, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ArrayStringTsvValidAsync(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringTsvValid");
@@ -2105,7 +2107,7 @@ namespace url
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response ArrayStringTsvValid(IEnumerable<string>? arrayQuery, CancellationToken cancellationToken = default)
+        public Response ArrayStringTsvValid(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringTsvValid");
@@ -2128,7 +2130,7 @@ namespace url
                 throw;
             }
         }
-        internal HttpMessage CreateArrayStringPipesValidRequest(IEnumerable<string>? arrayQuery)
+        internal HttpMessage CreateArrayStringPipesValidRequest(IEnumerable<string> arrayQuery)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -2146,7 +2148,7 @@ namespace url
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> ArrayStringPipesValidAsync(IEnumerable<string>? arrayQuery, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ArrayStringPipesValidAsync(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringPipesValid");
@@ -2172,7 +2174,7 @@ namespace url
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response ArrayStringPipesValid(IEnumerable<string>? arrayQuery, CancellationToken cancellationToken = default)
+        public Response ArrayStringPipesValid(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringPipesValid");
