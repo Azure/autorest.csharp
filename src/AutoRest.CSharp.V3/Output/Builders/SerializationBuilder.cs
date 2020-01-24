@@ -95,6 +95,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
                     return new JsonObjectSerialization(dictionaryElementTypeReference, Array.Empty<JsonPropertySerialization>(),
                         new JsonDynamicPropertiesSerialization(BuildSerialization(dictionarySchema.ElementType, false)));
+                //PUT FLATTEN STRATEGY HERE
                 default:
                     return new JsonValueSerialization(
                         BuilderHelpers.CreateType(schema, isNullable),

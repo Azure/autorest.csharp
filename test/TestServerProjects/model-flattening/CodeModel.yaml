@@ -28,7 +28,7 @@ schemas: !<!Schemas>
             language: !<!Languages> 
               default:
                 name: FlattenedProduct-properties-p.name
-                description: MISSING·SCHEMA-DESCRIPTION-STRING
+                description: ''
             protocol: !<!Protocols> {}
           flattenedNames:
           - properties
@@ -36,8 +36,9 @@ schemas: !<!Schemas>
           serializedName: p.name
           language: !<!Languages> 
             default:
-              name: p.name
-              description: MISSING·SCHEMA-DESCRIPTION-STRING
+              name: pName
+              description: ''
+              originalName: p.name
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: !<!StringSchema> &ref_4
@@ -48,7 +49,7 @@ schemas: !<!Schemas>
             language: !<!Languages> 
               default:
                 name: FlattenedProduct-properties-type
-                description: MISSING·SCHEMA-DESCRIPTION-STRING
+                description: ''
             protocol: !<!Protocols> {}
           flattenedNames:
           - properties
@@ -56,8 +57,9 @@ schemas: !<!Schemas>
           serializedName: type
           language: !<!Languages> 
             default:
-              name: type
-              description: MISSING·SCHEMA-DESCRIPTION-STRING
+              name: typePropertiesType
+              description: ''
+              originalName: type
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: !<!ChoiceSchema> &ref_5
@@ -67,67 +69,67 @@ schemas: !<!Schemas>
               language:
                 default:
                   name: Succeeded
-                  description: ''
+                  description: The value 'undefined'
             - !<!ChoiceValue> 
               value: Failed
               language:
                 default:
                   name: Failed
-                  description: ''
+                  description: The value 'undefined'
             - !<!ChoiceValue> 
               value: canceled
               language:
                 default:
                   name: canceled
-                  description: ''
+                  description: The value 'undefined'
             - !<!ChoiceValue> 
               value: Accepted
               language:
                 default:
                   name: Accepted
-                  description: ''
+                  description: The value 'undefined'
             - !<!ChoiceValue> 
               value: Creating
               language:
                 default:
                   name: Creating
-                  description: ''
+                  description: The value 'undefined'
             - !<!ChoiceValue> 
               value: Created
               language:
                 default:
                   name: Created
-                  description: ''
+                  description: The value 'undefined'
             - !<!ChoiceValue> 
               value: Updating
               language:
                 default:
                   name: Updating
-                  description: ''
+                  description: The value 'undefined'
             - !<!ChoiceValue> 
               value: Updated
               language:
                 default:
                   name: Updated
-                  description: ''
+                  description: The value 'undefined'
             - !<!ChoiceValue> 
               value: Deleting
               language:
                 default:
                   name: Deleting
-                  description: ''
+                  description: The value 'undefined'
             - !<!ChoiceValue> 
               value: Deleted
               language:
                 default:
                   name: Deleted
-                  description: ''
+                  description: The value 'undefined'
             - !<!ChoiceValue> 
               value: OK
               language:
                 default:
                   name: OK
-                  description: ''
+                  description: The value 'undefined'
             type: choice
             apiVersions:
             - !<!ApiVersion> 
@@ -153,6 +155,7 @@ schemas: !<!Schemas>
             default:
               name: provisioningStateValues
               description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+              originalName: provisioningStateValues
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: !<!StringSchema> &ref_6
@@ -163,7 +166,7 @@ schemas: !<!Schemas>
             language: !<!Languages> 
               default:
                 name: FlattenedProduct-properties-provisioningState
-                description: MISSING·SCHEMA-DESCRIPTION-STRING
+                description: ''
             protocol: !<!Protocols> {}
           flattenedNames:
           - properties
@@ -172,7 +175,8 @@ schemas: !<!Schemas>
           language: !<!Languages> 
             default:
               name: provisioningState
-              description: MISSING·SCHEMA-DESCRIPTION-STRING
+              description: ''
+              originalName: provisioningState
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
@@ -200,6 +204,7 @@ schemas: !<!Schemas>
         default:
           name: id
           description: Resource Id
+          originalName: id
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_23
@@ -218,6 +223,7 @@ schemas: !<!Schemas>
         default:
           name: type
           description: Resource Type
+          originalName: type
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!DictionarySchema> &ref_16
@@ -230,7 +236,7 @@ schemas: !<!Schemas>
           language: !<!Languages> 
             default:
               name: string
-              description: MISSING·SCHEMA-DESCRIPTION-STRING
+              description: ''
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
@@ -242,6 +248,7 @@ schemas: !<!Schemas>
         default:
           name: tags
           description: Dictionary of <components·schemas·resource·properties·tags·additionalproperties>
+          originalName: tags
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_25
@@ -259,6 +266,7 @@ schemas: !<!Schemas>
         default:
           name: location
           description: Resource Location
+          originalName: location
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_26
@@ -277,6 +285,7 @@ schemas: !<!Schemas>
         default:
           name: name
           description: Resource Name
+          originalName: name
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -304,6 +313,7 @@ schemas: !<!Schemas>
         default:
           name: status
           description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+          originalName: status
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_27
@@ -314,13 +324,14 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: Error-message
-            description: MISSING·SCHEMA-DESCRIPTION-STRING
+            description: ''
         protocol: !<!Protocols> {}
       serializedName: message
       language: !<!Languages> 
         default:
           name: message
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          description: ''
+          originalName: message
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: *ref_2
@@ -329,6 +340,7 @@ schemas: !<!Schemas>
         default:
           name: parentError
           description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+          originalName: parentError
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -348,8 +360,9 @@ schemas: !<!Schemas>
       serializedName: p.name
       language: !<!Languages> 
         default:
-          name: p.name
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          name: pName
+          description: ''
+          originalName: p.name
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: *ref_4
@@ -357,7 +370,8 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: type
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          description: ''
+          originalName: type
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: *ref_5
@@ -367,6 +381,7 @@ schemas: !<!Schemas>
         default:
           name: provisioningStateValues
           description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+          originalName: provisioningStateValues
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: *ref_6
@@ -374,7 +389,8 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: provisioningState
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          description: ''
+          originalName: provisioningState
       protocol: !<!Protocols> {}
     extensions:
       x-ms-client-flatten: true
@@ -407,6 +423,7 @@ schemas: !<!Schemas>
         default:
           name: value
           description: the product value
+          originalName: value
       protocol: !<!Protocols> {}
     extensions:
       x-ms-flattened: true
@@ -432,6 +449,7 @@ schemas: !<!Schemas>
         default:
           name: value
           description: the product value
+          originalName: value
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -452,6 +470,7 @@ schemas: !<!Schemas>
         default:
           name: productresource
           description: Flattened product.
+          originalName: productresource
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!ArraySchema> &ref_20
@@ -470,6 +489,7 @@ schemas: !<!Schemas>
         default:
           name: arrayofresources
           description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+          originalName: arrayofresources
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!DictionarySchema> &ref_17
@@ -485,6 +505,7 @@ schemas: !<!Schemas>
         default:
           name: dictionaryofresources
           description: Dictionary of <FlattenedProduct>
+          originalName: dictionaryofresources
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -527,8 +548,9 @@ schemas: !<!Schemas>
           serializedName: max_product_display_name
           language: !<!Languages> 
             default:
-              name: max_product_display_name
+              name: maxProductDisplayName
               description: Display name of product.
+              originalName: max_product_display_name
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: !<!ConstantSchema> &ref_12
@@ -556,6 +578,7 @@ schemas: !<!Schemas>
             default:
               name: capacity
               description: 'Capacity of product. For example, 4 people.'
+              originalName: capacity
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: !<!StringSchema> &ref_13
@@ -575,8 +598,9 @@ schemas: !<!Schemas>
           serializedName: '@odata.value'
           language: !<!Languages> 
             default:
-              name: '@odata.value'
+              name: OdataValue
               description: URL value.
+              originalName: '@odata.value'
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
@@ -604,6 +628,7 @@ schemas: !<!Schemas>
         default:
           name: productId
           description: 'Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.'
+          originalName: productId
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_29
@@ -622,6 +647,7 @@ schemas: !<!Schemas>
         default:
           name: description
           description: Description of product.
+          originalName: description
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -642,8 +668,9 @@ schemas: !<!Schemas>
       serializedName: max_product_display_name
       language: !<!Languages> 
         default:
-          name: max_product_display_name
+          name: maxProductDisplayName
           description: Display name of product.
+          originalName: max_product_display_name
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: *ref_12
@@ -653,6 +680,7 @@ schemas: !<!Schemas>
         default:
           name: capacity
           description: 'Capacity of product. For example, 4 people.'
+          originalName: capacity
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: *ref_13
@@ -663,8 +691,9 @@ schemas: !<!Schemas>
       serializedName: '@odata.value'
       language: !<!Languages> 
         default:
-          name: '@odata.value'
+          name: OdataValue
           description: URL value.
+          originalName: '@odata.value'
       protocol: !<!Protocols> {}
     extensions:
       x-ms-flattened: true
@@ -697,8 +726,9 @@ schemas: !<!Schemas>
           serializedName: '@odata.value'
           language: !<!Languages> 
             default:
-              name: '@odata.value'
+              name: OdataValue
               description: URL value.
+              originalName: '@odata.value'
           protocol: !<!Protocols> {}
         extensions:
           x-ms-flattened: true
@@ -725,8 +755,9 @@ schemas: !<!Schemas>
       serializedName: generic_value
       language: !<!Languages> 
         default:
-          name: generic_value
+          name: genericValue
           description: Generic URL value.
+          originalName: generic_value
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -821,6 +852,8 @@ globalParameters:
   clientDefaultValue: 'http://localhost:3000'
   implementation: Client
   required: true
+  extensions:
+    x-ms-skip-url-encoding: true
   language: !<!Languages> 
     default:
       name: $host

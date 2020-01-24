@@ -29,27 +29,27 @@ namespace model_flattening.Models
         private const string DeletedValue = "Deleted";
         private const string OKValue = "OK";
 
-        /// <summary> Succeeded. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static FlattenedProductPropertiesProvisioningStateValues Succeeded { get; } = new FlattenedProductPropertiesProvisioningStateValues(SucceededValue);
-        /// <summary> Failed. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static FlattenedProductPropertiesProvisioningStateValues Failed { get; } = new FlattenedProductPropertiesProvisioningStateValues(FailedValue);
-        /// <summary> canceled. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static FlattenedProductPropertiesProvisioningStateValues Canceled { get; } = new FlattenedProductPropertiesProvisioningStateValues(CanceledValue);
-        /// <summary> Accepted. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static FlattenedProductPropertiesProvisioningStateValues Accepted { get; } = new FlattenedProductPropertiesProvisioningStateValues(AcceptedValue);
-        /// <summary> Creating. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static FlattenedProductPropertiesProvisioningStateValues Creating { get; } = new FlattenedProductPropertiesProvisioningStateValues(CreatingValue);
-        /// <summary> Created. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static FlattenedProductPropertiesProvisioningStateValues Created { get; } = new FlattenedProductPropertiesProvisioningStateValues(CreatedValue);
-        /// <summary> Updating. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static FlattenedProductPropertiesProvisioningStateValues Updating { get; } = new FlattenedProductPropertiesProvisioningStateValues(UpdatingValue);
-        /// <summary> Updated. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static FlattenedProductPropertiesProvisioningStateValues Updated { get; } = new FlattenedProductPropertiesProvisioningStateValues(UpdatedValue);
-        /// <summary> Deleting. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static FlattenedProductPropertiesProvisioningStateValues Deleting { get; } = new FlattenedProductPropertiesProvisioningStateValues(DeletingValue);
-        /// <summary> Deleted. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static FlattenedProductPropertiesProvisioningStateValues Deleted { get; } = new FlattenedProductPropertiesProvisioningStateValues(DeletedValue);
-        /// <summary> OK. </summary>
+        /// <summary> The value &apos;undefined&apos;. </summary>
         public static FlattenedProductPropertiesProvisioningStateValues OK { get; } = new FlattenedProductPropertiesProvisioningStateValues(OKValue);
         /// <summary> Determines if two <see cref="FlattenedProductPropertiesProvisioningStateValues"/> values are the same. </summary>
         public static bool operator ==(FlattenedProductPropertiesProvisioningStateValues left, FlattenedProductPropertiesProvisioningStateValues right) => left.Equals(right);

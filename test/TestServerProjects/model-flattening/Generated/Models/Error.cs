@@ -8,7 +8,6 @@ namespace model_flattening.Models
     {
         /// <summary> MISSING·SCHEMA-DESCRIPTION-INTEGER. </summary>
         public int? Status { get; set; }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-STRING. </summary>
         public string? Message { get; set; }
         /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
         public Error? ParentError { get; set; }

@@ -17,10 +17,10 @@ namespace model_flattening.Models
                 writer.WritePropertyName("p.name");
                 writer.WriteStringValue(PName);
             }
-            if (Type != null)
+            if (TypePropertiesType != null)
             {
                 writer.WritePropertyName("type");
-                writer.WriteStringValue(Type);
+                writer.WriteStringValue(TypePropertiesType);
             }
             if (ProvisioningStateValues != null)
             {
@@ -85,7 +85,7 @@ namespace model_flattening.Models
                     {
                         continue;
                     }
-                    result.Type = property.Value.GetString();
+                    result.TypePropertiesType = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("provisioningStateValues"))
