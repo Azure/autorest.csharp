@@ -8,6 +8,6 @@ namespace body_datetime.Models
     {
         /// <summary> MISSING·SCHEMA-DESCRIPTION-INTEGER. </summary>
         public int? Status { get; set; }
-        public string? Message { get; set; }
+        public string Message { get; set; }
     }
 }

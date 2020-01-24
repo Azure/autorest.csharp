@@ -7,6 +7,6 @@ namespace xml_service.Models
     public partial class ComplexTypeWithMeta
     {
         /// <summary> The id of the res. </summary>
-        public string? ID { get; set; }
+        public string ID { get; set; }
     }
 }

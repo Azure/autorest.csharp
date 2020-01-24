@@ -13,6 +13,6 @@ namespace xml_service
         {
             _response = response;
         }
-        public string? CustomHeader => _response.Headers.TryGetValue("Custom-Header", out string? value) ? value : null;
+        public string CustomHeader => _response.Headers.TryGetValue("Custom-Header", out string value) ? value : null;
     }
 }

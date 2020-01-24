@@ -156,35 +156,35 @@ namespace xml_service.Models
         internal static StorageServiceProperties DeserializeStorageServiceProperties(XElement element)
         {
             StorageServiceProperties result = default;
-            result = new StorageServiceProperties(); Logging? value = default;
+            result = new StorageServiceProperties(); Logging value = default;
             var logging = element.Element("Logging");
             if (logging != null)
             {
                 value = Logging.DeserializeLogging(logging);
             }
             result.Logging = value;
-            Metrics? value0 = default;
+            Metrics value0 = default;
             var hourMetrics = element.Element("HourMetrics");
             if (hourMetrics != null)
             {
                 value0 = Metrics.DeserializeMetrics(hourMetrics);
             }
             result.HourMetrics = value0;
-            Metrics? value1 = default;
+            Metrics value1 = default;
             var minuteMetrics = element.Element("MinuteMetrics");
             if (minuteMetrics != null)
             {
                 value1 = Metrics.DeserializeMetrics(minuteMetrics);
             }
             result.MinuteMetrics = value1;
-            string? value2 = default;
+            string value2 = default;
             var defaultServiceVersion = element.Element("DefaultServiceVersion");
             if (defaultServiceVersion != null)
             {
-                value2 = (string?)defaultServiceVersion;
+                value2 = (string)defaultServiceVersion;
             }
             result.DefaultServiceVersion = value2;
-            RetentionPolicy? value3 = default;
+            RetentionPolicy value3 = default;
             var deleteRetentionPolicy = element.Element("DeleteRetentionPolicy");
             if (deleteRetentionPolicy != null)
             {

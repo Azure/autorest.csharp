@@ -15,7 +15,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <summary> Language used in the data source. </summary>
         public string Language { get; set; }
         /// <summary> Unique identifier of the recognized entity from the data source. </summary>
-        public string? Id { get; set; }
+        public string Id { get; set; }
         /// <summary> URL for the entity&apos;s page from the data source. </summary>
         public string Url { get; set; }
         /// <summary> Data source used to extract entity linking, such as Wiki/Bing etc. </summary>

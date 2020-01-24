@@ -97,7 +97,7 @@ namespace xml_service.Models
                 value0 = ContainerProperties.DeserializeContainerProperties(properties);
             }
             result.Properties = value0;
-            IDictionary<string, string>? value1 = default;
+            IDictionary<string, string> value1 = default;
             var metadata = element.Element("Metadata");
             if (metadata != null)
             {

@@ -92,18 +92,18 @@ namespace xml_service.Models
         internal static Banana DeserializeBanana(XElement element)
         {
             Banana result = default;
-            result = new Banana(); string? value = default;
+            result = new Banana(); string value = default;
             var name = element.Element("name");
             if (name != null)
             {
-                value = (string?)name;
+                value = (string)name;
             }
             result.Name = value;
-            string? value0 = default;
+            string value0 = default;
             var flavor = element.Element("flavor");
             if (flavor != null)
             {
-                value0 = (string?)flavor;
+                value0 = (string)flavor;
             }
             result.Flavor = value0;
             DateTimeOffset? value1 = default;

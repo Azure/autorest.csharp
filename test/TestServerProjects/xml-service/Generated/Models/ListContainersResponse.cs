@@ -10,11 +10,11 @@ namespace xml_service.Models
     {
         public string ServiceEndpoint { get; set; }
         public string Prefix { get; set; }
-        public string? Marker { get; set; }
+        public string Marker { get; set; }
         /// <summary> MISSING·SCHEMA-DESCRIPTION-INTEGER. </summary>
         public int MaxResults { get; set; }
         /// <summary> MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA. </summary>
-        public ICollection<Container>? Containers { get; set; }
+        public ICollection<Container> Containers { get; set; }
         public string NextMarker { get; set; }
     }
 }

@@ -9,7 +9,7 @@ namespace custom_baseUrl_paging.Models
     public partial class ProductResult
     {
         /// <summary> MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA. </summary>
-        public ICollection<Product>? Values { get; set; }
-        public string? NextLink { get; set; }
+        public ICollection<Product> Values { get; set; }
+        public string NextLink { get; set; }
     }
 }

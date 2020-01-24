@@ -131,7 +131,7 @@ namespace xml_service.Models
                 value2 = BlobProperties.DeserializeBlobProperties(properties);
             }
             result.Properties = value2;
-            IDictionary<string, string>? value3 = default;
+            IDictionary<string, string> value3 = default;
             var metadata = element.Element("Metadata");
             if (metadata != null)
             {

@@ -51,11 +51,11 @@ namespace xml_service.Models
         internal static ComplexTypeWithMeta DeserializeComplexTypeWithMeta(XElement element)
         {
             ComplexTypeWithMeta result = default;
-            result = new ComplexTypeWithMeta(); string? value = default;
+            result = new ComplexTypeWithMeta(); string value = default;
             var iD = element.Element("ID");
             if (iD != null)
             {
-                value = (string?)iD;
+                value = (string)iD;
             }
             result.ID = value;
             return result;

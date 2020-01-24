@@ -107,13 +107,13 @@ namespace xml_service.Models
             result = new Slide(); var type = element.Attribute("type");
             if (type != null)
             {
-                result.Type = (string?)type;
+                result.Type = (string)type;
             }
-            string? value = default;
+            string value = default;
             var title = element.Element("title");
             if (title != null)
             {
-                value = (string?)title;
+                value = (string)title;
             }
             result.Title = value;
             result.Items = new List<string>();

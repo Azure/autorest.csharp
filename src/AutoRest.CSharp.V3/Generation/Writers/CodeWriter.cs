@@ -209,7 +209,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 name += $"<{subTypes}>";
             }
 
-            if (type.IsNullable)
+            if (type.IsNullable && type.IsValueType)
             {
                 name += "?";
             }

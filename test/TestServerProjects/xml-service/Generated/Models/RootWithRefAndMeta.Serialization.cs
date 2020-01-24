@@ -69,18 +69,18 @@ namespace xml_service.Models
         internal static RootWithRefAndMeta DeserializeRootWithRefAndMeta(XElement element)
         {
             RootWithRefAndMeta result = default;
-            result = new RootWithRefAndMeta(); ComplexTypeWithMeta? value = default;
+            result = new RootWithRefAndMeta(); ComplexTypeWithMeta value = default;
             var xMLComplexTypeWithMeta = element.Element("XMLComplexTypeWithMeta");
             if (xMLComplexTypeWithMeta != null)
             {
                 value = ComplexTypeWithMeta.DeserializeComplexTypeWithMeta(xMLComplexTypeWithMeta);
             }
             result.RefToModel = value;
-            string? value0 = default;
+            string value0 = default;
             var something = element.Element("Something");
             if (something != null)
             {
-                value0 = (string?)something;
+                value0 = (string)something;
             }
             result.Something = value0;
             return result;

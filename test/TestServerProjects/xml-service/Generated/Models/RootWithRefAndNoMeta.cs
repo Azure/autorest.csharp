@@ -7,8 +7,8 @@ namespace xml_service.Models
     public partial class RootWithRefAndNoMeta
     {
         /// <summary> I am a complex type with no XML node. </summary>
-        public ComplexTypeNoMeta? RefToModel { get; set; }
+        public ComplexTypeNoMeta RefToModel { get; set; }
         /// <summary> Something else (just to avoid flattening). </summary>
-        public string? Something { get; set; }
+        public string Something { get; set; }
     }
 }

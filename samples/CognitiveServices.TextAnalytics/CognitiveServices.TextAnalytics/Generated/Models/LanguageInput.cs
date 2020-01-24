@@ -9,6 +9,6 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <summary> Unique, non-empty document identifier. </summary>
         public string Id { get; set; }
         public string Text { get; set; }
-        public string? CountryHint { get; set; }
+        public string CountryHint { get; set; }
     }
 }

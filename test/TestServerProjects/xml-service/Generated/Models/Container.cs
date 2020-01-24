@@ -12,6 +12,6 @@ namespace xml_service.Models
         /// <summary> Properties of a container. </summary>
         public ContainerProperties Properties { get; set; } = new ContainerProperties();
         /// <summary> Dictionary of &lt;paths·xml-headers·get·responses·200·headers·custom_header·schema&gt;. </summary>
-        public IDictionary<string, string>? Metadata { get; set; }
+        public IDictionary<string, string> Metadata { get; set; }
     }
 }

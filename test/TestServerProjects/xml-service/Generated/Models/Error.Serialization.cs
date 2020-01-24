@@ -78,11 +78,11 @@ namespace xml_service.Models
                 value = (int?)status;
             }
             result.Status = value;
-            string? value0 = default;
+            string value0 = default;
             var message = element.Element("message");
             if (message != null)
             {
-                value0 = (string?)message;
+                value0 = (string)message;
             }
             result.Message = value0;
             return result;

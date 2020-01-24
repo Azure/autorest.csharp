@@ -7,6 +7,6 @@ namespace custom_baseUrl_paging.Models
     public partial class Product
     {
         /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
-        public ProductProperties? Properties { get; set; }
+        public ProductProperties Properties { get; set; }
     }
 }

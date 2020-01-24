@@ -125,17 +125,17 @@ namespace xml_service.Models
             result = new Slideshow(); var title = element.Attribute("title");
             if (title != null)
             {
-                result.Title = (string?)title;
+                result.Title = (string)title;
             }
             var date = element.Attribute("date");
             if (date != null)
             {
-                result.Date = (string?)date;
+                result.Date = (string)date;
             }
             var author = element.Attribute("author");
             if (author != null)
             {
-                result.Author = (string?)author;
+                result.Author = (string)author;
             }
             result.Slides = new List<Slide>();
             foreach (var e in element.Elements("slide"))
