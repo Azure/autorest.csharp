@@ -2,16 +2,17 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
+using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Input;
 
 namespace AutoRest.CSharp.V3.Output.Models.Types
 {
     internal class EnumType : ISchemaType
     {
-        public EnumType(Schema schema, string name, string? description, IEnumerable<EnumTypeValue> values, bool isStringBased = false)
+        public EnumType(Schema schema, TypeDeclarationOptions declarationOptions, string? description, IEnumerable<EnumTypeValue> values, bool isStringBased = false)
         {
             Schema = schema;
-            Name = name;
+            Declaration = declarationOptions;
             Description = description;
             Values = new List<EnumTypeValue>(values);
             IsStringBased = isStringBased;
@@ -19,8 +20,9 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
         public bool IsStringBased { get; }
         public Schema Schema { get; }
-        public string Name { get; }
+        public TypeDeclarationOptions Declaration { get; }
         public string? Description { get; }
         public IList<EnumTypeValue> Values { get; }
+        public CSharpType Type => new CSharpType(Declaration.Namespace, Declaration.Name, isValueType: true);
     }
 }

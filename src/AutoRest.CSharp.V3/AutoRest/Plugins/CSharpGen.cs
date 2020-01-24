@@ -10,6 +10,7 @@ using AutoRest.CSharp.V3.AutoRest.Communication;
 using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Generation.Writers;
 using AutoRest.CSharp.V3.Input;
+using AutoRest.CSharp.V3.Input.Source;
 using AutoRest.CSharp.V3.Output.Builders;
 using AutoRest.CSharp.V3.Output.Models.Responses;
 using Microsoft.CodeAnalysis;
@@ -20,6 +21,7 @@ using Diagnostic = Microsoft.CodeAnalysis.Diagnostic;
 
 namespace AutoRest.CSharp.V3.AutoRest.Plugins
 {
+
     [PluginName("csharpgen")]
     internal class CSharpGen : IPlugin
     {
@@ -29,17 +31,19 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                 .Concat(codeModel.Schemas.SealedChoices ?? Enumerable.Empty<SealedChoiceSchema>())
                 .Concat(codeModel.Schemas.Objects ?? Enumerable.Empty<ObjectSchema>());
 
-            var modelBuilder = new ModelBuilder(GetMediaTypes(codeModel));
+            var project = GeneratedCodeWorkspace.Create(configuration.OutputFolder);
+            var sourceInputModel = SourceInputModelBuilder.Build(await project.GetCompilationAsync());
+
+            var modelBuilder = new ModelBuilder(configuration.Namespace, GetMediaTypes(codeModel), sourceInputModel);
+            var clientBuilder = new ClientBuilder(configuration.Namespace);
             var models = schemas.Select(modelBuilder.BuildModel).ToArray();
-            var clients = codeModel.OperationGroups.Select(ClientBuilder.BuildClient).ToArray();
-            var typeFactory = new TypeFactory(configuration.Namespace, models);
+            var clients = codeModel.OperationGroups.Select(clientBuilder.BuildClient).ToArray();
+            var typeFactory = new TypeFactory(models);
 
             var modelWriter = new ModelWriter(typeFactory);
             var writer = new ClientWriter(typeFactory);
             var serializeWriter = new SerializationWriter(typeFactory);
             var headerModelModelWriter = new ResponseHeaderGroupWriter(typeFactory);
-
-            var project = WorkspaceFactory.CreateGeneratedCodeProject();
 
             foreach (var model in models)
             {
@@ -49,9 +53,9 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                 var serializerCodeWriter = new CodeWriter();
                 serializeWriter.WriteSerialization(serializerCodeWriter, model);
 
-                var name = model.Name;
-                project = project.AddDocument($"Generated/Models/{name}.cs", codeWriter.ToFormattedCode()).Project;
-                project = project.AddDocument($"Generated/Models/{name}.Serialization.cs", serializerCodeWriter.ToFormattedCode()).Project;
+                var name = model.Type.Name;
+                project.AddGeneratedFile($"Models/{name}.cs", codeWriter.ToFormattedCode());
+                project.AddGeneratedFile($"Models/{name}.Serialization.cs", serializerCodeWriter.ToFormattedCode());
             }
 
             foreach (var client in clients)
@@ -59,7 +63,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                 var codeWriter = new CodeWriter();
                 writer.WriteClient(codeWriter, client);
 
-                project = project.AddDocument($"Generated/Operations/{client.Name}.cs", codeWriter.ToFormattedCode()).Project;
+                project.AddGeneratedFile($"Operations/{client.Type.Name}.cs", codeWriter.ToFormattedCode());
 
                 var headerModels = client.Methods.Select(m => m.Response.HeaderModel).OfType<ResponseHeaderGroupType>().Distinct();
                 foreach (ResponseHeaderGroupType responseHeaderModel in headerModels)
@@ -67,50 +71,13 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                     var headerModelCodeWriter = new CodeWriter();
                     headerModelModelWriter.WriteHeaderModel(headerModelCodeWriter, responseHeaderModel);
 
-                    project = project.AddDocument($"Generated/Operations/{responseHeaderModel.Name}.cs", headerModelCodeWriter.ToFormattedCode()).Project;
+                    project.AddGeneratedFile($"Operations/{responseHeaderModel.Type.Name}.cs", headerModelCodeWriter.ToFormattedCode());
                 }
             }
 
-            Compilation? compilation = await project.GetCompilationAsync();
-
-            Debug.Assert(compilation != null);
-
-            foreach (Diagnostic diagnostic in compilation.GetDiagnostics())
+            await foreach (var file in project.GetGeneratedFilesAsync())
             {
-                if (diagnostic.Severity == DiagnosticSeverity.Error)
-                {
-                    await autoRest.Fatal(diagnostic.ToString());
-                }
-            }
-
-            foreach (Document document in project.Documents)
-            {
-                // Skip writing shared files
-                if (document.Folders.Contains(WorkspaceFactory.SharedFolder))
-                {
-                    continue;
-                }
-
-                var root = await document.GetSyntaxRootAsync()!;
-
-                Debug.Assert(root != null);
-
-                root = root.WithAdditionalAnnotations(Simplifier.Annotation);
-                var simplified = document.WithSyntaxRoot(root);
-
-                try
-                {
-                    simplified = await Simplifier.ReduceAsync(simplified);
-                }
-                catch (InvalidOperationException)
-                {
-                    // Workaround for https://github.com/dotnet/roslyn/issues/40592
-                }
-
-                simplified = await Formatter.FormatAsync(simplified);
-
-                SourceText text = await simplified.GetTextAsync();
-                await autoRest.WriteFile(document.Name, text.ToString(), "source-file-csharp");
+                await autoRest.WriteFile(file.Name, file.Text, "source-file-csharp");
             }
 
             return true;

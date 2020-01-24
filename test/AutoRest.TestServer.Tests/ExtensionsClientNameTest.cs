@@ -1,8 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using extension_client_name;
-using extension_client_name.Models;
+using ExtensionClientName;
+using ExtensionClientName.Models;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests
