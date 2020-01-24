@@ -22,6 +22,11 @@
 
   <ItemGroup>
     <None Include="../../src/assets/**/*.cs" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="package.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../readme.md" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
+  <Target Name="NpmPackage" DependsOnTargets="Build">
+    <Exec Command="npm pack" WorkingDirectory="$(OutputPath)" />
+  </Target>
 </Project>
