@@ -17,7 +17,6 @@ namespace @Settings.Namespace
     public interface ILoadBalancingConfig
     {
         CustomCheckIsErrorResponse IsErrorResponse { get; }
-        TimeSpan PerRequestTimeout { get; }
         ShouldRetryPredicate ShouldRetryPredicate { get; }
         IResourceManager<string> UrlResourceManager { get; }
     }

@@ -14,7 +14,7 @@ namespace AutoRest.CSharp.LoadBalanced
         protected override async Task GenerateClientSideCode(CodeModelCs codeModel)
         {
             await GenerateServiceClient<ServiceClientTemplate>(codeModel);
-            await GenerateOperations<VanillaTemplates.MethodGroupTemplate>(codeModel.Operations);
+            // await GenerateOperations<VanillaTemplates.MethodGroupTemplate>(codeModel.Operations);
             await GenerateModels(codeModel.ModelTypes.Union(codeModel.HeaderTypes));
             await GenerateEnums(codeModel.EnumTypes);
             await GenerateExceptions(codeModel.ErrorTypes);
@@ -26,6 +26,12 @@ namespace AutoRest.CSharp.LoadBalanced
             await Write(new ExtendedServiceClientTemplate { Model = codeModel }, $"{GeneratedSourcesBaseFolder}LoadBalanced{codeModel.Name}{ImplementationFileExtension}");
             await Write(new ConfigTemplate { Model = codeModel }, $"{GeneratedSourcesBaseFolder}LoadBalancingConfigBase{ImplementationFileExtension}");
             await Write(new ConfigInterfaceTemplate { Model = codeModel }, $"{GeneratedSourcesBaseFolder}ILoadBalancingConfig{ImplementationFileExtension}");
+        }
+
+        protected override async Task GenerateServiceClient<T>(CodeModelCs codeModel)
+        {
+            await Write(new T { Model = codeModel }, $"{GeneratedSourcesBaseFolder}{codeModel.Name}{ImplementationFileExtension}");
+            await Write(new ServiceClientInterfaceTemplate { Model = codeModel }, $"{GeneratedSourcesBaseFolder}I{codeModel.Name}{ImplementationFileExtension}");
         }
     }
 }

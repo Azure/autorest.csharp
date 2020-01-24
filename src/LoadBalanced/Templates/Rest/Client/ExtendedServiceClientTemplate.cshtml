@@ -18,6 +18,7 @@ namespace @Settings.Namespace
     using System.Threading.Tasks;
     using Microsoft.Rest;
     using Agoda.Frameworks.LoadBalancing;
+    using Polly;
 @EmptyLine
 
     public partial class @Model.Name
@@ -34,55 +35,72 @@ namespace @Settings.Namespace
             this.loadBalancingConfig = loadBalancingConfig;
         }
 
-        private async Task<T> SendWithRetry<T>(System.Func<CancellationToken, Task<T>> action, CancellationToken cancellationToken) where T : HttpOperationResponse
+    @foreach (MethodCs method in Model.Methods)
+    {
+        if (method.ExcludeFromInterface)
+        {
+            continue;
+        }
+
+        @:@(Include(new ExtendedOperationMethodTemplate(), method))
+        @EmptyLine 
+    }
+
+        private async Task<T> SendWithRetry<T>(string invocationId, System.Func<Task<T>> action, CancellationToken cancellationToken) where T : HttpOperationResponse
         {
             if (loadBalancingConfig == null)
             {
-                return await action(cancellationToken);
+                return await action();
             }
 
             var retryResults = await loadBalancingConfig.UrlResourceManager.ExecuteAsyncWithDiag(async (source, _) =>
             {
                 this.BaseUri = new System.Uri(source);
 
-                using (var cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken))
+                try
                 {
-                    cts.CancelAfter(loadBalancingConfig.PerRequestTimeout);
-                    try
+                    var operationResponse = await action();
+                    if (IsTransientHttpStatusCode(operationResponse.Response.StatusCode))
                     {
-                        var operationResponse = await action(cts.Token);
-                        if (IsTransientHttpStatusCode(operationResponse.Response.StatusCode))
-                        {
-                            throw new Frameworks.Http.TransientHttpRequestException(
-                                operationResponse.Request.RequestUri.AbsolutePath,
-                                operationResponse.Request.RequestUri.GetLeftPart(System.UriPartial.Path),
-                                operationResponse.Response,
-                                $"Response status code does not indicate success: ${operationResponse.Response.StatusCode}");
-                        }
-
-                        if (!operationResponse.Response.IsSuccessStatusCode)
-                        {
-                            throw new Frameworks.Http.HttpErrorResponseException(
-                                operationResponse.Request.RequestUri.AbsolutePath,
-                                operationResponse.Request.RequestUri.GetLeftPart(System.UriPartial.Path),
-                                operationResponse.Response);
-                        }
-
-                        if (loadBalancingConfig.IsErrorResponse != null && loadBalancingConfig.IsErrorResponse(operationResponse.Response, await operationResponse.Response.Content.ReadAsStringAsync()))
-                        {
-                            throw new Frameworks.Http.HttpErrorResponseException(
-                                operationResponse.Request.RequestUri.AbsolutePath,
-                                operationResponse.Request.RequestUri.GetLeftPart(System.UriPartial.Path),
-                                operationResponse.Response);
-                        }
-                        return operationResponse;
+                        throw new Frameworks.Http.TransientHttpRequestException(
+                            operationResponse.Request.RequestUri.AbsolutePath,
+                            operationResponse.Request.RequestUri.GetLeftPart(System.UriPartial.Path),
+                            operationResponse.Response,
+                            $"Response status code does not indicate success: ${operationResponse.Response.StatusCode}");
                     }
-                    catch (TaskCanceledException e)
-                        when (!cancellationToken.IsCancellationRequested)
+
+                    if (!operationResponse.Response.IsSuccessStatusCode)
                     {
-                        throw new TimeoutException("Request timeout", e);
+                        throw new Frameworks.Http.HttpErrorResponseException(
+                            operationResponse.Request.RequestUri.AbsolutePath,
+                            operationResponse.Request.RequestUri.GetLeftPart(System.UriPartial.Path),
+                            operationResponse.Response);
                     }
+
+                    if (loadBalancingConfig.IsErrorResponse != null && loadBalancingConfig.IsErrorResponse(operationResponse.Response, await operationResponse.Response.Content.ReadAsStringAsync()))
+                    {
+                        throw new Frameworks.Http.HttpErrorResponseException(
+                            operationResponse.Request.RequestUri.AbsolutePath,
+                            operationResponse.Request.RequestUri.GetLeftPart(System.UriPartial.Path),
+                            operationResponse.Response);
+                    }
+                    return operationResponse;
                 }
+                catch (Exception ex)
+                {
+                    if (!string.IsNullOrWhiteSpace(invocationId))
+                    {
+                        Microsoft.Rest.ServiceClientTracing.Error(invocationId, ex);
+                    }
+
+                    if (ex is Polly.Timeout.TimeoutRejectedException) 
+                    {
+                        throw new TimeoutException($"Request Timeout {source}", ex);
+                    }
+                    
+                    throw;
+                }
+
             }, loadBalancingConfig.ShouldRetryPredicate);
 
             var result = retryResults.Last();

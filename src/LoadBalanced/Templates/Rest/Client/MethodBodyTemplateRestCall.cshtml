@@ -44,7 +44,7 @@ if (_shouldTrace)
     Microsoft.Rest.ServiceClientTracing.Enter(_invocationId, this, "@(Model.Name)", tracingParameters);
 }
 
-return await this.SendWithRetry(async (perRequestCancellationToken) => 
+return await this.SendWithRetry(_invocationId, async () => 
 {
     // Construct URL
     @if (Model.IsAbsoluteUrl)
@@ -273,8 +273,8 @@ return await this.SendWithRetry(async (perRequestCancellationToken) =>
     // Set Credentials
     if (@(Model.ClientReference).Credentials != null)
     {
-        perRequestCancellationToken.ThrowIfCancellationRequested();
-        await @(Model.ClientReference).Credentials.ProcessHttpRequestAsync(_httpRequest, perRequestCancellationToken).ConfigureAwait(false);
+        cancellationToken.ThrowIfCancellationRequested();
+        await @(Model.ClientReference).Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
     }
         </text>
     }
@@ -285,14 +285,14 @@ return await this.SendWithRetry(async (perRequestCancellationToken) =>
         Microsoft.Rest.ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
     }
 
-    perRequestCancellationToken.ThrowIfCancellationRequested();
+    cancellationToken.ThrowIfCancellationRequested();
     @if (Model.ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream) || Model.HttpMethod == HttpMethod.Head)
     {
-    @:_httpResponse = await @(Model.ClientReference).HttpClient.SendAsync(_httpRequest, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, perRequestCancellationToken).ConfigureAwait(false);
+    @:_httpResponse = await @(Model.ClientReference).HttpClient.SendAsync(_httpRequest, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
     }
     else
     {
-    @:_httpResponse = await @(Model.ClientReference).HttpClient.SendAsync(_httpRequest, perRequestCancellationToken).ConfigureAwait(false);
+    @:_httpResponse = await @(Model.ClientReference).HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
     }
     if (_shouldTrace)
     {
@@ -300,7 +300,7 @@ return await this.SendWithRetry(async (perRequestCancellationToken) =>
     }
 
     System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
-    perRequestCancellationToken.ThrowIfCancellationRequested();
+    cancellationToken.ThrowIfCancellationRequested();
     string _responseContent = null;
 
     if (@(Model.FailureStatusCodePredicate))
