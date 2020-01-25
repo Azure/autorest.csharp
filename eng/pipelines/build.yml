@@ -12,6 +12,7 @@ jobs:
   - job: Build
     variables:
       DotNetCoreSDKVersion: 3.0.100
+      ProjectDirectory: src/AutoRest.CSharp.V3/
     pool:
       vmImage: windows-2019
     steps:
@@ -39,7 +40,7 @@ jobs:
           DOTNET_CLI_TELEMETRY_OPTOUT: 1
           DOTNET_MULTILEVEL_LOOKUP: 0
       - script: |
-          dotnet pack /t:NpmPackage src/AutoRest.CSharp.V3/AutoRest.CSharp.V3.csproj -o $(Build.ArtifactStagingDirectory)
+          dotnet pack /t:NpmPackage $(ProjectDirectory) -o $(Build.ArtifactStagingDirectory)
         displayName: "Publish NPM package"
       - task: PublishPipelineArtifact@1
         condition: succeeded()
@@ -47,9 +48,9 @@ jobs:
           artifactName: packages
           path: $(Build.ArtifactStagingDirectory)
       - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
-        - task: GithubRelease@0
-          displayName: "Create GitHub Release"
-          inputs:
-            githubConnection: azure
-            repositoryName: azure/autorest.csharp
-            assets: $(Build.ArtifactStagingDirectory)/packages/* 
+        - script: |
+            export DEV_VERSION=$(node -p -e "require('./$(ProjectDirectory)package.json').version")-dev.$BUILD_BUILDNUMBER
+            npm version --no-git-tag-version $DEV_VERSION
+            npm pack
+            npx publish-release --token $(Github-azuresdkci-personalaccesstoken) --repo autorest.csharp --owner azure --name v$DEV_VERSION --tag v$DEV_VERSION --notes='prerelease build' --prerelease --editRelease false --assets autorest-csharp-$DEV_VERSION.tgz --target_commitish $(Build.SourceBranchName)
+          displayName: 'Publish to GitHub'
