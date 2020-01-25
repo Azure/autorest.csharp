@@ -20,6 +20,7 @@ namespace AutoRest.CSharp.V3.Input
             Extensions = new DictionaryOfAny();
         }
     }
+
     internal partial class ObjectSchema
     {
         public ObjectSchema()
@@ -28,6 +29,11 @@ namespace AutoRest.CSharp.V3.Input
             Parents = new Relations();
             Children = new Relations();
         }
+    }
+
+    internal partial class Property
+    {
+        public bool? IsBag { get; set; }
     }
 
     internal partial class Schema

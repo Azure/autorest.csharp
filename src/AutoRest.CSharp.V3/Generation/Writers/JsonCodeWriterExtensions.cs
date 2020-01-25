@@ -17,9 +17,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         {
             writerName ??= w => w.AppendRaw("writer");
 
-            var type = serialization.Type;
-            CSharpType implementationType = typeFactory.CreateType(type);
-
             switch (serialization)
             {
                 case JsonArraySerialization array:
@@ -83,7 +80,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                                 case EnumType clientEnum:
                                     writer.Append($"{writerName}.WriteStringValue({name}")
-                                        .AppendNullableValue(implementationType)
+                                        .AppendNullableValue(serialization.Type.IsNullable, isValueType: true)
                                         .AppendRaw(clientEnum.IsStringBased ? ".ToString()" : ".ToSerialString()")
                                         .Line($");");
                                     return;
@@ -131,8 +128,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                                 writeFormat = true;
                             }
 
-                            writer.Append($"({name}")
-                                .AppendNullableValue(implementationType);
+                            writer.Append($"({name}").AppendNullableValue(serialization.Type.IsNullable, frameworkType.IsValueType);
 
                             if (writeFormat && valueSerialization.Format.ToFormatSpecifier() is string formatString)
                             {
@@ -251,8 +247,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             var type = property.ValueSerialization.Type;
             var name = property.MemberName;
 
-            CSharpType propertyType = typeFactory.CreateType(type);
-
             void WriteNullCheck()
             {
                 using (writer.If($"{itemVariable}.Value.ValueKind == {writer.Type(typeof(JsonValueKind))}.Null"))
@@ -263,7 +257,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
             void WriteInitialization()
             {
-                if (propertyType.IsNullable && (type is DictionaryTypeReference || type is CollectionTypeReference))
+                if (type.IsNullable && (type is DictionaryTypeReference || type is CollectionTypeReference))
                 {
                     writer.Line($"{destination}.{name} = new {writer.Type(typeFactory.CreateConcreteType(property.ValueSerialization.Type))}();");
                 }
@@ -273,14 +267,15 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             writer.Append($"if({itemVariable}.NameEquals({property.Name:L}))");
             using (writer.Scope())
             {
-                if (propertyType.IsNullable)
+                if (type.IsNullable)
                 {
                     WriteNullCheck();
                 }
 
                 WriteInitialization();
 
-                writer.ToDeserializeCall(property.ValueSerialization, typeFactory, w => w.Append($"{destination}.{name}"), w => w.Append($"{itemVariable}.Value"));
+                CodeWriterDelegate nextDestination = property.IsFlattened ? destination : w => w.Append($"{destination}.{name}");
+                writer.ToDeserializeCall(property.ValueSerialization, typeFactory, nextDestination, w => w.Append($"{itemVariable}.Value"));
                 writer.Line($"continue;");
             }
 

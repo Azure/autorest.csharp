@@ -11,6 +11,8 @@ namespace model_flattening.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
+            writer.WritePropertyName("details");
+            writer.WriteStartObject();
             if (MaxProductDisplayName != null)
             {
                 writer.WritePropertyName("max_product_display_name");
@@ -18,11 +20,15 @@ namespace model_flattening.Models
             }
             writer.WritePropertyName("max_product_capacity");
             writer.WriteStringValue(Capacity);
+            writer.WritePropertyName("max_product_image");
+            writer.WriteStartObject();
             if (OdataValue != null)
             {
                 writer.WritePropertyName("@odata.value");
                 writer.WriteStringValue(OdataValue);
             }
+            writer.WriteEndObject();
+            writer.WriteEndObject();
             writer.WritePropertyName("base_product_id");
             writer.WriteStringValue(ProductId);
             if (Description != null)
@@ -37,27 +43,41 @@ namespace model_flattening.Models
             SimpleProduct result = new SimpleProduct();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("max_product_display_name"))
+                if (property.NameEquals("details"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        continue;
+                        if (property0.NameEquals("max_product_display_name"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                continue;
+                            }
+                            result.MaxProductDisplayName = property0.Value.GetString();
+                            continue;
+                        }
+                        if (property0.NameEquals("max_product_capacity"))
+                        {
+                            result.Capacity = property0.Value.GetString();
+                            continue;
+                        }
+                        if (property0.NameEquals("max_product_image"))
+                        {
+                            foreach (var property1 in property0.Value.EnumerateObject())
+                            {
+                                if (property1.NameEquals("@odata.value"))
+                                {
+                                    if (property1.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        continue;
+                                    }
+                                    result.OdataValue = property1.Value.GetString();
+                                    continue;
+                                }
+                            }
+                            continue;
+                        }
                     }
-                    result.MaxProductDisplayName = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("max_product_capacity"))
-                {
-                    result.Capacity = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("@odata.value"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    result.OdataValue = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("base_product_id"))

@@ -11,11 +11,14 @@ namespace model_flattening.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
+            writer.WritePropertyName("property");
+            writer.WriteStartObject();
             if (Value != null)
             {
                 writer.WritePropertyName("value");
                 writer.WriteStringValue(Value);
             }
+            writer.WriteEndObject();
             writer.WriteEndObject();
         }
         internal static ProductWrapper DeserializeProductWrapper(JsonElement element)
@@ -23,13 +26,20 @@ namespace model_flattening.Models
             ProductWrapper result = new ProductWrapper();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("value"))
+                if (property.NameEquals("property"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        continue;
+                        if (property0.NameEquals("value"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                continue;
+                            }
+                            result.Value = property0.Value.GetString();
+                            continue;
+                        }
                     }
-                    result.Value = property.Value.GetString();
                     continue;
                 }
             }
