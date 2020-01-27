@@ -1,6 +1,5 @@
 param($Token, $BuildNumber, $Sha, $WorkingDirectory, $PackageJson)
 
-$Artifacts = Resolve-Path $Artifacts
 $WorkingDirectory = Resolve-Path $WorkingDirectory
 
 cp $PackageJson $WorkingDirectory -Force
@@ -20,7 +19,7 @@ try
 
    Write-Host "Publishing $file"
 
-   npx publish-release --token $Token --repo autorest.csharp --owner azure --name $name --tag $name --notes='prerelease build' --prerelease --editRelease false --assets $file.FullName --target_commitish $Sha
+   npx -q publish-release --token $Token --repo autorest.csharp --owner azure --name $name --tag $name --notes='prerelease build' --prerelease --editRelease false --assets $file --target_commitish $Sha
 }
 finally
 {
