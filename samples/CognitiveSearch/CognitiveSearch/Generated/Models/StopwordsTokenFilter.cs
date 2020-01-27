@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System.Collections.Generic;
 
 namespace CognitiveSearch.Models
@@ -14,7 +16,7 @@ namespace CognitiveSearch.Models
             OdataType = "#Microsoft.Azure.Search.StopwordsTokenFilter";
         }
         /// <summary> The list of stopwords. This property and the stopwords list property cannot both be set. </summary>
-        public ICollection<string>? Stopwords { get; set; }
+        public ICollection<string> Stopwords { get; set; }
         /// <summary> Identifies a predefined list of language-specific stopwords. </summary>
         public StopwordsList? StopwordsList { get; set; }
         /// <summary> A value indicating whether to ignore case. If true, all words are converted to lower case first. Default is false. </summary>

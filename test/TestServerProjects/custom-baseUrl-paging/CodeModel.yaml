@@ -1,0 +1,458 @@
+!<!CodeModel> 
+schemas: !<!Schemas> 
+  objects:
+  - !<!ObjectSchema> &ref_10
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    properties:
+    - !<!Property> 
+      schema: !<!ArraySchema> &ref_2
+        type: array
+        apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+        elementType: !<!ObjectSchema> &ref_0
+          type: object
+          apiVersions:
+          - !<!ApiVersion> 
+            version: 1.0.0
+          properties:
+          - !<!Property> 
+            schema: !<!ObjectSchema> &ref_1
+              type: object
+              apiVersions:
+              - !<!ApiVersion> 
+                version: 1.0.0
+              properties:
+              - !<!Property> 
+                schema: !<!NumberSchema> &ref_3
+                  type: integer
+                  precision: 32
+                  language: !<!Languages> 
+                    default:
+                      name: typeForid
+                      description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+                  protocol: !<!Protocols> {}
+                serializedName: id
+                language: !<!Languages> 
+                  default:
+                    name: id
+                    description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+                    originalName: id
+                protocol: !<!Protocols> {}
+              - !<!Property> 
+                schema: !<!StringSchema> &ref_5
+                  type: string
+                  apiVersions:
+                  - !<!ApiVersion> 
+                    version: 1.0.0
+                  language: !<!Languages> 
+                    default:
+                      name: Product-properties-name
+                      description: ''
+                  protocol: !<!Protocols> {}
+                serializedName: name
+                language: !<!Languages> 
+                  default:
+                    name: name
+                    description: ''
+                    originalName: name
+                protocol: !<!Protocols> {}
+              language: !<!Languages> 
+                default:
+                  name: Product-properties
+                  description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+                  namespace: Api100
+              protocol: !<!Protocols> {}
+            serializedName: properties
+            language: !<!Languages> 
+              default:
+                name: properties
+                description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+                originalName: properties
+            protocol: !<!Protocols> {}
+          language: !<!Languages> 
+            default:
+              name: Product
+              description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+              namespace: Api100
+          protocol: !<!Protocols> {}
+        language: !<!Languages> 
+          default:
+            name: ProductResult-values
+            description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+        protocol: !<!Protocols> {}
+      serializedName: values
+      language: !<!Languages> 
+        default:
+          name: values
+          description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+          originalName: values
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: !<!StringSchema> &ref_6
+        type: string
+        apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+        language: !<!Languages> 
+          default:
+            name: ProductResult-nextLink
+            description: ''
+        protocol: !<!Protocols> {}
+      serializedName: nextLink
+      language: !<!Languages> 
+        default:
+          name: nextLink
+          description: ''
+          originalName: nextLink
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: ProductResult
+        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        namespace: Api100
+    protocol: !<!Protocols> {}
+  - *ref_0
+  - *ref_1
+  - !<!ObjectSchema> 
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    properties:
+    - !<!Property> 
+      schema: !<!NumberSchema> &ref_4
+        type: integer
+        precision: 32
+        language: !<!Languages> 
+          default:
+            name: typeForstatus
+            description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+        protocol: !<!Protocols> {}
+      serializedName: status
+      language: !<!Languages> 
+        default:
+          name: status
+          description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+          originalName: status
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: !<!StringSchema> &ref_7
+        type: string
+        apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+        language: !<!Languages> 
+          default:
+            name: Error-message
+            description: ''
+        protocol: !<!Protocols> {}
+      serializedName: message
+      language: !<!Languages> 
+        default:
+          name: message
+          description: ''
+          originalName: message
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: Error
+        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        namespace: Api100
+    protocol: !<!Protocols> {}
+  arrays:
+  - *ref_2
+  numbers:
+  - *ref_3
+  - *ref_4
+  strings:
+  - !<!StringSchema> &ref_8
+    type: string
+    language: !<!Languages> 
+      default:
+        name: string
+        description: simple string
+    protocol: !<!Protocols> {}
+  - *ref_5
+  - *ref_6
+  - !<!StringSchema> &ref_11
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: string
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> 
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    defaultValue: host
+    language: !<!Languages> 
+      default:
+        name: string
+        description: ''
+    protocol: !<!Protocols> {}
+  - *ref_7
+globalParameters:
+- !<!Parameter> &ref_9
+  schema: *ref_8
+  clientDefaultValue: host
+  implementation: Client
+  required: true
+  extensions:
+    x-in: path
+    x-ms-priority: 0
+    x-ms-skip-url-encoding: true
+    x-name: host
+    x-required: true
+    x-type: string
+  language: !<!Languages> 
+    default:
+      name: host
+      description: A string value that is used as a global part of the parameterized host
+      serializedName: host
+  protocol: !<!Protocols> 
+    http: !<!HttpParameter> 
+      in: uri
+info: !<!Info> 
+  description: Test Infrastructure for AutoRest
+  title: custom-baseUrl-paging
+operationGroups:
+- !<!OperationGroup> 
+  $key: Paging
+  operations:
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - !<!Parameter> 
+        schema: *ref_8
+        implementation: Method
+        required: true
+        extensions:
+          x-in: path
+          x-ms-skip-url-encoding: true
+          x-name: accountName
+          x-required: true
+          x-type: string
+        language: !<!Languages> 
+          default:
+            name: accountName
+            description: Account Name
+            serializedName: accountName
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: uri
+      - *ref_9
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /paging/customurl/partialnextlink
+          method: get
+          uri: 'http://{accountName}{host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_10
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - default
+    extensions:
+      x-ms-pageable:
+        itemName: values
+        nextLinkName: nextLink
+    language: !<!Languages> 
+      default:
+        name: getPagesPartialUrl
+        description: 'A paging operation that combines custom url, paging and partial URL and expect to concat after host'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - !<!Parameter> 
+        schema: *ref_8
+        implementation: Method
+        required: true
+        extensions:
+          x-in: path
+          x-ms-skip-url-encoding: true
+          x-name: accountName
+          x-required: true
+          x-type: string
+        language: !<!Languages> 
+          default:
+            name: accountName
+            description: Account Name
+            serializedName: accountName
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: uri
+      - *ref_9
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /paging/customurl/partialnextlinkop
+          method: get
+          uri: 'http://{accountName}{host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_10
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - default
+    extensions:
+      x-ms-pageable:
+        itemName: values
+        nextLinkName: nextLink
+        operationName: Paging_getPagesPartialUrlOperationNext
+    language: !<!Languages> 
+      default:
+        name: getPagesPartialUrlOperation
+        description: 'A paging operation that combines custom url, paging and partial URL with next operation'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - !<!Parameter> 
+        schema: *ref_8
+        implementation: Method
+        required: true
+        extensions:
+          x-in: path
+          x-ms-skip-url-encoding: true
+          x-name: accountName
+          x-required: true
+          x-type: string
+        language: !<!Languages> 
+          default:
+            name: accountName
+            description: Account Name
+            serializedName: accountName
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: uri
+      - *ref_9
+      - !<!Parameter> 
+        schema: *ref_11
+        implementation: Method
+        required: true
+        extensions:
+          x-ms-skip-url-encoding: true
+        language: !<!Languages> 
+          default:
+            name: nextLink
+            description: Next link for the list operation.
+            serializedName: nextLink
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: path
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: '/paging/customurl/{nextLink}'
+          method: get
+          uri: 'http://{accountName}{host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_10
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - default
+    extensions:
+      x-ms-pageable:
+        itemName: values
+        nextLinkName: nextLink
+        operationName: Paging_getPagesPartialUrlOperationNext
+    language: !<!Languages> 
+      default:
+        name: getPagesPartialUrlOperationNext
+        description: 'A paging operation that combines custom url, paging and partial URL'
+    protocol: !<!Protocols> {}
+  language: !<!Languages> 
+    default:
+      name: Paging
+      description: ''
+  protocol: !<!Protocols> {}
+language: !<!Languages> 
+  default:
+    name: ''
+    description: ''
+protocol: !<!Protocols> 
+  http: !<!HttpModel> {}

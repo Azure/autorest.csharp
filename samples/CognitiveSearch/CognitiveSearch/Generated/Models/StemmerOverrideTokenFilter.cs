@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System.Collections.Generic;
 
 namespace CognitiveSearch.Models
@@ -14,6 +16,6 @@ namespace CognitiveSearch.Models
             OdataType = "#Microsoft.Azure.Search.StemmerOverrideTokenFilter";
         }
         /// <summary> A list of stemming rules in the following format: &quot;word =&gt; stem&quot;, for example: &quot;ran =&gt; run&quot;. </summary>
-        public ICollection<string> Rules { get; set; } = new List<string>();
+        public ICollection<string> Rules { get; set; } = new System.Collections.Generic.List<string>();
     }
 }

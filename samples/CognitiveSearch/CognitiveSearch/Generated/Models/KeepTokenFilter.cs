@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System.Collections.Generic;
 
 namespace CognitiveSearch.Models
@@ -14,7 +16,7 @@ namespace CognitiveSearch.Models
             OdataType = "#Microsoft.Azure.Search.KeepTokenFilter";
         }
         /// <summary> The list of words to keep. </summary>
-        public ICollection<string> KeepWords { get; set; } = new List<string>();
+        public ICollection<string> KeepWords { get; set; } = new System.Collections.Generic.List<string>();
         /// <summary> A value indicating whether to lower case all words first. Default is false. </summary>
         public bool? LowerCaseKeepWords { get; set; }
     }

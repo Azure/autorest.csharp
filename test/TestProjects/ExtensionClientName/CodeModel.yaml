@@ -90,7 +90,7 @@ globalParameters:
       in: uri
 info: !<!Info> 
   description: Resource Flattening for AutoRest
-  title: extension-client-name
+  title: ExtensionClientName
 operationGroups:
 - !<!OperationGroup> 
   $key: ''

@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 namespace CognitiveSearch.Models
 {
     /// <summary> A skill to split a string into chunks of text. </summary>

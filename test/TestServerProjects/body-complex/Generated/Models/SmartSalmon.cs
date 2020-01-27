@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System.Collections;
 using System.Collections.Generic;
 
@@ -14,8 +16,8 @@ namespace body_complex.Models
         {
             Fishtype = "smart_salmon";
         }
-        public string? CollegeDegree { get; set; }
-        private readonly IDictionary<string, object> _additionalProperties = new Dictionary<string, object>();
+        public string CollegeDegree { get; set; }
+        private readonly IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
         /// <inheritdoc />
         public IEnumerator<KeyValuePair<string, object>> GetEnumerator() => _additionalProperties.GetEnumerator();
         /// <inheritdoc />

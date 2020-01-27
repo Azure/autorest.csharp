@@ -1,11 +1,13 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
-namespace extension_client_name.Models
+namespace ExtensionClientName.Models
 {
     public partial class OriginalSchema : IUtf8JsonSerializable
     {

@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -1039,7 +1041,7 @@ namespace header
                 throw;
             }
         }
-        internal HttpMessage CreateParamStringRequest(string scenario, string? value)
+        internal HttpMessage CreateParamStringRequest(string scenario, string value)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1059,7 +1061,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> ParamStringAsync(string scenario, string? value, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ParamStringAsync(string scenario, string value, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
             {
@@ -1090,7 +1092,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response ParamString(string scenario, string? value, CancellationToken cancellationToken = default)
+        public Response ParamString(string scenario, string value, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
             {

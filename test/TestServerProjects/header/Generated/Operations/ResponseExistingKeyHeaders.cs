@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using Azure;
 using Azure.Core;
 
@@ -13,6 +15,6 @@ namespace header
         {
             _response = response;
         }
-        public string? UserAgent => _response.Headers.TryGetValue("User-Agent", out string? value) ? value : null;
+        public string UserAgent => _response.Headers.TryGetValue("User-Agent", out string value) ? value : null;
     }
 }

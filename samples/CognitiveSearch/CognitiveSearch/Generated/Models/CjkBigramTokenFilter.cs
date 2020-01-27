@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System.Collections.Generic;
 
 namespace CognitiveSearch.Models
@@ -14,7 +16,7 @@ namespace CognitiveSearch.Models
             OdataType = "#Microsoft.Azure.Search.CjkBigramTokenFilter";
         }
         /// <summary> The scripts to ignore. </summary>
-        public ICollection<CjkBigramTokenFilterScripts>? IgnoreScripts { get; set; }
+        public ICollection<CjkBigramTokenFilterScripts> IgnoreScripts { get; set; }
         /// <summary> A value indicating whether to output both unigrams and bigrams (if true), or just bigrams (if false). Default is false. </summary>
         public bool? OutputUnigrams { get; set; }
     }

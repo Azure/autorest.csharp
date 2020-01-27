@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System;
 using System.Text.Json;
 using System.Threading;
@@ -230,7 +232,7 @@ namespace paging
                 throw;
             }
         }
-        internal HttpMessage CreateGetMultiplePagesRequest(string? clientRequestId, int? maxresults, int? timeout)
+        internal HttpMessage CreateGetMultiplePagesRequest(string clientRequestId, int? maxresults, int? timeout)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -258,7 +260,7 @@ namespace paging
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ProductResult>> GetMultiplePagesAsync(string? clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ProductResult>> GetMultiplePagesAsync(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePages");
@@ -290,7 +292,7 @@ namespace paging
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ProductResult> GetMultiplePages(string? clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        public Response<ProductResult> GetMultiplePages(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePages");
@@ -317,7 +319,7 @@ namespace paging
                 throw;
             }
         }
-        internal HttpMessage CreateGetOdataMultiplePagesRequest(string? clientRequestId, int? maxresults, int? timeout)
+        internal HttpMessage CreateGetOdataMultiplePagesRequest(string clientRequestId, int? maxresults, int? timeout)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -345,7 +347,7 @@ namespace paging
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<OdataProductResult>> GetOdataMultiplePagesAsync(string? clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<OdataProductResult>> GetOdataMultiplePagesAsync(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetOdataMultiplePages");
@@ -377,7 +379,7 @@ namespace paging
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<OdataProductResult> GetOdataMultiplePages(string? clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        public Response<OdataProductResult> GetOdataMultiplePages(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetOdataMultiplePages");
@@ -404,7 +406,7 @@ namespace paging
                 throw;
             }
         }
-        internal HttpMessage CreateGetMultiplePagesWithOffsetRequest(string? clientRequestId, int? maxresults, int offset, int? timeout)
+        internal HttpMessage CreateGetMultiplePagesWithOffsetRequest(string clientRequestId, int? maxresults, int offset, int? timeout)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -434,7 +436,7 @@ namespace paging
         /// <param name="offset"> Offset of return value. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ProductResult>> GetMultiplePagesWithOffsetAsync(string? clientRequestId, int? maxresults, int offset, int? timeout, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ProductResult>> GetMultiplePagesWithOffsetAsync(string clientRequestId, int? maxresults, int offset, int? timeout, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesWithOffset");
@@ -467,7 +469,7 @@ namespace paging
         /// <param name="offset"> Offset of return value. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ProductResult> GetMultiplePagesWithOffset(string? clientRequestId, int? maxresults, int offset, int? timeout, CancellationToken cancellationToken = default)
+        public Response<ProductResult> GetMultiplePagesWithOffset(string clientRequestId, int? maxresults, int offset, int? timeout, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesWithOffset");
@@ -1011,7 +1013,7 @@ namespace paging
                 throw;
             }
         }
-        internal HttpMessage CreateGetMultiplePagesLRORequest(string? clientRequestId, int? maxresults, int? timeout)
+        internal HttpMessage CreateGetMultiplePagesLRORequest(string clientRequestId, int? maxresults, int? timeout)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1039,7 +1041,7 @@ namespace paging
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ProductResult>> GetMultiplePagesLROAsync(string? clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ProductResult>> GetMultiplePagesLROAsync(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesLRO");
@@ -1071,7 +1073,7 @@ namespace paging
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ProductResult> GetMultiplePagesLRO(string? clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        public Response<ProductResult> GetMultiplePagesLRO(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesLRO");
@@ -1538,7 +1540,7 @@ namespace paging
                 throw;
             }
         }
-        internal HttpMessage CreateGetMultiplePagesNextPageRequest(string? clientRequestId, int? maxresults, int? timeout, string nextLink)
+        internal HttpMessage CreateGetMultiplePagesNextPageRequest(string clientRequestId, int? maxresults, int? timeout, string nextLink)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1566,7 +1568,7 @@ namespace paging
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ProductResult>> GetMultiplePagesNextPageAsync(string? clientRequestId, int? maxresults, int? timeout, string nextLink, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ProductResult>> GetMultiplePagesNextPageAsync(string clientRequestId, int? maxresults, int? timeout, string nextLink, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1603,7 +1605,7 @@ namespace paging
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ProductResult> GetMultiplePagesNextPage(string? clientRequestId, int? maxresults, int? timeout, string nextLink, CancellationToken cancellationToken = default)
+        public Response<ProductResult> GetMultiplePagesNextPage(string clientRequestId, int? maxresults, int? timeout, string nextLink, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1634,7 +1636,7 @@ namespace paging
                 throw;
             }
         }
-        internal HttpMessage CreateGetOdataMultiplePagesNextPageRequest(string? clientRequestId, int? maxresults, int? timeout, string nextLink)
+        internal HttpMessage CreateGetOdataMultiplePagesNextPageRequest(string clientRequestId, int? maxresults, int? timeout, string nextLink)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1662,7 +1664,7 @@ namespace paging
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<OdataProductResult>> GetOdataMultiplePagesNextPageAsync(string? clientRequestId, int? maxresults, int? timeout, string nextLink, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<OdataProductResult>> GetOdataMultiplePagesNextPageAsync(string clientRequestId, int? maxresults, int? timeout, string nextLink, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1699,7 +1701,7 @@ namespace paging
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<OdataProductResult> GetOdataMultiplePagesNextPage(string? clientRequestId, int? maxresults, int? timeout, string nextLink, CancellationToken cancellationToken = default)
+        public Response<OdataProductResult> GetOdataMultiplePagesNextPage(string clientRequestId, int? maxresults, int? timeout, string nextLink, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1730,7 +1732,7 @@ namespace paging
                 throw;
             }
         }
-        internal HttpMessage CreateGetMultiplePagesWithOffsetNextPageRequest(string? clientRequestId, int? maxresults, int? timeout, string nextLink)
+        internal HttpMessage CreateGetMultiplePagesWithOffsetNextPageRequest(string clientRequestId, int? maxresults, int? timeout, string nextLink)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1758,7 +1760,7 @@ namespace paging
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ProductResult>> GetMultiplePagesWithOffsetNextPageAsync(string? clientRequestId, int? maxresults, int? timeout, string nextLink, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ProductResult>> GetMultiplePagesWithOffsetNextPageAsync(string clientRequestId, int? maxresults, int? timeout, string nextLink, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1795,7 +1797,7 @@ namespace paging
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ProductResult> GetMultiplePagesWithOffsetNextPage(string? clientRequestId, int? maxresults, int? timeout, string nextLink, CancellationToken cancellationToken = default)
+        public Response<ProductResult> GetMultiplePagesWithOffsetNextPage(string clientRequestId, int? maxresults, int? timeout, string nextLink, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -2216,7 +2218,7 @@ namespace paging
                 throw;
             }
         }
-        internal HttpMessage CreateGetMultiplePagesLRONextPageRequest(string? clientRequestId, int? maxresults, int? timeout, string nextLink)
+        internal HttpMessage CreateGetMultiplePagesLRONextPageRequest(string clientRequestId, int? maxresults, int? timeout, string nextLink)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -2244,7 +2246,7 @@ namespace paging
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ProductResult>> GetMultiplePagesLRONextPageAsync(string? clientRequestId, int? maxresults, int? timeout, string nextLink, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ProductResult>> GetMultiplePagesLRONextPageAsync(string clientRequestId, int? maxresults, int? timeout, string nextLink, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -2281,7 +2283,7 @@ namespace paging
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ProductResult> GetMultiplePagesLRONextPage(string? clientRequestId, int? maxresults, int? timeout, string nextLink, CancellationToken cancellationToken = default)
+        public Response<ProductResult> GetMultiplePagesLRONextPage(string clientRequestId, int? maxresults, int? timeout, string nextLink, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -2413,7 +2415,7 @@ namespace paging
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public AsyncPageable<Product> GetMultiplePagesPageableAsync(string? clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        public AsyncPageable<Product> GetMultiplePagesPageableAsync(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
 
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
@@ -2433,7 +2435,7 @@ namespace paging
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Pageable<Product> GetMultiplePagesPageable(string? clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        public Pageable<Product> GetMultiplePagesPageable(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
 
             Page<Product> FirstPageFunc(int? pageSizeHint)
@@ -2453,7 +2455,7 @@ namespace paging
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public AsyncPageable<Product> GetOdataMultiplePagesPageableAsync(string? clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        public AsyncPageable<Product> GetOdataMultiplePagesPageableAsync(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
 
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
@@ -2473,7 +2475,7 @@ namespace paging
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Pageable<Product> GetOdataMultiplePagesPageable(string? clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        public Pageable<Product> GetOdataMultiplePagesPageable(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
 
             Page<Product> FirstPageFunc(int? pageSizeHint)
@@ -2494,7 +2496,7 @@ namespace paging
         /// <param name="offset"> Offset of return value. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public AsyncPageable<Product> GetMultiplePagesWithOffsetPageableAsync(string? clientRequestId, int? maxresults, int offset, int? timeout, CancellationToken cancellationToken = default)
+        public AsyncPageable<Product> GetMultiplePagesWithOffsetPageableAsync(string clientRequestId, int? maxresults, int offset, int? timeout, CancellationToken cancellationToken = default)
         {
 
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
@@ -2515,7 +2517,7 @@ namespace paging
         /// <param name="offset"> Offset of return value. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Pageable<Product> GetMultiplePagesWithOffsetPageable(string? clientRequestId, int? maxresults, int offset, int? timeout, CancellationToken cancellationToken = default)
+        public Pageable<Product> GetMultiplePagesWithOffsetPageable(string clientRequestId, int? maxresults, int offset, int? timeout, CancellationToken cancellationToken = default)
         {
 
             Page<Product> FirstPageFunc(int? pageSizeHint)
@@ -2803,7 +2805,7 @@ namespace paging
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public AsyncPageable<Product> GetMultiplePagesLROPageableAsync(string? clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        public AsyncPageable<Product> GetMultiplePagesLROPageableAsync(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
 
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
@@ -2823,7 +2825,7 @@ namespace paging
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Pageable<Product> GetMultiplePagesLROPageable(string? clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        public Pageable<Product> GetMultiplePagesLROPageable(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
 
             Page<Product> FirstPageFunc(int? pageSizeHint)

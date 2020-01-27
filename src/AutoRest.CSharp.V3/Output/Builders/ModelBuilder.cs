@@ -5,44 +5,65 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Input;
+using AutoRest.CSharp.V3.Input.Source;
 using AutoRest.CSharp.V3.Output.Models.Serialization;
 using AutoRest.CSharp.V3.Output.Models.Shared;
 using AutoRest.CSharp.V3.Output.Models.TypeReferences;
 using AutoRest.CSharp.V3.Output.Models.Types;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 
 namespace AutoRest.CSharp.V3.Output.Builders
 {
     internal class ModelBuilder
     {
         private readonly KnownMediaType[] _mediaTypes;
+        private readonly SourceInputModel _sourceInputModel;
+        private readonly string _defaultModelsNamespace;
+        private readonly Accessibility _defaultAccessibility = Accessibility.Public;
 
-        public ModelBuilder(KnownMediaType[] mediaTypes)
+        public ModelBuilder(string @namespace, KnownMediaType[] mediaTypes, SourceInputModel sourceInputModel)
         {
             _mediaTypes = mediaTypes;
+            _sourceInputModel = sourceInputModel;
+            _defaultModelsNamespace = $"{@namespace}.Models";
         }
 
-        private static ISchemaType BuildClientEnum(SealedChoiceSchema sealedChoiceSchema) => new EnumType(
-            sealedChoiceSchema,
-            sealedChoiceSchema.CSharpName(),
-            CreateDescription(sealedChoiceSchema),
-            sealedChoiceSchema.Choices.Select(c => new EnumTypeValue(
-                c.CSharpName(),
-                CreateDescription(c),
-                BuilderHelpers.StringConstant(c.Value))));
+        private ISchemaType BuildClientEnum(SealedChoiceSchema sealedChoiceSchema)
+        {
+            var codeInput = _sourceInputModel.FindForSchema(sealedChoiceSchema.Name);
 
-        private static ISchemaType BuildClientEnum(ChoiceSchema choiceSchema) => new EnumType(
-            choiceSchema,
-            choiceSchema.CSharpName(),
-            CreateDescription(choiceSchema),
-            choiceSchema.Choices.Select(c => new EnumTypeValue(
-                c.CSharpName(),
-                CreateDescription(c),
-                BuilderHelpers.StringConstant(c.Value))),
-            true);
+            return new EnumType(
+                sealedChoiceSchema,
+                BuilderHelpers.CreateTypeAttributes(sealedChoiceSchema.CSharpName(), _defaultModelsNamespace, _defaultAccessibility, codeInput?.ExistingType),
+                CreateDescription(sealedChoiceSchema),
+                sealedChoiceSchema.Choices.Select(c => new EnumTypeValue(
+                    c.CSharpName(),
+                    CreateDescription(c),
+                    BuilderHelpers.StringConstant(c.Value))));
+        }
+
+        private ISchemaType BuildClientEnum(ChoiceSchema choiceSchema)
+        {
+            var codeInput = _sourceInputModel.FindForSchema(choiceSchema.Name);
+
+            return new EnumType(
+                choiceSchema,
+                BuilderHelpers.CreateTypeAttributes(choiceSchema.CSharpName(), _defaultModelsNamespace, _defaultAccessibility, codeInput?.ExistingType),
+                CreateDescription(choiceSchema),
+                choiceSchema.Choices.Select(c => new EnumTypeValue(
+                    c.CSharpName(),
+                    CreateDescription(c),
+                    BuilderHelpers.StringConstant(c.Value))),
+                true);
+        }
 
         private ISchemaType BuildClientObject(ObjectSchema objectSchema)
         {
+            var codeInput = _sourceInputModel.FindForSchema(objectSchema.Name);
+
             TypeReference? inheritsFromTypeReference = null;
             DictionarySchema? inheritedDictionarySchema = null;
 
@@ -96,7 +117,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
             return new ObjectType(
                 objectSchema,
-                objectSchema.CSharpName(),
+                BuilderHelpers.CreateTypeAttributes(objectSchema.CSharpName(), _defaultModelsNamespace, _defaultAccessibility, codeInput?.ExistingType),
                 CreateDescription(objectSchema),
                 (SchemaTypeReference?) inheritsFromTypeReference,
                 properties.ToArray(),

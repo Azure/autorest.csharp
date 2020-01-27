@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
     <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
     <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,6 +23,8 @@
 
   <ItemGroup>
     <None Include="../../src/assets/**/*.cs" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="package.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../readme.md" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
-
+  
 </Project>

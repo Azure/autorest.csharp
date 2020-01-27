@@ -1,0 +1,12 @@
+{
+  "version": "1.0.0",
+  "name": "@autorest/csharp-v3",
+  "description": "See readme.md for details",
+  "scripts": {
+    "start": "dotnet ./AutoRest.CSharp.V3.dll --server"
+  },
+  "files":[ "AutoRest.CSharp.V3.dll" ],
+  "devDependencies": {
+  },
+  "dependencies": {}
+}

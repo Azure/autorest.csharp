@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System;
 using System.Text.Json;
 using System.Threading;
@@ -41,7 +43,7 @@ namespace CognitiveSearch
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
-        internal HttpMessage CreateCreateOrUpdateRequest(string dataSourceName, Guid? clientRequestId, string? ifMatch, string? ifNoneMatch, DataSource dataSource)
+        internal HttpMessage CreateCreateOrUpdateRequest(string dataSourceName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, DataSource dataSource)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -82,7 +84,7 @@ namespace CognitiveSearch
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
         /// <param name="dataSource"> The definition of the datasource to create or update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<DataSource>> CreateOrUpdateAsync(string dataSourceName, Guid? clientRequestId, string? ifMatch, string? ifNoneMatch, DataSource dataSource, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<DataSource>> CreateOrUpdateAsync(string dataSourceName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, DataSource dataSource, CancellationToken cancellationToken = default)
         {
             if (dataSourceName == null)
             {
@@ -124,7 +126,7 @@ namespace CognitiveSearch
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
         /// <param name="dataSource"> The definition of the datasource to create or update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<DataSource> CreateOrUpdate(string dataSourceName, Guid? clientRequestId, string? ifMatch, string? ifNoneMatch, DataSource dataSource, CancellationToken cancellationToken = default)
+        public Response<DataSource> CreateOrUpdate(string dataSourceName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, DataSource dataSource, CancellationToken cancellationToken = default)
         {
             if (dataSourceName == null)
             {
@@ -159,7 +161,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
-        internal HttpMessage CreateDeleteRequest(string dataSourceName, Guid? clientRequestId, string? ifMatch, string? ifNoneMatch)
+        internal HttpMessage CreateDeleteRequest(string dataSourceName, Guid? clientRequestId, string ifMatch, string ifNoneMatch)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -194,7 +196,7 @@ namespace CognitiveSearch
         /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DeleteAsync(string dataSourceName, Guid? clientRequestId, string? ifMatch, string? ifNoneMatch, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> DeleteAsync(string dataSourceName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
         {
             if (dataSourceName == null)
             {
@@ -227,7 +229,7 @@ namespace CognitiveSearch
         /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Delete(string dataSourceName, Guid? clientRequestId, string? ifMatch, string? ifNoneMatch, CancellationToken cancellationToken = default)
+        public Response Delete(string dataSourceName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
         {
             if (dataSourceName == null)
             {
@@ -345,7 +347,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
-        internal HttpMessage CreateListRequest(string? select, Guid? clientRequestId)
+        internal HttpMessage CreateListRequest(string select, Guid? clientRequestId)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -372,7 +374,7 @@ namespace CognitiveSearch
         /// <param name="select"> Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ListDataSourcesResult>> ListAsync(string? select, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ListDataSourcesResult>> ListAsync(string select, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("DataSourcesOperations.List");
@@ -403,7 +405,7 @@ namespace CognitiveSearch
         /// <param name="select"> Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ListDataSourcesResult> List(string? select, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public Response<ListDataSourcesResult> List(string select, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("DataSourcesOperations.List");

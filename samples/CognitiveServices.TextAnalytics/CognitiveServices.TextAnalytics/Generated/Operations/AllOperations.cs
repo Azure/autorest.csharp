@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System;
 using System.Text.Json;
 using System.Threading;
@@ -29,7 +31,7 @@ namespace CognitiveServices.TextAnalytics
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
-        internal HttpMessage CreateEntitiesRecognitionGeneralRequest(string? modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput)
+        internal HttpMessage CreateEntitiesRecognitionGeneralRequest(string modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -62,7 +64,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
         /// <param name="multiLanguageBatchInput"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<EntitiesResult>> EntitiesRecognitionGeneralAsync(string? modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<EntitiesResult>> EntitiesRecognitionGeneralAsync(string modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput, CancellationToken cancellationToken = default)
         {
             if (multiLanguageBatchInput == null)
             {
@@ -101,7 +103,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
         /// <param name="multiLanguageBatchInput"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<EntitiesResult> EntitiesRecognitionGeneral(string? modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput, CancellationToken cancellationToken = default)
+        public Response<EntitiesResult> EntitiesRecognitionGeneral(string modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput, CancellationToken cancellationToken = default)
         {
             if (multiLanguageBatchInput == null)
             {
@@ -132,7 +134,7 @@ namespace CognitiveServices.TextAnalytics
                 throw;
             }
         }
-        internal HttpMessage CreateEntitiesRecognitionPiiRequest(string? modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput)
+        internal HttpMessage CreateEntitiesRecognitionPiiRequest(string modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -165,7 +167,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
         /// <param name="multiLanguageBatchInput"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<EntitiesResult>> EntitiesRecognitionPiiAsync(string? modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<EntitiesResult>> EntitiesRecognitionPiiAsync(string modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput, CancellationToken cancellationToken = default)
         {
             if (multiLanguageBatchInput == null)
             {
@@ -204,7 +206,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
         /// <param name="multiLanguageBatchInput"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<EntitiesResult> EntitiesRecognitionPii(string? modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput, CancellationToken cancellationToken = default)
+        public Response<EntitiesResult> EntitiesRecognitionPii(string modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput, CancellationToken cancellationToken = default)
         {
             if (multiLanguageBatchInput == null)
             {
@@ -235,7 +237,7 @@ namespace CognitiveServices.TextAnalytics
                 throw;
             }
         }
-        internal HttpMessage CreateEntitiesLinkingRequest(string? modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput)
+        internal HttpMessage CreateEntitiesLinkingRequest(string modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -268,7 +270,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
         /// <param name="multiLanguageBatchInput"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<EntityLinkingResult>> EntitiesLinkingAsync(string? modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<EntityLinkingResult>> EntitiesLinkingAsync(string modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput, CancellationToken cancellationToken = default)
         {
             if (multiLanguageBatchInput == null)
             {
@@ -307,7 +309,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
         /// <param name="multiLanguageBatchInput"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<EntityLinkingResult> EntitiesLinking(string? modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput, CancellationToken cancellationToken = default)
+        public Response<EntityLinkingResult> EntitiesLinking(string modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput, CancellationToken cancellationToken = default)
         {
             if (multiLanguageBatchInput == null)
             {
@@ -338,7 +340,7 @@ namespace CognitiveServices.TextAnalytics
                 throw;
             }
         }
-        internal HttpMessage CreateKeyPhrasesRequest(string? modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput)
+        internal HttpMessage CreateKeyPhrasesRequest(string modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -368,7 +370,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
         /// <param name="multiLanguageBatchInput"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<KeyPhraseResult>> KeyPhrasesAsync(string? modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<KeyPhraseResult>> KeyPhrasesAsync(string modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput, CancellationToken cancellationToken = default)
         {
             if (multiLanguageBatchInput == null)
             {
@@ -404,7 +406,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
         /// <param name="multiLanguageBatchInput"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<KeyPhraseResult> KeyPhrases(string? modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput, CancellationToken cancellationToken = default)
+        public Response<KeyPhraseResult> KeyPhrases(string modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput, CancellationToken cancellationToken = default)
         {
             if (multiLanguageBatchInput == null)
             {
@@ -435,7 +437,7 @@ namespace CognitiveServices.TextAnalytics
                 throw;
             }
         }
-        internal HttpMessage CreateLanguagesRequest(string? modelVersion, bool? showStats, LanguageBatchInput languageBatchInput)
+        internal HttpMessage CreateLanguagesRequest(string modelVersion, bool? showStats, LanguageBatchInput languageBatchInput)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -465,7 +467,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
         /// <param name="languageBatchInput"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<LanguageResult>> LanguagesAsync(string? modelVersion, bool? showStats, LanguageBatchInput languageBatchInput, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<LanguageResult>> LanguagesAsync(string modelVersion, bool? showStats, LanguageBatchInput languageBatchInput, CancellationToken cancellationToken = default)
         {
             if (languageBatchInput == null)
             {
@@ -501,7 +503,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
         /// <param name="languageBatchInput"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<LanguageResult> Languages(string? modelVersion, bool? showStats, LanguageBatchInput languageBatchInput, CancellationToken cancellationToken = default)
+        public Response<LanguageResult> Languages(string modelVersion, bool? showStats, LanguageBatchInput languageBatchInput, CancellationToken cancellationToken = default)
         {
             if (languageBatchInput == null)
             {
@@ -532,7 +534,7 @@ namespace CognitiveServices.TextAnalytics
                 throw;
             }
         }
-        internal HttpMessage CreateSentimentRequest(string? modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput)
+        internal HttpMessage CreateSentimentRequest(string modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -562,7 +564,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
         /// <param name="multiLanguageBatchInput"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<SentimentResponse>> SentimentAsync(string? modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<SentimentResponse>> SentimentAsync(string modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput, CancellationToken cancellationToken = default)
         {
             if (multiLanguageBatchInput == null)
             {
@@ -598,7 +600,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
         /// <param name="multiLanguageBatchInput"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<SentimentResponse> Sentiment(string? modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput, CancellationToken cancellationToken = default)
+        public Response<SentimentResponse> Sentiment(string modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput, CancellationToken cancellationToken = default)
         {
             if (multiLanguageBatchInput == null)
             {

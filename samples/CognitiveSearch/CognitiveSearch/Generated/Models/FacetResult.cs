@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System.Collections;
 using System.Collections.Generic;
 
@@ -11,7 +13,7 @@ namespace CognitiveSearch.Models
     {
         /// <summary> The approximate count of documents falling within the bucket described by this facet. </summary>
         public long? Count { get; internal set; }
-        private readonly IDictionary<string, object> _additionalProperties = new Dictionary<string, object>();
+        private readonly IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
         /// <inheritdoc />
         public IEnumerator<KeyValuePair<string, object>> GetEnumerator() => _additionalProperties.GetEnumerator();
         /// <inheritdoc />

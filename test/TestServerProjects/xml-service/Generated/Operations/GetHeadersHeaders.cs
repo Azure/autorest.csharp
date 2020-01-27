@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using Azure;
 using Azure.Core;
 
@@ -13,6 +15,6 @@ namespace xml_service
         {
             _response = response;
         }
-        public string? CustomHeader => _response.Headers.TryGetValue("Custom-Header", out string? value) ? value : null;
+        public string CustomHeader => _response.Headers.TryGetValue("Custom-Header", out string value) ? value : null;
     }
 }

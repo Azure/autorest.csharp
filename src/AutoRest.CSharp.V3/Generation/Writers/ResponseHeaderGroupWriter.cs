@@ -22,15 +22,14 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         public void WriteHeaderModel(CodeWriter writer, ResponseHeaderGroupType responseHeaderGroup)
         {
-            var cs = _typeFactory.CreateType(responseHeaderGroup.Name);
-            using (writer.Namespace(cs.Namespace))
+            using (writer.Namespace(responseHeaderGroup.Declaration.Namespace))
             {
                 writer.UseNamespace(new CSharpType(typeof(ResponseHeadersExtensions)).Namespace);
 
-                using (writer.Class("internal", null, cs.Name))
+                using (writer.Class(responseHeaderGroup.Declaration.Accessibility, null, responseHeaderGroup.Declaration.Name))
                 {
                     WriteField(writer);
-                    WriteConstructor(writer, cs);
+                    WriteConstructor(writer, responseHeaderGroup);
 
                     foreach (var method in responseHeaderGroup.Headers)
                     {
@@ -45,9 +44,9 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             writer.Line($"private readonly {typeof(Response)} {ResponseField};");
         }
 
-        private void WriteConstructor(CodeWriter writer, CSharpType cs)
+        private void WriteConstructor(CodeWriter writer, ResponseHeaderGroupType responseHeaderGroup)
         {
-            using (writer.Method("public", null, cs.Name, writer.Pair(typeof(Response), ResponseParameter)))
+            using (writer.Method("public", null, responseHeaderGroup.Declaration.Name, writer.Pair(typeof(Response), ResponseParameter)))
             {
                 writer.Line($"{ResponseField} = {ResponseParameter};");
             }
