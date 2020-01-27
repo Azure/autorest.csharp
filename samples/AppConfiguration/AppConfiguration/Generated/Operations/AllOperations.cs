@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
@@ -15,13 +17,13 @@ namespace AppConfiguration
 {
     internal partial class AllOperations
     {
-        private string? syncToken;
+        private string syncToken;
         private string host;
         private string ApiVersion;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
         /// <summary> Initializes a new instance of AllOperations. </summary>
-        public AllOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string? syncToken, string host = "", string ApiVersion = "1.0")
+        public AllOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string syncToken, string host = "", string ApiVersion = "1.0")
         {
             if (host == null)
             {
@@ -38,7 +40,7 @@ namespace AppConfiguration
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
-        internal HttpMessage CreateGetKeysRequest(string? name, string? after, string? acceptDatetime)
+        internal HttpMessage CreateGetKeysRequest(string name, string after, string acceptDatetime)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -71,7 +73,7 @@ namespace AppConfiguration
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<KeyListResult, GetKeysHeaders>> GetKeysAsync(string? name, string? after, string? acceptDatetime, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<KeyListResult, GetKeysHeaders>> GetKeysAsync(string name, string after, string acceptDatetime, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("AllOperations.GetKeys");
@@ -104,7 +106,7 @@ namespace AppConfiguration
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<KeyListResult, GetKeysHeaders> GetKeys(string? name, string? after, string? acceptDatetime, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<KeyListResult, GetKeysHeaders> GetKeys(string name, string after, string acceptDatetime, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("AllOperations.GetKeys");
@@ -132,7 +134,7 @@ namespace AppConfiguration
                 throw;
             }
         }
-        internal HttpMessage CreateCheckKeysRequest(string? name, string? after, string? acceptDatetime)
+        internal HttpMessage CreateCheckKeysRequest(string name, string after, string acceptDatetime)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -165,7 +167,7 @@ namespace AppConfiguration
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<CheckKeysHeaders>> CheckKeysAsync(string? name, string? after, string? acceptDatetime, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<CheckKeysHeaders>> CheckKeysAsync(string name, string after, string acceptDatetime, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("AllOperations.CheckKeys");
@@ -194,7 +196,7 @@ namespace AppConfiguration
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<CheckKeysHeaders> CheckKeys(string? name, string? after, string? acceptDatetime, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<CheckKeysHeaders> CheckKeys(string name, string after, string acceptDatetime, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("AllOperations.CheckKeys");
@@ -218,7 +220,7 @@ namespace AppConfiguration
                 throw;
             }
         }
-        internal HttpMessage CreateGetKeyValuesRequest(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Get6ItemsItem>? select)
+        internal HttpMessage CreateGetKeyValuesRequest(string key, string label, string after, string acceptDatetime, IEnumerable<Get6ItemsItem> select)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -261,7 +263,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<KeyValueListResult, GetKeyValuesHeaders>> GetKeyValuesAsync(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Get6ItemsItem>? select, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<KeyValueListResult, GetKeyValuesHeaders>> GetKeyValuesAsync(string key, string label, string after, string acceptDatetime, IEnumerable<Get6ItemsItem> select, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("AllOperations.GetKeyValues");
@@ -296,7 +298,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<KeyValueListResult, GetKeyValuesHeaders> GetKeyValues(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Get6ItemsItem>? select, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<KeyValueListResult, GetKeyValuesHeaders> GetKeyValues(string key, string label, string after, string acceptDatetime, IEnumerable<Get6ItemsItem> select, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("AllOperations.GetKeyValues");
@@ -324,7 +326,7 @@ namespace AppConfiguration
                 throw;
             }
         }
-        internal HttpMessage CreateCheckKeyValuesRequest(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Head6ItemsItem>? select)
+        internal HttpMessage CreateCheckKeyValuesRequest(string key, string label, string after, string acceptDatetime, IEnumerable<Head6ItemsItem> select)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -367,7 +369,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<CheckKeyValuesHeaders>> CheckKeyValuesAsync(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Head6ItemsItem>? select, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<CheckKeyValuesHeaders>> CheckKeyValuesAsync(string key, string label, string after, string acceptDatetime, IEnumerable<Head6ItemsItem> select, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("AllOperations.CheckKeyValues");
@@ -398,7 +400,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<CheckKeyValuesHeaders> CheckKeyValues(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Head6ItemsItem>? select, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<CheckKeyValuesHeaders> CheckKeyValues(string key, string label, string after, string acceptDatetime, IEnumerable<Head6ItemsItem> select, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("AllOperations.CheckKeyValues");
@@ -422,7 +424,7 @@ namespace AppConfiguration
                 throw;
             }
         }
-        internal HttpMessage CreateGetKeyValueRequest(string key, string? label, string? acceptDatetime, string? ifMatch, string? ifNoneMatch, IEnumerable<Get7ItemsItem>? select)
+        internal HttpMessage CreateGetKeyValueRequest(string key, string label, string acceptDatetime, string ifMatch, string ifNoneMatch, IEnumerable<Get7ItemsItem> select)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -467,7 +469,7 @@ namespace AppConfiguration
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<KeyValue, GetKeyValueHeaders>> GetKeyValueAsync(string key, string? label, string? acceptDatetime, string? ifMatch, string? ifNoneMatch, IEnumerable<Get7ItemsItem>? select, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<KeyValue, GetKeyValueHeaders>> GetKeyValueAsync(string key, string label, string acceptDatetime, string ifMatch, string ifNoneMatch, IEnumerable<Get7ItemsItem> select, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -507,7 +509,7 @@ namespace AppConfiguration
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<KeyValue, GetKeyValueHeaders> GetKeyValue(string key, string? label, string? acceptDatetime, string? ifMatch, string? ifNoneMatch, IEnumerable<Get7ItemsItem>? select, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<KeyValue, GetKeyValueHeaders> GetKeyValue(string key, string label, string acceptDatetime, string ifMatch, string ifNoneMatch, IEnumerable<Get7ItemsItem> select, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -539,7 +541,7 @@ namespace AppConfiguration
                 throw;
             }
         }
-        internal HttpMessage CreatePutKeyValueRequest(string key, string? label, string? ifMatch, string? ifNoneMatch, KeyValue? entity)
+        internal HttpMessage CreatePutKeyValueRequest(string key, string label, string ifMatch, string ifNoneMatch, KeyValue entity)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -584,7 +586,7 @@ namespace AppConfiguration
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="entity"> The key-value to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<KeyValue, PutKeyValueHeaders>> PutKeyValueAsync(string key, string? label, string? ifMatch, string? ifNoneMatch, KeyValue? entity, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<KeyValue, PutKeyValueHeaders>> PutKeyValueAsync(string key, string label, string ifMatch, string ifNoneMatch, KeyValue entity, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -623,7 +625,7 @@ namespace AppConfiguration
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="entity"> The key-value to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<KeyValue, PutKeyValueHeaders> PutKeyValue(string key, string? label, string? ifMatch, string? ifNoneMatch, KeyValue? entity, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<KeyValue, PutKeyValueHeaders> PutKeyValue(string key, string label, string ifMatch, string ifNoneMatch, KeyValue entity, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -655,7 +657,7 @@ namespace AppConfiguration
                 throw;
             }
         }
-        internal HttpMessage CreateDeleteKeyValueRequest(string key, string? label, string? ifMatch)
+        internal HttpMessage CreateDeleteKeyValueRequest(string key, string label, string ifMatch)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -685,7 +687,7 @@ namespace AppConfiguration
         /// <param name="label"> A filter used to match labels. </param>
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<KeyValue, DeleteKeyValueHeaders>> DeleteKeyValueAsync(string key, string? label, string? ifMatch, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<KeyValue, DeleteKeyValueHeaders>> DeleteKeyValueAsync(string key, string label, string ifMatch, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -722,7 +724,7 @@ namespace AppConfiguration
         /// <param name="label"> A filter used to match labels. </param>
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<KeyValue, DeleteKeyValueHeaders> DeleteKeyValue(string key, string? label, string? ifMatch, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<KeyValue, DeleteKeyValueHeaders> DeleteKeyValue(string key, string label, string ifMatch, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -754,7 +756,7 @@ namespace AppConfiguration
                 throw;
             }
         }
-        internal HttpMessage CreateCheckKeyValueRequest(string key, string? label, string? acceptDatetime, string? ifMatch, string? ifNoneMatch, IEnumerable<Head7ItemsItem>? select)
+        internal HttpMessage CreateCheckKeyValueRequest(string key, string label, string acceptDatetime, string ifMatch, string ifNoneMatch, IEnumerable<Head7ItemsItem> select)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -799,7 +801,7 @@ namespace AppConfiguration
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<CheckKeyValueHeaders>> CheckKeyValueAsync(string key, string? label, string? acceptDatetime, string? ifMatch, string? ifNoneMatch, IEnumerable<Head7ItemsItem>? select, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<CheckKeyValueHeaders>> CheckKeyValueAsync(string key, string label, string acceptDatetime, string ifMatch, string ifNoneMatch, IEnumerable<Head7ItemsItem> select, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -835,7 +837,7 @@ namespace AppConfiguration
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<CheckKeyValueHeaders> CheckKeyValue(string key, string? label, string? acceptDatetime, string? ifMatch, string? ifNoneMatch, IEnumerable<Head7ItemsItem>? select, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<CheckKeyValueHeaders> CheckKeyValue(string key, string label, string acceptDatetime, string ifMatch, string ifNoneMatch, IEnumerable<Head7ItemsItem> select, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -863,7 +865,7 @@ namespace AppConfiguration
                 throw;
             }
         }
-        internal HttpMessage CreateGetLabelsRequest(string? name, string? after, string? acceptDatetime, IEnumerable<string>? select)
+        internal HttpMessage CreateGetLabelsRequest(string name, string after, string acceptDatetime, IEnumerable<string> select)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -901,7 +903,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<LabelListResult, GetLabelsHeaders>> GetLabelsAsync(string? name, string? after, string? acceptDatetime, IEnumerable<string>? select, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<LabelListResult, GetLabelsHeaders>> GetLabelsAsync(string name, string after, string acceptDatetime, IEnumerable<string> select, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("AllOperations.GetLabels");
@@ -935,7 +937,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<LabelListResult, GetLabelsHeaders> GetLabels(string? name, string? after, string? acceptDatetime, IEnumerable<string>? select, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<LabelListResult, GetLabelsHeaders> GetLabels(string name, string after, string acceptDatetime, IEnumerable<string> select, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("AllOperations.GetLabels");
@@ -963,7 +965,7 @@ namespace AppConfiguration
                 throw;
             }
         }
-        internal HttpMessage CreateCheckLabelsRequest(string? name, string? after, string? acceptDatetime, IEnumerable<string>? select)
+        internal HttpMessage CreateCheckLabelsRequest(string name, string after, string acceptDatetime, IEnumerable<string> select)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1001,7 +1003,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<CheckLabelsHeaders>> CheckLabelsAsync(string? name, string? after, string? acceptDatetime, IEnumerable<string>? select, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<CheckLabelsHeaders>> CheckLabelsAsync(string name, string after, string acceptDatetime, IEnumerable<string> select, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("AllOperations.CheckLabels");
@@ -1031,7 +1033,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<CheckLabelsHeaders> CheckLabels(string? name, string? after, string? acceptDatetime, IEnumerable<string>? select, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<CheckLabelsHeaders> CheckLabels(string name, string after, string acceptDatetime, IEnumerable<string> select, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("AllOperations.CheckLabels");
@@ -1055,7 +1057,7 @@ namespace AppConfiguration
                 throw;
             }
         }
-        internal HttpMessage CreatePutLockRequest(string key, string? label, string? ifMatch, string? ifNoneMatch)
+        internal HttpMessage CreatePutLockRequest(string key, string label, string ifMatch, string ifNoneMatch)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1090,7 +1092,7 @@ namespace AppConfiguration
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<KeyValue, PutLockHeaders>> PutLockAsync(string key, string? label, string? ifMatch, string? ifNoneMatch, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<KeyValue, PutLockHeaders>> PutLockAsync(string key, string label, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -1128,7 +1130,7 @@ namespace AppConfiguration
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<KeyValue, PutLockHeaders> PutLock(string key, string? label, string? ifMatch, string? ifNoneMatch, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<KeyValue, PutLockHeaders> PutLock(string key, string label, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -1160,7 +1162,7 @@ namespace AppConfiguration
                 throw;
             }
         }
-        internal HttpMessage CreateDeleteLockRequest(string key, string? label, string? ifMatch, string? ifNoneMatch)
+        internal HttpMessage CreateDeleteLockRequest(string key, string label, string ifMatch, string ifNoneMatch)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1195,7 +1197,7 @@ namespace AppConfiguration
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<KeyValue, DeleteLockHeaders>> DeleteLockAsync(string key, string? label, string? ifMatch, string? ifNoneMatch, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<KeyValue, DeleteLockHeaders>> DeleteLockAsync(string key, string label, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -1233,7 +1235,7 @@ namespace AppConfiguration
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<KeyValue, DeleteLockHeaders> DeleteLock(string key, string? label, string? ifMatch, string? ifNoneMatch, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<KeyValue, DeleteLockHeaders> DeleteLock(string key, string label, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -1265,7 +1267,7 @@ namespace AppConfiguration
                 throw;
             }
         }
-        internal HttpMessage CreateGetRevisionsRequest(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Enum0>? select)
+        internal HttpMessage CreateGetRevisionsRequest(string key, string label, string after, string acceptDatetime, IEnumerable<Enum0> select)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1308,7 +1310,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<KeyValueListResult, GetRevisionsHeaders>> GetRevisionsAsync(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Enum0>? select, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<KeyValueListResult, GetRevisionsHeaders>> GetRevisionsAsync(string key, string label, string after, string acceptDatetime, IEnumerable<Enum0> select, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("AllOperations.GetRevisions");
@@ -1343,7 +1345,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<KeyValueListResult, GetRevisionsHeaders> GetRevisions(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Enum0>? select, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<KeyValueListResult, GetRevisionsHeaders> GetRevisions(string key, string label, string after, string acceptDatetime, IEnumerable<Enum0> select, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("AllOperations.GetRevisions");
@@ -1371,7 +1373,7 @@ namespace AppConfiguration
                 throw;
             }
         }
-        internal HttpMessage CreateCheckRevisionsRequest(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Enum0>? select)
+        internal HttpMessage CreateCheckRevisionsRequest(string key, string label, string after, string acceptDatetime, IEnumerable<Enum0> select)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1414,7 +1416,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<CheckRevisionsHeaders>> CheckRevisionsAsync(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Enum0>? select, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<CheckRevisionsHeaders>> CheckRevisionsAsync(string key, string label, string after, string acceptDatetime, IEnumerable<Enum0> select, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("AllOperations.CheckRevisions");
@@ -1445,7 +1447,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<CheckRevisionsHeaders> CheckRevisions(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Enum0>? select, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<CheckRevisionsHeaders> CheckRevisions(string key, string label, string after, string acceptDatetime, IEnumerable<Enum0> select, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("AllOperations.CheckRevisions");
@@ -1469,7 +1471,7 @@ namespace AppConfiguration
                 throw;
             }
         }
-        internal HttpMessage CreateGetKeysNextPageRequest(string? acceptDatetime, string nextLink)
+        internal HttpMessage CreateGetKeysNextPageRequest(string acceptDatetime, string nextLink)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1491,7 +1493,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<KeyListResult, GetKeysHeaders>> GetKeysNextPageAsync(string? acceptDatetime, string nextLink, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<KeyListResult, GetKeysHeaders>> GetKeysNextPageAsync(string acceptDatetime, string nextLink, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1527,7 +1529,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<KeyListResult, GetKeysHeaders> GetKeysNextPage(string? acceptDatetime, string nextLink, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<KeyListResult, GetKeysHeaders> GetKeysNextPage(string acceptDatetime, string nextLink, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1559,7 +1561,7 @@ namespace AppConfiguration
                 throw;
             }
         }
-        internal HttpMessage CreateGetKeyValuesNextPageRequest(string? acceptDatetime, string nextLink)
+        internal HttpMessage CreateGetKeyValuesNextPageRequest(string acceptDatetime, string nextLink)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1581,7 +1583,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<KeyValueListResult, GetKeyValuesHeaders>> GetKeyValuesNextPageAsync(string? acceptDatetime, string nextLink, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<KeyValueListResult, GetKeyValuesHeaders>> GetKeyValuesNextPageAsync(string acceptDatetime, string nextLink, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1617,7 +1619,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<KeyValueListResult, GetKeyValuesHeaders> GetKeyValuesNextPage(string? acceptDatetime, string nextLink, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<KeyValueListResult, GetKeyValuesHeaders> GetKeyValuesNextPage(string acceptDatetime, string nextLink, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1649,7 +1651,7 @@ namespace AppConfiguration
                 throw;
             }
         }
-        internal HttpMessage CreateGetLabelsNextPageRequest(string? acceptDatetime, string nextLink)
+        internal HttpMessage CreateGetLabelsNextPageRequest(string acceptDatetime, string nextLink)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1671,7 +1673,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<LabelListResult, GetLabelsHeaders>> GetLabelsNextPageAsync(string? acceptDatetime, string nextLink, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<LabelListResult, GetLabelsHeaders>> GetLabelsNextPageAsync(string acceptDatetime, string nextLink, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1707,7 +1709,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<LabelListResult, GetLabelsHeaders> GetLabelsNextPage(string? acceptDatetime, string nextLink, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<LabelListResult, GetLabelsHeaders> GetLabelsNextPage(string acceptDatetime, string nextLink, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1739,7 +1741,7 @@ namespace AppConfiguration
                 throw;
             }
         }
-        internal HttpMessage CreateGetRevisionsNextPageRequest(string? acceptDatetime, string nextLink)
+        internal HttpMessage CreateGetRevisionsNextPageRequest(string acceptDatetime, string nextLink)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1761,7 +1763,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<KeyValueListResult, GetRevisionsHeaders>> GetRevisionsNextPageAsync(string? acceptDatetime, string nextLink, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<KeyValueListResult, GetRevisionsHeaders>> GetRevisionsNextPageAsync(string acceptDatetime, string nextLink, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1797,7 +1799,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<KeyValueListResult, GetRevisionsHeaders> GetRevisionsNextPage(string? acceptDatetime, string nextLink, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<KeyValueListResult, GetRevisionsHeaders> GetRevisionsNextPage(string acceptDatetime, string nextLink, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1834,7 +1836,7 @@ namespace AppConfiguration
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public AsyncPageable<Key> GetKeysPageableAsync(string? name, string? after, string? acceptDatetime, CancellationToken cancellationToken = default)
+        public AsyncPageable<Key> GetKeysPageableAsync(string name, string after, string acceptDatetime, CancellationToken cancellationToken = default)
         {
 
             async Task<Page<Key>> FirstPageFunc(int? pageSizeHint)
@@ -1854,7 +1856,7 @@ namespace AppConfiguration
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Pageable<Key> GetKeysPageable(string? name, string? after, string? acceptDatetime, CancellationToken cancellationToken = default)
+        public Pageable<Key> GetKeysPageable(string name, string after, string acceptDatetime, CancellationToken cancellationToken = default)
         {
 
             Page<Key> FirstPageFunc(int? pageSizeHint)
@@ -1876,7 +1878,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public AsyncPageable<KeyValue> GetKeyValuesPageableAsync(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Get6ItemsItem>? select, CancellationToken cancellationToken = default)
+        public AsyncPageable<KeyValue> GetKeyValuesPageableAsync(string key, string label, string after, string acceptDatetime, IEnumerable<Get6ItemsItem> select, CancellationToken cancellationToken = default)
         {
 
             async Task<Page<KeyValue>> FirstPageFunc(int? pageSizeHint)
@@ -1898,7 +1900,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Pageable<KeyValue> GetKeyValuesPageable(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Get6ItemsItem>? select, CancellationToken cancellationToken = default)
+        public Pageable<KeyValue> GetKeyValuesPageable(string key, string label, string after, string acceptDatetime, IEnumerable<Get6ItemsItem> select, CancellationToken cancellationToken = default)
         {
 
             Page<KeyValue> FirstPageFunc(int? pageSizeHint)
@@ -1919,7 +1921,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public AsyncPageable<Label> GetLabelsPageableAsync(string? name, string? after, string? acceptDatetime, IEnumerable<string>? select, CancellationToken cancellationToken = default)
+        public AsyncPageable<Label> GetLabelsPageableAsync(string name, string after, string acceptDatetime, IEnumerable<string> select, CancellationToken cancellationToken = default)
         {
 
             async Task<Page<Label>> FirstPageFunc(int? pageSizeHint)
@@ -1940,7 +1942,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Pageable<Label> GetLabelsPageable(string? name, string? after, string? acceptDatetime, IEnumerable<string>? select, CancellationToken cancellationToken = default)
+        public Pageable<Label> GetLabelsPageable(string name, string after, string acceptDatetime, IEnumerable<string> select, CancellationToken cancellationToken = default)
         {
 
             Page<Label> FirstPageFunc(int? pageSizeHint)
@@ -1962,7 +1964,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public AsyncPageable<KeyValue> GetRevisionsPageableAsync(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Enum0>? select, CancellationToken cancellationToken = default)
+        public AsyncPageable<KeyValue> GetRevisionsPageableAsync(string key, string label, string after, string acceptDatetime, IEnumerable<Enum0> select, CancellationToken cancellationToken = default)
         {
 
             async Task<Page<KeyValue>> FirstPageFunc(int? pageSizeHint)
@@ -1984,7 +1986,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Pageable<KeyValue> GetRevisionsPageable(string? key, string? label, string? after, string? acceptDatetime, IEnumerable<Enum0>? select, CancellationToken cancellationToken = default)
+        public Pageable<KeyValue> GetRevisionsPageable(string key, string label, string after, string acceptDatetime, IEnumerable<Enum0> select, CancellationToken cancellationToken = default)
         {
 
             Page<KeyValue> FirstPageFunc(int? pageSizeHint)

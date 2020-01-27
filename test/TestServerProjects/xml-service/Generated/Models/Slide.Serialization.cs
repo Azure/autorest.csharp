@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Xml;
@@ -107,16 +109,16 @@ namespace xml_service.Models
             result = new Slide(); var type = element.Attribute("type");
             if (type != null)
             {
-                result.Type = (string?)type;
+                result.Type = (string)type;
             }
-            string? value = default;
+            string value = default;
             var title = element.Element("title");
             if (title != null)
             {
-                value = (string?)title;
+                value = (string)title;
             }
             result.Title = value;
-            result.Items = new List<string>();
+            result.Items = new System.Collections.Generic.List<string>();
             foreach (var e in element.Elements("item"))
             {
                 string value0 = default;

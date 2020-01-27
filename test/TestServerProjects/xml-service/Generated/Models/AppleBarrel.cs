@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System.Collections.Generic;
 
 namespace xml_service.Models
@@ -9,8 +11,8 @@ namespace xml_service.Models
     public partial class AppleBarrel
     {
         /// <summary> MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA. </summary>
-        public ICollection<string>? GoodApples { get; set; }
+        public ICollection<string> GoodApples { get; set; }
         /// <summary> MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA. </summary>
-        public ICollection<string>? BadApples { get; set; }
+        public ICollection<string> BadApples { get; set; }
     }
 }

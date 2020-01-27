@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System.Collections.Generic;
 
 namespace CognitiveSearch.Models
@@ -14,6 +16,6 @@ namespace CognitiveSearch.Models
             OdataType = "#Microsoft.Azure.Search.ElisionTokenFilter";
         }
         /// <summary> The set of articles to remove. </summary>
-        public ICollection<string>? Articles { get; set; }
+        public ICollection<string> Articles { get; set; }
     }
 }

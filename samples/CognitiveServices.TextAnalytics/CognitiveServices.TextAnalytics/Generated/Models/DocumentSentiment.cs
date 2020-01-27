@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System.Collections.Generic;
 
 namespace CognitiveServices.TextAnalytics.Models
@@ -13,10 +15,10 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <summary> Predicted sentiment for document (Negative, Neutral, Positive, or Mixed). </summary>
         public DocumentSentimentSentiment Sentiment { get; set; }
         /// <summary> if showStats=true was specified in the request this field will contain information about the document payload. </summary>
-        public DocumentStatistics? Statistics { get; set; }
+        public DocumentStatistics Statistics { get; set; }
         /// <summary> &lt;Any object&gt;. </summary>
         public object DocumentScores { get; set; }
         /// <summary> Sentence level sentiment analysis. </summary>
-        public ICollection<SentenceSentiment> Sentences { get; set; } = new List<SentenceSentiment>();
+        public ICollection<SentenceSentiment> Sentences { get; set; } = new System.Collections.Generic.List<CognitiveServices.TextAnalytics.Models.SentenceSentiment>();
     }
 }

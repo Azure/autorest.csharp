@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
@@ -51,11 +53,11 @@ namespace xml_service.Models
         internal static ComplexTypeNoMeta DeserializeComplexTypeNoMeta(XElement element)
         {
             ComplexTypeNoMeta result = default;
-            result = new ComplexTypeNoMeta(); string? value = default;
+            result = new ComplexTypeNoMeta(); string value = default;
             var iD = element.Element("ID");
             if (iD != null)
             {
-                value = (string?)iD;
+                value = (string)iD;
             }
             result.ID = value;
             return result;

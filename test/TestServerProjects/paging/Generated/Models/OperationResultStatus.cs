@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System;
 using System.ComponentModel;
 
@@ -9,7 +11,7 @@ namespace paging.Models
     /// <summary> The status of the request. </summary>
     public readonly partial struct OperationResultStatus : IEquatable<OperationResultStatus>
     {
-        private readonly string? _value;
+        private readonly string _value;
 
         /// <summary> Determines if two <see cref="OperationResultStatus"/> values are the same. </summary>
         public OperationResultStatus(string value)
@@ -60,7 +62,7 @@ namespace paging.Models
 
         /// <inheritdoc />
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override bool Equals(object? obj) => obj is OperationResultStatus other && Equals(other);
+        public override bool Equals(object obj) => obj is OperationResultStatus other && Equals(other);
         /// <inheritdoc />
         public bool Equals(OperationResultStatus other) => string.Equals(_value, other._value, StringComparison.Ordinal);
 
@@ -68,6 +70,6 @@ namespace paging.Models
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override int GetHashCode() => _value?.GetHashCode() ?? 0;
         /// <inheritdoc />
-        public override string? ToString() => _value;
+        public override string ToString() => _value;
     }
 }

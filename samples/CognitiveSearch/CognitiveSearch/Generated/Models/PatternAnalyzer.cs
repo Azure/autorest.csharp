@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System.Collections.Generic;
 
 namespace CognitiveSearch.Models
@@ -16,10 +18,10 @@ namespace CognitiveSearch.Models
         /// <summary> A value indicating whether terms should be lower-cased. Default is true. </summary>
         public bool? LowerCaseTerms { get; set; }
         /// <summary> A regular expression pattern to match token separators. Default is an expression that matches one or more whitespace characters. </summary>
-        public string? Pattern { get; set; }
+        public string Pattern { get; set; }
         /// <summary> Defines flags that can be combined to control how regular expressions are used in the pattern analyzer and pattern tokenizer. </summary>
         public RegexFlags? Flags { get; set; }
         /// <summary> A list of stopwords. </summary>
-        public ICollection<string>? Stopwords { get; set; }
+        public ICollection<string> Stopwords { get; set; }
     }
 }

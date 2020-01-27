@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System;
 
 namespace body_complex.Models
@@ -9,6 +11,6 @@ namespace body_complex.Models
     public partial class ByteWrapper
     {
         /// <summary> MISSING·SCHEMA-DESCRIPTION-BYTEARRAY. </summary>
-        public byte[]? Field { get; set; }
+        public byte[] Field { get; set; }
     }
 }

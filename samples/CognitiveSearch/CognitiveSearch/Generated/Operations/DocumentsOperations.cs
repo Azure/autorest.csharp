@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
@@ -130,7 +132,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
-        internal HttpMessage CreateSearchGetRequest(string? searchText, bool? includeTotalResultCount, IEnumerable<string>? facets, string? filter, IEnumerable<string>? highlightFields, string? highlightPostTag, string? highlightPreTag, double? minimumCoverage, IEnumerable<string>? orderBy, QueryType? queryType, IEnumerable<string>? scoringParameters, string? scoringProfile, IEnumerable<string>? searchFields, SearchMode? searchMode, IEnumerable<string>? select, int? skip, int? top, Guid? clientRequestId)
+        internal HttpMessage CreateSearchGetRequest(string searchText, bool? includeTotalResultCount, IEnumerable<string> facets, string filter, IEnumerable<string> highlightFields, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> orderBy, QueryType? queryType, IEnumerable<string> scoringParameters, string scoringProfile, IEnumerable<string> searchFields, SearchMode? searchMode, IEnumerable<string> select, int? skip, int? top, Guid? clientRequestId)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -240,7 +242,7 @@ namespace CognitiveSearch
         /// <param name="top"> The number of search results to retrieve. This can be used in conjunction with $skip to implement client-side paging of search results. If results are truncated due to server-side paging, the response will include a continuation token that can be used to issue another Search request for the next page of results. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<SearchDocumentsResult>> SearchGetAsync(string? searchText, bool? includeTotalResultCount, IEnumerable<string>? facets, string? filter, IEnumerable<string>? highlightFields, string? highlightPostTag, string? highlightPreTag, double? minimumCoverage, IEnumerable<string>? orderBy, QueryType? queryType, IEnumerable<string>? scoringParameters, string? scoringProfile, IEnumerable<string>? searchFields, SearchMode? searchMode, IEnumerable<string>? select, int? skip, int? top, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<SearchDocumentsResult>> SearchGetAsync(string searchText, bool? includeTotalResultCount, IEnumerable<string> facets, string filter, IEnumerable<string> highlightFields, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> orderBy, QueryType? queryType, IEnumerable<string> scoringParameters, string scoringProfile, IEnumerable<string> searchFields, SearchMode? searchMode, IEnumerable<string> select, int? skip, int? top, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("DocumentsOperations.SearchGet");
@@ -287,7 +289,7 @@ namespace CognitiveSearch
         /// <param name="top"> The number of search results to retrieve. This can be used in conjunction with $skip to implement client-side paging of search results. If results are truncated due to server-side paging, the response will include a continuation token that can be used to issue another Search request for the next page of results. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<SearchDocumentsResult> SearchGet(string? searchText, bool? includeTotalResultCount, IEnumerable<string>? facets, string? filter, IEnumerable<string>? highlightFields, string? highlightPostTag, string? highlightPreTag, double? minimumCoverage, IEnumerable<string>? orderBy, QueryType? queryType, IEnumerable<string>? scoringParameters, string? scoringProfile, IEnumerable<string>? searchFields, SearchMode? searchMode, IEnumerable<string>? select, int? skip, int? top, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public Response<SearchDocumentsResult> SearchGet(string searchText, bool? includeTotalResultCount, IEnumerable<string> facets, string filter, IEnumerable<string> highlightFields, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> orderBy, QueryType? queryType, IEnumerable<string> scoringParameters, string scoringProfile, IEnumerable<string> searchFields, SearchMode? searchMode, IEnumerable<string> select, int? skip, int? top, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("DocumentsOperations.SearchGet");
@@ -410,7 +412,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
-        internal HttpMessage CreateGetRequest(string key, IEnumerable<string>? selectedFields, Guid? clientRequestId)
+        internal HttpMessage CreateGetRequest(string key, IEnumerable<string> selectedFields, Guid? clientRequestId)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -443,7 +445,7 @@ namespace CognitiveSearch
         /// <param name="selectedFields"> List of field names to retrieve for the document; Any field not retrieved will be missing from the returned document. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ComponentsSchemasFacetresultAdditionalproperties>> GetAsync(string key, IEnumerable<string>? selectedFields, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ComponentsSchemasFacetresultAdditionalproperties>> GetAsync(string key, IEnumerable<string> selectedFields, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -479,7 +481,7 @@ namespace CognitiveSearch
         /// <param name="selectedFields"> List of field names to retrieve for the document; Any field not retrieved will be missing from the returned document. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ComponentsSchemasFacetresultAdditionalproperties> Get(string key, IEnumerable<string>? selectedFields, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public Response<ComponentsSchemasFacetresultAdditionalproperties> Get(string key, IEnumerable<string> selectedFields, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -510,7 +512,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
-        internal HttpMessage CreateSuggestGetRequest(string searchText, string suggesterName, string? filter, bool? useFuzzyMatching, string? highlightPostTag, string? highlightPreTag, double? minimumCoverage, IEnumerable<string>? orderBy, IEnumerable<string>? searchFields, IEnumerable<string>? select, int? top, Guid? clientRequestId)
+        internal HttpMessage CreateSuggestGetRequest(string searchText, string suggesterName, string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> orderBy, IEnumerable<string> searchFields, IEnumerable<string> select, int? top, Guid? clientRequestId)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -584,7 +586,7 @@ namespace CognitiveSearch
         /// <param name="top"> The number of suggestions to retrieve. The value must be a number between 1 and 100. The default is 5. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<SuggestDocumentsResult>> SuggestGetAsync(string searchText, string suggesterName, string? filter, bool? useFuzzyMatching, string? highlightPostTag, string? highlightPreTag, double? minimumCoverage, IEnumerable<string>? orderBy, IEnumerable<string>? searchFields, IEnumerable<string>? select, int? top, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<SuggestDocumentsResult>> SuggestGetAsync(string searchText, string suggesterName, string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> orderBy, IEnumerable<string> searchFields, IEnumerable<string> select, int? top, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
             if (searchText == null)
             {
@@ -633,7 +635,7 @@ namespace CognitiveSearch
         /// <param name="top"> The number of suggestions to retrieve. The value must be a number between 1 and 100. The default is 5. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<SuggestDocumentsResult> SuggestGet(string searchText, string suggesterName, string? filter, bool? useFuzzyMatching, string? highlightPostTag, string? highlightPreTag, double? minimumCoverage, IEnumerable<string>? orderBy, IEnumerable<string>? searchFields, IEnumerable<string>? select, int? top, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public Response<SuggestDocumentsResult> SuggestGet(string searchText, string suggesterName, string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> orderBy, IEnumerable<string> searchFields, IEnumerable<string> select, int? top, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
             if (searchText == null)
             {
@@ -860,7 +862,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
-        internal HttpMessage CreateAutocompleteGetRequest(Guid? clientRequestId, string searchText, string suggesterName, AutocompleteMode? autocompleteMode, string? filter, bool? useFuzzyMatching, string? highlightPostTag, string? highlightPreTag, double? minimumCoverage, IEnumerable<string>? searchFields, int? top)
+        internal HttpMessage CreateAutocompleteGetRequest(Guid? clientRequestId, string searchText, string suggesterName, AutocompleteMode? autocompleteMode, string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> searchFields, int? top)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -929,7 +931,7 @@ namespace CognitiveSearch
         /// <param name="searchFields"> The list of field names to consider when querying for auto-completed terms. Target fields must be included in the specified suggester. </param>
         /// <param name="top"> The number of auto-completed terms to retrieve. This must be a value between 1 and 100. The default is 5. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<AutocompleteResult>> AutocompleteGetAsync(Guid? clientRequestId, string searchText, string suggesterName, AutocompleteMode? autocompleteMode, string? filter, bool? useFuzzyMatching, string? highlightPostTag, string? highlightPreTag, double? minimumCoverage, IEnumerable<string>? searchFields, int? top, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<AutocompleteResult>> AutocompleteGetAsync(Guid? clientRequestId, string searchText, string suggesterName, AutocompleteMode? autocompleteMode, string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> searchFields, int? top, CancellationToken cancellationToken = default)
         {
             if (searchText == null)
             {
@@ -977,7 +979,7 @@ namespace CognitiveSearch
         /// <param name="searchFields"> The list of field names to consider when querying for auto-completed terms. Target fields must be included in the specified suggester. </param>
         /// <param name="top"> The number of auto-completed terms to retrieve. This must be a value between 1 and 100. The default is 5. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<AutocompleteResult> AutocompleteGet(Guid? clientRequestId, string searchText, string suggesterName, AutocompleteMode? autocompleteMode, string? filter, bool? useFuzzyMatching, string? highlightPostTag, string? highlightPreTag, double? minimumCoverage, IEnumerable<string>? searchFields, int? top, CancellationToken cancellationToken = default)
+        public Response<AutocompleteResult> AutocompleteGet(Guid? clientRequestId, string searchText, string suggesterName, AutocompleteMode? autocompleteMode, string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> searchFields, int? top, CancellationToken cancellationToken = default)
         {
             if (searchText == null)
             {

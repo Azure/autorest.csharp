@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System;
 using System.Text.Json;
 using System.Xml;
@@ -593,46 +595,46 @@ namespace xml_service.Models
                 value1 = (long?)contentLength;
             }
             result.ContentLength = value1;
-            string? value2 = default;
+            string value2 = default;
             var contentType = element.Element("Content-Type");
             if (contentType != null)
             {
-                value2 = (string?)contentType;
+                value2 = (string)contentType;
             }
             result.ContentType = value2;
-            string? value3 = default;
+            string value3 = default;
             var contentEncoding = element.Element("Content-Encoding");
             if (contentEncoding != null)
             {
-                value3 = (string?)contentEncoding;
+                value3 = (string)contentEncoding;
             }
             result.ContentEncoding = value3;
-            string? value4 = default;
+            string value4 = default;
             var contentLanguage = element.Element("Content-Language");
             if (contentLanguage != null)
             {
-                value4 = (string?)contentLanguage;
+                value4 = (string)contentLanguage;
             }
             result.ContentLanguage = value4;
-            string? value5 = default;
+            string value5 = default;
             var contentMD5 = element.Element("Content-MD5");
             if (contentMD5 != null)
             {
-                value5 = (string?)contentMD5;
+                value5 = (string)contentMD5;
             }
             result.ContentMd5 = value5;
-            string? value6 = default;
+            string value6 = default;
             var contentDisposition = element.Element("Content-Disposition");
             if (contentDisposition != null)
             {
-                value6 = (string?)contentDisposition;
+                value6 = (string)contentDisposition;
             }
             result.ContentDisposition = value6;
-            string? value7 = default;
+            string value7 = default;
             var cacheControl = element.Element("Cache-Control");
             if (cacheControl != null)
             {
-                value7 = (string?)cacheControl;
+                value7 = (string)cacheControl;
             }
             result.CacheControl = value7;
             int? value8 = default;
@@ -670,11 +672,11 @@ namespace xml_service.Models
                 value12 = leaseDuration.Value.ToLeaseDurationType();
             }
             result.LeaseDuration = value12;
-            string? value13 = default;
+            string value13 = default;
             var copyId = element.Element("CopyId");
             if (copyId != null)
             {
-                value13 = (string?)copyId;
+                value13 = (string)copyId;
             }
             result.CopyId = value13;
             CopyStatusType? value14 = default;
@@ -684,18 +686,18 @@ namespace xml_service.Models
                 value14 = copyStatus.Value.ToCopyStatusType();
             }
             result.CopyStatus = value14;
-            string? value15 = default;
+            string value15 = default;
             var copySource = element.Element("CopySource");
             if (copySource != null)
             {
-                value15 = (string?)copySource;
+                value15 = (string)copySource;
             }
             result.CopySource = value15;
-            string? value16 = default;
+            string value16 = default;
             var copyProgress = element.Element("CopyProgress");
             if (copyProgress != null)
             {
-                value16 = (string?)copyProgress;
+                value16 = (string)copyProgress;
             }
             result.CopyProgress = value16;
             DateTimeOffset? value17 = default;
@@ -705,11 +707,11 @@ namespace xml_service.Models
                 value17 = copyCompletionTime.GetDateTimeOffsetValue("R");
             }
             result.CopyCompletionTime = value17;
-            string? value18 = default;
+            string value18 = default;
             var copyStatusDescription = element.Element("CopyStatusDescription");
             if (copyStatusDescription != null)
             {
-                value18 = (string?)copyStatusDescription;
+                value18 = (string)copyStatusDescription;
             }
             result.CopyStatusDescription = value18;
             bool? value19 = default;
@@ -726,11 +728,11 @@ namespace xml_service.Models
                 value20 = (bool?)incrementalCopy;
             }
             result.IncrementalCopy = value20;
-            string? value21 = default;
+            string value21 = default;
             var destinationSnapshot = element.Element("DestinationSnapshot");
             if (destinationSnapshot != null)
             {
-                value21 = (string?)destinationSnapshot;
+                value21 = (string)destinationSnapshot;
             }
             result.DestinationSnapshot = value21;
             DateTimeOffset? value22 = default;

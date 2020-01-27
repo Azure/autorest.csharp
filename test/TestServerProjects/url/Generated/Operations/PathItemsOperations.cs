@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,12 +15,12 @@ namespace url
     internal partial class PathItemsOperations
     {
         private string globalStringPath;
-        private string? globalStringQuery;
+        private string globalStringQuery;
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
         /// <summary> Initializes a new instance of PathItemsOperations. </summary>
-        public PathItemsOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string globalStringPath, string? globalStringQuery, string host = "http://localhost:3000")
+        public PathItemsOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string globalStringPath, string globalStringQuery, string host = "http://localhost:3000")
         {
             if (globalStringPath == null)
             {
@@ -35,7 +37,7 @@ namespace url
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
-        internal HttpMessage CreateGetAllWithValuesRequest(string pathItemStringPath, string? pathItemStringQuery, string localStringPath, string? localStringQuery)
+        internal HttpMessage CreateGetAllWithValuesRequest(string pathItemStringPath, string pathItemStringQuery, string localStringPath, string localStringQuery)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -70,7 +72,7 @@ namespace url
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
         /// <param name="localStringQuery"> should contain value &apos;localStringQuery&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetAllWithValuesAsync(string pathItemStringPath, string? pathItemStringQuery, string localStringPath, string? localStringQuery, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> GetAllWithValuesAsync(string pathItemStringPath, string pathItemStringQuery, string localStringPath, string localStringQuery, CancellationToken cancellationToken = default)
         {
             if (pathItemStringPath == null)
             {
@@ -107,7 +109,7 @@ namespace url
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
         /// <param name="localStringQuery"> should contain value &apos;localStringQuery&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response GetAllWithValues(string pathItemStringPath, string? pathItemStringQuery, string localStringPath, string? localStringQuery, CancellationToken cancellationToken = default)
+        public Response GetAllWithValues(string pathItemStringPath, string pathItemStringQuery, string localStringPath, string localStringQuery, CancellationToken cancellationToken = default)
         {
             if (pathItemStringPath == null)
             {
@@ -138,7 +140,7 @@ namespace url
                 throw;
             }
         }
-        internal HttpMessage CreateGetGlobalQueryNullRequest(string pathItemStringPath, string? pathItemStringQuery, string localStringPath, string? localStringQuery)
+        internal HttpMessage CreateGetGlobalQueryNullRequest(string pathItemStringPath, string pathItemStringQuery, string localStringPath, string localStringQuery)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -173,7 +175,7 @@ namespace url
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
         /// <param name="localStringQuery"> should contain value &apos;localStringQuery&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetGlobalQueryNullAsync(string pathItemStringPath, string? pathItemStringQuery, string localStringPath, string? localStringQuery, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> GetGlobalQueryNullAsync(string pathItemStringPath, string pathItemStringQuery, string localStringPath, string localStringQuery, CancellationToken cancellationToken = default)
         {
             if (pathItemStringPath == null)
             {
@@ -210,7 +212,7 @@ namespace url
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
         /// <param name="localStringQuery"> should contain value &apos;localStringQuery&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response GetGlobalQueryNull(string pathItemStringPath, string? pathItemStringQuery, string localStringPath, string? localStringQuery, CancellationToken cancellationToken = default)
+        public Response GetGlobalQueryNull(string pathItemStringPath, string pathItemStringQuery, string localStringPath, string localStringQuery, CancellationToken cancellationToken = default)
         {
             if (pathItemStringPath == null)
             {
@@ -241,7 +243,7 @@ namespace url
                 throw;
             }
         }
-        internal HttpMessage CreateGetGlobalAndLocalQueryNullRequest(string pathItemStringPath, string? pathItemStringQuery, string localStringPath, string? localStringQuery)
+        internal HttpMessage CreateGetGlobalAndLocalQueryNullRequest(string pathItemStringPath, string pathItemStringQuery, string localStringPath, string localStringQuery)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -276,7 +278,7 @@ namespace url
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
         /// <param name="localStringQuery"> should contain value &apos;localStringQuery&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetGlobalAndLocalQueryNullAsync(string pathItemStringPath, string? pathItemStringQuery, string localStringPath, string? localStringQuery, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> GetGlobalAndLocalQueryNullAsync(string pathItemStringPath, string pathItemStringQuery, string localStringPath, string localStringQuery, CancellationToken cancellationToken = default)
         {
             if (pathItemStringPath == null)
             {
@@ -313,7 +315,7 @@ namespace url
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
         /// <param name="localStringQuery"> should contain value &apos;localStringQuery&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response GetGlobalAndLocalQueryNull(string pathItemStringPath, string? pathItemStringQuery, string localStringPath, string? localStringQuery, CancellationToken cancellationToken = default)
+        public Response GetGlobalAndLocalQueryNull(string pathItemStringPath, string pathItemStringQuery, string localStringPath, string localStringQuery, CancellationToken cancellationToken = default)
         {
             if (pathItemStringPath == null)
             {
@@ -344,7 +346,7 @@ namespace url
                 throw;
             }
         }
-        internal HttpMessage CreateGetLocalPathItemQueryNullRequest(string pathItemStringPath, string? pathItemStringQuery, string localStringPath, string? localStringQuery)
+        internal HttpMessage CreateGetLocalPathItemQueryNullRequest(string pathItemStringPath, string pathItemStringQuery, string localStringPath, string localStringQuery)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -379,7 +381,7 @@ namespace url
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
         /// <param name="localStringQuery"> should contain value &apos;localStringQuery&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetLocalPathItemQueryNullAsync(string pathItemStringPath, string? pathItemStringQuery, string localStringPath, string? localStringQuery, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> GetLocalPathItemQueryNullAsync(string pathItemStringPath, string pathItemStringQuery, string localStringPath, string localStringQuery, CancellationToken cancellationToken = default)
         {
             if (pathItemStringPath == null)
             {
@@ -416,7 +418,7 @@ namespace url
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
         /// <param name="localStringQuery"> should contain value &apos;localStringQuery&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response GetLocalPathItemQueryNull(string pathItemStringPath, string? pathItemStringQuery, string localStringPath, string? localStringQuery, CancellationToken cancellationToken = default)
+        public Response GetLocalPathItemQueryNull(string pathItemStringPath, string pathItemStringQuery, string localStringPath, string localStringQuery, CancellationToken cancellationToken = default)
         {
             if (pathItemStringPath == null)
             {

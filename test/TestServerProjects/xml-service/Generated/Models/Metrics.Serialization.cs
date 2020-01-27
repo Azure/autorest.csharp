@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
@@ -99,11 +101,11 @@ namespace xml_service.Models
         internal static Metrics DeserializeMetrics(XElement element)
         {
             Metrics result = default;
-            result = new Metrics(); string? value = default;
+            result = new Metrics(); string value = default;
             var version = element.Element("Version");
             if (version != null)
             {
-                value = (string?)version;
+                value = (string)version;
             }
             result.Version = value;
             bool value0 = default;
@@ -120,7 +122,7 @@ namespace xml_service.Models
                 value1 = (bool?)includeAPIs;
             }
             result.IncludeAPIs = value1;
-            RetentionPolicy? value2 = default;
+            RetentionPolicy value2 = default;
             var retentionPolicy = element.Element("RetentionPolicy");
             if (retentionPolicy != null)
             {

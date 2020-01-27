@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
@@ -69,18 +71,18 @@ namespace xml_service.Models
         internal static RootWithRefAndNoMeta DeserializeRootWithRefAndNoMeta(XElement element)
         {
             RootWithRefAndNoMeta result = default;
-            result = new RootWithRefAndNoMeta(); ComplexTypeNoMeta? value = default;
+            result = new RootWithRefAndNoMeta(); ComplexTypeNoMeta value = default;
             var refToModel = element.Element("RefToModel");
             if (refToModel != null)
             {
                 value = ComplexTypeNoMeta.DeserializeComplexTypeNoMeta(refToModel);
             }
             result.RefToModel = value;
-            string? value0 = default;
+            string value0 = default;
             var something = element.Element("Something");
             if (something != null)
             {
-                value0 = (string?)something;
+                value0 = (string)something;
             }
             result.Something = value0;
             return result;

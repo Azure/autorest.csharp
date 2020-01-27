@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System.Collections.Generic;
 
 namespace body_complex.Models
@@ -9,6 +11,6 @@ namespace body_complex.Models
     public partial class DictionaryWrapper
     {
         /// <summary> Dictionary of &lt;components·schemas·dictionary_wrapper·properties·defaultprogram·additionalproperties&gt;. </summary>
-        public IDictionary<string, string>? DefaultProgram { get; set; }
+        public IDictionary<string, string> DefaultProgram { get; set; }
     }
 }

@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System;
 using System.Text.Json;
 using System.Threading;
@@ -29,7 +31,7 @@ namespace TypeSchemaMapping
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
-        internal HttpMessage CreateOperationRequest(CustomizedModel? body)
+        internal HttpMessage CreateOperationRequest(CustomizedModel body)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -47,7 +49,7 @@ namespace TypeSchemaMapping
         /// <summary> MISSING·OPERATION-DESCRIPTION. </summary>
         /// <param name="body"> The Model to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<CustomizedModel>> OperationAsync(CustomizedModel? body, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<CustomizedModel>> OperationAsync(CustomizedModel body, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("AllOperations.Operation");
@@ -77,7 +79,7 @@ namespace TypeSchemaMapping
         /// <summary> MISSING·OPERATION-DESCRIPTION. </summary>
         /// <param name="body"> The Model to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<CustomizedModel> Operation(CustomizedModel? body, CancellationToken cancellationToken = default)
+        public Response<CustomizedModel> Operation(CustomizedModel body, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("AllOperations.Operation");

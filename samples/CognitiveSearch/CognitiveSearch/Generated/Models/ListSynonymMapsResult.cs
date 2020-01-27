@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System.Collections.Generic;
 
 namespace CognitiveSearch.Models
@@ -9,6 +11,6 @@ namespace CognitiveSearch.Models
     public partial class ListSynonymMapsResult
     {
         /// <summary> The synonym maps in the Search service. </summary>
-        public ICollection<SynonymMap>? SynonymMaps { get; internal set; }
+        public ICollection<SynonymMap> SynonymMaps { get; internal set; }
     }
 }

@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System;
 using System.ComponentModel;
 
@@ -9,7 +11,7 @@ namespace AppConfiguration.Models
     /// <summary> MISSING·SCHEMA-DESCRIPTION-CHOICE. </summary>
     public readonly partial struct Head7ItemsItem : IEquatable<Head7ItemsItem>
     {
-        private readonly string? _value;
+        private readonly string _value;
 
         /// <summary> Determines if two <see cref="Head7ItemsItem"/> values are the same. </summary>
         public Head7ItemsItem(string value)
@@ -51,7 +53,7 @@ namespace AppConfiguration.Models
 
         /// <inheritdoc />
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override bool Equals(object? obj) => obj is Head7ItemsItem other && Equals(other);
+        public override bool Equals(object obj) => obj is Head7ItemsItem other && Equals(other);
         /// <inheritdoc />
         public bool Equals(Head7ItemsItem other) => string.Equals(_value, other._value, StringComparison.Ordinal);
 
@@ -59,6 +61,6 @@ namespace AppConfiguration.Models
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override int GetHashCode() => _value?.GetHashCode() ?? 0;
         /// <inheritdoc />
-        public override string? ToString() => _value;
+        public override string ToString() => _value;
     }
 }

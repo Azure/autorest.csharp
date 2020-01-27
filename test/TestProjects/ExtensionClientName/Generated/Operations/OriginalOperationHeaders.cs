@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using Azure;
 using Azure.Core;
 
@@ -13,6 +15,6 @@ namespace ExtensionClientName
         {
             _response = response;
         }
-        public string? OriginalHeader => _response.Headers.TryGetValue("originalHeader", out string? value) ? value : null;
+        public string OriginalHeader => _response.Headers.TryGetValue("originalHeader", out string value) ? value : null;
     }
 }
