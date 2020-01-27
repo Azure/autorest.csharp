@@ -19,7 +19,7 @@ try
 
    Write-Host "Publishing $file"
 
-   npx -q publish-release --token $Token --repo autorest.csharp --owner azure --name $name --tag $name --notes='prerelease build' --prerelease --editRelease false --assets $file --target_commitish $Sha
+   cmd /c "npx -q publish-release --token $Token --repo autorest.csharp --owner azure --name $name --tag $name --notes='prerelease build' --prerelease --editRelease false --assets $file --target_commitish $Sha"
 }
 finally
 {
