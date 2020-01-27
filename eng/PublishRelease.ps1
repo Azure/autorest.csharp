@@ -15,11 +15,11 @@ try
    npm version --no-git-tag-version $devVersion > Out-Null;
    
    $file = npm pack -q;
-   $name = [System.IO.Path]::GetFileNameWithoutExtension($file.Name)
+   $name = [System.IO.Path]::GetFileNameWithoutExtension($file)
 
    Write-Host "Publishing $file"
 
-   cmd /c "npx -q publish-release --token $Token --repo autorest.csharp --owner azure --name $name --tag $name --notes='prerelease build' --prerelease --editRelease false --assets $file --target_commitish $Sha 2>&1"
+   cmd /c "npx -q publish-release --token $Token --repo autorest.csharp --owner azure --name $name --tag $name --notes=prerelease-build --prerelease --editRelease false --assets $file --target_commitish $Sha 2>&1"
 }
 finally
 {
