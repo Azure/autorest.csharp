@@ -11,11 +11,14 @@ try
    $currentVersion = node -p -e "require('./package.json').version";
    $devVersion="$currentVersion-dev.$BuildNumber"
 
-   npm version --no-git-tag-version $devVersion
-   npm pack
+   Write-Host "Setting version to $devVersion"
 
-   $file = Get-ChildItem . -Filter *.tgz
+   npm version --no-git-tag-version $devVersion > Out-Null;
+   
+   $file = npm pack -q;
    $name = [System.IO.Path]::GetFileNameWithoutExtension($file.Name)
+
+   Write-Host "Publishing $file"
 
    cp $file $Artifacts
    npx publish-release --token $Token --repo autorest.csharp --owner azure --name $name --tag $name --notes='prerelease build' --prerelease --editRelease false --assets $file.FullName --target_commitish $Sha
