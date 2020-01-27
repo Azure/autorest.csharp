@@ -26,21 +26,5 @@
     <None Include="package.json" CopyToOutputDirectory="PreserveNewest" />
     <None Include="../../readme.md" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
-
-  <Target Name="NpmPackage" DependsOnTargets="Build">
-    <Exec Command="npm version --no-git-tag-version $(Version) --allow-same-version" WorkingDirectory="$(OutputPath)" />
-    <Exec Command="npm pack" WorkingDirectory="$(OutputPath)" ConsoleToMsBuild="true">
-      <Output TaskParameter="ConsoleOutput" PropertyName="OutputOfPack" />
-    </Exec>
-
-    <ItemGroup>
-      <OutputOfPackLines Include="$(OutputOfPack)" />
-    </ItemGroup>
-    <PropertyGroup>
-      <NpmPackageName Condition="'%(OutputOfPackLines.Identity)' != ''">%(OutputOfPackLines.Identity)</NpmPackageName>
-    </PropertyGroup>
-
-    <Message Importance="high" Text="$(NpmPackageName) -> $(PackageOutputPath)" />
-    <Copy SourceFiles="$(OutputPath)$(NpmPackageName)" DestinationFolder="$(PackageOutputPath)" Retries="5" />
-  </Target>
+  
 </Project>
