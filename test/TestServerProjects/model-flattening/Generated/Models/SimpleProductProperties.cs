@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 namespace model_flattening.Models
 {
     /// <summary> The product documentation. </summary>
@@ -11,6 +13,6 @@ namespace model_flattening.Models
         /// <summary> Capacity of product. For example, 4 people. </summary>
         public string Capacity { get; set; } = "Large";
         /// <summary> URL value. </summary>
-        public string? OdataValue { get; set; }
+        public string OdataValue { get; set; }
     }
 }
