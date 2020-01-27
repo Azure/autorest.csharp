@@ -14,7 +14,6 @@ namespace body_complex.Models
         /// <summary> The constant value Kind1. </summary>
         public string Kind { get; internal set; } = "Kind1";
         public string? PropB1 { get; set; }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-STRING. </summary>
         public string? PropBH1 { get; set; }
     }
 }

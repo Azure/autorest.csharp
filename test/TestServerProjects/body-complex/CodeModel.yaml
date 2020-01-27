@@ -1670,29 +1670,10 @@ schemas: !<!Schemas>
         apiVersions:
         - !<!ApiVersion> 
           version: '2016-02-29'
-        properties:
-        - !<!Property> 
-          schema: !<!StringSchema> &ref_78
-            type: string
-            apiVersions:
-            - !<!ApiVersion> 
-              version: '2016-02-29'
-            language: !<!Languages> 
-              default:
-                name: MyBaseHelperType-propBH1
-                description: ''
-            protocol: !<!Protocols> {}
-          serializedName: propBH1
-          language: !<!Languages> 
-            default:
-              name: propBH1
-              description: ''
-              originalName: propBH1
-          protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
             name: MyBaseHelperType-propBH1
-            description: MISSING·SCHEMA-DESCRIPTION-STRING
+            description: ''
         protocol: !<!Protocols> {}
       flattenedNames:
       - helper
@@ -1702,8 +1683,8 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: propBH1
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
-          originalName: helper
+          description: ''
+          originalName: propBH1
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -1723,7 +1704,8 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: propBH1
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          description: ''
+          originalName: propBH1
       protocol: !<!Protocols> {}
     extensions:
       x-ms-flattened: true
