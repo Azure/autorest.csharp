@@ -118,7 +118,7 @@
     },
     "model-flattening": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\model-flattening\\CodeModel.yaml --plugin=csharpgen --output-path=$(SolutionDir)\\test\\TestServerProjects\\model-flattening --namespace=model_flattening"
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\model-flattening\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\model-flattening --namespace=model_flattening"
     }
   }
 }
