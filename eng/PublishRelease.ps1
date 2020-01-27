@@ -1,4 +1,9 @@
-param($Token, $BuildNumber, $Sha, $WorkingDirectory, $Artifacts)
+param($Token, $BuildNumber, $Sha, $WorkingDirectory, $PackageJson, $Artifacts)
+
+$Artifacts = Resolve-Path $Artifacts
+$WorkingDirectory = Resolve-Path $WorkingDirectory
+
+cp $PackageJson $WorkingDirectory -Force
 
 pushd $WorkingDirectory
 try
