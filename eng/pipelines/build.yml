@@ -12,7 +12,6 @@ jobs:
   - job: Build
     variables:
       DotNetCoreSDKVersion: 3.0.100
-      ProjectDirectory: src/AutoRest.CSharp.V3/
     pool:
       vmImage: windows-2019
     steps:
