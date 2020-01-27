@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 namespace CognitiveSearch.Models
 {
     /// <summary> Creates combinations of tokens as a single token. This token filter is implemented using Apache Lucene. </summary>
@@ -20,8 +22,8 @@ namespace CognitiveSearch.Models
         /// <summary> A value indicating whether to output unigrams for those times when no shingles are available. This property takes precedence when outputUnigrams is set to false. Default is false. </summary>
         public bool? OutputUnigramsIfNoShingles { get; set; }
         /// <summary> The string to use when joining adjacent tokens to form a shingle. Default is a single space (&quot; &quot;). </summary>
-        public string? TokenSeparator { get; set; }
+        public string TokenSeparator { get; set; }
         /// <summary> The string to insert for each position at which there is no token. Default is an underscore (&quot;_&quot;). </summary>
-        public string? FilterToken { get; set; }
+        public string FilterToken { get; set; }
     }
 }

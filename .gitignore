@@ -353,7 +353,3 @@ MigrationBackup/
 
 # Rider IDE
 .idea/
-
-# Ignores generated files from samples
-samples/**/*.yaml
-test/**/*.yaml

@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System.Collections.Generic;
 
 namespace CognitiveServices.TextAnalytics.Models
@@ -17,6 +19,6 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <summary> The length of the sentence by Unicode standard. </summary>
         public int Length { get; set; }
         /// <summary> The warnings generated for the sentence. </summary>
-        public ICollection<string> Warnings { get; set; } = new List<string>();
+        public ICollection<string> Warnings { get; set; } = new System.Collections.Generic.List<string>();
     }
 }

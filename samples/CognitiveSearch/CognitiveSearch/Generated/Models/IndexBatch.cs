@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System.Collections.Generic;
 
 namespace CognitiveSearch.Models
@@ -9,6 +11,6 @@ namespace CognitiveSearch.Models
     public partial class IndexBatch
     {
         /// <summary> The actions in the batch. </summary>
-        public ICollection<IndexAction> Actions { get; set; } = new List<IndexAction>();
+        public ICollection<IndexAction> Actions { get; set; } = new System.Collections.Generic.List<CognitiveSearch.Models.IndexAction>();
     }
 }

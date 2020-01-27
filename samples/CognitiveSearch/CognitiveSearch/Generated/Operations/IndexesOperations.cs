@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System;
 using System.Text.Json;
 using System.Threading;
@@ -134,7 +136,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
-        internal HttpMessage CreateListRequest(string? select, Guid? clientRequestId)
+        internal HttpMessage CreateListRequest(string select, Guid? clientRequestId)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -161,7 +163,7 @@ namespace CognitiveSearch
         /// <param name="select"> Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ListIndexesResult>> ListAsync(string? select, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ListIndexesResult>> ListAsync(string select, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("IndexesOperations.List");
@@ -192,7 +194,7 @@ namespace CognitiveSearch
         /// <param name="select"> Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ListIndexesResult> List(string? select, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public Response<ListIndexesResult> List(string select, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("IndexesOperations.List");
@@ -219,7 +221,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
-        internal HttpMessage CreateCreateOrUpdateRequest(string indexName, bool? allowIndexDowntime, Guid? clientRequestId, string? ifMatch, string? ifNoneMatch, Models.Index index)
+        internal HttpMessage CreateCreateOrUpdateRequest(string indexName, bool? allowIndexDowntime, Guid? clientRequestId, string ifMatch, string ifNoneMatch, Models.Index index)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -265,7 +267,7 @@ namespace CognitiveSearch
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
         /// <param name="index"> The definition of the index to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Models.Index>> CreateOrUpdateAsync(string indexName, bool? allowIndexDowntime, Guid? clientRequestId, string? ifMatch, string? ifNoneMatch, Models.Index index, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<Models.Index>> CreateOrUpdateAsync(string indexName, bool? allowIndexDowntime, Guid? clientRequestId, string ifMatch, string ifNoneMatch, Models.Index index, CancellationToken cancellationToken = default)
         {
             if (indexName == null)
             {
@@ -308,7 +310,7 @@ namespace CognitiveSearch
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
         /// <param name="index"> The definition of the index to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Models.Index> CreateOrUpdate(string indexName, bool? allowIndexDowntime, Guid? clientRequestId, string? ifMatch, string? ifNoneMatch, Models.Index index, CancellationToken cancellationToken = default)
+        public Response<Models.Index> CreateOrUpdate(string indexName, bool? allowIndexDowntime, Guid? clientRequestId, string ifMatch, string ifNoneMatch, Models.Index index, CancellationToken cancellationToken = default)
         {
             if (indexName == null)
             {
@@ -343,7 +345,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
-        internal HttpMessage CreateDeleteRequest(string indexName, Guid? clientRequestId, string? ifMatch, string? ifNoneMatch)
+        internal HttpMessage CreateDeleteRequest(string indexName, Guid? clientRequestId, string ifMatch, string ifNoneMatch)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -378,7 +380,7 @@ namespace CognitiveSearch
         /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DeleteAsync(string indexName, Guid? clientRequestId, string? ifMatch, string? ifNoneMatch, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> DeleteAsync(string indexName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
         {
             if (indexName == null)
             {
@@ -411,7 +413,7 @@ namespace CognitiveSearch
         /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Delete(string indexName, Guid? clientRequestId, string? ifMatch, string? ifNoneMatch, CancellationToken cancellationToken = default)
+        public Response Delete(string indexName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
         {
             if (indexName == null)
             {

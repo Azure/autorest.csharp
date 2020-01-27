@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System;
 using System.ComponentModel;
 
@@ -9,7 +11,7 @@ namespace CognitiveSearch.Models
     /// <summary> The language codes supported for input text by EntityRecognitionSkill. </summary>
     public readonly partial struct EntityRecognitionSkillLanguage : IEquatable<EntityRecognitionSkillLanguage>
     {
-        private readonly string? _value;
+        private readonly string _value;
 
         /// <summary> Determines if two <see cref="EntityRecognitionSkillLanguage"/> values are the same. </summary>
         public EntityRecognitionSkillLanguage(string value)
@@ -96,7 +98,7 @@ namespace CognitiveSearch.Models
 
         /// <inheritdoc />
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override bool Equals(object? obj) => obj is EntityRecognitionSkillLanguage other && Equals(other);
+        public override bool Equals(object obj) => obj is EntityRecognitionSkillLanguage other && Equals(other);
         /// <inheritdoc />
         public bool Equals(EntityRecognitionSkillLanguage other) => string.Equals(_value, other._value, StringComparison.Ordinal);
 
@@ -104,6 +106,6 @@ namespace CognitiveSearch.Models
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override int GetHashCode() => _value?.GetHashCode() ?? 0;
         /// <inheritdoc />
-        public override string? ToString() => _value;
+        public override string ToString() => _value;
     }
 }

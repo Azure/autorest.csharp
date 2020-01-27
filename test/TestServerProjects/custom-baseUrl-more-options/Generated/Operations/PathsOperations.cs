@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -33,7 +35,7 @@ namespace custom_baseUrl_more_options
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
-        internal HttpMessage CreateGetEmptyRequest(string vault, string secret, string keyName, string? keyVersion)
+        internal HttpMessage CreateGetEmptyRequest(string vault, string secret, string keyName, string keyVersion)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -59,7 +61,7 @@ namespace custom_baseUrl_more_options
         /// <param name="keyName"> The key name with value &apos;key1&apos;. </param>
         /// <param name="keyVersion"> The key version. Default value &apos;v1&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetEmptyAsync(string vault, string secret, string keyName, string? keyVersion, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> GetEmptyAsync(string vault, string secret, string keyName, string keyVersion, CancellationToken cancellationToken = default)
         {
             if (vault == null)
             {
@@ -100,7 +102,7 @@ namespace custom_baseUrl_more_options
         /// <param name="keyName"> The key name with value &apos;key1&apos;. </param>
         /// <param name="keyVersion"> The key version. Default value &apos;v1&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response GetEmpty(string vault, string secret, string keyName, string? keyVersion, CancellationToken cancellationToken = default)
+        public Response GetEmpty(string vault, string secret, string keyName, string keyVersion, CancellationToken cancellationToken = default)
         {
             if (vault == null)
             {

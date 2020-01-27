@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System.Collections;
 using System.Collections.Generic;
 
@@ -11,10 +13,10 @@ namespace additionalProperties.Models
     {
         /// <summary> MISSING·SCHEMA-DESCRIPTION-INTEGER. </summary>
         public int Id { get; set; }
-        public string? Name { get; set; }
+        public string Name { get; set; }
         /// <summary> MISSING·SCHEMA-DESCRIPTION-BOOLEAN. </summary>
         public bool? Status { get; internal set; }
-        private readonly IDictionary<string, string> _additionalProperties = new Dictionary<string, string>();
+        private readonly IDictionary<string, string> _additionalProperties = new System.Collections.Generic.Dictionary<string, string>();
         /// <inheritdoc />
         public IEnumerator<KeyValuePair<string, string>> GetEnumerator() => _additionalProperties.GetEnumerator();
         /// <inheritdoc />

@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System.Collections.Generic;
 
 namespace CognitiveSearch.Models
@@ -16,8 +18,8 @@ namespace CognitiveSearch.Models
         /// <summary> The language codes supported for input by ImageAnalysisSkill. </summary>
         public ImageAnalysisSkillLanguage? DefaultLanguageCode { get; set; }
         /// <summary> A list of visual features. </summary>
-        public ICollection<VisualFeature>? VisualFeatures { get; set; }
+        public ICollection<VisualFeature> VisualFeatures { get; set; }
         /// <summary> A string indicating which domain-specific details to return. </summary>
-        public ICollection<ImageDetail>? Details { get; set; }
+        public ICollection<ImageDetail> Details { get; set; }
     }
 }

@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System.Collections.Generic;
 
 namespace CognitiveSearch.Models
@@ -15,8 +17,8 @@ namespace CognitiveSearch.Models
         /// <summary> Defines the names of all tokenizers supported by Azure Cognitive Search. </summary>
         public TokenizerName? Tokenizer { get; set; }
         /// <summary> An optional list of token filters to use when breaking the given text. This parameter can only be set when using the tokenizer parameter. </summary>
-        public ICollection<TokenFilterName>? TokenFilters { get; set; }
+        public ICollection<TokenFilterName> TokenFilters { get; set; }
         /// <summary> An optional list of character filters to use when breaking the given text. This parameter can only be set when using the tokenizer parameter. </summary>
-        public ICollection<string>? CharFilters { get; set; }
+        public ICollection<string> CharFilters { get; set; }
     }
 }

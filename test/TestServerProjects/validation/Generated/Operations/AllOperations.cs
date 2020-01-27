@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System;
 using System.Text.Json;
 using System.Threading;
@@ -128,7 +130,7 @@ namespace validation
                 throw;
             }
         }
-        internal HttpMessage CreateValidationOfBodyRequest(string resourceGroupName, int id, Product? body)
+        internal HttpMessage CreateValidationOfBodyRequest(string resourceGroupName, int id, Product body)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -154,7 +156,7 @@ namespace validation
         /// <param name="id"> Required int multiple of 10 from 100 to 1000. </param>
         /// <param name="body"> The Product to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Product>> ValidationOfBodyAsync(string resourceGroupName, int id, Product? body, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<Product>> ValidationOfBodyAsync(string resourceGroupName, int id, Product body, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -190,7 +192,7 @@ namespace validation
         /// <param name="id"> Required int multiple of 10 from 100 to 1000. </param>
         /// <param name="body"> The Product to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Product> ValidationOfBody(string resourceGroupName, int id, Product? body, CancellationToken cancellationToken = default)
+        public Response<Product> ValidationOfBody(string resourceGroupName, int id, Product body, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -282,7 +284,7 @@ namespace validation
                 throw;
             }
         }
-        internal HttpMessage CreatePostWithConstantInBodyRequest(Product? body)
+        internal HttpMessage CreatePostWithConstantInBodyRequest(Product body)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -302,7 +304,7 @@ namespace validation
         /// <summary> MISSING·OPERATION-DESCRIPTION. </summary>
         /// <param name="body"> The Product to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Product>> PostWithConstantInBodyAsync(Product? body, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<Product>> PostWithConstantInBodyAsync(Product body, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("AllOperations.PostWithConstantInBody");
@@ -332,7 +334,7 @@ namespace validation
         /// <summary> MISSING·OPERATION-DESCRIPTION. </summary>
         /// <param name="body"> The Product to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Product> PostWithConstantInBody(Product? body, CancellationToken cancellationToken = default)
+        public Response<Product> PostWithConstantInBody(Product body, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("AllOperations.PostWithConstantInBody");

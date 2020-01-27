@@ -209,7 +209,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 name += $"<{subTypes}>";
             }
 
-            if (type.IsNullable)
+            if (type.IsNullable && type.IsValueType)
             {
                 name += "?";
             }
@@ -320,6 +320,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
             builder.AppendLine("// Copyright (c) Microsoft Corporation. All rights reserved.");
             builder.AppendLine("// Licensed under the MIT License.");
+            builder.AppendLine();
+            builder.AppendLine("#nullable disable");
             builder.AppendLine();
 
             foreach (string ns in namespaces)

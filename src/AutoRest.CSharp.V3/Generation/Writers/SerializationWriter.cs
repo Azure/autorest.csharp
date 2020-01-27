@@ -43,10 +43,9 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 return;
             }
 
-            var cs = _typeFactory.CreateType(model);
-            using (writer.Namespace(cs.Namespace))
+            using (writer.Namespace(model.Declaration.Namespace))
             {
-                writer.Append($"public partial class {model.Name}: {typeof(IUtf8JsonSerializable)}");
+                writer.Append($"{model.Declaration.Accessibility} partial class {model.Declaration.Name}: {typeof(IUtf8JsonSerializable)}");
 
                 if (model.Serializations.OfType<XmlElementSerialization>().Any())
                 {
@@ -64,7 +63,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                                 WriteJsonDeserialize(writer, model, jsonSerialization);
                                 break;
                             case XmlElementSerialization xmlSerialization:
-                                WriteXmlSerialize(writer, model, xmlSerialization);
+                                WriteXmlSerialize(writer, xmlSerialization);
                                 WriteXmlDeserialize(writer, model, xmlSerialization);
                                 break;
                             default:
@@ -75,7 +74,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
         }
 
-        private void WriteXmlSerialize(CodeWriter writer, ObjectType model, XmlElementSerialization serialization)
+        private void WriteXmlSerialize(CodeWriter writer, XmlElementSerialization serialization)
         {
             const string namehint = "nameHint";
             writer.Append($"void {typeof(IXmlSerializable)}.{nameof(IXmlSerializable.Write)}({typeof(XmlWriter)} writer, {typeof(string)} {namehint})");
@@ -92,9 +91,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private void WriteXmlDeserialize(CodeWriter writer, ObjectType model, XmlElementSerialization serialization)
         {
-            var cs = _typeFactory.CreateType(model);
-            var typeText = writer.Type(cs);
-            using (writer.Method("internal static", typeText, "Deserialize"+cs.Name, writer.Pair(typeof(XElement), "element")))
+            using (writer.Scope($"internal static {model.Type} Deserialize{model.Declaration.Name}({typeof(XElement)} element)"))
             {
                 var resultVariable = "result";
                 writer.ToDeserializeCall(serialization,
@@ -106,9 +103,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private void WriteJsonDeserialize(CodeWriter writer, ObjectType model, JsonSerialization jsonSerialization)
         {
-            var cs = _typeFactory.CreateType(model);
-            var typeText = writer.Type(cs);
-            using (writer.Method("internal static", typeText, "Deserialize"+cs.Name, writer.Pair(typeof(JsonElement), "element")))
+            using (writer.Scope($"internal static {model.Type} Deserialize{model.Declaration.Name}({typeof(JsonElement)} element)"))
             {
                 if (model.Discriminator?.HasDescendants == true)
                 {
@@ -145,30 +140,31 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private void WriteSealedChoiceSerialization(CodeWriter writer, EnumType schema)
         {
-            var cs = _typeFactory.CreateType(schema);
-            using (writer.Namespace(cs.Namespace))
+            using (writer.Namespace(schema.Declaration.Namespace))
             {
-                using (writer.Scope($"internal static class {schema.Name}Extensions"))
+                string declaredTypeName = schema.Declaration.Name;
+
+                using (writer.Scope($"internal static class {declaredTypeName}Extensions"))
                 {
-                    using (writer.Scope($"public static string ToSerialString(this {cs} value) => value switch", end: "};"))
+                    using (writer.Scope($"public static string ToSerialString(this {declaredTypeName} value) => value switch", end: "};"))
                     {
                         foreach (EnumTypeValue value in schema.Values)
                         {
-                            writer.Line($"{cs}.{value.Name} => {value.Value.Value:L},");
+                            writer.Line($"{declaredTypeName}.{value.Name} => {value.Value.Value:L},");
                         }
 
-                        writer.Line($"_ => throw new {typeof(ArgumentOutOfRangeException)}(nameof(value), value, \"Unknown {cs.Name} value.\")");
+                        writer.Line($"_ => throw new {typeof(ArgumentOutOfRangeException)}(nameof(value), value, \"Unknown {declaredTypeName} value.\")");
                     }
                     writer.Line();
 
-                    using (writer.Scope($"public static {cs} To{schema.Name}(this string value) => value switch", end: "};"))
+                    using (writer.Scope($"public static {declaredTypeName} To{declaredTypeName}(this string value) => value switch", end: "};"))
                     {
                         foreach (EnumTypeValue value in schema.Values)
                         {
-                            writer.Line($"{value.Value.Value:L} => {cs}.{value.Name},");
+                            writer.Line($"{value.Value.Value:L} => {declaredTypeName}.{value.Name},");
                         }
 
-                        writer.Line($"_ => throw new {typeof(ArgumentOutOfRangeException)}(nameof(value), value, \"Unknown {cs.Name} value.\")");
+                        writer.Line($"_ => throw new {typeof(ArgumentOutOfRangeException)}(nameof(value), value, \"Unknown {declaredTypeName} value.\")");
                     }
                 }
             }

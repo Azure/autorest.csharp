@@ -5,9 +5,8 @@ using AutoRest.CSharp.V3.Input;
 
 namespace AutoRest.CSharp.V3.Output.Models.Types
 {
-    internal interface ISchemaType
+    internal interface ISchemaType: ITypeProvider
     {
-        string Name { get; }
         Schema Schema { get; }
     }
 }

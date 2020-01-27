@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -28,7 +30,7 @@ namespace url_multi_collectionFormat
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
-        internal HttpMessage CreateArrayStringMultiNullRequest(IEnumerable<string>? arrayQuery)
+        internal HttpMessage CreateArrayStringMultiNullRequest(IEnumerable<string> arrayQuery)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -46,7 +48,7 @@ namespace url_multi_collectionFormat
         /// <summary> Get a null array of string using the multi-array format. </summary>
         /// <param name="arrayQuery"> a null array of string using the multi-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> ArrayStringMultiNullAsync(IEnumerable<string>? arrayQuery, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ArrayStringMultiNullAsync(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringMultiNull");
@@ -72,7 +74,7 @@ namespace url_multi_collectionFormat
         /// <summary> Get a null array of string using the multi-array format. </summary>
         /// <param name="arrayQuery"> a null array of string using the multi-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response ArrayStringMultiNull(IEnumerable<string>? arrayQuery, CancellationToken cancellationToken = default)
+        public Response ArrayStringMultiNull(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringMultiNull");
@@ -95,7 +97,7 @@ namespace url_multi_collectionFormat
                 throw;
             }
         }
-        internal HttpMessage CreateArrayStringMultiEmptyRequest(IEnumerable<string>? arrayQuery)
+        internal HttpMessage CreateArrayStringMultiEmptyRequest(IEnumerable<string> arrayQuery)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -113,7 +115,7 @@ namespace url_multi_collectionFormat
         /// <summary> Get an empty array [] of string using the multi-array format. </summary>
         /// <param name="arrayQuery"> an empty array [] of string using the multi-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> ArrayStringMultiEmptyAsync(IEnumerable<string>? arrayQuery, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ArrayStringMultiEmptyAsync(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringMultiEmpty");
@@ -139,7 +141,7 @@ namespace url_multi_collectionFormat
         /// <summary> Get an empty array [] of string using the multi-array format. </summary>
         /// <param name="arrayQuery"> an empty array [] of string using the multi-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response ArrayStringMultiEmpty(IEnumerable<string>? arrayQuery, CancellationToken cancellationToken = default)
+        public Response ArrayStringMultiEmpty(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringMultiEmpty");
@@ -162,7 +164,7 @@ namespace url_multi_collectionFormat
                 throw;
             }
         }
-        internal HttpMessage CreateArrayStringMultiValidRequest(IEnumerable<string>? arrayQuery)
+        internal HttpMessage CreateArrayStringMultiValidRequest(IEnumerable<string> arrayQuery)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -180,7 +182,7 @@ namespace url_multi_collectionFormat
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </summary>
         /// <param name="arrayQuery"> an empty array [] of string using the multi-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> ArrayStringMultiValidAsync(IEnumerable<string>? arrayQuery, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ArrayStringMultiValidAsync(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringMultiValid");
@@ -206,7 +208,7 @@ namespace url_multi_collectionFormat
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </summary>
         /// <param name="arrayQuery"> an empty array [] of string using the multi-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response ArrayStringMultiValid(IEnumerable<string>? arrayQuery, CancellationToken cancellationToken = default)
+        public Response ArrayStringMultiValid(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringMultiValid");

@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System;
 using System.ComponentModel;
 
@@ -9,7 +11,7 @@ namespace CognitiveSearch.Models
     /// <summary> Defines the type of a datasource. </summary>
     public readonly partial struct DataSourceType : IEquatable<DataSourceType>
     {
-        private readonly string? _value;
+        private readonly string _value;
 
         /// <summary> Determines if two <see cref="DataSourceType"/> values are the same. </summary>
         public DataSourceType(string value)
@@ -39,7 +41,7 @@ namespace CognitiveSearch.Models
 
         /// <inheritdoc />
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override bool Equals(object? obj) => obj is DataSourceType other && Equals(other);
+        public override bool Equals(object obj) => obj is DataSourceType other && Equals(other);
         /// <inheritdoc />
         public bool Equals(DataSourceType other) => string.Equals(_value, other._value, StringComparison.Ordinal);
 
@@ -47,6 +49,6 @@ namespace CognitiveSearch.Models
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override int GetHashCode() => _value?.GetHashCode() ?? 0;
         /// <inheritdoc />
-        public override string? ToString() => _value;
+        public override string ToString() => _value;
     }
 }

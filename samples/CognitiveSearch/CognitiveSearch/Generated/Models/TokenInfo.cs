@@ -1,13 +1,15 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 namespace CognitiveSearch.Models
 {
     /// <summary> Information about a token returned by an analyzer. </summary>
     public partial class TokenInfo
     {
         /// <summary> The token returned by the analyzer. </summary>
-        public string? Token { get; internal set; }
+        public string Token { get; internal set; }
         /// <summary> The index of the first character of the token in the input text. </summary>
         public int? StartOffset { get; internal set; }
         /// <summary> The index of the last character of the token in the input text. </summary>

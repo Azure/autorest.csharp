@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System.Collections;
 using System.Collections.Generic;
 
@@ -10,8 +12,8 @@ namespace CognitiveSearch.Models
     public partial class SuggestResult : IDictionary<string, object>
     {
         /// <summary> The text of the suggestion result. </summary>
-        public string? Text { get; internal set; }
-        private readonly IDictionary<string, object> _additionalProperties = new Dictionary<string, object>();
+        public string Text { get; internal set; }
+        private readonly IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
         /// <inheritdoc />
         public IEnumerator<KeyValuePair<string, object>> GetEnumerator() => _additionalProperties.GetEnumerator();
         /// <inheritdoc />

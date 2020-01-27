@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Xml;
@@ -136,11 +138,11 @@ namespace xml_service.Models
                 value = (string)prefix;
             }
             result.Prefix = value;
-            string? value0 = default;
+            string value0 = default;
             var marker = element.Element("Marker");
             if (marker != null)
             {
-                value0 = (string?)marker;
+                value0 = (string)marker;
             }
             result.Marker = value0;
             int value1 = default;

@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System.Collections.Generic;
 
 namespace xml_service.Models
@@ -15,6 +17,6 @@ namespace xml_service.Models
         /// <summary> Properties of a blob. </summary>
         public BlobProperties Properties { get; set; } = new BlobProperties();
         /// <summary> Dictionary of &lt;paths·xml-headers·get·responses·200·headers·custom_header·schema&gt;. </summary>
-        public IDictionary<string, string>? Metadata { get; set; }
+        public IDictionary<string, string> Metadata { get; set; }
     }
 }

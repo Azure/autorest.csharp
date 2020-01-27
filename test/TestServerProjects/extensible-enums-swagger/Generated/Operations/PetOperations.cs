@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System;
 using System.Text.Json;
 using System.Threading;
@@ -109,7 +111,7 @@ namespace extensible_enums_swagger
                 throw;
             }
         }
-        internal HttpMessage CreateAddPetRequest(Pet? petParam)
+        internal HttpMessage CreateAddPetRequest(Pet petParam)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -127,7 +129,7 @@ namespace extensible_enums_swagger
         /// <summary> MISSING·OPERATION-DESCRIPTION. </summary>
         /// <param name="petParam"> The Pet to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Pet>> AddPetAsync(Pet? petParam, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<Pet>> AddPetAsync(Pet petParam, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("PetOperations.AddPet");
@@ -157,7 +159,7 @@ namespace extensible_enums_swagger
         /// <summary> MISSING·OPERATION-DESCRIPTION. </summary>
         /// <param name="petParam"> The Pet to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Pet> AddPet(Pet? petParam, CancellationToken cancellationToken = default)
+        public Response<Pet> AddPet(Pet petParam, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("PetOperations.AddPet");

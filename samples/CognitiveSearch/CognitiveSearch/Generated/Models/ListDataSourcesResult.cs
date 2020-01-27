@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable disable
+
 using System.Collections.Generic;
 
 namespace CognitiveSearch.Models
@@ -9,6 +11,6 @@ namespace CognitiveSearch.Models
     public partial class ListDataSourcesResult
     {
         /// <summary> The datasources in the Search service. </summary>
-        public ICollection<DataSource>? DataSources { get; internal set; }
+        public ICollection<DataSource> DataSources { get; internal set; }
     }
 }
