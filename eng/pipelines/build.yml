@@ -45,6 +45,6 @@ jobs:
           artifactName: packages
           path: $(Build.ArtifactStagingDirectory)
       - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
-        - pwsh: ./eng/PublishRelease.ps1 -WorkingDirectory artifacts/artifacts/bin/AutoRest.CSharp.V3/Debug/netcoreapp3.0/ -Token $(Github-azuresdkci-personalaccesstoken) -Artifacts $(Build.ArtifactStagingDirectory) -BuildNumber $(Build.BuildNumber) -Sha $(Build.SourceBranchName)
+        - pwsh: ./eng/PublishRelease.ps1 -WorkingDirectory ./artifacts/bin/AutoRest.CSharp.V3/Debug/netcoreapp3.0/ -Token $(Github-azuresdkci-personalaccesstoken) -Artifacts $(Build.ArtifactStagingDirectory) -BuildNumber $(Build.BuildNumber) -Sha $(Build.SourceBranchName)
           condition: succeeded()
           displayName: 'Publish to GitHub'
