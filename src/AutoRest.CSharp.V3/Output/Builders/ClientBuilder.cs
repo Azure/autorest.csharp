@@ -117,7 +117,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
         {
             HttpRequest? httpRequest = operation.Request.Protocol.Http as HttpRequest;
             //TODO: Handle multiple responses
-            ServiceResponse? response = operation.Responses.FirstOrDefault();
+            ServiceResponse? response = operation.Responses?.FirstOrDefault();
             HttpResponse? httpResponse = response?.Protocol.Http as HttpResponse;
             if (httpRequest == null || httpResponse == null)
             {

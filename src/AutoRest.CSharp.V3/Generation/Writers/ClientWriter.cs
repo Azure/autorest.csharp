@@ -170,7 +170,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     writer.ToSerializeCall(
                         jsonSerialization,
                         _typeFactory,
-                        WriteConstantOrParameter(value),
+                        WriteConstantOrParameter(value, ignoreNullability: true),
                         writerName: w => w.Append($"content.{nameof(Utf8JsonRequestContent.JsonWriter)}"));
 
                     writer.Line($"request.Content = content;");
@@ -184,7 +184,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     writer.ToSerializeCall(
                         xmlSerialization,
                         _typeFactory,
-                        WriteConstantOrParameter(value),
+                        WriteConstantOrParameter(value, ignoreNullability: true),
                         writerName: w => w.Append($"content.{nameof(XmlWriterContent.XmlWriter)}"));
 
                     writer.Line($"request.Content = content;");
@@ -340,7 +340,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
         }
 
-        private CodeWriterDelegate WriteConstantOrParameter(ParameterOrConstant constantOrParameter) => writer =>
+        private CodeWriterDelegate WriteConstantOrParameter(ParameterOrConstant constantOrParameter, bool ignoreNullability = false) => writer =>
         {
             if (constantOrParameter.IsConstant)
             {
@@ -348,8 +348,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
             else
             {
-                writer.AppendRaw(constantOrParameter.Parameter.Name)
-                    .AppendNullableValue(_typeFactory.CreateType(constantOrParameter.Type));
+                writer.AppendRaw(constantOrParameter.Parameter.Name);
+                if (!ignoreNullability)
+                {
+                    writer.AppendNullableValue(_typeFactory.CreateType(constantOrParameter.Type));
+                }
             }
         };
 

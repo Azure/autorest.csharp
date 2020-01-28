@@ -12,8 +12,17 @@ namespace AutoRest.TestServer.Tests
     {
         public HttpInfrastructureTests(TestServerVersion version) : base(version, "httpResponses") { }
 
-        [Test]
-        public Task HttpClientFailure400Delete() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        //[Test]
+        //public Task HttpClientFailure400Delete() => TestStatus(async (host, pipeline) =>
+        //{
+        //    var value = new Basic
+        //    {
+        //        Name = "abc",
+        //        Id = 2,
+        //        Color = CMYKColors.Magenta
+        //    };
+        //    return await new BasicOperations(ClientDiagnostics, pipeline, host).PutValidAsync(value);
+        //});
 
         [Test]
         public Task HttpClientFailure400Get() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
