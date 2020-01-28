@@ -88,8 +88,24 @@
       "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestProjects\\ExtensionClientName\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestProjects\\ExtensionClientName --namespace=ExtensionClientName",
       "commandName": "Project"
     },
+    "head": {
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\head\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\head --namespace=head",
+      "commandName": "Project"
+    },
     "header": {
       "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\header\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\header --namespace=header",
+      "commandName": "Project"
+    },
+    "head-exceptions": {
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\head-exceptions\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\head-exceptions --namespace=head_exceptions",
+      "commandName": "Project"
+    },
+    "httpInfrastructure": {
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\httpInfrastructure\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\httpInfrastructure --namespace=httpInfrastructure",
+      "commandName": "Project"
+    },
+    "httpInfrastructure.quirks": {
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\httpInfrastructure.quirks\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\httpInfrastructure.quirks --namespace=httpInfrastructure.quirks",
       "commandName": "Project"
     },
     "paging": {
@@ -115,22 +131,6 @@
     "xml-service": {
       "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\xml-service\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\xml-service --namespace=xml_service",
       "commandName": "Project"
-    },
-    "head": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\head\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\head --namespace=head"
-    },
-    "head-exceptions": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\head-exceptions\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\head-exceptions --namespace=head_exceptions"
-    },
-    "httpInfrastructure": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\httpInfrastructure\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\httpInfrastructure --namespace=httpInfrastructure"
-    },
-    "httpInfrastructure.quirks": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\httpInfrastructure.quirks\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\httpInfrastructure.quirks --namespace=httpInfrastructure.quirks"
     }
   }
 }
