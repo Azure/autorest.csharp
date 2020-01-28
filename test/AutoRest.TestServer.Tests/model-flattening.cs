@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,83 +19,96 @@ namespace AutoRest.TestServer.Tests
         public Task GetModelFlattenArray() => Test(async (host, pipeline) =>
         {
             var result = await new AllOperations(ClientDiagnostics, pipeline, host).GetArrayAsync();
-            Assert.AreEqual("1", result.Value.ElementAt(0).Id);
-            Assert.AreEqual("Building 44", result.Value.ElementAt(0).Location);
-            Assert.AreEqual("Resource1", result.Value.ElementAt(0).Name);
-            Assert.AreEqual("Succeeded", result.Value.ElementAt(0).ProvisioningState);
-            Assert.AreEqual(FlattenedProductPropertiesProvisioningStateValues.OK, result.Value.ElementAt(0).ProvisioningStateValues);
-            Assert.AreEqual("Product1", result.Value.ElementAt(0).PName);
-            Assert.AreEqual("Flat", result.Value.ElementAt(0).TypePropertiesType);
-            Assert.AreEqual("value1", result.Value.ElementAt(0).Tags["tag1"]);
-            Assert.AreEqual("value3", result.Value.ElementAt(0).Tags["tag2"]);
-            Assert.AreEqual("Microsoft.Web/sites", result.Value.ElementAt(0).Type);
-            Assert.AreEqual("2", result.Value.ElementAt(1).Id);
-            Assert.AreEqual("Resource2", result.Value.ElementAt(1).Name);
-            Assert.AreEqual("Building 44", result.Value.ElementAt(1).Location);
-            Assert.AreEqual("3", result.Value.ElementAt(2).Id);
-            Assert.AreEqual("Resource3", result.Value.ElementAt(2).Name);
+            var product1 = result.Value.ElementAt(0);
+            Assert.AreEqual("1", product1.Id);
+            Assert.AreEqual("Building 44", product1.Location);
+            Assert.AreEqual("Resource1", product1.Name);
+            Assert.AreEqual("Succeeded", product1.ProvisioningState);
+            Assert.AreEqual(FlattenedProductPropertiesProvisioningStateValues.OK, product1.ProvisioningStateValues);
+            Assert.AreEqual("Product1", product1.PName);
+            Assert.AreEqual("Flat", product1.TypePropertiesType);
+            Assert.AreEqual("value1", product1.Tags["tag1"]);
+            Assert.AreEqual("value3", product1.Tags["tag2"]);
+            Assert.AreEqual("Microsoft.Web/sites", product1.Type);
+            var product2 = result.Value.ElementAt(1);
+            Assert.AreEqual("2", product2.Id);
+            Assert.AreEqual("Resource2", product2.Name);
+            Assert.AreEqual("Building 44", product2.Location);
+            var product3 = result.Value.ElementAt(2);
+            Assert.AreEqual("3", product3.Id);
+            Assert.AreEqual("Resource3", product3.Name);
         });
 
         [Test]
         public Task GetModelFlattenDictionary() => Test(async (host, pipeline) =>
         {
             var result = await new AllOperations(ClientDiagnostics, pipeline, host).GetDictionaryAsync();
-            Assert.AreEqual("1", result.Value["Product1"].Id);
-            Assert.AreEqual("Building 44", result.Value["Product1"].Location);
-            Assert.AreEqual("Resource1", result.Value["Product1"].Name);
-            Assert.AreEqual("Succeeded", result.Value["Product1"].ProvisioningState);
-            Assert.AreEqual(FlattenedProductPropertiesProvisioningStateValues.OK, result.Value["Product1"].ProvisioningStateValues);
-            Assert.AreEqual("Product1", result.Value["Product1"].PName);
-            Assert.AreEqual("Flat", result.Value["Product1"].TypePropertiesType);
-            Assert.AreEqual("value1", result.Value["Product1"].Tags["tag1"]);
-            Assert.AreEqual("value3", result.Value["Product1"].Tags["tag2"]);
-            Assert.AreEqual("Microsoft.Web/sites", result.Value["Product1"].Type);
-            Assert.AreEqual("2", result.Value["Product2"].Id);
-            Assert.AreEqual("Resource2", result.Value["Product2"].Name);
-            Assert.AreEqual("Building 44", result.Value["Product2"].Location);
-            Assert.AreEqual("3", result.Value["Product3"].Id);
-            Assert.AreEqual("Resource3", result.Value["Product3"].Name);
+            var product1 = result.Value["Product1"];
+            Assert.AreEqual("1", product1.Id);
+            Assert.AreEqual("Building 44", product1.Location);
+            Assert.AreEqual("Resource1", product1.Name);
+            Assert.AreEqual("Succeeded", product1.ProvisioningState);
+            Assert.AreEqual(FlattenedProductPropertiesProvisioningStateValues.OK, product1.ProvisioningStateValues);
+            Assert.AreEqual("Product1", product1.PName);
+            Assert.AreEqual("Flat", product1.TypePropertiesType);
+            Assert.AreEqual("value1", product1.Tags["tag1"]);
+            Assert.AreEqual("value3", product1.Tags["tag2"]);
+            Assert.AreEqual("Microsoft.Web/sites", product1.Type);
+            var product2 = result.Value["Product2"];
+            Assert.AreEqual("2", product2.Id);
+            Assert.AreEqual("Resource2", product2.Name);
+            Assert.AreEqual("Building 44", product2.Location);
+            var product3 = result.Value["Product3"];
+            Assert.AreEqual("3", product3.Id);
+            Assert.AreEqual("Resource3", product3.Name);
         });
 
         [Test]
         public Task GetModelFlattenResourceCollection() => Test(async (host, pipeline) =>
         {
             var result = await new AllOperations(ClientDiagnostics, pipeline, host).GetResourceCollectionAsync();
-            Assert.AreEqual("1", result.Value.Dictionaryofresources["Product1"].Id);
-            Assert.AreEqual("Building 44", result.Value.Dictionaryofresources["Product1"].Location);
-            Assert.AreEqual("Resource1", result.Value.Dictionaryofresources["Product1"].Name);
-            Assert.AreEqual("Succeeded", result.Value.Dictionaryofresources["Product1"].ProvisioningState);
-            Assert.AreEqual(FlattenedProductPropertiesProvisioningStateValues.OK, result.Value.Dictionaryofresources["Product1"].ProvisioningStateValues);
-            Assert.AreEqual("Product1", result.Value.Dictionaryofresources["Product1"].PName);
-            Assert.AreEqual("Flat", result.Value.Dictionaryofresources["Product1"].TypePropertiesType);
-            Assert.AreEqual("value1", result.Value.Dictionaryofresources["Product1"].Tags["tag1"]);
-            Assert.AreEqual("value3", result.Value.Dictionaryofresources["Product1"].Tags["tag2"]);
-            Assert.AreEqual("Microsoft.Web/sites", result.Value.Dictionaryofresources["Product1"].Type);
-            Assert.AreEqual("2", result.Value.Dictionaryofresources["Product2"].Id);
-            Assert.AreEqual("Resource2", result.Value.Dictionaryofresources["Product2"].Name);
-            Assert.AreEqual("Building 44", result.Value.Dictionaryofresources["Product2"].Location);
-            Assert.AreEqual("3", result.Value.Dictionaryofresources["Product3"].Id);
-            Assert.AreEqual("Resource3", result.Value.Dictionaryofresources["Product3"].Name);
+            var product1 = result.Value.Dictionaryofresources["Product1"];
+            Assert.AreEqual("1", product1.Id);
+            Assert.AreEqual("Building 44", product1.Location);
+            Assert.AreEqual("Resource1", product1.Name);
+            Assert.AreEqual("Succeeded", product1.ProvisioningState);
+            Assert.AreEqual(FlattenedProductPropertiesProvisioningStateValues.OK, product1.ProvisioningStateValues);
+            Assert.AreEqual("Product1", product1.PName);
+            Assert.AreEqual("Flat", product1.TypePropertiesType);
+            Assert.AreEqual("value1", product1.Tags["tag1"]);
+            Assert.AreEqual("value3", product1.Tags["tag2"]);
+            Assert.AreEqual("Microsoft.Web/sites", product1.Type);
+            var product2 = result.Value.Dictionaryofresources["Product2"];
+            Assert.AreEqual("2", product2.Id);
+            Assert.AreEqual("Resource2", product2.Name);
+            Assert.AreEqual("Building 44", product2.Location);
+            var product3 = result.Value.Dictionaryofresources["Product3"];
+            Assert.AreEqual("3", product3.Id);
+            Assert.AreEqual("Resource3", product3.Name);
 
-            Assert.AreEqual("4", result.Value.Arrayofresources.ElementAt(0).Id);
-            Assert.AreEqual("Building 44", result.Value.Arrayofresources.ElementAt(0).Location);
-            Assert.AreEqual("Resource4", result.Value.Arrayofresources.ElementAt(0).Name);
-            Assert.AreEqual("Succeeded", result.Value.Arrayofresources.ElementAt(0).ProvisioningState);
-            Assert.AreEqual(FlattenedProductPropertiesProvisioningStateValues.OK, result.Value.Arrayofresources.ElementAt(0).ProvisioningStateValues);
-            Assert.AreEqual("Product4", result.Value.Arrayofresources.ElementAt(0).PName);
-            Assert.AreEqual("Flat", result.Value.Arrayofresources.ElementAt(0).TypePropertiesType);
-            Assert.AreEqual("value1", result.Value.Arrayofresources.ElementAt(0).Tags["tag1"]);
-            Assert.AreEqual("value3", result.Value.Arrayofresources.ElementAt(0).Tags["tag2"]);
-            Assert.AreEqual("Microsoft.Web/sites", result.Value.Arrayofresources.ElementAt(0).Type);
-            Assert.AreEqual("5", result.Value.Arrayofresources.ElementAt(1).Id);
-            Assert.AreEqual("Resource5", result.Value.Arrayofresources.ElementAt(1).Name);
-            Assert.AreEqual("Building 44", result.Value.Arrayofresources.ElementAt(1).Location);
-            Assert.AreEqual("6", result.Value.Arrayofresources.ElementAt(2).Id);
-            Assert.AreEqual("Resource6", result.Value.Arrayofresources.ElementAt(2).Name);
+            var product4 = result.Value.Arrayofresources.ElementAt(0);
+            Assert.AreEqual("4", product4.Id);
+            Assert.AreEqual("Building 44", product4.Location);
+            Assert.AreEqual("Resource4", product4.Name);
+            Assert.AreEqual("Succeeded", product4.ProvisioningState);
+            Assert.AreEqual(FlattenedProductPropertiesProvisioningStateValues.OK, product4.ProvisioningStateValues);
+            Assert.AreEqual("Product4", product4.PName);
+            Assert.AreEqual("Flat", product4.TypePropertiesType);
+            Assert.AreEqual("value1", product4.Tags["tag1"]);
+            Assert.AreEqual("value3", product4.Tags["tag2"]);
+            Assert.AreEqual("Microsoft.Web/sites", product4.Type);
+            var product5 = result.Value.Arrayofresources.ElementAt(1);
+            Assert.AreEqual("5", product5.Id);
+            Assert.AreEqual("Resource5", product5.Name);
+            Assert.AreEqual("Building 44", product5.Location);
+            var product6 = result.Value.Arrayofresources.ElementAt(2);
+            Assert.AreEqual("6", product6.Id);
+            Assert.AreEqual("Resource6", product6.Name);
 
-            Assert.AreEqual("7", result.Value.Productresource.Id);
-            Assert.AreEqual("Resource7", result.Value.Productresource.Name);
-            Assert.AreEqual("Building 44", result.Value.Productresource.Location);
+            var product7 = result.Value.Productresource;
+            Assert.AreEqual("7", product7.Id);
+            Assert.AreEqual("Resource7", product7.Name);
+            Assert.AreEqual("Building 44", product7.Location);
         });
 
         [Test]
