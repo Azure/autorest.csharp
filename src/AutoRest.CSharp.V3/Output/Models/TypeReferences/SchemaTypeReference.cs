@@ -7,13 +7,13 @@ namespace AutoRest.CSharp.V3.Output.Models.TypeReferences
 {
     internal class SchemaTypeReference: TypeReference
     {
-        public SchemaTypeReference(Schema? schema, bool isNullable)
+        public SchemaTypeReference(Schema schema, bool isNullable)
         {
             Schema = schema;
             IsNullable = isNullable;
         }
 
-        public Schema? Schema { get; }
+        public Schema Schema { get; }
         public override bool IsNullable { get; }
     }
 }

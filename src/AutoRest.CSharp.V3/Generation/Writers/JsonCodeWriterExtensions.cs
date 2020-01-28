@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Diagnostics;
 using System.Text.Json;
 using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Output.Models.Serialization;
@@ -41,7 +42,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     foreach (JsonPropertySerialization property in dictionary.Properties)
                     {
-                        using (property.ValueSerialization.Type.IsNullable ? writer.If($"{property.MemberName} != null") : default)
+                        var hasNullableType = property.ValueSerialization.Type?.IsNullable ?? false;
+                        using (hasNullableType ? writer.If($"{property.MemberName} != null") : default)
                         {
                             writer.Line($"{writerName}.WritePropertyName({property.Name:L});");
                             writer.ToSerializeCall(
@@ -80,7 +82,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                                 case EnumType clientEnum:
                                     writer.Append($"{writerName}.WriteStringValue({name}")
-                                        .AppendNullableValue(serialization.Type.IsNullable, isValueType: true)
+                                        .AppendNullableValue(valueSerialization.Type.IsNullable, isValueType: true)
                                         .AppendRaw(clientEnum.IsStringBased ? ".ToString()" : ".ToSerialString()")
                                         .Line($");");
                                     return;
@@ -128,7 +130,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                                 writeFormat = true;
                             }
 
-                            writer.Append($"({name}").AppendNullableValue(serialization.Type.IsNullable, frameworkType.IsValueType);
+                            writer.Append($"({name}").AppendNullableValue(valueSerialization.Type.IsNullable, frameworkType.IsValueType);
 
                             if (writeFormat && valueSerialization.Format.ToFormatSpecifier() is string formatString)
                             {
@@ -161,6 +163,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             {
                 string s = destination;
 
+                Debug.Assert(type != null);
                 writer
                     .Line($"{typeFactory.CreateType(type)} {destination:D} = new {typeFactory.CreateConcreteType(type)}();")
                     .ToDeserializeCall(serialization, typeFactory, w => w.AppendRaw(s), element);
@@ -257,9 +260,9 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
             void WriteInitialization()
             {
-                if (type.IsNullable && (type is DictionaryTypeReference || type is CollectionTypeReference))
+                if (type != null && type.IsNullable && (type is DictionaryTypeReference || type is CollectionTypeReference))
                 {
-                    writer.Line($"{destination}.{name} = new {writer.Type(typeFactory.CreateConcreteType(property.ValueSerialization.Type))}();");
+                    writer.Line($"{destination}.{name} = new {writer.Type(typeFactory.CreateConcreteType(type))}();");
                 }
             }
 
@@ -267,14 +270,14 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             writer.Append($"if({itemVariable}.NameEquals({property.Name:L}))");
             using (writer.Scope())
             {
-                if (type.IsNullable)
+                if (type != null && type.IsNullable)
                 {
                     WriteNullCheck();
                 }
 
                 WriteInitialization();
 
-                CodeWriterDelegate nextDestination = property.IsFlattened ? destination : w => w.Append($"{destination}.{name}");
+                CodeWriterDelegate nextDestination = name == null ? destination : w => w.Append($"{destination}.{name}");
                 writer.ToDeserializeCall(property.ValueSerialization, typeFactory, nextDestination, w => w.Append($"{itemVariable}.Value"));
                 writer.Line($"continue;");
             }

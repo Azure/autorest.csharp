@@ -157,15 +157,14 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 yield return new JsonPropertySerialization(
                     property.SerializedName,
                     property.CSharpName(),
-                    BuildSerialization(property.Schema, property.IsNullable()),
-                    false);
+                    BuildSerialization(property.Schema, property.IsNullable()));
             }
 
             foreach ((string name, PropertyBag innerBag) in propertyBag.Bag)
             {
                 JsonPropertySerialization[] serializationProperties = GetPropertySerializationsFromBag(innerBag).ToArray();
-                JsonObjectSerialization objectSerialization = new JsonObjectSerialization(new SchemaTypeReference(null, false), serializationProperties, null);
-                yield return new JsonPropertySerialization(name, name, objectSerialization, true);
+                JsonObjectSerialization objectSerialization = new JsonObjectSerialization(null, serializationProperties, null);
+                yield return new JsonPropertySerialization(name, null, objectSerialization);
             }
         }
 
@@ -175,7 +174,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             foreach (var schema in EnumerateHierarchy(objectSchema))
             {
                 PropertyBag propertyBag = new PropertyBag();
-                propertyBag.Properties.AddRange(schema.Properties ?? Array.Empty<Property>());
+                propertyBag.Properties.AddRange(schema.Properties!);
                 PopulatePropertyBag(propertyBag, 0);
                 serializationProperties.AddRange(GetPropertySerializationsFromBag(propertyBag));
             }
@@ -193,8 +192,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
         {
             foreach (Property property in propertyBag.Properties.ToArray())
             {
-                int flattenNamesCount = property.FlattenedNames?.Count ?? 0;
-                if (flattenNamesCount == 0 || depthIndex >= flattenNamesCount - 1)
+                if (depthIndex >= (property.FlattenedNames?.Count ?? 0) - 1)
                 {
                     continue;
                 }
@@ -210,7 +208,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 propertyBag.Properties.Remove(property);
             }
 
-            foreach ((string name, PropertyBag innerBag) in propertyBag.Bag)
+            foreach (PropertyBag innerBag in propertyBag.Bag.Values)
             {
                 PopulatePropertyBag(innerBag, depthIndex + 1);
             }

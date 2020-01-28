@@ -31,11 +31,6 @@ namespace AutoRest.CSharp.V3.Input
         }
     }
 
-    internal partial class Property
-    {
-        public bool? IsBag { get; set; }
-    }
-
     internal partial class Schema
     {
         public string? XmlName => Serialization?.Xml?.Name;
