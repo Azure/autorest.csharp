@@ -13,6 +13,13 @@ namespace model_flattening.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
+            writer.WritePropertyName("base_product_id");
+            writer.WriteStringValue(ProductId);
+            if (Description != null)
+            {
+                writer.WritePropertyName("base_product_description");
+                writer.WriteStringValue(Description);
+            }
             writer.WritePropertyName("details");
             writer.WriteStartObject();
             if (MaxProductDisplayName != null)
@@ -31,13 +38,6 @@ namespace model_flattening.Models
             }
             writer.WriteEndObject();
             writer.WriteEndObject();
-            writer.WritePropertyName("base_product_id");
-            writer.WriteStringValue(ProductId);
-            if (Description != null)
-            {
-                writer.WritePropertyName("base_product_description");
-                writer.WriteStringValue(Description);
-            }
             writer.WriteEndObject();
         }
         internal static SimpleProduct DeserializeSimpleProduct(JsonElement element)
@@ -45,6 +45,20 @@ namespace model_flattening.Models
             SimpleProduct result = new SimpleProduct();
             foreach (var property in element.EnumerateObject())
             {
+                if (property.NameEquals("base_product_id"))
+                {
+                    result.ProductId = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("base_product_description"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    result.Description = property.Value.GetString();
+                    continue;
+                }
                 if (property.NameEquals("details"))
                 {
                     foreach (var property0 in property.Value.EnumerateObject())
@@ -80,20 +94,6 @@ namespace model_flattening.Models
                             continue;
                         }
                     }
-                    continue;
-                }
-                if (property.NameEquals("base_product_id"))
-                {
-                    result.ProductId = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("base_product_description"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    result.Description = property.Value.GetString();
                     continue;
                 }
             }

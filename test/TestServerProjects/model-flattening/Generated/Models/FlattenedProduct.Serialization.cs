@@ -14,29 +14,6 @@ namespace model_flattening.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("properties");
-            writer.WriteStartObject();
-            if (PName != null)
-            {
-                writer.WritePropertyName("p.name");
-                writer.WriteStringValue(PName);
-            }
-            if (TypePropertiesType != null)
-            {
-                writer.WritePropertyName("type");
-                writer.WriteStringValue(TypePropertiesType);
-            }
-            if (ProvisioningStateValues != null)
-            {
-                writer.WritePropertyName("provisioningStateValues");
-                writer.WriteStringValue(ProvisioningStateValues.Value.ToString());
-            }
-            if (ProvisioningState != null)
-            {
-                writer.WritePropertyName("provisioningState");
-                writer.WriteStringValue(ProvisioningState);
-            }
-            writer.WriteEndObject();
             if (Id != null)
             {
                 writer.WritePropertyName("id");
@@ -68,6 +45,29 @@ namespace model_flattening.Models
                 writer.WritePropertyName("name");
                 writer.WriteStringValue(Name);
             }
+            writer.WritePropertyName("properties");
+            writer.WriteStartObject();
+            if (PName != null)
+            {
+                writer.WritePropertyName("p.name");
+                writer.WriteStringValue(PName);
+            }
+            if (TypePropertiesType != null)
+            {
+                writer.WritePropertyName("type");
+                writer.WriteStringValue(TypePropertiesType);
+            }
+            if (ProvisioningStateValues != null)
+            {
+                writer.WritePropertyName("provisioningStateValues");
+                writer.WriteStringValue(ProvisioningStateValues.Value.ToString());
+            }
+            if (ProvisioningState != null)
+            {
+                writer.WritePropertyName("provisioningState");
+                writer.WriteStringValue(ProvisioningState);
+            }
+            writer.WriteEndObject();
             writer.WriteEndObject();
         }
         internal static FlattenedProduct DeserializeFlattenedProduct(JsonElement element)
@@ -75,49 +75,6 @@ namespace model_flattening.Models
             FlattenedProduct result = new FlattenedProduct();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("properties"))
-                {
-                    foreach (var property0 in property.Value.EnumerateObject())
-                    {
-                        if (property0.NameEquals("p.name"))
-                        {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                continue;
-                            }
-                            result.PName = property0.Value.GetString();
-                            continue;
-                        }
-                        if (property0.NameEquals("type"))
-                        {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                continue;
-                            }
-                            result.TypePropertiesType = property0.Value.GetString();
-                            continue;
-                        }
-                        if (property0.NameEquals("provisioningStateValues"))
-                        {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                continue;
-                            }
-                            result.ProvisioningStateValues = new FlattenedProductPropertiesProvisioningStateValues(property0.Value.GetString());
-                            continue;
-                        }
-                        if (property0.NameEquals("provisioningState"))
-                        {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                continue;
-                            }
-                            result.ProvisioningState = property0.Value.GetString();
-                            continue;
-                        }
-                    }
-                    continue;
-                }
                 if (property.NameEquals("id"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -165,6 +122,49 @@ namespace model_flattening.Models
                         continue;
                     }
                     result.Name = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("properties"))
+                {
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        if (property0.NameEquals("p.name"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                continue;
+                            }
+                            result.PName = property0.Value.GetString();
+                            continue;
+                        }
+                        if (property0.NameEquals("type"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                continue;
+                            }
+                            result.TypePropertiesType = property0.Value.GetString();
+                            continue;
+                        }
+                        if (property0.NameEquals("provisioningStateValues"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                continue;
+                            }
+                            result.ProvisioningStateValues = new FlattenedProductPropertiesProvisioningStateValues(property0.Value.GetString());
+                            continue;
+                        }
+                        if (property0.NameEquals("provisioningState"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                continue;
+                            }
+                            result.ProvisioningState = property0.Value.GetString();
+                            continue;
+                        }
+                    }
                     continue;
                 }
             }

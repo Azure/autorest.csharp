@@ -170,16 +170,10 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
         private static JsonObjectSerialization BuildJsonObjectSerialization(ObjectSchema objectSchema, TypeReference schemaTypeReference, bool isNullable)
         {
-            List<JsonPropertySerialization> serializationProperties = new List<JsonPropertySerialization>();
-            foreach (var schema in EnumerateHierarchy(objectSchema))
-            {
-                PropertyBag propertyBag = new PropertyBag();
-                propertyBag.Properties.AddRange(schema.Properties!);
-                PopulatePropertyBag(propertyBag, 0);
-                serializationProperties.AddRange(GetPropertySerializationsFromBag(propertyBag));
-            }
-
-            return new JsonObjectSerialization(schemaTypeReference, serializationProperties.ToArray(), CreateAdditionalProperties(objectSchema));
+            PropertyBag propertyBag = new PropertyBag();
+            propertyBag.Properties.AddRange(EnumerateHierarchy(objectSchema).SelectMany(s => s.Properties!));
+            PopulatePropertyBag(propertyBag, 0);
+            return new JsonObjectSerialization(schemaTypeReference, GetPropertySerializationsFromBag(propertyBag).ToArray(), CreateAdditionalProperties(objectSchema));
         }
 
         private class PropertyBag
