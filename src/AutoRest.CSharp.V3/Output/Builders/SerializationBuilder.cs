@@ -150,24 +150,62 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 schemaTypeReference, elements.ToArray(), attributes.ToArray(), embeddedArrays.ToArray());
         }
 
-        private static JsonObjectSerialization BuildJsonObjectSerialization(ObjectSchema objectSchema, TypeReference schemaTypeReference, bool isNullable)
+        private static IEnumerable<JsonPropertySerialization> GetPropertySerializationsFromBag(PropertyBag propertyBag)
         {
-            List<JsonPropertySerialization> serializationProperties = new List<JsonPropertySerialization>();
-            foreach (var schema in EnumerateHierarchy(objectSchema))
+            foreach (Property property in propertyBag.Properties)
             {
-                foreach (Property property in schema.Properties!)
-                {
-                    JsonPropertySerialization propertySerialization = new JsonPropertySerialization(
-                        property.SerializedName,
-                        property.CSharpName(),
-                        BuildSerialization(property.Schema, property.IsNullable())
-                    );
-
-                    serializationProperties.Add(propertySerialization);
-                }
+                yield return new JsonPropertySerialization(
+                    property.SerializedName,
+                    property.CSharpName(),
+                    BuildSerialization(property.Schema, property.IsNullable()));
             }
 
-            return new JsonObjectSerialization(schemaTypeReference, serializationProperties.ToArray(), CreateAdditionalProperties(objectSchema));
+            foreach ((string name, PropertyBag innerBag) in propertyBag.Bag)
+            {
+                JsonPropertySerialization[] serializationProperties = GetPropertySerializationsFromBag(innerBag).ToArray();
+                JsonObjectSerialization objectSerialization = new JsonObjectSerialization(null, serializationProperties, null);
+                yield return new JsonPropertySerialization(name, null, objectSerialization);
+            }
+        }
+
+        private static JsonObjectSerialization BuildJsonObjectSerialization(ObjectSchema objectSchema, TypeReference schemaTypeReference, bool isNullable)
+        {
+            PropertyBag propertyBag = new PropertyBag();
+            propertyBag.Properties.AddRange(EnumerateHierarchy(objectSchema).SelectMany(s => s.Properties!));
+            PopulatePropertyBag(propertyBag, 0);
+            return new JsonObjectSerialization(schemaTypeReference, GetPropertySerializationsFromBag(propertyBag).ToArray(), CreateAdditionalProperties(objectSchema));
+        }
+
+        private class PropertyBag
+        {
+            public Dictionary<string, PropertyBag> Bag { get; } = new Dictionary<string, PropertyBag>();
+            public List<Property> Properties { get; } = new List<Property>();
+        }
+
+        private static void PopulatePropertyBag(PropertyBag propertyBag, int depthIndex)
+        {
+            foreach (Property property in propertyBag.Properties.ToArray())
+            {
+                if (depthIndex >= (property.FlattenedNames?.Count ?? 0) - 1)
+                {
+                    continue;
+                }
+
+                string name = property!.FlattenedNames.ElementAt(depthIndex);
+                if (!propertyBag.Bag.TryGetValue(name, out PropertyBag? namedBag))
+                {
+                    namedBag = new PropertyBag();
+                    propertyBag.Bag.Add(name, namedBag);
+                }
+
+                namedBag.Properties.Add(property);
+                propertyBag.Properties.Remove(property);
+            }
+
+            foreach (PropertyBag innerBag in propertyBag.Bag.Values)
+            {
+                PopulatePropertyBag(innerBag, depthIndex + 1);
+            }
         }
 
         private static IEnumerable<ObjectSchema> EnumerateHierarchy(ObjectSchema schema)

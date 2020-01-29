@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Diagnostics;
 using System.Text.Json;
 using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Output.Models.Serialization;
@@ -16,9 +17,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         public static void ToSerializeCall(this CodeWriter writer, JsonSerialization serialization, TypeFactory typeFactory, CodeWriterDelegate name, CodeWriterDelegate? writerName = null)
         {
             writerName ??= w => w.AppendRaw("writer");
-
-            var type = serialization.Type;
-            CSharpType implementationType = typeFactory.CreateType(type);
 
             switch (serialization)
             {
@@ -44,7 +42,9 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     foreach (JsonPropertySerialization property in dictionary.Properties)
                     {
-                        using (property.ValueSerialization.Type.IsNullable ? writer.If($"{property.MemberName} != null") : default)
+                        TypeReference? serializationType = property.ValueSerialization.Type;
+                        bool hasNullableType = serializationType != null && typeFactory.CreateType(serializationType).IsNullable;
+                        using (hasNullableType ? writer.If($"{property.MemberName} != null") : default)
                         {
                             writer.Line($"{writerName}.WritePropertyName({property.Name:L});");
                             writer.ToSerializeCall(
@@ -83,7 +83,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                                 case EnumType clientEnum:
                                     writer.Append($"{writerName}.WriteStringValue({name}")
-                                        .AppendNullableValue(implementationType)
+                                        .AppendNullableValue(typeFactory.CreateType(valueSerialization.Type))
                                         .AppendRaw(clientEnum.IsStringBased ? ".ToString()" : ".ToSerialString()")
                                         .Line($");");
                                     return;
@@ -131,8 +131,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                                 writeFormat = true;
                             }
 
-                            writer.Append($"({name}")
-                                .AppendNullableValue(implementationType);
+                            writer.Append($"({name}").AppendNullableValue(typeFactory.CreateType(valueSerialization.Type));
 
                             if (writeFormat && valueSerialization.Format.ToFormatSpecifier() is string formatString)
                             {
@@ -165,6 +164,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             {
                 string s = destination;
 
+                Debug.Assert(type != null);
                 writer
                     .Line($"{typeFactory.CreateType(type)} {destination:D} = new {typeFactory.CreateConcreteType(type)}();")
                     .ToDeserializeCall(serialization, typeFactory, w => w.AppendRaw(s), element);
@@ -248,10 +248,9 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private static void ReadProperty(CodeWriter writer, string itemVariable, CodeWriterDelegate destination, JsonPropertySerialization property, TypeFactory typeFactory)
         {
-            var type = property.ValueSerialization.Type;
-            var name = property.MemberName;
-
-            CSharpType propertyType = typeFactory.CreateType(type);
+            TypeReference? type = property.ValueSerialization.Type;
+            string? name = property.MemberName;
+            bool hasNullableType = type != null && typeFactory.CreateType(type).IsNullable;
 
             void WriteNullCheck()
             {
@@ -263,27 +262,26 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
             void WriteInitialization()
             {
-                if (propertyType.IsNullable && (type is DictionaryTypeReference || type is CollectionTypeReference))
+                if (hasNullableType && (type is DictionaryTypeReference || type is CollectionTypeReference))
                 {
-                    writer.Line($"{destination}.{name} = new {writer.Type(typeFactory.CreateConcreteType(property.ValueSerialization.Type))}();");
+                    writer.Line($"{destination}.{name} = new {writer.Type(typeFactory.CreateConcreteType(type))}();");
                 }
             }
-
 
             writer.Append($"if({itemVariable}.NameEquals({property.Name:L}))");
             using (writer.Scope())
             {
-                if (propertyType.IsNullable)
+                if (hasNullableType)
                 {
                     WriteNullCheck();
                 }
 
                 WriteInitialization();
 
-                writer.ToDeserializeCall(property.ValueSerialization, typeFactory, w => w.Append($"{destination}.{name}"), w => w.Append($"{itemVariable}.Value"));
+                CodeWriterDelegate nextDestination = name == null ? destination : w => w.Append($"{destination}.{name}");
+                writer.ToDeserializeCall(property.ValueSerialization, typeFactory, nextDestination, w => w.Append($"{itemVariable}.Value"));
                 writer.Line($"continue;");
             }
-
         }
 
         public static void ToDeserializeCall(this CodeWriter writer, JsonValueSerialization serialization, TypeFactory typeFactory, CodeWriterDelegate element)

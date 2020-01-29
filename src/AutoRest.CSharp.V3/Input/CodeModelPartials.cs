@@ -20,6 +20,7 @@ namespace AutoRest.CSharp.V3.Input
             Extensions = new DictionaryOfAny();
         }
     }
+
     internal partial class ObjectSchema
     {
         public ObjectSchema()

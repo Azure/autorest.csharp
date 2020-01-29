@@ -36,7 +36,7 @@ namespace AutoRest.TestServer.Tests
                 Id = 2,
                 Color = CMYKColors.Magenta
             };
-            return await new BasicOperations(ClientDiagnostics, pipeline, host).PutValidAsync( value);
+            return await new BasicOperations(ClientDiagnostics, pipeline, host).PutValidAsync(value);
         });
 
         [Test]
