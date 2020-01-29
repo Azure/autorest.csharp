@@ -67,6 +67,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             TypeReference? inheritsFromTypeReference = null;
             DictionarySchema? inheritedDictionarySchema = null;
 
+            //TODO: Doesn't support multiple inheritance (only uses last immediate parent)
             foreach (ComplexSchema complexSchema in objectSchema.Parents!.Immediate)
             {
                 switch (complexSchema)

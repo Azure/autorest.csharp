@@ -25,11 +25,14 @@ namespace body_complex.Models
                 writer.WritePropertyName("propB1");
                 writer.WriteStringValue(PropB1);
             }
-            if (Helper != null)
+            writer.WritePropertyName("helper");
+            writer.WriteStartObject();
+            if (PropBH1 != null)
             {
-                writer.WritePropertyName("helper");
-                writer.WriteObjectValue(Helper);
+                writer.WritePropertyName("propBH1");
+                writer.WriteStringValue(PropBH1);
             }
+            writer.WriteEndObject();
             writer.WriteEndObject();
         }
         internal static MyDerivedType DeserializeMyDerivedType(JsonElement element)
@@ -62,11 +65,18 @@ namespace body_complex.Models
                 }
                 if (property.NameEquals("helper"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        continue;
+                        if (property0.NameEquals("propBH1"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                continue;
+                            }
+                            result.PropBH1 = property0.Value.GetString();
+                            continue;
+                        }
                     }
-                    result.Helper = MyBaseHelperType.DeserializeMyBaseHelperType(property.Value);
                     continue;
                 }
             }
