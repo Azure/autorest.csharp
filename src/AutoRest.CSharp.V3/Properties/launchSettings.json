@@ -96,6 +96,18 @@
       "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\header\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\header --namespace=header",
       "commandName": "Project"
     },
+    "head-exceptions": {
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\head-exceptions\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\head-exceptions --namespace=head_exceptions",
+      "commandName": "Project"
+    },
+    "httpInfrastructure": {
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\httpInfrastructure\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\httpInfrastructure --namespace=httpInfrastructure",
+      "commandName": "Project"
+    },
+    "httpInfrastructure.quirks": {
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\httpInfrastructure.quirks\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\httpInfrastructure.quirks --namespace=httpInfrastructure.quirks",
+      "commandName": "Project"
+    },
     "model-flattening": {
       "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\model-flattening\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\model-flattening --namespace=model_flattening",
       "commandName": "Project"

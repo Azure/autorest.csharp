@@ -1248,6 +1248,446 @@ namespace httpInfrastructure.quirks
                 throw;
             }
         }
+        internal HttpMessage CreateGetDefaultModelA200ValidRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/http/payloads/default/A/response/200/valid", false);
+            request.Uri = uri;
+            return message;
+        }
+        /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Response> GetDefaultModelA200ValidAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = clientDiagnostics.CreateScope("MultipleResponsesOperations.GetDefaultModelA200Valid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDefaultModelA200ValidRequest();
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
+                {
+                    default:
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response GetDefaultModelA200Valid(CancellationToken cancellationToken = default)
+        {
+            using var scope = clientDiagnostics.CreateScope("MultipleResponsesOperations.GetDefaultModelA200Valid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDefaultModelA200ValidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        internal HttpMessage CreateGetDefaultModelA200NoneRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/http/payloads/default/A/response/200/none", false);
+            request.Uri = uri;
+            return message;
+        }
+        /// <summary> Send a 200 response with no payload. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Response> GetDefaultModelA200NoneAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = clientDiagnostics.CreateScope("MultipleResponsesOperations.GetDefaultModelA200None");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDefaultModelA200NoneRequest();
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
+                {
+                    default:
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        /// <summary> Send a 200 response with no payload. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response GetDefaultModelA200None(CancellationToken cancellationToken = default)
+        {
+            using var scope = clientDiagnostics.CreateScope("MultipleResponsesOperations.GetDefaultModelA200None");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDefaultModelA200NoneRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        internal HttpMessage CreateGetDefaultModelA400ValidRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/http/payloads/default/A/response/400/valid", false);
+            request.Uri = uri;
+            return message;
+        }
+        /// <summary> Send a 400 response with valid payload: {&apos;statusCode&apos;: &apos;400&apos;}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Response> GetDefaultModelA400ValidAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = clientDiagnostics.CreateScope("MultipleResponsesOperations.GetDefaultModelA400Valid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDefaultModelA400ValidRequest();
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
+                {
+                    default:
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        /// <summary> Send a 400 response with valid payload: {&apos;statusCode&apos;: &apos;400&apos;}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response GetDefaultModelA400Valid(CancellationToken cancellationToken = default)
+        {
+            using var scope = clientDiagnostics.CreateScope("MultipleResponsesOperations.GetDefaultModelA400Valid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDefaultModelA400ValidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        internal HttpMessage CreateGetDefaultModelA400NoneRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/http/payloads/default/A/response/400/none", false);
+            request.Uri = uri;
+            return message;
+        }
+        /// <summary> Send a 400 response with no payload. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Response> GetDefaultModelA400NoneAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = clientDiagnostics.CreateScope("MultipleResponsesOperations.GetDefaultModelA400None");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDefaultModelA400NoneRequest();
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
+                {
+                    default:
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        /// <summary> Send a 400 response with no payload. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response GetDefaultModelA400None(CancellationToken cancellationToken = default)
+        {
+            using var scope = clientDiagnostics.CreateScope("MultipleResponsesOperations.GetDefaultModelA400None");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDefaultModelA400NoneRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        internal HttpMessage CreateGetDefaultNone200InvalidRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/http/payloads/default/none/response/200/invalid", false);
+            request.Uri = uri;
+            return message;
+        }
+        /// <summary> Send a 200 response with invalid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Response> GetDefaultNone200InvalidAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = clientDiagnostics.CreateScope("MultipleResponsesOperations.GetDefaultNone200Invalid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDefaultNone200InvalidRequest();
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
+                {
+                    default:
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        /// <summary> Send a 200 response with invalid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response GetDefaultNone200Invalid(CancellationToken cancellationToken = default)
+        {
+            using var scope = clientDiagnostics.CreateScope("MultipleResponsesOperations.GetDefaultNone200Invalid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDefaultNone200InvalidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        internal HttpMessage CreateGetDefaultNone200NoneRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/http/payloads/default/none/response/200/none", false);
+            request.Uri = uri;
+            return message;
+        }
+        /// <summary> Send a 200 response with no payload. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Response> GetDefaultNone200NoneAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = clientDiagnostics.CreateScope("MultipleResponsesOperations.GetDefaultNone200None");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDefaultNone200NoneRequest();
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
+                {
+                    default:
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        /// <summary> Send a 200 response with no payload. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response GetDefaultNone200None(CancellationToken cancellationToken = default)
+        {
+            using var scope = clientDiagnostics.CreateScope("MultipleResponsesOperations.GetDefaultNone200None");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDefaultNone200NoneRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        internal HttpMessage CreateGetDefaultNone400InvalidRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/http/payloads/default/none/response/400/invalid", false);
+            request.Uri = uri;
+            return message;
+        }
+        /// <summary> Send a 400 response with valid payload: {&apos;statusCode&apos;: &apos;400&apos;}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Response> GetDefaultNone400InvalidAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = clientDiagnostics.CreateScope("MultipleResponsesOperations.GetDefaultNone400Invalid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDefaultNone400InvalidRequest();
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
+                {
+                    default:
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        /// <summary> Send a 400 response with valid payload: {&apos;statusCode&apos;: &apos;400&apos;}. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response GetDefaultNone400Invalid(CancellationToken cancellationToken = default)
+        {
+            using var scope = clientDiagnostics.CreateScope("MultipleResponsesOperations.GetDefaultNone400Invalid");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDefaultNone400InvalidRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        internal HttpMessage CreateGetDefaultNone400NoneRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/http/payloads/default/none/response/400/none", false);
+            request.Uri = uri;
+            return message;
+        }
+        /// <summary> Send a 400 response with no payload. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Response> GetDefaultNone400NoneAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = clientDiagnostics.CreateScope("MultipleResponsesOperations.GetDefaultNone400None");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDefaultNone400NoneRequest();
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
+                {
+                    default:
+                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        /// <summary> Send a 400 response with no payload. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response GetDefaultNone400None(CancellationToken cancellationToken = default)
+        {
+            using var scope = clientDiagnostics.CreateScope("MultipleResponsesOperations.GetDefaultNone400None");
+            scope.Start();
+            try
+            {
+                using var message = CreateGetDefaultNone400NoneRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    default:
+                        throw message.Response.CreateRequestFailedException();
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGet200ModelA200NoneRequest()
         {
             var message = pipeline.CreateMessage();

@@ -566,6 +566,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         case { }:
                             writer.Append($"return {typeof(Response)}.FromValue({valueVariable}, message.Response);");
                             break;
+                        case null when !statusCodes.Any():
+                            break;
                         case null:
                             writer.Append($"return message.Response;");
                             break;

@@ -309,7 +309,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             return new ResponseHeaderGroupType(
                 BuilderHelpers.CreateTypeAttributes(operationName + "Headers", _defaultOperationsNamespace, Accessibility.Internal),
                 $"Header model for {operationName}",
-                httpResponse.Headers.Select(CreateResponseHeader).ToArray()
+                httpResponse!.Headers.Select(CreateResponseHeader).ToArray()
                 );
         }
 
