@@ -119,7 +119,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             //TODO: Handle multiple responses
             ServiceResponse? response = operation.Responses?.FirstOrDefault();
             HttpResponse? httpResponse = response?.Protocol.Http as HttpResponse;
-            if (httpRequest == null || httpResponse == null)
+            if (httpRequest == null)
             {
                 return null;
             }
@@ -216,7 +216,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 Schema schema = schemaResponse.Schema is ConstantSchema constantSchema ? constantSchema.ValueType : schemaResponse.Schema;
                 TypeReference responseType = BuilderHelpers.CreateType(schema, isNullable: false);
 
-                ObjectSerialization serialization = SerializationBuilder.Build(httpResponse.KnownMediaType, schema, isNullable: false);
+                ObjectSerialization serialization = SerializationBuilder.Build(httpResponse?.KnownMediaType, schema, isNullable: false);
 
                 responseBody = new ObjectResponseBody(responseType, serialization);
             }
@@ -227,7 +227,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
             Response clientResponse = new Response(
                 responseBody,
-                httpResponse.StatusCodes.Select(ToStatusCode).ToArray(),
+                httpResponse?.StatusCodes.Select(ToStatusCode).ToArray() ?? Array.Empty<int>(),
                 BuildResponseHeaderModel(operation, httpResponse)
             );
 
@@ -294,9 +294,9 @@ namespace AutoRest.CSharp.V3.Output.Builders
             BuilderHelpers.ParseConstant(requestParameter),
             requestParameter.Required == true);
 
-        private ResponseHeaderGroupType? BuildResponseHeaderModel(Operation operation, HttpResponse httpResponse)
+        private ResponseHeaderGroupType? BuildResponseHeaderModel(Operation operation, HttpResponse? httpResponse)
         {
-            if (!httpResponse.Headers.Any())
+            if (!(httpResponse?.Headers.Any() ?? false))
             {
                 return null;
             }
