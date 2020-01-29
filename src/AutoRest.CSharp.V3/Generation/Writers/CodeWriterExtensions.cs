@@ -7,12 +7,9 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 {
     internal static class CodeWriterExtensions
     {
-        public static CodeWriter AppendNullableValue(this CodeWriter writer, CSharpType type) =>
-            writer.AppendNullableValue(type.IsNullable, type.IsValueType);
-
-        public static CodeWriter AppendNullableValue(this CodeWriter writer, bool isNullable, bool isValueType)
+        public static CodeWriter AppendNullableValue(this CodeWriter writer, CSharpType type)
         {
-            if (isNullable && isValueType)
+            if (type.IsNullable && type.IsValueType)
             {
                 writer.Append($".Value");
             }
