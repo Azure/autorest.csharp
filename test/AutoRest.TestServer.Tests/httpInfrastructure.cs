@@ -4,6 +4,8 @@
 using System;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
+using Azure;
+using httpInfrastructure;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests
@@ -12,233 +14,358 @@ namespace AutoRest.TestServer.Tests
     {
         public HttpInfrastructureTests(TestServerVersion version) : base(version, "httpResponses") { }
 
-        //[Test]
-        //public Task HttpClientFailure400Delete() => TestStatus(async (host, pipeline) =>
-        //{
-        //    var value = new Basic
-        //    {
-        //        Name = "abc",
-        //        Id = 2,
-        //        Color = CMYKColors.Magenta
-        //    };
-        //    return await new BasicOperations(ClientDiagnostics, pipeline, host).PutValidAsync(value);
-        //});
-
         [Test]
-        public Task HttpClientFailure400Get() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpClientFailure400Delete() => Test((host, pipeline) =>
+        {
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureOperations(ClientDiagnostics, pipeline, host).Delete400Async());
+        });
 
         [Test]
-        public Task HttpClientFailure400Head() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpClientFailure400Get() => Test((host, pipeline) =>
+        {
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureOperations(ClientDiagnostics, pipeline, host).Get400Async());
+        });
 
         [Test]
-        public Task HttpClientFailure400Options() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpClientFailure400Head() => Test((host, pipeline) =>
+        {
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureOperations(ClientDiagnostics, pipeline, host).Head400Async());
+        });
 
         [Test]
-        public Task HttpClientFailure400Patch() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpClientFailure400Options() => Test((host, pipeline) =>
+        {
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureOperations(ClientDiagnostics, pipeline, host).Options400Async());
+        });
 
         [Test]
-        public Task HttpClientFailure400Post() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpClientFailure400Patch() => Test((host, pipeline) =>
+        {
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureOperations(ClientDiagnostics, pipeline, host).Patch400Async());
+        });
 
         [Test]
-        public Task HttpClientFailure400Put() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpClientFailure400Post() => Test((host, pipeline) =>
+        {
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureOperations(ClientDiagnostics, pipeline, host).Post400Async());
+        });
 
         [Test]
-        public Task HttpClientFailure401Head() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpClientFailure400Put() => Test((host, pipeline) =>
+        {
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureOperations(ClientDiagnostics, pipeline, host).Put400Async());
+        });
 
         [Test]
-        public Task HttpClientFailure402Get() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpClientFailure401Head() => Test((host, pipeline) =>
+        {
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureOperations(ClientDiagnostics, pipeline, host).Head401Async());
+        });
 
         [Test]
-        public Task HttpClientFailure403Get() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpClientFailure402Get() => Test((host, pipeline) =>
+        {
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureOperations(ClientDiagnostics, pipeline, host).Get402Async());
+        });
 
         [Test]
-        public Task HttpClientFailure403Options() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpClientFailure403Get() => Test((host, pipeline) =>
+        {
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureOperations(ClientDiagnostics, pipeline, host).Get403Async());
+        });
 
         [Test]
-        public Task HttpClientFailure404Put() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpClientFailure403Options() => Test((host, pipeline) =>
+        {
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureOperations(ClientDiagnostics, pipeline, host).Options403Async());
+        });
 
         [Test]
-        public Task HttpClientFailure405Patch() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpClientFailure404Put() => Test((host, pipeline) =>
+        {
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureOperations(ClientDiagnostics, pipeline, host).Put404Async());
+        });
 
         [Test]
-        public Task HttpClientFailure406Post() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpClientFailure405Patch() => Test((host, pipeline) =>
+        {
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureOperations(ClientDiagnostics, pipeline, host).Patch405Async());
+        });
 
         [Test]
-        public Task HttpClientFailure407Delete() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpClientFailure406Post() => Test((host, pipeline) =>
+        {
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureOperations(ClientDiagnostics, pipeline, host).Post406Async());
+        });
 
         [Test]
-        public Task HttpClientFailure409Put() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpClientFailure407Delete() => Test((host, pipeline) =>
+        {
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureOperations(ClientDiagnostics, pipeline, host).Delete407Async());
+        });
 
         [Test]
-        public Task HttpClientFailure410Head() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpClientFailure409Put() => Test((host, pipeline) =>
+        {
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureOperations(ClientDiagnostics, pipeline, host).Put409Async());
+        });
 
         [Test]
-        public Task HttpClientFailure411Get() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpClientFailure410Head() => Test((host, pipeline) =>
+        {
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureOperations(ClientDiagnostics, pipeline, host).Head410Async());
+        });
 
         [Test]
-        public Task HttpClientFailure412Get() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpClientFailure411Get() => Test((host, pipeline) =>
+        {
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureOperations(ClientDiagnostics, pipeline, host).Get411Async());
+        });
 
         [Test]
-        public Task HttpClientFailure412Options() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpClientFailure412Get() => Test((host, pipeline) =>
+        {
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureOperations(ClientDiagnostics, pipeline, host).Get412Async());
+        });
 
         [Test]
-        public Task HttpClientFailure413Put() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpClientFailure412Options() => Test((host, pipeline) =>
+        {
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureOperations(ClientDiagnostics, pipeline, host).Options412Async());
+        });
 
         [Test]
-        public Task HttpClientFailure414Patch() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpClientFailure413Put() => Test((host, pipeline) =>
+        {
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureOperations(ClientDiagnostics, pipeline, host).Put413Async());
+        });
 
         [Test]
-        public Task HttpClientFailure415Post() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpClientFailure414Patch() => Test((host, pipeline) =>
+        {
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureOperations(ClientDiagnostics, pipeline, host).Patch414Async());
+        });
 
         [Test]
-        public Task HttpClientFailure416Get() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpClientFailure415Post() => Test((host, pipeline) =>
+        {
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureOperations(ClientDiagnostics, pipeline, host).Post415Async());
+        });
 
         [Test]
-        public Task HttpClientFailure417Delete() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpClientFailure416Get() => Test((host, pipeline) =>
+        {
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureOperations(ClientDiagnostics, pipeline, host).Get416Async());
+        });
 
         [Test]
-        public Task HttpClientFailure429Head() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpClientFailure417Delete() => Test((host, pipeline) =>
+        {
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureOperations(ClientDiagnostics, pipeline, host).Delete417Async());
+        });
 
         [Test]
-        public Task HttpRedirect300Get() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpClientFailure429Head() => Test((host, pipeline) =>
+        {
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureOperations(ClientDiagnostics, pipeline, host).Head429Async());
+        });
 
         [Test]
-        public Task HttpRedirect300Head() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpRedirect300Get() => TestStatus(async (host, pipeline) =>
+            await new HttpRedirectsOperations(ClientDiagnostics, pipeline, host).Get300Async());
 
         [Test]
-        public Task HttpRedirect301Get() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpRedirect300Head() => TestStatus(async (host, pipeline) =>
+            await new HttpRedirectsOperations(ClientDiagnostics, pipeline, host).Head300Async());
 
         [Test]
-        public Task HttpRedirect301Put() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpRedirect301Get() => TestStatus(async (host, pipeline) =>
+            await new HttpRedirectsOperations(ClientDiagnostics, pipeline, host).Get301Async());
 
         [Test]
-        public Task HttpRedirect302Get() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpRedirect301Put() => Test(async (host, pipeline) =>
+        {
+            var result = await new HttpRedirectsOperations(ClientDiagnostics, pipeline, host).Put301Async();
+            Assert.AreEqual("/http/failure/500", result.Headers.Location);
+        });
 
         [Test]
-        public Task HttpRedirect302Head() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpRedirect302Get() => TestStatus(async (host, pipeline) =>
+            await new HttpRedirectsOperations(ClientDiagnostics, pipeline, host).Get300Async());
 
         [Test]
-        public Task HttpRedirect302Patch() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpRedirect302Head() => TestStatus(async (host, pipeline) =>
+            await new HttpRedirectsOperations(ClientDiagnostics, pipeline, host).Get300Async());
 
         [Test]
-        public Task HttpRedirect303Post() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpRedirect302Patch() => TestStatus(async (host, pipeline) =>
+            await new HttpRedirectsOperations(ClientDiagnostics, pipeline, host).Get300Async());
 
         [Test]
-        public Task HttpRedirect307Delete() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpRedirect303Post() => TestStatus(async (host, pipeline) =>
+            await new HttpRedirectsOperations(ClientDiagnostics, pipeline, host).Get300Async());
 
         [Test]
-        public Task HttpRedirect307Get() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpRedirect307Delete() => TestStatus(async (host, pipeline) =>
+            await new HttpRedirectsOperations(ClientDiagnostics, pipeline, host).Get300Async());
 
         [Test]
-        public Task HttpRedirect307Head() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpRedirect307Get() => TestStatus(async (host, pipeline) =>
+            await new HttpRedirectsOperations(ClientDiagnostics, pipeline, host).Get300Async());
 
         [Test]
-        public Task HttpRedirect307Options() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpRedirect307Head() => TestStatus(async (host, pipeline) =>
+            await new HttpRedirectsOperations(ClientDiagnostics, pipeline, host).Get300Async());
 
         [Test]
-        public Task HttpRedirect307Patch() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpRedirect307Options() => TestStatus(async (host, pipeline) =>
+            await new HttpRedirectsOperations(ClientDiagnostics, pipeline, host).Get300Async());
 
         [Test]
-        public Task HttpRedirect307Post() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpRedirect307Patch() => TestStatus(async (host, pipeline) =>
+            await new HttpRedirectsOperations(ClientDiagnostics, pipeline, host).Get300Async());
 
         [Test]
-        public Task HttpRedirect307Put() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpRedirect307Post() => TestStatus(async (host, pipeline) =>
+            await new HttpRedirectsOperations(ClientDiagnostics, pipeline, host).Get300Async());
 
         [Test]
-        public Task HttpRetry408Head() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpRedirect307Put() => TestStatus(async (host, pipeline) =>
+            await new HttpRedirectsOperations(ClientDiagnostics, pipeline, host).Get300Async());
 
         [Test]
-        public Task HttpRetry500Patch() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpRetry408Head() => TestStatus(async (host, pipeline) =>
+            await new HttpRetryOperations(ClientDiagnostics, pipeline, host).Head408Async());
 
         [Test]
-        public Task HttpRetry500Put() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
-
+        public Task HttpRetry500Patch() => TestStatus(async (host, pipeline) =>
+            await new HttpRetryOperations(ClientDiagnostics, pipeline, host).Head408Async());
         [Test]
-        public Task HttpRetry502Get() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpRetry500Put() => TestStatus(async (host, pipeline) =>
+            await new HttpRetryOperations(ClientDiagnostics, pipeline, host).Head408Async());
 
+        [Test]
+        public Task HttpRetry502Get() => TestStatus(async (host, pipeline) =>
+            await new HttpRetryOperations(ClientDiagnostics, pipeline, host).Head408Async());
         [Test]
-        public Task HttpRetry502Options() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpRetry502Options() => TestStatus(async (host, pipeline) =>
+            await new HttpRetryOperations(ClientDiagnostics, pipeline, host).Head408Async());
 
         [Test]
-        public Task HttpRetry503Delete() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpRetry503Delete() => TestStatus(async (host, pipeline) =>
+            await new HttpRetryOperations(ClientDiagnostics, pipeline, host).Head408Async());
 
         [Test]
-        public Task HttpRetry503Post() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpRetry503Post() => TestStatus(async (host, pipeline) =>
+            await new HttpRetryOperations(ClientDiagnostics, pipeline, host).Head408Async());
 
         [Test]
-        public Task HttpRetry504Patch() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpRetry504Patch() => TestStatus(async (host, pipeline) =>
+            await new HttpRetryOperations(ClientDiagnostics, pipeline, host).Head408Async());
 
         [Test]
-        public Task HttpRetry504Put() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpRetry504Put() => TestStatus(async (host, pipeline) =>
+            await new HttpRetryOperations(ClientDiagnostics, pipeline, host).Head408Async());
 
         [Test]
-        public Task HttpServerFailure501Get() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpServerFailure501Get() => Test((host, pipeline) =>
+        {
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpServerFailureOperations(ClientDiagnostics, pipeline, host).Get501Async());
+        });
 
         [Test]
-        public Task HttpServerFailure501Head() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpServerFailure501Head() => Test((host, pipeline) =>
+        {
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpServerFailureOperations(ClientDiagnostics, pipeline, host).Get501Async());
+        });
 
         [Test]
-        public Task HttpServerFailure505Delete() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpServerFailure505Delete() => Test((host, pipeline) =>
+        {
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpServerFailureOperations(ClientDiagnostics, pipeline, host).Get501Async());
+        });
 
         [Test]
-        public Task HttpServerFailure505Post() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpServerFailure505Post() => Test((host, pipeline) =>
+        {
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpServerFailureOperations(ClientDiagnostics, pipeline, host).Get501Async());
+        });
 
         [Test]
-        public Task HttpSuccess200Delete() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpSuccess200Delete() => TestStatus(async (host, pipeline) =>
+            await new HttpSuccessOperations(ClientDiagnostics, pipeline, host).Delete200Async());
 
         [Test]
-        public Task HttpSuccess200Get() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpSuccess200Get() => TestStatus(async (host, pipeline) =>
+            await new HttpSuccessOperations(ClientDiagnostics, pipeline, host).Delete200Async());
 
         [Test]
-        public Task HttpSuccess200Head() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpSuccess200Head() => TestStatus(async (host, pipeline) =>
+            await new HttpSuccessOperations(ClientDiagnostics, pipeline, host).Delete200Async());
 
         [Test]
-        public Task HttpSuccess200Options() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpSuccess200Options() => TestStatus(async (host, pipeline) =>
+            await new HttpSuccessOperations(ClientDiagnostics, pipeline, host).Delete200Async());
 
         [Test]
-        public Task HttpSuccess200Patch() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpSuccess200Patch() => TestStatus(async (host, pipeline) =>
+            await new HttpSuccessOperations(ClientDiagnostics, pipeline, host).Delete200Async());
 
         [Test]
-        public Task HttpSuccess200Post() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpSuccess200Post() => TestStatus(async (host, pipeline) =>
+            await new HttpSuccessOperations(ClientDiagnostics, pipeline, host).Delete200Async());
 
         [Test]
-        public Task HttpSuccess200Put() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpSuccess200Put() => TestStatus(async (host, pipeline) =>
+            await new HttpSuccessOperations(ClientDiagnostics, pipeline, host).Delete200Async());
 
         [Test]
-        public Task HttpSuccess201Post() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpSuccess201Post() => TestStatus(async (host, pipeline) =>
+            await new HttpSuccessOperations(ClientDiagnostics, pipeline, host).Delete200Async());
 
         [Test]
-        public Task HttpSuccess201Put() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpSuccess201Put() => TestStatus(async (host, pipeline) =>
+            await new HttpSuccessOperations(ClientDiagnostics, pipeline, host).Delete200Async());
 
         [Test]
-        public Task HttpSuccess202Delete() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpSuccess202Delete() => TestStatus(async (host, pipeline) =>
+            await new HttpSuccessOperations(ClientDiagnostics, pipeline, host).Delete200Async());
 
         [Test]
-        public Task HttpSuccess202Patch() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpSuccess202Patch() => TestStatus(async (host, pipeline) =>
+            await new HttpSuccessOperations(ClientDiagnostics, pipeline, host).Delete200Async());
 
         [Test]
-        public Task HttpSuccess202Post() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpSuccess202Post() => TestStatus(async (host, pipeline) =>
+            await new HttpSuccessOperations(ClientDiagnostics, pipeline, host).Delete200Async());
 
         [Test]
-        public Task HttpSuccess202Put() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpSuccess202Put() => TestStatus(async (host, pipeline) =>
+            await new HttpSuccessOperations(ClientDiagnostics, pipeline, host).Delete200Async());
 
         [Test]
-        public Task HttpSuccess204Delete() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpSuccess204Delete() => TestStatus(async (host, pipeline) =>
+            await new HttpSuccessOperations(ClientDiagnostics, pipeline, host).Delete200Async());
 
         [Test]
-        public Task HttpSuccess204Head() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpSuccess204Head() => TestStatus(async (host, pipeline) =>
+            await new HttpSuccessOperations(ClientDiagnostics, pipeline, host).Delete200Async());
 
         [Test]
-        public Task HttpSuccess204Patch() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpSuccess204Patch() => TestStatus(async (host, pipeline) =>
+            await new HttpSuccessOperations(ClientDiagnostics, pipeline, host).Delete200Async());
 
         [Test]
-        public Task HttpSuccess204Post() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpSuccess204Post() => TestStatus(async (host, pipeline) =>
+            await new HttpSuccessOperations(ClientDiagnostics, pipeline, host).Delete200Async());
 
         [Test]
-        public Task HttpSuccess204Put() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpSuccess204Put() => TestStatus(async (host, pipeline) =>
+            await new HttpSuccessOperations(ClientDiagnostics, pipeline, host).Delete200Async());
 
         [Test]
-        public Task HttpSuccess404Head() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task HttpSuccess404Head() => TestStatus(async (host, pipeline) =>
+            await new HttpSuccessOperations(ClientDiagnostics, pipeline, host).Delete200Async());
 
         [Test]
         public Task ResponsesScenarioA200MatchingModel() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
