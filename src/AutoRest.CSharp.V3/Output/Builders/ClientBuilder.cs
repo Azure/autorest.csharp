@@ -202,7 +202,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             }
 
             Request request = new Request(
-                ToCoreRequestMethod(httpRequest.Method) ?? RequestMethod.Get,
+                httpRequest.Method.ToCoreRequestMethod() ?? RequestMethod.Get,
                 ToPathParts(httpRequest.Uri, uriParameters),
                 ToPathParts(httpRequest.Path, pathParameters),
                 query.ToArray(),
@@ -361,19 +361,6 @@ namespace AutoRest.CSharp.V3.Output.Builders
         }
 
         private static int ToStatusCode(StatusCodes arg) => int.Parse(arg.ToString().Trim('_'));
-
-        private static RequestMethod? ToCoreRequestMethod(HttpMethod method) => method switch
-        {
-            HttpMethod.Delete => RequestMethod.Delete,
-            HttpMethod.Get => RequestMethod.Get,
-            HttpMethod.Head => RequestMethod.Head,
-            HttpMethod.Options => (RequestMethod?)null,
-            HttpMethod.Patch => RequestMethod.Patch,
-            HttpMethod.Post => RequestMethod.Post,
-            HttpMethod.Put => RequestMethod.Put,
-            HttpMethod.Trace => null,
-            _ => null
-        };
 
         private static string CreateDescription(RequestParameter requestParameter)
         {
