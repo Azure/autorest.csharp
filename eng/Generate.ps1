@@ -1,10 +1,11 @@
 #Requires -Version 6.0
-param($name, [switch]$noDebug, [switch]$reset, [switch]$noBuild, [switch]$fast, [switch]$updateLaunchSettings)
+param($name, [switch]$noDebug, [switch]$reset, [switch]$noBuild, [switch]$fast, [switch]$updateLaunchSettings, [switch]$removeGenerated = $true)
 
 $ErrorActionPreference = 'Stop'
 
 function Invoke-AutoRest($baseOutput, $title, $autoRestArguments)
 {
+    $outputPath = Join-Path $baseOutput $title
     $command = "npx  @autorest/autorest $script:debugFlags $autoRestArguments"
     if ($title)
     {
@@ -15,8 +16,12 @@ function Invoke-AutoRest($baseOutput, $title, $autoRestArguments)
     if ($fast)
     {
         $codeModel = Join-Path $baseOutput $title "CodeModel.yaml"
-        $outputPath = Join-Path $baseOutput $title
         $command = "dotnet run --project $script:autorestPluginProject --no-build -- --plugin=csharpgen --title=$title --namespace=$namespace --standalone --input-file=$codeModel --output-folder=$outputPath"
+    }
+
+    if ($removeGenerated)
+    {
+        Get-ChildItem $outputPath -Filter Generated -Directory -Recurse | Remove-Item -Force -Recurse;
     }
 
     Write-Host "> $command"
