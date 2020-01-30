@@ -385,13 +385,25 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        public Task ResponsesScenarioA200MatchingModel() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task ResponsesScenarioA200MatchingModel() => Test(async (host, pipeline) =>
+        {
+            var result = await new MultipleResponsesOperations(ClientDiagnostics, pipeline, host).Get200Model204NoModelDefaultError200ValidAsync();
+            Assert.AreEqual("200", result.Value.StatusCode);
+        });
 
         [Test]
-        public Task ResponsesScenarioA201DefaultNoModel() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task ResponsesScenarioA201DefaultNoModel() => Test(async (host, pipeline) =>
+        {
+            var result = await new MultipleResponsesOperations(ClientDiagnostics, pipeline, host).Get200Model204NoModelDefaultError204ValidAsync();
+            Assert.AreEqual("200", result.Value.StatusCode);
+        });
 
         [Test]
-        public Task ResponsesScenarioA202DefaultNoModel() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task ResponsesScenarioA202DefaultNoModel() => Test(async (host, pipeline) =>
+        {
+            var result = await new MultipleResponsesOperations(ClientDiagnostics, pipeline, host).Get200Model204NoModelDefaultError202NoneAsync();
+            Assert.AreEqual("202", result.Value.StatusCode);
+        });
 
         [Test]
         public Task ResponsesScenarioA204MatchingNoModel() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
