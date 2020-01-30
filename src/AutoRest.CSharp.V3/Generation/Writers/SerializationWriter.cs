@@ -116,7 +116,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                             {
                                 writer
                                     .Append($"case {implementation.Key:L}: return ")
-                                    .ToDeserializeCall(implementation.Type, _typeFactory, w => w.Append($"element"));
+                                    .ToDeserializeCall(_typeFactory.ResolveImplementation(implementation.Type), w => w.Append($"element"));
                                 writer.Line($";");
                             }
                         }

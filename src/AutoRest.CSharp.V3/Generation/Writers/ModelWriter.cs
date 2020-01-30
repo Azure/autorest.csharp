@@ -5,9 +5,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using AutoRest.CSharp.V3.Generation.Types;
-using AutoRest.CSharp.V3.Output.Models.TypeReferences;
+
 using AutoRest.CSharp.V3.Output.Models.Types;
+using CSharpType = AutoRest.CSharp.V3.Generation.Types.CSharpType;
 
 namespace AutoRest.CSharp.V3.Generation.Writers
 {
@@ -45,12 +47,12 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 List<string> implementsTypes = new List<string>();
                 if (schema.Inherits != null)
                 {
-                    implementsTypes.Add(writer.Type(_typeFactory.CreateType(schema.Inherits)));
+                    implementsTypes.Add(writer.Type(schema.Inherits));
                 }
 
                 if (schema.ImplementsDictionary != null)
                 {
-                    var dictionaryType = _typeFactory.CreateInputType(schema.ImplementsDictionary);
+                    var dictionaryType = schema.ImplementsDictionary;
                     implementsTypes.Add(writer.Type(dictionaryType));
                 }
 
@@ -70,7 +72,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     {
                         writer.WriteXmlDocumentationSummary(property.Description);
 
-                        CSharpType propertyType = _typeFactory.CreateType(property.Type);
+                        CSharpType propertyType = property.Type;
                         writer.Append($"public {propertyType} {property.Name:D}");
                         writer.AppendRaw(property.IsReadOnly ? "{ get; internal set; }" : "{ get; set; }");
 
@@ -78,9 +80,9 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         {
                             writer.Append($" = {property.DefaultValue.Value.Value:L};");
                         }
-                        else if (NeedsInitialization(property))
+                        else if (property.ImplementationType != null)
                         {
-                            writer.Append($" = new {_typeFactory.CreateConcreteType(property.Type)}();");
+                            writer.Append($" = new {property.Type}();");
                         }
 
                         writer.Line();
@@ -88,10 +90,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     if (schema.ImplementsDictionary != null)
                     {
-                        var implementationType = _typeFactory.CreateType(schema.ImplementsDictionary);
-                        var fieldType = _typeFactory.CreateConcreteType(schema.ImplementsDictionary);
-                        var keyType = _typeFactory.CreateType(schema.ImplementsDictionary.KeyType);
-                        var itemType = _typeFactory.CreateType(schema.ImplementsDictionary.ValueType);
+                        var fieldType = schema.ImplementsDictionary;
+
+                        Debug.Assert(fieldType.Arguments.Length == 2);
+                        var keyType = fieldType.Arguments[0];
+                        var itemType = fieldType.Arguments[1];
 
                         var keyValuePairType = new CSharpType(typeof(KeyValuePair<,>), keyType, itemType);
                         var iEnumeratorKeyValuePairType = new CSharpType(typeof(IEnumerator<>), keyValuePairType);
@@ -102,7 +105,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         var iEnumerable = new CSharpType(typeof(IEnumerable));
 
                         string additionalProperties = "_additionalProperties";
-                        writer.Line($"private readonly {implementationType} {additionalProperties} = new {fieldType}();");
+                        writer.Line($"private readonly {fieldType} {additionalProperties} = new {fieldType}();");
 
                         writer
                             .WriteXmlDocumentationInheritDoc()
@@ -147,27 +150,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     }
                 }
             }
-        }
-
-        private bool NeedsInitialization(ObjectTypeProperty property)
-        {
-            // TODO: This logic shouldn't be base only on type nullability
-            if (property.Type.IsNullable)
-            {
-                return false;
-            }
-
-            if (property.Type is CollectionTypeReference || property.Type is DictionaryTypeReference)
-            {
-                return true;
-            }
-
-            if (property.Type is SchemaTypeReference schemaType)
-            {
-                return _typeFactory.ResolveReference(schemaType) is ObjectType;
-            }
-
-            return false;
         }
 
         private void WriteSealedChoiceSchema(CodeWriter writer, EnumType schema)

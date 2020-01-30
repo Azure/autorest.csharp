@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Input;
 using AutoRest.CSharp.V3.Input.Source;
 using AutoRest.CSharp.V3.Output.Models;
@@ -12,7 +13,7 @@ using AutoRest.CSharp.V3.Output.Models.Requests;
 using AutoRest.CSharp.V3.Output.Models.Responses;
 using AutoRest.CSharp.V3.Output.Models.Serialization;
 using AutoRest.CSharp.V3.Output.Models.Shared;
-using AutoRest.CSharp.V3.Output.Models.TypeReferences;
+using AutoRest.CSharp.V3.Output.Models.Types;
 using AutoRest.CSharp.V3.Utilities;
 using Azure.Core;
 using Microsoft.CodeAnalysis;
@@ -24,10 +25,14 @@ namespace AutoRest.CSharp.V3.Output.Builders
     internal class ClientBuilder
     {
         private readonly string _defaultOperationsNamespace;
+        private readonly TypeFactory _typeFactory;
+        private SerializationBuilder _serializationBuilder;
 
-        public ClientBuilder(string @namespace)
+        public ClientBuilder(string @namespace, TypeFactory typeFactory)
         {
             _defaultOperationsNamespace = @namespace;
+            _typeFactory = typeFactory;
+            _serializationBuilder = new SerializationBuilder(typeFactory);
         }
 
         public Client BuildClient(OperationGroup operationGroup)
@@ -83,9 +88,20 @@ namespace AutoRest.CSharp.V3.Output.Builders
                     {
                         nextPageMethods.Add(nextPageMethod);
                     }
-                    //TODO: This is a hack since we don't have the model information at this point
-                    ObjectSchema? schemaForPaging = ((processed.Method.Response.ResponseBody as ObjectResponseBody)?.Type as SchemaTypeReference)?.Schema as ObjectSchema;
-                    Paging pagingMethod = GetClientMethodPaging(processed.Method, nextPageMethod, pageable, schemaForPaging);
+
+                    if (!(processed.Method.Response.ResponseBody is ObjectResponseBody objectResponseBody))
+                    {
+                        throw new InvalidOperationException($"Method {processed.Method.Name} has to have a return value");
+                    }
+
+                    var type = objectResponseBody.Type;
+                    var implementation = _typeFactory.ResolveImplementation(type);
+                    if (!(implementation is ObjectType objectType))
+                    {
+                        throw new InvalidOperationException($"The return type of {processed.Method.Name} has to be and object schema to be used in paging");
+                    }
+
+                    Paging pagingMethod = GetClientMethodPaging(processed.Method, nextPageMethod, pageable, objectType);
                     pagingMethods.Add(pagingMethod);
                 }
             }
@@ -144,7 +160,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                     switch (requestParameter.Schema)
                     {
                         case ConstantSchema constant:
-                            constantOrParameter = BuilderHelpers.ParseConstant(constant);
+                            constantOrParameter = ParseConstant(constant);
                             valueSchema = constant.ValueType;
                             break;
                         case BinarySchema _:
@@ -182,7 +198,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                             break;
                         case ParameterLocation.Body:
                             Debug.Assert(httpRequestWithBody != null);
-                            var serialization = SerializationBuilder.Build(httpRequestWithBody.KnownMediaType, requestParameter.Schema, requestParameter.IsNullable());
+                            var serialization = _serializationBuilder.Build(httpRequestWithBody.KnownMediaType, requestParameter.Schema, requestParameter.IsNullable());
                             body = new RequestBody(constantOrParameter, serialization);
                             break;
                         case ParameterLocation.Uri:
@@ -214,9 +230,9 @@ namespace AutoRest.CSharp.V3.Output.Builders
             if (response is SchemaResponse schemaResponse)
             {
                 Schema schema = schemaResponse.Schema is ConstantSchema constantSchema ? constantSchema.ValueType : schemaResponse.Schema;
-                TypeReference responseType = BuilderHelpers.CreateType(schema, isNullable: false);
+                CSharpType responseType = _typeFactory.CreateType(schema, isNullable: false);
 
-                ObjectSerialization serialization = SerializationBuilder.Build(httpResponse.KnownMediaType, schema, isNullable: false);
+                ObjectSerialization serialization = _serializationBuilder.Build(httpResponse.KnownMediaType, schema, isNullable: false);
 
                 responseBody = new ObjectResponseBody(responseType, serialization);
             }
@@ -247,7 +263,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             var nextPageUrlParameter = new Parameter(
                 "nextLink",
                 "The URL to the next page of results.",
-                new FrameworkTypeReference(typeof(string)),
+                new CSharpType(typeof(string)),
                 null,
                 true);
             var headerParameterNames = method.Request.Headers.Where(h => !h.Value.IsConstant).Select(h => h.Value.Parameter.Name).ToArray();
@@ -270,28 +286,32 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 method.Diagnostics);
         }
 
-        private static Paging GetClientMethodPaging(Method method, Method nextPageMethod, IDictionary<object, object> pageable, ObjectSchema? schema)
+        private Paging GetClientMethodPaging(Method method, Method nextPageMethod, IDictionary<object, object> pageable, ObjectType type)
         {
-            var nextLinkName = pageable.GetValue<string>("nextLinkName");
-            var itemName = pageable.GetValue<string>("itemName");
-            //TODO: Hack to figure out the property name on the model
-            var itemProperty = schema?.Properties?.FirstOrDefault(p => p.SerializedName == itemName);
-            itemName = itemProperty?.CSharpName() ?? itemName ?? "Value";
-            var nextLinkProperty = schema?.Properties?.FirstOrDefault(p => p.SerializedName == nextLinkName);
-            nextLinkName = nextLinkProperty?.CSharpName() ?? nextLinkName;
-            // If itemName resolves to Value, we can't use itemProperty. So, get the correct property.
-            var itemTypeProperty = schema?.Properties?.FirstOrDefault(p => p.CSharpName() == itemName);
-            var itemTypeValueSchema = (itemTypeProperty?.Schema as ArraySchema)?.ElementType;
-            var itemType = BuilderHelpers.CreateType(itemTypeValueSchema ?? new Schema(), false);
-            var name = $"{method.Name}Pageable";
-            return new Paging(method, nextPageMethod, name, nextLinkName, itemName, itemType);
+            var nextLinkName = pageable.GetValue<string>("nextLinkName") ?? "nextLink";
+            var itemName = pageable.GetValue<string>("itemName") ?? "value";
+
+            var itemProperty = type.Properties.Single(p => p.SchemaProperty.SerializedName == itemName);
+            var nextLinkProperty = type.Properties.FirstOrDefault(p => p.SchemaProperty.SerializedName == nextLinkName);
+
+            if (itemProperty.SchemaProperty.Schema is ArraySchema arraySchema)
+            {
+                var itemType = _typeFactory.CreateType(arraySchema.ElementType, false);
+
+                var name = $"{method.Name}Pageable";
+                return new Paging(method, nextPageMethod, name, nextLinkProperty.Name, itemProperty.Name, itemType);
+            }
+            else
+            {
+                throw new InvalidOperationException($"{itemName} property has to be an array schema, actual {itemProperty.SchemaProperty}");
+            }
         }
 
-        private static Parameter BuildParameter(RequestParameter requestParameter) => new Parameter(
+        private Parameter BuildParameter(RequestParameter requestParameter) => new Parameter(
             requestParameter.CSharpName(),
             CreateDescription(requestParameter),
-            BuilderHelpers.CreateType(requestParameter.Schema, requestParameter.IsNullable()),
-            BuilderHelpers.ParseConstant(requestParameter),
+            _typeFactory.CreateType(requestParameter.Schema, requestParameter.IsNullable()),
+            ParseConstant(requestParameter),
             requestParameter.Required == true);
 
         private ResponseHeaderGroupType? BuildResponseHeaderModel(Operation operation, HttpResponse httpResponse)
@@ -302,7 +322,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             }
 
             ResponseHeader CreateResponseHeader(HttpResponseHeader header) =>
-                new ResponseHeader(header.Header.ToCleanName(), header.Header, BuilderHelpers.CreateType(header.Schema, true));
+                new ResponseHeader(header.Header.ToCleanName(), header.Header, _typeFactory.CreateType(header.Schema, true));
 
             string operationName = operation.CSharpName();
 
@@ -358,6 +378,25 @@ namespace AutoRest.CSharp.V3.Output.Builders
             }
 
             return host.ToArray();
+        }
+
+        private Constant ParseConstant(ConstantSchema constant) =>
+            BuilderHelpers.ParseConstant(constant.Value.Value, _typeFactory.CreateType(constant.ValueType, constant.Value.Value == null));
+
+        private Constant? ParseConstant(RequestParameter parameter)
+        {
+            if (parameter.ClientDefaultValue != null)
+            {
+                CSharpType constantTypeReference = _typeFactory.CreateType(parameter.Schema, parameter.IsNullable());
+                return BuilderHelpers.ParseConstant(parameter.ClientDefaultValue, constantTypeReference);
+            }
+
+            if (parameter.Schema is ConstantSchema constantSchema)
+            {
+                return ParseConstant(constantSchema);
+            }
+
+            return null;
         }
 
         private static int ToStatusCode(StatusCodes arg) => int.Parse(arg.ToString().Trim('_'));

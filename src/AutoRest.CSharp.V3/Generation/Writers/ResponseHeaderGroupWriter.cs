@@ -54,7 +54,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private void WriteHeaderProperty(CodeWriter writer, ResponseHeader header)
         {
-            var type = _typeFactory.CreateType(header.Type);
+            var type = header.Type;
             writer.Line($"public {type} {header.Name} => {ResponseField}.Headers.TryGetValue({header.SerializedName:L}, out {type} value) ? value : null;");
         }
     }

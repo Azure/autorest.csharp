@@ -13,6 +13,7 @@ using AutoRest.CSharp.V3.Input;
 using AutoRest.CSharp.V3.Input.Source;
 using AutoRest.CSharp.V3.Output.Builders;
 using AutoRest.CSharp.V3.Output.Models.Responses;
+using AutoRest.CSharp.V3.Output.Models.Types;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Formatting;
 using Microsoft.CodeAnalysis.Simplification;
@@ -21,7 +22,6 @@ using Diagnostic = Microsoft.CodeAnalysis.Diagnostic;
 
 namespace AutoRest.CSharp.V3.AutoRest.Plugins
 {
-
     [PluginName("csharpgen")]
     internal class CSharpGen : IPlugin
     {
@@ -34,11 +34,19 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
             var project = GeneratedCodeWorkspace.Create(configuration.OutputFolder);
             var sourceInputModel = SourceInputModelBuilder.Build(await project.GetCompilationAsync());
 
-            var modelBuilder = new ModelBuilder(configuration.Namespace, GetMediaTypes(codeModel), sourceInputModel);
-            var clientBuilder = new ClientBuilder(configuration.Namespace);
-            var models = schemas.Select(modelBuilder.BuildModel).ToArray();
+            var typeFactory = new TypeFactory();
+            var context = new BuildContext(configuration.Namespace, typeFactory, sourceInputModel, GetMediaTypes(codeModel));
+
+            var modelBuilder = new ModelBuilder(context);
+            var clientBuilder = new ClientBuilder(configuration.Namespace, typeFactory);
+            var models = schemas.Select(schema => modelBuilder.BuildModel(schema)).ToArray();
+
+            foreach (var model in models)
+            {
+                typeFactory.Add(model);
+            }
+
             var clients = codeModel.OperationGroups.Select(clientBuilder.BuildClient).ToArray();
-            var typeFactory = new TypeFactory(models);
 
             var modelWriter = new ModelWriter(typeFactory);
             var writer = new ClientWriter(typeFactory);

@@ -16,11 +16,11 @@ using AutoRest.CSharp.V3.Output.Models.Serialization;
 using AutoRest.CSharp.V3.Output.Models.Serialization.Json;
 using AutoRest.CSharp.V3.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.V3.Output.Models.Shared;
-using AutoRest.CSharp.V3.Output.Models.TypeReferences;
 using AutoRest.CSharp.V3.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using CSharpType = AutoRest.CSharp.V3.Generation.Types.CSharpType;
 using Response = Azure.Response;
 
 namespace AutoRest.CSharp.V3.Generation.Writers
@@ -67,7 +67,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         {
             foreach (Parameter clientParameter in operationGroup.Parameters)
             {
-                writer.Line($"private {_typeFactory.CreateType(clientParameter.Type)} {clientParameter.Name};");
+                writer.Line($"private {clientParameter.Type} {clientParameter.Name};");
             }
 
             writer.Line($"private {typeof(ClientDiagnostics)} clientDiagnostics;");
@@ -101,7 +101,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private void WriteParameter(CodeWriter writer, Parameter clientParameter)
         {
-            writer.Append($"{_typeFactory.CreateInputType(clientParameter.Type)} {clientParameter.Name}");
+            writer.Append($"{clientParameter.Type} {clientParameter.Name}");
             if (clientParameter.DefaultValue != null)
             {
                 writer.Append($" = {clientParameter.DefaultValue.Value.Value:L}");
@@ -121,7 +121,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             var parameters = operation.Parameters;
             foreach (Parameter clientParameter in parameters)
             {
-                writer.Append($"{_typeFactory.CreateInputType(clientParameter.Type)} {clientParameter.Name},");
+                writer.Append($"{clientParameter.Type} {clientParameter.Name},");
             }
             writer.RemoveTrailingComma();
             writer.Line($")");
@@ -205,7 +205,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         {
             //TODO: Handle multiple responses
             var responseBody = operation.Response.ResponseBody;
-            CSharpType? bodyType = responseBody != null ? _typeFactory.CreateType(responseBody.Type) : null;
+            CSharpType? bodyType = responseBody?.Type;
             CSharpType? headerModelType = operation.Response.HeaderModel?.Type;
             CSharpType responseType = bodyType switch
             {
@@ -281,7 +281,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private void WritePagingOperation(CodeWriter writer, Paging pagingMethod, bool async)
         {
-            var pageType = _typeFactory.CreateType(pagingMethod.ItemType);
+            var pageType = pagingMethod.ItemType;
             CSharpType responseType = async ? new CSharpType(typeof(AsyncPageable<>), pageType) : new CSharpType(typeof(Pageable<>), pageType);
             var parameters = pagingMethod.Method.Parameters;
             var nextPageParameters = pagingMethod.NextPageMethod.Parameters;
@@ -349,7 +349,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             else
             {
                 writer.AppendRaw(constantOrParameter.Parameter.Name)
-                    .AppendNullableValue(_typeFactory.CreateType(constantOrParameter.Type));
+                    .AppendNullableValue(constantOrParameter.Type);
             }
         };
 
@@ -357,7 +357,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         {
             foreach (Parameter parameter in parameters)
             {
-                CSharpType cs = _typeFactory.CreateType(parameter.Type);
+                CSharpType cs = parameter.Type;
                 if (parameter.IsRequired && (cs.IsNullable || !cs.IsValueType))
                 {
                     using (writer.If($"{parameter.Name} == null"))
@@ -378,31 +378,36 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             if (constant.Value == null)
             {
                 // Cast helps the overload resolution
-                writer.Append($"({_typeFactory.CreateType(constant.Type)}){null:L}");
+                writer.Append($"({constant.Type}){null:L}");
                 return;
             }
 
-            switch (constant.Type)
+            Type? frameworkType = constant.Type.FrameworkType;
+
+            if (frameworkType == typeof(DateTimeOffset))
             {
-                case FrameworkTypeReference frameworkType when frameworkType.Type == typeof(DateTimeOffset):
-                    var d = (DateTimeOffset)constant.Value;
-                    d = d.ToUniversalTime();
-                    writer.Append($"new {typeof(DateTimeOffset)}({d.Year:L}, {d.Month:L}, {d.Day:L} ,{d.Hour:L}, {d.Minute:L}, {d.Second:L}, {d.Millisecond:L}, {typeof(TimeSpan)}.{nameof(TimeSpan.Zero)})");
-                    break;
-                case FrameworkTypeReference frameworkType when frameworkType.Type == typeof(byte[]):
-                    var value = (byte[])constant.Value;
-                    writer.Append($"new byte[] {{");
-                    foreach (byte b in value)
-                    {
-                        writer.Append($"{b}, ");
-                    }
-                    writer.Append($"}}");
-                    break;
-                case FrameworkTypeReference _:
-                    writer.Literal(constant.Value);
-                    break;
-                default:
-                    throw new InvalidOperationException("Unknown constant type");
+                var d = (DateTimeOffset) constant.Value;
+                d = d.ToUniversalTime();
+                writer.Append($"new {typeof(DateTimeOffset)}({d.Year:L}, {d.Month:L}, {d.Day:L} ,{d.Hour:L}, {d.Minute:L}, {d.Second:L}, {d.Millisecond:L}, {typeof(TimeSpan)}.{nameof(TimeSpan.Zero)})");
+            }
+            else if (frameworkType == typeof(byte[]))
+            {
+                var value = (byte[]) constant.Value;
+                writer.Append($"new byte[] {{");
+                foreach (byte b in value)
+                {
+                    writer.Append($"{b}, ");
+                }
+
+                writer.Append($"}}");
+            }
+            else if (frameworkType != null)
+            {
+                writer.Literal(constant.Value);
+            }
+            else
+            {
+                throw new InvalidOperationException("Unknown constant type");
             }
         }
 
@@ -428,7 +433,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             if (value.IsConstant)
                 return default;
 
-            var type = _typeFactory.CreateType(value.Type);
+            var type = value.Type;
             if (type.IsNullable)
             {
                 return writer.If($"{value.Parameter.Name} != null");

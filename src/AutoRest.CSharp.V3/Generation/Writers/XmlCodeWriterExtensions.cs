@@ -4,9 +4,10 @@
 using System;
 using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Output.Models.Serialization.Xml;
-using AutoRest.CSharp.V3.Output.Models.TypeReferences;
+
 using AutoRest.CSharp.V3.Output.Models.Types;
 using AutoRest.CSharp.V3.Utilities;
+using CSharpType = AutoRest.CSharp.V3.Generation.Types.CSharpType;
 
 namespace AutoRest.CSharp.V3.Generation.Writers
 {
@@ -110,8 +111,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     string elementName = elementValueSerialization.Name;
 
-                    if ((type is SchemaTypeReference schemaReference && typeFactory.ResolveReference(schemaReference) is ObjectType) ||
-                        (type is FrameworkTypeReference frameworkReference && frameworkReference.Type == typeof(object)))
+                    if (typeFactory.TryResolveImplementation(type, out ITypeProvider? implementation) && implementation is ObjectType ||
+                        type.FrameworkType == typeof(object))
                     {
                         writer.Line($"{writerName}.WriteObjectValue({name}, {elementName:L});");
                         return;
@@ -131,51 +132,49 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private static void ToSerializeValueCall(this CodeWriter writer, TypeFactory typeFactory, CodeWriterDelegate name, CodeWriterDelegate writerName, XmlValueSerialization valueSerialization)
         {
-            CSharpType implementationType = typeFactory.CreateType(valueSerialization.Type);
-            switch (valueSerialization.Type)
+            CSharpType implementationType = valueSerialization.Type;
+            if (typeFactory.TryResolveImplementation(implementationType, out ITypeProvider? typeProvider))
             {
-                case SchemaTypeReference schemaTypeReference:
-                    switch (typeFactory.ResolveReference(schemaTypeReference))
-                    {
-                        case ObjectType _:
-                            throw new NotSupportedException("Object type references are only supported as elements");
+                switch (typeProvider)
+                {
+                    case ObjectType _:
+                        throw new NotSupportedException("Object type references are only supported as elements");
 
-                        case EnumType clientEnum:
-                            writer.Append($"{writerName}.WriteValue({name}")
-                                .AppendNullableValue(implementationType)
-                                .AppendRaw(clientEnum.IsStringBased ? ".ToString()" : ".ToSerialString()")
-                                .Line($");");
-                            return;
-                    }
-
-                    return;
-
-                case FrameworkTypeReference frameworkTypeReference:
-                    var frameworkType = frameworkTypeReference.Type;
-                    if (frameworkType == typeof(object))
-                    {
-                        throw new NotSupportedException("Object references are only supported as elements");
-                    }
-
-                    bool writeFormat = frameworkType == typeof(byte[]) ||
-                                       frameworkType == typeof(DateTimeOffset) ||
-                                       frameworkType == typeof(DateTime) ||
-                                       frameworkType == typeof(TimeSpan);
-
-                    writer.Append($"{writerName}.WriteValue({name}")
-                        .AppendNullableValue(implementationType);
-
-                    if (writeFormat && valueSerialization.Format.ToFormatSpecifier() is string formatString)
-                    {
-                        writer.Append($", {formatString:L}");
-                    }
-
-                    writer.LineRaw(");");
-
-                    return;
-                default:
-                    throw new NotSupportedException();
+                    case EnumType clientEnum:
+                        writer.Append($"{writerName}.WriteValue({name}")
+                            .AppendNullableValue(implementationType)
+                            .AppendRaw(clientEnum.IsStringBased ? ".ToString()" : ".ToSerialString()")
+                            .Line($");");
+                        return;
+                }
             }
+
+            var frameworkType = implementationType.FrameworkType;
+
+            if (frameworkType == null)
+            {
+                throw new NotSupportedException();
+            }
+
+            if (frameworkType == typeof(object))
+            {
+                throw new NotSupportedException("Object references are only supported as elements");
+            }
+
+            bool writeFormat = frameworkType == typeof(byte[]) ||
+                               frameworkType == typeof(DateTimeOffset) ||
+                               frameworkType == typeof(DateTime) ||
+                               frameworkType == typeof(TimeSpan);
+
+            writer.Append($"{writerName}.WriteValue({name}")
+                .AppendNullableValue(implementationType);
+
+            if (writeFormat && valueSerialization.Format.ToFormatSpecifier() is string formatString)
+            {
+                writer.Append($", {formatString:L}");
+            }
+
+            writer.LineRaw(");");
         }
 
         public static void ToDeserializeCall(this CodeWriter writer, XmlElementSerialization serialization, TypeFactory typeFactory, CodeWriterDelegate element, ref string destination, bool isElement = false)
@@ -187,7 +186,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             string s = destination;
 
             writer
-                .Line($"{typeFactory.CreateType(type)} {destination:D} = default;");
+                .Line($"{type} {destination:D} = default;");
 
             if (isElement)
             {
@@ -227,7 +226,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 {
                     string childElementVariable = writer.GetTemporaryVariable("e");
 
-                    writer.Line($"{destination} = new {typeFactory.CreateConcreteType(serialization.Type)}();");
+                    writer.Line($"{destination} = new {serialization.Type}();");
 
                     using (writer.Scope($"foreach (var {childElementVariable:D} in {element}.Elements({arraySerialization.ValueSerialization.Name:L}))"))
                     {
@@ -246,7 +245,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 }
                 case XmlDictionarySerialization dictionarySerialization:
                 {
-                    writer.Append($"{destination} = new {typeFactory.CreateConcreteType(dictionarySerialization.Type)}();");
+                    writer.Append($"{destination} = new {dictionarySerialization.Type}();");
 
                     string elementsVariable = writer.GetTemporaryVariable("elements");
                     string elementVariable = writer.GetTemporaryVariable("e");
@@ -268,7 +267,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     break;
                 }
                 case XmlObjectSerialization elementSerialization:
-                    writer.Append($"{destination} = new {typeFactory.CreateConcreteType(elementSerialization.Type)}();");
+                    writer.Append($"{destination} = new {elementSerialization.Type}();");
 
                     foreach (XmlObjectAttributeSerialization attribute in elementSerialization.Attributes)
                     {
@@ -320,69 +319,62 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private static void ToDeserializeValueCall(this CodeWriter writer, XmlValueSerialization serialization, TypeFactory typeFactory, CodeWriterDelegate element)
         {
-            switch (serialization.Type)
+            var type = serialization.Type;
+            var frameworkType = type.FrameworkType;
+            if (frameworkType != null)
             {
-                case SchemaTypeReference schemaTypeReference:
-                    CSharpType cSharpType = typeFactory.CreateType(schemaTypeReference).WithNullable(false);
 
-                    switch (typeFactory.ResolveReference(schemaTypeReference))
-                    {
-                        case ObjectType _:
-                            writer.Append($"{cSharpType}.Deserialize{cSharpType.Name}({element})");
-                            break;
+                if (frameworkType == typeof(bool) ||
+                    frameworkType == typeof(char) ||
+                    frameworkType == typeof(short) ||
+                    frameworkType == typeof(int) ||
+                    frameworkType == typeof(long) ||
+                    frameworkType == typeof(float) ||
+                    frameworkType == typeof(double) ||
+                    frameworkType == typeof(decimal) ||
+                    frameworkType == typeof(string)
+                )
+                {
+                    writer.Append($"({type}){element}");
+                    return;
+                }
 
-                        case EnumType clientEnum when clientEnum.IsStringBased:
-                            writer.Append($"new {cSharpType}({element}.Value)");
-                            break;
+                writer.Append($"{element}.");
 
-                        case EnumType clientEnum when !clientEnum.IsStringBased:
-                            writer.Append($"{element}.Value.To{cSharpType.Name}()");
-                            break;
-                    }
+                if (frameworkType == typeof(byte[]))
+                {
+                    writer.AppendRaw("GetBytesFromBase64");
+                }
 
+                if (frameworkType == typeof(DateTimeOffset))
+                {
+                    writer.AppendRaw("GetDateTimeOffsetValue");
+                }
+
+                if (frameworkType == typeof(TimeSpan))
+                {
+                    writer.AppendRaw("GetTimeSpanValue");
+                }
+
+                writer.Append($"({serialization.Format.ToFormatSpecifier():L})");
+                return;
+            }
+
+            CSharpType cSharpType = type.WithNullable(false);
+
+            switch (typeFactory.ResolveImplementation(type))
+            {
+                case ObjectType _:
+                    writer.Append($"{cSharpType}.Deserialize{cSharpType.Name}({element})");
                     break;
-                case FrameworkTypeReference frameworkTypeReference:
 
-                    var frameworkType = frameworkTypeReference.Type;
-
-                    if (frameworkType == typeof(bool) ||
-                        frameworkType == typeof(char) ||
-                        frameworkType == typeof(short) ||
-                        frameworkType == typeof(int) ||
-                        frameworkType == typeof(long) ||
-                        frameworkType == typeof(float) ||
-                        frameworkType == typeof(double) ||
-                        frameworkType == typeof(decimal) ||
-                        frameworkType == typeof(string)
-                    )
-                    {
-                        var type = typeFactory.CreateType(frameworkTypeReference);
-                        writer.Append($"({type}){element}");
-                        return;
-                    }
-
-                    writer.Append($"{element}.");
-
-                    if (frameworkType == typeof(byte[]))
-                    {
-                        writer.AppendRaw("GetBytesFromBase64");
-                    }
-
-                    if (frameworkType == typeof(DateTimeOffset))
-                    {
-                        writer.AppendRaw("GetDateTimeOffsetValue");
-                    }
-
-                    if (frameworkType == typeof(TimeSpan))
-                    {
-                        writer.AppendRaw("GetTimeSpanValue");
-                    }
-
-                    writer.Append($"({serialization.Format.ToFormatSpecifier():L})");
-
+                case EnumType clientEnum when clientEnum.IsStringBased:
+                    writer.Append($"new {cSharpType}({element}.Value)");
                     break;
-                default:
-                    throw new NotImplementedException(serialization.Type.ToString());
+
+                case EnumType clientEnum when !clientEnum.IsStringBased:
+                    writer.Append($"{element}.Value.To{cSharpType.Name}()");
+                    break;
             }
         }
     }
