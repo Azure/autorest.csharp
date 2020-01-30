@@ -13,12 +13,12 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
     internal class EnumType : ISchemaType
     {
         public EnumType(ChoiceSchema schema, BuildContext context)
-            :this(schema, context, schema.Choices, true)
+            : this(schema, context, schema.Choices, true)
         {
         }
 
         public EnumType(SealedChoiceSchema schema, BuildContext context)
-            :this(schema, context, schema.Choices, false)
+            : this(schema, context, schema.Choices, false)
         {
         }
 
@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 CreateDescription(c),
                 BuilderHelpers.StringConstant(c.Value))).ToArray();
             IsStringBased = isStringBased;
-            Type = new CSharpType(Declaration.Namespace, Declaration.Name, isValueType: true);
+            Type = new CSharpType(this, Declaration.Namespace, Declaration.Name, isValueType: true);
         }
 
         public bool IsStringBased { get; }
@@ -48,9 +48,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
         private static string CreateDescription(ChoiceValue choiceValue)
         {
-            return string.IsNullOrWhiteSpace(choiceValue.Language.Default.Description) ?
-                choiceValue.Value :
-                BuilderHelpers.EscapeXmlDescription(choiceValue.Language.Default.Description);
+            return string.IsNullOrWhiteSpace(choiceValue.Language.Default.Description) ? choiceValue.Value : BuilderHelpers.EscapeXmlDescription(choiceValue.Language.Default.Description);
         }
     }
 }

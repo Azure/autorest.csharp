@@ -13,13 +13,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         private const string ResponseParameter = "response";
         private const string ResponseField = "_" + ResponseParameter;
 
-        private readonly TypeFactory _typeFactory;
-
-        public ResponseHeaderGroupWriter(TypeFactory typeFactory)
-        {
-            _typeFactory = typeFactory;
-        }
-
         public void WriteHeaderModel(CodeWriter writer, ResponseHeaderGroupType responseHeaderGroup)
         {
             using (writer.Namespace(responseHeaderGroup.Declaration.Namespace))

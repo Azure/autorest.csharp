@@ -27,13 +27,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 {
     internal class ClientWriter
     {
-        private readonly TypeFactory _typeFactory;
-
-        public ClientWriter(TypeFactory typeFactory)
-        {
-            _typeFactory = typeFactory;
-        }
-
         public void WriteClient(CodeWriter writer, Client operationGroup)
         {
             var cs = operationGroup.Type;
@@ -169,7 +162,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     writer.ToSerializeCall(
                         jsonSerialization,
-                        _typeFactory,
                         WriteConstantOrParameter(value),
                         writerName: w => w.Append($"content.{nameof(Utf8JsonRequestContent.JsonWriter)}"));
 
@@ -183,7 +175,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     writer.ToSerializeCall(
                         xmlSerialization,
-                        _typeFactory,
                         WriteConstantOrParameter(value),
                         writerName: w => w.Append($"content.{nameof(XmlWriterContent.XmlWriter)}"));
 
@@ -531,7 +522,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                                 writer.ToDeserializeCall(
                                     jsonSerialization,
-                                    _typeFactory,
                                     w => w.Append($"document.RootElement"),
                                     ref valueVariable
                                 );
@@ -540,7 +530,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                                 writer.Line($"var {document:D} = {typeof(XDocument)}.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);");
                                 writer.ToDeserializeCall(
                                     xmlSerialization,
-                                    _typeFactory,
                                     w => w.Append($"document"),
                                     ref valueVariable
                                 );

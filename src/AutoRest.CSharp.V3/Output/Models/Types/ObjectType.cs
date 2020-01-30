@@ -41,7 +41,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 context.SourceInputModel.FindForSchema(_objectSchema.Name)?.ExistingType);
 
             Description = BuilderHelpers.CreateDescription(objectSchema);
-            Type = new CSharpType(Declaration.Namespace, Declaration.Name, isValueType: false);;
+            Type = new CSharpType(this, Declaration.Namespace, Declaration.Name, isValueType: false);;
         }
 
         public TypeDeclarationOptions Declaration { get; }
@@ -95,7 +95,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
         private ObjectSerialization[] BuildSerializations()
         {
-            return _context.SupportedMediaTypes.Select(type => _serializationBuilder.BuildObject(type, _objectSchema, isNullable: false)).ToArray();
+            return _context.Library.SupportedMediaTypes.Select(type => _serializationBuilder.BuildObject(type, _objectSchema, isNullable: false)).ToArray();
         }
 
         private CSharpType CreateDictionaryType(DictionarySchema inheritedDictionarySchema)

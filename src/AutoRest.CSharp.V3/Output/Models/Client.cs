@@ -24,6 +24,6 @@ namespace AutoRest.CSharp.V3.Output.Models
         public Paging[] PagingMethods { get; }
         public TypeDeclarationOptions DeclaredType { get; }
         public Parameter[] Parameters { get; }
-        public CSharpType Type => new CSharpType(DeclaredType.Namespace, DeclaredType.Name);
+        public CSharpType Type => new CSharpType(this, DeclaredType.Namespace, DeclaredType.Name);
     }
 }

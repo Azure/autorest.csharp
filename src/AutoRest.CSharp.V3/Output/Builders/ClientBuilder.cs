@@ -7,7 +7,6 @@ using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Input;
-using AutoRest.CSharp.V3.Input.Source;
 using AutoRest.CSharp.V3.Output.Models;
 using AutoRest.CSharp.V3.Output.Models.Requests;
 using AutoRest.CSharp.V3.Output.Models.Responses;
@@ -24,15 +23,15 @@ namespace AutoRest.CSharp.V3.Output.Builders
 {
     internal class ClientBuilder
     {
-        private readonly string _defaultOperationsNamespace;
+        private readonly BuildContext _context;
+        private readonly SerializationBuilder _serializationBuilder;
         private readonly TypeFactory _typeFactory;
-        private SerializationBuilder _serializationBuilder;
 
-        public ClientBuilder(string @namespace, TypeFactory typeFactory)
+        public ClientBuilder(BuildContext context)
         {
-            _defaultOperationsNamespace = @namespace;
-            _typeFactory = typeFactory;
-            _serializationBuilder = new SerializationBuilder(typeFactory);
+            _context = context;
+            _serializationBuilder = new SerializationBuilder(context.TypeFactory);
+            _typeFactory = _context.TypeFactory;
         }
 
         public Client BuildClient(OperationGroup operationGroup)
@@ -95,7 +94,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                     }
 
                     var type = objectResponseBody.Type;
-                    var implementation = _typeFactory.ResolveImplementation(type);
+                    var implementation = type.Implementation;
                     if (!(implementation is ObjectType objectType))
                     {
                         throw new InvalidOperationException($"The return type of {processed.Method.Name} has to be and object schema to be used in paging");
@@ -108,7 +107,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
             Method[] methods = processedMethods.Select(om => om.Value.Method).Concat(nextPageMethods).ToArray();
             return new Client(
-                BuilderHelpers.CreateTypeAttributes(clientName, _defaultOperationsNamespace, Accessibility.Internal),
+                BuilderHelpers.CreateTypeAttributes(clientName, _context.DefaultNamespace, Accessibility.Internal),
                 operationGroup.Language.Default.Description,
                 OrderParameters(clientParameters.Values),
                 methods,
@@ -327,7 +326,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             string operationName = operation.CSharpName();
 
             return new ResponseHeaderGroupType(
-                BuilderHelpers.CreateTypeAttributes(operationName + "Headers", _defaultOperationsNamespace, Accessibility.Internal),
+                BuilderHelpers.CreateTypeAttributes(operationName + "Headers", _context.DefaultNamespace, Accessibility.Internal),
                 $"Header model for {operationName}",
                 httpResponse.Headers.Select(CreateResponseHeader).ToArray()
                 );
@@ -351,17 +350,6 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-        }
-
-        private static ParameterOrConstant[] ToParts(string httpRequestUri, Dictionary<string, ParameterOrConstant> parameters)
-        {
-            List<ParameterOrConstant> host = new List<ParameterOrConstant>();
-            foreach ((string text, bool isLiteral) in StringExtensions.GetPathParts(httpRequestUri))
-            {
-                host.Add(isLiteral ? BuilderHelpers.StringConstant(text) : parameters[text]);
-            }
-
-            return host.ToArray();
         }
 
         private static PathSegment[] ToPathParts(string httpRequestUri, Dictionary<string, PathSegment> parameters)

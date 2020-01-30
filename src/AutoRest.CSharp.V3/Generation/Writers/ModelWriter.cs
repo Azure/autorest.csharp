@@ -15,13 +15,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 {
     internal class ModelWriter
     {
-        private readonly TypeFactory _typeFactory;
-
-        public ModelWriter(TypeFactory typeFactory)
-        {
-            _typeFactory = typeFactory;
-        }
-
         public void WriteModel(CodeWriter writer, ISchemaType model)
         {
             switch (model)

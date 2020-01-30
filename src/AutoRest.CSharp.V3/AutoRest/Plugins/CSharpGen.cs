@@ -27,33 +27,17 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
     {
         public async Task<bool> Execute(IPluginCommunication autoRest, CodeModel codeModel, Configuration configuration)
         {
-            var schemas = (codeModel.Schemas.Choices ?? Enumerable.Empty<ChoiceSchema>()).Cast<Schema>()
-                .Concat(codeModel.Schemas.SealedChoices ?? Enumerable.Empty<SealedChoiceSchema>())
-                .Concat(codeModel.Schemas.Objects ?? Enumerable.Empty<ObjectSchema>());
-
             var project = GeneratedCodeWorkspace.Create(configuration.OutputFolder);
             var sourceInputModel = SourceInputModelBuilder.Build(await project.GetCompilationAsync());
 
-            var typeFactory = new TypeFactory();
-            var context = new BuildContext(configuration.Namespace, typeFactory, sourceInputModel, GetMediaTypes(codeModel));
+            var context = new BuildContext(codeModel, configuration.Namespace, sourceInputModel);
 
-            var modelBuilder = new ModelBuilder(context);
-            var clientBuilder = new ClientBuilder(configuration.Namespace, typeFactory);
-            var models = schemas.Select(schema => modelBuilder.BuildModel(schema)).ToArray();
+            var modelWriter = new ModelWriter();
+            var writer = new ClientWriter();
+            var serializeWriter = new SerializationWriter();
+            var headerModelModelWriter = new ResponseHeaderGroupWriter();
 
-            foreach (var model in models)
-            {
-                typeFactory.Add(model);
-            }
-
-            var clients = codeModel.OperationGroups.Select(clientBuilder.BuildClient).ToArray();
-
-            var modelWriter = new ModelWriter(typeFactory);
-            var writer = new ClientWriter(typeFactory);
-            var serializeWriter = new SerializationWriter(typeFactory);
-            var headerModelModelWriter = new ResponseHeaderGroupWriter(typeFactory);
-
-            foreach (var model in models)
+            foreach (var model in context.Library.Models)
             {
                 var codeWriter = new CodeWriter();
                 modelWriter.WriteModel(codeWriter, model);
@@ -66,7 +50,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                 project.AddGeneratedFile($"Models/{name}.Serialization.cs", serializerCodeWriter.ToFormattedCode());
             }
 
-            foreach (var client in clients)
+            foreach (var client in context.Library.Clients)
             {
                 var codeWriter = new CodeWriter();
                 writer.WriteClient(codeWriter, client);
@@ -89,34 +73,6 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
             }
 
             return true;
-        }
-
-        // TODO: remove if https://github.com/Azure/autorest.modelerfour/issues/103 is implemented
-        private KnownMediaType[] GetMediaTypes(CodeModel codeModel)
-        {
-            HashSet<KnownMediaType> types = new HashSet<KnownMediaType>();
-            foreach (OperationGroup operationGroup in codeModel.OperationGroups)
-            {
-                foreach (Operation operation in operationGroup.Operations)
-                {
-                    if (operation.Request.Protocol.Http is HttpWithBodyRequest bodyRequest)
-                    {
-                        types.Add(bodyRequest.KnownMediaType);
-                    }
-
-                    foreach (var response in operation.Responses!)
-                    {
-                        if (response is SchemaResponse _ &&
-                            response.Protocol.Http is HttpResponse httpResponse)
-                        {
-                            types.Add(httpResponse.KnownMediaType);
-                        }
-                    }
-                }
-            }
-
-            // Order so JSON always goes first
-            return types.OrderBy(t => t).ToArray();
         }
     }
 }

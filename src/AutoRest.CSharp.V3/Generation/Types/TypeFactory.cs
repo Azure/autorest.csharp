@@ -3,8 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using AutoRest.CSharp.V3.Input;
 using AutoRest.CSharp.V3.Output.Models.Types;
 
@@ -12,16 +10,11 @@ namespace AutoRest.CSharp.V3.Generation.Types
 {
     internal class TypeFactory
     {
-        private readonly List<ISchemaType> _schemaTypes;
+        private readonly OutputLibrary _library;
 
-        public TypeFactory()
+        public TypeFactory(OutputLibrary library)
         {
-            _schemaTypes = new List<ISchemaType>();
-        }
-
-        public void Add(ISchemaType type)
-        {
-            _schemaTypes.Add(type);
+            _library = library;
         }
 
         private static Type? ToFrameworkType(AllSchemaTypes schemaType) => schemaType switch
@@ -71,16 +64,7 @@ namespace AutoRest.CSharp.V3.Generation.Types
             _ => ResolveReference(schema).WithNullable(isNullable)
         };
 
-        public ITypeProvider ResolveImplementation(CSharpType type) => _schemaTypes.Single(s => s.Type.Namespace == type.Namespace && s.Type.Name == type.Name);
-
-        public bool TryResolveImplementation(CSharpType type, [NotNullWhen(true)] out ITypeProvider? typeProvider)
-        {
-            typeProvider = _schemaTypes.SingleOrDefault(s => s.Type == type);
-
-            return typeProvider != null;
-        }
-
-        public CSharpType ResolveReference(Schema schema) => _schemaTypes.Single(s => s.Schema == schema).Type;
+        public CSharpType ResolveReference(Schema schema) => _library.FindTypeForSchema(schema).Type;
 
         //
         // private CSharpType CreateTypeInfo(Output.Models.TypeReferences.CSharpType schema, bool useConcrete = false, bool useInput = false) => schema switch

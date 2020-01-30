@@ -9,17 +9,20 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 {
     internal class BuildContext
     {
-        public BuildContext(string defaultNamespace, TypeFactory typeFactory, SourceInputModel sourceInputModel, KnownMediaType[] supportedMediaTypes)
+        private readonly CodeModel _codeModel;
+        private OutputLibrary? _library;
+        private TypeFactory? _typeFactory;
+
+        public BuildContext(CodeModel codeModel, string defaultNamespace, SourceInputModel sourceInputModel)
         {
+            _codeModel = codeModel;
             DefaultNamespace = defaultNamespace;
-            TypeFactory = typeFactory;
             SourceInputModel = sourceInputModel;
-            SupportedMediaTypes = supportedMediaTypes;
         }
 
+        public OutputLibrary Library => _library ??= new OutputLibrary(_codeModel, this);
         public string DefaultNamespace { get; }
-        public TypeFactory TypeFactory { get; }
+        public TypeFactory TypeFactory => _typeFactory ??= new TypeFactory(Library);
         public SourceInputModel SourceInputModel { get; }
-        public KnownMediaType[] SupportedMediaTypes { get; }
     }
 }

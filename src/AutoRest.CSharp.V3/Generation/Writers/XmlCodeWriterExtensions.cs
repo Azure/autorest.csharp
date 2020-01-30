@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 
 using System;
-using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Output.Models.Serialization.Xml;
 
 using AutoRest.CSharp.V3.Output.Models.Types;
@@ -13,7 +12,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 {
     internal static class XmlCodeWriterExtensions
     {
-        public static void ToSerializeCall(this CodeWriter writer, XmlElementSerialization serialization, TypeFactory typeFactory, CodeWriterDelegate name, CodeWriterDelegate? writerName = null, CodeWriterDelegate? nameHint = null)
+        public static void ToSerializeCall(this CodeWriter writer, XmlElementSerialization serialization, CodeWriterDelegate name, CodeWriterDelegate? writerName = null, CodeWriterDelegate? nameHint = null)
         {
             writerName ??= w => w.AppendRaw("writer");
 
@@ -32,7 +31,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     {
                         writer.ToSerializeCall(
                             array.ValueSerialization,
-                            typeFactory,
                             w => w.Append($"{itemVariable}"),
                             writerName);
                     }
@@ -49,7 +47,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     {
                         writer.ToSerializeCall(
                             dictionarySerialization.ValueSerialization,
-                            typeFactory,
                             w => w.Append($"{pairVariable}.Value"),
                             writerName);
                     }
@@ -72,7 +69,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         {
                             writer.Line($"{writerName}.WriteStartAttribute({property.Name:L});");
                             writer.ToSerializeValueCall(
-                                typeFactory,
                                 w => w.Append($"{property.MemberName}"),
                                 writerName,
                                 property.ValueSerialization);
@@ -86,7 +82,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         {
                             writer.ToSerializeCall(
                                 property.ValueSerialization,
-                                typeFactory,
                                 w => w.Append($"{property.MemberName}"));
                         }
                     }
@@ -97,7 +92,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         {
                             writer.ToSerializeCall(
                                 property.ArraySerialization,
-                                typeFactory,
                                 w => w.Append($"{property.MemberName}"));
                         }
                     }
@@ -111,7 +105,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     string elementName = elementValueSerialization.Name;
 
-                    if (typeFactory.TryResolveImplementation(type, out ITypeProvider? implementation) && implementation is ObjectType ||
+                    if (type.Implementation is ObjectType ||
                         type.FrameworkType == typeof(object))
                     {
                         writer.Line($"{writerName}.WriteObjectValue({name}, {elementName:L});");
@@ -120,7 +114,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     writer.Line($"{writerName}.WriteStartElement({elementName:L});");
 
-                    writer.ToSerializeValueCall(typeFactory, name, writerName, elementValueSerialization.Value);
+                    writer.ToSerializeValueCall(name, writerName, elementValueSerialization.Value);
 
                     writer.Line($"{writerName}.WriteEndElement();");
 
@@ -130,23 +124,21 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
         }
 
-        private static void ToSerializeValueCall(this CodeWriter writer, TypeFactory typeFactory, CodeWriterDelegate name, CodeWriterDelegate writerName, XmlValueSerialization valueSerialization)
+        private static void ToSerializeValueCall(this CodeWriter writer, CodeWriterDelegate name, CodeWriterDelegate writerName, XmlValueSerialization valueSerialization)
         {
             CSharpType implementationType = valueSerialization.Type;
-            if (typeFactory.TryResolveImplementation(implementationType, out ITypeProvider? typeProvider))
-            {
-                switch (typeProvider)
-                {
-                    case ObjectType _:
-                        throw new NotSupportedException("Object type references are only supported as elements");
 
-                    case EnumType clientEnum:
-                        writer.Append($"{writerName}.WriteValue({name}")
-                            .AppendNullableValue(implementationType)
-                            .AppendRaw(clientEnum.IsStringBased ? ".ToString()" : ".ToSerialString()")
-                            .Line($");");
-                        return;
-                }
+            switch (implementationType.Implementation)
+            {
+                case ObjectType _:
+                    throw new NotSupportedException("Object type references are only supported as elements");
+
+                case EnumType clientEnum:
+                    writer.Append($"{writerName}.WriteValue({name}")
+                        .AppendNullableValue(implementationType)
+                        .AppendRaw(clientEnum.IsStringBased ? ".ToString()" : ".ToSerialString()")
+                        .Line($");");
+                    return;
             }
 
             var frameworkType = implementationType.FrameworkType;
@@ -177,7 +169,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             writer.LineRaw(");");
         }
 
-        public static void ToDeserializeCall(this CodeWriter writer, XmlElementSerialization serialization, TypeFactory typeFactory, CodeWriterDelegate element, ref string destination, bool isElement = false)
+        public static void ToDeserializeCall(this CodeWriter writer, XmlElementSerialization serialization, CodeWriterDelegate element, ref string destination, bool isElement = false)
         {
             var type = serialization.Type;
 
@@ -190,19 +182,19 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
             if (isElement)
             {
-                writer.ToDeserializeElementCall(serialization, typeFactory, w => w.AppendRaw(s), element);
+                writer.ToDeserializeElementCall(serialization, w=> w.AppendRaw(s), element);
             }
             else
             {
-                writer.ToDeserializeCall(serialization, typeFactory, w => w.AppendRaw(s), element);
+                writer.ToDeserializeCall(serialization, w => w.AppendRaw(s), element);
             }
         }
 
-        private static void ToDeserializeCall(this CodeWriter writer, XmlElementSerialization serialization, TypeFactory typeFactory, CodeWriterDelegate destination, CodeWriterDelegate element)
+        private static void ToDeserializeCall(this CodeWriter writer, XmlElementSerialization serialization, CodeWriterDelegate destination, CodeWriterDelegate element)
         {
             if (serialization is XmlArraySerialization arraySerialization && !arraySerialization.Wrapped)
             {
-                writer.ToDeserializeElementCall(serialization, typeFactory, destination, element);
+                writer.ToDeserializeElementCall(serialization, destination, element);
                 return;
             }
 
@@ -214,11 +206,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
             using (writer.Scope($"if ({elementVariable} != null)"))
             {
-                writer.ToDeserializeElementCall(serialization, typeFactory, destination, element);
+                writer.ToDeserializeElementCall(serialization, destination, element);
             }
         }
 
-        private static void ToDeserializeElementCall(this CodeWriter writer, XmlElementSerialization serialization, TypeFactory typeFactory, CodeWriterDelegate destination, CodeWriterDelegate element, bool isElement = false)
+        private static void ToDeserializeElementCall(this CodeWriter writer, XmlElementSerialization serialization, CodeWriterDelegate destination, CodeWriterDelegate element, bool isElement = false)
         {
             switch (serialization)
             {
@@ -233,7 +225,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         var itemVariableName = writer.GetTemporaryVariable("value");
                         writer.ToDeserializeCall(
                             arraySerialization.ValueSerialization,
-                            typeFactory,
                             w => w.AppendRaw(childElementVariable),
                             ref itemVariableName,
                             true);
@@ -256,7 +247,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         var itemVariableName = "value";
                         writer.ToDeserializeCall(
                             dictionarySerialization.ValueSerialization,
-                            typeFactory,
                             w => w.AppendRaw(elementVariable),
                             ref itemVariableName,
                             true);
@@ -277,7 +267,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         using (writer.Scope($"if ({elementVariable} != null)"))
                         {
                             writer.Append($"{destination}.{attribute.MemberName} = ");
-                            writer.ToDeserializeValueCall(attribute.ValueSerialization, typeFactory, w => w.AppendRaw(elementVariable));
+                            writer.ToDeserializeValueCall(attribute.ValueSerialization, w => w.AppendRaw(elementVariable));
                             writer.Line($";");
                         }
                     }
@@ -287,7 +277,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         var itemVariableName = "value";
                         writer.ToDeserializeCall(
                             elem.ValueSerialization,
-                            typeFactory,
                             element,
                             ref itemVariableName);
 
@@ -300,7 +289,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                         writer.ToDeserializeCall(
                             embeddedArray.ArraySerialization,
-                            typeFactory,
                             arrayDestination,
                             element);
                     }
@@ -309,7 +297,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 case XmlElementValueSerialization valueSerialization:
                 {
                     writer.Append($"{destination} = ");
-                    writer.ToDeserializeValueCall(valueSerialization.Value, typeFactory, w => w.Append(element));
+                    writer.ToDeserializeValueCall(valueSerialization.Value, w => w.Append(element));
                     writer.Line($";");
 
                     break;
@@ -317,7 +305,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
         }
 
-        private static void ToDeserializeValueCall(this CodeWriter writer, XmlValueSerialization serialization, TypeFactory typeFactory, CodeWriterDelegate element)
+        private static void ToDeserializeValueCall(this CodeWriter writer, XmlValueSerialization serialization, CodeWriterDelegate element)
         {
             var type = serialization.Type;
             var frameworkType = type.FrameworkType;
@@ -360,21 +348,24 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 return;
             }
 
-            CSharpType cSharpType = type.WithNullable(false);
+            CSharpType nonNullable = type.WithNullable(false);
 
-            switch (typeFactory.ResolveImplementation(type))
+            switch (type.Implementation)
             {
                 case ObjectType _:
-                    writer.Append($"{cSharpType}.Deserialize{cSharpType.Name}({element})");
+                    writer.Append($"{nonNullable}.Deserialize{nonNullable.Name}({element})");
                     break;
 
                 case EnumType clientEnum when clientEnum.IsStringBased:
-                    writer.Append($"new {cSharpType}({element}.Value)");
+                    writer.Append($"new {nonNullable}({element}.Value)");
                     break;
 
                 case EnumType clientEnum when !clientEnum.IsStringBased:
-                    writer.Append($"{element}.Value.To{cSharpType.Name}()");
+                    writer.Append($"{element}.Value.To{nonNullable.Name}()");
                     break;
+
+                default:
+                    throw new NotSupportedException();
             }
         }
     }

@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Diagnostics;
 using System.Text.Json;
 using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Output.Models.Serialization;
@@ -13,7 +14,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 {
     internal static class JsonCodeWriterExtensions
     {
-        public static void ToSerializeCall(this CodeWriter writer, JsonSerialization serialization, TypeFactory typeFactory, CodeWriterDelegate name, CodeWriterDelegate? writerName = null)
+        public static void ToSerializeCall(this CodeWriter writer, JsonSerialization serialization, CodeWriterDelegate name, CodeWriterDelegate? writerName = null)
         {
             writerName ??= w => w.AppendRaw("writer");
 
@@ -30,7 +31,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     {
                         writer.ToSerializeCall(
                             array.ValueSerialization,
-                            typeFactory,
                             w => w.AppendRaw(collectionItemVariable),
                             writerName);
                     }
@@ -49,7 +49,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                             writer.Line($"{writerName}.WritePropertyName({property.Name:L});");
                             writer.ToSerializeCall(
                                 property.ValueSerialization,
-                                typeFactory,
                                 w => w.Append($"{property.MemberName}"));
                         }
                     }
@@ -62,7 +61,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                             writer.Line($"{writerName}.WritePropertyName({itemVariable}.Key);");
                             writer.ToSerializeCall(
                                 dictionary.AdditionalProperties.ValueSerialization,
-                                typeFactory,
                                 w => w.Append($"{itemVariable}.Value"),
                                 writerName);
                         }
@@ -72,9 +70,9 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     return;
 
                 case JsonValueSerialization valueSerialization:
-                    var frameworkType = valueSerialization.Type.FrameworkType;
-                    if (frameworkType != null)
+                    if (valueSerialization.Type.IsFrameworkType)
                     {
+                        var frameworkType = valueSerialization.Type.FrameworkType;
                         bool writeFormat = false;
 
                         writer.Append($"{writerName}.");
@@ -126,7 +124,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         return;
                     }
 
-                    switch (typeFactory.ResolveImplementation(valueSerialization.Type))
+                    switch (valueSerialization.Type.Implementation)
                     {
                         case ObjectType _:
                             writer.Line($"{writerName}.WriteObjectValue({name});");
@@ -147,7 +145,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
         }
 
-        public static void ToDeserializeCall(this CodeWriter writer, JsonSerialization serialization, TypeFactory typeFactory, CodeWriterDelegate element, ref string destination)
+        public static void ToDeserializeCall(this CodeWriter writer, JsonSerialization serialization, CodeWriterDelegate element, ref string destination)
         {
             var type = serialization.Type;
 
@@ -156,7 +154,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             if (serialization is JsonValueSerialization valueSerialization)
             {
                 writer.Append($"var {destination:D} =")
-                    .ToDeserializeCall(valueSerialization, typeFactory, element);
+                    .ToDeserializeCall(valueSerialization, element);
                 writer.LineRaw(";");
             }
             else
@@ -165,11 +163,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                 writer
                     .Line($"{type} {destination:D} = new {type}();")
-                    .ToDeserializeCall(serialization, typeFactory, w => w.AppendRaw(s), element);
+                    .ToDeserializeCall(serialization, w => w.AppendRaw(s), element);
             }
         }
 
-        public static void ToDeserializeCall(this CodeWriter writer, JsonSerialization serialization, TypeFactory typeFactory, CodeWriterDelegate destination, CodeWriterDelegate element)
+        public static void ToDeserializeCall(this CodeWriter writer, JsonSerialization serialization, CodeWriterDelegate destination, CodeWriterDelegate element)
         {
             switch (serialization)
             {
@@ -183,7 +181,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                             writer.Append($"{destination}.Add(");
                             writer.ToDeserializeCall(
                                 valueSerialization,
-                                typeFactory,
                                 w => w.AppendRaw(collectionItemVariable));
                             writer.Line($");");
                         }
@@ -192,7 +189,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                             var itemVariableName = "value";
                             writer.ToDeserializeCall(
                                 array.ValueSerialization,
-                                typeFactory,
                                 w => w.AppendRaw(collectionItemVariable),
                                 ref itemVariableName);
 
@@ -208,7 +204,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     {
                         foreach (JsonPropertySerialization property in dictionary.Properties)
                         {
-                            ReadProperty(writer, itemVariable, destination, property, typeFactory);
+                            ReadProperty(writer, itemVariable, destination, property);
                         }
 
                         if (dictionary.AdditionalProperties is JsonDynamicPropertiesSerialization additionalProperties)
@@ -218,7 +214,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                                 writer.Append($"{destination}.Add({itemVariable}.Name, ");
                                 writer.ToDeserializeCall(
                                     valueSerialization,
-                                    typeFactory,
                                     w => w.Append($"{itemVariable}.Value"));
                                 writer.Line($");");
                             }
@@ -227,7 +222,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                                 var itemVariableName = "value";
                                 writer.ToDeserializeCall(
                                     additionalProperties.ValueSerialization,
-                                    typeFactory,
                                     w => w.Append($"{itemVariable}.Value"),
                                     ref itemVariableName);
 
@@ -240,11 +234,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
 
             writer.Append($"{destination} = ");
-            ToDeserializeCall(writer, (JsonValueSerialization) serialization, typeFactory, element);
+            ToDeserializeCall(writer, (JsonValueSerialization) serialization, element);
             writer.Line($";");
         }
 
-        private static void ReadProperty(CodeWriter writer, string itemVariable, CodeWriterDelegate destination, JsonPropertySerialization property, TypeFactory typeFactory)
+        private static void ReadProperty(CodeWriter writer, string itemVariable, CodeWriterDelegate destination, JsonPropertySerialization property)
         {
             var type = property.ValueSerialization.Type;
             var name = property.MemberName;
@@ -276,16 +270,16 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                 WriteInitialization();
 
-                writer.ToDeserializeCall(property.ValueSerialization, typeFactory, w => w.Append($"{destination}.{name}"), w => w.Append($"{itemVariable}.Value"));
+                writer.ToDeserializeCall(property.ValueSerialization, w => w.Append($"{destination}.{name}"), w => w.Append($"{itemVariable}.Value"));
                 writer.Line($"continue;");
             }
         }
 
-        public static void ToDeserializeCall(this CodeWriter writer, JsonValueSerialization serialization, TypeFactory typeFactory, CodeWriterDelegate element)
+        public static void ToDeserializeCall(this CodeWriter writer, JsonValueSerialization serialization, CodeWriterDelegate element)
         {
-            var frameworkType = serialization.Type.FrameworkType;
-            if (frameworkType != null)
+            if (serialization.Type.IsFrameworkType)
             {
+                var frameworkType = serialization.Type.FrameworkType;
                 bool includeFormat = false;
 
                 writer.Append($"{element}.");
@@ -341,7 +335,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
             else
             {
-                writer.ToDeserializeCall(typeFactory.ResolveImplementation(serialization.Type), element);
+                writer.ToDeserializeCall(serialization.Type.Implementation, element);
             }
         }
 

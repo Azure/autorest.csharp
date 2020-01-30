@@ -16,13 +16,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 {
     internal class SerializationWriter
     {
-        private readonly TypeFactory _typeFactory;
-
-        public SerializationWriter(TypeFactory typeFactory)
-        {
-            _typeFactory = typeFactory;
-        }
-
         public void WriteSerialization(CodeWriter writer, ISchemaType schema)
         {
             switch (schema)
@@ -82,7 +75,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             {
                 writer.ToSerializeCall(
                     serialization,
-                    _typeFactory,
                     w => w.AppendRaw("this"),
                     null,
                     w => w.AppendRaw(namehint));
@@ -94,9 +86,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             using (writer.Scope($"internal static {model.Type} Deserialize{model.Declaration.Name}({typeof(XElement)} element)"))
             {
                 var resultVariable = "result";
-                writer.ToDeserializeCall(serialization,
-                    _typeFactory,
-                    w=> w.AppendRaw("element"), ref resultVariable, true);
+                writer.ToDeserializeCall(serialization, w=> w.AppendRaw("element"), ref resultVariable, true);
                 writer.Line($"return {resultVariable};");
             }
         }
@@ -116,7 +106,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                             {
                                 writer
                                     .Append($"case {implementation.Key:L}: return ")
-                                    .ToDeserializeCall(_typeFactory.ResolveImplementation(implementation.Type), w => w.Append($"element"));
+                                    .ToDeserializeCall(implementation.Type.Implementation, w => w.Append($"element"));
                                 writer.Line($";");
                             }
                         }
@@ -124,7 +114,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 }
 
                 var resultVariable = "result";
-                writer.ToDeserializeCall(jsonSerialization, _typeFactory, w=>w.AppendRaw("element"), ref resultVariable);
+                writer.ToDeserializeCall(jsonSerialization, w=>w.AppendRaw("element"), ref resultVariable);
                 writer.Line($"return {resultVariable};");
             }
         }
@@ -134,7 +124,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             writer.Append($"void {typeof(IUtf8JsonSerializable)}.{nameof(IUtf8JsonSerializable.Write)}({typeof(Utf8JsonWriter)} writer)");
             using (writer.Scope())
             {
-                writer.ToSerializeCall(jsonSerialization, _typeFactory, w => w.AppendRaw("this"));
+                writer.ToSerializeCall(jsonSerialization, w => w.AppendRaw("this"));
             }
         }
 
