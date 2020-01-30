@@ -8,6 +8,6 @@ namespace AutoRest.CSharp.V3.Output.Models.Serialization.Json
 {
     internal abstract class JsonSerialization: ObjectSerialization
     {
-        public abstract CSharpType Type { get; }
+        public abstract CSharpType? Type { get; }
     }
 }

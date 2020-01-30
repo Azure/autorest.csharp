@@ -81,7 +81,7 @@ $testNames =
     #'httpInfrastructure',
     #'httpInfrastructure.quirks',
     #'lro',
-    #'model-flattening',
+    'model-flattening',
     'paging',
     #'parameter-flattening',
     #'report',

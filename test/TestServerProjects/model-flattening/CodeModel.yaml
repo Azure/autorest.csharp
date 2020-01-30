@@ -20,168 +20,163 @@ schemas: !<!Schemas>
           - *ref_0
         properties:
         - !<!Property> 
-          schema: !<!ObjectSchema> &ref_3
-            type: object
+          schema: !<!StringSchema> &ref_3
+            type: string
             apiVersions:
             - !<!ApiVersion> 
               version: 1.0.0
-            properties:
-            - !<!Property> 
-              schema: !<!StringSchema> &ref_24
-                type: string
-                apiVersions:
-                - !<!ApiVersion> 
-                  version: 1.0.0
-                language: !<!Languages> 
-                  default:
-                    name: FlattenedProduct-properties-p.name
-                    description: MISSING·SCHEMA-DESCRIPTION-STRING
-                protocol: !<!Protocols> {}
-              serializedName: p.name
-              language: !<!Languages> 
-                default:
-                  name: p.name
-                  description: MISSING·SCHEMA-DESCRIPTION-STRING
-              protocol: !<!Protocols> {}
-            - !<!Property> 
-              schema: !<!StringSchema> &ref_25
-                type: string
-                apiVersions:
-                - !<!ApiVersion> 
-                  version: 1.0.0
-                language: !<!Languages> 
-                  default:
-                    name: FlattenedProduct-properties-type
-                    description: MISSING·SCHEMA-DESCRIPTION-STRING
-                protocol: !<!Protocols> {}
-              serializedName: type
-              language: !<!Languages> 
-                default:
-                  name: type
-                  description: MISSING·SCHEMA-DESCRIPTION-STRING
-              protocol: !<!Protocols> {}
-            - !<!Property> 
-              schema: !<!ChoiceSchema> &ref_13
-                choices:
-                - !<!ChoiceValue> 
-                  value: Succeeded
-                  language:
-                    default:
-                      name: Succeeded
-                      description: ''
-                - !<!ChoiceValue> 
-                  value: Failed
-                  language:
-                    default:
-                      name: Failed
-                      description: ''
-                - !<!ChoiceValue> 
-                  value: canceled
-                  language:
-                    default:
-                      name: canceled
-                      description: ''
-                - !<!ChoiceValue> 
-                  value: Accepted
-                  language:
-                    default:
-                      name: Accepted
-                      description: ''
-                - !<!ChoiceValue> 
-                  value: Creating
-                  language:
-                    default:
-                      name: Creating
-                      description: ''
-                - !<!ChoiceValue> 
-                  value: Created
-                  language:
-                    default:
-                      name: Created
-                      description: ''
-                - !<!ChoiceValue> 
-                  value: Updating
-                  language:
-                    default:
-                      name: Updating
-                      description: ''
-                - !<!ChoiceValue> 
-                  value: Updated
-                  language:
-                    default:
-                      name: Updated
-                      description: ''
-                - !<!ChoiceValue> 
-                  value: Deleting
-                  language:
-                    default:
-                      name: Deleting
-                      description: ''
-                - !<!ChoiceValue> 
-                  value: Deleted
-                  language:
-                    default:
-                      name: Deleted
-                      description: ''
-                - !<!ChoiceValue> 
-                  value: OK
-                  language:
-                    default:
-                      name: OK
-                      description: ''
-                type: choice
-                apiVersions:
-                - !<!ApiVersion> 
-                  version: 1.0.0
-                choiceType: !<!StringSchema> &ref_6
-                  type: string
-                  language: !<!Languages> 
-                    default:
-                      name: string
-                      description: simple string
-                  protocol: !<!Protocols> {}
-                language: !<!Languages> 
-                  default:
-                    name: FlattenedProduct-properties-provisioningStateValues
-                    description: MISSING·SCHEMA-DESCRIPTION-CHOICE
-                protocol: !<!Protocols> {}
-              readOnly: true
-              serializedName: provisioningStateValues
-              language: !<!Languages> 
-                default:
-                  name: provisioningStateValues
-                  description: MISSING·SCHEMA-DESCRIPTION-CHOICE
-              protocol: !<!Protocols> {}
-            - !<!Property> 
-              schema: !<!StringSchema> &ref_26
-                type: string
-                apiVersions:
-                - !<!ApiVersion> 
-                  version: 1.0.0
-                language: !<!Languages> 
-                  default:
-                    name: FlattenedProduct-properties-provisioningState
-                    description: MISSING·SCHEMA-DESCRIPTION-STRING
-                protocol: !<!Protocols> {}
-              serializedName: provisioningState
-              language: !<!Languages> 
-                default:
-                  name: provisioningState
-                  description: MISSING·SCHEMA-DESCRIPTION-STRING
-              protocol: !<!Protocols> {}
-            extensions:
-              x-ms-client-flatten: true
             language: !<!Languages> 
               default:
-                name: FlattenedProduct-properties
-                description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
-                namespace: Api100
+                name: FlattenedProduct-properties-p.name
+                description: ''
             protocol: !<!Protocols> {}
-          serializedName: properties
+          flattenedNames:
+          - properties
+          - p.name
+          serializedName: p.name
           language: !<!Languages> 
             default:
-              name: properties
-              description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+              name: pName
+              description: ''
+              originalName: p.name
+          protocol: !<!Protocols> {}
+        - !<!Property> 
+          schema: !<!StringSchema> &ref_4
+            type: string
+            apiVersions:
+            - !<!ApiVersion> 
+              version: 1.0.0
+            language: !<!Languages> 
+              default:
+                name: FlattenedProduct-properties-type
+                description: ''
+            protocol: !<!Protocols> {}
+          flattenedNames:
+          - properties
+          - type
+          serializedName: type
+          language: !<!Languages> 
+            default:
+              name: typePropertiesType
+              description: ''
+              originalName: type
+          protocol: !<!Protocols> {}
+        - !<!Property> 
+          schema: !<!ChoiceSchema> &ref_5
+            choices:
+            - !<!ChoiceValue> 
+              value: Succeeded
+              language:
+                default:
+                  name: Succeeded
+                  description: The value 'undefined'
+            - !<!ChoiceValue> 
+              value: Failed
+              language:
+                default:
+                  name: Failed
+                  description: The value 'undefined'
+            - !<!ChoiceValue> 
+              value: canceled
+              language:
+                default:
+                  name: canceled
+                  description: The value 'undefined'
+            - !<!ChoiceValue> 
+              value: Accepted
+              language:
+                default:
+                  name: Accepted
+                  description: The value 'undefined'
+            - !<!ChoiceValue> 
+              value: Creating
+              language:
+                default:
+                  name: Creating
+                  description: The value 'undefined'
+            - !<!ChoiceValue> 
+              value: Created
+              language:
+                default:
+                  name: Created
+                  description: The value 'undefined'
+            - !<!ChoiceValue> 
+              value: Updating
+              language:
+                default:
+                  name: Updating
+                  description: The value 'undefined'
+            - !<!ChoiceValue> 
+              value: Updated
+              language:
+                default:
+                  name: Updated
+                  description: The value 'undefined'
+            - !<!ChoiceValue> 
+              value: Deleting
+              language:
+                default:
+                  name: Deleting
+                  description: The value 'undefined'
+            - !<!ChoiceValue> 
+              value: Deleted
+              language:
+                default:
+                  name: Deleted
+                  description: The value 'undefined'
+            - !<!ChoiceValue> 
+              value: OK
+              language:
+                default:
+                  name: OK
+                  description: The value 'undefined'
+            type: choice
+            apiVersions:
+            - !<!ApiVersion> 
+              version: 1.0.0
+            choiceType: !<!StringSchema> &ref_9
+              type: string
+              language: !<!Languages> 
+                default:
+                  name: string
+                  description: simple string
+              protocol: !<!Protocols> {}
+            language: !<!Languages> 
+              default:
+                name: FlattenedProduct-properties-provisioningStateValues
+                description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+            protocol: !<!Protocols> {}
+          flattenedNames:
+          - properties
+          - provisioningStateValues
+          readOnly: true
+          serializedName: provisioningStateValues
+          language: !<!Languages> 
+            default:
+              name: provisioningStateValues
+              description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+              originalName: provisioningStateValues
+          protocol: !<!Protocols> {}
+        - !<!Property> 
+          schema: !<!StringSchema> &ref_6
+            type: string
+            apiVersions:
+            - !<!ApiVersion> 
+              version: 1.0.0
+            language: !<!Languages> 
+              default:
+                name: FlattenedProduct-properties-provisioningState
+                description: ''
+            protocol: !<!Protocols> {}
+          flattenedNames:
+          - properties
+          - provisioningState
+          serializedName: provisioningState
+          language: !<!Languages> 
+            default:
+              name: provisioningState
+              description: ''
+              originalName: provisioningState
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
@@ -193,7 +188,7 @@ schemas: !<!Schemas>
       - *ref_1
     properties:
     - !<!Property> 
-      schema: !<!StringSchema> &ref_18
+      schema: !<!StringSchema> &ref_22
         type: string
         apiVersions:
         - !<!ApiVersion> 
@@ -209,9 +204,10 @@ schemas: !<!Schemas>
         default:
           name: id
           description: Resource Id
+          originalName: id
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_19
+      schema: !<!StringSchema> &ref_23
         type: string
         apiVersions:
         - !<!ApiVersion> 
@@ -227,11 +223,12 @@ schemas: !<!Schemas>
         default:
           name: type
           description: Resource Type
+          originalName: type
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!DictionarySchema> &ref_11
+      schema: !<!DictionarySchema> &ref_16
         type: dictionary
-        elementType: !<!StringSchema> &ref_20
+        elementType: !<!StringSchema> &ref_24
           type: string
           apiVersions:
           - !<!ApiVersion> 
@@ -239,7 +236,7 @@ schemas: !<!Schemas>
           language: !<!Languages> 
             default:
               name: string
-              description: MISSING·SCHEMA-DESCRIPTION-STRING
+              description: ''
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
@@ -251,9 +248,10 @@ schemas: !<!Schemas>
         default:
           name: tags
           description: Dictionary of <components·schemas·resource·properties·tags·additionalproperties>
+          originalName: tags
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_21
+      schema: !<!StringSchema> &ref_25
         type: string
         apiVersions:
         - !<!ApiVersion> 
@@ -268,9 +266,10 @@ schemas: !<!Schemas>
         default:
           name: location
           description: Resource Location
+          originalName: location
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_22
+      schema: !<!StringSchema> &ref_26
         type: string
         apiVersions:
         - !<!ApiVersion> 
@@ -286,6 +285,7 @@ schemas: !<!Schemas>
         default:
           name: name
           description: Resource Name
+          originalName: name
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -300,7 +300,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     properties:
     - !<!Property> 
-      schema: !<!NumberSchema> &ref_17
+      schema: !<!NumberSchema> &ref_21
         type: integer
         precision: 32
         language: !<!Languages> 
@@ -313,9 +313,10 @@ schemas: !<!Schemas>
         default:
           name: status
           description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+          originalName: status
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_23
+      schema: !<!StringSchema> &ref_27
         type: string
         apiVersions:
         - !<!ApiVersion> 
@@ -323,13 +324,14 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: Error-message
-            description: MISSING·SCHEMA-DESCRIPTION-STRING
+            description: ''
         protocol: !<!Protocols> {}
       serializedName: message
       language: !<!Languages> 
         default:
           name: message
-          description: MISSING·SCHEMA-DESCRIPTION-STRING
+          description: ''
+          originalName: message
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: *ref_2
@@ -338,6 +340,7 @@ schemas: !<!Schemas>
         default:
           name: parentError
           description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+          originalName: parentError
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -346,15 +349,66 @@ schemas: !<!Schemas>
         namespace: Api100
     protocol: !<!Protocols> {}
   - *ref_1
-  - *ref_3
-  - !<!ObjectSchema> &ref_4
+  - !<!ObjectSchema> 
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
     properties:
     - !<!Property> 
-      schema: !<!StringSchema> &ref_27
+      schema: *ref_3
+      serializedName: p.name
+      language: !<!Languages> 
+        default:
+          name: pName
+          description: ''
+          originalName: p.name
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: *ref_4
+      serializedName: type
+      language: !<!Languages> 
+        default:
+          name: type
+          description: ''
+          originalName: type
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: *ref_5
+      readOnly: true
+      serializedName: provisioningStateValues
+      language: !<!Languages> 
+        default:
+          name: provisioningStateValues
+          description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+          originalName: provisioningStateValues
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: *ref_6
+      serializedName: provisioningState
+      language: !<!Languages> 
+        default:
+          name: provisioningState
+          description: ''
+          originalName: provisioningState
+      protocol: !<!Protocols> {}
+    extensions:
+      x-ms-client-flatten: true
+      x-ms-flattened: true
+    language: !<!Languages> 
+      default:
+        name: FlattenedProduct-properties
+        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        namespace: Api100
+    protocol: !<!Protocols> {}
+  - !<!ObjectSchema> &ref_18
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    properties:
+    - !<!Property> 
+      schema: !<!StringSchema> &ref_7
         type: string
         apiVersions:
         - !<!ApiVersion> 
@@ -369,26 +423,33 @@ schemas: !<!Schemas>
         default:
           name: value
           description: the product value
+          originalName: value
       protocol: !<!Protocols> {}
+    extensions:
+      x-ms-flattened: true
     language: !<!Languages> 
       default:
         name: WrappedProduct
         description: The wrapped produc.
         namespace: Api100
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_14
+  - !<!ObjectSchema> &ref_19
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
     properties:
     - !<!Property> 
-      schema: *ref_4
-      serializedName: property
+      schema: *ref_7
+      flattenedNames:
+      - property
+      - value
+      serializedName: value
       language: !<!Languages> 
         default:
-          name: property
-          description: The wrapped produc.
+          name: value
+          description: the product value
+          originalName: value
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -396,7 +457,7 @@ schemas: !<!Schemas>
         description: The wrapped produc.
         namespace: Api100
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_39
+  - !<!ObjectSchema> &ref_37
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -409,9 +470,10 @@ schemas: !<!Schemas>
         default:
           name: productresource
           description: Flattened product.
+          originalName: productresource
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_15
+      schema: !<!ArraySchema> &ref_20
         type: array
         apiVersions:
         - !<!ApiVersion> 
@@ -427,9 +489,10 @@ schemas: !<!Schemas>
         default:
           name: arrayofresources
           description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+          originalName: arrayofresources
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!DictionarySchema> &ref_12
+      schema: !<!DictionarySchema> &ref_17
         type: dictionary
         elementType: *ref_1
         language: !<!Languages> 
@@ -442,6 +505,7 @@ schemas: !<!Schemas>
         default:
           name: dictionaryofresources
           description: Dictionary of <FlattenedProduct>
+          originalName: dictionaryofresources
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -449,160 +513,94 @@ schemas: !<!Schemas>
         description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
         namespace: Api100
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_5
+  - !<!ObjectSchema> &ref_8
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
     children: !<!Relations> 
       all:
-      - !<!ObjectSchema> &ref_9
+      - !<!ObjectSchema> &ref_10
         type: object
         apiVersions:
         - !<!ApiVersion> 
           version: 1.0.0
         parents: !<!Relations> 
           all:
-          - *ref_5
+          - *ref_8
           immediate:
-          - *ref_5
+          - *ref_8
         properties:
         - !<!Property> 
-          schema: !<!ObjectSchema> &ref_10
-            type: object
+          schema: !<!StringSchema> &ref_11
+            type: string
             apiVersions:
             - !<!ApiVersion> 
               version: 1.0.0
-            properties:
-            - !<!Property> 
-              schema: !<!StringSchema> &ref_30
-                type: string
-                apiVersions:
-                - !<!ApiVersion> 
-                  version: 1.0.0
-                language: !<!Languages> 
-                  default:
-                    name: SimpleProductProperties-max_product_display_name
-                    description: Display name of product.
-                protocol: !<!Protocols> {}
-              required: true
-              serializedName: max_product_display_name
-              language: !<!Languages> 
-                default:
-                  name: max_product_display_name
-                  description: Display name of product.
-              protocol: !<!Protocols> {}
-            - !<!Property> 
-              schema: !<!ConstantSchema> &ref_16
-                type: constant
-                apiVersions:
-                - !<!ApiVersion> 
-                  version: 1.0.0
-                value: !<!ConstantValue> 
-                  value: Large
-                  language:
-                    default:
-                      name: ''
-                      description: ''
-                valueType: *ref_6
-                language: !<!Languages> 
-                  default:
-                    name: capacity
-                    description: 'Capacity of product. For example, 4 people.'
-                protocol: !<!Protocols> {}
-              required: true
-              serializedName: max_product_capacity
-              language: !<!Languages> 
-                default:
-                  name: max_product_capacity
-                  description: 'Capacity of product. For example, 4 people.'
-              protocol: !<!Protocols> {}
-            - !<!Property> 
-              schema: !<!ObjectSchema> &ref_7
-                type: object
-                apiVersions:
-                - !<!ApiVersion> 
-                  version: 1.0.0
-                parents: !<!Relations> 
-                  all:
-                  - !<!ObjectSchema> &ref_8
-                    type: object
-                    apiVersions:
-                    - !<!ApiVersion> 
-                      version: 1.0.0
-                    children: !<!Relations> 
-                      all:
-                      - *ref_7
-                      immediate:
-                      - *ref_7
-                    properties:
-                    - !<!Property> 
-                      schema: !<!StringSchema> &ref_31
-                        type: string
-                        apiVersions:
-                        - !<!ApiVersion> 
-                          version: 1.0.0
-                        language: !<!Languages> 
-                          default:
-                            name: GenericUrl-generic_value
-                            description: Generic URL value.
-                        protocol: !<!Protocols> {}
-                      serializedName: generic_value
-                      language: !<!Languages> 
-                        default:
-                          name: generic_value
-                          description: Generic URL value.
-                      protocol: !<!Protocols> {}
-                    language: !<!Languages> 
-                      default:
-                        name: GenericUrl
-                        description: The Generic URL.
-                        namespace: Api100
-                    protocol: !<!Protocols> {}
-                  immediate:
-                  - *ref_8
-                properties:
-                - !<!Property> 
-                  schema: !<!StringSchema> &ref_32
-                    type: string
-                    apiVersions:
-                    - !<!ApiVersion> 
-                      version: 1.0.0
-                    language: !<!Languages> 
-                      default:
-                        name: ProductUrl-@odata.value
-                        description: URL value.
-                    protocol: !<!Protocols> {}
-                  serializedName: '@odata.value'
-                  language: !<!Languages> 
-                    default:
-                      name: '@odata.value'
-                      description: URL value.
-                  protocol: !<!Protocols> {}
-                language: !<!Languages> 
-                  default:
-                    name: ProductUrl
-                    description: The product URL.
-                    namespace: Api100
-                protocol: !<!Protocols> {}
-              required: false
-              serializedName: max_product_image
-              language: !<!Languages> 
-                default:
-                  name: max_product_image
-                  description: The product URL.
-              protocol: !<!Protocols> {}
             language: !<!Languages> 
               default:
-                name: SimpleProductProperties
-                description: The product documentation.
-                namespace: Api100
+                name: SimpleProductProperties-max_product_display_name
+                description: Display name of product.
             protocol: !<!Protocols> {}
-          serializedName: details
+          flattenedNames:
+          - details
+          - max_product_display_name
+          serializedName: max_product_display_name
           language: !<!Languages> 
             default:
-              name: details
-              description: The product documentation.
+              name: maxProductDisplayName
+              description: Display name of product.
+              originalName: max_product_display_name
+          protocol: !<!Protocols> {}
+        - !<!Property> 
+          schema: !<!ConstantSchema> &ref_12
+            type: constant
+            apiVersions:
+            - !<!ApiVersion> 
+              version: 1.0.0
+            value: !<!ConstantValue> 
+              value: Large
+              language:
+                default:
+                  name: ''
+                  description: ''
+            valueType: *ref_9
+            language: !<!Languages> 
+              default:
+                name: capacity
+                description: 'Capacity of product. For example, 4 people.'
+            protocol: !<!Protocols> {}
+          flattenedNames:
+          - details
+          - max_product_capacity
+          serializedName: max_product_capacity
+          language: !<!Languages> 
+            default:
+              name: capacity
+              description: 'Capacity of product. For example, 4 people.'
+              originalName: capacity
+          protocol: !<!Protocols> {}
+        - !<!Property> 
+          schema: !<!StringSchema> &ref_13
+            type: string
+            apiVersions:
+            - !<!ApiVersion> 
+              version: 1.0.0
+            language: !<!Languages> 
+              default:
+                name: ProductUrl-@odata.value
+                description: URL value.
+            protocol: !<!Protocols> {}
+          flattenedNames:
+          - details
+          - max_product_image
+          - '@odata.value'
+          serializedName: '@odata.value'
+          language: !<!Languages> 
+            default:
+              name: OdataValue
+              description: URL value.
+              originalName: '@odata.value'
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
@@ -611,7 +609,7 @@ schemas: !<!Schemas>
             namespace: Api100
         protocol: !<!Protocols> {}
       immediate:
-      - *ref_9
+      - *ref_10
     properties:
     - !<!Property> 
       schema: !<!StringSchema> &ref_28
@@ -628,8 +626,9 @@ schemas: !<!Schemas>
       serializedName: base_product_id
       language: !<!Languages> 
         default:
-          name: base_product_id
+          name: productId
           description: 'Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.'
+          originalName: productId
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_29
@@ -646,8 +645,9 @@ schemas: !<!Schemas>
       serializedName: base_product_description
       language: !<!Languages> 
         default:
-          name: base_product_description
+          name: description
           description: Description of product.
+          originalName: description
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -655,13 +655,120 @@ schemas: !<!Schemas>
         description: The product documentation.
         namespace: Api100
     protocol: !<!Protocols> {}
-  - *ref_9
   - *ref_10
-  - *ref_8
-  - *ref_7
+  - !<!ObjectSchema> 
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    properties:
+    - !<!Property> 
+      schema: *ref_11
+      required: true
+      serializedName: max_product_display_name
+      language: !<!Languages> 
+        default:
+          name: maxProductDisplayName
+          description: Display name of product.
+          originalName: max_product_display_name
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: *ref_12
+      required: true
+      serializedName: max_product_capacity
+      language: !<!Languages> 
+        default:
+          name: capacity
+          description: 'Capacity of product. For example, 4 people.'
+          originalName: capacity
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: *ref_13
+      flattenedNames:
+      - max_product_image
+      - '@odata.value'
+      required: false
+      serializedName: '@odata.value'
+      language: !<!Languages> 
+        default:
+          name: OdataValue
+          description: URL value.
+          originalName: '@odata.value'
+      protocol: !<!Protocols> {}
+    extensions:
+      x-ms-flattened: true
+    language: !<!Languages> 
+      default:
+        name: SimpleProductProperties
+        description: The product documentation.
+        namespace: Api100
+    protocol: !<!Protocols> {}
+  - !<!ObjectSchema> &ref_14
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    children: !<!Relations> 
+      all:
+      - !<!ObjectSchema> &ref_15
+        type: object
+        apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+        parents: !<!Relations> 
+          all:
+          - *ref_14
+          immediate:
+          - *ref_14
+        properties:
+        - !<!Property> 
+          schema: *ref_13
+          serializedName: '@odata.value'
+          language: !<!Languages> 
+            default:
+              name: OdataValue
+              description: URL value.
+              originalName: '@odata.value'
+          protocol: !<!Protocols> {}
+        extensions:
+          x-ms-flattened: true
+        language: !<!Languages> 
+          default:
+            name: ProductUrl
+            description: The product URL.
+            namespace: Api100
+        protocol: !<!Protocols> {}
+      immediate:
+      - *ref_15
+    properties:
+    - !<!Property> 
+      schema: !<!StringSchema> &ref_30
+        type: string
+        apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+        language: !<!Languages> 
+          default:
+            name: GenericUrl-generic_value
+            description: Generic URL value.
+        protocol: !<!Protocols> {}
+      serializedName: generic_value
+      language: !<!Languages> 
+        default:
+          name: genericValue
+          description: Generic URL value.
+          originalName: generic_value
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: GenericUrl
+        description: The Generic URL.
+        namespace: Api100
+    protocol: !<!Protocols> {}
+  - *ref_15
   dictionaries:
-  - *ref_11
-  - !<!DictionarySchema> &ref_38
+  - *ref_16
+  - !<!DictionarySchema> &ref_36
     type: dictionary
     elementType: *ref_1
     language: !<!Languages> 
@@ -669,11 +776,11 @@ schemas: !<!Schemas>
         name: DictionaryOfFlattenedProduct
         description: Dictionary of <FlattenedProduct>
     protocol: !<!Protocols> {}
-  - *ref_12
+  - *ref_17
   choices:
-  - *ref_13
+  - *ref_5
   arrays:
-  - !<!ArraySchema> &ref_34
+  - !<!ArraySchema> &ref_32
     type: array
     apiVersions:
     - !<!ApiVersion> 
@@ -684,7 +791,7 @@ schemas: !<!Schemas>
         name: Array of Resource
         description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
     protocol: !<!Protocols> {}
-  - !<!ArraySchema> &ref_35
+  - !<!ArraySchema> &ref_33
     type: array
     apiVersions:
     - !<!ApiVersion> 
@@ -695,56 +802,58 @@ schemas: !<!Schemas>
         name: Array of FlattenedProduct
         description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
     protocol: !<!Protocols> {}
-  - !<!ArraySchema> &ref_36
+  - !<!ArraySchema> &ref_34
     type: array
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    elementType: *ref_4
+    elementType: *ref_18
     language: !<!Languages> 
       default:
         name: Array of WrappedProduct
         description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
     protocol: !<!Protocols> {}
-  - !<!ArraySchema> &ref_37
+  - !<!ArraySchema> &ref_35
     type: array
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    elementType: *ref_14
+    elementType: *ref_19
     language: !<!Languages> 
       default:
         name: Array of ProductWrapper
         description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
     protocol: !<!Protocols> {}
-  - *ref_15
-  constants:
-  - *ref_16
-  numbers:
-  - *ref_17
-  strings:
-  - *ref_6
-  - *ref_18
-  - *ref_19
   - *ref_20
+  constants:
+  - *ref_12
+  numbers:
   - *ref_21
+  strings:
+  - *ref_9
   - *ref_22
   - *ref_23
   - *ref_24
   - *ref_25
   - *ref_26
   - *ref_27
+  - *ref_3
+  - *ref_4
+  - *ref_6
+  - *ref_7
   - *ref_28
   - *ref_29
+  - *ref_11
   - *ref_30
-  - *ref_31
-  - *ref_32
+  - *ref_13
 globalParameters:
-- !<!Parameter> &ref_33
-  schema: *ref_6
+- !<!Parameter> &ref_31
+  schema: *ref_9
   clientDefaultValue: 'http://localhost:3000'
   implementation: Client
   required: true
+  extensions:
+    x-ms-skip-url-encoding: true
   language: !<!Languages> 
     default:
       name: $host
@@ -766,9 +875,9 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_33
+      - *ref_31
       - !<!Parameter> 
-        schema: *ref_34
+        schema: *ref_32
         implementation: Method
         extensions:
           x-ms-requestBody-name: ResourceArray
@@ -829,7 +938,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_33
+      - *ref_31
       language: !<!Languages> 
         default:
           name: ''
@@ -841,7 +950,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_35
+      schema: *ref_33
       language: !<!Languages> 
         default:
           name: ''
@@ -878,9 +987,9 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_33
+      - *ref_31
       - !<!Parameter> 
-        schema: *ref_36
+        schema: *ref_34
         implementation: Method
         extensions:
           x-ms-requestBody-name: ResourceArray
@@ -941,7 +1050,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_33
+      - *ref_31
       language: !<!Languages> 
         default:
           name: ''
@@ -953,7 +1062,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_37
+      schema: *ref_35
       language: !<!Languages> 
         default:
           name: ''
@@ -990,9 +1099,9 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_33
+      - *ref_31
       - !<!Parameter> 
-        schema: *ref_38
+        schema: *ref_36
         implementation: Method
         extensions:
           x-ms-requestBody-name: ResourceDictionary
@@ -1053,7 +1162,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_33
+      - *ref_31
       language: !<!Languages> 
         default:
           name: ''
@@ -1065,7 +1174,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_38
+      schema: *ref_36
       language: !<!Languages> 
         default:
           name: ''
@@ -1102,9 +1211,9 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_33
+      - *ref_31
       - !<!Parameter> 
-        schema: *ref_39
+        schema: *ref_37
         implementation: Method
         extensions:
           x-ms-requestBody-name: ResourceComplexObject
@@ -1165,7 +1274,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_33
+      - *ref_31
       language: !<!Languages> 
         default:
           name: ''
@@ -1177,7 +1286,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_39
+      schema: *ref_37
       language: !<!Languages> 
         default:
           name: ''
@@ -1214,9 +1323,9 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_33
+      - *ref_31
       - !<!Parameter> 
-        schema: *ref_9
+        schema: *ref_10
         implementation: Method
         extensions:
           x-ms-requestBody-name: SimpleBodyProduct
@@ -1242,7 +1351,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_9
+      schema: *ref_10
       language: !<!Languages> 
         default:
           name: ''
@@ -1281,9 +1390,9 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_33
+      - *ref_31
       - !<!Parameter> 
-        schema: *ref_9
+        schema: *ref_10
         implementation: Method
         extensions:
           x-ms-client-flatten: true
@@ -1310,7 +1419,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_9
+      schema: *ref_10
       language: !<!Languages> 
         default:
           name: ''
@@ -1349,9 +1458,9 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_33
+      - *ref_31
       - !<!Parameter> 
-        schema: *ref_20
+        schema: *ref_24
         implementation: Method
         required: true
         extensions:
@@ -1366,7 +1475,7 @@ operationGroups:
           http: !<!HttpParameter> 
             in: path
       - !<!Parameter> 
-        schema: *ref_9
+        schema: *ref_10
         implementation: Method
         extensions:
           x-ms-client-flatten: true
@@ -1395,7 +1504,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_9
+      schema: *ref_10
       language: !<!Languages> 
         default:
           name: ''

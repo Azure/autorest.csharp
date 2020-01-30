@@ -131,7 +131,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
         private Method? BuildMethod(Operation operation, string clientName, IReadOnlyDictionary<string, Parameter> clientParameters)
         {
             HttpRequest? httpRequest = operation.Request.Protocol.Http as HttpRequest;
-            //TODO: Handle multiple responses
+            //TODO: Handle multiple responses: https://github.com/Azure/autorest.csharp/issues/413
             ServiceResponse? response = operation.Responses.FirstOrDefault();
             HttpResponse? httpResponse = response?.Protocol.Http as HttpResponse;
             if (httpRequest == null || httpResponse == null)
