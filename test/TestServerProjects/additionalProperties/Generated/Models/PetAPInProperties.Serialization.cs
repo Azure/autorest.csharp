@@ -73,7 +73,7 @@ namespace additionalProperties.Models
                     {
                         continue;
                     }
-                    result.AdditionalProperties = new Dictionary<string, float>();
+                    result.AdditionalProperties = new System.Collections.Generic.IDictionary<string, float>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
                         result.AdditionalProperties.Add(property0.Name, property0.Value.GetSingle());

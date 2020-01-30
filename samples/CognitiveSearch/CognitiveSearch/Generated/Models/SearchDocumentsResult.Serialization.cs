@@ -91,10 +91,10 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Facets = new Dictionary<string, ICollection<FacetResult>>();
+                    result.Facets = new System.Collections.Generic.IDictionary<string, ICollection<FacetResult>>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        List<FacetResult> value = new List<FacetResult>();
+                        ICollection<FacetResult> value = new List<FacetResult>();
                         foreach (var item in property0.Value.EnumerateArray())
                         {
                             value.Add(FacetResult.DeserializeFacetResult(item));

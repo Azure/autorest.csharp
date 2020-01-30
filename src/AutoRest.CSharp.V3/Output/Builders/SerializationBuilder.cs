@@ -94,11 +94,16 @@ namespace AutoRest.CSharp.V3.Output.Builders
                     return BuildSerialization(constantSchema.ValueType, constantSchema.Value.Value == null);
                 case ArraySchema arraySchema:
                     return new JsonArraySerialization(
-                        _typeFactory.CreateImplementationType(arraySchema, isNullable), BuildSerialization(arraySchema.ElementType, false));
+                        _typeFactory.CreateType(arraySchema, isNullable),
+                        BuildSerialization(arraySchema.ElementType, false),
+                        _typeFactory.CreateImplementationType(arraySchema, isNullable));
                 case DictionarySchema dictionarySchema:
-                    var dictionaryElementTypeReference = _typeFactory.CreateImplementationType(dictionarySchema, isNullable);
-                    return new JsonObjectSerialization(dictionaryElementTypeReference, Array.Empty<JsonPropertySerialization>(),
-                        new JsonDynamicPropertiesSerialization(BuildSerialization(dictionarySchema.ElementType, false)));
+                    return new JsonObjectSerialization(
+                        _typeFactory.CreateType(dictionarySchema, isNullable),
+                        Array.Empty<JsonPropertySerialization>(),
+                        new JsonDynamicPropertiesSerialization(BuildSerialization(dictionarySchema.ElementType, false)),
+                        _typeFactory.CreateInputType(dictionarySchema, isNullable)
+                        );
                 default:
                     return new JsonValueSerialization(
                         _typeFactory.CreateType(schema, isNullable),
@@ -168,7 +173,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             foreach ((string name, PropertyBag innerBag) in propertyBag.Bag)
             {
                 JsonPropertySerialization[] serializationProperties = GetPropertySerializationsFromBag(innerBag).ToArray();
-                JsonObjectSerialization objectSerialization = new JsonObjectSerialization(null, serializationProperties, null);
+                JsonObjectSerialization objectSerialization = new JsonObjectSerialization(null, serializationProperties, null, null);
                 yield return new JsonPropertySerialization(name, null, objectSerialization);
             }
         }
@@ -178,7 +183,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             PropertyBag propertyBag = new PropertyBag();
             propertyBag.Properties.AddRange(EnumerateHierarchy(objectSchema).SelectMany(s => s.Properties!));
             PopulatePropertyBag(propertyBag, 0);
-            return new JsonObjectSerialization(schemaTypeReference, GetPropertySerializationsFromBag(propertyBag).ToArray(), CreateAdditionalProperties(objectSchema));
+            return new JsonObjectSerialization(schemaTypeReference, GetPropertySerializationsFromBag(propertyBag).ToArray(), CreateAdditionalProperties(objectSchema), schemaTypeReference);
         }
 
         private class PropertyBag

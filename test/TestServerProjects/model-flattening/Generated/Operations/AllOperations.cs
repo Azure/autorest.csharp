@@ -130,7 +130,7 @@ namespace model_flattening
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            List<FlattenedProduct> value = new List<FlattenedProduct>();
+                            ICollection<FlattenedProduct> value = new List<FlattenedProduct>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(FlattenedProduct.DeserializeFlattenedProduct(item));
@@ -162,7 +162,7 @@ namespace model_flattening
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            List<FlattenedProduct> value = new List<FlattenedProduct>();
+                            ICollection<FlattenedProduct> value = new List<FlattenedProduct>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(FlattenedProduct.DeserializeFlattenedProduct(item));
@@ -277,7 +277,7 @@ namespace model_flattening
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            List<ProductWrapper> value = new List<ProductWrapper>();
+                            ICollection<ProductWrapper> value = new List<ProductWrapper>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(ProductWrapper.DeserializeProductWrapper(item));
@@ -309,7 +309,7 @@ namespace model_flattening
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            List<ProductWrapper> value = new List<ProductWrapper>();
+                            ICollection<ProductWrapper> value = new List<ProductWrapper>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(ProductWrapper.DeserializeProductWrapper(item));
@@ -425,7 +425,7 @@ namespace model_flattening
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, FlattenedProduct> value = new Dictionary<string, FlattenedProduct>();
+                            IDictionary<string, FlattenedProduct> value = new System.Collections.Generic.IDictionary<string, FlattenedProduct>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, FlattenedProduct.DeserializeFlattenedProduct(property.Value));
@@ -457,7 +457,7 @@ namespace model_flattening
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, FlattenedProduct> value = new Dictionary<string, FlattenedProduct>();
+                            IDictionary<string, FlattenedProduct> value = new System.Collections.Generic.IDictionary<string, FlattenedProduct>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, FlattenedProduct.DeserializeFlattenedProduct(property.Value));

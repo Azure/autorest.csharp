@@ -3,6 +3,7 @@
 
 using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Output.Models.Serialization;
@@ -157,14 +158,18 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 string s = destination;
 
                 var type = serialization.Type;
+                TryGetInitializerType(serialization, out CSharpType? implementationType);
+
                 Debug.Assert(type != null);
+                Debug.Assert(implementationType != null);
+
                 writer
-                    .Line($"{type} {destination:D} = new {type}();")
+                    .Line($"{type} {destination:D} = new {implementationType}();")
                     .ToDeserializeCall(serialization, w => w.AppendRaw(s), element);
             }
         }
 
-        public static void ToDeserializeCall(this CodeWriter writer, JsonSerialization serialization, CodeWriterDelegate destination, CodeWriterDelegate element)
+        private static void ToDeserializeCall(this CodeWriter writer, JsonSerialization serialization, CodeWriterDelegate destination, CodeWriterDelegate element)
         {
             switch (serialization)
             {
@@ -252,9 +257,9 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
             void WriteInitialization()
             {
-                if (hasNullableType && !(property.ValueSerialization is JsonValueSerialization))
+                if (hasNullableType && TryGetInitializerType(property.ValueSerialization, out CSharpType? initializerType))
                 {
-                    writer.Line($"{destination}.{name} = new {type}();");
+                    writer.Line($"{destination}.{name} = new {initializerType}();");
                 }
             }
 
@@ -274,7 +279,19 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
         }
 
-        public static void ToDeserializeCall(this CodeWriter writer, JsonValueSerialization serialization, CodeWriterDelegate element)
+        private static bool TryGetInitializerType(JsonSerialization jsonSerialization, [NotNullWhen(true)] out CSharpType? type)
+        {
+            type = jsonSerialization switch
+            {
+                JsonObjectSerialization objectSerialization => objectSerialization.InitializeType,
+                JsonArraySerialization arraySerialization => arraySerialization.InitializeType,
+                _ => null
+            };
+
+            return type != null;
+        }
+
+        private static void ToDeserializeCall(this CodeWriter writer, JsonValueSerialization serialization, CodeWriterDelegate element)
         {
             if (serialization.Type.IsFrameworkType)
             {

@@ -96,7 +96,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.HttpHeaders = new Dictionary<string, string>();
+                    result.HttpHeaders = new System.Collections.Generic.IDictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
                         result.HttpHeaders.Add(property0.Name, property0.Value.GetString());

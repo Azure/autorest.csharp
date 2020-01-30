@@ -87,7 +87,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
         {
             return string.IsNullOrWhiteSpace(schema.Language.Default.Description) ?
                 $"The {schema.Name}." :
-                BuilderHelpers.EscapeXmlDescription(schema.Language.Default.Description);
+                EscapeXmlDescription(schema.Language.Default.Description);
         }
     }
 }

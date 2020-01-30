@@ -38,7 +38,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    result.DefaultProgram = new Dictionary<string, string>();
+                    result.DefaultProgram = new System.Collections.Generic.IDictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
                         result.DefaultProgram.Add(property0.Name, property0.Value.GetString());

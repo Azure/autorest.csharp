@@ -27,13 +27,6 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
         public Client[] Clients => _clients ??= BuildClients();
 
-        private Client[] BuildClients()
-        {
-            var clientBuilder = new ClientBuilder(_context);
-
-            return _codeModel.OperationGroups.Select(clientBuilder.BuildClient).ToArray();
-        }
-
         public KnownMediaType[] SupportedMediaTypes { get; }
 
         public ISchemaType FindTypeForSchema(Schema schema)
@@ -42,6 +35,13 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         }
 
         private Dictionary<Schema, ISchemaType> SchemaMap => _models ??= BuildModels();
+
+        private Client[] BuildClients()
+        {
+            var clientBuilder = new ClientBuilder(_context);
+
+            return _codeModel.OperationGroups.Select(clientBuilder.BuildClient).ToArray();
+        }
 
         private Dictionary<Schema, ISchemaType> BuildModels()
         {
