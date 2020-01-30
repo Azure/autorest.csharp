@@ -43,10 +43,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     implementsTypes.Add(writer.Type(schema.Inherits));
                 }
 
-                if (schema.ImplementsDictionary != null)
+                if (schema.ImplementsDictionaryElementType != null)
                 {
-                    var dictionaryType = schema.ImplementsDictionary;
-                    implementsTypes.Add(writer.Type(dictionaryType));
+                    var elementType = schema.ImplementsDictionaryElementType;
+                    implementsTypes.Add(
+                        writer.Type(new CSharpType(typeof(IDictionary<,>), new CSharpType(typeof(string)), elementType)));
                 }
 
                 writer.WriteXmlDocumentationSummary(schema.Description);
@@ -75,19 +76,19 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         }
                         else if (property.ImplementationType != null)
                         {
-                            writer.Append($" = new {property.Type}();");
+                            writer.Append($" = new {property.ImplementationType}();");
                         }
 
                         writer.Line();
                     }
 
-                    if (schema.ImplementsDictionary != null)
+                    if (schema.ImplementsDictionaryElementType is CSharpType itemType)
                     {
-                        var fieldType = schema.ImplementsDictionary;
+                        var dictionaryType = new CSharpType(typeof(IDictionary<,>), new CSharpType(typeof(string)), itemType);
+                        var implementation = new CSharpType(typeof(Dictionary<,>), new CSharpType(typeof(string)), itemType);
 
-                        Debug.Assert(fieldType.Arguments.Length == 2);
-                        var keyType = fieldType.Arguments[0];
-                        var itemType = fieldType.Arguments[1];
+                        Debug.Assert(dictionaryType.Arguments.Length == 2);
+                        var keyType = new CSharpType(typeof(string));
 
                         var keyValuePairType = new CSharpType(typeof(KeyValuePair<,>), keyType, itemType);
                         var iEnumeratorKeyValuePairType = new CSharpType(typeof(IEnumerator<>), keyValuePairType);
@@ -98,7 +99,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         var iEnumerable = new CSharpType(typeof(IEnumerable));
 
                         string additionalProperties = "_additionalProperties";
-                        writer.Line($"private readonly {fieldType} {additionalProperties} = new {fieldType}();");
+                        writer.Line($"private readonly {dictionaryType} {additionalProperties} = new {implementation}();");
 
                         writer
                             .WriteXmlDocumentationInheritDoc()

@@ -65,7 +65,7 @@ namespace CognitiveSearch.Models
                     result.Highlights = new Dictionary<string, ICollection<string>>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        ICollection<string> value = new List<string>();
+                        List<string> value = new List<string>();
                         foreach (var item in property0.Value.EnumerateArray())
                         {
                             value.Add(item.GetString());

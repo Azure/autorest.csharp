@@ -58,7 +58,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
         public ObjectTypeDiscriminator? Discriminator => _discriminator ??= BuildDiscriminator();
 
-        public CSharpType? ImplementsDictionary => _inheritsType ??= CreateInheritedDictionary();
+        public CSharpType? ImplementsDictionaryElementType => _inheritsType ??= CreateInheritedDictionaryElementType();
 
         public CSharpType Type { get; }
 
@@ -98,12 +98,9 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             return _context.Library.SupportedMediaTypes.Select(type => _serializationBuilder.BuildObject(type, _objectSchema, isNullable: false)).ToArray();
         }
 
-        private CSharpType CreateDictionaryType(DictionarySchema inheritedDictionarySchema)
+        private CSharpType CreateDictionaryElementType(DictionarySchema inheritedDictionarySchema)
         {
-            return new CSharpType(typeof(IDictionary<,>),
-                isNullable: false,
-                new CSharpType(typeof(string)),
-                _typeFactory.CreateType(inheritedDictionarySchema.ElementType, false));
+            return _typeFactory.CreateType(inheritedDictionarySchema.ElementType, false);
         }
 
         private ObjectTypeDiscriminatorImplementation[] CreateDiscriminatorImplementations(Discriminator schemaDiscriminator)
@@ -130,7 +127,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             Constant? defaultValue = null;
 
             CSharpType type;
-            CSharpType? initializeType = null;
+            CSharpType? implementationType = null;
             if (property.Schema is ConstantSchema constantSchema)
             {
                 type = _typeFactory.CreateType(constantSchema.ValueType, false);
@@ -143,9 +140,9 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 {
                     defaultValue = BuilderHelpers.ParseConstant(property.ClientDefaultValue, type);
                 }
-                else if (property.Required == true && (property.Schema is ArraySchema || property.Schema is DictionarySchema))
+                else if (property.Required == true && (property.Schema is ObjectSchema || property.Schema is ArraySchema || property.Schema is DictionarySchema))
                 {
-                    initializeType = type;
+                    implementationType = _typeFactory.CreateImplementationType(property.Schema, property.IsNullable());
                 }
             }
 
@@ -153,7 +150,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 BuilderHelpers.EscapeXmlDescription(property.Language.Default.Description),
                 type,
                 isReadOnly,
-                initializeType,
+                implementationType,
                 property,
                 defaultValue);
         }
@@ -171,13 +168,13 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             return null;
         }
 
-        private CSharpType? CreateInheritedDictionary()
+        private CSharpType? CreateInheritedDictionaryElementType()
         {
             foreach (ComplexSchema complexSchema in _objectSchema.Parents!.Immediate)
             {
                 if (complexSchema is DictionarySchema dictionarySchema)
                 {
-                    return CreateDictionaryType(dictionarySchema);
+                    return CreateDictionaryElementType(dictionarySchema);
                 };
             }
 

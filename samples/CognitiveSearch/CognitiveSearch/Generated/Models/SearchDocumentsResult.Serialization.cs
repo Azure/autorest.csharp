@@ -94,7 +94,7 @@ namespace CognitiveSearch.Models
                     result.Facets = new Dictionary<string, ICollection<FacetResult>>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        ICollection<FacetResult> value = new List<FacetResult>();
+                        List<FacetResult> value = new List<FacetResult>();
                         foreach (var item in property0.Value.EnumerateArray())
                         {
                             value.Add(FacetResult.DeserializeFacetResult(item));

@@ -146,8 +146,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         public static void ToDeserializeCall(this CodeWriter writer, JsonSerialization serialization, CodeWriterDelegate element, ref string destination)
         {
-            var type = serialization.Type;
-
             destination = writer.GetTemporaryVariable(destination);
 
             if (serialization is JsonValueSerialization valueSerialization)
@@ -160,6 +158,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             {
                 string s = destination;
 
+                var type = serialization.Type;
                 Debug.Assert(type != null);
                 writer
                     .Line($"{type} {destination:D} = new {type}();")
@@ -242,6 +241,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         {
             CSharpType? type = property.ValueSerialization.Type;
             string? name = property.MemberName;
+
             bool hasNullableType = type != null && type.IsNullable;
 
             void WriteNullCheck()
@@ -254,9 +254,9 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
             void WriteInitialization()
             {
-                if (property.InitializeType != null)
+                if (hasNullableType && !(property.ValueSerialization is JsonValueSerialization))
                 {
-                    writer.Line($"{destination}.{name} = new {property.InitializeType}();");
+                    writer.Line($"{destination}.{name} = new {type}();");
                 }
             }
 

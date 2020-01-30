@@ -298,7 +298,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 var itemType = _typeFactory.CreateType(arraySchema.ElementType, false);
 
                 var name = $"{method.Name}Pageable";
-                return new Paging(method, nextPageMethod, name, nextLinkProperty.Name, itemProperty.Name, itemType);
+                return new Paging(method, nextPageMethod, name, nextLinkProperty?.Name, itemProperty.Name, itemType);
             }
             else
             {
@@ -309,7 +309,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
         private Parameter BuildParameter(RequestParameter requestParameter) => new Parameter(
             requestParameter.CSharpName(),
             CreateDescription(requestParameter),
-            _typeFactory.CreateType(requestParameter.Schema, requestParameter.IsNullable()),
+            _typeFactory.CreateInputType(requestParameter.Schema, requestParameter.IsNullable()),
             ParseConstant(requestParameter),
             requestParameter.Required == true);
 

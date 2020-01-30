@@ -64,18 +64,47 @@ namespace AutoRest.CSharp.V3.Generation.Types
             _ => ResolveReference(schema).WithNullable(isNullable)
         };
 
+        public CSharpType CreateImplementationType(Schema schema, bool isNullable)
+        {
+            var definitionType = CreateType(schema, isNullable);
+
+            if (!definitionType.IsFrameworkType)
+            {
+                return definitionType;
+            }
+
+            if (definitionType.FrameworkType == typeof(ICollection<>))
+            {
+                return new CSharpType(typeof(List<>), definitionType.IsNullable, definitionType.Arguments);
+            }
+
+            if (definitionType.FrameworkType == typeof(IDictionary<,>))
+            {
+                return new CSharpType(typeof(Dictionary<,>), definitionType.IsNullable, definitionType.Arguments);
+            }
+
+            return definitionType;
+        }
+
+        public CSharpType CreateInputType(Schema schema, bool isNullable)
+        {
+            var definitionType = CreateType(schema, isNullable);
+
+            if (!definitionType.IsFrameworkType)
+            {
+                return definitionType;
+            }
+
+            if (definitionType.FrameworkType == typeof(ICollection<>))
+            {
+                return new CSharpType(typeof(IEnumerable<>), definitionType.IsNullable, definitionType.Arguments);
+            }
+
+            return definitionType;
+        }
+
         public CSharpType ResolveReference(Schema schema) => _library.FindTypeForSchema(schema).Type;
 
-        //
-        // private CSharpType CreateTypeInfo(Output.Models.TypeReferences.CSharpType schema, bool useConcrete = false, bool useInput = false) => schema switch
-        // {
-        //     CollectionTypeReference arraySchema => ArrayTypeInfo(arraySchema, useConcrete, useInput),
-        //     DictionaryTypeReference dictionarySchema => DictionaryTypeInfo(dictionarySchema, useConcrete),
-        //     SchemaTypeReference schemaTypeReference => DefaultTypeInfo(schemaTypeReference),
-        //     FrameworkTypeReference frameworkTypeReference => new CSharpType(frameworkTypeReference.Type, isNullable: frameworkTypeReference.IsNullable),
-        //     _ => throw new NotImplementedException()
-        // };
-        //
         // private CSharpType ArrayTypeInfo(CollectionTypeReference schema, bool useConcrete = false, bool useInput = false)
         // {
         //     bool isNullable = schema.IsNullable;

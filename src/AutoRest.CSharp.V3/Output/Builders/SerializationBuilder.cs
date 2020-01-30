@@ -65,14 +65,14 @@ namespace AutoRest.CSharp.V3.Output.Builders
                     var wrapped = isRoot || arraySchema.Serialization?.Xml?.Wrapped == true;
 
                     return new XmlArraySerialization(
-                        _typeFactory.CreateType(arraySchema, isNullable),
+                        _typeFactory.CreateImplementationType(arraySchema, isNullable),
                         BuildXmlElementSerialization(arraySchema.ElementType, false, null, false),
                         xmlName,
                         wrapped);
 
                 case DictionarySchema dictionarySchema:
                     return new XmlDictionarySerialization(
-                        _typeFactory.CreateType(dictionarySchema, isNullable),
+                        _typeFactory.CreateImplementationType(dictionarySchema, isNullable),
                         BuildXmlElementSerialization(dictionarySchema.ElementType, false, "!dictionary-item", false),
                         xmlName);
                 default:
@@ -94,13 +94,9 @@ namespace AutoRest.CSharp.V3.Output.Builders
                     return BuildSerialization(constantSchema.ValueType, constantSchema.Value.Value == null);
                 case ArraySchema arraySchema:
                     return new JsonArraySerialization(
-                        _typeFactory.CreateType(arraySchema, isNullable), BuildSerialization(arraySchema.ElementType, false));
+                        _typeFactory.CreateImplementationType(arraySchema, isNullable), BuildSerialization(arraySchema.ElementType, false));
                 case DictionarySchema dictionarySchema:
-                    var dictionaryElementTypeReference = new CSharpType(typeof(Dictionary<,>),
-                        isNullable,
-                        new CSharpType(typeof(string)),
-                        _typeFactory.CreateType(dictionarySchema.ElementType, false));
-
+                    var dictionaryElementTypeReference = _typeFactory.CreateImplementationType(dictionarySchema, isNullable);
                     return new JsonObjectSerialization(dictionaryElementTypeReference, Array.Empty<JsonPropertySerialization>(),
                         new JsonDynamicPropertiesSerialization(BuildSerialization(dictionarySchema.ElementType, false)));
                 default:
@@ -165,8 +161,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 yield return new JsonPropertySerialization(
                     property.SerializedName,
                     property.CSharpName(),
-                    BuildSerialization(property.Schema, property.IsNullable()),
-                    null
+                    BuildSerialization(property.Schema, property.IsNullable())
                     );
             }
 
@@ -174,7 +169,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             {
                 JsonPropertySerialization[] serializationProperties = GetPropertySerializationsFromBag(innerBag).ToArray();
                 JsonObjectSerialization objectSerialization = new JsonObjectSerialization(null, serializationProperties, null);
-                yield return new JsonPropertySerialization(name, null, objectSerialization, null);
+                yield return new JsonPropertySerialization(name, null, objectSerialization);
             }
         }
 

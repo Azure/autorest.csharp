@@ -105,8 +105,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     string elementName = elementValueSerialization.Name;
 
-                    if (type.Implementation is ObjectType ||
-                        type.FrameworkType == typeof(object))
+                    if ((!type.IsFrameworkType && type.Implementation is ObjectType) ||
+                        (type.IsFrameworkType && type.FrameworkType == typeof(object)))
                     {
                         writer.Line($"{writerName}.WriteObjectValue({name}, {elementName:L});");
                         return;
@@ -128,17 +128,20 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         {
             CSharpType implementationType = valueSerialization.Type;
 
-            switch (implementationType.Implementation)
+            if (!implementationType.IsFrameworkType)
             {
-                case ObjectType _:
-                    throw new NotSupportedException("Object type references are only supported as elements");
+                switch (implementationType.Implementation)
+                {
+                    case ObjectType _:
+                        throw new NotSupportedException("Object type references are only supported as elements");
 
-                case EnumType clientEnum:
-                    writer.Append($"{writerName}.WriteValue({name}")
-                        .AppendNullableValue(implementationType)
-                        .AppendRaw(clientEnum.IsStringBased ? ".ToString()" : ".ToSerialString()")
-                        .Line($");");
-                    return;
+                    case EnumType clientEnum:
+                        writer.Append($"{writerName}.WriteValue({name}")
+                            .AppendNullableValue(implementationType)
+                            .AppendRaw(clientEnum.IsStringBased ? ".ToString()" : ".ToSerialString()")
+                            .Line($");");
+                        return;
+                }
             }
 
             var frameworkType = implementationType.FrameworkType;
@@ -308,10 +311,10 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         private static void ToDeserializeValueCall(this CodeWriter writer, XmlValueSerialization serialization, CodeWriterDelegate element)
         {
             var type = serialization.Type;
-            var frameworkType = type.FrameworkType;
-            if (frameworkType != null)
-            {
 
+            if (type.IsFrameworkType)
+            {
+                var frameworkType = type.FrameworkType;
                 if (frameworkType == typeof(bool) ||
                     frameworkType == typeof(char) ||
                     frameworkType == typeof(short) ||

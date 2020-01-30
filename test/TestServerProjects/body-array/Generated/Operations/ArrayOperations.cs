@@ -58,7 +58,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<int> value = new List<int>();
+                            List<int> value = new List<int>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetInt32());
@@ -90,7 +90,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<int> value = new List<int>();
+                            List<int> value = new List<int>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetInt32());
@@ -133,7 +133,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<int> value = new List<int>();
+                            List<int> value = new List<int>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetInt32());
@@ -165,7 +165,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<int> value = new List<int>();
+                            List<int> value = new List<int>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetInt32());
@@ -208,7 +208,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<int> value = new List<int>();
+                            List<int> value = new List<int>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetInt32());
@@ -240,7 +240,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<int> value = new List<int>();
+                            List<int> value = new List<int>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetInt32());
@@ -363,7 +363,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<bool> value = new List<bool>();
+                            List<bool> value = new List<bool>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetBoolean());
@@ -395,7 +395,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<bool> value = new List<bool>();
+                            List<bool> value = new List<bool>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetBoolean());
@@ -518,7 +518,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<bool> value = new List<bool>();
+                            List<bool> value = new List<bool>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetBoolean());
@@ -550,7 +550,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<bool> value = new List<bool>();
+                            List<bool> value = new List<bool>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetBoolean());
@@ -593,7 +593,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<bool> value = new List<bool>();
+                            List<bool> value = new List<bool>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetBoolean());
@@ -625,7 +625,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<bool> value = new List<bool>();
+                            List<bool> value = new List<bool>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetBoolean());
@@ -668,7 +668,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<int> value = new List<int>();
+                            List<int> value = new List<int>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetInt32());
@@ -700,7 +700,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<int> value = new List<int>();
+                            List<int> value = new List<int>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetInt32());
@@ -823,7 +823,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<int> value = new List<int>();
+                            List<int> value = new List<int>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetInt32());
@@ -855,7 +855,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<int> value = new List<int>();
+                            List<int> value = new List<int>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetInt32());
@@ -898,7 +898,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<int> value = new List<int>();
+                            List<int> value = new List<int>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetInt32());
@@ -930,7 +930,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<int> value = new List<int>();
+                            List<int> value = new List<int>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetInt32());
@@ -973,7 +973,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<long> value = new List<long>();
+                            List<long> value = new List<long>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetInt64());
@@ -1005,7 +1005,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<long> value = new List<long>();
+                            List<long> value = new List<long>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetInt64());
@@ -1128,7 +1128,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<long> value = new List<long>();
+                            List<long> value = new List<long>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetInt64());
@@ -1160,7 +1160,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<long> value = new List<long>();
+                            List<long> value = new List<long>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetInt64());
@@ -1203,7 +1203,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<long> value = new List<long>();
+                            List<long> value = new List<long>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetInt64());
@@ -1235,7 +1235,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<long> value = new List<long>();
+                            List<long> value = new List<long>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetInt64());
@@ -1278,7 +1278,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<float> value = new List<float>();
+                            List<float> value = new List<float>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetSingle());
@@ -1310,7 +1310,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<float> value = new List<float>();
+                            List<float> value = new List<float>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetSingle());
@@ -1433,7 +1433,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<float> value = new List<float>();
+                            List<float> value = new List<float>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetSingle());
@@ -1465,7 +1465,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<float> value = new List<float>();
+                            List<float> value = new List<float>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetSingle());
@@ -1508,7 +1508,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<float> value = new List<float>();
+                            List<float> value = new List<float>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetSingle());
@@ -1540,7 +1540,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<float> value = new List<float>();
+                            List<float> value = new List<float>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetSingle());
@@ -1583,7 +1583,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<double> value = new List<double>();
+                            List<double> value = new List<double>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDouble());
@@ -1615,7 +1615,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<double> value = new List<double>();
+                            List<double> value = new List<double>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDouble());
@@ -1738,7 +1738,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<double> value = new List<double>();
+                            List<double> value = new List<double>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDouble());
@@ -1770,7 +1770,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<double> value = new List<double>();
+                            List<double> value = new List<double>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDouble());
@@ -1813,7 +1813,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<double> value = new List<double>();
+                            List<double> value = new List<double>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDouble());
@@ -1845,7 +1845,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<double> value = new List<double>();
+                            List<double> value = new List<double>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDouble());
@@ -1888,7 +1888,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<string> value = new List<string>();
+                            List<string> value = new List<string>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetString());
@@ -1920,7 +1920,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<string> value = new List<string>();
+                            List<string> value = new List<string>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetString());
@@ -2043,7 +2043,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<FooEnum> value = new List<FooEnum>();
+                            List<FooEnum> value = new List<FooEnum>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetString().ToFooEnum());
@@ -2075,7 +2075,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<FooEnum> value = new List<FooEnum>();
+                            List<FooEnum> value = new List<FooEnum>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetString().ToFooEnum());
@@ -2198,7 +2198,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<Enum0> value = new List<Enum0>();
+                            List<Enum0> value = new List<Enum0>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(new Enum0(item.GetString()));
@@ -2230,7 +2230,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<Enum0> value = new List<Enum0>();
+                            List<Enum0> value = new List<Enum0>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(new Enum0(item.GetString()));
@@ -2353,7 +2353,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<string> value = new List<string>();
+                            List<string> value = new List<string>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetString());
@@ -2385,7 +2385,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<string> value = new List<string>();
+                            List<string> value = new List<string>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetString());
@@ -2428,7 +2428,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<string> value = new List<string>();
+                            List<string> value = new List<string>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetString());
@@ -2460,7 +2460,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<string> value = new List<string>();
+                            List<string> value = new List<string>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetString());
@@ -2503,7 +2503,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<Guid> value = new List<Guid>();
+                            List<Guid> value = new List<Guid>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetGuid());
@@ -2535,7 +2535,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<Guid> value = new List<Guid>();
+                            List<Guid> value = new List<Guid>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetGuid());
@@ -2658,7 +2658,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<Guid> value = new List<Guid>();
+                            List<Guid> value = new List<Guid>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetGuid());
@@ -2690,7 +2690,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<Guid> value = new List<Guid>();
+                            List<Guid> value = new List<Guid>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetGuid());
@@ -2733,7 +2733,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
+                            List<DateTimeOffset> value = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDateTimeOffset("D"));
@@ -2765,7 +2765,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
+                            List<DateTimeOffset> value = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDateTimeOffset("D"));
@@ -2888,7 +2888,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
+                            List<DateTimeOffset> value = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDateTimeOffset("D"));
@@ -2920,7 +2920,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
+                            List<DateTimeOffset> value = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDateTimeOffset("D"));
@@ -2963,7 +2963,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
+                            List<DateTimeOffset> value = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDateTimeOffset("D"));
@@ -2995,7 +2995,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
+                            List<DateTimeOffset> value = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDateTimeOffset("D"));
@@ -3038,7 +3038,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
+                            List<DateTimeOffset> value = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDateTimeOffset("S"));
@@ -3070,7 +3070,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
+                            List<DateTimeOffset> value = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDateTimeOffset("S"));
@@ -3193,7 +3193,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
+                            List<DateTimeOffset> value = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDateTimeOffset("S"));
@@ -3225,7 +3225,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
+                            List<DateTimeOffset> value = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDateTimeOffset("S"));
@@ -3268,7 +3268,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
+                            List<DateTimeOffset> value = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDateTimeOffset("S"));
@@ -3300,7 +3300,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
+                            List<DateTimeOffset> value = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDateTimeOffset("S"));
@@ -3343,7 +3343,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
+                            List<DateTimeOffset> value = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDateTimeOffset("R"));
@@ -3375,7 +3375,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
+                            List<DateTimeOffset> value = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDateTimeOffset("R"));
@@ -3498,7 +3498,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<TimeSpan> value = new List<TimeSpan>();
+                            List<TimeSpan> value = new List<TimeSpan>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetTimeSpan("P"));
@@ -3530,7 +3530,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<TimeSpan> value = new List<TimeSpan>();
+                            List<TimeSpan> value = new List<TimeSpan>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetTimeSpan("P"));
@@ -3653,7 +3653,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<byte[]> value = new List<byte[]>();
+                            List<byte[]> value = new List<byte[]>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetBytesFromBase64());
@@ -3685,7 +3685,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<byte[]> value = new List<byte[]>();
+                            List<byte[]> value = new List<byte[]>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetBytesFromBase64());
@@ -3808,7 +3808,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<byte[]> value = new List<byte[]>();
+                            List<byte[]> value = new List<byte[]>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetBytesFromBase64());
@@ -3840,7 +3840,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<byte[]> value = new List<byte[]>();
+                            List<byte[]> value = new List<byte[]>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetBytesFromBase64());
@@ -3883,7 +3883,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<byte[]> value = new List<byte[]>();
+                            List<byte[]> value = new List<byte[]>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetBytesFromBase64("U"));
@@ -3915,7 +3915,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<byte[]> value = new List<byte[]>();
+                            List<byte[]> value = new List<byte[]>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetBytesFromBase64("U"));
@@ -3958,7 +3958,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<Product> value = new List<Product>();
+                            List<Product> value = new List<Product>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(Product.DeserializeProduct(item));
@@ -3990,7 +3990,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<Product> value = new List<Product>();
+                            List<Product> value = new List<Product>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(Product.DeserializeProduct(item));
@@ -4033,7 +4033,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<Product> value = new List<Product>();
+                            List<Product> value = new List<Product>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(Product.DeserializeProduct(item));
@@ -4065,7 +4065,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<Product> value = new List<Product>();
+                            List<Product> value = new List<Product>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(Product.DeserializeProduct(item));
@@ -4108,7 +4108,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<Product> value = new List<Product>();
+                            List<Product> value = new List<Product>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(Product.DeserializeProduct(item));
@@ -4140,7 +4140,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<Product> value = new List<Product>();
+                            List<Product> value = new List<Product>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(Product.DeserializeProduct(item));
@@ -4183,7 +4183,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<Product> value = new List<Product>();
+                            List<Product> value = new List<Product>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(Product.DeserializeProduct(item));
@@ -4215,7 +4215,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<Product> value = new List<Product>();
+                            List<Product> value = new List<Product>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(Product.DeserializeProduct(item));
@@ -4258,7 +4258,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<Product> value = new List<Product>();
+                            List<Product> value = new List<Product>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(Product.DeserializeProduct(item));
@@ -4290,7 +4290,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<Product> value = new List<Product>();
+                            List<Product> value = new List<Product>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(Product.DeserializeProduct(item));
@@ -4413,10 +4413,10 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<ICollection<string>> value = new List<ICollection<string>>();
+                            List<ICollection<string>> value = new List<ICollection<string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                ICollection<string> value0 = new List<string>();
+                                List<string> value0 = new List<string>();
                                 foreach (var item0 in item.EnumerateArray())
                                 {
                                     value0.Add(item0.GetString());
@@ -4450,10 +4450,10 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<ICollection<string>> value = new List<ICollection<string>>();
+                            List<ICollection<string>> value = new List<ICollection<string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                ICollection<string> value0 = new List<string>();
+                                List<string> value0 = new List<string>();
                                 foreach (var item0 in item.EnumerateArray())
                                 {
                                     value0.Add(item0.GetString());
@@ -4498,10 +4498,10 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<ICollection<string>> value = new List<ICollection<string>>();
+                            List<ICollection<string>> value = new List<ICollection<string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                ICollection<string> value0 = new List<string>();
+                                List<string> value0 = new List<string>();
                                 foreach (var item0 in item.EnumerateArray())
                                 {
                                     value0.Add(item0.GetString());
@@ -4535,10 +4535,10 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<ICollection<string>> value = new List<ICollection<string>>();
+                            List<ICollection<string>> value = new List<ICollection<string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                ICollection<string> value0 = new List<string>();
+                                List<string> value0 = new List<string>();
                                 foreach (var item0 in item.EnumerateArray())
                                 {
                                     value0.Add(item0.GetString());
@@ -4583,10 +4583,10 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<ICollection<string>> value = new List<ICollection<string>>();
+                            List<ICollection<string>> value = new List<ICollection<string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                ICollection<string> value0 = new List<string>();
+                                List<string> value0 = new List<string>();
                                 foreach (var item0 in item.EnumerateArray())
                                 {
                                     value0.Add(item0.GetString());
@@ -4620,10 +4620,10 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<ICollection<string>> value = new List<ICollection<string>>();
+                            List<ICollection<string>> value = new List<ICollection<string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                ICollection<string> value0 = new List<string>();
+                                List<string> value0 = new List<string>();
                                 foreach (var item0 in item.EnumerateArray())
                                 {
                                     value0.Add(item0.GetString());
@@ -4668,10 +4668,10 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<ICollection<string>> value = new List<ICollection<string>>();
+                            List<ICollection<string>> value = new List<ICollection<string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                ICollection<string> value0 = new List<string>();
+                                List<string> value0 = new List<string>();
                                 foreach (var item0 in item.EnumerateArray())
                                 {
                                     value0.Add(item0.GetString());
@@ -4705,10 +4705,10 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<ICollection<string>> value = new List<ICollection<string>>();
+                            List<ICollection<string>> value = new List<ICollection<string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                ICollection<string> value0 = new List<string>();
+                                List<string> value0 = new List<string>();
                                 foreach (var item0 in item.EnumerateArray())
                                 {
                                     value0.Add(item0.GetString());
@@ -4753,10 +4753,10 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<ICollection<string>> value = new List<ICollection<string>>();
+                            List<ICollection<string>> value = new List<ICollection<string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                ICollection<string> value0 = new List<string>();
+                                List<string> value0 = new List<string>();
                                 foreach (var item0 in item.EnumerateArray())
                                 {
                                     value0.Add(item0.GetString());
@@ -4790,10 +4790,10 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<ICollection<string>> value = new List<ICollection<string>>();
+                            List<ICollection<string>> value = new List<ICollection<string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                ICollection<string> value0 = new List<string>();
+                                List<string> value0 = new List<string>();
                                 foreach (var item0 in item.EnumerateArray())
                                 {
                                     value0.Add(item0.GetString());
@@ -4923,10 +4923,10 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
+                            List<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                IDictionary<string, string> value0 = new Dictionary<string, string>();
+                                Dictionary<string, string> value0 = new Dictionary<string, string>();
                                 foreach (var property in item.EnumerateObject())
                                 {
                                     value0.Add(property.Name, property.Value.GetString());
@@ -4960,10 +4960,10 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
+                            List<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                IDictionary<string, string> value0 = new Dictionary<string, string>();
+                                Dictionary<string, string> value0 = new Dictionary<string, string>();
                                 foreach (var property in item.EnumerateObject())
                                 {
                                     value0.Add(property.Name, property.Value.GetString());
@@ -5008,10 +5008,10 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
+                            List<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                IDictionary<string, string> value0 = new Dictionary<string, string>();
+                                Dictionary<string, string> value0 = new Dictionary<string, string>();
                                 foreach (var property in item.EnumerateObject())
                                 {
                                     value0.Add(property.Name, property.Value.GetString());
@@ -5045,10 +5045,10 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
+                            List<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                IDictionary<string, string> value0 = new Dictionary<string, string>();
+                                Dictionary<string, string> value0 = new Dictionary<string, string>();
                                 foreach (var property in item.EnumerateObject())
                                 {
                                     value0.Add(property.Name, property.Value.GetString());
@@ -5093,10 +5093,10 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
+                            List<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                IDictionary<string, string> value0 = new Dictionary<string, string>();
+                                Dictionary<string, string> value0 = new Dictionary<string, string>();
                                 foreach (var property in item.EnumerateObject())
                                 {
                                     value0.Add(property.Name, property.Value.GetString());
@@ -5130,10 +5130,10 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
+                            List<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                IDictionary<string, string> value0 = new Dictionary<string, string>();
+                                Dictionary<string, string> value0 = new Dictionary<string, string>();
                                 foreach (var property in item.EnumerateObject())
                                 {
                                     value0.Add(property.Name, property.Value.GetString());
@@ -5178,10 +5178,10 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
+                            List<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                IDictionary<string, string> value0 = new Dictionary<string, string>();
+                                Dictionary<string, string> value0 = new Dictionary<string, string>();
                                 foreach (var property in item.EnumerateObject())
                                 {
                                     value0.Add(property.Name, property.Value.GetString());
@@ -5215,10 +5215,10 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
+                            List<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                IDictionary<string, string> value0 = new Dictionary<string, string>();
+                                Dictionary<string, string> value0 = new Dictionary<string, string>();
                                 foreach (var property in item.EnumerateObject())
                                 {
                                     value0.Add(property.Name, property.Value.GetString());
@@ -5263,10 +5263,10 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
+                            List<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                IDictionary<string, string> value0 = new Dictionary<string, string>();
+                                Dictionary<string, string> value0 = new Dictionary<string, string>();
                                 foreach (var property in item.EnumerateObject())
                                 {
                                     value0.Add(property.Name, property.Value.GetString());
@@ -5300,10 +5300,10 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
+                            List<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                IDictionary<string, string> value0 = new Dictionary<string, string>();
+                                Dictionary<string, string> value0 = new Dictionary<string, string>();
                                 foreach (var property in item.EnumerateObject())
                                 {
                                     value0.Add(property.Name, property.Value.GetString());
