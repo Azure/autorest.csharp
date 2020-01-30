@@ -20,7 +20,6 @@ using AutoRest.CSharp.V3.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using CSharpType = AutoRest.CSharp.V3.Generation.Types.CSharpType;
 using Response = Azure.Response;
 
 namespace AutoRest.CSharp.V3.Generation.Writers

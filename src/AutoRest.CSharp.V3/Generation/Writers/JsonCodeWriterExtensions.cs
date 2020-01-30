@@ -8,8 +8,6 @@ using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Output.Models.Serialization;
 using AutoRest.CSharp.V3.Output.Models.Serialization.Json;
 using AutoRest.CSharp.V3.Output.Models.Types;
-using CSharpType = AutoRest.CSharp.V3.Generation.Types.CSharpType;
-
 namespace AutoRest.CSharp.V3.Generation.Writers
 {
     internal static class JsonCodeWriterExtensions

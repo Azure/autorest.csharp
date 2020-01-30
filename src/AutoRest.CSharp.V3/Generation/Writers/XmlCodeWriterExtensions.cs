@@ -3,10 +3,8 @@
 
 using System;
 using AutoRest.CSharp.V3.Output.Models.Serialization.Xml;
-
 using AutoRest.CSharp.V3.Output.Models.Types;
 using AutoRest.CSharp.V3.Utilities;
-using CSharpType = AutoRest.CSharp.V3.Generation.Types.CSharpType;
 
 namespace AutoRest.CSharp.V3.Generation.Writers
 {

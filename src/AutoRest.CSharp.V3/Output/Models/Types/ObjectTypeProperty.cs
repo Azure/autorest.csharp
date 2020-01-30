@@ -4,8 +4,6 @@
 using AutoRest.CSharp.V3.Input;
 using AutoRest.CSharp.V3.Output.Models.Shared;
 
-using CSharpType = AutoRest.CSharp.V3.Generation.Types.CSharpType;
-
 namespace AutoRest.CSharp.V3.Output.Models.Types
 {
     internal class ObjectTypeProperty
