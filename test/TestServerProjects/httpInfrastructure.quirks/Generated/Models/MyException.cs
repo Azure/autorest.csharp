@@ -5,7 +5,7 @@
 
 namespace httpInfrastructure.quirks.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The MyException. </summary>
     public partial class MyException
     {
         public string StatusCode { get; set; }

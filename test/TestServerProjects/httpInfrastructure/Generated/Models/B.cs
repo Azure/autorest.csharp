@@ -5,7 +5,7 @@
 
 namespace httpInfrastructure.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The B. </summary>
     public partial class B : MyException
     {
         public string TextStatusCode { get; set; }

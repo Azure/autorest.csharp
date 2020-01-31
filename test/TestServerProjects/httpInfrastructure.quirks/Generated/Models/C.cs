@@ -5,7 +5,7 @@
 
 namespace httpInfrastructure.quirks.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The C. </summary>
     public partial class C
     {
         public string HttpCode { get; set; }

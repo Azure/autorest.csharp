@@ -38,6 +38,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_1
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -79,6 +80,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_1
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -120,6 +122,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_1
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
