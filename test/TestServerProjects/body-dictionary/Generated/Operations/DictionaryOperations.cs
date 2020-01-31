@@ -58,7 +58,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, int> value = new System.Collections.Generic.IDictionary<string, int>();
+                            IDictionary<string, int> value = new Dictionary<string, int>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetInt32());
@@ -90,7 +90,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, int> value = new System.Collections.Generic.IDictionary<string, int>();
+                            IDictionary<string, int> value = new Dictionary<string, int>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetInt32());
@@ -133,7 +133,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, int> value = new System.Collections.Generic.IDictionary<string, int>();
+                            IDictionary<string, int> value = new Dictionary<string, int>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetInt32());
@@ -165,7 +165,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, int> value = new System.Collections.Generic.IDictionary<string, int>();
+                            IDictionary<string, int> value = new Dictionary<string, int>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetInt32());
@@ -289,7 +289,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, string> value = new System.Collections.Generic.IDictionary<string, string>();
+                            IDictionary<string, string> value = new Dictionary<string, string>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetString());
@@ -321,7 +321,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, string> value = new System.Collections.Generic.IDictionary<string, string>();
+                            IDictionary<string, string> value = new Dictionary<string, string>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetString());
@@ -364,7 +364,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, string> value = new System.Collections.Generic.IDictionary<string, string>();
+                            IDictionary<string, string> value = new Dictionary<string, string>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetString());
@@ -396,7 +396,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, string> value = new System.Collections.Generic.IDictionary<string, string>();
+                            IDictionary<string, string> value = new Dictionary<string, string>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetString());
@@ -439,7 +439,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, string> value = new System.Collections.Generic.IDictionary<string, string>();
+                            IDictionary<string, string> value = new Dictionary<string, string>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetString());
@@ -471,7 +471,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, string> value = new System.Collections.Generic.IDictionary<string, string>();
+                            IDictionary<string, string> value = new Dictionary<string, string>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetString());
@@ -514,7 +514,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, string> value = new System.Collections.Generic.IDictionary<string, string>();
+                            IDictionary<string, string> value = new Dictionary<string, string>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetString());
@@ -546,7 +546,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, string> value = new System.Collections.Generic.IDictionary<string, string>();
+                            IDictionary<string, string> value = new Dictionary<string, string>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetString());
@@ -589,7 +589,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, bool> value = new System.Collections.Generic.IDictionary<string, bool>();
+                            IDictionary<string, bool> value = new Dictionary<string, bool>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetBoolean());
@@ -621,7 +621,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, bool> value = new System.Collections.Generic.IDictionary<string, bool>();
+                            IDictionary<string, bool> value = new Dictionary<string, bool>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetBoolean());
@@ -745,7 +745,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, bool> value = new System.Collections.Generic.IDictionary<string, bool>();
+                            IDictionary<string, bool> value = new Dictionary<string, bool>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetBoolean());
@@ -777,7 +777,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, bool> value = new System.Collections.Generic.IDictionary<string, bool>();
+                            IDictionary<string, bool> value = new Dictionary<string, bool>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetBoolean());
@@ -820,7 +820,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, bool> value = new System.Collections.Generic.IDictionary<string, bool>();
+                            IDictionary<string, bool> value = new Dictionary<string, bool>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetBoolean());
@@ -852,7 +852,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, bool> value = new System.Collections.Generic.IDictionary<string, bool>();
+                            IDictionary<string, bool> value = new Dictionary<string, bool>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetBoolean());
@@ -895,7 +895,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, int> value = new System.Collections.Generic.IDictionary<string, int>();
+                            IDictionary<string, int> value = new Dictionary<string, int>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetInt32());
@@ -927,7 +927,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, int> value = new System.Collections.Generic.IDictionary<string, int>();
+                            IDictionary<string, int> value = new Dictionary<string, int>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetInt32());
@@ -1051,7 +1051,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, int> value = new System.Collections.Generic.IDictionary<string, int>();
+                            IDictionary<string, int> value = new Dictionary<string, int>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetInt32());
@@ -1083,7 +1083,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, int> value = new System.Collections.Generic.IDictionary<string, int>();
+                            IDictionary<string, int> value = new Dictionary<string, int>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetInt32());
@@ -1126,7 +1126,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, int> value = new System.Collections.Generic.IDictionary<string, int>();
+                            IDictionary<string, int> value = new Dictionary<string, int>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetInt32());
@@ -1158,7 +1158,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, int> value = new System.Collections.Generic.IDictionary<string, int>();
+                            IDictionary<string, int> value = new Dictionary<string, int>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetInt32());
@@ -1201,7 +1201,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, long> value = new System.Collections.Generic.IDictionary<string, long>();
+                            IDictionary<string, long> value = new Dictionary<string, long>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetInt64());
@@ -1233,7 +1233,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, long> value = new System.Collections.Generic.IDictionary<string, long>();
+                            IDictionary<string, long> value = new Dictionary<string, long>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetInt64());
@@ -1357,7 +1357,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, long> value = new System.Collections.Generic.IDictionary<string, long>();
+                            IDictionary<string, long> value = new Dictionary<string, long>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetInt64());
@@ -1389,7 +1389,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, long> value = new System.Collections.Generic.IDictionary<string, long>();
+                            IDictionary<string, long> value = new Dictionary<string, long>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetInt64());
@@ -1432,7 +1432,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, long> value = new System.Collections.Generic.IDictionary<string, long>();
+                            IDictionary<string, long> value = new Dictionary<string, long>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetInt64());
@@ -1464,7 +1464,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, long> value = new System.Collections.Generic.IDictionary<string, long>();
+                            IDictionary<string, long> value = new Dictionary<string, long>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetInt64());
@@ -1507,7 +1507,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, float> value = new System.Collections.Generic.IDictionary<string, float>();
+                            IDictionary<string, float> value = new Dictionary<string, float>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetSingle());
@@ -1539,7 +1539,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, float> value = new System.Collections.Generic.IDictionary<string, float>();
+                            IDictionary<string, float> value = new Dictionary<string, float>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetSingle());
@@ -1663,7 +1663,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, float> value = new System.Collections.Generic.IDictionary<string, float>();
+                            IDictionary<string, float> value = new Dictionary<string, float>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetSingle());
@@ -1695,7 +1695,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, float> value = new System.Collections.Generic.IDictionary<string, float>();
+                            IDictionary<string, float> value = new Dictionary<string, float>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetSingle());
@@ -1738,7 +1738,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, float> value = new System.Collections.Generic.IDictionary<string, float>();
+                            IDictionary<string, float> value = new Dictionary<string, float>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetSingle());
@@ -1770,7 +1770,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, float> value = new System.Collections.Generic.IDictionary<string, float>();
+                            IDictionary<string, float> value = new Dictionary<string, float>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetSingle());
@@ -1813,7 +1813,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, double> value = new System.Collections.Generic.IDictionary<string, double>();
+                            IDictionary<string, double> value = new Dictionary<string, double>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetDouble());
@@ -1845,7 +1845,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, double> value = new System.Collections.Generic.IDictionary<string, double>();
+                            IDictionary<string, double> value = new Dictionary<string, double>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetDouble());
@@ -1969,7 +1969,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, double> value = new System.Collections.Generic.IDictionary<string, double>();
+                            IDictionary<string, double> value = new Dictionary<string, double>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetDouble());
@@ -2001,7 +2001,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, double> value = new System.Collections.Generic.IDictionary<string, double>();
+                            IDictionary<string, double> value = new Dictionary<string, double>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetDouble());
@@ -2044,7 +2044,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, double> value = new System.Collections.Generic.IDictionary<string, double>();
+                            IDictionary<string, double> value = new Dictionary<string, double>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetDouble());
@@ -2076,7 +2076,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, double> value = new System.Collections.Generic.IDictionary<string, double>();
+                            IDictionary<string, double> value = new Dictionary<string, double>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetDouble());
@@ -2119,7 +2119,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, string> value = new System.Collections.Generic.IDictionary<string, string>();
+                            IDictionary<string, string> value = new Dictionary<string, string>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetString());
@@ -2151,7 +2151,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, string> value = new System.Collections.Generic.IDictionary<string, string>();
+                            IDictionary<string, string> value = new Dictionary<string, string>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetString());
@@ -2275,7 +2275,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, string> value = new System.Collections.Generic.IDictionary<string, string>();
+                            IDictionary<string, string> value = new Dictionary<string, string>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetString());
@@ -2307,7 +2307,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, string> value = new System.Collections.Generic.IDictionary<string, string>();
+                            IDictionary<string, string> value = new Dictionary<string, string>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetString());
@@ -2350,7 +2350,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, string> value = new System.Collections.Generic.IDictionary<string, string>();
+                            IDictionary<string, string> value = new Dictionary<string, string>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetString());
@@ -2382,7 +2382,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, string> value = new System.Collections.Generic.IDictionary<string, string>();
+                            IDictionary<string, string> value = new Dictionary<string, string>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetString());
@@ -2425,7 +2425,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, DateTimeOffset> value = new System.Collections.Generic.IDictionary<string, DateTimeOffset>();
+                            IDictionary<string, DateTimeOffset> value = new Dictionary<string, DateTimeOffset>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetDateTimeOffset("D"));
@@ -2457,7 +2457,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, DateTimeOffset> value = new System.Collections.Generic.IDictionary<string, DateTimeOffset>();
+                            IDictionary<string, DateTimeOffset> value = new Dictionary<string, DateTimeOffset>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetDateTimeOffset("D"));
@@ -2581,7 +2581,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, DateTimeOffset> value = new System.Collections.Generic.IDictionary<string, DateTimeOffset>();
+                            IDictionary<string, DateTimeOffset> value = new Dictionary<string, DateTimeOffset>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetDateTimeOffset("D"));
@@ -2613,7 +2613,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, DateTimeOffset> value = new System.Collections.Generic.IDictionary<string, DateTimeOffset>();
+                            IDictionary<string, DateTimeOffset> value = new Dictionary<string, DateTimeOffset>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetDateTimeOffset("D"));
@@ -2656,7 +2656,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, DateTimeOffset> value = new System.Collections.Generic.IDictionary<string, DateTimeOffset>();
+                            IDictionary<string, DateTimeOffset> value = new Dictionary<string, DateTimeOffset>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetDateTimeOffset("D"));
@@ -2688,7 +2688,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, DateTimeOffset> value = new System.Collections.Generic.IDictionary<string, DateTimeOffset>();
+                            IDictionary<string, DateTimeOffset> value = new Dictionary<string, DateTimeOffset>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetDateTimeOffset("D"));
@@ -2731,7 +2731,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, DateTimeOffset> value = new System.Collections.Generic.IDictionary<string, DateTimeOffset>();
+                            IDictionary<string, DateTimeOffset> value = new Dictionary<string, DateTimeOffset>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetDateTimeOffset("S"));
@@ -2763,7 +2763,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, DateTimeOffset> value = new System.Collections.Generic.IDictionary<string, DateTimeOffset>();
+                            IDictionary<string, DateTimeOffset> value = new Dictionary<string, DateTimeOffset>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetDateTimeOffset("S"));
@@ -2887,7 +2887,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, DateTimeOffset> value = new System.Collections.Generic.IDictionary<string, DateTimeOffset>();
+                            IDictionary<string, DateTimeOffset> value = new Dictionary<string, DateTimeOffset>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetDateTimeOffset("S"));
@@ -2919,7 +2919,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, DateTimeOffset> value = new System.Collections.Generic.IDictionary<string, DateTimeOffset>();
+                            IDictionary<string, DateTimeOffset> value = new Dictionary<string, DateTimeOffset>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetDateTimeOffset("S"));
@@ -2962,7 +2962,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, DateTimeOffset> value = new System.Collections.Generic.IDictionary<string, DateTimeOffset>();
+                            IDictionary<string, DateTimeOffset> value = new Dictionary<string, DateTimeOffset>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetDateTimeOffset("S"));
@@ -2994,7 +2994,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, DateTimeOffset> value = new System.Collections.Generic.IDictionary<string, DateTimeOffset>();
+                            IDictionary<string, DateTimeOffset> value = new Dictionary<string, DateTimeOffset>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetDateTimeOffset("S"));
@@ -3037,7 +3037,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, DateTimeOffset> value = new System.Collections.Generic.IDictionary<string, DateTimeOffset>();
+                            IDictionary<string, DateTimeOffset> value = new Dictionary<string, DateTimeOffset>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetDateTimeOffset("R"));
@@ -3069,7 +3069,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, DateTimeOffset> value = new System.Collections.Generic.IDictionary<string, DateTimeOffset>();
+                            IDictionary<string, DateTimeOffset> value = new Dictionary<string, DateTimeOffset>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetDateTimeOffset("R"));
@@ -3193,7 +3193,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, TimeSpan> value = new System.Collections.Generic.IDictionary<string, TimeSpan>();
+                            IDictionary<string, TimeSpan> value = new Dictionary<string, TimeSpan>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetTimeSpan("P"));
@@ -3225,7 +3225,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, TimeSpan> value = new System.Collections.Generic.IDictionary<string, TimeSpan>();
+                            IDictionary<string, TimeSpan> value = new Dictionary<string, TimeSpan>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetTimeSpan("P"));
@@ -3349,7 +3349,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, byte[]> value = new System.Collections.Generic.IDictionary<string, byte[]>();
+                            IDictionary<string, byte[]> value = new Dictionary<string, byte[]>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetBytesFromBase64());
@@ -3381,7 +3381,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, byte[]> value = new System.Collections.Generic.IDictionary<string, byte[]>();
+                            IDictionary<string, byte[]> value = new Dictionary<string, byte[]>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetBytesFromBase64());
@@ -3505,7 +3505,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, byte[]> value = new System.Collections.Generic.IDictionary<string, byte[]>();
+                            IDictionary<string, byte[]> value = new Dictionary<string, byte[]>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetBytesFromBase64());
@@ -3537,7 +3537,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, byte[]> value = new System.Collections.Generic.IDictionary<string, byte[]>();
+                            IDictionary<string, byte[]> value = new Dictionary<string, byte[]>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetBytesFromBase64());
@@ -3580,7 +3580,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, byte[]> value = new System.Collections.Generic.IDictionary<string, byte[]>();
+                            IDictionary<string, byte[]> value = new Dictionary<string, byte[]>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetBytesFromBase64("U"));
@@ -3612,7 +3612,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, byte[]> value = new System.Collections.Generic.IDictionary<string, byte[]>();
+                            IDictionary<string, byte[]> value = new Dictionary<string, byte[]>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetBytesFromBase64("U"));
@@ -3655,7 +3655,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, Widget> value = new System.Collections.Generic.IDictionary<string, Widget>();
+                            IDictionary<string, Widget> value = new Dictionary<string, Widget>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, Widget.DeserializeWidget(property.Value));
@@ -3687,7 +3687,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, Widget> value = new System.Collections.Generic.IDictionary<string, Widget>();
+                            IDictionary<string, Widget> value = new Dictionary<string, Widget>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, Widget.DeserializeWidget(property.Value));
@@ -3730,7 +3730,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, Widget> value = new System.Collections.Generic.IDictionary<string, Widget>();
+                            IDictionary<string, Widget> value = new Dictionary<string, Widget>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, Widget.DeserializeWidget(property.Value));
@@ -3762,7 +3762,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, Widget> value = new System.Collections.Generic.IDictionary<string, Widget>();
+                            IDictionary<string, Widget> value = new Dictionary<string, Widget>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, Widget.DeserializeWidget(property.Value));
@@ -3805,7 +3805,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, Widget> value = new System.Collections.Generic.IDictionary<string, Widget>();
+                            IDictionary<string, Widget> value = new Dictionary<string, Widget>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, Widget.DeserializeWidget(property.Value));
@@ -3837,7 +3837,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, Widget> value = new System.Collections.Generic.IDictionary<string, Widget>();
+                            IDictionary<string, Widget> value = new Dictionary<string, Widget>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, Widget.DeserializeWidget(property.Value));
@@ -3880,7 +3880,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, Widget> value = new System.Collections.Generic.IDictionary<string, Widget>();
+                            IDictionary<string, Widget> value = new Dictionary<string, Widget>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, Widget.DeserializeWidget(property.Value));
@@ -3912,7 +3912,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, Widget> value = new System.Collections.Generic.IDictionary<string, Widget>();
+                            IDictionary<string, Widget> value = new Dictionary<string, Widget>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, Widget.DeserializeWidget(property.Value));
@@ -3955,7 +3955,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, Widget> value = new System.Collections.Generic.IDictionary<string, Widget>();
+                            IDictionary<string, Widget> value = new Dictionary<string, Widget>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, Widget.DeserializeWidget(property.Value));
@@ -3987,7 +3987,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, Widget> value = new System.Collections.Generic.IDictionary<string, Widget>();
+                            IDictionary<string, Widget> value = new Dictionary<string, Widget>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, Widget.DeserializeWidget(property.Value));
@@ -4111,7 +4111,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, ICollection<string>> value = new System.Collections.Generic.IDictionary<string, ICollection<string>>();
+                            IDictionary<string, ICollection<string>> value = new Dictionary<string, ICollection<string>>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 ICollection<string> value0 = new List<string>();
@@ -4148,7 +4148,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, ICollection<string>> value = new System.Collections.Generic.IDictionary<string, ICollection<string>>();
+                            IDictionary<string, ICollection<string>> value = new Dictionary<string, ICollection<string>>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 ICollection<string> value0 = new List<string>();
@@ -4196,7 +4196,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, ICollection<string>> value = new System.Collections.Generic.IDictionary<string, ICollection<string>>();
+                            IDictionary<string, ICollection<string>> value = new Dictionary<string, ICollection<string>>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 ICollection<string> value0 = new List<string>();
@@ -4233,7 +4233,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, ICollection<string>> value = new System.Collections.Generic.IDictionary<string, ICollection<string>>();
+                            IDictionary<string, ICollection<string>> value = new Dictionary<string, ICollection<string>>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 ICollection<string> value0 = new List<string>();
@@ -4281,7 +4281,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, ICollection<string>> value = new System.Collections.Generic.IDictionary<string, ICollection<string>>();
+                            IDictionary<string, ICollection<string>> value = new Dictionary<string, ICollection<string>>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 ICollection<string> value0 = new List<string>();
@@ -4318,7 +4318,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, ICollection<string>> value = new System.Collections.Generic.IDictionary<string, ICollection<string>>();
+                            IDictionary<string, ICollection<string>> value = new Dictionary<string, ICollection<string>>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 ICollection<string> value0 = new List<string>();
@@ -4366,7 +4366,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, ICollection<string>> value = new System.Collections.Generic.IDictionary<string, ICollection<string>>();
+                            IDictionary<string, ICollection<string>> value = new Dictionary<string, ICollection<string>>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 ICollection<string> value0 = new List<string>();
@@ -4403,7 +4403,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, ICollection<string>> value = new System.Collections.Generic.IDictionary<string, ICollection<string>>();
+                            IDictionary<string, ICollection<string>> value = new Dictionary<string, ICollection<string>>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 ICollection<string> value0 = new List<string>();
@@ -4451,7 +4451,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, ICollection<string>> value = new System.Collections.Generic.IDictionary<string, ICollection<string>>();
+                            IDictionary<string, ICollection<string>> value = new Dictionary<string, ICollection<string>>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 ICollection<string> value0 = new List<string>();
@@ -4488,7 +4488,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, ICollection<string>> value = new System.Collections.Generic.IDictionary<string, ICollection<string>>();
+                            IDictionary<string, ICollection<string>> value = new Dictionary<string, ICollection<string>>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 ICollection<string> value0 = new List<string>();
@@ -4622,7 +4622,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, object> value = new System.Collections.Generic.IDictionary<string, object>();
+                            IDictionary<string, object> value = new Dictionary<string, object>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetObject());
@@ -4654,7 +4654,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, object> value = new System.Collections.Generic.IDictionary<string, object>();
+                            IDictionary<string, object> value = new Dictionary<string, object>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetObject());
@@ -4697,7 +4697,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, object> value = new System.Collections.Generic.IDictionary<string, object>();
+                            IDictionary<string, object> value = new Dictionary<string, object>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetObject());
@@ -4729,7 +4729,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, object> value = new System.Collections.Generic.IDictionary<string, object>();
+                            IDictionary<string, object> value = new Dictionary<string, object>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetObject());
@@ -4772,7 +4772,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, object> value = new System.Collections.Generic.IDictionary<string, object>();
+                            IDictionary<string, object> value = new Dictionary<string, object>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetObject());
@@ -4804,7 +4804,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, object> value = new System.Collections.Generic.IDictionary<string, object>();
+                            IDictionary<string, object> value = new Dictionary<string, object>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetObject());
@@ -4847,7 +4847,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, object> value = new System.Collections.Generic.IDictionary<string, object>();
+                            IDictionary<string, object> value = new Dictionary<string, object>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetObject());
@@ -4879,7 +4879,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, object> value = new System.Collections.Generic.IDictionary<string, object>();
+                            IDictionary<string, object> value = new Dictionary<string, object>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetObject());
@@ -4922,7 +4922,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, object> value = new System.Collections.Generic.IDictionary<string, object>();
+                            IDictionary<string, object> value = new Dictionary<string, object>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetObject());
@@ -4954,7 +4954,7 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, object> value = new System.Collections.Generic.IDictionary<string, object>();
+                            IDictionary<string, object> value = new Dictionary<string, object>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, property.Value.GetObject());

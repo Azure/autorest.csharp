@@ -76,7 +76,7 @@ namespace model_flattening.Models
                     {
                         continue;
                     }
-                    result.Tags = new System.Collections.Generic.IDictionary<string, string>();
+                    result.Tags = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
                         result.Tags.Add(property0.Name, property0.Value.GetString());

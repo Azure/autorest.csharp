@@ -91,7 +91,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Facets = new System.Collections.Generic.IDictionary<string, ICollection<FacetResult>>();
+                    result.Facets = new Dictionary<string, ICollection<FacetResult>>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
                         ICollection<FacetResult> value = new List<FacetResult>();

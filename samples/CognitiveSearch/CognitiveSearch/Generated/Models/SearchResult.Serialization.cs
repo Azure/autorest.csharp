@@ -62,7 +62,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Highlights = new System.Collections.Generic.IDictionary<string, ICollection<string>>();
+                    result.Highlights = new Dictionary<string, ICollection<string>>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
                         ICollection<string> value = new List<string>();

@@ -43,7 +43,7 @@ namespace ExtensionClientName.Models
                     {
                         continue;
                     }
-                    result.RenamedProperty = new System.Collections.Generic.IDictionary<string, string>();
+                    result.RenamedProperty = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
                         result.RenamedProperty.Add(property0.Name, property0.Value.GetString());

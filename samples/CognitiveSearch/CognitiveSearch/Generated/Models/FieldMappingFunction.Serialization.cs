@@ -45,7 +45,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Parameters = new System.Collections.Generic.IDictionary<string, object>();
+                    result.Parameters = new Dictionary<string, object>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
                         result.Parameters.Add(property0.Name, property0.Value.GetObject());

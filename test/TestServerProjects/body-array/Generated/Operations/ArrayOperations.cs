@@ -4926,7 +4926,7 @@ namespace body_array
                             ICollection<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                IDictionary<string, string> value0 = new System.Collections.Generic.IDictionary<string, string>();
+                                IDictionary<string, string> value0 = new Dictionary<string, string>();
                                 foreach (var property in item.EnumerateObject())
                                 {
                                     value0.Add(property.Name, property.Value.GetString());
@@ -4963,7 +4963,7 @@ namespace body_array
                             ICollection<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                IDictionary<string, string> value0 = new System.Collections.Generic.IDictionary<string, string>();
+                                IDictionary<string, string> value0 = new Dictionary<string, string>();
                                 foreach (var property in item.EnumerateObject())
                                 {
                                     value0.Add(property.Name, property.Value.GetString());
@@ -5011,7 +5011,7 @@ namespace body_array
                             ICollection<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                IDictionary<string, string> value0 = new System.Collections.Generic.IDictionary<string, string>();
+                                IDictionary<string, string> value0 = new Dictionary<string, string>();
                                 foreach (var property in item.EnumerateObject())
                                 {
                                     value0.Add(property.Name, property.Value.GetString());
@@ -5048,7 +5048,7 @@ namespace body_array
                             ICollection<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                IDictionary<string, string> value0 = new System.Collections.Generic.IDictionary<string, string>();
+                                IDictionary<string, string> value0 = new Dictionary<string, string>();
                                 foreach (var property in item.EnumerateObject())
                                 {
                                     value0.Add(property.Name, property.Value.GetString());
@@ -5096,7 +5096,7 @@ namespace body_array
                             ICollection<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                IDictionary<string, string> value0 = new System.Collections.Generic.IDictionary<string, string>();
+                                IDictionary<string, string> value0 = new Dictionary<string, string>();
                                 foreach (var property in item.EnumerateObject())
                                 {
                                     value0.Add(property.Name, property.Value.GetString());
@@ -5133,7 +5133,7 @@ namespace body_array
                             ICollection<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                IDictionary<string, string> value0 = new System.Collections.Generic.IDictionary<string, string>();
+                                IDictionary<string, string> value0 = new Dictionary<string, string>();
                                 foreach (var property in item.EnumerateObject())
                                 {
                                     value0.Add(property.Name, property.Value.GetString());
@@ -5181,7 +5181,7 @@ namespace body_array
                             ICollection<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                IDictionary<string, string> value0 = new System.Collections.Generic.IDictionary<string, string>();
+                                IDictionary<string, string> value0 = new Dictionary<string, string>();
                                 foreach (var property in item.EnumerateObject())
                                 {
                                     value0.Add(property.Name, property.Value.GetString());
@@ -5218,7 +5218,7 @@ namespace body_array
                             ICollection<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                IDictionary<string, string> value0 = new System.Collections.Generic.IDictionary<string, string>();
+                                IDictionary<string, string> value0 = new Dictionary<string, string>();
                                 foreach (var property in item.EnumerateObject())
                                 {
                                     value0.Add(property.Name, property.Value.GetString());
@@ -5266,7 +5266,7 @@ namespace body_array
                             ICollection<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                IDictionary<string, string> value0 = new System.Collections.Generic.IDictionary<string, string>();
+                                IDictionary<string, string> value0 = new Dictionary<string, string>();
                                 foreach (var property in item.EnumerateObject())
                                 {
                                     value0.Add(property.Name, property.Value.GetString());
@@ -5303,7 +5303,7 @@ namespace body_array
                             ICollection<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                IDictionary<string, string> value0 = new System.Collections.Generic.IDictionary<string, string>();
+                                IDictionary<string, string> value0 = new Dictionary<string, string>();
                                 foreach (var property in item.EnumerateObject())
                                 {
                                     value0.Add(property.Name, property.Value.GetString());

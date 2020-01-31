@@ -425,7 +425,7 @@ namespace model_flattening
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, FlattenedProduct> value = new System.Collections.Generic.IDictionary<string, FlattenedProduct>();
+                            IDictionary<string, FlattenedProduct> value = new Dictionary<string, FlattenedProduct>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, FlattenedProduct.DeserializeFlattenedProduct(property.Value));
@@ -457,7 +457,7 @@ namespace model_flattening
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, FlattenedProduct> value = new System.Collections.Generic.IDictionary<string, FlattenedProduct>();
+                            IDictionary<string, FlattenedProduct> value = new Dictionary<string, FlattenedProduct>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
                                 value.Add(property.Name, FlattenedProduct.DeserializeFlattenedProduct(property.Value));

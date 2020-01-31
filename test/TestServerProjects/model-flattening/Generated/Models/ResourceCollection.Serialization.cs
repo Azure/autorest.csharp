@@ -75,7 +75,7 @@ namespace model_flattening.Models
                     {
                         continue;
                     }
-                    result.Dictionaryofresources = new System.Collections.Generic.IDictionary<string, FlattenedProduct>();
+                    result.Dictionaryofresources = new Dictionary<string, FlattenedProduct>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
                         result.Dictionaryofresources.Add(property0.Name, FlattenedProduct.DeserializeFlattenedProduct(property0.Value));

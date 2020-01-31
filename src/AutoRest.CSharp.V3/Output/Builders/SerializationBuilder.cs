@@ -102,7 +102,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                         _typeFactory.CreateType(dictionarySchema, isNullable),
                         Array.Empty<JsonPropertySerialization>(),
                         new JsonDynamicPropertiesSerialization(BuildSerialization(dictionarySchema.ElementType, false)),
-                        _typeFactory.CreateInputType(dictionarySchema, isNullable)
+                        _typeFactory.CreateImplementationType(dictionarySchema, isNullable)
                         );
                 default:
                     return new JsonValueSerialization(

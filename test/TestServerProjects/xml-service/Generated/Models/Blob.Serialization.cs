@@ -68,7 +68,7 @@ namespace xml_service.Models
                     {
                         continue;
                     }
-                    result.Metadata = new System.Collections.Generic.IDictionary<string, string>();
+                    result.Metadata = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
                         result.Metadata.Add(property0.Name, property0.Value.GetString());
