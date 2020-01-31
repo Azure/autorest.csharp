@@ -5,7 +5,7 @@
 
 namespace body_complex.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The MyDerivedType. </summary>
     public partial class MyDerivedType : MyBaseType
     {
         /// <summary> Initializes a new instance of MyDerivedType. </summary>

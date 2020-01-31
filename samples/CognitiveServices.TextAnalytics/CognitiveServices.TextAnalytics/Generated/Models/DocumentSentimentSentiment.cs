@@ -24,13 +24,13 @@ namespace CognitiveServices.TextAnalytics.Models
         private const string NegativeValue = "negative";
         private const string MixedValue = "mixed";
 
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> positive. </summary>
         public static DocumentSentimentSentiment Positive { get; } = new DocumentSentimentSentiment(PositiveValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> neutral. </summary>
         public static DocumentSentimentSentiment Neutral { get; } = new DocumentSentimentSentiment(NeutralValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> negative. </summary>
         public static DocumentSentimentSentiment Negative { get; } = new DocumentSentimentSentiment(NegativeValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> mixed. </summary>
         public static DocumentSentimentSentiment Mixed { get; } = new DocumentSentimentSentiment(MixedValue);
         /// <summary> Determines if two <see cref="DocumentSentimentSentiment"/> values are the same. </summary>
         public static bool operator ==(DocumentSentimentSentiment left, DocumentSentimentSentiment right) => left.Equals(right);

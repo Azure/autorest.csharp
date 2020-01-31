@@ -8,7 +8,7 @@ using System.ComponentModel;
 
 namespace xml_service.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-CHOICE. </summary>
+    /// <summary> The ArchiveStatus. </summary>
     public readonly partial struct ArchiveStatus : IEquatable<ArchiveStatus>
     {
         private readonly string _value;
@@ -22,9 +22,9 @@ namespace xml_service.Models
         private const string RehydratePendingToHotValue = "rehydrate-pending-to-hot";
         private const string RehydratePendingToCoolValue = "rehydrate-pending-to-cool";
 
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> rehydrate-pending-to-hot. </summary>
         public static ArchiveStatus RehydratePendingToHot { get; } = new ArchiveStatus(RehydratePendingToHotValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> rehydrate-pending-to-cool. </summary>
         public static ArchiveStatus RehydratePendingToCool { get; } = new ArchiveStatus(RehydratePendingToCoolValue);
         /// <summary> Determines if two <see cref="ArchiveStatus"/> values are the same. </summary>
         public static bool operator ==(ArchiveStatus left, ArchiveStatus right) => left.Equals(right);

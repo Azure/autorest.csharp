@@ -57,7 +57,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: OriginalSchema
-        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        description: ''
         namespace: Api100
     protocol: !<!Protocols> {}
   dictionaries:
@@ -102,31 +102,31 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_4
-      - !<!Parameter> 
+      - !<!Parameter> &ref_6
         schema: *ref_1
         implementation: Method
         required: true
         language: !<!Languages> 
           default:
             name: RenamedPathParameter
-            description: MISSING·PARAMETER-DESCRIPTION
+            description: ''
             serializedName: originalPathParameter
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: path
-      - !<!Parameter> 
+      - !<!Parameter> &ref_7
         schema: *ref_1
         implementation: Method
         required: true
         language: !<!Languages> 
           default:
             name: RenamedQueryParameter
-            description: MISSING·PARAMETER-DESCRIPTION
+            description: ''
             serializedName: originalQueryParameter
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
+      - !<!Parameter> &ref_8
         schema: *ref_5
         implementation: Method
         required: true
@@ -140,6 +140,10 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_6
+      - *ref_7
+      - *ref_8
       language: !<!Languages> 
         default:
           name: ''
@@ -175,7 +179,7 @@ operationGroups:
     language: !<!Languages> 
       default:
         name: originalOperation
-        description: MISSING·OPERATION-DESCRIPTION
+        description: ''
     protocol: !<!Protocols> {}
   language: !<!Languages> 
     default:

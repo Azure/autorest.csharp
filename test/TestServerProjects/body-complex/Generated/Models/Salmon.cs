@@ -5,7 +5,7 @@
 
 namespace body_complex.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The salmon. </summary>
     public partial class Salmon : Fish
     {
         /// <summary> Initializes a new instance of Salmon. </summary>
@@ -14,7 +14,6 @@ namespace body_complex.Models
             Fishtype = "salmon";
         }
         public string Location { get; set; }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-BOOLEAN. </summary>
         public bool? Iswild { get; set; }
     }
 }

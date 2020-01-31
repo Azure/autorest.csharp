@@ -5,7 +5,7 @@
 
 namespace CognitiveSearch.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The components·schemas·facetresult·additionalproperties. </summary>
     public partial class ComponentsSchemasFacetresultAdditionalproperties
     {
     }

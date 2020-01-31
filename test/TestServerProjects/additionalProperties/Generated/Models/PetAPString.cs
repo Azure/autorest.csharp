@@ -8,13 +8,11 @@ using System.Collections.Generic;
 
 namespace additionalProperties.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The PetAPString. </summary>
     public partial class PetAPString : IDictionary<string, string>
     {
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-INTEGER. </summary>
         public int Id { get; set; }
         public string Name { get; set; }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-BOOLEAN. </summary>
         public bool? Status { get; internal set; }
         private readonly IDictionary<string, string> _additionalProperties = new System.Collections.Generic.Dictionary<string, string>();
         /// <inheritdoc />

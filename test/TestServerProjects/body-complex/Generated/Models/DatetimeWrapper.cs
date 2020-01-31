@@ -7,12 +7,10 @@ using System;
 
 namespace body_complex.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The datetime-wrapper. </summary>
     public partial class DatetimeWrapper
     {
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-DATETIME. </summary>
         public DateTimeOffset? Field { get; set; }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-DATETIME. </summary>
         public DateTimeOffset? Now { get; set; }
     }
 }

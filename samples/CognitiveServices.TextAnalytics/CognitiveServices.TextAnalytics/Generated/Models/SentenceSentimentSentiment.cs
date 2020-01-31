@@ -23,11 +23,11 @@ namespace CognitiveServices.TextAnalytics.Models
         private const string NeutralValue = "neutral";
         private const string NegativeValue = "negative";
 
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> positive. </summary>
         public static SentenceSentimentSentiment Positive { get; } = new SentenceSentimentSentiment(PositiveValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> neutral. </summary>
         public static SentenceSentimentSentiment Neutral { get; } = new SentenceSentimentSentiment(NeutralValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> negative. </summary>
         public static SentenceSentimentSentiment Negative { get; } = new SentenceSentimentSentiment(NegativeValue);
         /// <summary> Determines if two <see cref="SentenceSentimentSentiment"/> values are the same. </summary>
         public static bool operator ==(SentenceSentimentSentiment left, SentenceSentimentSentiment right) => left.Equals(right);

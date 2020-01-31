@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The SentenceSentiment. </summary>
     public partial class SentenceSentiment
     {
         /// <summary> The predicted Sentiment for the sentence. </summary>

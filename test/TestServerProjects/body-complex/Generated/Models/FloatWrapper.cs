@@ -5,7 +5,7 @@
 
 namespace body_complex.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The float-wrapper. </summary>
     public partial class FloatWrapper
     {
         public float? Field1 { get; set; }

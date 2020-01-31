@@ -8,67 +8,67 @@ namespace CognitiveSearch.Models
     /// <summary> Identifies a predefined list of language-specific stopwords. </summary>
     public enum StopwordsList
     {
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> arabic. </summary>
         Arabic,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> armenian. </summary>
         Armenian,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> basque. </summary>
         Basque,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> brazilian. </summary>
         Brazilian,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> bulgarian. </summary>
         Bulgarian,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> catalan. </summary>
         Catalan,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> czech. </summary>
         Czech,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> danish. </summary>
         Danish,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> dutch. </summary>
         Dutch,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> english. </summary>
         English,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> finnish. </summary>
         Finnish,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> french. </summary>
         French,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> galician. </summary>
         Galician,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> german. </summary>
         German,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> greek. </summary>
         Greek,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> hindi. </summary>
         Hindi,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> hungarian. </summary>
         Hungarian,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> indonesian. </summary>
         Indonesian,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> irish. </summary>
         Irish,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> italian. </summary>
         Italian,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> latvian. </summary>
         Latvian,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> norwegian. </summary>
         Norwegian,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> persian. </summary>
         Persian,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> portuguese. </summary>
         Portuguese,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> romanian. </summary>
         Romanian,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> russian. </summary>
         Russian,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> sorani. </summary>
         Sorani,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> spanish. </summary>
         Spanish,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> swedish. </summary>
         Swedish,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> thai. </summary>
         Thai,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> turkish. </summary>
         Turkish
     }
 }

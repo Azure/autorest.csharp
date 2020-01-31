@@ -42,7 +42,6 @@ namespace body_complex
             request.Uri = uri;
             return message;
         }
-        /// <summary> MISSING·OPERATION-DESCRIPTION. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<MyBaseType>> GetValidAsync(CancellationToken cancellationToken = default)
         {
@@ -70,7 +69,6 @@ namespace body_complex
                 throw;
             }
         }
-        /// <summary> MISSING·OPERATION-DESCRIPTION. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<MyBaseType> GetValid(CancellationToken cancellationToken = default)
         {

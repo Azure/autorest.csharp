@@ -5,10 +5,9 @@
 
 namespace validation.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The Error. </summary>
     public partial class Error
     {
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-INTEGER. </summary>
         public int? Code { get; set; }
         public string Message { get; set; }
         public string Fields { get; set; }

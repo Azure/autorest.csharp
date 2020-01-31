@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The DocumentSentiment. </summary>
     public partial class DocumentSentiment
     {
         /// <summary> Unique, non-empty document identifier. </summary>

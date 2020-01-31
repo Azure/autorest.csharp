@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace ExtensionClientName.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The OriginalSchema. </summary>
     public partial class OriginalSchema
     {
         /// <summary> A description about the set of tags. </summary>

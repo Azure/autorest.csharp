@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The KeyPhraseResult. </summary>
     public partial class KeyPhraseResult
     {
         /// <summary> Response by document. </summary>

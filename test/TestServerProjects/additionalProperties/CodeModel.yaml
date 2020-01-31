@@ -39,19 +39,19 @@ schemas: !<!Schemas>
             language: !<!Languages> 
               default:
                 name: typeForfriendly
-                description: MISSING·SCHEMA-DESCRIPTION-BOOLEAN
+                description: ''
             protocol: !<!Protocols> {}
           serializedName: friendly
           language: !<!Languages> 
             default:
               name: friendly
-              description: MISSING·SCHEMA-DESCRIPTION-BOOLEAN
+              description: ''
               originalName: friendly
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
             name: CatAPTrue
-            description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+            description: ''
             namespace: Api100
         protocol: !<!Protocols> {}
       immediate:
@@ -69,14 +69,14 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: typeForid
-            description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+            description: ''
         protocol: !<!Protocols> {}
       required: true
       serializedName: id
       language: !<!Languages> 
         default:
           name: id
-          description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+          description: ''
           originalName: id
       protocol: !<!Protocols> {}
     - !<!Property> 
@@ -104,7 +104,7 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: typeForstatus
-            description: MISSING·SCHEMA-DESCRIPTION-BOOLEAN
+            description: ''
         protocol: !<!Protocols> {}
       readOnly: true
       required: false
@@ -112,16 +112,16 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: status
-          description: MISSING·SCHEMA-DESCRIPTION-BOOLEAN
+          description: ''
           originalName: status
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
         name: PetAPTrue
-        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        description: ''
         namespace: Api100
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_31
+  - !<!ObjectSchema> &ref_32
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -134,13 +134,13 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: typeForstatus
-            description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+            description: ''
         protocol: !<!Protocols> {}
       serializedName: status
       language: !<!Languages> 
         default:
           name: status
-          description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+          description: ''
           originalName: status
       protocol: !<!Protocols> {}
     - !<!Property> 
@@ -164,11 +164,11 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Error
-        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        description: ''
         namespace: Api100
     protocol: !<!Protocols> {}
   - *ref_1
-  - !<!ObjectSchema> &ref_32
+  - !<!ObjectSchema> &ref_34
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -199,14 +199,14 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: typeForid
-            description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+            description: ''
         protocol: !<!Protocols> {}
       required: true
       serializedName: id
       language: !<!Languages> 
         default:
           name: id
-          description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+          description: ''
           originalName: id
       protocol: !<!Protocols> {}
     - !<!Property> 
@@ -234,7 +234,7 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: typeForstatus
-            description: MISSING·SCHEMA-DESCRIPTION-BOOLEAN
+            description: ''
         protocol: !<!Protocols> {}
       readOnly: true
       required: false
@@ -242,16 +242,16 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: status
-          description: MISSING·SCHEMA-DESCRIPTION-BOOLEAN
+          description: ''
           originalName: status
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
         name: PetAPObject
-        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        description: ''
         namespace: Api100
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_33
+  - !<!ObjectSchema> &ref_36
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -285,14 +285,14 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: typeForid
-            description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+            description: ''
         protocol: !<!Protocols> {}
       required: true
       serializedName: id
       language: !<!Languages> 
         default:
           name: id
-          description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+          description: ''
           originalName: id
       protocol: !<!Protocols> {}
     - !<!Property> 
@@ -320,7 +320,7 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: typeForstatus
-            description: MISSING·SCHEMA-DESCRIPTION-BOOLEAN
+            description: ''
         protocol: !<!Protocols> {}
       readOnly: true
       required: false
@@ -328,16 +328,16 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: status
-          description: MISSING·SCHEMA-DESCRIPTION-BOOLEAN
+          description: ''
           originalName: status
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
         name: PetAPString
-        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        description: ''
         namespace: Api100
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_34
+  - !<!ObjectSchema> &ref_38
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -350,14 +350,14 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: typeForid
-            description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+            description: ''
         protocol: !<!Protocols> {}
       required: true
       serializedName: id
       language: !<!Languages> 
         default:
           name: id
-          description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+          description: ''
           originalName: id
       protocol: !<!Protocols> {}
     - !<!Property> 
@@ -385,7 +385,7 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: typeForstatus
-            description: MISSING·SCHEMA-DESCRIPTION-BOOLEAN
+            description: ''
         protocol: !<!Protocols> {}
       readOnly: true
       required: false
@@ -393,7 +393,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: status
-          description: MISSING·SCHEMA-DESCRIPTION-BOOLEAN
+          description: ''
           originalName: status
       protocol: !<!Protocols> {}
     - !<!Property> 
@@ -426,10 +426,10 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: PetAPInProperties
-        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        description: ''
         namespace: Api100
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_35
+  - !<!ObjectSchema> &ref_40
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -454,14 +454,14 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: typeForid
-            description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+            description: ''
         protocol: !<!Protocols> {}
       required: true
       serializedName: id
       language: !<!Languages> 
         default:
           name: id
-          description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+          description: ''
           originalName: id
       protocol: !<!Protocols> {}
     - !<!Property> 
@@ -489,7 +489,7 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: typeForstatus
-            description: MISSING·SCHEMA-DESCRIPTION-BOOLEAN
+            description: ''
         protocol: !<!Protocols> {}
       readOnly: true
       required: false
@@ -497,7 +497,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: status
-          description: MISSING·SCHEMA-DESCRIPTION-BOOLEAN
+          description: ''
           originalName: status
       protocol: !<!Protocols> {}
     - !<!Property> 
@@ -539,7 +539,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: PetAPInPropertiesWithAPString
-        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        description: ''
         namespace: Api100
     protocol: !<!Protocols> {}
   dictionaries:
@@ -610,7 +610,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_30
-      - !<!Parameter> 
+      - !<!Parameter> &ref_31
         schema: *ref_0
         implementation: Method
         required: true
@@ -624,6 +624,8 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_31
       language: !<!Languages> 
         default:
           name: ''
@@ -652,7 +654,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_31
+      schema: *ref_32
       language: !<!Languages> 
         default:
           name: ''
@@ -678,7 +680,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_30
-      - !<!Parameter> 
+      - !<!Parameter> &ref_33
         schema: *ref_1
         implementation: Method
         required: true
@@ -692,6 +694,8 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_33
       language: !<!Languages> 
         default:
           name: ''
@@ -720,7 +724,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_31
+      schema: *ref_32
       language: !<!Languages> 
         default:
           name: ''
@@ -746,8 +750,8 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_30
-      - !<!Parameter> 
-        schema: *ref_32
+      - !<!Parameter> &ref_35
+        schema: *ref_34
         implementation: Method
         required: true
         extensions:
@@ -760,6 +764,8 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_35
       language: !<!Languages> 
         default:
           name: ''
@@ -774,7 +780,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_32
+      schema: *ref_34
       language: !<!Languages> 
         default:
           name: ''
@@ -788,7 +794,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_31
+      schema: *ref_32
       language: !<!Languages> 
         default:
           name: ''
@@ -814,8 +820,8 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_30
-      - !<!Parameter> 
-        schema: *ref_33
+      - !<!Parameter> &ref_37
+        schema: *ref_36
         implementation: Method
         required: true
         extensions:
@@ -828,6 +834,8 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_37
       language: !<!Languages> 
         default:
           name: ''
@@ -842,7 +850,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_33
+      schema: *ref_36
       language: !<!Languages> 
         default:
           name: ''
@@ -856,7 +864,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_31
+      schema: *ref_32
       language: !<!Languages> 
         default:
           name: ''
@@ -882,8 +890,8 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_30
-      - !<!Parameter> 
-        schema: *ref_34
+      - !<!Parameter> &ref_39
+        schema: *ref_38
         implementation: Method
         required: true
         extensions:
@@ -896,6 +904,8 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_39
       language: !<!Languages> 
         default:
           name: ''
@@ -910,7 +920,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_34
+      schema: *ref_38
       language: !<!Languages> 
         default:
           name: ''
@@ -924,7 +934,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_31
+      schema: *ref_32
       language: !<!Languages> 
         default:
           name: ''
@@ -950,8 +960,8 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_30
-      - !<!Parameter> 
-        schema: *ref_35
+      - !<!Parameter> &ref_41
+        schema: *ref_40
         implementation: Method
         required: true
         extensions:
@@ -964,6 +974,8 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_41
       language: !<!Languages> 
         default:
           name: ''
@@ -978,7 +990,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_35
+      schema: *ref_40
       language: !<!Languages> 
         default:
           name: ''
@@ -992,7 +1004,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_31
+      schema: *ref_32
       language: !<!Languages> 
         default:
           name: ''

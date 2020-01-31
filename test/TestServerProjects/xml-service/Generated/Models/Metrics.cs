@@ -5,7 +5,7 @@
 
 namespace xml_service.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The Metrics. </summary>
     public partial class Metrics
     {
         /// <summary> The version of Storage Analytics to configure. </summary>

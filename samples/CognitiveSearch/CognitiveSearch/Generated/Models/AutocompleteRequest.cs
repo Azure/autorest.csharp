@@ -10,7 +10,6 @@ namespace CognitiveSearch.Models
     {
         /// <summary> The search text on which to base autocomplete results. </summary>
         public string SearchText { get; set; }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-CHOICE. </summary>
         public AutocompleteMode? AutocompleteMode { get; set; }
         /// <summary> An OData expression that filters the documents used to produce completed terms for the Autocomplete result. </summary>
         public string Filter { get; set; }

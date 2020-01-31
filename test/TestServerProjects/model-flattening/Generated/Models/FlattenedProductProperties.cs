@@ -5,12 +5,11 @@
 
 namespace model_flattening.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The FlattenedProduct-properties. </summary>
     public partial class FlattenedProductProperties
     {
         public string PName { get; set; }
         public string Type { get; set; }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-CHOICE. </summary>
         public FlattenedProductPropertiesProvisioningStateValues? ProvisioningStateValues { get; internal set; }
         public string ProvisioningState { get; set; }
     }

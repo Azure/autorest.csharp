@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace model_flattening.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The Resource. </summary>
     public partial class Resource
     {
         /// <summary> Resource Id. </summary>

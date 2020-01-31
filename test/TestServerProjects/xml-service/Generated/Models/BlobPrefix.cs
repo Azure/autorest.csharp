@@ -5,7 +5,7 @@
 
 namespace xml_service.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The BlobPrefix. </summary>
     public partial class BlobPrefix
     {
         public string Name { get; set; }

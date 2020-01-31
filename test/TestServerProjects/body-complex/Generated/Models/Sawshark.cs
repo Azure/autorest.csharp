@@ -7,7 +7,7 @@ using System;
 
 namespace body_complex.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The sawshark. </summary>
     public partial class Sawshark : Shark
     {
         /// <summary> Initializes a new instance of Sawshark. </summary>
@@ -15,7 +15,6 @@ namespace body_complex.Models
         {
             Fishtype = "sawshark";
         }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-BYTEARRAY. </summary>
         public byte[] Picture { get; set; }
     }
 }

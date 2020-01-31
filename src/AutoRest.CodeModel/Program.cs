@@ -65,6 +65,7 @@ namespace AutoRest.CodeModel
                 .Replace(": Parameter", ": RequestParameter")
                 .Replace("<Parameter>", "<RequestParameter>")
                 .Replace("public Parameter OriginalParameter { get; set; } = new Parameter();", "public RequestParameter OriginalParameter { get; set; } = new RequestParameter();")
+                .Replace("public Parameter GroupedBy", "public RequestParameter GroupedBy")
                 .Replace("class Request ", "class ServiceRequest ")
                 .Replace("public Request Request { get; set; } = new Request();", "public ServiceRequest Request { get; set; } = new ServiceRequest();")
                 .Replace("class Response ", "class ServiceResponse ")
