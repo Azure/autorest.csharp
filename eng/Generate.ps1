@@ -3,10 +3,23 @@ param($name, [switch]$noDebug, [switch]$reset, [switch]$noBuild, [switch]$fast, 
 
 $ErrorActionPreference = 'Stop'
 
+function Invoke($command)
+{
+    Write-Host "> $command"
+    pushd $repoRoot
+    cmd /c "$command 2>&1"
+    popd
+    
+    if($LastExitCode -ne 0)
+    {
+        Write-Error "Command failed to execute: $command"
+    }
+}
+
 function Invoke-AutoRest($baseOutput, $title, $autoRestArguments)
 {
     $outputPath = Join-Path $baseOutput $title
-    $command = "npx  @autorest/autorest $script:debugFlags $autoRestArguments"
+    $command = "npx @autorest/autorest $script:debugFlags $autoRestArguments"
     if ($title)
     {
         $namespace = $title.Replace('-', '_')
@@ -24,15 +37,7 @@ function Invoke-AutoRest($baseOutput, $title, $autoRestArguments)
         Get-ChildItem $outputPath -Filter Generated -Directory -Recurse | Remove-Item -Force -Recurse;
     }
 
-    Write-Host "> $command"
-    pushd $repoRoot
-    cmd /c "$command 2>&1"
-    popd
-    
-    if($LastExitCode -ne 0)
-    {
-        Write-Error "Command failed to execute: $command"
-    }
+    Invoke $command
 }
 
 # General configuration
@@ -162,7 +167,7 @@ if ($updateLaunchSettings)
 
 if ($reset -or $env:TF_BUILD)
 {
-    Invoke-AutoRest $null $null '--reset'
+    Invoke 'npx autorest --reset'
 }
 
 if (!$noBuild)
