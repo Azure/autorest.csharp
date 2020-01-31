@@ -8,7 +8,7 @@ using System.ComponentModel;
 
 namespace AppConfiguration.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-CHOICE. </summary>
+    /// <summary> The get-7-itemsItem. </summary>
     public readonly partial struct Get7ItemsItem : IEquatable<Get7ItemsItem>
     {
         private readonly string _value;
@@ -28,21 +28,21 @@ namespace AppConfiguration.Models
         private const string LockedValue = "locked";
         private const string EtagValue = "etag";
 
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> key. </summary>
         public static Get7ItemsItem Key { get; } = new Get7ItemsItem(KeyValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> label. </summary>
         public static Get7ItemsItem Label { get; } = new Get7ItemsItem(LabelValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> content_type. </summary>
         public static Get7ItemsItem ContentType { get; } = new Get7ItemsItem(ContentTypeValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> value. </summary>
         public static Get7ItemsItem Value { get; } = new Get7ItemsItem(ValueValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> last_modified. </summary>
         public static Get7ItemsItem LastModified { get; } = new Get7ItemsItem(LastModifiedValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> tags. </summary>
         public static Get7ItemsItem Tags { get; } = new Get7ItemsItem(TagsValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> locked. </summary>
         public static Get7ItemsItem Locked { get; } = new Get7ItemsItem(LockedValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> etag. </summary>
         public static Get7ItemsItem Etag { get; } = new Get7ItemsItem(EtagValue);
         /// <summary> Determines if two <see cref="Get7ItemsItem"/> values are the same. </summary>
         public static bool operator ==(Get7ItemsItem left, Get7ItemsItem right) => left.Equals(right);

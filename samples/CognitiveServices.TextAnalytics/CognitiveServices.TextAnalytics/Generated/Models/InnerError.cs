@@ -5,7 +5,7 @@
 
 namespace CognitiveServices.TextAnalytics.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The InnerError. </summary>
     public partial class InnerError
     {
         /// <summary> Error code. </summary>
@@ -14,7 +14,6 @@ namespace CognitiveServices.TextAnalytics.Models
         public string Message { get; set; }
         /// <summary> Error target. </summary>
         public string Target { get; set; }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
         public InnerError Innererror { get; set; }
     }
 }

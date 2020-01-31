@@ -5,10 +5,9 @@
 
 namespace paging.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The Product. </summary>
     public partial class Product
     {
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
         public ProductProperties Properties { get; set; }
     }
 }

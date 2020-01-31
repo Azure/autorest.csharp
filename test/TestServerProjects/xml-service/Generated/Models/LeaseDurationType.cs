@@ -5,12 +5,12 @@
 
 namespace xml_service.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-CHOICE. </summary>
+    /// <summary> The LeaseDurationType. </summary>
     public enum LeaseDurationType
     {
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> infinite. </summary>
         Infinite,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> fixed. </summary>
         Fixed
     }
 }

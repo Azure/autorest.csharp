@@ -7,10 +7,9 @@ using System;
 
 namespace body_complex.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The duration-wrapper. </summary>
     public partial class DurationWrapper
     {
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-DURATION. </summary>
         public TimeSpan? Field { get; set; }
     }
 }

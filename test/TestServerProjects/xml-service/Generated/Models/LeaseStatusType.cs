@@ -5,12 +5,12 @@
 
 namespace xml_service.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-CHOICE. </summary>
+    /// <summary> The LeaseStatusType. </summary>
     public enum LeaseStatusType
     {
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> locked. </summary>
         Locked,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> unlocked. </summary>
         Unlocked
     }
 }

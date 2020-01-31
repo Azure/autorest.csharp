@@ -25,11 +25,11 @@ namespace body_complex.Models
         private const string UpperRedValue = "RED";
         private const string LowerRedValue = "red";
 
-        /// <summary> The value &apos;pink&apos;. </summary>
+        /// <summary> pink. </summary>
         public static GoblinSharkColor Pink { get; } = new GoblinSharkColor(PinkValue);
-        /// <summary> The value &apos;gray&apos;. </summary>
+        /// <summary> gray. </summary>
         public static GoblinSharkColor Gray { get; } = new GoblinSharkColor(GrayValue);
-        /// <summary> The value &apos;brown&apos;. </summary>
+        /// <summary> brown. </summary>
         public static GoblinSharkColor Brown { get; } = new GoblinSharkColor(BrownValue);
         /// <summary> Uppercase RED. </summary>
         public static GoblinSharkColor UpperRed { get; } = new GoblinSharkColor(UpperRedValue);

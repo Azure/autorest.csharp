@@ -5,14 +5,14 @@
 
 namespace CognitiveSearch.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-CHOICE. </summary>
+    /// <summary> The AutocompleteMode. </summary>
     public enum AutocompleteMode
     {
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> oneTerm. </summary>
         OneTerm,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> twoTerms. </summary>
         TwoTerms,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> oneTermWithContext. </summary>
         OneTermWithContext
     }
 }

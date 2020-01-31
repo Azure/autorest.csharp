@@ -5,7 +5,7 @@
 
 namespace CognitiveServices.TextAnalytics.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The DocumentError. </summary>
     public partial class DocumentError
     {
         /// <summary> Document Id. </summary>

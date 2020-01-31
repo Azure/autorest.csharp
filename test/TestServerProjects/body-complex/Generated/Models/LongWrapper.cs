@@ -5,12 +5,10 @@
 
 namespace body_complex.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The long-wrapper. </summary>
     public partial class LongWrapper
     {
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-INTEGER. </summary>
         public long? Field1 { get; set; }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-INTEGER. </summary>
         public long? Field2 { get; set; }
     }
 }

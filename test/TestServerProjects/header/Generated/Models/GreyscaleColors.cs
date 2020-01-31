@@ -5,14 +5,14 @@
 
 namespace header.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-CHOICE. </summary>
+    /// <summary> The GreyscaleColors. </summary>
     public enum GreyscaleColors
     {
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> White. </summary>
         White,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> black. </summary>
         Black,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> GREY. </summary>
         GREY
     }
 }

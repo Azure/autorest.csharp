@@ -7,10 +7,9 @@ using System.Collections.Generic;
 
 namespace body_complex.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The array-wrapper. </summary>
     public partial class ArrayWrapper
     {
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA. </summary>
         public ICollection<string> Array { get; set; }
     }
 }

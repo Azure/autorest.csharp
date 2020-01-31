@@ -14,13 +14,13 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: typeForstatus
-            description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+            description: ''
         protocol: !<!Protocols> {}
       serializedName: status
       language: !<!Languages> 
         default:
           name: status
-          description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+          description: ''
           originalName: status
       protocol: !<!Protocols> {}
     - !<!Property> 
@@ -44,7 +44,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Error
-        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        description: ''
         namespace: Api100
     protocol: !<!Protocols> {}
   numbers:
@@ -88,6 +88,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_3
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -137,6 +138,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_3
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -186,6 +188,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_3
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''

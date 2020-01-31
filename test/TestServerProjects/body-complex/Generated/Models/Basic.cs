@@ -5,14 +5,13 @@
 
 namespace body_complex.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The basic. </summary>
     public partial class Basic
     {
         /// <summary> Basic Id. </summary>
         public int? Id { get; set; }
         /// <summary> Name property with a very long description that does not fit on a single line and a line break. </summary>
         public string Name { get; set; }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-CHOICE. </summary>
         public CMYKColors? Color { get; set; }
     }
 }

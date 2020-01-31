@@ -8,7 +8,7 @@ using System.ComponentModel;
 
 namespace xml_service.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-CHOICE. </summary>
+    /// <summary> The PublicAccessType. </summary>
     public readonly partial struct PublicAccessType : IEquatable<PublicAccessType>
     {
         private readonly string _value;
@@ -22,9 +22,9 @@ namespace xml_service.Models
         private const string ContainerValue = "container";
         private const string BlobValue = "blob";
 
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> container. </summary>
         public static PublicAccessType Container { get; } = new PublicAccessType(ContainerValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> blob. </summary>
         public static PublicAccessType Blob { get; } = new PublicAccessType(BlobValue);
         /// <summary> Determines if two <see cref="PublicAccessType"/> values are the same. </summary>
         public static bool operator ==(PublicAccessType left, PublicAccessType right) => left.Equals(right);

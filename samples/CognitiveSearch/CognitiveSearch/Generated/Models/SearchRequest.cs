@@ -26,7 +26,6 @@ namespace CognitiveSearch.Models
         public double? MinimumCoverage { get; set; }
         /// <summary> The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, or desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no $orderby is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses. </summary>
         public string OrderBy { get; set; }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-CHOICE. </summary>
         public QueryType? QueryType { get; set; }
         /// <summary> The list of parameter values to be used in scoring functions (for example, referencePointParameter) using the format name-values. For example, if the scoring profile defines a function with a parameter called &apos;mylocation&apos; the parameter string would be &quot;mylocation--122.2,44.8&quot; (without the quotes). </summary>
         public ICollection<string> ScoringParameters { get; set; }
@@ -36,7 +35,6 @@ namespace CognitiveSearch.Models
         public string SearchText { get; set; }
         /// <summary> The comma-separated list of field names to which to scope the full-text search. When using fielded search (fieldName:searchExpression) in a full Lucene query, the field names of each fielded search expression take precedence over any field names listed in this parameter. </summary>
         public string SearchFields { get; set; }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-CHOICE. </summary>
         public SearchMode? SearchMode { get; set; }
         /// <summary> The comma-separated list of fields to retrieve. If unspecified, all fields marked as retrievable in the schema are included. </summary>
         public string Select { get; set; }

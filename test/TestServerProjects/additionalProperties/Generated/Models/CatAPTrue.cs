@@ -5,10 +5,9 @@
 
 namespace additionalProperties.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The CatAPTrue. </summary>
     public partial class CatAPTrue : PetAPTrue
     {
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-BOOLEAN. </summary>
         public bool? Friendly { get; set; }
     }
 }

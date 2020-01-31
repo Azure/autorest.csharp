@@ -14,13 +14,13 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: typeForstatus
-            description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+            description: ''
         protocol: !<!Protocols> {}
       serializedName: status
       language: !<!Languages> 
         default:
           name: status
-          description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+          description: ''
           originalName: status
       protocol: !<!Protocols> {}
     - !<!Property> 
@@ -44,7 +44,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Error
-        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        description: ''
         namespace: Api100
     protocol: !<!Protocols> {}
   constants:
@@ -73,7 +73,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Constant0
-        description: The constant value 340282300000000000000
+        description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> 
     type: constant
@@ -100,9 +100,9 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Constant1
-        description: The constant value 2.5976931e+101
+        description: ''
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_19
+  - !<!ConstantSchema> &ref_21
     type: constant
     apiVersions:
     - !<!ApiVersion> 
@@ -127,9 +127,9 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Constant2
-        description: The constant value 99999999.99
+        description: ''
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_20
+  - !<!ConstantSchema> &ref_22
     type: constant
     apiVersions:
     - !<!ApiVersion> 
@@ -154,7 +154,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Constant3
-        description: The constant value -99999999.99
+        description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> 
     type: constant
@@ -181,9 +181,9 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Constant4
-        description: The constant value 2.5976931e+101
+        description: ''
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_21
+  - !<!ConstantSchema> &ref_24
     type: constant
     apiVersions:
     - !<!ApiVersion> 
@@ -208,9 +208,9 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Constant5
-        description: The constant value 99999999.99
+        description: ''
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_22
+  - !<!ConstantSchema> &ref_25
     type: constant
     apiVersions:
     - !<!ApiVersion> 
@@ -235,7 +235,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Constant6
-        description: The constant value -99999999.99
+        description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> 
     type: constant
@@ -262,7 +262,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Constant7
-        description: The constant value 3.402823e-20
+        description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> 
     type: constant
@@ -289,7 +289,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Constant8
-        description: The constant value 2.5976931e-101
+        description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> 
     type: constant
@@ -316,7 +316,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Constant9
-        description: The constant value 2.5976931e-101
+        description: ''
     protocol: !<!Protocols> {}
   numbers:
   - !<!NumberSchema> &ref_14
@@ -413,6 +413,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_13
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -462,6 +463,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_13
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -511,6 +513,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_13
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -560,6 +563,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_13
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -609,7 +613,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_13
-      - !<!Parameter> 
+      - !<!Parameter> &ref_19
         schema: *ref_16
         implementation: Method
         required: true
@@ -623,6 +627,8 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_19
       language: !<!Languages> 
         default:
           name: ''
@@ -673,6 +679,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_13
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -722,7 +729,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_13
-      - !<!Parameter> 
+      - !<!Parameter> &ref_20
         schema: *ref_17
         implementation: Method
         required: true
@@ -736,6 +743,8 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_20
       language: !<!Languages> 
         default:
           name: ''
@@ -786,6 +795,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_13
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -836,7 +846,7 @@ operationGroups:
       parameters:
       - *ref_13
       - !<!Parameter> 
-        schema: *ref_19
+        schema: *ref_21
         implementation: Method
         required: true
         extensions:
@@ -849,6 +859,7 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -899,6 +910,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_13
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -949,7 +961,7 @@ operationGroups:
       parameters:
       - *ref_13
       - !<!Parameter> 
-        schema: *ref_20
+        schema: *ref_22
         implementation: Method
         required: true
         extensions:
@@ -962,6 +974,7 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -1012,6 +1025,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_13
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -1061,7 +1075,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_13
-      - !<!Parameter> 
+      - !<!Parameter> &ref_23
         schema: *ref_18
         implementation: Method
         required: true
@@ -1075,6 +1089,8 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_23
       language: !<!Languages> 
         default:
           name: ''
@@ -1125,6 +1141,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_13
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -1175,7 +1192,7 @@ operationGroups:
       parameters:
       - *ref_13
       - !<!Parameter> 
-        schema: *ref_21
+        schema: *ref_24
         implementation: Method
         required: true
         extensions:
@@ -1188,6 +1205,7 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -1238,6 +1256,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_13
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -1288,7 +1307,7 @@ operationGroups:
       parameters:
       - *ref_13
       - !<!Parameter> 
-        schema: *ref_22
+        schema: *ref_25
         implementation: Method
         required: true
         extensions:
@@ -1301,6 +1320,7 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -1351,6 +1371,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_13
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -1400,7 +1421,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_13
-      - !<!Parameter> 
+      - !<!Parameter> &ref_26
         schema: *ref_16
         implementation: Method
         required: true
@@ -1414,6 +1435,8 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_26
       language: !<!Languages> 
         default:
           name: ''
@@ -1464,6 +1487,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_13
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -1513,7 +1537,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_13
-      - !<!Parameter> 
+      - !<!Parameter> &ref_27
         schema: *ref_17
         implementation: Method
         required: true
@@ -1527,6 +1551,8 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_27
       language: !<!Languages> 
         default:
           name: ''
@@ -1577,6 +1603,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_13
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -1626,7 +1653,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_13
-      - !<!Parameter> 
+      - !<!Parameter> &ref_28
         schema: *ref_18
         implementation: Method
         required: true
@@ -1640,6 +1667,8 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -1690,6 +1719,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_13
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''

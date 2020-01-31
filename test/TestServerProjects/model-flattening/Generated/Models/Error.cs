@@ -5,13 +5,11 @@
 
 namespace model_flattening.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The Error. </summary>
     public partial class Error
     {
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-INTEGER. </summary>
         public int? Status { get; set; }
         public string Message { get; set; }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
         public Error ParentError { get; set; }
     }
 }

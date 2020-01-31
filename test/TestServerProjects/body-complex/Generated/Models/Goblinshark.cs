@@ -5,7 +5,7 @@
 
 namespace body_complex.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The goblinshark. </summary>
     public partial class Goblinshark : Shark
     {
         /// <summary> Initializes a new instance of Goblinshark. </summary>
@@ -13,7 +13,6 @@ namespace body_complex.Models
         {
             Fishtype = "goblin";
         }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-INTEGER. </summary>
         public int? Jawsize { get; set; }
         /// <summary> Colors possible. </summary>
         public GoblinSharkColor? Color { get; set; }
