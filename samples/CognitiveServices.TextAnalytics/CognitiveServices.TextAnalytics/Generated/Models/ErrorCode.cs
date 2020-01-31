@@ -24,13 +24,13 @@ namespace CognitiveServices.TextAnalytics.Models
         private const string InternalServerErrorValue = "internalServerError";
         private const string ServiceUnavailableValue = "serviceUnavailable";
 
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> invalidRequest. </summary>
         public static ErrorCode InvalidRequest { get; } = new ErrorCode(InvalidRequestValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> invalidArgument. </summary>
         public static ErrorCode InvalidArgument { get; } = new ErrorCode(InvalidArgumentValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> internalServerError. </summary>
         public static ErrorCode InternalServerError { get; } = new ErrorCode(InternalServerErrorValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> serviceUnavailable. </summary>
         public static ErrorCode ServiceUnavailable { get; } = new ErrorCode(ServiceUnavailableValue);
         /// <summary> Determines if two <see cref="ErrorCode"/> values are the same. </summary>
         public static bool operator ==(ErrorCode left, ErrorCode right) => left.Equals(right);

@@ -8,7 +8,7 @@ using System.ComponentModel;
 
 namespace model_flattening.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-CHOICE. </summary>
+    /// <summary> The FlattenedProduct-properties-provisioningStateValues. </summary>
     public readonly partial struct FlattenedProductPropertiesProvisioningStateValues : IEquatable<FlattenedProductPropertiesProvisioningStateValues>
     {
         private readonly string _value;
@@ -31,27 +31,27 @@ namespace model_flattening.Models
         private const string DeletedValue = "Deleted";
         private const string OKValue = "OK";
 
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> Succeeded. </summary>
         public static FlattenedProductPropertiesProvisioningStateValues Succeeded { get; } = new FlattenedProductPropertiesProvisioningStateValues(SucceededValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> Failed. </summary>
         public static FlattenedProductPropertiesProvisioningStateValues Failed { get; } = new FlattenedProductPropertiesProvisioningStateValues(FailedValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> canceled. </summary>
         public static FlattenedProductPropertiesProvisioningStateValues Canceled { get; } = new FlattenedProductPropertiesProvisioningStateValues(CanceledValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> Accepted. </summary>
         public static FlattenedProductPropertiesProvisioningStateValues Accepted { get; } = new FlattenedProductPropertiesProvisioningStateValues(AcceptedValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> Creating. </summary>
         public static FlattenedProductPropertiesProvisioningStateValues Creating { get; } = new FlattenedProductPropertiesProvisioningStateValues(CreatingValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> Created. </summary>
         public static FlattenedProductPropertiesProvisioningStateValues Created { get; } = new FlattenedProductPropertiesProvisioningStateValues(CreatedValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> Updating. </summary>
         public static FlattenedProductPropertiesProvisioningStateValues Updating { get; } = new FlattenedProductPropertiesProvisioningStateValues(UpdatingValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> Updated. </summary>
         public static FlattenedProductPropertiesProvisioningStateValues Updated { get; } = new FlattenedProductPropertiesProvisioningStateValues(UpdatedValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> Deleting. </summary>
         public static FlattenedProductPropertiesProvisioningStateValues Deleting { get; } = new FlattenedProductPropertiesProvisioningStateValues(DeletingValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> Deleted. </summary>
         public static FlattenedProductPropertiesProvisioningStateValues Deleted { get; } = new FlattenedProductPropertiesProvisioningStateValues(DeletedValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> OK. </summary>
         public static FlattenedProductPropertiesProvisioningStateValues OK { get; } = new FlattenedProductPropertiesProvisioningStateValues(OKValue);
         /// <summary> Determines if two <see cref="FlattenedProductPropertiesProvisioningStateValues"/> values are the same. </summary>
         public static bool operator ==(FlattenedProductPropertiesProvisioningStateValues left, FlattenedProductPropertiesProvisioningStateValues right) => left.Equals(right);

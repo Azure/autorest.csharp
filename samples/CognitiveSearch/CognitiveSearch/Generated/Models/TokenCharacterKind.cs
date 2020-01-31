@@ -8,15 +8,15 @@ namespace CognitiveSearch.Models
     /// <summary> Represents classes of characters on which a token filter can operate. </summary>
     public enum TokenCharacterKind
     {
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> letter. </summary>
         Letter,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> digit. </summary>
         Digit,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> whitespace. </summary>
         Whitespace,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> punctuation. </summary>
         Punctuation,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> symbol. </summary>
         Symbol
     }
 }

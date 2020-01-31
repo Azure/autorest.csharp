@@ -28,21 +28,21 @@ namespace CognitiveSearch.Models
         private const string EdmGeographyPointValue = "Edm.GeographyPoint";
         private const string EdmComplexTypeValue = "Edm.ComplexType";
 
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> Edm.String. </summary>
         public static DataType EdmString { get; } = new DataType(EdmStringValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> Edm.Int32. </summary>
         public static DataType EdmInt32 { get; } = new DataType(EdmInt32Value);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> Edm.Int64. </summary>
         public static DataType EdmInt64 { get; } = new DataType(EdmInt64Value);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> Edm.Double. </summary>
         public static DataType EdmDouble { get; } = new DataType(EdmDoubleValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> Edm.Boolean. </summary>
         public static DataType EdmBoolean { get; } = new DataType(EdmBooleanValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> Edm.DateTimeOffset. </summary>
         public static DataType EdmDateTimeOffset { get; } = new DataType(EdmDateTimeOffsetValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> Edm.GeographyPoint. </summary>
         public static DataType EdmGeographyPoint { get; } = new DataType(EdmGeographyPointValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> Edm.ComplexType. </summary>
         public static DataType EdmComplexType { get; } = new DataType(EdmComplexTypeValue);
         /// <summary> Determines if two <see cref="DataType"/> values are the same. </summary>
         public static bool operator ==(DataType left, DataType right) => left.Equals(right);

@@ -12,9 +12,7 @@ namespace xml_service.Models
     {
         /// <summary> Azure Analytics Logging settings. </summary>
         public Logging Logging { get; set; }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
         public Metrics HourMetrics { get; set; }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
         public Metrics MinuteMetrics { get; set; }
         /// <summary> The set of CORS rules. </summary>
         public ICollection<CorsRule> Cors { get; set; }

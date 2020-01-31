@@ -22,9 +22,9 @@ namespace AnotherCustomNamespace
         private const string AppleValue = "apple";
         private const string PearValue = "pear";
 
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> apple. </summary>
         public static CustomFruitEnum Apple { get; } = new CustomFruitEnum(AppleValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> pear. </summary>
         public static CustomFruitEnum Pear { get; } = new CustomFruitEnum(PearValue);
         /// <summary> Determines if two <see cref="CustomFruitEnum"/> values are the same. </summary>
         public static bool operator ==(CustomFruitEnum left, CustomFruitEnum right) => left.Equals(right);

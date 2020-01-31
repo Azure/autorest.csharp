@@ -14,13 +14,13 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: typeForstatus
-            description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+            description: ''
         protocol: !<!Protocols> {}
       serializedName: status
       language: !<!Languages> 
         default:
           name: status
-          description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+          description: ''
           originalName: status
       protocol: !<!Protocols> {}
     - !<!Property> 
@@ -44,7 +44,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Error
-        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        description: ''
         namespace: Api100
     protocol: !<!Protocols> {}
   constants:
@@ -68,12 +68,12 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: date-time
-          description: MISSING·SCHEMA-DESCRIPTION-DATETIME
+          description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
         name: Constant0
-        description: 'The constant value Sun, 1 Jan 0001 00:00:00 GMT'
+        description: ''
     protocol: !<!Protocols> {}
   dateTimes:
   - !<!DateTimeSchema> &ref_5
@@ -85,7 +85,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: date-time
-        description: MISSING·SCHEMA-DESCRIPTION-DATETIME
+        description: ''
     protocol: !<!Protocols> {}
   - *ref_0
   numbers:
@@ -129,6 +129,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_4
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -178,6 +179,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_4
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -227,6 +229,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_4
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -276,6 +279,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_4
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -325,7 +329,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_4
-      - !<!Parameter> 
+      - !<!Parameter> &ref_7
         schema: *ref_5
         implementation: Method
         required: true
@@ -339,6 +343,8 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_7
       language: !<!Languages> 
         default:
           name: ''
@@ -389,6 +395,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_4
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -438,6 +445,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_4
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -487,7 +495,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_4
-      - !<!Parameter> 
+      - !<!Parameter> &ref_8
         schema: *ref_5
         implementation: Method
         required: true
@@ -501,6 +509,8 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_8
       language: !<!Languages> 
         default:
           name: ''
@@ -551,6 +561,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_4
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''

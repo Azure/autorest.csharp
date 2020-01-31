@@ -8,19 +8,19 @@ namespace CognitiveSearch.Models
     /// <summary> A string indicating what entity categories to return. </summary>
     public enum EntityCategory
     {
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> location. </summary>
         Location,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> organization. </summary>
         Organization,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> person. </summary>
         Person,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> quantity. </summary>
         Quantity,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> datetime. </summary>
         Datetime,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> url. </summary>
         Url,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> email. </summary>
         Email
     }
 }

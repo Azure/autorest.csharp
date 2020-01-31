@@ -16,7 +16,6 @@ namespace CognitiveSearch.Models
         public IndexerExecutionResult LastResult { get; internal set; }
         /// <summary> History of the recent indexer executions, sorted in reverse chronological order. </summary>
         public ICollection<IndexerExecutionResult> ExecutionHistory { get; internal set; }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
         public IndexerLimits Limits { get; internal set; }
     }
 }

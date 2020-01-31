@@ -7,12 +7,10 @@ using System.Collections.Generic;
 
 namespace xml_service.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The Blobs. </summary>
     public partial class Blobs
     {
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA. </summary>
         public ICollection<BlobPrefix> BlobPrefix { get; set; }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA. </summary>
         public ICollection<Blob> Blob { get; set; }
     }
 }

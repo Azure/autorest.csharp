@@ -69,67 +69,67 @@ schemas: !<!Schemas>
               language:
                 default:
                   name: Succeeded
-                  description: The value 'undefined'
+                  description: ''
             - !<!ChoiceValue> 
               value: Failed
               language:
                 default:
                   name: Failed
-                  description: The value 'undefined'
+                  description: ''
             - !<!ChoiceValue> 
               value: canceled
               language:
                 default:
                   name: canceled
-                  description: The value 'undefined'
+                  description: ''
             - !<!ChoiceValue> 
               value: Accepted
               language:
                 default:
                   name: Accepted
-                  description: The value 'undefined'
+                  description: ''
             - !<!ChoiceValue> 
               value: Creating
               language:
                 default:
                   name: Creating
-                  description: The value 'undefined'
+                  description: ''
             - !<!ChoiceValue> 
               value: Created
               language:
                 default:
                   name: Created
-                  description: The value 'undefined'
+                  description: ''
             - !<!ChoiceValue> 
               value: Updating
               language:
                 default:
                   name: Updating
-                  description: The value 'undefined'
+                  description: ''
             - !<!ChoiceValue> 
               value: Updated
               language:
                 default:
                   name: Updated
-                  description: The value 'undefined'
+                  description: ''
             - !<!ChoiceValue> 
               value: Deleting
               language:
                 default:
                   name: Deleting
-                  description: The value 'undefined'
+                  description: ''
             - !<!ChoiceValue> 
               value: Deleted
               language:
                 default:
                   name: Deleted
-                  description: The value 'undefined'
+                  description: ''
             - !<!ChoiceValue> 
               value: OK
               language:
                 default:
                   name: OK
-                  description: The value 'undefined'
+                  description: ''
             type: choice
             apiVersions:
             - !<!ApiVersion> 
@@ -144,7 +144,7 @@ schemas: !<!Schemas>
             language: !<!Languages> 
               default:
                 name: FlattenedProduct-properties-provisioningStateValues
-                description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+                description: ''
             protocol: !<!Protocols> {}
           flattenedNames:
           - properties
@@ -154,7 +154,7 @@ schemas: !<!Schemas>
           language: !<!Languages> 
             default:
               name: provisioningStateValues
-              description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+              description: ''
               originalName: provisioningStateValues
           protocol: !<!Protocols> {}
         - !<!Property> 
@@ -188,7 +188,7 @@ schemas: !<!Schemas>
       - *ref_1
     properties:
     - !<!Property> 
-      schema: !<!StringSchema> &ref_22
+      schema: !<!StringSchema> &ref_23
         type: string
         apiVersions:
         - !<!ApiVersion> 
@@ -207,7 +207,7 @@ schemas: !<!Schemas>
           originalName: id
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_23
+      schema: !<!StringSchema> &ref_24
         type: string
         apiVersions:
         - !<!ApiVersion> 
@@ -226,9 +226,9 @@ schemas: !<!Schemas>
           originalName: type
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!DictionarySchema> &ref_16
+      schema: !<!DictionarySchema> &ref_17
         type: dictionary
-        elementType: !<!StringSchema> &ref_24
+        elementType: !<!StringSchema> &ref_25
           type: string
           apiVersions:
           - !<!ApiVersion> 
@@ -251,7 +251,7 @@ schemas: !<!Schemas>
           originalName: tags
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_25
+      schema: !<!StringSchema> &ref_26
         type: string
         apiVersions:
         - !<!ApiVersion> 
@@ -269,7 +269,7 @@ schemas: !<!Schemas>
           originalName: location
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_26
+      schema: !<!StringSchema> &ref_27
         type: string
         apiVersions:
         - !<!ApiVersion> 
@@ -290,7 +290,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Resource
-        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        description: ''
         namespace: Api100
     protocol: !<!Protocols> {}
   - !<!ObjectSchema> &ref_2
@@ -300,23 +300,23 @@ schemas: !<!Schemas>
       version: 1.0.0
     properties:
     - !<!Property> 
-      schema: !<!NumberSchema> &ref_21
+      schema: !<!NumberSchema> &ref_22
         type: integer
         precision: 32
         language: !<!Languages> 
           default:
             name: typeForstatus
-            description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+            description: ''
         protocol: !<!Protocols> {}
       serializedName: status
       language: !<!Languages> 
         default:
           name: status
-          description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+          description: ''
           originalName: status
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_27
+      schema: !<!StringSchema> &ref_28
         type: string
         apiVersions:
         - !<!ApiVersion> 
@@ -339,13 +339,13 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: parentError
-          description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+          description: ''
           originalName: parentError
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
         name: Error
-        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        description: ''
         namespace: Api100
     protocol: !<!Protocols> {}
   - *ref_1
@@ -380,7 +380,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: provisioningStateValues
-          description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+          description: ''
           originalName: provisioningStateValues
       protocol: !<!Protocols> {}
     - !<!Property> 
@@ -398,10 +398,10 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: FlattenedProduct-properties
-        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        description: ''
         namespace: Api100
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_18
+  - !<!ObjectSchema> &ref_19
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -433,7 +433,7 @@ schemas: !<!Schemas>
         description: The wrapped produc.
         namespace: Api100
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_19
+  - !<!ObjectSchema> &ref_20
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -457,7 +457,7 @@ schemas: !<!Schemas>
         description: The wrapped produc.
         namespace: Api100
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_37
+  - !<!ObjectSchema> &ref_40
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -473,7 +473,7 @@ schemas: !<!Schemas>
           originalName: productresource
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_20
+      schema: !<!ArraySchema> &ref_21
         type: array
         apiVersions:
         - !<!ApiVersion> 
@@ -482,17 +482,17 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: ResourceCollection-arrayofresources
-            description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+            description: ''
         protocol: !<!Protocols> {}
       serializedName: arrayofresources
       language: !<!Languages> 
         default:
           name: arrayofresources
-          description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+          description: ''
           originalName: arrayofresources
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!DictionarySchema> &ref_17
+      schema: !<!DictionarySchema> &ref_18
         type: dictionary
         elementType: *ref_1
         language: !<!Languages> 
@@ -510,7 +510,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: ResourceCollection
-        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        description: ''
         namespace: Api100
     protocol: !<!Protocols> {}
   - !<!ObjectSchema> &ref_8
@@ -588,6 +588,28 @@ schemas: !<!Schemas>
               version: 1.0.0
             language: !<!Languages> 
               default:
+                name: GenericUrl-generic_value
+                description: Generic URL value.
+            protocol: !<!Protocols> {}
+          flattenedNames:
+          - details
+          - max_product_image
+          - generic_value
+          serializedName: generic_value
+          language: !<!Languages> 
+            default:
+              name: genericValue
+              description: Generic URL value.
+              originalName: generic_value
+          protocol: !<!Protocols> {}
+        - !<!Property> 
+          schema: !<!StringSchema> &ref_14
+            type: string
+            apiVersions:
+            - !<!ApiVersion> 
+              version: 1.0.0
+            language: !<!Languages> 
+              default:
                 name: ProductUrl-@odata.value
                 description: URL value.
             protocol: !<!Protocols> {}
@@ -612,7 +634,7 @@ schemas: !<!Schemas>
       - *ref_10
     properties:
     - !<!Property> 
-      schema: !<!StringSchema> &ref_28
+      schema: !<!StringSchema> &ref_29
         type: string
         apiVersions:
         - !<!ApiVersion> 
@@ -631,7 +653,7 @@ schemas: !<!Schemas>
           originalName: productId
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_29
+      schema: !<!StringSchema> &ref_30
         type: string
         apiVersions:
         - !<!ApiVersion> 
@@ -686,6 +708,19 @@ schemas: !<!Schemas>
       schema: *ref_13
       flattenedNames:
       - max_product_image
+      - generic_value
+      required: false
+      serializedName: generic_value
+      language: !<!Languages> 
+        default:
+          name: genericValue
+          description: Generic URL value.
+          originalName: generic_value
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: *ref_14
+      flattenedNames:
+      - max_product_image
       - '@odata.value'
       required: false
       serializedName: '@odata.value'
@@ -703,26 +738,26 @@ schemas: !<!Schemas>
         description: The product documentation.
         namespace: Api100
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_14
+  - !<!ObjectSchema> &ref_15
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
     children: !<!Relations> 
       all:
-      - !<!ObjectSchema> &ref_15
+      - !<!ObjectSchema> &ref_16
         type: object
         apiVersions:
         - !<!ApiVersion> 
           version: 1.0.0
         parents: !<!Relations> 
           all:
-          - *ref_14
+          - *ref_15
           immediate:
-          - *ref_14
+          - *ref_15
         properties:
         - !<!Property> 
-          schema: *ref_13
+          schema: *ref_14
           serializedName: '@odata.value'
           language: !<!Languages> 
             default:
@@ -739,19 +774,10 @@ schemas: !<!Schemas>
             namespace: Api100
         protocol: !<!Protocols> {}
       immediate:
-      - *ref_15
+      - *ref_16
     properties:
     - !<!Property> 
-      schema: !<!StringSchema> &ref_30
-        type: string
-        apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-        language: !<!Languages> 
-          default:
-            name: GenericUrl-generic_value
-            description: Generic URL value.
-        protocol: !<!Protocols> {}
+      schema: *ref_13
       serializedName: generic_value
       language: !<!Languages> 
         default:
@@ -765,10 +791,10 @@ schemas: !<!Schemas>
         description: The Generic URL.
         namespace: Api100
     protocol: !<!Protocols> {}
-  - *ref_15
-  dictionaries:
   - *ref_16
-  - !<!DictionarySchema> &ref_36
+  dictionaries:
+  - *ref_17
+  - !<!DictionarySchema> &ref_38
     type: dictionary
     elementType: *ref_1
     language: !<!Languages> 
@@ -776,7 +802,7 @@ schemas: !<!Schemas>
         name: DictionaryOfFlattenedProduct
         description: Dictionary of <FlattenedProduct>
     protocol: !<!Protocols> {}
-  - *ref_17
+  - *ref_18
   choices:
   - *ref_5
   arrays:
@@ -789,9 +815,9 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Array of Resource
-        description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+        description: ''
     protocol: !<!Protocols> {}
-  - !<!ArraySchema> &ref_33
+  - !<!ArraySchema> &ref_34
     type: array
     apiVersions:
     - !<!ApiVersion> 
@@ -800,18 +826,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Array of FlattenedProduct
-        description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
-    protocol: !<!Protocols> {}
-  - !<!ArraySchema> &ref_34
-    type: array
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    elementType: *ref_18
-    language: !<!Languages> 
-      default:
-        name: Array of WrappedProduct
-        description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+        description: ''
     protocol: !<!Protocols> {}
   - !<!ArraySchema> &ref_35
     type: array
@@ -821,31 +836,42 @@ schemas: !<!Schemas>
     elementType: *ref_19
     language: !<!Languages> 
       default:
-        name: Array of ProductWrapper
-        description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+        name: Array of WrappedProduct
+        description: ''
     protocol: !<!Protocols> {}
-  - *ref_20
+  - !<!ArraySchema> &ref_37
+    type: array
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    elementType: *ref_20
+    language: !<!Languages> 
+      default:
+        name: Array of ProductWrapper
+        description: ''
+    protocol: !<!Protocols> {}
+  - *ref_21
   constants:
   - *ref_12
   numbers:
-  - *ref_21
+  - *ref_22
   strings:
   - *ref_9
-  - *ref_22
   - *ref_23
   - *ref_24
   - *ref_25
   - *ref_26
   - *ref_27
+  - *ref_28
   - *ref_3
   - *ref_4
   - *ref_6
   - *ref_7
-  - *ref_28
   - *ref_29
-  - *ref_11
   - *ref_30
+  - *ref_11
   - *ref_13
+  - *ref_14
 globalParameters:
 - !<!Parameter> &ref_31
   schema: *ref_9
@@ -876,7 +902,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_31
-      - !<!Parameter> 
+      - !<!Parameter> &ref_33
         schema: *ref_32
         implementation: Method
         extensions:
@@ -889,6 +915,8 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_33
       language: !<!Languages> 
         default:
           name: ''
@@ -939,6 +967,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_31
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -950,7 +979,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_33
+      schema: *ref_34
       language: !<!Languages> 
         default:
           name: ''
@@ -988,8 +1017,8 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_31
-      - !<!Parameter> 
-        schema: *ref_34
+      - !<!Parameter> &ref_36
+        schema: *ref_35
         implementation: Method
         extensions:
           x-ms-requestBody-name: ResourceArray
@@ -1001,6 +1030,8 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_36
       language: !<!Languages> 
         default:
           name: ''
@@ -1051,6 +1082,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_31
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -1062,7 +1094,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_35
+      schema: *ref_37
       language: !<!Languages> 
         default:
           name: ''
@@ -1100,8 +1132,8 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_31
-      - !<!Parameter> 
-        schema: *ref_36
+      - !<!Parameter> &ref_39
+        schema: *ref_38
         implementation: Method
         extensions:
           x-ms-requestBody-name: ResourceDictionary
@@ -1113,6 +1145,8 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_39
       language: !<!Languages> 
         default:
           name: ''
@@ -1163,6 +1197,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_31
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -1174,7 +1209,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_36
+      schema: *ref_38
       language: !<!Languages> 
         default:
           name: ''
@@ -1212,8 +1247,8 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_31
-      - !<!Parameter> 
-        schema: *ref_37
+      - !<!Parameter> &ref_41
+        schema: *ref_40
         implementation: Method
         extensions:
           x-ms-requestBody-name: ResourceComplexObject
@@ -1225,6 +1260,8 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_41
       language: !<!Languages> 
         default:
           name: ''
@@ -1275,6 +1312,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_31
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -1286,7 +1324,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_37
+      schema: *ref_40
       language: !<!Languages> 
         default:
           name: ''
@@ -1324,7 +1362,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_31
-      - !<!Parameter> 
+      - !<!Parameter> &ref_42
         schema: *ref_10
         implementation: Method
         extensions:
@@ -1337,6 +1375,8 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_42
       language: !<!Languages> 
         default:
           name: ''
@@ -1391,7 +1431,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_31
-      - !<!Parameter> 
+      - !<!Parameter> &ref_43
         schema: *ref_10
         implementation: Method
         extensions:
@@ -1405,6 +1445,8 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_43
       language: !<!Languages> 
         default:
           name: ''
@@ -1459,8 +1501,8 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_31
-      - !<!Parameter> 
-        schema: *ref_24
+      - !<!Parameter> &ref_44
+        schema: *ref_25
         implementation: Method
         required: true
         extensions:
@@ -1474,7 +1516,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: path
-      - !<!Parameter> 
+      - !<!Parameter> &ref_45
         schema: *ref_10
         implementation: Method
         extensions:
@@ -1490,6 +1532,9 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_44
+      - *ref_45
       language: !<!Languages> 
         default:
           name: ''

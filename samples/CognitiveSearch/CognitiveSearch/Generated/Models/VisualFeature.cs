@@ -8,17 +8,17 @@ namespace CognitiveSearch.Models
     /// <summary> The strings indicating what visual feature types to return. </summary>
     public enum VisualFeature
     {
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> categories. </summary>
         Categories,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> tags. </summary>
         Tags,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> description. </summary>
         Description,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> faces. </summary>
         Faces,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> imageType. </summary>
         ImageType,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> color. </summary>
         Color
     }
 }

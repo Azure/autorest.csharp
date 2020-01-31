@@ -34,13 +34,13 @@ schemas: !<!Schemas>
           language:
             default:
               name: apple
-              description: The value 'undefined'
+              description: ''
         - !<!ChoiceValue> 
           value: pear
           language:
             default:
               name: pear
-              description: The value 'undefined'
+              description: ''
         type: choice
         apiVersions:
         - !<!ApiVersion> 
@@ -73,43 +73,43 @@ schemas: !<!Schemas>
           language:
             default:
               name: Monday
-              description: The value 'undefined'
+              description: ''
         - !<!ChoiceValue> 
           value: Tuesday
           language:
             default:
               name: Tuesday
-              description: The value 'undefined'
+              description: ''
         - !<!ChoiceValue> 
           value: Wednesday
           language:
             default:
               name: Wednesday
-              description: The value 'undefined'
+              description: ''
         - !<!ChoiceValue> 
           value: Thursday
           language:
             default:
               name: Thursday
-              description: The value 'undefined'
+              description: ''
         - !<!ChoiceValue> 
           value: Friday
           language:
             default:
               name: Friday
-              description: The value 'undefined'
+              description: ''
         - !<!ChoiceValue> 
           value: Saturday
           language:
             default:
               name: Saturday
-              description: The value 'undefined'
+              description: ''
         - !<!ChoiceValue> 
           value: Sunday
           language:
             default:
               name: Sunday
-              description: The value 'undefined'
+              description: ''
         type: choice
         apiVersions:
         - !<!ApiVersion> 
@@ -131,7 +131,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Model
-        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        description: ''
         namespace: Api100
     protocol: !<!Protocols> {}
   choices:
@@ -170,7 +170,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_4
-      - !<!Parameter> 
+      - !<!Parameter> &ref_6
         schema: *ref_5
         implementation: Method
         extensions:
@@ -183,6 +183,8 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_6
       language: !<!Languages> 
         default:
           name: ''
@@ -214,7 +216,7 @@ operationGroups:
     language: !<!Languages> 
       default:
         name: Operation
-        description: MISSING·OPERATION-DESCRIPTION
+        description: ''
     protocol: !<!Protocols> {}
   language: !<!Languages> 
     default:

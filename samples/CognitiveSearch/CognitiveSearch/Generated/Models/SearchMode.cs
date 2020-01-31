@@ -5,12 +5,12 @@
 
 namespace CognitiveSearch.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-CHOICE. </summary>
+    /// <summary> The SearchMode. </summary>
     public enum SearchMode
     {
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> any. </summary>
         Any,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> all. </summary>
         All
     }
 }

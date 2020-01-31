@@ -7,10 +7,9 @@ using System.Collections.Generic;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The LanguageBatchInput. </summary>
     public partial class LanguageBatchInput
     {
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA. </summary>
         public ICollection<LanguageInput> Documents { get; set; } = new System.Collections.Generic.List<CognitiveServices.TextAnalytics.Models.LanguageInput>();
     }
 }

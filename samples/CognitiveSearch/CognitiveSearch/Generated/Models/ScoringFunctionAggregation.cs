@@ -8,15 +8,15 @@ namespace CognitiveSearch.Models
     /// <summary> Defines the aggregation function used to combine the results of all the scoring functions in a scoring profile. </summary>
     public enum ScoringFunctionAggregation
     {
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> sum. </summary>
         Sum,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> average. </summary>
         Average,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> minimum. </summary>
         Minimum,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> maximum. </summary>
         Maximum,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> firstMatching. </summary>
         FirstMatching
     }
 }

@@ -8,7 +8,7 @@ using System.ComponentModel;
 
 namespace body_complex.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-CHOICE. </summary>
+    /// <summary> The CMYKColors. </summary>
     public readonly partial struct CMYKColors : IEquatable<CMYKColors>
     {
         private readonly string _value;
@@ -24,13 +24,13 @@ namespace body_complex.Models
         private const string YELLOWValue = "YELLOW";
         private const string BlacKValue = "blacK";
 
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> cyan. </summary>
         public static CMYKColors Cyan { get; } = new CMYKColors(CyanValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> Magenta. </summary>
         public static CMYKColors Magenta { get; } = new CMYKColors(MagentaValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> YELLOW. </summary>
         public static CMYKColors YELLOW { get; } = new CMYKColors(YELLOWValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> blacK. </summary>
         public static CMYKColors BlacK { get; } = new CMYKColors(BlacKValue);
         /// <summary> Determines if two <see cref="CMYKColors"/> values are the same. </summary>
         public static bool operator ==(CMYKColors left, CMYKColors right) => left.Equals(right);

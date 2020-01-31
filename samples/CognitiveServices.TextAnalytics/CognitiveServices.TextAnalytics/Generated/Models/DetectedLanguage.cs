@@ -5,7 +5,7 @@
 
 namespace CognitiveServices.TextAnalytics.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The DetectedLanguage. </summary>
     public partial class DetectedLanguage
     {
         /// <summary> Long name of a detected language (e.g. English, French). </summary>

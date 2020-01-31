@@ -5,7 +5,7 @@
 
 namespace body_complex.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The cookiecuttershark. </summary>
     public partial class Cookiecuttershark : Shark
     {
         /// <summary> Initializes a new instance of Cookiecuttershark. </summary>

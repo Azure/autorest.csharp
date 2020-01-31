@@ -5,7 +5,7 @@
 
 namespace body_complex.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The double-wrapper. </summary>
     public partial class DoubleWrapper
     {
         public double? Field1 { get; set; }

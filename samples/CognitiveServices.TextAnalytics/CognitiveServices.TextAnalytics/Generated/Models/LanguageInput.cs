@@ -5,7 +5,7 @@
 
 namespace CognitiveServices.TextAnalytics.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The LanguageInput. </summary>
     public partial class LanguageInput
     {
         /// <summary> Unique, non-empty document identifier. </summary>

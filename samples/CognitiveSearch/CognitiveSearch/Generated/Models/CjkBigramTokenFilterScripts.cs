@@ -8,13 +8,13 @@ namespace CognitiveSearch.Models
     /// <summary> Scripts that can be ignored by CjkBigramTokenFilter. </summary>
     public enum CjkBigramTokenFilterScripts
     {
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> han. </summary>
         Han,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> hiragana. </summary>
         Hiragana,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> katakana. </summary>
         Katakana,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> hangul. </summary>
         Hangul
     }
 }

@@ -5,7 +5,7 @@
 
 namespace AppConfiguration.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The Key. </summary>
     public partial class Key
     {
         public string Name { get; internal set; }

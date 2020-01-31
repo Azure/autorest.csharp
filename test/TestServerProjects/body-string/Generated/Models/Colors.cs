@@ -5,14 +5,14 @@
 
 namespace body_string.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-CHOICE. </summary>
+    /// <summary> The Colors. </summary>
     public enum Colors
     {
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> red color. </summary>
         RedColor,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> green-color. </summary>
         GreenColor,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> blue_color. </summary>
         BlueColor
     }
 }

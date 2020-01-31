@@ -7,12 +7,11 @@ using System.Collections.Generic;
 
 namespace model_flattening.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The ResourceCollection. </summary>
     public partial class ResourceCollection
     {
         /// <summary> Flattened product. </summary>
         public FlattenedProduct Productresource { get; set; }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA. </summary>
         public ICollection<FlattenedProduct> Arrayofresources { get; set; }
         /// <summary> Dictionary of &lt;FlattenedProduct&gt;. </summary>
         public IDictionary<string, FlattenedProduct> Dictionaryofresources { get; set; }

@@ -14,13 +14,13 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: typeForstatus
-            description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+            description: ''
         protocol: !<!Protocols> {}
       serializedName: status
       language: !<!Languages> 
         default:
           name: status
-          description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+          description: ''
           originalName: status
       protocol: !<!Protocols> {}
     - !<!Property> 
@@ -44,7 +44,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Error
-        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        description: ''
         namespace: Api100
     protocol: !<!Protocols> {}
   numbers:
@@ -57,7 +57,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: integer
-        description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+        description: ''
     protocol: !<!Protocols> {}
   - *ref_0
   - !<!NumberSchema> &ref_6
@@ -69,7 +69,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: integer
-        description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+        description: ''
     protocol: !<!Protocols> {}
   - !<!NumberSchema> &ref_7
     type: integer
@@ -80,7 +80,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: integer
-        description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+        description: ''
     protocol: !<!Protocols> {}
   strings:
   - !<!StringSchema> &ref_2
@@ -92,7 +92,7 @@ schemas: !<!Schemas>
     protocol: !<!Protocols> {}
   - *ref_1
   unixtimes:
-  - !<!UnixTimeSchema> &ref_8
+  - !<!UnixTimeSchema> &ref_12
     type: unixtime
     apiVersions:
     - !<!ApiVersion> 
@@ -132,6 +132,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_3
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -181,6 +182,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_3
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -230,6 +232,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_3
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -279,6 +282,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_3
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -328,6 +332,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_3
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -377,6 +382,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_3
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -426,7 +432,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_3
-      - !<!Parameter> 
+      - !<!Parameter> &ref_8
         schema: *ref_6
         implementation: Method
         required: true
@@ -440,6 +446,8 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_8
       language: !<!Languages> 
         default:
           name: ''
@@ -490,7 +498,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_3
-      - !<!Parameter> 
+      - !<!Parameter> &ref_9
         schema: *ref_7
         implementation: Method
         required: true
@@ -504,6 +512,8 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_9
       language: !<!Languages> 
         default:
           name: ''
@@ -554,7 +564,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_3
-      - !<!Parameter> 
+      - !<!Parameter> &ref_10
         schema: *ref_6
         implementation: Method
         required: true
@@ -568,6 +578,8 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_10
       language: !<!Languages> 
         default:
           name: ''
@@ -618,7 +630,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_3
-      - !<!Parameter> 
+      - !<!Parameter> &ref_11
         schema: *ref_7
         implementation: Method
         required: true
@@ -632,6 +644,8 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_11
       language: !<!Languages> 
         default:
           name: ''
@@ -682,6 +696,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_3
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -693,7 +708,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_8
+      schema: *ref_12
       language: !<!Languages> 
         default:
           name: ''
@@ -731,8 +746,8 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_3
-      - !<!Parameter> 
-        schema: *ref_8
+      - !<!Parameter> &ref_13
+        schema: *ref_12
         implementation: Method
         required: true
         extensions:
@@ -745,6 +760,8 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_13
       language: !<!Languages> 
         default:
           name: ''
@@ -795,6 +812,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_3
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -806,7 +824,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_8
+      schema: *ref_12
       language: !<!Languages> 
         default:
           name: ''
@@ -844,6 +862,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_3
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -855,7 +874,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_8
+      schema: *ref_12
       language: !<!Languages> 
         default:
           name: ''

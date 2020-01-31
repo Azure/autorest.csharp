@@ -1,7 +1,7 @@
 !<!CodeModel> 
 schemas: !<!Schemas> 
   objects:
-  - !<!ObjectSchema> &ref_524
+  - !<!ObjectSchema> &ref_543
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -103,7 +103,7 @@ schemas: !<!Schemas>
           language: !<!Languages> 
             default:
               name: Array of FacetResult
-              description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+              description: ''
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
@@ -292,13 +292,13 @@ schemas: !<!Schemas>
               language:
                 default:
                   name: simple
-                  description: The value 'undefined'
+                  description: ''
             - !<!ChoiceValue> 
               value: full
               language:
                 default:
                   name: full
-                  description: The value 'undefined'
+                  description: ''
             type: sealed-choice
             apiVersions:
             - !<!ApiVersion> 
@@ -313,13 +313,13 @@ schemas: !<!Schemas>
             language: !<!Languages> 
               default:
                 name: QueryType
-                description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+                description: ''
             protocol: !<!Protocols> {}
           serializedName: queryType
           language: !<!Languages> 
             default:
               name: queryType
-              description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+              description: ''
               originalName: queryType
           protocol: !<!Protocols> {}
         - !<!Property> 
@@ -420,13 +420,13 @@ schemas: !<!Schemas>
               language:
                 default:
                   name: any
-                  description: The value 'undefined'
+                  description: ''
             - !<!ChoiceValue> 
               value: all
               language:
                 default:
                   name: all
-                  description: The value 'undefined'
+                  description: ''
             type: sealed-choice
             apiVersions:
             - !<!ApiVersion> 
@@ -435,13 +435,13 @@ schemas: !<!Schemas>
             language: !<!Languages> 
               default:
                 name: SearchMode
-                description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+                description: ''
             protocol: !<!Protocols> {}
           serializedName: searchMode
           language: !<!Languages> 
             default:
               name: searchMode
-              description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+              description: ''
               originalName: searchMode
           protocol: !<!Protocols> {}
         - !<!Property> 
@@ -585,7 +585,7 @@ schemas: !<!Schemas>
                 language: !<!Languages> 
                   default:
                     name: Array of SearchResult-@search.highlights-itemsItem
-                    description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+                    description: ''
                 protocol: !<!Protocols> {}
               language: !<!Languages> 
                 default:
@@ -651,7 +651,7 @@ schemas: !<!Schemas>
   - *ref_3
   - *ref_4
   - *ref_5
-  - !<!ObjectSchema> &ref_526
+  - !<!ObjectSchema> &ref_550
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -659,10 +659,10 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: components·schemas·facetresult·additionalproperties
-        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        description: ''
         namespace: Api20190506
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_530
+  - !<!ObjectSchema> &ref_566
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -760,7 +760,7 @@ schemas: !<!Schemas>
         namespace: Api20190506
     protocol: !<!Protocols> {}
   - *ref_7
-  - !<!ObjectSchema> &ref_531
+  - !<!ObjectSchema> &ref_567
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -977,7 +977,7 @@ schemas: !<!Schemas>
         description: 'Parameters for filtering, sorting, fuzzy matching, and other suggestions query behaviors.'
         namespace: Api20190506
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_532
+  - !<!ObjectSchema> &ref_570
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -1021,25 +1021,25 @@ schemas: !<!Schemas>
                 language:
                   default:
                     name: upload
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: merge
                 language:
                   default:
                     name: merge
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: mergeOrUpload
                 language:
                   default:
                     name: mergeOrUpload
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: delete
                 language:
                   default:
                     name: delete
-                    description: The value 'undefined'
+                    description: ''
               type: sealed-choice
               apiVersions:
               - !<!ApiVersion> 
@@ -1083,7 +1083,7 @@ schemas: !<!Schemas>
         namespace: Api20190506
     protocol: !<!Protocols> {}
   - *ref_9
-  - !<!ObjectSchema> &ref_533
+  - !<!ObjectSchema> &ref_573
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -1204,7 +1204,7 @@ schemas: !<!Schemas>
         namespace: Api20190506
     protocol: !<!Protocols> {}
   - *ref_10
-  - !<!ObjectSchema> &ref_534
+  - !<!ObjectSchema> &ref_585
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -1303,7 +1303,7 @@ schemas: !<!Schemas>
         namespace: Api20190506
     protocol: !<!Protocols> {}
   - *ref_11
-  - !<!ObjectSchema> &ref_535
+  - !<!ObjectSchema> &ref_586
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -1335,19 +1335,19 @@ schemas: !<!Schemas>
           language:
             default:
               name: oneTerm
-              description: The value 'undefined'
+              description: ''
         - !<!ChoiceValue> 
           value: twoTerms
           language:
             default:
               name: twoTerms
-              description: The value 'undefined'
+              description: ''
         - !<!ChoiceValue> 
           value: oneTermWithContext
           language:
             default:
               name: oneTermWithContext
-              description: The value 'undefined'
+              description: ''
         type: sealed-choice
         apiVersions:
         - !<!ApiVersion> 
@@ -1356,13 +1356,13 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: AutocompleteMode
-            description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+            description: ''
         protocol: !<!Protocols> {}
       serializedName: autocompleteMode
       language: !<!Languages> 
         default:
           name: autocompleteMode
-          description: MISSING·SCHEMA-DESCRIPTION-CHOICE
+          description: ''
           originalName: autocompleteMode
       protocol: !<!Protocols> {}
     - !<!Property> 
@@ -1568,25 +1568,25 @@ schemas: !<!Schemas>
           language:
             default:
               name: AzureSql
-              description: The value 'azuresql'
+              description: ''
         - !<!ChoiceValue> 
           value: cosmosdb
           language:
             default:
               name: CosmosDb
-              description: The value 'cosmosdb'
+              description: ''
         - !<!ChoiceValue> 
           value: azureblob
           language:
             default:
               name: AzureBlob
-              description: The value 'azureblob'
+              description: ''
         - !<!ChoiceValue> 
           value: azuretable
           language:
             default:
               name: AzureTable
-              description: The value 'azuretable'
+              description: ''
         type: choice
         apiVersions:
         - !<!ApiVersion> 
@@ -1951,7 +1951,7 @@ schemas: !<!Schemas>
   - *ref_20
   - *ref_12
   - *ref_16
-  - !<!ObjectSchema> &ref_539
+  - !<!ObjectSchema> &ref_605
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -2453,7 +2453,7 @@ schemas: !<!Schemas>
   - *ref_24
   - *ref_22
   - *ref_25
-  - !<!ObjectSchema> &ref_540
+  - !<!ObjectSchema> &ref_625
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -2485,7 +2485,7 @@ schemas: !<!Schemas>
         description: 'Response from a List Indexers request. If successful, it includes the full definitions of all indexers.'
         namespace: Api20190506
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_541
+  - !<!ObjectSchema> &ref_630
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -2499,19 +2499,19 @@ schemas: !<!Schemas>
           language:
             default:
               name: unknown
-              description: The value 'undefined'
+              description: ''
         - !<!ChoiceValue> 
           value: error
           language:
             default:
               name: error
-              description: The value 'undefined'
+              description: ''
         - !<!ChoiceValue> 
           value: running
           language:
             default:
               name: running
-              description: The value 'undefined'
+              description: ''
         type: sealed-choice
         apiVersions:
         - !<!ApiVersion> 
@@ -2545,25 +2545,25 @@ schemas: !<!Schemas>
               language:
                 default:
                   name: transientFailure
-                  description: The value 'undefined'
+                  description: ''
             - !<!ChoiceValue> 
               value: success
               language:
                 default:
                   name: success
-                  description: The value 'undefined'
+                  description: ''
             - !<!ChoiceValue> 
               value: inProgress
               language:
                 default:
                   name: inProgress
-                  description: The value 'undefined'
+                  description: ''
             - !<!ChoiceValue> 
               value: reset
               language:
                 default:
                   name: reset
-                  description: The value 'undefined'
+                  description: ''
             type: sealed-choice
             apiVersions:
             - !<!ApiVersion> 
@@ -3086,7 +3086,7 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: IndexerLimits
-            description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+            description: ''
             namespace: Api20190506
         protocol: !<!Protocols> {}
       readOnly: true
@@ -3094,7 +3094,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: limits
-          description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+          description: ''
           originalName: limits
       protocol: !<!Protocols> {}
     language: !<!Languages> 
@@ -3356,13 +3356,13 @@ schemas: !<!Schemas>
                     language:
                       default:
                         name: printed
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: handwritten
                     language:
                       default:
                         name: handwritten
-                        description: The value 'undefined'
+                        description: ''
                   type: sealed-choice
                   apiVersions:
                   - !<!ApiVersion> 
@@ -3637,37 +3637,37 @@ schemas: !<!Schemas>
                       language:
                         default:
                           name: categories
-                          description: The value 'undefined'
+                          description: ''
                     - !<!ChoiceValue> 
                       value: tags
                       language:
                         default:
                           name: tags
-                          description: The value 'undefined'
+                          description: ''
                     - !<!ChoiceValue> 
                       value: description
                       language:
                         default:
                           name: description
-                          description: The value 'undefined'
+                          description: ''
                     - !<!ChoiceValue> 
                       value: faces
                       language:
                         default:
                           name: faces
-                          description: The value 'undefined'
+                          description: ''
                     - !<!ChoiceValue> 
                       value: imageType
                       language:
                         default:
                           name: imageType
-                          description: The value 'undefined'
+                          description: ''
                     - !<!ChoiceValue> 
                       value: color
                       language:
                         default:
                           name: color
-                          description: The value 'undefined'
+                          description: ''
                     type: sealed-choice
                     apiVersions:
                     - !<!ApiVersion> 
@@ -3703,13 +3703,13 @@ schemas: !<!Schemas>
                       language:
                         default:
                           name: celebrities
-                          description: The value 'undefined'
+                          description: ''
                     - !<!ChoiceValue> 
                       value: landmarks
                       language:
                         default:
                           name: landmarks
-                          description: The value 'undefined'
+                          description: ''
                     type: sealed-choice
                     apiVersions:
                     - !<!ApiVersion> 
@@ -3861,43 +3861,43 @@ schemas: !<!Schemas>
                       language:
                         default:
                           name: location
-                          description: The value 'undefined'
+                          description: ''
                     - !<!ChoiceValue> 
                       value: organization
                       language:
                         default:
                           name: organization
-                          description: The value 'undefined'
+                          description: ''
                     - !<!ChoiceValue> 
                       value: person
                       language:
                         default:
                           name: person
-                          description: The value 'undefined'
+                          description: ''
                     - !<!ChoiceValue> 
                       value: quantity
                       language:
                         default:
                           name: quantity
-                          description: The value 'undefined'
+                          description: ''
                     - !<!ChoiceValue> 
                       value: datetime
                       language:
                         default:
                           name: datetime
-                          description: The value 'undefined'
+                          description: ''
                     - !<!ChoiceValue> 
                       value: url
                       language:
                         default:
                           name: url
-                          description: The value 'undefined'
+                          description: ''
                     - !<!ChoiceValue> 
                       value: email
                       language:
                         default:
                           name: email
-                          description: The value 'undefined'
+                          description: ''
                     type: sealed-choice
                     apiVersions:
                     - !<!ApiVersion> 
@@ -4347,13 +4347,13 @@ schemas: !<!Schemas>
                     language:
                       default:
                         name: pages
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: sentences
                     language:
                       default:
                         name: sentences
-                        description: The value 'undefined'
+                        description: ''
                   type: sealed-choice
                   apiVersions:
                   - !<!ApiVersion> 
@@ -5451,7 +5451,7 @@ schemas: !<!Schemas>
   - *ref_46
   - *ref_51
   - *ref_47
-  - !<!ObjectSchema> &ref_542
+  - !<!ObjectSchema> &ref_644
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -5578,7 +5578,7 @@ schemas: !<!Schemas>
         description: Represents a synonym map definition.
         namespace: Api20190506
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_543
+  - !<!ObjectSchema> &ref_660
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -5674,49 +5674,49 @@ schemas: !<!Schemas>
                 language:
                   default:
                     name: Edm.String
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: Edm.Int32
                 language:
                   default:
                     name: Edm.Int32
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: Edm.Int64
                 language:
                   default:
                     name: Edm.Int64
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: Edm.Double
                 language:
                   default:
                     name: Edm.Double
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: Edm.Boolean
                 language:
                   default:
                     name: Edm.Boolean
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: Edm.DateTimeOffset
                 language:
                   default:
                     name: Edm.DateTimeOffset
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: Edm.GeographyPoint
                 language:
                   default:
                     name: Edm.GeographyPoint
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: Edm.ComplexType
                 language:
                   default:
                     name: Edm.ComplexType
-                    description: The value 'undefined'
+                    description: ''
               type: choice
               apiVersions:
               - !<!ApiVersion> 
@@ -5877,559 +5877,559 @@ schemas: !<!Schemas>
                 language:
                   default:
                     name: ar.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: ar.lucene
                 language:
                   default:
                     name: ar.lucene
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: hy.lucene
                 language:
                   default:
                     name: hy.lucene
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: bn.microsoft
                 language:
                   default:
                     name: bn.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: eu.lucene
                 language:
                   default:
                     name: eu.lucene
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: bg.microsoft
                 language:
                   default:
                     name: bg.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: bg.lucene
                 language:
                   default:
                     name: bg.lucene
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: ca.microsoft
                 language:
                   default:
                     name: ca.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: ca.lucene
                 language:
                   default:
                     name: ca.lucene
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: zh-Hans.microsoft
                 language:
                   default:
                     name: zh-Hans.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: zh-Hans.lucene
                 language:
                   default:
                     name: zh-Hans.lucene
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: zh-Hant.microsoft
                 language:
                   default:
                     name: zh-Hant.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: zh-Hant.lucene
                 language:
                   default:
                     name: zh-Hant.lucene
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: hr.microsoft
                 language:
                   default:
                     name: hr.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: cs.microsoft
                 language:
                   default:
                     name: cs.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: cs.lucene
                 language:
                   default:
                     name: cs.lucene
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: da.microsoft
                 language:
                   default:
                     name: da.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: da.lucene
                 language:
                   default:
                     name: da.lucene
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: nl.microsoft
                 language:
                   default:
                     name: nl.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: nl.lucene
                 language:
                   default:
                     name: nl.lucene
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: en.microsoft
                 language:
                   default:
                     name: en.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: en.lucene
                 language:
                   default:
                     name: en.lucene
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: et.microsoft
                 language:
                   default:
                     name: et.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: fi.microsoft
                 language:
                   default:
                     name: fi.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: fi.lucene
                 language:
                   default:
                     name: fi.lucene
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: fr.microsoft
                 language:
                   default:
                     name: fr.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: fr.lucene
                 language:
                   default:
                     name: fr.lucene
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: gl.lucene
                 language:
                   default:
                     name: gl.lucene
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: de.microsoft
                 language:
                   default:
                     name: de.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: de.lucene
                 language:
                   default:
                     name: de.lucene
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: el.microsoft
                 language:
                   default:
                     name: el.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: el.lucene
                 language:
                   default:
                     name: el.lucene
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: gu.microsoft
                 language:
                   default:
                     name: gu.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: he.microsoft
                 language:
                   default:
                     name: he.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: hi.microsoft
                 language:
                   default:
                     name: hi.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: hi.lucene
                 language:
                   default:
                     name: hi.lucene
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: hu.microsoft
                 language:
                   default:
                     name: hu.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: hu.lucene
                 language:
                   default:
                     name: hu.lucene
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: is.microsoft
                 language:
                   default:
                     name: is.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: id.microsoft
                 language:
                   default:
                     name: id.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: id.lucene
                 language:
                   default:
                     name: id.lucene
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: ga.lucene
                 language:
                   default:
                     name: ga.lucene
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: it.microsoft
                 language:
                   default:
                     name: it.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: it.lucene
                 language:
                   default:
                     name: it.lucene
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: ja.microsoft
                 language:
                   default:
                     name: ja.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: ja.lucene
                 language:
                   default:
                     name: ja.lucene
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: kn.microsoft
                 language:
                   default:
                     name: kn.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: ko.microsoft
                 language:
                   default:
                     name: ko.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: ko.lucene
                 language:
                   default:
                     name: ko.lucene
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: lv.microsoft
                 language:
                   default:
                     name: lv.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: lv.lucene
                 language:
                   default:
                     name: lv.lucene
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: lt.microsoft
                 language:
                   default:
                     name: lt.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: ml.microsoft
                 language:
                   default:
                     name: ml.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: ms.microsoft
                 language:
                   default:
                     name: ms.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: mr.microsoft
                 language:
                   default:
                     name: mr.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: nb.microsoft
                 language:
                   default:
                     name: nb.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: no.lucene
                 language:
                   default:
                     name: no.lucene
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: fa.lucene
                 language:
                   default:
                     name: fa.lucene
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: pl.microsoft
                 language:
                   default:
                     name: pl.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: pl.lucene
                 language:
                   default:
                     name: pl.lucene
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: pt-BR.microsoft
                 language:
                   default:
                     name: pt-BR.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: pt-BR.lucene
                 language:
                   default:
                     name: pt-BR.lucene
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: pt-PT.microsoft
                 language:
                   default:
                     name: pt-PT.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: pt-PT.lucene
                 language:
                   default:
                     name: pt-PT.lucene
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: pa.microsoft
                 language:
                   default:
                     name: pa.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: ro.microsoft
                 language:
                   default:
                     name: ro.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: ro.lucene
                 language:
                   default:
                     name: ro.lucene
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: ru.microsoft
                 language:
                   default:
                     name: ru.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: ru.lucene
                 language:
                   default:
                     name: ru.lucene
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: sr-cyrillic.microsoft
                 language:
                   default:
                     name: sr-cyrillic.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: sr-latin.microsoft
                 language:
                   default:
                     name: sr-latin.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: sk.microsoft
                 language:
                   default:
                     name: sk.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: sl.microsoft
                 language:
                   default:
                     name: sl.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: es.microsoft
                 language:
                   default:
                     name: es.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: es.lucene
                 language:
                   default:
                     name: es.lucene
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: sv.microsoft
                 language:
                   default:
                     name: sv.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: sv.lucene
                 language:
                   default:
                     name: sv.lucene
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: ta.microsoft
                 language:
                   default:
                     name: ta.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: te.microsoft
                 language:
                   default:
                     name: te.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: th.microsoft
                 language:
                   default:
                     name: th.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: th.lucene
                 language:
                   default:
                     name: th.lucene
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: tr.microsoft
                 language:
                   default:
                     name: tr.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: tr.lucene
                 language:
                   default:
                     name: tr.lucene
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: uk.microsoft
                 language:
                   default:
                     name: uk.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: ur.microsoft
                 language:
                   default:
                     name: ur.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: vi.microsoft
                 language:
                   default:
                     name: vi.microsoft
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: standard.lucene
                 language:
                   default:
                     name: standard.lucene
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: standardasciifolding.lucene
                 language:
                   default:
                     name: standardasciifolding.lucene
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: keyword
                 language:
                   default:
                     name: keyword
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: pattern
                 language:
                   default:
                     name: pattern
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: simple
                 language:
                   default:
                     name: simple
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: stop
                 language:
                   default:
                     name: stop
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: whitespace
                 language:
                   default:
                     name: whitespace
-                    description: The value 'undefined'
+                    description: ''
               type: choice
               apiVersions:
               - !<!ApiVersion> 
@@ -7002,25 +7002,25 @@ schemas: !<!Schemas>
                       language:
                         default:
                           name: linear
-                          description: The value 'undefined'
+                          description: ''
                     - !<!ChoiceValue> 
                       value: constant
                       language:
                         default:
                           name: constant
-                          description: The value 'undefined'
+                          description: ''
                     - !<!ChoiceValue> 
                       value: quadratic
                       language:
                         default:
                           name: quadratic
-                          description: The value 'undefined'
+                          description: ''
                     - !<!ChoiceValue> 
                       value: logarithmic
                       language:
                         default:
                           name: logarithmic
-                          description: The value 'undefined'
+                          description: ''
                     type: sealed-choice
                     apiVersions:
                     - !<!ApiVersion> 
@@ -7066,31 +7066,31 @@ schemas: !<!Schemas>
                 language:
                   default:
                     name: sum
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: average
                 language:
                   default:
                     name: average
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: minimum
                 language:
                   default:
                     name: minimum
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: maximum
                 language:
                   default:
                     name: maximum
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: firstMatching
                 language:
                   default:
                     name: firstMatching
-                    description: The value 'undefined'
+                    description: ''
               type: sealed-choice
               apiVersions:
               - !<!ApiVersion> 
@@ -7795,49 +7795,49 @@ schemas: !<!Schemas>
                     language:
                       default:
                         name: CANON_EQ
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: CASE_INSENSITIVE
                     language:
                       default:
                         name: CASE_INSENSITIVE
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: COMMENTS
                     language:
                       default:
                         name: COMMENTS
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: DOTALL
                     language:
                       default:
                         name: DOTALL
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: LITERAL
                     language:
                       default:
                         name: LITERAL
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: MULTILINE
                     language:
                       default:
                         name: MULTILINE
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: UNICODE_CASE
                     language:
                       default:
                         name: UNICODE_CASE
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: UNIX_LINES
                     language:
                       default:
                         name: UNIX_LINES
-                        description: The value 'undefined'
+                        description: ''
                   type: choice
                   apiVersions:
                   - !<!ApiVersion> 
@@ -8193,31 +8193,31 @@ schemas: !<!Schemas>
                       language:
                         default:
                           name: letter
-                          description: The value 'undefined'
+                          description: ''
                     - !<!ChoiceValue> 
                       value: digit
                       language:
                         default:
                           name: digit
-                          description: The value 'undefined'
+                          description: ''
                     - !<!ChoiceValue> 
                       value: whitespace
                       language:
                         default:
                           name: whitespace
-                          description: The value 'undefined'
+                          description: ''
                     - !<!ChoiceValue> 
                       value: punctuation
                       language:
                         default:
                           name: punctuation
-                          description: The value 'undefined'
+                          description: ''
                     - !<!ChoiceValue> 
                       value: symbol
                       language:
                         default:
                           name: symbol
-                          description: The value 'undefined'
+                          description: ''
                     type: sealed-choice
                     apiVersions:
                     - !<!ApiVersion> 
@@ -8382,253 +8382,253 @@ schemas: !<!Schemas>
                     language:
                       default:
                         name: bangla
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: bulgarian
                     language:
                       default:
                         name: bulgarian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: catalan
                     language:
                       default:
                         name: catalan
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: chineseSimplified
                     language:
                       default:
                         name: chineseSimplified
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: chineseTraditional
                     language:
                       default:
                         name: chineseTraditional
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: croatian
                     language:
                       default:
                         name: croatian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: czech
                     language:
                       default:
                         name: czech
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: danish
                     language:
                       default:
                         name: danish
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: dutch
                     language:
                       default:
                         name: dutch
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: english
                     language:
                       default:
                         name: english
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: french
                     language:
                       default:
                         name: french
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: german
                     language:
                       default:
                         name: german
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: greek
                     language:
                       default:
                         name: greek
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: gujarati
                     language:
                       default:
                         name: gujarati
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: hindi
                     language:
                       default:
                         name: hindi
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: icelandic
                     language:
                       default:
                         name: icelandic
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: indonesian
                     language:
                       default:
                         name: indonesian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: italian
                     language:
                       default:
                         name: italian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: japanese
                     language:
                       default:
                         name: japanese
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: kannada
                     language:
                       default:
                         name: kannada
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: korean
                     language:
                       default:
                         name: korean
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: malay
                     language:
                       default:
                         name: malay
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: malayalam
                     language:
                       default:
                         name: malayalam
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: marathi
                     language:
                       default:
                         name: marathi
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: norwegianBokmaal
                     language:
                       default:
                         name: norwegianBokmaal
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: polish
                     language:
                       default:
                         name: polish
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: portuguese
                     language:
                       default:
                         name: portuguese
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: portugueseBrazilian
                     language:
                       default:
                         name: portugueseBrazilian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: punjabi
                     language:
                       default:
                         name: punjabi
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: romanian
                     language:
                       default:
                         name: romanian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: russian
                     language:
                       default:
                         name: russian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: serbianCyrillic
                     language:
                       default:
                         name: serbianCyrillic
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: serbianLatin
                     language:
                       default:
                         name: serbianLatin
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: slovenian
                     language:
                       default:
                         name: slovenian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: spanish
                     language:
                       default:
                         name: spanish
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: swedish
                     language:
                       default:
                         name: swedish
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: tamil
                     language:
                       default:
                         name: tamil
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: telugu
                     language:
                       default:
                         name: telugu
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: thai
                     language:
                       default:
                         name: thai
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: ukrainian
                     language:
                       default:
                         name: ukrainian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: urdu
                     language:
                       default:
                         name: urdu
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: vietnamese
                     language:
                       default:
                         name: vietnamese
-                        description: The value 'undefined'
+                        description: ''
                   type: sealed-choice
                   apiVersions:
                   - !<!ApiVersion> 
@@ -8712,271 +8712,271 @@ schemas: !<!Schemas>
                     language:
                       default:
                         name: arabic
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: bangla
                     language:
                       default:
                         name: bangla
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: bulgarian
                     language:
                       default:
                         name: bulgarian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: catalan
                     language:
                       default:
                         name: catalan
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: croatian
                     language:
                       default:
                         name: croatian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: czech
                     language:
                       default:
                         name: czech
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: danish
                     language:
                       default:
                         name: danish
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: dutch
                     language:
                       default:
                         name: dutch
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: english
                     language:
                       default:
                         name: english
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: estonian
                     language:
                       default:
                         name: estonian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: finnish
                     language:
                       default:
                         name: finnish
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: french
                     language:
                       default:
                         name: french
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: german
                     language:
                       default:
                         name: german
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: greek
                     language:
                       default:
                         name: greek
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: gujarati
                     language:
                       default:
                         name: gujarati
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: hebrew
                     language:
                       default:
                         name: hebrew
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: hindi
                     language:
                       default:
                         name: hindi
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: hungarian
                     language:
                       default:
                         name: hungarian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: icelandic
                     language:
                       default:
                         name: icelandic
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: indonesian
                     language:
                       default:
                         name: indonesian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: italian
                     language:
                       default:
                         name: italian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: kannada
                     language:
                       default:
                         name: kannada
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: latvian
                     language:
                       default:
                         name: latvian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: lithuanian
                     language:
                       default:
                         name: lithuanian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: malay
                     language:
                       default:
                         name: malay
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: malayalam
                     language:
                       default:
                         name: malayalam
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: marathi
                     language:
                       default:
                         name: marathi
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: norwegianBokmaal
                     language:
                       default:
                         name: norwegianBokmaal
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: polish
                     language:
                       default:
                         name: polish
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: portuguese
                     language:
                       default:
                         name: portuguese
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: portugueseBrazilian
                     language:
                       default:
                         name: portugueseBrazilian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: punjabi
                     language:
                       default:
                         name: punjabi
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: romanian
                     language:
                       default:
                         name: romanian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: russian
                     language:
                       default:
                         name: russian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: serbianCyrillic
                     language:
                       default:
                         name: serbianCyrillic
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: serbianLatin
                     language:
                       default:
                         name: serbianLatin
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: slovak
                     language:
                       default:
                         name: slovak
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: slovenian
                     language:
                       default:
                         name: slovenian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: spanish
                     language:
                       default:
                         name: spanish
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: swedish
                     language:
                       default:
                         name: swedish
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: tamil
                     language:
                       default:
                         name: tamil
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: telugu
                     language:
                       default:
                         name: telugu
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: turkish
                     language:
                       default:
                         name: turkish
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: ukrainian
                     language:
                       default:
                         name: ukrainian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: urdu
                     language:
                       default:
                         name: urdu
-                        description: The value 'undefined'
+                        description: ''
                   type: sealed-choice
                   apiVersions:
                   - !<!ApiVersion> 
@@ -9657,25 +9657,25 @@ schemas: !<!Schemas>
                       language:
                         default:
                           name: han
-                          description: The value 'undefined'
+                          description: ''
                     - !<!ChoiceValue> 
                       value: hiragana
                       language:
                         default:
                           name: hiragana
-                          description: The value 'undefined'
+                          description: ''
                     - !<!ChoiceValue> 
                       value: katakana
                       language:
                         default:
                           name: katakana
-                          description: The value 'undefined'
+                          description: ''
                     - !<!ChoiceValue> 
                       value: hangul
                       language:
                         default:
                           name: hangul
-                          description: The value 'undefined'
+                          description: ''
                     type: sealed-choice
                     apiVersions:
                     - !<!ApiVersion> 
@@ -9982,13 +9982,13 @@ schemas: !<!Schemas>
                     language:
                       default:
                         name: front
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: back
                     language:
                       default:
                         name: back
-                        description: The value 'undefined'
+                        description: ''
                   type: sealed-choice
                   apiVersions:
                   - !<!ApiVersion> 
@@ -10626,67 +10626,67 @@ schemas: !<!Schemas>
                     language:
                       default:
                         name: metaphone
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: doubleMetaphone
                     language:
                       default:
                         name: doubleMetaphone
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: soundex
                     language:
                       default:
                         name: soundex
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: refinedSoundex
                     language:
                       default:
                         name: refinedSoundex
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: caverphone1
                     language:
                       default:
                         name: caverphone1
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: caverphone2
                     language:
                       default:
                         name: caverphone2
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: cologne
                     language:
                       default:
                         name: cologne
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: nysiis
                     language:
                       default:
                         name: nysiis
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: koelnerPhonetik
                     language:
                       default:
                         name: koelnerPhonetik
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: haasePhonetik
                     language:
                       default:
                         name: haasePhonetik
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: beiderMorse
                     language:
                       default:
                         name: beiderMorse
-                        description: The value 'undefined'
+                        description: ''
                   type: sealed-choice
                   apiVersions:
                   - !<!ApiVersion> 
@@ -10874,133 +10874,133 @@ schemas: !<!Schemas>
                     language:
                       default:
                         name: armenian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: basque
                     language:
                       default:
                         name: basque
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: catalan
                     language:
                       default:
                         name: catalan
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: danish
                     language:
                       default:
                         name: danish
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: dutch
                     language:
                       default:
                         name: dutch
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: english
                     language:
                       default:
                         name: english
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: finnish
                     language:
                       default:
                         name: finnish
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: french
                     language:
                       default:
                         name: french
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: german
                     language:
                       default:
                         name: german
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: german2
                     language:
                       default:
                         name: german2
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: hungarian
                     language:
                       default:
                         name: hungarian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: italian
                     language:
                       default:
                         name: italian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: kp
                     language:
                       default:
                         name: kp
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: lovins
                     language:
                       default:
                         name: lovins
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: norwegian
                     language:
                       default:
                         name: norwegian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: porter
                     language:
                       default:
                         name: porter
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: portuguese
                     language:
                       default:
                         name: portuguese
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: romanian
                     language:
                       default:
                         name: romanian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: russian
                     language:
                       default:
                         name: russian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: spanish
                     language:
                       default:
                         name: spanish
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: swedish
                     language:
                       default:
                         name: swedish
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: turkish
                     language:
                       default:
                         name: turkish
-                        description: The value 'undefined'
+                        description: ''
                   type: sealed-choice
                   apiVersions:
                   - !<!ApiVersion> 
@@ -11047,325 +11047,325 @@ schemas: !<!Schemas>
                     language:
                       default:
                         name: arabic
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: armenian
                     language:
                       default:
                         name: armenian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: basque
                     language:
                       default:
                         name: basque
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: brazilian
                     language:
                       default:
                         name: brazilian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: bulgarian
                     language:
                       default:
                         name: bulgarian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: catalan
                     language:
                       default:
                         name: catalan
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: czech
                     language:
                       default:
                         name: czech
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: danish
                     language:
                       default:
                         name: danish
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: dutch
                     language:
                       default:
                         name: dutch
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: dutchKp
                     language:
                       default:
                         name: dutchKp
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: english
                     language:
                       default:
                         name: english
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: lightEnglish
                     language:
                       default:
                         name: lightEnglish
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: minimalEnglish
                     language:
                       default:
                         name: minimalEnglish
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: possessiveEnglish
                     language:
                       default:
                         name: possessiveEnglish
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: porter2
                     language:
                       default:
                         name: porter2
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: lovins
                     language:
                       default:
                         name: lovins
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: finnish
                     language:
                       default:
                         name: finnish
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: lightFinnish
                     language:
                       default:
                         name: lightFinnish
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: french
                     language:
                       default:
                         name: french
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: lightFrench
                     language:
                       default:
                         name: lightFrench
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: minimalFrench
                     language:
                       default:
                         name: minimalFrench
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: galician
                     language:
                       default:
                         name: galician
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: minimalGalician
                     language:
                       default:
                         name: minimalGalician
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: german
                     language:
                       default:
                         name: german
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: german2
                     language:
                       default:
                         name: german2
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: lightGerman
                     language:
                       default:
                         name: lightGerman
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: minimalGerman
                     language:
                       default:
                         name: minimalGerman
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: greek
                     language:
                       default:
                         name: greek
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: hindi
                     language:
                       default:
                         name: hindi
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: hungarian
                     language:
                       default:
                         name: hungarian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: lightHungarian
                     language:
                       default:
                         name: lightHungarian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: indonesian
                     language:
                       default:
                         name: indonesian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: irish
                     language:
                       default:
                         name: irish
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: italian
                     language:
                       default:
                         name: italian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: lightItalian
                     language:
                       default:
                         name: lightItalian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: sorani
                     language:
                       default:
                         name: sorani
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: latvian
                     language:
                       default:
                         name: latvian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: norwegian
                     language:
                       default:
                         name: norwegian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: lightNorwegian
                     language:
                       default:
                         name: lightNorwegian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: minimalNorwegian
                     language:
                       default:
                         name: minimalNorwegian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: lightNynorsk
                     language:
                       default:
                         name: lightNynorsk
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: minimalNynorsk
                     language:
                       default:
                         name: minimalNynorsk
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: portuguese
                     language:
                       default:
                         name: portuguese
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: lightPortuguese
                     language:
                       default:
                         name: lightPortuguese
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: minimalPortuguese
                     language:
                       default:
                         name: minimalPortuguese
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: portugueseRslp
                     language:
                       default:
                         name: portugueseRslp
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: romanian
                     language:
                       default:
                         name: romanian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: russian
                     language:
                       default:
                         name: russian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: lightRussian
                     language:
                       default:
                         name: lightRussian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: spanish
                     language:
                       default:
                         name: spanish
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: lightSpanish
                     language:
                       default:
                         name: lightSpanish
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: swedish
                     language:
                       default:
                         name: swedish
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: lightSwedish
                     language:
                       default:
                         name: lightSwedish
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: turkish
                     language:
                       default:
                         name: turkish
-                        description: The value 'undefined'
+                        description: ''
                   type: sealed-choice
                   apiVersions:
                   - !<!ApiVersion> 
@@ -11491,187 +11491,187 @@ schemas: !<!Schemas>
                     language:
                       default:
                         name: arabic
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: armenian
                     language:
                       default:
                         name: armenian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: basque
                     language:
                       default:
                         name: basque
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: brazilian
                     language:
                       default:
                         name: brazilian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: bulgarian
                     language:
                       default:
                         name: bulgarian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: catalan
                     language:
                       default:
                         name: catalan
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: czech
                     language:
                       default:
                         name: czech
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: danish
                     language:
                       default:
                         name: danish
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: dutch
                     language:
                       default:
                         name: dutch
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: english
                     language:
                       default:
                         name: english
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: finnish
                     language:
                       default:
                         name: finnish
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: french
                     language:
                       default:
                         name: french
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: galician
                     language:
                       default:
                         name: galician
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: german
                     language:
                       default:
                         name: german
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: greek
                     language:
                       default:
                         name: greek
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: hindi
                     language:
                       default:
                         name: hindi
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: hungarian
                     language:
                       default:
                         name: hungarian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: indonesian
                     language:
                       default:
                         name: indonesian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: irish
                     language:
                       default:
                         name: irish
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: italian
                     language:
                       default:
                         name: italian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: latvian
                     language:
                       default:
                         name: latvian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: norwegian
                     language:
                       default:
                         name: norwegian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: persian
                     language:
                       default:
                         name: persian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: portuguese
                     language:
                       default:
                         name: portuguese
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: romanian
                     language:
                       default:
                         name: romanian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: russian
                     language:
                       default:
                         name: russian
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: sorani
                     language:
                       default:
                         name: sorani
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: spanish
                     language:
                       default:
                         name: spanish
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: swedish
                     language:
                       default:
                         name: swedish
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: thai
                     language:
                       default:
                         name: thai
-                        description: The value 'undefined'
+                        description: ''
                   - !<!ChoiceValue> 
                     value: turkish
                     language:
                       default:
                         name: turkish
-                        description: The value 'undefined'
+                        description: ''
                   type: sealed-choice
                   apiVersions:
                   - !<!ApiVersion> 
@@ -12456,7 +12456,7 @@ schemas: !<!Schemas>
   - *ref_68
   - *ref_85
   - *ref_113
-  - !<!ObjectSchema> &ref_544
+  - !<!ObjectSchema> &ref_667
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -12488,7 +12488,7 @@ schemas: !<!Schemas>
         description: 'Response from a List Indexes request. If successful, it includes the full definitions of all indexes.'
         namespace: Api20190506
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_545
+  - !<!ObjectSchema> &ref_682
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -12536,7 +12536,7 @@ schemas: !<!Schemas>
         description: Statistics for a given index. Statistics are collected periodically and are not guaranteed to always be up-to-date.
         namespace: Api20190506
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_546
+  - !<!ObjectSchema> &ref_683
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -12627,7 +12627,7 @@ schemas: !<!Schemas>
         description: Specifies some text and analysis components used to break that text into tokens.
         namespace: Api20190506
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_547
+  - !<!ObjectSchema> &ref_687
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -12744,7 +12744,7 @@ schemas: !<!Schemas>
         namespace: Api20190506
     protocol: !<!Protocols> {}
   - *ref_125
-  - !<!ObjectSchema> &ref_548
+  - !<!ObjectSchema> &ref_689
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -13067,19 +13067,19 @@ schemas: !<!Schemas>
       language:
         default:
           name: location
-          description: The value 'undefined'
+          description: ''
     - !<!ChoiceValue> 
       value: organization
       language:
         default:
           name: organization
-          description: The value 'undefined'
+          description: ''
     - !<!ChoiceValue> 
       value: person
       language:
         default:
           name: person
-          description: The value 'undefined'
+          description: ''
     type: choice
     apiVersions:
     - !<!ApiVersion> 
@@ -13093,7 +13093,7 @@ schemas: !<!Schemas>
         description: A string indicating which named entity categories to return.
     protocol: !<!Protocols> {}
   arrays:
-  - !<!ArraySchema> &ref_515
+  - !<!ArraySchema> &ref_516
     type: array
     apiVersions:
     - !<!ApiVersion> 
@@ -13111,9 +13111,9 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Array of get-2-itemsItem
-        description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+        description: ''
     protocol: !<!Protocols> {}
-  - !<!ArraySchema> &ref_516
+  - !<!ArraySchema> &ref_517
     type: array
     apiVersions:
     - !<!ApiVersion> 
@@ -13131,9 +13131,9 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Array of get-4-itemsItem
-        description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+        description: ''
     protocol: !<!Protocols> {}
-  - !<!ArraySchema> &ref_518
+  - !<!ArraySchema> &ref_519
     type: array
     apiVersions:
     - !<!ApiVersion> 
@@ -13151,9 +13151,9 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Array of get-8-itemsItem
-        description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+        description: ''
     protocol: !<!Protocols> {}
-  - !<!ArraySchema> &ref_519
+  - !<!ArraySchema> &ref_520
     type: array
     apiVersions:
     - !<!ApiVersion> 
@@ -13171,9 +13171,9 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Array of get-10-itemsItem
-        description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+        description: ''
     protocol: !<!Protocols> {}
-  - !<!ArraySchema> &ref_520
+  - !<!ArraySchema> &ref_521
     type: array
     apiVersions:
     - !<!ApiVersion> 
@@ -13191,9 +13191,9 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Array of get-12-itemsItem
-        description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+        description: ''
     protocol: !<!Protocols> {}
-  - !<!ArraySchema> &ref_521
+  - !<!ArraySchema> &ref_522
     type: array
     apiVersions:
     - !<!ApiVersion> 
@@ -13211,14 +13211,14 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Array of get-14-itemsItem
-        description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+        description: ''
     protocol: !<!Protocols> {}
   - *ref_147
   - *ref_148
   - *ref_149
   - *ref_150
   - *ref_151
-  - !<!ArraySchema> &ref_525
+  - !<!ArraySchema> &ref_546
     type: array
     apiVersions:
     - !<!ApiVersion> 
@@ -13236,9 +13236,9 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Array of get-1-itemsItem
-        description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+        description: ''
     protocol: !<!Protocols> {}
-  - !<!ArraySchema> &ref_527
+  - !<!ArraySchema> &ref_551
     type: array
     apiVersions:
     - !<!ApiVersion> 
@@ -13256,9 +13256,9 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Array of get-7-itemsItem
-        description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+        description: ''
     protocol: !<!Protocols> {}
-  - !<!ArraySchema> &ref_528
+  - !<!ArraySchema> &ref_552
     type: array
     apiVersions:
     - !<!ApiVersion> 
@@ -13267,9 +13267,9 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Array of string
-        description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+        description: ''
     protocol: !<!Protocols> {}
-  - !<!ArraySchema> &ref_529
+  - !<!ArraySchema> &ref_553
     type: array
     apiVersions:
     - !<!ApiVersion> 
@@ -13287,7 +13287,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Array of get-9-itemsItem
-        description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+        description: ''
     protocol: !<!Protocols> {}
   - *ref_153
   - *ref_154
@@ -13345,7 +13345,7 @@ schemas: !<!Schemas>
   - *ref_206
   - *ref_207
   booleans:
-  - !<!BooleanSchema> &ref_514
+  - !<!BooleanSchema> &ref_515
     type: boolean
     apiVersions:
     - !<!ApiVersion> 
@@ -13353,7 +13353,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: boolean
-        description: MISSING·SCHEMA-DESCRIPTION-BOOLEAN
+        description: ''
     protocol: !<!Protocols> {}
   - *ref_208
   - *ref_209
@@ -13533,7 +13533,7 @@ schemas: !<!Schemas>
         name: ApiVersion-2019-05-06
         description: Api Version (2019-05-06)
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_536
+  - !<!ConstantSchema> &ref_589
     type: constant
     value: !<!ConstantValue> 
       value: return=representation
@@ -13545,7 +13545,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Constant0
-        description: The constant value return=representation
+        description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> 
     type: constant
@@ -13994,7 +13994,7 @@ schemas: !<!Schemas>
   - *ref_265
   - *ref_266
   numbers:
-  - !<!NumberSchema> &ref_513
+  - !<!NumberSchema> &ref_514
     type: integer
     apiVersions:
     - !<!ApiVersion> 
@@ -14003,9 +14003,9 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: integer
-        description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+        description: ''
     protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_517
+  - !<!NumberSchema> &ref_518
     type: number
     apiVersions:
     - !<!ApiVersion> 
@@ -14016,7 +14016,7 @@ schemas: !<!Schemas>
         name: number
         description: ''
     protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_522
+  - !<!NumberSchema> &ref_523
     type: integer
     apiVersions:
     - !<!ApiVersion> 
@@ -14025,7 +14025,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: integer
-        description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+        description: ''
     protocol: !<!Protocols> {}
   - *ref_267
   - *ref_268
@@ -14293,7 +14293,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: uuid
-        description: MISSING·SCHEMA-DESCRIPTION-UUID
+        description: ''
     protocol: !<!Protocols> {}
 globalParameters:
 - !<!Parameter> &ref_508
@@ -14382,12 +14382,12 @@ operationGroups:
       - *ref_508
       - *ref_509
       - *ref_510
-      - !<!Parameter> 
+      - !<!Parameter> &ref_513
         schema: *ref_511
         implementation: Method
         extensions:
           x-ms-client-request-id: true
-          x-ms-parameter-grouping: &ref_523
+          x-ms-parameter-grouping: &ref_524
             name: request-options
         language: !<!Languages> 
           default:
@@ -14398,6 +14398,8 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - *ref_512
+      signatureParameters:
+      - *ref_513
       language: !<!Languages> 
         default:
           name: ''
@@ -14409,7 +14411,7 @@ operationGroups:
           uri: 'https://{searchServiceName}.{searchDnsSuffix}/indexes(''{indexName}'')'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_513
+      schema: *ref_514
       language: !<!Languages> 
         default:
           name: ''
@@ -14437,7 +14439,7 @@ operationGroups:
       - *ref_508
       - *ref_509
       - *ref_510
-      - !<!Parameter> 
+      - !<!Parameter> &ref_525
         schema: *ref_152
         implementation: Method
         language: !<!Languages> 
@@ -14448,8 +14450,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
-        schema: *ref_514
+      - !<!Parameter> &ref_526
+        schema: *ref_515
         implementation: Method
         extensions:
           x-ms-parameter-grouping:
@@ -14462,8 +14464,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
-        schema: *ref_515
+      - !<!Parameter> &ref_527
+        schema: *ref_516
         implementation: Method
         extensions:
           x-ms-parameter-grouping:
@@ -14477,7 +14479,7 @@ operationGroups:
           http: !<!HttpParameter> 
             in: query
             style: form
-      - !<!Parameter> 
+      - !<!Parameter> &ref_528
         schema: *ref_152
         implementation: Method
         extensions:
@@ -14491,8 +14493,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
-        schema: *ref_516
+      - !<!Parameter> &ref_529
+        schema: *ref_517
         implementation: Method
         extensions:
           x-ms-parameter-grouping:
@@ -14505,7 +14507,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
+      - !<!Parameter> &ref_530
         schema: *ref_152
         implementation: Method
         extensions:
@@ -14519,7 +14521,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
+      - !<!Parameter> &ref_531
         schema: *ref_152
         implementation: Method
         extensions:
@@ -14533,8 +14535,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
-        schema: *ref_517
+      - !<!Parameter> &ref_532
+        schema: *ref_518
         implementation: Method
         extensions:
           x-ms-parameter-grouping:
@@ -14549,8 +14551,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
-        schema: *ref_518
+      - !<!Parameter> &ref_533
+        schema: *ref_519
         implementation: Method
         extensions:
           x-ms-parameter-grouping:
@@ -14566,7 +14568,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
+      - !<!Parameter> &ref_534
         schema: *ref_346
         implementation: Method
         extensions:
@@ -14580,8 +14582,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
-        schema: *ref_519
+      - !<!Parameter> &ref_535
+        schema: *ref_520
         implementation: Method
         extensions:
           x-ms-parameter-grouping:
@@ -14597,7 +14599,7 @@ operationGroups:
           http: !<!HttpParameter> 
             in: query
             style: form
-      - !<!Parameter> 
+      - !<!Parameter> &ref_536
         schema: *ref_152
         implementation: Method
         extensions:
@@ -14611,8 +14613,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
-        schema: *ref_520
+      - !<!Parameter> &ref_537
+        schema: *ref_521
         implementation: Method
         extensions:
           x-ms-parameter-grouping:
@@ -14627,7 +14629,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
+      - !<!Parameter> &ref_538
         schema: *ref_347
         implementation: Method
         extensions:
@@ -14641,8 +14643,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
-        schema: *ref_521
+      - !<!Parameter> &ref_539
+        schema: *ref_522
         implementation: Method
         extensions:
           x-ms-parameter-grouping:
@@ -14655,8 +14657,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
-        schema: *ref_522
+      - !<!Parameter> &ref_540
+        schema: *ref_523
         implementation: Method
         extensions:
           x-ms-parameter-grouping:
@@ -14671,8 +14673,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
-        schema: *ref_522
+      - !<!Parameter> &ref_541
+        schema: *ref_523
         implementation: Method
         extensions:
           x-ms-parameter-grouping:
@@ -14688,12 +14690,12 @@ operationGroups:
           http: !<!HttpParameter> 
             in: query
       - *ref_512
-      - !<!Parameter> 
+      - !<!Parameter> &ref_542
         schema: *ref_511
         implementation: Method
         extensions:
           x-ms-client-request-id: true
-          x-ms-parameter-grouping: *ref_523
+          x-ms-parameter-grouping: *ref_524
         language: !<!Languages> 
           default:
             name: client-request-id
@@ -14702,6 +14704,25 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
+      signatureParameters:
+      - *ref_525
+      - *ref_526
+      - *ref_527
+      - *ref_528
+      - *ref_529
+      - *ref_530
+      - *ref_531
+      - *ref_532
+      - *ref_533
+      - *ref_534
+      - *ref_535
+      - *ref_536
+      - *ref_537
+      - *ref_538
+      - *ref_539
+      - *ref_540
+      - *ref_541
+      - *ref_542
       language: !<!Languages> 
         default:
           name: ''
@@ -14713,7 +14734,7 @@ operationGroups:
           uri: 'https://{searchServiceName}.{searchDnsSuffix}/indexes(''{indexName}'')'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_524
+      schema: *ref_543
       language: !<!Languages> 
         default:
           name: ''
@@ -14742,12 +14763,12 @@ operationGroups:
       - *ref_509
       - *ref_510
       - *ref_512
-      - !<!Parameter> 
+      - !<!Parameter> &ref_544
         schema: *ref_511
         implementation: Method
         extensions:
           x-ms-client-request-id: true
-          x-ms-parameter-grouping: *ref_523
+          x-ms-parameter-grouping: *ref_524
         language: !<!Languages> 
           default:
             name: client-request-id
@@ -14756,7 +14777,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> 
+      - !<!Parameter> &ref_545
         schema: *ref_4
         implementation: Method
         required: true
@@ -14770,6 +14791,9 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_544
+      - *ref_545
       language: !<!Languages> 
         default:
           name: ''
@@ -14784,7 +14808,7 @@ operationGroups:
           uri: 'https://{searchServiceName}.{searchDnsSuffix}/indexes(''{indexName}'')'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_524
+      schema: *ref_543
       language: !<!Languages> 
         default:
           name: ''
@@ -14813,7 +14837,7 @@ operationGroups:
       - *ref_508
       - *ref_509
       - *ref_510
-      - !<!Parameter> 
+      - !<!Parameter> &ref_547
         schema: *ref_152
         implementation: Method
         required: true
@@ -14825,8 +14849,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: path
-      - !<!Parameter> 
-        schema: *ref_525
+      - !<!Parameter> &ref_548
+        schema: *ref_546
         implementation: Method
         language: !<!Languages> 
           default:
@@ -14837,12 +14861,12 @@ operationGroups:
           http: !<!HttpParameter> 
             in: query
       - *ref_512
-      - !<!Parameter> 
+      - !<!Parameter> &ref_549
         schema: *ref_511
         implementation: Method
         extensions:
           x-ms-client-request-id: true
-          x-ms-parameter-grouping: *ref_523
+          x-ms-parameter-grouping: *ref_524
         language: !<!Languages> 
           default:
             name: client-request-id
@@ -14851,6 +14875,10 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
+      signatureParameters:
+      - *ref_547
+      - *ref_548
+      - *ref_549
       language: !<!Languages> 
         default:
           name: ''
@@ -14862,7 +14890,7 @@ operationGroups:
           uri: 'https://{searchServiceName}.{searchDnsSuffix}/indexes(''{indexName}'')'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_526
+      schema: *ref_550
       language: !<!Languages> 
         default:
           name: ''
@@ -14888,7 +14916,7 @@ operationGroups:
       - *ref_508
       - *ref_509
       - *ref_510
-      - !<!Parameter> 
+      - !<!Parameter> &ref_554
         schema: *ref_152
         implementation: Method
         required: true
@@ -14900,7 +14928,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
+      - !<!Parameter> &ref_555
         schema: *ref_152
         implementation: Method
         required: true
@@ -14912,7 +14940,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
+      - !<!Parameter> &ref_556
         schema: *ref_152
         implementation: Method
         extensions:
@@ -14926,8 +14954,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
-        schema: *ref_514
+      - !<!Parameter> &ref_557
+        schema: *ref_515
         implementation: Method
         extensions:
           x-ms-parameter-grouping:
@@ -14942,7 +14970,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
+      - !<!Parameter> &ref_558
         schema: *ref_152
         implementation: Method
         extensions:
@@ -14956,7 +14984,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
+      - !<!Parameter> &ref_559
         schema: *ref_152
         implementation: Method
         extensions:
@@ -14970,8 +14998,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
-        schema: *ref_517
+      - !<!Parameter> &ref_560
+        schema: *ref_518
         implementation: Method
         extensions:
           x-ms-parameter-grouping:
@@ -14986,8 +15014,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
-        schema: *ref_527
+      - !<!Parameter> &ref_561
+        schema: *ref_551
         implementation: Method
         extensions:
           x-ms-parameter-grouping:
@@ -15003,8 +15031,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
-        schema: *ref_528
+      - !<!Parameter> &ref_562
+        schema: *ref_552
         implementation: Method
         extensions:
           x-ms-parameter-grouping:
@@ -15017,8 +15045,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
-        schema: *ref_529
+      - !<!Parameter> &ref_563
+        schema: *ref_553
         implementation: Method
         extensions:
           x-ms-parameter-grouping:
@@ -15031,8 +15059,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
-        schema: *ref_522
+      - !<!Parameter> &ref_564
+        schema: *ref_523
         implementation: Method
         extensions:
           x-ms-parameter-grouping:
@@ -15046,12 +15074,12 @@ operationGroups:
           http: !<!HttpParameter> 
             in: query
       - *ref_512
-      - !<!Parameter> 
+      - !<!Parameter> &ref_565
         schema: *ref_511
         implementation: Method
         extensions:
           x-ms-client-request-id: true
-          x-ms-parameter-grouping: *ref_523
+          x-ms-parameter-grouping: *ref_524
         language: !<!Languages> 
           default:
             name: client-request-id
@@ -15060,6 +15088,19 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
+      signatureParameters:
+      - *ref_554
+      - *ref_555
+      - *ref_556
+      - *ref_557
+      - *ref_558
+      - *ref_559
+      - *ref_560
+      - *ref_561
+      - *ref_562
+      - *ref_563
+      - *ref_564
+      - *ref_565
       language: !<!Languages> 
         default:
           name: ''
@@ -15071,7 +15112,7 @@ operationGroups:
           uri: 'https://{searchServiceName}.{searchDnsSuffix}/indexes(''{indexName}'')'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_530
+      schema: *ref_566
       language: !<!Languages> 
         default:
           name: ''
@@ -15100,12 +15141,12 @@ operationGroups:
       - *ref_509
       - *ref_510
       - *ref_512
-      - !<!Parameter> 
+      - !<!Parameter> &ref_568
         schema: *ref_511
         implementation: Method
         extensions:
           x-ms-client-request-id: true
-          x-ms-parameter-grouping: *ref_523
+          x-ms-parameter-grouping: *ref_524
         language: !<!Languages> 
           default:
             name: client-request-id
@@ -15114,8 +15155,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> 
-        schema: *ref_531
+      - !<!Parameter> &ref_569
+        schema: *ref_567
         implementation: Method
         required: true
         extensions:
@@ -15128,6 +15169,9 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_568
+      - *ref_569
       language: !<!Languages> 
         default:
           name: ''
@@ -15142,7 +15186,7 @@ operationGroups:
           uri: 'https://{searchServiceName}.{searchDnsSuffix}/indexes(''{indexName}'')'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_530
+      schema: *ref_566
       language: !<!Languages> 
         default:
           name: ''
@@ -15172,12 +15216,12 @@ operationGroups:
       - *ref_509
       - *ref_510
       - *ref_512
-      - !<!Parameter> 
+      - !<!Parameter> &ref_571
         schema: *ref_511
         implementation: Method
         extensions:
           x-ms-client-request-id: true
-          x-ms-parameter-grouping: *ref_523
+          x-ms-parameter-grouping: *ref_524
         language: !<!Languages> 
           default:
             name: client-request-id
@@ -15186,8 +15230,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> 
-        schema: *ref_532
+      - !<!Parameter> &ref_572
+        schema: *ref_570
         implementation: Method
         required: true
         extensions:
@@ -15200,6 +15244,9 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_571
+      - *ref_572
       language: !<!Languages> 
         default:
           name: ''
@@ -15214,7 +15261,7 @@ operationGroups:
           uri: 'https://{searchServiceName}.{searchDnsSuffix}/indexes(''{indexName}'')'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_533
+      schema: *ref_573
       language: !<!Languages> 
         default:
           name: ''
@@ -15227,7 +15274,7 @@ operationGroups:
           statusCodes:
           - '200'
     - !<!SchemaResponse> 
-      schema: *ref_533
+      schema: *ref_573
       language: !<!Languages> 
         default:
           name: ''
@@ -15256,12 +15303,12 @@ operationGroups:
       - *ref_508
       - *ref_509
       - *ref_510
-      - !<!Parameter> 
+      - !<!Parameter> &ref_574
         schema: *ref_511
         implementation: Method
         extensions:
           x-ms-client-request-id: true
-          x-ms-parameter-grouping: *ref_523
+          x-ms-parameter-grouping: *ref_524
         language: !<!Languages> 
           default:
             name: client-request-id
@@ -15271,7 +15318,7 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - *ref_512
-      - !<!Parameter> 
+      - !<!Parameter> &ref_575
         schema: *ref_152
         implementation: Method
         required: true
@@ -15283,7 +15330,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
+      - !<!Parameter> &ref_576
         schema: *ref_152
         implementation: Method
         required: true
@@ -15295,7 +15342,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
+      - !<!Parameter> &ref_577
         schema: *ref_349
         implementation: Method
         extensions:
@@ -15309,7 +15356,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
+      - !<!Parameter> &ref_578
         schema: *ref_152
         implementation: Method
         extensions:
@@ -15323,8 +15370,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
-        schema: *ref_514
+      - !<!Parameter> &ref_579
+        schema: *ref_515
         implementation: Method
         extensions:
           x-ms-parameter-grouping:
@@ -15339,7 +15386,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
+      - !<!Parameter> &ref_580
         schema: *ref_152
         implementation: Method
         extensions:
@@ -15353,7 +15400,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
+      - !<!Parameter> &ref_581
         schema: *ref_152
         implementation: Method
         extensions:
@@ -15367,8 +15414,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
-        schema: *ref_517
+      - !<!Parameter> &ref_582
+        schema: *ref_518
         implementation: Method
         extensions:
           x-ms-parameter-grouping:
@@ -15383,8 +15430,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
-        schema: *ref_528
+      - !<!Parameter> &ref_583
+        schema: *ref_552
         implementation: Method
         extensions:
           x-ms-parameter-grouping:
@@ -15397,8 +15444,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
-        schema: *ref_522
+      - !<!Parameter> &ref_584
+        schema: *ref_523
         implementation: Method
         extensions:
           x-ms-parameter-grouping:
@@ -15411,6 +15458,18 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
+      signatureParameters:
+      - *ref_574
+      - *ref_575
+      - *ref_576
+      - *ref_577
+      - *ref_578
+      - *ref_579
+      - *ref_580
+      - *ref_581
+      - *ref_582
+      - *ref_583
+      - *ref_584
       language: !<!Languages> 
         default:
           name: ''
@@ -15422,7 +15481,7 @@ operationGroups:
           uri: 'https://{searchServiceName}.{searchDnsSuffix}/indexes(''{indexName}'')'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_534
+      schema: *ref_585
       language: !<!Languages> 
         default:
           name: ''
@@ -15450,12 +15509,12 @@ operationGroups:
       - *ref_508
       - *ref_509
       - *ref_510
-      - !<!Parameter> 
+      - !<!Parameter> &ref_587
         schema: *ref_511
         implementation: Method
         extensions:
           x-ms-client-request-id: true
-          x-ms-parameter-grouping: *ref_523
+          x-ms-parameter-grouping: *ref_524
         language: !<!Languages> 
           default:
             name: client-request-id
@@ -15465,8 +15524,8 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - *ref_512
-      - !<!Parameter> 
-        schema: *ref_535
+      - !<!Parameter> &ref_588
+        schema: *ref_586
         implementation: Method
         required: true
         extensions:
@@ -15479,6 +15538,9 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_587
+      - *ref_588
       language: !<!Languages> 
         default:
           name: ''
@@ -15493,7 +15555,7 @@ operationGroups:
           uri: 'https://{searchServiceName}.{searchDnsSuffix}/indexes(''{indexName}'')'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_534
+      schema: *ref_585
       language: !<!Languages> 
         default:
           name: ''
@@ -15529,7 +15591,7 @@ operationGroups:
       parameters:
       - *ref_508
       - *ref_509
-      - !<!Parameter> 
+      - !<!Parameter> &ref_590
         schema: *ref_152
         implementation: Method
         required: true
@@ -15541,12 +15603,12 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: path
-      - !<!Parameter> 
+      - !<!Parameter> &ref_591
         schema: *ref_511
         implementation: Method
         extensions:
           x-ms-client-request-id: true
-          x-ms-parameter-grouping: *ref_523
+          x-ms-parameter-grouping: *ref_524
         language: !<!Languages> 
           default:
             name: client-request-id
@@ -15555,11 +15617,11 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> 
+      - !<!Parameter> &ref_592
         schema: *ref_152
         implementation: Method
         extensions:
-          x-ms-parameter-grouping: &ref_537
+          x-ms-parameter-grouping: &ref_595
             name: access-condition
         language: !<!Languages> 
           default:
@@ -15569,11 +15631,11 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> 
+      - !<!Parameter> &ref_593
         schema: *ref_152
         implementation: Method
         extensions:
-          x-ms-parameter-grouping: &ref_538
+          x-ms-parameter-grouping: &ref_596
             name: access-condition
         language: !<!Languages> 
           default:
@@ -15584,7 +15646,7 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - !<!Parameter> 
-        schema: *ref_536
+        schema: *ref_589
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -15596,7 +15658,7 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - *ref_512
-      - !<!Parameter> 
+      - !<!Parameter> &ref_594
         schema: *ref_21
         implementation: Method
         required: true
@@ -15610,6 +15672,12 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_590
+      - *ref_591
+      - *ref_592
+      - *ref_593
+      - *ref_594
       language: !<!Languages> 
         default:
           name: ''
@@ -15665,7 +15733,7 @@ operationGroups:
       parameters:
       - *ref_508
       - *ref_509
-      - !<!Parameter> 
+      - !<!Parameter> &ref_597
         schema: *ref_152
         implementation: Method
         required: true
@@ -15677,12 +15745,12 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: path
-      - !<!Parameter> 
+      - !<!Parameter> &ref_598
         schema: *ref_511
         implementation: Method
         extensions:
           x-ms-client-request-id: true
-          x-ms-parameter-grouping: *ref_523
+          x-ms-parameter-grouping: *ref_524
         language: !<!Languages> 
           default:
             name: client-request-id
@@ -15691,11 +15759,11 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> 
+      - !<!Parameter> &ref_599
         schema: *ref_152
         implementation: Method
         extensions:
-          x-ms-parameter-grouping: *ref_537
+          x-ms-parameter-grouping: *ref_595
         language: !<!Languages> 
           default:
             name: If-Match
@@ -15704,11 +15772,11 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> 
+      - !<!Parameter> &ref_600
         schema: *ref_152
         implementation: Method
         extensions:
-          x-ms-parameter-grouping: *ref_538
+          x-ms-parameter-grouping: *ref_596
         language: !<!Languages> 
           default:
             name: If-None-Match
@@ -15718,6 +15786,11 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - *ref_512
+      signatureParameters:
+      - *ref_597
+      - *ref_598
+      - *ref_599
+      - *ref_600
       language: !<!Languages> 
         default:
           name: ''
@@ -15761,7 +15834,7 @@ operationGroups:
       parameters:
       - *ref_508
       - *ref_509
-      - !<!Parameter> 
+      - !<!Parameter> &ref_601
         schema: *ref_152
         implementation: Method
         required: true
@@ -15773,12 +15846,12 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: path
-      - !<!Parameter> 
+      - !<!Parameter> &ref_602
         schema: *ref_511
         implementation: Method
         extensions:
           x-ms-client-request-id: true
-          x-ms-parameter-grouping: *ref_523
+          x-ms-parameter-grouping: *ref_524
         language: !<!Languages> 
           default:
             name: client-request-id
@@ -15788,6 +15861,9 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - *ref_512
+      signatureParameters:
+      - *ref_601
+      - *ref_602
       language: !<!Languages> 
         default:
           name: ''
@@ -15826,7 +15902,7 @@ operationGroups:
       parameters:
       - *ref_508
       - *ref_509
-      - !<!Parameter> 
+      - !<!Parameter> &ref_603
         schema: *ref_152
         implementation: Method
         language: !<!Languages> 
@@ -15837,12 +15913,12 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
+      - !<!Parameter> &ref_604
         schema: *ref_511
         implementation: Method
         extensions:
           x-ms-client-request-id: true
-          x-ms-parameter-grouping: *ref_523
+          x-ms-parameter-grouping: *ref_524
         language: !<!Languages> 
           default:
             name: client-request-id
@@ -15852,6 +15928,9 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - *ref_512
+      signatureParameters:
+      - *ref_603
+      - *ref_604
       language: !<!Languages> 
         default:
           name: ''
@@ -15863,7 +15942,7 @@ operationGroups:
           uri: 'https://{searchServiceName}.{searchDnsSuffix}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_539
+      schema: *ref_605
       language: !<!Languages> 
         default:
           name: ''
@@ -15890,12 +15969,12 @@ operationGroups:
       parameters:
       - *ref_508
       - *ref_509
-      - !<!Parameter> 
+      - !<!Parameter> &ref_606
         schema: *ref_511
         implementation: Method
         extensions:
           x-ms-client-request-id: true
-          x-ms-parameter-grouping: *ref_523
+          x-ms-parameter-grouping: *ref_524
         language: !<!Languages> 
           default:
             name: client-request-id
@@ -15905,7 +15984,7 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - *ref_512
-      - !<!Parameter> 
+      - !<!Parameter> &ref_607
         schema: *ref_21
         implementation: Method
         required: true
@@ -15919,6 +15998,9 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_606
+      - *ref_607
       language: !<!Languages> 
         default:
           name: ''
@@ -15969,7 +16051,7 @@ operationGroups:
       parameters:
       - *ref_508
       - *ref_509
-      - !<!Parameter> 
+      - !<!Parameter> &ref_608
         schema: *ref_152
         implementation: Method
         required: true
@@ -15981,12 +16063,12 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: path
-      - !<!Parameter> 
+      - !<!Parameter> &ref_609
         schema: *ref_511
         implementation: Method
         extensions:
           x-ms-client-request-id: true
-          x-ms-parameter-grouping: *ref_523
+          x-ms-parameter-grouping: *ref_524
         language: !<!Languages> 
           default:
             name: client-request-id
@@ -15996,6 +16078,9 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - *ref_512
+      signatureParameters:
+      - *ref_608
+      - *ref_609
       language: !<!Languages> 
         default:
           name: ''
@@ -16030,7 +16115,7 @@ operationGroups:
       parameters:
       - *ref_508
       - *ref_509
-      - !<!Parameter> 
+      - !<!Parameter> &ref_610
         schema: *ref_152
         implementation: Method
         required: true
@@ -16042,12 +16127,12 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: path
-      - !<!Parameter> 
+      - !<!Parameter> &ref_611
         schema: *ref_511
         implementation: Method
         extensions:
           x-ms-client-request-id: true
-          x-ms-parameter-grouping: *ref_523
+          x-ms-parameter-grouping: *ref_524
         language: !<!Languages> 
           default:
             name: client-request-id
@@ -16057,6 +16142,9 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - *ref_512
+      signatureParameters:
+      - *ref_610
+      - *ref_611
       language: !<!Languages> 
         default:
           name: ''
@@ -16091,7 +16179,7 @@ operationGroups:
       parameters:
       - *ref_508
       - *ref_509
-      - !<!Parameter> 
+      - !<!Parameter> &ref_612
         schema: *ref_152
         implementation: Method
         required: true
@@ -16103,12 +16191,12 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: path
-      - !<!Parameter> 
+      - !<!Parameter> &ref_613
         schema: *ref_511
         implementation: Method
         extensions:
           x-ms-client-request-id: true
-          x-ms-parameter-grouping: *ref_523
+          x-ms-parameter-grouping: *ref_524
         language: !<!Languages> 
           default:
             name: client-request-id
@@ -16117,11 +16205,11 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> 
+      - !<!Parameter> &ref_614
         schema: *ref_152
         implementation: Method
         extensions:
-          x-ms-parameter-grouping: *ref_537
+          x-ms-parameter-grouping: *ref_595
         language: !<!Languages> 
           default:
             name: If-Match
@@ -16130,11 +16218,11 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> 
+      - !<!Parameter> &ref_615
         schema: *ref_152
         implementation: Method
         extensions:
-          x-ms-parameter-grouping: *ref_538
+          x-ms-parameter-grouping: *ref_596
         language: !<!Languages> 
           default:
             name: If-None-Match
@@ -16144,7 +16232,7 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - !<!Parameter> 
-        schema: *ref_536
+        schema: *ref_589
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -16156,7 +16244,7 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - *ref_512
-      - !<!Parameter> 
+      - !<!Parameter> &ref_616
         schema: *ref_26
         implementation: Method
         required: true
@@ -16170,6 +16258,12 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_612
+      - *ref_613
+      - *ref_614
+      - *ref_615
+      - *ref_616
       language: !<!Languages> 
         default:
           name: ''
@@ -16225,7 +16319,7 @@ operationGroups:
       parameters:
       - *ref_508
       - *ref_509
-      - !<!Parameter> 
+      - !<!Parameter> &ref_617
         schema: *ref_152
         implementation: Method
         required: true
@@ -16237,12 +16331,12 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: path
-      - !<!Parameter> 
+      - !<!Parameter> &ref_618
         schema: *ref_511
         implementation: Method
         extensions:
           x-ms-client-request-id: true
-          x-ms-parameter-grouping: *ref_523
+          x-ms-parameter-grouping: *ref_524
         language: !<!Languages> 
           default:
             name: client-request-id
@@ -16251,11 +16345,11 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> 
+      - !<!Parameter> &ref_619
         schema: *ref_152
         implementation: Method
         extensions:
-          x-ms-parameter-grouping: *ref_537
+          x-ms-parameter-grouping: *ref_595
         language: !<!Languages> 
           default:
             name: If-Match
@@ -16264,11 +16358,11 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> 
+      - !<!Parameter> &ref_620
         schema: *ref_152
         implementation: Method
         extensions:
-          x-ms-parameter-grouping: *ref_538
+          x-ms-parameter-grouping: *ref_596
         language: !<!Languages> 
           default:
             name: If-None-Match
@@ -16278,6 +16372,11 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - *ref_512
+      signatureParameters:
+      - *ref_617
+      - *ref_618
+      - *ref_619
+      - *ref_620
       language: !<!Languages> 
         default:
           name: ''
@@ -16321,7 +16420,7 @@ operationGroups:
       parameters:
       - *ref_508
       - *ref_509
-      - !<!Parameter> 
+      - !<!Parameter> &ref_621
         schema: *ref_152
         implementation: Method
         required: true
@@ -16333,12 +16432,12 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: path
-      - !<!Parameter> 
+      - !<!Parameter> &ref_622
         schema: *ref_511
         implementation: Method
         extensions:
           x-ms-client-request-id: true
-          x-ms-parameter-grouping: *ref_523
+          x-ms-parameter-grouping: *ref_524
         language: !<!Languages> 
           default:
             name: client-request-id
@@ -16348,6 +16447,9 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - *ref_512
+      signatureParameters:
+      - *ref_621
+      - *ref_622
       language: !<!Languages> 
         default:
           name: ''
@@ -16386,7 +16488,7 @@ operationGroups:
       parameters:
       - *ref_508
       - *ref_509
-      - !<!Parameter> 
+      - !<!Parameter> &ref_623
         schema: *ref_152
         implementation: Method
         language: !<!Languages> 
@@ -16397,12 +16499,12 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
+      - !<!Parameter> &ref_624
         schema: *ref_511
         implementation: Method
         extensions:
           x-ms-client-request-id: true
-          x-ms-parameter-grouping: *ref_523
+          x-ms-parameter-grouping: *ref_524
         language: !<!Languages> 
           default:
             name: client-request-id
@@ -16412,6 +16514,9 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - *ref_512
+      signatureParameters:
+      - *ref_623
+      - *ref_624
       language: !<!Languages> 
         default:
           name: ''
@@ -16423,7 +16528,7 @@ operationGroups:
           uri: 'https://{searchServiceName}.{searchDnsSuffix}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_540
+      schema: *ref_625
       language: !<!Languages> 
         default:
           name: ''
@@ -16450,12 +16555,12 @@ operationGroups:
       parameters:
       - *ref_508
       - *ref_509
-      - !<!Parameter> 
+      - !<!Parameter> &ref_626
         schema: *ref_511
         implementation: Method
         extensions:
           x-ms-client-request-id: true
-          x-ms-parameter-grouping: *ref_523
+          x-ms-parameter-grouping: *ref_524
         language: !<!Languages> 
           default:
             name: client-request-id
@@ -16465,7 +16570,7 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - *ref_512
-      - !<!Parameter> 
+      - !<!Parameter> &ref_627
         schema: *ref_26
         implementation: Method
         required: true
@@ -16479,6 +16584,9 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_626
+      - *ref_627
       language: !<!Languages> 
         default:
           name: ''
@@ -16521,7 +16629,7 @@ operationGroups:
       parameters:
       - *ref_508
       - *ref_509
-      - !<!Parameter> 
+      - !<!Parameter> &ref_628
         schema: *ref_152
         implementation: Method
         required: true
@@ -16533,12 +16641,12 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: path
-      - !<!Parameter> 
+      - !<!Parameter> &ref_629
         schema: *ref_511
         implementation: Method
         extensions:
           x-ms-client-request-id: true
-          x-ms-parameter-grouping: *ref_523
+          x-ms-parameter-grouping: *ref_524
         language: !<!Languages> 
           default:
             name: client-request-id
@@ -16548,6 +16656,9 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - *ref_512
+      signatureParameters:
+      - *ref_628
+      - *ref_629
       language: !<!Languages> 
         default:
           name: ''
@@ -16559,7 +16670,7 @@ operationGroups:
           uri: 'https://{searchServiceName}.{searchDnsSuffix}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_541
+      schema: *ref_630
       language: !<!Languages> 
         default:
           name: ''
@@ -16594,7 +16705,7 @@ operationGroups:
       parameters:
       - *ref_508
       - *ref_509
-      - !<!Parameter> 
+      - !<!Parameter> &ref_631
         schema: *ref_152
         implementation: Method
         required: true
@@ -16606,12 +16717,12 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: path
-      - !<!Parameter> 
+      - !<!Parameter> &ref_632
         schema: *ref_511
         implementation: Method
         extensions:
           x-ms-client-request-id: true
-          x-ms-parameter-grouping: *ref_523
+          x-ms-parameter-grouping: *ref_524
         language: !<!Languages> 
           default:
             name: client-request-id
@@ -16620,11 +16731,11 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> 
+      - !<!Parameter> &ref_633
         schema: *ref_152
         implementation: Method
         extensions:
-          x-ms-parameter-grouping: *ref_537
+          x-ms-parameter-grouping: *ref_595
         language: !<!Languages> 
           default:
             name: If-Match
@@ -16633,11 +16744,11 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> 
+      - !<!Parameter> &ref_634
         schema: *ref_152
         implementation: Method
         extensions:
-          x-ms-parameter-grouping: *ref_538
+          x-ms-parameter-grouping: *ref_596
         language: !<!Languages> 
           default:
             name: If-None-Match
@@ -16647,7 +16758,7 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - !<!Parameter> 
-        schema: *ref_536
+        schema: *ref_589
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -16659,7 +16770,7 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - *ref_512
-      - !<!Parameter> 
+      - !<!Parameter> &ref_635
         schema: *ref_52
         implementation: Method
         required: true
@@ -16673,6 +16784,12 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_631
+      - *ref_632
+      - *ref_633
+      - *ref_634
+      - *ref_635
       language: !<!Languages> 
         default:
           name: ''
@@ -16728,7 +16845,7 @@ operationGroups:
       parameters:
       - *ref_508
       - *ref_509
-      - !<!Parameter> 
+      - !<!Parameter> &ref_636
         schema: *ref_152
         implementation: Method
         required: true
@@ -16740,12 +16857,12 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: path
-      - !<!Parameter> 
+      - !<!Parameter> &ref_637
         schema: *ref_511
         implementation: Method
         extensions:
           x-ms-client-request-id: true
-          x-ms-parameter-grouping: *ref_523
+          x-ms-parameter-grouping: *ref_524
         language: !<!Languages> 
           default:
             name: client-request-id
@@ -16754,11 +16871,11 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> 
+      - !<!Parameter> &ref_638
         schema: *ref_152
         implementation: Method
         extensions:
-          x-ms-parameter-grouping: *ref_537
+          x-ms-parameter-grouping: *ref_595
         language: !<!Languages> 
           default:
             name: If-Match
@@ -16767,11 +16884,11 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> 
+      - !<!Parameter> &ref_639
         schema: *ref_152
         implementation: Method
         extensions:
-          x-ms-parameter-grouping: *ref_538
+          x-ms-parameter-grouping: *ref_596
         language: !<!Languages> 
           default:
             name: If-None-Match
@@ -16781,6 +16898,11 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - *ref_512
+      signatureParameters:
+      - *ref_636
+      - *ref_637
+      - *ref_638
+      - *ref_639
       language: !<!Languages> 
         default:
           name: ''
@@ -16824,7 +16946,7 @@ operationGroups:
       parameters:
       - *ref_508
       - *ref_509
-      - !<!Parameter> 
+      - !<!Parameter> &ref_640
         schema: *ref_152
         implementation: Method
         required: true
@@ -16836,12 +16958,12 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: path
-      - !<!Parameter> 
+      - !<!Parameter> &ref_641
         schema: *ref_511
         implementation: Method
         extensions:
           x-ms-client-request-id: true
-          x-ms-parameter-grouping: *ref_523
+          x-ms-parameter-grouping: *ref_524
         language: !<!Languages> 
           default:
             name: client-request-id
@@ -16851,6 +16973,9 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - *ref_512
+      signatureParameters:
+      - *ref_640
+      - *ref_641
       language: !<!Languages> 
         default:
           name: ''
@@ -16889,7 +17014,7 @@ operationGroups:
       parameters:
       - *ref_508
       - *ref_509
-      - !<!Parameter> 
+      - !<!Parameter> &ref_642
         schema: *ref_152
         implementation: Method
         language: !<!Languages> 
@@ -16900,12 +17025,12 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
+      - !<!Parameter> &ref_643
         schema: *ref_511
         implementation: Method
         extensions:
           x-ms-client-request-id: true
-          x-ms-parameter-grouping: *ref_523
+          x-ms-parameter-grouping: *ref_524
         language: !<!Languages> 
           default:
             name: client-request-id
@@ -16915,6 +17040,9 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - *ref_512
+      signatureParameters:
+      - *ref_642
+      - *ref_643
       language: !<!Languages> 
         default:
           name: ''
@@ -16926,7 +17054,7 @@ operationGroups:
           uri: 'https://{searchServiceName}.{searchDnsSuffix}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_542
+      schema: *ref_644
       language: !<!Languages> 
         default:
           name: ''
@@ -16953,12 +17081,12 @@ operationGroups:
       parameters:
       - *ref_508
       - *ref_509
-      - !<!Parameter> 
+      - !<!Parameter> &ref_645
         schema: *ref_511
         implementation: Method
         extensions:
           x-ms-client-request-id: true
-          x-ms-parameter-grouping: *ref_523
+          x-ms-parameter-grouping: *ref_524
         language: !<!Languages> 
           default:
             name: client-request-id
@@ -16968,7 +17096,7 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - *ref_512
-      - !<!Parameter> 
+      - !<!Parameter> &ref_646
         schema: *ref_52
         implementation: Method
         required: true
@@ -16982,6 +17110,9 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_645
+      - *ref_646
       language: !<!Languages> 
         default:
           name: ''
@@ -17032,7 +17163,7 @@ operationGroups:
       parameters:
       - *ref_508
       - *ref_509
-      - !<!Parameter> 
+      - !<!Parameter> &ref_647
         schema: *ref_152
         implementation: Method
         required: true
@@ -17044,12 +17175,12 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: path
-      - !<!Parameter> 
+      - !<!Parameter> &ref_648
         schema: *ref_511
         implementation: Method
         extensions:
           x-ms-client-request-id: true
-          x-ms-parameter-grouping: *ref_523
+          x-ms-parameter-grouping: *ref_524
         language: !<!Languages> 
           default:
             name: client-request-id
@@ -17058,11 +17189,11 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> 
+      - !<!Parameter> &ref_649
         schema: *ref_152
         implementation: Method
         extensions:
-          x-ms-parameter-grouping: *ref_537
+          x-ms-parameter-grouping: *ref_595
         language: !<!Languages> 
           default:
             name: If-Match
@@ -17071,11 +17202,11 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> 
+      - !<!Parameter> &ref_650
         schema: *ref_152
         implementation: Method
         extensions:
-          x-ms-parameter-grouping: *ref_538
+          x-ms-parameter-grouping: *ref_596
         language: !<!Languages> 
           default:
             name: If-None-Match
@@ -17085,7 +17216,7 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - !<!Parameter> 
-        schema: *ref_536
+        schema: *ref_589
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -17097,7 +17228,7 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - *ref_512
-      - !<!Parameter> 
+      - !<!Parameter> &ref_651
         schema: *ref_53
         implementation: Method
         required: true
@@ -17111,6 +17242,12 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_647
+      - *ref_648
+      - *ref_649
+      - *ref_650
+      - *ref_651
       language: !<!Languages> 
         default:
           name: ''
@@ -17166,7 +17303,7 @@ operationGroups:
       parameters:
       - *ref_508
       - *ref_509
-      - !<!Parameter> 
+      - !<!Parameter> &ref_652
         schema: *ref_152
         implementation: Method
         required: true
@@ -17178,12 +17315,12 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: path
-      - !<!Parameter> 
+      - !<!Parameter> &ref_653
         schema: *ref_511
         implementation: Method
         extensions:
           x-ms-client-request-id: true
-          x-ms-parameter-grouping: *ref_523
+          x-ms-parameter-grouping: *ref_524
         language: !<!Languages> 
           default:
             name: client-request-id
@@ -17192,11 +17329,11 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> 
+      - !<!Parameter> &ref_654
         schema: *ref_152
         implementation: Method
         extensions:
-          x-ms-parameter-grouping: *ref_537
+          x-ms-parameter-grouping: *ref_595
         language: !<!Languages> 
           default:
             name: If-Match
@@ -17205,11 +17342,11 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> 
+      - !<!Parameter> &ref_655
         schema: *ref_152
         implementation: Method
         extensions:
-          x-ms-parameter-grouping: *ref_538
+          x-ms-parameter-grouping: *ref_596
         language: !<!Languages> 
           default:
             name: If-None-Match
@@ -17219,6 +17356,11 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - *ref_512
+      signatureParameters:
+      - *ref_652
+      - *ref_653
+      - *ref_654
+      - *ref_655
       language: !<!Languages> 
         default:
           name: ''
@@ -17262,7 +17404,7 @@ operationGroups:
       parameters:
       - *ref_508
       - *ref_509
-      - !<!Parameter> 
+      - !<!Parameter> &ref_656
         schema: *ref_152
         implementation: Method
         required: true
@@ -17274,12 +17416,12 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: path
-      - !<!Parameter> 
+      - !<!Parameter> &ref_657
         schema: *ref_511
         implementation: Method
         extensions:
           x-ms-client-request-id: true
-          x-ms-parameter-grouping: *ref_523
+          x-ms-parameter-grouping: *ref_524
         language: !<!Languages> 
           default:
             name: client-request-id
@@ -17289,6 +17431,9 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - *ref_512
+      signatureParameters:
+      - *ref_656
+      - *ref_657
       language: !<!Languages> 
         default:
           name: ''
@@ -17327,7 +17472,7 @@ operationGroups:
       parameters:
       - *ref_508
       - *ref_509
-      - !<!Parameter> 
+      - !<!Parameter> &ref_658
         schema: *ref_152
         implementation: Method
         language: !<!Languages> 
@@ -17338,12 +17483,12 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
+      - !<!Parameter> &ref_659
         schema: *ref_511
         implementation: Method
         extensions:
           x-ms-client-request-id: true
-          x-ms-parameter-grouping: *ref_523
+          x-ms-parameter-grouping: *ref_524
         language: !<!Languages> 
           default:
             name: client-request-id
@@ -17353,6 +17498,9 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - *ref_512
+      signatureParameters:
+      - *ref_658
+      - *ref_659
       language: !<!Languages> 
         default:
           name: ''
@@ -17364,7 +17512,7 @@ operationGroups:
           uri: 'https://{searchServiceName}.{searchDnsSuffix}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_543
+      schema: *ref_660
       language: !<!Languages> 
         default:
           name: ''
@@ -17391,12 +17539,12 @@ operationGroups:
       parameters:
       - *ref_508
       - *ref_509
-      - !<!Parameter> 
+      - !<!Parameter> &ref_661
         schema: *ref_511
         implementation: Method
         extensions:
           x-ms-client-request-id: true
-          x-ms-parameter-grouping: *ref_523
+          x-ms-parameter-grouping: *ref_524
         language: !<!Languages> 
           default:
             name: client-request-id
@@ -17406,7 +17554,7 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - *ref_512
-      - !<!Parameter> 
+      - !<!Parameter> &ref_662
         schema: *ref_53
         implementation: Method
         required: true
@@ -17420,6 +17568,9 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_661
+      - *ref_662
       language: !<!Languages> 
         default:
           name: ''
@@ -17470,12 +17621,12 @@ operationGroups:
       parameters:
       - *ref_508
       - *ref_509
-      - !<!Parameter> 
+      - !<!Parameter> &ref_663
         schema: *ref_511
         implementation: Method
         extensions:
           x-ms-client-request-id: true
-          x-ms-parameter-grouping: *ref_523
+          x-ms-parameter-grouping: *ref_524
         language: !<!Languages> 
           default:
             name: client-request-id
@@ -17485,7 +17636,7 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - *ref_512
-      - !<!Parameter> 
+      - !<!Parameter> &ref_664
         schema: *ref_121
         implementation: Method
         required: true
@@ -17499,6 +17650,9 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_663
+      - *ref_664
       language: !<!Languages> 
         default:
           name: ''
@@ -17541,7 +17695,7 @@ operationGroups:
       parameters:
       - *ref_508
       - *ref_509
-      - !<!Parameter> 
+      - !<!Parameter> &ref_665
         schema: *ref_152
         implementation: Method
         language: !<!Languages> 
@@ -17552,12 +17706,12 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
+      - !<!Parameter> &ref_666
         schema: *ref_511
         implementation: Method
         extensions:
           x-ms-client-request-id: true
-          x-ms-parameter-grouping: *ref_523
+          x-ms-parameter-grouping: *ref_524
         language: !<!Languages> 
           default:
             name: client-request-id
@@ -17567,6 +17721,9 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - *ref_512
+      signatureParameters:
+      - *ref_665
+      - *ref_666
       language: !<!Languages> 
         default:
           name: ''
@@ -17578,7 +17735,7 @@ operationGroups:
           uri: 'https://{searchServiceName}.{searchDnsSuffix}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_544
+      schema: *ref_667
       language: !<!Languages> 
         default:
           name: ''
@@ -17605,7 +17762,7 @@ operationGroups:
       parameters:
       - *ref_508
       - *ref_509
-      - !<!Parameter> 
+      - !<!Parameter> &ref_668
         schema: *ref_152
         implementation: Method
         required: true
@@ -17617,8 +17774,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: path
-      - !<!Parameter> 
-        schema: *ref_514
+      - !<!Parameter> &ref_669
+        schema: *ref_515
         implementation: Method
         language: !<!Languages> 
           default:
@@ -17630,12 +17787,12 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
+      - !<!Parameter> &ref_670
         schema: *ref_511
         implementation: Method
         extensions:
           x-ms-client-request-id: true
-          x-ms-parameter-grouping: *ref_523
+          x-ms-parameter-grouping: *ref_524
         language: !<!Languages> 
           default:
             name: client-request-id
@@ -17644,11 +17801,11 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> 
+      - !<!Parameter> &ref_671
         schema: *ref_152
         implementation: Method
         extensions:
-          x-ms-parameter-grouping: *ref_537
+          x-ms-parameter-grouping: *ref_595
         language: !<!Languages> 
           default:
             name: If-Match
@@ -17657,11 +17814,11 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> 
+      - !<!Parameter> &ref_672
         schema: *ref_152
         implementation: Method
         extensions:
-          x-ms-parameter-grouping: *ref_538
+          x-ms-parameter-grouping: *ref_596
         language: !<!Languages> 
           default:
             name: If-None-Match
@@ -17671,7 +17828,7 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - !<!Parameter> 
-        schema: *ref_536
+        schema: *ref_589
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -17683,7 +17840,7 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - *ref_512
-      - !<!Parameter> 
+      - !<!Parameter> &ref_673
         schema: *ref_121
         implementation: Method
         required: true
@@ -17697,6 +17854,13 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_668
+      - *ref_669
+      - *ref_670
+      - *ref_671
+      - *ref_672
+      - *ref_673
       language: !<!Languages> 
         default:
           name: ''
@@ -17752,7 +17916,7 @@ operationGroups:
       parameters:
       - *ref_508
       - *ref_509
-      - !<!Parameter> 
+      - !<!Parameter> &ref_674
         schema: *ref_152
         implementation: Method
         required: true
@@ -17764,12 +17928,12 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: path
-      - !<!Parameter> 
+      - !<!Parameter> &ref_675
         schema: *ref_511
         implementation: Method
         extensions:
           x-ms-client-request-id: true
-          x-ms-parameter-grouping: *ref_523
+          x-ms-parameter-grouping: *ref_524
         language: !<!Languages> 
           default:
             name: client-request-id
@@ -17778,11 +17942,11 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> 
+      - !<!Parameter> &ref_676
         schema: *ref_152
         implementation: Method
         extensions:
-          x-ms-parameter-grouping: *ref_537
+          x-ms-parameter-grouping: *ref_595
         language: !<!Languages> 
           default:
             name: If-Match
@@ -17791,11 +17955,11 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> 
+      - !<!Parameter> &ref_677
         schema: *ref_152
         implementation: Method
         extensions:
-          x-ms-parameter-grouping: *ref_538
+          x-ms-parameter-grouping: *ref_596
         language: !<!Languages> 
           default:
             name: If-None-Match
@@ -17805,6 +17969,11 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - *ref_512
+      signatureParameters:
+      - *ref_674
+      - *ref_675
+      - *ref_676
+      - *ref_677
       language: !<!Languages> 
         default:
           name: ''
@@ -17848,7 +18017,7 @@ operationGroups:
       parameters:
       - *ref_508
       - *ref_509
-      - !<!Parameter> 
+      - !<!Parameter> &ref_678
         schema: *ref_152
         implementation: Method
         required: true
@@ -17860,12 +18029,12 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: path
-      - !<!Parameter> 
+      - !<!Parameter> &ref_679
         schema: *ref_511
         implementation: Method
         extensions:
           x-ms-client-request-id: true
-          x-ms-parameter-grouping: *ref_523
+          x-ms-parameter-grouping: *ref_524
         language: !<!Languages> 
           default:
             name: client-request-id
@@ -17875,6 +18044,9 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - *ref_512
+      signatureParameters:
+      - *ref_678
+      - *ref_679
       language: !<!Languages> 
         default:
           name: ''
@@ -17913,7 +18085,7 @@ operationGroups:
       parameters:
       - *ref_508
       - *ref_509
-      - !<!Parameter> 
+      - !<!Parameter> &ref_680
         schema: *ref_152
         implementation: Method
         required: true
@@ -17925,12 +18097,12 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: path
-      - !<!Parameter> 
+      - !<!Parameter> &ref_681
         schema: *ref_511
         implementation: Method
         extensions:
           x-ms-client-request-id: true
-          x-ms-parameter-grouping: *ref_523
+          x-ms-parameter-grouping: *ref_524
         language: !<!Languages> 
           default:
             name: client-request-id
@@ -17940,6 +18112,9 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - *ref_512
+      signatureParameters:
+      - *ref_680
+      - *ref_681
       language: !<!Languages> 
         default:
           name: ''
@@ -17951,7 +18126,7 @@ operationGroups:
           uri: 'https://{searchServiceName}.{searchDnsSuffix}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_545
+      schema: *ref_682
       language: !<!Languages> 
         default:
           name: ''
@@ -17978,7 +18153,7 @@ operationGroups:
       parameters:
       - *ref_508
       - *ref_509
-      - !<!Parameter> 
+      - !<!Parameter> &ref_684
         schema: *ref_152
         implementation: Method
         required: true
@@ -17990,12 +18165,12 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: path
-      - !<!Parameter> 
+      - !<!Parameter> &ref_685
         schema: *ref_511
         implementation: Method
         extensions:
           x-ms-client-request-id: true
-          x-ms-parameter-grouping: *ref_523
+          x-ms-parameter-grouping: *ref_524
         language: !<!Languages> 
           default:
             name: client-request-id
@@ -18005,8 +18180,8 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - *ref_512
-      - !<!Parameter> 
-        schema: *ref_546
+      - !<!Parameter> &ref_686
+        schema: *ref_683
         implementation: Method
         required: true
         extensions:
@@ -18019,6 +18194,10 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_684
+      - *ref_685
+      - *ref_686
       language: !<!Languages> 
         default:
           name: ''
@@ -18033,7 +18212,7 @@ operationGroups:
           uri: 'https://{searchServiceName}.{searchDnsSuffix}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_547
+      schema: *ref_687
       language: !<!Languages> 
         default:
           name: ''
@@ -18069,12 +18248,12 @@ operationGroups:
       parameters:
       - *ref_508
       - *ref_509
-      - !<!Parameter> 
+      - !<!Parameter> &ref_688
         schema: *ref_511
         implementation: Method
         extensions:
           x-ms-client-request-id: true
-          x-ms-parameter-grouping: *ref_523
+          x-ms-parameter-grouping: *ref_524
         language: !<!Languages> 
           default:
             name: client-request-id
@@ -18084,6 +18263,8 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - *ref_512
+      signatureParameters:
+      - *ref_688
       language: !<!Languages> 
         default:
           name: ''
@@ -18095,7 +18276,7 @@ operationGroups:
           uri: 'https://{searchServiceName}.{searchDnsSuffix}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_548
+      schema: *ref_689
       language: !<!Languages> 
         default:
           name: ''

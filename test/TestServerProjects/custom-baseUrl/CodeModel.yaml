@@ -1,7 +1,7 @@
 !<!CodeModel> 
 schemas: !<!Schemas> 
   objects:
-  - !<!ObjectSchema> &ref_4
+  - !<!ObjectSchema> &ref_5
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -14,13 +14,13 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: typeForstatus
-            description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+            description: ''
         protocol: !<!Protocols> {}
       serializedName: status
       language: !<!Languages> 
         default:
           name: status
-          description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+          description: ''
           originalName: status
       protocol: !<!Protocols> {}
     - !<!Property> 
@@ -44,7 +44,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Error
-        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        description: ''
         namespace: Api100
     protocol: !<!Protocols> {}
   numbers:
@@ -103,7 +103,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - !<!Parameter> 
+      - !<!Parameter> &ref_4
         schema: *ref_2
         implementation: Method
         required: true
@@ -122,6 +122,8 @@ operationGroups:
           http: !<!HttpParameter> 
             in: uri
       - *ref_3
+      signatureParameters:
+      - *ref_4
       language: !<!Languages> 
         default:
           name: ''
@@ -143,7 +145,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_4
+      schema: *ref_5
       language: !<!Languages> 
         default:
           name: ''

@@ -5,10 +5,9 @@
 
 namespace body_dictionary.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The Widget. </summary>
     public partial class Widget
     {
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-INTEGER. </summary>
         public int? Integer { get; set; }
         public string String { get; set; }
     }

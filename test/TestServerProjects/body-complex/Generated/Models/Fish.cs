@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace body_complex.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The Fish. </summary>
     public partial class Fish
     {
         /// <summary> Initializes a new instance of Fish. </summary>
@@ -18,7 +18,6 @@ namespace body_complex.Models
         public string Fishtype { get; internal set; }
         public string Species { get; set; }
         public float Length { get; set; }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA. </summary>
         public ICollection<Fish> Siblings { get; set; }
     }
 }

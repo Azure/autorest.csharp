@@ -8,7 +8,7 @@ using TypeSchemaMapping.Models;
 
 namespace CustomNamespace
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The Model. </summary>
     internal partial class CustomizedModel
     {
         /// <summary> A description about the set of tags. </summary>

@@ -8,9 +8,9 @@ namespace CognitiveSearch.Models
     /// <summary> A value indicating which split mode to perform. </summary>
     public enum TextSplitMode
     {
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> pages. </summary>
         Pages,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> sentences. </summary>
         Sentences
     }
 }

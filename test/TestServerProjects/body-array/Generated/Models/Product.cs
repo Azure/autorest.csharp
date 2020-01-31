@@ -5,10 +5,9 @@
 
 namespace body_array.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The Product. </summary>
     public partial class Product
     {
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-INTEGER. </summary>
         public int? Integer { get; set; }
         public string String { get; set; }
     }

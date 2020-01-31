@@ -5,7 +5,7 @@
 
 namespace body_complex.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The string-wrapper. </summary>
     public partial class StringWrapper
     {
         public string Field { get; set; }

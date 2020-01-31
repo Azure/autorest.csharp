@@ -5,7 +5,7 @@
 
 namespace body_complex.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The siamese. </summary>
     public partial class Siamese : Cat
     {
         public string Breed { get; set; }

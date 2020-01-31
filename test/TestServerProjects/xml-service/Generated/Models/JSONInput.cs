@@ -5,10 +5,9 @@
 
 namespace xml_service.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The JSONInput. </summary>
     public partial class JSONInput
     {
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-INTEGER. </summary>
         public int? Id { get; set; }
     }
 }

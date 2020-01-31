@@ -5,12 +5,10 @@
 
 namespace body_complex.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The boolean-wrapper. </summary>
     public partial class BooleanWrapper
     {
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-BOOLEAN. </summary>
         public bool? FieldTrue { get; set; }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-BOOLEAN. </summary>
         public bool? FieldFalse { get; set; }
     }
 }

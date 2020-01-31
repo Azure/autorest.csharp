@@ -8,9 +8,9 @@ namespace CognitiveSearch.Models
     /// <summary> A value indicating which algorithm to use. Default is printed. </summary>
     public enum TextExtractionAlgorithm
     {
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> printed. </summary>
         Printed,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> handwritten. </summary>
         Handwritten
     }
 }

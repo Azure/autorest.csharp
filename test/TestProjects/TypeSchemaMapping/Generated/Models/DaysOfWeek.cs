@@ -27,19 +27,19 @@ namespace TypeSchemaMapping.Models
         private const string SaturdayValue = "Saturday";
         private const string SundayValue = "Sunday";
 
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> Monday. </summary>
         public static DaysOfWeek Monday { get; } = new DaysOfWeek(MondayValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> Tuesday. </summary>
         public static DaysOfWeek Tuesday { get; } = new DaysOfWeek(TuesdayValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> Wednesday. </summary>
         public static DaysOfWeek Wednesday { get; } = new DaysOfWeek(WednesdayValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> Thursday. </summary>
         public static DaysOfWeek Thursday { get; } = new DaysOfWeek(ThursdayValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> Friday. </summary>
         public static DaysOfWeek Friday { get; } = new DaysOfWeek(FridayValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> Saturday. </summary>
         public static DaysOfWeek Saturday { get; } = new DaysOfWeek(SaturdayValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> Sunday. </summary>
         public static DaysOfWeek Sunday { get; } = new DaysOfWeek(SundayValue);
         /// <summary> Determines if two <see cref="DaysOfWeek"/> values are the same. </summary>
         public static bool operator ==(DaysOfWeek left, DaysOfWeek right) => left.Equals(right);

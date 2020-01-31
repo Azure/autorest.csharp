@@ -33,13 +33,13 @@ schemas: !<!Schemas>
                   language: !<!Languages> 
                     default:
                       name: typeForid
-                      description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+                      description: ''
                   protocol: !<!Protocols> {}
                 serializedName: id
                 language: !<!Languages> 
                   default:
                     name: id
-                    description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+                    description: ''
                     originalName: id
                 protocol: !<!Protocols> {}
               - !<!Property> 
@@ -63,32 +63,32 @@ schemas: !<!Schemas>
               language: !<!Languages> 
                 default:
                   name: Product-properties
-                  description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+                  description: ''
                   namespace: Api100
               protocol: !<!Protocols> {}
             serializedName: properties
             language: !<!Languages> 
               default:
                 name: properties
-                description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+                description: ''
                 originalName: properties
             protocol: !<!Protocols> {}
           language: !<!Languages> 
             default:
               name: Product
-              description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+              description: ''
               namespace: Api100
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
             name: ProductResultValue-value
-            description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+            description: ''
         protocol: !<!Protocols> {}
       serializedName: value
       language: !<!Languages> 
         default:
           name: value
-          description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+          description: ''
           originalName: value
       protocol: !<!Protocols> {}
     - !<!Property> 
@@ -112,7 +112,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: ProductResultValue
-        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        description: ''
         namespace: Api100
     protocol: !<!Protocols> {}
   - *ref_0
@@ -133,13 +133,13 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: ProductResult-values
-            description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+            description: ''
         protocol: !<!Protocols> {}
       serializedName: values
       language: !<!Languages> 
         default:
           name: values
-          description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+          description: ''
           originalName: values
       protocol: !<!Protocols> {}
     - !<!Property> 
@@ -163,10 +163,10 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: ProductResult
-        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        description: ''
         namespace: Api100
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_20
+  - !<!ObjectSchema> &ref_26
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -182,13 +182,13 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: OdataProductResult-values
-            description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+            description: ''
         protocol: !<!Protocols> {}
       serializedName: values
       language: !<!Languages> 
         default:
           name: values
-          description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+          description: ''
           originalName: values
       protocol: !<!Protocols> {}
     - !<!Property> 
@@ -212,7 +212,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: OdataProductResult
-        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        description: ''
         namespace: Api100
     protocol: !<!Protocols> {}
   - !<!ObjectSchema> 
@@ -229,67 +229,67 @@ schemas: !<!Schemas>
           language:
             default:
               name: Succeeded
-              description: The value 'undefined'
+              description: ''
         - !<!ChoiceValue> 
           value: Failed
           language:
             default:
               name: Failed
-              description: The value 'undefined'
+              description: ''
         - !<!ChoiceValue> 
           value: canceled
           language:
             default:
               name: canceled
-              description: The value 'undefined'
+              description: ''
         - !<!ChoiceValue> 
           value: Accepted
           language:
             default:
               name: Accepted
-              description: The value 'undefined'
+              description: ''
         - !<!ChoiceValue> 
           value: Creating
           language:
             default:
               name: Creating
-              description: The value 'undefined'
+              description: ''
         - !<!ChoiceValue> 
           value: Created
           language:
             default:
               name: Created
-              description: The value 'undefined'
+              description: ''
         - !<!ChoiceValue> 
           value: Updating
           language:
             default:
               name: Updating
-              description: The value 'undefined'
+              description: ''
         - !<!ChoiceValue> 
           value: Updated
           language:
             default:
               name: Updated
-              description: The value 'undefined'
+              description: ''
         - !<!ChoiceValue> 
           value: Deleting
           language:
             default:
               name: Deleting
-              description: The value 'undefined'
+              description: ''
         - !<!ChoiceValue> 
           value: Deleted
           language:
             default:
               name: Deleted
-              description: The value 'undefined'
+              description: ''
         - !<!ChoiceValue> 
           value: OK
           language:
             default:
               name: OK
-              description: The value 'undefined'
+              description: ''
         type: choice
         apiVersions:
         - !<!ApiVersion> 
@@ -316,7 +316,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: OperationResult
-        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        description: ''
         namespace: Api100
     protocol: !<!Protocols> {}
   choices:
@@ -336,7 +336,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: integer
-        description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+        description: ''
     protocol: !<!Protocols> {}
   - !<!NumberSchema> &ref_17
     type: integer
@@ -348,7 +348,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: integer
-        description: MISSING·SCHEMA-DESCRIPTION-INTEGER
+        description: ''
     protocol: !<!Protocols> {}
   strings:
   - *ref_7
@@ -396,6 +396,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_12
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -444,6 +445,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_12
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -493,6 +495,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_12
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -542,22 +545,22 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_12
-      - !<!Parameter> 
+      - !<!Parameter> &ref_18
         schema: *ref_15
         implementation: Method
         language: !<!Languages> 
           default:
             name: client-request-id
-            description: MISSING·PARAMETER-DESCRIPTION
+            description: ''
             serializedName: client-request-id
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> 
+      - !<!Parameter> &ref_19
         schema: *ref_16
         implementation: Method
         extensions:
-          x-ms-parameter-grouping: &ref_18
+          x-ms-parameter-grouping: &ref_21
             postfix: Options
         language: !<!Languages> 
           default:
@@ -567,11 +570,11 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> 
+      - !<!Parameter> &ref_20
         schema: *ref_17
         implementation: Method
         extensions:
-          x-ms-parameter-grouping: &ref_19
+          x-ms-parameter-grouping: &ref_22
             postfix: Options
         language: !<!Languages> 
           default:
@@ -581,6 +584,10 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
+      signatureParameters:
+      - *ref_18
+      - *ref_19
+      - *ref_20
       language: !<!Languages> 
         default:
           name: ''
@@ -630,22 +637,22 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_12
-      - !<!Parameter> 
+      - !<!Parameter> &ref_23
         schema: *ref_15
         implementation: Method
         language: !<!Languages> 
           default:
             name: client-request-id
-            description: MISSING·PARAMETER-DESCRIPTION
+            description: ''
             serializedName: client-request-id
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> 
+      - !<!Parameter> &ref_24
         schema: *ref_16
         implementation: Method
         extensions:
-          x-ms-parameter-grouping: *ref_18
+          x-ms-parameter-grouping: *ref_21
         language: !<!Languages> 
           default:
             name: maxresults
@@ -654,11 +661,11 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> 
+      - !<!Parameter> &ref_25
         schema: *ref_17
         implementation: Method
         extensions:
-          x-ms-parameter-grouping: *ref_19
+          x-ms-parameter-grouping: *ref_22
         language: !<!Languages> 
           default:
             name: timeout
@@ -667,6 +674,10 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
+      signatureParameters:
+      - *ref_23
+      - *ref_24
+      - *ref_25
       language: !<!Languages> 
         default:
           name: ''
@@ -678,7 +689,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_20
+      schema: *ref_26
       language: !<!Languages> 
         default:
           name: ''
@@ -716,22 +727,22 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_12
-      - !<!Parameter> 
+      - !<!Parameter> &ref_27
         schema: *ref_15
         implementation: Method
         language: !<!Languages> 
           default:
             name: client-request-id
-            description: MISSING·PARAMETER-DESCRIPTION
+            description: ''
             serializedName: client-request-id
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> 
+      - !<!Parameter> &ref_28
         schema: *ref_16
         implementation: Method
         extensions:
-          x-ms-parameter-grouping: *ref_18
+          x-ms-parameter-grouping: *ref_21
         language: !<!Languages> 
           default:
             name: maxresults
@@ -740,7 +751,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> 
+      - !<!Parameter> &ref_29
         schema: *ref_16
         implementation: Method
         required: true
@@ -755,11 +766,11 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: path
-      - !<!Parameter> 
+      - !<!Parameter> &ref_30
         schema: *ref_17
         implementation: Method
         extensions:
-          x-ms-parameter-grouping: *ref_19
+          x-ms-parameter-grouping: *ref_22
         language: !<!Languages> 
           default:
             name: timeout
@@ -768,6 +779,11 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
+      signatureParameters:
+      - *ref_27
+      - *ref_28
+      - *ref_29
+      - *ref_30
       language: !<!Languages> 
         default:
           name: ''
@@ -817,6 +833,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_12
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -866,6 +883,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_12
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -915,6 +933,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_12
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -964,6 +983,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_12
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -1013,6 +1033,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_12
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
@@ -1062,7 +1083,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_12
-      - !<!Parameter> 
+      - !<!Parameter> &ref_31
         schema: *ref_15
         implementation: Method
         required: true
@@ -1074,7 +1095,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
+      - !<!Parameter> &ref_32
         schema: *ref_15
         implementation: Method
         required: true
@@ -1086,6 +1107,9 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: path
+      signatureParameters:
+      - *ref_31
+      - *ref_32
       language: !<!Languages> 
         default:
           name: ''
@@ -1097,7 +1121,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_20
+      schema: *ref_26
       language: !<!Languages> 
         default:
           name: ''
@@ -1136,12 +1160,12 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_12
-      - !<!Parameter> 
+      - !<!Parameter> &ref_33
         schema: *ref_15
         implementation: Method
         required: true
         extensions:
-          x-ms-parameter-grouping: &ref_21
+          x-ms-parameter-grouping: &ref_41
             name: custom-parameter-group
         language: !<!Languages> 
           default:
@@ -1151,12 +1175,12 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
+      - !<!Parameter> &ref_34
         schema: *ref_15
         implementation: Method
         required: true
         extensions:
-          x-ms-parameter-grouping: &ref_22
+          x-ms-parameter-grouping: &ref_42
             name: custom-parameter-group
         language: !<!Languages> 
           default:
@@ -1166,6 +1190,9 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: path
+      signatureParameters:
+      - *ref_33
+      - *ref_34
       language: !<!Languages> 
         default:
           name: ''
@@ -1177,7 +1204,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_20
+      schema: *ref_26
       language: !<!Languages> 
         default:
           name: ''
@@ -1216,22 +1243,22 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_12
-      - !<!Parameter> 
+      - !<!Parameter> &ref_35
         schema: *ref_15
         implementation: Method
         language: !<!Languages> 
           default:
             name: client-request-id
-            description: MISSING·PARAMETER-DESCRIPTION
+            description: ''
             serializedName: client-request-id
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> 
+      - !<!Parameter> &ref_36
         schema: *ref_16
         implementation: Method
         extensions:
-          x-ms-parameter-grouping: *ref_18
+          x-ms-parameter-grouping: *ref_21
         language: !<!Languages> 
           default:
             name: maxresults
@@ -1240,11 +1267,11 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> 
+      - !<!Parameter> &ref_37
         schema: *ref_17
         implementation: Method
         extensions:
-          x-ms-parameter-grouping: *ref_19
+          x-ms-parameter-grouping: *ref_22
         language: !<!Languages> 
           default:
             name: timeout
@@ -1253,6 +1280,10 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
+      signatureParameters:
+      - *ref_35
+      - *ref_36
+      - *ref_37
       language: !<!Languages> 
         default:
           name: ''
@@ -1303,7 +1334,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_12
-      - !<!Parameter> 
+      - !<!Parameter> &ref_38
         schema: *ref_15
         implementation: Method
         required: true
@@ -1315,7 +1346,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
+      - !<!Parameter> &ref_39
         schema: *ref_15
         implementation: Method
         required: true
@@ -1327,7 +1358,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: path
-      - !<!Parameter> 
+      - !<!Parameter> &ref_40
         schema: *ref_15
         implementation: Method
         required: true
@@ -1341,6 +1372,10 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: path
+      signatureParameters:
+      - *ref_38
+      - *ref_39
+      - *ref_40
       language: !<!Languages> 
         default:
           name: ''
@@ -1352,7 +1387,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_20
+      schema: *ref_26
       language: !<!Languages> 
         default:
           name: ''
@@ -1391,12 +1426,12 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_12
-      - !<!Parameter> 
+      - !<!Parameter> &ref_43
         schema: *ref_15
         implementation: Method
         required: true
         extensions:
-          x-ms-parameter-grouping: *ref_21
+          x-ms-parameter-grouping: *ref_41
         language: !<!Languages> 
           default:
             name: api_version
@@ -1405,12 +1440,12 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
+      - !<!Parameter> &ref_44
         schema: *ref_15
         implementation: Method
         required: true
         extensions:
-          x-ms-parameter-grouping: *ref_22
+          x-ms-parameter-grouping: *ref_42
         language: !<!Languages> 
           default:
             name: tenant
@@ -1419,7 +1454,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: path
-      - !<!Parameter> 
+      - !<!Parameter> &ref_45
         schema: *ref_15
         implementation: Method
         required: true
@@ -1433,6 +1468,10 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: path
+      signatureParameters:
+      - *ref_43
+      - *ref_44
+      - *ref_45
       language: !<!Languages> 
         default:
           name: ''
@@ -1444,7 +1483,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_20
+      schema: *ref_26
       language: !<!Languages> 
         default:
           name: ''
