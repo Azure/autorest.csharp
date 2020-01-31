@@ -12,13 +12,15 @@ namespace AutoRest.CSharp.V3.Output.Models.Serialization.Xml
             CSharpType type,
             XmlObjectElementSerialization[] elements,
             XmlObjectAttributeSerialization[] attributes,
-            XmlObjectArraySerialization[] embeddedArrays)
+            XmlObjectArraySerialization[] embeddedArrays,
+            CSharpType initializeType)
         {
             Type = type;
             Elements = elements;
             Attributes = attributes;
             Name = name;
             EmbeddedArrays = embeddedArrays;
+            InitializeType = initializeType;
         }
 
         public override string Name { get; }
@@ -26,5 +28,6 @@ namespace AutoRest.CSharp.V3.Output.Models.Serialization.Xml
         public XmlObjectAttributeSerialization[] Attributes { get; }
         public XmlObjectArraySerialization[] EmbeddedArrays { get; }
         public override CSharpType Type { get; }
+        public CSharpType InitializeType { get; }
     }
 }

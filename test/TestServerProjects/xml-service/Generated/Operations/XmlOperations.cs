@@ -1032,7 +1032,7 @@ namespace xml_service
                     case 200:
                         {
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            List<Banana> value = default;
+                            ICollection<Banana> value = default;
                             var bananas = document.Element("bananas");
                             if (bananas != null)
                             {
@@ -1071,7 +1071,7 @@ namespace xml_service
                     case 200:
                         {
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            List<Banana> value = default;
+                            ICollection<Banana> value = default;
                             var bananas = document.Element("bananas");
                             if (bananas != null)
                             {
@@ -1201,7 +1201,7 @@ namespace xml_service
                     case 200:
                         {
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            List<Banana> value = default;
+                            ICollection<Banana> value = default;
                             var bananas = document.Element("bananas");
                             if (bananas != null)
                             {
@@ -1240,7 +1240,7 @@ namespace xml_service
                     case 200:
                         {
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            List<Banana> value = default;
+                            ICollection<Banana> value = default;
                             var bananas = document.Element("bananas");
                             if (bananas != null)
                             {
@@ -1370,7 +1370,7 @@ namespace xml_service
                     case 200:
                         {
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            List<Banana> value = default;
+                            ICollection<Banana> value = default;
                             var bananas = document.Element("bananas");
                             if (bananas != null)
                             {
@@ -1409,7 +1409,7 @@ namespace xml_service
                     case 200:
                         {
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            List<Banana> value = default;
+                            ICollection<Banana> value = default;
                             var bananas = document.Element("bananas");
                             if (bananas != null)
                             {
@@ -1927,7 +1927,7 @@ namespace xml_service
                     case 200:
                         {
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            List<SignedIdentifier> value = default;
+                            ICollection<SignedIdentifier> value = default;
                             var signedIdentifiers = document.Element("SignedIdentifiers");
                             if (signedIdentifiers != null)
                             {
@@ -1966,7 +1966,7 @@ namespace xml_service
                     case 200:
                         {
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            List<SignedIdentifier> value = default;
+                            ICollection<SignedIdentifier> value = default;
                             var signedIdentifiers = document.Element("SignedIdentifiers");
                             if (signedIdentifiers != null)
                             {

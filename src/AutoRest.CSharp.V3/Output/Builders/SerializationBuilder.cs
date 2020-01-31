@@ -65,16 +65,18 @@ namespace AutoRest.CSharp.V3.Output.Builders
                     var wrapped = isRoot || arraySchema.Serialization?.Xml?.Wrapped == true;
 
                     return new XmlArraySerialization(
-                        _typeFactory.CreateImplementationType(arraySchema, isNullable),
+                        _typeFactory.CreateType(arraySchema, isNullable),
                         BuildXmlElementSerialization(arraySchema.ElementType, false, null, false),
                         xmlName,
-                        wrapped);
+                        wrapped,
+                        _typeFactory.CreateImplementationType(arraySchema, isNullable));
 
                 case DictionarySchema dictionarySchema:
                     return new XmlDictionarySerialization(
-                        _typeFactory.CreateImplementationType(dictionarySchema, isNullable),
+                        _typeFactory.CreateType(dictionarySchema, isNullable),
                         BuildXmlElementSerialization(dictionarySchema.ElementType, false, "!dictionary-item", false),
-                        xmlName);
+                        xmlName,
+                        _typeFactory.CreateImplementationType(dictionarySchema, isNullable));
                 default:
                     return new XmlElementValueSerialization(xmlName, BuildXmlValueSerialization(schema, isNullable));
             }
@@ -156,7 +158,9 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
             return new XmlObjectSerialization(
                 objectSchema.Serialization?.Xml?.Name ?? objectSchema.Language.Default.Name,
-                schemaTypeReference, elements.ToArray(), attributes.ToArray(), embeddedArrays.ToArray());
+                schemaTypeReference, elements.ToArray(), attributes.ToArray(), embeddedArrays.ToArray(),
+                schemaTypeReference
+                );
         }
 
         private IEnumerable<JsonPropertySerialization> GetPropertySerializationsFromBag(PropertyBag propertyBag)

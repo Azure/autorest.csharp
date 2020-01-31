@@ -8,16 +8,16 @@ namespace AutoRest.CSharp.V3.Output.Models.Serialization.Json
 {
     internal class JsonObjectSerialization: JsonSerialization
     {
-        public JsonObjectSerialization(CSharpType? type, JsonPropertySerialization[] properties, JsonDynamicPropertiesSerialization? additionalProperties, CSharpType? initializeType)
+        public JsonObjectSerialization(CSharpType? type, JsonPropertySerialization[] properties, JsonDynamicPropertiesSerialization? additionalProperties, CSharpType? implementationType)
         {
             Type = type;
             Properties = properties;
             AdditionalProperties = additionalProperties;
-            InitializeType = initializeType;
+            ImplementationType = implementationType;
         }
 
         public override CSharpType? Type { get; }
-        public CSharpType? InitializeType { get; }
+        public CSharpType? ImplementationType { get; }
         public JsonPropertySerialization[] Properties { get; }
         public JsonDynamicPropertiesSerialization? AdditionalProperties { get; }
     }

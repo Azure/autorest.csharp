@@ -283,8 +283,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         {
             type = jsonSerialization switch
             {
-                JsonObjectSerialization objectSerialization => objectSerialization.InitializeType,
-                JsonArraySerialization arraySerialization => arraySerialization.InitializeType,
+                JsonObjectSerialization objectSerialization => objectSerialization.ImplementationType,
+                JsonArraySerialization arraySerialization => arraySerialization.ImplementationType,
                 _ => null
             };
 

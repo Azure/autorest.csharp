@@ -8,15 +8,15 @@ namespace AutoRest.CSharp.V3.Output.Models.Serialization.Json
 {
     internal class JsonArraySerialization: JsonSerialization
     {
-        public JsonArraySerialization(CSharpType type, JsonSerialization valueSerialization, CSharpType? initializeType)
+        public JsonArraySerialization(CSharpType type, JsonSerialization valueSerialization, CSharpType? implementationType)
         {
             Type = type;
             ValueSerialization = valueSerialization;
-            InitializeType = initializeType;
+            ImplementationType = implementationType;
         }
 
         public override CSharpType Type { get; }
-        public CSharpType? InitializeType { get; }
+        public CSharpType? ImplementationType { get; }
         public JsonSerialization ValueSerialization { get; }
     }
 }

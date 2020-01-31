@@ -133,7 +133,7 @@ namespace xml_service.Models
                 value2 = BlobProperties.DeserializeBlobProperties(properties);
             }
             result.Properties = value2;
-            System.Collections.Generic.Dictionary<string, string> value3 = default;
+            System.Collections.Generic.IDictionary<string, string> value3 = default;
             var metadata = element.Element("Metadata");
             if (metadata != null)
             {

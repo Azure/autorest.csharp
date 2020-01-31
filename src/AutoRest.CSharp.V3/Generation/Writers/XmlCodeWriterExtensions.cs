@@ -220,7 +220,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 {
                     string childElementVariable = writer.GetTemporaryVariable("e");
 
-                    writer.Line($"{destination} = new {serialization.Type}();");
+                    writer.Line($"{destination} = new {arraySerialization.ImplementationType}();");
 
                     using (writer.Scope($"foreach (var {childElementVariable:D} in {element}.Elements({arraySerialization.ValueSerialization.Name:L}))"))
                     {
@@ -238,7 +238,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 }
                 case XmlDictionarySerialization dictionarySerialization:
                 {
-                    writer.Append($"{destination} = new {dictionarySerialization.Type}();");
+                    writer.Append($"{destination} = new {dictionarySerialization.ImplementationType}();");
 
                     string elementsVariable = writer.GetTemporaryVariable("elements");
                     string elementVariable = writer.GetTemporaryVariable("e");
