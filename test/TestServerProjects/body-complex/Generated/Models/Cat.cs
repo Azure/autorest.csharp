@@ -7,11 +7,10 @@ using System.Collections.Generic;
 
 namespace body_complex.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The cat. </summary>
     public partial class Cat : Pet
     {
         public string Color { get; set; }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA. </summary>
         public ICollection<Dog> Hates { get; set; }
     }
 }

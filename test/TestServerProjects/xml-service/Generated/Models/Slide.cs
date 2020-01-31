@@ -12,7 +12,6 @@ namespace xml_service.Models
     {
         public string Type { get; set; }
         public string Title { get; set; }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA. </summary>
         public ICollection<string> Items { get; set; }
     }
 }

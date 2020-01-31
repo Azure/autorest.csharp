@@ -5,7 +5,7 @@
 
 namespace CognitiveServices.TextAnalytics.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The Entity. </summary>
     public partial class Entity
     {
         /// <summary> Entity text as appears in the request. </summary>

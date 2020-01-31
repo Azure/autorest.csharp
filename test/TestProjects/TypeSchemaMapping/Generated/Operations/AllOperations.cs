@@ -46,7 +46,6 @@ namespace TypeSchemaMapping
             request.Content = content;
             return message;
         }
-        /// <summary> MISSING·OPERATION-DESCRIPTION. </summary>
         /// <param name="body"> The Model to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<CustomizedModel>> OperationAsync(CustomizedModel body, CancellationToken cancellationToken = default)
@@ -76,7 +75,6 @@ namespace TypeSchemaMapping
                 throw;
             }
         }
-        /// <summary> MISSING·OPERATION-DESCRIPTION. </summary>
         /// <param name="body"> The Model to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<CustomizedModel> Operation(CustomizedModel body, CancellationToken cancellationToken = default)

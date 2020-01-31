@@ -47,9 +47,8 @@ namespace ExtensionClientName
             request.Content = content;
             return message;
         }
-        /// <summary> MISSING·OPERATION-DESCRIPTION. </summary>
-        /// <param name="renamedPathParameter"> MISSING·PARAMETER-DESCRIPTION. </param>
-        /// <param name="renamedQueryParameter"> MISSING·PARAMETER-DESCRIPTION. </param>
+        /// <param name="renamedPathParameter"> The string to use. </param>
+        /// <param name="renamedQueryParameter"> The string to use. </param>
         /// <param name="renamedBodyParameter"> The OriginalSchema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<OriginalSchema, OriginalOperationHeaders>> OriginalOperationAsync(string renamedPathParameter, string renamedQueryParameter, OriginalSchema renamedBodyParameter, CancellationToken cancellationToken = default)
@@ -92,9 +91,8 @@ namespace ExtensionClientName
                 throw;
             }
         }
-        /// <summary> MISSING·OPERATION-DESCRIPTION. </summary>
-        /// <param name="renamedPathParameter"> MISSING·PARAMETER-DESCRIPTION. </param>
-        /// <param name="renamedQueryParameter"> MISSING·PARAMETER-DESCRIPTION. </param>
+        /// <param name="renamedPathParameter"> The string to use. </param>
+        /// <param name="renamedQueryParameter"> The string to use. </param>
         /// <param name="renamedBodyParameter"> The OriginalSchema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<OriginalSchema, OriginalOperationHeaders> OriginalOperation(string renamedPathParameter, string renamedQueryParameter, OriginalSchema renamedBodyParameter, CancellationToken cancellationToken = default)

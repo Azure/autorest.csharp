@@ -11,7 +11,6 @@ namespace xml_service.Models
     public partial class Blob
     {
         public string Name { get; set; }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-BOOLEAN. </summary>
         public bool Deleted { get; set; }
         public string Snapshot { get; set; }
         /// <summary> Properties of a blob. </summary>

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The Error. </summary>
     public partial class Error
     {
         /// <summary> Error code. </summary>
@@ -16,7 +16,6 @@ namespace CognitiveServices.TextAnalytics.Models
         public string Message { get; set; }
         /// <summary> Error target. </summary>
         public string Target { get; set; }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
         public InnerError Innererror { get; set; }
         /// <summary> Details about specific errors that led to this reported error. </summary>
         public ICollection<Error> Details { get; set; }

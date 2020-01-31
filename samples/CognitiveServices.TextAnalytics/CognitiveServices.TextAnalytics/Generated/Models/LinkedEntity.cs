@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The LinkedEntity. </summary>
     public partial class LinkedEntity
     {
         /// <summary> Entity Linking formal name. </summary>

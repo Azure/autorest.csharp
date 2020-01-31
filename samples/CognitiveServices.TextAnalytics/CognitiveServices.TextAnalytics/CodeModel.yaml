@@ -102,7 +102,7 @@ schemas: !<!Schemas>
         namespace: ApiV30Preview1
     protocol: !<!Protocols> {}
   - *ref_0
-  - !<!ObjectSchema> &ref_99
+  - !<!ObjectSchema> &ref_102
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -262,7 +262,7 @@ schemas: !<!Schemas>
                 language: !<!Languages> 
                   default:
                     name: Entity
-                    description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+                    description: ''
                     namespace: ApiV30Preview1
                 protocol: !<!Protocols> {}
               language: !<!Languages> 
@@ -336,7 +336,7 @@ schemas: !<!Schemas>
           language: !<!Languages> 
             default:
               name: DocumentEntities
-              description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+              description: ''
               namespace: ApiV30Preview1
           protocol: !<!Protocols> {}
         language: !<!Languages> 
@@ -406,7 +406,7 @@ schemas: !<!Schemas>
           language: !<!Languages> 
             default:
               name: DocumentError
-              description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+              description: ''
               namespace: ApiV30Preview1
           protocol: !<!Protocols> {}
         language: !<!Languages> 
@@ -533,7 +533,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: EntitiesResult
-        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        description: ''
         namespace: ApiV30Preview1
     protocol: !<!Protocols> {}
   - *ref_1
@@ -556,25 +556,25 @@ schemas: !<!Schemas>
           language:
             default:
               name: invalidRequest
-              description: The value 'undefined'
+              description: ''
         - !<!ChoiceValue> 
           value: invalidArgument
           language:
             default:
               name: invalidArgument
-              description: The value 'undefined'
+              description: ''
         - !<!ChoiceValue> 
           value: internalServerError
           language:
             default:
               name: internalServerError
-              description: The value 'undefined'
+              description: ''
         - !<!ChoiceValue> 
           value: serviceUnavailable
           language:
             default:
               name: serviceUnavailable
-              description: The value 'undefined'
+              description: ''
         type: choice
         apiVersions:
         - !<!ApiVersion> 
@@ -652,55 +652,55 @@ schemas: !<!Schemas>
               language:
                 default:
                   name: invalidParameterValue
-                  description: The value 'undefined'
+                  description: ''
             - !<!ChoiceValue> 
               value: invalidRequestBodyFormat
               language:
                 default:
                   name: invalidRequestBodyFormat
-                  description: The value 'undefined'
+                  description: ''
             - !<!ChoiceValue> 
               value: emptyRequest
               language:
                 default:
                   name: emptyRequest
-                  description: The value 'undefined'
+                  description: ''
             - !<!ChoiceValue> 
               value: missingInputRecords
               language:
                 default:
                   name: missingInputRecords
-                  description: The value 'undefined'
+                  description: ''
             - !<!ChoiceValue> 
               value: invalidDocument
               language:
                 default:
                   name: invalidDocument
-                  description: The value 'undefined'
+                  description: ''
             - !<!ChoiceValue> 
               value: modelVersionIncorrect
               language:
                 default:
                   name: modelVersionIncorrect
-                  description: The value 'undefined'
+                  description: ''
             - !<!ChoiceValue> 
               value: invalidDocumentBatch
               language:
                 default:
                   name: invalidDocumentBatch
-                  description: The value 'undefined'
+                  description: ''
             - !<!ChoiceValue> 
               value: unsupportedLanguageCode
               language:
                 default:
                   name: unsupportedLanguageCode
-                  description: The value 'undefined'
+                  description: ''
             - !<!ChoiceValue> 
               value: invalidCountryHint
               language:
                 default:
                   name: invalidCountryHint
-                  description: The value 'undefined'
+                  description: ''
             type: choice
             apiVersions:
             - !<!ApiVersion> 
@@ -764,13 +764,13 @@ schemas: !<!Schemas>
           language: !<!Languages> 
             default:
               name: innererror
-              description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+              description: ''
               originalName: innererror
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
             name: InnerError
-            description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+            description: ''
             namespace: ApiV30Preview1
         protocol: !<!Protocols> {}
       required: false
@@ -778,7 +778,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: innererror
-          description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+          description: ''
           originalName: innererror
       protocol: !<!Protocols> {}
     - !<!Property> 
@@ -804,11 +804,11 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: Error
-        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        description: ''
         namespace: ApiV30Preview1
     protocol: !<!Protocols> {}
   - *ref_8
-  - !<!ObjectSchema> &ref_100
+  - !<!ObjectSchema> &ref_109
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -961,7 +961,7 @@ schemas: !<!Schemas>
                       language: !<!Languages> 
                         default:
                           name: Match
-                          description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+                          description: ''
                           namespace: ApiV30Preview1
                       protocol: !<!Protocols> {}
                     language: !<!Languages> 
@@ -1056,7 +1056,7 @@ schemas: !<!Schemas>
                 language: !<!Languages> 
                   default:
                     name: LinkedEntity
-                    description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+                    description: ''
                     namespace: ApiV30Preview1
                 protocol: !<!Protocols> {}
               language: !<!Languages> 
@@ -1085,7 +1085,7 @@ schemas: !<!Schemas>
           language: !<!Languages> 
             default:
               name: DocumentLinkedEntities
-              description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+              description: ''
               namespace: ApiV30Preview1
           protocol: !<!Protocols> {}
         language: !<!Languages> 
@@ -1153,13 +1153,13 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: EntityLinkingResult
-        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        description: ''
         namespace: ApiV30Preview1
     protocol: !<!Protocols> {}
   - *ref_10
   - *ref_11
   - *ref_12
-  - !<!ObjectSchema> &ref_101
+  - !<!ObjectSchema> &ref_113
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -1238,7 +1238,7 @@ schemas: !<!Schemas>
           language: !<!Languages> 
             default:
               name: DocumentKeyPhrases
-              description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+              description: ''
               namespace: ApiV30Preview1
           protocol: !<!Protocols> {}
         language: !<!Languages> 
@@ -1306,11 +1306,11 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: KeyPhraseResult
-        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        description: ''
         namespace: ApiV30Preview1
     protocol: !<!Protocols> {}
   - *ref_13
-  - !<!ObjectSchema> &ref_102
+  - !<!ObjectSchema> &ref_114
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -1388,30 +1388,30 @@ schemas: !<!Schemas>
           language: !<!Languages> 
             default:
               name: LanguageInput
-              description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+              description: ''
               namespace: ApiV30Preview1
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
             name: LanguageBatchInput-documents
-            description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+            description: ''
         protocol: !<!Protocols> {}
       required: true
       serializedName: documents
       language: !<!Languages> 
         default:
           name: documents
-          description: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+          description: ''
           originalName: documents
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
         name: LanguageBatchInput
-        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        description: ''
         namespace: ApiV30Preview1
     protocol: !<!Protocols> {}
   - *ref_14
-  - !<!ObjectSchema> &ref_103
+  - !<!ObjectSchema> &ref_118
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -1518,7 +1518,7 @@ schemas: !<!Schemas>
                 language: !<!Languages> 
                   default:
                     name: DetectedLanguage
-                    description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+                    description: ''
                     namespace: ApiV30Preview1
                 protocol: !<!Protocols> {}
               language: !<!Languages> 
@@ -1547,7 +1547,7 @@ schemas: !<!Schemas>
           language: !<!Languages> 
             default:
               name: DocumentLanguage
-              description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+              description: ''
               namespace: ApiV30Preview1
           protocol: !<!Protocols> {}
         language: !<!Languages> 
@@ -1615,12 +1615,12 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: LanguageResult
-        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        description: ''
         namespace: ApiV30Preview1
     protocol: !<!Protocols> {}
   - *ref_15
   - *ref_16
-  - !<!ObjectSchema> &ref_104
+  - !<!ObjectSchema> &ref_122
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -1665,25 +1665,25 @@ schemas: !<!Schemas>
                 language:
                   default:
                     name: positive
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: neutral
                 language:
                   default:
                     name: neutral
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: negative
                 language:
                   default:
                     name: negative
-                    description: The value 'undefined'
+                    description: ''
               - !<!ChoiceValue> 
                 value: mixed
                 language:
                   default:
                     name: mixed
-                    description: The value 'undefined'
+                    description: ''
               type: choice
               apiVersions:
               - !<!ApiVersion> 
@@ -1748,19 +1748,19 @@ schemas: !<!Schemas>
                       language:
                         default:
                           name: positive
-                          description: The value 'undefined'
+                          description: ''
                     - !<!ChoiceValue> 
                       value: neutral
                       language:
                         default:
                           name: neutral
-                          description: The value 'undefined'
+                          description: ''
                     - !<!ChoiceValue> 
                       value: negative
                       language:
                         default:
                           name: negative
-                          description: The value 'undefined'
+                          description: ''
                     type: choice
                     apiVersions:
                     - !<!ApiVersion> 
@@ -1861,7 +1861,7 @@ schemas: !<!Schemas>
                 language: !<!Languages> 
                   default:
                     name: SentenceSentiment
-                    description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+                    description: ''
                     namespace: ApiV30Preview1
                 protocol: !<!Protocols> {}
               language: !<!Languages> 
@@ -1880,7 +1880,7 @@ schemas: !<!Schemas>
           language: !<!Languages> 
             default:
               name: DocumentSentiment
-              description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+              description: ''
               namespace: ApiV30Preview1
           protocol: !<!Protocols> {}
         language: !<!Languages> 
@@ -1948,7 +1948,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: SentimentResponse
-        description: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+        description: ''
         namespace: ApiV30Preview1
     protocol: !<!Protocols> {}
   - *ref_17
@@ -2051,7 +2051,7 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: boolean
-        description: MISSING·SCHEMA-DESCRIPTION-BOOLEAN
+        description: ''
     protocol: !<!Protocols> {}
   numbers:
   - *ref_43
@@ -2187,7 +2187,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_95
-      - !<!Parameter> 
+      - !<!Parameter> &ref_99
         schema: *ref_96
         implementation: Method
         language: !<!Languages> 
@@ -2198,7 +2198,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
+      - !<!Parameter> &ref_100
         schema: *ref_97
         implementation: Method
         language: !<!Languages> 
@@ -2209,7 +2209,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
+      - !<!Parameter> &ref_101
         schema: *ref_98
         implementation: Method
         required: true
@@ -2223,6 +2223,10 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_99
+      - *ref_100
+      - *ref_101
       language: !<!Languages> 
         default:
           name: ''
@@ -2238,7 +2242,7 @@ operationGroups:
           uri: '{Endpoint}/text/analytics/v3.0-preview.1'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_99
+      schema: *ref_102
       language: !<!Languages> 
         default:
           name: ''
@@ -2282,7 +2286,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_95
-      - !<!Parameter> 
+      - !<!Parameter> &ref_103
         schema: *ref_96
         implementation: Method
         language: !<!Languages> 
@@ -2293,7 +2297,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
+      - !<!Parameter> &ref_104
         schema: *ref_97
         implementation: Method
         language: !<!Languages> 
@@ -2304,7 +2308,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
+      - !<!Parameter> &ref_105
         schema: *ref_98
         implementation: Method
         required: true
@@ -2318,6 +2322,10 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_103
+      - *ref_104
+      - *ref_105
       language: !<!Languages> 
         default:
           name: ''
@@ -2333,7 +2341,7 @@ operationGroups:
           uri: '{Endpoint}/text/analytics/v3.0-preview.1'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_99
+      schema: *ref_102
       language: !<!Languages> 
         default:
           name: ''
@@ -2377,7 +2385,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_95
-      - !<!Parameter> 
+      - !<!Parameter> &ref_106
         schema: *ref_96
         implementation: Method
         language: !<!Languages> 
@@ -2388,7 +2396,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
+      - !<!Parameter> &ref_107
         schema: *ref_97
         implementation: Method
         language: !<!Languages> 
@@ -2399,7 +2407,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
+      - !<!Parameter> &ref_108
         schema: *ref_98
         implementation: Method
         required: true
@@ -2413,6 +2421,10 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_106
+      - *ref_107
+      - *ref_108
       language: !<!Languages> 
         default:
           name: ''
@@ -2428,7 +2440,7 @@ operationGroups:
           uri: '{Endpoint}/text/analytics/v3.0-preview.1'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_100
+      schema: *ref_109
       language: !<!Languages> 
         default:
           name: ''
@@ -2471,7 +2483,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_95
-      - !<!Parameter> 
+      - !<!Parameter> &ref_110
         schema: *ref_96
         implementation: Method
         language: !<!Languages> 
@@ -2482,7 +2494,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
+      - !<!Parameter> &ref_111
         schema: *ref_97
         implementation: Method
         language: !<!Languages> 
@@ -2493,7 +2505,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
+      - !<!Parameter> &ref_112
         schema: *ref_98
         implementation: Method
         required: true
@@ -2507,6 +2519,10 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_110
+      - *ref_111
+      - *ref_112
       language: !<!Languages> 
         default:
           name: ''
@@ -2522,7 +2538,7 @@ operationGroups:
           uri: '{Endpoint}/text/analytics/v3.0-preview.1'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_101
+      schema: *ref_113
       language: !<!Languages> 
         default:
           name: ''
@@ -2564,7 +2580,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_95
-      - !<!Parameter> 
+      - !<!Parameter> &ref_115
         schema: *ref_96
         implementation: Method
         language: !<!Languages> 
@@ -2575,7 +2591,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
+      - !<!Parameter> &ref_116
         schema: *ref_97
         implementation: Method
         language: !<!Languages> 
@@ -2586,8 +2602,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
-        schema: *ref_102
+      - !<!Parameter> &ref_117
+        schema: *ref_114
         implementation: Method
         required: true
         extensions:
@@ -2600,6 +2616,10 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_115
+      - *ref_116
+      - *ref_117
       language: !<!Languages> 
         default:
           name: ''
@@ -2615,7 +2635,7 @@ operationGroups:
           uri: '{Endpoint}/text/analytics/v3.0-preview.1'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_103
+      schema: *ref_118
       language: !<!Languages> 
         default:
           name: ''
@@ -2659,7 +2679,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_95
-      - !<!Parameter> 
+      - !<!Parameter> &ref_119
         schema: *ref_96
         implementation: Method
         language: !<!Languages> 
@@ -2670,7 +2690,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
+      - !<!Parameter> &ref_120
         schema: *ref_97
         implementation: Method
         language: !<!Languages> 
@@ -2681,7 +2701,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> 
+      - !<!Parameter> &ref_121
         schema: *ref_98
         implementation: Method
         required: true
@@ -2695,6 +2715,10 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      signatureParameters:
+      - *ref_119
+      - *ref_120
+      - *ref_121
       language: !<!Languages> 
         default:
           name: ''
@@ -2710,7 +2734,7 @@ operationGroups:
           uri: '{Endpoint}/text/analytics/v3.0-preview.1'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_104
+      schema: *ref_122
       language: !<!Languages> 
         default:
           name: ''

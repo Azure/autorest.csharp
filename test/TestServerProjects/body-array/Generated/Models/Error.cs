@@ -5,10 +5,9 @@
 
 namespace body_array.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The Error. </summary>
     public partial class Error
     {
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-INTEGER. </summary>
         public int? Status { get; set; }
         public string Message { get; set; }
     }

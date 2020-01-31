@@ -31,6 +31,11 @@ namespace model_flattening.Models
             writer.WriteStringValue(Capacity);
             writer.WritePropertyName("max_product_image");
             writer.WriteStartObject();
+            if (GenericValue != null)
+            {
+                writer.WritePropertyName("generic_value");
+                writer.WriteStringValue(GenericValue);
+            }
             if (OdataValue != null)
             {
                 writer.WritePropertyName("@odata.value");
@@ -81,6 +86,15 @@ namespace model_flattening.Models
                         {
                             foreach (var property1 in property0.Value.EnumerateObject())
                             {
+                                if (property1.NameEquals("generic_value"))
+                                {
+                                    if (property1.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        continue;
+                                    }
+                                    result.GenericValue = property1.Value.GetString();
+                                    continue;
+                                }
                                 if (property1.NameEquals("@odata.value"))
                                 {
                                     if (property1.Value.ValueKind == JsonValueKind.Null)

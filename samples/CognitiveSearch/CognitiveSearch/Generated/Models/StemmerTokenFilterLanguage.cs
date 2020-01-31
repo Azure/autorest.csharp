@@ -8,113 +8,113 @@ namespace CognitiveSearch.Models
     /// <summary> The language to use for a stemmer token filter. </summary>
     public enum StemmerTokenFilterLanguage
     {
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> arabic. </summary>
         Arabic,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> armenian. </summary>
         Armenian,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> basque. </summary>
         Basque,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> brazilian. </summary>
         Brazilian,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> bulgarian. </summary>
         Bulgarian,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> catalan. </summary>
         Catalan,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> czech. </summary>
         Czech,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> danish. </summary>
         Danish,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> dutch. </summary>
         Dutch,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> dutchKp. </summary>
         DutchKp,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> english. </summary>
         English,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> lightEnglish. </summary>
         LightEnglish,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> minimalEnglish. </summary>
         MinimalEnglish,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> possessiveEnglish. </summary>
         PossessiveEnglish,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> porter2. </summary>
         Porter2,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> lovins. </summary>
         Lovins,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> finnish. </summary>
         Finnish,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> lightFinnish. </summary>
         LightFinnish,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> french. </summary>
         French,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> lightFrench. </summary>
         LightFrench,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> minimalFrench. </summary>
         MinimalFrench,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> galician. </summary>
         Galician,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> minimalGalician. </summary>
         MinimalGalician,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> german. </summary>
         German,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> german2. </summary>
         German2,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> lightGerman. </summary>
         LightGerman,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> minimalGerman. </summary>
         MinimalGerman,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> greek. </summary>
         Greek,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> hindi. </summary>
         Hindi,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> hungarian. </summary>
         Hungarian,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> lightHungarian. </summary>
         LightHungarian,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> indonesian. </summary>
         Indonesian,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> irish. </summary>
         Irish,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> italian. </summary>
         Italian,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> lightItalian. </summary>
         LightItalian,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> sorani. </summary>
         Sorani,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> latvian. </summary>
         Latvian,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> norwegian. </summary>
         Norwegian,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> lightNorwegian. </summary>
         LightNorwegian,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> minimalNorwegian. </summary>
         MinimalNorwegian,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> lightNynorsk. </summary>
         LightNynorsk,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> minimalNynorsk. </summary>
         MinimalNynorsk,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> portuguese. </summary>
         Portuguese,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> lightPortuguese. </summary>
         LightPortuguese,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> minimalPortuguese. </summary>
         MinimalPortuguese,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> portugueseRslp. </summary>
         PortugueseRslp,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> romanian. </summary>
         Romanian,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> russian. </summary>
         Russian,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> lightRussian. </summary>
         LightRussian,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> spanish. </summary>
         Spanish,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> lightSpanish. </summary>
         LightSpanish,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> swedish. </summary>
         Swedish,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> lightSwedish. </summary>
         LightSwedish,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> turkish. </summary>
         Turkish
     }
 }

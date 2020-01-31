@@ -5,18 +5,18 @@
 
 namespace xml_service.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-CHOICE. </summary>
+    /// <summary> The LeaseStateType. </summary>
     public enum LeaseStateType
     {
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> available. </summary>
         Available,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> leased. </summary>
         Leased,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> expired. </summary>
         Expired,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> breaking. </summary>
         Breaking,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> broken. </summary>
         Broken
     }
 }

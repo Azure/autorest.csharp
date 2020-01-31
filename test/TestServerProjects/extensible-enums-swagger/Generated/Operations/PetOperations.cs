@@ -43,7 +43,6 @@ namespace extensible_enums_swagger
             request.Uri = uri;
             return message;
         }
-        /// <summary> MISSING·OPERATION-DESCRIPTION. </summary>
         /// <param name="petId"> Pet id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Pet>> GetByPetIdAsync(string petId, CancellationToken cancellationToken = default)
@@ -77,7 +76,6 @@ namespace extensible_enums_swagger
                 throw;
             }
         }
-        /// <summary> MISSING·OPERATION-DESCRIPTION. </summary>
         /// <param name="petId"> Pet id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Pet> GetByPetId(string petId, CancellationToken cancellationToken = default)
@@ -126,7 +124,6 @@ namespace extensible_enums_swagger
             request.Content = content;
             return message;
         }
-        /// <summary> MISSING·OPERATION-DESCRIPTION. </summary>
         /// <param name="petParam"> The Pet to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Pet>> AddPetAsync(Pet petParam, CancellationToken cancellationToken = default)
@@ -156,7 +153,6 @@ namespace extensible_enums_swagger
                 throw;
             }
         }
-        /// <summary> MISSING·OPERATION-DESCRIPTION. </summary>
         /// <param name="petParam"> The Pet to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Pet> AddPet(Pet petParam, CancellationToken cancellationToken = default)

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace body_complex.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The dictionary-wrapper. </summary>
     public partial class DictionaryWrapper
     {
         /// <summary> Dictionary of &lt;components·schemas·dictionary_wrapper·properties·defaultprogram·additionalproperties&gt;. </summary>

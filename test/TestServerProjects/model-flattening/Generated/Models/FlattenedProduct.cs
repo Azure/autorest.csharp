@@ -10,7 +10,6 @@ namespace model_flattening.Models
     {
         public string PName { get; set; }
         public string TypePropertiesType { get; set; }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-CHOICE. </summary>
         public FlattenedProductPropertiesProvisioningStateValues? ProvisioningStateValues { get; internal set; }
         public string ProvisioningState { get; set; }
     }

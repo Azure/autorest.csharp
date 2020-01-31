@@ -5,7 +5,7 @@
 
 namespace body_string.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The RefColorConstant. </summary>
     public partial class RefColorConstant
     {
         /// <summary> Referenced Color Constant Description. </summary>

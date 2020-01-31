@@ -5,14 +5,14 @@
 
 namespace body_array.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-CHOICE. </summary>
+    /// <summary> The FooEnum. </summary>
     public enum FooEnum
     {
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> foo1. </summary>
         Foo1,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> foo2. </summary>
         Foo2,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> foo3. </summary>
         Foo3
     }
 }

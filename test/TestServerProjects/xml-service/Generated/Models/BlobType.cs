@@ -5,14 +5,14 @@
 
 namespace xml_service.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-CHOICE. </summary>
+    /// <summary> The BlobType. </summary>
     public enum BlobType
     {
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> BlockBlob. </summary>
         BlockBlob,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> PageBlob. </summary>
         PageBlob,
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> AppendBlob. </summary>
         AppendBlob
     }
 }

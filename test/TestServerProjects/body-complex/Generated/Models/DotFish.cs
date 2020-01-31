@@ -5,7 +5,7 @@
 
 namespace body_complex.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The DotFish. </summary>
     public partial class DotFish
     {
         /// <summary> Initializes a new instance of DotFish. </summary>

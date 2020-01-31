@@ -5,7 +5,7 @@
 
 namespace paging.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The OperationResult. </summary>
     public partial class OperationResult
     {
         /// <summary> The status of the request. </summary>

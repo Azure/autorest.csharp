@@ -5,7 +5,7 @@
 
 namespace body_complex.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The MyBaseType. </summary>
     public partial class MyBaseType
     {
         /// <summary> Initializes a new instance of MyBaseType. </summary>
@@ -13,7 +13,6 @@ namespace body_complex.Models
         {
             Kind = null;
         }
-        /// <summary> The constant value Kind1. </summary>
         public string Kind { get; internal set; } = "Kind1";
         public string PropB1 { get; set; }
         public string PropBH1 { get; set; }

@@ -5,7 +5,7 @@
 
 namespace body_complex.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The MyBaseHelperType. </summary>
     public partial class MyBaseHelperType
     {
         public string PropBH1 { get; set; }

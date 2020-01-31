@@ -8,7 +8,7 @@ using System.ComponentModel;
 
 namespace AppConfiguration.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-CHOICE. </summary>
+    /// <summary> The Enum0. </summary>
     public readonly partial struct Enum0 : IEquatable<Enum0>
     {
         private readonly string _value;
@@ -28,21 +28,21 @@ namespace AppConfiguration.Models
         private const string LockedValue = "locked";
         private const string EtagValue = "etag";
 
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> key. </summary>
         public static Enum0 Key { get; } = new Enum0(KeyValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> label. </summary>
         public static Enum0 Label { get; } = new Enum0(LabelValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> content_type. </summary>
         public static Enum0 ContentType { get; } = new Enum0(ContentTypeValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> value. </summary>
         public static Enum0 Value { get; } = new Enum0(ValueValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> last_modified. </summary>
         public static Enum0 LastModified { get; } = new Enum0(LastModifiedValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> tags. </summary>
         public static Enum0 Tags { get; } = new Enum0(TagsValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> locked. </summary>
         public static Enum0 Locked { get; } = new Enum0(LockedValue);
-        /// <summary> The value &apos;undefined&apos;. </summary>
+        /// <summary> etag. </summary>
         public static Enum0 Etag { get; } = new Enum0(EtagValue);
         /// <summary> Determines if two <see cref="Enum0"/> values are the same. </summary>
         public static bool operator ==(Enum0 left, Enum0 right) => left.Equals(right);

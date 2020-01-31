@@ -891,6 +891,55 @@ namespace AutoRest.CSharp.V3.Input
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
+    internal enum ImplementationLocation
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"Client")]
+        Client = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Context")]
+        Context = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Method")]
+        Method = 2,
+    }
+
+    /// <summary>a definition of an discrete input for an operation</summary>
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
+    internal partial class RequestParameter : Value
+    {
+        /// <summary>suggested implementation location for this parameter</summary>
+        [YamlDotNet.Serialization.YamlMember(Alias = "implementation")]
+        public ImplementationLocation? Implementation { get; set; }
+
+        /// <summary>When a parameter is flattened, it will be left in the list, but marked hidden (so, don't generate those!)</summary>
+        [YamlDotNet.Serialization.YamlMember(Alias = "flattened")]
+        public bool? Flattened { get; set; }
+
+        /// <summary>When a parameter is grouped into another, this will tell where the parameter got grouped into.</summary>
+        [YamlDotNet.Serialization.YamlMember(Alias = "groupedBy")]
+        public RequestParameter? GroupedBy { get; set; }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
+    internal partial class VirtualParameter : RequestParameter
+    {
+        /// <summary>the original body parameter that this parameter is in effect replacing</summary>
+        [YamlDotNet.Serialization.YamlMember(Alias = "originalParameter")]
+        [System.ComponentModel.DataAnnotations.Required]
+        public RequestParameter OriginalParameter { get; set; } = new RequestParameter();
+
+        /// <summary>if this parameter is for a nested property, this is the path of properties it takes to get there</summary>
+        [YamlDotNet.Serialization.YamlMember(Alias = "pathToProperty")]
+        [System.ComponentModel.DataAnnotations.Required]
+        public System.Collections.Generic.ICollection<Property> PathToProperty { get; set; } = new System.Collections.ObjectModel.Collection<Property>();
+
+        /// <summary>the target property this virtual parameter represents</summary>
+        [YamlDotNet.Serialization.YamlMember(Alias = "targetProperty")]
+        [System.ComponentModel.DataAnnotations.Required]
+        public Property TargetProperty { get; set; } = new Property();
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
     internal partial class Relations
     {
         [YamlDotNet.Serialization.YamlMember(Alias = "immediate")]
@@ -919,10 +968,18 @@ namespace AutoRest.CSharp.V3.Input
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
+    internal partial class GroupProperty : Property
+    {
+        [YamlDotNet.Serialization.YamlMember(Alias = "originalParameter")]
+        [System.ComponentModel.DataAnnotations.Required]
+        public System.Collections.Generic.ICollection<RequestParameter> OriginalParameter { get; set; } = new System.Collections.ObjectModel.Collection<RequestParameter>();
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
     internal partial class GroupSchema : Schema
     {
         [YamlDotNet.Serialization.YamlMember(Alias = "properties")]
-        public System.Collections.Generic.ICollection<Property>? Properties { get; set; }
+        public System.Collections.Generic.ICollection<GroupProperty>? Properties { get; set; }
     }
 
     /// <summary>a schema that represents a type with child properties.</summary>
@@ -1325,51 +1382,6 @@ namespace AutoRest.CSharp.V3.Input
         public DictionaryOfAny? Extensions { get; set; }
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
-    internal enum ImplementationLocation
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"Client")]
-        Client = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Context")]
-        Context = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"Method")]
-        Method = 2,
-    }
-
-    /// <summary>a definition of an discrete input for an operation</summary>
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
-    internal partial class RequestParameter : Value
-    {
-        /// <summary>suggested implementation location for this parameter</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "implementation")]
-        public ImplementationLocation? Implementation { get; set; }
-
-        /// <summary>When a parameter is flattened, it will be left in the list, but marked hidden (so, don't generate those!)</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "hidden")]
-        public bool? Hidden { get; set; }
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
-    internal partial class VirtualParameter : RequestParameter
-    {
-        /// <summary>the original body parameter that this parameter is in effect replacing</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "originalParameter")]
-        [System.ComponentModel.DataAnnotations.Required]
-        public RequestParameter OriginalParameter { get; set; } = new RequestParameter();
-
-        /// <summary>if this parameter is for a nested property, this is the path of properties it takes to get there</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "pathToProperty")]
-        [System.ComponentModel.DataAnnotations.Required]
-        public System.Collections.Generic.ICollection<Property> PathToProperty { get; set; } = new System.Collections.ObjectModel.Collection<Property>();
-
-        /// <summary>the target property this virtual parameter represents</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "targetProperty")]
-        [System.ComponentModel.DataAnnotations.Required]
-        public Property TargetProperty { get; set; } = new Property();
-    }
-
     /// <summary>a response from a service.</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
     internal partial class ServiceResponse : Metadata
@@ -1453,6 +1465,10 @@ namespace AutoRest.CSharp.V3.Input
         /// <summary>the parameter inputs to the operation</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "parameters")]
         public System.Collections.Generic.ICollection<RequestParameter>? Parameters { get; set; }
+
+        /// <summary>a filtered list of parameters that is (assumably) the actual method signature parameters</summary>
+        [YamlDotNet.Serialization.YamlMember(Alias = "signatureParameters")]
+        public System.Collections.Generic.ICollection<RequestParameter>? SignatureParameters { get; set; }
     }
 
     /// <summary>an operation group represents a container around set of operations</summary>

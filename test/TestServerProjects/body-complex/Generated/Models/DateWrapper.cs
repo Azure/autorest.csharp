@@ -7,12 +7,10 @@ using System;
 
 namespace body_complex.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The date-wrapper. </summary>
     public partial class DateWrapper
     {
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-DATE. </summary>
         public DateTimeOffset? Field { get; set; }
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-DATE. </summary>
         public DateTimeOffset? Leap { get; set; }
     }
 }

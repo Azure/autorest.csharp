@@ -8,7 +8,7 @@ using System.ComponentModel;
 
 namespace extensible_enums_swagger.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-CHOICE. </summary>
+    /// <summary> The IntEnum. </summary>
     public readonly partial struct IntEnum : IEquatable<IntEnum>
     {
         private readonly string _value;

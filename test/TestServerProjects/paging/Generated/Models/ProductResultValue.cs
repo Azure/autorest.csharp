@@ -7,10 +7,9 @@ using System.Collections.Generic;
 
 namespace paging.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The ProductResultValue. </summary>
     public partial class ProductResultValue
     {
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA. </summary>
         public ICollection<Product> Value { get; set; }
         public string NextLink { get; set; }
     }

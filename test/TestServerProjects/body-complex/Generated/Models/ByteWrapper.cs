@@ -7,10 +7,9 @@ using System;
 
 namespace body_complex.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The byte-wrapper. </summary>
     public partial class ByteWrapper
     {
-        /// <summary> MISSING·SCHEMA-DESCRIPTION-BYTEARRAY. </summary>
         public byte[] Field { get; set; }
     }
 }

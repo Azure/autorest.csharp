@@ -7,7 +7,7 @@ using System;
 
 namespace CognitiveSearch.Models
 {
-    /// <summary> MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA. </summary>
+    /// <summary> The IndexerLimits. </summary>
     public partial class IndexerLimits
     {
         /// <summary> The maximum duration that the indexer is permitted to run for one execution. </summary>
