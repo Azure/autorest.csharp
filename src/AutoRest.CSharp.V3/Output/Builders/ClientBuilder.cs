@@ -211,12 +211,12 @@ namespace AutoRest.CSharp.V3.Output.Builders
             );
 
             ResponseBody? responseBody = null;
-            if (response is SchemaResponse schemaResponse)
+            if (response is SchemaResponse schemaResponse && httpResponse != null)
             {
                 Schema schema = schemaResponse.Schema is ConstantSchema constantSchema ? constantSchema.ValueType : schemaResponse.Schema;
                 TypeReference responseType = BuilderHelpers.CreateType(schema, isNullable: false);
 
-                ObjectSerialization serialization = SerializationBuilder.Build(httpResponse?.KnownMediaType, schema, isNullable: false);
+                ObjectSerialization serialization = SerializationBuilder.Build(httpResponse.KnownMediaType, schema, isNullable: false);
 
                 responseBody = new ObjectResponseBody(responseType, serialization);
             }

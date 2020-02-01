@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             }
         }
 
-        public static ObjectSerialization Build(KnownMediaType? mediaType, Schema schema, bool isNullable)
+        public static ObjectSerialization Build(KnownMediaType mediaType, Schema schema, bool isNullable)
         {
             switch (mediaType)
             {
