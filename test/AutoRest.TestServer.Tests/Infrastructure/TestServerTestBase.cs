@@ -73,7 +73,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
         private Task TestStatus(string scenario, Func<string, HttpPipeline, Task<Response>> test, bool ignoreScenario = false) => Test(scenario, async (host, pipeline) =>
         {
             var response = await test(host, pipeline);
-            Assert.That(response.Status, Is.EqualTo(200).Or.EqualTo(201), "Unexpected response " + response.ReasonPhrase);
+            Assert.That(response.Status, Is.EqualTo(200).Or.EqualTo(201).Or.EqualTo(202).Or.EqualTo(204), "Unexpected response " + response.ReasonPhrase);
         }, ignoreScenario);
 
         public Task Test(Action<string, HttpPipeline> test, bool ignoreScenario = false)

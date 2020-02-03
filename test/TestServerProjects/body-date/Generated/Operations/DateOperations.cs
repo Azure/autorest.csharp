@@ -34,7 +34,7 @@ namespace body_date
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethodAdditional.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/date/null", false);
@@ -101,7 +101,7 @@ namespace body_date
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethodAdditional.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/date/invaliddate", false);
@@ -168,7 +168,7 @@ namespace body_date
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethodAdditional.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/date/overflowdate", false);
@@ -235,7 +235,7 @@ namespace body_date
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethodAdditional.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/date/underflowdate", false);
@@ -302,7 +302,7 @@ namespace body_date
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Put;
+            request.Method = RequestMethodAdditional.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/date/max", false);
@@ -369,7 +369,7 @@ namespace body_date
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethodAdditional.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/date/max", false);
@@ -436,7 +436,7 @@ namespace body_date
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Put;
+            request.Method = RequestMethodAdditional.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/date/min", false);
@@ -503,7 +503,7 @@ namespace body_date
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethodAdditional.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/date/min", false);

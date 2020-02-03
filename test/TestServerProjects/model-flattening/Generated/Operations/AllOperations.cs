@@ -36,7 +36,7 @@ namespace model_flattening
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Put;
+            request.Method = RequestMethodAdditional.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/model-flatten/array", false);
@@ -108,7 +108,7 @@ namespace model_flattening
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethodAdditional.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/model-flatten/array", false);
@@ -183,7 +183,7 @@ namespace model_flattening
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Put;
+            request.Method = RequestMethodAdditional.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/model-flatten/wrappedarray", false);
@@ -255,7 +255,7 @@ namespace model_flattening
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethodAdditional.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/model-flatten/wrappedarray", false);
@@ -330,7 +330,7 @@ namespace model_flattening
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Put;
+            request.Method = RequestMethodAdditional.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/model-flatten/dictionary", false);
@@ -403,7 +403,7 @@ namespace model_flattening
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethodAdditional.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/model-flatten/dictionary", false);
@@ -478,7 +478,7 @@ namespace model_flattening
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Put;
+            request.Method = RequestMethodAdditional.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/model-flatten/resourcecollection", false);
@@ -545,7 +545,7 @@ namespace model_flattening
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethodAdditional.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/model-flatten/resourcecollection", false);
@@ -612,7 +612,7 @@ namespace model_flattening
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Put;
+            request.Method = RequestMethodAdditional.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/model-flatten/customFlattening", false);
@@ -687,7 +687,7 @@ namespace model_flattening
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Post;
+            request.Method = RequestMethodAdditional.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/model-flatten/customFlattening", false);
@@ -762,7 +762,7 @@ namespace model_flattening
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Put;
+            request.Method = RequestMethodAdditional.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/model-flatten/customFlattening/parametergrouping/", false);

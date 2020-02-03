@@ -35,7 +35,7 @@ namespace additionalProperties
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Put;
+            request.Method = RequestMethodAdditional.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/additionalProperties/true", false);
@@ -118,7 +118,7 @@ namespace additionalProperties
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Put;
+            request.Method = RequestMethodAdditional.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/additionalProperties/true-subclass", false);
@@ -201,7 +201,7 @@ namespace additionalProperties
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Put;
+            request.Method = RequestMethodAdditional.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/additionalProperties/type/object", false);
@@ -284,7 +284,7 @@ namespace additionalProperties
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Put;
+            request.Method = RequestMethodAdditional.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/additionalProperties/type/string", false);
@@ -367,7 +367,7 @@ namespace additionalProperties
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Put;
+            request.Method = RequestMethodAdditional.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/additionalProperties/in/properties", false);
@@ -450,7 +450,7 @@ namespace additionalProperties
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Put;
+            request.Method = RequestMethodAdditional.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/additionalProperties/in/properties/with/additionalProperties/string", false);

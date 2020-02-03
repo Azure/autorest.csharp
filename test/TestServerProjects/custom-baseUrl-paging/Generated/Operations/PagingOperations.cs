@@ -35,7 +35,7 @@ namespace custom_baseUrl_paging
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethodAdditional.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw("http://", false);
             uri.AppendRaw(accountName, false);
@@ -116,7 +116,7 @@ namespace custom_baseUrl_paging
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethodAdditional.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw("http://", false);
             uri.AppendRaw(accountName, false);
@@ -197,7 +197,7 @@ namespace custom_baseUrl_paging
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethodAdditional.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw("http://", false);
             uri.AppendRaw(accountName, false);
@@ -289,7 +289,7 @@ namespace custom_baseUrl_paging
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethodAdditional.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(nextLink, false);
             request.Uri = uri;

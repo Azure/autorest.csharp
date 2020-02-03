@@ -33,7 +33,7 @@ namespace custom_baseUrl
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethodAdditional.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw("http://", false);
             uri.AppendRaw(accountName, false);

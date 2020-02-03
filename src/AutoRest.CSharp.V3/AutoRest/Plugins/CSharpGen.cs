@@ -96,7 +96,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                         types.Add(bodyRequest.KnownMediaType);
                     }
 
-                    foreach (var response in operation.Responses!)
+                    foreach (var response in operation.Responses ?? Array.Empty<ServiceResponse>())
                     {
                         if (response is SchemaResponse _ &&
                             response.Protocol.Http is HttpResponse httpResponse)

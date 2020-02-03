@@ -130,7 +130,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.Line($"var message = pipeline.CreateMessage();");
                 writer.Line($"var request = message.Request;");
                 var method = operation.Request.HttpMethod;
-                writer.Line($"request.Method = {typeof(RequestMethod)}.{method.ToRequestMethodName()};");
+                writer.Line($"request.Method = {typeof(RequestMethodAdditional)}.{method.ToRequestMethodName()};");
 
                 //TODO: Add logic to escape the strings when specified, using Uri.EscapeDataString(value);
                 //TODO: Need proper logic to convert the values to strings. Right now, everything is just using default ToString().
@@ -170,7 +170,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     writer.ToSerializeCall(
                         jsonSerialization,
                         _typeFactory,
-                        WriteConstantOrParameter(value),
+                        WriteConstantOrParameter(value, ignoreNullability: true),
                         writerName: w => w.Append($"content.{nameof(Utf8JsonRequestContent.JsonWriter)}"));
 
                     writer.Line($"request.Content = content;");
@@ -184,7 +184,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     writer.ToSerializeCall(
                         xmlSerialization,
                         _typeFactory,
-                        WriteConstantOrParameter(value),
+                        WriteConstantOrParameter(value, ignoreNullability: true),
                         writerName: w => w.Append($"content.{nameof(XmlWriterContent.XmlWriter)}"));
 
                     writer.Line($"request.Content = content;");
@@ -340,7 +340,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
         }
 
-        private CodeWriterDelegate WriteConstantOrParameter(ParameterOrConstant constantOrParameter) => writer =>
+        private CodeWriterDelegate WriteConstantOrParameter(ParameterOrConstant constantOrParameter, bool ignoreNullability = false) => writer =>
         {
             if (constantOrParameter.IsConstant)
             {
@@ -348,8 +348,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
             else
             {
-                writer.AppendRaw(constantOrParameter.Parameter.Name)
-                    .AppendNullableValue(_typeFactory.CreateType(constantOrParameter.Type));
+                writer.AppendRaw(constantOrParameter.Parameter.Name);
+                if (!ignoreNullability)
+                {
+                    writer.AppendNullableValue(_typeFactory.CreateType(constantOrParameter.Type));
+                }
             }
         };
 
@@ -562,6 +565,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                             break;
                         case { }:
                             writer.Append($"return {typeof(Response)}.FromValue({valueVariable}, message.Response);");
+                            break;
+                        case null when !statusCodes.Any():
                             break;
                         case null:
                             writer.Append($"return message.Response;");
