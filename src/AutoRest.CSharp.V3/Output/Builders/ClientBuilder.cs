@@ -287,11 +287,16 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
         private Paging GetClientMethodPaging(Method method, Method nextPageMethod, IDictionary<object, object> pageable, ObjectType type)
         {
-            var nextLinkName = pageable.GetValue<string>("nextLinkName") ?? "nextLink";
+            var nextLinkName = pageable.GetValue<string>("nextLinkName");
             var itemName = pageable.GetValue<string>("itemName") ?? "value";
 
             var itemProperty = type.Properties.Single(p => p.SchemaProperty.SerializedName == itemName);
-            var nextLinkProperty = type.Properties.FirstOrDefault(p => p.SchemaProperty.SerializedName == nextLinkName);
+
+            ObjectTypeProperty? nextLinkProperty = null;
+            if (nextLinkName != null)
+            {
+                nextLinkProperty = type.Properties.Single(p => p.SchemaProperty.SerializedName == nextLinkName);
+            }
 
             if (itemProperty.SchemaProperty.Schema is ArraySchema arraySchema)
             {
