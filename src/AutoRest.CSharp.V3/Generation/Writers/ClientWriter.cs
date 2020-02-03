@@ -336,7 +336,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     writer.Line($"cancellationToken){configureAwaitText};");
                     writer.Line($"return {typeof(Page)}.FromValues(response.Value.{pagingMethod.ItemName}, {continuationTokenText}, response.GetRawResponse());");
                 }
-                writer.Line($"return {typeof(PageResponseEnumerator)}.Create{(async ? "Async" : string.Empty)}Enumerable(FirstPageFunc, NextPageFunc);");
+                writer.Line($"return {typeof(PageableHelpers)}.Create{(async ? "Async" : string.Empty)}Enumerable(FirstPageFunc, NextPageFunc);");
             }
         }
 

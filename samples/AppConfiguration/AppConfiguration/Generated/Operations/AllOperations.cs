@@ -1849,7 +1849,7 @@ namespace AppConfiguration
                 var response = await GetKeysNextPageAsync(acceptDatetime, nextLink, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
-            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
         /// <summary> Gets a list of keys. </summary>
         /// <param name="name"> A filter for the name of the returned keys. </param>
@@ -1869,7 +1869,7 @@ namespace AppConfiguration
                 var response = GetKeysNextPage(acceptDatetime, nextLink, cancellationToken);
                 return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
-            return PageResponseEnumerator.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
         /// <summary> Gets a list of key-values. </summary>
         /// <param name="key"> A filter used to match keys. </param>
@@ -1891,7 +1891,7 @@ namespace AppConfiguration
                 var response = await GetKeyValuesNextPageAsync(acceptDatetime, nextLink, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
-            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
         /// <summary> Gets a list of key-values. </summary>
         /// <param name="key"> A filter used to match keys. </param>
@@ -1913,7 +1913,7 @@ namespace AppConfiguration
                 var response = GetKeyValuesNextPage(acceptDatetime, nextLink, cancellationToken);
                 return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
-            return PageResponseEnumerator.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
         /// <summary> Gets a list of labels. </summary>
         /// <param name="name"> A filter for the name of the returned keys. </param>
@@ -1934,7 +1934,7 @@ namespace AppConfiguration
                 var response = await GetLabelsNextPageAsync(acceptDatetime, nextLink, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
-            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
         /// <summary> Gets a list of labels. </summary>
         /// <param name="name"> A filter for the name of the returned keys. </param>
@@ -1955,7 +1955,7 @@ namespace AppConfiguration
                 var response = GetLabelsNextPage(acceptDatetime, nextLink, cancellationToken);
                 return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
-            return PageResponseEnumerator.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
         /// <summary> Gets a list of key-value revisions. </summary>
         /// <param name="key"> A filter used to match keys. </param>
@@ -1977,7 +1977,7 @@ namespace AppConfiguration
                 var response = await GetRevisionsNextPageAsync(acceptDatetime, nextLink, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
-            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
         /// <summary> Gets a list of key-value revisions. </summary>
         /// <param name="key"> A filter used to match keys. </param>
@@ -1999,7 +1999,7 @@ namespace AppConfiguration
                 var response = GetRevisionsNextPage(acceptDatetime, nextLink, cancellationToken);
                 return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
-            return PageResponseEnumerator.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
     }
 }
