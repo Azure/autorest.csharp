@@ -620,7 +620,7 @@ schemas: !<!Schemas>
           serializedName: '@odata.value'
           language: !<!Languages> 
             default:
-              name: OdataValue
+              name: odataValue
               description: URL value.
               originalName: '@odata.value'
           protocol: !<!Protocols> {}
@@ -726,7 +726,7 @@ schemas: !<!Schemas>
       serializedName: '@odata.value'
       language: !<!Languages> 
         default:
-          name: OdataValue
+          name: odataValue
           description: URL value.
           originalName: '@odata.value'
       protocol: !<!Protocols> {}
@@ -761,7 +761,7 @@ schemas: !<!Schemas>
           serializedName: '@odata.value'
           language: !<!Languages> 
             default:
-              name: OdataValue
+              name: odataValue
               description: URL value.
               originalName: '@odata.value'
           protocol: !<!Protocols> {}

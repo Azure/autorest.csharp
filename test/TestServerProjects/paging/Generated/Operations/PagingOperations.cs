@@ -35,7 +35,7 @@ namespace paging
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethodAdditional.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/paging/noitemname", false);
@@ -102,7 +102,7 @@ namespace paging
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethodAdditional.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/paging/nullnextlink", false);
@@ -169,7 +169,7 @@ namespace paging
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethodAdditional.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/paging/single", false);
@@ -236,7 +236,7 @@ namespace paging
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethodAdditional.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/paging/multiple", false);
@@ -323,7 +323,7 @@ namespace paging
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethodAdditional.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/paging/multiple/odata", false);
@@ -410,7 +410,7 @@ namespace paging
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethodAdditional.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/paging/multiple/withpath/", false);
@@ -500,7 +500,7 @@ namespace paging
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethodAdditional.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/paging/multiple/retryfirst", false);
@@ -567,7 +567,7 @@ namespace paging
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethodAdditional.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/paging/multiple/retrysecond", false);
@@ -634,7 +634,7 @@ namespace paging
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethodAdditional.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/paging/single/failure", false);
@@ -701,7 +701,7 @@ namespace paging
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethodAdditional.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/paging/multiple/failure", false);
@@ -768,7 +768,7 @@ namespace paging
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethodAdditional.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/paging/multiple/failureuri", false);
@@ -835,7 +835,7 @@ namespace paging
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethodAdditional.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/paging/multiple/fragment/", false);
@@ -926,7 +926,7 @@ namespace paging
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethodAdditional.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/paging/multiple/fragmentwithgrouping/", false);
@@ -1017,7 +1017,7 @@ namespace paging
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Post;
+            request.Method = RequestMethodAdditional.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/paging/multiple/lro", false);
@@ -1104,7 +1104,7 @@ namespace paging
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethodAdditional.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/paging/multiple/fragment/", false);
@@ -1207,7 +1207,7 @@ namespace paging
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethodAdditional.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/paging/multiple/fragmentwithgrouping/", false);
@@ -1310,7 +1310,7 @@ namespace paging
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethodAdditional.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(nextLink, false);
             request.Uri = uri;
@@ -1388,7 +1388,7 @@ namespace paging
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethodAdditional.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(nextLink, false);
             request.Uri = uri;
@@ -1466,7 +1466,7 @@ namespace paging
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethodAdditional.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(nextLink, false);
             request.Uri = uri;
@@ -1544,7 +1544,7 @@ namespace paging
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethodAdditional.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(nextLink, false);
             request.Uri = uri;
@@ -1640,7 +1640,7 @@ namespace paging
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethodAdditional.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(nextLink, false);
             request.Uri = uri;
@@ -1736,7 +1736,7 @@ namespace paging
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethodAdditional.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(nextLink, false);
             request.Uri = uri;
@@ -1832,7 +1832,7 @@ namespace paging
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethodAdditional.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(nextLink, false);
             request.Uri = uri;
@@ -1910,7 +1910,7 @@ namespace paging
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethodAdditional.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(nextLink, false);
             request.Uri = uri;
@@ -1988,7 +1988,7 @@ namespace paging
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethodAdditional.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(nextLink, false);
             request.Uri = uri;
@@ -2066,7 +2066,7 @@ namespace paging
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethodAdditional.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(nextLink, false);
             request.Uri = uri;
@@ -2144,7 +2144,7 @@ namespace paging
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethodAdditional.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(nextLink, false);
             request.Uri = uri;
@@ -2222,7 +2222,7 @@ namespace paging
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Post;
+            request.Method = RequestMethodAdditional.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(nextLink, false);
             request.Uri = uri;
@@ -2328,7 +2328,7 @@ namespace paging
                 var response = await GetNoItemNamePagesNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
             }
-            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
         /// <summary> A paging operation that must return result of the default &apos;value&apos; node. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2344,7 +2344,7 @@ namespace paging
                 var response = GetNoItemNamePagesNextPage(nextLink, cancellationToken);
                 return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
             }
-            return PageResponseEnumerator.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
         /// <summary> A paging operation that must ignore any kind of nextLink, and stop after page 1. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2360,7 +2360,7 @@ namespace paging
                 var response = await GetNullNextLinkNamePagesNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, null, response.GetRawResponse());
             }
-            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
         /// <summary> A paging operation that must ignore any kind of nextLink, and stop after page 1. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2376,7 +2376,7 @@ namespace paging
                 var response = GetNullNextLinkNamePagesNextPage(nextLink, cancellationToken);
                 return Page.FromValues(response.Value.Values, null, response.GetRawResponse());
             }
-            return PageResponseEnumerator.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
         /// <summary> A paging operation that finishes on the first call without a nextlink. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2392,7 +2392,7 @@ namespace paging
                 var response = await GetSinglePagesNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
-            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
         /// <summary> A paging operation that finishes on the first call without a nextlink. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2408,7 +2408,7 @@ namespace paging
                 var response = GetSinglePagesNextPage(nextLink, cancellationToken);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
-            return PageResponseEnumerator.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
         /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
         /// <param name="clientRequestId"> The string to use. </param>
@@ -2428,7 +2428,7 @@ namespace paging
                 var response = await GetMultiplePagesNextPageAsync(clientRequestId, maxresults, timeout, nextLink, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
-            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
         /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
         /// <param name="clientRequestId"> The string to use. </param>
@@ -2448,7 +2448,7 @@ namespace paging
                 var response = GetMultiplePagesNextPage(clientRequestId, maxresults, timeout, nextLink, cancellationToken);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
-            return PageResponseEnumerator.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
         /// <summary> A paging operation that includes a nextLink in odata format that has 10 pages. </summary>
         /// <param name="clientRequestId"> The string to use. </param>
@@ -2468,7 +2468,7 @@ namespace paging
                 var response = await GetOdataMultiplePagesNextPageAsync(clientRequestId, maxresults, timeout, nextLink, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
-            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
         /// <summary> A paging operation that includes a nextLink in odata format that has 10 pages. </summary>
         /// <param name="clientRequestId"> The string to use. </param>
@@ -2488,7 +2488,7 @@ namespace paging
                 var response = GetOdataMultiplePagesNextPage(clientRequestId, maxresults, timeout, nextLink, cancellationToken);
                 return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
-            return PageResponseEnumerator.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
         /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
         /// <param name="clientRequestId"> The string to use. </param>
@@ -2509,7 +2509,7 @@ namespace paging
                 var response = await GetMultiplePagesWithOffsetNextPageAsync(clientRequestId, maxresults, timeout, nextLink, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
-            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
         /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
         /// <param name="clientRequestId"> The string to use. </param>
@@ -2530,7 +2530,7 @@ namespace paging
                 var response = GetMultiplePagesWithOffsetNextPage(clientRequestId, maxresults, timeout, nextLink, cancellationToken);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
-            return PageResponseEnumerator.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
         /// <summary> A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2546,7 +2546,7 @@ namespace paging
                 var response = await GetMultiplePagesRetryFirstNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
-            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
         /// <summary> A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2562,7 +2562,7 @@ namespace paging
                 var response = GetMultiplePagesRetryFirstNextPage(nextLink, cancellationToken);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
-            return PageResponseEnumerator.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
         /// <summary> A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2578,7 +2578,7 @@ namespace paging
                 var response = await GetMultiplePagesRetrySecondNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
-            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
         /// <summary> A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2594,7 +2594,7 @@ namespace paging
                 var response = GetMultiplePagesRetrySecondNextPage(nextLink, cancellationToken);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
-            return PageResponseEnumerator.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
         /// <summary> A paging operation that receives a 400 on the first call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2610,7 +2610,7 @@ namespace paging
                 var response = await GetSinglePagesFailureNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
-            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
         /// <summary> A paging operation that receives a 400 on the first call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2626,7 +2626,7 @@ namespace paging
                 var response = GetSinglePagesFailureNextPage(nextLink, cancellationToken);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
-            return PageResponseEnumerator.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
         /// <summary> A paging operation that receives a 400 on the second call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2642,7 +2642,7 @@ namespace paging
                 var response = await GetMultiplePagesFailureNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
-            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
         /// <summary> A paging operation that receives a 400 on the second call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2658,7 +2658,7 @@ namespace paging
                 var response = GetMultiplePagesFailureNextPage(nextLink, cancellationToken);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
-            return PageResponseEnumerator.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
         /// <summary> A paging operation that receives an invalid nextLink. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2674,7 +2674,7 @@ namespace paging
                 var response = await GetMultiplePagesFailureUriNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
-            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
         /// <summary> A paging operation that receives an invalid nextLink. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2690,7 +2690,7 @@ namespace paging
                 var response = GetMultiplePagesFailureUriNextPage(nextLink, cancellationToken);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
-            return PageResponseEnumerator.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
         /// <param name="apiVersion"> Sets the api version to use. </param>
@@ -2717,7 +2717,7 @@ namespace paging
                 var response = await NextFragmentAsync(apiVersion, tenant, nextLink, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
-            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
         /// <param name="apiVersion"> Sets the api version to use. </param>
@@ -2744,7 +2744,7 @@ namespace paging
                 var response = NextFragment(apiVersion, tenant, nextLink, cancellationToken);
                 return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
-            return PageResponseEnumerator.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped. </summary>
         /// <param name="apiVersion"> Sets the api version to use. </param>
@@ -2771,7 +2771,7 @@ namespace paging
                 var response = await NextFragmentWithGroupingAsync(apiVersion, tenant, nextLink, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
-            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped. </summary>
         /// <param name="apiVersion"> Sets the api version to use. </param>
@@ -2798,7 +2798,7 @@ namespace paging
                 var response = NextFragmentWithGrouping(apiVersion, tenant, nextLink, cancellationToken);
                 return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
-            return PageResponseEnumerator.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
         /// <summary> A long-running paging operation that includes a nextLink that has 10 pages. </summary>
         /// <param name="clientRequestId"> The string to use. </param>
@@ -2818,7 +2818,7 @@ namespace paging
                 var response = await GetMultiplePagesLRONextPageAsync(clientRequestId, maxresults, timeout, nextLink, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
-            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
         /// <summary> A long-running paging operation that includes a nextLink that has 10 pages. </summary>
         /// <param name="clientRequestId"> The string to use. </param>
@@ -2838,7 +2838,7 @@ namespace paging
                 var response = GetMultiplePagesLRONextPage(clientRequestId, maxresults, timeout, nextLink, cancellationToken);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
-            return PageResponseEnumerator.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
         /// <param name="apiVersion"> Sets the api version to use. </param>
@@ -2870,7 +2870,7 @@ namespace paging
                 var response = await NextFragmentAsync(apiVersion, tenant, nextLink, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
-            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
         /// <param name="apiVersion"> Sets the api version to use. </param>
@@ -2902,7 +2902,7 @@ namespace paging
                 var response = NextFragment(apiVersion, tenant, nextLink, cancellationToken);
                 return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
-            return PageResponseEnumerator.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
         /// <param name="apiVersion"> Sets the api version to use. </param>
@@ -2934,7 +2934,7 @@ namespace paging
                 var response = await NextFragmentWithGroupingAsync(apiVersion, tenant, nextLink, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
-            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
         /// <param name="apiVersion"> Sets the api version to use. </param>
@@ -2966,7 +2966,7 @@ namespace paging
                 var response = NextFragmentWithGrouping(apiVersion, tenant, nextLink, cancellationToken);
                 return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
-            return PageResponseEnumerator.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
     }
 }

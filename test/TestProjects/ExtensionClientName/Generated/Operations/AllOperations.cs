@@ -34,7 +34,7 @@ namespace ExtensionClientName
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Patch;
+            request.Method = RequestMethodAdditional.Patch;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/originalOperation/", false);

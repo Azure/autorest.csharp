@@ -84,7 +84,7 @@ $testNames =
     #'head',
     'header',
     #'head-exceptions',
-    #'httpInfrastructure',
+    'httpInfrastructure',
     #'httpInfrastructure.quirks',
     #'lro',
     'model-flattening',

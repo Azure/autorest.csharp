@@ -70,7 +70,7 @@ schemas: !<!Schemas>
       serializedName: '@nextLink'
       language: !<!Languages> 
         default:
-          name: NextLink
+          name: nextLink
           description: The URI that can be used to request the next set of paged results.
           originalName: '@nextLink'
       protocol: !<!Protocols> {}
@@ -381,7 +381,7 @@ schemas: !<!Schemas>
       serializedName: '@nextLink'
       language: !<!Languages> 
         default:
-          name: NextLink
+          name: nextLink
           description: The URI that can be used to request the next set of paged results.
           originalName: '@nextLink'
       protocol: !<!Protocols> {}
@@ -461,7 +461,7 @@ schemas: !<!Schemas>
       serializedName: '@nextLink'
       language: !<!Languages> 
         default:
-          name: NextLink
+          name: nextLink
           description: The URI that can be used to request the next set of paged results.
           originalName: '@nextLink'
       protocol: !<!Protocols> {}
