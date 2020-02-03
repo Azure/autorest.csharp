@@ -515,7 +515,7 @@ schemas: !<!Schemas>
       serializedName: '@odata.location'
       language: !<!Languages> 
         default:
-          name: OdataLocation
+          name: odataLocation
           description: ''
           originalName: '@odata.location'
       protocol: !<!Protocols> {}
