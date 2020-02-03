@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Azure.Core
 {
-    internal static class PageResponseEnumerator
+    internal static class PageableHelpers
     {
         public static FuncPageable<T> CreateEnumerable<T>(Func<string?, Page<T>> pageFunc) where T : notnull
         {
