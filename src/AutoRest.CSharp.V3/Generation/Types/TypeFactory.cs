@@ -3,77 +3,104 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using AutoRest.CSharp.V3.Output.Models.TypeReferences;
+using AutoRest.CSharp.V3.Input;
 using AutoRest.CSharp.V3.Output.Models.Types;
-using AutoRest.CSharp.V3.Utilities;
 
 namespace AutoRest.CSharp.V3.Generation.Types
 {
     internal class TypeFactory
     {
-        private readonly ISchemaType[] _schemaTypes;
+        private readonly OutputLibrary _library;
 
-        public TypeFactory(ISchemaType[] schemaTypes)
+        public TypeFactory(OutputLibrary library)
         {
-            _schemaTypes = schemaTypes;
+            _library = library;
         }
 
-        public CSharpType CreateType(TypeReference typeProvider) => CreateTypeInfo(typeProvider);
-        public CSharpType CreateConcreteType(TypeReference typeProvider) => CreateTypeInfo(typeProvider, useConcrete: true);
-        public CSharpType CreateInputType(TypeReference typeProvider) => CreateTypeInfo(typeProvider, useInput: true);
-        public ISchemaType ResolveReference(SchemaTypeReference reference) => _schemaTypes.Single(s => s.Schema == reference.Schema);
-
-        private CSharpType CreateTypeInfo(TypeReference schema, bool useConcrete = false, bool useInput = false) => schema switch
+        public CSharpType CreateType(Schema schema, bool isNullable) => schema switch
         {
-            CollectionTypeReference arraySchema => ArrayTypeInfo(arraySchema, useConcrete, useInput),
-            DictionaryTypeReference dictionarySchema => DictionaryTypeInfo(dictionarySchema, useConcrete),
-            SchemaTypeReference schemaTypeReference => DefaultTypeInfo(schemaTypeReference),
-            FrameworkTypeReference frameworkTypeReference => new CSharpType(frameworkTypeReference.Type, isNullable: frameworkTypeReference.IsNullable),
-            _ => throw new NotImplementedException()
+            ConstantSchema constantSchema => CreateType(constantSchema.ValueType, isNullable),
+            BinarySchema _ => new CSharpType(typeof(byte[]), isNullable),
+            ByteArraySchema _ => new CSharpType(typeof(byte[]), isNullable),
+            ArraySchema array => new CSharpType(typeof(ICollection<>), isNullable, CreateType(array.ElementType, false)),
+            DictionarySchema dictionary => new CSharpType(typeof(IDictionary<,>), isNullable, new CSharpType(typeof(string)), CreateType(dictionary.ElementType, false)),
+            NumberSchema number => new CSharpType(ToFrameworkNumericType(number), isNullable),
+            _ when ToFrameworkType(schema.Type) is Type type => new CSharpType(type, isNullable),
+            _ => _library.FindTypeForSchema(schema).Type.WithNullable(isNullable)
         };
 
-        private CSharpType ArrayTypeInfo(CollectionTypeReference schema, bool useConcrete = false, bool useInput = false)
+        public CSharpType CreateImplementationType(Schema schema, bool isNullable)
         {
-            bool isNullable = schema.IsNullable;
-            Type type;
-            if (useConcrete)
+            var definitionType = CreateType(schema, isNullable);
+
+            if (!definitionType.IsFrameworkType)
             {
-                type = typeof(List<>);
-                isNullable = false;
-            }
-            else if (useInput)
-            {
-                type = typeof(IEnumerable<>);
-            }
-            else
-            {
-                type = typeof(ICollection<>);
+                return definitionType;
             }
 
-            return new CSharpType(type, isNullable, CreateTypeInfo(schema.ItemType));
+            if (definitionType.FrameworkType == typeof(ICollection<>))
+            {
+                return new CSharpType(typeof(List<>), definitionType.IsNullable, definitionType.Arguments);
+            }
+
+            if (definitionType.FrameworkType == typeof(IDictionary<,>))
+            {
+                return new CSharpType(typeof(Dictionary<,>), definitionType.IsNullable, definitionType.Arguments);
+            }
+
+            return definitionType;
         }
 
-        private CSharpType DictionaryTypeInfo(DictionaryTypeReference schema, bool useConcrete = false)
+        public CSharpType CreateInputType(Schema schema, bool isNullable)
         {
-            Type type;
-            bool isNullable = schema.IsNullable;
-            if (useConcrete)
+            var definitionType = CreateType(schema, isNullable);
+
+            if (!definitionType.IsFrameworkType)
             {
-                type = typeof(Dictionary<,>);
-                isNullable = false;
-            }
-            else
-            {
-                type = typeof(IDictionary<,>);
+                return definitionType;
             }
 
-            return new CSharpType(type, isNullable, CreateTypeInfo(schema.KeyType), CreateTypeInfo(schema.ValueType));
+            if (definitionType.FrameworkType == typeof(ICollection<>))
+            {
+                return new CSharpType(typeof(IEnumerable<>), definitionType.IsNullable, definitionType.Arguments);
+            }
+
+            return definitionType;
         }
 
-        private CSharpType DefaultTypeInfo(SchemaTypeReference schemaReference)
+        private static Type? ToFrameworkType(AllSchemaTypes schemaType) => schemaType switch
         {
-            return ResolveReference(schemaReference).Type.WithNullable(schemaReference.IsNullable);
-        }
+            AllSchemaTypes.Boolean => typeof(bool),
+            AllSchemaTypes.ByteArray => null,
+            AllSchemaTypes.Char => typeof(char),
+            AllSchemaTypes.Date => typeof(DateTimeOffset),
+            AllSchemaTypes.DateTime => typeof(DateTimeOffset),
+            AllSchemaTypes.Duration => typeof(TimeSpan),
+            AllSchemaTypes.OdataQuery => typeof(string),
+            AllSchemaTypes.String => typeof(string),
+            AllSchemaTypes.Unixtime => typeof(DateTimeOffset),
+            AllSchemaTypes.Uri => typeof(Uri),
+            AllSchemaTypes.Uuid => typeof(Guid),
+            AllSchemaTypes.Any => typeof(object),
+            AllSchemaTypes.Binary => typeof(byte[]),
+            _ => null
+        };
+
+        private static Type ToFrameworkNumericType(NumberSchema schema) => schema.Type switch
+        {
+            AllSchemaTypes.Number => schema.Precision switch
+            {
+                32 => typeof(float),
+                128 => typeof(decimal),
+                _ => typeof(double)
+            },
+            // Assumes AllSchemaTypes.Integer
+            _ => schema.Precision switch
+            {
+                16 => typeof(short),
+                64 => typeof(long),
+                _ => typeof(int)
+            }
+        };
     }
 }

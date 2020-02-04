@@ -383,7 +383,7 @@ namespace custom_baseUrl_paging
                 var response = await GetPagesPartialUrlNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
-            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
         /// <summary> A paging operation that combines custom url, paging and partial URL and expect to concat after host. </summary>
         /// <param name="accountName"> Account Name. </param>
@@ -405,7 +405,7 @@ namespace custom_baseUrl_paging
                 var response = GetPagesPartialUrlNextPage(nextLink, cancellationToken);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
-            return PageResponseEnumerator.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
         /// <summary> A paging operation that combines custom url, paging and partial URL with next operation. </summary>
         /// <param name="accountName"> Account Name. </param>
@@ -427,7 +427,7 @@ namespace custom_baseUrl_paging
                 var response = await GetPagesPartialUrlOperationNextAsync(accountName, nextLink, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
-            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
         /// <summary> A paging operation that combines custom url, paging and partial URL with next operation. </summary>
         /// <param name="accountName"> Account Name. </param>
@@ -449,7 +449,7 @@ namespace custom_baseUrl_paging
                 var response = GetPagesPartialUrlOperationNext(accountName, nextLink, cancellationToken);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
-            return PageResponseEnumerator.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
         /// <summary> A paging operation that combines custom url, paging and partial URL. </summary>
         /// <param name="accountName"> Account Name. </param>
@@ -476,7 +476,7 @@ namespace custom_baseUrl_paging
                 var response = await GetPagesPartialUrlOperationNextAsync(accountName, nextLink, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
-            return PageResponseEnumerator.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
         /// <summary> A paging operation that combines custom url, paging and partial URL. </summary>
         /// <param name="accountName"> Account Name. </param>
@@ -503,7 +503,7 @@ namespace custom_baseUrl_paging
                 var response = GetPagesPartialUrlOperationNext(accountName, nextLink, cancellationToken);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
-            return PageResponseEnumerator.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
     }
 }

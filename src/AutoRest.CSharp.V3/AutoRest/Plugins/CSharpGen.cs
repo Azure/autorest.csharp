@@ -13,6 +13,7 @@ using AutoRest.CSharp.V3.Input;
 using AutoRest.CSharp.V3.Input.Source;
 using AutoRest.CSharp.V3.Output.Builders;
 using AutoRest.CSharp.V3.Output.Models.Responses;
+using AutoRest.CSharp.V3.Output.Models.Types;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Formatting;
 using Microsoft.CodeAnalysis.Simplification;
@@ -21,31 +22,22 @@ using Diagnostic = Microsoft.CodeAnalysis.Diagnostic;
 
 namespace AutoRest.CSharp.V3.AutoRest.Plugins
 {
-
     [PluginName("csharpgen")]
     internal class CSharpGen : IPlugin
     {
         public async Task<bool> Execute(IPluginCommunication autoRest, CodeModel codeModel, Configuration configuration)
         {
-            var schemas = (codeModel.Schemas.Choices ?? Enumerable.Empty<ChoiceSchema>()).Cast<Schema>()
-                .Concat(codeModel.Schemas.SealedChoices ?? Enumerable.Empty<SealedChoiceSchema>())
-                .Concat(codeModel.Schemas.Objects ?? Enumerable.Empty<ObjectSchema>());
-
             var project = GeneratedCodeWorkspace.Create(configuration.OutputFolder);
             var sourceInputModel = SourceInputModelBuilder.Build(await project.GetCompilationAsync());
 
-            var modelBuilder = new ModelBuilder(configuration.Namespace, GetMediaTypes(codeModel), sourceInputModel);
-            var clientBuilder = new ClientBuilder(configuration.Namespace);
-            var models = schemas.Select(modelBuilder.BuildModel).ToArray();
-            var clients = codeModel.OperationGroups.Select(clientBuilder.BuildClient).ToArray();
-            var typeFactory = new TypeFactory(models);
+            var context = new BuildContext(codeModel, configuration.Namespace, sourceInputModel);
 
-            var modelWriter = new ModelWriter(typeFactory);
-            var writer = new ClientWriter(typeFactory);
-            var serializeWriter = new SerializationWriter(typeFactory);
-            var headerModelModelWriter = new ResponseHeaderGroupWriter(typeFactory);
+            var modelWriter = new ModelWriter();
+            var writer = new ClientWriter();
+            var serializeWriter = new SerializationWriter();
+            var headerModelModelWriter = new ResponseHeaderGroupWriter();
 
-            foreach (var model in models)
+            foreach (var model in context.Library.Models)
             {
                 var codeWriter = new CodeWriter();
                 modelWriter.WriteModel(codeWriter, model);
@@ -58,7 +50,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                 project.AddGeneratedFile($"Models/{name}.Serialization.cs", serializerCodeWriter.ToFormattedCode());
             }
 
-            foreach (var client in clients)
+            foreach (var client in context.Library.Clients)
             {
                 var codeWriter = new CodeWriter();
                 writer.WriteClient(codeWriter, client);
@@ -81,34 +73,6 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
             }
 
             return true;
-        }
-
-        // TODO: remove if https://github.com/Azure/autorest.modelerfour/issues/103 is implemented
-        private KnownMediaType[] GetMediaTypes(CodeModel codeModel)
-        {
-            HashSet<KnownMediaType> types = new HashSet<KnownMediaType>();
-            foreach (OperationGroup operationGroup in codeModel.OperationGroups)
-            {
-                foreach (Operation operation in operationGroup.Operations)
-                {
-                    if (operation.Request.Protocol.Http is HttpWithBodyRequest bodyRequest)
-                    {
-                        types.Add(bodyRequest.KnownMediaType);
-                    }
-
-                    foreach (var response in operation.Responses ?? Array.Empty<ServiceResponse>())
-                    {
-                        if (response is SchemaResponse _ &&
-                            response.Protocol.Http is HttpResponse httpResponse)
-                        {
-                            types.Add(httpResponse.KnownMediaType);
-                        }
-                    }
-                }
-            }
-
-            // Order so JSON always goes first
-            return types.OrderBy(t => t).ToArray();
         }
     }
 }

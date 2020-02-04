@@ -1,24 +1,10 @@
 #Requires -Version 6.0
-param($name, [switch]$noDebug, [switch]$reset, [switch]$noBuild, [switch]$fast, [switch]$updateLaunchSettings)
+param($name, [switch]$noDebug, [switch]$reset, [switch]$noBuild, [switch]$fast, [switch]$updateLaunchSettings, [switch]$clean = $true)
 
 $ErrorActionPreference = 'Stop'
 
-function Invoke-AutoRest($baseOutput, $title, $autoRestArguments)
+function Invoke($command)
 {
-    $command = "npx  @autorest/autorest $script:debugFlags $autoRestArguments"
-    if ($title)
-    {
-        $namespace = $title.Replace('-', '_')
-        $command = "$command --title=$title --namespace=$namespace"
-    }
-
-    if ($fast)
-    {
-        $codeModel = Join-Path $baseOutput $title "CodeModel.yaml"
-        $outputPath = Join-Path $baseOutput $title
-        $command = "dotnet run --project $script:autorestPluginProject --no-build -- --plugin=csharpgen --title=$title --namespace=$namespace --standalone --input-file=$codeModel --output-folder=$outputPath"
-    }
-
     Write-Host "> $command"
     pushd $repoRoot
     cmd /c "$command 2>&1"
@@ -28,6 +14,26 @@ function Invoke-AutoRest($baseOutput, $title, $autoRestArguments)
     {
         Write-Error "Command failed to execute: $command"
     }
+}
+
+function Invoke-AutoRest($baseOutput, $title, $autoRestArguments)
+{
+    $outputPath = Join-Path $baseOutput $title
+    $namespace = $title.Replace('-', '_')
+    $command = "npx --no-install -p @autorest/autorest -c `"autorest $script:debugFlags $autoRestArguments --title=$title --namespace=$namespace`""
+
+    if ($fast)
+    {
+        $codeModel = Join-Path $baseOutput $title "CodeModel.yaml"
+        $command = "dotnet run --project $script:autorestPluginProject --no-build -- --plugin=csharpgen --title=$title --namespace=$namespace --standalone --input-file=$codeModel --output-folder=$outputPath"
+    }
+
+    if ($clean)
+    {
+        Get-ChildItem $outputPath -Filter Generated -Directory -Recurse | Remove-Item -Force -Recurse;
+    }
+
+    Invoke $command
 }
 
 # General configuration
@@ -157,7 +163,7 @@ if ($updateLaunchSettings)
 
 if ($reset -or $env:TF_BUILD)
 {
-    Invoke-AutoRest $null $null '--reset'
+    Invoke 'npx --no-install -p @autorest/autorest -c "autorest --reset"'
 }
 
 if (!$noBuild)
