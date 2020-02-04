@@ -18,6 +18,6 @@ namespace AutoRest.CSharp.V3.Output.Models.Responses
         public string Description { get; }
         public TypeDeclarationOptions Declaration { get; }
         public ResponseHeader[] Headers { get; }
-        public CSharpType Type => new CSharpType(Declaration.Namespace, Declaration.Name);
+        public CSharpType Type => new CSharpType(this, Declaration.Namespace, Declaration.Name);
     }
 }

@@ -2,8 +2,9 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Output.Models.Shared;
-using AutoRest.CSharp.V3.Output.Models.TypeReferences;
+
 
 namespace AutoRest.CSharp.V3.Output.Models.Requests
 {
@@ -26,7 +27,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Requests
             _constant = null;
         }
 
-        public TypeReference Type { get; }
+        public CSharpType Type { get; }
         public bool IsConstant => _constant.HasValue;
 
         public Constant Constant => _constant ?? throw new InvalidOperationException("Not a constant");

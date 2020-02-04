@@ -3,13 +3,14 @@
 
 using System;
 using System.Diagnostics;
-using AutoRest.CSharp.V3.Output.Models.TypeReferences;
+using AutoRest.CSharp.V3.Generation.Types;
+
 
 namespace AutoRest.CSharp.V3.Output.Models.Shared
 {
     internal struct Constant
     {
-        public Constant(object? value, TypeReference type)
+        public Constant(object? value, CSharpType type)
         {
             Debug.Assert(value == null || value.GetType().Namespace?.StartsWith("System") == true);
             Value = value;
@@ -25,9 +26,9 @@ namespace AutoRest.CSharp.V3.Output.Models.Shared
             }
 
             Type expectedType;
-            if (type is FrameworkTypeReference frameworkType)
+            if (type.FrameworkType != null)
             {
-                expectedType = frameworkType.Type;
+                expectedType = type.FrameworkType;
             }
             else
             {
@@ -41,6 +42,6 @@ namespace AutoRest.CSharp.V3.Output.Models.Shared
         }
 
         public object? Value { get; }
-        public TypeReference Type { get; }
+        public CSharpType Type { get; }
     }
 }

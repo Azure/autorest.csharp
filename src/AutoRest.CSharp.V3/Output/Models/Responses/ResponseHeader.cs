@@ -1,13 +1,14 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using AutoRest.CSharp.V3.Output.Models.TypeReferences;
+
+using AutoRest.CSharp.V3.Generation.Types;
 
 namespace AutoRest.CSharp.V3.Output.Models.Responses
 {
     internal class ResponseHeader
     {
-        public ResponseHeader(string name, string serializedName, TypeReference type)
+        public ResponseHeader(string name, string serializedName, CSharpType type)
         {
             Name = name;
             SerializedName = serializedName;
@@ -16,6 +17,6 @@ namespace AutoRest.CSharp.V3.Output.Models.Responses
 
         public string Name { get; }
         public string SerializedName { get; }
-        public TypeReference Type { get; }
+        public CSharpType Type { get; }
     }
 }

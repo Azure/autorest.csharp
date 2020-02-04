@@ -13,13 +13,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         private const string ResponseParameter = "response";
         private const string ResponseField = "_" + ResponseParameter;
 
-        private readonly TypeFactory _typeFactory;
-
-        public ResponseHeaderGroupWriter(TypeFactory typeFactory)
-        {
-            _typeFactory = typeFactory;
-        }
-
         public void WriteHeaderModel(CodeWriter writer, ResponseHeaderGroupType responseHeaderGroup)
         {
             using (writer.Namespace(responseHeaderGroup.Declaration.Namespace))
@@ -54,7 +47,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private void WriteHeaderProperty(CodeWriter writer, ResponseHeader header)
         {
-            var type = _typeFactory.CreateType(header.Type);
+            var type = header.Type;
             writer.Line($"public {type} {header.Name} => {ResponseField}.Headers.TryGetValue({header.SerializedName:L}, out {type} value) ? value : null;");
         }
     }

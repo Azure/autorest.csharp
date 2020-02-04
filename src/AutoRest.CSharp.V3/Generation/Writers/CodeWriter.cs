@@ -191,7 +191,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         public string Type(CSharpType type)
         {
-            string? mappedName = GetKeywordMapping(type.FrameworkType);
+            string? mappedName = type.IsFrameworkType ? GetKeywordMapping(type.FrameworkType) : null;
             string name = mappedName ?? type.Name;
             if (mappedName == null)
             {
