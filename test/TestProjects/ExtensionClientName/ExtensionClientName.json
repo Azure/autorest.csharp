@@ -81,6 +81,7 @@
           "description": "A description about the set of tags."
         }
       },
+      "x-ms-client-name": "RenamedSchema",
       "required": [
         "tags"
       ]

@@ -30,7 +30,7 @@ namespace ExtensionClientName
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
-        internal HttpMessage CreateOriginalOperationRequest(string renamedPathParameter, string renamedQueryParameter, OriginalSchema renamedBodyParameter)
+        internal HttpMessage CreateOriginalOperationRequest(string renamedPathParameter, string renamedQueryParameter, RenamedSchema renamedBodyParameter)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -49,9 +49,9 @@ namespace ExtensionClientName
         }
         /// <param name="renamedPathParameter"> The string to use. </param>
         /// <param name="renamedQueryParameter"> The string to use. </param>
-        /// <param name="renamedBodyParameter"> The OriginalSchema to use. </param>
+        /// <param name="renamedBodyParameter"> The RenamedSchema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<OriginalSchema, OriginalOperationHeaders>> OriginalOperationAsync(string renamedPathParameter, string renamedQueryParameter, OriginalSchema renamedBodyParameter, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<RenamedSchema, OriginalOperationHeaders>> OriginalOperationAsync(string renamedPathParameter, string renamedQueryParameter, RenamedSchema renamedBodyParameter, CancellationToken cancellationToken = default)
         {
             if (renamedPathParameter == null)
             {
@@ -77,7 +77,7 @@ namespace ExtensionClientName
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = OriginalSchema.DeserializeOriginalSchema(document.RootElement);
+                            var value = RenamedSchema.DeserializeRenamedSchema(document.RootElement);
                             var headers = new OriginalOperationHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
@@ -93,9 +93,9 @@ namespace ExtensionClientName
         }
         /// <param name="renamedPathParameter"> The string to use. </param>
         /// <param name="renamedQueryParameter"> The string to use. </param>
-        /// <param name="renamedBodyParameter"> The OriginalSchema to use. </param>
+        /// <param name="renamedBodyParameter"> The RenamedSchema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<OriginalSchema, OriginalOperationHeaders> OriginalOperation(string renamedPathParameter, string renamedQueryParameter, OriginalSchema renamedBodyParameter, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<RenamedSchema, OriginalOperationHeaders> OriginalOperation(string renamedPathParameter, string renamedQueryParameter, RenamedSchema renamedBodyParameter, CancellationToken cancellationToken = default)
         {
             if (renamedPathParameter == null)
             {
@@ -121,7 +121,7 @@ namespace ExtensionClientName
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = OriginalSchema.DeserializeOriginalSchema(document.RootElement);
+                            var value = RenamedSchema.DeserializeRenamedSchema(document.RootElement);
                             var headers = new OriginalOperationHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }

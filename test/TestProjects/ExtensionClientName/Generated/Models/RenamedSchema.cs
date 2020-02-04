@@ -7,8 +7,8 @@ using System.Collections.Generic;
 
 namespace ExtensionClientName.Models
 {
-    /// <summary> The OriginalSchema. </summary>
-    public partial class OriginalSchema
+    /// <summary> The RenamedSchema. </summary>
+    public partial class RenamedSchema
     {
         /// <summary> A description about the set of tags. </summary>
         public IDictionary<string, string> RenamedProperty { get; set; }

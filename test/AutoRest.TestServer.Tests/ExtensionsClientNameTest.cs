@@ -22,8 +22,8 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void PropertiesAreRenamed()
         {
-            TypeAsserts.HasProperty(typeof(OriginalSchema), "RenamedProperty");
-            TypeAsserts.HasProperty(typeof(OriginalSchema), "RenamedPropertyString");
+            TypeAsserts.HasProperty(typeof(RenamedSchema), "RenamedProperty");
+            TypeAsserts.HasProperty(typeof(RenamedSchema), "RenamedPropertyString");
         }
     }
 }

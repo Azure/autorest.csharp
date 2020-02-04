@@ -56,7 +56,7 @@ schemas: !<!Schemas>
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: OriginalSchema
+        name: RenamedSchema
         description: ''
         namespace: Api100
     protocol: !<!Protocols> {}
