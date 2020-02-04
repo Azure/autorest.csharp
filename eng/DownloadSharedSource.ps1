@@ -3,7 +3,7 @@ $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 
 $downloadPath = Resolve-Path (Join-Path $PSScriptRoot '..' 'src' 'assets' 'Azure.Core.Shared')
-$files = 'ClientDiagnostics.cs', 'ArrayBufferWriter.cs', 'DiagnosticScope.cs', 'ResponseExceptionExtensions.cs', 'ContentTypeUtilities.cs'
+$files = 'ClientDiagnostics.cs', 'ArrayBufferWriter.cs', 'DiagnosticScope.cs', 'ResponseExceptionExtensions.cs', 'ContentTypeUtilities.cs', 'OperationHelpers.cs'
 $baseUrl = 'https://raw.githubusercontent.com/Azure/azure-sdk-for-net/master/sdk/core/Azure.Core/src/Shared/'
 
 foreach ($file in $files)
