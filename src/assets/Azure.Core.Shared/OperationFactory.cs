@@ -4,7 +4,6 @@
 #nullable enable
 
 using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -12,15 +11,11 @@ namespace Azure.Core
 {
     internal static class OperationFactory
     {
-        //public static Operation<T> Create<T>(Func<string?, Page<T>> pageFunc) where T : class
-        //{
-        //    return new FuncOperation<T>((continuationToken, pageSizeHint) => pageFunc(continuationToken));
-        //}
+        public static Operation<T> Create<T>(Response initialResponse, PollingFunc<T> pollingFunc, CompletionPredicate<T> completionPredicate) where T : notnull =>
+            new FuncOperation<T>(initialResponse, pollingFunc, completionPredicate);
 
-        //public static Operation<T> CreateAsync<T>(Response<T> initialResponse, AsyncPollingFunc<T> asyncPollingFunc, AsyncCompletionPredicate<T> asyncCompletionPredicate) where T : class
-        //{
-        //    return new FuncOperation<T>((continuationToken, pageSizeHint) => pageFunc(continuationToken));
-        //}
+        public static Operation<T> CreateAsync<T>(Response initialResponse, AsyncPollingFunc<T> asyncPollingFunc, AsyncCompletionPredicate<T> asyncCompletionPredicate) where T : notnull =>
+            new FuncOperation<T>(initialResponse, asyncPollingFunc, asyncCompletionPredicate);
 
         internal delegate ValueTask<Response<T>> AsyncPollingFunc<T>(CancellationToken cancellationToken = new CancellationToken());
         internal delegate Response<T> PollingFunc<T>(CancellationToken cancellationToken = new CancellationToken());
@@ -28,26 +23,27 @@ namespace Azure.Core
         internal delegate ValueTask<bool> AsyncCompletionPredicate<T>(Response<T> response);
         internal delegate bool CompletionPredicate<T>(Response<T> response);
 
-        private class FuncOperation<T> : Operation<T> where T : class
+        private class FuncOperation<T> : Operation<T> where T : notnull
         {
             private readonly AsyncPollingFunc<T>? _asyncPollingFunc;
             private readonly PollingFunc<T>? _pollingFunc;
             private readonly AsyncCompletionPredicate<T>? _asyncCompletionPredicate;
             private readonly CompletionPredicate<T>? _completionPredicate;
             private Response _rawResponse;
-            private T? _value;
-            private bool _completed;
+            private T _value = default!;
+            private bool _hasValue;
+            private bool _hasCompleted;
 
-            public FuncOperation(Response<T> initialResponse, AsyncPollingFunc<T> asyncPollingFunc, AsyncCompletionPredicate<T> asyncCompletionPredicate)
+            public FuncOperation(Response initialResponse, AsyncPollingFunc<T> asyncPollingFunc, AsyncCompletionPredicate<T> asyncCompletionPredicate)
             {
-                _rawResponse = initialResponse.GetRawResponse();
+                _rawResponse = initialResponse;
                 _asyncPollingFunc = asyncPollingFunc;
                 _asyncCompletionPredicate = asyncCompletionPredicate;
             }
 
-            public FuncOperation(Response<T> initialResponse, PollingFunc<T> pollingFunc, CompletionPredicate<T> completionPredicate)
+            public FuncOperation(Response initialResponse, PollingFunc<T> pollingFunc, CompletionPredicate<T> completionPredicate)
             {
-                _rawResponse = initialResponse.GetRawResponse();
+                _rawResponse = initialResponse;
                 _pollingFunc = pollingFunc;
                 _completionPredicate = completionPredicate;
             }
@@ -62,38 +58,72 @@ namespace Azure.Core
 
             public override async ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = new CancellationToken())
             {
-                if (HasCompleted) return GetRawResponse();
-
-                Response<T>? response = null;
-                if (!_completed && _asyncPollingFunc != null && _asyncCompletionPredicate != null)
+                if (HasCompleted)
                 {
-                    response = await _asyncPollingFunc(cancellationToken).ConfigureAwait(false);
-                    _completed = await _asyncCompletionPredicate(response).ConfigureAwait(false);
+                    return GetRawResponse();
                 }
 
-                _rawResponse = response?.GetRawResponse() ?? _rawResponse;
-                return _rawResponse;
+                Response<T>? response = null;
+                if (!HasCompleted && _asyncPollingFunc != null && _asyncCompletionPredicate != null)
+                {
+                    response = await _asyncPollingFunc(cancellationToken).ConfigureAwait(false);
+                    _hasCompleted = await _asyncCompletionPredicate(response).ConfigureAwait(false);
+                }
+
+                if (response != null)
+                {
+                    _rawResponse = response.GetRawResponse();
+                    if (HasCompleted)
+                    {
+                        _value = response.Value;
+                        _hasValue = true;
+                    }
+                }
+                return GetRawResponse();
             }
 
             public override Response UpdateStatus(CancellationToken cancellationToken = new CancellationToken())
             {
-                if (HasCompleted) return GetRawResponse();
-
-                Response<T>? response = null;
-                if (!_completed && _pollingFunc != null && _completionPredicate != null)
+                if (HasCompleted)
                 {
-                    response = _pollingFunc(cancellationToken);
-                    _completed = _completionPredicate(response);
+                    return GetRawResponse();
                 }
 
-                _rawResponse = response?.GetRawResponse() ?? _rawResponse;
-                return _rawResponse;
+                Response<T>? response = null;
+                if (!HasCompleted && _pollingFunc != null && _completionPredicate != null)
+                {
+                    response = _pollingFunc(cancellationToken);
+                    _hasCompleted = _completionPredicate(response);
+                }
+
+                if (response != null)
+                {
+                    _rawResponse = response.GetRawResponse();
+                    if (HasCompleted)
+                    {
+                        _value = response.Value;
+                        _hasValue = true;
+                    }
+                }
+                return GetRawResponse();
             }
 
             public override string Id { get; } = Guid.NewGuid().ToString();
-            public override T Value => OperationHelpers.GetValue(ref _value);
-            public override bool HasCompleted => _completed;
-            public override bool HasValue => _value != null;
+
+            public override T Value
+            {
+                get
+                {
+                    if (!HasValue)
+                    {
+                        throw new InvalidOperationException("The operation has not completed yet.");
+                    }
+
+                    return _value;
+                }
+            }
+            public override bool HasCompleted => _hasCompleted;
+            public override bool HasValue => _hasValue;
         }
     }
 }
