@@ -44,7 +44,7 @@ if (_shouldTrace)
     Microsoft.Rest.ServiceClientTracing.Enter(_invocationId, this, "@(Model.Name)", tracingParameters);
 }
 
-return await this.SendWithRetry(_invocationId, async () => 
+return await this.SendWithRetry(_invocationId, async (attemptCount) => 
 {
     // Construct URL
     @if (Model.IsAbsoluteUrl)
@@ -71,6 +71,8 @@ return await this.SendWithRetry(_invocationId, async () =>
 
     _httpRequest.Method = new System.Net.Http.HttpMethod("@(Model.HttpMethod.ToString().ToUpper())");
     _httpRequest.RequestUri = new System.Uri(_url);
+    _httpRequest.Properties["attemptCount"] = attemptCount;
+    
     // Set Headers
     @(Model.SetDefaultHeaders)
     @foreach (var parameter in Model.LogicalParameters.OfType<ParameterCs>().Where(p => p.Location == ParameterLocation.Header && !p.IsHeaderCollection && !p.IsContentTypeHeader))

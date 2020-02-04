@@ -46,20 +46,20 @@ namespace @Settings.Namespace
         @EmptyLine 
     }
 
-        private async Task<T> SendWithRetry<T>(string invocationId, System.Func<Task<T>> action, CancellationToken cancellationToken) where T : HttpOperationResponse
+        private async Task<T> SendWithRetry<T>(string invocationId, System.Func<int, Task<T>> action, CancellationToken cancellationToken) where T : HttpOperationResponse
         {
             if (loadBalancingConfig == null)
             {
-                return await action();
+                return await action(1);
             }
 
-            var retryResults = await loadBalancingConfig.UrlResourceManager.ExecuteAsyncWithDiag(async (source, _) =>
+            var retryResults = await loadBalancingConfig.UrlResourceManager.ExecuteAsyncWithDiag(async (source, attemptCount) =>
             {
                 this.BaseUri = new System.Uri(source);
 
                 try
                 {
-                    var operationResponse = await action();
+                    var operationResponse = await action(attemptCount);
                     if (IsTransientHttpStatusCode(operationResponse.Response.StatusCode))
                     {
                         throw new Frameworks.Http.TransientHttpRequestException(
