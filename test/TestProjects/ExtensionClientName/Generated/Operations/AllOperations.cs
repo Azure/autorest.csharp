@@ -30,7 +30,7 @@ namespace ExtensionClientName
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
-        internal HttpMessage CreateOriginalOperationRequest(string renamedPathParameter, string renamedQueryParameter, RenamedSchema renamedBodyParameter)
+        internal HttpMessage CreateRenamedOperationRequest(string renamedPathParameter, string renamedQueryParameter, RenamedSchema renamedBodyParameter)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -51,7 +51,7 @@ namespace ExtensionClientName
         /// <param name="renamedQueryParameter"> The string to use. </param>
         /// <param name="renamedBodyParameter"> The RenamedSchema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<RenamedSchema, OriginalOperationHeaders>> OriginalOperationAsync(string renamedPathParameter, string renamedQueryParameter, RenamedSchema renamedBodyParameter, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<RenamedSchema, RenamedOperationHeaders>> RenamedOperationAsync(string renamedPathParameter, string renamedQueryParameter, RenamedSchema renamedBodyParameter, CancellationToken cancellationToken = default)
         {
             if (renamedPathParameter == null)
             {
@@ -66,11 +66,11 @@ namespace ExtensionClientName
                 throw new ArgumentNullException(nameof(renamedBodyParameter));
             }
 
-            using var scope = clientDiagnostics.CreateScope("AllOperations.OriginalOperation");
+            using var scope = clientDiagnostics.CreateScope("AllOperations.RenamedOperation");
             scope.Start();
             try
             {
-                using var message = CreateOriginalOperationRequest(renamedPathParameter, renamedQueryParameter, renamedBodyParameter);
+                using var message = CreateRenamedOperationRequest(renamedPathParameter, renamedQueryParameter, renamedBodyParameter);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -78,7 +78,7 @@ namespace ExtensionClientName
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = RenamedSchema.DeserializeRenamedSchema(document.RootElement);
-                            var headers = new OriginalOperationHeaders(message.Response);
+                            var headers = new RenamedOperationHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
@@ -95,7 +95,7 @@ namespace ExtensionClientName
         /// <param name="renamedQueryParameter"> The string to use. </param>
         /// <param name="renamedBodyParameter"> The RenamedSchema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<RenamedSchema, OriginalOperationHeaders> OriginalOperation(string renamedPathParameter, string renamedQueryParameter, RenamedSchema renamedBodyParameter, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<RenamedSchema, RenamedOperationHeaders> RenamedOperation(string renamedPathParameter, string renamedQueryParameter, RenamedSchema renamedBodyParameter, CancellationToken cancellationToken = default)
         {
             if (renamedPathParameter == null)
             {
@@ -110,11 +110,11 @@ namespace ExtensionClientName
                 throw new ArgumentNullException(nameof(renamedBodyParameter));
             }
 
-            using var scope = clientDiagnostics.CreateScope("AllOperations.OriginalOperation");
+            using var scope = clientDiagnostics.CreateScope("AllOperations.RenamedOperation");
             scope.Start();
             try
             {
-                using var message = CreateOriginalOperationRequest(renamedPathParameter, renamedQueryParameter, renamedBodyParameter);
+                using var message = CreateRenamedOperationRequest(renamedPathParameter, renamedQueryParameter, renamedBodyParameter);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -122,7 +122,7 @@ namespace ExtensionClientName
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = RenamedSchema.DeserializeRenamedSchema(document.RootElement);
-                            var headers = new OriginalOperationHeaders(message.Response);
+                            var headers = new RenamedOperationHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:

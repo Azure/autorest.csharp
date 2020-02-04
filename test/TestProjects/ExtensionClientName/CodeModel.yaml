@@ -178,7 +178,7 @@ operationGroups:
       x-ms-requestBody-index: 2
     language: !<!Languages> 
       default:
-        name: originalOperation
+        name: RenamedOperation
         description: ''
     protocol: !<!Protocols> {}
   language: !<!Languages> 

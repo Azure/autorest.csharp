@@ -19,6 +19,7 @@
     "/originalOperation/{originalPathParameter}": {
       "patch": {
         "operationId": "originalOperation",
+        "x-ms-client-name": "RenamedOperation",
         "parameters": [
           {
             "name": "originalPathParameter",
