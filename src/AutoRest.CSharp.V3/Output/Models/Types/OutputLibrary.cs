@@ -45,16 +45,16 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
         private Dictionary<Schema, ISchemaType> BuildModels()
         {
-            var allSchemas = (_codeModel.Schemas.Choices ?? Enumerable.Empty<ChoiceSchema>()).Cast<Schema>()
-                .Concat(_codeModel.Schemas.SealedChoices ?? Enumerable.Empty<SealedChoiceSchema>())
-                .Concat(_codeModel.Schemas.Objects ?? Enumerable.Empty<ObjectSchema>());
+            var allSchemas = _codeModel.Schemas.Choices.Cast<Schema>()
+                .Concat(_codeModel.Schemas.SealedChoices)
+                .Concat(_codeModel.Schemas.Objects);
 
             return allSchemas.ToDictionary(schema => schema, BuildModel);
         }
 
         private ISchemaType BuildModel(Schema schema) => schema switch
         {
-            SealedChoiceSchema sealedChoiceSchema => new EnumType(sealedChoiceSchema, _context),
+            SealedChoiceSchema sealedChoiceSchema => (ISchemaType)new EnumType(sealedChoiceSchema, _context),
             ChoiceSchema choiceSchema => new EnumType(choiceSchema, _context),
             ObjectSchema objectSchema => new ObjectType(objectSchema, _context),
             _ => throw new NotImplementedException()
@@ -73,7 +73,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                         types.Add(bodyRequest.KnownMediaType);
                     }
 
-                    foreach (var response in operation.Responses ?? Array.Empty<ServiceResponse>())
+                    foreach (var response in operation.Responses)
                     {
                         if (response is SchemaResponse _ &&
                             response.Protocol.Http is HttpResponse httpResponse)
