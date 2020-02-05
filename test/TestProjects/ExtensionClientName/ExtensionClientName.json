@@ -19,6 +19,7 @@
     "/originalOperation/{originalPathParameter}": {
       "patch": {
         "operationId": "originalOperation",
+        "x-ms-client-name": "RenamedOperation",
         "parameters": [
           {
             "name": "originalPathParameter",
@@ -81,6 +82,7 @@
           "description": "A description about the set of tags."
         }
       },
+      "x-ms-client-name": "RenamedSchema",
       "required": [
         "tags"
       ]
