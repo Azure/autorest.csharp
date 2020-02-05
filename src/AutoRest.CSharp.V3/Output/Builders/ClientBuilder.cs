@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.V3.Generation.Types;
@@ -60,6 +61,8 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
             List<Method> nextPageMethods = new List<Method>();
             List<Paging> pagingMethods = new List<Paging>();
+            List<Method> pollingMethods = new List<Method>();
+            List<LongRunningOperation> longRunningOperationMethods = new List<LongRunningOperation>();
             foreach ((string processedName, OperationMethod processed) in processedMethods)
             {
                 IDictionary<object, object>? pageable = processed.Operation.Extensions.GetValue<IDictionary<object, object>>("x-ms-pageable");
@@ -103,15 +106,27 @@ namespace AutoRest.CSharp.V3.Output.Builders
                     Paging pagingMethod = GetClientMethodPaging(processed.Method, nextPageMethod, pageable, objectType);
                     pagingMethods.Add(pagingMethod);
                 }
+                bool? longRunningOperation = processed.Operation.Extensions.GetValue<bool>("x-ms-long-running-operation");
+                if (longRunningOperation == true)
+                {
+                    Method pollingMethod = BuildPollingMethod(processed.Method);
+                    pollingMethods.Add(pollingMethod);
+
+                    IDictionary<object, object> options = processed.Operation.Extensions.GetValue<IDictionary<object, object>>("x-ms-long-running-operation-options")
+                                                          ?? ImmutableDictionary<object, object>.Empty;
+                    LongRunningOperation longRunningOperationMethod = BuildLongRunningOperation(processed.Method, pollingMethod, options);
+                    longRunningOperationMethods.Add(longRunningOperationMethod);
+                }
             }
 
-            Method[] methods = processedMethods.Select(om => om.Value.Method).Concat(nextPageMethods).ToArray();
+            Method[] methods = processedMethods.Select(om => om.Value.Method).Concat(nextPageMethods).Concat(pollingMethods).ToArray();
             return new Client(
                 BuilderHelpers.CreateTypeAttributes(clientName, _context.DefaultNamespace, Accessibility.Internal),
                 operationGroup.Language.Default.Description,
                 OrderParameters(clientParameters.Values),
                 methods,
-                pagingMethods.ToArray());
+                pagingMethods.ToArray(),
+                longRunningOperationMethods.ToArray());
         }
 
         private struct OperationMethod
@@ -337,31 +352,11 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 method.Diagnostics);
         }
 
-        //IN PROGRESS
-        private Paging GetClientMethodPolling(Method method, Method nextPageMethod, IDictionary<object, object> pageable, ObjectType type)
+        private static LongRunningOperation BuildLongRunningOperation(Method method, Method pollingMethod, IDictionary<object, object> options)
         {
-            var nextLinkName = pageable.GetValue<string>("nextLinkName");
-            var itemName = pageable.GetValue<string>("itemName") ?? "value";
-
-            var itemProperty = type.Properties.Single(p => p.SchemaProperty.SerializedName == itemName);
-
-            ObjectTypeProperty? nextLinkProperty = null;
-            if (nextLinkName != null)
-            {
-                nextLinkProperty = type.Properties.Single(p => p.SchemaProperty.SerializedName == nextLinkName);
-            }
-
-            if (itemProperty.SchemaProperty.Schema is ArraySchema arraySchema)
-            {
-                var itemType = _typeFactory.CreateType(arraySchema.ElementType, false);
-
-                var name = $"{method.Name}Pageable";
-                return new Paging(method, nextPageMethod, name, nextLinkProperty?.Name, itemProperty.Name, itemType);
-            }
-            else
-            {
-                throw new InvalidOperationException($"{itemName} property has to be an array schema, actual {itemProperty.SchemaProperty}");
-            }
+            FinalStateVia finalStateVia = FinalStateViaHelpers.Create(options.GetValue<string>("final-state-via"));
+            string name = $"{method.Name}Operation";
+            return new LongRunningOperation(method, pollingMethod, name, finalStateVia);
         }
 
         private Parameter BuildParameter(RequestParameter requestParameter) => new Parameter(
