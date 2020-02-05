@@ -9,7 +9,7 @@ using Azure.Core;
 
 namespace ExtensionClientName.Models
 {
-    public partial class OriginalSchema : IUtf8JsonSerializable
+    public partial class RenamedSchema : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -32,9 +32,9 @@ namespace ExtensionClientName.Models
             }
             writer.WriteEndObject();
         }
-        internal static OriginalSchema DeserializeOriginalSchema(JsonElement element)
+        internal static RenamedSchema DeserializeRenamedSchema(JsonElement element)
         {
-            OriginalSchema result = new OriginalSchema();
+            RenamedSchema result = new RenamedSchema();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("originalProperty"))

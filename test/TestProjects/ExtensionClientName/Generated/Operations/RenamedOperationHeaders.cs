@@ -8,10 +8,10 @@ using Azure.Core;
 
 namespace ExtensionClientName
 {
-    internal class OriginalOperationHeaders
+    internal class RenamedOperationHeaders
     {
         private readonly Azure.Response _response;
-        public OriginalOperationHeaders(Azure.Response response)
+        public RenamedOperationHeaders(Azure.Response response)
         {
             _response = response;
         }
