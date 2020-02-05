@@ -10,11 +10,13 @@ namespace AutoRest.CodeModel
     {
         public override string Generate(JsonSchemaProperty property)
         {
+            // Makes array type properties initialized with empty collections
             if (property.IsArray)
             {
                 property.IsRequired = true;
             }
 
+            // Cases CSharp properly
             if (property.Name == "csharp")
             {
                 return "CSharp";

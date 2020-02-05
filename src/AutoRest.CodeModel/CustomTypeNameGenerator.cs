@@ -8,6 +8,7 @@ namespace AutoRest.CodeModel
 {
     internal class CustomTypeNameGenerator : DefaultTypeNameGenerator
     {
+        // Class names that conflict with project class names
         private static readonly Dictionary<string, string> RenameMap = new Dictionary<string, string>
         {
             { "HttpHeader", "HttpResponseHeader" },

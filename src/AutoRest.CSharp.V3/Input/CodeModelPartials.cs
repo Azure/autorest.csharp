@@ -54,6 +54,16 @@ namespace AutoRest.CSharp.V3.Input
         }
     }
 
+    internal partial class HTTPSecurityScheme : Dictionary<string, object>
+    {
+
+    }
+
+    internal partial class SecurityScheme : Dictionary<string, object>
+    {
+
+    }
+
     /// <summary>language metadata specific to schema instances</summary>
     internal partial class Language : IDictionary<string, object>
     {

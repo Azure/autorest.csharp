@@ -7,7 +7,6 @@
 namespace AutoRest.CSharp.V3.Input
 {
     #pragma warning disable // Disable all warnings
-    #nullable enable
 
     /// <summary>- since API version formats range from
     /// Azure ARM API date style (2018-01-01) to semver (1.2.3)
@@ -228,14 +227,6 @@ namespace AutoRest.CSharp.V3.Input
         [YamlDotNet.Serialization.YamlMember(Alias = "description")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public string Description { get; set; }
-
-        private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
-
-        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
-        {
-            get { return _additionalProperties; }
-            set { _additionalProperties = value; }
-        }
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
@@ -266,7 +257,7 @@ namespace AutoRest.CSharp.V3.Input
         Boolean = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = @"byte-array")]
-        Byteminusarray = 4,
+        ByteArray = 4,
 
         [System.Runtime.Serialization.EnumMember(Value = @"char")]
         Char = 5,
@@ -287,7 +278,7 @@ namespace AutoRest.CSharp.V3.Input
         Date = 10,
 
         [System.Runtime.Serialization.EnumMember(Value = @"date-time")]
-        Dateminustime = 11,
+        DateTime = 11,
 
         [System.Runtime.Serialization.EnumMember(Value = @"dictionary")]
         Dictionary = 12,
@@ -314,16 +305,16 @@ namespace AutoRest.CSharp.V3.Input
         Object = 19,
 
         [System.Runtime.Serialization.EnumMember(Value = @"odata-query")]
-        Odataminusquery = 20,
+        OdataQuery = 20,
 
         [System.Runtime.Serialization.EnumMember(Value = @"or")]
         Or = 21,
 
         [System.Runtime.Serialization.EnumMember(Value = @"sealed-choice")]
-        Sealedminuschoice = 22,
+        SealedChoice = 22,
 
         [System.Runtime.Serialization.EnumMember(Value = @"sealed-conditional")]
-        Sealedminusconditional = 23,
+        SealedConditional = 23,
 
         [System.Runtime.Serialization.EnumMember(Value = @"string")]
         String = 24,
@@ -370,7 +361,7 @@ namespace AutoRest.CSharp.V3.Input
         Date = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = @"date-time")]
-        Dateminustime = 4,
+        DateTime = 4,
 
         [System.Runtime.Serialization.EnumMember(Value = @"duration")]
         Duration = 5,
@@ -404,7 +395,7 @@ namespace AutoRest.CSharp.V3.Input
         Boolean = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"byte-array")]
-        Byteminusarray = 2,
+        ByteArray = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"char")]
         Char = 3,
@@ -422,7 +413,7 @@ namespace AutoRest.CSharp.V3.Input
         Date = 7,
 
         [System.Runtime.Serialization.EnumMember(Value = @"date-time")]
-        Dateminustime = 8,
+        DateTime = 8,
 
         [System.Runtime.Serialization.EnumMember(Value = @"duration")]
         Duration = 9,
@@ -437,10 +428,10 @@ namespace AutoRest.CSharp.V3.Input
         Number = 12,
 
         [System.Runtime.Serialization.EnumMember(Value = @"sealed-choice")]
-        Sealedminuschoice = 13,
+        SealedChoice = 13,
 
         [System.Runtime.Serialization.EnumMember(Value = @"sealed-conditional")]
-        Sealedminusconditional = 14,
+        SealedConditional = 14,
 
         [System.Runtime.Serialization.EnumMember(Value = @"string")]
         String = 15,
@@ -485,7 +476,7 @@ namespace AutoRest.CSharp.V3.Input
         Boolean = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = @"byte-array")]
-        Byteminusarray = 4,
+        ByteArray = 4,
 
         [System.Runtime.Serialization.EnumMember(Value = @"char")]
         Char = 5,
@@ -506,7 +497,7 @@ namespace AutoRest.CSharp.V3.Input
         Date = 10,
 
         [System.Runtime.Serialization.EnumMember(Value = @"date-time")]
-        Dateminustime = 11,
+        DateTime = 11,
 
         [System.Runtime.Serialization.EnumMember(Value = @"dictionary")]
         Dictionary = 12,
@@ -533,16 +524,16 @@ namespace AutoRest.CSharp.V3.Input
         Object = 19,
 
         [System.Runtime.Serialization.EnumMember(Value = @"odata-query")]
-        Odataminusquery = 20,
+        OdataQuery = 20,
 
         [System.Runtime.Serialization.EnumMember(Value = @"or")]
         Or = 21,
 
         [System.Runtime.Serialization.EnumMember(Value = @"sealed-choice")]
-        Sealedminuschoice = 22,
+        SealedChoice = 22,
 
         [System.Runtime.Serialization.EnumMember(Value = @"sealed-conditional")]
-        Sealedminusconditional = 23,
+        SealedConditional = 23,
 
         [System.Runtime.Serialization.EnumMember(Value = @"string")]
         String = 24,
@@ -2058,25 +2049,11 @@ namespace AutoRest.CSharp.V3.Input
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
     internal partial class HTTPSecurityScheme
     {
-        private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
-
-        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
-        {
-            get { return _additionalProperties; }
-            set { _additionalProperties = value; }
-        }
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
     internal partial class SecurityScheme
     {
-        private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
-
-        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
-        {
-            get { return _additionalProperties; }
-            set { _additionalProperties = value; }
-        }
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
@@ -2488,10 +2465,10 @@ namespace AutoRest.CSharp.V3.Input
     internal enum DateTimeSchemaFormat
     {
         [System.Runtime.Serialization.EnumMember(Value = @"date-time")]
-        Dateminustime = 0,
+        DateTime = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"date-time-rfc1123")]
-        Dateminustimeminusrfc1123 = 1,
+        DateTimeRfc1123 = 1,
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
