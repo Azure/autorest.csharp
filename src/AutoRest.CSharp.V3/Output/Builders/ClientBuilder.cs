@@ -311,6 +311,59 @@ namespace AutoRest.CSharp.V3.Output.Builders
             }
         }
 
+        private static Method BuildPollingMethod(Method method)
+        {
+            var pollingLinkParameter = new Parameter(
+                "pollingLink",
+                "The URL to poll for the final response.",
+                new CSharpType(typeof(string)),
+                null,
+                true);
+            var request = new Request(
+                RequestMethod.Get,
+                new[] { new PathSegment(pollingLinkParameter, false, SerializationFormat.Default) },
+                Array.Empty<PathSegment>(),
+                Array.Empty<QueryParameter>(),
+                method.Request.Headers,
+                null
+            );
+
+            return new Method(
+                $"{method.Name}Polling",
+                method.Description,
+                request,
+                new[] { pollingLinkParameter },
+                method.Response,
+                method.Diagnostics);
+        }
+
+        //IN PROGRESS
+        private Paging GetClientMethodPolling(Method method, Method nextPageMethod, IDictionary<object, object> pageable, ObjectType type)
+        {
+            var nextLinkName = pageable.GetValue<string>("nextLinkName");
+            var itemName = pageable.GetValue<string>("itemName") ?? "value";
+
+            var itemProperty = type.Properties.Single(p => p.SchemaProperty.SerializedName == itemName);
+
+            ObjectTypeProperty? nextLinkProperty = null;
+            if (nextLinkName != null)
+            {
+                nextLinkProperty = type.Properties.Single(p => p.SchemaProperty.SerializedName == nextLinkName);
+            }
+
+            if (itemProperty.SchemaProperty.Schema is ArraySchema arraySchema)
+            {
+                var itemType = _typeFactory.CreateType(arraySchema.ElementType, false);
+
+                var name = $"{method.Name}Pageable";
+                return new Paging(method, nextPageMethod, name, nextLinkProperty?.Name, itemProperty.Name, itemType);
+            }
+            else
+            {
+                throw new InvalidOperationException($"{itemName} property has to be an array schema, actual {itemProperty.SchemaProperty}");
+            }
+        }
+
         private Parameter BuildParameter(RequestParameter requestParameter) => new Parameter(
             requestParameter.CSharpName(),
             CreateDescription(requestParameter),
