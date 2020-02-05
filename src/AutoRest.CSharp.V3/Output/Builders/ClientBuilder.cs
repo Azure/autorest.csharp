@@ -132,7 +132,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
         {
             HttpRequest? httpRequest = operation.Request.Protocol.Http as HttpRequest;
             //TODO: Handle multiple responses: https://github.com/Azure/autorest.csharp/issues/413
-            ServiceResponse? response = operation.Responses?.FirstOrDefault();
+            ServiceResponse? response = operation.Responses.FirstOrDefault();
             HttpResponse? httpResponse = response?.Protocol.Http as HttpResponse;
             if (httpRequest == null)
             {
@@ -147,7 +147,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             List<Parameter> methodParameters = new List<Parameter>();
 
             RequestBody? body = null;
-            foreach (RequestParameter requestParameter in operation.Request.Parameters ?? Array.Empty<RequestParameter>())
+            foreach (RequestParameter requestParameter in operation.Request.Parameters)
             {
                 string defaultName = requestParameter.Language.Default.Name;
                 string serializedName = requestParameter.Language.Default.SerializedName ?? defaultName;
