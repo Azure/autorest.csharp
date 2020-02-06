@@ -330,6 +330,67 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
         }
 
+        private void WriteLongRunningOperation(CodeWriter writer, LongRunningOperation lroMethod, bool async)
+        {
+            //TODO: Fix null condition fallback type
+            CSharpType responseType = new CSharpType(typeof(Operation<>), lroMethod.Method.Response.ResponseBody?.Type ?? new CSharpType(typeof(string)));
+            var parameters = lroMethod.Method.Parameters;
+            var nextPageParameters = lroMethod.PollingMethod.Parameters;
+
+            writer.WriteXmlDocumentationSummary(lroMethod.Method.Description);
+
+            foreach (Parameter parameter in parameters)
+            {
+                writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
+            }
+
+            writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
+
+            writer.Append($"public {responseType} {CreateMethodName(lroMethod.Name, async)}(");
+            foreach (Parameter parameter in parameters)
+            {
+                WriteParameter(writer, parameter);
+            }
+
+            writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
+
+            //using (writer.Scope())
+            //{
+            //    WriteParameterNullChecks(writer, parameters);
+
+            //    var pageWrappedType = new CSharpType(typeof(Page<>), pageType);
+            //    var funcType = async ? new CSharpType(typeof(Task<>), pageWrappedType) : pageWrappedType;
+            //    var nullableInt = new CSharpType(typeof(int), true);
+
+            //    var continuationTokenText = pagingMethod.NextLinkName != null ? $"response.Value.{pagingMethod.NextLinkName}" : "null";
+            //    var asyncText = async ? "async " : string.Empty;
+            //    var awaitText = async ? "await " : string.Empty;
+            //    var configureAwaitText = async ? ".ConfigureAwait(false)" : string.Empty;
+            //    using (writer.Scope($"{asyncText}{funcType} FirstPageFunc({nullableInt} pageSizeHint)"))
+            //    {
+            //        writer.Append($"var response = {awaitText}{CreateMethodName(pagingMethod.Method.Name, async)}(");
+            //        foreach (Parameter parameter in parameters)
+            //        {
+            //            writer.Append($"{parameter.Name}, ");
+            //        }
+            //        writer.Line($"cancellationToken){configureAwaitText};");
+            //        writer.Line($"return {typeof(Page)}.FromValues(response.Value.{pagingMethod.ItemName}, {continuationTokenText}, response.GetRawResponse());");
+            //    }
+
+            //    using (writer.Scope($"{asyncText}{funcType} NextPageFunc({typeof(string)} nextLink, {nullableInt} pageSizeHint)"))
+            //    {
+            //        writer.Append($"var response = {awaitText}{CreateMethodName(pagingMethod.NextPageMethod.Name, async)}(");
+            //        foreach (Parameter parameter in nextPageParameters)
+            //        {
+            //            writer.Append($"{parameter.Name}, ");
+            //        }
+            //        writer.Line($"cancellationToken){configureAwaitText};");
+            //        writer.Line($"return {typeof(Page)}.FromValues(response.Value.{pagingMethod.ItemName}, {continuationTokenText}, response.GetRawResponse());");
+            //    }
+            //    writer.Line($"return {typeof(PageableHelpers)}.Create{(async ? "Async" : string.Empty)}Enumerable(FirstPageFunc, NextPageFunc);");
+            //}
+        }
+
         private CodeWriterDelegate WriteConstantOrParameter(ParameterOrConstant constantOrParameter, bool ignoreNullability = false) => writer =>
         {
             if (constantOrParameter.IsConstant)

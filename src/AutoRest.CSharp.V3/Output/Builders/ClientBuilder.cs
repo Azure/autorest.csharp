@@ -106,8 +106,9 @@ namespace AutoRest.CSharp.V3.Output.Builders
                     Paging pagingMethod = GetClientMethodPaging(processed.Method, nextPageMethod, pageable, objectType);
                     pagingMethods.Add(pagingMethod);
                 }
-                bool? longRunningOperation = processed.Operation.Extensions.GetValue<bool>("x-ms-long-running-operation");
-                if (longRunningOperation == true)
+                // For some reason, booleans in dictionaries are deserialized as string instead of bool.
+                bool longRunningOperation = Convert.ToBoolean(processed.Operation.Extensions.GetValue<string>("x-ms-long-running-operation") ?? "false");
+                if (longRunningOperation)
                 {
                     Method pollingMethod = BuildPollingMethod(processed.Method);
                     pollingMethods.Add(pollingMethod);
@@ -354,10 +355,18 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
         private static LongRunningOperation BuildLongRunningOperation(Method method, Method pollingMethod, IDictionary<object, object> options)
         {
-            FinalStateVia finalStateVia = FinalStateViaHelpers.Create(options.GetValue<string>("final-state-via"));
+            FinalStateVia finalStateVia = GetFinalStateVia(options.GetValue<string>("final-state-via"));
             string name = $"{method.Name}Operation";
             return new LongRunningOperation(method, pollingMethod, name, finalStateVia);
         }
+
+        private static FinalStateVia GetFinalStateVia(string? rawValue) => rawValue switch
+        {
+            "azure-async-operation" => FinalStateVia.AzureAsyncOperation,
+            "location" => FinalStateVia.Location,
+            "original-uri" => FinalStateVia.OriginalUri,
+            _ => FinalStateVia.AzureAsyncOperation
+        };
 
         private Parameter BuildParameter(RequestParameter requestParameter) => new Parameter(
             requestParameter.CSharpName(),

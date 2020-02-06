@@ -9,15 +9,4 @@ namespace AutoRest.CSharp.V3.Output.Models.Requests
         Location,
         OriginalUri
     }
-
-    internal static class FinalStateViaHelpers
-    {
-        public static FinalStateVia Create(string? rawValue) => rawValue switch
-        {
-            "azure-async-operation" => FinalStateVia.AzureAsyncOperation,
-            "location" => FinalStateVia.Location,
-            "original-uri" => FinalStateVia.OriginalUri,
-            _ => FinalStateVia.AzureAsyncOperation
-        };
-    }
 }
