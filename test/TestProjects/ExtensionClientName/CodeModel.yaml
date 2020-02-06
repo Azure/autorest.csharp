@@ -17,7 +17,7 @@ schemas: !<!Schemas>
             version: 1.0.0
           language: !<!Languages> 
             default:
-              name: string
+              name: String
               description: ''
               header: originalHeader
           protocol: !<!Protocols> {}
@@ -30,9 +30,8 @@ schemas: !<!Schemas>
       serializedName: originalProperty
       language: !<!Languages> 
         default:
-          name: RenamedProperty
+          name: renamedProperty
           description: A description about the set of tags.
-          originalName: RenamedProperty
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_2
@@ -50,9 +49,8 @@ schemas: !<!Schemas>
       serializedName: originalPropertyString
       language: !<!Languages> 
         default:
-          name: RenamedPropertyString
+          name: renamedPropertyString
           description: A description about the set of tags.
-          originalName: RenamedPropertyString
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -67,7 +65,7 @@ schemas: !<!Schemas>
     type: string
     language: !<!Languages> 
       default:
-        name: string
+        name: String
         description: simple string
     protocol: !<!Protocols> {}
   - *ref_1
@@ -108,7 +106,7 @@ operationGroups:
         required: true
         language: !<!Languages> 
           default:
-            name: RenamedPathParameter
+            name: renamedPathParameter
             description: ''
             serializedName: originalPathParameter
         protocol: !<!Protocols> 
@@ -120,7 +118,7 @@ operationGroups:
         required: true
         language: !<!Languages> 
           default:
-            name: RenamedQueryParameter
+            name: renamedQueryParameter
             description: ''
             serializedName: originalQueryParameter
         protocol: !<!Protocols> 
@@ -134,7 +132,7 @@ operationGroups:
           x-ms-requestBody-name: RenamedBodyParameter
         language: !<!Languages> 
           default:
-            name: RenamedBodyParameter
+            name: renamedBodyParameter
             description: ''
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -178,7 +176,7 @@ operationGroups:
       x-ms-requestBody-index: 2
     language: !<!Languages> 
       default:
-        name: originalOperation
+        name: OriginalOperation
         description: ''
     protocol: !<!Protocols> {}
   language: !<!Languages> 
@@ -188,7 +186,7 @@ operationGroups:
   protocol: !<!Protocols> {}
 language: !<!Languages> 
   default:
-    name: ''
+    name: ExtensionClientName
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

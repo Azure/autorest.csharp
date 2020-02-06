@@ -32,7 +32,7 @@ schemas: !<!Schemas>
                   precision: 32
                   language: !<!Languages> 
                     default:
-                      name: typeForid
+                      name: TypeForid
                       description: ''
                   protocol: !<!Protocols> {}
                 serializedName: id
@@ -40,7 +40,6 @@ schemas: !<!Schemas>
                   default:
                     name: id
                     description: ''
-                    originalName: id
                 protocol: !<!Protocols> {}
               - !<!Property> 
                 schema: !<!StringSchema> &ref_5
@@ -50,7 +49,7 @@ schemas: !<!Schemas>
                     version: 1.0.0
                   language: !<!Languages> 
                     default:
-                      name: Product-properties-name
+                      name: ProductPropertiesName
                       description: ''
                   protocol: !<!Protocols> {}
                 serializedName: name
@@ -58,11 +57,10 @@ schemas: !<!Schemas>
                   default:
                     name: name
                     description: ''
-                    originalName: name
                 protocol: !<!Protocols> {}
               language: !<!Languages> 
                 default:
-                  name: Product-properties
+                  name: ProductProperties
                   description: ''
                   namespace: Api100
               protocol: !<!Protocols> {}
@@ -71,7 +69,6 @@ schemas: !<!Schemas>
               default:
                 name: properties
                 description: ''
-                originalName: properties
             protocol: !<!Protocols> {}
           language: !<!Languages> 
             default:
@@ -81,15 +78,14 @@ schemas: !<!Schemas>
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
-            name: ProductResult-values
-            description: ''
+            name: ProductResultValues
+            description: Array of Product
         protocol: !<!Protocols> {}
       serializedName: values
       language: !<!Languages> 
         default:
           name: values
           description: ''
-          originalName: values
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_6
@@ -99,7 +95,7 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: ProductResult-nextLink
+            name: ProductResultNextLink
             description: ''
         protocol: !<!Protocols> {}
       serializedName: nextLink
@@ -107,7 +103,6 @@ schemas: !<!Schemas>
         default:
           name: nextLink
           description: ''
-          originalName: nextLink
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -129,7 +124,7 @@ schemas: !<!Schemas>
         precision: 32
         language: !<!Languages> 
           default:
-            name: typeForstatus
+            name: TypeForstatus
             description: ''
         protocol: !<!Protocols> {}
       serializedName: status
@@ -137,7 +132,6 @@ schemas: !<!Schemas>
         default:
           name: status
           description: ''
-          originalName: status
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_7
@@ -147,7 +141,7 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: Error-message
+            name: ErrorMessage
             description: ''
         protocol: !<!Protocols> {}
       serializedName: message
@@ -155,7 +149,6 @@ schemas: !<!Schemas>
         default:
           name: message
           description: ''
-          originalName: message
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -173,7 +166,7 @@ schemas: !<!Schemas>
     type: string
     language: !<!Languages> 
       default:
-        name: string
+        name: String
         description: simple string
     protocol: !<!Protocols> {}
   - *ref_5
@@ -185,7 +178,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: string
+        name: String
         description: ''
     protocol: !<!Protocols> {}
   - !<!StringSchema> 
@@ -196,7 +189,7 @@ schemas: !<!Schemas>
     defaultValue: host
     language: !<!Languages> 
       default:
-        name: string
+        name: String
         description: ''
     protocol: !<!Protocols> {}
   - *ref_7
@@ -294,7 +287,7 @@ operationGroups:
         nextLinkName: nextLink
     language: !<!Languages> 
       default:
-        name: getPagesPartialUrl
+        name: GetPagesPartialUrl
         description: 'A paging operation that combines custom url, paging and partial URL and expect to concat after host'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -364,7 +357,7 @@ operationGroups:
         operationName: Paging_getPagesPartialUrlOperationNext
     language: !<!Languages> 
       default:
-        name: getPagesPartialUrlOperation
+        name: GetPagesPartialUrlOperation
         description: 'A paging operation that combines custom url, paging and partial URL with next operation'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -449,7 +442,7 @@ operationGroups:
         operationName: Paging_getPagesPartialUrlOperationNext
     language: !<!Languages> 
       default:
-        name: getPagesPartialUrlOperationNext
+        name: GetPagesPartialUrlOperationNext
         description: 'A paging operation that combines custom url, paging and partial URL'
     protocol: !<!Protocols> {}
   language: !<!Languages> 
@@ -459,7 +452,7 @@ operationGroups:
   protocol: !<!Protocols> {}
 language: !<!Languages> 
   default:
-    name: ''
+    name: CustomBaseUrlPaging
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

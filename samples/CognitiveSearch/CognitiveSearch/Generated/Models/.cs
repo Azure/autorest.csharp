@@ -5,8 +5,8 @@
 
 namespace CognitiveSearch.Models
 {
-    /// <summary> The components·schemas·facetresult·additionalproperties. </summary>
-    public partial class ComponentsSchemasFacetresultAdditionalproperties
+    /// <summary> The . </summary>
+    public partial class
     {
     }
 }

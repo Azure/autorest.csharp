@@ -13,7 +13,7 @@ schemas: !<!Schemas>
         precision: 32
         language: !<!Languages> 
           default:
-            name: typeForstatus
+            name: TypeForstatus
             description: ''
         protocol: !<!Protocols> {}
       serializedName: status
@@ -21,7 +21,6 @@ schemas: !<!Schemas>
         default:
           name: status
           description: ''
-          originalName: status
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_1
@@ -31,7 +30,7 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: Error-message
+            name: ErrorMessage
             description: ''
         protocol: !<!Protocols> {}
       serializedName: message
@@ -39,7 +38,6 @@ schemas: !<!Schemas>
         default:
           name: message
           description: ''
-          originalName: message
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -55,7 +53,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: duration
+        name: Duration
         description: ''
     protocol: !<!Protocols> {}
   numbers:
@@ -65,7 +63,7 @@ schemas: !<!Schemas>
     type: string
     language: !<!Languages> 
       default:
-        name: string
+        name: String
         description: simple string
     protocol: !<!Protocols> {}
   - *ref_1
@@ -139,7 +137,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getNull
+        name: GetNull
         description: Get null duration value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -205,7 +203,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putPositiveDuration
+        name: PutPositiveDuration
         description: Put a positive duration value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -255,7 +253,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getPositiveDuration
+        name: GetPositiveDuration
         description: Get a positive duration value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -305,17 +303,17 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getInvalid
+        name: GetInvalid
         description: Get an invalid duration value
     protocol: !<!Protocols> {}
   language: !<!Languages> 
     default:
-      name: duration
+      name: Duration
       description: ''
   protocol: !<!Protocols> {}
 language: !<!Languages> 
   default:
-    name: ''
+    name: BodyDuration
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

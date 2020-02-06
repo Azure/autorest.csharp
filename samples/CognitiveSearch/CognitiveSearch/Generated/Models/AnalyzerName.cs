@@ -72,17 +72,17 @@ namespace CognitiveSearch.Models
         private const string LvLuceneValue = "lv.lucene";
         private const string LtMicrosoftValue = "lt.microsoft";
         private const string MlMicrosoftValue = "ml.microsoft";
-        private const string MsMicrosoftValue = "ms.microsoft";
+        private const string MSMicrosoftValue = "ms.microsoft";
         private const string MrMicrosoftValue = "mr.microsoft";
         private const string NbMicrosoftValue = "nb.microsoft";
         private const string NoLuceneValue = "no.lucene";
         private const string FaLuceneValue = "fa.lucene";
         private const string PlMicrosoftValue = "pl.microsoft";
         private const string PlLuceneValue = "pl.lucene";
-        private const string PtBRMicrosoftValue = "pt-BR.microsoft";
-        private const string PtBRLuceneValue = "pt-BR.lucene";
-        private const string PtPTMicrosoftValue = "pt-PT.microsoft";
-        private const string PtPTLuceneValue = "pt-PT.lucene";
+        private const string PtBrMicrosoftValue = "pt-BR.microsoft";
+        private const string PtBrLuceneValue = "pt-BR.lucene";
+        private const string PtMicrosoftValue = "pt-PT.microsoft";
+        private const string PtLuceneValue = "pt-PT.lucene";
         private const string PaMicrosoftValue = "pa.microsoft";
         private const string RoMicrosoftValue = "ro.microsoft";
         private const string RoLuceneValue = "ro.lucene";
@@ -220,7 +220,7 @@ namespace CognitiveSearch.Models
         /// <summary> ml.microsoft. </summary>
         public static AnalyzerName MlMicrosoft { get; } = new AnalyzerName(MlMicrosoftValue);
         /// <summary> ms.microsoft. </summary>
-        public static AnalyzerName MsMicrosoft { get; } = new AnalyzerName(MsMicrosoftValue);
+        public static AnalyzerName MSMicrosoft { get; } = new AnalyzerName(MSMicrosoftValue);
         /// <summary> mr.microsoft. </summary>
         public static AnalyzerName MrMicrosoft { get; } = new AnalyzerName(MrMicrosoftValue);
         /// <summary> nb.microsoft. </summary>
@@ -234,13 +234,13 @@ namespace CognitiveSearch.Models
         /// <summary> pl.lucene. </summary>
         public static AnalyzerName PlLucene { get; } = new AnalyzerName(PlLuceneValue);
         /// <summary> pt-BR.microsoft. </summary>
-        public static AnalyzerName PtBRMicrosoft { get; } = new AnalyzerName(PtBRMicrosoftValue);
+        public static AnalyzerName PtBrMicrosoft { get; } = new AnalyzerName(PtBrMicrosoftValue);
         /// <summary> pt-BR.lucene. </summary>
-        public static AnalyzerName PtBRLucene { get; } = new AnalyzerName(PtBRLuceneValue);
+        public static AnalyzerName PtBrLucene { get; } = new AnalyzerName(PtBrLuceneValue);
         /// <summary> pt-PT.microsoft. </summary>
-        public static AnalyzerName PtPTMicrosoft { get; } = new AnalyzerName(PtPTMicrosoftValue);
+        public static AnalyzerName PtMicrosoft { get; } = new AnalyzerName(PtMicrosoftValue);
         /// <summary> pt-PT.lucene. </summary>
-        public static AnalyzerName PtPTLucene { get; } = new AnalyzerName(PtPTLuceneValue);
+        public static AnalyzerName PtLucene { get; } = new AnalyzerName(PtLuceneValue);
         /// <summary> pa.microsoft. </summary>
         public static AnalyzerName PaMicrosoft { get; } = new AnalyzerName(PaMicrosoftValue);
         /// <summary> ro.microsoft. </summary>

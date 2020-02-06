@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace body_complex.Models
 {
-    /// <summary> The array-wrapper. </summary>
+    /// <summary> The ArrayWrapper. </summary>
     public partial class ArrayWrapper
     {
         public ICollection<string> Array { get; set; }

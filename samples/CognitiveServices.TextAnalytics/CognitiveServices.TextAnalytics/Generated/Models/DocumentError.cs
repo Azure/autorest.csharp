@@ -11,6 +11,6 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <summary> Document Id. </summary>
         public string Id { get; set; }
         /// <summary> Document Error. </summary>
-        public DocumentErrorError Error { get; set; } = new DocumentErrorError();
+        public DocumentError Error { get; set; } = new DocumentError();
     }
 }

@@ -27,7 +27,7 @@ schemas: !<!Schemas>
               protocol: !<!Protocols> {}
             language: !<!Languages> 
               default:
-                name: PetAPTrue
+                name: PetApTrue
                 description: Dictionary of <any>
             protocol: !<!Protocols> {}
           immediate:
@@ -38,7 +38,7 @@ schemas: !<!Schemas>
             type: boolean
             language: !<!Languages> 
               default:
-                name: typeForfriendly
+                name: TypeForfriendly
                 description: ''
             protocol: !<!Protocols> {}
           serializedName: friendly
@@ -46,11 +46,10 @@ schemas: !<!Schemas>
             default:
               name: friendly
               description: ''
-              originalName: friendly
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
-            name: CatAPTrue
+            name: CatApTrue
             description: ''
             namespace: Api100
         protocol: !<!Protocols> {}
@@ -68,7 +67,7 @@ schemas: !<!Schemas>
         precision: 32
         language: !<!Languages> 
           default:
-            name: typeForid
+            name: TypeForid
             description: ''
         protocol: !<!Protocols> {}
       required: true
@@ -77,7 +76,6 @@ schemas: !<!Schemas>
         default:
           name: id
           description: ''
-          originalName: id
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_22
@@ -87,7 +85,7 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: PetAPTrue-name
+            name: PetApTrueName
             description: ''
         protocol: !<!Protocols> {}
       required: false
@@ -96,14 +94,13 @@ schemas: !<!Schemas>
         default:
           name: name
           description: ''
-          originalName: name
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!BooleanSchema> &ref_10
         type: boolean
         language: !<!Languages> 
           default:
-            name: typeForstatus
+            name: TypeForstatus
             description: ''
         protocol: !<!Protocols> {}
       readOnly: true
@@ -113,11 +110,10 @@ schemas: !<!Schemas>
         default:
           name: status
           description: ''
-          originalName: status
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: PetAPTrue
+        name: PetApTrue
         description: ''
         namespace: Api100
     protocol: !<!Protocols> {}
@@ -133,7 +129,7 @@ schemas: !<!Schemas>
         precision: 32
         language: !<!Languages> 
           default:
-            name: typeForstatus
+            name: TypeForstatus
             description: ''
         protocol: !<!Protocols> {}
       serializedName: status
@@ -141,7 +137,6 @@ schemas: !<!Schemas>
         default:
           name: status
           description: ''
-          originalName: status
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_23
@@ -151,7 +146,7 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: Error-message
+            name: ErrorMessage
             description: ''
         protocol: !<!Protocols> {}
       serializedName: message
@@ -159,7 +154,6 @@ schemas: !<!Schemas>
         default:
           name: message
           description: ''
-          originalName: message
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -186,7 +180,7 @@ schemas: !<!Schemas>
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
-            name: PetAPObject
+            name: PetApObject
             description: Dictionary of <any>
         protocol: !<!Protocols> {}
       immediate:
@@ -198,7 +192,7 @@ schemas: !<!Schemas>
         precision: 32
         language: !<!Languages> 
           default:
-            name: typeForid
+            name: TypeForid
             description: ''
         protocol: !<!Protocols> {}
       required: true
@@ -207,7 +201,6 @@ schemas: !<!Schemas>
         default:
           name: id
           description: ''
-          originalName: id
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_24
@@ -217,7 +210,7 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: PetAPObject-name
+            name: PetApObjectName
             description: ''
         protocol: !<!Protocols> {}
       required: false
@@ -226,14 +219,13 @@ schemas: !<!Schemas>
         default:
           name: name
           description: ''
-          originalName: name
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!BooleanSchema> &ref_12
         type: boolean
         language: !<!Languages> 
           default:
-            name: typeForstatus
+            name: TypeForstatus
             description: ''
         protocol: !<!Protocols> {}
       readOnly: true
@@ -243,11 +235,10 @@ schemas: !<!Schemas>
         default:
           name: status
           description: ''
-          originalName: status
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: PetAPObject
+        name: PetApObject
         description: ''
         namespace: Api100
     protocol: !<!Protocols> {}
@@ -267,13 +258,13 @@ schemas: !<!Schemas>
             version: 1.0.0
           language: !<!Languages> 
             default:
-              name: string
+              name: String
               description: ''
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
-            name: Dictionary of string
-            description: Dictionary of <components·schemas·petapstring·additionalproperties>
+            name: PetApString
+            description: Dictionary of String
         protocol: !<!Protocols> {}
       immediate:
       - *ref_4
@@ -284,7 +275,7 @@ schemas: !<!Schemas>
         precision: 32
         language: !<!Languages> 
           default:
-            name: typeForid
+            name: TypeForid
             description: ''
         protocol: !<!Protocols> {}
       required: true
@@ -293,7 +284,6 @@ schemas: !<!Schemas>
         default:
           name: id
           description: ''
-          originalName: id
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_25
@@ -303,7 +293,7 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: PetAPString-name
+            name: PetApStringName
             description: ''
         protocol: !<!Protocols> {}
       required: false
@@ -312,14 +302,13 @@ schemas: !<!Schemas>
         default:
           name: name
           description: ''
-          originalName: name
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!BooleanSchema> &ref_13
         type: boolean
         language: !<!Languages> 
           default:
-            name: typeForstatus
+            name: TypeForstatus
             description: ''
         protocol: !<!Protocols> {}
       readOnly: true
@@ -329,11 +318,10 @@ schemas: !<!Schemas>
         default:
           name: status
           description: ''
-          originalName: status
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: PetAPString
+        name: PetApString
         description: ''
         namespace: Api100
     protocol: !<!Protocols> {}
@@ -349,7 +337,7 @@ schemas: !<!Schemas>
         precision: 32
         language: !<!Languages> 
           default:
-            name: typeForid
+            name: TypeForid
             description: ''
         protocol: !<!Protocols> {}
       required: true
@@ -358,7 +346,6 @@ schemas: !<!Schemas>
         default:
           name: id
           description: ''
-          originalName: id
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_26
@@ -368,7 +355,7 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: PetAPInProperties-name
+            name: PetApInPropertiesName
             description: ''
         protocol: !<!Protocols> {}
       required: false
@@ -377,14 +364,13 @@ schemas: !<!Schemas>
         default:
           name: name
           description: ''
-          originalName: name
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!BooleanSchema> &ref_14
         type: boolean
         language: !<!Languages> 
           default:
-            name: typeForstatus
+            name: TypeForstatus
             description: ''
         protocol: !<!Protocols> {}
       readOnly: true
@@ -394,7 +380,6 @@ schemas: !<!Schemas>
         default:
           name: status
           description: ''
-          originalName: status
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!DictionarySchema> &ref_8
@@ -407,13 +392,13 @@ schemas: !<!Schemas>
           precision: 32
           language: !<!Languages> 
             default:
-              name: number
+              name: Number
               description: ''
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
-            name: Dictionary of number
-            description: Dictionary of <components·schemas·petapinproperties·properties·additionalproperties·additionalproperties>
+            name: PetApInPropertiesAdditionalProperties
+            description: Dictionary of Number
         protocol: !<!Protocols> {}
       required: false
       serializedName: additionalProperties
@@ -421,11 +406,10 @@ schemas: !<!Schemas>
         default:
           name: additionalProperties
           description: Dictionary of <components·schemas·petapinproperties·properties·additionalproperties·additionalproperties>
-          originalName: additionalProperties
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: PetAPInProperties
+        name: PetApInProperties
         description: ''
         namespace: Api100
     protocol: !<!Protocols> {}
@@ -441,8 +425,8 @@ schemas: !<!Schemas>
         elementType: *ref_5
         language: !<!Languages> 
           default:
-            name: Dictionary of string
-            description: Dictionary of <components·schemas·petapstring·additionalproperties>
+            name: PetApInPropertiesWithApstring
+            description: Dictionary of String
         protocol: !<!Protocols> {}
       immediate:
       - *ref_6
@@ -453,7 +437,7 @@ schemas: !<!Schemas>
         precision: 32
         language: !<!Languages> 
           default:
-            name: typeForid
+            name: TypeForid
             description: ''
         protocol: !<!Protocols> {}
       required: true
@@ -462,7 +446,6 @@ schemas: !<!Schemas>
         default:
           name: id
           description: ''
-          originalName: id
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_27
@@ -472,7 +455,7 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: PetAPInPropertiesWithAPString-name
+            name: PetApInPropertiesWithApstringName
             description: ''
         protocol: !<!Protocols> {}
       required: false
@@ -481,14 +464,13 @@ schemas: !<!Schemas>
         default:
           name: name
           description: ''
-          originalName: name
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!BooleanSchema> &ref_15
         type: boolean
         language: !<!Languages> 
           default:
-            name: typeForstatus
+            name: TypeForstatus
             description: ''
         protocol: !<!Protocols> {}
       readOnly: true
@@ -498,7 +480,6 @@ schemas: !<!Schemas>
         default:
           name: status
           description: ''
-          originalName: status
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_28
@@ -508,7 +489,7 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: PetAPInPropertiesWithAPString-@odata.location
+            name: PetApInPropertiesWithApstringOdataLocation
             description: ''
         protocol: !<!Protocols> {}
       required: true
@@ -517,7 +498,6 @@ schemas: !<!Schemas>
         default:
           name: odataLocation
           description: ''
-          originalName: '@odata.location'
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!DictionarySchema> &ref_9
@@ -525,8 +505,8 @@ schemas: !<!Schemas>
         elementType: *ref_7
         language: !<!Languages> 
           default:
-            name: Dictionary of number
-            description: Dictionary of <components·schemas·petapinproperties·properties·additionalproperties·additionalproperties>
+            name: PetApInPropertiesWithApstringAdditionalProperties
+            description: Dictionary of Number
         protocol: !<!Protocols> {}
       required: false
       serializedName: additionalProperties
@@ -534,11 +514,10 @@ schemas: !<!Schemas>
         default:
           name: additionalProperties
           description: Dictionary of <components·schemas·petapinproperties·properties·additionalproperties·additionalproperties>
-          originalName: additionalProperties
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: PetAPInPropertiesWithAPString
+        name: PetApInPropertiesWithApstring
         description: ''
         namespace: Api100
     protocol: !<!Protocols> {}
@@ -569,7 +548,7 @@ schemas: !<!Schemas>
     type: string
     language: !<!Languages> 
       default:
-        name: string
+        name: String
         description: simple string
     protocol: !<!Protocols> {}
   - *ref_22
@@ -670,7 +649,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: CreateAPTrue
+        name: CreateApTrue
         description: Create a Pet which contains more properties than what is defined.
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -740,7 +719,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: CreateCatAPTrue
+        name: CreateCatApTrue
         description: Create a CatAPTrue which contains more properties than what is defined.
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -810,7 +789,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: CreateAPObject
+        name: CreateApObject
         description: Create a Pet which contains more properties than what is defined.
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -880,7 +859,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: CreateAPString
+        name: CreateApString
         description: Create a Pet which contains more properties than what is defined.
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -950,7 +929,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: CreateAPInProperties
+        name: CreateApInProperties
         description: Create a Pet which contains more properties than what is defined.
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1020,7 +999,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: CreateAPInPropertiesWithAPString
+        name: CreateApInPropertiesWithApstring
         description: Create a Pet which contains more properties than what is defined.
     protocol: !<!Protocols> {}
   language: !<!Languages> 
@@ -1030,7 +1009,7 @@ operationGroups:
   protocol: !<!Protocols> {}
 language: !<!Languages> 
   default:
-    name: ''
+    name: AdditionalProperties
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

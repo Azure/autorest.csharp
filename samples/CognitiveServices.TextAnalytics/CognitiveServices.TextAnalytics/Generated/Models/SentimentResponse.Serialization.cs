@@ -45,7 +45,7 @@ namespace CognitiveServices.TextAnalytics.Models
                 {
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Documents.Add(DocumentSentiment.DeserializeDocumentSentiment(item));
+                        result.Documents.Add(Models.DocumentSentiment.DeserializeDocumentSentiment(item));
                     }
                     continue;
                 }

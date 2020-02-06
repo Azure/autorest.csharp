@@ -9,7 +9,7 @@ using Azure.Core;
 
 namespace additionalProperties.Models
 {
-    public partial class PetAPInPropertiesWithAPString : IUtf8JsonSerializable
+    public partial class PetApInPropertiesWithApstring : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -46,9 +46,9 @@ namespace additionalProperties.Models
             }
             writer.WriteEndObject();
         }
-        internal static PetAPInPropertiesWithAPString DeserializePetAPInPropertiesWithAPString(JsonElement element)
+        internal static PetApInPropertiesWithApstring DeserializePetApInPropertiesWithApstring(JsonElement element)
         {
-            PetAPInPropertiesWithAPString result = new PetAPInPropertiesWithAPString();
+            PetApInPropertiesWithApstring result = new PetApInPropertiesWithApstring();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))

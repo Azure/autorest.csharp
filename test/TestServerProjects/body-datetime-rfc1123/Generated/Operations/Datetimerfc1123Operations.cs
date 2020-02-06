@@ -314,7 +314,7 @@ namespace body_datetime_rfc1123
             return message;
         }
         /// <summary> Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT. </summary>
-        /// <param name="datetimeBody"> The date-time to use. </param>
+        /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutUtcMaxDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
@@ -340,7 +340,7 @@ namespace body_datetime_rfc1123
             }
         }
         /// <summary> Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT. </summary>
-        /// <param name="datetimeBody"> The date-time to use. </param>
+        /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutUtcMaxDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
@@ -515,7 +515,7 @@ namespace body_datetime_rfc1123
             return message;
         }
         /// <summary> Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT. </summary>
-        /// <param name="datetimeBody"> The date-time to use. </param>
+        /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutUtcMinDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
@@ -541,7 +541,7 @@ namespace body_datetime_rfc1123
             }
         }
         /// <summary> Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT. </summary>
-        /// <param name="datetimeBody"> The date-time to use. </param>
+        /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutUtcMinDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {

@@ -13,7 +13,7 @@ schemas: !<!Schemas>
         precision: 32
         language: !<!Languages> 
           default:
-            name: typeForstatus
+            name: TypeForstatus
             description: ''
         protocol: !<!Protocols> {}
       serializedName: status
@@ -21,7 +21,6 @@ schemas: !<!Schemas>
         default:
           name: status
           description: ''
-          originalName: status
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_2
@@ -31,7 +30,7 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: Error-message
+            name: ErrorMessage
             description: ''
         protocol: !<!Protocols> {}
       serializedName: message
@@ -39,7 +38,6 @@ schemas: !<!Schemas>
         default:
           name: message
           description: ''
-          originalName: message
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -66,7 +64,7 @@ schemas: !<!Schemas>
         version: 1.0.0
       language: !<!Languages> 
         default:
-          name: date
+          name: Date
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
@@ -82,7 +80,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: date
+        name: Date
         description: ''
     protocol: !<!Protocols> {}
   - *ref_0
@@ -93,7 +91,7 @@ schemas: !<!Schemas>
     type: string
     language: !<!Languages> 
       default:
-        name: string
+        name: String
         description: simple string
     protocol: !<!Protocols> {}
   - *ref_2
@@ -167,7 +165,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getNull
+        name: GetNull
         description: Get null date value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -217,7 +215,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getInvalidDate
+        name: GetInvalidDate
         description: Get invalid date value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -267,7 +265,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getOverflowDate
+        name: GetOverflowDate
         description: Get overflow date value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -317,7 +315,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getUnderflowDate
+        name: GetUnderflowDate
         description: Get underflow date value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -383,7 +381,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putMaxDate
+        name: PutMaxDate
         description: Put max date value 9999-12-31
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -433,7 +431,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getMaxDate
+        name: GetMaxDate
         description: Get max date value 9999-12-31
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -499,7 +497,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putMinDate
+        name: PutMinDate
         description: Put min date value 0000-01-01
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -549,17 +547,17 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getMinDate
+        name: GetMinDate
         description: Get min date value 0000-01-01
     protocol: !<!Protocols> {}
   language: !<!Languages> 
     default:
-      name: date
+      name: Date
       description: ''
   protocol: !<!Protocols> {}
 language: !<!Languages> 
   default:
-    name: ''
+    name: BodyDate
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

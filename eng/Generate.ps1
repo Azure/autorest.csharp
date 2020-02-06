@@ -125,7 +125,9 @@ foreach ($directory in Get-ChildItem $testSwaggerPath -Directory)
     }
 }
 # Sample configuration
-$projectNames = 'AppConfiguration', 'CognitiveServices.TextAnalytics', 'CognitiveSearch'
+$projectNames = 'AppConfiguration';
+    #'CognitiveServices.TextAnalytics',
+    #'CognitiveSearch';
 
 foreach ($projectName in $projectNames)
 {

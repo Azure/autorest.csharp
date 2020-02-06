@@ -5,7 +5,7 @@
 
 namespace body_complex.Models
 {
-    /// <summary> The goblinshark. </summary>
+    /// <summary> The Goblinshark. </summary>
     public partial class Goblinshark : Shark
     {
         /// <summary> Initializes a new instance of Goblinshark. </summary>

@@ -30,14 +30,14 @@ namespace CognitiveServices.TextAnalytics.Models
             writer.WriteEndArray();
             writer.WriteEndObject();
         }
-        internal static SentenceSentiment DeserializeSentenceSentiment(JsonElement element)
+        internal static Models.SentenceSentiment DeserializeSentenceSentiment(JsonElement element)
         {
-            SentenceSentiment result = new SentenceSentiment();
+            Models.SentenceSentiment result = new Models.SentenceSentiment();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sentiment"))
                 {
-                    result.Sentiment = new SentenceSentimentSentiment(property.Value.GetString());
+                    result.Sentiment = new Models.SentenceSentiment(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("sentenceScores"))

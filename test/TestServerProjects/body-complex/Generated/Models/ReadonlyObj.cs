@@ -5,7 +5,7 @@
 
 namespace body_complex.Models
 {
-    /// <summary> The readonly-obj. </summary>
+    /// <summary> The ReadonlyObj. </summary>
     public partial class ReadonlyObj
     {
         public string Id { get; internal set; }

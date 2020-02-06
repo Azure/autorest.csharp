@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class JSONInput : IUtf8JsonSerializable, IXmlSerializable
+    public partial class JsonInput : IUtf8JsonSerializable, IXmlSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -22,9 +22,9 @@ namespace xml_service.Models
             }
             writer.WriteEndObject();
         }
-        internal static JSONInput DeserializeJSONInput(JsonElement element)
+        internal static JsonInput DeserializeJsonInput(JsonElement element)
         {
-            JSONInput result = new JSONInput();
+            JsonInput result = new JsonInput();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))
@@ -41,7 +41,7 @@ namespace xml_service.Models
         }
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
-            writer.WriteStartElement(nameHint ?? "JSONInput");
+            writer.WriteStartElement(nameHint ?? "JsonInput");
             if (Id != null)
             {
                 writer.WriteStartElement("id");
@@ -50,10 +50,10 @@ namespace xml_service.Models
             }
             writer.WriteEndElement();
         }
-        internal static JSONInput DeserializeJSONInput(XElement element)
+        internal static JsonInput DeserializeJsonInput(XElement element)
         {
-            JSONInput result = default;
-            result = new JSONInput(); int? value = default;
+            JsonInput result = default;
+            result = new JsonInput(); int? value = default;
             var id = element.Element("id");
             if (id != null)
             {

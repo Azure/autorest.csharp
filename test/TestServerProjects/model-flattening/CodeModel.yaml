@@ -27,7 +27,7 @@ schemas: !<!Schemas>
               version: 1.0.0
             language: !<!Languages> 
               default:
-                name: FlattenedProduct-properties-p.name
+                name: FlattenedProductPropertiesPName
                 description: ''
             protocol: !<!Protocols> {}
           flattenedNames:
@@ -38,7 +38,6 @@ schemas: !<!Schemas>
             default:
               name: pName
               description: ''
-              originalName: p.name
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: !<!StringSchema> &ref_4
@@ -48,7 +47,7 @@ schemas: !<!Schemas>
               version: 1.0.0
             language: !<!Languages> 
               default:
-                name: FlattenedProduct-properties-type
+                name: FlattenedProductPropertiesType
                 description: ''
             protocol: !<!Protocols> {}
           flattenedNames:
@@ -59,7 +58,6 @@ schemas: !<!Schemas>
             default:
               name: typePropertiesType
               description: ''
-              originalName: type
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: !<!ChoiceSchema> &ref_5
@@ -80,7 +78,7 @@ schemas: !<!Schemas>
               value: canceled
               language:
                 default:
-                  name: canceled
+                  name: Canceled
                   description: ''
             - !<!ChoiceValue> 
               value: Accepted
@@ -128,7 +126,7 @@ schemas: !<!Schemas>
               value: OK
               language:
                 default:
-                  name: OK
+                  name: Ok
                   description: ''
             type: choice
             apiVersions:
@@ -138,12 +136,12 @@ schemas: !<!Schemas>
               type: string
               language: !<!Languages> 
                 default:
-                  name: string
+                  name: String
                   description: simple string
               protocol: !<!Protocols> {}
             language: !<!Languages> 
               default:
-                name: FlattenedProduct-properties-provisioningStateValues
+                name: FlattenedProductPropertiesProvisioningStateValues
                 description: ''
             protocol: !<!Protocols> {}
           flattenedNames:
@@ -155,7 +153,6 @@ schemas: !<!Schemas>
             default:
               name: provisioningStateValues
               description: ''
-              originalName: provisioningStateValues
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: !<!StringSchema> &ref_6
@@ -165,7 +162,7 @@ schemas: !<!Schemas>
               version: 1.0.0
             language: !<!Languages> 
               default:
-                name: FlattenedProduct-properties-provisioningState
+                name: FlattenedProductPropertiesProvisioningState
                 description: ''
             protocol: !<!Protocols> {}
           flattenedNames:
@@ -176,7 +173,6 @@ schemas: !<!Schemas>
             default:
               name: provisioningState
               description: ''
-              originalName: provisioningState
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
@@ -195,7 +191,7 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: Resource-id
+            name: ResourceId
             description: Resource Id
         protocol: !<!Protocols> {}
       readOnly: true
@@ -204,7 +200,6 @@ schemas: !<!Schemas>
         default:
           name: id
           description: Resource Id
-          originalName: id
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_24
@@ -214,7 +209,7 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: Resource-type
+            name: ResourceType
             description: Resource Type
         protocol: !<!Protocols> {}
       readOnly: true
@@ -223,7 +218,6 @@ schemas: !<!Schemas>
         default:
           name: type
           description: Resource Type
-          originalName: type
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!DictionarySchema> &ref_17
@@ -235,20 +229,19 @@ schemas: !<!Schemas>
             version: 1.0.0
           language: !<!Languages> 
             default:
-              name: string
+              name: String
               description: ''
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
-            name: Dictionary of string
-            description: Dictionary of <components·schemas·resource·properties·tags·additionalproperties>
+            name: ResourceTags
+            description: Dictionary of String
         protocol: !<!Protocols> {}
       serializedName: tags
       language: !<!Languages> 
         default:
           name: tags
           description: Dictionary of <components·schemas·resource·properties·tags·additionalproperties>
-          originalName: tags
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_26
@@ -258,7 +251,7 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: Resource-location
+            name: ResourceLocation
             description: Resource Location
         protocol: !<!Protocols> {}
       serializedName: location
@@ -266,7 +259,6 @@ schemas: !<!Schemas>
         default:
           name: location
           description: Resource Location
-          originalName: location
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_27
@@ -276,7 +268,7 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: Resource-name
+            name: ResourceName
             description: Resource Name
         protocol: !<!Protocols> {}
       readOnly: true
@@ -285,7 +277,6 @@ schemas: !<!Schemas>
         default:
           name: name
           description: Resource Name
-          originalName: name
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -305,7 +296,7 @@ schemas: !<!Schemas>
         precision: 32
         language: !<!Languages> 
           default:
-            name: typeForstatus
+            name: TypeForstatus
             description: ''
         protocol: !<!Protocols> {}
       serializedName: status
@@ -313,7 +304,6 @@ schemas: !<!Schemas>
         default:
           name: status
           description: ''
-          originalName: status
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_28
@@ -323,7 +313,7 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: Error-message
+            name: ErrorMessage
             description: ''
         protocol: !<!Protocols> {}
       serializedName: message
@@ -331,7 +321,6 @@ schemas: !<!Schemas>
         default:
           name: message
           description: ''
-          originalName: message
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: *ref_2
@@ -340,7 +329,6 @@ schemas: !<!Schemas>
         default:
           name: parentError
           description: ''
-          originalName: parentError
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -362,7 +350,6 @@ schemas: !<!Schemas>
         default:
           name: pName
           description: ''
-          originalName: p.name
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: *ref_4
@@ -371,7 +358,6 @@ schemas: !<!Schemas>
         default:
           name: type
           description: ''
-          originalName: type
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: *ref_5
@@ -381,7 +367,6 @@ schemas: !<!Schemas>
         default:
           name: provisioningStateValues
           description: ''
-          originalName: provisioningStateValues
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: *ref_6
@@ -390,14 +375,13 @@ schemas: !<!Schemas>
         default:
           name: provisioningState
           description: ''
-          originalName: provisioningState
       protocol: !<!Protocols> {}
     extensions:
       x-ms-client-flatten: true
       x-ms-flattened: true
     language: !<!Languages> 
       default:
-        name: FlattenedProduct-properties
+        name: FlattenedProductProperties
         description: ''
         namespace: Api100
     protocol: !<!Protocols> {}
@@ -415,7 +399,7 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: WrappedProduct-value
+            name: WrappedProductValue
             description: the product value
         protocol: !<!Protocols> {}
       serializedName: value
@@ -423,7 +407,6 @@ schemas: !<!Schemas>
         default:
           name: value
           description: the product value
-          originalName: value
       protocol: !<!Protocols> {}
     extensions:
       x-ms-flattened: true
@@ -449,7 +432,6 @@ schemas: !<!Schemas>
         default:
           name: value
           description: the product value
-          originalName: value
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -470,7 +452,6 @@ schemas: !<!Schemas>
         default:
           name: productresource
           description: Flattened product.
-          originalName: productresource
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!ArraySchema> &ref_21
@@ -481,15 +462,14 @@ schemas: !<!Schemas>
         elementType: *ref_1
         language: !<!Languages> 
           default:
-            name: ResourceCollection-arrayofresources
-            description: ''
+            name: ResourceCollectionArrayofresources
+            description: Array of FlattenedProduct
         protocol: !<!Protocols> {}
       serializedName: arrayofresources
       language: !<!Languages> 
         default:
           name: arrayofresources
           description: ''
-          originalName: arrayofresources
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!DictionarySchema> &ref_18
@@ -497,7 +477,7 @@ schemas: !<!Schemas>
         elementType: *ref_1
         language: !<!Languages> 
           default:
-            name: ResourceCollection-dictionaryofresources
+            name: ResourceCollectionDictionaryofresources
             description: Dictionary of <FlattenedProduct>
         protocol: !<!Protocols> {}
       serializedName: dictionaryofresources
@@ -505,7 +485,6 @@ schemas: !<!Schemas>
         default:
           name: dictionaryofresources
           description: Dictionary of <FlattenedProduct>
-          originalName: dictionaryofresources
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -539,7 +518,7 @@ schemas: !<!Schemas>
               version: 1.0.0
             language: !<!Languages> 
               default:
-                name: SimpleProductProperties-max_product_display_name
+                name: SimpleProductPropertiesMaxProductDisplayName
                 description: Display name of product.
             protocol: !<!Protocols> {}
           flattenedNames:
@@ -550,7 +529,6 @@ schemas: !<!Schemas>
             default:
               name: maxProductDisplayName
               description: Display name of product.
-              originalName: max_product_display_name
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: !<!ConstantSchema> &ref_12
@@ -567,7 +545,7 @@ schemas: !<!Schemas>
             valueType: *ref_9
             language: !<!Languages> 
               default:
-                name: capacity
+                name: Capacity
                 description: 'Capacity of product. For example, 4 people.'
             protocol: !<!Protocols> {}
           flattenedNames:
@@ -578,7 +556,6 @@ schemas: !<!Schemas>
             default:
               name: capacity
               description: 'Capacity of product. For example, 4 people.'
-              originalName: capacity
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: !<!StringSchema> &ref_13
@@ -588,7 +565,7 @@ schemas: !<!Schemas>
               version: 1.0.0
             language: !<!Languages> 
               default:
-                name: GenericUrl-generic_value
+                name: GenericUrlGenericValue
                 description: Generic URL value.
             protocol: !<!Protocols> {}
           flattenedNames:
@@ -600,7 +577,6 @@ schemas: !<!Schemas>
             default:
               name: genericValue
               description: Generic URL value.
-              originalName: generic_value
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: !<!StringSchema> &ref_14
@@ -610,7 +586,7 @@ schemas: !<!Schemas>
               version: 1.0.0
             language: !<!Languages> 
               default:
-                name: ProductUrl-@odata.value
+                name: ProductUrlOdataValue
                 description: URL value.
             protocol: !<!Protocols> {}
           flattenedNames:
@@ -622,7 +598,6 @@ schemas: !<!Schemas>
             default:
               name: odataValue
               description: URL value.
-              originalName: '@odata.value'
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
@@ -641,7 +616,7 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: productId
+            name: ProductId
             description: 'Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.'
         protocol: !<!Protocols> {}
       required: true
@@ -650,7 +625,6 @@ schemas: !<!Schemas>
         default:
           name: productId
           description: 'Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.'
-          originalName: productId
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_30
@@ -660,7 +634,7 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: description
+            name: Description
             description: Description of product.
         protocol: !<!Protocols> {}
       required: false
@@ -669,7 +643,6 @@ schemas: !<!Schemas>
         default:
           name: description
           description: Description of product.
-          originalName: description
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -692,7 +665,6 @@ schemas: !<!Schemas>
         default:
           name: maxProductDisplayName
           description: Display name of product.
-          originalName: max_product_display_name
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: *ref_12
@@ -702,7 +674,6 @@ schemas: !<!Schemas>
         default:
           name: capacity
           description: 'Capacity of product. For example, 4 people.'
-          originalName: capacity
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: *ref_13
@@ -715,7 +686,6 @@ schemas: !<!Schemas>
         default:
           name: genericValue
           description: Generic URL value.
-          originalName: generic_value
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: *ref_14
@@ -728,7 +698,6 @@ schemas: !<!Schemas>
         default:
           name: odataValue
           description: URL value.
-          originalName: '@odata.value'
       protocol: !<!Protocols> {}
     extensions:
       x-ms-flattened: true
@@ -763,7 +732,6 @@ schemas: !<!Schemas>
             default:
               name: odataValue
               description: URL value.
-              originalName: '@odata.value'
           protocol: !<!Protocols> {}
         extensions:
           x-ms-flattened: true
@@ -783,7 +751,6 @@ schemas: !<!Schemas>
         default:
           name: genericValue
           description: Generic URL value.
-          originalName: generic_value
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -814,8 +781,8 @@ schemas: !<!Schemas>
     elementType: *ref_0
     language: !<!Languages> 
       default:
-        name: Array of Resource
-        description: ''
+        name: ArrayOfResource
+        description: Array of Resource
     protocol: !<!Protocols> {}
   - !<!ArraySchema> &ref_34
     type: array
@@ -825,8 +792,8 @@ schemas: !<!Schemas>
     elementType: *ref_1
     language: !<!Languages> 
       default:
-        name: Array of FlattenedProduct
-        description: ''
+        name: ArrayOfFlattenedProduct
+        description: Array of FlattenedProduct
     protocol: !<!Protocols> {}
   - !<!ArraySchema> &ref_35
     type: array
@@ -836,8 +803,8 @@ schemas: !<!Schemas>
     elementType: *ref_19
     language: !<!Languages> 
       default:
-        name: Array of WrappedProduct
-        description: ''
+        name: ArrayOfWrappedProduct
+        description: Array of WrappedProduct
     protocol: !<!Protocols> {}
   - !<!ArraySchema> &ref_37
     type: array
@@ -847,8 +814,8 @@ schemas: !<!Schemas>
     elementType: *ref_20
     language: !<!Languages> 
       default:
-        name: Array of ProductWrapper
-        description: ''
+        name: ArrayOfProductWrapper
+        description: Array of ProductWrapper
     protocol: !<!Protocols> {}
   - *ref_21
   constants:
@@ -909,7 +876,7 @@ operationGroups:
           x-ms-requestBody-name: ResourceArray
         language: !<!Languages> 
           default:
-            name: ResourceArray
+            name: resourceArray
             description: External Resource as an Array to put
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -957,7 +924,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putArray
+        name: PutArray
         description: Put External Resource as an Array
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1007,7 +974,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getArray
+        name: GetArray
         description: Get External Resource as an Array
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1024,7 +991,7 @@ operationGroups:
           x-ms-requestBody-name: ResourceArray
         language: !<!Languages> 
           default:
-            name: ResourceArray
+            name: resourceArray
             description: External Resource as an Array to put
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -1072,7 +1039,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putWrappedArray
+        name: PutWrappedArray
         description: No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1122,7 +1089,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getWrappedArray
+        name: GetWrappedArray
         description: No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1139,7 +1106,7 @@ operationGroups:
           x-ms-requestBody-name: ResourceDictionary
         language: !<!Languages> 
           default:
-            name: ResourceDictionary
+            name: resourceDictionary
             description: External Resource as a Dictionary to put
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -1187,7 +1154,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putDictionary
+        name: PutDictionary
         description: Put External Resource as a Dictionary
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1237,7 +1204,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getDictionary
+        name: GetDictionary
         description: Get External Resource as a Dictionary
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1254,7 +1221,7 @@ operationGroups:
           x-ms-requestBody-name: ResourceComplexObject
         language: !<!Languages> 
           default:
-            name: ResourceComplexObject
+            name: resourceComplexObject
             description: External Resource as a ResourceCollection to put
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -1302,7 +1269,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putResourceCollection
+        name: PutResourceCollection
         description: Put External Resource as a ResourceCollection
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1352,7 +1319,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getResourceCollection
+        name: GetResourceCollection
         description: Get External Resource as a ResourceCollection
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1369,7 +1336,7 @@ operationGroups:
           x-ms-requestBody-name: SimpleBodyProduct
         language: !<!Languages> 
           default:
-            name: SimpleBodyProduct
+            name: simpleBodyProduct
             description: Simple body product to put
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -1421,7 +1388,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putSimpleProduct
+        name: PutSimpleProduct
         description: Put Simple Product with client flattening true on the model
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1439,7 +1406,7 @@ operationGroups:
           x-ms-requestBody-name: SimpleBodyProduct
         language: !<!Languages> 
           default:
-            name: SimpleBodyProduct
+            name: simpleBodyProduct
             description: Simple body product to post
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -1491,7 +1458,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: postFlattenedSimpleProduct
+        name: PostFlattenedSimpleProduct
         description: Put Flattened Simple Product with client flattening true on the parameter
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1526,7 +1493,7 @@ operationGroups:
           x-ms-requestBody-name: SimpleBodyProduct
         language: !<!Languages> 
           default:
-            name: SimpleBodyProduct
+            name: simpleBodyProduct
             description: Simple body product to put
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -1579,7 +1546,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putSimpleProductWithGrouping
+        name: PutSimpleProductWithGrouping
         description: Put Simple Product with client flattening true on the model
     protocol: !<!Protocols> {}
   language: !<!Languages> 
@@ -1589,7 +1556,7 @@ operationGroups:
   protocol: !<!Protocols> {}
 language: !<!Languages> 
   default:
-    name: ''
+    name: ModelFlattening
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

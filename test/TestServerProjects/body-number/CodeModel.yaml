@@ -13,7 +13,7 @@ schemas: !<!Schemas>
         precision: 32
         language: !<!Languages> 
           default:
-            name: typeForstatus
+            name: TypeForstatus
             description: ''
         protocol: !<!Protocols> {}
       serializedName: status
@@ -21,7 +21,6 @@ schemas: !<!Schemas>
         default:
           name: status
           description: ''
-          originalName: status
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_11
@@ -31,7 +30,7 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: Error-message
+            name: ErrorMessage
             description: ''
         protocol: !<!Protocols> {}
       serializedName: message
@@ -39,7 +38,6 @@ schemas: !<!Schemas>
         default:
           name: message
           description: ''
-          originalName: message
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -67,7 +65,7 @@ schemas: !<!Schemas>
       precision: 32
       language: !<!Languages> 
         default:
-          name: number
+          name: Number
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
@@ -94,7 +92,7 @@ schemas: !<!Schemas>
       precision: 64
       language: !<!Languages> 
         default:
-          name: number
+          name: Number
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
@@ -121,7 +119,7 @@ schemas: !<!Schemas>
       precision: 64
       language: !<!Languages> 
         default:
-          name: number
+          name: Number
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
@@ -148,7 +146,7 @@ schemas: !<!Schemas>
       precision: 64
       language: !<!Languages> 
         default:
-          name: number
+          name: Number
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
@@ -175,7 +173,7 @@ schemas: !<!Schemas>
       precision: 128
       language: !<!Languages> 
         default:
-          name: number
+          name: Number
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
@@ -202,7 +200,7 @@ schemas: !<!Schemas>
       precision: 128
       language: !<!Languages> 
         default:
-          name: number
+          name: Number
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
@@ -229,7 +227,7 @@ schemas: !<!Schemas>
       precision: 128
       language: !<!Languages> 
         default:
-          name: number
+          name: Number
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
@@ -256,7 +254,7 @@ schemas: !<!Schemas>
       precision: 64
       language: !<!Languages> 
         default:
-          name: number
+          name: Number
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
@@ -283,7 +281,7 @@ schemas: !<!Schemas>
       precision: 64
       language: !<!Languages> 
         default:
-          name: number
+          name: Number
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
@@ -310,7 +308,7 @@ schemas: !<!Schemas>
       precision: 128
       language: !<!Languages> 
         default:
-          name: number
+          name: Number
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
@@ -327,7 +325,7 @@ schemas: !<!Schemas>
     precision: 32
     language: !<!Languages> 
       default:
-        name: number
+        name: Number
         description: ''
     protocol: !<!Protocols> {}
   - *ref_0
@@ -339,7 +337,7 @@ schemas: !<!Schemas>
     precision: 32
     language: !<!Languages> 
       default:
-        name: number
+        name: Number
         description: ''
     protocol: !<!Protocols> {}
   - !<!NumberSchema> &ref_17
@@ -350,7 +348,7 @@ schemas: !<!Schemas>
     precision: 64
     language: !<!Languages> 
       default:
-        name: number
+        name: Number
         description: ''
     protocol: !<!Protocols> {}
   - !<!NumberSchema> &ref_18
@@ -361,7 +359,7 @@ schemas: !<!Schemas>
     precision: 128
     language: !<!Languages> 
       default:
-        name: number
+        name: Number
         description: ''
     protocol: !<!Protocols> {}
   - *ref_1
@@ -379,7 +377,7 @@ schemas: !<!Schemas>
     type: string
     language: !<!Languages> 
       default:
-        name: string
+        name: String
         description: simple string
     protocol: !<!Protocols> {}
   - *ref_11
@@ -453,7 +451,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getNull
+        name: GetNull
         description: Get null Number value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -503,7 +501,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getInvalidFloat
+        name: GetInvalidFloat
         description: Get invalid float Number value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -553,7 +551,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getInvalidDouble
+        name: GetInvalidDouble
         description: Get invalid double Number value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -603,7 +601,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getInvalidDecimal
+        name: GetInvalidDecimal
         description: Get invalid decimal Number value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -669,7 +667,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putBigFloat
+        name: PutBigFloat
         description: Put big float value 3.402823e+20
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -719,7 +717,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getBigFloat
+        name: GetBigFloat
         description: Get big float value 3.402823e+20
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -785,7 +783,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putBigDouble
+        name: PutBigDouble
         description: Put big double value 2.5976931e+101
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -835,7 +833,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getBigDouble
+        name: GetBigDouble
         description: Get big double value 2.5976931e+101
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -900,7 +898,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putBigDoublePositiveDecimal
+        name: PutBigDoublePositiveDecimal
         description: Put big double value 99999999.99
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -950,7 +948,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getBigDoublePositiveDecimal
+        name: GetBigDoublePositiveDecimal
         description: Get big double value 99999999.99
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1015,7 +1013,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putBigDoubleNegativeDecimal
+        name: PutBigDoubleNegativeDecimal
         description: Put big double value -99999999.99
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1065,7 +1063,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getBigDoubleNegativeDecimal
+        name: GetBigDoubleNegativeDecimal
         description: Get big double value -99999999.99
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1131,7 +1129,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putBigDecimal
+        name: PutBigDecimal
         description: Put big decimal value 2.5976931e+101
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1181,7 +1179,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getBigDecimal
+        name: GetBigDecimal
         description: Get big decimal value 2.5976931e+101
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1246,7 +1244,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putBigDecimalPositiveDecimal
+        name: PutBigDecimalPositiveDecimal
         description: Put big decimal value 99999999.99
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1296,7 +1294,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getBigDecimalPositiveDecimal
+        name: GetBigDecimalPositiveDecimal
         description: Get big decimal value 99999999.99
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1361,7 +1359,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putBigDecimalNegativeDecimal
+        name: PutBigDecimalNegativeDecimal
         description: Put big decimal value -99999999.99
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1411,7 +1409,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getBigDecimalNegativeDecimal
+        name: GetBigDecimalNegativeDecimal
         description: Get big decimal value -99999999.99
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1477,7 +1475,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putSmallFloat
+        name: PutSmallFloat
         description: Put small float value 3.402823e-20
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1527,7 +1525,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getSmallFloat
+        name: GetSmallFloat
         description: Get big double value 3.402823e-20
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1593,7 +1591,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putSmallDouble
+        name: PutSmallDouble
         description: Put small double value 2.5976931e-101
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1643,7 +1641,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getSmallDouble
+        name: GetSmallDouble
         description: Get big double value 2.5976931e-101
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1709,7 +1707,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putSmallDecimal
+        name: PutSmallDecimal
         description: Put small decimal value 2.5976931e-101
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1759,17 +1757,17 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getSmallDecimal
+        name: GetSmallDecimal
         description: Get small decimal value 2.5976931e-101
     protocol: !<!Protocols> {}
   language: !<!Languages> 
     default:
-      name: number
+      name: Number
       description: ''
   protocol: !<!Protocols> {}
 language: !<!Languages> 
   default:
-    name: ''
+    name: BodyNumber
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

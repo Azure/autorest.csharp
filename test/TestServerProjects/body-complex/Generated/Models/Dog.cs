@@ -5,7 +5,7 @@
 
 namespace body_complex.Models
 {
-    /// <summary> The dog. </summary>
+    /// <summary> The Dog. </summary>
     public partial class Dog : Pet
     {
         public string Food { get; set; }

@@ -13,7 +13,7 @@ schemas: !<!Schemas>
         precision: 32
         language: !<!Languages> 
           default:
-            name: typeForstatus
+            name: TypeForstatus
             description: ''
         protocol: !<!Protocols> {}
       serializedName: status
@@ -21,7 +21,6 @@ schemas: !<!Schemas>
         default:
           name: status
           description: ''
-          originalName: status
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_25
@@ -31,7 +30,7 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: Error-message
+            name: ErrorMessage
             description: ''
         protocol: !<!Protocols> {}
       serializedName: message
@@ -39,7 +38,6 @@ schemas: !<!Schemas>
         default:
           name: message
           description: ''
-          originalName: message
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -60,13 +58,13 @@ schemas: !<!Schemas>
         version: 1.0.0
       language: !<!Languages> 
         default:
-          name: get-0-itemsItem
+          name: Get0ItemsItem
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Array of get-0-itemsItem
-        description: ''
+        name: ArrayOfGet0ItemsItem
+        description: Array of Get0ItemsItem
     protocol: !<!Protocols> {}
   - !<!ArraySchema> &ref_97
     type: array
@@ -80,20 +78,20 @@ schemas: !<!Schemas>
         version: 1.0.0
       language: !<!Languages> 
         default:
-          name: string
+          name: String
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Array of string
-        description: ''
+        name: ArrayOfString
+        description: Array of String
     protocol: !<!Protocols> {}
   booleans:
   - !<!BooleanSchema> &ref_0
     type: boolean
     language: !<!Languages> 
       default:
-        name: bool
+        name: Bool
         description: simple boolean
     protocol: !<!Protocols> {}
   - !<!BooleanSchema> &ref_66
@@ -103,7 +101,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: boolean
+        name: Boolean
         description: ''
     protocol: !<!Protocols> {}
   byteArrays:
@@ -115,7 +113,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: byte-array
+        name: ByteArray
         description: ''
     protocol: !<!Protocols> {}
   - !<!ByteArraySchema> &ref_2
@@ -123,7 +121,7 @@ schemas: !<!Schemas>
     format: byte
     language: !<!Languages> 
       default:
-        name: byte-array
+        name: ByteArray
         description: ''
     protocol: !<!Protocols> {}
   - !<!ByteArraySchema> &ref_58
@@ -134,7 +132,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: byte-array
+        name: ByteArray
         description: ''
     protocol: !<!Protocols> {}
   - !<!ByteArraySchema> &ref_3
@@ -142,7 +140,7 @@ schemas: !<!Schemas>
     format: byte
     language: !<!Languages> 
       default:
-        name: byte-array
+        name: ByteArray
         description: ''
     protocol: !<!Protocols> {}
   constants:
@@ -157,7 +155,7 @@ schemas: !<!Schemas>
     valueType: *ref_0
     language: !<!Languages> 
       default:
-        name: Constant0
+        name: Constant1
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_31
@@ -171,7 +169,7 @@ schemas: !<!Schemas>
     valueType: *ref_0
     language: !<!Languages> 
       default:
-        name: Constant1
+        name: Constant2
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_32
@@ -187,12 +185,12 @@ schemas: !<!Schemas>
       precision: 32
       language: !<!Languages> 
         default:
-          name: number
+          name: Number
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant2
+        name: Constant3
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_33
@@ -208,12 +206,12 @@ schemas: !<!Schemas>
       precision: 32
       language: !<!Languages> 
         default:
-          name: number
+          name: Number
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant3
+        name: Constant4
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_34
@@ -229,12 +227,12 @@ schemas: !<!Schemas>
       precision: 32
       language: !<!Languages> 
         default:
-          name: number
+          name: Number
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant4
+        name: Constant5
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_35
@@ -250,12 +248,12 @@ schemas: !<!Schemas>
       precision: 32
       language: !<!Languages> 
         default:
-          name: number
+          name: Number
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant5
+        name: Constant6
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_36
@@ -271,12 +269,12 @@ schemas: !<!Schemas>
       precision: 32
       language: !<!Languages> 
         default:
-          name: number
+          name: Number
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant6
+        name: Constant7
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_37
@@ -292,12 +290,12 @@ schemas: !<!Schemas>
       precision: 32
       language: !<!Languages> 
         default:
-          name: number
+          name: Number
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant7
+        name: Constant8
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_38
@@ -313,12 +311,12 @@ schemas: !<!Schemas>
       precision: 64
       language: !<!Languages> 
         default:
-          name: number
+          name: Number
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant8
+        name: Constant9
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_39
@@ -334,12 +332,12 @@ schemas: !<!Schemas>
       precision: 64
       language: !<!Languages> 
         default:
-          name: number
+          name: Number
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant9
+        name: Constant10
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_40
@@ -354,12 +352,12 @@ schemas: !<!Schemas>
       type: string
       language: !<!Languages> 
         default:
-          name: string
+          name: String
           description: simple string
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant10
+        name: Constant11
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_41
@@ -373,7 +371,7 @@ schemas: !<!Schemas>
     valueType: *ref_1
     language: !<!Languages> 
       default:
-        name: Constant11
+        name: Constant12
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_42
@@ -387,7 +385,7 @@ schemas: !<!Schemas>
     valueType: *ref_1
     language: !<!Languages> 
       default:
-        name: Constant12
+        name: Constant13
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_43
@@ -401,7 +399,7 @@ schemas: !<!Schemas>
     valueType: *ref_1
     language: !<!Languages> 
       default:
-        name: Constant13
+        name: Constant14
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_50
@@ -415,7 +413,7 @@ schemas: !<!Schemas>
     valueType: *ref_2
     language: !<!Languages> 
       default:
-        name: Constant14
+        name: Constant15
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_52
@@ -430,12 +428,12 @@ schemas: !<!Schemas>
       type: date
       language: !<!Languages> 
         default:
-          name: date
+          name: Date
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant15
+        name: Constant16
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_55
@@ -451,12 +449,12 @@ schemas: !<!Schemas>
       format: date-time
       language: !<!Languages> 
         default:
-          name: date-time
+          name: DateTime
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant16
+        name: Constant17
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_64
@@ -470,7 +468,7 @@ schemas: !<!Schemas>
     valueType: *ref_0
     language: !<!Languages> 
       default:
-        name: Constant17
+        name: Constant18
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_65
@@ -484,7 +482,7 @@ schemas: !<!Schemas>
     valueType: *ref_0
     language: !<!Languages> 
       default:
-        name: Constant18
+        name: Constant19
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_68
@@ -500,12 +498,12 @@ schemas: !<!Schemas>
       precision: 32
       language: !<!Languages> 
         default:
-          name: number
+          name: Number
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant19
+        name: Constant20
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_69
@@ -521,12 +519,12 @@ schemas: !<!Schemas>
       precision: 32
       language: !<!Languages> 
         default:
-          name: number
+          name: Number
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant20
+        name: Constant21
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_72
@@ -542,12 +540,12 @@ schemas: !<!Schemas>
       precision: 32
       language: !<!Languages> 
         default:
-          name: number
+          name: Number
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant21
+        name: Constant22
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_73
@@ -563,12 +561,12 @@ schemas: !<!Schemas>
       precision: 32
       language: !<!Languages> 
         default:
-          name: number
+          name: Number
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant22
+        name: Constant23
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_76
@@ -584,12 +582,12 @@ schemas: !<!Schemas>
       precision: 32
       language: !<!Languages> 
         default:
-          name: number
+          name: Number
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant23
+        name: Constant24
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_77
@@ -605,12 +603,12 @@ schemas: !<!Schemas>
       precision: 32
       language: !<!Languages> 
         default:
-          name: number
+          name: Number
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant24
+        name: Constant25
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_80
@@ -626,12 +624,12 @@ schemas: !<!Schemas>
       precision: 64
       language: !<!Languages> 
         default:
-          name: number
+          name: Number
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant25
+        name: Constant26
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_81
@@ -647,12 +645,12 @@ schemas: !<!Schemas>
       precision: 64
       language: !<!Languages> 
         default:
-          name: number
+          name: Number
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant26
+        name: Constant27
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_84
@@ -666,7 +664,7 @@ schemas: !<!Schemas>
     valueType: *ref_1
     language: !<!Languages> 
       default:
-        name: Constant27
+        name: Constant28
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_85
@@ -680,7 +678,7 @@ schemas: !<!Schemas>
     valueType: *ref_1
     language: !<!Languages> 
       default:
-        name: Constant28
+        name: Constant29
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_86
@@ -694,7 +692,7 @@ schemas: !<!Schemas>
     valueType: *ref_1
     language: !<!Languages> 
       default:
-        name: Constant29
+        name: Constant30
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_91
@@ -708,7 +706,7 @@ schemas: !<!Schemas>
     valueType: *ref_3
     language: !<!Languages> 
       default:
-        name: Constant30
+        name: Constant31
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_93
@@ -723,12 +721,12 @@ schemas: !<!Schemas>
       type: date
       language: !<!Languages> 
         default:
-          name: date
+          name: Date
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant31
+        name: Constant32
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_95
@@ -744,12 +742,12 @@ schemas: !<!Schemas>
       format: date-time
       language: !<!Languages> 
         default:
-          name: date-time
+          name: DateTime
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Constant32
+        name: Constant33
         description: ''
     protocol: !<!Protocols> {}
   dateTimes:
@@ -762,7 +760,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: date-time
+        name: DateTime
         description: ''
     protocol: !<!Protocols> {}
   - *ref_5
@@ -775,7 +773,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: date
+        name: Date
         description: ''
     protocol: !<!Protocols> {}
   - *ref_7
@@ -799,7 +797,7 @@ schemas: !<!Schemas>
     precision: 32
     language: !<!Languages> 
       default:
-        name: integer
+        name: Integer
         description: ''
     protocol: !<!Protocols> {}
   - *ref_19
@@ -812,7 +810,7 @@ schemas: !<!Schemas>
     precision: 64
     language: !<!Languages> 
       default:
-        name: integer
+        name: Integer
         description: ''
     protocol: !<!Protocols> {}
   - *ref_21
@@ -825,7 +823,7 @@ schemas: !<!Schemas>
     precision: 32
     language: !<!Languages> 
       default:
-        name: number
+        name: Number
         description: ''
     protocol: !<!Protocols> {}
   - *ref_23
@@ -838,7 +836,7 @@ schemas: !<!Schemas>
     precision: 64
     language: !<!Languages> 
       default:
-        name: number
+        name: Number
         description: ''
     protocol: !<!Protocols> {}
   sealedChoices:
@@ -848,19 +846,19 @@ schemas: !<!Schemas>
       value: red color
       language:
         default:
-          name: red color
+          name: RedColor
           description: ''
     - !<!ChoiceValue> 
       value: green color
       language:
         default:
-          name: green color
+          name: GreenColor
           description: ''
     - !<!ChoiceValue> 
       value: blue color
       language:
         default:
-          name: blue color
+          name: BlueColor
           description: ''
     type: sealed-choice
     apiVersions:
@@ -885,7 +883,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: unixtime
+        name: Unixtime
         description: 'date in seconds since 1970-01-01T00:00:00Z.'
     protocol: !<!Protocols> {}
 globalParameters:
@@ -993,7 +991,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getBooleanTrue
+        name: GetBooleanTrue
         description: Get true Boolean value on path
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1051,7 +1049,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getBooleanFalse
+        name: GetBooleanFalse
         description: Get false Boolean value on path
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1109,7 +1107,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getIntOneMillion
+        name: GetIntOneMillion
         description: Get '1000000' integer value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1167,7 +1165,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getIntNegativeOneMillion
+        name: GetIntNegativeOneMillion
         description: Get '-1000000' integer value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1225,7 +1223,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getTenBillion
+        name: GetTenBillion
         description: Get '10000000000' 64 bit integer value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1283,7 +1281,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getNegativeTenBillion
+        name: GetNegativeTenBillion
         description: Get '-10000000000' 64 bit integer value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1341,7 +1339,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: floatScientificPositive
+        name: FloatScientificPositive
         description: Get '1.034E+20' numeric value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1399,7 +1397,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: floatScientificNegative
+        name: FloatScientificNegative
         description: Get '-1.034E-20' numeric value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1457,7 +1455,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: doubleDecimalPositive
+        name: DoubleDecimalPositive
         description: Get '9999999.999' numeric value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1515,7 +1513,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: doubleDecimalNegative
+        name: DoubleDecimalNegative
         description: Get '-9999999.999' numeric value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1573,7 +1571,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: stringUnicode
+        name: StringUnicode
         description: Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1631,7 +1629,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: stringUrlEncoded
+        name: StringUrlEncoded
         description: 'Get ''begin!*''();:@ &=+$,/?#[]end'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1691,7 +1689,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: stringUrlNonEncoded
+        name: StringUrlNonEncoded
         description: 'Get ''begin!*''();:@&=+$,end'
         summary: 'https://tools.ietf.org/html/rfc3986#appendix-A ''path'' accept any ''pchar'' not encoded'
     protocol: !<!Protocols> {}
@@ -1750,7 +1748,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: stringEmpty
+        name: StringEmpty
         description: Get ''
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1809,7 +1807,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: stringNull
+        name: StringNull
         description: Get null (should throw)
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1868,7 +1866,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: enumValid
+        name: EnumValid
         description: Get using uri with 'green color' in path parameter
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1927,7 +1925,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: enumNull
+        name: EnumNull
         description: Get null (should throw on the client before the request is sent on wire)
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1986,7 +1984,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: byteMultiByte
+        name: ByteMultiByte
         description: Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2044,7 +2042,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: byteEmpty
+        name: ByteEmpty
         description: Get '' as byte array
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2103,7 +2101,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: byteNull
+        name: ByteNull
         description: Get null as byte array (should throw)
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2396,7 +2394,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: base64Url
+        name: Base64Url
         description: Get 'lorem' encoded value as 'bG9yZW0' (base64url)
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2515,12 +2513,12 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: unixTimeUrl
+        name: UnixTimeUrl
         description: Get the date 2016-04-13 encoded value as '1460505600' (Unix time)
     protocol: !<!Protocols> {}
   language: !<!Languages> 
     default:
-      name: paths
+      name: Paths
       description: ''
   protocol: !<!Protocols> {}
 - !<!OperationGroup> 
@@ -2581,7 +2579,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getBooleanTrue
+        name: GetBooleanTrue
         description: Get true Boolean value on path
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2639,7 +2637,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getBooleanFalse
+        name: GetBooleanFalse
         description: Get false Boolean value on path
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2697,7 +2695,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getBooleanNull
+        name: GetBooleanNull
         description: Get null Boolean value on query (query string should be absent)
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2755,7 +2753,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getIntOneMillion
+        name: GetIntOneMillion
         description: Get '1000000' integer value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2813,7 +2811,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getIntNegativeOneMillion
+        name: GetIntNegativeOneMillion
         description: Get '-1000000' integer value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2871,7 +2869,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getIntNull
+        name: GetIntNull
         description: Get null integer value (no query parameter)
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2929,7 +2927,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getTenBillion
+        name: GetTenBillion
         description: Get '10000000000' 64 bit integer value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2987,7 +2985,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getNegativeTenBillion
+        name: GetNegativeTenBillion
         description: Get '-10000000000' 64 bit integer value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3045,7 +3043,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getLongNull
+        name: GetLongNull
         description: Get 'null 64 bit integer value (no query param in uri)
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3103,7 +3101,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: floatScientificPositive
+        name: FloatScientificPositive
         description: Get '1.034E+20' numeric value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3161,7 +3159,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: floatScientificNegative
+        name: FloatScientificNegative
         description: Get '-1.034E-20' numeric value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3219,7 +3217,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: floatNull
+        name: FloatNull
         description: Get null numeric value (no query parameter)
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3277,7 +3275,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: doubleDecimalPositive
+        name: DoubleDecimalPositive
         description: Get '9999999.999' numeric value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3335,7 +3333,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: doubleDecimalNegative
+        name: DoubleDecimalNegative
         description: Get '-9999999.999' numeric value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3393,7 +3391,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: doubleNull
+        name: DoubleNull
         description: Get null numeric value (no query parameter)
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3451,7 +3449,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: stringUnicode
+        name: StringUnicode
         description: Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3509,7 +3507,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: stringUrlEncoded
+        name: StringUrlEncoded
         description: 'Get ''begin!*''();:@ &=+$,/?#[]end'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3567,7 +3565,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: stringEmpty
+        name: StringEmpty
         description: Get ''
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3625,7 +3623,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: stringNull
+        name: StringNull
         description: Get null (no query parameter in url)
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3683,7 +3681,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: enumValid
+        name: EnumValid
         description: Get using uri with query parameter 'green color'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3741,7 +3739,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: enumNull
+        name: EnumNull
         description: Get null (no query parameter in url)
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3799,7 +3797,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: byteMultiByte
+        name: ByteMultiByte
         description: Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3857,7 +3855,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: byteEmpty
+        name: ByteEmpty
         description: Get '' as byte array
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3915,7 +3913,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: byteNull
+        name: ByteNull
         description: Get null as byte array (no query parameters in uri)
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -4506,7 +4504,7 @@ operationGroups:
     protocol: !<!Protocols> {}
   language: !<!Languages> 
     default:
-      name: queries
+      name: Queries
       description: ''
   protocol: !<!Protocols> {}
 - !<!OperationGroup> 
@@ -4607,7 +4605,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getAllWithValues
+        name: GetAllWithValues
         description: >-
           send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery='pathItemStringQuery',
           localStringQuery='localStringQuery'
@@ -4707,7 +4705,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getGlobalQueryNull
+        name: GetGlobalQueryNull
         description: 'send globalStringPath=''globalStringPath'', pathItemStringPath=''pathItemStringPath'', localStringPath=''localStringPath'', globalStringQuery=null, pathItemStringQuery=''pathItemStringQuery'', localStringQuery=''localStringQuery'''
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -4805,7 +4803,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getGlobalAndLocalQueryNull
+        name: GetGlobalAndLocalQueryNull
         description: 'send globalStringPath=globalStringPath, pathItemStringPath=''pathItemStringPath'', localStringPath=''localStringPath'', globalStringQuery=null, pathItemStringQuery=''pathItemStringQuery'', localStringQuery=null'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -4903,17 +4901,17 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getLocalPathItemQueryNull
+        name: GetLocalPathItemQueryNull
         description: 'send globalStringPath=''globalStringPath'', pathItemStringPath=''pathItemStringPath'', localStringPath=''localStringPath'', globalStringQuery=''globalStringQuery'', pathItemStringQuery=null, localStringQuery=null'
     protocol: !<!Protocols> {}
   language: !<!Languages> 
     default:
-      name: pathItems
+      name: PathItems
       description: ''
   protocol: !<!Protocols> {}
 language: !<!Languages> 
   default:
-    name: ''
+    name: Url
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

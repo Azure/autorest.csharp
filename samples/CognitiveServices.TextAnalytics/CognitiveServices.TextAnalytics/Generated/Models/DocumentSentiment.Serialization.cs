@@ -33,9 +33,9 @@ namespace CognitiveServices.TextAnalytics.Models
             writer.WriteEndArray();
             writer.WriteEndObject();
         }
-        internal static DocumentSentiment DeserializeDocumentSentiment(JsonElement element)
+        internal static Models.DocumentSentiment DeserializeDocumentSentiment(JsonElement element)
         {
-            DocumentSentiment result = new DocumentSentiment();
+            Models.DocumentSentiment result = new Models.DocumentSentiment();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))
@@ -45,7 +45,7 @@ namespace CognitiveServices.TextAnalytics.Models
                 }
                 if (property.NameEquals("sentiment"))
                 {
-                    result.Sentiment = new DocumentSentimentSentiment(property.Value.GetString());
+                    result.Sentiment = new Models.DocumentSentiment(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("statistics"))
@@ -66,7 +66,7 @@ namespace CognitiveServices.TextAnalytics.Models
                 {
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Sentences.Add(SentenceSentiment.DeserializeSentenceSentiment(item));
+                        result.Sentences.Add(Models.SentenceSentiment.DeserializeSentenceSentiment(item));
                     }
                     continue;
                 }

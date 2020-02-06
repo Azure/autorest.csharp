@@ -7,7 +7,7 @@ using System;
 
 namespace body_complex.Models
 {
-    /// <summary> The byte-wrapper. </summary>
+    /// <summary> The ByteWrapper. </summary>
     public partial class ByteWrapper
     {
         public byte[] Field { get; set; }

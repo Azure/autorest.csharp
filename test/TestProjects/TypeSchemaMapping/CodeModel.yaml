@@ -15,16 +15,15 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: Model-ModelProperty
+            name: ModelProperty
             description: A description about the set of tags.
         protocol: !<!Protocols> {}
       required: false
       serializedName: ModelProperty
       language: !<!Languages> 
         default:
-          name: ModelProperty
+          name: modelProperty
           description: A description about the set of tags.
-          originalName: ModelProperty
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!ChoiceSchema> &ref_1
@@ -33,13 +32,13 @@ schemas: !<!Schemas>
           value: apple
           language:
             default:
-              name: apple
+              name: Apple
               description: ''
         - !<!ChoiceValue> 
           value: pear
           language:
             default:
-              name: pear
+              name: Pear
               description: ''
         type: choice
         apiVersions:
@@ -49,7 +48,7 @@ schemas: !<!Schemas>
           type: string
           language: !<!Languages> 
             default:
-              name: string
+              name: String
               description: simple string
           protocol: !<!Protocols> {}
         language: !<!Languages> 
@@ -61,9 +60,8 @@ schemas: !<!Schemas>
       serializedName: Fruit
       language: !<!Languages> 
         default:
-          name: Fruit
+          name: fruit
           description: Fruit
-          originalName: Fruit
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!ChoiceSchema> &ref_2
@@ -124,9 +122,8 @@ schemas: !<!Schemas>
       serializedName: DaysOfWeek
       language: !<!Languages> 
         default:
-          name: DaysOfWeek
+          name: daysOfWeek
           description: Day of week
-          originalName: DaysOfWeek
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -225,7 +222,7 @@ operationGroups:
   protocol: !<!Protocols> {}
 language: !<!Languages> 
   default:
-    name: ''
+    name: TypeSchemaMapping
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

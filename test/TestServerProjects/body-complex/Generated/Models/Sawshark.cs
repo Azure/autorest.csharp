@@ -7,7 +7,7 @@ using System;
 
 namespace body_complex.Models
 {
-    /// <summary> The sawshark. </summary>
+    /// <summary> The Sawshark. </summary>
     public partial class Sawshark : Shark
     {
         /// <summary> Initializes a new instance of Sawshark. </summary>

@@ -11,7 +11,7 @@ namespace CognitiveServices.TextAnalytics.Models
     public partial class SentimentResponse
     {
         /// <summary> Sentiment analysis per document. </summary>
-        public ICollection<DocumentSentiment> Documents { get; set; } = new System.Collections.Generic.List<CognitiveServices.TextAnalytics.Models.DocumentSentiment>();
+        public ICollection<Models.DocumentSentiment> Documents { get; set; } = new System.Collections.Generic.List<CognitiveServices.TextAnalytics.Models.DocumentSentiment>();
         /// <summary> Errors by document id. </summary>
         public ICollection<DocumentError> Errors { get; set; } = new System.Collections.Generic.List<CognitiveServices.TextAnalytics.Models.DocumentError>();
         /// <summary> if showStats=true was specified in the request this field will contain information about the request payload. </summary>

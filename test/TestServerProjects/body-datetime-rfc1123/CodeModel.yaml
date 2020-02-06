@@ -13,7 +13,7 @@ schemas: !<!Schemas>
         precision: 32
         language: !<!Languages> 
           default:
-            name: typeForstatus
+            name: TypeForstatus
             description: ''
         protocol: !<!Protocols> {}
       serializedName: status
@@ -21,7 +21,6 @@ schemas: !<!Schemas>
         default:
           name: status
           description: ''
-          originalName: status
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_2
@@ -31,7 +30,7 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: Error-message
+            name: ErrorMessage
             description: ''
         protocol: !<!Protocols> {}
       serializedName: message
@@ -39,7 +38,6 @@ schemas: !<!Schemas>
         default:
           name: message
           description: ''
-          originalName: message
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -67,7 +65,7 @@ schemas: !<!Schemas>
         version: 1.0.0
       language: !<!Languages> 
         default:
-          name: date-time
+          name: DateTime
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
@@ -84,7 +82,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: date-time
+        name: DateTime
         description: ''
     protocol: !<!Protocols> {}
   - *ref_0
@@ -95,7 +93,7 @@ schemas: !<!Schemas>
     type: string
     language: !<!Languages> 
       default:
-        name: string
+        name: String
         description: simple string
     protocol: !<!Protocols> {}
   - *ref_2
@@ -169,7 +167,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getNull
+        name: GetNull
         description: Get null datetime value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -219,7 +217,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getInvalid
+        name: GetInvalid
         description: Get invalid datetime value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -269,7 +267,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getOverflow
+        name: GetOverflow
         description: Get overflow datetime value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -319,7 +317,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getUnderflow
+        name: GetUnderflow
         description: Get underflow datetime value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -385,7 +383,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putUtcMaxDateTime
+        name: PutUtcMaxDateTime
         description: 'Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -435,7 +433,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getUtcLowercaseMaxDateTime
+        name: GetUtcLowercaseMaxDateTime
         description: 'Get max datetime value fri, 31 dec 9999 23:59:59 gmt'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -485,7 +483,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getUtcUppercaseMaxDateTime
+        name: GetUtcUppercaseMaxDateTime
         description: 'Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -551,7 +549,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putUtcMinDateTime
+        name: PutUtcMinDateTime
         description: 'Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -601,17 +599,17 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getUtcMinDateTime
+        name: GetUtcMinDateTime
         description: 'Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT'
     protocol: !<!Protocols> {}
   language: !<!Languages> 
     default:
-      name: datetimerfc1123
+      name: Datetimerfc1123
       description: ''
   protocol: !<!Protocols> {}
 language: !<!Languages> 
   default:
-    name: ''
+    name: BodyDatetimeRfc1123
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

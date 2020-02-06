@@ -24,7 +24,7 @@ namespace AutoRest.TestServer.Tests
             var result = await new BasicOperations(ClientDiagnostics, pipeline, host).GetValidAsync();
             Assert.AreEqual("abc", result.Value.Name);
             Assert.AreEqual(2, result.Value.Id);
-            Assert.AreEqual(CMYKColors.YELLOW, result.Value.Color);
+            Assert.AreEqual(CMYKColors.Yellow, result.Value.Color);
         });
 
         [Test]

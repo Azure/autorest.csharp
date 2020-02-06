@@ -8,8 +8,8 @@ using System.Collections.Generic;
 
 namespace additionalProperties.Models
 {
-    /// <summary> The PetAPInPropertiesWithAPString. </summary>
-    public partial class PetAPInPropertiesWithAPString : IDictionary<string, string>
+    /// <summary> The PetApInPropertiesWithApstring. </summary>
+    public partial class PetApInPropertiesWithApstring : IDictionary<string, string>
     {
         public int Id { get; set; }
         public string Name { get; set; }

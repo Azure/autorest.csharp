@@ -5,7 +5,7 @@
 
 namespace model_flattening.Models
 {
-    /// <summary> The FlattenedProduct-properties. </summary>
+    /// <summary> The FlattenedProductProperties. </summary>
     public partial class FlattenedProductProperties
     {
         public string PName { get; set; }

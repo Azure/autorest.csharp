@@ -9,6 +9,6 @@ namespace xml_service.Models
     public partial class ComplexTypeNoMeta
     {
         /// <summary> The id of the res. </summary>
-        public string ID { get; set; }
+        public string Id { get; set; }
     }
 }

@@ -20,14 +20,14 @@ schemas: !<!Schemas>
             version: 1.0.0
           language: !<!Languages> 
             default:
-              name: Product-display_namesItem
+              name: ProductDisplayNamesItem
               description: ''
           protocol: !<!Protocols> {}
         maxItems: 6
         uniqueItems: true
         language: !<!Languages> 
           default:
-            name: Product-display_names
+            name: ProductDisplayNames
             description: Non required array of unique items from 0 to 6 elements.
         protocol: !<!Protocols> {}
       required: false
@@ -36,7 +36,6 @@ schemas: !<!Schemas>
         default:
           name: displayNames
           description: Non required array of unique items from 0 to 6 elements.
-          originalName: display_names
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!NumberSchema> &ref_10
@@ -48,7 +47,7 @@ schemas: !<!Schemas>
         precision: 32
         language: !<!Languages> 
           default:
-            name: typeForcapacity
+            name: TypeForcapacity
             description: Non required int betwen 0 and 100 exclusive.
         protocol: !<!Protocols> {}
       required: false
@@ -57,7 +56,6 @@ schemas: !<!Schemas>
         default:
           name: capacity
           description: Non required int betwen 0 and 100 exclusive.
-          originalName: capacity
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_15
@@ -68,7 +66,7 @@ schemas: !<!Schemas>
         pattern: 'http://\w+'
         language: !<!Languages> 
           default:
-            name: Product-image
+            name: ProductImage
             description: Image URL representing the product.
         protocol: !<!Protocols> {}
       required: false
@@ -77,7 +75,6 @@ schemas: !<!Schemas>
         default:
           name: image
           description: Image URL representing the product.
-          originalName: image
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!ObjectSchema> &ref_1
@@ -102,12 +99,12 @@ schemas: !<!Schemas>
               type: string
               language: !<!Languages> 
                 default:
-                  name: string
+                  name: String
                   description: simple string
               protocol: !<!Protocols> {}
             language: !<!Languages> 
               default:
-                name: ChildProduct-constProperty
+                name: ChildProductConstProperty
                 description: Constant string
             protocol: !<!Protocols> {}
           required: true
@@ -116,7 +113,6 @@ schemas: !<!Schemas>
             default:
               name: constProperty
               description: Constant string
-              originalName: constProperty
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: !<!NumberSchema> &ref_11
@@ -124,7 +120,7 @@ schemas: !<!Schemas>
             precision: 32
             language: !<!Languages> 
               default:
-                name: typeForcount
+                name: TypeForcount
                 description: Count
             protocol: !<!Protocols> {}
           required: false
@@ -133,7 +129,6 @@ schemas: !<!Schemas>
             default:
               name: count
               description: Count
-              originalName: count
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
@@ -147,7 +142,6 @@ schemas: !<!Schemas>
         default:
           name: child
           description: The product documentation.
-          originalName: child
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!ObjectSchema> &ref_2
@@ -171,7 +165,7 @@ schemas: !<!Schemas>
             valueType: *ref_0
             language: !<!Languages> 
               default:
-                name: ConstantProduct-constProperty
+                name: ConstantProductConstProperty
                 description: Constant string
             protocol: !<!Protocols> {}
           required: true
@@ -180,7 +174,6 @@ schemas: !<!Schemas>
             default:
               name: constProperty
               description: Constant string
-              originalName: constProperty
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: !<!ConstantSchema> &ref_6
@@ -197,7 +190,7 @@ schemas: !<!Schemas>
             valueType: *ref_0
             language: !<!Languages> 
               default:
-                name: ConstantProduct-constProperty2
+                name: ConstantProductConstProperty2
                 description: Constant string2
             protocol: !<!Protocols> {}
           required: true
@@ -206,7 +199,6 @@ schemas: !<!Schemas>
             default:
               name: constProperty2
               description: Constant string2
-              originalName: constProperty2
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
@@ -220,7 +212,6 @@ schemas: !<!Schemas>
         default:
           name: constChild
           description: The product documentation.
-          originalName: constChild
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!ConstantSchema> &ref_7
@@ -236,12 +227,12 @@ schemas: !<!Schemas>
           precision: 32
           language: !<!Languages> 
             default:
-              name: number
+              name: Number
               description: Constant int
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
-            name: typeForconstInt
+            name: TypeForconstInt
             description: Constant int
         protocol: !<!Protocols> {}
       required: true
@@ -250,7 +241,6 @@ schemas: !<!Schemas>
         default:
           name: constInt
           description: Constant int
-          originalName: constInt
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!ConstantSchema> &ref_8
@@ -267,7 +257,7 @@ schemas: !<!Schemas>
         valueType: *ref_0
         language: !<!Languages> 
           default:
-            name: Product-constString
+            name: ProductConstString
             description: Constant string
         protocol: !<!Protocols> {}
       required: true
@@ -276,7 +266,6 @@ schemas: !<!Schemas>
         default:
           name: constString
           description: Constant string
-          originalName: constString
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!ConstantSchema> &ref_9
@@ -302,7 +291,6 @@ schemas: !<!Schemas>
         default:
           name: constStringAsEnum
           description: Constant string as Enum
-          originalName: constStringAsEnum
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -324,7 +312,7 @@ schemas: !<!Schemas>
         precision: 32
         language: !<!Languages> 
           default:
-            name: typeForcode
+            name: TypeForcode
             description: ''
         protocol: !<!Protocols> {}
       serializedName: code
@@ -332,7 +320,6 @@ schemas: !<!Schemas>
         default:
           name: code
           description: ''
-          originalName: code
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_16
@@ -342,7 +329,7 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: Error-message
+            name: ErrorMessage
             description: ''
         protocol: !<!Protocols> {}
       serializedName: message
@@ -350,7 +337,6 @@ schemas: !<!Schemas>
         default:
           name: message
           description: ''
-          originalName: message
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_17
@@ -360,7 +346,7 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: Error-fields
+            name: ErrorFields
             description: ''
         protocol: !<!Protocols> {}
       serializedName: fields
@@ -368,7 +354,6 @@ schemas: !<!Schemas>
         default:
           name: fields
           description: ''
-          originalName: fields
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -390,7 +375,7 @@ schemas: !<!Schemas>
     valueType: *ref_0
     language: !<!Languages> 
       default:
-        name: ApiVersion-1.0.0
+        name: ApiVersion10
         description: Api Version (1.0.0)
     protocol: !<!Protocols> {}
   - *ref_4
@@ -410,7 +395,7 @@ schemas: !<!Schemas>
     valueType: *ref_0
     language: !<!Languages> 
       default:
-        name: ApiVersion-1.0.0
+        name: ApiVersion10
         description: Api Version (1.0.0)
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_32
@@ -424,7 +409,7 @@ schemas: !<!Schemas>
     valueType: *ref_0
     language: !<!Languages> 
       default:
-        name: Constant0
+        name: Constant8
         description: ''
     protocol: !<!Protocols> {}
   numbers:
@@ -439,7 +424,7 @@ schemas: !<!Schemas>
     precision: 32
     language: !<!Languages> 
       default:
-        name: integer
+        name: Integer
         description: ''
     protocol: !<!Protocols> {}
   - *ref_10
@@ -455,7 +440,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: string
+        name: String
         description: ''
     protocol: !<!Protocols> {}
   - !<!StringSchema> &ref_22
@@ -468,7 +453,7 @@ schemas: !<!Schemas>
     pattern: '[a-zA-Z0-9]+'
     language: !<!Languages> 
       default:
-        name: string
+        name: String
         description: ''
     protocol: !<!Protocols> {}
   - *ref_14
@@ -483,7 +468,7 @@ schemas: !<!Schemas>
     pattern: '\d{2}-\d{2}-\d{4}'
     language: !<!Languages> 
       default:
-        name: string
+        name: String
         description: ''
     protocol: !<!Protocols> {}
 globalParameters:
@@ -610,7 +595,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: validationOfMethodParameters
+        name: ValidationOfMethodParameters
         description: Validates input parameters on the method. See swagger for details.
         summary: ''
     protocol: !<!Protocols> {}
@@ -708,7 +693,7 @@ operationGroups:
       x-ms-requestBody-index: 3
     language: !<!Languages> 
       default:
-        name: validationOfBody
+        name: ValidationOfBody
         description: Validates body parameters on the method. See swagger for details.
         summary: ''
     protocol: !<!Protocols> {}
@@ -753,7 +738,7 @@ operationGroups:
           - '200'
     language: !<!Languages> 
       default:
-        name: getWithConstantInPath
+        name: GetWithConstantInPath
         description: ''
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -820,7 +805,7 @@ operationGroups:
       x-ms-requestBody-index: 1
     language: !<!Languages> 
       default:
-        name: postWithConstantInBody
+        name: PostWithConstantInBody
         description: ''
     protocol: !<!Protocols> {}
   language: !<!Languages> 
@@ -830,7 +815,7 @@ operationGroups:
   protocol: !<!Protocols> {}
 language: !<!Languages> 
   default:
-    name: ''
+    name: Validation
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

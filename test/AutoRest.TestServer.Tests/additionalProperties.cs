@@ -20,7 +20,7 @@ namespace AutoRest.TestServer.Tests
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task AdditionalPropertiesInProperties() => Test(async (host, pipeline) =>
         {
-            var response = await new PetsOperations(ClientDiagnostics, pipeline, host).CreateAPInPropertiesAsync( new PetAPInProperties()
+            var response = await new PetsOperations(ClientDiagnostics, pipeline, host).CreateApInPropertiesAsync(new PetApInProperties()
             {
                 Id = 4,
                 Name = "Bunny",
@@ -44,7 +44,7 @@ namespace AutoRest.TestServer.Tests
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task AdditionalPropertiesInPropertiesWithAPTypeString() => Test(async (host, pipeline) =>
         {
-            PetAPInPropertiesWithAPString parameter = new PetAPInPropertiesWithAPString()
+            PetApInPropertiesWithApstring parameter = new PetAPInPropertiesWithAPString()
             {
                 Id = 5,
                 Name = "Funny",

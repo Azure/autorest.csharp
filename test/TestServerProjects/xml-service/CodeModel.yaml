@@ -22,15 +22,14 @@ schemas: !<!Schemas>
               version: 1.0.0
             language: !<!Languages> 
               default:
-                name: ComplexTypeNoMeta-ID
+                name: ComplexTypeNoMetaId
                 description: The id of the res
             protocol: !<!Protocols> {}
           serializedName: ID
           language: !<!Languages> 
             default:
-              name: ID
+              name: id
               description: The id of the res
-              originalName: ID
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
@@ -41,9 +40,8 @@ schemas: !<!Schemas>
       serializedName: RefToModel
       language: !<!Languages> 
         default:
-          name: RefToModel
+          name: refToModel
           description: I am a complex type with no XML node
-          originalName: RefToModel
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_62
@@ -53,15 +51,14 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: RootWithRefAndNoMeta-Something
+            name: RootWithRefAndNoMetaSomething
             description: Something else (just to avoid flattening)
         protocol: !<!Protocols> {}
       serializedName: Something
       language: !<!Languages> 
         default:
-          name: Something
+          name: something
           description: Something else (just to avoid flattening)
-          originalName: Something
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -91,15 +88,14 @@ schemas: !<!Schemas>
               version: 1.0.0
             language: !<!Languages> 
               default:
-                name: ComplexTypeWithMeta-ID
+                name: ComplexTypeWithMetaId
                 description: The id of the res
             protocol: !<!Protocols> {}
           serializedName: ID
           language: !<!Languages> 
             default:
-              name: ID
+              name: id
               description: The id of the res
-              originalName: ID
           protocol: !<!Protocols> {}
         serialization:
           xml:
@@ -115,9 +111,8 @@ schemas: !<!Schemas>
       serializedName: RefToModel
       language: !<!Languages> 
         default:
-          name: RefToModel
+          name: refToModel
           description: I am a complex type with XML node
-          originalName: RefToModel
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_64
@@ -127,15 +122,14 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: RootWithRefAndMeta-Something
+            name: RootWithRefAndMetaSomething
             description: Something else (just to avoid flattening)
         protocol: !<!Protocols> {}
       serializedName: Something
       language: !<!Languages> 
         default:
-          name: Something
+          name: something
           description: Something else (just to avoid flattening)
-          originalName: Something
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -162,7 +156,7 @@ schemas: !<!Schemas>
             wrapped: false
         language: !<!Languages> 
           default:
-            name: Slideshow-title
+            name: SlideshowTitle
             description: ''
         protocol: !<!Protocols> {}
       serializedName: title
@@ -170,7 +164,6 @@ schemas: !<!Schemas>
         default:
           name: title
           description: ''
-          originalName: title
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_66
@@ -184,7 +177,7 @@ schemas: !<!Schemas>
             wrapped: false
         language: !<!Languages> 
           default:
-            name: Slideshow-date
+            name: SlideshowDate
             description: ''
         protocol: !<!Protocols> {}
       serializedName: date
@@ -192,7 +185,6 @@ schemas: !<!Schemas>
         default:
           name: date
           description: ''
-          originalName: date
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_67
@@ -206,7 +198,7 @@ schemas: !<!Schemas>
             wrapped: false
         language: !<!Languages> 
           default:
-            name: Slideshow-author
+            name: SlideshowAuthor
             description: ''
         protocol: !<!Protocols> {}
       serializedName: author
@@ -214,7 +206,6 @@ schemas: !<!Schemas>
         default:
           name: author
           description: ''
-          originalName: author
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!ArraySchema> &ref_23
@@ -240,7 +231,7 @@ schemas: !<!Schemas>
                   wrapped: false
               language: !<!Languages> 
                 default:
-                  name: Slide-type
+                  name: SlideType
                   description: ''
               protocol: !<!Protocols> {}
             serializedName: type
@@ -248,7 +239,6 @@ schemas: !<!Schemas>
               default:
                 name: type
                 description: ''
-                originalName: type
             protocol: !<!Protocols> {}
           - !<!Property> 
             schema: !<!StringSchema> &ref_69
@@ -258,7 +248,7 @@ schemas: !<!Schemas>
                 version: 1.0.0
               language: !<!Languages> 
                 default:
-                  name: Slide-title
+                  name: SlideTitle
                   description: ''
               protocol: !<!Protocols> {}
             serializedName: title
@@ -266,7 +256,6 @@ schemas: !<!Schemas>
               default:
                 name: title
                 description: ''
-                originalName: title
             protocol: !<!Protocols> {}
           - !<!Property> 
             schema: !<!ArraySchema> &ref_22
@@ -286,20 +275,19 @@ schemas: !<!Schemas>
                     wrapped: false
                 language: !<!Languages> 
                   default:
-                    name: Slide-itemsItem
+                    name: SlideItemsItem
                     description: ''
                 protocol: !<!Protocols> {}
               language: !<!Languages> 
                 default:
-                  name: Slide-items
-                  description: ''
+                  name: SlideItems
+                  description: Array of SlideItemsItem
               protocol: !<!Protocols> {}
             serializedName: items
             language: !<!Languages> 
               default:
                 name: items
                 description: ''
-                originalName: items
             protocol: !<!Protocols> {}
           serialization:
             xml:
@@ -314,15 +302,14 @@ schemas: !<!Schemas>
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
-            name: Slideshow-slides
-            description: ''
+            name: SlideshowSlides
+            description: Array of Slide
         protocol: !<!Protocols> {}
       serializedName: slides
       language: !<!Languages> 
         default:
           name: slides
           description: ''
-          originalName: slides
       protocol: !<!Protocols> {}
     serialization:
       xml:
@@ -348,7 +335,7 @@ schemas: !<!Schemas>
         precision: 32
         language: !<!Languages> 
           default:
-            name: typeForstatus
+            name: TypeForstatus
             description: ''
         protocol: !<!Protocols> {}
       serializedName: status
@@ -356,7 +343,6 @@ schemas: !<!Schemas>
         default:
           name: status
           description: ''
-          originalName: status
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_71
@@ -366,7 +352,7 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: Error-message
+            name: ErrorMessage
             description: ''
         protocol: !<!Protocols> {}
       serializedName: message
@@ -374,7 +360,6 @@ schemas: !<!Schemas>
         default:
           name: message
           description: ''
-          originalName: message
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -406,7 +391,7 @@ schemas: !<!Schemas>
               wrapped: false
           language: !<!Languages> 
             default:
-              name: AppleBarrel-GoodApplesItem
+              name: AppleBarrelGoodApplesItem
               description: ''
           protocol: !<!Protocols> {}
         serialization:
@@ -415,15 +400,14 @@ schemas: !<!Schemas>
             wrapped: true
         language: !<!Languages> 
           default:
-            name: AppleBarrel-GoodApples
-            description: ''
+            name: AppleBarrelGoodApples
+            description: Array of AppleBarrelGoodApplesItem
         protocol: !<!Protocols> {}
       serializedName: GoodApples
       language: !<!Languages> 
         default:
-          name: GoodApples
+          name: goodApples
           description: ''
-          originalName: GoodApples
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!ArraySchema> &ref_25
@@ -443,7 +427,7 @@ schemas: !<!Schemas>
               wrapped: false
           language: !<!Languages> 
             default:
-              name: AppleBarrel-BadApplesItem
+              name: AppleBarrelBadApplesItem
               description: ''
           protocol: !<!Protocols> {}
         serialization:
@@ -452,15 +436,14 @@ schemas: !<!Schemas>
             wrapped: true
         language: !<!Languages> 
           default:
-            name: AppleBarrel-BadApples
-            description: ''
+            name: AppleBarrelBadApples
+            description: Array of AppleBarrelBadApplesItem
         protocol: !<!Protocols> {}
       serializedName: BadApples
       language: !<!Languages> 
         default:
-          name: BadApples
+          name: badApples
           description: ''
-          originalName: BadApples
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -487,7 +470,7 @@ schemas: !<!Schemas>
             wrapped: false
         language: !<!Languages> 
           default:
-            name: Banana-name
+            name: BananaName
             description: ''
         protocol: !<!Protocols> {}
       serializedName: name
@@ -495,7 +478,6 @@ schemas: !<!Schemas>
         default:
           name: name
           description: ''
-          originalName: name
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_76
@@ -510,7 +492,7 @@ schemas: !<!Schemas>
             wrapped: false
         language: !<!Languages> 
           default:
-            name: Banana-flavor
+            name: BananaFlavor
             description: ''
         protocol: !<!Protocols> {}
       serializedName: flavor
@@ -518,7 +500,6 @@ schemas: !<!Schemas>
         default:
           name: flavor
           description: ''
-          originalName: flavor
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!DateTimeSchema> &ref_42
@@ -534,7 +515,7 @@ schemas: !<!Schemas>
             wrapped: false
         language: !<!Languages> 
           default:
-            name: Banana-expiration
+            name: BananaExpiration
             description: The time at which you should reconsider eating this banana
         protocol: !<!Protocols> {}
       serializedName: expiration
@@ -542,7 +523,6 @@ schemas: !<!Schemas>
         default:
           name: expiration
           description: The time at which you should reconsider eating this banana
-          originalName: expiration
       protocol: !<!Protocols> {}
     serialization:
       xml:
@@ -573,16 +553,15 @@ schemas: !<!Schemas>
             wrapped: false
         language: !<!Languages> 
           default:
-            name: ListContainersResponse-ServiceEndpoint
+            name: ListContainersResponseServiceEndpoint
             description: ''
         protocol: !<!Protocols> {}
       required: true
       serializedName: ServiceEndpoint
       language: !<!Languages> 
         default:
-          name: ServiceEndpoint
+          name: serviceEndpoint
           description: ''
-          originalName: ServiceEndpoint
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_78
@@ -592,16 +571,15 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: ListContainersResponse-Prefix
+            name: ListContainersResponsePrefix
             description: ''
         protocol: !<!Protocols> {}
       required: true
       serializedName: Prefix
       language: !<!Languages> 
         default:
-          name: Prefix
+          name: prefix
           description: ''
-          originalName: Prefix
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_79
@@ -611,16 +589,15 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: ListContainersResponse-Marker
+            name: ListContainersResponseMarker
             description: ''
         protocol: !<!Protocols> {}
       required: false
       serializedName: Marker
       language: !<!Languages> 
         default:
-          name: Marker
+          name: marker
           description: ''
-          originalName: Marker
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!NumberSchema> &ref_50
@@ -628,16 +605,15 @@ schemas: !<!Schemas>
         precision: 32
         language: !<!Languages> 
           default:
-            name: typeForMaxResults
+            name: TypeForMaxResults
             description: ''
         protocol: !<!Protocols> {}
       required: true
       serializedName: MaxResults
       language: !<!Languages> 
         default:
-          name: MaxResults
+          name: maxResults
           description: ''
-          originalName: MaxResults
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!ArraySchema> &ref_27
@@ -659,16 +635,15 @@ schemas: !<!Schemas>
                 version: 1.0.0
               language: !<!Languages> 
                 default:
-                  name: Container-Name
+                  name: ContainerName
                   description: ''
               protocol: !<!Protocols> {}
             required: true
             serializedName: Name
             language: !<!Languages> 
               default:
-                name: Name
+                name: name
                 description: ''
-                originalName: Name
             protocol: !<!Protocols> {}
           - !<!Property> 
             schema: !<!ObjectSchema> &ref_5
@@ -686,7 +661,7 @@ schemas: !<!Schemas>
                     version: 1.0.0
                   language: !<!Languages> 
                     default:
-                      name: ContainerProperties-Last-Modified
+                      name: ContainerPropertiesLastModified
                       description: ''
                   protocol: !<!Protocols> {}
                 required: true
@@ -695,7 +670,6 @@ schemas: !<!Schemas>
                   default:
                     name: lastModified
                     description: ''
-                    originalName: Last-Modified
                 protocol: !<!Protocols> {}
               - !<!Property> 
                 schema: !<!StringSchema> &ref_81
@@ -705,16 +679,15 @@ schemas: !<!Schemas>
                     version: 1.0.0
                   language: !<!Languages> 
                     default:
-                      name: ContainerProperties-Etag
+                      name: ContainerPropertiesEtag
                       description: ''
                   protocol: !<!Protocols> {}
                 required: true
                 serializedName: Etag
                 language: !<!Languages> 
                   default:
-                    name: Etag
+                    name: etag
                     description: ''
-                    originalName: Etag
                 protocol: !<!Protocols> {}
               - !<!Property> 
                 schema: !<!SealedChoiceSchema> &ref_11
@@ -723,13 +696,13 @@ schemas: !<!Schemas>
                     value: locked
                     language:
                       default:
-                        name: locked
+                        name: Locked
                         description: ''
                   - !<!ChoiceValue> 
                     value: unlocked
                     language:
                       default:
-                        name: unlocked
+                        name: Unlocked
                         description: ''
                   type: sealed-choice
                   apiVersions:
@@ -739,7 +712,7 @@ schemas: !<!Schemas>
                     type: string
                     language: !<!Languages> 
                       default:
-                        name: string
+                        name: String
                         description: simple string
                     protocol: !<!Protocols> {}
                   language: !<!Languages> 
@@ -751,9 +724,8 @@ schemas: !<!Schemas>
                 serializedName: LeaseStatus
                 language: !<!Languages> 
                   default:
-                    name: LeaseStatus
+                    name: leaseStatus
                     description: ''
-                    originalName: LeaseStatus
                 protocol: !<!Protocols> {}
               - !<!Property> 
                 schema: !<!SealedChoiceSchema> &ref_12
@@ -762,31 +734,31 @@ schemas: !<!Schemas>
                     value: available
                     language:
                       default:
-                        name: available
+                        name: Available
                         description: ''
                   - !<!ChoiceValue> 
                     value: leased
                     language:
                       default:
-                        name: leased
+                        name: Leased
                         description: ''
                   - !<!ChoiceValue> 
                     value: expired
                     language:
                       default:
-                        name: expired
+                        name: Expired
                         description: ''
                   - !<!ChoiceValue> 
                     value: breaking
                     language:
                       default:
-                        name: breaking
+                        name: Breaking
                         description: ''
                   - !<!ChoiceValue> 
                     value: broken
                     language:
                       default:
-                        name: broken
+                        name: Broken
                         description: ''
                   type: sealed-choice
                   apiVersions:
@@ -802,9 +774,8 @@ schemas: !<!Schemas>
                 serializedName: LeaseState
                 language: !<!Languages> 
                   default:
-                    name: LeaseState
+                    name: leaseState
                     description: ''
-                    originalName: LeaseState
                 protocol: !<!Protocols> {}
               - !<!Property> 
                 schema: !<!SealedChoiceSchema> &ref_13
@@ -813,13 +784,13 @@ schemas: !<!Schemas>
                     value: infinite
                     language:
                       default:
-                        name: infinite
+                        name: Infinite
                         description: ''
                   - !<!ChoiceValue> 
                     value: fixed
                     language:
                       default:
-                        name: fixed
+                        name: Fixed
                         description: ''
                   type: sealed-choice
                   apiVersions:
@@ -835,9 +806,8 @@ schemas: !<!Schemas>
                 serializedName: LeaseDuration
                 language: !<!Languages> 
                   default:
-                    name: LeaseDuration
+                    name: leaseDuration
                     description: ''
-                    originalName: LeaseDuration
                 protocol: !<!Protocols> {}
               - !<!Property> 
                 schema: !<!ChoiceSchema> &ref_19
@@ -846,13 +816,13 @@ schemas: !<!Schemas>
                     value: container
                     language:
                       default:
-                        name: container
+                        name: Container
                         description: ''
                   - !<!ChoiceValue> 
                     value: blob
                     language:
                       default:
-                        name: blob
+                        name: Blob
                         description: ''
                   type: choice
                   apiVersions:
@@ -868,9 +838,8 @@ schemas: !<!Schemas>
                 serializedName: PublicAccess
                 language: !<!Languages> 
                   default:
-                    name: PublicAccess
+                    name: publicAccess
                     description: ''
-                    originalName: PublicAccess
                 protocol: !<!Protocols> {}
               language: !<!Languages> 
                 default:
@@ -882,9 +851,8 @@ schemas: !<!Schemas>
             serializedName: Properties
             language: !<!Languages> 
               default:
-                name: Properties
+                name: properties
                 description: Properties of a container
-                originalName: Properties
             protocol: !<!Protocols> {}
           - !<!Property> 
             schema: !<!DictionarySchema> &ref_14
@@ -896,22 +864,21 @@ schemas: !<!Schemas>
                   version: 1.0.0
                 language: !<!Languages> 
                   default:
-                    name: string
+                    name: String
                     description: ''
                     header: Custom-Header
                 protocol: !<!Protocols> {}
               language: !<!Languages> 
                 default:
-                  name: Dictionary of string
-                  description: Dictionary of <paths·xml-headers·get·responses·200·headers·custom_header·schema>
+                  name: Metadata
+                  description: Dictionary of String
               protocol: !<!Protocols> {}
             required: false
             serializedName: Metadata
             language: !<!Languages> 
               default:
-                name: Metadata
+                name: metadata
                 description: Dictionary of <paths·xml-headers·get·responses·200·headers·custom_header·schema>
-                originalName: Metadata
             protocol: !<!Protocols> {}
           language: !<!Languages> 
             default:
@@ -925,16 +892,15 @@ schemas: !<!Schemas>
             wrapped: true
         language: !<!Languages> 
           default:
-            name: ListContainersResponse-Containers
-            description: ''
+            name: ListContainersResponseContainers
+            description: Array of Container
         protocol: !<!Protocols> {}
       required: false
       serializedName: Containers
       language: !<!Languages> 
         default:
-          name: Containers
+          name: containers
           description: ''
-          originalName: Containers
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_82
@@ -944,16 +910,15 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: ListContainersResponse-NextMarker
+            name: ListContainersResponseNextMarker
             description: ''
         protocol: !<!Protocols> {}
       required: true
       serializedName: NextMarker
       language: !<!Languages> 
         default:
-          name: NextMarker
+          name: nextMarker
           description: ''
-          originalName: NextMarker
       protocol: !<!Protocols> {}
     serialization:
       xml:
@@ -989,64 +954,60 @@ schemas: !<!Schemas>
               version: 1.0.0
             language: !<!Languages> 
               default:
-                name: Logging-Version
+                name: LoggingVersion
                 description: The version of Storage Analytics to configure.
             protocol: !<!Protocols> {}
           required: true
           serializedName: Version
           language: !<!Languages> 
             default:
-              name: Version
+              name: version
               description: The version of Storage Analytics to configure.
-              originalName: Version
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: !<!BooleanSchema> &ref_32
             type: boolean
             language: !<!Languages> 
               default:
-                name: typeForDelete
+                name: TypeForDelete
                 description: Indicates whether all delete requests should be logged.
             protocol: !<!Protocols> {}
           required: true
           serializedName: Delete
           language: !<!Languages> 
             default:
-              name: Delete
+              name: delete
               description: Indicates whether all delete requests should be logged.
-              originalName: Delete
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: !<!BooleanSchema> &ref_33
             type: boolean
             language: !<!Languages> 
               default:
-                name: typeForRead
+                name: TypeForRead
                 description: Indicates whether all read requests should be logged.
             protocol: !<!Protocols> {}
           required: true
           serializedName: Read
           language: !<!Languages> 
             default:
-              name: Read
+              name: read
               description: Indicates whether all read requests should be logged.
-              originalName: Read
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: !<!BooleanSchema> &ref_34
             type: boolean
             language: !<!Languages> 
               default:
-                name: typeForWrite
+                name: TypeForWrite
                 description: Indicates whether all write requests should be logged.
             protocol: !<!Protocols> {}
           required: true
           serializedName: Write
           language: !<!Languages> 
             default:
-              name: Write
+              name: write
               description: Indicates whether all write requests should be logged.
-              originalName: Write
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: !<!ObjectSchema> &ref_6
@@ -1060,16 +1021,15 @@ schemas: !<!Schemas>
                 type: boolean
                 language: !<!Languages> 
                   default:
-                    name: typeForEnabled
+                    name: TypeForEnabled
                     description: Indicates whether a retention policy is enabled for the storage service
                 protocol: !<!Protocols> {}
               required: true
               serializedName: Enabled
               language: !<!Languages> 
                 default:
-                  name: Enabled
+                  name: enabled
                   description: Indicates whether a retention policy is enabled for the storage service
-                  originalName: Enabled
               protocol: !<!Protocols> {}
             - !<!Property> 
               schema: !<!NumberSchema> &ref_51
@@ -1078,16 +1038,15 @@ schemas: !<!Schemas>
                 precision: 32
                 language: !<!Languages> 
                   default:
-                    name: typeForDays
+                    name: TypeForDays
                     description: Indicates the number of days that metrics or logging or soft-deleted data should be retained. All data older than this value will be deleted
                 protocol: !<!Protocols> {}
               required: false
               serializedName: Days
               language: !<!Languages> 
                 default:
-                  name: Days
+                  name: days
                   description: Indicates the number of days that metrics or logging or soft-deleted data should be retained. All data older than this value will be deleted
-                  originalName: Days
               protocol: !<!Protocols> {}
             language: !<!Languages> 
               default:
@@ -1099,9 +1058,8 @@ schemas: !<!Schemas>
           serializedName: RetentionPolicy
           language: !<!Languages> 
             default:
-              name: RetentionPolicy
+              name: retentionPolicy
               description: the retention policy
-              originalName: RetentionPolicy
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
@@ -1112,9 +1070,8 @@ schemas: !<!Schemas>
       serializedName: Logging
       language: !<!Languages> 
         default:
-          name: Logging
+          name: logging
           description: Azure Analytics Logging settings.
-          originalName: Logging
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!ObjectSchema> &ref_7
@@ -1131,48 +1088,45 @@ schemas: !<!Schemas>
               version: 1.0.0
             language: !<!Languages> 
               default:
-                name: Metrics-Version
+                name: MetricsVersion
                 description: The version of Storage Analytics to configure.
             protocol: !<!Protocols> {}
           required: false
           serializedName: Version
           language: !<!Languages> 
             default:
-              name: Version
+              name: version
               description: The version of Storage Analytics to configure.
-              originalName: Version
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: !<!BooleanSchema> &ref_36
             type: boolean
             language: !<!Languages> 
               default:
-                name: typeForEnabled
+                name: TypeForEnabled
                 description: Indicates whether metrics are enabled for the Blob service.
             protocol: !<!Protocols> {}
           required: true
           serializedName: Enabled
           language: !<!Languages> 
             default:
-              name: Enabled
+              name: enabled
               description: Indicates whether metrics are enabled for the Blob service.
-              originalName: Enabled
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: !<!BooleanSchema> &ref_37
             type: boolean
             language: !<!Languages> 
               default:
-                name: typeForIncludeAPIs
+                name: TypeForIncludeApIs
                 description: Indicates whether metrics should generate summary statistics for called API operations.
             protocol: !<!Protocols> {}
           required: false
           serializedName: IncludeAPIs
           language: !<!Languages> 
             default:
-              name: IncludeAPIs
+              name: includeApIs
               description: Indicates whether metrics should generate summary statistics for called API operations.
-              originalName: IncludeAPIs
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: *ref_6
@@ -1180,9 +1134,8 @@ schemas: !<!Schemas>
           serializedName: RetentionPolicy
           language: !<!Languages> 
             default:
-              name: RetentionPolicy
+              name: retentionPolicy
               description: the retention policy
-              originalName: RetentionPolicy
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
@@ -1193,18 +1146,16 @@ schemas: !<!Schemas>
       serializedName: HourMetrics
       language: !<!Languages> 
         default:
-          name: HourMetrics
+          name: hourMetrics
           description: ''
-          originalName: HourMetrics
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: *ref_7
       serializedName: MinuteMetrics
       language: !<!Languages> 
         default:
-          name: MinuteMetrics
+          name: minuteMetrics
           description: ''
-          originalName: MinuteMetrics
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!ArraySchema> &ref_28
@@ -1226,7 +1177,7 @@ schemas: !<!Schemas>
                 version: 1.0.0
               language: !<!Languages> 
                 default:
-                  name: CorsRule-AllowedOrigins
+                  name: CorsRuleAllowedOrigins
                   description: >-
                     The origin domains that are permitted to make a request against the storage service via CORS. The origin domain is the domain from which the request originates. Note that the origin must be an exact case-sensitive match
                     with the origin that the user age sends to the service. You can also use the wildcard character '*' to allow all origin domains to make requests via CORS.
@@ -1235,11 +1186,10 @@ schemas: !<!Schemas>
             serializedName: AllowedOrigins
             language: !<!Languages> 
               default:
-                name: AllowedOrigins
+                name: allowedOrigins
                 description: >-
                   The origin domains that are permitted to make a request against the storage service via CORS. The origin domain is the domain from which the request originates. Note that the origin must be an exact case-sensitive match
                   with the origin that the user age sends to the service. You can also use the wildcard character '*' to allow all origin domains to make requests via CORS.
-                originalName: AllowedOrigins
             protocol: !<!Protocols> {}
           - !<!Property> 
             schema: !<!StringSchema> &ref_86
@@ -1249,16 +1199,15 @@ schemas: !<!Schemas>
                 version: 1.0.0
               language: !<!Languages> 
                 default:
-                  name: CorsRule-AllowedMethods
+                  name: CorsRuleAllowedMethods
                   description: The methods (HTTP request verbs) that the origin domain may use for a CORS request. (comma separated)
               protocol: !<!Protocols> {}
             required: true
             serializedName: AllowedMethods
             language: !<!Languages> 
               default:
-                name: AllowedMethods
+                name: allowedMethods
                 description: The methods (HTTP request verbs) that the origin domain may use for a CORS request. (comma separated)
-                originalName: AllowedMethods
             protocol: !<!Protocols> {}
           - !<!Property> 
             schema: !<!StringSchema> &ref_87
@@ -1268,16 +1217,15 @@ schemas: !<!Schemas>
                 version: 1.0.0
               language: !<!Languages> 
                 default:
-                  name: CorsRule-AllowedHeaders
+                  name: CorsRuleAllowedHeaders
                   description: the request headers that the origin domain may specify on the CORS request.
               protocol: !<!Protocols> {}
             required: true
             serializedName: AllowedHeaders
             language: !<!Languages> 
               default:
-                name: AllowedHeaders
+                name: allowedHeaders
                 description: the request headers that the origin domain may specify on the CORS request.
-                originalName: AllowedHeaders
             protocol: !<!Protocols> {}
           - !<!Property> 
             schema: !<!StringSchema> &ref_88
@@ -1287,16 +1235,15 @@ schemas: !<!Schemas>
                 version: 1.0.0
               language: !<!Languages> 
                 default:
-                  name: CorsRule-ExposedHeaders
+                  name: CorsRuleExposedHeaders
                   description: The response headers that may be sent in the response to the CORS request and exposed by the browser to the request issuer
               protocol: !<!Protocols> {}
             required: true
             serializedName: ExposedHeaders
             language: !<!Languages> 
               default:
-                name: ExposedHeaders
+                name: exposedHeaders
                 description: The response headers that may be sent in the response to the CORS request and exposed by the browser to the request issuer
-                originalName: ExposedHeaders
             protocol: !<!Protocols> {}
           - !<!Property> 
             schema: !<!NumberSchema> &ref_52
@@ -1305,16 +1252,15 @@ schemas: !<!Schemas>
               precision: 32
               language: !<!Languages> 
                 default:
-                  name: typeForMaxAgeInSeconds
+                  name: TypeForMaxAgeInSeconds
                   description: The maximum amount time that a browser should cache the preflight OPTIONS request.
               protocol: !<!Protocols> {}
             required: true
             serializedName: MaxAgeInSeconds
             language: !<!Languages> 
               default:
-                name: MaxAgeInSeconds
+                name: maxAgeInSeconds
                 description: The maximum amount time that a browser should cache the preflight OPTIONS request.
-                originalName: MaxAgeInSeconds
             protocol: !<!Protocols> {}
           serialization:
             xml:
@@ -1335,15 +1281,14 @@ schemas: !<!Schemas>
             wrapped: true
         language: !<!Languages> 
           default:
-            name: StorageServiceProperties-Cors
+            name: StorageServicePropertiesCors
             description: The set of CORS rules.
         protocol: !<!Protocols> {}
       serializedName: Cors
       language: !<!Languages> 
         default:
-          name: Cors
+          name: cors
           description: The set of CORS rules.
-          originalName: Cors
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_89
@@ -1353,24 +1298,22 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: StorageServiceProperties-DefaultServiceVersion
+            name: StorageServicePropertiesDefaultServiceVersion
             description: The default version to use for requests to the Blob service if an incoming request's version is not specified. Possible values include version 2008-10-27 and all more recent versions
         protocol: !<!Protocols> {}
       serializedName: DefaultServiceVersion
       language: !<!Languages> 
         default:
-          name: DefaultServiceVersion
+          name: defaultServiceVersion
           description: The default version to use for requests to the Blob service if an incoming request's version is not specified. Possible values include version 2008-10-27 and all more recent versions
-          originalName: DefaultServiceVersion
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: *ref_6
       serializedName: DeleteRetentionPolicy
       language: !<!Languages> 
         default:
-          name: DeleteRetentionPolicy
+          name: deleteRetentionPolicy
           description: the retention policy
-          originalName: DeleteRetentionPolicy
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -1396,16 +1339,15 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: SignedIdentifier-Id
+            name: SignedIdentifierId
             description: a unique id
         protocol: !<!Protocols> {}
       required: true
       serializedName: Id
       language: !<!Languages> 
         default:
-          name: Id
+          name: id
           description: a unique id
-          originalName: Id
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!ObjectSchema> &ref_10
@@ -1423,16 +1365,15 @@ schemas: !<!Schemas>
               version: 1.0.0
             language: !<!Languages> 
               default:
-                name: AccessPolicy-Start
+                name: AccessPolicyStart
                 description: the date-time the policy is active
             protocol: !<!Protocols> {}
           required: true
           serializedName: Start
           language: !<!Languages> 
             default:
-              name: Start
+              name: start
               description: the date-time the policy is active
-              originalName: Start
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: !<!DateTimeSchema> &ref_45
@@ -1443,16 +1384,15 @@ schemas: !<!Schemas>
               version: 1.0.0
             language: !<!Languages> 
               default:
-                name: AccessPolicy-Expiry
+                name: AccessPolicyExpiry
                 description: the date-time the policy expires
             protocol: !<!Protocols> {}
           required: true
           serializedName: Expiry
           language: !<!Languages> 
             default:
-              name: Expiry
+              name: expiry
               description: the date-time the policy expires
-              originalName: Expiry
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: !<!StringSchema> &ref_91
@@ -1462,16 +1402,15 @@ schemas: !<!Schemas>
               version: 1.0.0
             language: !<!Languages> 
               default:
-                name: AccessPolicy-Permission
+                name: AccessPolicyPermission
                 description: the permissions for the acl policy
             protocol: !<!Protocols> {}
           required: true
           serializedName: Permission
           language: !<!Languages> 
             default:
-              name: Permission
+              name: permission
               description: the permissions for the acl policy
-              originalName: Permission
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
@@ -1483,9 +1422,8 @@ schemas: !<!Schemas>
       serializedName: AccessPolicy
       language: !<!Languages> 
         default:
-          name: AccessPolicy
+          name: accessPolicy
           description: An Access policy
-          originalName: AccessPolicy
       protocol: !<!Protocols> {}
     serialization:
       xml:
@@ -1517,16 +1455,15 @@ schemas: !<!Schemas>
             wrapped: false
         language: !<!Languages> 
           default:
-            name: ListBlobsResponse-ServiceEndpoint
+            name: ListBlobsResponseServiceEndpoint
             description: ''
         protocol: !<!Protocols> {}
       required: true
       serializedName: ServiceEndpoint
       language: !<!Languages> 
         default:
-          name: ServiceEndpoint
+          name: serviceEndpoint
           description: ''
-          originalName: ServiceEndpoint
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_93
@@ -1540,16 +1477,15 @@ schemas: !<!Schemas>
             wrapped: false
         language: !<!Languages> 
           default:
-            name: ListBlobsResponse-ContainerName
+            name: ListBlobsResponseContainerName
             description: ''
         protocol: !<!Protocols> {}
       required: true
       serializedName: ContainerName
       language: !<!Languages> 
         default:
-          name: ContainerName
+          name: containerName
           description: ''
-          originalName: ContainerName
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_94
@@ -1559,16 +1495,15 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: ListBlobsResponse-Prefix
+            name: ListBlobsResponsePrefix
             description: ''
         protocol: !<!Protocols> {}
       required: true
       serializedName: Prefix
       language: !<!Languages> 
         default:
-          name: Prefix
+          name: prefix
           description: ''
-          originalName: Prefix
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_95
@@ -1578,16 +1513,15 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: ListBlobsResponse-Marker
+            name: ListBlobsResponseMarker
             description: ''
         protocol: !<!Protocols> {}
       required: true
       serializedName: Marker
       language: !<!Languages> 
         default:
-          name: Marker
+          name: marker
           description: ''
-          originalName: Marker
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!NumberSchema> &ref_53
@@ -1595,16 +1529,15 @@ schemas: !<!Schemas>
         precision: 32
         language: !<!Languages> 
           default:
-            name: typeForMaxResults
+            name: TypeForMaxResults
             description: ''
         protocol: !<!Protocols> {}
       required: true
       serializedName: MaxResults
       language: !<!Languages> 
         default:
-          name: MaxResults
+          name: maxResults
           description: ''
-          originalName: MaxResults
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_96
@@ -1614,16 +1547,15 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: ListBlobsResponse-Delimiter
+            name: ListBlobsResponseDelimiter
             description: ''
         protocol: !<!Protocols> {}
       required: true
       serializedName: Delimiter
       language: !<!Languages> 
         default:
-          name: Delimiter
+          name: delimiter
           description: ''
-          originalName: Delimiter
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!ObjectSchema> &ref_15
@@ -1652,16 +1584,15 @@ schemas: !<!Schemas>
                     version: 1.0.0
                   language: !<!Languages> 
                     default:
-                      name: BlobPrefix-Name
+                      name: BlobPrefixName
                       description: ''
                   protocol: !<!Protocols> {}
                 required: true
                 serializedName: Name
                 language: !<!Languages> 
                   default:
-                    name: Name
+                    name: name
                     description: ''
-                    originalName: Name
                 protocol: !<!Protocols> {}
               language: !<!Languages> 
                 default:
@@ -1671,15 +1602,14 @@ schemas: !<!Schemas>
               protocol: !<!Protocols> {}
             language: !<!Languages> 
               default:
-                name: Blobs-BlobPrefix
-                description: ''
+                name: BlobsBlobPrefix
+                description: Array of BlobPrefix
             protocol: !<!Protocols> {}
           serializedName: BlobPrefix
           language: !<!Languages> 
             default:
-              name: BlobPrefix
+              name: blobPrefix
               description: ''
-              originalName: BlobPrefix
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: !<!ArraySchema> &ref_31
@@ -1701,32 +1631,30 @@ schemas: !<!Schemas>
                     version: 1.0.0
                   language: !<!Languages> 
                     default:
-                      name: Blob-Name
+                      name: BlobName
                       description: ''
                   protocol: !<!Protocols> {}
                 required: true
                 serializedName: Name
                 language: !<!Languages> 
                   default:
-                    name: Name
+                    name: name
                     description: ''
-                    originalName: Name
                 protocol: !<!Protocols> {}
               - !<!Property> 
                 schema: !<!BooleanSchema> &ref_38
                   type: boolean
                   language: !<!Languages> 
                     default:
-                      name: typeForDeleted
+                      name: TypeForDeleted
                       description: ''
                   protocol: !<!Protocols> {}
                 required: true
                 serializedName: Deleted
                 language: !<!Languages> 
                   default:
-                    name: Deleted
+                    name: deleted
                     description: ''
-                    originalName: Deleted
                 protocol: !<!Protocols> {}
               - !<!Property> 
                 schema: !<!StringSchema> &ref_99
@@ -1736,16 +1664,15 @@ schemas: !<!Schemas>
                     version: 1.0.0
                   language: !<!Languages> 
                     default:
-                      name: Blob-Snapshot
+                      name: BlobSnapshot
                       description: ''
                   protocol: !<!Protocols> {}
                 required: true
                 serializedName: Snapshot
                 language: !<!Languages> 
                   default:
-                    name: Snapshot
+                    name: snapshot
                     description: ''
-                    originalName: Snapshot
                 protocol: !<!Protocols> {}
               - !<!Property> 
                 schema: !<!ObjectSchema> &ref_18
@@ -1763,7 +1690,7 @@ schemas: !<!Schemas>
                         version: 1.0.0
                       language: !<!Languages> 
                         default:
-                          name: BlobProperties-Last-Modified
+                          name: BlobPropertiesLastModified
                           description: ''
                       protocol: !<!Protocols> {}
                     required: true
@@ -1772,7 +1699,6 @@ schemas: !<!Schemas>
                       default:
                         name: lastModified
                         description: ''
-                        originalName: Last-Modified
                     protocol: !<!Protocols> {}
                   - !<!Property> 
                     schema: !<!StringSchema> &ref_100
@@ -1782,16 +1708,15 @@ schemas: !<!Schemas>
                         version: 1.0.0
                       language: !<!Languages> 
                         default:
-                          name: BlobProperties-Etag
+                          name: BlobPropertiesEtag
                           description: ''
                       protocol: !<!Protocols> {}
                     required: true
                     serializedName: Etag
                     language: !<!Languages> 
                       default:
-                        name: Etag
+                        name: etag
                         description: ''
-                        originalName: Etag
                     protocol: !<!Protocols> {}
                   - !<!Property> 
                     schema: !<!NumberSchema> &ref_54
@@ -1799,7 +1724,7 @@ schemas: !<!Schemas>
                       precision: 64
                       language: !<!Languages> 
                         default:
-                          name: typeForContent-Length
+                          name: TypeForContentLength
                           description: Size in bytes
                       protocol: !<!Protocols> {}
                     required: false
@@ -1808,7 +1733,6 @@ schemas: !<!Schemas>
                       default:
                         name: contentLength
                         description: Size in bytes
-                        originalName: Content-Length
                     protocol: !<!Protocols> {}
                   - !<!Property> 
                     schema: !<!StringSchema> &ref_101
@@ -1818,7 +1742,7 @@ schemas: !<!Schemas>
                         version: 1.0.0
                       language: !<!Languages> 
                         default:
-                          name: BlobProperties-Content-Type
+                          name: BlobPropertiesContentType
                           description: ''
                       protocol: !<!Protocols> {}
                     required: false
@@ -1827,7 +1751,6 @@ schemas: !<!Schemas>
                       default:
                         name: contentType
                         description: ''
-                        originalName: Content-Type
                     protocol: !<!Protocols> {}
                   - !<!Property> 
                     schema: !<!StringSchema> &ref_102
@@ -1837,7 +1760,7 @@ schemas: !<!Schemas>
                         version: 1.0.0
                       language: !<!Languages> 
                         default:
-                          name: BlobProperties-Content-Encoding
+                          name: BlobPropertiesContentEncoding
                           description: ''
                       protocol: !<!Protocols> {}
                     required: false
@@ -1846,7 +1769,6 @@ schemas: !<!Schemas>
                       default:
                         name: contentEncoding
                         description: ''
-                        originalName: Content-Encoding
                     protocol: !<!Protocols> {}
                   - !<!Property> 
                     schema: !<!StringSchema> &ref_103
@@ -1856,7 +1778,7 @@ schemas: !<!Schemas>
                         version: 1.0.0
                       language: !<!Languages> 
                         default:
-                          name: BlobProperties-Content-Language
+                          name: BlobPropertiesContentLanguage
                           description: ''
                       protocol: !<!Protocols> {}
                     required: false
@@ -1865,7 +1787,6 @@ schemas: !<!Schemas>
                       default:
                         name: contentLanguage
                         description: ''
-                        originalName: Content-Language
                     protocol: !<!Protocols> {}
                   - !<!Property> 
                     schema: !<!StringSchema> &ref_104
@@ -1875,7 +1796,7 @@ schemas: !<!Schemas>
                         version: 1.0.0
                       language: !<!Languages> 
                         default:
-                          name: BlobProperties-Content-MD5
+                          name: BlobPropertiesContentMd5
                           description: ''
                       protocol: !<!Protocols> {}
                     required: false
@@ -1884,7 +1805,6 @@ schemas: !<!Schemas>
                       default:
                         name: contentMd5
                         description: ''
-                        originalName: Content-MD5
                     protocol: !<!Protocols> {}
                   - !<!Property> 
                     schema: !<!StringSchema> &ref_105
@@ -1894,7 +1814,7 @@ schemas: !<!Schemas>
                         version: 1.0.0
                       language: !<!Languages> 
                         default:
-                          name: BlobProperties-Content-Disposition
+                          name: BlobPropertiesContentDisposition
                           description: ''
                       protocol: !<!Protocols> {}
                     required: false
@@ -1903,7 +1823,6 @@ schemas: !<!Schemas>
                       default:
                         name: contentDisposition
                         description: ''
-                        originalName: Content-Disposition
                     protocol: !<!Protocols> {}
                   - !<!Property> 
                     schema: !<!StringSchema> &ref_106
@@ -1913,7 +1832,7 @@ schemas: !<!Schemas>
                         version: 1.0.0
                       language: !<!Languages> 
                         default:
-                          name: BlobProperties-Cache-Control
+                          name: BlobPropertiesCacheControl
                           description: ''
                       protocol: !<!Protocols> {}
                     required: false
@@ -1922,7 +1841,6 @@ schemas: !<!Schemas>
                       default:
                         name: cacheControl
                         description: ''
-                        originalName: Cache-Control
                     protocol: !<!Protocols> {}
                   - !<!Property> 
                     schema: !<!NumberSchema> &ref_55
@@ -1930,7 +1848,7 @@ schemas: !<!Schemas>
                       precision: 32
                       language: !<!Languages> 
                         default:
-                          name: blobSequenceNumber
+                          name: BlobSequenceNumber
                           description: ''
                       protocol: !<!Protocols> {}
                     required: false
@@ -1939,7 +1857,6 @@ schemas: !<!Schemas>
                       default:
                         name: blobSequenceNumber
                         description: ''
-                        originalName: blobSequenceNumber
                     protocol: !<!Protocols> {}
                   - !<!Property> 
                     schema: !<!SealedChoiceSchema> &ref_59
@@ -1976,9 +1893,8 @@ schemas: !<!Schemas>
                     serializedName: BlobType
                     language: !<!Languages> 
                       default:
-                        name: BlobType
+                        name: blobType
                         description: ''
-                        originalName: BlobType
                     protocol: !<!Protocols> {}
                   - !<!Property> 
                     schema: *ref_11
@@ -1986,9 +1902,8 @@ schemas: !<!Schemas>
                     serializedName: LeaseStatus
                     language: !<!Languages> 
                       default:
-                        name: LeaseStatus
+                        name: leaseStatus
                         description: ''
-                        originalName: LeaseStatus
                     protocol: !<!Protocols> {}
                   - !<!Property> 
                     schema: *ref_12
@@ -1996,9 +1911,8 @@ schemas: !<!Schemas>
                     serializedName: LeaseState
                     language: !<!Languages> 
                       default:
-                        name: LeaseState
+                        name: leaseState
                         description: ''
-                        originalName: LeaseState
                     protocol: !<!Protocols> {}
                   - !<!Property> 
                     schema: *ref_13
@@ -2006,9 +1920,8 @@ schemas: !<!Schemas>
                     serializedName: LeaseDuration
                     language: !<!Languages> 
                       default:
-                        name: LeaseDuration
+                        name: leaseDuration
                         description: ''
-                        originalName: LeaseDuration
                     protocol: !<!Protocols> {}
                   - !<!Property> 
                     schema: !<!StringSchema> &ref_107
@@ -2018,16 +1931,15 @@ schemas: !<!Schemas>
                         version: 1.0.0
                       language: !<!Languages> 
                         default:
-                          name: BlobProperties-CopyId
+                          name: BlobPropertiesCopyId
                           description: ''
                       protocol: !<!Protocols> {}
                     required: false
                     serializedName: CopyId
                     language: !<!Languages> 
                       default:
-                        name: CopyId
+                        name: copyId
                         description: ''
-                        originalName: CopyId
                     protocol: !<!Protocols> {}
                   - !<!Property> 
                     schema: !<!SealedChoiceSchema> &ref_60
@@ -2036,25 +1948,25 @@ schemas: !<!Schemas>
                         value: pending
                         language:
                           default:
-                            name: pending
+                            name: Pending
                             description: ''
                       - !<!ChoiceValue> 
                         value: success
                         language:
                           default:
-                            name: success
+                            name: Success
                             description: ''
                       - !<!ChoiceValue> 
                         value: aborted
                         language:
                           default:
-                            name: aborted
+                            name: Aborted
                             description: ''
                       - !<!ChoiceValue> 
                         value: failed
                         language:
                           default:
-                            name: failed
+                            name: Failed
                             description: ''
                       type: sealed-choice
                       apiVersions:
@@ -2070,9 +1982,8 @@ schemas: !<!Schemas>
                     serializedName: CopyStatus
                     language: !<!Languages> 
                       default:
-                        name: CopyStatus
+                        name: copyStatus
                         description: ''
-                        originalName: CopyStatus
                     protocol: !<!Protocols> {}
                   - !<!Property> 
                     schema: !<!StringSchema> &ref_108
@@ -2082,16 +1993,15 @@ schemas: !<!Schemas>
                         version: 1.0.0
                       language: !<!Languages> 
                         default:
-                          name: BlobProperties-CopySource
+                          name: BlobPropertiesCopySource
                           description: ''
                       protocol: !<!Protocols> {}
                     required: false
                     serializedName: CopySource
                     language: !<!Languages> 
                       default:
-                        name: CopySource
+                        name: copySource
                         description: ''
-                        originalName: CopySource
                     protocol: !<!Protocols> {}
                   - !<!Property> 
                     schema: !<!StringSchema> &ref_109
@@ -2101,16 +2011,15 @@ schemas: !<!Schemas>
                         version: 1.0.0
                       language: !<!Languages> 
                         default:
-                          name: BlobProperties-CopyProgress
+                          name: BlobPropertiesCopyProgress
                           description: ''
                       protocol: !<!Protocols> {}
                     required: false
                     serializedName: CopyProgress
                     language: !<!Languages> 
                       default:
-                        name: CopyProgress
+                        name: copyProgress
                         description: ''
-                        originalName: CopyProgress
                     protocol: !<!Protocols> {}
                   - !<!Property> 
                     schema: !<!DateTimeSchema> &ref_47
@@ -2121,16 +2030,15 @@ schemas: !<!Schemas>
                         version: 1.0.0
                       language: !<!Languages> 
                         default:
-                          name: BlobProperties-CopyCompletionTime
+                          name: BlobPropertiesCopyCompletionTime
                           description: ''
                       protocol: !<!Protocols> {}
                     required: false
                     serializedName: CopyCompletionTime
                     language: !<!Languages> 
                       default:
-                        name: CopyCompletionTime
+                        name: copyCompletionTime
                         description: ''
-                        originalName: CopyCompletionTime
                     protocol: !<!Protocols> {}
                   - !<!Property> 
                     schema: !<!StringSchema> &ref_110
@@ -2140,48 +2048,45 @@ schemas: !<!Schemas>
                         version: 1.0.0
                       language: !<!Languages> 
                         default:
-                          name: BlobProperties-CopyStatusDescription
+                          name: BlobPropertiesCopyStatusDescription
                           description: ''
                       protocol: !<!Protocols> {}
                     required: false
                     serializedName: CopyStatusDescription
                     language: !<!Languages> 
                       default:
-                        name: CopyStatusDescription
+                        name: copyStatusDescription
                         description: ''
-                        originalName: CopyStatusDescription
                     protocol: !<!Protocols> {}
                   - !<!Property> 
                     schema: !<!BooleanSchema> &ref_39
                       type: boolean
                       language: !<!Languages> 
                         default:
-                          name: typeForServerEncrypted
+                          name: TypeForServerEncrypted
                           description: ''
                       protocol: !<!Protocols> {}
                     required: false
                     serializedName: ServerEncrypted
                     language: !<!Languages> 
                       default:
-                        name: ServerEncrypted
+                        name: serverEncrypted
                         description: ''
-                        originalName: ServerEncrypted
                     protocol: !<!Protocols> {}
                   - !<!Property> 
                     schema: !<!BooleanSchema> &ref_40
                       type: boolean
                       language: !<!Languages> 
                         default:
-                          name: typeForIncrementalCopy
+                          name: TypeForIncrementalCopy
                           description: ''
                       protocol: !<!Protocols> {}
                     required: false
                     serializedName: IncrementalCopy
                     language: !<!Languages> 
                       default:
-                        name: IncrementalCopy
+                        name: incrementalCopy
                         description: ''
-                        originalName: IncrementalCopy
                     protocol: !<!Protocols> {}
                   - !<!Property> 
                     schema: !<!StringSchema> &ref_111
@@ -2191,16 +2096,15 @@ schemas: !<!Schemas>
                         version: 1.0.0
                       language: !<!Languages> 
                         default:
-                          name: BlobProperties-DestinationSnapshot
+                          name: BlobPropertiesDestinationSnapshot
                           description: ''
                       protocol: !<!Protocols> {}
                     required: false
                     serializedName: DestinationSnapshot
                     language: !<!Languages> 
                       default:
-                        name: DestinationSnapshot
+                        name: destinationSnapshot
                         description: ''
-                        originalName: DestinationSnapshot
                     protocol: !<!Protocols> {}
                   - !<!Property> 
                     schema: !<!DateTimeSchema> &ref_48
@@ -2211,16 +2115,15 @@ schemas: !<!Schemas>
                         version: 1.0.0
                       language: !<!Languages> 
                         default:
-                          name: BlobProperties-DeletedTime
+                          name: BlobPropertiesDeletedTime
                           description: ''
                       protocol: !<!Protocols> {}
                     required: false
                     serializedName: DeletedTime
                     language: !<!Languages> 
                       default:
-                        name: DeletedTime
+                        name: deletedTime
                         description: ''
-                        originalName: DeletedTime
                     protocol: !<!Protocols> {}
                   - !<!Property> 
                     schema: !<!NumberSchema> &ref_56
@@ -2228,16 +2131,15 @@ schemas: !<!Schemas>
                       precision: 32
                       language: !<!Languages> 
                         default:
-                          name: typeForRemainingRetentionDays
+                          name: TypeForRemainingRetentionDays
                           description: ''
                       protocol: !<!Protocols> {}
                     required: false
                     serializedName: RemainingRetentionDays
                     language: !<!Languages> 
                       default:
-                        name: RemainingRetentionDays
+                        name: remainingRetentionDays
                         description: ''
-                        originalName: RemainingRetentionDays
                     protocol: !<!Protocols> {}
                   - !<!Property> 
                     schema: !<!ChoiceSchema> &ref_20
@@ -2316,25 +2218,23 @@ schemas: !<!Schemas>
                     serializedName: AccessTier
                     language: !<!Languages> 
                       default:
-                        name: AccessTier
+                        name: accessTier
                         description: ''
-                        originalName: AccessTier
                     protocol: !<!Protocols> {}
                   - !<!Property> 
                     schema: !<!BooleanSchema> &ref_41
                       type: boolean
                       language: !<!Languages> 
                         default:
-                          name: typeForAccessTierInferred
+                          name: TypeForAccessTierInferred
                           description: ''
                       protocol: !<!Protocols> {}
                     required: false
                     serializedName: AccessTierInferred
                     language: !<!Languages> 
                       default:
-                        name: AccessTierInferred
+                        name: accessTierInferred
                         description: ''
-                        originalName: AccessTierInferred
                     protocol: !<!Protocols> {}
                   - !<!Property> 
                     schema: !<!ChoiceSchema> &ref_21
@@ -2343,13 +2243,13 @@ schemas: !<!Schemas>
                         value: rehydrate-pending-to-hot
                         language:
                           default:
-                            name: rehydrate-pending-to-hot
+                            name: RehydratePendingToHot
                             description: ''
                       - !<!ChoiceValue> 
                         value: rehydrate-pending-to-cool
                         language:
                           default:
-                            name: rehydrate-pending-to-cool
+                            name: RehydratePendingToCool
                             description: ''
                       type: choice
                       apiVersions:
@@ -2365,9 +2265,8 @@ schemas: !<!Schemas>
                     serializedName: ArchiveStatus
                     language: !<!Languages> 
                       default:
-                        name: ArchiveStatus
+                        name: archiveStatus
                         description: ''
-                        originalName: ArchiveStatus
                     protocol: !<!Protocols> {}
                   language: !<!Languages> 
                     default:
@@ -2379,9 +2278,8 @@ schemas: !<!Schemas>
                 serializedName: Properties
                 language: !<!Languages> 
                   default:
-                    name: Properties
+                    name: properties
                     description: Properties of a blob
-                    originalName: Properties
                 protocol: !<!Protocols> {}
               - !<!Property> 
                 schema: *ref_14
@@ -2389,9 +2287,8 @@ schemas: !<!Schemas>
                 serializedName: Metadata
                 language: !<!Languages> 
                   default:
-                    name: Metadata
+                    name: metadata
                     description: Dictionary of <paths·xml-headers·get·responses·200·headers·custom_header·schema>
-                    originalName: Metadata
                 protocol: !<!Protocols> {}
               serialization:
                 xml:
@@ -2406,15 +2303,14 @@ schemas: !<!Schemas>
               protocol: !<!Protocols> {}
             language: !<!Languages> 
               default:
-                name: Blobs-Blob
-                description: ''
+                name: BlobsBlob
+                description: Array of Blob
             protocol: !<!Protocols> {}
           serializedName: Blob
           language: !<!Languages> 
             default:
-              name: Blob
+              name: blob
               description: ''
-              originalName: Blob
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
@@ -2426,9 +2322,8 @@ schemas: !<!Schemas>
       serializedName: Blobs
       language: !<!Languages> 
         default:
-          name: Blobs
+          name: blobs
           description: ''
-          originalName: Blobs
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_112
@@ -2438,16 +2333,15 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: ListBlobsResponse-NextMarker
+            name: ListBlobsResponseNextMarker
             description: ''
         protocol: !<!Protocols> {}
       required: true
       serializedName: NextMarker
       language: !<!Languages> 
         default:
-          name: NextMarker
+          name: nextMarker
           description: ''
-          originalName: NextMarker
       protocol: !<!Protocols> {}
     serialization:
       xml:
@@ -2476,7 +2370,7 @@ schemas: !<!Schemas>
         precision: 32
         language: !<!Languages> 
           default:
-            name: typeForid
+            name: TypeForid
             description: ''
         protocol: !<!Protocols> {}
       serializedName: id
@@ -2484,11 +2378,10 @@ schemas: !<!Schemas>
         default:
           name: id
           description: ''
-          originalName: id
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: JSONInput
+        name: JsonInput
         description: ''
         namespace: Api100
     protocol: !<!Protocols> {}
@@ -2504,7 +2397,7 @@ schemas: !<!Schemas>
         precision: 32
         language: !<!Languages> 
           default:
-            name: typeForid
+            name: TypeForid
             description: ''
         protocol: !<!Protocols> {}
       serializedName: id
@@ -2512,11 +2405,10 @@ schemas: !<!Schemas>
         default:
           name: id
           description: ''
-          originalName: id
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: JSONOutput
+        name: JsonOutput
         description: ''
         namespace: Api100
     protocol: !<!Protocols> {}
@@ -2544,8 +2436,8 @@ schemas: !<!Schemas>
         wrapped: false
     language: !<!Languages> 
       default:
-        name: Array of Banana
-        description: ''
+        name: ArrayOfBanana
+        description: Array of Banana
     protocol: !<!Protocols> {}
   - !<!ArraySchema> &ref_126
     type: array
@@ -2560,8 +2452,8 @@ schemas: !<!Schemas>
         wrapped: true
     language: !<!Languages> 
       default:
-        name: Array of Banana
-        description: ''
+        name: ArrayOfBanana
+        description: Array of Banana
     protocol: !<!Protocols> {}
   - *ref_27
   - *ref_28
@@ -2606,7 +2498,7 @@ schemas: !<!Schemas>
     valueType: *ref_3
     language: !<!Languages> 
       default:
-        name: Constant0
+        name: Constant8
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_133
@@ -2620,7 +2512,7 @@ schemas: !<!Schemas>
     valueType: *ref_3
     language: !<!Languages> 
       default:
-        name: Constant1
+        name: Constant9
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_134
@@ -2634,7 +2526,7 @@ schemas: !<!Schemas>
     valueType: *ref_3
     language: !<!Languages> 
       default:
-        name: Constant2
+        name: Constant10
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_137
@@ -2648,7 +2540,7 @@ schemas: !<!Schemas>
     valueType: *ref_3
     language: !<!Languages> 
       default:
-        name: Constant3
+        name: Constant11
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_138
@@ -2662,7 +2554,7 @@ schemas: !<!Schemas>
     valueType: *ref_3
     language: !<!Languages> 
       default:
-        name: Constant4
+        name: Constant12
         description: ''
     protocol: !<!Protocols> {}
   dateTimes:
@@ -2800,7 +2692,7 @@ operationGroups:
           - '200'
     language: !<!Languages> 
       default:
-        name: getComplexTypeRefNoMeta
+        name: GetComplexTypeRefNoMeta
         description: Get a complex type that has a ref to a complex type with no XML node
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2852,7 +2744,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putComplexTypeRefNoMeta
+        name: PutComplexTypeRefNoMeta
         description: Puts a complex type that has a ref to a complex type with no XML node
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2888,7 +2780,7 @@ operationGroups:
           - '200'
     language: !<!Languages> 
       default:
-        name: getComplexTypeRefWithMeta
+        name: GetComplexTypeRefWithMeta
         description: Get a complex type that has a ref to a complex type with XML node
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2940,7 +2832,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putComplexTypeRefWithMeta
+        name: PutComplexTypeRefWithMeta
         description: Puts a complex type that has a ref to a complex type with XML node
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2990,7 +2882,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getSimple
+        name: GetSimple
         description: Get a simple XML document
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3056,7 +2948,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putSimple
+        name: PutSimple
         description: Put a simple XML document
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3092,7 +2984,7 @@ operationGroups:
           - '200'
     language: !<!Languages> 
       default:
-        name: getWrappedLists
+        name: GetWrappedLists
         description: Get an XML document with multiple wrapped lists
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3158,7 +3050,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putWrappedLists
+        name: PutWrappedLists
         description: Put an XML document with multiple wrapped lists
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3194,7 +3086,7 @@ operationGroups:
           - '200'
     language: !<!Languages> 
       default:
-        name: getHeaders
+        name: GetHeaders
         description: Get strongly-typed response headers.
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3230,7 +3122,7 @@ operationGroups:
           - '200'
     language: !<!Languages> 
       default:
-        name: getEmptyList
+        name: GetEmptyList
         description: Get an empty list.
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3282,7 +3174,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putEmptyList
+        name: PutEmptyList
         description: Puts an empty list.
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3318,7 +3210,7 @@ operationGroups:
           - '200'
     language: !<!Languages> 
       default:
-        name: getEmptyWrappedLists
+        name: GetEmptyWrappedLists
         description: Gets some empty wrapped lists.
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3370,7 +3262,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putEmptyWrappedLists
+        name: PutEmptyWrappedLists
         description: Puts some empty wrapped lists.
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3406,7 +3298,7 @@ operationGroups:
           - '200'
     language: !<!Languages> 
       default:
-        name: getRootList
+        name: GetRootList
         description: Gets a list as the root element.
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3458,7 +3350,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putRootList
+        name: PutRootList
         description: Puts a list as the root element.
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3494,7 +3386,7 @@ operationGroups:
           - '200'
     language: !<!Languages> 
       default:
-        name: getRootListSingleItem
+        name: GetRootListSingleItem
         description: Gets a list with a single item.
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3546,7 +3438,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putRootListSingleItem
+        name: PutRootListSingleItem
         description: Puts a list with a single item.
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3582,7 +3474,7 @@ operationGroups:
           - '200'
     language: !<!Languages> 
       default:
-        name: getEmptyRootList
+        name: GetEmptyRootList
         description: Gets an empty list as the root element.
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3634,7 +3526,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putEmptyRootList
+        name: PutEmptyRootList
         description: Puts an empty list as the root element.
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3670,7 +3562,7 @@ operationGroups:
           - '200'
     language: !<!Languages> 
       default:
-        name: getEmptyChildElement
+        name: GetEmptyChildElement
         description: Gets an XML document with an empty child element.
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3722,7 +3614,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putEmptyChildElement
+        name: PutEmptyChildElement
         description: Puts a value with an empty child element.
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3770,7 +3662,7 @@ operationGroups:
           - '200'
     language: !<!Languages> 
       default:
-        name: listContainers
+        name: ListContainers
         description: Lists containers in a storage account.
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3830,7 +3722,7 @@ operationGroups:
           - '200'
     language: !<!Languages> 
       default:
-        name: getServiceProperties
+        name: GetServiceProperties
         description: Gets storage service properties.
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3906,7 +3798,7 @@ operationGroups:
       x-ms-requestBody-index: 2
     language: !<!Languages> 
       default:
-        name: putServiceProperties
+        name: PutServiceProperties
         description: Puts storage service properties.
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3966,7 +3858,7 @@ operationGroups:
           - '200'
     language: !<!Languages> 
       default:
-        name: getAcls
+        name: GetAcls
         description: Gets storage ACLs for a container.
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -4042,7 +3934,7 @@ operationGroups:
       x-ms-requestBody-index: 2
     language: !<!Languages> 
       default:
-        name: putAcls
+        name: PutAcls
         description: Puts storage ACLs for a container.
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -4102,7 +3994,7 @@ operationGroups:
           - '200'
     language: !<!Languages> 
       default:
-        name: listBlobs
+        name: ListBlobs
         description: Lists blobs in a storage container.
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -4154,7 +4046,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: jsonInput
+        name: JsonInput
         description: A Swagger with XML that has one operation that takes JSON as input. You need to send the ID number 42
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -4190,17 +4082,17 @@ operationGroups:
           - '200'
     language: !<!Languages> 
       default:
-        name: jsonOutput
+        name: JsonOutput
         description: A Swagger with XML that has one operation that returns JSON. ID number 42
     protocol: !<!Protocols> {}
   language: !<!Languages> 
     default:
-      name: xml
+      name: Xml
       description: ''
   protocol: !<!Protocols> {}
 language: !<!Languages> 
   default:
-    name: ''
+    name: XmlService
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

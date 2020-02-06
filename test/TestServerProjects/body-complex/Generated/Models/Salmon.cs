@@ -5,7 +5,7 @@
 
 namespace body_complex.Models
 {
-    /// <summary> The salmon. </summary>
+    /// <summary> The Salmon. </summary>
     public partial class Salmon : Fish
     {
         /// <summary> Initializes a new instance of Salmon. </summary>

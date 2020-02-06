@@ -13,7 +13,7 @@ schemas: !<!Schemas>
         precision: 32
         language: !<!Languages> 
           default:
-            name: typeForstatus
+            name: TypeForstatus
             description: ''
         protocol: !<!Protocols> {}
       serializedName: status
@@ -21,7 +21,6 @@ schemas: !<!Schemas>
         default:
           name: status
           description: ''
-          originalName: status
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_1
@@ -31,7 +30,7 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: Error-message
+            name: ErrorMessage
             description: ''
         protocol: !<!Protocols> {}
       serializedName: message
@@ -39,7 +38,6 @@ schemas: !<!Schemas>
         default:
           name: message
           description: ''
-          originalName: message
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -56,7 +54,7 @@ schemas: !<!Schemas>
     precision: 32
     language: !<!Languages> 
       default:
-        name: integer
+        name: Integer
         description: ''
     protocol: !<!Protocols> {}
   - *ref_0
@@ -68,7 +66,7 @@ schemas: !<!Schemas>
     precision: 32
     language: !<!Languages> 
       default:
-        name: integer
+        name: Integer
         description: ''
     protocol: !<!Protocols> {}
   - !<!NumberSchema> &ref_7
@@ -79,7 +77,7 @@ schemas: !<!Schemas>
     precision: 64
     language: !<!Languages> 
       default:
-        name: integer
+        name: Integer
         description: ''
     protocol: !<!Protocols> {}
   strings:
@@ -87,7 +85,7 @@ schemas: !<!Schemas>
     type: string
     language: !<!Languages> 
       default:
-        name: string
+        name: String
         description: simple string
     protocol: !<!Protocols> {}
   - *ref_1
@@ -99,7 +97,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: unixtime
+        name: Unixtime
         description: 'date in seconds since 1970-01-01T00:00:00Z.'
     protocol: !<!Protocols> {}
 globalParameters:
@@ -172,7 +170,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getNull
+        name: GetNull
         description: Get null Int value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -222,7 +220,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getInvalid
+        name: GetInvalid
         description: Get invalid Int value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -272,7 +270,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getOverflowInt32
+        name: GetOverflowInt32
         description: Get overflow Int32 value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -322,7 +320,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getUnderflowInt32
+        name: GetUnderflowInt32
         description: Get underflow Int32 value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -372,7 +370,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getOverflowInt64
+        name: GetOverflowInt64
         description: Get overflow Int64 value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -422,7 +420,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getUnderflowInt64
+        name: GetUnderflowInt64
         description: Get underflow Int64 value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -488,7 +486,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putMax32
+        name: PutMax32
         description: Put max int32 value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -554,7 +552,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putMax64
+        name: PutMax64
         description: Put max int64 value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -620,7 +618,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putMin32
+        name: PutMin32
         description: Put min int32 value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -686,7 +684,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putMin64
+        name: PutMin64
         description: Put min int64 value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -736,7 +734,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getUnixTime
+        name: GetUnixTime
         description: Get datetime encoded as Unix time value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -802,7 +800,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putUnixTimeDate
+        name: PutUnixTimeDate
         description: Put datetime encoded as Unix time
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -852,7 +850,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getInvalidUnixTime
+        name: GetInvalidUnixTime
         description: Get invalid Unix time value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -902,17 +900,17 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getNullUnixTime
+        name: GetNullUnixTime
         description: Get null Unix time value
     protocol: !<!Protocols> {}
   language: !<!Languages> 
     default:
-      name: int
+      name: Int
       description: ''
   protocol: !<!Protocols> {}
 language: !<!Languages> 
   default:
-    name: ''
+    name: BodyInteger
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}
