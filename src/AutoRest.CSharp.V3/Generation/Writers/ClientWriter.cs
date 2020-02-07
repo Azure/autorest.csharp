@@ -583,7 +583,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 }
                 else
                 {
-                    writer.Line($"throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);");
+                    writer.Line($"throw clientDiagnostics.CreateRequestFailedException(message.Response);");
                 }
             }
         }

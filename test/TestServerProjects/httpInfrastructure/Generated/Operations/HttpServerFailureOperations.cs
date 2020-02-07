@@ -75,7 +75,7 @@ namespace httpInfrastructure
                 switch (message.Response.Status)
                 {
                     default:
-                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -130,7 +130,7 @@ namespace httpInfrastructure
                 switch (message.Response.Status)
                 {
                     default:
-                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -189,7 +189,7 @@ namespace httpInfrastructure
                 switch (message.Response.Status)
                 {
                     default:
-                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -248,7 +248,7 @@ namespace httpInfrastructure
                 switch (message.Response.Status)
                 {
                     default:
-                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
