@@ -33,7 +33,7 @@ namespace Azure.Storage.Tables
 
         public async Task<Response> UpdateAsync(string partitionKey, string rowKey, IDictionary<string, object> entity, CancellationToken cancellationToken= default)
         {
-            return (Response) await _tableOperations.UpdateEntityAsync(_operationTimeout, string.Empty, _format, _table, partitionKey, rowKey, entity, cancellationToken);
+            return (await _tableOperations.UpdateEntityAsync(_operationTimeout, string.Empty, _format, _table, partitionKey, rowKey, entity, cancellationToken)).GetRawResponse();
         }
 
         public AsyncPageable<IDictionary<string, object>> QueryAsync(string select = null, string filter = null, int? limit = null, CancellationToken cancellationToken = default)

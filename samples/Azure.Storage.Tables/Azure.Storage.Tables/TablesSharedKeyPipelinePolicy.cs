@@ -19,6 +19,18 @@ namespace Azure.Storage
     /// </summary>
     internal sealed class TablesSharedKeyPipelinePolicy : HttpPipelineSynchronousPolicy
     {
+        private class InternalStorageCredential: StorageSharedKeyCredential
+        {
+            public static InternalStorageCredential Instance = new InternalStorageCredential();
+            public InternalStorageCredential(): base(string.Empty, string.Empty)
+            {
+            }
+
+            public string GetSas(StorageSharedKeyCredential credential, string message)
+            {
+                return ComputeSasSignature(credential, message);
+            }
+        }
         /// <summary>
         /// Shared key credentials used to sign requests
         /// </summary>
@@ -43,8 +55,7 @@ namespace Azure.Storage
             message.Request.Headers.SetValue(Constants.HeaderNames.Date, date);
 
             var stringToSign = BuildStringToSign(message);
-            var signature = Convert.ToBase64String(
-                new HMACSHA256(Convert.FromBase64String(_credentials.AccountName)).ComputeHash(Encoding.UTF8.GetBytes(stringToSign)));
+            var signature = InternalStorageCredential.Instance.GetSas(_credentials, stringToSign);
 
             var key = new AuthenticationHeaderValue(Constants.HeaderNames.SharedKey, _credentials.AccountName + ":" + signature).ToString();
             message.Request.Headers.SetValue(Constants.HeaderNames.Authorization, key);
