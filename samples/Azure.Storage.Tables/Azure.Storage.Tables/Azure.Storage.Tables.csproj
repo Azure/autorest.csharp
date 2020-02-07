@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Azure.Core" Version="1.0.0" />
+    <PackageReference Include="Storage.Common" Version="1.0.0" />
     <PackageReference Include="System.Text.Json" Version="4.6.0" />
   </ItemGroup>
 
