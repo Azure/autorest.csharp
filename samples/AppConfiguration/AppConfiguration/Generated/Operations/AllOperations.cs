@@ -92,7 +92,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -125,7 +125,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)
@@ -182,7 +182,7 @@ namespace AppConfiguration
                         var headers = new CheckKeysHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -211,7 +211,7 @@ namespace AppConfiguration
                         var headers = new CheckKeysHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)
@@ -282,7 +282,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -317,7 +317,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)
@@ -384,7 +384,7 @@ namespace AppConfiguration
                         var headers = new CheckKeyValuesHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -415,7 +415,7 @@ namespace AppConfiguration
                         var headers = new CheckKeyValuesHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)
@@ -492,7 +492,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -532,7 +532,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)
@@ -609,7 +609,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -648,7 +648,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)
@@ -710,7 +710,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -747,7 +747,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)
@@ -820,7 +820,7 @@ namespace AppConfiguration
                         var headers = new CheckKeyValueHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -856,7 +856,7 @@ namespace AppConfiguration
                         var headers = new CheckKeyValueHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)
@@ -922,7 +922,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -956,7 +956,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)
@@ -1018,7 +1018,7 @@ namespace AppConfiguration
                         var headers = new CheckLabelsHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1048,7 +1048,7 @@ namespace AppConfiguration
                         var headers = new CheckLabelsHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)
@@ -1115,7 +1115,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1153,7 +1153,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)
@@ -1220,7 +1220,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1258,7 +1258,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)
@@ -1329,7 +1329,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1364,7 +1364,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)
@@ -1431,7 +1431,7 @@ namespace AppConfiguration
                         var headers = new CheckRevisionsHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1462,7 +1462,7 @@ namespace AppConfiguration
                         var headers = new CheckRevisionsHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)
@@ -1516,7 +1516,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1552,7 +1552,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)
@@ -1606,7 +1606,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1642,7 +1642,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)
@@ -1696,7 +1696,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1732,7 +1732,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)
@@ -1786,7 +1786,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1822,7 +1822,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)

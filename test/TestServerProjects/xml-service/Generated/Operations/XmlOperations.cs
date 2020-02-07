@@ -68,7 +68,7 @@ namespace xml_service
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -101,7 +101,7 @@ namespace xml_service
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)
@@ -146,7 +146,7 @@ namespace xml_service
                     case 201:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -176,7 +176,7 @@ namespace xml_service
                     case 201:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)
@@ -220,7 +220,7 @@ namespace xml_service
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -253,7 +253,7 @@ namespace xml_service
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)
@@ -298,7 +298,7 @@ namespace xml_service
                     case 201:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -328,7 +328,7 @@ namespace xml_service
                     case 201:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)
@@ -372,7 +372,7 @@ namespace xml_service
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -405,7 +405,7 @@ namespace xml_service
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)
@@ -450,7 +450,7 @@ namespace xml_service
                     case 201:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -480,7 +480,7 @@ namespace xml_service
                     case 201:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)
@@ -524,7 +524,7 @@ namespace xml_service
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -557,7 +557,7 @@ namespace xml_service
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)
@@ -602,7 +602,7 @@ namespace xml_service
                     case 201:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -632,7 +632,7 @@ namespace xml_service
                     case 201:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)
@@ -668,7 +668,7 @@ namespace xml_service
                         var headers = new GetHeadersHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -693,7 +693,7 @@ namespace xml_service
                         var headers = new GetHeadersHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)
@@ -737,7 +737,7 @@ namespace xml_service
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -770,7 +770,7 @@ namespace xml_service
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)
@@ -815,7 +815,7 @@ namespace xml_service
                     case 201:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -845,7 +845,7 @@ namespace xml_service
                     case 201:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)
@@ -889,7 +889,7 @@ namespace xml_service
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -922,7 +922,7 @@ namespace xml_service
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)
@@ -967,7 +967,7 @@ namespace xml_service
                     case 201:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -997,7 +997,7 @@ namespace xml_service
                     case 201:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)
@@ -1047,7 +1047,7 @@ namespace xml_service
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1086,7 +1086,7 @@ namespace xml_service
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)
@@ -1136,7 +1136,7 @@ namespace xml_service
                     case 201:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1166,7 +1166,7 @@ namespace xml_service
                     case 201:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)
@@ -1216,7 +1216,7 @@ namespace xml_service
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1255,7 +1255,7 @@ namespace xml_service
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)
@@ -1305,7 +1305,7 @@ namespace xml_service
                     case 201:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1335,7 +1335,7 @@ namespace xml_service
                     case 201:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)
@@ -1385,7 +1385,7 @@ namespace xml_service
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1424,7 +1424,7 @@ namespace xml_service
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)
@@ -1474,7 +1474,7 @@ namespace xml_service
                     case 201:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1504,7 +1504,7 @@ namespace xml_service
                     case 201:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)
@@ -1548,7 +1548,7 @@ namespace xml_service
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1581,7 +1581,7 @@ namespace xml_service
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)
@@ -1626,7 +1626,7 @@ namespace xml_service
                     case 201:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1656,7 +1656,7 @@ namespace xml_service
                     case 201:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)
@@ -1701,7 +1701,7 @@ namespace xml_service
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1734,7 +1734,7 @@ namespace xml_service
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)
@@ -1780,7 +1780,7 @@ namespace xml_service
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1813,7 +1813,7 @@ namespace xml_service
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)
@@ -1860,7 +1860,7 @@ namespace xml_service
                     case 201:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1890,7 +1890,7 @@ namespace xml_service
                     case 201:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)
@@ -1942,7 +1942,7 @@ namespace xml_service
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1981,7 +1981,7 @@ namespace xml_service
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)
@@ -2033,7 +2033,7 @@ namespace xml_service
                     case 201:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2063,7 +2063,7 @@ namespace xml_service
                     case 201:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)
@@ -2109,7 +2109,7 @@ namespace xml_service
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2142,7 +2142,7 @@ namespace xml_service
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)
@@ -2187,7 +2187,7 @@ namespace xml_service
                     case 200:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2217,7 +2217,7 @@ namespace xml_service
                     case 200:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)
@@ -2256,7 +2256,7 @@ namespace xml_service
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2284,7 +2284,7 @@ namespace xml_service
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response);
                 }
             }
             catch (Exception e)
