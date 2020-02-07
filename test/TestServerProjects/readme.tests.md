@@ -1,7 +1,7 @@
 # Tests AutoRest Configuration
 
 ``` yaml
-use: $(this-folder)/../../
+require: $(this-folder)/../readme.md
 output-folder: $(this-folder)/$(title)
 clear-output-folder: true
 include-csproj: true

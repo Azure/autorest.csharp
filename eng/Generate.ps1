@@ -25,7 +25,7 @@ function Invoke-AutoRest($baseOutput, $title, $autoRestArguments)
     if ($fast)
     {
         $codeModel = Join-Path $baseOutput $title "CodeModel.yaml"
-        $command = "dotnet run --project $script:autorestPluginProject --no-build -- --plugin=csharpgen --title=$title --namespace=$namespace --standalone --input-file=$codeModel --output-folder=$outputPath"
+        $command = "dotnet run --project $script:autorestPluginProject --no-build -- --plugin=csharpgen --title=$title --namespace=$namespace --standalone --input-file=$codeModel --output-folder=$outputPath --shared-source-folder=$sharedSource --save-code-model=true"
     }
 
     if ($clean)
@@ -44,6 +44,7 @@ $swaggerDefinitions = @{};
 
 # Test server test configuration
 $testServerDirectory = Join-Path $repoRoot 'test' 'TestServerProjects'
+$sharedSource = Join-Path $repoRoot 'src' 'assets'
 $autorestPluginProject = Resolve-Path (Join-Path $repoRoot 'src' 'AutoRest.CSharp.V3')
 $launchSettings = Join-Path $autorestPluginProject 'Properties' 'launchSettings.json'
 $configurationPath = Join-Path $testServerDirectory 'readme.tests.md'
@@ -145,6 +146,7 @@ if ($updateLaunchSettings)
         'profiles' = [ordered]@{}
     };
 
+    $sharedSourceNormalized = $sharedSource.Replace($repoRoot, "`$(SolutionDir)")
     foreach ($key in $swaggerDefinitions.Keys | Sort-Object)
     {
         $definition = $swaggerDefinitions[$key];
@@ -154,7 +156,7 @@ if ($updateLaunchSettings)
 
         $settings.profiles[$key] = @{
             'commandName'='Project';
-            'commandLineArgs'="--standalone --input-codemodel=$codeModel --plugin=csharpgen --output-folder=$outputPath --namespace=$namespace"
+            'commandLineArgs'="--standalone --input-codemodel=$codeModel --plugin=csharpgen --output-folder=$outputPath --namespace=$namespace --shared-source-folder=$sharedSourceNormalized --save-code-model=true"
         }
     }
 

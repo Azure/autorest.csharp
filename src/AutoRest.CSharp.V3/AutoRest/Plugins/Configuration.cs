@@ -12,13 +12,23 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
         public string Namespace { get; }
         public string Title { get; }
         public bool IncludeCsProj { get; }
+        public string SharedSourceFolder { get; }
+
+        public bool SaveCodeModel { get; }
 
         public Configuration(IPluginCommunication autoRest)
         {
-            OutputFolder = new Uri(autoRest.GetValue<string?>("output-folder").GetAwaiter().GetResult() ?? "Generated").LocalPath;
+            OutputFolder = new Uri(GetRequiredOption(autoRest, "output-folder")).LocalPath;
+            SharedSourceFolder = new Uri(GetRequiredOption(autoRest, "shared-source-folder")).LocalPath;
             Namespace = autoRest.GetValue<string?>("namespace").GetAwaiter().GetResult() ?? "Sample";
             Title = autoRest.GetValue<string?>("title").GetAwaiter().GetResult() ?? "Sample";
             IncludeCsProj = autoRest.GetValue<bool?>("include-csproj").GetAwaiter().GetResult() ?? true;
+            SaveCodeModel = autoRest.GetValue<bool?>("save-code-model").GetAwaiter().GetResult() ?? false;
+        }
+
+        private static string GetRequiredOption(IPluginCommunication autoRest, string name)
+        {
+            return autoRest.GetValue<string?>(name).GetAwaiter().GetResult() ?? throw new InvalidOperationException($"{name} configuration parameter is required");
         }
     }
 }
