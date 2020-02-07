@@ -1,0 +1,125 @@
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Net;
+using System.Net.Http.Headers;
+using System.Security.Cryptography;
+using System.Text;
+using Azure.Core;
+using Azure.Core.Pipeline;
+
+namespace Azure.Storage
+{
+    /// <summary>
+    /// HttpPipelinePolicy to sign requests using an Azure Storage shared key.
+    /// </summary>
+    internal sealed class TablesSharedKeyPipelinePolicy : HttpPipelineSynchronousPolicy
+    {
+        /// <summary>
+        /// Shared key credentials used to sign requests
+        /// </summary>
+        private readonly StorageSharedKeyCredential _credentials;
+
+        /// <summary>
+        /// Create a new SharedKeyPipelinePolicy
+        /// </summary>
+        /// <param name="credentials">SharedKeyCredentials to authenticate requests.</param>
+        public TablesSharedKeyPipelinePolicy(StorageSharedKeyCredential credentials)
+            => _credentials = credentials;
+
+        /// <summary>
+        /// Sign the request using the shared key credentials.
+        /// </summary>
+        /// <param name="message">The message with the request to sign.</param>
+        public override void OnSendingRequest(HttpMessage message)
+        {
+            base.OnSendingRequest(message);
+
+            var date = DateTimeOffset.UtcNow.ToString("r", CultureInfo.InvariantCulture);
+            message.Request.Headers.SetValue(Constants.HeaderNames.Date, date);
+
+            var stringToSign = BuildStringToSign(message);
+            var signature = Convert.ToBase64String(
+                new HMACSHA256(Convert.FromBase64String(_credentials.AccountName)).ComputeHash(Encoding.UTF8.GetBytes(stringToSign)));
+
+            var key = new AuthenticationHeaderValue(Constants.HeaderNames.SharedKey, _credentials.AccountName + ":" + signature).ToString();
+            message.Request.Headers.SetValue(Constants.HeaderNames.Authorization, key);
+        }
+
+        private string BuildStringToSign(HttpMessage message)
+        {
+            // https://docs.microsoft.com/en-us/rest/api/storageservices/authorize-with-shared-key
+
+            message.Request.Headers.TryGetValue(Constants.HeaderNames.Date, out var date);
+
+            var stringToSign = string.Join("\n",
+                date,
+                BuildCanonicalizedResource(message.Request.Uri.ToUri()));
+            return stringToSign;
+        }
+
+        private string BuildCanonicalizedResource(Uri resource)
+        {
+            // https://docs.microsoft.com/en-us/rest/api/storageservices/authentication-for-the-azure-storage-services
+            StringBuilder cr = new StringBuilder("/").Append(_credentials.AccountName);
+            if (resource.AbsolutePath.Length > 0)
+            {
+                // Any portion of the CanonicalizedResource string that is derived from
+                // the resource's URI should be encoded exactly as it is in the URI.
+                // -- https://msdn.microsoft.com/en-gb/library/azure/dd179428.aspx
+                cr.Append(resource.AbsolutePath);//EscapedPath()
+            }
+            else
+            {
+                // a slash is required to indicate the root path
+                cr.Append('/');
+            }
+
+            System.Collections.Generic.IDictionary<string, string> parameters = GetQueryParameters(resource); // Returns URL decoded values
+            if (parameters.Count > 0)
+            {
+                foreach (var name in parameters.Keys.OrderBy(key => key, StringComparer.Ordinal))
+                {
+                    if (name == "comp")
+                    {
+#pragma warning disable CA1308 // Normalize strings to uppercase
+                        cr.Append('\n').Append(name.ToLowerInvariant()).Append(':').Append(parameters[name]);
+#pragma warning restore CA1308 // Normalize strings to uppercase
+                    }
+                }
+            }
+            return cr.ToString();
+        }
+        public static IDictionary<string, string> GetQueryParameters(Uri uri)
+        {
+            var parameters = new Dictionary<string, string>();
+            var query = uri.Query ?? "";
+            if (!string.IsNullOrEmpty(query))
+            {
+                if (query.StartsWith("?", true, CultureInfo.InvariantCulture))
+                {
+                    query = query.Substring(1);
+                }
+                foreach (var param in query.Split(new[] { '&' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    var parts = param.Split(new[] { '=' }, 2);
+                    var name = WebUtility.UrlDecode(parts[0]);
+                    if (parts.Length == 1)
+                    {
+                        parameters.Add(name, default);
+                    }
+                    else
+                    {
+                        parameters.Add(name, WebUtility.UrlDecode(parts[1]));
+                    }
+                }
+            }
+            return parameters;
+        }
+
+    }
+}

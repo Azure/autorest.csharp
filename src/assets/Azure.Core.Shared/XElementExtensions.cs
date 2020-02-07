@@ -29,5 +29,10 @@ namespace Azure.Core
             "P" => XmlConvert.ToTimeSpan(element.Value),
             _ => throw new ArgumentException("Format is not supported", nameof(format))
         };
+
+        public static object GetObjectValue(this XElement element, string format)
+        {
+            return element.Value;
+        }
     }
 }
