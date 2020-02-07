@@ -37,7 +37,7 @@ namespace Azure.Core.Pipeline
         {
             if (_activity != null && value != null)
             {
-                AddAttribute(name, value.ToString() ?? string.Empty);
+                AddAttribute(name, value.ToString());
             }
         }
 
@@ -138,9 +138,9 @@ namespace Azure.Core.Pipeline
         {
             if (s_getIdFormatMethod == null) return false;
 
-            object? result = s_getIdFormatMethod.Invoke(activity, Array.Empty<object>());
+            object result = s_getIdFormatMethod.Invoke(activity, Array.Empty<object>());
 
-            return result is int format && format == 2 /* ActivityIdFormat.W3C */;
+            return (int)result == 2 /* ActivityIdFormat.W3C */;
         }
 
         public static bool TryGetTraceState(this Activity activity, out string? traceState)
