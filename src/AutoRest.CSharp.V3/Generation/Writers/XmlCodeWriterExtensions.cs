@@ -346,6 +346,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     writer.AppendRaw("GetTimeSpanValue");
                 }
 
+                if (frameworkType == typeof(object))
+                {
+                    writer.AppendRaw("GetObjectValue");
+                }
+
                 writer.Append($"({serialization.Format.ToFormatSpecifier():L})");
                 return;
             }
