@@ -903,14 +903,14 @@ schemas: !<!Schemas>
               language: !<!Languages> 
                 default:
                   name: Dictionary of string
-                  description: Dictionary of <paths·xml-headers·get·responses·200·headers·custom_header·schema>
+                  description: Dictionary of <paths·1uz2c5v·xml-headers·get·responses·200·headers·custom_header·schema>
               protocol: !<!Protocols> {}
             required: false
             serializedName: Metadata
             language: !<!Languages> 
               default:
                 name: Metadata
-                description: Dictionary of <paths·xml-headers·get·responses·200·headers·custom_header·schema>
+                description: Dictionary of <paths·1uz2c5v·xml-headers·get·responses·200·headers·custom_header·schema>
                 originalName: Metadata
             protocol: !<!Protocols> {}
           language: !<!Languages> 
@@ -2390,7 +2390,7 @@ schemas: !<!Schemas>
                 language: !<!Languages> 
                   default:
                     name: Metadata
-                    description: Dictionary of <paths·xml-headers·get·responses·200·headers·custom_header·schema>
+                    description: Dictionary of <paths·1uz2c5v·xml-headers·get·responses·200·headers·custom_header·schema>
                     originalName: Metadata
                 protocol: !<!Protocols> {}
               serialization:

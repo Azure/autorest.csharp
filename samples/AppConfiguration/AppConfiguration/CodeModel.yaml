@@ -70,7 +70,7 @@ schemas: !<!Schemas>
       serializedName: '@nextLink'
       language: !<!Languages> 
         default:
-          name: nextLink
+          name: NextLink
           description: The URI that can be used to request the next set of paged results.
           originalName: '@nextLink'
       protocol: !<!Protocols> {}
@@ -307,13 +307,13 @@ schemas: !<!Schemas>
               language: !<!Languages> 
                 default:
                   name: Dictionary of string
-                  description: Dictionary of <paths·keys·get·parameters·0·schema>
+                  description: Dictionary of <paths·2r06b2·keys·get·parameters·0·schema>
               protocol: !<!Protocols> {}
             serializedName: tags
             language: !<!Languages> 
               default:
                 name: tags
-                description: Dictionary of <paths·keys·get·parameters·0·schema>
+                description: Dictionary of <paths·2r06b2·keys·get·parameters·0·schema>
                 originalName: tags
             protocol: !<!Protocols> {}
           - !<!Property> 
@@ -381,7 +381,7 @@ schemas: !<!Schemas>
       serializedName: '@nextLink'
       language: !<!Languages> 
         default:
-          name: nextLink
+          name: NextLink
           description: The URI that can be used to request the next set of paged results.
           originalName: '@nextLink'
       protocol: !<!Protocols> {}
@@ -461,7 +461,7 @@ schemas: !<!Schemas>
       serializedName: '@nextLink'
       language: !<!Languages> 
         default:
-          name: nextLink
+          name: NextLink
           description: The URI that can be used to request the next set of paged results.
           originalName: '@nextLink'
       protocol: !<!Protocols> {}

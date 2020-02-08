@@ -13,7 +13,7 @@ namespace xml_service.Models
         public string Name { get; set; }
         /// <summary> Properties of a container. </summary>
         public ContainerProperties Properties { get; set; } = new ContainerProperties();
-        /// <summary> Dictionary of &lt;paths·xml-headers·get·responses·200·headers·custom_header·schema&gt;. </summary>
+        /// <summary> Dictionary of &lt;paths·1uz2c5v·xml-headers·get·responses·200·headers·custom_header·schema&gt;. </summary>
         public IDictionary<string, string> Metadata { get; set; }
     }
 }

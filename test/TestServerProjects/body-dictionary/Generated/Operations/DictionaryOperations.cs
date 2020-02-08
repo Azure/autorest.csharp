@@ -4537,7 +4537,7 @@ namespace body_dictionary
             return message;
         }
         /// <summary> Put An array of array of strings {&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: [&quot;4&quot;, &quot;5&quot;, &quot;6&quot;], &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
-        /// <param name="arrayBody"> The DictionaryOfpaths·dictionary-array-valid·put·requestbody·content·application-json·schema·additionalproperties to use. </param>
+        /// <param name="arrayBody"> The DictionaryOfpaths·1dxz488·dictionary-array-valid·put·requestbody·content·application-json·schema·additionalproperties to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutArrayValidAsync(IDictionary<string, ICollection<string>> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -4567,7 +4567,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Put An array of array of strings {&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: [&quot;4&quot;, &quot;5&quot;, &quot;6&quot;], &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
-        /// <param name="arrayBody"> The DictionaryOfpaths·dictionary-array-valid·put·requestbody·content·application-json·schema·additionalproperties to use. </param>
+        /// <param name="arrayBody"> The DictionaryOfpaths·1dxz488·dictionary-array-valid·put·requestbody·content·application-json·schema·additionalproperties to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutArrayValid(IDictionary<string, ICollection<string>> arrayBody, CancellationToken cancellationToken = default)
         {

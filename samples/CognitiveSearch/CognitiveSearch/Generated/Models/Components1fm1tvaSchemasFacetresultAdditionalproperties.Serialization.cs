@@ -8,16 +8,16 @@ using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class ComponentsSchemasFacetresultAdditionalproperties : IUtf8JsonSerializable
+    public partial class Components1fm1tvaSchemasFacetresultAdditionalproperties : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             writer.WriteEndObject();
         }
-        internal static ComponentsSchemasFacetresultAdditionalproperties DeserializeComponentsSchemasFacetresultAdditionalproperties(JsonElement element)
+        internal static Components1fm1tvaSchemasFacetresultAdditionalproperties DeserializeComponents1fm1tvaSchemasFacetresultAdditionalproperties(JsonElement element)
         {
-            ComponentsSchemasFacetresultAdditionalproperties result = new ComponentsSchemasFacetresultAdditionalproperties();
+            Components1fm1tvaSchemasFacetresultAdditionalproperties result = new Components1fm1tvaSchemasFacetresultAdditionalproperties();
             foreach (var property in element.EnumerateObject())
             {
             }

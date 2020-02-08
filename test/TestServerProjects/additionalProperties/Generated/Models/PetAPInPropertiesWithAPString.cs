@@ -15,7 +15,7 @@ namespace additionalProperties.Models
         public string Name { get; set; }
         public bool? Status { get; internal set; }
         public string OdataLocation { get; set; }
-        /// <summary> Dictionary of &lt;components·schemas·petapinproperties·properties·additionalproperties·additionalproperties&gt;. </summary>
+        /// <summary> Dictionary of &lt;components·ruixpu·schemas·petapinproperties·properties·additionalproperties·additionalproperties&gt;. </summary>
         public IDictionary<string, float> AdditionalProperties { get; set; }
         private readonly IDictionary<string, string> _additionalProperties = new System.Collections.Generic.Dictionary<string, string>();
         /// <inheritdoc />

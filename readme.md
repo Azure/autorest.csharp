@@ -18,20 +18,4 @@
 shared-source-folder: $(this-folder)/src/assets
 save-code-model: true
 use: $(this-folder)/artifacts/bin/AutoRest.CSharp.V3/Debug/netcoreapp3.0/
-use-extension:
-  "@autorest/modelerfour": "4.4.162"
-```
-
-```yaml $(include-csproj)
-pipeline:
-  csharpproj:
-    input: modelerfour/identity
-  csharpproj/emitter:
-    input: csharpproj
-    scope: output-scope
-  csharpproj/emitter/command:
-    input:
-    - csharpgen/emitter
-    - csharpproj/emitter
-    run: dotnet build $(title).csproj --verbosity quiet /nologo
 ```

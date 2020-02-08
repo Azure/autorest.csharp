@@ -658,7 +658,7 @@ schemas: !<!Schemas>
       version: '2019-05-06'
     language: !<!Languages> 
       default:
-        name: components·schemas·facetresult·additionalproperties
+        name: components·1fm1tva·schemas·facetresult·additionalproperties
         description: ''
         namespace: Api20190506
     protocol: !<!Protocols> {}
@@ -1795,7 +1795,7 @@ schemas: !<!Schemas>
             serializedName: '@odata.type'
             language: !<!Languages> 
               default:
-                name: odataType
+                name: OdataType
                 description: ''
                 originalName: '@odata.type'
             protocol: !<!Protocols> {}
@@ -1902,7 +1902,7 @@ schemas: !<!Schemas>
             serializedName: '@odata.type'
             language: !<!Languages> 
               default:
-                name: odataType
+                name: OdataType
                 description: ''
                 originalName: '@odata.type'
             protocol: !<!Protocols> {}
@@ -5032,7 +5032,7 @@ schemas: !<!Schemas>
               serializedName: '@odata.type'
               language: !<!Languages> 
                 default:
-                  name: odataType
+                  name: OdataType
                   description: ''
                   originalName: '@odata.type'
               protocol: !<!Protocols> {}
@@ -5383,7 +5383,7 @@ schemas: !<!Schemas>
             serializedName: '@odata.type'
             language: !<!Languages> 
               default:
-                name: odataType
+                name: OdataType
                 description: ''
                 originalName: '@odata.type'
             protocol: !<!Protocols> {}
@@ -8037,7 +8037,7 @@ schemas: !<!Schemas>
               serializedName: '@odata.type'
               language: !<!Languages> 
                 default:
-                  name: odataType
+                  name: OdataType
                   description: ''
                   originalName: '@odata.type'
               protocol: !<!Protocols> {}
@@ -9537,7 +9537,7 @@ schemas: !<!Schemas>
               serializedName: '@odata.type'
               language: !<!Languages> 
                 default:
-                  name: odataType
+                  name: OdataType
                   description: ''
                   originalName: '@odata.type'
               protocol: !<!Protocols> {}
@@ -12183,7 +12183,7 @@ schemas: !<!Schemas>
               serializedName: '@odata.type'
               language: !<!Languages> 
                 default:
-                  name: odataType
+                  name: OdataType
                   description: ''
                   originalName: '@odata.type'
               protocol: !<!Protocols> {}
@@ -12377,7 +12377,7 @@ schemas: !<!Schemas>
               serializedName: '@odata.type'
               language: !<!Languages> 
                 default:
-                  name: odataType
+                  name: OdataType
                   description: ''
                   originalName: '@odata.type'
               protocol: !<!Protocols> {}

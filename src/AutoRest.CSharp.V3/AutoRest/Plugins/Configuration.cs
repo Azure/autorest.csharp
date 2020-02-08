@@ -11,7 +11,6 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
         public string OutputFolder { get; }
         public string Namespace { get; }
         public string Title { get; }
-        public bool IncludeCsProj { get; }
         public string SharedSourceFolder { get; }
 
         public bool SaveCodeModel { get; }
@@ -22,7 +21,6 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
             SharedSourceFolder = new Uri(GetRequiredOption(autoRest, "shared-source-folder")).LocalPath;
             Namespace = autoRest.GetValue<string?>("namespace").GetAwaiter().GetResult() ?? "Sample";
             Title = autoRest.GetValue<string?>("title").GetAwaiter().GetResult() ?? "Sample";
-            IncludeCsProj = autoRest.GetValue<bool?>("include-csproj").GetAwaiter().GetResult() ?? true;
             SaveCodeModel = autoRest.GetValue<bool?>("save-code-model").GetAwaiter().GetResult() ?? false;
         }
 

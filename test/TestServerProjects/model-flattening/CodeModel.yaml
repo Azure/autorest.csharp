@@ -241,13 +241,13 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: Dictionary of string
-            description: Dictionary of <components·schemas·resource·properties·tags·additionalproperties>
+            description: Dictionary of <components·13oyrf9·schemas·resource·properties·tags·additionalproperties>
         protocol: !<!Protocols> {}
       serializedName: tags
       language: !<!Languages> 
         default:
           name: tags
-          description: Dictionary of <components·schemas·resource·properties·tags·additionalproperties>
+          description: Dictionary of <components·13oyrf9·schemas·resource·properties·tags·additionalproperties>
           originalName: tags
       protocol: !<!Protocols> {}
     - !<!Property> 
@@ -620,7 +620,7 @@ schemas: !<!Schemas>
           serializedName: '@odata.value'
           language: !<!Languages> 
             default:
-              name: odataValue
+              name: OdataValue
               description: URL value.
               originalName: '@odata.value'
           protocol: !<!Protocols> {}
@@ -726,7 +726,7 @@ schemas: !<!Schemas>
       serializedName: '@odata.value'
       language: !<!Languages> 
         default:
-          name: odataValue
+          name: OdataValue
           description: URL value.
           originalName: '@odata.value'
       protocol: !<!Protocols> {}
@@ -761,7 +761,7 @@ schemas: !<!Schemas>
           serializedName: '@odata.value'
           language: !<!Languages> 
             default:
-              name: odataValue
+              name: OdataValue
               description: URL value.
               originalName: '@odata.value'
           protocol: !<!Protocols> {}

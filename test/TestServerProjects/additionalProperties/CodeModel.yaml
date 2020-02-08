@@ -273,7 +273,7 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: Dictionary of string
-            description: Dictionary of <components·schemas·petapstring·additionalproperties>
+            description: Dictionary of <components·gbcthw·schemas·petapstring·additionalproperties>
         protocol: !<!Protocols> {}
       immediate:
       - *ref_4
@@ -413,14 +413,14 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: Dictionary of number
-            description: Dictionary of <components·schemas·petapinproperties·properties·additionalproperties·additionalproperties>
+            description: Dictionary of <components·ruixpu·schemas·petapinproperties·properties·additionalproperties·additionalproperties>
         protocol: !<!Protocols> {}
       required: false
       serializedName: additionalProperties
       language: !<!Languages> 
         default:
           name: additionalProperties
-          description: Dictionary of <components·schemas·petapinproperties·properties·additionalproperties·additionalproperties>
+          description: Dictionary of <components·ruixpu·schemas·petapinproperties·properties·additionalproperties·additionalproperties>
           originalName: additionalProperties
       protocol: !<!Protocols> {}
     language: !<!Languages> 
@@ -442,7 +442,7 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: Dictionary of string
-            description: Dictionary of <components·schemas·petapstring·additionalproperties>
+            description: Dictionary of <components·gbcthw·schemas·petapstring·additionalproperties>
         protocol: !<!Protocols> {}
       immediate:
       - *ref_6
@@ -515,7 +515,7 @@ schemas: !<!Schemas>
       serializedName: '@odata.location'
       language: !<!Languages> 
         default:
-          name: odataLocation
+          name: OdataLocation
           description: ''
           originalName: '@odata.location'
       protocol: !<!Protocols> {}
@@ -526,14 +526,14 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: Dictionary of number
-            description: Dictionary of <components·schemas·petapinproperties·properties·additionalproperties·additionalproperties>
+            description: Dictionary of <components·ruixpu·schemas·petapinproperties·properties·additionalproperties·additionalproperties>
         protocol: !<!Protocols> {}
       required: false
       serializedName: additionalProperties
       language: !<!Languages> 
         default:
           name: additionalProperties
-          description: Dictionary of <components·schemas·petapinproperties·properties·additionalproperties·additionalproperties>
+          description: Dictionary of <components·ruixpu·schemas·petapinproperties·properties·additionalproperties·additionalproperties>
           originalName: additionalProperties
       protocol: !<!Protocols> {}
     language: !<!Languages> 

@@ -698,13 +698,13 @@ schemas: !<!Schemas>
         language: !<!Languages> 
           default:
             name: Dictionary of string
-            description: Dictionary of <components·schemas·dictionary_wrapper·properties·defaultprogram·additionalproperties>
+            description: Dictionary of <components·1h82ak4·schemas·dictionary_wrapper·properties·defaultprogram·additionalproperties>
         protocol: !<!Protocols> {}
       serializedName: defaultProgram
       language: !<!Languages> 
         default:
           name: defaultProgram
-          description: Dictionary of <components·schemas·dictionary_wrapper·properties·defaultprogram·additionalproperties>
+          description: Dictionary of <components·1h82ak4·schemas·dictionary_wrapper·properties·defaultprogram·additionalproperties>
           originalName: defaultProgram
       protocol: !<!Protocols> {}
     language: !<!Languages> 
