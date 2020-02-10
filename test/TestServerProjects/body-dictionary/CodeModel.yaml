@@ -126,8 +126,8 @@ schemas: !<!Schemas>
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Dictionary of string
-        description: Dictionary of <paths·dictionary-nullvalue·get·responses·200·content·application-json·schema·additionalproperties>
+        name: DictionaryOfstring
+        description: Dictionary of <string>
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_28
     type: dictionary
@@ -338,7 +338,7 @@ schemas: !<!Schemas>
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: DictionaryOfpaths·dictionary-array-null·get·responses·200·content·application-json·schema·additionalproperties
+        name: DictionaryOfpaths·1y9iid6·dictionary-array-null·get·responses·200·content·application-json·schema·additionalproperties
         description: a null array
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_52
@@ -356,7 +356,7 @@ schemas: !<!Schemas>
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: DictionaryOfpaths·dictionary-array-empty·get·responses·200·content·application-json·schema·additionalproperties
+        name: DictionaryOfpaths·afa1hv·dictionary-array-empty·get·responses·200·content·application-json·schema·additionalproperties
         description: 'An empty dictionary {}'
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_53
@@ -383,7 +383,7 @@ schemas: !<!Schemas>
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: DictionaryOfpaths·dictionary-array-valid·put·requestbody·content·application-json·schema·additionalproperties
+        name: DictionaryOfpaths·1dxz488·dictionary-array-valid·put·requestbody·content·application-json·schema·additionalproperties
         description: 'An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}'
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_55

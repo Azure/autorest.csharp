@@ -56,7 +56,7 @@ namespace httpInfrastructure
                     case 200:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -80,7 +80,7 @@ namespace httpInfrastructure
                     case 200:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -119,7 +119,7 @@ namespace httpInfrastructure
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -147,7 +147,7 @@ namespace httpInfrastructure
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -186,7 +186,7 @@ namespace httpInfrastructure
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -214,7 +214,7 @@ namespace httpInfrastructure
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -253,7 +253,7 @@ namespace httpInfrastructure
                     case 200:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -277,7 +277,7 @@ namespace httpInfrastructure
                     case 200:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -316,7 +316,7 @@ namespace httpInfrastructure
                     case 200:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -340,7 +340,7 @@ namespace httpInfrastructure
                     case 200:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -379,7 +379,7 @@ namespace httpInfrastructure
                     case 200:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -403,7 +403,7 @@ namespace httpInfrastructure
                     case 200:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -442,7 +442,7 @@ namespace httpInfrastructure
                     case 200:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -466,7 +466,7 @@ namespace httpInfrastructure
                     case 200:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -505,7 +505,7 @@ namespace httpInfrastructure
                     case 201:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -529,7 +529,7 @@ namespace httpInfrastructure
                     case 201:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -568,7 +568,7 @@ namespace httpInfrastructure
                     case 201:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -592,7 +592,7 @@ namespace httpInfrastructure
                     case 201:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -631,7 +631,7 @@ namespace httpInfrastructure
                     case 202:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -655,7 +655,7 @@ namespace httpInfrastructure
                     case 202:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -694,7 +694,7 @@ namespace httpInfrastructure
                     case 202:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -718,7 +718,7 @@ namespace httpInfrastructure
                     case 202:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -757,7 +757,7 @@ namespace httpInfrastructure
                     case 202:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -781,7 +781,7 @@ namespace httpInfrastructure
                     case 202:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -820,7 +820,7 @@ namespace httpInfrastructure
                     case 202:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -844,7 +844,7 @@ namespace httpInfrastructure
                     case 202:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -879,7 +879,7 @@ namespace httpInfrastructure
                     case 204:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -903,7 +903,7 @@ namespace httpInfrastructure
                     case 204:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -942,7 +942,7 @@ namespace httpInfrastructure
                     case 204:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -966,7 +966,7 @@ namespace httpInfrastructure
                     case 204:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1005,7 +1005,7 @@ namespace httpInfrastructure
                     case 204:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1029,7 +1029,7 @@ namespace httpInfrastructure
                     case 204:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1068,7 +1068,7 @@ namespace httpInfrastructure
                     case 204:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1092,7 +1092,7 @@ namespace httpInfrastructure
                     case 204:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1131,7 +1131,7 @@ namespace httpInfrastructure
                     case 204:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1155,7 +1155,7 @@ namespace httpInfrastructure
                     case 204:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1190,7 +1190,7 @@ namespace httpInfrastructure
                     case 204:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1214,7 +1214,7 @@ namespace httpInfrastructure
                     case 204:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)

@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
     {
         public async Task<bool> Execute(IPluginCommunication autoRest, CodeModel codeModel, Configuration configuration)
         {
-            var project = GeneratedCodeWorkspace.Create(configuration.OutputFolder);
+            var project = GeneratedCodeWorkspace.Create(configuration.OutputFolder, configuration.SharedSourceFolder);
             var sourceInputModel = SourceInputModelBuilder.Build(await project.GetCompilationAsync());
 
             var context = new BuildContext(codeModel, configuration.Namespace, sourceInputModel);

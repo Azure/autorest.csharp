@@ -234,7 +234,7 @@ schemas: !<!Schemas>
         description: ''
         namespace: Api20181010
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_79
+  - !<!ObjectSchema> &ref_78
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -408,7 +408,7 @@ schemas: !<!Schemas>
         namespace: Api20181010
     protocol: !<!Protocols> {}
   - *ref_2
-  - !<!ObjectSchema> &ref_124
+  - !<!ObjectSchema> &ref_123
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -790,7 +790,7 @@ schemas: !<!Schemas>
   - *ref_3
   - *ref_4
   - *ref_6
-  - !<!ObjectSchema> &ref_135
+  - !<!ObjectSchema> &ref_134
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -929,7 +929,7 @@ schemas: !<!Schemas>
   arrays:
   - *ref_11
   - *ref_12
-  - !<!ArraySchema> &ref_115
+  - !<!ArraySchema> &ref_114
     type: array
     apiVersions:
     - !<!ApiVersion> 
@@ -958,10 +958,6 @@ schemas: !<!Schemas>
     type: constant
     value: !<!ConstantValue> 
       value: '2018-10-10'
-      language:
-        default:
-          name: ''
-          description: ''
     valueType: *ref_9
     language: !<!Languages> 
       default:
@@ -972,66 +968,46 @@ schemas: !<!Schemas>
     type: constant
     value: !<!ConstantValue> 
       value: '3.0'
-      language:
-        default:
-          name: ''
-          description: ''
     valueType: *ref_9
     language: !<!Languages> 
       default:
         name: Constant2
         description: ''
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_111
+  - !<!ConstantSchema> &ref_110
     type: constant
     value: !<!ConstantValue> 
       value: acl
-      language:
-        default:
-          name: ''
-          description: ''
     valueType: *ref_9
     language: !<!Languages> 
       default:
         name: Constant3
         description: ''
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_121
+  - !<!ConstantSchema> &ref_120
     type: constant
     value: !<!ConstantValue> 
       value: service
-      language:
-        default:
-          name: ''
-          description: ''
     valueType: *ref_9
     language: !<!Languages> 
       default:
         name: Constant4
         description: ''
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_122
+  - !<!ConstantSchema> &ref_121
     type: constant
     value: !<!ConstantValue> 
       value: properties
-      language:
-        default:
-          name: ''
-          description: ''
     valueType: *ref_9
     language: !<!Languages> 
       default:
         name: Constant5
         description: ''
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_131
+  - !<!ConstantSchema> &ref_130
     type: constant
     value: !<!ConstantValue> 
       value: stats
-      language:
-        default:
-          name: ''
-          description: ''
     valueType: *ref_9
     language: !<!Languages> 
       default:
@@ -1056,18 +1032,6 @@ schemas: !<!Schemas>
   - *ref_23
   numbers:
   - !<!NumberSchema> &ref_49
-    type: integer
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2018-10-10'
-    minimum: 0
-    precision: 32
-    language: !<!Languages> 
-      default:
-        name: integer
-        description: ''
-    protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_67
     type: integer
     apiVersions:
     - !<!ApiVersion> 
@@ -1173,7 +1137,7 @@ globalParameters:
   protocol: !<!Protocols> 
     http: !<!HttpParameter> 
       in: header
-- !<!Parameter> &ref_68
+- !<!Parameter> &ref_67
   schema: *ref_43
   implementation: Client
   required: true
@@ -1187,7 +1151,7 @@ globalParameters:
   protocol: !<!Protocols> 
     http: !<!HttpParameter> 
       in: header
-- !<!Parameter> &ref_80
+- !<!Parameter> &ref_79
   schema: *ref_43
   implementation: Client
   required: true
@@ -1201,7 +1165,7 @@ globalParameters:
   protocol: !<!Protocols> 
     http: !<!HttpParameter> 
       in: header
-- !<!Parameter> &ref_89
+- !<!Parameter> &ref_88
   schema: *ref_43
   implementation: Client
   required: true
@@ -1215,7 +1179,7 @@ globalParameters:
   protocol: !<!Protocols> 
     http: !<!HttpParameter> 
       in: header
-- !<!Parameter> &ref_97
+- !<!Parameter> &ref_96
   schema: *ref_43
   implementation: Client
   required: true
@@ -1229,7 +1193,7 @@ globalParameters:
   protocol: !<!Protocols> 
     http: !<!HttpParameter> 
       in: header
-- !<!Parameter> &ref_104
+- !<!Parameter> &ref_103
   schema: *ref_43
   implementation: Client
   required: true
@@ -1243,7 +1207,7 @@ globalParameters:
   protocol: !<!Protocols> 
     http: !<!HttpParameter> 
       in: header
-- !<!Parameter> &ref_110
+- !<!Parameter> &ref_109
   schema: *ref_43
   implementation: Client
   required: true
@@ -1257,7 +1221,7 @@ globalParameters:
   protocol: !<!Protocols> 
     http: !<!HttpParameter> 
       in: header
-- !<!Parameter> &ref_116
+- !<!Parameter> &ref_115
   schema: *ref_43
   implementation: Client
   required: true
@@ -1271,7 +1235,7 @@ globalParameters:
   protocol: !<!Protocols> 
     http: !<!HttpParameter> 
       in: header
-- !<!Parameter> &ref_123
+- !<!Parameter> &ref_122
   schema: *ref_43
   implementation: Client
   required: true
@@ -1285,7 +1249,7 @@ globalParameters:
   protocol: !<!Protocols> 
     http: !<!HttpParameter> 
       in: header
-- !<!Parameter> &ref_128
+- !<!Parameter> &ref_127
   schema: *ref_43
   implementation: Client
   required: true
@@ -1299,7 +1263,7 @@ globalParameters:
   protocol: !<!Protocols> 
     http: !<!HttpParameter> 
       in: header
-- !<!Parameter> &ref_132
+- !<!Parameter> &ref_131
   schema: *ref_43
   implementation: Client
   required: true
@@ -1368,7 +1332,7 @@ operationGroups:
         schema: *ref_49
         implementation: Method
         extensions:
-          x-ms-parameter-grouping: &ref_69
+          x-ms-parameter-grouping: &ref_68
             name: QueryOptions
         language: !<!Languages> 
           default:
@@ -1382,7 +1346,7 @@ operationGroups:
         schema: *ref_46
         implementation: Method
         extensions:
-          x-ms-parameter-grouping: &ref_70
+          x-ms-parameter-grouping: &ref_69
             name: QueryOptions
         language: !<!Languages> 
           default:
@@ -1396,7 +1360,7 @@ operationGroups:
         schema: *ref_46
         implementation: Method
         extensions:
-          x-ms-parameter-grouping: &ref_71
+          x-ms-parameter-grouping: &ref_70
             name: QueryOptions
         language: !<!Languages> 
           default:
@@ -1700,8 +1664,8 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_44
-      - !<!Parameter> &ref_72
-        schema: *ref_67
+      - !<!Parameter> &ref_71
+        schema: *ref_49
         implementation: Method
         language: !<!Languages> 
           default:
@@ -1713,8 +1677,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - *ref_68
-      - !<!Parameter> &ref_73
+      - *ref_67
+      - !<!Parameter> &ref_72
         schema: *ref_46
         implementation: Method
         language: !<!Languages> 
@@ -1737,7 +1701,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_74
+      - !<!Parameter> &ref_73
         schema: *ref_48
         implementation: Method
         extensions:
@@ -1750,16 +1714,29 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> &ref_75
+      - !<!Parameter> &ref_74
         schema: *ref_49
         implementation: Method
         extensions:
-          x-ms-parameter-grouping: *ref_69
+          x-ms-parameter-grouping: *ref_68
         language: !<!Languages> 
           default:
             name: Top
             description: Maximum number of records to return.
             serializedName: $top
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      - !<!Parameter> &ref_75
+        schema: *ref_46
+        implementation: Method
+        extensions:
+          x-ms-parameter-grouping: *ref_69
+        language: !<!Languages> 
+          default:
+            name: Select
+            description: 'Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".'
+            serializedName: $select
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
@@ -1770,26 +1747,13 @@ operationGroups:
           x-ms-parameter-grouping: *ref_70
         language: !<!Languages> 
           default:
-            name: Select
-            description: 'Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".'
-            serializedName: $select
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: query
-      - !<!Parameter> &ref_77
-        schema: *ref_46
-        implementation: Method
-        extensions:
-          x-ms-parameter-grouping: *ref_71
-        language: !<!Languages> 
-          default:
             name: Filter
             description: OData filter expression.
             serializedName: $filter
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> &ref_78
+      - !<!Parameter> &ref_77
         schema: *ref_46
         implementation: Method
         required: true
@@ -1802,13 +1766,13 @@ operationGroups:
           http: !<!HttpParameter> 
             in: path
       signatureParameters:
+      - *ref_71
       - *ref_72
       - *ref_73
       - *ref_74
       - *ref_75
       - *ref_76
       - *ref_77
-      - *ref_78
       language: !<!Languages> 
         default:
           name: ''
@@ -1820,7 +1784,7 @@ operationGroups:
           uri: '{url}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_79
+      schema: *ref_78
       language: !<!Languages> 
         default:
           name: ''
@@ -1878,8 +1842,8 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_44
-      - !<!Parameter> &ref_81
-        schema: *ref_67
+      - !<!Parameter> &ref_80
+        schema: *ref_49
         implementation: Method
         language: !<!Languages> 
           default:
@@ -1891,8 +1855,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - *ref_80
-      - !<!Parameter> &ref_82
+      - *ref_79
+      - !<!Parameter> &ref_81
         schema: *ref_46
         implementation: Method
         language: !<!Languages> 
@@ -1915,7 +1879,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_83
+      - !<!Parameter> &ref_82
         schema: *ref_48
         implementation: Method
         extensions:
@@ -1928,11 +1892,11 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> &ref_84
+      - !<!Parameter> &ref_83
         schema: *ref_46
         implementation: Method
         extensions:
-          x-ms-parameter-grouping: *ref_70
+          x-ms-parameter-grouping: *ref_69
         language: !<!Languages> 
           default:
             name: Select
@@ -1941,11 +1905,11 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> &ref_85
+      - !<!Parameter> &ref_84
         schema: *ref_46
         implementation: Method
         extensions:
-          x-ms-parameter-grouping: *ref_71
+          x-ms-parameter-grouping: *ref_70
         language: !<!Languages> 
           default:
             name: Filter
@@ -1954,7 +1918,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> &ref_86
+      - !<!Parameter> &ref_85
         schema: *ref_46
         implementation: Method
         required: true
@@ -1966,7 +1930,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: path
-      - !<!Parameter> &ref_87
+      - !<!Parameter> &ref_86
         schema: *ref_46
         implementation: Method
         required: true
@@ -1978,7 +1942,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: path
-      - !<!Parameter> &ref_88
+      - !<!Parameter> &ref_87
         schema: *ref_46
         implementation: Method
         required: true
@@ -1991,6 +1955,7 @@ operationGroups:
           http: !<!HttpParameter> 
             in: path
       signatureParameters:
+      - *ref_80
       - *ref_81
       - *ref_82
       - *ref_83
@@ -1998,7 +1963,6 @@ operationGroups:
       - *ref_85
       - *ref_86
       - *ref_87
-      - *ref_88
       language: !<!Languages> 
         default:
           name: ''
@@ -2010,7 +1974,7 @@ operationGroups:
           uri: '{url}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_79
+      schema: *ref_78
       language: !<!Languages> 
         default:
           name: ''
@@ -2068,8 +2032,8 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_44
-      - !<!Parameter> &ref_90
-        schema: *ref_67
+      - !<!Parameter> &ref_89
+        schema: *ref_49
         implementation: Method
         language: !<!Languages> 
           default:
@@ -2081,8 +2045,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - *ref_89
-      - !<!Parameter> &ref_91
+      - *ref_88
+      - !<!Parameter> &ref_90
         schema: *ref_46
         implementation: Method
         language: !<!Languages> 
@@ -2105,7 +2069,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_92
+      - !<!Parameter> &ref_91
         schema: *ref_48
         implementation: Method
         extensions:
@@ -2118,7 +2082,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> &ref_93
+      - !<!Parameter> &ref_92
         schema: *ref_46
         implementation: Method
         required: true
@@ -2130,7 +2094,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: path
-      - !<!Parameter> &ref_94
+      - !<!Parameter> &ref_93
         schema: *ref_46
         implementation: Method
         required: true
@@ -2142,7 +2106,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: path
-      - !<!Parameter> &ref_95
+      - !<!Parameter> &ref_94
         schema: *ref_46
         implementation: Method
         required: true
@@ -2154,7 +2118,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: path
-      - !<!Parameter> &ref_96
+      - !<!Parameter> &ref_95
         schema: *ref_8
         implementation: Method
         extensions:
@@ -2168,13 +2132,13 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
+      - *ref_89
       - *ref_90
       - *ref_91
       - *ref_92
       - *ref_93
       - *ref_94
       - *ref_95
-      - *ref_96
       language: !<!Languages> 
         default:
           name: ''
@@ -2242,8 +2206,8 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_44
-      - !<!Parameter> &ref_98
-        schema: *ref_67
+      - !<!Parameter> &ref_97
+        schema: *ref_49
         implementation: Method
         language: !<!Languages> 
           default:
@@ -2255,8 +2219,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - *ref_97
-      - !<!Parameter> &ref_99
+      - *ref_96
+      - !<!Parameter> &ref_98
         schema: *ref_46
         implementation: Method
         language: !<!Languages> 
@@ -2279,7 +2243,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_100
+      - !<!Parameter> &ref_99
         schema: *ref_48
         implementation: Method
         extensions:
@@ -2292,7 +2256,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> &ref_101
+      - !<!Parameter> &ref_100
         schema: *ref_46
         implementation: Method
         required: true
@@ -2304,7 +2268,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: path
-      - !<!Parameter> &ref_102
+      - !<!Parameter> &ref_101
         schema: *ref_46
         implementation: Method
         required: true
@@ -2316,7 +2280,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: path
-      - !<!Parameter> &ref_103
+      - !<!Parameter> &ref_102
         schema: *ref_46
         implementation: Method
         required: true
@@ -2329,12 +2293,12 @@ operationGroups:
           http: !<!HttpParameter> 
             in: path
       signatureParameters:
+      - *ref_97
       - *ref_98
       - *ref_99
       - *ref_100
       - *ref_101
       - *ref_102
-      - *ref_103
       language: !<!Languages> 
         default:
           name: ''
@@ -2397,8 +2361,8 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_44
-      - !<!Parameter> &ref_105
-        schema: *ref_67
+      - !<!Parameter> &ref_104
+        schema: *ref_49
         implementation: Method
         language: !<!Languages> 
           default:
@@ -2410,8 +2374,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - *ref_104
-      - !<!Parameter> &ref_106
+      - *ref_103
+      - !<!Parameter> &ref_105
         schema: *ref_46
         implementation: Method
         language: !<!Languages> 
@@ -2434,7 +2398,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_107
+      - !<!Parameter> &ref_106
         schema: *ref_48
         implementation: Method
         extensions:
@@ -2447,7 +2411,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> &ref_108
+      - !<!Parameter> &ref_107
         schema: *ref_46
         implementation: Method
         required: true
@@ -2459,7 +2423,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: path
-      - !<!Parameter> &ref_109
+      - !<!Parameter> &ref_108
         schema: *ref_8
         implementation: Method
         extensions:
@@ -2473,11 +2437,11 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
+      - *ref_104
       - *ref_105
       - *ref_106
       - *ref_107
       - *ref_108
-      - *ref_109
       language: !<!Languages> 
         default:
           name: ''
@@ -2549,8 +2513,8 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_44
-      - !<!Parameter> &ref_112
-        schema: *ref_67
+      - !<!Parameter> &ref_111
+        schema: *ref_49
         implementation: Method
         language: !<!Languages> 
           default:
@@ -2562,8 +2526,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - *ref_110
-      - !<!Parameter> &ref_113
+      - *ref_109
+      - !<!Parameter> &ref_112
         schema: *ref_46
         implementation: Method
         language: !<!Languages> 
@@ -2574,7 +2538,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_114
+      - !<!Parameter> &ref_113
         schema: *ref_46
         implementation: Method
         required: true
@@ -2587,7 +2551,7 @@ operationGroups:
           http: !<!HttpParameter> 
             in: path
       - !<!Parameter> 
-        schema: *ref_111
+        schema: *ref_110
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -2599,9 +2563,9 @@ operationGroups:
           http: !<!HttpParameter> 
             in: query
       signatureParameters:
+      - *ref_111
       - *ref_112
       - *ref_113
-      - *ref_114
       language: !<!Languages> 
         default:
           name: ''
@@ -2613,7 +2577,7 @@ operationGroups:
           uri: '{url}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_115
+      schema: *ref_114
       language: !<!Languages> 
         default:
           name: ''
@@ -2668,8 +2632,8 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_44
-      - !<!Parameter> &ref_117
-        schema: *ref_67
+      - !<!Parameter> &ref_116
+        schema: *ref_49
         implementation: Method
         language: !<!Languages> 
           default:
@@ -2681,8 +2645,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - *ref_116
-      - !<!Parameter> &ref_118
+      - *ref_115
+      - !<!Parameter> &ref_117
         schema: *ref_46
         implementation: Method
         language: !<!Languages> 
@@ -2693,7 +2657,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_119
+      - !<!Parameter> &ref_118
         schema: *ref_46
         implementation: Method
         required: true
@@ -2706,7 +2670,7 @@ operationGroups:
           http: !<!HttpParameter> 
             in: path
       - !<!Parameter> 
-        schema: *ref_111
+        schema: *ref_110
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -2717,8 +2681,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> &ref_120
-        schema: *ref_115
+      - !<!Parameter> &ref_119
+        schema: *ref_114
         implementation: Method
         extensions:
           x-ms-requestBody-name: tableAcl
@@ -2731,10 +2695,10 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
+      - *ref_116
       - *ref_117
       - *ref_118
       - *ref_119
-      - *ref_120
       language: !<!Languages> 
         default:
           name: ''
@@ -2811,7 +2775,7 @@ operationGroups:
       parameters:
       - *ref_44
       - !<!Parameter> 
-        schema: *ref_121
+        schema: *ref_120
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -2823,7 +2787,7 @@ operationGroups:
           http: !<!HttpParameter> 
             in: query
       - !<!Parameter> 
-        schema: *ref_122
+        schema: *ref_121
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -2834,8 +2798,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> &ref_125
-        schema: *ref_67
+      - !<!Parameter> &ref_124
+        schema: *ref_49
         implementation: Method
         language: !<!Languages> 
           default:
@@ -2847,8 +2811,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - *ref_123
-      - !<!Parameter> &ref_126
+      - *ref_122
+      - !<!Parameter> &ref_125
         schema: *ref_46
         implementation: Method
         language: !<!Languages> 
@@ -2859,8 +2823,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_127
-        schema: *ref_124
+      - !<!Parameter> &ref_126
+        schema: *ref_123
         implementation: Method
         required: true
         extensions:
@@ -2874,9 +2838,9 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
+      - *ref_124
       - *ref_125
       - *ref_126
-      - *ref_127
       language: !<!Languages> 
         default:
           name: ''
@@ -2942,7 +2906,7 @@ operationGroups:
       parameters:
       - *ref_44
       - !<!Parameter> 
-        schema: *ref_121
+        schema: *ref_120
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -2954,7 +2918,7 @@ operationGroups:
           http: !<!HttpParameter> 
             in: query
       - !<!Parameter> 
-        schema: *ref_122
+        schema: *ref_121
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -2965,8 +2929,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> &ref_129
-        schema: *ref_67
+      - !<!Parameter> &ref_128
+        schema: *ref_49
         implementation: Method
         language: !<!Languages> 
           default:
@@ -2978,8 +2942,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - *ref_128
-      - !<!Parameter> &ref_130
+      - *ref_127
+      - !<!Parameter> &ref_129
         schema: *ref_46
         implementation: Method
         language: !<!Languages> 
@@ -2991,8 +2955,8 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       signatureParameters:
+      - *ref_128
       - *ref_129
-      - *ref_130
       language: !<!Languages> 
         default:
           name: ''
@@ -3004,7 +2968,7 @@ operationGroups:
           uri: '{url}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_124
+      schema: *ref_123
       language: !<!Languages> 
         default:
           name: ''
@@ -3057,7 +3021,7 @@ operationGroups:
       parameters:
       - *ref_44
       - !<!Parameter> 
-        schema: *ref_121
+        schema: *ref_120
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -3069,7 +3033,7 @@ operationGroups:
           http: !<!HttpParameter> 
             in: query
       - !<!Parameter> 
-        schema: *ref_131
+        schema: *ref_130
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -3080,8 +3044,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> &ref_133
-        schema: *ref_67
+      - !<!Parameter> &ref_132
+        schema: *ref_49
         implementation: Method
         language: !<!Languages> 
           default:
@@ -3093,8 +3057,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - *ref_132
-      - !<!Parameter> &ref_134
+      - *ref_131
+      - !<!Parameter> &ref_133
         schema: *ref_46
         implementation: Method
         language: !<!Languages> 
@@ -3106,8 +3070,8 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       signatureParameters:
+      - *ref_132
       - *ref_133
-      - *ref_134
       language: !<!Languages> 
         default:
           name: ''
@@ -3119,7 +3083,7 @@ operationGroups:
           uri: '{url}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_135
+      schema: *ref_134
       language: !<!Languages> 
         default:
           name: ''

@@ -97,7 +97,7 @@ namespace Azure.Storage.Tables
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -132,7 +132,7 @@ namespace Azure.Storage.Tables
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -194,7 +194,7 @@ namespace Azure.Storage.Tables
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -231,7 +231,7 @@ namespace Azure.Storage.Tables
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -281,7 +281,7 @@ namespace Azure.Storage.Tables
                         var headers = new DeleteHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -313,7 +313,7 @@ namespace Azure.Storage.Tables
                         var headers = new DeleteHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -393,7 +393,7 @@ namespace Azure.Storage.Tables
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -434,7 +434,7 @@ namespace Azure.Storage.Tables
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -523,7 +523,7 @@ namespace Azure.Storage.Tables
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -573,7 +573,7 @@ namespace Azure.Storage.Tables
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -659,7 +659,7 @@ namespace Azure.Storage.Tables
                         var headers = new UpdateEntityHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -704,7 +704,7 @@ namespace Azure.Storage.Tables
                         var headers = new UpdateEntityHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -779,7 +779,7 @@ namespace Azure.Storage.Tables
                         var headers = new DeleteEntityHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -823,7 +823,7 @@ namespace Azure.Storage.Tables
                         var headers = new DeleteEntityHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -902,7 +902,7 @@ namespace Azure.Storage.Tables
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -945,7 +945,7 @@ namespace Azure.Storage.Tables
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1015,7 +1015,7 @@ namespace Azure.Storage.Tables
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1063,7 +1063,7 @@ namespace Azure.Storage.Tables
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1128,7 +1128,7 @@ namespace Azure.Storage.Tables
                         var headers = new SetAccessPolicyHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1162,7 +1162,7 @@ namespace Azure.Storage.Tables
                         var headers = new SetAccessPolicyHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)

@@ -66,7 +66,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -98,7 +98,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -141,7 +141,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -173,7 +173,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -204,7 +204,7 @@ namespace body_dictionary
             return message;
         }
         /// <summary> Set dictionary value empty {}. </summary>
-        /// <param name="arrayBody"> The Dictionary of string to use. </param>
+        /// <param name="arrayBody"> The DictionaryOfstring to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutEmptyAsync(IDictionary<string, string> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -224,7 +224,7 @@ namespace body_dictionary
                     case 200:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -234,7 +234,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Set dictionary value empty {}. </summary>
-        /// <param name="arrayBody"> The Dictionary of string to use. </param>
+        /// <param name="arrayBody"> The DictionaryOfstring to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutEmpty(IDictionary<string, string> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -254,7 +254,7 @@ namespace body_dictionary
                     case 200:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -297,7 +297,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -329,7 +329,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -372,7 +372,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -404,7 +404,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -447,7 +447,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -479,7 +479,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -522,7 +522,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -554,7 +554,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -597,7 +597,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -629,7 +629,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -680,7 +680,7 @@ namespace body_dictionary
                     case 200:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -710,7 +710,7 @@ namespace body_dictionary
                     case 200:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -753,7 +753,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -785,7 +785,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -828,7 +828,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -860,7 +860,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -903,7 +903,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -935,7 +935,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -986,7 +986,7 @@ namespace body_dictionary
                     case 200:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1016,7 +1016,7 @@ namespace body_dictionary
                     case 200:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1059,7 +1059,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1091,7 +1091,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1134,7 +1134,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1166,7 +1166,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1209,7 +1209,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1241,7 +1241,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1292,7 +1292,7 @@ namespace body_dictionary
                     case 200:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1322,7 +1322,7 @@ namespace body_dictionary
                     case 200:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1365,7 +1365,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1397,7 +1397,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1440,7 +1440,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1472,7 +1472,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1515,7 +1515,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1547,7 +1547,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1598,7 +1598,7 @@ namespace body_dictionary
                     case 200:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1628,7 +1628,7 @@ namespace body_dictionary
                     case 200:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1671,7 +1671,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1703,7 +1703,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1746,7 +1746,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1778,7 +1778,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1821,7 +1821,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1853,7 +1853,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1904,7 +1904,7 @@ namespace body_dictionary
                     case 200:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1934,7 +1934,7 @@ namespace body_dictionary
                     case 200:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1977,7 +1977,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2009,7 +2009,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2052,7 +2052,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2084,7 +2084,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2127,7 +2127,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2159,7 +2159,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2190,7 +2190,7 @@ namespace body_dictionary
             return message;
         }
         /// <summary> Set dictionary value {&quot;0&quot;: &quot;foo1&quot;, &quot;1&quot;: &quot;foo2&quot;, &quot;2&quot;: &quot;foo3&quot;}. </summary>
-        /// <param name="arrayBody"> The Dictionary of string to use. </param>
+        /// <param name="arrayBody"> The DictionaryOfstring to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutStringValidAsync(IDictionary<string, string> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -2210,7 +2210,7 @@ namespace body_dictionary
                     case 200:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2220,7 +2220,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Set dictionary value {&quot;0&quot;: &quot;foo1&quot;, &quot;1&quot;: &quot;foo2&quot;, &quot;2&quot;: &quot;foo3&quot;}. </summary>
-        /// <param name="arrayBody"> The Dictionary of string to use. </param>
+        /// <param name="arrayBody"> The DictionaryOfstring to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutStringValid(IDictionary<string, string> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -2240,7 +2240,7 @@ namespace body_dictionary
                     case 200:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2283,7 +2283,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2315,7 +2315,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2358,7 +2358,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2390,7 +2390,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2433,7 +2433,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2465,7 +2465,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2516,7 +2516,7 @@ namespace body_dictionary
                     case 200:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2546,7 +2546,7 @@ namespace body_dictionary
                     case 200:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2589,7 +2589,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2621,7 +2621,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2664,7 +2664,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2696,7 +2696,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2739,7 +2739,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2771,7 +2771,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2822,7 +2822,7 @@ namespace body_dictionary
                     case 200:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2852,7 +2852,7 @@ namespace body_dictionary
                     case 200:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2895,7 +2895,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2927,7 +2927,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2970,7 +2970,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -3002,7 +3002,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -3045,7 +3045,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -3077,7 +3077,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -3128,7 +3128,7 @@ namespace body_dictionary
                     case 200:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -3158,7 +3158,7 @@ namespace body_dictionary
                     case 200:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -3201,7 +3201,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -3233,7 +3233,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -3284,7 +3284,7 @@ namespace body_dictionary
                     case 200:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -3314,7 +3314,7 @@ namespace body_dictionary
                     case 200:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -3357,7 +3357,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -3389,7 +3389,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -3440,7 +3440,7 @@ namespace body_dictionary
                     case 200:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -3470,7 +3470,7 @@ namespace body_dictionary
                     case 200:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -3513,7 +3513,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -3545,7 +3545,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -3588,7 +3588,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -3620,7 +3620,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -3663,7 +3663,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -3695,7 +3695,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -3738,7 +3738,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -3770,7 +3770,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -3813,7 +3813,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -3845,7 +3845,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -3888,7 +3888,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -3920,7 +3920,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -3963,7 +3963,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -3995,7 +3995,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -4046,7 +4046,7 @@ namespace body_dictionary
                     case 200:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -4076,7 +4076,7 @@ namespace body_dictionary
                     case 200:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -4124,7 +4124,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -4161,7 +4161,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -4209,7 +4209,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -4246,7 +4246,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -4294,7 +4294,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -4331,7 +4331,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -4379,7 +4379,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -4416,7 +4416,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -4464,7 +4464,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -4501,7 +4501,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -4537,7 +4537,7 @@ namespace body_dictionary
             return message;
         }
         /// <summary> Put An array of array of strings {&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: [&quot;4&quot;, &quot;5&quot;, &quot;6&quot;], &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
-        /// <param name="arrayBody"> The DictionaryOfpaths·dictionary-array-valid·put·requestbody·content·application-json·schema·additionalproperties to use. </param>
+        /// <param name="arrayBody"> The DictionaryOfpaths·1dxz488·dictionary-array-valid·put·requestbody·content·application-json·schema·additionalproperties to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutArrayValidAsync(IDictionary<string, ICollection<string>> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -4557,7 +4557,7 @@ namespace body_dictionary
                     case 200:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -4567,7 +4567,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Put An array of array of strings {&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: [&quot;4&quot;, &quot;5&quot;, &quot;6&quot;], &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
-        /// <param name="arrayBody"> The DictionaryOfpaths·dictionary-array-valid·put·requestbody·content·application-json·schema·additionalproperties to use. </param>
+        /// <param name="arrayBody"> The DictionaryOfpaths·1dxz488·dictionary-array-valid·put·requestbody·content·application-json·schema·additionalproperties to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutArrayValid(IDictionary<string, ICollection<string>> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -4587,7 +4587,7 @@ namespace body_dictionary
                     case 200:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -4630,7 +4630,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -4662,7 +4662,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -4705,7 +4705,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -4737,7 +4737,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -4780,7 +4780,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -4812,7 +4812,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -4855,7 +4855,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -4887,7 +4887,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -4930,7 +4930,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -4962,7 +4962,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -5013,7 +5013,7 @@ namespace body_dictionary
                     case 200:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -5043,7 +5043,7 @@ namespace body_dictionary
                     case 200:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)

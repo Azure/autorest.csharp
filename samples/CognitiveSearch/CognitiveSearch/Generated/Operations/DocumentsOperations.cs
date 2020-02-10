@@ -93,7 +93,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -123,7 +123,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -260,7 +260,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -307,7 +307,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -368,7 +368,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -403,7 +403,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -445,7 +445,7 @@ namespace CognitiveSearch
         /// <param name="selectedFields"> List of field names to retrieve for the document; Any field not retrieved will be missing from the returned document. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ComponentsSchemasFacetresultAdditionalproperties>> GetAsync(string key, IEnumerable<string> selectedFields, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<Components1fm1tvaSchemasFacetresultAdditionalproperties>> GetAsync(string key, IEnumerable<string> selectedFields, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -463,11 +463,11 @@ namespace CognitiveSearch
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = ComponentsSchemasFacetresultAdditionalproperties.DeserializeComponentsSchemasFacetresultAdditionalproperties(document.RootElement);
+                            var value = Components1fm1tvaSchemasFacetresultAdditionalproperties.DeserializeComponents1fm1tvaSchemasFacetresultAdditionalproperties(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -481,7 +481,7 @@ namespace CognitiveSearch
         /// <param name="selectedFields"> List of field names to retrieve for the document; Any field not retrieved will be missing from the returned document. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ComponentsSchemasFacetresultAdditionalproperties> Get(string key, IEnumerable<string> selectedFields, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public Response<Components1fm1tvaSchemasFacetresultAdditionalproperties> Get(string key, IEnumerable<string> selectedFields, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -499,11 +499,11 @@ namespace CognitiveSearch
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = ComponentsSchemasFacetresultAdditionalproperties.DeserializeComponentsSchemasFacetresultAdditionalproperties(document.RootElement);
+                            var value = Components1fm1tvaSchemasFacetresultAdditionalproperties.DeserializeComponents1fm1tvaSchemasFacetresultAdditionalproperties(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -612,7 +612,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -661,7 +661,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -722,7 +722,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -757,7 +757,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -818,7 +818,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -853,7 +853,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -957,7 +957,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1005,7 +1005,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1066,7 +1066,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1101,7 +1101,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)

@@ -40,8 +40,24 @@ namespace AutoRest.CSharp.V3.AutoRest.Communication
             return File.ReadAllTextAsync(filename);
         }
 
-        public Task<T> GetValue<T>(string key) =>
-            _arguments.TryGetValue(key, out var stringValue) ? Task.FromResult((T)Convert.ChangeType(stringValue, typeof(T))) : Task.FromResult(default(T)!);
+        public Task<T> GetValue<T>(string key)
+        {
+            if (_arguments.TryGetValue(key, out var stringValue))
+            {
+                var conversionType = typeof(T);
+                // Handle nullable
+                if (conversionType.IsGenericType && conversionType.GetGenericTypeDefinition() == typeof(Nullable<>))
+                {
+                    conversionType = conversionType.GetGenericArguments()[0];
+                }
+
+                var value = (T) Convert.ChangeType(stringValue, conversionType);
+
+                return Task.FromResult(value);
+            }
+
+            return Task.FromResult(default(T)!);
+        }
 
         public Task<string[]> ListInputs(string? artifactType = null)
         {

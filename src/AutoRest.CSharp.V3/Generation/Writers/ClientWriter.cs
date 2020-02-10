@@ -579,11 +579,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.Line($"default:");
                 if (async)
                 {
-                    writer.Line($"throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);");
+                    writer.Line($"throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);");
                 }
                 else
                 {
-                    writer.Line($"throw message.Response.CreateRequestFailedException();");
+                    writer.Line($"throw clientDiagnostics.CreateRequestFailedException(message.Response);");
                 }
             }
         }

@@ -60,7 +60,7 @@ namespace body_string
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -88,7 +88,7 @@ namespace body_string
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -127,7 +127,7 @@ namespace body_string
                     case 200:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -151,7 +151,7 @@ namespace body_string
                     case 200:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -190,7 +190,7 @@ namespace body_string
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -218,7 +218,7 @@ namespace body_string
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -257,7 +257,7 @@ namespace body_string
                     case 200:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -281,7 +281,7 @@ namespace body_string
                     case 200:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -320,7 +320,7 @@ namespace body_string
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -348,7 +348,7 @@ namespace body_string
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -387,7 +387,7 @@ namespace body_string
                     case 200:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -411,7 +411,7 @@ namespace body_string
                     case 200:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -450,7 +450,7 @@ namespace body_string
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -478,7 +478,7 @@ namespace body_string
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -517,7 +517,7 @@ namespace body_string
                     case 200:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -541,7 +541,7 @@ namespace body_string
                     case 200:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -580,7 +580,7 @@ namespace body_string
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -608,7 +608,7 @@ namespace body_string
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -647,7 +647,7 @@ namespace body_string
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -675,7 +675,7 @@ namespace body_string
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -714,7 +714,7 @@ namespace body_string
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -742,7 +742,7 @@ namespace body_string
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -787,7 +787,7 @@ namespace body_string
                     case 200:
                         return message.Response;
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -817,7 +817,7 @@ namespace body_string
                     case 200:
                         return message.Response;
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -856,7 +856,7 @@ namespace body_string
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -884,7 +884,7 @@ namespace body_string
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
