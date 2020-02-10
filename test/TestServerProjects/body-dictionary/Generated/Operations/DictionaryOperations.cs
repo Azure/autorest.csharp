@@ -204,7 +204,7 @@ namespace body_dictionary
             return message;
         }
         /// <summary> Set dictionary value empty {}. </summary>
-        /// <param name="arrayBody"> The Dictionary of string to use. </param>
+        /// <param name="arrayBody"> The DictionaryOfstring to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutEmptyAsync(IDictionary<string, string> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -234,7 +234,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Set dictionary value empty {}. </summary>
-        /// <param name="arrayBody"> The Dictionary of string to use. </param>
+        /// <param name="arrayBody"> The DictionaryOfstring to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutEmpty(IDictionary<string, string> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -2190,7 +2190,7 @@ namespace body_dictionary
             return message;
         }
         /// <summary> Set dictionary value {&quot;0&quot;: &quot;foo1&quot;, &quot;1&quot;: &quot;foo2&quot;, &quot;2&quot;: &quot;foo3&quot;}. </summary>
-        /// <param name="arrayBody"> The Dictionary of string to use. </param>
+        /// <param name="arrayBody"> The DictionaryOfstring to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutStringValidAsync(IDictionary<string, string> arrayBody, CancellationToken cancellationToken = default)
         {
@@ -2220,7 +2220,7 @@ namespace body_dictionary
             }
         }
         /// <summary> Set dictionary value {&quot;0&quot;: &quot;foo1&quot;, &quot;1&quot;: &quot;foo2&quot;, &quot;2&quot;: &quot;foo3&quot;}. </summary>
-        /// <param name="arrayBody"> The Dictionary of string to use. </param>
+        /// <param name="arrayBody"> The DictionaryOfstring to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutStringValid(IDictionary<string, string> arrayBody, CancellationToken cancellationToken = default)
         {

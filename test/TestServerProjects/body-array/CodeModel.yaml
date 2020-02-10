@@ -108,8 +108,8 @@ schemas: !<!Schemas>
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Dictionary of string
-        description: Dictionary of <paths·xsy81v·array-prim-string-foo1-foo2-foo3·get·responses·200·content·application-json·schema·items>
+        name: DictionaryOfstring
+        description: Dictionary of <string>
     protocol: !<!Protocols> {}
   choices:
   - !<!ChoiceSchema> &ref_2
@@ -561,7 +561,7 @@ schemas: !<!Schemas>
     elementType: *ref_6
     language: !<!Languages> 
       default:
-        name: ArrayOfDictionary of string
+        name: ArrayOfDictionaryOfstring
         description: An array of Dictionaries with value null
     protocol: !<!Protocols> {}
   booleans:

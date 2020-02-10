@@ -15,6 +15,7 @@
 
 ## Configuration
 ```yaml
+version: 3.0.6212
 shared-source-folder: $(this-folder)/src/assets
 save-code-model: true
 use: $(this-folder)/artifacts/bin/AutoRest.CSharp.V3/Debug/netcoreapp3.0/

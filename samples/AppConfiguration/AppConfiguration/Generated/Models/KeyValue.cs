@@ -16,7 +16,7 @@ namespace AppConfiguration.Models
         public string ContentType { get; set; }
         public string Value { get; set; }
         public DateTimeOffset? LastModified { get; set; }
-        /// <summary> Dictionary of &lt;paths·2r06b2·keys·get·parameters·0·schema&gt;. </summary>
+        /// <summary> Dictionary of &lt;string&gt;. </summary>
         public IDictionary<string, string> Tags { get; set; }
         public bool? Locked { get; set; }
         public string Etag { get; set; }

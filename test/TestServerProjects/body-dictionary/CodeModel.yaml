@@ -126,8 +126,8 @@ schemas: !<!Schemas>
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Dictionary of string
-        description: Dictionary of <paths·pyocdk·dictionary-nullvalue·get·responses·200·content·application-json·schema·additionalproperties>
+        name: DictionaryOfstring
+        description: Dictionary of <string>
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_28
     type: dictionary

@@ -20,12 +20,12 @@ function Invoke-AutoRest($baseOutput, $title, $autoRestArguments)
 {
     $outputPath = Join-Path $baseOutput $title
     $namespace = $title.Replace('-', '_')
-    $command = "npx --no-install -p @autorest/autorest -c `"autorest $script:debugFlags $autoRestArguments --title=$title --namespace=$namespace`""
+    $command = "$script:autorestBinary $script:debugFlags $autoRestArguments --title=$title --namespace=$namespace"
 
     if ($fast)
     {
         $codeModel = Join-Path $baseOutput $title "CodeModel.yaml"
-        $command = "dotnet run --project $script:autorestPluginProject --no-build -- --plugin=csharpgen --title=$title --namespace=$namespace --standalone --input-file=$codeModel --output-folder=$outputPath --shared-source-folder=$sharedSource --save-code-model=true"
+        $command = "dotnet run --project $script:autorestPluginProject --no-build -- --plugin=csharpgen --title=$title --namespace=$namespace --standalone --input-file=$codeModel --output-folder=$outputPath --shared-source-folder=$script:sharedSource --save-code-model=true"
     }
 
     if ($clean)
@@ -43,6 +43,7 @@ $debugFlags = if (-not $noDebug) { '--debug', '--verbose' }
 $swaggerDefinitions = @{};
 
 # Test server test configuration
+$autorestBinary = Join-Path $repoRoot 'node_modules' '.bin' 'autorest-beta'
 $testServerDirectory = Join-Path $repoRoot 'test' 'TestServerProjects'
 $sharedSource = Join-Path $repoRoot 'src' 'assets'
 $autorestPluginProject = Resolve-Path (Join-Path $repoRoot 'src' 'AutoRest.CSharp.V3')
@@ -146,11 +147,11 @@ if ($updateLaunchSettings)
         'profiles' = [ordered]@{}
     };
 
-    $sharedSourceNormalized = $sharedSource.Replace($repoRoot, "`$(SolutionDir)")
+    $sharedSourceNormalized = $sharedSource.Replace($repoRoot, '$(SolutionDir)')
     foreach ($key in $swaggerDefinitions.Keys | Sort-Object)
     {
         $definition = $swaggerDefinitions[$key];
-        $outputPath = (Join-Path $definition.output $key).Replace($repoRoot, "`$(SolutionDir)")
+        $outputPath = (Join-Path $definition.output $key).Replace($repoRoot, '$(SolutionDir)')
         $codeModel = Join-Path $outputPath 'CodeModel.yaml'
         $namespace = $definition.title.Replace('-', '_')
 
@@ -165,7 +166,7 @@ if ($updateLaunchSettings)
 
 if ($reset -or $env:TF_BUILD)
 {
-    Invoke 'npx --no-install -p @autorest/autorest -c "autorest --reset"'
+    Invoke "$script:autorestBinary --reset"
 }
 
 if (!$noBuild)

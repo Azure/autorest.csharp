@@ -14,7 +14,7 @@ namespace model_flattening.Models
         public string Id { get; internal set; }
         /// <summary> Resource Type. </summary>
         public string Type { get; internal set; }
-        /// <summary> Dictionary of &lt;components·13oyrf9·schemas·resource·properties·tags·additionalproperties&gt;. </summary>
+        /// <summary> Dictionary of &lt;string&gt;. </summary>
         public IDictionary<string, string> Tags { get; set; }
         /// <summary> Resource Location. </summary>
         public string Location { get; set; }

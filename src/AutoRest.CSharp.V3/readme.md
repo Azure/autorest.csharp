@@ -4,7 +4,6 @@
 ## Configuration
 ```yaml
 # autorest-core version
-version: 3.0.6207
 use-extension:
   "@autorest/modelerfour": "4.4.162"
 modelerfour:

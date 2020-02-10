@@ -13,7 +13,7 @@ namespace additionalProperties.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public bool? Status { get; internal set; }
-        /// <summary> Dictionary of &lt;components·ruixpu·schemas·petapinproperties·properties·additionalproperties·additionalproperties&gt;. </summary>
+        /// <summary> Dictionary of &lt;number&gt;. </summary>
         public IDictionary<string, float> AdditionalProperties { get; set; }
     }
 }
