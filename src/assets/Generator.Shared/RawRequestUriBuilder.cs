@@ -1,7 +1,10 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable enable
+
 using System;
+using System.Globalization;
 
 namespace Azure.Core
 {
@@ -60,12 +63,12 @@ namespace Azure.Core
                     int separator = value.IndexOf(hostSeparator);
                     if (separator == -1)
                     {
-                        Port = int.Parse(value);
+                        Port = int.Parse(value, CultureInfo.InvariantCulture);
                         value = string.Empty;
                     }
                     else
                     {
-                        Port = int.Parse(value.Substring(0, separator));
+                        Port = int.Parse(value.Substring(0, separator), CultureInfo.InvariantCulture);
                         value = value.Substring(separator + 1);
                         _position = RawWritingPosition.Rest;
                     }
