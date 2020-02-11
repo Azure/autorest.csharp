@@ -458,24 +458,24 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             switch (queryParameter.SerializationStyle)
             {
                 case QuerySerializationStyle.PipeDelimited:
-                    method = nameof(UriBuilderExtensions.AppendQueryDelimited);
+                    method = nameof(RequestUriBuilderExtensions.AppendQueryDelimited);
                     delimiter = "|";
                     break;
                 case QuerySerializationStyle.TabDelimited:
-                    method = nameof(UriBuilderExtensions.AppendQueryDelimited);
+                    method = nameof(RequestUriBuilderExtensions.AppendQueryDelimited);
                     delimiter = "\t";
                     break;
                 case QuerySerializationStyle.SpaceDelimited:
-                    method = nameof(UriBuilderExtensions.AppendQueryDelimited);
+                    method = nameof(RequestUriBuilderExtensions.AppendQueryDelimited);
                     delimiter = " ";
                     break;
                 case QuerySerializationStyle.CommaDelimited:
-                    method = nameof(UriBuilderExtensions.AppendQueryDelimited);
+                    method = nameof(RequestUriBuilderExtensions.AppendQueryDelimited);
                     delimiter = ",";
                     break;
 
                 default:
-                    method = nameof(UriBuilderExtensions.AppendQuery);
+                    method = nameof(RequestUriBuilderExtensions.AppendQuery);
                     break;
             }
 
