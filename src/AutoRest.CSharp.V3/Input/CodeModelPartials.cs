@@ -25,7 +25,6 @@ namespace AutoRest.CSharp.V3.Input
     {
         public ObjectSchema()
         {
-            Properties = Array.Empty<Property>();
             Parents = new Relations();
             Children = new Relations();
         }
@@ -37,21 +36,14 @@ namespace AutoRest.CSharp.V3.Input
         public string Name => Language.Default.Name;
     }
 
-    internal partial class Relations
+    internal partial class HTTPSecurityScheme : Dictionary<string, object>
     {
-        public Relations()
-        {
-            Immediate = Array.Empty<ComplexSchema>();
-            All = Array.Empty<ComplexSchema>();
-        }
+
     }
 
-    internal partial class HttpResponse
+    internal partial class SecurityScheme : Dictionary<string, object>
     {
-        public HttpResponse()
-        {
-            Headers = Array.Empty<HttpResponseHeader>();
-        }
+
     }
 
     /// <summary>language metadata specific to schema instances</summary>

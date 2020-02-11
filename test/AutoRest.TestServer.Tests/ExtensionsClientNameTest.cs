@@ -12,7 +12,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void ParametersAreRenamed()
         {
-            var method = TypeAsserts.HasPublicInstanceMethod(typeof(AllOperations), "OriginalOperationAsync");
+            var method = TypeAsserts.HasPublicInstanceMethod(typeof(AllOperations), "RenamedOperationAsync");
             // TODO: Add more tests here
             TypeAsserts.HasParameter(method, "renamedBodyParameter");
             TypeAsserts.HasParameter(method, "renamedPathParameter");
@@ -22,8 +22,14 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void PropertiesAreRenamed()
         {
-            TypeAsserts.HasProperty(typeof(OriginalSchema), "RenamedProperty");
-            TypeAsserts.HasProperty(typeof(OriginalSchema), "RenamedPropertyString");
+            TypeAsserts.HasProperty(typeof(RenamedSchema), "RenamedProperty");
+            TypeAsserts.HasProperty(typeof(RenamedSchema), "RenamedPropertyString");
+        }
+
+        [Test]
+        public void HeaderTypesAreRenamed()
+        {
+            Assert.AreEqual("RenamedOperationHeaders", typeof(RenamedOperationHeaders).Name);
         }
     }
 }

@@ -1,19 +1,19 @@
 !<!CodeModel> 
 schemas: !<!Schemas> 
   objects:
-  - !<!ObjectSchema> &ref_7
+  - !<!ObjectSchema> &ref_5
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
     properties:
     - !<!Property> 
-      schema: !<!NumberSchema> &ref_2
+      schema: !<!NumberSchema> &ref_1
         type: integer
         precision: 32
         language: !<!Languages> 
           default:
-            name: TypeForstatus
+            name: typeForstatus
             description: ''
         protocol: !<!Protocols> {}
       serializedName: status
@@ -21,16 +21,17 @@ schemas: !<!Schemas>
         default:
           name: status
           description: ''
+          originalName: status
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_3
+      schema: !<!StringSchema> &ref_2
         type: string
         apiVersions:
         - !<!ApiVersion> 
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: ErrorMessage
+            name: Error-message
             description: ''
         protocol: !<!Protocols> {}
       serializedName: message
@@ -38,6 +39,7 @@ schemas: !<!Schemas>
         default:
           name: message
           description: ''
+          originalName: message
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -53,10 +55,6 @@ schemas: !<!Schemas>
       version: 1.0.0
     value: !<!ConstantValue> 
       value: '0001-01-01T00:00:00Z'
-      language:
-        default:
-          name: ''
-          description: ''
     valueType: !<!DateTimeSchema> &ref_0
       type: date-time
       format: date-time
@@ -65,7 +63,7 @@ schemas: !<!Schemas>
         version: 1.0.0
       language: !<!Languages> 
         default:
-          name: DateTime
+          name: date-time
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
@@ -80,54 +78,28 @@ schemas: !<!Schemas>
       version: 1.0.0
     value: !<!ConstantValue> 
       value: '0001-01-01t00:00:00+14:00'
-      language:
-        default:
-          name: ''
-          description: ''
-    valueType: !<!DateTimeSchema> &ref_1
-      type: date-time
-      format: date-time
-      apiVersions:
-      - !<!ApiVersion> 
-        version: 1.0.0
-      language: !<!Languages> 
-        default:
-          name: DateTime
-          description: ''
-      protocol: !<!Protocols> {}
+    valueType: *ref_0
     language: !<!Languages> 
       default:
         name: Constant1
         description: ''
     protocol: !<!Protocols> {}
   dateTimes:
-  - !<!DateTimeSchema> &ref_6
-    type: date-time
-    format: date-time
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    language: !<!Languages> 
-      default:
-        name: DateTime
-        description: ''
-    protocol: !<!Protocols> {}
   - *ref_0
-  - *ref_1
   numbers:
-  - *ref_2
+  - *ref_1
   strings:
-  - !<!StringSchema> &ref_4
+  - !<!StringSchema> &ref_3
     type: string
     language: !<!Languages> 
       default:
-        name: String
+        name: string
         description: simple string
     protocol: !<!Protocols> {}
-  - *ref_3
+  - *ref_2
 globalParameters:
-- !<!Parameter> &ref_5
-  schema: *ref_4
+- !<!Parameter> &ref_4
+  schema: *ref_3
   clientDefaultValue: 'http://localhost:3000'
   implementation: Client
   required: true
@@ -154,7 +126,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_5
+      - *ref_4
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -167,7 +139,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_0
       language: !<!Languages> 
         default:
           name: ''
@@ -181,7 +153,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_7
+      schema: *ref_5
       language: !<!Languages> 
         default:
           name: ''
@@ -195,7 +167,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetNull
+        name: getNull
         description: Get null datetime value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -204,7 +176,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_5
+      - *ref_4
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -217,7 +189,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_0
       language: !<!Languages> 
         default:
           name: ''
@@ -231,7 +203,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_7
+      schema: *ref_5
       language: !<!Languages> 
         default:
           name: ''
@@ -245,7 +217,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetInvalid
+        name: getInvalid
         description: Get invalid datetime value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -254,7 +226,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_5
+      - *ref_4
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -267,7 +239,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_0
       language: !<!Languages> 
         default:
           name: ''
@@ -281,7 +253,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_7
+      schema: *ref_5
       language: !<!Languages> 
         default:
           name: ''
@@ -295,7 +267,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetOverflow
+        name: getOverflow
         description: Get overflow datetime value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -304,7 +276,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_5
+      - *ref_4
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -317,7 +289,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_0
       language: !<!Languages> 
         default:
           name: ''
@@ -331,7 +303,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_7
+      schema: *ref_5
       language: !<!Languages> 
         default:
           name: ''
@@ -345,7 +317,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetUnderflow
+        name: getUnderflow
         description: Get underflow datetime value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -354,9 +326,9 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_5
-      - !<!Parameter> &ref_8
-        schema: *ref_6
+      - *ref_4
+      - !<!Parameter> &ref_6
+        schema: *ref_0
         implementation: Method
         required: true
         extensions:
@@ -370,7 +342,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_8
+      - *ref_6
       language: !<!Languages> 
         default:
           name: ''
@@ -395,7 +367,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_7
+      schema: *ref_5
       language: !<!Languages> 
         default:
           name: ''
@@ -411,7 +383,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: PutUtcMaxDateTime
+        name: putUtcMaxDateTime
         description: 'Put max datetime value 9999-12-31T23:59:59.999Z'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -420,9 +392,9 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_5
-      - !<!Parameter> &ref_9
-        schema: *ref_6
+      - *ref_4
+      - !<!Parameter> &ref_7
+        schema: *ref_0
         implementation: Method
         required: true
         extensions:
@@ -436,7 +408,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_9
+      - *ref_7
       language: !<!Languages> 
         default:
           name: ''
@@ -461,7 +433,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_7
+      schema: *ref_5
       language: !<!Languages> 
         default:
           name: ''
@@ -477,7 +449,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: PutUtcMaxDateTime7Digits
+        name: putUtcMaxDateTime7Digits
         description: 'Put max datetime value 9999-12-31T23:59:59.9999999Z'
         summary: 'This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario'
     protocol: !<!Protocols> {}
@@ -487,7 +459,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_5
+      - *ref_4
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -500,7 +472,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_0
       language: !<!Languages> 
         default:
           name: ''
@@ -514,7 +486,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_7
+      schema: *ref_5
       language: !<!Languages> 
         default:
           name: ''
@@ -528,7 +500,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetUtcLowercaseMaxDateTime
+        name: getUtcLowercaseMaxDateTime
         description: 'Get max datetime value 9999-12-31t23:59:59.999z'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -537,7 +509,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_5
+      - *ref_4
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -550,7 +522,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_0
       language: !<!Languages> 
         default:
           name: ''
@@ -564,7 +536,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_7
+      schema: *ref_5
       language: !<!Languages> 
         default:
           name: ''
@@ -578,7 +550,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetUtcUppercaseMaxDateTime
+        name: getUtcUppercaseMaxDateTime
         description: 'Get max datetime value 9999-12-31T23:59:59.999Z'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -587,7 +559,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_5
+      - *ref_4
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -600,7 +572,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_0
       language: !<!Languages> 
         default:
           name: ''
@@ -614,7 +586,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_7
+      schema: *ref_5
       language: !<!Languages> 
         default:
           name: ''
@@ -628,7 +600,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetUtcUppercaseMaxDateTime7Digits
+        name: getUtcUppercaseMaxDateTime7Digits
         description: 'Get max datetime value 9999-12-31T23:59:59.9999999Z'
         summary: 'This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario'
     protocol: !<!Protocols> {}
@@ -638,9 +610,9 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_5
-      - !<!Parameter> &ref_10
-        schema: *ref_6
+      - *ref_4
+      - !<!Parameter> &ref_8
+        schema: *ref_0
         implementation: Method
         required: true
         extensions:
@@ -654,7 +626,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_10
+      - *ref_8
       language: !<!Languages> 
         default:
           name: ''
@@ -679,7 +651,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_7
+      schema: *ref_5
       language: !<!Languages> 
         default:
           name: ''
@@ -695,7 +667,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: PutLocalPositiveOffsetMaxDateTime
+        name: putLocalPositiveOffsetMaxDateTime
         description: 'Put max datetime value with positive numoffset 9999-12-31t23:59:59.999+14:00'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -704,7 +676,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_5
+      - *ref_4
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -717,7 +689,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_0
       language: !<!Languages> 
         default:
           name: ''
@@ -731,7 +703,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_7
+      schema: *ref_5
       language: !<!Languages> 
         default:
           name: ''
@@ -745,7 +717,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetLocalPositiveOffsetLowercaseMaxDateTime
+        name: getLocalPositiveOffsetLowercaseMaxDateTime
         description: 'Get max datetime value with positive num offset 9999-12-31t23:59:59.999+14:00'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -754,7 +726,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_5
+      - *ref_4
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -767,7 +739,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_0
       language: !<!Languages> 
         default:
           name: ''
@@ -781,7 +753,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_7
+      schema: *ref_5
       language: !<!Languages> 
         default:
           name: ''
@@ -795,7 +767,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetLocalPositiveOffsetUppercaseMaxDateTime
+        name: getLocalPositiveOffsetUppercaseMaxDateTime
         description: 'Get max datetime value with positive num offset 9999-12-31T23:59:59.999+14:00'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -804,9 +776,9 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_5
-      - !<!Parameter> &ref_11
-        schema: *ref_6
+      - *ref_4
+      - !<!Parameter> &ref_9
+        schema: *ref_0
         implementation: Method
         required: true
         extensions:
@@ -820,7 +792,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_11
+      - *ref_9
       language: !<!Languages> 
         default:
           name: ''
@@ -845,7 +817,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_7
+      schema: *ref_5
       language: !<!Languages> 
         default:
           name: ''
@@ -861,7 +833,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: PutLocalNegativeOffsetMaxDateTime
+        name: putLocalNegativeOffsetMaxDateTime
         description: 'Put max datetime value with positive numoffset 9999-12-31t23:59:59.999-14:00'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -870,7 +842,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_5
+      - *ref_4
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -883,7 +855,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_0
       language: !<!Languages> 
         default:
           name: ''
@@ -897,7 +869,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_7
+      schema: *ref_5
       language: !<!Languages> 
         default:
           name: ''
@@ -911,7 +883,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetLocalNegativeOffsetUppercaseMaxDateTime
+        name: getLocalNegativeOffsetUppercaseMaxDateTime
         description: 'Get max datetime value with positive num offset 9999-12-31T23:59:59.999-14:00'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -920,7 +892,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_5
+      - *ref_4
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -933,7 +905,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_0
       language: !<!Languages> 
         default:
           name: ''
@@ -947,7 +919,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_7
+      schema: *ref_5
       language: !<!Languages> 
         default:
           name: ''
@@ -961,7 +933,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetLocalNegativeOffsetLowercaseMaxDateTime
+        name: getLocalNegativeOffsetLowercaseMaxDateTime
         description: 'Get max datetime value with positive num offset 9999-12-31t23:59:59.999-14:00'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -970,9 +942,9 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_5
-      - !<!Parameter> &ref_12
-        schema: *ref_6
+      - *ref_4
+      - !<!Parameter> &ref_10
+        schema: *ref_0
         implementation: Method
         required: true
         extensions:
@@ -986,7 +958,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_12
+      - *ref_10
       language: !<!Languages> 
         default:
           name: ''
@@ -1011,7 +983,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_7
+      schema: *ref_5
       language: !<!Languages> 
         default:
           name: ''
@@ -1027,7 +999,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: PutUtcMinDateTime
+        name: putUtcMinDateTime
         description: 'Put min datetime value 0001-01-01T00:00:00Z'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1036,7 +1008,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_5
+      - *ref_4
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -1063,7 +1035,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_7
+      schema: *ref_5
       language: !<!Languages> 
         default:
           name: ''
@@ -1077,7 +1049,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetUtcMinDateTime
+        name: getUtcMinDateTime
         description: 'Get min datetime value 0001-01-01T00:00:00Z'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1086,9 +1058,9 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_5
-      - !<!Parameter> &ref_13
-        schema: *ref_6
+      - *ref_4
+      - !<!Parameter> &ref_11
+        schema: *ref_0
         implementation: Method
         required: true
         extensions:
@@ -1102,7 +1074,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_13
+      - *ref_11
       language: !<!Languages> 
         default:
           name: ''
@@ -1127,7 +1099,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_7
+      schema: *ref_5
       language: !<!Languages> 
         default:
           name: ''
@@ -1143,7 +1115,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: PutLocalPositiveOffsetMinDateTime
+        name: putLocalPositiveOffsetMinDateTime
         description: 'Put min datetime value 0001-01-01T00:00:00+14:00'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1152,7 +1124,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_5
+      - *ref_4
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -1165,7 +1137,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_1
+      schema: *ref_0
       language: !<!Languages> 
         default:
           name: ''
@@ -1179,7 +1151,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_7
+      schema: *ref_5
       language: !<!Languages> 
         default:
           name: ''
@@ -1193,7 +1165,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetLocalPositiveOffsetMinDateTime
+        name: getLocalPositiveOffsetMinDateTime
         description: 'Get min datetime value 0001-01-01T00:00:00+14:00'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1202,9 +1174,9 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_5
-      - !<!Parameter> &ref_14
-        schema: *ref_6
+      - *ref_4
+      - !<!Parameter> &ref_12
+        schema: *ref_0
         implementation: Method
         required: true
         extensions:
@@ -1218,7 +1190,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_14
+      - *ref_12
       language: !<!Languages> 
         default:
           name: ''
@@ -1243,7 +1215,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_7
+      schema: *ref_5
       language: !<!Languages> 
         default:
           name: ''
@@ -1259,7 +1231,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: PutLocalNegativeOffsetMinDateTime
+        name: putLocalNegativeOffsetMinDateTime
         description: 'Put min datetime value 0001-01-01T00:00:00-14:00'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1268,7 +1240,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_5
+      - *ref_4
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -1281,7 +1253,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_1
+      schema: *ref_0
       language: !<!Languages> 
         default:
           name: ''
@@ -1295,7 +1267,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_7
+      schema: *ref_5
       language: !<!Languages> 
         default:
           name: ''
@@ -1309,17 +1281,17 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetLocalNegativeOffsetMinDateTime
+        name: getLocalNegativeOffsetMinDateTime
         description: 'Get min datetime value 0001-01-01T00:00:00-14:00'
     protocol: !<!Protocols> {}
   language: !<!Languages> 
     default:
-      name: Datetime
+      name: datetime
       description: ''
   protocol: !<!Protocols> {}
 language: !<!Languages> 
   default:
-    name: BodyDatetime
+    name: ''
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

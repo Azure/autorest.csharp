@@ -1,7 +1,7 @@
 !<!CodeModel> 
 schemas: !<!Schemas> 
   objects:
-  - !<!ObjectSchema> &ref_6
+  - !<!ObjectSchema> &ref_5
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -13,7 +13,7 @@ schemas: !<!Schemas>
         precision: 32
         language: !<!Languages> 
           default:
-            name: TypeForstatus
+            name: typeForstatus
             description: ''
         protocol: !<!Protocols> {}
       serializedName: status
@@ -21,6 +21,7 @@ schemas: !<!Schemas>
         default:
           name: status
           description: ''
+          originalName: status
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_2
@@ -30,7 +31,7 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: ErrorMessage
+            name: Error-message
             description: ''
         protocol: !<!Protocols> {}
       serializedName: message
@@ -38,6 +39,7 @@ schemas: !<!Schemas>
         default:
           name: message
           description: ''
+          originalName: message
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -53,10 +55,6 @@ schemas: !<!Schemas>
       version: 1.0.0
     value: !<!ConstantValue> 
       value: 'Sun, 1 Jan 0001 00:00:00 GMT'
-      language:
-        default:
-          name: ''
-          description: ''
     valueType: !<!DateTimeSchema> &ref_0
       type: date-time
       format: date-time-rfc1123
@@ -65,7 +63,7 @@ schemas: !<!Schemas>
         version: 1.0.0
       language: !<!Languages> 
         default:
-          name: DateTime
+          name: date-time
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
@@ -74,17 +72,6 @@ schemas: !<!Schemas>
         description: ''
     protocol: !<!Protocols> {}
   dateTimes:
-  - !<!DateTimeSchema> &ref_5
-    type: date-time
-    format: date-time-rfc1123
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    language: !<!Languages> 
-      default:
-        name: DateTime
-        description: ''
-    protocol: !<!Protocols> {}
   - *ref_0
   numbers:
   - *ref_1
@@ -93,7 +80,7 @@ schemas: !<!Schemas>
     type: string
     language: !<!Languages> 
       default:
-        name: String
+        name: string
         description: simple string
     protocol: !<!Protocols> {}
   - *ref_2
@@ -139,7 +126,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_5
+      schema: *ref_0
       language: !<!Languages> 
         default:
           name: ''
@@ -153,7 +140,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_5
       language: !<!Languages> 
         default:
           name: ''
@@ -167,7 +154,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetNull
+        name: getNull
         description: Get null datetime value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -189,7 +176,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_5
+      schema: *ref_0
       language: !<!Languages> 
         default:
           name: ''
@@ -203,7 +190,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_5
       language: !<!Languages> 
         default:
           name: ''
@@ -217,7 +204,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetInvalid
+        name: getInvalid
         description: Get invalid datetime value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -239,7 +226,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_5
+      schema: *ref_0
       language: !<!Languages> 
         default:
           name: ''
@@ -253,7 +240,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_5
       language: !<!Languages> 
         default:
           name: ''
@@ -267,7 +254,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetOverflow
+        name: getOverflow
         description: Get overflow datetime value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -289,7 +276,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_5
+      schema: *ref_0
       language: !<!Languages> 
         default:
           name: ''
@@ -303,7 +290,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_5
       language: !<!Languages> 
         default:
           name: ''
@@ -317,7 +304,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetUnderflow
+        name: getUnderflow
         description: Get underflow datetime value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -327,8 +314,8 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_4
-      - !<!Parameter> &ref_7
-        schema: *ref_5
+      - !<!Parameter> &ref_6
+        schema: *ref_0
         implementation: Method
         required: true
         extensions:
@@ -342,7 +329,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_7
+      - *ref_6
       language: !<!Languages> 
         default:
           name: ''
@@ -367,7 +354,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_5
       language: !<!Languages> 
         default:
           name: ''
@@ -383,7 +370,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: PutUtcMaxDateTime
+        name: putUtcMaxDateTime
         description: 'Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -405,7 +392,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_5
+      schema: *ref_0
       language: !<!Languages> 
         default:
           name: ''
@@ -419,7 +406,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_5
       language: !<!Languages> 
         default:
           name: ''
@@ -433,7 +420,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetUtcLowercaseMaxDateTime
+        name: getUtcLowercaseMaxDateTime
         description: 'Get max datetime value fri, 31 dec 9999 23:59:59 gmt'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -455,7 +442,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_5
+      schema: *ref_0
       language: !<!Languages> 
         default:
           name: ''
@@ -469,7 +456,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_5
       language: !<!Languages> 
         default:
           name: ''
@@ -483,7 +470,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetUtcUppercaseMaxDateTime
+        name: getUtcUppercaseMaxDateTime
         description: 'Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -493,8 +480,8 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_4
-      - !<!Parameter> &ref_8
-        schema: *ref_5
+      - !<!Parameter> &ref_7
+        schema: *ref_0
         implementation: Method
         required: true
         extensions:
@@ -508,7 +495,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_8
+      - *ref_7
       language: !<!Languages> 
         default:
           name: ''
@@ -533,7 +520,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_5
       language: !<!Languages> 
         default:
           name: ''
@@ -549,7 +536,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: PutUtcMinDateTime
+        name: putUtcMinDateTime
         description: 'Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -585,7 +572,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_5
       language: !<!Languages> 
         default:
           name: ''
@@ -599,17 +586,17 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetUtcMinDateTime
+        name: getUtcMinDateTime
         description: 'Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT'
     protocol: !<!Protocols> {}
   language: !<!Languages> 
     default:
-      name: Datetimerfc1123
+      name: datetimerfc1123
       description: ''
   protocol: !<!Protocols> {}
 language: !<!Languages> 
   default:
-    name: BodyDatetimeRfc1123
+    name: ''
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

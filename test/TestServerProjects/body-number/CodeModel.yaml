@@ -1,19 +1,19 @@
 !<!CodeModel> 
 schemas: !<!Schemas> 
   objects:
-  - !<!ObjectSchema> &ref_15
+  - !<!ObjectSchema> &ref_7
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
     properties:
     - !<!Property> 
-      schema: !<!NumberSchema> &ref_0
+      schema: !<!NumberSchema> &ref_3
         type: integer
         precision: 32
         language: !<!Languages> 
           default:
-            name: TypeForstatus
+            name: typeForstatus
             description: ''
         protocol: !<!Protocols> {}
       serializedName: status
@@ -21,16 +21,17 @@ schemas: !<!Schemas>
         default:
           name: status
           description: ''
+          originalName: status
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_11
+      schema: !<!StringSchema> &ref_4
         type: string
         apiVersions:
         - !<!ApiVersion> 
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: ErrorMessage
+            name: Error-message
             description: ''
         protocol: !<!Protocols> {}
       serializedName: message
@@ -38,6 +39,7 @@ schemas: !<!Schemas>
         default:
           name: message
           description: ''
+          originalName: message
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -53,11 +55,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     value: !<!ConstantValue> 
       value: 340282300000000000000
-      language:
-        default:
-          name: ''
-          description: ''
-    valueType: !<!NumberSchema> &ref_1
+    valueType: !<!NumberSchema> &ref_2
       type: number
       apiVersions:
       - !<!ApiVersion> 
@@ -65,7 +63,7 @@ schemas: !<!Schemas>
       precision: 32
       language: !<!Languages> 
         default:
-          name: Number
+          name: number
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
@@ -80,11 +78,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     value: !<!ConstantValue> 
       value: 2.5976931e+101
-      language:
-        default:
-          name: ''
-          description: ''
-    valueType: !<!NumberSchema> &ref_2
+    valueType: !<!NumberSchema> &ref_0
       type: number
       apiVersions:
       - !<!ApiVersion> 
@@ -92,7 +86,7 @@ schemas: !<!Schemas>
       precision: 64
       language: !<!Languages> 
         default:
-          name: Number
+          name: number
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
@@ -100,55 +94,27 @@ schemas: !<!Schemas>
         name: Constant1
         description: ''
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_21
+  - !<!ConstantSchema> &ref_10
     type: constant
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
     value: !<!ConstantValue> 
       value: 99999999.99
-      language:
-        default:
-          name: ''
-          description: ''
-    valueType: !<!NumberSchema> &ref_3
-      type: number
-      apiVersions:
-      - !<!ApiVersion> 
-        version: 1.0.0
-      precision: 64
-      language: !<!Languages> 
-        default:
-          name: Number
-          description: ''
-      protocol: !<!Protocols> {}
+    valueType: *ref_0
     language: !<!Languages> 
       default:
         name: Constant2
         description: ''
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_22
+  - !<!ConstantSchema> &ref_11
     type: constant
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
     value: !<!ConstantValue> 
       value: -99999999.99
-      language:
-        default:
-          name: ''
-          description: ''
-    valueType: !<!NumberSchema> &ref_4
-      type: number
-      apiVersions:
-      - !<!ApiVersion> 
-        version: 1.0.0
-      precision: 64
-      language: !<!Languages> 
-        default:
-          name: Number
-          description: ''
-      protocol: !<!Protocols> {}
+    valueType: *ref_0
     language: !<!Languages> 
       default:
         name: Constant3
@@ -161,11 +127,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     value: !<!ConstantValue> 
       value: 2.5976931e+101
-      language:
-        default:
-          name: ''
-          description: ''
-    valueType: !<!NumberSchema> &ref_5
+    valueType: !<!NumberSchema> &ref_1
       type: number
       apiVersions:
       - !<!ApiVersion> 
@@ -173,7 +135,7 @@ schemas: !<!Schemas>
       precision: 128
       language: !<!Languages> 
         default:
-          name: Number
+          name: number
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
@@ -181,55 +143,27 @@ schemas: !<!Schemas>
         name: Constant4
         description: ''
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_24
+  - !<!ConstantSchema> &ref_13
     type: constant
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
     value: !<!ConstantValue> 
       value: 99999999.99
-      language:
-        default:
-          name: ''
-          description: ''
-    valueType: !<!NumberSchema> &ref_6
-      type: number
-      apiVersions:
-      - !<!ApiVersion> 
-        version: 1.0.0
-      precision: 128
-      language: !<!Languages> 
-        default:
-          name: Number
-          description: ''
-      protocol: !<!Protocols> {}
+    valueType: *ref_1
     language: !<!Languages> 
       default:
         name: Constant5
         description: ''
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_25
+  - !<!ConstantSchema> &ref_14
     type: constant
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
     value: !<!ConstantValue> 
       value: -99999999.99
-      language:
-        default:
-          name: ''
-          description: ''
-    valueType: !<!NumberSchema> &ref_7
-      type: number
-      apiVersions:
-      - !<!ApiVersion> 
-        version: 1.0.0
-      precision: 128
-      language: !<!Languages> 
-        default:
-          name: Number
-          description: ''
-      protocol: !<!Protocols> {}
+    valueType: *ref_1
     language: !<!Languages> 
       default:
         name: Constant6
@@ -242,21 +176,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     value: !<!ConstantValue> 
       value: 3.402823e-20
-      language:
-        default:
-          name: ''
-          description: ''
-    valueType: !<!NumberSchema> &ref_8
-      type: number
-      apiVersions:
-      - !<!ApiVersion> 
-        version: 1.0.0
-      precision: 64
-      language: !<!Languages> 
-        default:
-          name: Number
-          description: ''
-      protocol: !<!Protocols> {}
+    valueType: *ref_0
     language: !<!Languages> 
       default:
         name: Constant7
@@ -269,21 +189,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     value: !<!ConstantValue> 
       value: 2.5976931e-101
-      language:
-        default:
-          name: ''
-          description: ''
-    valueType: !<!NumberSchema> &ref_9
-      type: number
-      apiVersions:
-      - !<!ApiVersion> 
-        version: 1.0.0
-      precision: 64
-      language: !<!Languages> 
-        default:
-          name: Number
-          description: ''
-      protocol: !<!Protocols> {}
+    valueType: *ref_0
     language: !<!Languages> 
       default:
         name: Constant8
@@ -296,94 +202,29 @@ schemas: !<!Schemas>
       version: 1.0.0
     value: !<!ConstantValue> 
       value: 2.5976931e-101
-      language:
-        default:
-          name: ''
-          description: ''
-    valueType: !<!NumberSchema> &ref_10
-      type: number
-      apiVersions:
-      - !<!ApiVersion> 
-        version: 1.0.0
-      precision: 128
-      language: !<!Languages> 
-        default:
-          name: Number
-          description: ''
-      protocol: !<!Protocols> {}
+    valueType: *ref_1
     language: !<!Languages> 
       default:
         name: Constant9
         description: ''
     protocol: !<!Protocols> {}
   numbers:
-  - !<!NumberSchema> &ref_14
-    type: number
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    precision: 32
-    language: !<!Languages> 
-      default:
-        name: Number
-        description: ''
-    protocol: !<!Protocols> {}
-  - *ref_0
-  - !<!NumberSchema> &ref_16
-    type: number
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    precision: 32
-    language: !<!Languages> 
-      default:
-        name: Number
-        description: ''
-    protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_17
-    type: number
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    precision: 64
-    language: !<!Languages> 
-      default:
-        name: Number
-        description: ''
-    protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_18
-    type: number
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    precision: 128
-    language: !<!Languages> 
-      default:
-        name: Number
-        description: ''
-    protocol: !<!Protocols> {}
-  - *ref_1
   - *ref_2
   - *ref_3
-  - *ref_4
-  - *ref_5
-  - *ref_6
-  - *ref_7
-  - *ref_8
-  - *ref_9
-  - *ref_10
+  - *ref_0
+  - *ref_1
   strings:
-  - !<!StringSchema> &ref_12
+  - !<!StringSchema> &ref_5
     type: string
     language: !<!Languages> 
       default:
-        name: String
+        name: string
         description: simple string
     protocol: !<!Protocols> {}
-  - *ref_11
+  - *ref_4
 globalParameters:
-- !<!Parameter> &ref_13
-  schema: *ref_12
+- !<!Parameter> &ref_6
+  schema: *ref_5
   clientDefaultValue: 'http://localhost:3000'
   implementation: Client
   required: true
@@ -410,7 +251,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_13
+      - *ref_6
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -419,388 +260,6 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpRequest> 
           path: /number/null
-          method: get
-          uri: '{$host}'
-    responses:
-    - !<!SchemaResponse> 
-      schema: *ref_14
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_15
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    language: !<!Languages> 
-      default:
-        name: GetNull
-        description: Get null Number value
-    protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_13
-      signatureParameters: []
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpRequest> 
-          path: /number/invalidfloat
-          method: get
-          uri: '{$host}'
-    responses:
-    - !<!SchemaResponse> 
-      schema: *ref_16
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_15
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    language: !<!Languages> 
-      default:
-        name: GetInvalidFloat
-        description: Get invalid float Number value
-    protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_13
-      signatureParameters: []
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpRequest> 
-          path: /number/invaliddouble
-          method: get
-          uri: '{$host}'
-    responses:
-    - !<!SchemaResponse> 
-      schema: *ref_17
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_15
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    language: !<!Languages> 
-      default:
-        name: GetInvalidDouble
-        description: Get invalid double Number value
-    protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_13
-      signatureParameters: []
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpRequest> 
-          path: /number/invaliddecimal
-          method: get
-          uri: '{$host}'
-    responses:
-    - !<!SchemaResponse> 
-      schema: *ref_18
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_15
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    language: !<!Languages> 
-      default:
-        name: GetInvalidDecimal
-        description: Get invalid decimal Number value
-    protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_13
-      - !<!Parameter> &ref_19
-        schema: *ref_16
-        implementation: Method
-        required: true
-        extensions:
-          x-ms-requestBody-name: numberBody
-        language: !<!Languages> 
-          default:
-            name: numberBody
-            description: ''
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: body
-            style: json
-      signatureParameters:
-      - *ref_19
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpWithBodyRequest> 
-          path: /number/big/float/3.402823e+20
-          method: put
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          uri: '{$host}'
-    responses:
-    - !<!Response> 
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_15
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    extensions:
-      x-ms-requestBody-index: 0
-    language: !<!Languages> 
-      default:
-        name: PutBigFloat
-        description: Put big float value 3.402823e+20
-    protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_13
-      signatureParameters: []
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpRequest> 
-          path: /number/big/float/3.402823e+20
-          method: get
-          uri: '{$host}'
-    responses:
-    - !<!SchemaResponse> 
-      schema: *ref_1
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_15
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    language: !<!Languages> 
-      default:
-        name: GetBigFloat
-        description: Get big float value 3.402823e+20
-    protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_13
-      - !<!Parameter> &ref_20
-        schema: *ref_17
-        implementation: Method
-        required: true
-        extensions:
-          x-ms-requestBody-name: numberBody
-        language: !<!Languages> 
-          default:
-            name: numberBody
-            description: ''
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: body
-            style: json
-      signatureParameters:
-      - *ref_20
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpWithBodyRequest> 
-          path: /number/big/double/2.5976931e+101
-          method: put
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          uri: '{$host}'
-    responses:
-    - !<!Response> 
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_15
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    extensions:
-      x-ms-requestBody-index: 0
-    language: !<!Languages> 
-      default:
-        name: PutBigDouble
-        description: Put big double value 2.5976931e+101
-    protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_13
-      signatureParameters: []
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpRequest> 
-          path: /number/big/double/2.5976931e+101
           method: get
           uri: '{$host}'
     responses:
@@ -819,7 +278,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_15
+      schema: *ref_7
       language: !<!Languages> 
         default:
           name: ''
@@ -833,8 +292,8 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetBigDouble
-        description: Get big double value 2.5976931e+101
+        name: getNull
+        description: Get null Number value
     protocol: !<!Protocols> {}
   - !<!Operation> 
     apiVersions:
@@ -842,72 +301,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_13
-      - !<!Parameter> 
-        schema: *ref_21
-        implementation: Method
-        required: true
-        extensions:
-          x-ms-requestBody-name: numberBody
-        language: !<!Languages> 
-          default:
-            name: numberBody
-            description: ''
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: body
-            style: json
-      signatureParameters: []
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpWithBodyRequest> 
-          path: /number/big/double/99999999.99
-          method: put
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          uri: '{$host}'
-    responses:
-    - !<!Response> 
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_15
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    extensions:
-      x-ms-requestBody-index: 0
-    language: !<!Languages> 
-      default:
-        name: PutBigDoublePositiveDecimal
-        description: Put big double value 99999999.99
-    protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_13
+      - *ref_6
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -915,12 +309,12 @@ operationGroups:
           description: ''
       protocol: !<!Protocols> 
         http: !<!HttpRequest> 
-          path: /number/big/double/99999999.99
+          path: /number/invalidfloat
           method: get
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_3
+      schema: *ref_2
       language: !<!Languages> 
         default:
           name: ''
@@ -933,453 +327,6 @@ operationGroups:
           statusCodes:
           - '200'
     exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_15
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    language: !<!Languages> 
-      default:
-        name: GetBigDoublePositiveDecimal
-        description: Get big double value 99999999.99
-    protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_13
-      - !<!Parameter> 
-        schema: *ref_22
-        implementation: Method
-        required: true
-        extensions:
-          x-ms-requestBody-name: numberBody
-        language: !<!Languages> 
-          default:
-            name: numberBody
-            description: ''
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: body
-            style: json
-      signatureParameters: []
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpWithBodyRequest> 
-          path: /number/big/double/-99999999.99
-          method: put
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          uri: '{$host}'
-    responses:
-    - !<!Response> 
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_15
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    extensions:
-      x-ms-requestBody-index: 0
-    language: !<!Languages> 
-      default:
-        name: PutBigDoubleNegativeDecimal
-        description: Put big double value -99999999.99
-    protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_13
-      signatureParameters: []
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpRequest> 
-          path: /number/big/double/-99999999.99
-          method: get
-          uri: '{$host}'
-    responses:
-    - !<!SchemaResponse> 
-      schema: *ref_4
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_15
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    language: !<!Languages> 
-      default:
-        name: GetBigDoubleNegativeDecimal
-        description: Get big double value -99999999.99
-    protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_13
-      - !<!Parameter> &ref_23
-        schema: *ref_18
-        implementation: Method
-        required: true
-        extensions:
-          x-ms-requestBody-name: numberBody
-        language: !<!Languages> 
-          default:
-            name: numberBody
-            description: ''
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: body
-            style: json
-      signatureParameters:
-      - *ref_23
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpWithBodyRequest> 
-          path: /number/big/decimal/2.5976931e+101
-          method: put
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          uri: '{$host}'
-    responses:
-    - !<!Response> 
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_15
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    extensions:
-      x-ms-requestBody-index: 0
-    language: !<!Languages> 
-      default:
-        name: PutBigDecimal
-        description: Put big decimal value 2.5976931e+101
-    protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_13
-      signatureParameters: []
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpRequest> 
-          path: /number/big/decimal/2.5976931e+101
-          method: get
-          uri: '{$host}'
-    responses:
-    - !<!SchemaResponse> 
-      schema: *ref_5
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_15
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    language: !<!Languages> 
-      default:
-        name: GetBigDecimal
-        description: Get big decimal value 2.5976931e+101
-    protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_13
-      - !<!Parameter> 
-        schema: *ref_24
-        implementation: Method
-        required: true
-        extensions:
-          x-ms-requestBody-name: numberBody
-        language: !<!Languages> 
-          default:
-            name: numberBody
-            description: ''
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: body
-            style: json
-      signatureParameters: []
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpWithBodyRequest> 
-          path: /number/big/decimal/99999999.99
-          method: put
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          uri: '{$host}'
-    responses:
-    - !<!Response> 
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_15
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    extensions:
-      x-ms-requestBody-index: 0
-    language: !<!Languages> 
-      default:
-        name: PutBigDecimalPositiveDecimal
-        description: Put big decimal value 99999999.99
-    protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_13
-      signatureParameters: []
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpRequest> 
-          path: /number/big/decimal/99999999.99
-          method: get
-          uri: '{$host}'
-    responses:
-    - !<!SchemaResponse> 
-      schema: *ref_6
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_15
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    language: !<!Languages> 
-      default:
-        name: GetBigDecimalPositiveDecimal
-        description: Get big decimal value 99999999.99
-    protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_13
-      - !<!Parameter> 
-        schema: *ref_25
-        implementation: Method
-        required: true
-        extensions:
-          x-ms-requestBody-name: numberBody
-        language: !<!Languages> 
-          default:
-            name: numberBody
-            description: ''
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: body
-            style: json
-      signatureParameters: []
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpWithBodyRequest> 
-          path: /number/big/decimal/-99999999.99
-          method: put
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          uri: '{$host}'
-    responses:
-    - !<!Response> 
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_15
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    extensions:
-      x-ms-requestBody-index: 0
-    language: !<!Languages> 
-      default:
-        name: PutBigDecimalNegativeDecimal
-        description: Put big decimal value -99999999.99
-    protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_13
-      signatureParameters: []
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpRequest> 
-          path: /number/big/decimal/-99999999.99
-          method: get
-          uri: '{$host}'
-    responses:
     - !<!SchemaResponse> 
       schema: *ref_7
       language: !<!Languages> 
@@ -1392,10 +339,46 @@ operationGroups:
           mediaTypes:
           - application/json
           statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: getInvalidFloat
+        description: Get invalid float Number value
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_6
+      signatureParameters: []
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /number/invaliddouble
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_0
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_15
+      schema: *ref_7
       language: !<!Languages> 
         default:
           name: ''
@@ -1409,7 +392,865 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetBigDecimalNegativeDecimal
+        name: getInvalidDouble
+        description: Get invalid double Number value
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_6
+      signatureParameters: []
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /number/invaliddecimal
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_1
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_7
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: getInvalidDecimal
+        description: Get invalid decimal Number value
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_6
+      - !<!Parameter> &ref_8
+        schema: *ref_2
+        implementation: Method
+        required: true
+        extensions:
+          x-ms-requestBody-name: numberBody
+        language: !<!Languages> 
+          default:
+            name: numberBody
+            description: ''
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      signatureParameters:
+      - *ref_8
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /number/big/float/3.402823e+20
+          method: put
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_7
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    extensions:
+      x-ms-requestBody-index: 0
+    language: !<!Languages> 
+      default:
+        name: putBigFloat
+        description: Put big float value 3.402823e+20
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_6
+      signatureParameters: []
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /number/big/float/3.402823e+20
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_2
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_7
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: getBigFloat
+        description: Get big float value 3.402823e+20
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_6
+      - !<!Parameter> &ref_9
+        schema: *ref_0
+        implementation: Method
+        required: true
+        extensions:
+          x-ms-requestBody-name: numberBody
+        language: !<!Languages> 
+          default:
+            name: numberBody
+            description: ''
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      signatureParameters:
+      - *ref_9
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /number/big/double/2.5976931e+101
+          method: put
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_7
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    extensions:
+      x-ms-requestBody-index: 0
+    language: !<!Languages> 
+      default:
+        name: putBigDouble
+        description: Put big double value 2.5976931e+101
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_6
+      signatureParameters: []
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /number/big/double/2.5976931e+101
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_0
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_7
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: getBigDouble
+        description: Get big double value 2.5976931e+101
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_6
+      - !<!Parameter> 
+        schema: *ref_10
+        implementation: Method
+        required: true
+        extensions:
+          x-ms-requestBody-name: numberBody
+        language: !<!Languages> 
+          default:
+            name: numberBody
+            description: ''
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      signatureParameters: []
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /number/big/double/99999999.99
+          method: put
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_7
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    extensions:
+      x-ms-requestBody-index: 0
+    language: !<!Languages> 
+      default:
+        name: putBigDoublePositiveDecimal
+        description: Put big double value 99999999.99
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_6
+      signatureParameters: []
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /number/big/double/99999999.99
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_0
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_7
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: getBigDoublePositiveDecimal
+        description: Get big double value 99999999.99
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_6
+      - !<!Parameter> 
+        schema: *ref_11
+        implementation: Method
+        required: true
+        extensions:
+          x-ms-requestBody-name: numberBody
+        language: !<!Languages> 
+          default:
+            name: numberBody
+            description: ''
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      signatureParameters: []
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /number/big/double/-99999999.99
+          method: put
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_7
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    extensions:
+      x-ms-requestBody-index: 0
+    language: !<!Languages> 
+      default:
+        name: putBigDoubleNegativeDecimal
+        description: Put big double value -99999999.99
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_6
+      signatureParameters: []
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /number/big/double/-99999999.99
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_0
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_7
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: getBigDoubleNegativeDecimal
+        description: Get big double value -99999999.99
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_6
+      - !<!Parameter> &ref_12
+        schema: *ref_1
+        implementation: Method
+        required: true
+        extensions:
+          x-ms-requestBody-name: numberBody
+        language: !<!Languages> 
+          default:
+            name: numberBody
+            description: ''
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      signatureParameters:
+      - *ref_12
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /number/big/decimal/2.5976931e+101
+          method: put
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_7
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    extensions:
+      x-ms-requestBody-index: 0
+    language: !<!Languages> 
+      default:
+        name: putBigDecimal
+        description: Put big decimal value 2.5976931e+101
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_6
+      signatureParameters: []
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /number/big/decimal/2.5976931e+101
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_1
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_7
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: getBigDecimal
+        description: Get big decimal value 2.5976931e+101
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_6
+      - !<!Parameter> 
+        schema: *ref_13
+        implementation: Method
+        required: true
+        extensions:
+          x-ms-requestBody-name: numberBody
+        language: !<!Languages> 
+          default:
+            name: numberBody
+            description: ''
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      signatureParameters: []
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /number/big/decimal/99999999.99
+          method: put
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_7
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    extensions:
+      x-ms-requestBody-index: 0
+    language: !<!Languages> 
+      default:
+        name: putBigDecimalPositiveDecimal
+        description: Put big decimal value 99999999.99
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_6
+      signatureParameters: []
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /number/big/decimal/99999999.99
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_1
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_7
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: getBigDecimalPositiveDecimal
+        description: Get big decimal value 99999999.99
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_6
+      - !<!Parameter> 
+        schema: *ref_14
+        implementation: Method
+        required: true
+        extensions:
+          x-ms-requestBody-name: numberBody
+        language: !<!Languages> 
+          default:
+            name: numberBody
+            description: ''
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      signatureParameters: []
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /number/big/decimal/-99999999.99
+          method: put
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_7
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    extensions:
+      x-ms-requestBody-index: 0
+    language: !<!Languages> 
+      default:
+        name: putBigDecimalNegativeDecimal
+        description: Put big decimal value -99999999.99
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_6
+      signatureParameters: []
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /number/big/decimal/-99999999.99
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_1
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_7
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: getBigDecimalNegativeDecimal
         description: Get big decimal value -99999999.99
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1418,9 +1259,9 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_13
-      - !<!Parameter> &ref_26
-        schema: *ref_16
+      - *ref_6
+      - !<!Parameter> &ref_15
+        schema: *ref_2
         implementation: Method
         required: true
         extensions:
@@ -1434,7 +1275,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_26
+      - *ref_15
       language: !<!Languages> 
         default:
           name: ''
@@ -1459,7 +1300,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_15
+      schema: *ref_7
       language: !<!Languages> 
         default:
           name: ''
@@ -1475,7 +1316,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: PutSmallFloat
+        name: putSmallFloat
         description: Put small float value 3.402823e-20
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1484,7 +1325,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_13
+      - *ref_6
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -1497,7 +1338,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_8
+      schema: *ref_0
       language: !<!Languages> 
         default:
           name: ''
@@ -1511,7 +1352,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_15
+      schema: *ref_7
       language: !<!Languages> 
         default:
           name: ''
@@ -1525,7 +1366,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetSmallFloat
+        name: getSmallFloat
         description: Get big double value 3.402823e-20
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1534,9 +1375,9 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_13
-      - !<!Parameter> &ref_27
-        schema: *ref_17
+      - *ref_6
+      - !<!Parameter> &ref_16
+        schema: *ref_0
         implementation: Method
         required: true
         extensions:
@@ -1550,7 +1391,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_27
+      - *ref_16
       language: !<!Languages> 
         default:
           name: ''
@@ -1575,7 +1416,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_15
+      schema: *ref_7
       language: !<!Languages> 
         default:
           name: ''
@@ -1591,7 +1432,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: PutSmallDouble
+        name: putSmallDouble
         description: Put small double value 2.5976931e-101
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1600,7 +1441,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_13
+      - *ref_6
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -1613,7 +1454,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_9
+      schema: *ref_0
       language: !<!Languages> 
         default:
           name: ''
@@ -1627,7 +1468,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_15
+      schema: *ref_7
       language: !<!Languages> 
         default:
           name: ''
@@ -1641,7 +1482,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetSmallDouble
+        name: getSmallDouble
         description: Get big double value 2.5976931e-101
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1650,9 +1491,9 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_13
-      - !<!Parameter> &ref_28
-        schema: *ref_18
+      - *ref_6
+      - !<!Parameter> &ref_17
+        schema: *ref_1
         implementation: Method
         required: true
         extensions:
@@ -1666,7 +1507,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_28
+      - *ref_17
       language: !<!Languages> 
         default:
           name: ''
@@ -1691,7 +1532,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_15
+      schema: *ref_7
       language: !<!Languages> 
         default:
           name: ''
@@ -1707,7 +1548,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: PutSmallDecimal
+        name: putSmallDecimal
         description: Put small decimal value 2.5976931e-101
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1716,7 +1557,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_13
+      - *ref_6
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -1729,7 +1570,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_10
+      schema: *ref_1
       language: !<!Languages> 
         default:
           name: ''
@@ -1743,7 +1584,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_15
+      schema: *ref_7
       language: !<!Languages> 
         default:
           name: ''
@@ -1757,17 +1598,17 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetSmallDecimal
+        name: getSmallDecimal
         description: Get small decimal value 2.5976931e-101
     protocol: !<!Protocols> {}
   language: !<!Languages> 
     default:
-      name: Number
+      name: number
       description: ''
   protocol: !<!Protocols> {}
 language: !<!Languages> 
   default:
-    name: BodyNumber
+    name: ''
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

@@ -68,7 +68,7 @@ schemas: !<!Schemas>
       serializedName: '@nextLink'
       language: !<!Languages> 
         default:
-          name: nextLink
+          name: NextLink
           description: The URI that can be used to request the next set of paged results.
       protocol: !<!Protocols> {}
     language: !<!Languages> 
@@ -293,14 +293,24 @@ schemas: !<!Schemas>
                 protocol: !<!Protocols> {}
               language: !<!Languages> 
                 default:
+<<<<<<< HEAD
                   name: KeyValueTags
                   description: Dictionary of String
+=======
+                  name: KeyValue-tags
+                  description: Dictionary of <string>
+>>>>>>> feature/v3
               protocol: !<!Protocols> {}
             serializedName: tags
             language: !<!Languages> 
               default:
                 name: tags
+<<<<<<< HEAD
                 description: Dictionary of <paths·keys·get·parameters·0·schema>
+=======
+                description: Dictionary of <string>
+                originalName: tags
+>>>>>>> feature/v3
             protocol: !<!Protocols> {}
           - !<!Property> 
             schema: !<!BooleanSchema> &ref_13
@@ -364,7 +374,7 @@ schemas: !<!Schemas>
       serializedName: '@nextLink'
       language: !<!Languages> 
         default:
-          name: nextLink
+          name: NextLink
           description: The URI that can be used to request the next set of paged results.
       protocol: !<!Protocols> {}
     language: !<!Languages> 
@@ -441,7 +451,7 @@ schemas: !<!Schemas>
       serializedName: '@nextLink'
       language: !<!Languages> 
         default:
-          name: nextLink
+          name: NextLink
           description: The URI that can be used to request the next set of paged results.
       protocol: !<!Protocols> {}
     language: !<!Languages> 
@@ -819,10 +829,6 @@ schemas: !<!Schemas>
         version: '1.0'
       value: !<!ConstantValue> 
         value: name
-        language:
-          default:
-            name: ''
-            description: ''
       valueType: *ref_4
       language: !<!Languages> 
         default:
@@ -847,10 +853,6 @@ schemas: !<!Schemas>
         version: '1.0'
       value: !<!ConstantValue> 
         value: name
-        language:
-          default:
-            name: ''
-            description: ''
       valueType: *ref_4
       language: !<!Languages> 
         default:
@@ -880,10 +882,6 @@ schemas: !<!Schemas>
     type: constant
     value: !<!ConstantValue> 
       value: '1.0'
-      language:
-        default:
-          name: ''
-          description: ''
     valueType: *ref_4
     language: !<!Languages> 
       default:
@@ -894,10 +892,6 @@ schemas: !<!Schemas>
     type: constant
     value: !<!ConstantValue> 
       value: '1.0'
-      language:
-        default:
-          name: ''
-          description: ''
     valueType: *ref_4
     language: !<!Languages> 
       default:
@@ -908,10 +902,6 @@ schemas: !<!Schemas>
     type: constant
     value: !<!ConstantValue> 
       value: '1.0'
-      language:
-        default:
-          name: ''
-          description: ''
     valueType: *ref_4
     language: !<!Languages> 
       default:
@@ -922,10 +912,6 @@ schemas: !<!Schemas>
     type: constant
     value: !<!ConstantValue> 
       value: '1.0'
-      language:
-        default:
-          name: ''
-          description: ''
     valueType: *ref_4
     language: !<!Languages> 
       default:
@@ -936,10 +922,6 @@ schemas: !<!Schemas>
     type: constant
     value: !<!ConstantValue> 
       value: '1.0'
-      language:
-        default:
-          name: ''
-          description: ''
     valueType: *ref_4
     language: !<!Languages> 
       default:
@@ -950,10 +932,6 @@ schemas: !<!Schemas>
     type: constant
     value: !<!ConstantValue> 
       value: '1.0'
-      language:
-        default:
-          name: ''
-          description: ''
     valueType: *ref_4
     language: !<!Languages> 
       default:
@@ -964,10 +942,6 @@ schemas: !<!Schemas>
     type: constant
     value: !<!ConstantValue> 
       value: '1.0'
-      language:
-        default:
-          name: ''
-          description: ''
     valueType: *ref_4
     language: !<!Languages> 
       default:
@@ -978,10 +952,6 @@ schemas: !<!Schemas>
     type: constant
     value: !<!ConstantValue> 
       value: '1.0'
-      language:
-        default:
-          name: ''
-          description: ''
     valueType: *ref_4
     language: !<!Languages> 
       default:
@@ -992,10 +962,6 @@ schemas: !<!Schemas>
     type: constant
     value: !<!ConstantValue> 
       value: '1.0'
-      language:
-        default:
-          name: ''
-          description: ''
     valueType: *ref_4
     language: !<!Languages> 
       default:
@@ -1007,10 +973,6 @@ schemas: !<!Schemas>
     type: constant
     value: !<!ConstantValue> 
       value: '1.0'
-      language:
-        default:
-          name: ''
-          description: ''
     valueType: *ref_4
     language: !<!Languages> 
       default:
@@ -1022,10 +984,6 @@ schemas: !<!Schemas>
     type: constant
     value: !<!ConstantValue> 
       value: '1.0'
-      language:
-        default:
-          name: ''
-          description: ''
     valueType: *ref_4
     language: !<!Languages> 
       default:
@@ -1036,10 +994,6 @@ schemas: !<!Schemas>
     type: constant
     value: !<!ConstantValue> 
       value: '1.0'
-      language:
-        default:
-          name: ''
-          description: ''
     valueType: *ref_4
     language: !<!Languages> 
       default:
@@ -1050,10 +1004,6 @@ schemas: !<!Schemas>
     type: constant
     value: !<!ConstantValue> 
       value: '1.0'
-      language:
-        default:
-          name: ''
-          description: ''
     valueType: *ref_4
     language: !<!Languages> 
       default:
@@ -1064,10 +1014,6 @@ schemas: !<!Schemas>
     type: constant
     value: !<!ConstantValue> 
       value: '1.0'
-      language:
-        default:
-          name: ''
-          description: ''
     valueType: *ref_4
     language: !<!Languages> 
       default:

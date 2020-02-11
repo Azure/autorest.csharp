@@ -16,6 +16,7 @@ using AutoRest.CSharp.V3.Output.Models.Serialization;
 using AutoRest.CSharp.V3.Output.Models.Serialization.Json;
 using AutoRest.CSharp.V3.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.V3.Output.Models.Shared;
+using AutoRest.CSharp.V3.Output.Models.Types;
 using AutoRest.CSharp.V3.Utilities;
 using Azure;
 using Azure.Core;
@@ -482,6 +483,14 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             using (WriteValueNullCheck(writer, value))
             {
                 writer.Append($"uri.{method}({queryParameter.Name:L}, {WriteConstantOrParameter(value)}");
+
+                // TODO: Hack to support extensible enums in query. https://github.com/Azure/autorest.csharp/issues/325
+                var type = value.Type;
+                if (!type.IsFrameworkType && type.Implementation is EnumType enumType && enumType.IsStringBased)
+                {
+                    writer.Append($".ToString()");
+                }
+
                 if (delimiter != null)
                 {
                     writer.Append($", {delimiter:L}");
@@ -570,11 +579,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.Line($"default:");
                 if (async)
                 {
-                    writer.Line($"throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);");
+                    writer.Line($"throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);");
                 }
                 else
                 {
-                    writer.Line($"throw message.Response.CreateRequestFailedException();");
+                    writer.Line($"throw clientDiagnostics.CreateRequestFailedException(message.Response);");
                 }
             }
         }

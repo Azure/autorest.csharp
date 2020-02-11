@@ -13,7 +13,7 @@ schemas: !<!Schemas>
         precision: 32
         language: !<!Languages> 
           default:
-            name: TypeForstatus
+            name: typeForstatus
             description: ''
         protocol: !<!Protocols> {}
       serializedName: status
@@ -21,6 +21,7 @@ schemas: !<!Schemas>
         default:
           name: status
           description: ''
+          originalName: status
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_18
@@ -30,7 +31,7 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: ErrorMessage
+            name: Error-message
             description: ''
         protocol: !<!Protocols> {}
       serializedName: message
@@ -38,6 +39,7 @@ schemas: !<!Schemas>
         default:
           name: message
           description: ''
+          originalName: message
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -57,7 +59,7 @@ schemas: !<!Schemas>
         precision: 32
         language: !<!Languages> 
           default:
-            name: TypeForinteger
+            name: typeForinteger
             description: ''
         protocol: !<!Protocols> {}
       serializedName: integer
@@ -65,6 +67,7 @@ schemas: !<!Schemas>
         default:
           name: integer
           description: ''
+          originalName: integer
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_19
@@ -74,7 +77,7 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: WidgetString
+            name: Widget-string
             description: ''
         protocol: !<!Protocols> {}
       serializedName: string
@@ -82,6 +85,7 @@ schemas: !<!Schemas>
         default:
           name: string
           description: ''
+          originalName: string
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -100,12 +104,12 @@ schemas: !<!Schemas>
       precision: 32
       language: !<!Languages> 
         default:
-          name: Integer
+          name: integer
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: DictionaryOfInteger
+        name: DictionaryOfinteger
         description: The null dictionary value
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_26
@@ -117,13 +121,13 @@ schemas: !<!Schemas>
         version: 1.0.0
       language: !<!Languages> 
         default:
-          name: String
+          name: string
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: DictionaryOfString
-        description: Dictionary of String
+        name: DictionaryOfstring
+        description: Dictionary of <string>
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_28
     type: dictionary
@@ -134,12 +138,12 @@ schemas: !<!Schemas>
         version: 1.0.0
       language: !<!Languages> 
         default:
-          name: Boolean
+          name: boolean
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: DictionaryOfBoolean
+        name: DictionaryOfboolean
         description: 'The dictionary value {"0": true, "1": false, "2": false, "3": true }'
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_31
@@ -152,12 +156,12 @@ schemas: !<!Schemas>
       precision: 64
       language: !<!Languages> 
         default:
-          name: Integer
+          name: integer
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: DictionaryOfInteger
+        name: DictionaryOfinteger
         description: 'The dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}'
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_33
@@ -170,12 +174,12 @@ schemas: !<!Schemas>
       precision: 32
       language: !<!Languages> 
         default:
-          name: Number
+          name: number
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: DictionaryOfNumber
+        name: DictionaryOfnumber
         description: 'The dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}'
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_35
@@ -188,12 +192,12 @@ schemas: !<!Schemas>
       precision: 64
       language: !<!Languages> 
         default:
-          name: Number
+          name: number
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: DictionaryOfNumber
+        name: DictionaryOfnumber
         description: 'The dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}'
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_38
@@ -205,12 +209,12 @@ schemas: !<!Schemas>
         version: 1.0.0
       language: !<!Languages> 
         default:
-          name: Date
+          name: date
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: DictionaryOfDate
+        name: DictionaryOfdate
         description: 'The dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}'
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_40
@@ -223,12 +227,12 @@ schemas: !<!Schemas>
         version: 1.0.0
       language: !<!Languages> 
         default:
-          name: DateTime
+          name: date-time
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: DictionaryOfDateTime
+        name: DictionaryOfdate-time
         description: 'The dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}'
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_42
@@ -241,12 +245,12 @@ schemas: !<!Schemas>
         version: 1.0.0
       language: !<!Languages> 
         default:
-          name: DateTime
+          name: date-time
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: DictionaryOfDateTime
+        name: DictionaryOfdate-time
         description: 'The dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}'
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_44
@@ -258,12 +262,12 @@ schemas: !<!Schemas>
         version: 1.0.0
       language: !<!Languages> 
         default:
-          name: Duration
+          name: duration
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: DictionaryOfDuration
+        name: DictionaryOfduration
         description: 'The dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}'
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_46
@@ -276,12 +280,12 @@ schemas: !<!Schemas>
         version: 1.0.0
       language: !<!Languages> 
         default:
-          name: ByteArray
+          name: byte-array
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: DictionaryOfByteArray
+        name: DictionaryOfbyte-array
         description: 'The dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each elementencoded in base 64'
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_48
@@ -294,12 +298,12 @@ schemas: !<!Schemas>
         version: 1.0.0
       language: !<!Languages> 
         default:
-          name: ByteArray
+          name: byte-array
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: DictionaryOfByteArray
+        name: DictionaryOfbyte-array
         description: 'The base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem ipsum"}'
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_49
@@ -324,17 +328,17 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: Get200ApplicationJsonAdditionalPropertiesItem
+            name: get-200-application-json-additionalPropertiesItem
             description: ''
         protocol: !<!Protocols> {}
       language: !<!Languages> 
         default:
-          name: ArrayOfGet200ApplicationJsonAdditionalPropertiesItem
-          description: Array of Get200ApplicationJsonAdditionalPropertiesItem
+          name: Array of get-200-application-json-additionalPropertiesItem
+          description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: DictionaryOfpathsDictionaryArrayNullGetResponses200ContentApplicationJsonSchemaAdditionalproperties
+        name: DictionaryOfpaths·1y9iid6·dictionary-array-null·get·responses·200·content·application-json·schema·additionalproperties
         description: a null array
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_52
@@ -347,12 +351,12 @@ schemas: !<!Schemas>
       elementType: *ref_1
       language: !<!Languages> 
         default:
-          name: ArrayOfString
-          description: Array of String
+          name: Array of string
+          description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: DictionaryOfpathsDictionaryArrayEmptyGetResponses200ContentApplicationJsonSchemaAdditionalproperties
+        name: DictionaryOfpaths·afa1hv·dictionary-array-empty·get·responses·200·content·application-json·schema·additionalproperties
         description: 'An empty dictionary {}'
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_53
@@ -369,17 +373,17 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: PutContentSchemaItemsItem
+            name: put-content-schema-itemsItem
             description: ''
         protocol: !<!Protocols> {}
       language: !<!Languages> 
         default:
-          name: ArrayOfPutContentSchemaItemsItem
-          description: Array of PutContentSchemaItemsItem
+          name: Array of put-content-schema-itemsItem
+          description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: DictionaryOfpathsDictionaryArrayValidPutRequestbodyContentApplicationJsonSchemaAdditionalproperties
+        name: DictionaryOfpaths·1dxz488·dictionary-array-valid·put·requestbody·content·application-json·schema·additionalproperties
         description: 'An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}'
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_55
@@ -424,7 +428,7 @@ schemas: !<!Schemas>
     type: string
     language: !<!Languages> 
       default:
-        name: String
+        name: string
         description: simple string
     protocol: !<!Protocols> {}
   - *ref_18
@@ -502,7 +506,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetNull
+        name: getNull
         description: Get null dictionary value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -552,7 +556,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetEmpty
+        name: getEmpty
         description: 'Get empty dictionary value {}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -618,7 +622,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: PutEmpty
+        name: putEmpty
         description: 'Set dictionary value empty {}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -668,7 +672,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetNullValue
+        name: getNullValue
         description: Get Dictionary with null value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -718,7 +722,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetNullKey
+        name: getNullKey
         description: Get Dictionary with null key
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -768,7 +772,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetEmptyStringKey
+        name: getEmptyStringKey
         description: Get Dictionary with key as empty string
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -818,7 +822,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetInvalid
+        name: getInvalid
         description: Get invalid Dictionary value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -868,7 +872,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetBooleanTfft
+        name: getBooleanTfft
         description: 'Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -934,7 +938,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: PutBooleanTfft
+        name: putBooleanTfft
         description: 'Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -984,7 +988,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetBooleanInvalidNull
+        name: getBooleanInvalidNull
         description: 'Get boolean dictionary value {"0": true, "1": null, "2": false }'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1034,7 +1038,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetBooleanInvalidString
+        name: getBooleanInvalidString
         description: 'Get boolean dictionary value ''{"0": true, "1": "boolean", "2": false}'''
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1084,7 +1088,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetIntegerValid
+        name: getIntegerValid
         description: 'Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1150,7 +1154,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: PutIntegerValid
+        name: putIntegerValid
         description: 'Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1200,7 +1204,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetIntInvalidNull
+        name: getIntInvalidNull
         description: 'Get integer dictionary value {"0": 1, "1": null, "2": 0}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1250,7 +1254,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetIntInvalidString
+        name: getIntInvalidString
         description: 'Get integer dictionary value {"0": 1, "1": "integer", "2": 0}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1300,7 +1304,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetLongValid
+        name: getLongValid
         description: 'Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1366,7 +1370,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: PutLongValid
+        name: putLongValid
         description: 'Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1416,7 +1420,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetLongInvalidNull
+        name: getLongInvalidNull
         description: 'Get long dictionary value {"0": 1, "1": null, "2": 0}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1466,7 +1470,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetLongInvalidString
+        name: getLongInvalidString
         description: 'Get long dictionary value {"0": 1, "1": "integer", "2": 0}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1516,7 +1520,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetFloatValid
+        name: getFloatValid
         description: 'Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1582,7 +1586,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: PutFloatValid
+        name: putFloatValid
         description: 'Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1632,7 +1636,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetFloatInvalidNull
+        name: getFloatInvalidNull
         description: 'Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1682,7 +1686,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetFloatInvalidString
+        name: getFloatInvalidString
         description: 'Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1732,7 +1736,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetDoubleValid
+        name: getDoubleValid
         description: 'Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1798,7 +1802,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: PutDoubleValid
+        name: putDoubleValid
         description: 'Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1848,7 +1852,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetDoubleInvalidNull
+        name: getDoubleInvalidNull
         description: 'Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1898,7 +1902,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetDoubleInvalidString
+        name: getDoubleInvalidString
         description: 'Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1948,7 +1952,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetStringValid
+        name: getStringValid
         description: 'Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2014,7 +2018,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: PutStringValid
+        name: putStringValid
         description: 'Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2064,7 +2068,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetStringWithNull
+        name: getStringWithNull
         description: 'Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2114,7 +2118,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetStringWithInvalid
+        name: getStringWithInvalid
         description: 'Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2164,7 +2168,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetDateValid
+        name: getDateValid
         description: 'Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2230,7 +2234,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: PutDateValid
+        name: putDateValid
         description: 'Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2280,7 +2284,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetDateInvalidNull
+        name: getDateInvalidNull
         description: 'Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2330,7 +2334,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetDateInvalidChars
+        name: getDateInvalidChars
         description: 'Get date dictionary value {"0": "2011-03-22", "1": "date"}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2380,7 +2384,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetDateTimeValid
+        name: getDateTimeValid
         description: 'Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2446,7 +2450,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: PutDateTimeValid
+        name: putDateTimeValid
         description: 'Set dictionary value  {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2496,7 +2500,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetDateTimeInvalidNull
+        name: getDateTimeInvalidNull
         description: 'Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2546,7 +2550,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetDateTimeInvalidChars
+        name: getDateTimeInvalidChars
         description: 'Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2596,7 +2600,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetDateTimeRfc1123Valid
+        name: getDateTimeRfc1123Valid
         description: 'Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2662,7 +2666,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: PutDateTimeRfc1123Valid
+        name: putDateTimeRfc1123Valid
         description: 'Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2712,7 +2716,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetDurationValid
+        name: getDurationValid
         description: 'Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2778,7 +2782,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: PutDurationValid
+        name: putDurationValid
         description: 'Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2828,7 +2832,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetByteValid
+        name: getByteValid
         description: 'Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2894,7 +2898,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: PutByteValid
+        name: putByteValid
         description: 'Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each elementencoded in base 64'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2944,7 +2948,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetByteInvalidNull
+        name: getByteInvalidNull
         description: 'Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2994,7 +2998,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetBase64Url
+        name: getBase64Url
         description: 'Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem ipsum"}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3044,7 +3048,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetComplexNull
+        name: getComplexNull
         description: Get dictionary of complex type null value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3094,7 +3098,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetComplexEmpty
+        name: getComplexEmpty
         description: 'Get empty dictionary of complex type {}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3144,7 +3148,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetComplexItemNull
+        name: getComplexItemNull
         description: 'Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3194,7 +3198,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetComplexItemEmpty
+        name: getComplexItemEmpty
         description: 'Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3244,7 +3248,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetComplexValid
+        name: getComplexValid
         description: 'Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3310,7 +3314,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: PutComplexValid
+        name: putComplexValid
         description: 'Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3360,7 +3364,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetArrayNull
+        name: getArrayNull
         description: Get a null array
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3410,7 +3414,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetArrayEmpty
+        name: getArrayEmpty
         description: 'Get an empty dictionary {}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3460,7 +3464,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetArrayItemNull
+        name: getArrayItemNull
         description: 'Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3510,7 +3514,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetArrayItemEmpty
+        name: getArrayItemEmpty
         description: 'Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3560,7 +3564,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetArrayValid
+        name: getArrayValid
         description: 'Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3626,7 +3630,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: PutArrayValid
+        name: putArrayValid
         description: 'Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3676,7 +3680,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetDictionaryNull
+        name: getDictionaryNull
         description: Get an dictionaries of dictionaries with value null
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3726,7 +3730,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetDictionaryEmpty
+        name: getDictionaryEmpty
         description: 'Get an dictionaries of dictionaries of type <string, string> with value {}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3776,7 +3780,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetDictionaryItemNull
+        name: getDictionaryItemNull
         description: 'Get an dictionaries of dictionaries of type <string, string> with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3826,7 +3830,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetDictionaryItemEmpty
+        name: getDictionaryItemEmpty
         description: 'Get an dictionaries of dictionaries of type <string, string> with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3876,7 +3880,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetDictionaryValid
+        name: getDictionaryValid
         description: 'Get an dictionaries of dictionaries of type <string, string> with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3942,17 +3946,17 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: PutDictionaryValid
+        name: putDictionaryValid
         description: 'Get an dictionaries of dictionaries of type <string, string> with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}'
     protocol: !<!Protocols> {}
   language: !<!Languages> 
     default:
-      name: Dictionary
+      name: dictionary
       description: ''
   protocol: !<!Protocols> {}
 language: !<!Languages> 
   default:
-    name: BodyDictionary
+    name: ''
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

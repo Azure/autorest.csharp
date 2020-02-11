@@ -17,7 +17,7 @@ schemas: !<!Schemas>
             version: 1.0.0
           language: !<!Languages> 
             default:
-              name: String
+              name: string
               description: ''
               header: originalHeader
           protocol: !<!Protocols> {}
@@ -30,8 +30,9 @@ schemas: !<!Schemas>
       serializedName: originalProperty
       language: !<!Languages> 
         default:
-          name: renamedProperty
+          name: RenamedProperty
           description: A description about the set of tags.
+          originalName: RenamedProperty
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_2
@@ -49,12 +50,13 @@ schemas: !<!Schemas>
       serializedName: originalPropertyString
       language: !<!Languages> 
         default:
-          name: renamedPropertyString
+          name: RenamedPropertyString
           description: A description about the set of tags.
+          originalName: RenamedPropertyString
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: OriginalSchema
+        name: RenamedSchema
         description: ''
         namespace: Api100
     protocol: !<!Protocols> {}
@@ -65,7 +67,7 @@ schemas: !<!Schemas>
     type: string
     language: !<!Languages> 
       default:
-        name: String
+        name: string
         description: simple string
     protocol: !<!Protocols> {}
   - *ref_1
@@ -106,7 +108,7 @@ operationGroups:
         required: true
         language: !<!Languages> 
           default:
-            name: renamedPathParameter
+            name: RenamedPathParameter
             description: ''
             serializedName: originalPathParameter
         protocol: !<!Protocols> 
@@ -118,7 +120,7 @@ operationGroups:
         required: true
         language: !<!Languages> 
           default:
-            name: renamedQueryParameter
+            name: RenamedQueryParameter
             description: ''
             serializedName: originalQueryParameter
         protocol: !<!Protocols> 
@@ -132,7 +134,7 @@ operationGroups:
           x-ms-requestBody-name: RenamedBodyParameter
         language: !<!Languages> 
           default:
-            name: renamedBodyParameter
+            name: RenamedBodyParameter
             description: ''
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -176,7 +178,7 @@ operationGroups:
       x-ms-requestBody-index: 2
     language: !<!Languages> 
       default:
-        name: OriginalOperation
+        name: RenamedOperation
         description: ''
     protocol: !<!Protocols> {}
   language: !<!Languages> 
@@ -186,7 +188,7 @@ operationGroups:
   protocol: !<!Protocols> {}
 language: !<!Languages> 
   default:
-    name: ExtensionClientName
+    name: ''
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

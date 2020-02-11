@@ -13,7 +13,7 @@ schemas: !<!Schemas>
         precision: 32
         language: !<!Languages> 
           default:
-            name: TypeForstatus
+            name: typeForstatus
             description: ''
         protocol: !<!Protocols> {}
       serializedName: status
@@ -21,6 +21,7 @@ schemas: !<!Schemas>
         default:
           name: status
           description: ''
+          originalName: status
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_1
@@ -30,7 +31,7 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: ErrorMessage
+            name: Error-message
             description: ''
         protocol: !<!Protocols> {}
       serializedName: message
@@ -38,6 +39,7 @@ schemas: !<!Schemas>
         default:
           name: message
           description: ''
+          originalName: message
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -54,7 +56,7 @@ schemas: !<!Schemas>
     precision: 32
     language: !<!Languages> 
       default:
-        name: Integer
+        name: integer
         description: ''
     protocol: !<!Protocols> {}
   - *ref_0
@@ -63,21 +65,10 @@ schemas: !<!Schemas>
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    precision: 32
-    language: !<!Languages> 
-      default:
-        name: Integer
-        description: ''
-    protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_7
-    type: integer
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
     precision: 64
     language: !<!Languages> 
       default:
-        name: Integer
+        name: integer
         description: ''
     protocol: !<!Protocols> {}
   strings:
@@ -85,19 +76,19 @@ schemas: !<!Schemas>
     type: string
     language: !<!Languages> 
       default:
-        name: String
+        name: string
         description: simple string
     protocol: !<!Protocols> {}
   - *ref_1
   unixtimes:
-  - !<!UnixTimeSchema> &ref_12
+  - !<!UnixTimeSchema> &ref_11
     type: unixtime
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: Unixtime
+        name: unixtime
         description: 'date in seconds since 1970-01-01T00:00:00Z.'
     protocol: !<!Protocols> {}
 globalParameters:
@@ -170,7 +161,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetNull
+        name: getNull
         description: Get null Int value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -220,7 +211,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetInvalid
+        name: getInvalid
         description: Get invalid Int value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -242,7 +233,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_4
       language: !<!Languages> 
         default:
           name: ''
@@ -270,7 +261,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetOverflowInt32
+        name: getOverflowInt32
         description: Get overflow Int32 value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -292,6 +283,56 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
+      schema: *ref_4
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_5
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: getUnderflowInt32
+        description: Get underflow Int32 value
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_3
+      signatureParameters: []
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /int/overflowint64
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
       schema: *ref_6
       language: !<!Languages> 
         default:
@@ -320,57 +361,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetUnderflowInt32
-        description: Get underflow Int32 value
-    protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_3
-      signatureParameters: []
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpRequest> 
-          path: /int/overflowint64
-          method: get
-          uri: '{$host}'
-    responses:
-    - !<!SchemaResponse> 
-      schema: *ref_7
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_5
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    language: !<!Languages> 
-      default:
-        name: GetOverflowInt64
+        name: getOverflowInt64
         description: Get overflow Int64 value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -392,7 +383,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_7
+      schema: *ref_6
       language: !<!Languages> 
         default:
           name: ''
@@ -420,7 +411,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetUnderflowInt64
+        name: getUnderflowInt64
         description: Get underflow Int64 value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -430,8 +421,8 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_3
-      - !<!Parameter> &ref_8
-        schema: *ref_6
+      - !<!Parameter> &ref_7
+        schema: *ref_4
         implementation: Method
         required: true
         extensions:
@@ -445,7 +436,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_8
+      - *ref_7
       language: !<!Languages> 
         default:
           name: ''
@@ -486,7 +477,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: PutMax32
+        name: putMax32
         description: Put max int32 value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -496,8 +487,8 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_3
-      - !<!Parameter> &ref_9
-        schema: *ref_7
+      - !<!Parameter> &ref_8
+        schema: *ref_6
         implementation: Method
         required: true
         extensions:
@@ -511,7 +502,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_9
+      - *ref_8
       language: !<!Languages> 
         default:
           name: ''
@@ -552,7 +543,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: PutMax64
+        name: putMax64
         description: Put max int64 value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -562,8 +553,8 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_3
-      - !<!Parameter> &ref_10
-        schema: *ref_6
+      - !<!Parameter> &ref_9
+        schema: *ref_4
         implementation: Method
         required: true
         extensions:
@@ -577,7 +568,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_10
+      - *ref_9
       language: !<!Languages> 
         default:
           name: ''
@@ -618,7 +609,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: PutMin32
+        name: putMin32
         description: Put min int32 value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -628,8 +619,8 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_3
-      - !<!Parameter> &ref_11
-        schema: *ref_7
+      - !<!Parameter> &ref_10
+        schema: *ref_6
         implementation: Method
         required: true
         extensions:
@@ -643,7 +634,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_11
+      - *ref_10
       language: !<!Languages> 
         default:
           name: ''
@@ -684,7 +675,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: PutMin64
+        name: putMin64
         description: Put min int64 value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -706,7 +697,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_12
+      schema: *ref_11
       language: !<!Languages> 
         default:
           name: ''
@@ -734,7 +725,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetUnixTime
+        name: getUnixTime
         description: Get datetime encoded as Unix time value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -744,8 +735,8 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - *ref_3
-      - !<!Parameter> &ref_13
-        schema: *ref_12
+      - !<!Parameter> &ref_12
+        schema: *ref_11
         implementation: Method
         required: true
         extensions:
@@ -759,7 +750,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_13
+      - *ref_12
       language: !<!Languages> 
         default:
           name: ''
@@ -800,7 +791,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: PutUnixTimeDate
+        name: putUnixTimeDate
         description: Put datetime encoded as Unix time
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -822,7 +813,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_12
+      schema: *ref_11
       language: !<!Languages> 
         default:
           name: ''
@@ -850,7 +841,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetInvalidUnixTime
+        name: getInvalidUnixTime
         description: Get invalid Unix time value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -872,7 +863,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_12
+      schema: *ref_11
       language: !<!Languages> 
         default:
           name: ''
@@ -900,17 +891,17 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: GetNullUnixTime
+        name: getNullUnixTime
         description: Get null Unix time value
     protocol: !<!Protocols> {}
   language: !<!Languages> 
     default:
-      name: Int
+      name: int
       description: ''
   protocol: !<!Protocols> {}
 language: !<!Languages> 
   default:
-    name: BodyInteger
+    name: ''
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

@@ -59,10 +59,6 @@ schemas: !<!Schemas>
           version: 1.0.0
         value: !<!ConstantValue> 
           value: green-color
-          language:
-            default:
-              name: ''
-              description: ''
         valueType: !<!StringSchema> &ref_0
           type: string
           language: !<!Languages> 
@@ -126,10 +122,6 @@ schemas: !<!Schemas>
       version: 1.0.0
     value: !<!ConstantValue> 
       value: null
-      language:
-        default:
-          name: ''
-          description: ''
     valueType: *ref_0
     language: !<!Languages> 
       default:
@@ -143,10 +135,6 @@ schemas: !<!Schemas>
       version: 1.0.0
     value: !<!ConstantValue> 
       value: ''
-      language:
-        default:
-          name: ''
-          description: ''
     valueType: *ref_0
     language: !<!Languages> 
       default:
@@ -160,10 +148,6 @@ schemas: !<!Schemas>
       version: 1.0.0
     value: !<!ConstantValue> 
       value: 啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€
-      language:
-        default:
-          name: ''
-          description: ''
     valueType: *ref_0
     language: !<!Languages> 
       default:
@@ -177,10 +161,6 @@ schemas: !<!Schemas>
       version: 1.0.0
     value: !<!ConstantValue> 
       value: '    Now is the time for all good men to come to the aid of their country    '
-      language:
-        default:
-          name: ''
-          description: ''
     valueType: *ref_0
     language: !<!Languages> 
       default:

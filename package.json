@@ -2,12 +2,8 @@
   "name": "@autorest/csharp-v3",
   "private": true,
   "description": "package.json intended for in-repo use only, package.json used for publishing is located in src/AutoRest.CSharp.V3/package.json",
-  "scripts": {
-    "start": "dotnet ./artifacts/bin/AutoRest.CSharp.V3/Debug/netcoreapp3.0/AutoRest.CSharp.V3.dll --server",
-    "debug": "dotnet ./artifacts/bin/AutoRest.CSharp.V3/Debug/netcoreapp3.0/AutoRest.CSharp.V3.dll --server --launch-debugger"
-  },
   "devDependencies": {
-    "@autorest/autorest": "https://github.com/Azure/autorest/releases/download/autorest-3.0.6168/autorest-3.0.6168.tgz",
+    "@autorest/autorest": "https://github.com/Azure/autorest/releases/download/autorest-3.0.6173/autorest-autorest-3.0.6173.tgz",
     "@microsoft.azure/autorest.testserver": "^2.10.9"
   },
   "dependencies": {}

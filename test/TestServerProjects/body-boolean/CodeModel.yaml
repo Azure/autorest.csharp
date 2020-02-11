@@ -71,10 +71,6 @@ schemas: !<!Schemas>
       version: 1.0.0
     value: !<!ConstantValue> 
       value: true
-      language:
-        default:
-          name: ''
-          description: ''
     valueType: *ref_0
     language: !<!Languages> 
       default:
@@ -88,10 +84,6 @@ schemas: !<!Schemas>
       version: 1.0.0
     value: !<!ConstantValue> 
       value: false
-      language:
-        default:
-          name: ''
-          description: ''
     valueType: *ref_0
     language: !<!Languages> 
       default:
