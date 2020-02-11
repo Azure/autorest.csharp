@@ -24,7 +24,7 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual("Building 44", product1.Location);
             Assert.AreEqual("Resource1", product1.Name);
             Assert.AreEqual("Succeeded", product1.ProvisioningState);
-            Assert.AreEqual(FlattenedProductPropertiesProvisioningStateValues.OK, product1.ProvisioningStateValues);
+            Assert.AreEqual(FlattenedProductPropertiesProvisioningStateValues.Ok, product1.ProvisioningStateValues);
             Assert.AreEqual("Product1", product1.PName);
             Assert.AreEqual("Flat", product1.TypePropertiesType);
             Assert.AreEqual("value1", product1.Tags["tag1"]);
@@ -48,7 +48,7 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual("Building 44", product1.Location);
             Assert.AreEqual("Resource1", product1.Name);
             Assert.AreEqual("Succeeded", product1.ProvisioningState);
-            Assert.AreEqual(FlattenedProductPropertiesProvisioningStateValues.OK, product1.ProvisioningStateValues);
+            Assert.AreEqual(FlattenedProductPropertiesProvisioningStateValues.Ok, product1.ProvisioningStateValues);
             Assert.AreEqual("Product1", product1.PName);
             Assert.AreEqual("Flat", product1.TypePropertiesType);
             Assert.AreEqual("value1", product1.Tags["tag1"]);
@@ -72,7 +72,7 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual("Building 44", product1.Location);
             Assert.AreEqual("Resource1", product1.Name);
             Assert.AreEqual("Succeeded", product1.ProvisioningState);
-            Assert.AreEqual(FlattenedProductPropertiesProvisioningStateValues.OK, product1.ProvisioningStateValues);
+            Assert.AreEqual(FlattenedProductPropertiesProvisioningStateValues.Ok, product1.ProvisioningStateValues);
             Assert.AreEqual("Product1", product1.PName);
             Assert.AreEqual("Flat", product1.TypePropertiesType);
             Assert.AreEqual("value1", product1.Tags["tag1"]);
@@ -91,7 +91,7 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual("Building 44", product4.Location);
             Assert.AreEqual("Resource4", product4.Name);
             Assert.AreEqual("Succeeded", product4.ProvisioningState);
-            Assert.AreEqual(FlattenedProductPropertiesProvisioningStateValues.OK, product4.ProvisioningStateValues);
+            Assert.AreEqual(FlattenedProductPropertiesProvisioningStateValues.Ok, product4.ProvisioningStateValues);
             Assert.AreEqual("Product4", product4.PName);
             Assert.AreEqual("Flat", product4.TypePropertiesType);
             Assert.AreEqual("value1", product4.Tags["tag1"]);
