@@ -13,7 +13,7 @@ schemas: !<!Schemas>
         precision: 32
         language: !<!Languages> 
           default:
-            name: TypeForstatus
+            name: Integer
             description: ''
         protocol: !<!Protocols> {}
       serializedName: status

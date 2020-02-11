@@ -13,19 +13,15 @@ namespace CognitiveServices.TextAnalytics.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
+            writer.WritePropertyName("id");
+            writer.WriteStringValue(Id);
+            writer.WritePropertyName("error");
+            writer.WriteObjectValue(Error);
             writer.WriteEndObject();
         }
         internal static DocumentError DeserializeDocumentError(JsonElement element)
         {
             DocumentError result = new DocumentError();
-            foreach (var property in element.EnumerateObject())
-            {
-            }
-            return result;
-        }
-    }
-}
-rror result = new DocumentError();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))

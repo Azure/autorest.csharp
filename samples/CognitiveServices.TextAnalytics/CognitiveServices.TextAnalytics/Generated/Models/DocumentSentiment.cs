@@ -16,13 +16,13 @@ namespace CognitiveServices.TextAnalytics.Models
         public Models.DocumentSentiment Sentiment { get; set; }
         /// <summary> if showStats=true was specified in the request this field will contain information about the document payload. </summary>
         public DocumentStatistics Statistics { get; set; }
-        /// <summary> &lt;Any object&gt;. </summary>
+        /// <summary> Any object. </summary>
         public object DocumentScores { get; set; }
         /// <summary> Sentence level sentiment analysis. </summary>
         public ICollection<Models.SentenceSentiment> Sentences { get; set; } = new System.Collections.Generic.List<CognitiveServices.TextAnalytics.Models.SentenceSentiment>();
     }
 }
-tic Models.DocumentSentiment Neutral { get; } = new Models.DocumentSentiment(NeutralValue);
+blic static Models.DocumentSentiment Neutral { get; } = new Models.DocumentSentiment(NeutralValue);
         /// <summary> negative. </summary>
         public static Models.DocumentSentiment Negative { get; } = new Models.DocumentSentiment(NegativeValue);
         /// <summary> mixed. </summary>

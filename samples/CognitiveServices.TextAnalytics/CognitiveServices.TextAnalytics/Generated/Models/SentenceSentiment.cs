@@ -12,7 +12,7 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         /// <summary> The predicted Sentiment for the sentence. </summary>
         public Models.SentenceSentiment Sentiment { get; set; }
-        /// <summary> &lt;Any object&gt;. </summary>
+        /// <summary> Any object. </summary>
         public object SentenceScores { get; set; }
         /// <summary> The sentence offset from the start of the document. </summary>
         public int Offset { get; set; }
@@ -22,7 +22,7 @@ namespace CognitiveServices.TextAnalytics.Models
         public ICollection<string> Warnings { get; set; } = new System.Collections.Generic.List<string>();
     }
 }
-(PositiveValue);
+entiment(PositiveValue);
         /// <summary> neutral. </summary>
         public static Models.SentenceSentiment Neutral { get; } = new Models.SentenceSentiment(NeutralValue);
         /// <summary> negative. </summary>

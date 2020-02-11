@@ -1,19 +1,19 @@
 !<!CodeModel> 
 schemas: !<!Schemas> 
   objects:
-  - !<!ObjectSchema> &ref_81
+  - !<!ObjectSchema> &ref_69
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
     properties:
     - !<!Property> 
-      schema: !<!NumberSchema> &ref_43
+      schema: !<!NumberSchema> &ref_45
         type: integer
         precision: 32
         language: !<!Languages> 
           default:
-            name: typeForid
+            name: Integer
             description: Basic Id
         protocol: !<!Protocols> {}
       serializedName: id
@@ -21,17 +21,16 @@ schemas: !<!Schemas>
         default:
           name: id
           description: Basic Id
-          originalName: id
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_58
+      schema: !<!StringSchema> &ref_46
         type: string
         apiVersions:
         - !<!ApiVersion> 
           version: '2016-02-29'
         language: !<!Languages> 
           default:
-            name: basic-name
+            name: BasicName
             description: Name property with a very long description that does not fit on a single line and a line break.
         protocol: !<!Protocols> {}
       serializedName: name
@@ -39,16 +38,15 @@ schemas: !<!Schemas>
         default:
           name: name
           description: Name property with a very long description that does not fit on a single line and a line break.
-          originalName: name
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!ChoiceSchema> &ref_23
+      schema: !<!ChoiceSchema> &ref_27
         choices:
         - !<!ChoiceValue> 
           value: cyan
           language:
             default:
-              name: cyan
+              name: Cyan
               description: ''
         - !<!ChoiceValue> 
           value: Magenta
@@ -60,23 +58,23 @@ schemas: !<!Schemas>
           value: YELLOW
           language:
             default:
-              name: YELLOW
+              name: Yellow
               description: ''
         - !<!ChoiceValue> 
           value: blacK
           language:
             default:
-              name: blacK
+              name: BlacK
               description: ''
         type: choice
         apiVersions:
         - !<!ApiVersion> 
           version: '2016-02-29'
-        choiceType: !<!StringSchema> &ref_9
+        choiceType: !<!StringSchema> &ref_14
           type: string
           language: !<!Languages> 
             default:
-              name: string
+              name: String
               description: simple string
           protocol: !<!Protocols> {}
         language: !<!Languages> 
@@ -89,27 +87,26 @@ schemas: !<!Schemas>
         default:
           name: color
           description: ''
-          originalName: color
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: basic
+        name: Basic
         description: ''
         namespace: Api20160229
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_82
+  - !<!ObjectSchema> &ref_70
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
     properties:
     - !<!Property> 
-      schema: !<!NumberSchema> &ref_44
+      schema: !<!NumberSchema> &ref_0
         type: integer
         precision: 32
         language: !<!Languages> 
           default:
-            name: typeForstatus
+            name: Integer
             description: ''
         protocol: !<!Protocols> {}
       serializedName: status
@@ -117,17 +114,16 @@ schemas: !<!Schemas>
         default:
           name: status
           description: ''
-          originalName: status
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_59
+      schema: !<!StringSchema> &ref_47
         type: string
         apiVersions:
         - !<!ApiVersion> 
           version: '2016-02-29'
         language: !<!Languages> 
           default:
-            name: Error-message
+            name: ErrorMessage
             description: ''
         protocol: !<!Protocols> {}
       serializedName: message
@@ -135,11 +131,240 @@ schemas: !<!Schemas>
         default:
           name: message
           description: ''
-          originalName: message
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
         name: Error
+        description: ''
+        namespace: Api20160229
+    protocol: !<!Protocols> {}
+  - !<!ObjectSchema> &ref_73
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    properties:
+    - !<!Property> 
+      schema: *ref_0
+      serializedName: field1
+      language: !<!Languages> 
+        default:
+          name: field1
+          description: ''
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: *ref_0
+      serializedName: field2
+      language: !<!Languages> 
+        default:
+          name: field2
+          description: ''
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: IntWrapper
+        description: ''
+        namespace: Api20160229
+    protocol: !<!Protocols> {}
+  - !<!ObjectSchema> &ref_75
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    properties:
+    - !<!Property> 
+      schema: !<!NumberSchema> &ref_1
+        type: integer
+        precision: 64
+        language: !<!Languages> 
+          default:
+            name: Integer
+            description: ''
+        protocol: !<!Protocols> {}
+      serializedName: field1
+      language: !<!Languages> 
+        default:
+          name: field1
+          description: ''
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: *ref_1
+      serializedName: field2
+      language: !<!Languages> 
+        default:
+          name: field2
+          description: ''
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: LongWrapper
+        description: ''
+        namespace: Api20160229
+    protocol: !<!Protocols> {}
+  - !<!ObjectSchema> &ref_77
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    properties:
+    - !<!Property> 
+      schema: !<!NumberSchema> &ref_2
+        type: number
+        precision: 32
+        language: !<!Languages> 
+          default:
+            name: Number
+            description: ''
+        protocol: !<!Protocols> {}
+      serializedName: field1
+      language: !<!Languages> 
+        default:
+          name: field1
+          description: ''
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: *ref_2
+      serializedName: field2
+      language: !<!Languages> 
+        default:
+          name: field2
+          description: ''
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: FloatWrapper
+        description: ''
+        namespace: Api20160229
+    protocol: !<!Protocols> {}
+  - !<!ObjectSchema> &ref_79
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    properties:
+    - !<!Property> 
+      schema: !<!NumberSchema> &ref_3
+        type: number
+        precision: 64
+        language: !<!Languages> 
+          default:
+            name: Number
+            description: ''
+        protocol: !<!Protocols> {}
+      serializedName: field1
+      language: !<!Languages> 
+        default:
+          name: field1
+          description: ''
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: *ref_3
+      serializedName: field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose
+      language: !<!Languages> 
+        default:
+          name: field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose
+          description: ''
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: DoubleWrapper
+        description: ''
+        namespace: Api20160229
+    protocol: !<!Protocols> {}
+  - !<!ObjectSchema> &ref_81
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    properties:
+    - !<!Property> 
+      schema: !<!BooleanSchema> &ref_4
+        type: boolean
+        language: !<!Languages> 
+          default:
+            name: Boolean
+            description: ''
+        protocol: !<!Protocols> {}
+      serializedName: field_true
+      language: !<!Languages> 
+        default:
+          name: fieldTrue
+          description: ''
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: *ref_4
+      serializedName: field_false
+      language: !<!Languages> 
+        default:
+          name: fieldFalse
+          description: ''
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: BooleanWrapper
+        description: ''
+        namespace: Api20160229
+    protocol: !<!Protocols> {}
+  - !<!ObjectSchema> &ref_83
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    properties:
+    - !<!Property> 
+      schema: !<!StringSchema> &ref_48
+        type: string
+        apiVersions:
+        - !<!ApiVersion> 
+          version: '2016-02-29'
+        language: !<!Languages> 
+          default:
+            name: StringWrapperField
+            description: ''
+        protocol: !<!Protocols> {}
+      serializedName: field
+      language: !<!Languages> 
+        default:
+          name: field
+          description: ''
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: !<!StringSchema> &ref_49
+        type: string
+        apiVersions:
+        - !<!ApiVersion> 
+          version: '2016-02-29'
+        language: !<!Languages> 
+          default:
+            name: StringWrapperEmpty
+            description: ''
+        protocol: !<!Protocols> {}
+      serializedName: empty
+      language: !<!Languages> 
+        default:
+          name: empty
+          description: ''
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: !<!StringSchema> &ref_50
+        type: string
+        apiVersions:
+        - !<!ApiVersion> 
+          version: '2016-02-29'
+        language: !<!Languages> 
+          default:
+            name: StringWrapperNull
+            description: ''
+        protocol: !<!Protocols> {}
+      serializedName: 'null'
+      language: !<!Languages> 
+        default:
+          name: 'null'
+          description: ''
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: StringWrapper
         description: ''
         namespace: Api20160229
     protocol: !<!Protocols> {}
@@ -150,40 +375,42 @@ schemas: !<!Schemas>
       version: '2016-02-29'
     properties:
     - !<!Property> 
-      schema: !<!NumberSchema> &ref_45
-        type: integer
-        precision: 32
+      schema: !<!DateSchema> &ref_42
+        type: date
+        apiVersions:
+        - !<!ApiVersion> 
+          version: '2016-02-29'
         language: !<!Languages> 
           default:
-            name: typeForfield1
+            name: DateWrapperField
             description: ''
         protocol: !<!Protocols> {}
-      serializedName: field1
+      serializedName: field
       language: !<!Languages> 
         default:
-          name: field1
+          name: field
           description: ''
-          originalName: field1
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!NumberSchema> &ref_46
-        type: integer
-        precision: 32
+      schema: !<!DateSchema> &ref_43
+        type: date
+        apiVersions:
+        - !<!ApiVersion> 
+          version: '2016-02-29'
         language: !<!Languages> 
           default:
-            name: typeForfield2
+            name: DateWrapperLeap
             description: ''
         protocol: !<!Protocols> {}
-      serializedName: field2
+      serializedName: leap
       language: !<!Languages> 
         default:
-          name: field2
+          name: leap
           description: ''
-          originalName: field2
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: int-wrapper
+        name: DateWrapper
         description: ''
         namespace: Api20160229
     protocol: !<!Protocols> {}
@@ -194,40 +421,44 @@ schemas: !<!Schemas>
       version: '2016-02-29'
     properties:
     - !<!Property> 
-      schema: !<!NumberSchema> &ref_47
-        type: integer
-        precision: 64
+      schema: !<!DateTimeSchema> &ref_37
+        type: date-time
+        format: date-time
+        apiVersions:
+        - !<!ApiVersion> 
+          version: '2016-02-29'
         language: !<!Languages> 
           default:
-            name: typeForfield1
+            name: DatetimeWrapperField
             description: ''
         protocol: !<!Protocols> {}
-      serializedName: field1
+      serializedName: field
       language: !<!Languages> 
         default:
-          name: field1
+          name: field
           description: ''
-          originalName: field1
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!NumberSchema> &ref_48
-        type: integer
-        precision: 64
+      schema: !<!DateTimeSchema> &ref_38
+        type: date-time
+        format: date-time
+        apiVersions:
+        - !<!ApiVersion> 
+          version: '2016-02-29'
         language: !<!Languages> 
           default:
-            name: typeForfield2
+            name: DatetimeWrapperNow
             description: ''
         protocol: !<!Protocols> {}
-      serializedName: field2
+      serializedName: now
       language: !<!Languages> 
         default:
-          name: field2
+          name: now
           description: ''
-          originalName: field2
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: long-wrapper
+        name: DatetimeWrapper
         description: ''
         namespace: Api20160229
     protocol: !<!Protocols> {}
@@ -238,40 +469,44 @@ schemas: !<!Schemas>
       version: '2016-02-29'
     properties:
     - !<!Property> 
-      schema: !<!NumberSchema> &ref_49
-        type: number
-        precision: 32
+      schema: !<!DateTimeSchema> &ref_39
+        type: date-time
+        format: date-time-rfc1123
+        apiVersions:
+        - !<!ApiVersion> 
+          version: '2016-02-29'
         language: !<!Languages> 
           default:
-            name: typeForfield1
+            name: Datetimerfc1123WrapperField
             description: ''
         protocol: !<!Protocols> {}
-      serializedName: field1
+      serializedName: field
       language: !<!Languages> 
         default:
-          name: field1
+          name: field
           description: ''
-          originalName: field1
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!NumberSchema> &ref_50
-        type: number
-        precision: 32
+      schema: !<!DateTimeSchema> &ref_40
+        type: date-time
+        format: date-time-rfc1123
+        apiVersions:
+        - !<!ApiVersion> 
+          version: '2016-02-29'
         language: !<!Languages> 
           default:
-            name: typeForfield2
+            name: Datetimerfc1123WrapperNow
             description: ''
         protocol: !<!Protocols> {}
-      serializedName: field2
+      serializedName: now
       language: !<!Languages> 
         default:
-          name: field2
+          name: now
           description: ''
-          originalName: field2
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: float-wrapper
+        name: Datetimerfc1123Wrapper
         description: ''
         namespace: Api20160229
     protocol: !<!Protocols> {}
@@ -282,40 +517,25 @@ schemas: !<!Schemas>
       version: '2016-02-29'
     properties:
     - !<!Property> 
-      schema: !<!NumberSchema> &ref_51
-        type: number
-        precision: 64
+      schema: !<!DurationSchema> &ref_44
+        type: duration
+        apiVersions:
+        - !<!ApiVersion> 
+          version: '2016-02-29'
         language: !<!Languages> 
           default:
-            name: typeForfield1
+            name: DurationWrapperField
             description: ''
         protocol: !<!Protocols> {}
-      serializedName: field1
+      serializedName: field
       language: !<!Languages> 
         default:
-          name: field1
+          name: field
           description: ''
-          originalName: field1
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: !<!NumberSchema> &ref_52
-        type: number
-        precision: 64
-        language: !<!Languages> 
-          default:
-            name: typeForfield_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose
-            description: ''
-        protocol: !<!Protocols> {}
-      serializedName: field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose
-      language: !<!Languages> 
-        default:
-          name: field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose
-          description: ''
-          originalName: field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: double-wrapper
+        name: DurationWrapper
         description: ''
         namespace: Api20160229
     protocol: !<!Protocols> {}
@@ -326,38 +546,26 @@ schemas: !<!Schemas>
       version: '2016-02-29'
     properties:
     - !<!Property> 
-      schema: !<!BooleanSchema> &ref_30
-        type: boolean
+      schema: !<!ByteArraySchema> &ref_34
+        type: byte-array
+        format: byte
+        apiVersions:
+        - !<!ApiVersion> 
+          version: '2016-02-29'
         language: !<!Languages> 
           default:
-            name: typeForfield_true
+            name: ByteWrapperField
             description: ''
         protocol: !<!Protocols> {}
-      serializedName: field_true
+      serializedName: field
       language: !<!Languages> 
         default:
-          name: fieldTrue
+          name: field
           description: ''
-          originalName: field_true
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: !<!BooleanSchema> &ref_31
-        type: boolean
-        language: !<!Languages> 
-          default:
-            name: typeForfield_false
-            description: ''
-        protocol: !<!Protocols> {}
-      serializedName: field_false
-      language: !<!Languages> 
-        default:
-          name: fieldFalse
-          description: ''
-          originalName: field_false
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: boolean-wrapper
+        name: ByteWrapper
         description: ''
         namespace: Api20160229
     protocol: !<!Protocols> {}
@@ -368,336 +576,60 @@ schemas: !<!Schemas>
       version: '2016-02-29'
     properties:
     - !<!Property> 
-      schema: !<!StringSchema> &ref_60
-        type: string
-        apiVersions:
-        - !<!ApiVersion> 
-          version: '2016-02-29'
-        language: !<!Languages> 
-          default:
-            name: string-wrapper-field
-            description: ''
-        protocol: !<!Protocols> {}
-      serializedName: field
-      language: !<!Languages> 
-        default:
-          name: field
-          description: ''
-          originalName: field
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: !<!StringSchema> &ref_61
-        type: string
-        apiVersions:
-        - !<!ApiVersion> 
-          version: '2016-02-29'
-        language: !<!Languages> 
-          default:
-            name: string-wrapper-empty
-            description: ''
-        protocol: !<!Protocols> {}
-      serializedName: empty
-      language: !<!Languages> 
-        default:
-          name: empty
-          description: ''
-          originalName: empty
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: !<!StringSchema> &ref_62
-        type: string
-        apiVersions:
-        - !<!ApiVersion> 
-          version: '2016-02-29'
-        language: !<!Languages> 
-          default:
-            name: string-wrapper-null
-            description: ''
-        protocol: !<!Protocols> {}
-      serializedName: 'null'
-      language: !<!Languages> 
-        default:
-          name: 'null'
-          description: ''
-          originalName: 'null'
-      protocol: !<!Protocols> {}
-    language: !<!Languages> 
-      default:
-        name: string-wrapper
-        description: ''
-        namespace: Api20160229
-    protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_97
-    type: object
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2016-02-29'
-    properties:
-    - !<!Property> 
-      schema: !<!DateSchema> &ref_40
-        type: date
-        apiVersions:
-        - !<!ApiVersion> 
-          version: '2016-02-29'
-        language: !<!Languages> 
-          default:
-            name: date-wrapper-field
-            description: ''
-        protocol: !<!Protocols> {}
-      serializedName: field
-      language: !<!Languages> 
-        default:
-          name: field
-          description: ''
-          originalName: field
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: !<!DateSchema> &ref_41
-        type: date
-        apiVersions:
-        - !<!ApiVersion> 
-          version: '2016-02-29'
-        language: !<!Languages> 
-          default:
-            name: date-wrapper-leap
-            description: ''
-        protocol: !<!Protocols> {}
-      serializedName: leap
-      language: !<!Languages> 
-        default:
-          name: leap
-          description: ''
-          originalName: leap
-      protocol: !<!Protocols> {}
-    language: !<!Languages> 
-      default:
-        name: date-wrapper
-        description: ''
-        namespace: Api20160229
-    protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_99
-    type: object
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2016-02-29'
-    properties:
-    - !<!Property> 
-      schema: !<!DateTimeSchema> &ref_35
-        type: date-time
-        format: date-time
-        apiVersions:
-        - !<!ApiVersion> 
-          version: '2016-02-29'
-        language: !<!Languages> 
-          default:
-            name: datetime-wrapper-field
-            description: ''
-        protocol: !<!Protocols> {}
-      serializedName: field
-      language: !<!Languages> 
-        default:
-          name: field
-          description: ''
-          originalName: field
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: !<!DateTimeSchema> &ref_36
-        type: date-time
-        format: date-time
-        apiVersions:
-        - !<!ApiVersion> 
-          version: '2016-02-29'
-        language: !<!Languages> 
-          default:
-            name: datetime-wrapper-now
-            description: ''
-        protocol: !<!Protocols> {}
-      serializedName: now
-      language: !<!Languages> 
-        default:
-          name: now
-          description: ''
-          originalName: now
-      protocol: !<!Protocols> {}
-    language: !<!Languages> 
-      default:
-        name: datetime-wrapper
-        description: ''
-        namespace: Api20160229
-    protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_101
-    type: object
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2016-02-29'
-    properties:
-    - !<!Property> 
-      schema: !<!DateTimeSchema> &ref_37
-        type: date-time
-        format: date-time-rfc1123
-        apiVersions:
-        - !<!ApiVersion> 
-          version: '2016-02-29'
-        language: !<!Languages> 
-          default:
-            name: datetimerfc1123-wrapper-field
-            description: ''
-        protocol: !<!Protocols> {}
-      serializedName: field
-      language: !<!Languages> 
-        default:
-          name: field
-          description: ''
-          originalName: field
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: !<!DateTimeSchema> &ref_38
-        type: date-time
-        format: date-time-rfc1123
-        apiVersions:
-        - !<!ApiVersion> 
-          version: '2016-02-29'
-        language: !<!Languages> 
-          default:
-            name: datetimerfc1123-wrapper-now
-            description: ''
-        protocol: !<!Protocols> {}
-      serializedName: now
-      language: !<!Languages> 
-        default:
-          name: now
-          description: ''
-          originalName: now
-      protocol: !<!Protocols> {}
-    language: !<!Languages> 
-      default:
-        name: datetimerfc1123-wrapper
-        description: ''
-        namespace: Api20160229
-    protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_103
-    type: object
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2016-02-29'
-    properties:
-    - !<!Property> 
-      schema: !<!DurationSchema> &ref_42
-        type: duration
-        apiVersions:
-        - !<!ApiVersion> 
-          version: '2016-02-29'
-        language: !<!Languages> 
-          default:
-            name: duration-wrapper-field
-            description: ''
-        protocol: !<!Protocols> {}
-      serializedName: field
-      language: !<!Languages> 
-        default:
-          name: field
-          description: ''
-          originalName: field
-      protocol: !<!Protocols> {}
-    language: !<!Languages> 
-      default:
-        name: duration-wrapper
-        description: ''
-        namespace: Api20160229
-    protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_105
-    type: object
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2016-02-29'
-    properties:
-    - !<!Property> 
-      schema: !<!ByteArraySchema> &ref_32
-        type: byte-array
-        format: byte
-        apiVersions:
-        - !<!ApiVersion> 
-          version: '2016-02-29'
-        language: !<!Languages> 
-          default:
-            name: byte-wrapper-field
-            description: ''
-        protocol: !<!Protocols> {}
-      serializedName: field
-      language: !<!Languages> 
-        default:
-          name: field
-          description: ''
-          originalName: field
-      protocol: !<!Protocols> {}
-    language: !<!Languages> 
-      default:
-        name: byte-wrapper
-        description: ''
-        namespace: Api20160229
-    protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_107
-    type: object
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2016-02-29'
-    properties:
-    - !<!Property> 
-      schema: !<!ArraySchema> &ref_25
+      schema: !<!ArraySchema> &ref_29
         type: array
         apiVersions:
         - !<!ApiVersion> 
           version: '2016-02-29'
-        elementType: !<!StringSchema> &ref_63
+        elementType: !<!StringSchema> &ref_51
           type: string
           apiVersions:
           - !<!ApiVersion> 
             version: '2016-02-29'
           language: !<!Languages> 
             default:
-              name: array-wrapper-arrayItem
+              name: ArrayWrapperArrayItem
               description: ''
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
-            name: array-wrapper-array
-            description: ''
+            name: ArrayWrapperArray
+            description: Array of ArrayWrapperArrayItem
         protocol: !<!Protocols> {}
       serializedName: array
       language: !<!Languages> 
         default:
           name: array
           description: ''
-          originalName: array
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: array-wrapper
+        name: ArrayWrapper
         description: ''
         namespace: Api20160229
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_110
+  - !<!ObjectSchema> &ref_98
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
     properties:
     - !<!Property> 
-      schema: !<!DictionarySchema> &ref_22
+      schema: !<!DictionarySchema> &ref_26
         type: dictionary
-        elementType: !<!StringSchema> &ref_64
+        elementType: !<!StringSchema> &ref_52
           type: string
           apiVersions:
           - !<!ApiVersion> 
             version: '2016-02-29'
           language: !<!Languages> 
             default:
-              name: string
+              name: String
               description: ''
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
-            name: dictionary-wrapper-defaultProgram
+            name: DictionaryWrapperDefaultProgram
             description: Dictionary of <string>
         protocol: !<!Protocols> {}
       serializedName: defaultProgram
@@ -705,198 +637,13 @@ schemas: !<!Schemas>
         default:
           name: defaultProgram
           description: Dictionary of <string>
-          originalName: defaultProgram
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: dictionary-wrapper
+        name: DictionaryWrapper
         description: ''
         namespace: Api20160229
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_0
-    type: object
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2016-02-29'
-    children: !<!Relations> 
-      all:
-      - !<!ObjectSchema> &ref_3
-        type: object
-        apiVersions:
-        - !<!ApiVersion> 
-          version: '2016-02-29'
-        parents: !<!Relations> 
-          all:
-          - *ref_0
-          immediate:
-          - *ref_0
-        properties:
-        - !<!Property> 
-          schema: !<!StringSchema> &ref_67
-            type: string
-            apiVersions:
-            - !<!ApiVersion> 
-              version: '2016-02-29'
-            language: !<!Languages> 
-              default:
-                name: dog-food
-                description: ''
-            protocol: !<!Protocols> {}
-          serializedName: food
-          language: !<!Languages> 
-            default:
-              name: food
-              description: ''
-              originalName: food
-          protocol: !<!Protocols> {}
-        language: !<!Languages> 
-          default:
-            name: dog
-            description: ''
-            namespace: Api20160229
-        protocol: !<!Protocols> {}
-      - !<!ObjectSchema> &ref_1
-        type: object
-        apiVersions:
-        - !<!ApiVersion> 
-          version: '2016-02-29'
-        children: !<!Relations> 
-          all:
-          - !<!ObjectSchema> &ref_2
-            type: object
-            apiVersions:
-            - !<!ApiVersion> 
-              version: '2016-02-29'
-            parents: !<!Relations> 
-              all:
-              - *ref_1
-              - *ref_0
-              immediate:
-              - *ref_1
-            properties:
-            - !<!Property> 
-              schema: !<!StringSchema> &ref_68
-                type: string
-                apiVersions:
-                - !<!ApiVersion> 
-                  version: '2016-02-29'
-                language: !<!Languages> 
-                  default:
-                    name: siamese-breed
-                    description: ''
-                protocol: !<!Protocols> {}
-              serializedName: breed
-              language: !<!Languages> 
-                default:
-                  name: breed
-                  description: ''
-                  originalName: breed
-              protocol: !<!Protocols> {}
-            language: !<!Languages> 
-              default:
-                name: siamese
-                description: ''
-                namespace: Api20160229
-            protocol: !<!Protocols> {}
-          immediate:
-          - *ref_2
-        parents: !<!Relations> 
-          all:
-          - *ref_0
-          immediate:
-          - *ref_0
-        properties:
-        - !<!Property> 
-          schema: !<!StringSchema> &ref_66
-            type: string
-            apiVersions:
-            - !<!ApiVersion> 
-              version: '2016-02-29'
-            language: !<!Languages> 
-              default:
-                name: cat-color
-                description: ''
-            protocol: !<!Protocols> {}
-          serializedName: color
-          language: !<!Languages> 
-            default:
-              name: color
-              description: ''
-              originalName: color
-          protocol: !<!Protocols> {}
-        - !<!Property> 
-          schema: !<!ArraySchema> &ref_26
-            type: array
-            apiVersions:
-            - !<!ApiVersion> 
-              version: '2016-02-29'
-            elementType: *ref_3
-            language: !<!Languages> 
-              default:
-                name: cat-hates
-                description: ''
-            protocol: !<!Protocols> {}
-          serializedName: hates
-          language: !<!Languages> 
-            default:
-              name: hates
-              description: ''
-              originalName: hates
-          protocol: !<!Protocols> {}
-        language: !<!Languages> 
-          default:
-            name: cat
-            description: ''
-            namespace: Api20160229
-        protocol: !<!Protocols> {}
-      - *ref_2
-      immediate:
-      - *ref_3
-      - *ref_1
-    properties:
-    - !<!Property> 
-      schema: !<!NumberSchema> &ref_53
-        type: integer
-        precision: 32
-        language: !<!Languages> 
-          default:
-            name: typeForid
-            description: ''
-        protocol: !<!Protocols> {}
-      serializedName: id
-      language: !<!Languages> 
-        default:
-          name: id
-          description: ''
-          originalName: id
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: !<!StringSchema> &ref_65
-        type: string
-        apiVersions:
-        - !<!ApiVersion> 
-          version: '2016-02-29'
-        language: !<!Languages> 
-          default:
-            name: pet-name
-            description: ''
-        protocol: !<!Protocols> {}
-      serializedName: name
-      language: !<!Languages> 
-        default:
-          name: name
-          description: ''
-          originalName: name
-      protocol: !<!Protocols> {}
-    language: !<!Languages> 
-      default:
-        name: pet
-        description: ''
-        namespace: Api20160229
-    protocol: !<!Protocols> {}
-  - *ref_1
-  - *ref_3
-  - *ref_2
   - !<!ObjectSchema> &ref_5
     type: object
     apiVersions:
@@ -904,7 +651,41 @@ schemas: !<!Schemas>
       version: '2016-02-29'
     children: !<!Relations> 
       all:
-      - !<!ObjectSchema> &ref_4
+      - !<!ObjectSchema> &ref_8
+        type: object
+        apiVersions:
+        - !<!ApiVersion> 
+          version: '2016-02-29'
+        parents: !<!Relations> 
+          all:
+          - *ref_5
+          immediate:
+          - *ref_5
+        properties:
+        - !<!Property> 
+          schema: !<!StringSchema> &ref_55
+            type: string
+            apiVersions:
+            - !<!ApiVersion> 
+              version: '2016-02-29'
+            language: !<!Languages> 
+              default:
+                name: DogFood
+                description: ''
+            protocol: !<!Protocols> {}
+          serializedName: food
+          language: !<!Languages> 
+            default:
+              name: food
+              description: ''
+          protocol: !<!Protocols> {}
+        language: !<!Languages> 
+          default:
+            name: Dog
+            description: ''
+            namespace: Api20160229
+        protocol: !<!Protocols> {}
+      - !<!ObjectSchema> &ref_6
         type: object
         apiVersions:
         - !<!ApiVersion> 
@@ -916,39 +697,176 @@ schemas: !<!Schemas>
             apiVersions:
             - !<!ApiVersion> 
               version: '2016-02-29'
-            discriminatorValue: smart_salmon
             parents: !<!Relations> 
               all:
-              - *ref_4
-              - !<!DictionarySchema> &ref_6
-                type: dictionary
-                elementType: !<!AnySchema> 
-                  type: any
-                  language: !<!Languages> 
-                    default:
-                      name: any
-                      description: <Any object>
-                  protocol: !<!Protocols> {}
-                language: !<!Languages> 
-                  default:
-                    name: smart_salmon
-                    description: Dictionary of <any>
-                protocol: !<!Protocols> {}
-              - *ref_5
               - *ref_6
+              - *ref_5
               immediate:
-              - *ref_4
               - *ref_6
             properties:
             - !<!Property> 
-              schema: !<!StringSchema> &ref_77
+              schema: !<!StringSchema> &ref_56
                 type: string
                 apiVersions:
                 - !<!ApiVersion> 
                   version: '2016-02-29'
                 language: !<!Languages> 
                   default:
-                    name: smart_salmon-college_degree
+                    name: SiameseBreed
+                    description: ''
+                protocol: !<!Protocols> {}
+              serializedName: breed
+              language: !<!Languages> 
+                default:
+                  name: breed
+                  description: ''
+              protocol: !<!Protocols> {}
+            language: !<!Languages> 
+              default:
+                name: Siamese
+                description: ''
+                namespace: Api20160229
+            protocol: !<!Protocols> {}
+          immediate:
+          - *ref_7
+        parents: !<!Relations> 
+          all:
+          - *ref_5
+          immediate:
+          - *ref_5
+        properties:
+        - !<!Property> 
+          schema: !<!StringSchema> &ref_54
+            type: string
+            apiVersions:
+            - !<!ApiVersion> 
+              version: '2016-02-29'
+            language: !<!Languages> 
+              default:
+                name: CatColor
+                description: ''
+            protocol: !<!Protocols> {}
+          serializedName: color
+          language: !<!Languages> 
+            default:
+              name: color
+              description: ''
+          protocol: !<!Protocols> {}
+        - !<!Property> 
+          schema: !<!ArraySchema> &ref_30
+            type: array
+            apiVersions:
+            - !<!ApiVersion> 
+              version: '2016-02-29'
+            elementType: *ref_8
+            language: !<!Languages> 
+              default:
+                name: CatHates
+                description: Array of dog
+            protocol: !<!Protocols> {}
+          serializedName: hates
+          language: !<!Languages> 
+            default:
+              name: hates
+              description: ''
+          protocol: !<!Protocols> {}
+        language: !<!Languages> 
+          default:
+            name: Cat
+            description: ''
+            namespace: Api20160229
+        protocol: !<!Protocols> {}
+      - *ref_7
+      immediate:
+      - *ref_8
+      - *ref_6
+    properties:
+    - !<!Property> 
+      schema: *ref_0
+      serializedName: id
+      language: !<!Languages> 
+        default:
+          name: id
+          description: ''
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: !<!StringSchema> &ref_53
+        type: string
+        apiVersions:
+        - !<!ApiVersion> 
+          version: '2016-02-29'
+        language: !<!Languages> 
+          default:
+            name: PetName
+            description: ''
+        protocol: !<!Protocols> {}
+      serializedName: name
+      language: !<!Languages> 
+        default:
+          name: name
+          description: ''
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: Pet
+        description: ''
+        namespace: Api20160229
+    protocol: !<!Protocols> {}
+  - *ref_6
+  - *ref_8
+  - *ref_7
+  - !<!ObjectSchema> &ref_10
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    children: !<!Relations> 
+      all:
+      - !<!ObjectSchema> &ref_9
+        type: object
+        apiVersions:
+        - !<!ApiVersion> 
+          version: '2016-02-29'
+        children: !<!Relations> 
+          all:
+          - !<!ObjectSchema> &ref_12
+            type: object
+            apiVersions:
+            - !<!ApiVersion> 
+              version: '2016-02-29'
+            discriminatorValue: smart_salmon
+            parents: !<!Relations> 
+              all:
+              - *ref_9
+              - !<!DictionarySchema> &ref_11
+                type: dictionary
+                elementType: !<!AnySchema> 
+                  type: any
+                  language: !<!Languages> 
+                    default:
+                      name: any
+                      description: Any object
+                  protocol: !<!Protocols> {}
+                language: !<!Languages> 
+                  default:
+                    name: SmartSalmon
+                    description: Dictionary of <any>
+                protocol: !<!Protocols> {}
+              - *ref_10
+              - *ref_11
+              immediate:
+              - *ref_9
+              - *ref_11
+            properties:
+            - !<!Property> 
+              schema: !<!StringSchema> &ref_65
+                type: string
+                apiVersions:
+                - !<!ApiVersion> 
+                  version: '2016-02-29'
+                language: !<!Languages> 
+                  default:
+                    name: SmartSalmonCollegeDegree
                     description: ''
                 protocol: !<!Protocols> {}
               serializedName: college_degree
@@ -956,30 +874,29 @@ schemas: !<!Schemas>
                 default:
                   name: collegeDegree
                   description: ''
-                  originalName: college_degree
               protocol: !<!Protocols> {}
             language: !<!Languages> 
               default:
-                name: smart_salmon
+                name: SmartSalmon
                 description: ''
                 namespace: Api20160229
             protocol: !<!Protocols> {}
           immediate:
-          - *ref_7
+          - *ref_12
         discriminator: !<!Discriminator> 
           all:
-            smart_salmon: *ref_7
+            smart_salmon: *ref_12
           immediate:
-            smart_salmon: *ref_7
-          property: !<!Property> &ref_13
-            schema: !<!StringSchema> &ref_69
+            smart_salmon: *ref_12
+          property: !<!Property> &ref_18
+            schema: !<!StringSchema> &ref_57
               type: string
               apiVersions:
               - !<!ApiVersion> 
                 version: '2016-02-29'
               language: !<!Languages> 
                 default:
-                  name: Fish-fishtype
+                  name: FishFishtype
                   description: ''
               protocol: !<!Protocols> {}
             isDiscriminator: true
@@ -989,24 +906,23 @@ schemas: !<!Schemas>
               default:
                 name: fishtype
                 description: ''
-                originalName: fishtype
             protocol: !<!Protocols> {}
         discriminatorValue: salmon
         parents: !<!Relations> 
           all:
-          - *ref_5
+          - *ref_10
           immediate:
-          - *ref_5
+          - *ref_10
         properties:
         - !<!Property> 
-          schema: !<!StringSchema> &ref_74
+          schema: !<!StringSchema> &ref_62
             type: string
             apiVersions:
             - !<!ApiVersion> 
               version: '2016-02-29'
             language: !<!Languages> 
               default:
-                name: salmon-location
+                name: SalmonLocation
                 description: ''
             protocol: !<!Protocols> {}
           serializedName: location
@@ -1014,38 +930,30 @@ schemas: !<!Schemas>
             default:
               name: location
               description: ''
-              originalName: location
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: !<!BooleanSchema> &ref_15
-            type: boolean
-            language: !<!Languages> 
-              default:
-                name: typeForiswild
-                description: ''
-            protocol: !<!Protocols> {}
+          schema: *ref_4
           serializedName: iswild
           language: !<!Languages> 
             default:
               name: iswild
               description: ''
-              originalName: iswild
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
-            name: salmon
+            name: Salmon
             description: ''
             namespace: Api20160229
         protocol: !<!Protocols> {}
-      - *ref_7
-      - !<!ObjectSchema> &ref_8
+      - *ref_12
+      - !<!ObjectSchema> &ref_13
         type: object
         apiVersions:
         - !<!ApiVersion> 
           version: '2016-02-29'
         children: !<!Relations> 
           all:
-          - !<!ObjectSchema> &ref_10
+          - !<!ObjectSchema> &ref_15
             type: object
             apiVersions:
             - !<!ApiVersion> 
@@ -1053,13 +961,13 @@ schemas: !<!Schemas>
             discriminatorValue: sawshark
             parents: !<!Relations> 
               all:
-              - *ref_8
-              - *ref_5
+              - *ref_13
+              - *ref_10
               immediate:
-              - *ref_8
+              - *ref_13
             properties:
             - !<!Property> 
-              schema: !<!ByteArraySchema> &ref_33
+              schema: !<!ByteArraySchema> &ref_35
                 type: byte-array
                 format: byte
                 apiVersions:
@@ -1067,7 +975,7 @@ schemas: !<!Schemas>
                   version: '2016-02-29'
                 language: !<!Languages> 
                   default:
-                    name: sawshark-picture
+                    name: SawsharkPicture
                     description: ''
                 protocol: !<!Protocols> {}
               serializedName: picture
@@ -1075,15 +983,14 @@ schemas: !<!Schemas>
                 default:
                   name: picture
                   description: ''
-                  originalName: picture
               protocol: !<!Protocols> {}
             language: !<!Languages> 
               default:
-                name: sawshark
+                name: Sawshark
                 description: ''
                 namespace: Api20160229
             protocol: !<!Protocols> {}
-          - !<!ObjectSchema> &ref_11
+          - !<!ObjectSchema> &ref_16
             type: object
             apiVersions:
             - !<!ApiVersion> 
@@ -1091,65 +998,57 @@ schemas: !<!Schemas>
             discriminatorValue: goblin
             parents: !<!Relations> 
               all:
-              - *ref_8
-              - *ref_5
+              - *ref_13
+              - *ref_10
               immediate:
-              - *ref_8
+              - *ref_13
             properties:
             - !<!Property> 
-              schema: !<!NumberSchema> &ref_57
-                type: integer
-                precision: 32
-                language: !<!Languages> 
-                  default:
-                    name: typeForjawsize
-                    description: ''
-                protocol: !<!Protocols> {}
+              schema: *ref_0
               serializedName: jawsize
               language: !<!Languages> 
                 default:
                   name: jawsize
                   description: ''
-                  originalName: jawsize
               protocol: !<!Protocols> {}
             - !<!Property> 
-              schema: !<!ChoiceSchema> &ref_24
+              schema: !<!ChoiceSchema> &ref_28
                 choices:
                 - !<!ChoiceValue> 
                   value: pink
                   language:
                     default:
-                      name: pink
+                      name: Pink
                       description: ''
                 - !<!ChoiceValue> 
                   value: gray
                   language:
                     default:
-                      name: gray
+                      name: Gray
                       description: ''
                 - !<!ChoiceValue> 
                   value: brown
                   language:
                     default:
-                      name: brown
+                      name: Brown
                       description: ''
                 - !<!ChoiceValue> 
                   value: RED
                   language:
                     default:
-                      name: upperRed
+                      name: UpperRed
                       description: Uppercase RED
                 - !<!ChoiceValue> 
                   value: red
                   language:
                     default:
-                      name: lowerRed
+                      name: LowerRed
                       description: Lowercase RED
                 type: choice
                 apiVersions:
                 - !<!ApiVersion> 
                   version: '2016-02-29'
-                choiceType: *ref_9
+                choiceType: *ref_14
                 defaultValue: gray
                 language: !<!Languages> 
                   default:
@@ -1161,17 +1060,16 @@ schemas: !<!Schemas>
                 default:
                   name: color
                   description: Colors possible
-                  originalName: color
               protocol: !<!Protocols> {}
             extensions:
               x-ms-discriminator-value: goblin
             language: !<!Languages> 
               default:
-                name: goblinshark
+                name: Goblinshark
                 description: ''
                 namespace: Api20160229
             protocol: !<!Protocols> {}
-          - !<!ObjectSchema> &ref_12
+          - !<!ObjectSchema> &ref_17
             type: object
             apiVersions:
             - !<!ApiVersion> 
@@ -1179,56 +1077,48 @@ schemas: !<!Schemas>
             discriminatorValue: cookiecuttershark
             parents: !<!Relations> 
               all:
-              - *ref_8
-              - *ref_5
+              - *ref_13
+              - *ref_10
               immediate:
-              - *ref_8
+              - *ref_13
             language: !<!Languages> 
               default:
-                name: cookiecuttershark
+                name: Cookiecuttershark
                 description: ''
                 namespace: Api20160229
             protocol: !<!Protocols> {}
           immediate:
-          - *ref_10
-          - *ref_11
-          - *ref_12
+          - *ref_15
+          - *ref_16
+          - *ref_17
         discriminator: !<!Discriminator> 
           all:
-            cookiecuttershark: *ref_12
-            goblin: *ref_11
-            sawshark: *ref_10
+            cookiecuttershark: *ref_17
+            goblin: *ref_16
+            sawshark: *ref_15
           immediate:
-            cookiecuttershark: *ref_12
-            goblin: *ref_11
-            sawshark: *ref_10
-          property: *ref_13
+            cookiecuttershark: *ref_17
+            goblin: *ref_16
+            sawshark: *ref_15
+          property: *ref_18
         discriminatorValue: shark
         parents: !<!Relations> 
           all:
-          - *ref_5
+          - *ref_10
           immediate:
-          - *ref_5
+          - *ref_10
         properties:
         - !<!Property> 
-          schema: !<!NumberSchema> &ref_56
-            type: integer
-            precision: 32
-            language: !<!Languages> 
-              default:
-                name: typeForage
-                description: ''
-            protocol: !<!Protocols> {}
+          schema: *ref_0
           required: false
           serializedName: age
           language: !<!Languages> 
             default:
               name: age
               description: ''
-              originalName: age
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: !<!DateTimeSchema> &ref_39
+          schema: !<!DateTimeSchema> &ref_41
             type: date-time
             format: date-time
             apiVersions:
@@ -1236,7 +1126,7 @@ schemas: !<!Schemas>
               version: '2016-02-29'
             language: !<!Languages> 
               default:
-                name: shark-birthday
+                name: SharkBirthday
                 description: ''
             protocol: !<!Protocols> {}
           required: true
@@ -1245,43 +1135,42 @@ schemas: !<!Schemas>
             default:
               name: birthday
               description: ''
-              originalName: birthday
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
-            name: shark
+            name: Shark
             description: ''
             namespace: Api20160229
         protocol: !<!Protocols> {}
-      - *ref_10
-      - *ref_11
-      - *ref_12
+      - *ref_15
+      - *ref_16
+      - *ref_17
       immediate:
-      - *ref_4
-      - *ref_8
+      - *ref_9
+      - *ref_13
     discriminator: !<!Discriminator> 
       all:
-        cookiecuttershark: *ref_12
-        goblin: *ref_11
-        salmon: *ref_4
-        sawshark: *ref_10
-        shark: *ref_8
-        smart_salmon: *ref_7
+        cookiecuttershark: *ref_17
+        goblin: *ref_16
+        salmon: *ref_9
+        sawshark: *ref_15
+        shark: *ref_13
+        smart_salmon: *ref_12
       immediate:
-        salmon: *ref_4
-        shark: *ref_8
-      property: *ref_13
+        salmon: *ref_9
+        shark: *ref_13
+      property: *ref_18
     properties:
-    - *ref_13
+    - *ref_18
     - !<!Property> 
-      schema: !<!StringSchema> &ref_70
+      schema: !<!StringSchema> &ref_58
         type: string
         apiVersions:
         - !<!ApiVersion> 
           version: '2016-02-29'
         language: !<!Languages> 
           default:
-            name: Fish-species
+            name: FishSpecies
             description: ''
         protocol: !<!Protocols> {}
       required: false
@@ -1290,36 +1179,27 @@ schemas: !<!Schemas>
         default:
           name: species
           description: ''
-          originalName: species
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!NumberSchema> &ref_54
-        type: number
-        precision: 32
-        language: !<!Languages> 
-          default:
-            name: typeForlength
-            description: ''
-        protocol: !<!Protocols> {}
+      schema: *ref_2
       required: true
       serializedName: length
       language: !<!Languages> 
         default:
           name: length
           description: ''
-          originalName: length
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_27
+      schema: !<!ArraySchema> &ref_31
         type: array
         apiVersions:
         - !<!ApiVersion> 
           version: '2016-02-29'
-        elementType: *ref_5
+        elementType: *ref_10
         language: !<!Languages> 
           default:
-            name: Fish-siblings
-            description: ''
+            name: FishSiblings
+            description: Array of Fish
         protocol: !<!Protocols> {}
       required: false
       serializedName: siblings
@@ -1327,7 +1207,6 @@ schemas: !<!Schemas>
         default:
           name: siblings
           description: ''
-          originalName: siblings
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -1335,14 +1214,14 @@ schemas: !<!Schemas>
         description: ''
         namespace: Api20160229
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_14
+  - !<!ObjectSchema> &ref_19
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
     children: !<!Relations> 
       all:
-      - !<!ObjectSchema> &ref_16
+      - !<!ObjectSchema> &ref_20
         type: object
         apiVersions:
         - !<!ApiVersion> 
@@ -1350,19 +1229,19 @@ schemas: !<!Schemas>
         discriminatorValue: DotSalmon
         parents: !<!Relations> 
           all:
-          - *ref_14
+          - *ref_19
           immediate:
-          - *ref_14
+          - *ref_19
         properties:
         - !<!Property> 
-          schema: !<!StringSchema> &ref_73
+          schema: !<!StringSchema> &ref_61
             type: string
             apiVersions:
             - !<!ApiVersion> 
               version: '2016-02-29'
             language: !<!Languages> 
               default:
-                name: DotSalmon-location
+                name: DotSalmonLocation
                 description: ''
             protocol: !<!Protocols> {}
           serializedName: location
@@ -1370,16 +1249,14 @@ schemas: !<!Schemas>
             default:
               name: location
               description: ''
-              originalName: location
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: *ref_15
+          schema: *ref_4
           serializedName: iswild
           language: !<!Languages> 
             default:
               name: iswild
               description: ''
-              originalName: iswild
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
@@ -1388,21 +1265,21 @@ schemas: !<!Schemas>
             namespace: Api20160229
         protocol: !<!Protocols> {}
       immediate:
-      - *ref_16
+      - *ref_20
     discriminator: !<!Discriminator> 
       all:
-        DotSalmon: *ref_16
+        DotSalmon: *ref_20
       immediate:
-        DotSalmon: *ref_16
-      property: !<!Property> &ref_17
-        schema: !<!StringSchema> &ref_71
+        DotSalmon: *ref_20
+      property: !<!Property> &ref_21
+        schema: !<!StringSchema> &ref_59
           type: string
           apiVersions:
           - !<!ApiVersion> 
             version: '2016-02-29'
           language: !<!Languages> 
             default:
-              name: DotFish-fish.type
+              name: DotFishType
               description: ''
           protocol: !<!Protocols> {}
         isDiscriminator: true
@@ -1412,19 +1289,18 @@ schemas: !<!Schemas>
           default:
             name: fishType
             description: ''
-            originalName: fish.type
         protocol: !<!Protocols> {}
     properties:
-    - *ref_17
+    - *ref_21
     - !<!Property> 
-      schema: !<!StringSchema> &ref_72
+      schema: !<!StringSchema> &ref_60
         type: string
         apiVersions:
         - !<!ApiVersion> 
           version: '2016-02-29'
         language: !<!Languages> 
           default:
-            name: DotFish-species
+            name: DotFishSpecies
             description: ''
         protocol: !<!Protocols> {}
       required: false
@@ -1433,7 +1309,6 @@ schemas: !<!Schemas>
         default:
           name: species
           description: ''
-          originalName: species
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -1441,67 +1316,63 @@ schemas: !<!Schemas>
         description: ''
         namespace: Api20160229
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_115
+  - !<!ObjectSchema> &ref_103
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
     properties:
     - !<!Property> 
-      schema: *ref_16
+      schema: *ref_20
       serializedName: sampleSalmon
       language: !<!Languages> 
         default:
           name: sampleSalmon
           description: ''
-          originalName: sampleSalmon
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_28
+      schema: !<!ArraySchema> &ref_32
         type: array
         apiVersions:
         - !<!ApiVersion> 
           version: '2016-02-29'
-        elementType: *ref_16
+        elementType: *ref_20
         language: !<!Languages> 
           default:
-            name: DotFishMarket-salmons
-            description: ''
+            name: DotFishMarketSalmons
+            description: Array of DotSalmon
         protocol: !<!Protocols> {}
       serializedName: salmons
       language: !<!Languages> 
         default:
           name: salmons
           description: ''
-          originalName: salmons
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_14
+      schema: *ref_19
       serializedName: sampleFish
       language: !<!Languages> 
         default:
           name: sampleFish
           description: ''
-          originalName: sampleFish
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_29
+      schema: !<!ArraySchema> &ref_33
         type: array
         apiVersions:
         - !<!ApiVersion> 
           version: '2016-02-29'
-        elementType: *ref_14
+        elementType: *ref_19
         language: !<!Languages> 
           default:
-            name: DotFishMarket-fishes
-            description: ''
+            name: DotFishMarketFishes
+            description: Array of DotFish
         protocol: !<!Protocols> {}
       serializedName: fishes
       language: !<!Languages> 
         default:
           name: fishes
           description: ''
-          originalName: fishes
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -1509,23 +1380,23 @@ schemas: !<!Schemas>
         description: ''
         namespace: Api20160229
     protocol: !<!Protocols> {}
-  - *ref_16
-  - *ref_4
-  - !<!ObjectSchema> &ref_120
+  - *ref_20
+  - *ref_9
+  - !<!ObjectSchema> &ref_108
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
     properties:
     - !<!Property> 
-      schema: !<!StringSchema> &ref_75
+      schema: !<!StringSchema> &ref_63
         type: string
         apiVersions:
         - !<!ApiVersion> 
           version: '2016-02-29'
         language: !<!Languages> 
           default:
-            name: readonly-obj-id
+            name: ReadonlyObjId
             description: ''
         protocol: !<!Protocols> {}
       readOnly: true
@@ -1534,38 +1405,29 @@ schemas: !<!Schemas>
         default:
           name: id
           description: ''
-          originalName: id
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!NumberSchema> &ref_55
-        type: integer
-        precision: 32
-        language: !<!Languages> 
-          default:
-            name: typeForsize
-            description: ''
-        protocol: !<!Protocols> {}
+      schema: *ref_0
       serializedName: size
       language: !<!Languages> 
         default:
           name: size
           description: ''
-          originalName: size
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: readonly-obj
+        name: ReadonlyObj
         description: ''
         namespace: Api20160229
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_18
+  - !<!ObjectSchema> &ref_22
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
     children: !<!Relations> 
       all:
-      - !<!ObjectSchema> &ref_19
+      - !<!ObjectSchema> &ref_23
         type: object
         apiVersions:
         - !<!ApiVersion> 
@@ -1573,19 +1435,19 @@ schemas: !<!Schemas>
         discriminatorValue: Kind1
         parents: !<!Relations> 
           all:
-          - *ref_18
+          - *ref_22
           immediate:
-          - *ref_18
+          - *ref_22
         properties:
         - !<!Property> 
-          schema: !<!StringSchema> &ref_78
+          schema: !<!StringSchema> &ref_66
             type: string
             apiVersions:
             - !<!ApiVersion> 
               version: '2016-02-29'
             language: !<!Languages> 
               default:
-                name: MyDerivedType-propD1
+                name: MyDerivedTypePropD1
                 description: ''
             protocol: !<!Protocols> {}
           serializedName: propD1
@@ -1593,7 +1455,6 @@ schemas: !<!Schemas>
             default:
               name: propD1
               description: ''
-              originalName: propD1
           protocol: !<!Protocols> {}
         extensions:
           x-ms-discriminator-value: Kind1
@@ -1604,21 +1465,21 @@ schemas: !<!Schemas>
             namespace: Api20160229
         protocol: !<!Protocols> {}
       immediate:
-      - *ref_19
+      - *ref_23
     discriminator: !<!Discriminator> 
       all:
-        Kind1: *ref_19
+        Kind1: *ref_23
       immediate:
-        Kind1: *ref_19
-      property: !<!Property> &ref_20
-        schema: !<!ConstantSchema> &ref_34
+        Kind1: *ref_23
+      property: !<!Property> &ref_24
+        schema: !<!ConstantSchema> &ref_36
           type: constant
           apiVersions:
           - !<!ApiVersion> 
             version: '2016-02-29'
           value: !<!ConstantValue> 
             value: Kind1
-          valueType: *ref_9
+          valueType: *ref_14
           language: !<!Languages> 
             default:
               name: MyKind
@@ -1631,19 +1492,18 @@ schemas: !<!Schemas>
           default:
             name: kind
             description: ''
-            originalName: kind
         protocol: !<!Protocols> {}
     properties:
-    - *ref_20
+    - *ref_24
     - !<!Property> 
-      schema: !<!StringSchema> &ref_76
+      schema: !<!StringSchema> &ref_64
         type: string
         apiVersions:
         - !<!ApiVersion> 
           version: '2016-02-29'
         language: !<!Languages> 
           default:
-            name: MyBaseType-propB1
+            name: MyBaseTypePropB1
             description: ''
         protocol: !<!Protocols> {}
       required: false
@@ -1652,17 +1512,16 @@ schemas: !<!Schemas>
         default:
           name: propB1
           description: ''
-          originalName: propB1
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_21
+      schema: !<!StringSchema> &ref_25
         type: string
         apiVersions:
         - !<!ApiVersion> 
           version: '2016-02-29'
         language: !<!Languages> 
           default:
-            name: MyBaseHelperType-propBH1
+            name: MyBaseHelperTypePropBh1
             description: ''
         protocol: !<!Protocols> {}
       flattenedNames:
@@ -1672,9 +1531,8 @@ schemas: !<!Schemas>
       serializedName: propBH1
       language: !<!Languages> 
         default:
-          name: propBH1
+          name: propBh1
           description: ''
-          originalName: propBH1
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -1689,13 +1547,12 @@ schemas: !<!Schemas>
       version: '2016-02-29'
     properties:
     - !<!Property> 
-      schema: *ref_21
+      schema: *ref_25
       serializedName: propBH1
       language: !<!Languages> 
         default:
-          name: propBH1
+          name: propBh1
           description: ''
-          originalName: propBH1
       protocol: !<!Protocols> {}
     extensions:
       x-ms-flattened: true
@@ -1705,58 +1562,60 @@ schemas: !<!Schemas>
         description: ''
         namespace: Api20160229
     protocol: !<!Protocols> {}
-  - *ref_7
-  - *ref_8
-  - *ref_10
-  - *ref_11
   - *ref_12
-  - *ref_19
-  dictionaries:
-  - *ref_22
-  - *ref_6
-  choices:
+  - *ref_13
+  - *ref_15
+  - *ref_16
+  - *ref_17
   - *ref_23
-  - *ref_24
-  arrays:
-  - *ref_25
+  dictionaries:
   - *ref_26
+  - *ref_11
+  choices:
   - *ref_27
   - *ref_28
+  arrays:
   - *ref_29
-  booleans:
   - *ref_30
   - *ref_31
-  - *ref_15
-  byteArrays:
   - *ref_32
   - *ref_33
+  booleans:
+  - *ref_4
+  byteArrays:
+  - *ref_34
+  - *ref_35
   constants:
-  - !<!ConstantSchema> &ref_79
+  - !<!ConstantSchema> &ref_67
     type: constant
     value: !<!ConstantValue> 
       value: '2016-02-29'
-    valueType: *ref_9
+    valueType: *ref_14
     language: !<!Languages> 
       default:
-        name: ApiVersion-2016-02-29
+        name: ApiVersion20160229
         description: Api Version (2016-02-29)
     protocol: !<!Protocols> {}
-  - *ref_34
-  dateTimes:
-  - *ref_35
   - *ref_36
+  dateTimes:
   - *ref_37
   - *ref_38
   - *ref_39
-  dates:
   - *ref_40
   - *ref_41
-  durations:
+  dates:
   - *ref_42
-  numbers:
   - *ref_43
+  durations:
   - *ref_44
+  numbers:
   - *ref_45
+  - *ref_0
+  - *ref_1
+  - *ref_2
+  - *ref_3
+  strings:
+  - *ref_14
   - *ref_46
   - *ref_47
   - *ref_48
@@ -1769,8 +1628,6 @@ schemas: !<!Schemas>
   - *ref_55
   - *ref_56
   - *ref_57
-  strings:
-  - *ref_9
   - *ref_58
   - *ref_59
   - *ref_60
@@ -1778,24 +1635,12 @@ schemas: !<!Schemas>
   - *ref_62
   - *ref_63
   - *ref_64
+  - *ref_25
   - *ref_65
   - *ref_66
-  - *ref_67
-  - *ref_68
-  - *ref_69
-  - *ref_70
-  - *ref_71
-  - *ref_72
-  - *ref_73
-  - *ref_74
-  - *ref_75
-  - *ref_76
-  - *ref_21
-  - *ref_77
-  - *ref_78
 globalParameters:
-- !<!Parameter> &ref_80
-  schema: *ref_9
+- !<!Parameter> &ref_68
+  schema: *ref_14
   clientDefaultValue: 'http://localhost:3000'
   implementation: Client
   required: true
@@ -1809,8 +1654,8 @@ globalParameters:
   protocol: !<!Protocols> 
     http: !<!HttpParameter> 
       in: uri
-- !<!Parameter> &ref_83
-  schema: *ref_79
+- !<!Parameter> &ref_71
+  schema: *ref_67
   implementation: Client
   required: true
   language: !<!Languages> 
@@ -1834,7 +1679,7 @@ operationGroups:
       version: '2016-02-29'
     request: !<!Request> 
       parameters:
-      - *ref_80
+      - *ref_68
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -1847,7 +1692,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_81
+      schema: *ref_69
       language: !<!Languages> 
         default:
           name: ''
@@ -1861,7 +1706,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_82
+      schema: *ref_70
       language: !<!Languages> 
         default:
           name: ''
@@ -1875,7 +1720,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getValid
+        name: GetValid
         description: 'Get complex type {id: 2, name: ''abc'', color: ''YELLOW''}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1884,10 +1729,10 @@ operationGroups:
       version: '2016-02-29'
     request: !<!Request> 
       parameters:
-      - *ref_80
-      - *ref_83
-      - !<!Parameter> &ref_84
-        schema: *ref_81
+      - *ref_68
+      - *ref_71
+      - !<!Parameter> &ref_72
+        schema: *ref_69
         implementation: Method
         required: true
         extensions:
@@ -1901,7 +1746,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_84
+      - *ref_72
       language: !<!Languages> 
         default:
           name: ''
@@ -1926,7 +1771,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_82
+      schema: *ref_70
       language: !<!Languages> 
         default:
           name: ''
@@ -1942,7 +1787,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putValid
+        name: PutValid
         description: 'Please put {id: 2, name: ''abc'', color: ''Magenta''}'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1951,7 +1796,7 @@ operationGroups:
       version: '2016-02-29'
     request: !<!Request> 
       parameters:
-      - *ref_80
+      - *ref_68
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -1964,7 +1809,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_81
+      schema: *ref_69
       language: !<!Languages> 
         default:
           name: ''
@@ -1978,7 +1823,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_82
+      schema: *ref_70
       language: !<!Languages> 
         default:
           name: ''
@@ -1992,7 +1837,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getInvalid
+        name: GetInvalid
         description: Get a basic complex type that is invalid for the local strong type
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2001,7 +1846,7 @@ operationGroups:
       version: '2016-02-29'
     request: !<!Request> 
       parameters:
-      - *ref_80
+      - *ref_68
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -2014,7 +1859,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_81
+      schema: *ref_69
       language: !<!Languages> 
         default:
           name: ''
@@ -2028,7 +1873,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_82
+      schema: *ref_70
       language: !<!Languages> 
         default:
           name: ''
@@ -2042,7 +1887,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getEmpty
+        name: GetEmpty
         description: Get a basic complex type that is empty
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2051,7 +1896,7 @@ operationGroups:
       version: '2016-02-29'
     request: !<!Request> 
       parameters:
-      - *ref_80
+      - *ref_68
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -2064,7 +1909,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_81
+      schema: *ref_69
       language: !<!Languages> 
         default:
           name: ''
@@ -2078,7 +1923,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_82
+      schema: *ref_70
       language: !<!Languages> 
         default:
           name: ''
@@ -2092,7 +1937,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getNull
+        name: GetNull
         description: Get a basic complex type whose properties are null
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2101,7 +1946,7 @@ operationGroups:
       version: '2016-02-29'
     request: !<!Request> 
       parameters:
-      - *ref_80
+      - *ref_68
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -2110,6 +1955,528 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpRequest> 
           path: /complex/basic/notprovided
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_69
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_70
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: GetNotProvided
+        description: Get a basic complex type while the server doesn't provide a response payload
+    protocol: !<!Protocols> {}
+  language: !<!Languages> 
+    default:
+      name: Basic
+      description: ''
+  protocol: !<!Protocols> {}
+- !<!OperationGroup> 
+  $key: primitive
+  operations:
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    request: !<!Request> 
+      parameters:
+      - *ref_68
+      signatureParameters: []
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /complex/primitive/integer
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_73
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_70
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: GetInt
+        description: Get complex types with integer properties
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    request: !<!Request> 
+      parameters:
+      - *ref_68
+      - !<!Parameter> &ref_74
+        schema: *ref_73
+        implementation: Method
+        required: true
+        extensions:
+          x-ms-requestBody-name: complexBody
+        language: !<!Languages> 
+          default:
+            name: complexBody
+            description: Please put -1 and 2
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      signatureParameters:
+      - *ref_74
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /complex/primitive/integer
+          method: put
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_70
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    extensions:
+      x-ms-requestBody-index: 0
+    language: !<!Languages> 
+      default:
+        name: PutInt
+        description: Put complex types with integer properties
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    request: !<!Request> 
+      parameters:
+      - *ref_68
+      signatureParameters: []
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /complex/primitive/long
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_75
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_70
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: GetLong
+        description: Get complex types with long properties
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    request: !<!Request> 
+      parameters:
+      - *ref_68
+      - !<!Parameter> &ref_76
+        schema: *ref_75
+        implementation: Method
+        required: true
+        extensions:
+          x-ms-requestBody-name: complexBody
+        language: !<!Languages> 
+          default:
+            name: complexBody
+            description: Please put 1099511627775 and -999511627788
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      signatureParameters:
+      - *ref_76
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /complex/primitive/long
+          method: put
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_70
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    extensions:
+      x-ms-requestBody-index: 0
+    language: !<!Languages> 
+      default:
+        name: PutLong
+        description: Put complex types with long properties
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    request: !<!Request> 
+      parameters:
+      - *ref_68
+      signatureParameters: []
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /complex/primitive/float
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_77
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_70
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: GetFloat
+        description: Get complex types with float properties
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    request: !<!Request> 
+      parameters:
+      - *ref_68
+      - !<!Parameter> &ref_78
+        schema: *ref_77
+        implementation: Method
+        required: true
+        extensions:
+          x-ms-requestBody-name: complexBody
+        language: !<!Languages> 
+          default:
+            name: complexBody
+            description: Please put 1.05 and -0.003
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      signatureParameters:
+      - *ref_78
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /complex/primitive/float
+          method: put
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_70
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    extensions:
+      x-ms-requestBody-index: 0
+    language: !<!Languages> 
+      default:
+        name: PutFloat
+        description: Put complex types with float properties
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    request: !<!Request> 
+      parameters:
+      - *ref_68
+      signatureParameters: []
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /complex/primitive/double
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_79
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_70
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: GetDouble
+        description: Get complex types with double properties
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    request: !<!Request> 
+      parameters:
+      - *ref_68
+      - !<!Parameter> &ref_80
+        schema: *ref_79
+        implementation: Method
+        required: true
+        extensions:
+          x-ms-requestBody-name: complexBody
+        language: !<!Languages> 
+          default:
+            name: complexBody
+            description: Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      signatureParameters:
+      - *ref_80
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /complex/primitive/double
+          method: put
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_70
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    extensions:
+      x-ms-requestBody-index: 0
+    language: !<!Languages> 
+      default:
+        name: PutDouble
+        description: Put complex types with double properties
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    request: !<!Request> 
+      parameters:
+      - *ref_68
+      signatureParameters: []
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /complex/primitive/bool
           method: get
           uri: '{$host}'
     responses:
@@ -2128,7 +2495,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_82
+      schema: *ref_70
       language: !<!Languages> 
         default:
           name: ''
@@ -2142,24 +2509,82 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getNotProvided
-        description: Get a basic complex type while the server doesn't provide a response payload
+        name: GetBool
+        description: Get complex types with bool properties
     protocol: !<!Protocols> {}
-  language: !<!Languages> 
-    default:
-      name: basic
-      description: ''
-  protocol: !<!Protocols> {}
-- !<!OperationGroup> 
-  $key: primitive
-  operations:
   - !<!Operation> 
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
     request: !<!Request> 
       parameters:
-      - *ref_80
+      - *ref_68
+      - !<!Parameter> &ref_82
+        schema: *ref_81
+        implementation: Method
+        required: true
+        extensions:
+          x-ms-requestBody-name: complexBody
+        language: !<!Languages> 
+          default:
+            name: complexBody
+            description: Please put true and false
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      signatureParameters:
+      - *ref_82
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /complex/primitive/bool
+          method: put
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_70
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    extensions:
+      x-ms-requestBody-index: 0
+    language: !<!Languages> 
+      default:
+        name: PutBool
+        description: Put complex types with bool properties
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    request: !<!Request> 
+      parameters:
+      - *ref_68
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -2167,7 +2592,123 @@ operationGroups:
           description: ''
       protocol: !<!Protocols> 
         http: !<!HttpRequest> 
-          path: /complex/primitive/integer
+          path: /complex/primitive/string
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_83
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_70
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: GetString
+        description: Get complex types with string properties
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    request: !<!Request> 
+      parameters:
+      - *ref_68
+      - !<!Parameter> &ref_84
+        schema: *ref_83
+        implementation: Method
+        required: true
+        extensions:
+          x-ms-requestBody-name: complexBody
+        language: !<!Languages> 
+          default:
+            name: complexBody
+            description: 'Please put ''goodrequest'', '''', and null'
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      signatureParameters:
+      - *ref_84
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /complex/primitive/string
+          method: put
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_70
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    extensions:
+      x-ms-requestBody-index: 0
+    language: !<!Languages> 
+      default:
+        name: PutString
+        description: Put complex types with string properties
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    request: !<!Request> 
+      parameters:
+      - *ref_68
+      signatureParameters: []
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /complex/primitive/date
           method: get
           uri: '{$host}'
     responses:
@@ -2186,7 +2727,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_82
+      schema: *ref_70
       language: !<!Languages> 
         default:
           name: ''
@@ -2200,8 +2741,8 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getInt
-        description: Get complex types with integer properties
+        name: GetDate
+        description: Get complex types with date properties
     protocol: !<!Protocols> {}
   - !<!Operation> 
     apiVersions:
@@ -2209,7 +2750,7 @@ operationGroups:
       version: '2016-02-29'
     request: !<!Request> 
       parameters:
-      - *ref_80
+      - *ref_68
       - !<!Parameter> &ref_86
         schema: *ref_85
         implementation: Method
@@ -2219,7 +2760,7 @@ operationGroups:
         language: !<!Languages> 
           default:
             name: complexBody
-            description: Please put -1 and 2
+            description: Please put '0001-01-01' and '2016-02-29'
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: body
@@ -2232,7 +2773,7 @@ operationGroups:
           description: ''
       protocol: !<!Protocols> 
         http: !<!HttpWithBodyRequest> 
-          path: /complex/primitive/integer
+          path: /complex/primitive/date
           method: put
           knownMediaType: json
           mediaTypes:
@@ -2250,7 +2791,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_82
+      schema: *ref_70
       language: !<!Languages> 
         default:
           name: ''
@@ -2266,8 +2807,8 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putInt
-        description: Put complex types with integer properties
+        name: PutDate
+        description: Put complex types with date properties
     protocol: !<!Protocols> {}
   - !<!Operation> 
     apiVersions:
@@ -2275,7 +2816,7 @@ operationGroups:
       version: '2016-02-29'
     request: !<!Request> 
       parameters:
-      - *ref_80
+      - *ref_68
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -2283,7 +2824,7 @@ operationGroups:
           description: ''
       protocol: !<!Protocols> 
         http: !<!HttpRequest> 
-          path: /complex/primitive/long
+          path: /complex/primitive/datetime
           method: get
           uri: '{$host}'
     responses:
@@ -2302,7 +2843,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_82
+      schema: *ref_70
       language: !<!Languages> 
         default:
           name: ''
@@ -2316,8 +2857,8 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getLong
-        description: Get complex types with long properties
+        name: GetDateTime
+        description: Get complex types with datetime properties
     protocol: !<!Protocols> {}
   - !<!Operation> 
     apiVersions:
@@ -2325,7 +2866,7 @@ operationGroups:
       version: '2016-02-29'
     request: !<!Request> 
       parameters:
-      - *ref_80
+      - *ref_68
       - !<!Parameter> &ref_88
         schema: *ref_87
         implementation: Method
@@ -2335,7 +2876,7 @@ operationGroups:
         language: !<!Languages> 
           default:
             name: complexBody
-            description: Please put 1099511627775 and -999511627788
+            description: 'Please put ''0001-01-01T12:00:00-04:00'' and ''2015-05-18T11:38:00-08:00'''
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: body
@@ -2348,7 +2889,7 @@ operationGroups:
           description: ''
       protocol: !<!Protocols> 
         http: !<!HttpWithBodyRequest> 
-          path: /complex/primitive/long
+          path: /complex/primitive/datetime
           method: put
           knownMediaType: json
           mediaTypes:
@@ -2366,7 +2907,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_82
+      schema: *ref_70
       language: !<!Languages> 
         default:
           name: ''
@@ -2382,8 +2923,8 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putLong
-        description: Put complex types with long properties
+        name: PutDateTime
+        description: Put complex types with datetime properties
     protocol: !<!Protocols> {}
   - !<!Operation> 
     apiVersions:
@@ -2391,7 +2932,7 @@ operationGroups:
       version: '2016-02-29'
     request: !<!Request> 
       parameters:
-      - *ref_80
+      - *ref_68
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -2399,7 +2940,7 @@ operationGroups:
           description: ''
       protocol: !<!Protocols> 
         http: !<!HttpRequest> 
-          path: /complex/primitive/float
+          path: /complex/primitive/datetimerfc1123
           method: get
           uri: '{$host}'
     responses:
@@ -2418,7 +2959,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_82
+      schema: *ref_70
       language: !<!Languages> 
         default:
           name: ''
@@ -2432,8 +2973,8 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getFloat
-        description: Get complex types with float properties
+        name: GetDateTimeRfc1123
+        description: Get complex types with datetimeRfc1123 properties
     protocol: !<!Protocols> {}
   - !<!Operation> 
     apiVersions:
@@ -2441,7 +2982,7 @@ operationGroups:
       version: '2016-02-29'
     request: !<!Request> 
       parameters:
-      - *ref_80
+      - *ref_68
       - !<!Parameter> &ref_90
         schema: *ref_89
         implementation: Method
@@ -2451,7 +2992,7 @@ operationGroups:
         language: !<!Languages> 
           default:
             name: complexBody
-            description: Please put 1.05 and -0.003
+            description: 'Please put ''Mon, 01 Jan 0001 12:00:00 GMT'' and ''Mon, 18 May 2015 11:38:00 GMT'''
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: body
@@ -2464,7 +3005,7 @@ operationGroups:
           description: ''
       protocol: !<!Protocols> 
         http: !<!HttpWithBodyRequest> 
-          path: /complex/primitive/float
+          path: /complex/primitive/datetimerfc1123
           method: put
           knownMediaType: json
           mediaTypes:
@@ -2482,7 +3023,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_82
+      schema: *ref_70
       language: !<!Languages> 
         default:
           name: ''
@@ -2498,8 +3039,8 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putFloat
-        description: Put complex types with float properties
+        name: PutDateTimeRfc1123
+        description: Put complex types with datetimeRfc1123 properties
     protocol: !<!Protocols> {}
   - !<!Operation> 
     apiVersions:
@@ -2507,7 +3048,7 @@ operationGroups:
       version: '2016-02-29'
     request: !<!Request> 
       parameters:
-      - *ref_80
+      - *ref_68
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -2515,7 +3056,7 @@ operationGroups:
           description: ''
       protocol: !<!Protocols> 
         http: !<!HttpRequest> 
-          path: /complex/primitive/double
+          path: /complex/primitive/duration
           method: get
           uri: '{$host}'
     responses:
@@ -2534,7 +3075,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_82
+      schema: *ref_70
       language: !<!Languages> 
         default:
           name: ''
@@ -2548,8 +3089,8 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getDouble
-        description: Get complex types with double properties
+        name: GetDuration
+        description: Get complex types with duration properties
     protocol: !<!Protocols> {}
   - !<!Operation> 
     apiVersions:
@@ -2557,7 +3098,7 @@ operationGroups:
       version: '2016-02-29'
     request: !<!Request> 
       parameters:
-      - *ref_80
+      - *ref_68
       - !<!Parameter> &ref_92
         schema: *ref_91
         implementation: Method
@@ -2567,7 +3108,7 @@ operationGroups:
         language: !<!Languages> 
           default:
             name: complexBody
-            description: Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005
+            description: Please put 'P123DT22H14M12.011S'
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: body
@@ -2580,7 +3121,7 @@ operationGroups:
           description: ''
       protocol: !<!Protocols> 
         http: !<!HttpWithBodyRequest> 
-          path: /complex/primitive/double
+          path: /complex/primitive/duration
           method: put
           knownMediaType: json
           mediaTypes:
@@ -2598,7 +3139,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_82
+      schema: *ref_70
       language: !<!Languages> 
         default:
           name: ''
@@ -2614,8 +3155,8 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putDouble
-        description: Put complex types with double properties
+        name: PutDuration
+        description: Put complex types with duration properties
     protocol: !<!Protocols> {}
   - !<!Operation> 
     apiVersions:
@@ -2623,7 +3164,7 @@ operationGroups:
       version: '2016-02-29'
     request: !<!Request> 
       parameters:
-      - *ref_80
+      - *ref_68
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -2631,7 +3172,7 @@ operationGroups:
           description: ''
       protocol: !<!Protocols> 
         http: !<!HttpRequest> 
-          path: /complex/primitive/bool
+          path: /complex/primitive/byte
           method: get
           uri: '{$host}'
     responses:
@@ -2650,7 +3191,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_82
+      schema: *ref_70
       language: !<!Languages> 
         default:
           name: ''
@@ -2664,8 +3205,8 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getBool
-        description: Get complex types with bool properties
+        name: GetByte
+        description: Get complex types with byte properties
     protocol: !<!Protocols> {}
   - !<!Operation> 
     apiVersions:
@@ -2673,7 +3214,7 @@ operationGroups:
       version: '2016-02-29'
     request: !<!Request> 
       parameters:
-      - *ref_80
+      - *ref_68
       - !<!Parameter> &ref_94
         schema: *ref_93
         implementation: Method
@@ -2683,7 +3224,7 @@ operationGroups:
         language: !<!Languages> 
           default:
             name: complexBody
-            description: Please put true and false
+            description: Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6)
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: body
@@ -2696,7 +3237,7 @@ operationGroups:
           description: ''
       protocol: !<!Protocols> 
         http: !<!HttpWithBodyRequest> 
-          path: /complex/primitive/bool
+          path: /complex/primitive/byte
           method: put
           knownMediaType: json
           mediaTypes:
@@ -2714,7 +3255,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_82
+      schema: *ref_70
       language: !<!Languages> 
         default:
           name: ''
@@ -2730,16 +3271,24 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putBool
-        description: Put complex types with bool properties
+        name: PutByte
+        description: Put complex types with byte properties
     protocol: !<!Protocols> {}
+  language: !<!Languages> 
+    default:
+      name: Primitive
+      description: ''
+  protocol: !<!Protocols> {}
+- !<!OperationGroup> 
+  $key: array
+  operations:
   - !<!Operation> 
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
     request: !<!Request> 
       parameters:
-      - *ref_80
+      - *ref_68
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -2747,7 +3296,7 @@ operationGroups:
           description: ''
       protocol: !<!Protocols> 
         http: !<!HttpRequest> 
-          path: /complex/primitive/string
+          path: /complex/array/valid
           method: get
           uri: '{$host}'
     responses:
@@ -2766,7 +3315,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_82
+      schema: *ref_70
       language: !<!Languages> 
         default:
           name: ''
@@ -2780,8 +3329,8 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getString
-        description: Get complex types with string properties
+        name: GetValid
+        description: Get complex types with array property
     protocol: !<!Protocols> {}
   - !<!Operation> 
     apiVersions:
@@ -2789,7 +3338,7 @@ operationGroups:
       version: '2016-02-29'
     request: !<!Request> 
       parameters:
-      - *ref_80
+      - *ref_68
       - !<!Parameter> &ref_96
         schema: *ref_95
         implementation: Method
@@ -2799,7 +3348,7 @@ operationGroups:
         language: !<!Languages> 
           default:
             name: complexBody
-            description: 'Please put ''goodrequest'', '''', and null'
+            description: 'Please put an array with 4 items: "1, 2, 3, 4", "", null, "&S#$(*Y", "The quick brown fox jumps over the lazy dog"'
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: body
@@ -2812,7 +3361,7 @@ operationGroups:
           description: ''
       protocol: !<!Protocols> 
         http: !<!HttpWithBodyRequest> 
-          path: /complex/primitive/string
+          path: /complex/array/valid
           method: put
           knownMediaType: json
           mediaTypes:
@@ -2830,7 +3379,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_82
+      schema: *ref_70
       language: !<!Languages> 
         default:
           name: ''
@@ -2846,8 +3395,8 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putString
-        description: Put complex types with string properties
+        name: PutValid
+        description: Put complex types with array property
     protocol: !<!Protocols> {}
   - !<!Operation> 
     apiVersions:
@@ -2855,7 +3404,7 @@ operationGroups:
       version: '2016-02-29'
     request: !<!Request> 
       parameters:
-      - *ref_80
+      - *ref_68
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -2863,12 +3412,12 @@ operationGroups:
           description: ''
       protocol: !<!Protocols> 
         http: !<!HttpRequest> 
-          path: /complex/primitive/date
+          path: /complex/array/empty
           method: get
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_97
+      schema: *ref_95
       language: !<!Languages> 
         default:
           name: ''
@@ -2882,7 +3431,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_82
+      schema: *ref_70
       language: !<!Languages> 
         default:
           name: ''
@@ -2896,8 +3445,8 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getDate
-        description: Get complex types with date properties
+        name: GetEmpty
+        description: Get complex types with array property which is empty
     protocol: !<!Protocols> {}
   - !<!Operation> 
     apiVersions:
@@ -2905,9 +3454,9 @@ operationGroups:
       version: '2016-02-29'
     request: !<!Request> 
       parameters:
-      - *ref_80
-      - !<!Parameter> &ref_98
-        schema: *ref_97
+      - *ref_68
+      - !<!Parameter> &ref_97
+        schema: *ref_95
         implementation: Method
         required: true
         extensions:
@@ -2915,20 +3464,20 @@ operationGroups:
         language: !<!Languages> 
           default:
             name: complexBody
-            description: Please put '0001-01-01' and '2016-02-29'
+            description: 'Please put an array with 4 items: "1, 2, 3, 4", "", null, "&S#$(*Y", "The quick brown fox jumps over the lazy dog"'
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: body
             style: json
       signatureParameters:
-      - *ref_98
+      - *ref_97
       language: !<!Languages> 
         default:
           name: ''
           description: ''
       protocol: !<!Protocols> 
         http: !<!HttpWithBodyRequest> 
-          path: /complex/primitive/date
+          path: /complex/array/empty
           method: put
           knownMediaType: json
           mediaTypes:
@@ -2946,7 +3495,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_82
+      schema: *ref_70
       language: !<!Languages> 
         default:
           name: ''
@@ -2962,8 +3511,8 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putDate
-        description: Put complex types with date properties
+        name: PutEmpty
+        description: Put complex types with array property which is empty
     protocol: !<!Protocols> {}
   - !<!Operation> 
     apiVersions:
@@ -2971,7 +3520,7 @@ operationGroups:
       version: '2016-02-29'
     request: !<!Request> 
       parameters:
-      - *ref_80
+      - *ref_68
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -2979,12 +3528,12 @@ operationGroups:
           description: ''
       protocol: !<!Protocols> 
         http: !<!HttpRequest> 
-          path: /complex/primitive/datetime
+          path: /complex/array/notprovided
           method: get
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_99
+      schema: *ref_95
       language: !<!Languages> 
         default:
           name: ''
@@ -2998,7 +3547,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_82
+      schema: *ref_70
       language: !<!Languages> 
         default:
           name: ''
@@ -3012,8 +3561,66 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getDateTime
-        description: Get complex types with datetime properties
+        name: GetNotProvided
+        description: Get complex types with array property while server doesn't provide a response payload
+    protocol: !<!Protocols> {}
+  language: !<!Languages> 
+    default:
+      name: Array
+      description: ''
+  protocol: !<!Protocols> {}
+- !<!OperationGroup> 
+  $key: dictionary
+  operations:
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    request: !<!Request> 
+      parameters:
+      - *ref_68
+      signatureParameters: []
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /complex/dictionary/typed/valid
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_98
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_70
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: GetValid
+        description: Get complex types with dictionary property
     protocol: !<!Protocols> {}
   - !<!Operation> 
     apiVersions:
@@ -3021,9 +3628,9 @@ operationGroups:
       version: '2016-02-29'
     request: !<!Request> 
       parameters:
-      - *ref_80
-      - !<!Parameter> &ref_100
-        schema: *ref_99
+      - *ref_68
+      - !<!Parameter> &ref_99
+        schema: *ref_98
         implementation: Method
         required: true
         extensions:
@@ -3031,7 +3638,123 @@ operationGroups:
         language: !<!Languages> 
           default:
             name: complexBody
-            description: 'Please put ''0001-01-01T12:00:00-04:00'' and ''2015-05-18T11:38:00-08:00'''
+            description: 'Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null'
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      signatureParameters:
+      - *ref_99
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /complex/dictionary/typed/valid
+          method: put
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_70
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    extensions:
+      x-ms-requestBody-index: 0
+    language: !<!Languages> 
+      default:
+        name: PutValid
+        description: Put complex types with dictionary property
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    request: !<!Request> 
+      parameters:
+      - *ref_68
+      signatureParameters: []
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /complex/dictionary/typed/empty
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_98
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_70
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: GetEmpty
+        description: Get complex types with dictionary property which is empty
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    request: !<!Request> 
+      parameters:
+      - *ref_68
+      - !<!Parameter> &ref_100
+        schema: *ref_98
+        implementation: Method
+        required: true
+        extensions:
+          x-ms-requestBody-name: complexBody
+        language: !<!Languages> 
+          default:
+            name: complexBody
+            description: 'Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null'
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: body
@@ -3044,7 +3767,7 @@ operationGroups:
           description: ''
       protocol: !<!Protocols> 
         http: !<!HttpWithBodyRequest> 
-          path: /complex/primitive/datetime
+          path: /complex/dictionary/typed/empty
           method: put
           knownMediaType: json
           mediaTypes:
@@ -3062,7 +3785,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_82
+      schema: *ref_70
       language: !<!Languages> 
         default:
           name: ''
@@ -3078,8 +3801,8 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putDateTime
-        description: Put complex types with datetime properties
+        name: PutEmpty
+        description: Put complex types with dictionary property which is empty
     protocol: !<!Protocols> {}
   - !<!Operation> 
     apiVersions:
@@ -3087,7 +3810,7 @@ operationGroups:
       version: '2016-02-29'
     request: !<!Request> 
       parameters:
-      - *ref_80
+      - *ref_68
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -3095,12 +3818,12 @@ operationGroups:
           description: ''
       protocol: !<!Protocols> 
         http: !<!HttpRequest> 
-          path: /complex/primitive/datetimerfc1123
+          path: /complex/dictionary/typed/null
           method: get
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_101
+      schema: *ref_98
       language: !<!Languages> 
         default:
           name: ''
@@ -3114,7 +3837,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_82
+      schema: *ref_70
       language: !<!Languages> 
         default:
           name: ''
@@ -3128,8 +3851,8 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getDateTimeRfc1123
-        description: Get complex types with datetimeRfc1123 properties
+        name: GetNull
+        description: Get complex types with dictionary property which is null
     protocol: !<!Protocols> {}
   - !<!Operation> 
     apiVersions:
@@ -3137,9 +3860,117 @@ operationGroups:
       version: '2016-02-29'
     request: !<!Request> 
       parameters:
-      - *ref_80
-      - !<!Parameter> &ref_102
-        schema: *ref_101
+      - *ref_68
+      signatureParameters: []
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /complex/dictionary/typed/notprovided
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_98
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_70
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: GetNotProvided
+        description: Get complex types with dictionary property while server doesn't provide a response payload
+    protocol: !<!Protocols> {}
+  language: !<!Languages> 
+    default:
+      name: Dictionary
+      description: ''
+  protocol: !<!Protocols> {}
+- !<!OperationGroup> 
+  $key: inheritance
+  operations:
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    request: !<!Request> 
+      parameters:
+      - *ref_68
+      signatureParameters: []
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /complex/inheritance/valid
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_7
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_70
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: GetValid
+        description: Get complex types that extend others
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    request: !<!Request> 
+      parameters:
+      - *ref_68
+      - !<!Parameter> &ref_101
+        schema: *ref_7
         implementation: Method
         required: true
         extensions:
@@ -3147,7 +3978,164 @@ operationGroups:
         language: !<!Languages> 
           default:
             name: complexBody
-            description: 'Please put ''Mon, 01 Jan 0001 12:00:00 GMT'' and ''Mon, 18 May 2015 11:38:00 GMT'''
+            description: 'Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".'
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      signatureParameters:
+      - *ref_101
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /complex/inheritance/valid
+          method: put
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_70
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    extensions:
+      x-ms-requestBody-index: 0
+    language: !<!Languages> 
+      default:
+        name: PutValid
+        description: Put complex types that extend others
+    protocol: !<!Protocols> {}
+  language: !<!Languages> 
+    default:
+      name: Inheritance
+      description: ''
+  protocol: !<!Protocols> {}
+- !<!OperationGroup> 
+  $key: polymorphism
+  operations:
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    request: !<!Request> 
+      parameters:
+      - *ref_68
+      signatureParameters: []
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /complex/polymorphism/valid
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_10
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_70
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: GetValid
+        description: Get complex types that are polymorphic
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    request: !<!Request> 
+      parameters:
+      - *ref_68
+      - !<!Parameter> &ref_102
+        schema: *ref_10
+        implementation: Method
+        required: true
+        extensions:
+          x-ms-requestBody-name: complexBody
+        language: !<!Languages> 
+          default:
+            name: complexBody
+            description: |-
+              Please put a salmon that looks like this:
+              {
+                      'fishtype':'Salmon',
+                      'location':'alaska',
+                      'iswild':true,
+                      'species':'king',
+                      'length':1.0,
+                      'siblings':[
+                        {
+                          'fishtype':'Shark',
+                          'age':6,
+                          'birthday': '2012-01-05T01:00:00Z',
+                          'length':20.0,
+                          'species':'predator',
+                        },
+                        {
+                          'fishtype':'Sawshark',
+                          'age':105,
+                          'birthday': '1900-01-05T01:00:00Z',
+                          'length':10.0,
+                          'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
+                          'species':'dangerous',
+                        },
+                        {
+                          'fishtype': 'goblin',
+                          'age': 1,
+                          'birthday': '2015-08-08T00:00:00Z',
+                          'length': 30.0,
+                          'species': 'scary',
+                          'jawsize': 5
+                        }
+                      ]
+                    };
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: body
@@ -3160,7 +4148,7 @@ operationGroups:
           description: ''
       protocol: !<!Protocols> 
         http: !<!HttpWithBodyRequest> 
-          path: /complex/primitive/datetimerfc1123
+          path: /complex/polymorphism/valid
           method: put
           knownMediaType: json
           mediaTypes:
@@ -3178,7 +4166,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_82
+      schema: *ref_70
       language: !<!Languages> 
         default:
           name: ''
@@ -3194,8 +4182,8 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putDateTimeRfc1123
-        description: Put complex types with datetimeRfc1123 properties
+        name: PutValid
+        description: Put complex types that are polymorphic
     protocol: !<!Protocols> {}
   - !<!Operation> 
     apiVersions:
@@ -3203,7 +4191,7 @@ operationGroups:
       version: '2016-02-29'
     request: !<!Request> 
       parameters:
-      - *ref_80
+      - *ref_68
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -3211,7 +4199,57 @@ operationGroups:
           description: ''
       protocol: !<!Protocols> 
         http: !<!HttpRequest> 
-          path: /complex/primitive/duration
+          path: /complex/polymorphism/dotsyntax
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_19
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_70
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: GetDotSyntax
+        description: 'Get complex types that are polymorphic, JSON key contains a dot'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    request: !<!Request> 
+      parameters:
+      - *ref_68
+      signatureParameters: []
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /complex/polymorphism/composedWithDiscriminator
           method: get
           uri: '{$host}'
     responses:
@@ -3230,7 +4268,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_82
+      schema: *ref_70
       language: !<!Languages> 
         default:
           name: ''
@@ -3244,1200 +4282,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getDuration
-        description: Get complex types with duration properties
-    protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_80
-      - !<!Parameter> &ref_104
-        schema: *ref_103
-        implementation: Method
-        required: true
-        extensions:
-          x-ms-requestBody-name: complexBody
-        language: !<!Languages> 
-          default:
-            name: complexBody
-            description: Please put 'P123DT22H14M12.011S'
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: body
-            style: json
-      signatureParameters:
-      - *ref_104
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpWithBodyRequest> 
-          path: /complex/primitive/duration
-          method: put
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          uri: '{$host}'
-    responses:
-    - !<!Response> 
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_82
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    extensions:
-      x-ms-requestBody-index: 0
-    language: !<!Languages> 
-      default:
-        name: putDuration
-        description: Put complex types with duration properties
-    protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_80
-      signatureParameters: []
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpRequest> 
-          path: /complex/primitive/byte
-          method: get
-          uri: '{$host}'
-    responses:
-    - !<!SchemaResponse> 
-      schema: *ref_105
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_82
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    language: !<!Languages> 
-      default:
-        name: getByte
-        description: Get complex types with byte properties
-    protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_80
-      - !<!Parameter> &ref_106
-        schema: *ref_105
-        implementation: Method
-        required: true
-        extensions:
-          x-ms-requestBody-name: complexBody
-        language: !<!Languages> 
-          default:
-            name: complexBody
-            description: Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6)
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: body
-            style: json
-      signatureParameters:
-      - *ref_106
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpWithBodyRequest> 
-          path: /complex/primitive/byte
-          method: put
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          uri: '{$host}'
-    responses:
-    - !<!Response> 
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_82
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    extensions:
-      x-ms-requestBody-index: 0
-    language: !<!Languages> 
-      default:
-        name: putByte
-        description: Put complex types with byte properties
-    protocol: !<!Protocols> {}
-  language: !<!Languages> 
-    default:
-      name: primitive
-      description: ''
-  protocol: !<!Protocols> {}
-- !<!OperationGroup> 
-  $key: array
-  operations:
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_80
-      signatureParameters: []
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpRequest> 
-          path: /complex/array/valid
-          method: get
-          uri: '{$host}'
-    responses:
-    - !<!SchemaResponse> 
-      schema: *ref_107
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_82
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    language: !<!Languages> 
-      default:
-        name: getValid
-        description: Get complex types with array property
-    protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_80
-      - !<!Parameter> &ref_108
-        schema: *ref_107
-        implementation: Method
-        required: true
-        extensions:
-          x-ms-requestBody-name: complexBody
-        language: !<!Languages> 
-          default:
-            name: complexBody
-            description: 'Please put an array with 4 items: "1, 2, 3, 4", "", null, "&S#$(*Y", "The quick brown fox jumps over the lazy dog"'
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: body
-            style: json
-      signatureParameters:
-      - *ref_108
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpWithBodyRequest> 
-          path: /complex/array/valid
-          method: put
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          uri: '{$host}'
-    responses:
-    - !<!Response> 
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_82
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    extensions:
-      x-ms-requestBody-index: 0
-    language: !<!Languages> 
-      default:
-        name: putValid
-        description: Put complex types with array property
-    protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_80
-      signatureParameters: []
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpRequest> 
-          path: /complex/array/empty
-          method: get
-          uri: '{$host}'
-    responses:
-    - !<!SchemaResponse> 
-      schema: *ref_107
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_82
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    language: !<!Languages> 
-      default:
-        name: getEmpty
-        description: Get complex types with array property which is empty
-    protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_80
-      - !<!Parameter> &ref_109
-        schema: *ref_107
-        implementation: Method
-        required: true
-        extensions:
-          x-ms-requestBody-name: complexBody
-        language: !<!Languages> 
-          default:
-            name: complexBody
-            description: 'Please put an array with 4 items: "1, 2, 3, 4", "", null, "&S#$(*Y", "The quick brown fox jumps over the lazy dog"'
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: body
-            style: json
-      signatureParameters:
-      - *ref_109
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpWithBodyRequest> 
-          path: /complex/array/empty
-          method: put
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          uri: '{$host}'
-    responses:
-    - !<!Response> 
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_82
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    extensions:
-      x-ms-requestBody-index: 0
-    language: !<!Languages> 
-      default:
-        name: putEmpty
-        description: Put complex types with array property which is empty
-    protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_80
-      signatureParameters: []
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpRequest> 
-          path: /complex/array/notprovided
-          method: get
-          uri: '{$host}'
-    responses:
-    - !<!SchemaResponse> 
-      schema: *ref_107
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_82
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    language: !<!Languages> 
-      default:
-        name: getNotProvided
-        description: Get complex types with array property while server doesn't provide a response payload
-    protocol: !<!Protocols> {}
-  language: !<!Languages> 
-    default:
-      name: array
-      description: ''
-  protocol: !<!Protocols> {}
-- !<!OperationGroup> 
-  $key: dictionary
-  operations:
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_80
-      signatureParameters: []
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpRequest> 
-          path: /complex/dictionary/typed/valid
-          method: get
-          uri: '{$host}'
-    responses:
-    - !<!SchemaResponse> 
-      schema: *ref_110
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_82
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    language: !<!Languages> 
-      default:
-        name: getValid
-        description: Get complex types with dictionary property
-    protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_80
-      - !<!Parameter> &ref_111
-        schema: *ref_110
-        implementation: Method
-        required: true
-        extensions:
-          x-ms-requestBody-name: complexBody
-        language: !<!Languages> 
-          default:
-            name: complexBody
-            description: 'Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null'
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: body
-            style: json
-      signatureParameters:
-      - *ref_111
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpWithBodyRequest> 
-          path: /complex/dictionary/typed/valid
-          method: put
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          uri: '{$host}'
-    responses:
-    - !<!Response> 
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_82
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    extensions:
-      x-ms-requestBody-index: 0
-    language: !<!Languages> 
-      default:
-        name: putValid
-        description: Put complex types with dictionary property
-    protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_80
-      signatureParameters: []
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpRequest> 
-          path: /complex/dictionary/typed/empty
-          method: get
-          uri: '{$host}'
-    responses:
-    - !<!SchemaResponse> 
-      schema: *ref_110
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_82
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    language: !<!Languages> 
-      default:
-        name: getEmpty
-        description: Get complex types with dictionary property which is empty
-    protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_80
-      - !<!Parameter> &ref_112
-        schema: *ref_110
-        implementation: Method
-        required: true
-        extensions:
-          x-ms-requestBody-name: complexBody
-        language: !<!Languages> 
-          default:
-            name: complexBody
-            description: 'Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null'
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: body
-            style: json
-      signatureParameters:
-      - *ref_112
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpWithBodyRequest> 
-          path: /complex/dictionary/typed/empty
-          method: put
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          uri: '{$host}'
-    responses:
-    - !<!Response> 
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_82
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    extensions:
-      x-ms-requestBody-index: 0
-    language: !<!Languages> 
-      default:
-        name: putEmpty
-        description: Put complex types with dictionary property which is empty
-    protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_80
-      signatureParameters: []
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpRequest> 
-          path: /complex/dictionary/typed/null
-          method: get
-          uri: '{$host}'
-    responses:
-    - !<!SchemaResponse> 
-      schema: *ref_110
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_82
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    language: !<!Languages> 
-      default:
-        name: getNull
-        description: Get complex types with dictionary property which is null
-    protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_80
-      signatureParameters: []
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpRequest> 
-          path: /complex/dictionary/typed/notprovided
-          method: get
-          uri: '{$host}'
-    responses:
-    - !<!SchemaResponse> 
-      schema: *ref_110
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_82
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    language: !<!Languages> 
-      default:
-        name: getNotProvided
-        description: Get complex types with dictionary property while server doesn't provide a response payload
-    protocol: !<!Protocols> {}
-  language: !<!Languages> 
-    default:
-      name: dictionary
-      description: ''
-  protocol: !<!Protocols> {}
-- !<!OperationGroup> 
-  $key: inheritance
-  operations:
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_80
-      signatureParameters: []
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpRequest> 
-          path: /complex/inheritance/valid
-          method: get
-          uri: '{$host}'
-    responses:
-    - !<!SchemaResponse> 
-      schema: *ref_2
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_82
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    language: !<!Languages> 
-      default:
-        name: getValid
-        description: Get complex types that extend others
-    protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_80
-      - !<!Parameter> &ref_113
-        schema: *ref_2
-        implementation: Method
-        required: true
-        extensions:
-          x-ms-requestBody-name: complexBody
-        language: !<!Languages> 
-          default:
-            name: complexBody
-            description: 'Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".'
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: body
-            style: json
-      signatureParameters:
-      - *ref_113
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpWithBodyRequest> 
-          path: /complex/inheritance/valid
-          method: put
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          uri: '{$host}'
-    responses:
-    - !<!Response> 
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_82
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    extensions:
-      x-ms-requestBody-index: 0
-    language: !<!Languages> 
-      default:
-        name: putValid
-        description: Put complex types that extend others
-    protocol: !<!Protocols> {}
-  language: !<!Languages> 
-    default:
-      name: inheritance
-      description: ''
-  protocol: !<!Protocols> {}
-- !<!OperationGroup> 
-  $key: polymorphism
-  operations:
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_80
-      signatureParameters: []
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpRequest> 
-          path: /complex/polymorphism/valid
-          method: get
-          uri: '{$host}'
-    responses:
-    - !<!SchemaResponse> 
-      schema: *ref_5
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_82
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    language: !<!Languages> 
-      default:
-        name: getValid
-        description: Get complex types that are polymorphic
-    protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_80
-      - !<!Parameter> &ref_114
-        schema: *ref_5
-        implementation: Method
-        required: true
-        extensions:
-          x-ms-requestBody-name: complexBody
-        language: !<!Languages> 
-          default:
-            name: complexBody
-            description: |-
-              Please put a salmon that looks like this:
-              {
-                      'fishtype':'Salmon',
-                      'location':'alaska',
-                      'iswild':true,
-                      'species':'king',
-                      'length':1.0,
-                      'siblings':[
-                        {
-                          'fishtype':'Shark',
-                          'age':6,
-                          'birthday': '2012-01-05T01:00:00Z',
-                          'length':20.0,
-                          'species':'predator',
-                        },
-                        {
-                          'fishtype':'Sawshark',
-                          'age':105,
-                          'birthday': '1900-01-05T01:00:00Z',
-                          'length':10.0,
-                          'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
-                          'species':'dangerous',
-                        },
-                        {
-                          'fishtype': 'goblin',
-                          'age': 1,
-                          'birthday': '2015-08-08T00:00:00Z',
-                          'length': 30.0,
-                          'species': 'scary',
-                          'jawsize': 5
-                        }
-                      ]
-                    };
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: body
-            style: json
-      signatureParameters:
-      - *ref_114
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpWithBodyRequest> 
-          path: /complex/polymorphism/valid
-          method: put
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          uri: '{$host}'
-    responses:
-    - !<!Response> 
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_82
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    extensions:
-      x-ms-requestBody-index: 0
-    language: !<!Languages> 
-      default:
-        name: putValid
-        description: Put complex types that are polymorphic
-    protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_80
-      signatureParameters: []
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpRequest> 
-          path: /complex/polymorphism/dotsyntax
-          method: get
-          uri: '{$host}'
-    responses:
-    - !<!SchemaResponse> 
-      schema: *ref_14
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_82
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    language: !<!Languages> 
-      default:
-        name: getDotSyntax
-        description: 'Get complex types that are polymorphic, JSON key contains a dot'
-    protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_80
-      signatureParameters: []
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpRequest> 
-          path: /complex/polymorphism/composedWithDiscriminator
-          method: get
-          uri: '{$host}'
-    responses:
-    - !<!SchemaResponse> 
-      schema: *ref_115
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_82
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    language: !<!Languages> 
-      default:
-        name: getComposedWithDiscriminator
+        name: GetComposedWithDiscriminator
         description: 'Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -4446,7 +4291,7 @@ operationGroups:
       version: '2016-02-29'
     request: !<!Request> 
       parameters:
-      - *ref_80
+      - *ref_68
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -4459,7 +4304,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_115
+      schema: *ref_103
       language: !<!Languages> 
         default:
           name: ''
@@ -4473,7 +4318,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_82
+      schema: *ref_70
       language: !<!Languages> 
         default:
           name: ''
@@ -4487,7 +4332,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getComposedWithoutDiscriminator
+        name: GetComposedWithoutDiscriminator
         description: 'Get complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -4496,7 +4341,7 @@ operationGroups:
       version: '2016-02-29'
     request: !<!Request> 
       parameters:
-      - *ref_80
+      - *ref_68
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -4509,7 +4354,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_4
+      schema: *ref_9
       language: !<!Languages> 
         default:
           name: ''
@@ -4523,7 +4368,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_82
+      schema: *ref_70
       language: !<!Languages> 
         default:
           name: ''
@@ -4537,7 +4382,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getComplicated
+        name: GetComplicated
         description: 'Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -4546,9 +4391,9 @@ operationGroups:
       version: '2016-02-29'
     request: !<!Request> 
       parameters:
-      - *ref_80
-      - !<!Parameter> &ref_116
-        schema: *ref_4
+      - *ref_68
+      - !<!Parameter> &ref_104
+        schema: *ref_9
         implementation: Method
         required: true
         extensions:
@@ -4562,7 +4407,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_116
+      - *ref_104
       language: !<!Languages> 
         default:
           name: ''
@@ -4587,7 +4432,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_82
+      schema: *ref_70
       language: !<!Languages> 
         default:
           name: ''
@@ -4603,7 +4448,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putComplicated
+        name: PutComplicated
         description: 'Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -4612,9 +4457,9 @@ operationGroups:
       version: '2016-02-29'
     request: !<!Request> 
       parameters:
-      - *ref_80
-      - !<!Parameter> &ref_117
-        schema: *ref_4
+      - *ref_68
+      - !<!Parameter> &ref_105
+        schema: *ref_9
         implementation: Method
         required: true
         extensions:
@@ -4628,7 +4473,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_117
+      - *ref_105
       language: !<!Languages> 
         default:
           name: ''
@@ -4643,7 +4488,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_4
+      schema: *ref_9
       language: !<!Languages> 
         default:
           name: ''
@@ -4657,7 +4502,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_82
+      schema: *ref_70
       language: !<!Languages> 
         default:
           name: ''
@@ -4673,7 +4518,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putMissingDiscriminator
+        name: PutMissingDiscriminator
         description: 'Put complex types that are polymorphic, omitting the discriminator'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -4682,9 +4527,9 @@ operationGroups:
       version: '2016-02-29'
     request: !<!Request> 
       parameters:
-      - *ref_80
-      - !<!Parameter> &ref_118
-        schema: *ref_5
+      - *ref_68
+      - !<!Parameter> &ref_106
+        schema: *ref_10
         implementation: Method
         required: true
         extensions:
@@ -4731,7 +4576,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_118
+      - *ref_106
       language: !<!Languages> 
         default:
           name: ''
@@ -4756,7 +4601,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_82
+      schema: *ref_70
       language: !<!Languages> 
         default:
           name: ''
@@ -4772,12 +4617,12 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putValidMissingRequired
+        name: PutValidMissingRequired
         description: 'Put complex types that are polymorphic, attempting to omit required ''birthday'' field - the request should not be allowed from the client'
     protocol: !<!Protocols> {}
   language: !<!Languages> 
     default:
-      name: polymorphism
+      name: Polymorphism
       description: ''
   protocol: !<!Protocols> {}
 - !<!OperationGroup> 
@@ -4789,7 +4634,7 @@ operationGroups:
       version: '2016-02-29'
     request: !<!Request> 
       parameters:
-      - *ref_80
+      - *ref_68
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -4802,7 +4647,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_5
+      schema: *ref_10
       language: !<!Languages> 
         default:
           name: ''
@@ -4816,7 +4661,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_82
+      schema: *ref_70
       language: !<!Languages> 
         default:
           name: ''
@@ -4830,7 +4675,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getValid
+        name: GetValid
         description: Get complex types that are polymorphic and have recursive references
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -4839,9 +4684,9 @@ operationGroups:
       version: '2016-02-29'
     request: !<!Request> 
       parameters:
-      - *ref_80
-      - !<!Parameter> &ref_119
-        schema: *ref_5
+      - *ref_68
+      - !<!Parameter> &ref_107
+        schema: *ref_10
         implementation: Method
         required: true
         extensions:
@@ -4888,7 +4733,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_119
+      - *ref_107
       language: !<!Languages> 
         default:
           name: ''
@@ -4913,7 +4758,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_82
+      schema: *ref_70
       language: !<!Languages> 
         default:
           name: ''
@@ -4929,12 +4774,12 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putValid
+        name: PutValid
         description: Put complex types that are polymorphic and have recursive references
     protocol: !<!Protocols> {}
   language: !<!Languages> 
     default:
-      name: polymorphicrecursive
+      name: Polymorphicrecursive
       description: ''
   protocol: !<!Protocols> {}
 - !<!OperationGroup> 
@@ -4946,7 +4791,7 @@ operationGroups:
       version: '2016-02-29'
     request: !<!Request> 
       parameters:
-      - *ref_80
+      - *ref_68
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -4959,7 +4804,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_120
+      schema: *ref_108
       language: !<!Languages> 
         default:
           name: ''
@@ -4973,7 +4818,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_82
+      schema: *ref_70
       language: !<!Languages> 
         default:
           name: ''
@@ -4987,7 +4832,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getValid
+        name: GetValid
         description: Get complex types that have readonly properties
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -4996,9 +4841,9 @@ operationGroups:
       version: '2016-02-29'
     request: !<!Request> 
       parameters:
-      - *ref_80
-      - !<!Parameter> &ref_121
-        schema: *ref_120
+      - *ref_68
+      - !<!Parameter> &ref_109
+        schema: *ref_108
         implementation: Method
         required: true
         extensions:
@@ -5012,7 +4857,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_121
+      - *ref_109
       language: !<!Languages> 
         default:
           name: ''
@@ -5037,7 +4882,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_82
+      schema: *ref_70
       language: !<!Languages> 
         default:
           name: ''
@@ -5053,12 +4898,12 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putValid
+        name: PutValid
         description: Put complex types that have readonly properties
     protocol: !<!Protocols> {}
   language: !<!Languages> 
     default:
-      name: readonlyproperty
+      name: Readonlyproperty
       description: ''
   protocol: !<!Protocols> {}
 - !<!OperationGroup> 
@@ -5070,7 +4915,7 @@ operationGroups:
       version: '2016-02-29'
     request: !<!Request> 
       parameters:
-      - *ref_80
+      - *ref_68
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -5083,7 +4928,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_18
+      schema: *ref_22
       language: !<!Languages> 
         default:
           name: ''
@@ -5097,17 +4942,17 @@ operationGroups:
           - '200'
     language: !<!Languages> 
       default:
-        name: getValid
+        name: GetValid
         description: ''
     protocol: !<!Protocols> {}
   language: !<!Languages> 
     default:
-      name: flattencomplex
+      name: Flattencomplex
       description: ''
   protocol: !<!Protocols> {}
 language: !<!Languages> 
   default:
-    name: ''
+    name: BodyComplex
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

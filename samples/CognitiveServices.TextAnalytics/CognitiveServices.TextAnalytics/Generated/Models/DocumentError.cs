@@ -5,10 +5,12 @@
 
 namespace CognitiveServices.TextAnalytics.Models
 {
-    /// <summary> The DocumentError. </summary>
+    /// <summary> Document Error. </summary>
     public partial class DocumentError
     {
-        /// <summary> Document Id. </summary>
+    }
+}
+ /// <summary> Document Id. </summary>
         public string Id { get; set; }
         /// <summary> Document Error. </summary>
         public DocumentError Error { get; set; } = new DocumentError();

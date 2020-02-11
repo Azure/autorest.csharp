@@ -1,14 +1,14 @@
 !<!CodeModel> 
 schemas: !<!Schemas> 
   objects:
-  - !<!ObjectSchema> &ref_98
+  - !<!ObjectSchema> &ref_97
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: V3.0-Preview.1
     properties:
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_23
+      schema: !<!ArraySchema> &ref_25
         type: array
         apiVersions:
         - !<!ApiVersion> 
@@ -20,7 +20,7 @@ schemas: !<!Schemas>
             version: V3.0-Preview.1
           properties:
           - !<!Property> 
-            schema: !<!StringSchema> &ref_61
+            schema: !<!StringSchema> &ref_60
               type: string
               apiVersions:
               - !<!ApiVersion> 
@@ -38,7 +38,7 @@ schemas: !<!Schemas>
                 description: 'A unique, non-empty document identifier.'
             protocol: !<!Protocols> {}
           - !<!Property> 
-            schema: !<!StringSchema> &ref_62
+            schema: !<!StringSchema> &ref_61
               type: string
               apiVersions:
               - !<!ApiVersion> 
@@ -56,7 +56,7 @@ schemas: !<!Schemas>
                 description: The input text to process.
             protocol: !<!Protocols> {}
           - !<!Property> 
-            schema: !<!StringSchema> &ref_63
+            schema: !<!StringSchema> &ref_62
               type: string
               apiVersions:
               - !<!ApiVersion> 
@@ -98,14 +98,14 @@ schemas: !<!Schemas>
         namespace: ApiV30Preview1
     protocol: !<!Protocols> {}
   - *ref_0
-  - !<!ObjectSchema> &ref_102
+  - !<!ObjectSchema> &ref_101
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: V3.0-Preview.1
     properties:
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_25
+      schema: !<!ArraySchema> &ref_27
         type: array
         apiVersions:
         - !<!ApiVersion> 
@@ -117,7 +117,7 @@ schemas: !<!Schemas>
             version: V3.0-Preview.1
           properties:
           - !<!Property> 
-            schema: !<!StringSchema> &ref_64
+            schema: !<!StringSchema> &ref_63
               type: string
               apiVersions:
               - !<!ApiVersion> 
@@ -135,7 +135,7 @@ schemas: !<!Schemas>
                 description: 'Unique, non-empty document identifier.'
             protocol: !<!Protocols> {}
           - !<!Property> 
-            schema: !<!ArraySchema> &ref_24
+            schema: !<!ArraySchema> &ref_26
               type: array
               apiVersions:
               - !<!ApiVersion> 
@@ -147,7 +147,7 @@ schemas: !<!Schemas>
                   version: V3.0-Preview.1
                 properties:
                 - !<!Property> 
-                  schema: !<!StringSchema> &ref_65
+                  schema: !<!StringSchema> &ref_64
                     type: string
                     apiVersions:
                     - !<!ApiVersion> 
@@ -165,7 +165,7 @@ schemas: !<!Schemas>
                       description: Entity text as appears in the request.
                   protocol: !<!Protocols> {}
                 - !<!Property> 
-                  schema: !<!StringSchema> &ref_66
+                  schema: !<!StringSchema> &ref_65
                     type: string
                     apiVersions:
                     - !<!ApiVersion> 
@@ -183,7 +183,7 @@ schemas: !<!Schemas>
                       description: 'Entity type, such as Person/Location/Org/SSN etc'
                   protocol: !<!Protocols> {}
                 - !<!Property> 
-                  schema: !<!StringSchema> &ref_67
+                  schema: !<!StringSchema> &ref_66
                     type: string
                     apiVersions:
                     - !<!ApiVersion> 
@@ -201,12 +201,12 @@ schemas: !<!Schemas>
                       description: 'Entity sub type, such as Age/Year/TimeRange etc'
                   protocol: !<!Protocols> {}
                 - !<!Property> 
-                  schema: !<!NumberSchema> &ref_43
+                  schema: !<!NumberSchema> &ref_45
                     type: integer
                     precision: 32
                     language: !<!Languages> 
                       default:
-                        name: TypeForoffset
+                        name: Integer
                         description: Start position (in Unicode characters) for the entity text.
                     protocol: !<!Protocols> {}
                   required: true
@@ -217,12 +217,12 @@ schemas: !<!Schemas>
                       description: Start position (in Unicode characters) for the entity text.
                   protocol: !<!Protocols> {}
                 - !<!Property> 
-                  schema: !<!NumberSchema> &ref_44
+                  schema: !<!NumberSchema> &ref_46
                     type: integer
                     precision: 32
                     language: !<!Languages> 
                       default:
-                        name: TypeForlength
+                        name: Integer
                         description: Length (in Unicode characters) for the entity text.
                     protocol: !<!Protocols> {}
                   required: true
@@ -233,12 +233,12 @@ schemas: !<!Schemas>
                       description: Length (in Unicode characters) for the entity text.
                   protocol: !<!Protocols> {}
                 - !<!Property> 
-                  schema: !<!NumberSchema> &ref_45
+                  schema: !<!NumberSchema> &ref_47
                     type: number
                     precision: 64
                     language: !<!Languages> 
                       default:
-                        name: TypeForscore
+                        name: Number
                         description: Confidence score between 0 and 1 of the extracted entity.
                     protocol: !<!Protocols> {}
                   required: true
@@ -274,12 +274,12 @@ schemas: !<!Schemas>
                 version: V3.0-Preview.1
               properties:
               - !<!Property> 
-                schema: !<!NumberSchema> &ref_46
+                schema: !<!NumberSchema> &ref_48
                   type: integer
                   precision: 32
                   language: !<!Languages> 
                     default:
-                      name: TypeForcharactersCount
+                      name: Integer
                       description: Number of text elements recognized in the document.
                   protocol: !<!Protocols> {}
                 required: true
@@ -290,12 +290,12 @@ schemas: !<!Schemas>
                     description: Number of text elements recognized in the document.
                 protocol: !<!Protocols> {}
               - !<!Property> 
-                schema: !<!NumberSchema> &ref_47
+                schema: !<!NumberSchema> &ref_49
                   type: integer
                   precision: 32
                   language: !<!Languages> 
                     default:
-                      name: TypeFortransactionsCount
+                      name: Integer
                       description: Number of transactions for the document.
                   protocol: !<!Protocols> {}
                 required: true
@@ -337,7 +337,7 @@ schemas: !<!Schemas>
           description: Response by document
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_26
+      schema: !<!ArraySchema> &ref_28
         type: array
         apiVersions:
         - !<!ApiVersion> 
@@ -349,7 +349,7 @@ schemas: !<!Schemas>
             version: V3.0-Preview.1
           properties:
           - !<!Property> 
-            schema: !<!StringSchema> &ref_68
+            schema: !<!StringSchema> &ref_67
               type: string
               apiVersions:
               - !<!ApiVersion> 
@@ -411,12 +411,12 @@ schemas: !<!Schemas>
           version: V3.0-Preview.1
         properties:
         - !<!Property> 
-          schema: !<!NumberSchema> &ref_48
+          schema: !<!NumberSchema> &ref_50
             type: integer
             precision: 32
             language: !<!Languages> 
               default:
-                name: TypeFordocumentsCount
+                name: Integer
                 description: Number of documents submitted in the request.
             protocol: !<!Protocols> {}
           required: true
@@ -427,12 +427,12 @@ schemas: !<!Schemas>
               description: Number of documents submitted in the request.
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: !<!NumberSchema> &ref_49
+          schema: !<!NumberSchema> &ref_51
             type: integer
             precision: 32
             language: !<!Languages> 
               default:
-                name: TypeForvalidDocumentsCount
+                name: Integer
                 description: 'Number of valid documents. This excludes empty, over-size limit or non-supported languages documents.'
             protocol: !<!Protocols> {}
           required: true
@@ -443,12 +443,12 @@ schemas: !<!Schemas>
               description: 'Number of valid documents. This excludes empty, over-size limit or non-supported languages documents.'
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: !<!NumberSchema> &ref_50
+          schema: !<!NumberSchema> &ref_52
             type: integer
             precision: 32
             language: !<!Languages> 
               default:
-                name: TypeForerroneousDocumentsCount
+                name: Integer
                 description: 'Number of invalid documents. This includes empty, over-size limit or non-supported languages documents.'
             protocol: !<!Protocols> {}
           required: true
@@ -459,12 +459,12 @@ schemas: !<!Schemas>
               description: 'Number of invalid documents. This includes empty, over-size limit or non-supported languages documents.'
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: !<!NumberSchema> &ref_51
+          schema: !<!NumberSchema> &ref_53
             type: integer
             precision: 64
             language: !<!Languages> 
               default:
-                name: TypeFortransactionsCount
+                name: Integer
                 description: Number of transactions for the request.
             protocol: !<!Protocols> {}
           required: true
@@ -488,7 +488,7 @@ schemas: !<!Schemas>
           description: if showStats=true was specified in the request this field will contain information about the request payload.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_69
+      schema: !<!StringSchema> &ref_68
         type: string
         apiVersions:
         - !<!ApiVersion> 
@@ -524,7 +524,7 @@ schemas: !<!Schemas>
       version: V3.0-Preview.1
     properties:
     - !<!Property> 
-      schema: !<!ChoiceSchema> &ref_19
+      schema: !<!ChoiceSchema> &ref_21
         choices:
         - !<!ChoiceValue> 
           value: invalidRequest
@@ -574,7 +574,7 @@ schemas: !<!Schemas>
           description: Error code.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_70
+      schema: !<!StringSchema> &ref_69
         type: string
         apiVersions:
         - !<!ApiVersion> 
@@ -592,7 +592,7 @@ schemas: !<!Schemas>
           description: Error message.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_71
+      schema: !<!StringSchema> &ref_70
         type: string
         apiVersions:
         - !<!ApiVersion> 
@@ -617,7 +617,7 @@ schemas: !<!Schemas>
           version: V3.0-Preview.1
         properties:
         - !<!Property> 
-          schema: !<!ChoiceSchema> &ref_20
+          schema: !<!ChoiceSchema> &ref_22
             choices:
             - !<!ChoiceValue> 
               value: invalidParameterValue
@@ -691,7 +691,7 @@ schemas: !<!Schemas>
               description: Error code.
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: !<!StringSchema> &ref_72
+          schema: !<!StringSchema> &ref_71
             type: string
             apiVersions:
             - !<!ApiVersion> 
@@ -709,7 +709,7 @@ schemas: !<!Schemas>
               description: Error message.
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: !<!StringSchema> &ref_73
+          schema: !<!StringSchema> &ref_72
             type: string
             apiVersions:
             - !<!ApiVersion> 
@@ -749,7 +749,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_27
+      schema: !<!ArraySchema> &ref_29
         type: array
         apiVersions:
         - !<!ApiVersion> 
@@ -774,14 +774,14 @@ schemas: !<!Schemas>
         namespace: ApiV30Preview1
     protocol: !<!Protocols> {}
   - *ref_8
-  - !<!ObjectSchema> &ref_109
+  - !<!ObjectSchema> &ref_108
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: V3.0-Preview.1
     properties:
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_30
+      schema: !<!ArraySchema> &ref_32
         type: array
         apiVersions:
         - !<!ApiVersion> 
@@ -793,7 +793,7 @@ schemas: !<!Schemas>
             version: V3.0-Preview.1
           properties:
           - !<!Property> 
-            schema: !<!StringSchema> &ref_74
+            schema: !<!StringSchema> &ref_73
               type: string
               apiVersions:
               - !<!ApiVersion> 
@@ -811,7 +811,7 @@ schemas: !<!Schemas>
                 description: 'Unique, non-empty document identifier.'
             protocol: !<!Protocols> {}
           - !<!Property> 
-            schema: !<!ArraySchema> &ref_29
+            schema: !<!ArraySchema> &ref_31
               type: array
               apiVersions:
               - !<!ApiVersion> 
@@ -823,7 +823,7 @@ schemas: !<!Schemas>
                   version: V3.0-Preview.1
                 properties:
                 - !<!Property> 
-                  schema: !<!StringSchema> &ref_75
+                  schema: !<!StringSchema> &ref_74
                     type: string
                     apiVersions:
                     - !<!ApiVersion> 
@@ -841,7 +841,7 @@ schemas: !<!Schemas>
                       description: Entity Linking formal name.
                   protocol: !<!Protocols> {}
                 - !<!Property> 
-                  schema: !<!ArraySchema> &ref_28
+                  schema: !<!ArraySchema> &ref_30
                     type: array
                     apiVersions:
                     - !<!ApiVersion> 
@@ -853,12 +853,12 @@ schemas: !<!Schemas>
                         version: V3.0-Preview.1
                       properties:
                       - !<!Property> 
-                        schema: !<!NumberSchema> &ref_52
+                        schema: !<!NumberSchema> &ref_54
                           type: number
                           precision: 64
                           language: !<!Languages> 
                             default:
-                              name: TypeForscore
+                              name: Number
                               description: 'If a well-known item is recognized, a decimal number denoting the confidence level between 0 and 1 will be returned.'
                           protocol: !<!Protocols> {}
                         required: true
@@ -869,7 +869,7 @@ schemas: !<!Schemas>
                             description: 'If a well-known item is recognized, a decimal number denoting the confidence level between 0 and 1 will be returned.'
                         protocol: !<!Protocols> {}
                       - !<!Property> 
-                        schema: !<!StringSchema> &ref_76
+                        schema: !<!StringSchema> &ref_75
                           type: string
                           apiVersions:
                           - !<!ApiVersion> 
@@ -887,12 +887,12 @@ schemas: !<!Schemas>
                             description: Entity text as appears in the request.
                         protocol: !<!Protocols> {}
                       - !<!Property> 
-                        schema: !<!NumberSchema> &ref_53
+                        schema: !<!NumberSchema> &ref_55
                           type: integer
                           precision: 32
                           language: !<!Languages> 
                             default:
-                              name: TypeForoffset
+                              name: Integer
                               description: Start position (in Unicode characters) for the entity match text.
                           protocol: !<!Protocols> {}
                         required: true
@@ -903,12 +903,12 @@ schemas: !<!Schemas>
                             description: Start position (in Unicode characters) for the entity match text.
                         protocol: !<!Protocols> {}
                       - !<!Property> 
-                        schema: !<!NumberSchema> &ref_54
+                        schema: !<!NumberSchema> &ref_56
                           type: integer
                           precision: 32
                           language: !<!Languages> 
                             default:
-                              name: TypeForlength
+                              name: Integer
                               description: Length (in Unicode characters) for the entity match text.
                           protocol: !<!Protocols> {}
                         required: true
@@ -937,7 +937,7 @@ schemas: !<!Schemas>
                       description: List of instances this entity appears in the text.
                   protocol: !<!Protocols> {}
                 - !<!Property> 
-                  schema: !<!StringSchema> &ref_77
+                  schema: !<!StringSchema> &ref_76
                     type: string
                     apiVersions:
                     - !<!ApiVersion> 
@@ -955,7 +955,7 @@ schemas: !<!Schemas>
                       description: Language used in the data source.
                   protocol: !<!Protocols> {}
                 - !<!Property> 
-                  schema: !<!StringSchema> &ref_78
+                  schema: !<!StringSchema> &ref_77
                     type: string
                     apiVersions:
                     - !<!ApiVersion> 
@@ -973,7 +973,7 @@ schemas: !<!Schemas>
                       description: Unique identifier of the recognized entity from the data source.
                   protocol: !<!Protocols> {}
                 - !<!Property> 
-                  schema: !<!StringSchema> &ref_79
+                  schema: !<!StringSchema> &ref_78
                     type: string
                     apiVersions:
                     - !<!ApiVersion> 
@@ -991,7 +991,7 @@ schemas: !<!Schemas>
                       description: URL for the entity's page from the data source.
                   protocol: !<!Protocols> {}
                 - !<!Property> 
-                  schema: !<!StringSchema> &ref_80
+                  schema: !<!StringSchema> &ref_79
                     type: string
                     apiVersions:
                     - !<!ApiVersion> 
@@ -1054,7 +1054,7 @@ schemas: !<!Schemas>
           description: Response by document
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_31
+      schema: !<!ArraySchema> &ref_33
         type: array
         apiVersions:
         - !<!ApiVersion> 
@@ -1082,7 +1082,7 @@ schemas: !<!Schemas>
           description: if showStats=true was specified in the request this field will contain information about the request payload.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_81
+      schema: !<!StringSchema> &ref_80
         type: string
         apiVersions:
         - !<!ApiVersion> 
@@ -1108,14 +1108,14 @@ schemas: !<!Schemas>
   - *ref_10
   - *ref_11
   - *ref_12
-  - !<!ObjectSchema> &ref_113
+  - !<!ObjectSchema> &ref_112
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: V3.0-Preview.1
     properties:
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_33
+      schema: !<!ArraySchema> &ref_35
         type: array
         apiVersions:
         - !<!ApiVersion> 
@@ -1127,7 +1127,7 @@ schemas: !<!Schemas>
             version: V3.0-Preview.1
           properties:
           - !<!Property> 
-            schema: !<!StringSchema> &ref_82
+            schema: !<!StringSchema> &ref_81
               type: string
               apiVersions:
               - !<!ApiVersion> 
@@ -1145,12 +1145,12 @@ schemas: !<!Schemas>
                 description: 'Unique, non-empty document identifier.'
             protocol: !<!Protocols> {}
           - !<!Property> 
-            schema: !<!ArraySchema> &ref_32
+            schema: !<!ArraySchema> &ref_34
               type: array
               apiVersions:
               - !<!ApiVersion> 
                 version: V3.0-Preview.1
-              elementType: !<!StringSchema> &ref_83
+              elementType: !<!StringSchema> &ref_82
                 type: string
                 apiVersions:
                 - !<!ApiVersion> 
@@ -1200,7 +1200,7 @@ schemas: !<!Schemas>
           description: Response by document
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_34
+      schema: !<!ArraySchema> &ref_36
         type: array
         apiVersions:
         - !<!ApiVersion> 
@@ -1228,7 +1228,7 @@ schemas: !<!Schemas>
           description: if showStats=true was specified in the request this field will contain information about the request payload.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_84
+      schema: !<!StringSchema> &ref_83
         type: string
         apiVersions:
         - !<!ApiVersion> 
@@ -1252,14 +1252,14 @@ schemas: !<!Schemas>
         namespace: ApiV30Preview1
     protocol: !<!Protocols> {}
   - *ref_13
-  - !<!ObjectSchema> &ref_114
+  - !<!ObjectSchema> &ref_113
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: V3.0-Preview.1
     properties:
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_35
+      schema: !<!ArraySchema> &ref_37
         type: array
         apiVersions:
         - !<!ApiVersion> 
@@ -1271,7 +1271,7 @@ schemas: !<!Schemas>
             version: V3.0-Preview.1
           properties:
           - !<!Property> 
-            schema: !<!StringSchema> &ref_85
+            schema: !<!StringSchema> &ref_84
               type: string
               apiVersions:
               - !<!ApiVersion> 
@@ -1289,7 +1289,7 @@ schemas: !<!Schemas>
                 description: 'Unique, non-empty document identifier.'
             protocol: !<!Protocols> {}
           - !<!Property> 
-            schema: !<!StringSchema> &ref_86
+            schema: !<!StringSchema> &ref_85
               type: string
               apiVersions:
               - !<!ApiVersion> 
@@ -1307,7 +1307,7 @@ schemas: !<!Schemas>
                 description: ''
             protocol: !<!Protocols> {}
           - !<!Property> 
-            schema: !<!StringSchema> &ref_87
+            schema: !<!StringSchema> &ref_86
               type: string
               apiVersions:
               - !<!ApiVersion> 
@@ -1349,14 +1349,14 @@ schemas: !<!Schemas>
         namespace: ApiV30Preview1
     protocol: !<!Protocols> {}
   - *ref_14
-  - !<!ObjectSchema> &ref_118
+  - !<!ObjectSchema> &ref_117
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: V3.0-Preview.1
     properties:
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_37
+      schema: !<!ArraySchema> &ref_39
         type: array
         apiVersions:
         - !<!ApiVersion> 
@@ -1368,7 +1368,7 @@ schemas: !<!Schemas>
             version: V3.0-Preview.1
           properties:
           - !<!Property> 
-            schema: !<!StringSchema> &ref_88
+            schema: !<!StringSchema> &ref_87
               type: string
               apiVersions:
               - !<!ApiVersion> 
@@ -1386,7 +1386,7 @@ schemas: !<!Schemas>
                 description: 'Unique, non-empty document identifier.'
             protocol: !<!Protocols> {}
           - !<!Property> 
-            schema: !<!ArraySchema> &ref_36
+            schema: !<!ArraySchema> &ref_38
               type: array
               apiVersions:
               - !<!ApiVersion> 
@@ -1398,7 +1398,7 @@ schemas: !<!Schemas>
                   version: V3.0-Preview.1
                 properties:
                 - !<!Property> 
-                  schema: !<!StringSchema> &ref_89
+                  schema: !<!StringSchema> &ref_88
                     type: string
                     apiVersions:
                     - !<!ApiVersion> 
@@ -1416,7 +1416,7 @@ schemas: !<!Schemas>
                       description: 'Long name of a detected language (e.g. English, French).'
                   protocol: !<!Protocols> {}
                 - !<!Property> 
-                  schema: !<!StringSchema> &ref_90
+                  schema: !<!StringSchema> &ref_89
                     type: string
                     apiVersions:
                     - !<!ApiVersion> 
@@ -1434,12 +1434,12 @@ schemas: !<!Schemas>
                       description: 'A two letter representation of the detected language according to the ISO 639-1 standard (e.g. en, fr).'
                   protocol: !<!Protocols> {}
                 - !<!Property> 
-                  schema: !<!NumberSchema> &ref_55
+                  schema: !<!NumberSchema> &ref_57
                     type: number
                     precision: 64
                     language: !<!Languages> 
                       default:
-                        name: TypeForscore
+                        name: Number
                         description: A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true.
                     protocol: !<!Protocols> {}
                   required: true
@@ -1495,7 +1495,7 @@ schemas: !<!Schemas>
           description: Response by document
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_38
+      schema: !<!ArraySchema> &ref_40
         type: array
         apiVersions:
         - !<!ApiVersion> 
@@ -1523,7 +1523,7 @@ schemas: !<!Schemas>
           description: if showStats=true was specified in the request this field will contain information about the request payload.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_91
+      schema: !<!StringSchema> &ref_90
         type: string
         apiVersions:
         - !<!ApiVersion> 
@@ -1548,26 +1548,26 @@ schemas: !<!Schemas>
     protocol: !<!Protocols> {}
   - *ref_15
   - *ref_16
-  - !<!ObjectSchema> &ref_122
+  - !<!ObjectSchema> &ref_121
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: V3.0-Preview.1
     properties:
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_41
+      schema: !<!ArraySchema> &ref_43
         type: array
         apiVersions:
         - !<!ApiVersion> 
           version: V3.0-Preview.1
-        elementType: !<!ObjectSchema> &ref_17
+        elementType: !<!ObjectSchema> &ref_18
           type: object
           apiVersions:
           - !<!ApiVersion> 
             version: V3.0-Preview.1
           properties:
           - !<!Property> 
-            schema: !<!StringSchema> &ref_92
+            schema: !<!StringSchema> &ref_91
               type: string
               apiVersions:
               - !<!ApiVersion> 
@@ -1585,7 +1585,7 @@ schemas: !<!Schemas>
                 description: 'Unique, non-empty document identifier.'
             protocol: !<!Protocols> {}
           - !<!Property> 
-            schema: !<!ChoiceSchema> &ref_21
+            schema: !<!ChoiceSchema> &ref_23
               choices:
               - !<!ChoiceValue> 
                 value: positive
@@ -1638,34 +1638,34 @@ schemas: !<!Schemas>
                 description: if showStats=true was specified in the request this field will contain information about the document payload.
             protocol: !<!Protocols> {}
           - !<!Property> 
-            schema: !<!AnySchema> 
+            schema: !<!AnySchema> &ref_17
               type: any
               language: !<!Languages> 
                 default:
                   name: any
-                  description: <Any object>
+                  description: Any object
               protocol: !<!Protocols> {}
             required: true
             serializedName: documentScores
             language: !<!Languages> 
               default:
                 name: documentScores
-                description: <Any object>
+                description: Any object
             protocol: !<!Protocols> {}
           - !<!Property> 
-            schema: !<!ArraySchema> &ref_40
+            schema: !<!ArraySchema> &ref_42
               type: array
               apiVersions:
               - !<!ApiVersion> 
                 version: V3.0-Preview.1
-              elementType: !<!ObjectSchema> &ref_18
+              elementType: !<!ObjectSchema> &ref_19
                 type: object
                 apiVersions:
                 - !<!ApiVersion> 
                   version: V3.0-Preview.1
                 properties:
                 - !<!Property> 
-                  schema: !<!ChoiceSchema> &ref_22
+                  schema: !<!ChoiceSchema> &ref_24
                     choices:
                     - !<!ChoiceValue> 
                       value: positive
@@ -1703,27 +1703,21 @@ schemas: !<!Schemas>
                       description: The predicted Sentiment for the sentence.
                   protocol: !<!Protocols> {}
                 - !<!Property> 
-                  schema: !<!AnySchema> 
-                    type: any
-                    language: !<!Languages> 
-                      default:
-                        name: any
-                        description: <Any object>
-                    protocol: !<!Protocols> {}
+                  schema: *ref_17
                   required: true
                   serializedName: sentenceScores
                   language: !<!Languages> 
                     default:
                       name: sentenceScores
-                      description: <Any object>
+                      description: Any object
                   protocol: !<!Protocols> {}
                 - !<!Property> 
-                  schema: !<!NumberSchema> &ref_56
+                  schema: !<!NumberSchema> &ref_58
                     type: integer
                     precision: 32
                     language: !<!Languages> 
                       default:
-                        name: TypeForoffset
+                        name: Integer
                         description: The sentence offset from the start of the document.
                     protocol: !<!Protocols> {}
                   required: true
@@ -1734,12 +1728,12 @@ schemas: !<!Schemas>
                       description: The sentence offset from the start of the document.
                   protocol: !<!Protocols> {}
                 - !<!Property> 
-                  schema: !<!NumberSchema> &ref_57
+                  schema: !<!NumberSchema> &ref_59
                     type: integer
                     precision: 32
                     language: !<!Languages> 
                       default:
-                        name: TypeForlength
+                        name: Integer
                         description: The length of the sentence by Unicode standard.
                     protocol: !<!Protocols> {}
                   required: true
@@ -1750,12 +1744,12 @@ schemas: !<!Schemas>
                       description: The length of the sentence by Unicode standard.
                   protocol: !<!Protocols> {}
                 - !<!Property> 
-                  schema: !<!ArraySchema> &ref_39
+                  schema: !<!ArraySchema> &ref_41
                     type: array
                     apiVersions:
                     - !<!ApiVersion> 
                       version: V3.0-Preview.1
-                    elementType: !<!StringSchema> &ref_93
+                    elementType: !<!StringSchema> &ref_92
                       type: string
                       apiVersions:
                       - !<!ApiVersion> 
@@ -1814,7 +1808,7 @@ schemas: !<!Schemas>
           description: Sentiment analysis per document.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_42
+      schema: !<!ArraySchema> &ref_44
         type: array
         apiVersions:
         - !<!ApiVersion> 
@@ -1842,7 +1836,7 @@ schemas: !<!Schemas>
           description: if showStats=true was specified in the request this field will contain information about the request payload.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_94
+      schema: !<!StringSchema> &ref_93
         type: string
         apiVersions:
         - !<!ApiVersion> 
@@ -1865,8 +1859,8 @@ schemas: !<!Schemas>
         description: ''
         namespace: ApiV30Preview1
     protocol: !<!Protocols> {}
-  - *ref_17
   - *ref_18
+  - *ref_19
   - !<!ObjectSchema> 
     type: object
     apiVersions:
@@ -1874,12 +1868,12 @@ schemas: !<!Schemas>
       version: V3.0-Preview.1
     properties:
     - !<!Property> 
-      schema: !<!NumberSchema> &ref_58
+      schema: !<!NumberSchema> &ref_20
         type: number
         precision: 64
         language: !<!Languages> 
           default:
-            name: TypeForpositive
+            name: Number
             description: ''
         protocol: !<!Protocols> {}
       required: true
@@ -1890,14 +1884,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!NumberSchema> &ref_59
-        type: number
-        precision: 64
-        language: !<!Languages> 
-          default:
-            name: TypeForneutral
-            description: ''
-        protocol: !<!Protocols> {}
+      schema: *ref_20
       required: true
       serializedName: neutral
       language: !<!Languages> 
@@ -1906,14 +1893,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!NumberSchema> &ref_60
-        type: number
-        precision: 64
-        language: !<!Languages> 
-          default:
-            name: TypeFornegative
-            description: ''
-        protocol: !<!Protocols> {}
+      schema: *ref_20
       required: true
       serializedName: negative
       language: !<!Languages> 
@@ -1928,13 +1908,11 @@ schemas: !<!Schemas>
         namespace: ApiV30Preview1
     protocol: !<!Protocols> {}
   choices:
-  - *ref_19
-  - *ref_20
   - *ref_21
   - *ref_22
-  arrays:
   - *ref_23
   - *ref_24
+  arrays:
   - *ref_25
   - *ref_26
   - *ref_27
@@ -1953,8 +1931,10 @@ schemas: !<!Schemas>
   - *ref_40
   - *ref_41
   - *ref_42
+  - *ref_43
+  - *ref_44
   booleans:
-  - !<!BooleanSchema> &ref_97
+  - !<!BooleanSchema> &ref_96
     type: boolean
     apiVersions:
     - !<!ApiVersion> 
@@ -1965,8 +1945,6 @@ schemas: !<!Schemas>
         description: ''
     protocol: !<!Protocols> {}
   numbers:
-  - *ref_43
-  - *ref_44
   - *ref_45
   - *ref_46
   - *ref_47
@@ -1982,10 +1960,10 @@ schemas: !<!Schemas>
   - *ref_57
   - *ref_58
   - *ref_59
-  - *ref_60
+  - *ref_20
   strings:
   - *ref_7
-  - !<!StringSchema> &ref_96
+  - !<!StringSchema> &ref_95
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1995,6 +1973,7 @@ schemas: !<!Schemas>
         name: String
         description: ''
     protocol: !<!Protocols> {}
+  - *ref_60
   - *ref_61
   - *ref_62
   - *ref_63
@@ -2028,9 +2007,8 @@ schemas: !<!Schemas>
   - *ref_91
   - *ref_92
   - *ref_93
-  - *ref_94
 globalParameters:
-- !<!Parameter> &ref_95
+- !<!Parameter> &ref_94
   schema: *ref_7
   implementation: Client
   required: true
@@ -2097,9 +2075,9 @@ operationGroups:
       version: V3.0-Preview.1
     request: !<!Request> 
       parameters:
-      - *ref_95
-      - !<!Parameter> &ref_99
-        schema: *ref_96
+      - *ref_94
+      - !<!Parameter> &ref_98
+        schema: *ref_95
         implementation: Method
         language: !<!Languages> 
           default:
@@ -2109,8 +2087,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> &ref_100
-        schema: *ref_97
+      - !<!Parameter> &ref_99
+        schema: *ref_96
         implementation: Method
         language: !<!Languages> 
           default:
@@ -2120,8 +2098,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> &ref_101
-        schema: *ref_98
+      - !<!Parameter> &ref_100
+        schema: *ref_97
         implementation: Method
         required: true
         extensions:
@@ -2135,9 +2113,9 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
+      - *ref_98
       - *ref_99
       - *ref_100
-      - *ref_101
       language: !<!Languages> 
         default:
           name: ''
@@ -2153,7 +2131,7 @@ operationGroups:
           uri: '{Endpoint}/text/analytics/v3.0-preview.1'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_102
+      schema: *ref_101
       language: !<!Languages> 
         default:
           name: ''
@@ -2196,9 +2174,9 @@ operationGroups:
       version: V3.0-Preview.1
     request: !<!Request> 
       parameters:
-      - *ref_95
-      - !<!Parameter> &ref_103
-        schema: *ref_96
+      - *ref_94
+      - !<!Parameter> &ref_102
+        schema: *ref_95
         implementation: Method
         language: !<!Languages> 
           default:
@@ -2208,8 +2186,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> &ref_104
-        schema: *ref_97
+      - !<!Parameter> &ref_103
+        schema: *ref_96
         implementation: Method
         language: !<!Languages> 
           default:
@@ -2219,8 +2197,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> &ref_105
-        schema: *ref_98
+      - !<!Parameter> &ref_104
+        schema: *ref_97
         implementation: Method
         required: true
         extensions:
@@ -2234,9 +2212,9 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
+      - *ref_102
       - *ref_103
       - *ref_104
-      - *ref_105
       language: !<!Languages> 
         default:
           name: ''
@@ -2252,7 +2230,7 @@ operationGroups:
           uri: '{Endpoint}/text/analytics/v3.0-preview.1'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_102
+      schema: *ref_101
       language: !<!Languages> 
         default:
           name: ''
@@ -2295,9 +2273,9 @@ operationGroups:
       version: V3.0-Preview.1
     request: !<!Request> 
       parameters:
-      - *ref_95
-      - !<!Parameter> &ref_106
-        schema: *ref_96
+      - *ref_94
+      - !<!Parameter> &ref_105
+        schema: *ref_95
         implementation: Method
         language: !<!Languages> 
           default:
@@ -2307,8 +2285,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> &ref_107
-        schema: *ref_97
+      - !<!Parameter> &ref_106
+        schema: *ref_96
         implementation: Method
         language: !<!Languages> 
           default:
@@ -2318,8 +2296,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> &ref_108
-        schema: *ref_98
+      - !<!Parameter> &ref_107
+        schema: *ref_97
         implementation: Method
         required: true
         extensions:
@@ -2333,9 +2311,9 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
+      - *ref_105
       - *ref_106
       - *ref_107
-      - *ref_108
       language: !<!Languages> 
         default:
           name: ''
@@ -2351,7 +2329,7 @@ operationGroups:
           uri: '{Endpoint}/text/analytics/v3.0-preview.1'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_109
+      schema: *ref_108
       language: !<!Languages> 
         default:
           name: ''
@@ -2393,9 +2371,9 @@ operationGroups:
       version: V3.0-Preview.1
     request: !<!Request> 
       parameters:
-      - *ref_95
-      - !<!Parameter> &ref_110
-        schema: *ref_96
+      - *ref_94
+      - !<!Parameter> &ref_109
+        schema: *ref_95
         implementation: Method
         language: !<!Languages> 
           default:
@@ -2405,8 +2383,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> &ref_111
-        schema: *ref_97
+      - !<!Parameter> &ref_110
+        schema: *ref_96
         implementation: Method
         language: !<!Languages> 
           default:
@@ -2416,8 +2394,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> &ref_112
-        schema: *ref_98
+      - !<!Parameter> &ref_111
+        schema: *ref_97
         implementation: Method
         required: true
         extensions:
@@ -2431,9 +2409,9 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
+      - *ref_109
       - *ref_110
       - *ref_111
-      - *ref_112
       language: !<!Languages> 
         default:
           name: ''
@@ -2449,7 +2427,7 @@ operationGroups:
           uri: '{Endpoint}/text/analytics/v3.0-preview.1'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_113
+      schema: *ref_112
       language: !<!Languages> 
         default:
           name: ''
@@ -2490,9 +2468,9 @@ operationGroups:
       version: V3.0-Preview.1
     request: !<!Request> 
       parameters:
-      - *ref_95
-      - !<!Parameter> &ref_115
-        schema: *ref_96
+      - *ref_94
+      - !<!Parameter> &ref_114
+        schema: *ref_95
         implementation: Method
         language: !<!Languages> 
           default:
@@ -2502,8 +2480,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> &ref_116
-        schema: *ref_97
+      - !<!Parameter> &ref_115
+        schema: *ref_96
         implementation: Method
         language: !<!Languages> 
           default:
@@ -2513,8 +2491,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> &ref_117
-        schema: *ref_114
+      - !<!Parameter> &ref_116
+        schema: *ref_113
         implementation: Method
         required: true
         extensions:
@@ -2528,9 +2506,9 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
+      - *ref_114
       - *ref_115
       - *ref_116
-      - *ref_117
       language: !<!Languages> 
         default:
           name: ''
@@ -2546,7 +2524,7 @@ operationGroups:
           uri: '{Endpoint}/text/analytics/v3.0-preview.1'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_118
+      schema: *ref_117
       language: !<!Languages> 
         default:
           name: ''
@@ -2589,9 +2567,9 @@ operationGroups:
       version: V3.0-Preview.1
     request: !<!Request> 
       parameters:
-      - *ref_95
-      - !<!Parameter> &ref_119
-        schema: *ref_96
+      - *ref_94
+      - !<!Parameter> &ref_118
+        schema: *ref_95
         implementation: Method
         language: !<!Languages> 
           default:
@@ -2601,8 +2579,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> &ref_120
-        schema: *ref_97
+      - !<!Parameter> &ref_119
+        schema: *ref_96
         implementation: Method
         language: !<!Languages> 
           default:
@@ -2612,8 +2590,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> &ref_121
-        schema: *ref_98
+      - !<!Parameter> &ref_120
+        schema: *ref_97
         implementation: Method
         required: true
         extensions:
@@ -2627,9 +2605,9 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
+      - *ref_118
       - *ref_119
       - *ref_120
-      - *ref_121
       language: !<!Languages> 
         default:
           name: ''
@@ -2645,7 +2623,7 @@ operationGroups:
           uri: '{Endpoint}/text/analytics/v3.0-preview.1'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_122
+      schema: *ref_121
       language: !<!Languages> 
         default:
           name: ''

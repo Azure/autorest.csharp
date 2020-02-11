@@ -15,7 +15,7 @@ schemas: !<!Schemas>
           version: '2018-10-10'
         language: !<!Languages> 
           default:
-            name: TableQueryResponse-odata.metadata
+            name: TableQueryResponseOdataMetadata
             description: The metadata response of the table.
         protocol: !<!Protocols> {}
       serializedName: odata.metadata
@@ -23,7 +23,6 @@ schemas: !<!Schemas>
         default:
           name: odataMetadata
           description: The metadata response of the table.
-          originalName: odata.metadata
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!ArraySchema> &ref_11
@@ -57,7 +56,7 @@ schemas: !<!Schemas>
                     version: '2018-10-10'
                   language: !<!Languages> 
                     default:
-                      name: TableResponse-odata.metadata
+                      name: TableResponseOdataMetadata
                       description: The metadata response of the table.
                   protocol: !<!Protocols> {}
                 serializedName: odata.metadata
@@ -65,7 +64,6 @@ schemas: !<!Schemas>
                   default:
                     name: odataMetadata
                     description: The metadata response of the table.
-                    originalName: odata.metadata
                 protocol: !<!Protocols> {}
               language: !<!Languages> 
                 default:
@@ -84,15 +82,14 @@ schemas: !<!Schemas>
                 version: '2018-10-10'
               language: !<!Languages> 
                 default:
-                  name: TableResponseProperties-TableName
+                  name: TableResponsePropertiesTableName
                   description: The name of the table.
               protocol: !<!Protocols> {}
             serializedName: TableName
             language: !<!Languages> 
               default:
-                name: TableName
+                name: tableName
                 description: The name of the table.
-                originalName: TableName
             protocol: !<!Protocols> {}
           - !<!Property> 
             schema: !<!StringSchema> &ref_28
@@ -102,7 +99,7 @@ schemas: !<!Schemas>
                 version: '2018-10-10'
               language: !<!Languages> 
                 default:
-                  name: TableResponseProperties-odata.type
+                  name: TableResponsePropertiesOdataType
                   description: The odata type of the table.
               protocol: !<!Protocols> {}
             serializedName: odata.type
@@ -110,7 +107,6 @@ schemas: !<!Schemas>
               default:
                 name: odataType
                 description: The odata type of the table.
-                originalName: odata.type
             protocol: !<!Protocols> {}
           - !<!Property> 
             schema: !<!StringSchema> &ref_29
@@ -120,7 +116,7 @@ schemas: !<!Schemas>
                 version: '2018-10-10'
               language: !<!Languages> 
                 default:
-                  name: TableResponseProperties-odata.id
+                  name: TableResponsePropertiesOdataId
                   description: The id of the table.
               protocol: !<!Protocols> {}
             serializedName: odata.id
@@ -128,7 +124,6 @@ schemas: !<!Schemas>
               default:
                 name: odataId
                 description: The id of the table.
-                originalName: odata.id
             protocol: !<!Protocols> {}
           - !<!Property> 
             schema: !<!StringSchema> &ref_30
@@ -138,7 +133,7 @@ schemas: !<!Schemas>
                 version: '2018-10-10'
               language: !<!Languages> 
                 default:
-                  name: TableResponseProperties-odata.editLink
+                  name: TableResponsePropertiesOdataEditLink
                   description: The edit link of the table.
               protocol: !<!Protocols> {}
             serializedName: odata.editLink
@@ -146,7 +141,6 @@ schemas: !<!Schemas>
               default:
                 name: odataEditLink
                 description: The edit link of the table.
-                originalName: odata.editLink
             protocol: !<!Protocols> {}
           language: !<!Languages> 
             default:
@@ -156,7 +150,7 @@ schemas: !<!Schemas>
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
-            name: TableQueryResponse-value
+            name: TableQueryResponseValue
             description: List of tables.
         protocol: !<!Protocols> {}
       serializedName: value
@@ -164,7 +158,6 @@ schemas: !<!Schemas>
         default:
           name: value
           description: List of tables.
-          originalName: value
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -187,15 +180,14 @@ schemas: !<!Schemas>
           version: '2018-10-10'
         language: !<!Languages> 
           default:
-            name: TableProperties-TableName
+            name: TablePropertiesTableName
             description: The name of the table to create.
         protocol: !<!Protocols> {}
       serializedName: TableName
       language: !<!Languages> 
         default:
-          name: TableName
+          name: tableName
           description: The name of the table to create.
-          originalName: TableName
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -218,15 +210,14 @@ schemas: !<!Schemas>
           version: '2018-10-10'
         language: !<!Languages> 
           default:
-            name: StorageError-Message
+            name: StorageErrorMessage
             description: ''
         protocol: !<!Protocols> {}
       serializedName: Message
       language: !<!Languages> 
         default:
-          name: Message
+          name: message
           description: ''
-          originalName: Message
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -248,7 +239,7 @@ schemas: !<!Schemas>
           version: '2018-10-10'
         language: !<!Languages> 
           default:
-            name: TableEntityQueryResponse-odata.metadata
+            name: TableEntityQueryResponseOdataMetadata
             description: The metadata response of the table.
         protocol: !<!Protocols> {}
       serializedName: odata.metadata
@@ -256,7 +247,6 @@ schemas: !<!Schemas>
         default:
           name: odataMetadata
           description: The metadata response of the table.
-          originalName: odata.metadata
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!ArraySchema> &ref_12
@@ -271,7 +261,7 @@ schemas: !<!Schemas>
             language: !<!Languages> 
               default:
                 name: any
-                description: <Any object>
+                description: Any object
             protocol: !<!Protocols> {}
           language: !<!Languages> 
             default:
@@ -280,7 +270,7 @@ schemas: !<!Schemas>
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
-            name: TableEntityQueryResponse-value
+            name: TableEntityQueryResponseValue
             description: List of table entities.
         protocol: !<!Protocols> {}
       serializedName: value
@@ -288,7 +278,6 @@ schemas: !<!Schemas>
         default:
           name: value
           description: List of table entities.
-          originalName: value
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -310,16 +299,15 @@ schemas: !<!Schemas>
           version: '2018-10-10'
         language: !<!Languages> 
           default:
-            name: SignedIdentifier-Id
+            name: SignedIdentifierId
             description: a unique id
         protocol: !<!Protocols> {}
       required: true
       serializedName: Id
       language: !<!Languages> 
         default:
-          name: Id
+          name: id
           description: a unique id
-          originalName: Id
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!ObjectSchema> &ref_2
@@ -337,16 +325,15 @@ schemas: !<!Schemas>
               version: '2018-10-10'
             language: !<!Languages> 
               default:
-                name: AccessPolicy-Start
+                name: AccessPolicyStart
                 description: the date-time the policy is active
             protocol: !<!Protocols> {}
           required: true
           serializedName: Start
           language: !<!Languages> 
             default:
-              name: Start
+              name: start
               description: the date-time the policy is active
-              originalName: Start
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: !<!DateTimeSchema> &ref_22
@@ -357,16 +344,15 @@ schemas: !<!Schemas>
               version: '2018-10-10'
             language: !<!Languages> 
               default:
-                name: AccessPolicy-Expiry
+                name: AccessPolicyExpiry
                 description: the date-time the policy expires
             protocol: !<!Protocols> {}
           required: true
           serializedName: Expiry
           language: !<!Languages> 
             default:
-              name: Expiry
+              name: expiry
               description: the date-time the policy expires
-              originalName: Expiry
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: !<!StringSchema> &ref_36
@@ -376,16 +362,15 @@ schemas: !<!Schemas>
               version: '2018-10-10'
             language: !<!Languages> 
               default:
-                name: AccessPolicy-Permission
+                name: AccessPolicyPermission
                 description: the permissions for the acl policy
             protocol: !<!Protocols> {}
           required: true
           serializedName: Permission
           language: !<!Languages> 
             default:
-              name: Permission
+              name: permission
               description: the permissions for the acl policy
-              originalName: Permission
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
@@ -397,9 +382,8 @@ schemas: !<!Schemas>
       serializedName: AccessPolicy
       language: !<!Languages> 
         default:
-          name: AccessPolicy
+          name: accessPolicy
           description: An Access policy
-          originalName: AccessPolicy
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -429,64 +413,60 @@ schemas: !<!Schemas>
               version: '2018-10-10'
             language: !<!Languages> 
               default:
-                name: Logging-Version
+                name: LoggingVersion
                 description: The version of Storage Analytics to configure.
             protocol: !<!Protocols> {}
           required: true
           serializedName: Version
           language: !<!Languages> 
             default:
-              name: Version
+              name: version
               description: The version of Storage Analytics to configure.
-              originalName: Version
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: !<!BooleanSchema> &ref_15
             type: boolean
             language: !<!Languages> 
               default:
-                name: typeForDelete
+                name: Boolean
                 description: Indicates whether all delete requests should be logged.
             protocol: !<!Protocols> {}
           required: true
           serializedName: Delete
           language: !<!Languages> 
             default:
-              name: Delete
+              name: delete
               description: Indicates whether all delete requests should be logged.
-              originalName: Delete
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: !<!BooleanSchema> &ref_16
             type: boolean
             language: !<!Languages> 
               default:
-                name: typeForRead
+                name: Boolean
                 description: Indicates whether all read requests should be logged.
             protocol: !<!Protocols> {}
           required: true
           serializedName: Read
           language: !<!Languages> 
             default:
-              name: Read
+              name: read
               description: Indicates whether all read requests should be logged.
-              originalName: Read
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: !<!BooleanSchema> &ref_17
             type: boolean
             language: !<!Languages> 
               default:
-                name: typeForWrite
+                name: Boolean
                 description: Indicates whether all write requests should be logged.
             protocol: !<!Protocols> {}
           required: true
           serializedName: Write
           language: !<!Languages> 
             default:
-              name: Write
+              name: write
               description: Indicates whether all write requests should be logged.
-              originalName: Write
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: !<!ObjectSchema> &ref_3
@@ -500,16 +480,15 @@ schemas: !<!Schemas>
                 type: boolean
                 language: !<!Languages> 
                   default:
-                    name: typeForEnabled
+                    name: Boolean
                     description: Indicates whether a retention policy is enabled for the storage service
                 protocol: !<!Protocols> {}
               required: true
               serializedName: Enabled
               language: !<!Languages> 
                 default:
-                  name: Enabled
+                  name: enabled
                   description: Indicates whether a retention policy is enabled for the storage service
-                  originalName: Enabled
               protocol: !<!Protocols> {}
             - !<!Property> 
               schema: !<!NumberSchema> &ref_24
@@ -518,16 +497,15 @@ schemas: !<!Schemas>
                 precision: 32
                 language: !<!Languages> 
                   default:
-                    name: typeForDays
+                    name: Integer
                     description: Indicates the number of days that metrics or logging or soft-deleted data should be retained. All data older than this value will be deleted
                 protocol: !<!Protocols> {}
               required: false
               serializedName: Days
               language: !<!Languages> 
                 default:
-                  name: Days
+                  name: days
                   description: Indicates the number of days that metrics or logging or soft-deleted data should be retained. All data older than this value will be deleted
-                  originalName: Days
               protocol: !<!Protocols> {}
             language: !<!Languages> 
               default:
@@ -539,9 +517,8 @@ schemas: !<!Schemas>
           serializedName: RetentionPolicy
           language: !<!Languages> 
             default:
-              name: RetentionPolicy
+              name: retentionPolicy
               description: the retention policy
-              originalName: RetentionPolicy
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
@@ -552,9 +529,8 @@ schemas: !<!Schemas>
       serializedName: Logging
       language: !<!Languages> 
         default:
-          name: Logging
+          name: logging
           description: Azure Analytics Logging settings.
-          originalName: Logging
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!ObjectSchema> &ref_4
@@ -571,48 +547,45 @@ schemas: !<!Schemas>
               version: '2018-10-10'
             language: !<!Languages> 
               default:
-                name: Metrics-Version
+                name: MetricsVersion
                 description: The version of Storage Analytics to configure.
             protocol: !<!Protocols> {}
           required: false
           serializedName: Version
           language: !<!Languages> 
             default:
-              name: Version
+              name: version
               description: The version of Storage Analytics to configure.
-              originalName: Version
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: !<!BooleanSchema> &ref_19
             type: boolean
             language: !<!Languages> 
               default:
-                name: typeForEnabled
+                name: Boolean
                 description: Indicates whether metrics are enabled for the Queue service.
             protocol: !<!Protocols> {}
           required: true
           serializedName: Enabled
           language: !<!Languages> 
             default:
-              name: Enabled
+              name: enabled
               description: Indicates whether metrics are enabled for the Queue service.
-              originalName: Enabled
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: !<!BooleanSchema> &ref_20
             type: boolean
             language: !<!Languages> 
               default:
-                name: typeForIncludeAPIs
+                name: Boolean
                 description: Indicates whether metrics should generate summary statistics for called API operations.
             protocol: !<!Protocols> {}
           required: false
           serializedName: IncludeAPIs
           language: !<!Languages> 
             default:
-              name: IncludeAPIs
+              name: includeApIs
               description: Indicates whether metrics should generate summary statistics for called API operations.
-              originalName: IncludeAPIs
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: *ref_3
@@ -620,9 +593,8 @@ schemas: !<!Schemas>
           serializedName: RetentionPolicy
           language: !<!Languages> 
             default:
-              name: RetentionPolicy
+              name: retentionPolicy
               description: the retention policy
-              originalName: RetentionPolicy
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
@@ -633,18 +605,16 @@ schemas: !<!Schemas>
       serializedName: HourMetrics
       language: !<!Languages> 
         default:
-          name: HourMetrics
+          name: hourMetrics
           description: ''
-          originalName: HourMetrics
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: *ref_4
       serializedName: MinuteMetrics
       language: !<!Languages> 
         default:
-          name: MinuteMetrics
+          name: minuteMetrics
           description: ''
-          originalName: MinuteMetrics
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!ArraySchema> &ref_14
@@ -666,7 +636,7 @@ schemas: !<!Schemas>
                 version: '2018-10-10'
               language: !<!Languages> 
                 default:
-                  name: CorsRule-AllowedOrigins
+                  name: CorsRuleAllowedOrigins
                   description: >-
                     The origin domains that are permitted to make a request against the storage service via CORS. The origin domain is the domain from which the request originates. Note that the origin must be an exact case-sensitive match
                     with the origin that the user age sends to the service. You can also use the wildcard character '*' to allow all origin domains to make requests via CORS.
@@ -675,11 +645,10 @@ schemas: !<!Schemas>
             serializedName: AllowedOrigins
             language: !<!Languages> 
               default:
-                name: AllowedOrigins
+                name: allowedOrigins
                 description: >-
                   The origin domains that are permitted to make a request against the storage service via CORS. The origin domain is the domain from which the request originates. Note that the origin must be an exact case-sensitive match
                   with the origin that the user age sends to the service. You can also use the wildcard character '*' to allow all origin domains to make requests via CORS.
-                originalName: AllowedOrigins
             protocol: !<!Protocols> {}
           - !<!Property> 
             schema: !<!StringSchema> &ref_40
@@ -689,16 +658,15 @@ schemas: !<!Schemas>
                 version: '2018-10-10'
               language: !<!Languages> 
                 default:
-                  name: CorsRule-AllowedMethods
+                  name: CorsRuleAllowedMethods
                   description: The methods (HTTP request verbs) that the origin domain may use for a CORS request. (comma separated)
               protocol: !<!Protocols> {}
             required: true
             serializedName: AllowedMethods
             language: !<!Languages> 
               default:
-                name: AllowedMethods
+                name: allowedMethods
                 description: The methods (HTTP request verbs) that the origin domain may use for a CORS request. (comma separated)
-                originalName: AllowedMethods
             protocol: !<!Protocols> {}
           - !<!Property> 
             schema: !<!StringSchema> &ref_41
@@ -708,16 +676,15 @@ schemas: !<!Schemas>
                 version: '2018-10-10'
               language: !<!Languages> 
                 default:
-                  name: CorsRule-AllowedHeaders
+                  name: CorsRuleAllowedHeaders
                   description: the request headers that the origin domain may specify on the CORS request.
               protocol: !<!Protocols> {}
             required: true
             serializedName: AllowedHeaders
             language: !<!Languages> 
               default:
-                name: AllowedHeaders
+                name: allowedHeaders
                 description: the request headers that the origin domain may specify on the CORS request.
-                originalName: AllowedHeaders
             protocol: !<!Protocols> {}
           - !<!Property> 
             schema: !<!StringSchema> &ref_42
@@ -727,16 +694,15 @@ schemas: !<!Schemas>
                 version: '2018-10-10'
               language: !<!Languages> 
                 default:
-                  name: CorsRule-ExposedHeaders
+                  name: CorsRuleExposedHeaders
                   description: The response headers that may be sent in the response to the CORS request and exposed by the browser to the request issuer
               protocol: !<!Protocols> {}
             required: true
             serializedName: ExposedHeaders
             language: !<!Languages> 
               default:
-                name: ExposedHeaders
+                name: exposedHeaders
                 description: The response headers that may be sent in the response to the CORS request and exposed by the browser to the request issuer
-                originalName: ExposedHeaders
             protocol: !<!Protocols> {}
           - !<!Property> 
             schema: !<!NumberSchema> &ref_25
@@ -745,16 +711,15 @@ schemas: !<!Schemas>
               precision: 32
               language: !<!Languages> 
                 default:
-                  name: typeForMaxAgeInSeconds
+                  name: Integer
                   description: The maximum amount time that a browser should cache the preflight OPTIONS request.
               protocol: !<!Protocols> {}
             required: true
             serializedName: MaxAgeInSeconds
             language: !<!Languages> 
               default:
-                name: MaxAgeInSeconds
+                name: maxAgeInSeconds
                 description: The maximum amount time that a browser should cache the preflight OPTIONS request.
-                originalName: MaxAgeInSeconds
             protocol: !<!Protocols> {}
           language: !<!Languages> 
             default:
@@ -770,15 +735,14 @@ schemas: !<!Schemas>
             wrapped: true
         language: !<!Languages> 
           default:
-            name: StorageServiceProperties-Cors
+            name: StorageServicePropertiesCors
             description: The set of CORS rules.
         protocol: !<!Protocols> {}
       serializedName: Cors
       language: !<!Languages> 
         default:
-          name: Cors
+          name: cors
           description: The set of CORS rules.
-          originalName: Cors
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -810,19 +774,19 @@ schemas: !<!Schemas>
               value: live
               language:
                 default:
-                  name: live
+                  name: Live
                   description: ''
             - !<!ChoiceValue> 
               value: bootstrap
               language:
                 default:
-                  name: bootstrap
+                  name: Bootstrap
                   description: ''
             - !<!ChoiceValue> 
               value: unavailable
               language:
                 default:
-                  name: unavailable
+                  name: Unavailable
                   description: ''
             type: choice
             apiVersions:
@@ -832,7 +796,7 @@ schemas: !<!Schemas>
               type: string
               language: !<!Languages> 
                 default:
-                  name: string
+                  name: String
                   description: simple string
               protocol: !<!Protocols> {}
             language: !<!Languages> 
@@ -844,9 +808,8 @@ schemas: !<!Schemas>
           serializedName: Status
           language: !<!Languages> 
             default:
-              name: Status
+              name: status
               description: The status of the secondary location
-              originalName: Status
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: !<!DateTimeSchema> &ref_23
@@ -857,7 +820,7 @@ schemas: !<!Schemas>
               version: '2018-10-10'
             language: !<!Languages> 
               default:
-                name: GeoReplication-LastSyncTime
+                name: GeoReplicationLastSyncTime
                 description: >-
                   A GMT date/time value, to the second. All primary writes preceding this value are guaranteed to be available for read operations at the secondary. Primary writes after this point in time may or may not be available for
                   reads.
@@ -866,11 +829,10 @@ schemas: !<!Schemas>
           serializedName: LastSyncTime
           language: !<!Languages> 
             default:
-              name: LastSyncTime
+              name: lastSyncTime
               description: >-
                 A GMT date/time value, to the second. All primary writes preceding this value are guaranteed to be available for read operations at the secondary. Primary writes after this point in time may or may not be available for
                 reads.
-              originalName: LastSyncTime
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
@@ -881,9 +843,8 @@ schemas: !<!Schemas>
       serializedName: GeoReplication
       language: !<!Languages> 
         default:
-          name: GeoReplication
+          name: geoReplication
           description: ''
-          originalName: GeoReplication
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -901,19 +862,19 @@ schemas: !<!Schemas>
       value: application/json;odata=nometadata
       language:
         default:
-          name: application/json;odata=nometadata
+          name: ApplicationJsonOdataNometadata
           description: ''
     - !<!ChoiceValue> 
       value: application/json;odata=minimalmetadata
       language:
         default:
-          name: application/json;odata=minimalmetadata
+          name: ApplicationJsonOdataMinimalmetadata
           description: ''
     - !<!ChoiceValue> 
       value: application/json;odata=fullmetadata
       language:
         default:
-          name: application/json;odata=fullmetadata
+          name: ApplicationJsonOdataFullmetadata
           description: ''
     type: choice
     apiVersions:
@@ -961,7 +922,7 @@ schemas: !<!Schemas>
     valueType: *ref_9
     language: !<!Languages> 
       default:
-        name: Constant1
+        name: Constant2
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_47
@@ -971,7 +932,7 @@ schemas: !<!Schemas>
     valueType: *ref_9
     language: !<!Languages> 
       default:
-        name: Constant2
+        name: Constant3
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_110
@@ -981,7 +942,7 @@ schemas: !<!Schemas>
     valueType: *ref_9
     language: !<!Languages> 
       default:
-        name: Constant3
+        name: Constant4
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_120
@@ -991,7 +952,7 @@ schemas: !<!Schemas>
     valueType: *ref_9
     language: !<!Languages> 
       default:
-        name: Constant4
+        name: Constant5
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_121
@@ -1001,7 +962,7 @@ schemas: !<!Schemas>
     valueType: *ref_9
     language: !<!Languages> 
       default:
-        name: Constant5
+        name: Constant6
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_130
@@ -1011,7 +972,7 @@ schemas: !<!Schemas>
     valueType: *ref_9
     language: !<!Languages> 
       default:
-        name: Constant6
+        name: Constant7
         description: ''
     protocol: !<!Protocols> {}
   dateTimes:
@@ -1023,7 +984,7 @@ schemas: !<!Schemas>
       version: '2018-10-10'
     language: !<!Languages> 
       default:
-        name: date-time
+        name: DateTime
         description: ''
         header: Date
     protocol: !<!Protocols> {}
@@ -1040,7 +1001,7 @@ schemas: !<!Schemas>
     precision: 32
     language: !<!Languages> 
       default:
-        name: integer
+        name: Integer
         description: ''
     protocol: !<!Protocols> {}
   - *ref_24
@@ -1054,7 +1015,7 @@ schemas: !<!Schemas>
       version: '2018-10-10'
     language: !<!Languages> 
       default:
-        name: string
+        name: String
         description: ''
         header: x-ms-error-code
     protocol: !<!Protocols> {}
@@ -1103,7 +1064,7 @@ globalParameters:
     x-ms-priority: 1
   language: !<!Languages> 
     default:
-      name: version
+      name: Version
       description: Specifies the version of the operation to use for this request.
       serializedName: x-ms-version
   protocol: !<!Protocols> 
@@ -1117,7 +1078,7 @@ globalParameters:
     x-ms-priority: 1
   language: !<!Languages> 
     default:
-      name: version
+      name: Version
       description: Specifies the version of the operation to use for this request.
       serializedName: x-ms-version
   protocol: !<!Protocols> 
@@ -1131,7 +1092,7 @@ globalParameters:
     x-ms-priority: 1
   language: !<!Languages> 
     default:
-      name: version
+      name: Version
       description: Specifies the version of the operation to use for this request.
       serializedName: x-ms-version
   protocol: !<!Protocols> 
@@ -1145,7 +1106,7 @@ globalParameters:
     x-ms-priority: 1
   language: !<!Languages> 
     default:
-      name: version
+      name: Version
       description: Specifies the version of the operation to use for this request.
       serializedName: x-ms-version
   protocol: !<!Protocols> 
@@ -1159,7 +1120,7 @@ globalParameters:
     x-ms-priority: 1
   language: !<!Languages> 
     default:
-      name: version
+      name: Version
       description: Specifies the version of the operation to use for this request.
       serializedName: x-ms-version
   protocol: !<!Protocols> 
@@ -1173,7 +1134,7 @@ globalParameters:
     x-ms-priority: 1
   language: !<!Languages> 
     default:
-      name: version
+      name: Version
       description: Specifies the version of the operation to use for this request.
       serializedName: x-ms-version
   protocol: !<!Protocols> 
@@ -1187,7 +1148,7 @@ globalParameters:
     x-ms-priority: 1
   language: !<!Languages> 
     default:
-      name: version
+      name: Version
       description: Specifies the version of the operation to use for this request.
       serializedName: x-ms-version
   protocol: !<!Protocols> 
@@ -1201,7 +1162,7 @@ globalParameters:
     x-ms-priority: 1
   language: !<!Languages> 
     default:
-      name: version
+      name: Version
       description: Specifies the version of the operation to use for this request.
       serializedName: x-ms-version
   protocol: !<!Protocols> 
@@ -1215,7 +1176,7 @@ globalParameters:
     x-ms-priority: 1
   language: !<!Languages> 
     default:
-      name: version
+      name: Version
       description: Specifies the version of the operation to use for this request.
       serializedName: x-ms-version
   protocol: !<!Protocols> 
@@ -1229,7 +1190,7 @@ globalParameters:
     x-ms-priority: 1
   language: !<!Languages> 
     default:
-      name: version
+      name: Version
       description: Specifies the version of the operation to use for this request.
       serializedName: x-ms-version
   protocol: !<!Protocols> 
@@ -1243,7 +1204,7 @@ globalParameters:
     x-ms-priority: 1
   language: !<!Languages> 
     default:
-      name: version
+      name: Version
       description: Specifies the version of the operation to use for this request.
       serializedName: x-ms-version
   protocol: !<!Protocols> 
@@ -1257,7 +1218,7 @@ globalParameters:
     x-ms-priority: 1
   language: !<!Languages> 
     default:
-      name: version
+      name: Version
       description: Specifies the version of the operation to use for this request.
       serializedName: x-ms-version
   protocol: !<!Protocols> 
@@ -1271,7 +1232,7 @@ globalParameters:
     x-ms-priority: 1
   language: !<!Languages> 
     default:
-      name: version
+      name: Version
       description: Specifies the version of the operation to use for this request.
       serializedName: x-ms-version
   protocol: !<!Protocols> 
@@ -1322,7 +1283,7 @@ operationGroups:
             name: QueryOptions
         language: !<!Languages> 
           default:
-            name: Format
+            name: format
             description: Specifies the media type for the response
             serializedName: $format
         protocol: !<!Protocols> 
@@ -1336,7 +1297,7 @@ operationGroups:
             name: QueryOptions
         language: !<!Languages> 
           default:
-            name: Top
+            name: top
             description: Maximum number of records to return.
             serializedName: $top
         protocol: !<!Protocols> 
@@ -1350,7 +1311,7 @@ operationGroups:
             name: QueryOptions
         language: !<!Languages> 
           default:
-            name: Select
+            name: select
             description: 'Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".'
             serializedName: $select
         protocol: !<!Protocols> 
@@ -1364,7 +1325,7 @@ operationGroups:
             name: QueryOptions
         language: !<!Languages> 
           default:
-            name: Filter
+            name: filter
             description: OData filter expression.
             serializedName: $filter
         protocol: !<!Protocols> 
@@ -1458,7 +1419,7 @@ operationGroups:
           x-ms-parameter-grouping: *ref_58
         language: !<!Languages> 
           default:
-            name: Format
+            name: format
             description: Specifies the media type for the response
             serializedName: $format
         protocol: !<!Protocols> 
@@ -1708,7 +1669,7 @@ operationGroups:
           x-ms-parameter-grouping: *ref_58
         language: !<!Languages> 
           default:
-            name: Format
+            name: format
             description: Specifies the media type for the response
             serializedName: $format
         protocol: !<!Protocols> 
@@ -1721,7 +1682,7 @@ operationGroups:
           x-ms-parameter-grouping: *ref_68
         language: !<!Languages> 
           default:
-            name: Top
+            name: top
             description: Maximum number of records to return.
             serializedName: $top
         protocol: !<!Protocols> 
@@ -1734,7 +1695,7 @@ operationGroups:
           x-ms-parameter-grouping: *ref_69
         language: !<!Languages> 
           default:
-            name: Select
+            name: select
             description: 'Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".'
             serializedName: $select
         protocol: !<!Protocols> 
@@ -1747,7 +1708,7 @@ operationGroups:
           x-ms-parameter-grouping: *ref_70
         language: !<!Languages> 
           default:
-            name: Filter
+            name: filter
             description: OData filter expression.
             serializedName: $filter
         protocol: !<!Protocols> 
@@ -1886,7 +1847,7 @@ operationGroups:
           x-ms-parameter-grouping: *ref_58
         language: !<!Languages> 
           default:
-            name: Format
+            name: format
             description: Specifies the media type for the response
             serializedName: $format
         protocol: !<!Protocols> 
@@ -1899,7 +1860,7 @@ operationGroups:
           x-ms-parameter-grouping: *ref_69
         language: !<!Languages> 
           default:
-            name: Select
+            name: select
             description: 'Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".'
             serializedName: $select
         protocol: !<!Protocols> 
@@ -1912,7 +1873,7 @@ operationGroups:
           x-ms-parameter-grouping: *ref_70
         language: !<!Languages> 
           default:
-            name: Filter
+            name: filter
             description: OData filter expression.
             serializedName: $filter
         protocol: !<!Protocols> 
@@ -2076,7 +2037,7 @@ operationGroups:
           x-ms-parameter-grouping: *ref_58
         language: !<!Languages> 
           default:
-            name: Format
+            name: format
             description: Specifies the media type for the response
             serializedName: $format
         protocol: !<!Protocols> 
@@ -2250,7 +2211,7 @@ operationGroups:
           x-ms-parameter-grouping: *ref_58
         language: !<!Languages> 
           default:
-            name: Format
+            name: format
             description: Specifies the media type for the response
             serializedName: $format
         protocol: !<!Protocols> 
@@ -2405,7 +2366,7 @@ operationGroups:
           x-ms-parameter-grouping: *ref_58
         language: !<!Languages> 
           default:
-            name: Format
+            name: format
             description: Specifies the media type for the response
             serializedName: $format
         protocol: !<!Protocols> 
@@ -3138,7 +3099,7 @@ operationGroups:
   protocol: !<!Protocols> {}
 language: !<!Languages> 
   default:
-    name: ''
+    name: AzureStorageTables
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

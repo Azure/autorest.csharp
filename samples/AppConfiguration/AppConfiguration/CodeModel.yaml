@@ -68,7 +68,7 @@ schemas: !<!Schemas>
       serializedName: '@nextLink'
       language: !<!Languages> 
         default:
-          name: NextLink
+          name: nextLink
           description: The URI that can be used to request the next set of paged results.
       protocol: !<!Protocols> {}
     language: !<!Languages> 
@@ -158,7 +158,7 @@ schemas: !<!Schemas>
         precision: 32
         language: !<!Languages> 
           default:
-            name: TypeForstatus
+            name: Integer
             description: The HTTP status code that the error maps to.
         protocol: !<!Protocols> {}
       serializedName: status
@@ -293,31 +293,21 @@ schemas: !<!Schemas>
                 protocol: !<!Protocols> {}
               language: !<!Languages> 
                 default:
-<<<<<<< HEAD
                   name: KeyValueTags
-                  description: Dictionary of String
-=======
-                  name: KeyValue-tags
                   description: Dictionary of <string>
->>>>>>> feature/v3
               protocol: !<!Protocols> {}
             serializedName: tags
             language: !<!Languages> 
               default:
                 name: tags
-<<<<<<< HEAD
-                description: Dictionary of <paths·keys·get·parameters·0·schema>
-=======
                 description: Dictionary of <string>
-                originalName: tags
->>>>>>> feature/v3
             protocol: !<!Protocols> {}
           - !<!Property> 
             schema: !<!BooleanSchema> &ref_13
               type: boolean
               language: !<!Languages> 
                 default:
-                  name: TypeForlocked
+                  name: Boolean
                   description: ''
               protocol: !<!Protocols> {}
             serializedName: locked
@@ -374,7 +364,7 @@ schemas: !<!Schemas>
       serializedName: '@nextLink'
       language: !<!Languages> 
         default:
-          name: NextLink
+          name: nextLink
           description: The URI that can be used to request the next set of paged results.
       protocol: !<!Protocols> {}
     language: !<!Languages> 
@@ -451,7 +441,7 @@ schemas: !<!Schemas>
       serializedName: '@nextLink'
       language: !<!Languages> 
         default:
-          name: NextLink
+          name: nextLink
           description: The URI that can be used to request the next set of paged results.
       protocol: !<!Protocols> {}
     language: !<!Languages> 
@@ -1187,6 +1177,9 @@ operationGroups:
       default:
         name: GetKeys
         description: Gets a list of keys.
+        paging:
+          itemName: items
+          nextLinkName: '@nextLink'
         summary: Gets a list of keys.
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1398,6 +1391,9 @@ operationGroups:
       default:
         name: GetKeyValues
         description: Gets a list of key-values.
+        paging:
+          itemName: items
+          nextLinkName: '@nextLink'
         summary: Gets a list of key-values.
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2143,6 +2139,9 @@ operationGroups:
       default:
         name: GetLabels
         description: Gets a list of labels.
+        paging:
+          itemName: items
+          nextLinkName: '@nextLink'
         summary: Gets a list of labels.
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2593,6 +2592,9 @@ operationGroups:
       default:
         name: GetRevisions
         description: Gets a list of key-value revisions.
+        paging:
+          itemName: items
+          nextLinkName: '@nextLink'
         summary: Gets a list of key-value revisions.
     protocol: !<!Protocols> {}
   - !<!Operation> 

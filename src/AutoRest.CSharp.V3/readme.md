@@ -5,7 +5,7 @@
 ```yaml
 # autorest-core version
 use-extension:
-  "@autorest/modelerfour": "4.4.162"
+  "@autorest/modelerfour": "4.6.191"
 modelerfour:
   flatten-models: true
 pipeline:

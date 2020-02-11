@@ -1,14 +1,14 @@
 !<!CodeModel> 
 schemas: !<!Schemas> 
   objects:
-  - !<!ObjectSchema> &ref_11
+  - !<!ObjectSchema> &ref_10
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
     properties:
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_2
+      schema: !<!ArraySchema> &ref_3
         type: array
         apiVersions:
         - !<!ApiVersion> 
@@ -27,12 +27,12 @@ schemas: !<!Schemas>
                 version: 1.0.0
               properties:
               - !<!Property> 
-                schema: !<!NumberSchema> &ref_3
+                schema: !<!NumberSchema> &ref_2
                   type: integer
                   precision: 32
                   language: !<!Languages> 
                     default:
-                      name: TypeForid
+                      name: Integer
                       description: ''
                   protocol: !<!Protocols> {}
                 serializedName: id
@@ -42,7 +42,7 @@ schemas: !<!Schemas>
                     description: ''
                 protocol: !<!Protocols> {}
               - !<!Property> 
-                schema: !<!StringSchema> &ref_5
+                schema: !<!StringSchema> &ref_4
                   type: string
                   apiVersions:
                   - !<!ApiVersion> 
@@ -88,7 +88,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_6
+      schema: !<!StringSchema> &ref_5
         type: string
         apiVersions:
         - !<!ApiVersion> 
@@ -119,14 +119,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     properties:
     - !<!Property> 
-      schema: !<!NumberSchema> &ref_4
-        type: integer
-        precision: 32
-        language: !<!Languages> 
-          default:
-            name: TypeForstatus
-            description: ''
-        protocol: !<!Protocols> {}
+      schema: *ref_2
       serializedName: status
       language: !<!Languages> 
         default:
@@ -134,7 +127,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_7
+      schema: !<!StringSchema> &ref_6
         type: string
         apiVersions:
         - !<!ApiVersion> 
@@ -157,20 +150,19 @@ schemas: !<!Schemas>
         namespace: Api100
     protocol: !<!Protocols> {}
   arrays:
-  - *ref_2
-  numbers:
   - *ref_3
-  - *ref_4
+  numbers:
+  - *ref_2
   strings:
-  - !<!StringSchema> &ref_8
+  - !<!StringSchema> &ref_7
     type: string
     language: !<!Languages> 
       default:
         name: String
         description: simple string
     protocol: !<!Protocols> {}
+  - *ref_4
   - *ref_5
-  - *ref_6
   - !<!StringSchema> &ref_13
     type: string
     apiVersions:
@@ -192,10 +184,10 @@ schemas: !<!Schemas>
         name: String
         description: ''
     protocol: !<!Protocols> {}
-  - *ref_7
+  - *ref_6
 globalParameters:
-- !<!Parameter> &ref_9
-  schema: *ref_8
+- !<!Parameter> &ref_8
+  schema: *ref_7
   clientDefaultValue: host
   implementation: Client
   required: true
@@ -221,14 +213,14 @@ operationGroups:
 - !<!OperationGroup> 
   $key: Paging
   operations:
-  - !<!Operation> 
+  - !<!Operation> &ref_12
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - !<!Parameter> &ref_10
-        schema: *ref_8
+      - !<!Parameter> &ref_9
+        schema: *ref_7
         implementation: Method
         required: true
         extensions:
@@ -245,9 +237,9 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: uri
-      - *ref_9
+      - *ref_8
       signatureParameters:
-      - *ref_10
+      - *ref_9
       language: !<!Languages> 
         default:
           name: ''
@@ -259,7 +251,7 @@ operationGroups:
           uri: 'http://{accountName}{host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_11
+      schema: *ref_10
       language: !<!Languages> 
         default:
           name: ''
@@ -289,6 +281,9 @@ operationGroups:
       default:
         name: GetPagesPartialUrl
         description: 'A paging operation that combines custom url, paging and partial URL and expect to concat after host'
+        paging:
+          itemName: values
+          nextLinkName: nextLink
     protocol: !<!Protocols> {}
   - !<!Operation> 
     apiVersions:
@@ -296,8 +291,8 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - !<!Parameter> &ref_12
-        schema: *ref_8
+      - !<!Parameter> &ref_11
+        schema: *ref_7
         implementation: Method
         required: true
         extensions:
@@ -314,9 +309,9 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: uri
-      - *ref_9
+      - *ref_8
       signatureParameters:
-      - *ref_12
+      - *ref_11
       language: !<!Languages> 
         default:
           name: ''
@@ -328,7 +323,7 @@ operationGroups:
           uri: 'http://{accountName}{host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_11
+      schema: *ref_10
       language: !<!Languages> 
         default:
           name: ''
@@ -359,6 +354,12 @@ operationGroups:
       default:
         name: GetPagesPartialUrlOperation
         description: 'A paging operation that combines custom url, paging and partial URL with next operation'
+        paging:
+          group: Paging
+          itemName: values
+          member: GetPagesPartialUrlOperationNext
+          nextLinkName: nextLink
+          nextLinkOperation: *ref_12
     protocol: !<!Protocols> {}
   - !<!Operation> 
     apiVersions:
@@ -367,7 +368,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - !<!Parameter> &ref_14
-        schema: *ref_8
+        schema: *ref_7
         implementation: Method
         required: true
         extensions:
@@ -384,7 +385,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: uri
-      - *ref_9
+      - *ref_8
       - !<!Parameter> &ref_15
         schema: *ref_13
         implementation: Method
@@ -413,7 +414,7 @@ operationGroups:
           uri: 'http://{accountName}{host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_11
+      schema: *ref_10
       language: !<!Languages> 
         default:
           name: ''
@@ -444,6 +445,12 @@ operationGroups:
       default:
         name: GetPagesPartialUrlOperationNext
         description: 'A paging operation that combines custom url, paging and partial URL'
+        paging:
+          group: Paging
+          itemName: values
+          member: GetPagesPartialUrlOperationNext
+          nextLinkName: nextLink
+          nextLinkOperation: *ref_12
     protocol: !<!Protocols> {}
   language: !<!Languages> 
     default:

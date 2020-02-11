@@ -47,7 +47,7 @@ schemas: !<!Schemas>
         precision: 32
         language: !<!Languages> 
           default:
-            name: TypeForcapacity
+            name: Integer
             description: Non required int betwen 0 and 100 exclusive.
         protocol: !<!Protocols> {}
       required: false
@@ -116,7 +116,7 @@ schemas: !<!Schemas>
             precision: 32
             language: !<!Languages> 
               default:
-                name: TypeForcount
+                name: Integer
                 description: Count
             protocol: !<!Protocols> {}
           required: false
@@ -216,7 +216,7 @@ schemas: !<!Schemas>
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
-            name: TypeForconstInt
+            name: Constant4
             description: Constant int
         protocol: !<!Protocols> {}
       required: true
@@ -288,7 +288,7 @@ schemas: !<!Schemas>
         precision: 32
         language: !<!Languages> 
           default:
-            name: TypeForcode
+            name: Integer
             description: ''
         protocol: !<!Protocols> {}
       serializedName: code
