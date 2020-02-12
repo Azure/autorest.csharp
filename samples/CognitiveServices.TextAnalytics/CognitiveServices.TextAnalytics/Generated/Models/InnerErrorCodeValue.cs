@@ -1,0 +1,30 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
+#nullable disable
+
+namespace CognitiveServices.TextAnalytics.Models
+{
+    /// <summary> Error code. </summary>
+    public enum InnerErrorCodeValue
+    {
+        /// <summary> invalidParameterValue. </summary>
+        InvalidParameterValue,
+        /// <summary> invalidRequestBodyFormat. </summary>
+        InvalidRequestBodyFormat,
+        /// <summary> emptyRequest. </summary>
+        EmptyRequest,
+        /// <summary> missingInputRecords. </summary>
+        MissingInputRecords,
+        /// <summary> invalidDocument. </summary>
+        InvalidDocument,
+        /// <summary> modelVersionIncorrect. </summary>
+        ModelVersionIncorrect,
+        /// <summary> invalidDocumentBatch. </summary>
+        InvalidDocumentBatch,
+        /// <summary> unsupportedLanguageCode. </summary>
+        UnsupportedLanguageCode,
+        /// <summary> invalidCountryHint. </summary>
+        InvalidCountryHint
+    }
+}

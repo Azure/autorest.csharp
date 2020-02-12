@@ -16,7 +16,7 @@ namespace CognitiveServices.TextAnalytics.Models
             writer.WritePropertyName("id");
             writer.WriteStringValue(Id);
             writer.WritePropertyName("sentiment");
-            writer.WriteStringValue(Sentiment.ToString());
+            writer.WriteStringValue(Sentiment.ToSerialString());
             if (Statistics != null)
             {
                 writer.WritePropertyName("statistics");
@@ -33,9 +33,9 @@ namespace CognitiveServices.TextAnalytics.Models
             writer.WriteEndArray();
             writer.WriteEndObject();
         }
-        internal static Models.DocumentSentiment DeserializeDocumentSentiment(JsonElement element)
+        internal static DocumentSentiment DeserializeDocumentSentiment(JsonElement element)
         {
-            Models.DocumentSentiment result = new Models.DocumentSentiment();
+            DocumentSentiment result = new DocumentSentiment();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))
@@ -45,7 +45,7 @@ namespace CognitiveServices.TextAnalytics.Models
                 }
                 if (property.NameEquals("sentiment"))
                 {
-                    result.Sentiment = new Models.DocumentSentiment(property.Value.GetString());
+                    result.Sentiment = property.Value.GetString().ToDocumentSentimentValue();
                     continue;
                 }
                 if (property.NameEquals("statistics"))
@@ -59,14 +59,14 @@ namespace CognitiveServices.TextAnalytics.Models
                 }
                 if (property.NameEquals("documentScores"))
                 {
-                    result.DocumentScores = property.Value.GetObject();
+                    result.DocumentScores = SentimentConfidenceScorePerLabel.DeserializeSentimentConfidenceScorePerLabel(property.Value);
                     continue;
                 }
                 if (property.NameEquals("sentences"))
                 {
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Sentences.Add(Models.SentenceSentiment.DeserializeSentenceSentiment(item));
+                        result.Sentences.Add(SentenceSentiment.DeserializeSentenceSentiment(item));
                     }
                     continue;
                 }

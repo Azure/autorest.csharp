@@ -31,7 +31,7 @@ namespace CognitiveServices.TextAnalytics.Models
                 }
                 if (property.NameEquals("error"))
                 {
-                    result.Error = DocumentError.DeserializeDocumentError(property.Value);
+                    result.Error = TextAnalyticsError.DeserializeTextAnalyticsError(property.Value);
                     continue;
                 }
             }
