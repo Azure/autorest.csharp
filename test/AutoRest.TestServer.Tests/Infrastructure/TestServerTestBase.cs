@@ -12,6 +12,7 @@ using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Infrastructure
 {
+    [Parallelizable(ParallelScope.Fixtures)]
     [TestFixture(TestServerVersion.V1)]
     [TestFixture(TestServerVersion.V2)]
     public class TestServerTestBase

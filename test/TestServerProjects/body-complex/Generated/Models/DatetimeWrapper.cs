@@ -7,7 +7,7 @@ using System;
 
 namespace body_complex.Models
 {
-    /// <summary> The datetime-wrapper. </summary>
+    /// <summary> The DatetimeWrapper. </summary>
     public partial class DatetimeWrapper
     {
         public DateTimeOffset? Field { get; set; }

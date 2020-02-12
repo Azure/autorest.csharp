@@ -17,10 +17,10 @@ namespace CognitiveServices.TextAnalytics.Models
             writer.WriteStringValue(Text);
             writer.WritePropertyName("type");
             writer.WriteStringValue(Type);
-            if (SubType != null)
+            if (Subtype != null)
             {
-                writer.WritePropertyName("subType");
-                writer.WriteStringValue(SubType);
+                writer.WritePropertyName("subtype");
+                writer.WriteStringValue(Subtype);
             }
             writer.WritePropertyName("offset");
             writer.WriteNumberValue(Offset);
@@ -45,13 +45,13 @@ namespace CognitiveServices.TextAnalytics.Models
                     result.Type = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("subType"))
+                if (property.NameEquals("subtype"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         continue;
                     }
-                    result.SubType = property.Value.GetString();
+                    result.Subtype = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("offset"))

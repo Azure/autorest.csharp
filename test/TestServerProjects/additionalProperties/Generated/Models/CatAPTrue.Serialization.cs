@@ -8,7 +8,7 @@ using Azure.Core;
 
 namespace additionalProperties.Models
 {
-    public partial class CatAPTrue : IUtf8JsonSerializable
+    public partial class CatApTrue : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -37,9 +37,9 @@ namespace additionalProperties.Models
             }
             writer.WriteEndObject();
         }
-        internal static CatAPTrue DeserializeCatAPTrue(JsonElement element)
+        internal static CatApTrue DeserializeCatApTrue(JsonElement element)
         {
-            CatAPTrue result = new CatAPTrue();
+            CatApTrue result = new CatApTrue();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("friendly"))

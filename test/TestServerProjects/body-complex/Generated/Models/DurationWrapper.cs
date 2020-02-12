@@ -7,7 +7,7 @@ using System;
 
 namespace body_complex.Models
 {
-    /// <summary> The duration-wrapper. </summary>
+    /// <summary> The DurationWrapper. </summary>
     public partial class DurationWrapper
     {
         public TimeSpan? Field { get; set; }

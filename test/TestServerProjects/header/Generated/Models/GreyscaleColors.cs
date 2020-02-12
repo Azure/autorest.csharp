@@ -13,6 +13,6 @@ namespace header.Models
         /// <summary> black. </summary>
         Black,
         /// <summary> GREY. </summary>
-        GREY
+        Grey
     }
 }

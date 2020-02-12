@@ -3,6 +3,7 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
@@ -14,18 +15,29 @@ namespace CognitiveServices.TextAnalytics.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("code");
-            writer.WriteStringValue(Code.ToString());
+            writer.WriteStringValue(Code.ToSerialString());
             writer.WritePropertyName("message");
             writer.WriteStringValue(Message);
+            if (Details != null)
+            {
+                writer.WritePropertyName("details");
+                writer.WriteStartObject();
+                foreach (var item in Details)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteStringValue(item.Value);
+                }
+                writer.WriteEndObject();
+            }
             if (Target != null)
             {
                 writer.WritePropertyName("target");
                 writer.WriteStringValue(Target);
             }
-            if (Innererror != null)
+            if (InnerError != null)
             {
-                writer.WritePropertyName("innererror");
-                writer.WriteObjectValue(Innererror);
+                writer.WritePropertyName("innerError");
+                writer.WriteObjectValue(InnerError);
             }
             writer.WriteEndObject();
         }
@@ -36,12 +48,25 @@ namespace CognitiveServices.TextAnalytics.Models
             {
                 if (property.NameEquals("code"))
                 {
-                    result.Code = new InnerErrorCode(property.Value.GetString());
+                    result.Code = property.Value.GetString().ToInnerErrorCodeValue();
                     continue;
                 }
                 if (property.NameEquals("message"))
                 {
                     result.Message = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("details"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    result.Details = new Dictionary<string, string>();
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        result.Details.Add(property0.Name, property0.Value.GetString());
+                    }
                     continue;
                 }
                 if (property.NameEquals("target"))
@@ -53,13 +78,13 @@ namespace CognitiveServices.TextAnalytics.Models
                     result.Target = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("innererror"))
+                if (property.NameEquals("innerError"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         continue;
                     }
-                    result.Innererror = DeserializeInnerError(property.Value);
+                    result.InnerError = DeserializeInnerError(property.Value);
                     continue;
                 }
             }

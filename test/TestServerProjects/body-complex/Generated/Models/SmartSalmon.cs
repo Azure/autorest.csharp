@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace body_complex.Models
 {
-    /// <summary> The smart_salmon. </summary>
+    /// <summary> The SmartSalmon. </summary>
     public partial class SmartSalmon : Salmon, IDictionary<string, object>
     {
         /// <summary> Initializes a new instance of SmartSalmon. </summary>

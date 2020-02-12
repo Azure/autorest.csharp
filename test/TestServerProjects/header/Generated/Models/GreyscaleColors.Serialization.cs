@@ -13,7 +13,7 @@ namespace header.Models
         {
             GreyscaleColors.White => "White",
             GreyscaleColors.Black => "black",
-            GreyscaleColors.GREY => "GREY",
+            GreyscaleColors.Grey => "GREY",
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown GreyscaleColors value.")
         };
 
@@ -21,7 +21,7 @@ namespace header.Models
         {
             "White" => GreyscaleColors.White,
             "black" => GreyscaleColors.Black,
-            "GREY" => GreyscaleColors.GREY,
+            "GREY" => GreyscaleColors.Grey,
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown GreyscaleColors value.")
         };
     }

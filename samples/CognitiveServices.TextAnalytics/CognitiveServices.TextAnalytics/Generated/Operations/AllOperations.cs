@@ -31,7 +31,7 @@ namespace CognitiveServices.TextAnalytics
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
-        internal HttpMessage CreateEntitiesRecognitionGeneralRequest(string modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput)
+        internal HttpMessage CreateEntitiesRecognitionGeneralRequest(string modelVersion, bool? showStats, MultiLanguageBatchInput input)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -52,30 +52,27 @@ namespace CognitiveServices.TextAnalytics
             request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Content-Type", "text/json");
             using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(multiLanguageBatchInput);
+            content.JsonWriter.WriteObjectValue(input);
             request.Content = content;
             return message;
         }
-        /// <summary>
-        /// The API returns a list of general named entities in a given document. For the list of supported entity types, check &lt;a href=&quot;https://aka.ms/taner&quot;&gt;Supported Entity Types in Text Analytics API&lt;/a&gt;. For the list of enabled languages, check &lt;a href=&quot;https://aka.ms/talangs&quot;&gt;Supported languages in Text Analytics API&lt;/a&gt;.
-        /// .
-        /// </summary>
+        /// <summary> The API returns a list of general named entities in a given document. For the list of supported entity types, check &lt;a href=&quot;https://aka.ms/taner&quot;&gt;Supported Entity Types in Text Analytics API&lt;/a&gt;. See the &lt;a href=&quot;https://aka.ms/talangs&quot;&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages. </summary>
         /// <param name="modelVersion"> (Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. </param>
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
-        /// <param name="multiLanguageBatchInput"> Collection of documents to analyze. </param>
+        /// <param name="input"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<EntitiesResult>> EntitiesRecognitionGeneralAsync(string modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<EntitiesResult>> EntitiesRecognitionGeneralAsync(string modelVersion, bool? showStats, MultiLanguageBatchInput input, CancellationToken cancellationToken = default)
         {
-            if (multiLanguageBatchInput == null)
+            if (input == null)
             {
-                throw new ArgumentNullException(nameof(multiLanguageBatchInput));
+                throw new ArgumentNullException(nameof(input));
             }
 
             using var scope = clientDiagnostics.CreateScope("AllOperations.EntitiesRecognitionGeneral");
             scope.Start();
             try
             {
-                using var message = CreateEntitiesRecognitionGeneralRequest(modelVersion, showStats, multiLanguageBatchInput);
+                using var message = CreateEntitiesRecognitionGeneralRequest(modelVersion, showStats, input);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -95,26 +92,23 @@ namespace CognitiveServices.TextAnalytics
                 throw;
             }
         }
-        /// <summary>
-        /// The API returns a list of general named entities in a given document. For the list of supported entity types, check &lt;a href=&quot;https://aka.ms/taner&quot;&gt;Supported Entity Types in Text Analytics API&lt;/a&gt;. For the list of enabled languages, check &lt;a href=&quot;https://aka.ms/talangs&quot;&gt;Supported languages in Text Analytics API&lt;/a&gt;.
-        /// .
-        /// </summary>
+        /// <summary> The API returns a list of general named entities in a given document. For the list of supported entity types, check &lt;a href=&quot;https://aka.ms/taner&quot;&gt;Supported Entity Types in Text Analytics API&lt;/a&gt;. See the &lt;a href=&quot;https://aka.ms/talangs&quot;&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages. </summary>
         /// <param name="modelVersion"> (Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. </param>
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
-        /// <param name="multiLanguageBatchInput"> Collection of documents to analyze. </param>
+        /// <param name="input"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<EntitiesResult> EntitiesRecognitionGeneral(string modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput, CancellationToken cancellationToken = default)
+        public Response<EntitiesResult> EntitiesRecognitionGeneral(string modelVersion, bool? showStats, MultiLanguageBatchInput input, CancellationToken cancellationToken = default)
         {
-            if (multiLanguageBatchInput == null)
+            if (input == null)
             {
-                throw new ArgumentNullException(nameof(multiLanguageBatchInput));
+                throw new ArgumentNullException(nameof(input));
             }
 
             using var scope = clientDiagnostics.CreateScope("AllOperations.EntitiesRecognitionGeneral");
             scope.Start();
             try
             {
-                using var message = CreateEntitiesRecognitionGeneralRequest(modelVersion, showStats, multiLanguageBatchInput);
+                using var message = CreateEntitiesRecognitionGeneralRequest(modelVersion, showStats, input);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -134,7 +128,7 @@ namespace CognitiveServices.TextAnalytics
                 throw;
             }
         }
-        internal HttpMessage CreateEntitiesRecognitionPiiRequest(string modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput)
+        internal HttpMessage CreateEntitiesRecognitionPiiRequest(string modelVersion, bool? showStats, MultiLanguageBatchInput input)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -155,30 +149,30 @@ namespace CognitiveServices.TextAnalytics
             request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Content-Type", "text/json");
             using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(multiLanguageBatchInput);
+            content.JsonWriter.WriteObjectValue(input);
             request.Content = content;
             return message;
         }
         /// <summary>
-        /// The API returns a list of entities with personal information (\&quot;SSN\&quot;, \&quot;Bank Account\&quot; etc) in the document. See the &amp;lt;a href=&quot;https://aka.ms/talangs&quot;&amp;gt;Supported languages in Text Analytics API&amp;lt;/a&amp;gt; for the list of enabled languages.
+        /// The API returns a list of entities with personal information (\&quot;SSN\&quot;, \&quot;Bank Account\&quot; etc) in the document. For the list of supported entity types, check &lt;a href=&quot;https://aka.ms/tanerpii&quot;&gt;Supported Entity Types in Text Analytics API&lt;/a&gt;. See the &lt;a href=&quot;https://aka.ms/talangs&quot;&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages.
         /// .
         /// </summary>
         /// <param name="modelVersion"> (Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. </param>
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
-        /// <param name="multiLanguageBatchInput"> Collection of documents to analyze. </param>
+        /// <param name="input"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<EntitiesResult>> EntitiesRecognitionPiiAsync(string modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<EntitiesResult>> EntitiesRecognitionPiiAsync(string modelVersion, bool? showStats, MultiLanguageBatchInput input, CancellationToken cancellationToken = default)
         {
-            if (multiLanguageBatchInput == null)
+            if (input == null)
             {
-                throw new ArgumentNullException(nameof(multiLanguageBatchInput));
+                throw new ArgumentNullException(nameof(input));
             }
 
             using var scope = clientDiagnostics.CreateScope("AllOperations.EntitiesRecognitionPii");
             scope.Start();
             try
             {
-                using var message = CreateEntitiesRecognitionPiiRequest(modelVersion, showStats, multiLanguageBatchInput);
+                using var message = CreateEntitiesRecognitionPiiRequest(modelVersion, showStats, input);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -199,25 +193,25 @@ namespace CognitiveServices.TextAnalytics
             }
         }
         /// <summary>
-        /// The API returns a list of entities with personal information (\&quot;SSN\&quot;, \&quot;Bank Account\&quot; etc) in the document. See the &amp;lt;a href=&quot;https://aka.ms/talangs&quot;&amp;gt;Supported languages in Text Analytics API&amp;lt;/a&amp;gt; for the list of enabled languages.
+        /// The API returns a list of entities with personal information (\&quot;SSN\&quot;, \&quot;Bank Account\&quot; etc) in the document. For the list of supported entity types, check &lt;a href=&quot;https://aka.ms/tanerpii&quot;&gt;Supported Entity Types in Text Analytics API&lt;/a&gt;. See the &lt;a href=&quot;https://aka.ms/talangs&quot;&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages.
         /// .
         /// </summary>
         /// <param name="modelVersion"> (Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. </param>
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
-        /// <param name="multiLanguageBatchInput"> Collection of documents to analyze. </param>
+        /// <param name="input"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<EntitiesResult> EntitiesRecognitionPii(string modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput, CancellationToken cancellationToken = default)
+        public Response<EntitiesResult> EntitiesRecognitionPii(string modelVersion, bool? showStats, MultiLanguageBatchInput input, CancellationToken cancellationToken = default)
         {
-            if (multiLanguageBatchInput == null)
+            if (input == null)
             {
-                throw new ArgumentNullException(nameof(multiLanguageBatchInput));
+                throw new ArgumentNullException(nameof(input));
             }
 
             using var scope = clientDiagnostics.CreateScope("AllOperations.EntitiesRecognitionPii");
             scope.Start();
             try
             {
-                using var message = CreateEntitiesRecognitionPiiRequest(modelVersion, showStats, multiLanguageBatchInput);
+                using var message = CreateEntitiesRecognitionPiiRequest(modelVersion, showStats, input);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -237,7 +231,7 @@ namespace CognitiveServices.TextAnalytics
                 throw;
             }
         }
-        internal HttpMessage CreateEntitiesLinkingRequest(string modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput)
+        internal HttpMessage CreateEntitiesLinkingRequest(string modelVersion, bool? showStats, MultiLanguageBatchInput input)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -258,30 +252,27 @@ namespace CognitiveServices.TextAnalytics
             request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Content-Type", "text/json");
             using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(multiLanguageBatchInput);
+            content.JsonWriter.WriteObjectValue(input);
             request.Content = content;
             return message;
         }
-        /// <summary>
-        /// The API returns a list of recognized entities with links to a well-known knowledge base. See the &amp;lt;a href=&quot;https://aka.ms/talangs&quot;&amp;gt;Supported languages in Text Analytics API.
-        /// .
-        /// </summary>
+        /// <summary> The API returns a list of recognized entities with links to a well-known knowledge base. See the &lt;a href=&quot;https://aka.ms/talangs&quot;&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages. </summary>
         /// <param name="modelVersion"> (Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. </param>
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
-        /// <param name="multiLanguageBatchInput"> Collection of documents to analyze. </param>
+        /// <param name="input"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<EntityLinkingResult>> EntitiesLinkingAsync(string modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<EntityLinkingResult>> EntitiesLinkingAsync(string modelVersion, bool? showStats, MultiLanguageBatchInput input, CancellationToken cancellationToken = default)
         {
-            if (multiLanguageBatchInput == null)
+            if (input == null)
             {
-                throw new ArgumentNullException(nameof(multiLanguageBatchInput));
+                throw new ArgumentNullException(nameof(input));
             }
 
             using var scope = clientDiagnostics.CreateScope("AllOperations.EntitiesLinking");
             scope.Start();
             try
             {
-                using var message = CreateEntitiesLinkingRequest(modelVersion, showStats, multiLanguageBatchInput);
+                using var message = CreateEntitiesLinkingRequest(modelVersion, showStats, input);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -301,26 +292,23 @@ namespace CognitiveServices.TextAnalytics
                 throw;
             }
         }
-        /// <summary>
-        /// The API returns a list of recognized entities with links to a well-known knowledge base. See the &amp;lt;a href=&quot;https://aka.ms/talangs&quot;&amp;gt;Supported languages in Text Analytics API.
-        /// .
-        /// </summary>
+        /// <summary> The API returns a list of recognized entities with links to a well-known knowledge base. See the &lt;a href=&quot;https://aka.ms/talangs&quot;&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages. </summary>
         /// <param name="modelVersion"> (Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. </param>
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
-        /// <param name="multiLanguageBatchInput"> Collection of documents to analyze. </param>
+        /// <param name="input"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<EntityLinkingResult> EntitiesLinking(string modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput, CancellationToken cancellationToken = default)
+        public Response<EntityLinkingResult> EntitiesLinking(string modelVersion, bool? showStats, MultiLanguageBatchInput input, CancellationToken cancellationToken = default)
         {
-            if (multiLanguageBatchInput == null)
+            if (input == null)
             {
-                throw new ArgumentNullException(nameof(multiLanguageBatchInput));
+                throw new ArgumentNullException(nameof(input));
             }
 
             using var scope = clientDiagnostics.CreateScope("AllOperations.EntitiesLinking");
             scope.Start();
             try
             {
-                using var message = CreateEntitiesLinkingRequest(modelVersion, showStats, multiLanguageBatchInput);
+                using var message = CreateEntitiesLinkingRequest(modelVersion, showStats, input);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -340,7 +328,7 @@ namespace CognitiveServices.TextAnalytics
                 throw;
             }
         }
-        internal HttpMessage CreateKeyPhrasesRequest(string modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput)
+        internal HttpMessage CreateKeyPhrasesRequest(string modelVersion, bool? showStats, MultiLanguageBatchInput input)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -361,27 +349,27 @@ namespace CognitiveServices.TextAnalytics
             request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Content-Type", "text/json");
             using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(multiLanguageBatchInput);
+            content.JsonWriter.WriteObjectValue(input);
             request.Content = content;
             return message;
         }
-        /// <summary> The API returns a list of strings denoting the key phrases in the input text. See the &amp;lt;a href=&quot;https://aka.ms/talangs&quot;&amp;gt;Supported languages in Text Analytics API&amp;lt;/a&amp;gt; for the list of enabled languages. </summary>
+        /// <summary> The API returns a list of strings denoting the key phrases in the input text. See the &lt;a href=&quot;https://aka.ms/talangs&quot;&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages. </summary>
         /// <param name="modelVersion"> (Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. </param>
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
-        /// <param name="multiLanguageBatchInput"> Collection of documents to analyze. </param>
+        /// <param name="input"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<KeyPhraseResult>> KeyPhrasesAsync(string modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<KeyPhraseResult>> KeyPhrasesAsync(string modelVersion, bool? showStats, MultiLanguageBatchInput input, CancellationToken cancellationToken = default)
         {
-            if (multiLanguageBatchInput == null)
+            if (input == null)
             {
-                throw new ArgumentNullException(nameof(multiLanguageBatchInput));
+                throw new ArgumentNullException(nameof(input));
             }
 
             using var scope = clientDiagnostics.CreateScope("AllOperations.KeyPhrases");
             scope.Start();
             try
             {
-                using var message = CreateKeyPhrasesRequest(modelVersion, showStats, multiLanguageBatchInput);
+                using var message = CreateKeyPhrasesRequest(modelVersion, showStats, input);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -401,23 +389,23 @@ namespace CognitiveServices.TextAnalytics
                 throw;
             }
         }
-        /// <summary> The API returns a list of strings denoting the key phrases in the input text. See the &amp;lt;a href=&quot;https://aka.ms/talangs&quot;&amp;gt;Supported languages in Text Analytics API&amp;lt;/a&amp;gt; for the list of enabled languages. </summary>
+        /// <summary> The API returns a list of strings denoting the key phrases in the input text. See the &lt;a href=&quot;https://aka.ms/talangs&quot;&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages. </summary>
         /// <param name="modelVersion"> (Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. </param>
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
-        /// <param name="multiLanguageBatchInput"> Collection of documents to analyze. </param>
+        /// <param name="input"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<KeyPhraseResult> KeyPhrases(string modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput, CancellationToken cancellationToken = default)
+        public Response<KeyPhraseResult> KeyPhrases(string modelVersion, bool? showStats, MultiLanguageBatchInput input, CancellationToken cancellationToken = default)
         {
-            if (multiLanguageBatchInput == null)
+            if (input == null)
             {
-                throw new ArgumentNullException(nameof(multiLanguageBatchInput));
+                throw new ArgumentNullException(nameof(input));
             }
 
             using var scope = clientDiagnostics.CreateScope("AllOperations.KeyPhrases");
             scope.Start();
             try
             {
-                using var message = CreateKeyPhrasesRequest(modelVersion, showStats, multiLanguageBatchInput);
+                using var message = CreateKeyPhrasesRequest(modelVersion, showStats, input);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -437,7 +425,7 @@ namespace CognitiveServices.TextAnalytics
                 throw;
             }
         }
-        internal HttpMessage CreateLanguagesRequest(string modelVersion, bool? showStats, LanguageBatchInput languageBatchInput)
+        internal HttpMessage CreateLanguagesRequest(string modelVersion, bool? showStats, LanguageBatchInput input)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -458,27 +446,27 @@ namespace CognitiveServices.TextAnalytics
             request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Content-Type", "text/json");
             using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(languageBatchInput);
+            content.JsonWriter.WriteObjectValue(input);
             request.Content = content;
             return message;
         }
-        /// <summary> The API returns the detected language and a numeric score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true. See the &amp;lt;a href=&quot;https://aka.ms/talangs&quot;&amp;gt;Supported languages in Text Analytics API&amp;lt;/a&amp;gt; for the list of enabled languages. </summary>
+        /// <summary> The API returns the detected language and a numeric score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true. See the &lt;a href=&quot;https://aka.ms/talangs&quot;&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages. </summary>
         /// <param name="modelVersion"> (Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. </param>
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
-        /// <param name="languageBatchInput"> Collection of documents to analyze. </param>
+        /// <param name="input"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<LanguageResult>> LanguagesAsync(string modelVersion, bool? showStats, LanguageBatchInput languageBatchInput, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<LanguageResult>> LanguagesAsync(string modelVersion, bool? showStats, LanguageBatchInput input, CancellationToken cancellationToken = default)
         {
-            if (languageBatchInput == null)
+            if (input == null)
             {
-                throw new ArgumentNullException(nameof(languageBatchInput));
+                throw new ArgumentNullException(nameof(input));
             }
 
             using var scope = clientDiagnostics.CreateScope("AllOperations.Languages");
             scope.Start();
             try
             {
-                using var message = CreateLanguagesRequest(modelVersion, showStats, languageBatchInput);
+                using var message = CreateLanguagesRequest(modelVersion, showStats, input);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -498,23 +486,23 @@ namespace CognitiveServices.TextAnalytics
                 throw;
             }
         }
-        /// <summary> The API returns the detected language and a numeric score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true. See the &amp;lt;a href=&quot;https://aka.ms/talangs&quot;&amp;gt;Supported languages in Text Analytics API&amp;lt;/a&amp;gt; for the list of enabled languages. </summary>
+        /// <summary> The API returns the detected language and a numeric score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true. See the &lt;a href=&quot;https://aka.ms/talangs&quot;&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages. </summary>
         /// <param name="modelVersion"> (Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. </param>
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
-        /// <param name="languageBatchInput"> Collection of documents to analyze. </param>
+        /// <param name="input"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<LanguageResult> Languages(string modelVersion, bool? showStats, LanguageBatchInput languageBatchInput, CancellationToken cancellationToken = default)
+        public Response<LanguageResult> Languages(string modelVersion, bool? showStats, LanguageBatchInput input, CancellationToken cancellationToken = default)
         {
-            if (languageBatchInput == null)
+            if (input == null)
             {
-                throw new ArgumentNullException(nameof(languageBatchInput));
+                throw new ArgumentNullException(nameof(input));
             }
 
             using var scope = clientDiagnostics.CreateScope("AllOperations.Languages");
             scope.Start();
             try
             {
-                using var message = CreateLanguagesRequest(modelVersion, showStats, languageBatchInput);
+                using var message = CreateLanguagesRequest(modelVersion, showStats, input);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -534,7 +522,7 @@ namespace CognitiveServices.TextAnalytics
                 throw;
             }
         }
-        internal HttpMessage CreateSentimentRequest(string modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput)
+        internal HttpMessage CreateSentimentRequest(string modelVersion, bool? showStats, MultiLanguageBatchInput input)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -555,27 +543,27 @@ namespace CognitiveServices.TextAnalytics
             request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Content-Type", "text/json");
             using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(multiLanguageBatchInput);
+            content.JsonWriter.WriteObjectValue(input);
             request.Content = content;
             return message;
         }
-        /// <summary> The API returns a sentiment prediction, as well as sentiment scores for each sentiment class (Positive, Negative, and Neutral) for the document and each sentence within it. See the &amp;lt;a href=&quot;https://aka.ms/talangs&quot;&amp;gt;Supported languages in Text Analytics API&amp;lt;/a&amp;gt; for the list of enabled languages. </summary>
+        /// <summary> The API returns a sentiment prediction, as well as sentiment scores for each sentiment class (Positive, Negative, and Neutral) for the document and each sentence within it. See the &lt;a href=&quot;https://aka.ms/talangs&quot;&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages. </summary>
         /// <param name="modelVersion"> (Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. </param>
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
-        /// <param name="multiLanguageBatchInput"> Collection of documents to analyze. </param>
+        /// <param name="input"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<SentimentResponse>> SentimentAsync(string modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<SentimentResponse>> SentimentAsync(string modelVersion, bool? showStats, MultiLanguageBatchInput input, CancellationToken cancellationToken = default)
         {
-            if (multiLanguageBatchInput == null)
+            if (input == null)
             {
-                throw new ArgumentNullException(nameof(multiLanguageBatchInput));
+                throw new ArgumentNullException(nameof(input));
             }
 
             using var scope = clientDiagnostics.CreateScope("AllOperations.Sentiment");
             scope.Start();
             try
             {
-                using var message = CreateSentimentRequest(modelVersion, showStats, multiLanguageBatchInput);
+                using var message = CreateSentimentRequest(modelVersion, showStats, input);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -595,23 +583,23 @@ namespace CognitiveServices.TextAnalytics
                 throw;
             }
         }
-        /// <summary> The API returns a sentiment prediction, as well as sentiment scores for each sentiment class (Positive, Negative, and Neutral) for the document and each sentence within it. See the &amp;lt;a href=&quot;https://aka.ms/talangs&quot;&amp;gt;Supported languages in Text Analytics API&amp;lt;/a&amp;gt; for the list of enabled languages. </summary>
+        /// <summary> The API returns a sentiment prediction, as well as sentiment scores for each sentiment class (Positive, Negative, and Neutral) for the document and each sentence within it. See the &lt;a href=&quot;https://aka.ms/talangs&quot;&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages. </summary>
         /// <param name="modelVersion"> (Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. </param>
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
-        /// <param name="multiLanguageBatchInput"> Collection of documents to analyze. </param>
+        /// <param name="input"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<SentimentResponse> Sentiment(string modelVersion, bool? showStats, MultiLanguageBatchInput multiLanguageBatchInput, CancellationToken cancellationToken = default)
+        public Response<SentimentResponse> Sentiment(string modelVersion, bool? showStats, MultiLanguageBatchInput input, CancellationToken cancellationToken = default)
         {
-            if (multiLanguageBatchInput == null)
+            if (input == null)
             {
-                throw new ArgumentNullException(nameof(multiLanguageBatchInput));
+                throw new ArgumentNullException(nameof(input));
             }
 
             using var scope = clientDiagnostics.CreateScope("AllOperations.Sentiment");
             scope.Start();
             try
             {
-                using var message = CreateSentimentRequest(modelVersion, showStats, multiLanguageBatchInput);
+                using var message = CreateSentimentRequest(modelVersion, showStats, input);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {

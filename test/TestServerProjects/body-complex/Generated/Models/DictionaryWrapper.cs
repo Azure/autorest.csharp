@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace body_complex.Models
 {
-    /// <summary> The dictionary-wrapper. </summary>
+    /// <summary> The DictionaryWrapper. </summary>
     public partial class DictionaryWrapper
     {
         /// <summary> Dictionary of &lt;string&gt;. </summary>

@@ -22,10 +22,10 @@ namespace xml_service.Models
             }
             writer.WritePropertyName("Enabled");
             writer.WriteBooleanValue(Enabled);
-            if (IncludeAPIs != null)
+            if (IncludeApIs != null)
             {
                 writer.WritePropertyName("IncludeAPIs");
-                writer.WriteBooleanValue(IncludeAPIs.Value);
+                writer.WriteBooleanValue(IncludeApIs.Value);
             }
             if (RetentionPolicy != null)
             {
@@ -59,7 +59,7 @@ namespace xml_service.Models
                     {
                         continue;
                     }
-                    result.IncludeAPIs = property.Value.GetBoolean();
+                    result.IncludeApIs = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("RetentionPolicy"))
@@ -86,10 +86,10 @@ namespace xml_service.Models
             writer.WriteStartElement("Enabled");
             writer.WriteValue(Enabled);
             writer.WriteEndElement();
-            if (IncludeAPIs != null)
+            if (IncludeApIs != null)
             {
                 writer.WriteStartElement("IncludeAPIs");
-                writer.WriteValue(IncludeAPIs.Value);
+                writer.WriteValue(IncludeApIs.Value);
                 writer.WriteEndElement();
             }
             if (RetentionPolicy != null)
@@ -121,7 +121,7 @@ namespace xml_service.Models
             {
                 value1 = (bool?)includeAPIs;
             }
-            result.IncludeAPIs = value1;
+            result.IncludeApIs = value1;
             RetentionPolicy value2 = default;
             var retentionPolicy = element.Element("RetentionPolicy");
             if (retentionPolicy != null)

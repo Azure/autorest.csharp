@@ -5,8 +5,8 @@
 
 namespace CognitiveSearch.Models
 {
-    /// <summary> The components·1fm1tva·schemas·facetresult·additionalproperties. </summary>
-    public partial class Components1fm1tvaSchemasFacetresultAdditionalproperties
+    /// <summary> The Components1Fm1TvaSchemasFacetresultAdditionalproperties. </summary>
+    public partial class Components1Fm1TvaSchemasFacetresultAdditionalproperties
     {
     }
 }

@@ -314,7 +314,7 @@ namespace body_datetime
             return message;
         }
         /// <summary> Put max datetime value 9999-12-31T23:59:59.999Z. </summary>
-        /// <param name="datetimeBody"> The date-time to use. </param>
+        /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutUtcMaxDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
@@ -340,7 +340,7 @@ namespace body_datetime
             }
         }
         /// <summary> Put max datetime value 9999-12-31T23:59:59.999Z. </summary>
-        /// <param name="datetimeBody"> The date-time to use. </param>
+        /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutUtcMaxDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
@@ -381,7 +381,7 @@ namespace body_datetime
             return message;
         }
         /// <summary> Put max datetime value 9999-12-31T23:59:59.9999999Z. </summary>
-        /// <param name="datetimeBody"> The date-time to use. </param>
+        /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutUtcMaxDateTime7DigitsAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
@@ -407,7 +407,7 @@ namespace body_datetime
             }
         }
         /// <summary> Put max datetime value 9999-12-31T23:59:59.9999999Z. </summary>
-        /// <param name="datetimeBody"> The date-time to use. </param>
+        /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutUtcMaxDateTime7Digits(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
@@ -649,7 +649,7 @@ namespace body_datetime
             return message;
         }
         /// <summary> Put max datetime value with positive numoffset 9999-12-31t23:59:59.999+14:00. </summary>
-        /// <param name="datetimeBody"> The date-time to use. </param>
+        /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutLocalPositiveOffsetMaxDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
@@ -675,7 +675,7 @@ namespace body_datetime
             }
         }
         /// <summary> Put max datetime value with positive numoffset 9999-12-31t23:59:59.999+14:00. </summary>
-        /// <param name="datetimeBody"> The date-time to use. </param>
+        /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutLocalPositiveOffsetMaxDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
@@ -850,7 +850,7 @@ namespace body_datetime
             return message;
         }
         /// <summary> Put max datetime value with positive numoffset 9999-12-31t23:59:59.999-14:00. </summary>
-        /// <param name="datetimeBody"> The date-time to use. </param>
+        /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutLocalNegativeOffsetMaxDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
@@ -876,7 +876,7 @@ namespace body_datetime
             }
         }
         /// <summary> Put max datetime value with positive numoffset 9999-12-31t23:59:59.999-14:00. </summary>
-        /// <param name="datetimeBody"> The date-time to use. </param>
+        /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutLocalNegativeOffsetMaxDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
@@ -1051,7 +1051,7 @@ namespace body_datetime
             return message;
         }
         /// <summary> Put min datetime value 0001-01-01T00:00:00Z. </summary>
-        /// <param name="datetimeBody"> The date-time to use. </param>
+        /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutUtcMinDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
@@ -1077,7 +1077,7 @@ namespace body_datetime
             }
         }
         /// <summary> Put min datetime value 0001-01-01T00:00:00Z. </summary>
-        /// <param name="datetimeBody"> The date-time to use. </param>
+        /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutUtcMinDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
@@ -1185,7 +1185,7 @@ namespace body_datetime
             return message;
         }
         /// <summary> Put min datetime value 0001-01-01T00:00:00+14:00. </summary>
-        /// <param name="datetimeBody"> The date-time to use. </param>
+        /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutLocalPositiveOffsetMinDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
@@ -1211,7 +1211,7 @@ namespace body_datetime
             }
         }
         /// <summary> Put min datetime value 0001-01-01T00:00:00+14:00. </summary>
-        /// <param name="datetimeBody"> The date-time to use. </param>
+        /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutLocalPositiveOffsetMinDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
@@ -1319,7 +1319,7 @@ namespace body_datetime
             return message;
         }
         /// <summary> Put min datetime value 0001-01-01T00:00:00-14:00. </summary>
-        /// <param name="datetimeBody"> The date-time to use. </param>
+        /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutLocalNegativeOffsetMinDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
@@ -1345,7 +1345,7 @@ namespace body_datetime
             }
         }
         /// <summary> Put min datetime value 0001-01-01T00:00:00-14:00. </summary>
-        /// <param name="datetimeBody"> The date-time to use. </param>
+        /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutLocalNegativeOffsetMinDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {

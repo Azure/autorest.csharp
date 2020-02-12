@@ -5,7 +5,7 @@
 
 namespace body_complex.Models
 {
-    /// <summary> The double-wrapper. </summary>
+    /// <summary> The DoubleWrapper. </summary>
     public partial class DoubleWrapper
     {
         public double? Field1 { get; set; }

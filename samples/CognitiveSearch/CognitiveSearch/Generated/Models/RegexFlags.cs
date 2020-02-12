@@ -19,31 +19,31 @@ namespace CognitiveSearch.Models
             _value = value ?? throw new ArgumentNullException(nameof(value));
         }
 
-        private const string CANONEQValue = "CANON_EQ";
-        private const string CASEINSENSITIVEValue = "CASE_INSENSITIVE";
-        private const string COMMENTSValue = "COMMENTS";
-        private const string DOTALLValue = "DOTALL";
-        private const string LITERALValue = "LITERAL";
-        private const string MULTILINEValue = "MULTILINE";
-        private const string UNICODECASEValue = "UNICODE_CASE";
-        private const string UNIXLINESValue = "UNIX_LINES";
+        private const string CanonEqValue = "CANON_EQ";
+        private const string CaseInsensitiveValue = "CASE_INSENSITIVE";
+        private const string CommentsValue = "COMMENTS";
+        private const string DotallValue = "DOTALL";
+        private const string LiteralValue = "LITERAL";
+        private const string MultilineValue = "MULTILINE";
+        private const string UnicodeCaseValue = "UNICODE_CASE";
+        private const string UnixLinesValue = "UNIX_LINES";
 
         /// <summary> CANON_EQ. </summary>
-        public static RegexFlags CANONEQ { get; } = new RegexFlags(CANONEQValue);
+        public static RegexFlags CanonEq { get; } = new RegexFlags(CanonEqValue);
         /// <summary> CASE_INSENSITIVE. </summary>
-        public static RegexFlags CASEINSENSITIVE { get; } = new RegexFlags(CASEINSENSITIVEValue);
+        public static RegexFlags CaseInsensitive { get; } = new RegexFlags(CaseInsensitiveValue);
         /// <summary> COMMENTS. </summary>
-        public static RegexFlags COMMENTS { get; } = new RegexFlags(COMMENTSValue);
+        public static RegexFlags Comments { get; } = new RegexFlags(CommentsValue);
         /// <summary> DOTALL. </summary>
-        public static RegexFlags DOTALL { get; } = new RegexFlags(DOTALLValue);
+        public static RegexFlags Dotall { get; } = new RegexFlags(DotallValue);
         /// <summary> LITERAL. </summary>
-        public static RegexFlags LITERAL { get; } = new RegexFlags(LITERALValue);
+        public static RegexFlags Literal { get; } = new RegexFlags(LiteralValue);
         /// <summary> MULTILINE. </summary>
-        public static RegexFlags MULTILINE { get; } = new RegexFlags(MULTILINEValue);
+        public static RegexFlags Multiline { get; } = new RegexFlags(MultilineValue);
         /// <summary> UNICODE_CASE. </summary>
-        public static RegexFlags UNICODECASE { get; } = new RegexFlags(UNICODECASEValue);
+        public static RegexFlags UnicodeCase { get; } = new RegexFlags(UnicodeCaseValue);
         /// <summary> UNIX_LINES. </summary>
-        public static RegexFlags UNIXLINES { get; } = new RegexFlags(UNIXLINESValue);
+        public static RegexFlags UnixLines { get; } = new RegexFlags(UnixLinesValue);
         /// <summary> Determines if two <see cref="RegexFlags"/> values are the same. </summary>
         public static bool operator ==(RegexFlags left, RegexFlags right) => left.Equals(right);
         /// <summary> Determines if two <see cref="RegexFlags"/> values are not the same. </summary>

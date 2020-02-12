@@ -5,7 +5,7 @@
 
 namespace body_complex.Models
 {
-    /// <summary> The siamese. </summary>
+    /// <summary> The Siamese. </summary>
     public partial class Siamese : Cat
     {
         public string Breed { get; set; }

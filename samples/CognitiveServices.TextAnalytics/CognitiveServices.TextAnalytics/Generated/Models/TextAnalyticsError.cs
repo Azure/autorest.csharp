@@ -7,17 +7,17 @@ using System.Collections.Generic;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
-    /// <summary> The Error. </summary>
-    public partial class Error
+    /// <summary> The TextAnalyticsError. </summary>
+    public partial class TextAnalyticsError
     {
         /// <summary> Error code. </summary>
-        public ErrorCode Code { get; set; }
+        public ErrorCodeValue Code { get; set; }
         /// <summary> Error message. </summary>
         public string Message { get; set; }
         /// <summary> Error target. </summary>
         public string Target { get; set; }
-        public InnerError Innererror { get; set; }
+        public InnerError InnerError { get; set; }
         /// <summary> Details about specific errors that led to this reported error. </summary>
-        public ICollection<Error> Details { get; set; }
+        public ICollection<TextAnalyticsError> Details { get; set; }
     }
 }

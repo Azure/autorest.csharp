@@ -3,6 +3,7 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
@@ -14,20 +15,23 @@ namespace CognitiveServices.TextAnalytics.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("sentiment");
-            writer.WriteStringValue(Sentiment.ToString());
+            writer.WriteStringValue(Sentiment.ToSerialString());
             writer.WritePropertyName("sentenceScores");
             writer.WriteObjectValue(SentenceScores);
             writer.WritePropertyName("offset");
             writer.WriteNumberValue(Offset);
             writer.WritePropertyName("length");
             writer.WriteNumberValue(Length);
-            writer.WritePropertyName("warnings");
-            writer.WriteStartArray();
-            foreach (var item in Warnings)
+            if (Warnings != null)
             {
-                writer.WriteStringValue(item);
+                writer.WritePropertyName("warnings");
+                writer.WriteStartArray();
+                foreach (var item in Warnings)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
             }
-            writer.WriteEndArray();
             writer.WriteEndObject();
         }
         internal static SentenceSentiment DeserializeSentenceSentiment(JsonElement element)
@@ -37,12 +41,12 @@ namespace CognitiveServices.TextAnalytics.Models
             {
                 if (property.NameEquals("sentiment"))
                 {
-                    result.Sentiment = new SentenceSentimentSentiment(property.Value.GetString());
+                    result.Sentiment = property.Value.GetString().ToSentenceSentimentValue();
                     continue;
                 }
                 if (property.NameEquals("sentenceScores"))
                 {
-                    result.SentenceScores = property.Value.GetObject();
+                    result.SentenceScores = SentimentConfidenceScorePerLabel.DeserializeSentimentConfidenceScorePerLabel(property.Value);
                     continue;
                 }
                 if (property.NameEquals("offset"))
@@ -57,6 +61,11 @@ namespace CognitiveServices.TextAnalytics.Models
                 }
                 if (property.NameEquals("warnings"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    result.Warnings = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
                         result.Warnings.Add(item.GetString());

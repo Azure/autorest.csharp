@@ -8,6 +8,6 @@ namespace body_complex.Models
     /// <summary> The MyBaseHelperType. </summary>
     public partial class MyBaseHelperType
     {
-        public string PropBH1 { get; set; }
+        public string PropBh1 { get; set; }
     }
 }

@@ -13,7 +13,7 @@ schemas: !<!Schemas>
         precision: 32
         language: !<!Languages> 
           default:
-            name: typeForstatus
+            name: Integer
             description: ''
         protocol: !<!Protocols> {}
       serializedName: status
@@ -21,7 +21,6 @@ schemas: !<!Schemas>
         default:
           name: status
           description: ''
-          originalName: status
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_3
@@ -31,7 +30,7 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: Error-message
+            name: ErrorMessage
             description: ''
         protocol: !<!Protocols> {}
       serializedName: message
@@ -39,7 +38,6 @@ schemas: !<!Schemas>
         default:
           name: message
           description: ''
-          originalName: message
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -56,7 +54,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: byte-array
+        name: ByteArray
         description: The null byte value
     protocol: !<!Protocols> {}
   - !<!ByteArraySchema> &ref_1
@@ -67,7 +65,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: byte-array
+        name: ByteArray
         description: The empty byte value ''
     protocol: !<!Protocols> {}
   - !<!ByteArraySchema> &ref_7
@@ -78,7 +76,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: byte-array
+        name: ByteArray
         description: Non-ascii base-64 encoded byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
     protocol: !<!Protocols> {}
   constants:
@@ -115,7 +113,7 @@ schemas: !<!Schemas>
     type: string
     language: !<!Languages> 
       default:
-        name: string
+        name: String
         description: simple string
     protocol: !<!Protocols> {}
   - *ref_3
@@ -189,7 +187,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getNull
+        name: GetNull
         description: Get null byte value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -239,7 +237,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getEmpty
+        name: GetEmpty
         description: Get empty byte value ''
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -289,7 +287,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getNonAscii
+        name: GetNonAscii
         description: Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -355,7 +353,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putNonAscii
+        name: PutNonAscii
         description: Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -405,17 +403,17 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getInvalid
+        name: GetInvalid
         description: 'Get invalid byte value '':::SWAGGER::::'''
     protocol: !<!Protocols> {}
   language: !<!Languages> 
     default:
-      name: byte
+      name: Byte
       description: ''
   protocol: !<!Protocols> {}
 language: !<!Languages> 
   default:
-    name: ''
+    name: BodyByte
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

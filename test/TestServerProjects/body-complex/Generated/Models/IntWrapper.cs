@@ -5,7 +5,7 @@
 
 namespace body_complex.Models
 {
-    /// <summary> The int-wrapper. </summary>
+    /// <summary> The IntWrapper. </summary>
     public partial class IntWrapper
     {
         public int? Field1 { get; set; }

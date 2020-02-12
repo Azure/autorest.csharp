@@ -20,7 +20,7 @@ jobs:
         inputs:
           version: "$(DotNetCoreSDKVersion)"
       - script: |
-          npm install
+          npm ci
         displayName: "Install packages"
       - script: |
           dotnet build AutoRest.CSharp.V3.sln

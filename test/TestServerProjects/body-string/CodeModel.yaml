@@ -13,7 +13,7 @@ schemas: !<!Schemas>
         precision: 32
         language: !<!Languages> 
           default:
-            name: typeForstatus
+            name: Integer
             description: ''
         protocol: !<!Protocols> {}
       serializedName: status
@@ -21,7 +21,6 @@ schemas: !<!Schemas>
         default:
           name: status
           description: ''
-          originalName: status
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_3
@@ -31,7 +30,7 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: Error-message
+            name: ErrorMessage
             description: ''
         protocol: !<!Protocols> {}
       serializedName: message
@@ -39,7 +38,6 @@ schemas: !<!Schemas>
         default:
           name: message
           description: ''
-          originalName: message
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -65,7 +63,7 @@ schemas: !<!Schemas>
           type: string
           language: !<!Languages> 
             default:
-              name: string
+              name: String
               description: simple string
           protocol: !<!Protocols> {}
         language: !<!Languages> 
@@ -77,9 +75,8 @@ schemas: !<!Schemas>
       serializedName: ColorConstant
       language: !<!Languages> 
         default:
-          name: ColorConstant
+          name: colorConstant
           description: Referenced Color Constant Description.
-          originalName: ColorConstant
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_4
@@ -89,7 +86,7 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: RefColorConstant-field1
+            name: RefColorConstantField1
             description: Sample string.
         protocol: !<!Protocols> {}
       required: false
@@ -98,7 +95,6 @@ schemas: !<!Schemas>
         default:
           name: field1
           description: Sample string.
-          originalName: field1
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -115,7 +111,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: byte-array
+        name: ByteArray
         description: ''
     protocol: !<!Protocols> {}
   constants:
@@ -129,7 +125,7 @@ schemas: !<!Schemas>
     valueType: *ref_0
     language: !<!Languages> 
       default:
-        name: Constant0
+        name: Constant1
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_8
@@ -142,7 +138,7 @@ schemas: !<!Schemas>
     valueType: *ref_0
     language: !<!Languages> 
       default:
-        name: Constant1
+        name: Constant2
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_9
@@ -155,7 +151,7 @@ schemas: !<!Schemas>
     valueType: *ref_0
     language: !<!Languages> 
       default:
-        name: Constant2
+        name: Constant3
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_10
@@ -168,7 +164,7 @@ schemas: !<!Schemas>
     valueType: *ref_0
     language: !<!Languages> 
       default:
-        name: Constant3
+        name: Constant4
         description: ''
     protocol: !<!Protocols> {}
   - *ref_1
@@ -181,19 +177,19 @@ schemas: !<!Schemas>
       value: red color
       language:
         default:
-          name: red color
+          name: RedColor
           description: ''
     - !<!ChoiceValue> 
       value: green-color
       language:
         default:
-          name: green-color
+          name: GreenColor
           description: ''
     - !<!ChoiceValue> 
       value: blue_color
       language:
         default:
-          name: blue_color
+          name: BlueColor
           description: ''
     type: sealed-choice
     apiVersions:
@@ -216,7 +212,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: string
+        name: String
         description: ''
     protocol: !<!Protocols> {}
 globalParameters:
@@ -289,7 +285,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getNull
+        name: GetNull
         description: Get null string value value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -353,7 +349,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putNull
+        name: PutNull
         description: Set string value null
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -403,7 +399,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getEmpty
+        name: GetEmpty
         description: Get empty string value value ''
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -468,7 +464,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putEmpty
+        name: PutEmpty
         description: Set string value empty ''
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -518,7 +514,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getMbcs
+        name: GetMbcs
         description: Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -583,7 +579,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putMbcs
+        name: PutMbcs
         description: Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -633,7 +629,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getWhitespace
+        name: GetWhitespace
         description: Get string value with leading and trailing whitespace '<tab><space><space>Now is the time for all good men to come to the aid of their country<tab><space><space>'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -698,7 +694,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putWhitespace
+        name: PutWhitespace
         description: Set String value with leading and trailing whitespace '<tab><space><space>Now is the time for all good men to come to the aid of their country<tab><space><space>'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -748,7 +744,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getNotProvided
+        name: GetNotProvided
         description: Get String value when no string value is sent in response payload
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -798,7 +794,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getBase64Encoded
+        name: GetBase64Encoded
         description: Get value that is base64 encoded
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -848,7 +844,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getBase64UrlEncoded
+        name: GetBase64UrlEncoded
         description: Get value that is base64url encoded
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -914,7 +910,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putBase64UrlEncoded
+        name: PutBase64UrlEncoded
         description: Put value that is base64url encoded
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -964,12 +960,12 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getNullBase64UrlEncoded
+        name: GetNullBase64UrlEncoded
         description: Get null value that is expected to be base64url encoded
     protocol: !<!Protocols> {}
   language: !<!Languages> 
     default:
-      name: string
+      name: String
       description: ''
   protocol: !<!Protocols> {}
 - !<!OperationGroup> 
@@ -1022,7 +1018,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getNotExpandable
+        name: GetNotExpandable
         description: 'Get enum value ''red color'' from enumeration of ''red color'', ''green-color'', ''blue_color''.'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1088,7 +1084,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putNotExpandable
+        name: PutNotExpandable
         description: 'Sends value ''red color'' from enumeration of ''red color'', ''green-color'', ''blue_color'''
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1138,7 +1134,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getReferenced
+        name: GetReferenced
         description: 'Get enum value ''red color'' from enumeration of ''red color'', ''green-color'', ''blue_color''.'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1204,7 +1200,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putReferenced
+        name: PutReferenced
         description: 'Sends value ''red color'' from enumeration of ''red color'', ''green-color'', ''blue_color'''
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1254,7 +1250,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getReferencedConstant
+        name: GetReferencedConstant
         description: Get value 'green-color' from the constant.
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1320,17 +1316,17 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putReferencedConstant
+        name: PutReferencedConstant
         description: Sends value 'green-color' from a constant
     protocol: !<!Protocols> {}
   language: !<!Languages> 
     default:
-      name: enum
+      name: Enum
       description: ''
   protocol: !<!Protocols> {}
 language: !<!Languages> 
   default:
-    name: ''
+    name: BodyString
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

@@ -21,7 +21,7 @@ namespace body_complex.Models
 
         private const string CyanValue = "cyan";
         private const string MagentaValue = "Magenta";
-        private const string YELLOWValue = "YELLOW";
+        private const string YellowValue = "YELLOW";
         private const string BlacKValue = "blacK";
 
         /// <summary> cyan. </summary>
@@ -29,7 +29,7 @@ namespace body_complex.Models
         /// <summary> Magenta. </summary>
         public static CMYKColors Magenta { get; } = new CMYKColors(MagentaValue);
         /// <summary> YELLOW. </summary>
-        public static CMYKColors YELLOW { get; } = new CMYKColors(YELLOWValue);
+        public static CMYKColors Yellow { get; } = new CMYKColors(YellowValue);
         /// <summary> blacK. </summary>
         public static CMYKColors BlacK { get; } = new CMYKColors(BlacKValue);
         /// <summary> Determines if two <see cref="CMYKColors"/> values are the same. </summary>

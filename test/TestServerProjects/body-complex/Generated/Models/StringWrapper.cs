@@ -5,7 +5,7 @@
 
 namespace body_complex.Models
 {
-    /// <summary> The string-wrapper. </summary>
+    /// <summary> The StringWrapper. </summary>
     public partial class StringWrapper
     {
         public string Field { get; set; }

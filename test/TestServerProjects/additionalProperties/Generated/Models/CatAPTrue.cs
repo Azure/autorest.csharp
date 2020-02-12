@@ -5,8 +5,8 @@
 
 namespace additionalProperties.Models
 {
-    /// <summary> The CatAPTrue. </summary>
-    public partial class CatAPTrue : PetAPTrue
+    /// <summary> The CatApTrue. </summary>
+    public partial class CatApTrue : PetApTrue
     {
         public bool? Friendly { get; set; }
     }

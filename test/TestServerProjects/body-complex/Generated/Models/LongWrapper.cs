@@ -5,7 +5,7 @@
 
 namespace body_complex.Models
 {
-    /// <summary> The long-wrapper. </summary>
+    /// <summary> The LongWrapper. </summary>
     public partial class LongWrapper
     {
         public long? Field1 { get; set; }

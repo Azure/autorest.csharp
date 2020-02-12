@@ -15,7 +15,7 @@ schemas: !<!Schemas>
           version: '2016-07-07'
         language: !<!Languages> 
           default:
-            name: Pet-name
+            name: PetName
             description: ''
         protocol: !<!Protocols> {}
       required: false
@@ -24,7 +24,6 @@ schemas: !<!Schemas>
         default:
           name: name
           description: ''
-          originalName: name
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!ChoiceSchema> &ref_1
@@ -79,7 +78,7 @@ schemas: !<!Schemas>
           type: string
           language: !<!Languages> 
             default:
-              name: string
+              name: String
               description: simple string
           protocol: !<!Protocols> {}
         defaultValue: Friday
@@ -92,9 +91,8 @@ schemas: !<!Schemas>
       serializedName: DaysOfWeek
       language: !<!Languages> 
         default:
-          name: DaysOfWeek
+          name: daysOfWeek
           description: Type of Pet
-          originalName: DaysOfWeek
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!ChoiceSchema> &ref_2
@@ -103,19 +101,19 @@ schemas: !<!Schemas>
           value: '1'
           language:
             default:
-              name: '1'
+              name: One
               description: one
         - !<!ChoiceValue> 
           value: '2'
           language:
             default:
-              name: '2'
+              name: Two
               description: two
         - !<!ChoiceValue> 
           value: '3'
           language:
             default:
-              name: '3'
+              name: Three
               description: three
         type: choice
         apiVersions:
@@ -131,9 +129,8 @@ schemas: !<!Schemas>
       serializedName: IntEnum
       language: !<!Languages> 
         default:
-          name: IntEnum
+          name: intEnum
           description: ''
-          originalName: IntEnum
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -153,7 +150,7 @@ schemas: !<!Schemas>
       version: '2016-07-07'
     language: !<!Languages> 
       default:
-        name: string
+        name: String
         description: ''
     protocol: !<!Protocols> {}
   - *ref_3
@@ -291,7 +288,7 @@ operationGroups:
   protocol: !<!Protocols> {}
 language: !<!Languages> 
   default:
-    name: ''
+    name: ExtensibleEnumsSwagger
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

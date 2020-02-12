@@ -767,7 +767,7 @@ namespace body_string
             return message;
         }
         /// <summary> Put value that is base64url encoded. </summary>
-        /// <param name="stringBody"> The byte-array to use. </param>
+        /// <param name="stringBody"> The ByteArray to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutBase64UrlEncodedAsync(byte[] stringBody, CancellationToken cancellationToken = default)
         {
@@ -797,7 +797,7 @@ namespace body_string
             }
         }
         /// <summary> Put value that is base64url encoded. </summary>
-        /// <param name="stringBody"> The byte-array to use. </param>
+        /// <param name="stringBody"> The ByteArray to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutBase64UrlEncoded(byte[] stringBody, CancellationToken cancellationToken = default)
         {

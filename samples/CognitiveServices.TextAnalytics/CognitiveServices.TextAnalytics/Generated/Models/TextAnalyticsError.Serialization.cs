@@ -9,13 +9,13 @@ using Azure.Core;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
-    public partial class Error : IUtf8JsonSerializable
+    public partial class TextAnalyticsError : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("code");
-            writer.WriteStringValue(Code.ToString());
+            writer.WriteStringValue(Code.ToSerialString());
             writer.WritePropertyName("message");
             writer.WriteStringValue(Message);
             if (Target != null)
@@ -23,10 +23,10 @@ namespace CognitiveServices.TextAnalytics.Models
                 writer.WritePropertyName("target");
                 writer.WriteStringValue(Target);
             }
-            if (Innererror != null)
+            if (InnerError != null)
             {
-                writer.WritePropertyName("innererror");
-                writer.WriteObjectValue(Innererror);
+                writer.WritePropertyName("innerError");
+                writer.WriteObjectValue(InnerError);
             }
             if (Details != null)
             {
@@ -40,14 +40,14 @@ namespace CognitiveServices.TextAnalytics.Models
             }
             writer.WriteEndObject();
         }
-        internal static Error DeserializeError(JsonElement element)
+        internal static TextAnalyticsError DeserializeTextAnalyticsError(JsonElement element)
         {
-            Error result = new Error();
+            TextAnalyticsError result = new TextAnalyticsError();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("code"))
                 {
-                    result.Code = new ErrorCode(property.Value.GetString());
+                    result.Code = property.Value.GetString().ToErrorCodeValue();
                     continue;
                 }
                 if (property.NameEquals("message"))
@@ -64,13 +64,13 @@ namespace CognitiveServices.TextAnalytics.Models
                     result.Target = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("innererror"))
+                if (property.NameEquals("innerError"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         continue;
                     }
-                    result.Innererror = InnerError.DeserializeInnerError(property.Value);
+                    result.InnerError = InnerError.DeserializeInnerError(property.Value);
                     continue;
                 }
                 if (property.NameEquals("details"))
@@ -79,10 +79,10 @@ namespace CognitiveServices.TextAnalytics.Models
                     {
                         continue;
                     }
-                    result.Details = new List<Error>();
+                    result.Details = new List<TextAnalyticsError>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Details.Add(DeserializeError(item));
+                        result.Details.Add(DeserializeTextAnalyticsError(item));
                     }
                     continue;
                 }
