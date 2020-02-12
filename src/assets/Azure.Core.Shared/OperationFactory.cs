@@ -11,41 +11,49 @@ namespace Azure.Core
 {
     internal static class OperationFactory
     {
-        public static Operation<T> Create<T>(Response initialResponse, PollingFunc<T> pollingFunc, CompletionPredicate<T> completionPredicate) where T : notnull =>
-            new FuncOperation<T>(initialResponse, pollingFunc, completionPredicate);
+        public static Operation<T> Create<T>(Response originalResponse, PollingFunc pollingFunc, CompletionPredicate completionPredicate, FinalFunc<T> finalFunc) where T : notnull =>
+            new FuncOperation<T>(originalResponse, pollingFunc, completionPredicate, finalFunc);
 
-        public static Operation<T> CreateAsync<T>(Response initialResponse, AsyncPollingFunc<T> asyncPollingFunc, AsyncCompletionPredicate<T> asyncCompletionPredicate) where T : notnull =>
-            new FuncOperation<T>(initialResponse, asyncPollingFunc, asyncCompletionPredicate);
+        public static Operation<T> CreateAsync<T>(Response originalResponse, AsyncPollingFunc asyncPollingFunc, AsyncCompletionPredicate asyncCompletionPredicate, AsyncFinalFunc<T> asyncFinalFunc) where T : notnull =>
+            new FuncOperation<T>(originalResponse, asyncPollingFunc, asyncCompletionPredicate, asyncFinalFunc);
 
-        internal delegate ValueTask<Response<T>> AsyncPollingFunc<T>(CancellationToken cancellationToken = new CancellationToken());
-        internal delegate Response<T> PollingFunc<T>(CancellationToken cancellationToken = new CancellationToken());
+        internal delegate ValueTask<Response> AsyncPollingFunc(Response previousResponse, CancellationToken cancellationToken = new CancellationToken());
+        internal delegate Response PollingFunc(Response previousResponse, CancellationToken cancellationToken = new CancellationToken());
 
-        internal delegate ValueTask<bool> AsyncCompletionPredicate<T>(Response<T> response);
-        internal delegate bool CompletionPredicate<T>(Response<T> response);
+        internal delegate ValueTask<bool> AsyncCompletionPredicate(Response response);
+        internal delegate bool CompletionPredicate(Response response);
+
+        internal delegate ValueTask<Response<T>> AsyncFinalFunc<T>(Response response, CancellationToken cancellationToken = new CancellationToken());
+        internal delegate Response<T> FinalFunc<T>(Response response, CancellationToken cancellationToken = new CancellationToken());
 
         private class FuncOperation<T> : Operation<T> where T : notnull
         {
-            private readonly AsyncPollingFunc<T>? _asyncPollingFunc;
-            private readonly PollingFunc<T>? _pollingFunc;
-            private readonly AsyncCompletionPredicate<T>? _asyncCompletionPredicate;
-            private readonly CompletionPredicate<T>? _completionPredicate;
+            private readonly AsyncPollingFunc? _asyncPollingFunc;
+            private readonly PollingFunc? _pollingFunc;
+            private readonly AsyncCompletionPredicate? _asyncCompletionPredicate;
+            private readonly CompletionPredicate? _completionPredicate;
+            private readonly AsyncFinalFunc<T>? _asyncFinalFunc;
+            private readonly FinalFunc<T>? _finalFunc;
+
             private Response _rawResponse;
             private T _value = default!;
             private bool _hasValue;
             private bool _hasCompleted;
 
-            public FuncOperation(Response initialResponse, AsyncPollingFunc<T> asyncPollingFunc, AsyncCompletionPredicate<T> asyncCompletionPredicate)
+            public FuncOperation(Response originalResponse, AsyncPollingFunc asyncPollingFunc, AsyncCompletionPredicate asyncCompletionPredicate, AsyncFinalFunc<T> asyncFinalFunc)
             {
-                _rawResponse = initialResponse;
+                _rawResponse = originalResponse;
                 _asyncPollingFunc = asyncPollingFunc;
                 _asyncCompletionPredicate = asyncCompletionPredicate;
+                _asyncFinalFunc = asyncFinalFunc;
             }
 
-            public FuncOperation(Response initialResponse, PollingFunc<T> pollingFunc, CompletionPredicate<T> completionPredicate)
+            public FuncOperation(Response originalResponse, PollingFunc pollingFunc, CompletionPredicate completionPredicate, FinalFunc<T> finalFunc)
             {
-                _rawResponse = initialResponse;
+                _rawResponse = originalResponse;
                 _pollingFunc = pollingFunc;
                 _completionPredicate = completionPredicate;
+                _finalFunc = finalFunc;
             }
 
             public override Response GetRawResponse() => _rawResponse;
@@ -58,53 +66,67 @@ namespace Azure.Core
 
             public override async ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = new CancellationToken())
             {
+                // If it is completed, short circuit.
                 if (HasCompleted)
                 {
                     return GetRawResponse();
                 }
 
-                Response<T>? response = null;
-                if (!HasCompleted && _asyncPollingFunc != null && _asyncCompletionPredicate != null)
+                if (_asyncCompletionPredicate != null)
                 {
-                    response = await _asyncPollingFunc(cancellationToken).ConfigureAwait(false);
-                    _hasCompleted = await _asyncCompletionPredicate(response).ConfigureAwait(false);
-                }
-
-                if (response != null)
-                {
-                    _rawResponse = response.GetRawResponse();
-                    if (HasCompleted)
+                    // Since it has not been completed, we check to see if it was completed.
+                    _hasCompleted = await _asyncCompletionPredicate(GetRawResponse()).ConfigureAwait(false);
+                    // If it is now completed, then we extract the value from the response.
+                    if (HasCompleted && _asyncFinalFunc != null)
                     {
-                        _value = response.Value;
+                        Response<T> finalResponse = await _asyncFinalFunc(GetRawResponse(), cancellationToken);
+                        _rawResponse = finalResponse.GetRawResponse();
+                        _value = finalResponse.Value;
                         _hasValue = true;
+                        return GetRawResponse();
                     }
                 }
+
+                // If it wasn't completed after checking it, then we poll for a new response.
+                if (_asyncPollingFunc != null && _asyncCompletionPredicate != null)
+                {
+                    Response response = await _asyncPollingFunc(GetRawResponse(), cancellationToken).ConfigureAwait(false);
+                    _rawResponse = response;
+                }
+
                 return GetRawResponse();
             }
 
             public override Response UpdateStatus(CancellationToken cancellationToken = new CancellationToken())
             {
+                // If it is completed, short circuit.
                 if (HasCompleted)
                 {
                     return GetRawResponse();
                 }
 
-                Response<T>? response = null;
-                if (!HasCompleted && _pollingFunc != null && _completionPredicate != null)
+                if (_completionPredicate != null)
                 {
-                    response = _pollingFunc(cancellationToken);
-                    _hasCompleted = _completionPredicate(response);
-                }
-
-                if (response != null)
-                {
-                    _rawResponse = response.GetRawResponse();
-                    if (HasCompleted)
+                    // Since it has not been completed, we check to see if it was completed.
+                    _hasCompleted = _completionPredicate(GetRawResponse());
+                    // If it is now completed, then we extract the value from the response.
+                    if (HasCompleted && _finalFunc != null)
                     {
-                        _value = response.Value;
+                        Response<T> finalResponse = _finalFunc(GetRawResponse(), cancellationToken);
+                        _rawResponse = finalResponse.GetRawResponse();
+                        _value = finalResponse.Value;
                         _hasValue = true;
+                        return GetRawResponse();
                     }
                 }
+
+                // If it wasn't completed after checking it, then we poll for a new response.
+                if (_pollingFunc != null && _asyncCompletionPredicate != null)
+                {
+                    Response response = _pollingFunc(GetRawResponse(), cancellationToken);
+                    _rawResponse = response;
+                }
+
                 return GetRawResponse();
             }
 

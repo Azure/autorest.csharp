@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.Pipeline;
 using NUnit.Framework;
 
@@ -97,7 +98,11 @@ namespace AutoRest.TestServer.Tests.Infrastructure
 
             try
             {
-                var pipeline = new HttpPipeline(new HttpClientTransport(server.Server.Client));
+                var pipeline = HttpPipelineBuilder.Build(new TestClientOptions
+                {
+                    Transport = new HttpClientTransport(server.Server.Client)
+                });
+
                 await test(server.Host, pipeline);
             }
             catch (Exception ex)
@@ -122,6 +127,11 @@ namespace AutoRest.TestServer.Tests.Infrastructure
             var testName = TestContext.CurrentContext.Test.Name;
             var indexOfUnderscore = testName.IndexOf('_');
             return indexOfUnderscore == -1 ? testName : testName.Substring(0, indexOfUnderscore);
+        }
+
+        private class TestClientOptions : ClientOptions
+        {
+
         }
     }
 }
