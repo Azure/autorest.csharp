@@ -12,9 +12,9 @@ using Azure.Core.Pipeline;
 
 namespace Azure.Core
 {
-    internal static class ArmPollingHelpers
+    internal static class ArmOperationHelpers
     {
-        public static async ValueTask<Operation<T>> CreateOperationAsync<T>(HttpPipeline pipeline, ClientDiagnostics clientDiagnostics,
+        public static async ValueTask<Operation<T>> CreateAsync<T>(HttpPipeline pipeline, ClientDiagnostics clientDiagnostics,
             Response originalResponse, bool isPutOrPatch, string scopeName, Func<HttpMessage> createOriginalHttpMethod, Func<Response, ValueTask<Response<T>>> createFinalResponse) where T : notnull
         {
             using HttpMessage originalHttpMethod = createOriginalHttpMethod();

@@ -708,7 +708,7 @@ namespace lro
         public async ValueTask<Operation<Product>> PutAsyncRetrySucceededOperationAsync(Product product, CancellationToken cancellationToken = default)
         {
             var originalResponse = (await PutAsyncRetrySucceededAsync(product, cancellationToken).ConfigureAwait(false)).GetRawResponse();
-            return await ArmPollingHelpers.CreateOperationAsync(pipeline, clientDiagnostics, originalResponse, true, "LROsOperations.Put200Succeeded",
+            return await ArmOperationHelpers.CreateAsync(pipeline, clientDiagnostics, originalResponse, true, "LROsOperations.Put200Succeeded",
                 () => CreatePutAsyncRetrySucceededRequest(product),
                 async response =>
                 {
