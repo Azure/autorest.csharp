@@ -67,7 +67,7 @@ namespace lro
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -97,7 +97,7 @@ namespace lro
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -143,7 +143,7 @@ namespace lro
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -174,7 +174,7 @@ namespace lro
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -213,7 +213,7 @@ namespace lro
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -241,7 +241,7 @@ namespace lro
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -277,7 +277,7 @@ namespace lro
                         var headers = new Delete202Retry200Headers(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -302,7 +302,7 @@ namespace lro
                         var headers = new Delete202Retry200Headers(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -338,7 +338,7 @@ namespace lro
                         var headers = new DeleteAsyncRelativeRetrySucceededHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -363,7 +363,7 @@ namespace lro
                         var headers = new DeleteAsyncRelativeRetrySucceededHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -405,7 +405,7 @@ namespace lro
                         var headers = new Post202Retry200Headers(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -432,7 +432,7 @@ namespace lro
                         var headers = new Post202Retry200Headers(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -474,7 +474,7 @@ namespace lro
                         var headers = new PostAsyncRelativeRetrySucceededHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -501,7 +501,7 @@ namespace lro
                         var headers = new PostAsyncRelativeRetrySucceededHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -546,7 +546,7 @@ namespace lro
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -580,7 +580,7 @@ namespace lro
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -626,7 +626,7 @@ namespace lro
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -661,7 +661,7 @@ namespace lro
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -705,7 +705,7 @@ namespace lro
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -739,7 +739,7 @@ namespace lro
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -780,7 +780,7 @@ namespace lro
                         var headers = new Delete202Retry200Headers(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -811,7 +811,7 @@ namespace lro
                         var headers = new Delete202Retry200Headers(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -852,7 +852,7 @@ namespace lro
                         var headers = new DeleteAsyncRelativeRetrySucceededHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -883,7 +883,7 @@ namespace lro
                         var headers = new DeleteAsyncRelativeRetrySucceededHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -925,7 +925,7 @@ namespace lro
                         var headers = new Post202Retry200Headers(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -956,7 +956,7 @@ namespace lro
                         var headers = new Post202Retry200Headers(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -998,7 +998,7 @@ namespace lro
                         var headers = new PostAsyncRelativeRetrySucceededHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw await message.Response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1029,7 +1029,7 @@ namespace lro
                         var headers = new PostAsyncRelativeRetrySucceededHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw message.Response.CreateRequestFailedException();
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)

@@ -22,7 +22,7 @@ namespace Azure.Core
             ScenarioInfo originalInfo = GetScenarioInfo(originalResponse, originalUri);
             if (!isPutOrPatch && (originalInfo.HeaderFrom == HeaderFrom.None || originalInfo.HeaderFrom != HeaderFrom.Location))
             {
-                throw await originalResponse.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                throw await clientDiagnostics.CreateRequestFailedExceptionAsync(originalResponse).ConfigureAwait(false);
             }
 
             return OperationFactory.CreateAsync(originalResponse, async (r, c) =>
@@ -45,7 +45,7 @@ namespace Azure.Core
                         return await createFinalResponse(response);
                     }
                     default:
-                        throw await response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(response).ConfigureAwait(false);
                 }
             });
         }
