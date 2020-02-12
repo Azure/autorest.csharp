@@ -667,31 +667,53 @@ namespace lro
             }
         }
 
-        public async ValueTask<Operation<Product>> PutAsyncRetrySucceededOperationAsync(Product product, CancellationToken cancellationToken = default)
+        public Operation<Product> PutAsyncRetrySucceededOperation(Product product)
         {
-            var originalResponse = (await PutAsyncRetrySucceededAsync(product, cancellationToken).ConfigureAwait(false)).GetRawResponse();
-            return await ArmOperationHelpers.CreateAsync(pipeline, clientDiagnostics, originalResponse, true, "LROsOperations.Put200Succeeded",
+            //var originalResponse = (await PutAsyncRetrySucceededAsync(product, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics,
+                c => (PutAsyncRetrySucceeded(product, c)).GetRawResponse(),
+                async c => (await PutAsyncRetrySucceededAsync(product, c).ConfigureAwait(false)).GetRawResponse(),
+                true, "LROsOperations.Put200Succeeded",
                 () => CreatePutAsyncRetrySucceededRequest(product),
-                async response =>
+                (r, c) =>
                 {
-                    using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                    using var document = JsonDocument.Parse(r.ContentStream, default);
                     var value = Product.DeserializeProduct(document.RootElement);
-                    return Response.FromValue(value, response);
+                    return Response.FromValue(value, r);
+                },
+                async (r, c) =>
+                {
+                    using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                    var value = Product.DeserializeProduct(document.RootElement);
+                    return Response.FromValue(value, r);
                 });
         }
 
-        public Operation<Product> PutAsyncRetrySucceededOperation(Product product, CancellationToken cancellationToken = default)
-        {
-            var originalResponse = (PutAsyncRetrySucceeded(product, cancellationToken)).GetRawResponse();
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, true, "LROsOperations.Put200Succeeded",
-                () => CreatePutAsyncRetrySucceededRequest(product),
-                response =>
-                {
-                    using var document = JsonDocument.Parse(response.ContentStream, default);
-                    var value = Product.DeserializeProduct(document.RootElement);
-                    return Response.FromValue(value, response);
-                });
-        }
+        //public async ValueTask<Operation<Product>> PutAsyncRetrySucceededOperationAsync(Product product, CancellationToken cancellationToken = default)
+        //{
+        //    var originalResponse = (await PutAsyncRetrySucceededAsync(product, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+        //    return await ArmOperationHelpers.CreateAsync(pipeline, clientDiagnostics, originalResponse, true, "LROsOperations.Put200Succeeded",
+        //        () => CreatePutAsyncRetrySucceededRequest(product),
+        //        async response =>
+        //        {
+        //            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+        //            var value = Product.DeserializeProduct(document.RootElement);
+        //            return Response.FromValue(value, response);
+        //        });
+        //}
+
+        //public Operation<Product> PutAsyncRetrySucceededOperation(Product product, CancellationToken cancellationToken = default)
+        //{
+        //    var originalResponse = (PutAsyncRetrySucceeded(product, cancellationToken)).GetRawResponse();
+        //    return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, true, "LROsOperations.Put200Succeeded",
+        //        () => CreatePutAsyncRetrySucceededRequest(product),
+        //        response =>
+        //        {
+        //            using var document = JsonDocument.Parse(response.ContentStream, default);
+        //            var value = Product.DeserializeProduct(document.RootElement);
+        //            return Response.FromValue(value, response);
+        //        });
+        //}
 
         internal HttpMessage CreatePutAsyncRetrySucceededRequest(Product product)
         {

@@ -14,54 +14,30 @@ namespace Azure.Core
 {
     internal static class ArmOperationHelpers
     {
-        public static async ValueTask<Operation<T>> CreateAsync<T>(HttpPipeline pipeline, ClientDiagnostics clientDiagnostics,
-            Response originalResponse, bool isPutOrPatch, string scopeName, Func<HttpMessage> createOriginalHttpMethod, Func<Response, ValueTask<Response<T>>> createFinalResponse) where T : notnull
-        {
-            using HttpMessage originalHttpMethod = createOriginalHttpMethod();
-            string originalUri = originalHttpMethod.Request.Uri.ToString();
-            ScenarioInfo originalInfo = GetScenarioInfo(originalResponse, originalUri);
-            if (!isPutOrPatch && (originalInfo.HeaderFrom == HeaderFrom.None || originalInfo.HeaderFrom != HeaderFrom.Location))
-            {
-                throw await clientDiagnostics.CreateRequestFailedExceptionAsync(originalResponse).ConfigureAwait(false);
-            }
-
-            return OperationFactory.CreateAsync(originalResponse, async (r, c) =>
-            {
-                ScenarioInfo info = GetScenarioInfo(r, originalUri);
-                return await GetResponseAsync(pipeline, clientDiagnostics, scopeName, info.PollUri, c).ConfigureAwait(false);
-            }, r =>
-            {
-                ScenarioInfo info = GetScenarioInfo(r, originalUri);
-                return new ValueTask<bool>(IsTerminalState(r, info));
-            }, async (r, c) =>
-            {
-                string finalUri = isPutOrPatch ? originalUri : originalInfo.PollUri;
-                Response response = await GetResponseAsync(pipeline, clientDiagnostics, scopeName, finalUri, c).ConfigureAwait(false);
-                switch (response.Status)
-                {
-                    case 200:
-                    case 204 when !isPutOrPatch:
-                    {
-                        return await createFinalResponse(response);
-                    }
-                    default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(response).ConfigureAwait(false);
-                }
-            });
-        }
-
         public static Operation<T> Create<T>(HttpPipeline pipeline, ClientDiagnostics clientDiagnostics,
-            Response originalResponse, bool isPutOrPatch, string scopeName, Func<HttpMessage> createOriginalHttpMethod, Func<Response, Response<T>> createFinalResponse) where T : notnull
+            Func<CancellationToken, Response> originalFunc, Func<CancellationToken, ValueTask<Response>> originalFuncAsync, bool isPutOrPatch, string scopeName,
+            Func<HttpMessage> createOriginalHttpMethod, Func<Response, CancellationToken, Response<T>> createFinalResponse, Func<Response, CancellationToken, ValueTask<Response<T>>> createFinalResponseAsync) where T : notnull
         {
             using HttpMessage originalHttpMethod = createOriginalHttpMethod();
             string originalUri = originalHttpMethod.Request.Uri.ToString();
-            ScenarioInfo originalInfo = GetScenarioInfo(originalResponse, originalUri);
-            if (!isPutOrPatch && (originalInfo.HeaderFrom == HeaderFrom.None || originalInfo.HeaderFrom != HeaderFrom.Location))
-            {
-                throw clientDiagnostics.CreateRequestFailedException(originalResponse);
-            }
+            //ScenarioInfo originalInfo = GetScenarioInfo(originalResponse, originalUri);
+            //if (!isPutOrPatch && (originalInfo.HeaderFrom == HeaderFrom.None || originalInfo.HeaderFrom != HeaderFrom.Location))
+            //{
+            //    throw clientDiagnostics.CreateRequestFailedException(originalResponse);
+            //}
+            //ScenarioInfo originalInfo = new ScenarioInfo();
 
-            return OperationFactory.Create(originalResponse, (r, c) =>
+            return OperationFactory.Create(c =>
+            {
+                Response originalResponse = originalFunc(c);
+                ScenarioInfo originalInfo = GetScenarioInfo(originalResponse, originalUri);
+                if (!isPutOrPatch && (originalInfo.HeaderFrom == HeaderFrom.None || originalInfo.HeaderFrom != HeaderFrom.Location))
+                {
+                    throw clientDiagnostics.CreateRequestFailedException(originalResponse);
+                }
+
+                return originalResponse;
+            }, (r, c) =>
             {
                 ScenarioInfo info = GetScenarioInfo(r, originalUri);
                 return GetResponse(pipeline, clientDiagnostics, scopeName, info.PollUri, c);
@@ -71,20 +47,121 @@ namespace Azure.Core
                 return IsTerminalState(r, info);
             }, (r, c) =>
             {
-                string finalUri = isPutOrPatch ? originalUri : originalInfo.PollUri;
+                //string finalUri = isPutOrPatch ? originalUri : originalInfo.PollUri;
+                string finalUri = originalUri;
                 Response response = GetResponse(pipeline, clientDiagnostics, scopeName, finalUri, c);
                 switch (response.Status)
                 {
                     case 200:
                     case 204 when !isPutOrPatch:
-                        {
-                            return createFinalResponse(response);
-                        }
+                    {
+                        return createFinalResponse(response, c);
+                    }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(response);
                 }
+            }, async c =>
+            {
+                Response originalResponse = await originalFuncAsync(c).ConfigureAwait(false);
+                ScenarioInfo originalInfo = GetScenarioInfo(originalResponse, originalUri);
+                if (!isPutOrPatch && (originalInfo.HeaderFrom == HeaderFrom.None || originalInfo.HeaderFrom != HeaderFrom.Location))
+                {
+                    throw await clientDiagnostics.CreateRequestFailedExceptionAsync(originalResponse).ConfigureAwait(false);
+                }
+
+                return originalResponse;
+            }, async (r, c) =>
+            {
+                ScenarioInfo info = GetScenarioInfo(r, originalUri);
+                return await GetResponseAsync(pipeline, clientDiagnostics, scopeName, info.PollUri, c).ConfigureAwait(false);
+            }, async (r, c) =>
+            {
+                //string finalUri = isPutOrPatch ? originalUri : originalInfo.PollUri;
+                string finalUri = originalUri;
+                Response response = await GetResponseAsync(pipeline, clientDiagnostics, scopeName, finalUri, c).ConfigureAwait(false);
+                switch (response.Status)
+                {
+                    case 200:
+                    case 204 when !isPutOrPatch:
+                        {
+                            return await createFinalResponseAsync(response, c);
+                        }
+                    default:
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(response).ConfigureAwait(false);
+                }
             });
         }
+        //public static async ValueTask<Operation<T>> CreateAsync<T>(HttpPipeline pipeline, ClientDiagnostics clientDiagnostics,
+        //    Response originalResponse, bool isPutOrPatch, string scopeName, Func<HttpMessage> createOriginalHttpMethod, Func<Response, ValueTask<Response<T>>> createFinalResponse) where T : notnull
+        //{
+        //    using HttpMessage originalHttpMethod = createOriginalHttpMethod();
+        //    string originalUri = originalHttpMethod.Request.Uri.ToString();
+        //    ScenarioInfo originalInfo = GetScenarioInfo(originalResponse, originalUri);
+        //    if (!isPutOrPatch && (originalInfo.HeaderFrom == HeaderFrom.None || originalInfo.HeaderFrom != HeaderFrom.Location))
+        //    {
+        //        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(originalResponse).ConfigureAwait(false);
+        //    }
+
+        //    return OperationFactory.CreateAsync(originalResponse, async (r, c) =>
+        //    {
+        //        ScenarioInfo info = GetScenarioInfo(r, originalUri);
+        //        return await GetResponseAsync(pipeline, clientDiagnostics, scopeName, info.PollUri, c).ConfigureAwait(false);
+        //    }, r =>
+        //    {
+        //        ScenarioInfo info = GetScenarioInfo(r, originalUri);
+        //        return new ValueTask<bool>(IsTerminalState(r, info));
+        //    }, async (r, c) =>
+        //    {
+        //        string finalUri = isPutOrPatch ? originalUri : originalInfo.PollUri;
+        //        Response response = await GetResponseAsync(pipeline, clientDiagnostics, scopeName, finalUri, c).ConfigureAwait(false);
+        //        switch (response.Status)
+        //        {
+        //            case 200:
+        //            case 204 when !isPutOrPatch:
+        //            {
+        //                return await createFinalResponse(response);
+        //            }
+        //            default:
+        //                throw await clientDiagnostics.CreateRequestFailedExceptionAsync(response).ConfigureAwait(false);
+        //        }
+        //    });
+        //}
+
+        //public static Operation<T> Create<T>(HttpPipeline pipeline, ClientDiagnostics clientDiagnostics,
+        //    Response originalResponse, bool isPutOrPatch, string scopeName, Func<HttpMessage> createOriginalHttpMethod, Func<Response, Response<T>> createFinalResponse) where T : notnull
+        //{
+        //    using HttpMessage originalHttpMethod = createOriginalHttpMethod();
+        //    string originalUri = originalHttpMethod.Request.Uri.ToString();
+        //    ScenarioInfo originalInfo = GetScenarioInfo(originalResponse, originalUri);
+        //    if (!isPutOrPatch && (originalInfo.HeaderFrom == HeaderFrom.None || originalInfo.HeaderFrom != HeaderFrom.Location))
+        //    {
+        //        throw clientDiagnostics.CreateRequestFailedException(originalResponse);
+        //    }
+
+        //    return OperationFactory.Create(originalResponse, (r, c) =>
+        //    {
+        //        ScenarioInfo info = GetScenarioInfo(r, originalUri);
+        //        return GetResponse(pipeline, clientDiagnostics, scopeName, info.PollUri, c);
+        //    }, r =>
+        //    {
+        //        ScenarioInfo info = GetScenarioInfo(r, originalUri);
+        //        return IsTerminalState(r, info);
+        //    }, (r, c) =>
+        //    {
+        //        string finalUri = isPutOrPatch ? originalUri : originalInfo.PollUri;
+        //        Response response = GetResponse(pipeline, clientDiagnostics, scopeName, finalUri, c);
+        //        switch (response.Status)
+        //        {
+        //            case 200:
+        //            case 204 when !isPutOrPatch:
+        //                {
+        //                    return createFinalResponse(response);
+        //                }
+        //            default:
+        //                throw clientDiagnostics.CreateRequestFailedException(response);
+        //        }
+        //    });
+        //}
 
         private static HttpMessage CreateGetResponseRequest(HttpPipeline pipeline, string link)
         {
