@@ -15,32 +15,8 @@
 
 ## Configuration
 ```yaml
-# autorest-core version
-version: 3.0.6200
-use-extension:
-  "@autorest/modelerfour": "4.4.162"
-modelerfour:
-  flatten-models: true
-pipeline:
-  csharpgen:
-    input: modelerfour/identity
-  csharpgen/emitter:
-    input: csharpgen
-    scope: output-scope
-output-scope:
-  output-artifact: source-file-csharp
-```
-
-```yaml $(include-csproj)
-pipeline:
-  csharpproj:
-    input: modelerfour/identity
-  csharpproj/emitter:
-    input: csharpproj
-    scope: output-scope
-  csharpproj/emitter/command:
-    input:
-    - csharpgen/emitter
-    - csharpproj/emitter
-    run: dotnet build $(title).csproj --verbosity quiet /nologo
+version: 3.0.6212
+shared-source-folder: $(this-folder)/src/assets
+save-code-model: true
+use: $(this-folder)/artifacts/bin/AutoRest.CSharp.V3/Debug/netcoreapp3.0/
 ```

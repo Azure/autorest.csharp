@@ -15,7 +15,7 @@ namespace xml_service.Models
         public string Snapshot { get; set; }
         /// <summary> Properties of a blob. </summary>
         public BlobProperties Properties { get; set; } = new BlobProperties();
-        /// <summary> Dictionary of &lt;paths·xml-headers·get·responses·200·headers·custom_header·schema&gt;. </summary>
+        /// <summary> Dictionary of &lt;string&gt;. </summary>
         public IDictionary<string, string> Metadata { get; set; }
     }
 }

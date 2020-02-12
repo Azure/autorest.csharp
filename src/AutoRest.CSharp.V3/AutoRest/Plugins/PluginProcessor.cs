@@ -32,6 +32,8 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
             }
             try
             {
+                var configuration = new Configuration(autoRest);
+
                 var plugin = Plugins[autoRest.PluginName]();
                 var codeModel = new CodeModel();
                 if (plugin.DeserializeCodeModel)
@@ -41,11 +43,14 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
 
                     var codeModelYaml = await autoRest.ReadFile(codeModelFileName);
 
-                    await autoRest.WriteFile("CodeModel.yaml", codeModelYaml, "source-file-csharp");
+                    if (configuration.SaveCodeModel)
+                    {
+                        await autoRest.WriteFile("CodeModel.yaml", codeModelYaml, "source-file-csharp");
+                    }
 
                     codeModel = CodeModelSerialization.DeserializeCodeModel(codeModelYaml);
                 }
-                var configuration = new Configuration(autoRest);
+
                 await plugin.Execute(autoRest, codeModel, configuration);
                 return true;
             }

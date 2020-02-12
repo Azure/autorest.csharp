@@ -5,7 +5,6 @@
   "scripts": {
     "start": "dotnet ./AutoRest.CSharp.V3.dll --server"
   },
-  "files":[ "AutoRest.CSharp.V3.dll" ],
   "devDependencies": {
   },
   "dependencies": {}

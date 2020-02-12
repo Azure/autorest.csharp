@@ -94,10 +94,6 @@ schemas: !<!Schemas>
               version: 1.0.0
             value: !<!ConstantValue> 
               value: constant
-              language:
-                default:
-                  name: ''
-                  description: ''
             valueType: !<!StringSchema> &ref_0
               type: string
               language: !<!Languages> 
@@ -164,10 +160,6 @@ schemas: !<!Schemas>
               version: 1.0.0
             value: !<!ConstantValue> 
               value: constant
-              language:
-                default:
-                  name: ''
-                  description: ''
             valueType: *ref_0
             language: !<!Languages> 
               default:
@@ -190,10 +182,6 @@ schemas: !<!Schemas>
               version: 1.0.0
             value: !<!ConstantValue> 
               value: constant2
-              language:
-                default:
-                  name: ''
-                  description: ''
             valueType: *ref_0
             language: !<!Languages> 
               default:
@@ -227,10 +215,6 @@ schemas: !<!Schemas>
         type: constant
         value: !<!ConstantValue> 
           value: 0
-          language:
-            default:
-              name: ''
-              description: ''
         valueType: !<!NumberSchema> &ref_12
           type: number
           precision: 32
@@ -260,10 +244,6 @@ schemas: !<!Schemas>
           version: 1.0.0
         value: !<!ConstantValue> 
           value: constant
-          language:
-            default:
-              name: ''
-              description: ''
         valueType: *ref_0
         language: !<!Languages> 
           default:
@@ -286,10 +266,6 @@ schemas: !<!Schemas>
           version: 1.0.0
         value: !<!ConstantValue> 
           value: constant_string_as_enum
-          language:
-            default:
-              name: ''
-              description: ''
         valueType: *ref_0
         language: !<!Languages> 
           default:
@@ -383,10 +359,6 @@ schemas: !<!Schemas>
     type: constant
     value: !<!ConstantValue> 
       value: 1.0.0
-      language:
-        default:
-          name: ''
-          description: ''
     valueType: *ref_0
     language: !<!Languages> 
       default:
@@ -403,10 +375,6 @@ schemas: !<!Schemas>
     type: constant
     value: !<!ConstantValue> 
       value: 1.0.0
-      language:
-        default:
-          name: ''
-          description: ''
     valueType: *ref_0
     language: !<!Languages> 
       default:
@@ -417,10 +385,6 @@ schemas: !<!Schemas>
     type: constant
     value: !<!ConstantValue> 
       value: constant
-      language:
-        default:
-          name: ''
-          description: ''
     valueType: *ref_0
     language: !<!Languages> 
       default:

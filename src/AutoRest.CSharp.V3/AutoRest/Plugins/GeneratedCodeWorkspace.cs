@@ -20,7 +20,6 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
         public static string SharedFolder = "shared";
         public static string GeneratedFolder = "Generated";
 
-        private static readonly string SharedSourceDirectory = Path.Combine(Path.GetDirectoryName(typeof(GeneratedCodeWorkspace).Assembly.Location)!, "Azure.Core.Shared");
         private static readonly string[] SharedFolders = { SharedFolder };
         private static readonly string[] GeneratedFolders = { GeneratedFolder };
 
@@ -69,7 +68,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
             }
         }
 
-        public static GeneratedCodeWorkspace Create(string projectDirectory)
+        public static GeneratedCodeWorkspace Create(string projectDirectory, string sharedSourceFolder)
         {
             var workspace = new AdhocWorkspace();
             // TODO: This is not the right way to construct the workspace but it works
@@ -93,7 +92,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                 generatedCodeProject = generatedCodeProject.AddDocument(sharedSourceFile, File.ReadAllText(sharedSourceFile), Array.Empty<string>(), sharedSourceFile).Project;
             }
 
-            foreach (string sharedSourceFile in Directory.GetFiles(SharedSourceDirectory, "*.cs"))
+            foreach (string sharedSourceFile in Directory.GetFiles(sharedSourceFolder, "*.cs", SearchOption.AllDirectories))
             {
                 generatedCodeProject = generatedCodeProject.AddDocument(sharedSourceFile, File.ReadAllText(sharedSourceFile), SharedFolders, sharedSourceFile).Project;
             }
