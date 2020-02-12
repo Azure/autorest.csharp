@@ -50,6 +50,42 @@ namespace Azure.Core
             });
         }
 
+        public static Operation<T> Create<T>(HttpPipeline pipeline, ClientDiagnostics clientDiagnostics,
+            Response originalResponse, bool isPutOrPatch, string scopeName, Func<HttpMessage> createOriginalHttpMethod, Func<Response, Response<T>> createFinalResponse) where T : notnull
+        {
+            using HttpMessage originalHttpMethod = createOriginalHttpMethod();
+            string originalUri = originalHttpMethod.Request.Uri.ToString();
+            ScenarioInfo originalInfo = GetScenarioInfo(originalResponse, originalUri);
+            if (!isPutOrPatch && (originalInfo.HeaderFrom == HeaderFrom.None || originalInfo.HeaderFrom != HeaderFrom.Location))
+            {
+                throw clientDiagnostics.CreateRequestFailedException(originalResponse);
+            }
+
+            return OperationFactory.Create(originalResponse, (r, c) =>
+            {
+                ScenarioInfo info = GetScenarioInfo(r, originalUri);
+                return GetResponse(pipeline, clientDiagnostics, scopeName, info.PollUri, c);
+            }, r =>
+            {
+                ScenarioInfo info = GetScenarioInfo(r, originalUri);
+                return IsTerminalState(r, info);
+            }, (r, c) =>
+            {
+                string finalUri = isPutOrPatch ? originalUri : originalInfo.PollUri;
+                Response response = GetResponse(pipeline, clientDiagnostics, scopeName, finalUri, c);
+                switch (response.Status)
+                {
+                    case 200:
+                    case 204 when !isPutOrPatch:
+                        {
+                            return createFinalResponse(response);
+                        }
+                    default:
+                        throw clientDiagnostics.CreateRequestFailedException(response);
+                }
+            });
+        }
+
         private static HttpMessage CreateGetResponseRequest(HttpPipeline pipeline, string link)
         {
             var message = pipeline.CreateMessage();
