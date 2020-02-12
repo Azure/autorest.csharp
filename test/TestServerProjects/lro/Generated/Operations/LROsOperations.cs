@@ -34,35 +34,35 @@ namespace lro
             this.pipeline = pipeline;
         }
 
-        public async ValueTask<Operation<Product>> Put200SucceededOperationAsync(Product product, CancellationToken cancellationToken = default)
-        {
-            var originalResponse = (await Put200SucceededAsync(product, cancellationToken).ConfigureAwait(false)).GetRawResponse();
-            using var originalRequest = CreatePut200SucceededRequest(product);
-            var originalUri = originalRequest.Request.Uri.ToString();
-            var originalInfo = ArmPollingHelpers.GetScenarioInfo(originalResponse, originalUri);
-            const bool isPutOrPatch = true;
-            if (!isPutOrPatch && (originalInfo.HeaderFrom == ArmPollingHelpers.HeaderFrom.None || originalInfo.HeaderFrom != ArmPollingHelpers.HeaderFrom.Location))
-            {
-                throw await originalResponse.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
-            }
+        //public async ValueTask<Operation<Product>> Put200SucceededOperationAsync(Product product, CancellationToken cancellationToken = default)
+        //{
+        //    var originalResponse = (await Put200SucceededAsync(product, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+        //    using var originalRequest = CreatePut200SucceededRequest(product);
+        //    var originalUri = originalRequest.Request.Uri.ToString();
+        //    var originalInfo = ArmPollingHelpers.GetScenarioInfo(originalResponse, originalUri);
+        //    const bool isPutOrPatch = true;
+        //    if (!isPutOrPatch && (originalInfo.HeaderFrom == ArmPollingHelpers.HeaderFrom.None || originalInfo.HeaderFrom != ArmPollingHelpers.HeaderFrom.Location))
+        //    {
+        //        throw await originalResponse.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+        //    }
 
-            return OperationFactory.CreateAsync(originalResponse, async (r, c) =>
-            {
-                var info = ArmPollingHelpers.GetScenarioInfo(r, originalUri);
-                return await ArmPollingHelpers.GetResponseAsync(pipeline, clientDiagnostics, "LROsOperations.Put200Succeeded", info.PollUri, c).ConfigureAwait(false);
-            }, r =>
-            {
-                var info = ArmPollingHelpers.GetScenarioInfo(r, originalUri);
-                return new ValueTask<bool>(ArmPollingHelpers.IsTerminalState(r, info));
-            }, async (r, c) =>
-            {
-                var finalUri = isPutOrPatch ? originalUri : originalInfo.PollUri;
-                var response = await ArmPollingHelpers.GetResponseAsync(pipeline, clientDiagnostics, "LROsOperations.Put200Succeeded", finalUri, c).ConfigureAwait(false);
-                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
-            });
-        }
+        //    return OperationFactory.CreateAsync(originalResponse, async (r, c) =>
+        //    {
+        //        var info = ArmPollingHelpers.GetScenarioInfo(r, originalUri);
+        //        return await ArmPollingHelpers.GetResponseAsync(pipeline, clientDiagnostics, "LROsOperations.Put200Succeeded", info.PollUri, c).ConfigureAwait(false);
+        //    }, r =>
+        //    {
+        //        var info = ArmPollingHelpers.GetScenarioInfo(r, originalUri);
+        //        return new ValueTask<bool>(ArmPollingHelpers.IsTerminalState(r, info));
+        //    }, async (r, c) =>
+        //    {
+        //        var finalUri = isPutOrPatch ? originalUri : originalInfo.PollUri;
+        //        var response = await ArmPollingHelpers.GetResponseAsync(pipeline, clientDiagnostics, "LROsOperations.Put200Succeeded", finalUri, c).ConfigureAwait(false);
+        //        using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+        //        var value = Product.DeserializeProduct(document.RootElement);
+        //        return Response.FromValue(value, response);
+        //    });
+        //}
 
         internal HttpMessage CreatePut200SucceededRequest(Product product)
         {
@@ -666,43 +666,90 @@ namespace lro
                 throw;
             }
         }
+        //public async ValueTask<Operation<Product>> PutAsyncRetrySucceededOperationAsync(Product product, CancellationToken cancellationToken = default)
+        //{
+        //    var originalResponse = (await PutAsyncRetrySucceededAsync(product, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+        //    using var originalRequest = CreatePutAsyncRetrySucceededRequest(product);
+        //    var originalUri = originalRequest.Request.Uri.ToString();
+        //    var originalInfo = ArmPollingHelpers.GetScenarioInfo(originalResponse, originalUri);
+        //    const bool isPutOrPatch = true;
+        //    if (!isPutOrPatch && (originalInfo.HeaderFrom == ArmPollingHelpers.HeaderFrom.None || originalInfo.HeaderFrom != ArmPollingHelpers.HeaderFrom.Location))
+        //    {
+        //        throw await originalResponse.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+        //    }
+
+        //    return OperationFactory.CreateAsync(originalResponse, async (r, c) =>
+        //    {
+        //        var info = ArmPollingHelpers.GetScenarioInfo(r, originalUri);
+        //        return await ArmPollingHelpers.GetResponseAsync(pipeline, clientDiagnostics, "LROsOperations.Put200Succeeded", info.PollUri, c).ConfigureAwait(false);
+        //    }, r =>
+        //    {
+        //        var info = ArmPollingHelpers.GetScenarioInfo(r, originalUri);
+        //        return new ValueTask<bool>(ArmPollingHelpers.IsTerminalState(r, info));
+        //    }, async (r, c) =>
+        //    {
+        //        var finalUri = isPutOrPatch ? originalUri : originalInfo.PollUri;
+        //        var response = await ArmPollingHelpers.GetResponseAsync(pipeline, clientDiagnostics, "LROsOperations.Put200Succeeded", finalUri, c).ConfigureAwait(false);
+        //        switch (response.Status)
+        //        {
+        //            case 200:
+        //            case 204 when !isPutOrPatch:
+        //            {
+        //                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+        //                var value = Product.DeserializeProduct(document.RootElement);
+        //                return Response.FromValue(value, response);
+        //            }
+        //            default:
+        //                throw await response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+        //        }
+        //    });
+        //}
+
         public async ValueTask<Operation<Product>> PutAsyncRetrySucceededOperationAsync(Product product, CancellationToken cancellationToken = default)
         {
             var originalResponse = (await PutAsyncRetrySucceededAsync(product, cancellationToken).ConfigureAwait(false)).GetRawResponse();
-            using var originalRequest = CreatePutAsyncRetrySucceededRequest(product);
-            var originalUri = originalRequest.Request.Uri.ToString();
-            var originalInfo = ArmPollingHelpers.GetScenarioInfo(originalResponse, originalUri);
-            const bool isPutOrPatch = true;
-            if (!isPutOrPatch && (originalInfo.HeaderFrom == ArmPollingHelpers.HeaderFrom.None || originalInfo.HeaderFrom != ArmPollingHelpers.HeaderFrom.Location))
-            {
-                throw await originalResponse.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
-            }
-
-            return OperationFactory.CreateAsync(originalResponse, async (r, c) =>
-            {
-                var info = ArmPollingHelpers.GetScenarioInfo(r, originalUri);
-                return await ArmPollingHelpers.GetResponseAsync(pipeline, clientDiagnostics, "LROsOperations.Put200Succeeded", info.PollUri, c).ConfigureAwait(false);
-            }, r =>
-            {
-                var info = ArmPollingHelpers.GetScenarioInfo(r, originalUri);
-                return new ValueTask<bool>(ArmPollingHelpers.IsTerminalState(r, info));
-            }, async (r, c) =>
-            {
-                var finalUri = isPutOrPatch ? originalUri : originalInfo.PollUri;
-                var response = await ArmPollingHelpers.GetResponseAsync(pipeline, clientDiagnostics, "LROsOperations.Put200Succeeded", finalUri, c).ConfigureAwait(false);
-                switch (response.Status)
+            return await ArmPollingHelpers.CreateOperationAsync(pipeline, clientDiagnostics, originalResponse, true, "LROsOperations.Put200Succeeded",
+                () => CreatePutAsyncRetrySucceededRequest(product),
+                async response =>
                 {
-                    case 200:
-                    case 204 when !isPutOrPatch:
-                    {
-                        using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        var value = Product.DeserializeProduct(document.RootElement);
-                        return Response.FromValue(value, response);
-                    }
-                    default:
-                        throw await response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
-                }
-            });
+                    using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                    var value = Product.DeserializeProduct(document.RootElement);
+                    return Response.FromValue(value, response);
+                });
+            //using var originalRequest = CreatePutAsyncRetrySucceededRequest(product);
+            //var originalUri = originalRequest.Request.Uri.ToString();
+            //var originalInfo = ArmPollingHelpers.GetScenarioInfo(originalResponse, originalUri);
+            //const bool isPutOrPatch = true;
+            //if (!isPutOrPatch && (originalInfo.HeaderFrom == ArmPollingHelpers.HeaderFrom.None || originalInfo.HeaderFrom != ArmPollingHelpers.HeaderFrom.Location))
+            //{
+            //    throw await originalResponse.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+            //}
+
+            //return OperationFactory.CreateAsync(originalResponse, async (r, c) =>
+            //{
+            //    var info = ArmPollingHelpers.GetScenarioInfo(r, originalUri);
+            //    return await ArmPollingHelpers.GetResponseAsync(pipeline, clientDiagnostics, "LROsOperations.Put200Succeeded", info.PollUri, c).ConfigureAwait(false);
+            //}, r =>
+            //{
+            //    var info = ArmPollingHelpers.GetScenarioInfo(r, originalUri);
+            //    return new ValueTask<bool>(ArmPollingHelpers.IsTerminalState(r, info));
+            //}, async (r, c) =>
+            //{
+            //    var finalUri = isPutOrPatch ? originalUri : originalInfo.PollUri;
+            //    var response = await ArmPollingHelpers.GetResponseAsync(pipeline, clientDiagnostics, "LROsOperations.Put200Succeeded", finalUri, c).ConfigureAwait(false);
+            //    switch (response.Status)
+            //    {
+            //        case 200:
+            //        case 204 when !isPutOrPatch:
+            //            {
+            //                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+            //                var value = Product.DeserializeProduct(document.RootElement);
+            //                return Response.FromValue(value, response);
+            //            }
+            //        default:
+            //            throw await response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+            //    }
+            //});
         }
         internal HttpMessage CreatePutAsyncRetrySucceededRequest(Product product)
         {

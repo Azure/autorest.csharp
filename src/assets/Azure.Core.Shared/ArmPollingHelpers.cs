@@ -14,6 +14,42 @@ namespace Azure.Core
 {
     internal static class ArmPollingHelpers
     {
+        public static async ValueTask<Operation<T>> CreateOperationAsync<T>(HttpPipeline pipeline, ClientDiagnostics clientDiagnostics,
+            Response originalResponse, bool isPutOrPatch, string scopeName, Func<HttpMessage> createOriginalHttpMethod, Func<Response, ValueTask<Response<T>>> createFinalResponse) where T : notnull
+        {
+            using HttpMessage originalHttpMethod = createOriginalHttpMethod();
+            string originalUri = originalHttpMethod.Request.Uri.ToString();
+            ScenarioInfo originalInfo = GetScenarioInfo(originalResponse, originalUri);
+            if (!isPutOrPatch && (originalInfo.HeaderFrom == HeaderFrom.None || originalInfo.HeaderFrom != HeaderFrom.Location))
+            {
+                throw await originalResponse.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+            }
+
+            return OperationFactory.CreateAsync(originalResponse, async (r, c) =>
+            {
+                ScenarioInfo info = GetScenarioInfo(r, originalUri);
+                return await GetResponseAsync(pipeline, clientDiagnostics, scopeName, info.PollUri, c).ConfigureAwait(false);
+            }, r =>
+            {
+                ScenarioInfo info = GetScenarioInfo(r, originalUri);
+                return new ValueTask<bool>(IsTerminalState(r, info));
+            }, async (r, c) =>
+            {
+                string finalUri = isPutOrPatch ? originalUri : originalInfo.PollUri;
+                Response response = await GetResponseAsync(pipeline, clientDiagnostics, scopeName, finalUri, c).ConfigureAwait(false);
+                switch (response.Status)
+                {
+                    case 200:
+                    case 204 when !isPutOrPatch:
+                    {
+                        return await createFinalResponse(response);
+                    }
+                    default:
+                        throw await response.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
+                }
+            });
+        }
+
         private static HttpMessage CreateGetResponseRequest(HttpPipeline pipeline, string link)
         {
             var message = pipeline.CreateMessage();
@@ -25,7 +61,7 @@ namespace Azure.Core
             return message;
         }
 
-        public static async ValueTask<Response> GetResponseAsync(HttpPipeline pipeline, ClientDiagnostics clientDiagnostics, string scopeName, string link, CancellationToken cancellationToken = default)
+        private static async ValueTask<Response> GetResponseAsync(HttpPipeline pipeline, ClientDiagnostics clientDiagnostics, string scopeName, string link, CancellationToken cancellationToken = default)
         {
             if (link == null)
             {
@@ -47,7 +83,7 @@ namespace Azure.Core
             }
         }
 
-        public static Response GetResponse(HttpPipeline pipeline, ClientDiagnostics clientDiagnostics, string scopeName, string link, CancellationToken cancellationToken = default)
+        private static Response GetResponse(HttpPipeline pipeline, ClientDiagnostics clientDiagnostics, string scopeName, string link, CancellationToken cancellationToken = default)
         {
             if (link == null)
             {
@@ -69,14 +105,14 @@ namespace Azure.Core
             }
         }
 
-        public enum HeaderFrom
+        private enum HeaderFrom
         {
             None,
             AzureAsyncOperation,
             Location
         }
 
-        public class ScenarioInfo
+        private class ScenarioInfo
         {
             public ScenarioInfo(HeaderFrom headerFrom, string pollUri)
             {
@@ -84,11 +120,11 @@ namespace Azure.Core
                 PollUri = pollUri;
             }
 
-            public HeaderFrom HeaderFrom { get; set; }
-            public string PollUri { get; set; }
+            public HeaderFrom HeaderFrom { get; }
+            public string PollUri { get; }
         }
 
-        public static ScenarioInfo GetScenarioInfo(Response response, string originalUri)
+        private static ScenarioInfo GetScenarioInfo(Response response, string originalUri)
         {
             if (response.Headers.Any(h => string.Equals(h.Name, "Azure-AsyncOperation", StringComparison.InvariantCultureIgnoreCase)))
             {
@@ -107,7 +143,7 @@ namespace Azure.Core
 
         private static readonly string[] TerminalStates = { "Succeeded", "Failed", "Canceled" };
 
-        public static bool IsTerminalState(Response response, ScenarioInfo info)
+        private static bool IsTerminalState(Response response, ScenarioInfo info)
         {
             try
             {

@@ -17,14 +17,14 @@ namespace Azure.Core
         public static Operation<T> CreateAsync<T>(Response originalResponse, AsyncPollingFunc asyncPollingFunc, AsyncCompletionPredicate asyncCompletionPredicate, AsyncFinalFunc<T> asyncFinalFunc) where T : notnull =>
             new FuncOperation<T>(originalResponse, asyncPollingFunc, asyncCompletionPredicate, asyncFinalFunc);
 
-        internal delegate ValueTask<Response> AsyncPollingFunc(Response previousResponse, CancellationToken cancellationToken = new CancellationToken());
-        internal delegate Response PollingFunc(Response previousResponse, CancellationToken cancellationToken = new CancellationToken());
+        internal delegate ValueTask<Response> AsyncPollingFunc(Response previousResponse, CancellationToken cancellationToken = default);
+        internal delegate Response PollingFunc(Response previousResponse, CancellationToken cancellationToken = default);
 
         internal delegate ValueTask<bool> AsyncCompletionPredicate(Response response);
         internal delegate bool CompletionPredicate(Response response);
 
-        internal delegate ValueTask<Response<T>> AsyncFinalFunc<T>(Response response, CancellationToken cancellationToken = new CancellationToken());
-        internal delegate Response<T> FinalFunc<T>(Response response, CancellationToken cancellationToken = new CancellationToken());
+        internal delegate ValueTask<Response<T>> AsyncFinalFunc<T>(Response response, CancellationToken cancellationToken = default);
+        internal delegate Response<T> FinalFunc<T>(Response response, CancellationToken cancellationToken = default);
 
         private class FuncOperation<T> : Operation<T> where T : notnull
         {
@@ -58,13 +58,13 @@ namespace Azure.Core
 
             public override Response GetRawResponse() => _rawResponse;
 
-            public override ValueTask<Response<T>> WaitForCompletionAsync(CancellationToken cancellationToken = new CancellationToken()) =>
+            public override ValueTask<Response<T>> WaitForCompletionAsync(CancellationToken cancellationToken = default) =>
                 this.DefaultWaitForCompletionAsync(OperationHelpers.DefaultPollingInterval, cancellationToken);
 
             public override ValueTask<Response<T>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken) =>
                 this.DefaultWaitForCompletionAsync(pollingInterval, cancellationToken);
 
-            public override async ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = new CancellationToken())
+            public override async ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default)
             {
                 // If it is completed, short circuit.
                 if (HasCompleted)
@@ -97,7 +97,7 @@ namespace Azure.Core
                 return GetRawResponse();
             }
 
-            public override Response UpdateStatus(CancellationToken cancellationToken = new CancellationToken())
+            public override Response UpdateStatus(CancellationToken cancellationToken = default)
             {
                 // If it is completed, short circuit.
                 if (HasCompleted)
