@@ -11,12 +11,9 @@ namespace Azure.Core
 {
     internal static class OperationFactory
     {
-        public static Operation<T> Create<T>(OriginalFunc originalFunc, PollingFunc pollingFunc, Predicate<Response> completionPredicate, FinalFunc<T> finalFunc,
-            AsyncOriginalFunc asyncOriginalFunc, AsyncPollingFunc asyncPollingFunc, AsyncFinalFunc<T> asyncFinalFunc) where T : notnull =>
-            new FuncOperation<T>(originalFunc, pollingFunc, completionPredicate, finalFunc, asyncOriginalFunc, asyncPollingFunc, asyncFinalFunc);
-
-        internal delegate ValueTask<Response> AsyncOriginalFunc(CancellationToken cancellationToken = default);
-        internal delegate Response OriginalFunc(CancellationToken cancellationToken = default);
+        public static Operation<T> Create<T>(Response originalResponse, PollingFunc pollingFunc, Predicate<Response> completionPredicate, FinalFunc<T> finalFunc,
+            AsyncPollingFunc asyncPollingFunc, AsyncFinalFunc<T> asyncFinalFunc) where T : notnull =>
+            new FuncOperation<T>(originalResponse, pollingFunc, completionPredicate, finalFunc, asyncPollingFunc, asyncFinalFunc);
 
         internal delegate ValueTask<Response> AsyncPollingFunc(Response previousResponse, CancellationToken cancellationToken = default);
         internal delegate Response PollingFunc(Response previousResponse, CancellationToken cancellationToken = default);
@@ -26,41 +23,30 @@ namespace Azure.Core
 
         private class FuncOperation<T> : Operation<T> where T : notnull
         {
-            private readonly AsyncOriginalFunc _asyncOriginalFunc;
-            private readonly OriginalFunc _originalFunc;
             private readonly AsyncPollingFunc _asyncPollingFunc;
             private readonly PollingFunc _pollingFunc;
             private readonly Predicate<Response> _completionPredicate;
             private readonly AsyncFinalFunc<T> _asyncFinalFunc;
             private readonly FinalFunc<T> _finalFunc;
 
-            private Response _rawResponse = default!;
+            private Response _rawResponse;
             private T _value = default!;
             private bool _hasValue;
             private bool _hasCompleted;
-            private bool _hasResponse;
+            private bool _shouldPoll;
 
-            public FuncOperation(OriginalFunc originalFunc, PollingFunc pollingFunc, Predicate<Response> completionPredicate, FinalFunc<T> finalFunc,
-                AsyncOriginalFunc asyncOriginalFunc, AsyncPollingFunc asyncPollingFunc, AsyncFinalFunc<T> asyncFinalFunc)
+            public FuncOperation(Response originalResponse, PollingFunc pollingFunc, Predicate<Response> completionPredicate, FinalFunc<T> finalFunc,
+                AsyncPollingFunc asyncPollingFunc, AsyncFinalFunc<T> asyncFinalFunc)
             {
-                _originalFunc = originalFunc;
+                _rawResponse = originalResponse;
                 _pollingFunc = pollingFunc;
                 _completionPredicate = completionPredicate;
                 _finalFunc = finalFunc;
-                _asyncOriginalFunc = asyncOriginalFunc;
                 _asyncPollingFunc = asyncPollingFunc;
                 _asyncFinalFunc = asyncFinalFunc;
             }
 
-            public override Response GetRawResponse()
-            {
-                if (!_hasResponse)
-                {
-                    throw new InvalidOperationException("The operation has not been started yet.");
-                }
-
-                return _rawResponse;
-            }
+            public override Response GetRawResponse() => _rawResponse;
 
             public override ValueTask<Response<T>> WaitForCompletionAsync(CancellationToken cancellationToken = default) =>
                 this.DefaultWaitForCompletionAsync(OperationHelpers.DefaultPollingInterval, cancellationToken);
@@ -75,11 +61,9 @@ namespace Azure.Core
                     return GetRawResponse();
                 }
 
-                Response response = _hasResponse
-                    ? await _asyncPollingFunc(GetRawResponse(), cancellationToken).ConfigureAwait(false)
-                    : await _asyncOriginalFunc(cancellationToken).ConfigureAwait(false);
+                Response response = _shouldPoll ? await _asyncPollingFunc(GetRawResponse(), cancellationToken).ConfigureAwait(false) : GetRawResponse();
                 _rawResponse = response;
-                _hasResponse = true;
+                _shouldPoll = true;
                 _hasCompleted = _completionPredicate(GetRawResponse());
                 if (HasCompleted)
                 {
@@ -100,11 +84,9 @@ namespace Azure.Core
                     return GetRawResponse();
                 }
 
-                Response response = _hasResponse
-                    ? _pollingFunc(GetRawResponse(), cancellationToken)
-                    : _originalFunc(cancellationToken);
+                Response response = _shouldPoll ? _pollingFunc(GetRawResponse(), cancellationToken) : GetRawResponse();
                 _rawResponse = response;
-                _hasResponse = true;
+                _shouldPoll = true;
                 _hasCompleted = _completionPredicate(GetRawResponse());
                 if (HasCompleted)
                 {

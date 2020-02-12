@@ -14,30 +14,18 @@ namespace Azure.Core
 {
     internal static class ArmOperationHelpers
     {
-        public static Operation<T> Create<T>(HttpPipeline pipeline, ClientDiagnostics clientDiagnostics,
-            Func<CancellationToken, Response> originalFunc, Func<CancellationToken, ValueTask<Response>> originalFuncAsync, bool isPutOrPatch, string scopeName,
+        public static Operation<T> Create<T>(HttpPipeline pipeline, ClientDiagnostics clientDiagnostics, Response originalResponse, bool isPutOrPatch, string scopeName,
             Func<HttpMessage> createOriginalHttpMethod, Func<Response, CancellationToken, Response<T>> createFinalResponse, Func<Response, CancellationToken, ValueTask<Response<T>>> createFinalResponseAsync) where T : notnull
         {
             using HttpMessage originalHttpMethod = createOriginalHttpMethod();
             string originalUri = originalHttpMethod.Request.Uri.ToString();
-            //ScenarioInfo originalInfo = GetScenarioInfo(originalResponse, originalUri);
-            //if (!isPutOrPatch && (originalInfo.HeaderFrom == HeaderFrom.None || originalInfo.HeaderFrom != HeaderFrom.Location))
-            //{
-            //    throw clientDiagnostics.CreateRequestFailedException(originalResponse);
-            //}
-            //ScenarioInfo originalInfo = new ScenarioInfo();
-
-            return OperationFactory.Create(c =>
+            ScenarioInfo originalInfo = GetScenarioInfo(originalResponse, originalUri);
+            if (!isPutOrPatch && (originalInfo.HeaderFrom == HeaderFrom.None || originalInfo.HeaderFrom != HeaderFrom.Location))
             {
-                Response originalResponse = originalFunc(c);
-                ScenarioInfo originalInfo = GetScenarioInfo(originalResponse, originalUri);
-                if (!isPutOrPatch && (originalInfo.HeaderFrom == HeaderFrom.None || originalInfo.HeaderFrom != HeaderFrom.Location))
-                {
-                    throw clientDiagnostics.CreateRequestFailedException(originalResponse);
-                }
+                throw clientDiagnostics.CreateRequestFailedException(originalResponse);
+            }
 
-                return originalResponse;
-            }, (r, c) =>
+            return OperationFactory.Create(originalResponse, (r, c) =>
             {
                 ScenarioInfo info = GetScenarioInfo(r, originalUri);
                 return GetResponse(pipeline, clientDiagnostics, scopeName, info.PollUri, c);
@@ -47,8 +35,7 @@ namespace Azure.Core
                 return IsTerminalState(r, info);
             }, (r, c) =>
             {
-                //string finalUri = isPutOrPatch ? originalUri : originalInfo.PollUri;
-                string finalUri = originalUri;
+                string finalUri = isPutOrPatch ? originalUri : originalInfo.PollUri;
                 Response response = GetResponse(pipeline, clientDiagnostics, scopeName, finalUri, c);
                 switch (response.Status)
                 {
@@ -60,24 +47,13 @@ namespace Azure.Core
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(response);
                 }
-            }, async c =>
-            {
-                Response originalResponse = await originalFuncAsync(c).ConfigureAwait(false);
-                ScenarioInfo originalInfo = GetScenarioInfo(originalResponse, originalUri);
-                if (!isPutOrPatch && (originalInfo.HeaderFrom == HeaderFrom.None || originalInfo.HeaderFrom != HeaderFrom.Location))
-                {
-                    throw await clientDiagnostics.CreateRequestFailedExceptionAsync(originalResponse).ConfigureAwait(false);
-                }
-
-                return originalResponse;
             }, async (r, c) =>
             {
                 ScenarioInfo info = GetScenarioInfo(r, originalUri);
                 return await GetResponseAsync(pipeline, clientDiagnostics, scopeName, info.PollUri, c).ConfigureAwait(false);
             }, async (r, c) =>
             {
-                //string finalUri = isPutOrPatch ? originalUri : originalInfo.PollUri;
-                string finalUri = originalUri;
+                string finalUri = isPutOrPatch ? originalUri : originalInfo.PollUri;
                 Response response = await GetResponseAsync(pipeline, clientDiagnostics, scopeName, finalUri, c).ConfigureAwait(false);
                 switch (response.Status)
                 {

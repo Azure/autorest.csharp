@@ -260,7 +260,7 @@ namespace AutoRest.TestServer.Tests
             //Assert.AreEqual("foo", result.Value.Name);
             //Assert.AreEqual("Accepted", result.Value.ProvisioningState);
             //var pollingResult = await new LROsOperations(ClientDiagnostics, pipeline, host).PutAsyncRetrySucceededPollingAsync(result.Headers.AzureAsyncOperation);
-            var operation = new LROsOperations(ClientDiagnostics, pipeline, host).PutAsyncRetrySucceededOperation(value);
+            var operation = await new LROsOperations(ClientDiagnostics, pipeline, host).StartPutAsyncRetrySucceededOperationAsync(value);
             var result = await operation.WaitForCompletionAsync();
             Assert.AreEqual("100", result.Value.Id);
             Assert.AreEqual("foo", result.Value.Name);

@@ -667,14 +667,10 @@ namespace lro
             }
         }
 
-        public Operation<Product> PutAsyncRetrySucceededOperation(Product product)
+        internal Operation<Product> CreatePutAsyncRetrySucceededOperation(Response originalResponse, Func<HttpMessage> createOriginalHttpMethod)
         {
-            //var originalResponse = (await PutAsyncRetrySucceededAsync(product, cancellationToken).ConfigureAwait(false)).GetRawResponse();
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics,
-                c => (PutAsyncRetrySucceeded(product, c)).GetRawResponse(),
-                async c => (await PutAsyncRetrySucceededAsync(product, c).ConfigureAwait(false)).GetRawResponse(),
-                true, "LROsOperations.Put200Succeeded",
-                () => CreatePutAsyncRetrySucceededRequest(product),
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, true, "LROsOperations.Put200Succeeded",
+                createOriginalHttpMethod,
                 (r, c) =>
                 {
                     using var document = JsonDocument.Parse(r.ContentStream, default);
@@ -687,6 +683,18 @@ namespace lro
                     var value = Product.DeserializeProduct(document.RootElement);
                     return Response.FromValue(value, r);
                 });
+        }
+
+        public async ValueTask<Operation<Product>> StartPutAsyncRetrySucceededOperationAsync(Product product, CancellationToken cancellationToken = default)
+        {
+            var originalResponse = (await PutAsyncRetrySucceededAsync(product, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+            return CreatePutAsyncRetrySucceededOperation(originalResponse, () => CreatePutAsyncRetrySucceededRequest(product));
+        }
+
+        public Operation<Product> StartPutAsyncRetrySucceededOperation(Product product, CancellationToken cancellationToken = default)
+        {
+            var originalResponse = (PutAsyncRetrySucceeded(product, cancellationToken)).GetRawResponse();
+            return CreatePutAsyncRetrySucceededOperation(originalResponse, () => CreatePutAsyncRetrySucceededRequest(product));
         }
 
         //public async ValueTask<Operation<Product>> PutAsyncRetrySucceededOperationAsync(Product product, CancellationToken cancellationToken = default)
