@@ -199,14 +199,14 @@ schemas: !<!Schemas>
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
-            name: Dictionary of string
-            description: Dictionary of <components·schemas·resource·properties·tags·additionalproperties>
+            name: Resource-tags
+            description: Dictionary of <string>
         protocol: !<!Protocols> {}
       serializedName: tags
       language: !<!Languages> 
         default:
           name: tags
-          description: Dictionary of <components·schemas·resource·properties·tags·additionalproperties>
+          description: Dictionary of <string>
           originalName: tags
       protocol: !<!Protocols> {}
     - !<!Property> 

@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Requests
         public string? Description { get; }
         public Request Request { get; }
         public Parameter[] Parameters { get; }
-        public Response Response { get; }
+        public Response Response { get; set; }
         public Diagnostic Diagnostics { get; }
     }
 }

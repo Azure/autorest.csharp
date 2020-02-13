@@ -12,7 +12,7 @@ using Azure.Core.Pipeline;
 
 namespace Azure.Core
 {
-    internal static class ArmOperationHelpers
+    public static class ArmOperationHelpers
     {
         //public static Operation<T> Create<T>(HttpPipeline pipeline, ClientDiagnostics clientDiagnostics, Response originalResponse, bool isPutOrPatch, string scopeName,
         //    Func<HttpMessage> createOriginalHttpMessage, Func<Response, CancellationToken, Response<T>> createFinalResponse, Func<Response, CancellationToken, ValueTask<Response<T>>> createFinalResponseAsync) where T : notnull
@@ -68,7 +68,26 @@ namespace Azure.Core
         //    });
         //}
 
-        public static Operation<T> Create<T>(HttpPipeline pipeline, ClientDiagnostics clientDiagnostics, Response originalResponse, bool isPutOrPatch, string scopeName,
+        public static Response<TResult> DefaultWaitForCompletion<TResult>(this Operation<TResult> operation, CancellationToken cancellationToken = default) where TResult : notnull
+        {
+            return operation.DefaultWaitForCompletion(OperationHelpers.DefaultPollingInterval, cancellationToken);
+        }
+
+        public static Response<TResult> DefaultWaitForCompletion<TResult>(this Operation<TResult> operation, TimeSpan pollingInterval, CancellationToken cancellationToken = default) where TResult : notnull
+        {
+            while (true)
+            {
+                operation.UpdateStatus(cancellationToken);
+                if (operation.HasCompleted)
+                {
+                    return Response.FromValue(operation.Value, operation.GetRawResponse());
+                }
+
+                Thread.Sleep(pollingInterval);
+            }
+        }
+
+        internal static Operation<T> Create<T>(HttpPipeline pipeline, ClientDiagnostics clientDiagnostics, Response originalResponse, bool isPutOrPatch, string scopeName,
             Func<HttpMessage> createOriginalHttpMessage, Func<Response, CancellationToken, Response<T>> createFinalResponse, Func<Response, CancellationToken, ValueTask<Response<T>>> createFinalResponseAsync) where T : notnull
         {
             using HttpMessage originalHttpMethod = createOriginalHttpMessage();

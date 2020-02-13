@@ -19,6 +19,7 @@ using Azure.Core;
 using Microsoft.CodeAnalysis;
 using Diagnostic = AutoRest.CSharp.V3.Output.Models.Requests.Diagnostic;
 using Request = AutoRest.CSharp.V3.Output.Models.Requests.Request;
+using AzureResponse = Azure.Response;
 
 namespace AutoRest.CSharp.V3.Output.Builders
 {
@@ -110,12 +111,15 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 bool longRunningOperation = Convert.ToBoolean(processed.Operation.Extensions.GetValue<string>("x-ms-long-running-operation") ?? "false");
                 if (longRunningOperation)
                 {
-                    Method pollingMethod = BuildPollingMethod(processed.Method);
-                    pollingMethods.Add(pollingMethod);
+                    Response originalResponse = processed.Method.Response;
+                    processed.Method.Response = new Response(null, originalResponse.SuccessfulStatusCodes, null);
+
+                    //Method pollingMethod = BuildPollingMethod(processed.Method);
+                    //pollingMethods.Add(pollingMethod);
 
                     IDictionary<object, object> options = processed.Operation.Extensions.GetValue<IDictionary<object, object>>("x-ms-long-running-operation-options")
                                                           ?? ImmutableDictionary<object, object>.Empty;
-                    LongRunningOperation longRunningOperationMethod = BuildLongRunningOperation(processed.Method, pollingMethod, options);
+                    LongRunningOperation longRunningOperationMethod = BuildLongRunningOperation(processed.Method, originalResponse, options);
                     longRunningOperationMethods.Add(longRunningOperationMethod);
                 }
             }
@@ -327,37 +331,82 @@ namespace AutoRest.CSharp.V3.Output.Builders
             }
         }
 
-        private static Method BuildPollingMethod(Method method)
+        //private static Method BuildPollingMethod(Method method)
+        //{
+        //    var pollingLinkParameter = new Parameter(
+        //        "pollingLink",
+        //        "The URL to poll for the final response.",
+        //        new CSharpType(typeof(string)),
+        //        null,
+        //        true);
+        //    var request = new Request(
+        //        RequestMethod.Get,
+        //        new[] { new PathSegment(pollingLinkParameter, false, SerializationFormat.Default) },
+        //        Array.Empty<PathSegment>(),
+        //        Array.Empty<QueryParameter>(),
+        //        method.Request.Headers,
+        //        null
+        //    );
+
+        //    return new Method(
+        //        $"{method.Name}Polling",
+        //        method.Description,
+        //        request,
+        //        new[] { pollingLinkParameter },
+        //        method.Response,
+        //        method.Diagnostics);
+        //}
+
+        //private static Method BuildCreateOperationMethod(Method method)
+        //{
+        //    var originalResponseParameter = new Parameter(
+        //        "originalResponse",
+        //        "The original response from starting the operation.",
+        //        new CSharpType(typeof(Response)),
+        //        null,
+        //        true);
+        //    var httpMessageParameter = new Parameter(
+        //        "createOriginalHttpMessage",
+        //        "Creates the HTTP message used for the original request.",
+        //        new CSharpType(typeof(Func<>), new CSharpType(typeof(HttpMessage))),
+        //        null,
+        //        true);
+
+        //    var request = new Request(
+        //        RequestMethod.Get,
+        //        new[] { new PathSegment(pollingLinkParameter, false, SerializationFormat.Default) },
+        //        Array.Empty<PathSegment>(),
+        //        Array.Empty<QueryParameter>(),
+        //        method.Request.Headers,
+        //        null
+        //    );
+
+        //    return new Method(
+        //        $"Create{method.Name}Operation",
+        //        method.Description,
+        //        request,
+        //        new[] { pollingLinkParameter },
+        //        method.Response,
+        //        method.Diagnostics);
+        //}
+
+        private static LongRunningOperation BuildLongRunningOperation(Method method, Response originalResponse, IDictionary<object, object> options)
         {
-            var pollingLinkParameter = new Parameter(
-                "pollingLink",
-                "The URL to poll for the final response.",
-                new CSharpType(typeof(string)),
+            var originalResponseParameter = new Parameter(
+                "originalResponse",
+                "The original response from starting the operation.",
+                new CSharpType(typeof(AzureResponse)),
                 null,
                 true);
-            var request = new Request(
-                RequestMethod.Get,
-                new[] { new PathSegment(pollingLinkParameter, false, SerializationFormat.Default) },
-                Array.Empty<PathSegment>(),
-                Array.Empty<QueryParameter>(),
-                method.Request.Headers,
-                null
-            );
-
-            return new Method(
-                $"{method.Name}Polling",
-                method.Description,
-                request,
-                new[] { pollingLinkParameter },
-                method.Response,
-                method.Diagnostics);
-        }
-
-        private static LongRunningOperation BuildLongRunningOperation(Method method, Method pollingMethod, IDictionary<object, object> options)
-        {
+            var httpMessageParameter = new Parameter(
+                "createOriginalHttpMessage",
+                "Creates the HTTP message used for the original request.",
+                new CSharpType(typeof(Func<>), new CSharpType(typeof(HttpMessage))),
+                null,
+                true);
             FinalStateVia finalStateVia = GetFinalStateVia(options.GetValue<string>("final-state-via"));
             string name = $"{method.Name}Operation";
-            return new LongRunningOperation(method, pollingMethod, name, finalStateVia);
+            return new LongRunningOperation(method, originalResponse, name, new[] { originalResponseParameter, httpMessageParameter }, finalStateVia);
         }
 
         private static FinalStateVia GetFinalStateVia(string? rawValue) => rawValue switch

@@ -10,9 +10,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using custom_baseUrl_paging.Models;
 using lro.Models;
-using Product = lro.Models.Product;
 
 namespace lro
 {
@@ -33,37 +31,6 @@ namespace lro
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
-
-        //public async ValueTask<Operation<Product>> Put200SucceededOperationAsync(Product product, CancellationToken cancellationToken = default)
-        //{
-        //    var originalResponse = (await Put200SucceededAsync(product, cancellationToken).ConfigureAwait(false)).GetRawResponse();
-        //    using var originalRequest = CreatePut200SucceededRequest(product);
-        //    var originalUri = originalRequest.Request.Uri.ToString();
-        //    var originalInfo = ArmPollingHelpers.GetScenarioInfo(originalResponse, originalUri);
-        //    const bool isPutOrPatch = true;
-        //    if (!isPutOrPatch && (originalInfo.HeaderFrom == ArmPollingHelpers.HeaderFrom.None || originalInfo.HeaderFrom != ArmPollingHelpers.HeaderFrom.Location))
-        //    {
-        //        throw await originalResponse.CreateRequestFailedExceptionAsync().ConfigureAwait(false);
-        //    }
-
-        //    return OperationFactory.CreateAsync(originalResponse, async (r, c) =>
-        //    {
-        //        var info = ArmPollingHelpers.GetScenarioInfo(r, originalUri);
-        //        return await ArmPollingHelpers.GetResponseAsync(pipeline, clientDiagnostics, "LROsOperations.Put200Succeeded", info.PollUri, c).ConfigureAwait(false);
-        //    }, r =>
-        //    {
-        //        var info = ArmPollingHelpers.GetScenarioInfo(r, originalUri);
-        //        return new ValueTask<bool>(ArmPollingHelpers.IsTerminalState(r, info));
-        //    }, async (r, c) =>
-        //    {
-        //        var finalUri = isPutOrPatch ? originalUri : originalInfo.PollUri;
-        //        var response = await ArmPollingHelpers.GetResponseAsync(pipeline, clientDiagnostics, "LROsOperations.Put200Succeeded", finalUri, c).ConfigureAwait(false);
-        //        using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-        //        var value = Product.DeserializeProduct(document.RootElement);
-        //        return Response.FromValue(value, response);
-        //    });
-        //}
-
         internal HttpMessage CreatePut200SucceededRequest(Product product)
         {
             var message = pipeline.CreateMessage();
@@ -82,9 +49,8 @@ namespace lro
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Product>> Put200SucceededAsync(Product product, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> Put200SucceededAsync(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsOperations.Put200Succeeded");
             scope.Start();
             try
@@ -94,11 +60,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 200:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -112,9 +74,8 @@ namespace lro
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Product> Put200Succeeded(Product product, CancellationToken cancellationToken = default)
+        public Response Put200Succeeded(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsOperations.Put200Succeeded");
             scope.Start();
             try
@@ -124,11 +85,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 200:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -157,9 +114,8 @@ namespace lro
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Product>> Put200SucceededNoStateAsync(Product product, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> Put200SucceededNoStateAsync(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsOperations.Put200SucceededNoState");
             scope.Start();
             try
@@ -169,11 +125,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 200:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -187,9 +139,8 @@ namespace lro
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Product> Put200SucceededNoState(Product product, CancellationToken cancellationToken = default)
+        public Response Put200SucceededNoState(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsOperations.Put200SucceededNoState");
             scope.Start();
             try
@@ -199,11 +150,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 200:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -232,9 +179,8 @@ namespace lro
         /// <summary> Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn&apos;t contains ProvisioningState. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Product>> Put202Retry200Async(Product product, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> Put202Retry200Async(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsOperations.Put202Retry200");
             scope.Start();
             try
@@ -244,11 +190,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 202:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -262,9 +204,8 @@ namespace lro
         /// <summary> Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn&apos;t contains ProvisioningState. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Product> Put202Retry200(Product product, CancellationToken cancellationToken = default)
+        public Response Put202Retry200(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsOperations.Put202Retry200");
             scope.Start();
             try
@@ -274,11 +215,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 202:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -307,9 +244,8 @@ namespace lro
         /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Product>> Put201CreatingSucceeded200Async(Product product, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> Put201CreatingSucceeded200Async(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsOperations.Put201CreatingSucceeded200");
             scope.Start();
             try
@@ -319,11 +255,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 200:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -337,9 +269,8 @@ namespace lro
         /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Product> Put201CreatingSucceeded200(Product product, CancellationToken cancellationToken = default)
+        public Response Put201CreatingSucceeded200(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsOperations.Put201CreatingSucceeded200");
             scope.Start();
             try
@@ -349,11 +280,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 200:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -382,9 +309,8 @@ namespace lro
         /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Product>> Put200UpdatingSucceeded204Async(Product product, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> Put200UpdatingSucceeded204Async(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsOperations.Put200UpdatingSucceeded204");
             scope.Start();
             try
@@ -394,11 +320,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 200:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -412,9 +334,8 @@ namespace lro
         /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Product> Put200UpdatingSucceeded204(Product product, CancellationToken cancellationToken = default)
+        public Response Put200UpdatingSucceeded204(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsOperations.Put200UpdatingSucceeded204");
             scope.Start();
             try
@@ -424,11 +345,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 200:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -457,9 +374,8 @@ namespace lro
         /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Product>> Put201CreatingFailed200Async(Product product, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> Put201CreatingFailed200Async(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsOperations.Put201CreatingFailed200");
             scope.Start();
             try
@@ -469,11 +385,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 200:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -487,9 +399,8 @@ namespace lro
         /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Product> Put201CreatingFailed200(Product product, CancellationToken cancellationToken = default)
+        public Response Put201CreatingFailed200(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsOperations.Put201CreatingFailed200");
             scope.Start();
             try
@@ -499,11 +410,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 200:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -532,9 +439,8 @@ namespace lro
         /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Product>> Put200Acceptedcanceled200Async(Product product, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> Put200Acceptedcanceled200Async(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsOperations.Put200Acceptedcanceled200");
             scope.Start();
             try
@@ -544,11 +450,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 200:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -562,9 +464,8 @@ namespace lro
         /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Product> Put200Acceptedcanceled200(Product product, CancellationToken cancellationToken = default)
+        public Response Put200Acceptedcanceled200(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsOperations.Put200Acceptedcanceled200");
             scope.Start();
             try
@@ -574,11 +475,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 200:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -607,9 +504,8 @@ namespace lro
         /// <summary> Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<Product, PutNoHeaderInRetryHeaders>> PutNoHeaderInRetryAsync(Product product, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutNoHeaderInRetryAsync(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsOperations.PutNoHeaderInRetry");
             scope.Start();
             try
@@ -619,12 +515,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 202:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            var headers = new PutNoHeaderInRetryHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -638,9 +529,8 @@ namespace lro
         /// <summary> Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<Product, PutNoHeaderInRetryHeaders> PutNoHeaderInRetry(Product product, CancellationToken cancellationToken = default)
+        public Response PutNoHeaderInRetry(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsOperations.PutNoHeaderInRetry");
             scope.Start();
             try
@@ -650,12 +540,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 202:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            var headers = new PutNoHeaderInRetryHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -666,63 +551,6 @@ namespace lro
                 throw;
             }
         }
-
-        internal Operation<Product> CreatePutAsyncRetrySucceededOperation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
-        {
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, true, "LROsOperations.Put200Succeeded",
-                createOriginalHttpMessage,
-                (r, c) =>
-                {
-                    using var document = JsonDocument.Parse(r.ContentStream, default);
-                    var value = Product.DeserializeProduct(document.RootElement);
-                    return Response.FromValue(value, r);
-                },
-                async (r, c) =>
-                {
-                    using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
-                    var value = Product.DeserializeProduct(document.RootElement);
-                    return Response.FromValue(value, r);
-                });
-        }
-
-        public async ValueTask<Operation<Product>> StartPutAsyncRetrySucceededOperationAsync(Product product, CancellationToken cancellationToken = default)
-        {
-            var originalResponse = (await PutAsyncRetrySucceededAsync(product, cancellationToken).ConfigureAwait(false)).GetRawResponse();
-            return CreatePutAsyncRetrySucceededOperation(originalResponse, () => CreatePutAsyncRetrySucceededRequest(product));
-        }
-
-        public Operation<Product> StartPutAsyncRetrySucceededOperation(Product product, CancellationToken cancellationToken = default)
-        {
-            var originalResponse = (PutAsyncRetrySucceeded(product, cancellationToken)).GetRawResponse();
-            return CreatePutAsyncRetrySucceededOperation(originalResponse, () => CreatePutAsyncRetrySucceededRequest(product));
-        }
-
-        //public async ValueTask<Operation<Product>> PutAsyncRetrySucceededOperationAsync(Product product, CancellationToken cancellationToken = default)
-        //{
-        //    var originalResponse = (await PutAsyncRetrySucceededAsync(product, cancellationToken).ConfigureAwait(false)).GetRawResponse();
-        //    return await ArmOperationHelpers.CreateAsync(pipeline, clientDiagnostics, originalResponse, true, "LROsOperations.Put200Succeeded",
-        //        () => CreatePutAsyncRetrySucceededRequest(product),
-        //        async response =>
-        //        {
-        //            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-        //            var value = Product.DeserializeProduct(document.RootElement);
-        //            return Response.FromValue(value, response);
-        //        });
-        //}
-
-        //public Operation<Product> PutAsyncRetrySucceededOperation(Product product, CancellationToken cancellationToken = default)
-        //{
-        //    var originalResponse = (PutAsyncRetrySucceeded(product, cancellationToken)).GetRawResponse();
-        //    return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, true, "LROsOperations.Put200Succeeded",
-        //        () => CreatePutAsyncRetrySucceededRequest(product),
-        //        response =>
-        //        {
-        //            using var document = JsonDocument.Parse(response.ContentStream, default);
-        //            var value = Product.DeserializeProduct(document.RootElement);
-        //            return Response.FromValue(value, response);
-        //        });
-        //}
-
         internal HttpMessage CreatePutAsyncRetrySucceededRequest(Product product)
         {
             var message = pipeline.CreateMessage();
@@ -741,9 +569,8 @@ namespace lro
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<Product, PutAsyncRetrySucceededHeaders>> PutAsyncRetrySucceededAsync(Product product, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutAsyncRetrySucceededAsync(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsOperations.PutAsyncRetrySucceeded");
             scope.Start();
             try
@@ -753,12 +580,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 200:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            var headers = new PutAsyncRetrySucceededHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -772,9 +594,8 @@ namespace lro
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<Product, PutAsyncRetrySucceededHeaders> PutAsyncRetrySucceeded(Product product, CancellationToken cancellationToken = default)
+        public Response PutAsyncRetrySucceeded(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsOperations.PutAsyncRetrySucceeded");
             scope.Start();
             try
@@ -784,12 +605,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 200:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            var headers = new PutAsyncRetrySucceededHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -818,9 +634,8 @@ namespace lro
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<Product, PutAsyncNoRetrySucceededHeaders>> PutAsyncNoRetrySucceededAsync(Product product, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutAsyncNoRetrySucceededAsync(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsOperations.PutAsyncNoRetrySucceeded");
             scope.Start();
             try
@@ -830,12 +645,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 200:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            var headers = new PutAsyncNoRetrySucceededHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -849,9 +659,8 @@ namespace lro
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<Product, PutAsyncNoRetrySucceededHeaders> PutAsyncNoRetrySucceeded(Product product, CancellationToken cancellationToken = default)
+        public Response PutAsyncNoRetrySucceeded(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsOperations.PutAsyncNoRetrySucceeded");
             scope.Start();
             try
@@ -861,12 +670,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 200:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            var headers = new PutAsyncNoRetrySucceededHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -895,9 +699,8 @@ namespace lro
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<Product, PutAsyncRetryFailedHeaders>> PutAsyncRetryFailedAsync(Product product, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutAsyncRetryFailedAsync(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsOperations.PutAsyncRetryFailed");
             scope.Start();
             try
@@ -907,12 +710,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 200:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            var headers = new PutAsyncRetryFailedHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -926,9 +724,8 @@ namespace lro
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<Product, PutAsyncRetryFailedHeaders> PutAsyncRetryFailed(Product product, CancellationToken cancellationToken = default)
+        public Response PutAsyncRetryFailed(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsOperations.PutAsyncRetryFailed");
             scope.Start();
             try
@@ -938,12 +735,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 200:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            var headers = new PutAsyncRetryFailedHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -972,9 +764,8 @@ namespace lro
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<Product, PutAsyncNoRetrycanceledHeaders>> PutAsyncNoRetrycanceledAsync(Product product, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutAsyncNoRetrycanceledAsync(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsOperations.PutAsyncNoRetrycanceled");
             scope.Start();
             try
@@ -984,12 +775,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 200:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            var headers = new PutAsyncNoRetrycanceledHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -1003,9 +789,8 @@ namespace lro
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<Product, PutAsyncNoRetrycanceledHeaders> PutAsyncNoRetrycanceled(Product product, CancellationToken cancellationToken = default)
+        public Response PutAsyncNoRetrycanceled(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsOperations.PutAsyncNoRetrycanceled");
             scope.Start();
             try
@@ -1015,12 +800,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 200:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            var headers = new PutAsyncNoRetrycanceledHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -1049,9 +829,8 @@ namespace lro
         /// <summary> Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<Product, PutAsyncNoHeaderInRetryHeaders>> PutAsyncNoHeaderInRetryAsync(Product product, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutAsyncNoHeaderInRetryAsync(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsOperations.PutAsyncNoHeaderInRetry");
             scope.Start();
             try
@@ -1061,12 +840,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 201:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            var headers = new PutAsyncNoHeaderInRetryHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -1080,9 +854,8 @@ namespace lro
         /// <summary> Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<Product, PutAsyncNoHeaderInRetryHeaders> PutAsyncNoHeaderInRetry(Product product, CancellationToken cancellationToken = default)
+        public Response PutAsyncNoHeaderInRetry(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsOperations.PutAsyncNoHeaderInRetry");
             scope.Start();
             try
@@ -1092,12 +865,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 201:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            var headers = new PutAsyncNoHeaderInRetryHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -1126,9 +894,8 @@ namespace lro
         /// <summary> Long running put request with non resource. </summary>
         /// <param name="sku"> sku to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Sku>> PutNonResourceAsync(Sku sku, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutNonResourceAsync(Sku sku, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsOperations.PutNonResource");
             scope.Start();
             try
@@ -1138,11 +905,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 202:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Sku.DeserializeSku(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -1156,9 +919,8 @@ namespace lro
         /// <summary> Long running put request with non resource. </summary>
         /// <param name="sku"> sku to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Sku> PutNonResource(Sku sku, CancellationToken cancellationToken = default)
+        public Response PutNonResource(Sku sku, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsOperations.PutNonResource");
             scope.Start();
             try
@@ -1168,11 +930,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 202:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Sku.DeserializeSku(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -1201,9 +959,8 @@ namespace lro
         /// <summary> Long running put request with non resource. </summary>
         /// <param name="sku"> sku to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Sku>> PutAsyncNonResourceAsync(Sku sku, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutAsyncNonResourceAsync(Sku sku, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsOperations.PutAsyncNonResource");
             scope.Start();
             try
@@ -1213,11 +970,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 202:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Sku.DeserializeSku(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -1231,9 +984,8 @@ namespace lro
         /// <summary> Long running put request with non resource. </summary>
         /// <param name="sku"> sku to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Sku> PutAsyncNonResource(Sku sku, CancellationToken cancellationToken = default)
+        public Response PutAsyncNonResource(Sku sku, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsOperations.PutAsyncNonResource");
             scope.Start();
             try
@@ -1243,11 +995,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 202:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Sku.DeserializeSku(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -1276,9 +1024,8 @@ namespace lro
         /// <summary> Long running put request with sub resource. </summary>
         /// <param name="product"> Sub Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<SubProduct>> PutSubResourceAsync(SubProduct product, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutSubResourceAsync(SubProduct product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsOperations.PutSubResource");
             scope.Start();
             try
@@ -1288,11 +1035,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 202:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = SubProduct.DeserializeSubProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -1306,9 +1049,8 @@ namespace lro
         /// <summary> Long running put request with sub resource. </summary>
         /// <param name="product"> Sub Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<SubProduct> PutSubResource(SubProduct product, CancellationToken cancellationToken = default)
+        public Response PutSubResource(SubProduct product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsOperations.PutSubResource");
             scope.Start();
             try
@@ -1318,11 +1060,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 202:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = SubProduct.DeserializeSubProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -1351,9 +1089,8 @@ namespace lro
         /// <summary> Long running put request with sub resource. </summary>
         /// <param name="product"> Sub Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<SubProduct>> PutAsyncSubResourceAsync(SubProduct product, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutAsyncSubResourceAsync(SubProduct product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsOperations.PutAsyncSubResource");
             scope.Start();
             try
@@ -1363,11 +1100,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 202:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = SubProduct.DeserializeSubProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -1381,9 +1114,8 @@ namespace lro
         /// <summary> Long running put request with sub resource. </summary>
         /// <param name="product"> Sub Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<SubProduct> PutAsyncSubResource(SubProduct product, CancellationToken cancellationToken = default)
+        public Response PutAsyncSubResource(SubProduct product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsOperations.PutAsyncSubResource");
             scope.Start();
             try
@@ -1393,11 +1125,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 202:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = SubProduct.DeserializeSubProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -1421,7 +1149,7 @@ namespace lro
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Product>> DeleteProvisioning202Accepted200SucceededAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response> DeleteProvisioning202Accepted200SucceededAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LROsOperations.DeleteProvisioning202Accepted200Succeeded");
             scope.Start();
@@ -1432,11 +1160,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 200:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -1449,7 +1173,7 @@ namespace lro
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Product> DeleteProvisioning202Accepted200Succeeded(CancellationToken cancellationToken = default)
+        public Response DeleteProvisioning202Accepted200Succeeded(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LROsOperations.DeleteProvisioning202Accepted200Succeeded");
             scope.Start();
@@ -1460,11 +1184,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 200:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -1488,7 +1208,7 @@ namespace lro
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Product>> DeleteProvisioning202DeletingFailed200Async(CancellationToken cancellationToken = default)
+        public async ValueTask<Response> DeleteProvisioning202DeletingFailed200Async(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LROsOperations.DeleteProvisioning202DeletingFailed200");
             scope.Start();
@@ -1499,11 +1219,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 200:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -1516,7 +1232,7 @@ namespace lro
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Product> DeleteProvisioning202DeletingFailed200(CancellationToken cancellationToken = default)
+        public Response DeleteProvisioning202DeletingFailed200(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LROsOperations.DeleteProvisioning202DeletingFailed200");
             scope.Start();
@@ -1527,11 +1243,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 200:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -1555,7 +1267,7 @@ namespace lro
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Product>> DeleteProvisioning202Deletingcanceled200Async(CancellationToken cancellationToken = default)
+        public async ValueTask<Response> DeleteProvisioning202Deletingcanceled200Async(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LROsOperations.DeleteProvisioning202Deletingcanceled200");
             scope.Start();
@@ -1566,11 +1278,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 200:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -1583,7 +1291,7 @@ namespace lro
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Product> DeleteProvisioning202Deletingcanceled200(CancellationToken cancellationToken = default)
+        public Response DeleteProvisioning202Deletingcanceled200(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LROsOperations.DeleteProvisioning202Deletingcanceled200");
             scope.Start();
@@ -1594,11 +1302,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 200:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -1681,7 +1385,7 @@ namespace lro
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Product>> Delete202Retry200Async(CancellationToken cancellationToken = default)
+        public async ValueTask<Response> Delete202Retry200Async(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LROsOperations.Delete202Retry200");
             scope.Start();
@@ -1692,11 +1396,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 200:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -1709,7 +1409,7 @@ namespace lro
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Product> Delete202Retry200(CancellationToken cancellationToken = default)
+        public Response Delete202Retry200(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LROsOperations.Delete202Retry200");
             scope.Start();
@@ -1720,11 +1420,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 200:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -1748,7 +1444,7 @@ namespace lro
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Product>> Delete202NoRetry204Async(CancellationToken cancellationToken = default)
+        public async ValueTask<Response> Delete202NoRetry204Async(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LROsOperations.Delete202NoRetry204");
             scope.Start();
@@ -1759,11 +1455,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 200:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -1776,7 +1468,7 @@ namespace lro
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Product> Delete202NoRetry204(CancellationToken cancellationToken = default)
+        public Response Delete202NoRetry204(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LROsOperations.Delete202NoRetry204");
             scope.Start();
@@ -1787,11 +1479,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 200:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -1815,7 +1503,7 @@ namespace lro
         }
         /// <summary> Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<DeleteNoHeaderInRetryHeaders>> DeleteNoHeaderInRetryAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response> DeleteNoHeaderInRetryAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LROsOperations.DeleteNoHeaderInRetry");
             scope.Start();
@@ -1826,8 +1514,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 202:
-                        var headers = new DeleteNoHeaderInRetryHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
+                        return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -1840,7 +1527,7 @@ namespace lro
         }
         /// <summary> Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<DeleteNoHeaderInRetryHeaders> DeleteNoHeaderInRetry(CancellationToken cancellationToken = default)
+        public Response DeleteNoHeaderInRetry(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LROsOperations.DeleteNoHeaderInRetry");
             scope.Start();
@@ -1851,8 +1538,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 202:
-                        var headers = new DeleteNoHeaderInRetryHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
+                        return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -1876,7 +1562,7 @@ namespace lro
         }
         /// <summary> Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<DeleteAsyncNoHeaderInRetryHeaders>> DeleteAsyncNoHeaderInRetryAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response> DeleteAsyncNoHeaderInRetryAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LROsOperations.DeleteAsyncNoHeaderInRetry");
             scope.Start();
@@ -1887,8 +1573,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 202:
-                        var headers = new DeleteAsyncNoHeaderInRetryHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
+                        return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -1901,7 +1586,7 @@ namespace lro
         }
         /// <summary> Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<DeleteAsyncNoHeaderInRetryHeaders> DeleteAsyncNoHeaderInRetry(CancellationToken cancellationToken = default)
+        public Response DeleteAsyncNoHeaderInRetry(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LROsOperations.DeleteAsyncNoHeaderInRetry");
             scope.Start();
@@ -1912,8 +1597,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 202:
-                        var headers = new DeleteAsyncNoHeaderInRetryHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
+                        return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -1937,7 +1621,7 @@ namespace lro
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<DeleteAsyncRetrySucceededHeaders>> DeleteAsyncRetrySucceededAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response> DeleteAsyncRetrySucceededAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LROsOperations.DeleteAsyncRetrySucceeded");
             scope.Start();
@@ -1948,8 +1632,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 202:
-                        var headers = new DeleteAsyncRetrySucceededHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
+                        return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -1962,7 +1645,7 @@ namespace lro
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<DeleteAsyncRetrySucceededHeaders> DeleteAsyncRetrySucceeded(CancellationToken cancellationToken = default)
+        public Response DeleteAsyncRetrySucceeded(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LROsOperations.DeleteAsyncRetrySucceeded");
             scope.Start();
@@ -1973,8 +1656,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 202:
-                        var headers = new DeleteAsyncRetrySucceededHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
+                        return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -1998,7 +1680,7 @@ namespace lro
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<DeleteAsyncNoRetrySucceededHeaders>> DeleteAsyncNoRetrySucceededAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response> DeleteAsyncNoRetrySucceededAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LROsOperations.DeleteAsyncNoRetrySucceeded");
             scope.Start();
@@ -2009,8 +1691,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 202:
-                        var headers = new DeleteAsyncNoRetrySucceededHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
+                        return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -2023,7 +1704,7 @@ namespace lro
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<DeleteAsyncNoRetrySucceededHeaders> DeleteAsyncNoRetrySucceeded(CancellationToken cancellationToken = default)
+        public Response DeleteAsyncNoRetrySucceeded(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LROsOperations.DeleteAsyncNoRetrySucceeded");
             scope.Start();
@@ -2034,8 +1715,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 202:
-                        var headers = new DeleteAsyncNoRetrySucceededHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
+                        return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -2059,7 +1739,7 @@ namespace lro
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<DeleteAsyncRetryFailedHeaders>> DeleteAsyncRetryFailedAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response> DeleteAsyncRetryFailedAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LROsOperations.DeleteAsyncRetryFailed");
             scope.Start();
@@ -2070,8 +1750,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 202:
-                        var headers = new DeleteAsyncRetryFailedHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
+                        return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -2084,7 +1763,7 @@ namespace lro
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<DeleteAsyncRetryFailedHeaders> DeleteAsyncRetryFailed(CancellationToken cancellationToken = default)
+        public Response DeleteAsyncRetryFailed(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LROsOperations.DeleteAsyncRetryFailed");
             scope.Start();
@@ -2095,8 +1774,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 202:
-                        var headers = new DeleteAsyncRetryFailedHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
+                        return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -2120,7 +1798,7 @@ namespace lro
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<DeleteAsyncRetrycanceledHeaders>> DeleteAsyncRetrycanceledAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response> DeleteAsyncRetrycanceledAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LROsOperations.DeleteAsyncRetrycanceled");
             scope.Start();
@@ -2131,8 +1809,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 202:
-                        var headers = new DeleteAsyncRetrycanceledHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
+                        return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -2145,7 +1822,7 @@ namespace lro
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<DeleteAsyncRetrycanceledHeaders> DeleteAsyncRetrycanceled(CancellationToken cancellationToken = default)
+        public Response DeleteAsyncRetrycanceled(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LROsOperations.DeleteAsyncRetrycanceled");
             scope.Start();
@@ -2156,8 +1833,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 202:
-                        var headers = new DeleteAsyncRetrycanceledHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
+                        return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -2181,7 +1857,7 @@ namespace lro
         }
         /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; header. Poll returns a 200 with a response body after success. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Sku>> Post200WithPayloadAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response> Post200WithPayloadAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LROsOperations.Post200WithPayload");
             scope.Start();
@@ -2192,11 +1868,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 200:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Sku.DeserializeSku(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -2209,7 +1881,7 @@ namespace lro
         }
         /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; header. Poll returns a 200 with a response body after success. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Sku> Post200WithPayload(CancellationToken cancellationToken = default)
+        public Response Post200WithPayload(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LROsOperations.Post200WithPayload");
             scope.Start();
@@ -2220,11 +1892,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 200:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Sku.DeserializeSku(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -2253,9 +1921,8 @@ namespace lro
         /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; and &apos;Retry-After&apos; headers, Polls return a 200 with a response body after success. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<Post202Retry200Headers>> Post202Retry200Async(Product product, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> Post202Retry200Async(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsOperations.Post202Retry200");
             scope.Start();
             try
@@ -2265,8 +1932,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 202:
-                        var headers = new Post202Retry200Headers(message.Response);
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
+                        return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -2280,9 +1946,8 @@ namespace lro
         /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; and &apos;Retry-After&apos; headers, Polls return a 200 with a response body after success. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<Post202Retry200Headers> Post202Retry200(Product product, CancellationToken cancellationToken = default)
+        public Response Post202Retry200(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsOperations.Post202Retry200");
             scope.Start();
             try
@@ -2292,8 +1957,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 202:
-                        var headers = new Post202Retry200Headers(message.Response);
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
+                        return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -2322,9 +1986,8 @@ namespace lro
         /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; header, 204 with noresponse body after success. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<Product, Post202NoRetry204Headers>> Post202NoRetry204Async(Product product, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> Post202NoRetry204Async(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsOperations.Post202NoRetry204");
             scope.Start();
             try
@@ -2334,12 +1997,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 202:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            var headers = new Post202NoRetry204Headers(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -2353,9 +2011,8 @@ namespace lro
         /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; header, 204 with noresponse body after success. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<Product, Post202NoRetry204Headers> Post202NoRetry204(Product product, CancellationToken cancellationToken = default)
+        public Response Post202NoRetry204(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsOperations.Post202NoRetry204");
             scope.Start();
             try
@@ -2365,12 +2022,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 202:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            var headers = new Post202NoRetry204Headers(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -2394,7 +2046,7 @@ namespace lro
         }
         /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should poll Location to get the final object. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Product>> PostDoubleHeadersFinalLocationGetAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PostDoubleHeadersFinalLocationGetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LROsOperations.PostDoubleHeadersFinalLocationGet");
             scope.Start();
@@ -2405,11 +2057,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 202:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -2422,7 +2070,7 @@ namespace lro
         }
         /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should poll Location to get the final object. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Product> PostDoubleHeadersFinalLocationGet(CancellationToken cancellationToken = default)
+        public Response PostDoubleHeadersFinalLocationGet(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LROsOperations.PostDoubleHeadersFinalLocationGet");
             scope.Start();
@@ -2433,11 +2081,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 202:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -2461,7 +2105,7 @@ namespace lro
         }
         /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should NOT poll Location to get the final object. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Product>> PostDoubleHeadersFinalAzureHeaderGetAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PostDoubleHeadersFinalAzureHeaderGetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LROsOperations.PostDoubleHeadersFinalAzureHeaderGet");
             scope.Start();
@@ -2472,11 +2116,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 202:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -2489,7 +2129,7 @@ namespace lro
         }
         /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should NOT poll Location to get the final object. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Product> PostDoubleHeadersFinalAzureHeaderGet(CancellationToken cancellationToken = default)
+        public Response PostDoubleHeadersFinalAzureHeaderGet(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LROsOperations.PostDoubleHeadersFinalAzureHeaderGet");
             scope.Start();
@@ -2500,11 +2140,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 202:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -2528,7 +2164,7 @@ namespace lro
         }
         /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should NOT poll Location to get the final object if you support initial Autorest behavior. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Product>> PostDoubleHeadersFinalAzureHeaderGetDefaultAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PostDoubleHeadersFinalAzureHeaderGetDefaultAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LROsOperations.PostDoubleHeadersFinalAzureHeaderGetDefault");
             scope.Start();
@@ -2539,11 +2175,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 202:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -2556,7 +2188,7 @@ namespace lro
         }
         /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should NOT poll Location to get the final object if you support initial Autorest behavior. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Product> PostDoubleHeadersFinalAzureHeaderGetDefault(CancellationToken cancellationToken = default)
+        public Response PostDoubleHeadersFinalAzureHeaderGetDefault(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LROsOperations.PostDoubleHeadersFinalAzureHeaderGetDefault");
             scope.Start();
@@ -2567,11 +2199,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 202:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -2600,9 +2228,8 @@ namespace lro
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Product>> PostAsyncRetrySucceededAsync(Product product, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PostAsyncRetrySucceededAsync(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsOperations.PostAsyncRetrySucceeded");
             scope.Start();
             try
@@ -2612,11 +2239,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 200:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -2630,9 +2253,8 @@ namespace lro
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Product> PostAsyncRetrySucceeded(Product product, CancellationToken cancellationToken = default)
+        public Response PostAsyncRetrySucceeded(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsOperations.PostAsyncRetrySucceeded");
             scope.Start();
             try
@@ -2642,11 +2264,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 200:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -2675,9 +2293,8 @@ namespace lro
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Product>> PostAsyncNoRetrySucceededAsync(Product product, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PostAsyncNoRetrySucceededAsync(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsOperations.PostAsyncNoRetrySucceeded");
             scope.Start();
             try
@@ -2687,11 +2304,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 200:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -2705,9 +2318,8 @@ namespace lro
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Product> PostAsyncNoRetrySucceeded(Product product, CancellationToken cancellationToken = default)
+        public Response PostAsyncNoRetrySucceeded(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsOperations.PostAsyncNoRetrySucceeded");
             scope.Start();
             try
@@ -2717,11 +2329,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 200:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -2750,9 +2358,8 @@ namespace lro
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<PostAsyncRetryFailedHeaders>> PostAsyncRetryFailedAsync(Product product, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PostAsyncRetryFailedAsync(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsOperations.PostAsyncRetryFailed");
             scope.Start();
             try
@@ -2762,8 +2369,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 202:
-                        var headers = new PostAsyncRetryFailedHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
+                        return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -2777,9 +2383,8 @@ namespace lro
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<PostAsyncRetryFailedHeaders> PostAsyncRetryFailed(Product product, CancellationToken cancellationToken = default)
+        public Response PostAsyncRetryFailed(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsOperations.PostAsyncRetryFailed");
             scope.Start();
             try
@@ -2789,8 +2394,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 202:
-                        var headers = new PostAsyncRetryFailedHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
+                        return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -2819,9 +2423,8 @@ namespace lro
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<PostAsyncRetrycanceledHeaders>> PostAsyncRetrycanceledAsync(Product product, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PostAsyncRetrycanceledAsync(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsOperations.PostAsyncRetrycanceled");
             scope.Start();
             try
@@ -2831,8 +2434,7 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 202:
-                        var headers = new PostAsyncRetrycanceledHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
+                        return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -2846,9 +2448,8 @@ namespace lro
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<PostAsyncRetrycanceledHeaders> PostAsyncRetrycanceled(Product product, CancellationToken cancellationToken = default)
+        public Response PostAsyncRetrycanceled(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsOperations.PostAsyncRetrycanceled");
             scope.Start();
             try
@@ -2858,1666 +2459,6 @@ namespace lro
                 switch (message.Response.Status)
                 {
                     case 202:
-                        var headers = new PostAsyncRetrycanceledHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        internal HttpMessage CreatePut200SucceededPollingRequest(string pollingLink)
-        {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(pollingLink, false);
-            request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            return message;
-        }
-        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Product>> Put200SucceededPollingAsync(string pollingLink, CancellationToken cancellationToken = default)
-        {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.Put200Succeeded");
-            scope.Start();
-            try
-            {
-                using var message = CreatePut200SucceededPollingRequest(pollingLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Product> Put200SucceededPolling(string pollingLink, CancellationToken cancellationToken = default)
-        {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.Put200Succeeded");
-            scope.Start();
-            try
-            {
-                using var message = CreatePut200SucceededPollingRequest(pollingLink);
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        internal HttpMessage CreatePut200SucceededNoStatePollingRequest(string pollingLink)
-        {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(pollingLink, false);
-            request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            return message;
-        }
-        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Product>> Put200SucceededNoStatePollingAsync(string pollingLink, CancellationToken cancellationToken = default)
-        {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.Put200SucceededNoState");
-            scope.Start();
-            try
-            {
-                using var message = CreatePut200SucceededNoStatePollingRequest(pollingLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Product> Put200SucceededNoStatePolling(string pollingLink, CancellationToken cancellationToken = default)
-        {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.Put200SucceededNoState");
-            scope.Start();
-            try
-            {
-                using var message = CreatePut200SucceededNoStatePollingRequest(pollingLink);
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        internal HttpMessage CreatePut202Retry200PollingRequest(string pollingLink)
-        {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(pollingLink, false);
-            request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            return message;
-        }
-        /// <summary> Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn&apos;t contains ProvisioningState. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Product>> Put202Retry200PollingAsync(string pollingLink, CancellationToken cancellationToken = default)
-        {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.Put202Retry200");
-            scope.Start();
-            try
-            {
-                using var message = CreatePut202Retry200PollingRequest(pollingLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        /// <summary> Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn&apos;t contains ProvisioningState. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Product> Put202Retry200Polling(string pollingLink, CancellationToken cancellationToken = default)
-        {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.Put202Retry200");
-            scope.Start();
-            try
-            {
-                using var message = CreatePut202Retry200PollingRequest(pollingLink);
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        internal HttpMessage CreatePut201CreatingSucceeded200PollingRequest(string pollingLink)
-        {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(pollingLink, false);
-            request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            return message;
-        }
-        /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Product>> Put201CreatingSucceeded200PollingAsync(string pollingLink, CancellationToken cancellationToken = default)
-        {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.Put201CreatingSucceeded200");
-            scope.Start();
-            try
-            {
-                using var message = CreatePut201CreatingSucceeded200PollingRequest(pollingLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Product> Put201CreatingSucceeded200Polling(string pollingLink, CancellationToken cancellationToken = default)
-        {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.Put201CreatingSucceeded200");
-            scope.Start();
-            try
-            {
-                using var message = CreatePut201CreatingSucceeded200PollingRequest(pollingLink);
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        internal HttpMessage CreatePut200UpdatingSucceeded204PollingRequest(string pollingLink)
-        {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(pollingLink, false);
-            request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            return message;
-        }
-        /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Product>> Put200UpdatingSucceeded204PollingAsync(string pollingLink, CancellationToken cancellationToken = default)
-        {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.Put200UpdatingSucceeded204");
-            scope.Start();
-            try
-            {
-                using var message = CreatePut200UpdatingSucceeded204PollingRequest(pollingLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Product> Put200UpdatingSucceeded204Polling(string pollingLink, CancellationToken cancellationToken = default)
-        {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.Put200UpdatingSucceeded204");
-            scope.Start();
-            try
-            {
-                using var message = CreatePut200UpdatingSucceeded204PollingRequest(pollingLink);
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        internal HttpMessage CreatePut201CreatingFailed200PollingRequest(string pollingLink)
-        {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(pollingLink, false);
-            request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            return message;
-        }
-        /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Product>> Put201CreatingFailed200PollingAsync(string pollingLink, CancellationToken cancellationToken = default)
-        {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.Put201CreatingFailed200");
-            scope.Start();
-            try
-            {
-                using var message = CreatePut201CreatingFailed200PollingRequest(pollingLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Product> Put201CreatingFailed200Polling(string pollingLink, CancellationToken cancellationToken = default)
-        {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.Put201CreatingFailed200");
-            scope.Start();
-            try
-            {
-                using var message = CreatePut201CreatingFailed200PollingRequest(pollingLink);
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        internal HttpMessage CreatePut200Acceptedcanceled200PollingRequest(string pollingLink)
-        {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(pollingLink, false);
-            request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            return message;
-        }
-        /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Product>> Put200Acceptedcanceled200PollingAsync(string pollingLink, CancellationToken cancellationToken = default)
-        {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.Put200Acceptedcanceled200");
-            scope.Start();
-            try
-            {
-                using var message = CreatePut200Acceptedcanceled200PollingRequest(pollingLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Product> Put200Acceptedcanceled200Polling(string pollingLink, CancellationToken cancellationToken = default)
-        {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.Put200Acceptedcanceled200");
-            scope.Start();
-            try
-            {
-                using var message = CreatePut200Acceptedcanceled200PollingRequest(pollingLink);
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        internal HttpMessage CreatePutNoHeaderInRetryPollingRequest(string pollingLink)
-        {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(pollingLink, false);
-            request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            return message;
-        }
-        /// <summary> Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<Product, PutNoHeaderInRetryHeaders>> PutNoHeaderInRetryPollingAsync(string pollingLink, CancellationToken cancellationToken = default)
-        {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.PutNoHeaderInRetry");
-            scope.Start();
-            try
-            {
-                using var message = CreatePutNoHeaderInRetryPollingRequest(pollingLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            var headers = new PutNoHeaderInRetryHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                        }
-                    default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        /// <summary> Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<Product, PutNoHeaderInRetryHeaders> PutNoHeaderInRetryPolling(string pollingLink, CancellationToken cancellationToken = default)
-        {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.PutNoHeaderInRetry");
-            scope.Start();
-            try
-            {
-                using var message = CreatePutNoHeaderInRetryPollingRequest(pollingLink);
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            var headers = new PutNoHeaderInRetryHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                        }
-                    default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        internal HttpMessage CreatePutAsyncRetrySucceededPollingRequest(string pollingLink)
-        {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(pollingLink, false);
-            request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            return message;
-        }
-        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<Product, PutAsyncRetrySucceededHeaders>> PutAsyncRetrySucceededPollingAsync(string pollingLink, CancellationToken cancellationToken = default)
-        {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.PutAsyncRetrySucceeded");
-            scope.Start();
-            try
-            {
-                using var message = CreatePutAsyncRetrySucceededPollingRequest(pollingLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            var headers = new PutAsyncRetrySucceededHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                        }
-                    default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<Product, PutAsyncRetrySucceededHeaders> PutAsyncRetrySucceededPolling(string pollingLink, CancellationToken cancellationToken = default)
-        {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.PutAsyncRetrySucceeded");
-            scope.Start();
-            try
-            {
-                using var message = CreatePutAsyncRetrySucceededPollingRequest(pollingLink);
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            var headers = new PutAsyncRetrySucceededHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                        }
-                    default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        internal HttpMessage CreatePutAsyncNoRetrySucceededPollingRequest(string pollingLink)
-        {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(pollingLink, false);
-            request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            return message;
-        }
-        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<Product, PutAsyncNoRetrySucceededHeaders>> PutAsyncNoRetrySucceededPollingAsync(string pollingLink, CancellationToken cancellationToken = default)
-        {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.PutAsyncNoRetrySucceeded");
-            scope.Start();
-            try
-            {
-                using var message = CreatePutAsyncNoRetrySucceededPollingRequest(pollingLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            var headers = new PutAsyncNoRetrySucceededHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                        }
-                    default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<Product, PutAsyncNoRetrySucceededHeaders> PutAsyncNoRetrySucceededPolling(string pollingLink, CancellationToken cancellationToken = default)
-        {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.PutAsyncNoRetrySucceeded");
-            scope.Start();
-            try
-            {
-                using var message = CreatePutAsyncNoRetrySucceededPollingRequest(pollingLink);
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            var headers = new PutAsyncNoRetrySucceededHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                        }
-                    default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        internal HttpMessage CreatePutAsyncRetryFailedPollingRequest(string pollingLink)
-        {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(pollingLink, false);
-            request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            return message;
-        }
-        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<Product, PutAsyncRetryFailedHeaders>> PutAsyncRetryFailedPollingAsync(string pollingLink, CancellationToken cancellationToken = default)
-        {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.PutAsyncRetryFailed");
-            scope.Start();
-            try
-            {
-                using var message = CreatePutAsyncRetryFailedPollingRequest(pollingLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            var headers = new PutAsyncRetryFailedHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                        }
-                    default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<Product, PutAsyncRetryFailedHeaders> PutAsyncRetryFailedPolling(string pollingLink, CancellationToken cancellationToken = default)
-        {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.PutAsyncRetryFailed");
-            scope.Start();
-            try
-            {
-                using var message = CreatePutAsyncRetryFailedPollingRequest(pollingLink);
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            var headers = new PutAsyncRetryFailedHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                        }
-                    default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        internal HttpMessage CreatePutAsyncNoRetrycanceledPollingRequest(string pollingLink)
-        {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(pollingLink, false);
-            request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            return message;
-        }
-        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<Product, PutAsyncNoRetrycanceledHeaders>> PutAsyncNoRetrycanceledPollingAsync(string pollingLink, CancellationToken cancellationToken = default)
-        {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.PutAsyncNoRetrycanceled");
-            scope.Start();
-            try
-            {
-                using var message = CreatePutAsyncNoRetrycanceledPollingRequest(pollingLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            var headers = new PutAsyncNoRetrycanceledHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                        }
-                    default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<Product, PutAsyncNoRetrycanceledHeaders> PutAsyncNoRetrycanceledPolling(string pollingLink, CancellationToken cancellationToken = default)
-        {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.PutAsyncNoRetrycanceled");
-            scope.Start();
-            try
-            {
-                using var message = CreatePutAsyncNoRetrycanceledPollingRequest(pollingLink);
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            var headers = new PutAsyncNoRetrycanceledHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                        }
-                    default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        internal HttpMessage CreatePutAsyncNoHeaderInRetryPollingRequest(string pollingLink)
-        {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(pollingLink, false);
-            request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            return message;
-        }
-        /// <summary> Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<Product, PutAsyncNoHeaderInRetryHeaders>> PutAsyncNoHeaderInRetryPollingAsync(string pollingLink, CancellationToken cancellationToken = default)
-        {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.PutAsyncNoHeaderInRetry");
-            scope.Start();
-            try
-            {
-                using var message = CreatePutAsyncNoHeaderInRetryPollingRequest(pollingLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 201:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            var headers = new PutAsyncNoHeaderInRetryHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                        }
-                    default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        /// <summary> Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<Product, PutAsyncNoHeaderInRetryHeaders> PutAsyncNoHeaderInRetryPolling(string pollingLink, CancellationToken cancellationToken = default)
-        {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.PutAsyncNoHeaderInRetry");
-            scope.Start();
-            try
-            {
-                using var message = CreatePutAsyncNoHeaderInRetryPollingRequest(pollingLink);
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 201:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            var headers = new PutAsyncNoHeaderInRetryHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                        }
-                    default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        internal HttpMessage CreatePutNonResourcePollingRequest(string pollingLink)
-        {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(pollingLink, false);
-            request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            return message;
-        }
-        /// <summary> Long running put request with non resource. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Sku>> PutNonResourcePollingAsync(string pollingLink, CancellationToken cancellationToken = default)
-        {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.PutNonResource");
-            scope.Start();
-            try
-            {
-                using var message = CreatePutNonResourcePollingRequest(pollingLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Sku.DeserializeSku(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        /// <summary> Long running put request with non resource. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Sku> PutNonResourcePolling(string pollingLink, CancellationToken cancellationToken = default)
-        {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.PutNonResource");
-            scope.Start();
-            try
-            {
-                using var message = CreatePutNonResourcePollingRequest(pollingLink);
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Sku.DeserializeSku(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        internal HttpMessage CreatePutAsyncNonResourcePollingRequest(string pollingLink)
-        {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(pollingLink, false);
-            request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            return message;
-        }
-        /// <summary> Long running put request with non resource. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Sku>> PutAsyncNonResourcePollingAsync(string pollingLink, CancellationToken cancellationToken = default)
-        {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.PutAsyncNonResource");
-            scope.Start();
-            try
-            {
-                using var message = CreatePutAsyncNonResourcePollingRequest(pollingLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Sku.DeserializeSku(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        /// <summary> Long running put request with non resource. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Sku> PutAsyncNonResourcePolling(string pollingLink, CancellationToken cancellationToken = default)
-        {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.PutAsyncNonResource");
-            scope.Start();
-            try
-            {
-                using var message = CreatePutAsyncNonResourcePollingRequest(pollingLink);
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Sku.DeserializeSku(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        internal HttpMessage CreatePutSubResourcePollingRequest(string pollingLink)
-        {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(pollingLink, false);
-            request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            return message;
-        }
-        /// <summary> Long running put request with sub resource. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<SubProduct>> PutSubResourcePollingAsync(string pollingLink, CancellationToken cancellationToken = default)
-        {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.PutSubResource");
-            scope.Start();
-            try
-            {
-                using var message = CreatePutSubResourcePollingRequest(pollingLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = SubProduct.DeserializeSubProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        /// <summary> Long running put request with sub resource. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<SubProduct> PutSubResourcePolling(string pollingLink, CancellationToken cancellationToken = default)
-        {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.PutSubResource");
-            scope.Start();
-            try
-            {
-                using var message = CreatePutSubResourcePollingRequest(pollingLink);
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = SubProduct.DeserializeSubProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        internal HttpMessage CreatePutAsyncSubResourcePollingRequest(string pollingLink)
-        {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(pollingLink, false);
-            request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            return message;
-        }
-        /// <summary> Long running put request with sub resource. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<SubProduct>> PutAsyncSubResourcePollingAsync(string pollingLink, CancellationToken cancellationToken = default)
-        {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.PutAsyncSubResource");
-            scope.Start();
-            try
-            {
-                using var message = CreatePutAsyncSubResourcePollingRequest(pollingLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = SubProduct.DeserializeSubProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        /// <summary> Long running put request with sub resource. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<SubProduct> PutAsyncSubResourcePolling(string pollingLink, CancellationToken cancellationToken = default)
-        {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.PutAsyncSubResource");
-            scope.Start();
-            try
-            {
-                using var message = CreatePutAsyncSubResourcePollingRequest(pollingLink);
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = SubProduct.DeserializeSubProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        internal HttpMessage CreateDeleteProvisioning202Accepted200SucceededPollingRequest(string pollingLink)
-        {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(pollingLink, false);
-            request.Uri = uri;
-            return message;
-        }
-        /// <summary> Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Product>> DeleteProvisioning202Accepted200SucceededPollingAsync(string pollingLink, CancellationToken cancellationToken = default)
-        {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.DeleteProvisioning202Accepted200Succeeded");
-            scope.Start();
-            try
-            {
-                using var message = CreateDeleteProvisioning202Accepted200SucceededPollingRequest(pollingLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        /// <summary> Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Product> DeleteProvisioning202Accepted200SucceededPolling(string pollingLink, CancellationToken cancellationToken = default)
-        {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.DeleteProvisioning202Accepted200Succeeded");
-            scope.Start();
-            try
-            {
-                using var message = CreateDeleteProvisioning202Accepted200SucceededPollingRequest(pollingLink);
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        internal HttpMessage CreateDeleteProvisioning202DeletingFailed200PollingRequest(string pollingLink)
-        {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(pollingLink, false);
-            request.Uri = uri;
-            return message;
-        }
-        /// <summary> Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Product>> DeleteProvisioning202DeletingFailed200PollingAsync(string pollingLink, CancellationToken cancellationToken = default)
-        {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.DeleteProvisioning202DeletingFailed200");
-            scope.Start();
-            try
-            {
-                using var message = CreateDeleteProvisioning202DeletingFailed200PollingRequest(pollingLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        /// <summary> Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Product> DeleteProvisioning202DeletingFailed200Polling(string pollingLink, CancellationToken cancellationToken = default)
-        {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.DeleteProvisioning202DeletingFailed200");
-            scope.Start();
-            try
-            {
-                using var message = CreateDeleteProvisioning202DeletingFailed200PollingRequest(pollingLink);
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        internal HttpMessage CreateDeleteProvisioning202Deletingcanceled200PollingRequest(string pollingLink)
-        {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(pollingLink, false);
-            request.Uri = uri;
-            return message;
-        }
-        /// <summary> Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Product>> DeleteProvisioning202Deletingcanceled200PollingAsync(string pollingLink, CancellationToken cancellationToken = default)
-        {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.DeleteProvisioning202Deletingcanceled200");
-            scope.Start();
-            try
-            {
-                using var message = CreateDeleteProvisioning202Deletingcanceled200PollingRequest(pollingLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        /// <summary> Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Product> DeleteProvisioning202Deletingcanceled200Polling(string pollingLink, CancellationToken cancellationToken = default)
-        {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.DeleteProvisioning202Deletingcanceled200");
-            scope.Start();
-            try
-            {
-                using var message = CreateDeleteProvisioning202Deletingcanceled200PollingRequest(pollingLink);
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        internal HttpMessage CreateDelete204SucceededPollingRequest(string pollingLink)
-        {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(pollingLink, false);
-            request.Uri = uri;
-            return message;
-        }
-        /// <summary> Long running delete succeeds and returns right away. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Delete204SucceededPollingAsync(string pollingLink, CancellationToken cancellationToken = default)
-        {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.Delete204Succeeded");
-            scope.Start();
-            try
-            {
-                using var message = CreateDelete204SucceededPollingRequest(pollingLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 204:
-                        return message.Response;
-                    default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        /// <summary> Long running delete succeeds and returns right away. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Delete204SucceededPolling(string pollingLink, CancellationToken cancellationToken = default)
-        {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.Delete204Succeeded");
-            scope.Start();
-            try
-            {
-                using var message = CreateDelete204SucceededPollingRequest(pollingLink);
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 204:
                         return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -4529,1363 +2470,1659 @@ namespace lro
                 throw;
             }
         }
-        internal HttpMessage CreateDelete202Retry200PollingRequest(string pollingLink)
+        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’. </summary>
+        /// <param name="originalResponse"> The original response from starting the operation. </param>
+        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
+        public Operation<Product> CreatePut200SucceededOperation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
         {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(pollingLink, false);
-            request.Uri = uri;
-            return message;
-        }
-        /// <summary> Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Product>> Delete202Retry200PollingAsync(string pollingLink, CancellationToken cancellationToken = default)
-        {
-            if (pollingLink == null)
+            if (originalResponse == null)
             {
-                throw new ArgumentNullException(nameof(pollingLink));
+                throw new ArgumentNullException(nameof(originalResponse));
+            }
+            if (createOriginalHttpMessage == null)
+            {
+                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.Delete202Retry200");
-            scope.Start();
-            try
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, true, "LROsOperations.Put200Succeeded", createOriginalHttpMessage,
+            (r, c) =>
             {
-                using var message = CreateDelete202Retry200PollingRequest(pollingLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
+                using var document = JsonDocument.Parse(r.ContentStream);
+                var value = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value, r);
+            },
+            async (r, c) =>
             {
-                scope.Failed(e);
-                throw;
-            }
+                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                var value0 = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value0, r);
+            });
         }
-        /// <summary> Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
+        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’. </summary>
+        /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Product> Delete202Retry200Polling(string pollingLink, CancellationToken cancellationToken = default)
+        public async ValueTask<Operation<Product>> StartPut200SucceededOperationAsync(Product product, CancellationToken cancellationToken = default)
         {
-            if (pollingLink == null)
+            var originalResponse = await Put200SucceededAsync(product, cancellationToken).ConfigureAwait(false);
+            return CreatePut200SucceededOperation(originalResponse, () => CreatePut200SucceededRequest(product));
+        }
+        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’. </summary>
+        /// <param name="product"> Product to put. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Operation<Product> StartPut200SucceededOperation(Product product, CancellationToken cancellationToken = default)
+        {
+            var originalResponse = Put200Succeeded(product, cancellationToken);
+            return CreatePut200SucceededOperation(originalResponse, () => CreatePut200SucceededRequest(product));
+        }
+        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’. </summary>
+        /// <param name="originalResponse"> The original response from starting the operation. </param>
+        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
+        public Operation<Product> CreatePut200SucceededNoStateOperation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        {
+            if (originalResponse == null)
             {
-                throw new ArgumentNullException(nameof(pollingLink));
+                throw new ArgumentNullException(nameof(originalResponse));
+            }
+            if (createOriginalHttpMessage == null)
+            {
+                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.Delete202Retry200");
-            scope.Start();
-            try
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, true, "LROsOperations.Put200SucceededNoState", createOriginalHttpMessage,
+            (r, c) =>
             {
-                using var message = CreateDelete202Retry200PollingRequest(pollingLink);
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
+                using var document = JsonDocument.Parse(r.ContentStream);
+                var value = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value, r);
+            },
+            async (r, c) =>
             {
-                scope.Failed(e);
-                throw;
-            }
+                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                var value0 = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value0, r);
+            });
         }
-        internal HttpMessage CreateDelete202NoRetry204PollingRequest(string pollingLink)
-        {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(pollingLink, false);
-            request.Uri = uri;
-            return message;
-        }
-        /// <summary> Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
+        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’. </summary>
+        /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Product>> Delete202NoRetry204PollingAsync(string pollingLink, CancellationToken cancellationToken = default)
+        public async ValueTask<Operation<Product>> StartPut200SucceededNoStateOperationAsync(Product product, CancellationToken cancellationToken = default)
         {
-            if (pollingLink == null)
+            var originalResponse = await Put200SucceededNoStateAsync(product, cancellationToken).ConfigureAwait(false);
+            return CreatePut200SucceededNoStateOperation(originalResponse, () => CreatePut200SucceededNoStateRequest(product));
+        }
+        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’. </summary>
+        /// <param name="product"> Product to put. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Operation<Product> StartPut200SucceededNoStateOperation(Product product, CancellationToken cancellationToken = default)
+        {
+            var originalResponse = Put200SucceededNoState(product, cancellationToken);
+            return CreatePut200SucceededNoStateOperation(originalResponse, () => CreatePut200SucceededNoStateRequest(product));
+        }
+        /// <summary> Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn&apos;t contains ProvisioningState. </summary>
+        /// <param name="originalResponse"> The original response from starting the operation. </param>
+        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
+        public Operation<Product> CreatePut202Retry200Operation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        {
+            if (originalResponse == null)
             {
-                throw new ArgumentNullException(nameof(pollingLink));
+                throw new ArgumentNullException(nameof(originalResponse));
+            }
+            if (createOriginalHttpMessage == null)
+            {
+                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.Delete202NoRetry204");
-            scope.Start();
-            try
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, true, "LROsOperations.Put202Retry200", createOriginalHttpMessage,
+            (r, c) =>
             {
-                using var message = CreateDelete202NoRetry204PollingRequest(pollingLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
+                using var document = JsonDocument.Parse(r.ContentStream);
+                var value = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value, r);
+            },
+            async (r, c) =>
             {
-                scope.Failed(e);
-                throw;
-            }
+                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                var value0 = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value0, r);
+            });
         }
-        /// <summary> Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
+        /// <summary> Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn&apos;t contains ProvisioningState. </summary>
+        /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Product> Delete202NoRetry204Polling(string pollingLink, CancellationToken cancellationToken = default)
+        public async ValueTask<Operation<Product>> StartPut202Retry200OperationAsync(Product product, CancellationToken cancellationToken = default)
         {
-            if (pollingLink == null)
+            var originalResponse = await Put202Retry200Async(product, cancellationToken).ConfigureAwait(false);
+            return CreatePut202Retry200Operation(originalResponse, () => CreatePut202Retry200Request(product));
+        }
+        /// <summary> Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn&apos;t contains ProvisioningState. </summary>
+        /// <param name="product"> Product to put. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Operation<Product> StartPut202Retry200Operation(Product product, CancellationToken cancellationToken = default)
+        {
+            var originalResponse = Put202Retry200(product, cancellationToken);
+            return CreatePut202Retry200Operation(originalResponse, () => CreatePut202Retry200Request(product));
+        }
+        /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
+        /// <param name="originalResponse"> The original response from starting the operation. </param>
+        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
+        public Operation<Product> CreatePut201CreatingSucceeded200Operation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        {
+            if (originalResponse == null)
             {
-                throw new ArgumentNullException(nameof(pollingLink));
+                throw new ArgumentNullException(nameof(originalResponse));
+            }
+            if (createOriginalHttpMessage == null)
+            {
+                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.Delete202NoRetry204");
-            scope.Start();
-            try
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, true, "LROsOperations.Put201CreatingSucceeded200", createOriginalHttpMessage,
+            (r, c) =>
             {
-                using var message = CreateDelete202NoRetry204PollingRequest(pollingLink);
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
+                using var document = JsonDocument.Parse(r.ContentStream);
+                var value = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value, r);
+            },
+            async (r, c) =>
             {
-                scope.Failed(e);
-                throw;
-            }
+                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                var value0 = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value0, r);
+            });
         }
-        internal HttpMessage CreateDeleteNoHeaderInRetryPollingRequest(string pollingLink)
+        /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
+        /// <param name="product"> Product to put. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Operation<Product>> StartPut201CreatingSucceeded200OperationAsync(Product product, CancellationToken cancellationToken = default)
         {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(pollingLink, false);
-            request.Uri = uri;
-            return message;
+            var originalResponse = await Put201CreatingSucceeded200Async(product, cancellationToken).ConfigureAwait(false);
+            return CreatePut201CreatingSucceeded200Operation(originalResponse, () => CreatePut201CreatingSucceeded200Request(product));
+        }
+        /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
+        /// <param name="product"> Product to put. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Operation<Product> StartPut201CreatingSucceeded200Operation(Product product, CancellationToken cancellationToken = default)
+        {
+            var originalResponse = Put201CreatingSucceeded200(product, cancellationToken);
+            return CreatePut201CreatingSucceeded200Operation(originalResponse, () => CreatePut201CreatingSucceeded200Request(product));
+        }
+        /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
+        /// <param name="originalResponse"> The original response from starting the operation. </param>
+        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
+        public Operation<Product> CreatePut200UpdatingSucceeded204Operation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        {
+            if (originalResponse == null)
+            {
+                throw new ArgumentNullException(nameof(originalResponse));
+            }
+            if (createOriginalHttpMessage == null)
+            {
+                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
+            }
+
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, true, "LROsOperations.Put200UpdatingSucceeded204", createOriginalHttpMessage,
+            (r, c) =>
+            {
+                using var document = JsonDocument.Parse(r.ContentStream);
+                var value = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value, r);
+            },
+            async (r, c) =>
+            {
+                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                var value0 = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value0, r);
+            });
+        }
+        /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
+        /// <param name="product"> Product to put. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Operation<Product>> StartPut200UpdatingSucceeded204OperationAsync(Product product, CancellationToken cancellationToken = default)
+        {
+            var originalResponse = await Put200UpdatingSucceeded204Async(product, cancellationToken).ConfigureAwait(false);
+            return CreatePut200UpdatingSucceeded204Operation(originalResponse, () => CreatePut200UpdatingSucceeded204Request(product));
+        }
+        /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
+        /// <param name="product"> Product to put. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Operation<Product> StartPut200UpdatingSucceeded204Operation(Product product, CancellationToken cancellationToken = default)
+        {
+            var originalResponse = Put200UpdatingSucceeded204(product, cancellationToken);
+            return CreatePut200UpdatingSucceeded204Operation(originalResponse, () => CreatePut200UpdatingSucceeded204Request(product));
+        }
+        /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’. </summary>
+        /// <param name="originalResponse"> The original response from starting the operation. </param>
+        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
+        public Operation<Product> CreatePut201CreatingFailed200Operation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        {
+            if (originalResponse == null)
+            {
+                throw new ArgumentNullException(nameof(originalResponse));
+            }
+            if (createOriginalHttpMessage == null)
+            {
+                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
+            }
+
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, true, "LROsOperations.Put201CreatingFailed200", createOriginalHttpMessage,
+            (r, c) =>
+            {
+                using var document = JsonDocument.Parse(r.ContentStream);
+                var value = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value, r);
+            },
+            async (r, c) =>
+            {
+                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                var value0 = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value0, r);
+            });
+        }
+        /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’. </summary>
+        /// <param name="product"> Product to put. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Operation<Product>> StartPut201CreatingFailed200OperationAsync(Product product, CancellationToken cancellationToken = default)
+        {
+            var originalResponse = await Put201CreatingFailed200Async(product, cancellationToken).ConfigureAwait(false);
+            return CreatePut201CreatingFailed200Operation(originalResponse, () => CreatePut201CreatingFailed200Request(product));
+        }
+        /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’. </summary>
+        /// <param name="product"> Product to put. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Operation<Product> StartPut201CreatingFailed200Operation(Product product, CancellationToken cancellationToken = default)
+        {
+            var originalResponse = Put201CreatingFailed200(product, cancellationToken);
+            return CreatePut201CreatingFailed200Operation(originalResponse, () => CreatePut201CreatingFailed200Request(product));
+        }
+        /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’. </summary>
+        /// <param name="originalResponse"> The original response from starting the operation. </param>
+        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
+        public Operation<Product> CreatePut200Acceptedcanceled200Operation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        {
+            if (originalResponse == null)
+            {
+                throw new ArgumentNullException(nameof(originalResponse));
+            }
+            if (createOriginalHttpMessage == null)
+            {
+                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
+            }
+
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, true, "LROsOperations.Put200Acceptedcanceled200", createOriginalHttpMessage,
+            (r, c) =>
+            {
+                using var document = JsonDocument.Parse(r.ContentStream);
+                var value = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value, r);
+            },
+            async (r, c) =>
+            {
+                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                var value0 = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value0, r);
+            });
+        }
+        /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’. </summary>
+        /// <param name="product"> Product to put. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Operation<Product>> StartPut200Acceptedcanceled200OperationAsync(Product product, CancellationToken cancellationToken = default)
+        {
+            var originalResponse = await Put200Acceptedcanceled200Async(product, cancellationToken).ConfigureAwait(false);
+            return CreatePut200Acceptedcanceled200Operation(originalResponse, () => CreatePut200Acceptedcanceled200Request(product));
+        }
+        /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’. </summary>
+        /// <param name="product"> Product to put. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Operation<Product> StartPut200Acceptedcanceled200Operation(Product product, CancellationToken cancellationToken = default)
+        {
+            var originalResponse = Put200Acceptedcanceled200(product, cancellationToken);
+            return CreatePut200Acceptedcanceled200Operation(originalResponse, () => CreatePut200Acceptedcanceled200Request(product));
+        }
+        /// <summary> Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header. </summary>
+        /// <param name="originalResponse"> The original response from starting the operation. </param>
+        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
+        public Operation<Product> CreatePutNoHeaderInRetryOperation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        {
+            if (originalResponse == null)
+            {
+                throw new ArgumentNullException(nameof(originalResponse));
+            }
+            if (createOriginalHttpMessage == null)
+            {
+                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
+            }
+
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, true, "LROsOperations.PutNoHeaderInRetry", createOriginalHttpMessage,
+            (r, c) =>
+            {
+                using var document = JsonDocument.Parse(r.ContentStream);
+                var value = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value, r);
+            },
+            async (r, c) =>
+            {
+                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                var value0 = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value0, r);
+            });
+        }
+        /// <summary> Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header. </summary>
+        /// <param name="product"> Product to put. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Operation<Product>> StartPutNoHeaderInRetryOperationAsync(Product product, CancellationToken cancellationToken = default)
+        {
+            var originalResponse = await PutNoHeaderInRetryAsync(product, cancellationToken).ConfigureAwait(false);
+            return CreatePutNoHeaderInRetryOperation(originalResponse, () => CreatePutNoHeaderInRetryRequest(product));
+        }
+        /// <summary> Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header. </summary>
+        /// <param name="product"> Product to put. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Operation<Product> StartPutNoHeaderInRetryOperation(Product product, CancellationToken cancellationToken = default)
+        {
+            var originalResponse = PutNoHeaderInRetry(product, cancellationToken);
+            return CreatePutNoHeaderInRetryOperation(originalResponse, () => CreatePutNoHeaderInRetryRequest(product));
+        }
+        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <param name="originalResponse"> The original response from starting the operation. </param>
+        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
+        public Operation<Product> CreatePutAsyncRetrySucceededOperation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        {
+            if (originalResponse == null)
+            {
+                throw new ArgumentNullException(nameof(originalResponse));
+            }
+            if (createOriginalHttpMessage == null)
+            {
+                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
+            }
+
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, true, "LROsOperations.PutAsyncRetrySucceeded", createOriginalHttpMessage,
+            (r, c) =>
+            {
+                using var document = JsonDocument.Parse(r.ContentStream);
+                var value = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value, r);
+            },
+            async (r, c) =>
+            {
+                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                var value0 = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value0, r);
+            });
+        }
+        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <param name="product"> Product to put. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Operation<Product>> StartPutAsyncRetrySucceededOperationAsync(Product product, CancellationToken cancellationToken = default)
+        {
+            var originalResponse = await PutAsyncRetrySucceededAsync(product, cancellationToken).ConfigureAwait(false);
+            return CreatePutAsyncRetrySucceededOperation(originalResponse, () => CreatePutAsyncRetrySucceededRequest(product));
+        }
+        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <param name="product"> Product to put. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Operation<Product> StartPutAsyncRetrySucceededOperation(Product product, CancellationToken cancellationToken = default)
+        {
+            var originalResponse = PutAsyncRetrySucceeded(product, cancellationToken);
+            return CreatePutAsyncRetrySucceededOperation(originalResponse, () => CreatePutAsyncRetrySucceededRequest(product));
+        }
+        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <param name="originalResponse"> The original response from starting the operation. </param>
+        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
+        public Operation<Product> CreatePutAsyncNoRetrySucceededOperation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        {
+            if (originalResponse == null)
+            {
+                throw new ArgumentNullException(nameof(originalResponse));
+            }
+            if (createOriginalHttpMessage == null)
+            {
+                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
+            }
+
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, true, "LROsOperations.PutAsyncNoRetrySucceeded", createOriginalHttpMessage,
+            (r, c) =>
+            {
+                using var document = JsonDocument.Parse(r.ContentStream);
+                var value = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value, r);
+            },
+            async (r, c) =>
+            {
+                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                var value0 = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value0, r);
+            });
+        }
+        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <param name="product"> Product to put. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Operation<Product>> StartPutAsyncNoRetrySucceededOperationAsync(Product product, CancellationToken cancellationToken = default)
+        {
+            var originalResponse = await PutAsyncNoRetrySucceededAsync(product, cancellationToken).ConfigureAwait(false);
+            return CreatePutAsyncNoRetrySucceededOperation(originalResponse, () => CreatePutAsyncNoRetrySucceededRequest(product));
+        }
+        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <param name="product"> Product to put. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Operation<Product> StartPutAsyncNoRetrySucceededOperation(Product product, CancellationToken cancellationToken = default)
+        {
+            var originalResponse = PutAsyncNoRetrySucceeded(product, cancellationToken);
+            return CreatePutAsyncNoRetrySucceededOperation(originalResponse, () => CreatePutAsyncNoRetrySucceededRequest(product));
+        }
+        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <param name="originalResponse"> The original response from starting the operation. </param>
+        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
+        public Operation<Product> CreatePutAsyncRetryFailedOperation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        {
+            if (originalResponse == null)
+            {
+                throw new ArgumentNullException(nameof(originalResponse));
+            }
+            if (createOriginalHttpMessage == null)
+            {
+                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
+            }
+
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, true, "LROsOperations.PutAsyncRetryFailed", createOriginalHttpMessage,
+            (r, c) =>
+            {
+                using var document = JsonDocument.Parse(r.ContentStream);
+                var value = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value, r);
+            },
+            async (r, c) =>
+            {
+                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                var value0 = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value0, r);
+            });
+        }
+        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <param name="product"> Product to put. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Operation<Product>> StartPutAsyncRetryFailedOperationAsync(Product product, CancellationToken cancellationToken = default)
+        {
+            var originalResponse = await PutAsyncRetryFailedAsync(product, cancellationToken).ConfigureAwait(false);
+            return CreatePutAsyncRetryFailedOperation(originalResponse, () => CreatePutAsyncRetryFailedRequest(product));
+        }
+        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <param name="product"> Product to put. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Operation<Product> StartPutAsyncRetryFailedOperation(Product product, CancellationToken cancellationToken = default)
+        {
+            var originalResponse = PutAsyncRetryFailed(product, cancellationToken);
+            return CreatePutAsyncRetryFailedOperation(originalResponse, () => CreatePutAsyncRetryFailedRequest(product));
+        }
+        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <param name="originalResponse"> The original response from starting the operation. </param>
+        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
+        public Operation<Product> CreatePutAsyncNoRetrycanceledOperation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        {
+            if (originalResponse == null)
+            {
+                throw new ArgumentNullException(nameof(originalResponse));
+            }
+            if (createOriginalHttpMessage == null)
+            {
+                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
+            }
+
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, true, "LROsOperations.PutAsyncNoRetrycanceled", createOriginalHttpMessage,
+            (r, c) =>
+            {
+                using var document = JsonDocument.Parse(r.ContentStream);
+                var value = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value, r);
+            },
+            async (r, c) =>
+            {
+                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                var value0 = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value0, r);
+            });
+        }
+        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <param name="product"> Product to put. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Operation<Product>> StartPutAsyncNoRetrycanceledOperationAsync(Product product, CancellationToken cancellationToken = default)
+        {
+            var originalResponse = await PutAsyncNoRetrycanceledAsync(product, cancellationToken).ConfigureAwait(false);
+            return CreatePutAsyncNoRetrycanceledOperation(originalResponse, () => CreatePutAsyncNoRetrycanceledRequest(product));
+        }
+        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <param name="product"> Product to put. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Operation<Product> StartPutAsyncNoRetrycanceledOperation(Product product, CancellationToken cancellationToken = default)
+        {
+            var originalResponse = PutAsyncNoRetrycanceled(product, cancellationToken);
+            return CreatePutAsyncNoRetrycanceledOperation(originalResponse, () => CreatePutAsyncNoRetrycanceledRequest(product));
+        }
+        /// <summary> Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header. </summary>
+        /// <param name="originalResponse"> The original response from starting the operation. </param>
+        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
+        public Operation<Product> CreatePutAsyncNoHeaderInRetryOperation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        {
+            if (originalResponse == null)
+            {
+                throw new ArgumentNullException(nameof(originalResponse));
+            }
+            if (createOriginalHttpMessage == null)
+            {
+                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
+            }
+
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, true, "LROsOperations.PutAsyncNoHeaderInRetry", createOriginalHttpMessage,
+            (r, c) =>
+            {
+                using var document = JsonDocument.Parse(r.ContentStream);
+                var value = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value, r);
+            },
+            async (r, c) =>
+            {
+                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                var value0 = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value0, r);
+            });
+        }
+        /// <summary> Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header. </summary>
+        /// <param name="product"> Product to put. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Operation<Product>> StartPutAsyncNoHeaderInRetryOperationAsync(Product product, CancellationToken cancellationToken = default)
+        {
+            var originalResponse = await PutAsyncNoHeaderInRetryAsync(product, cancellationToken).ConfigureAwait(false);
+            return CreatePutAsyncNoHeaderInRetryOperation(originalResponse, () => CreatePutAsyncNoHeaderInRetryRequest(product));
+        }
+        /// <summary> Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header. </summary>
+        /// <param name="product"> Product to put. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Operation<Product> StartPutAsyncNoHeaderInRetryOperation(Product product, CancellationToken cancellationToken = default)
+        {
+            var originalResponse = PutAsyncNoHeaderInRetry(product, cancellationToken);
+            return CreatePutAsyncNoHeaderInRetryOperation(originalResponse, () => CreatePutAsyncNoHeaderInRetryRequest(product));
+        }
+        /// <summary> Long running put request with non resource. </summary>
+        /// <param name="originalResponse"> The original response from starting the operation. </param>
+        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
+        public Operation<Sku> CreatePutNonResourceOperation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        {
+            if (originalResponse == null)
+            {
+                throw new ArgumentNullException(nameof(originalResponse));
+            }
+            if (createOriginalHttpMessage == null)
+            {
+                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
+            }
+
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, true, "LROsOperations.PutNonResource", createOriginalHttpMessage,
+            (r, c) =>
+            {
+                using var document = JsonDocument.Parse(r.ContentStream);
+                var value = Sku.DeserializeSku(document.RootElement);
+                return Response.FromValue(value, r);
+            },
+            async (r, c) =>
+            {
+                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                var value0 = Sku.DeserializeSku(document.RootElement);
+                return Response.FromValue(value0, r);
+            });
+        }
+        /// <summary> Long running put request with non resource. </summary>
+        /// <param name="sku"> sku to put. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Operation<Sku>> StartPutNonResourceOperationAsync(Sku sku, CancellationToken cancellationToken = default)
+        {
+            var originalResponse = await PutNonResourceAsync(sku, cancellationToken).ConfigureAwait(false);
+            return CreatePutNonResourceOperation(originalResponse, () => CreatePutNonResourceRequest(sku));
+        }
+        /// <summary> Long running put request with non resource. </summary>
+        /// <param name="sku"> sku to put. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Operation<Sku> StartPutNonResourceOperation(Sku sku, CancellationToken cancellationToken = default)
+        {
+            var originalResponse = PutNonResource(sku, cancellationToken);
+            return CreatePutNonResourceOperation(originalResponse, () => CreatePutNonResourceRequest(sku));
+        }
+        /// <summary> Long running put request with non resource. </summary>
+        /// <param name="originalResponse"> The original response from starting the operation. </param>
+        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
+        public Operation<Sku> CreatePutAsyncNonResourceOperation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        {
+            if (originalResponse == null)
+            {
+                throw new ArgumentNullException(nameof(originalResponse));
+            }
+            if (createOriginalHttpMessage == null)
+            {
+                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
+            }
+
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, true, "LROsOperations.PutAsyncNonResource", createOriginalHttpMessage,
+            (r, c) =>
+            {
+                using var document = JsonDocument.Parse(r.ContentStream);
+                var value = Sku.DeserializeSku(document.RootElement);
+                return Response.FromValue(value, r);
+            },
+            async (r, c) =>
+            {
+                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                var value0 = Sku.DeserializeSku(document.RootElement);
+                return Response.FromValue(value0, r);
+            });
+        }
+        /// <summary> Long running put request with non resource. </summary>
+        /// <param name="sku"> sku to put. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Operation<Sku>> StartPutAsyncNonResourceOperationAsync(Sku sku, CancellationToken cancellationToken = default)
+        {
+            var originalResponse = await PutAsyncNonResourceAsync(sku, cancellationToken).ConfigureAwait(false);
+            return CreatePutAsyncNonResourceOperation(originalResponse, () => CreatePutAsyncNonResourceRequest(sku));
+        }
+        /// <summary> Long running put request with non resource. </summary>
+        /// <param name="sku"> sku to put. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Operation<Sku> StartPutAsyncNonResourceOperation(Sku sku, CancellationToken cancellationToken = default)
+        {
+            var originalResponse = PutAsyncNonResource(sku, cancellationToken);
+            return CreatePutAsyncNonResourceOperation(originalResponse, () => CreatePutAsyncNonResourceRequest(sku));
+        }
+        /// <summary> Long running put request with sub resource. </summary>
+        /// <param name="originalResponse"> The original response from starting the operation. </param>
+        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
+        public Operation<SubProduct> CreatePutSubResourceOperation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        {
+            if (originalResponse == null)
+            {
+                throw new ArgumentNullException(nameof(originalResponse));
+            }
+            if (createOriginalHttpMessage == null)
+            {
+                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
+            }
+
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, true, "LROsOperations.PutSubResource", createOriginalHttpMessage,
+            (r, c) =>
+            {
+                using var document = JsonDocument.Parse(r.ContentStream);
+                var value = SubProduct.DeserializeSubProduct(document.RootElement);
+                return Response.FromValue(value, r);
+            },
+            async (r, c) =>
+            {
+                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                var value0 = SubProduct.DeserializeSubProduct(document.RootElement);
+                return Response.FromValue(value0, r);
+            });
+        }
+        /// <summary> Long running put request with sub resource. </summary>
+        /// <param name="product"> Sub Product to put. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Operation<SubProduct>> StartPutSubResourceOperationAsync(SubProduct product, CancellationToken cancellationToken = default)
+        {
+            var originalResponse = await PutSubResourceAsync(product, cancellationToken).ConfigureAwait(false);
+            return CreatePutSubResourceOperation(originalResponse, () => CreatePutSubResourceRequest(product));
+        }
+        /// <summary> Long running put request with sub resource. </summary>
+        /// <param name="product"> Sub Product to put. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Operation<SubProduct> StartPutSubResourceOperation(SubProduct product, CancellationToken cancellationToken = default)
+        {
+            var originalResponse = PutSubResource(product, cancellationToken);
+            return CreatePutSubResourceOperation(originalResponse, () => CreatePutSubResourceRequest(product));
+        }
+        /// <summary> Long running put request with sub resource. </summary>
+        /// <param name="originalResponse"> The original response from starting the operation. </param>
+        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
+        public Operation<SubProduct> CreatePutAsyncSubResourceOperation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        {
+            if (originalResponse == null)
+            {
+                throw new ArgumentNullException(nameof(originalResponse));
+            }
+            if (createOriginalHttpMessage == null)
+            {
+                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
+            }
+
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, true, "LROsOperations.PutAsyncSubResource", createOriginalHttpMessage,
+            (r, c) =>
+            {
+                using var document = JsonDocument.Parse(r.ContentStream);
+                var value = SubProduct.DeserializeSubProduct(document.RootElement);
+                return Response.FromValue(value, r);
+            },
+            async (r, c) =>
+            {
+                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                var value0 = SubProduct.DeserializeSubProduct(document.RootElement);
+                return Response.FromValue(value0, r);
+            });
+        }
+        /// <summary> Long running put request with sub resource. </summary>
+        /// <param name="product"> Sub Product to put. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Operation<SubProduct>> StartPutAsyncSubResourceOperationAsync(SubProduct product, CancellationToken cancellationToken = default)
+        {
+            var originalResponse = await PutAsyncSubResourceAsync(product, cancellationToken).ConfigureAwait(false);
+            return CreatePutAsyncSubResourceOperation(originalResponse, () => CreatePutAsyncSubResourceRequest(product));
+        }
+        /// <summary> Long running put request with sub resource. </summary>
+        /// <param name="product"> Sub Product to put. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Operation<SubProduct> StartPutAsyncSubResourceOperation(SubProduct product, CancellationToken cancellationToken = default)
+        {
+            var originalResponse = PutAsyncSubResource(product, cancellationToken);
+            return CreatePutAsyncSubResourceOperation(originalResponse, () => CreatePutAsyncSubResourceRequest(product));
+        }
+        /// <summary> Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
+        /// <param name="originalResponse"> The original response from starting the operation. </param>
+        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
+        public Operation<Product> CreateDeleteProvisioning202Accepted200SucceededOperation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        {
+            if (originalResponse == null)
+            {
+                throw new ArgumentNullException(nameof(originalResponse));
+            }
+            if (createOriginalHttpMessage == null)
+            {
+                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
+            }
+
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsOperations.DeleteProvisioning202Accepted200Succeeded", createOriginalHttpMessage,
+            (r, c) =>
+            {
+                using var document = JsonDocument.Parse(r.ContentStream);
+                var value = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value, r);
+            },
+            async (r, c) =>
+            {
+                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                var value0 = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value0, r);
+            });
+        }
+        /// <summary> Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Operation<Product>> StartDeleteProvisioning202Accepted200SucceededOperationAsync(CancellationToken cancellationToken = default)
+        {
+            var originalResponse = await DeleteProvisioning202Accepted200SucceededAsync(cancellationToken).ConfigureAwait(false);
+            return CreateDeleteProvisioning202Accepted200SucceededOperation(originalResponse, () => CreateDeleteProvisioning202Accepted200SucceededRequest());
+        }
+        /// <summary> Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Operation<Product> StartDeleteProvisioning202Accepted200SucceededOperation(CancellationToken cancellationToken = default)
+        {
+            var originalResponse = DeleteProvisioning202Accepted200Succeeded(cancellationToken);
+            return CreateDeleteProvisioning202Accepted200SucceededOperation(originalResponse, () => CreateDeleteProvisioning202Accepted200SucceededRequest());
+        }
+        /// <summary> Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’. </summary>
+        /// <param name="originalResponse"> The original response from starting the operation. </param>
+        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
+        public Operation<Product> CreateDeleteProvisioning202DeletingFailed200Operation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        {
+            if (originalResponse == null)
+            {
+                throw new ArgumentNullException(nameof(originalResponse));
+            }
+            if (createOriginalHttpMessage == null)
+            {
+                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
+            }
+
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsOperations.DeleteProvisioning202DeletingFailed200", createOriginalHttpMessage,
+            (r, c) =>
+            {
+                using var document = JsonDocument.Parse(r.ContentStream);
+                var value = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value, r);
+            },
+            async (r, c) =>
+            {
+                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                var value0 = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value0, r);
+            });
+        }
+        /// <summary> Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Operation<Product>> StartDeleteProvisioning202DeletingFailed200OperationAsync(CancellationToken cancellationToken = default)
+        {
+            var originalResponse = await DeleteProvisioning202DeletingFailed200Async(cancellationToken).ConfigureAwait(false);
+            return CreateDeleteProvisioning202DeletingFailed200Operation(originalResponse, () => CreateDeleteProvisioning202DeletingFailed200Request());
+        }
+        /// <summary> Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Operation<Product> StartDeleteProvisioning202DeletingFailed200Operation(CancellationToken cancellationToken = default)
+        {
+            var originalResponse = DeleteProvisioning202DeletingFailed200(cancellationToken);
+            return CreateDeleteProvisioning202DeletingFailed200Operation(originalResponse, () => CreateDeleteProvisioning202DeletingFailed200Request());
+        }
+        /// <summary> Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’. </summary>
+        /// <param name="originalResponse"> The original response from starting the operation. </param>
+        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
+        public Operation<Product> CreateDeleteProvisioning202Deletingcanceled200Operation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        {
+            if (originalResponse == null)
+            {
+                throw new ArgumentNullException(nameof(originalResponse));
+            }
+            if (createOriginalHttpMessage == null)
+            {
+                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
+            }
+
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsOperations.DeleteProvisioning202Deletingcanceled200", createOriginalHttpMessage,
+            (r, c) =>
+            {
+                using var document = JsonDocument.Parse(r.ContentStream);
+                var value = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value, r);
+            },
+            async (r, c) =>
+            {
+                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                var value0 = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value0, r);
+            });
+        }
+        /// <summary> Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Operation<Product>> StartDeleteProvisioning202Deletingcanceled200OperationAsync(CancellationToken cancellationToken = default)
+        {
+            var originalResponse = await DeleteProvisioning202Deletingcanceled200Async(cancellationToken).ConfigureAwait(false);
+            return CreateDeleteProvisioning202Deletingcanceled200Operation(originalResponse, () => CreateDeleteProvisioning202Deletingcanceled200Request());
+        }
+        /// <summary> Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Operation<Product> StartDeleteProvisioning202Deletingcanceled200Operation(CancellationToken cancellationToken = default)
+        {
+            var originalResponse = DeleteProvisioning202Deletingcanceled200(cancellationToken);
+            return CreateDeleteProvisioning202Deletingcanceled200Operation(originalResponse, () => CreateDeleteProvisioning202Deletingcanceled200Request());
+        }
+        /// <summary> Long running delete succeeds and returns right away. </summary>
+        /// <param name="originalResponse"> The original response from starting the operation. </param>
+        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
+        public Operation<Response> CreateDelete204SucceededOperation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        {
+            if (originalResponse == null)
+            {
+                throw new ArgumentNullException(nameof(originalResponse));
+            }
+            if (createOriginalHttpMessage == null)
+            {
+                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
+            }
+
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsOperations.Delete204Succeeded", createOriginalHttpMessage,
+            (r, c) =>
+            {
+                return Response.FromValue(r, r);
+            },
+            async (r, c) =>
+            {
+                await Task.CompletedTask;
+                return Response.FromValue(r, r);
+            });
+        }
+        /// <summary> Long running delete succeeds and returns right away. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Operation<Response>> StartDelete204SucceededOperationAsync(CancellationToken cancellationToken = default)
+        {
+            var originalResponse = await Delete204SucceededAsync(cancellationToken).ConfigureAwait(false);
+            return CreateDelete204SucceededOperation(originalResponse, () => CreateDelete204SucceededRequest());
+        }
+        /// <summary> Long running delete succeeds and returns right away. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Operation<Response> StartDelete204SucceededOperation(CancellationToken cancellationToken = default)
+        {
+            var originalResponse = Delete204Succeeded(cancellationToken);
+            return CreateDelete204SucceededOperation(originalResponse, () => CreateDelete204SucceededRequest());
+        }
+        /// <summary> Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
+        /// <param name="originalResponse"> The original response from starting the operation. </param>
+        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
+        public Operation<Product> CreateDelete202Retry200Operation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        {
+            if (originalResponse == null)
+            {
+                throw new ArgumentNullException(nameof(originalResponse));
+            }
+            if (createOriginalHttpMessage == null)
+            {
+                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
+            }
+
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsOperations.Delete202Retry200", createOriginalHttpMessage,
+            (r, c) =>
+            {
+                using var document = JsonDocument.Parse(r.ContentStream);
+                var value = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value, r);
+            },
+            async (r, c) =>
+            {
+                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                var value0 = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value0, r);
+            });
+        }
+        /// <summary> Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Operation<Product>> StartDelete202Retry200OperationAsync(CancellationToken cancellationToken = default)
+        {
+            var originalResponse = await Delete202Retry200Async(cancellationToken).ConfigureAwait(false);
+            return CreateDelete202Retry200Operation(originalResponse, () => CreateDelete202Retry200Request());
+        }
+        /// <summary> Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Operation<Product> StartDelete202Retry200Operation(CancellationToken cancellationToken = default)
+        {
+            var originalResponse = Delete202Retry200(cancellationToken);
+            return CreateDelete202Retry200Operation(originalResponse, () => CreateDelete202Retry200Request());
+        }
+        /// <summary> Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
+        /// <param name="originalResponse"> The original response from starting the operation. </param>
+        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
+        public Operation<Product> CreateDelete202NoRetry204Operation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        {
+            if (originalResponse == null)
+            {
+                throw new ArgumentNullException(nameof(originalResponse));
+            }
+            if (createOriginalHttpMessage == null)
+            {
+                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
+            }
+
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsOperations.Delete202NoRetry204", createOriginalHttpMessage,
+            (r, c) =>
+            {
+                using var document = JsonDocument.Parse(r.ContentStream);
+                var value = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value, r);
+            },
+            async (r, c) =>
+            {
+                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                var value0 = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value0, r);
+            });
+        }
+        /// <summary> Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Operation<Product>> StartDelete202NoRetry204OperationAsync(CancellationToken cancellationToken = default)
+        {
+            var originalResponse = await Delete202NoRetry204Async(cancellationToken).ConfigureAwait(false);
+            return CreateDelete202NoRetry204Operation(originalResponse, () => CreateDelete202NoRetry204Request());
+        }
+        /// <summary> Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Operation<Product> StartDelete202NoRetry204Operation(CancellationToken cancellationToken = default)
+        {
+            var originalResponse = Delete202NoRetry204(cancellationToken);
+            return CreateDelete202NoRetry204Operation(originalResponse, () => CreateDelete202NoRetry204Request());
         }
         /// <summary> Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<DeleteNoHeaderInRetryHeaders>> DeleteNoHeaderInRetryPollingAsync(string pollingLink, CancellationToken cancellationToken = default)
+        /// <param name="originalResponse"> The original response from starting the operation. </param>
+        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
+        public Operation<Response> CreateDeleteNoHeaderInRetryOperation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
         {
-            if (pollingLink == null)
+            if (originalResponse == null)
             {
-                throw new ArgumentNullException(nameof(pollingLink));
+                throw new ArgumentNullException(nameof(originalResponse));
+            }
+            if (createOriginalHttpMessage == null)
+            {
+                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.DeleteNoHeaderInRetry");
-            scope.Start();
-            try
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsOperations.DeleteNoHeaderInRetry", createOriginalHttpMessage,
+            (r, c) =>
             {
-                using var message = CreateDeleteNoHeaderInRetryPollingRequest(pollingLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        var headers = new DeleteNoHeaderInRetryHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
+                return Response.FromValue(r, r);
+            },
+            async (r, c) =>
             {
-                scope.Failed(e);
-                throw;
-            }
+                await Task.CompletedTask;
+                return Response.FromValue(r, r);
+            });
         }
         /// <summary> Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<DeleteNoHeaderInRetryHeaders> DeleteNoHeaderInRetryPolling(string pollingLink, CancellationToken cancellationToken = default)
+        public async ValueTask<Operation<Response>> StartDeleteNoHeaderInRetryOperationAsync(CancellationToken cancellationToken = default)
         {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.DeleteNoHeaderInRetry");
-            scope.Start();
-            try
-            {
-                using var message = CreateDeleteNoHeaderInRetryPollingRequest(pollingLink);
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        var headers = new DeleteNoHeaderInRetryHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            var originalResponse = await DeleteNoHeaderInRetryAsync(cancellationToken).ConfigureAwait(false);
+            return CreateDeleteNoHeaderInRetryOperation(originalResponse, () => CreateDeleteNoHeaderInRetryRequest());
         }
-        internal HttpMessage CreateDeleteAsyncNoHeaderInRetryPollingRequest(string pollingLink)
+        /// <summary> Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Operation<Response> StartDeleteNoHeaderInRetryOperation(CancellationToken cancellationToken = default)
         {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(pollingLink, false);
-            request.Uri = uri;
-            return message;
+            var originalResponse = DeleteNoHeaderInRetry(cancellationToken);
+            return CreateDeleteNoHeaderInRetryOperation(originalResponse, () => CreateDeleteNoHeaderInRetryRequest());
         }
         /// <summary> Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<DeleteAsyncNoHeaderInRetryHeaders>> DeleteAsyncNoHeaderInRetryPollingAsync(string pollingLink, CancellationToken cancellationToken = default)
+        /// <param name="originalResponse"> The original response from starting the operation. </param>
+        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
+        public Operation<Response> CreateDeleteAsyncNoHeaderInRetryOperation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
         {
-            if (pollingLink == null)
+            if (originalResponse == null)
             {
-                throw new ArgumentNullException(nameof(pollingLink));
+                throw new ArgumentNullException(nameof(originalResponse));
+            }
+            if (createOriginalHttpMessage == null)
+            {
+                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.DeleteAsyncNoHeaderInRetry");
-            scope.Start();
-            try
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsOperations.DeleteAsyncNoHeaderInRetry", createOriginalHttpMessage,
+            (r, c) =>
             {
-                using var message = CreateDeleteAsyncNoHeaderInRetryPollingRequest(pollingLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        var headers = new DeleteAsyncNoHeaderInRetryHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
+                return Response.FromValue(r, r);
+            },
+            async (r, c) =>
             {
-                scope.Failed(e);
-                throw;
-            }
+                await Task.CompletedTask;
+                return Response.FromValue(r, r);
+            });
         }
         /// <summary> Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<DeleteAsyncNoHeaderInRetryHeaders> DeleteAsyncNoHeaderInRetryPolling(string pollingLink, CancellationToken cancellationToken = default)
+        public async ValueTask<Operation<Response>> StartDeleteAsyncNoHeaderInRetryOperationAsync(CancellationToken cancellationToken = default)
         {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.DeleteAsyncNoHeaderInRetry");
-            scope.Start();
-            try
-            {
-                using var message = CreateDeleteAsyncNoHeaderInRetryPollingRequest(pollingLink);
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        var headers = new DeleteAsyncNoHeaderInRetryHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            var originalResponse = await DeleteAsyncNoHeaderInRetryAsync(cancellationToken).ConfigureAwait(false);
+            return CreateDeleteAsyncNoHeaderInRetryOperation(originalResponse, () => CreateDeleteAsyncNoHeaderInRetryRequest());
         }
-        internal HttpMessage CreateDeleteAsyncRetrySucceededPollingRequest(string pollingLink)
+        /// <summary> Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Operation<Response> StartDeleteAsyncNoHeaderInRetryOperation(CancellationToken cancellationToken = default)
         {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(pollingLink, false);
-            request.Uri = uri;
-            return message;
+            var originalResponse = DeleteAsyncNoHeaderInRetry(cancellationToken);
+            return CreateDeleteAsyncNoHeaderInRetryOperation(originalResponse, () => CreateDeleteAsyncNoHeaderInRetryRequest());
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<DeleteAsyncRetrySucceededHeaders>> DeleteAsyncRetrySucceededPollingAsync(string pollingLink, CancellationToken cancellationToken = default)
+        /// <param name="originalResponse"> The original response from starting the operation. </param>
+        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
+        public Operation<Response> CreateDeleteAsyncRetrySucceededOperation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
         {
-            if (pollingLink == null)
+            if (originalResponse == null)
             {
-                throw new ArgumentNullException(nameof(pollingLink));
+                throw new ArgumentNullException(nameof(originalResponse));
+            }
+            if (createOriginalHttpMessage == null)
+            {
+                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.DeleteAsyncRetrySucceeded");
-            scope.Start();
-            try
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsOperations.DeleteAsyncRetrySucceeded", createOriginalHttpMessage,
+            (r, c) =>
             {
-                using var message = CreateDeleteAsyncRetrySucceededPollingRequest(pollingLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        var headers = new DeleteAsyncRetrySucceededHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
+                return Response.FromValue(r, r);
+            },
+            async (r, c) =>
             {
-                scope.Failed(e);
-                throw;
-            }
+                await Task.CompletedTask;
+                return Response.FromValue(r, r);
+            });
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<DeleteAsyncRetrySucceededHeaders> DeleteAsyncRetrySucceededPolling(string pollingLink, CancellationToken cancellationToken = default)
+        public async ValueTask<Operation<Response>> StartDeleteAsyncRetrySucceededOperationAsync(CancellationToken cancellationToken = default)
         {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.DeleteAsyncRetrySucceeded");
-            scope.Start();
-            try
-            {
-                using var message = CreateDeleteAsyncRetrySucceededPollingRequest(pollingLink);
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        var headers = new DeleteAsyncRetrySucceededHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        internal HttpMessage CreateDeleteAsyncNoRetrySucceededPollingRequest(string pollingLink)
-        {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(pollingLink, false);
-            request.Uri = uri;
-            return message;
+            var originalResponse = await DeleteAsyncRetrySucceededAsync(cancellationToken).ConfigureAwait(false);
+            return CreateDeleteAsyncRetrySucceededOperation(originalResponse, () => CreateDeleteAsyncRetrySucceededRequest());
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<DeleteAsyncNoRetrySucceededHeaders>> DeleteAsyncNoRetrySucceededPollingAsync(string pollingLink, CancellationToken cancellationToken = default)
+        public Operation<Response> StartDeleteAsyncRetrySucceededOperation(CancellationToken cancellationToken = default)
         {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.DeleteAsyncNoRetrySucceeded");
-            scope.Start();
-            try
-            {
-                using var message = CreateDeleteAsyncNoRetrySucceededPollingRequest(pollingLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        var headers = new DeleteAsyncNoRetrySucceededHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            var originalResponse = DeleteAsyncRetrySucceeded(cancellationToken);
+            return CreateDeleteAsyncRetrySucceededOperation(originalResponse, () => CreateDeleteAsyncRetrySucceededRequest());
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<DeleteAsyncNoRetrySucceededHeaders> DeleteAsyncNoRetrySucceededPolling(string pollingLink, CancellationToken cancellationToken = default)
+        /// <param name="originalResponse"> The original response from starting the operation. </param>
+        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
+        public Operation<Response> CreateDeleteAsyncNoRetrySucceededOperation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
         {
-            if (pollingLink == null)
+            if (originalResponse == null)
             {
-                throw new ArgumentNullException(nameof(pollingLink));
+                throw new ArgumentNullException(nameof(originalResponse));
+            }
+            if (createOriginalHttpMessage == null)
+            {
+                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.DeleteAsyncNoRetrySucceeded");
-            scope.Start();
-            try
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsOperations.DeleteAsyncNoRetrySucceeded", createOriginalHttpMessage,
+            (r, c) =>
             {
-                using var message = CreateDeleteAsyncNoRetrySucceededPollingRequest(pollingLink);
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        var headers = new DeleteAsyncNoRetrySucceededHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
+                return Response.FromValue(r, r);
+            },
+            async (r, c) =>
             {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        internal HttpMessage CreateDeleteAsyncRetryFailedPollingRequest(string pollingLink)
-        {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(pollingLink, false);
-            request.Uri = uri;
-            return message;
+                await Task.CompletedTask;
+                return Response.FromValue(r, r);
+            });
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<DeleteAsyncRetryFailedHeaders>> DeleteAsyncRetryFailedPollingAsync(string pollingLink, CancellationToken cancellationToken = default)
+        public async ValueTask<Operation<Response>> StartDeleteAsyncNoRetrySucceededOperationAsync(CancellationToken cancellationToken = default)
         {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.DeleteAsyncRetryFailed");
-            scope.Start();
-            try
-            {
-                using var message = CreateDeleteAsyncRetryFailedPollingRequest(pollingLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        var headers = new DeleteAsyncRetryFailedHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            var originalResponse = await DeleteAsyncNoRetrySucceededAsync(cancellationToken).ConfigureAwait(false);
+            return CreateDeleteAsyncNoRetrySucceededOperation(originalResponse, () => CreateDeleteAsyncNoRetrySucceededRequest());
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<DeleteAsyncRetryFailedHeaders> DeleteAsyncRetryFailedPolling(string pollingLink, CancellationToken cancellationToken = default)
+        public Operation<Response> StartDeleteAsyncNoRetrySucceededOperation(CancellationToken cancellationToken = default)
         {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.DeleteAsyncRetryFailed");
-            scope.Start();
-            try
-            {
-                using var message = CreateDeleteAsyncRetryFailedPollingRequest(pollingLink);
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        var headers = new DeleteAsyncRetryFailedHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        internal HttpMessage CreateDeleteAsyncRetrycanceledPollingRequest(string pollingLink)
-        {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(pollingLink, false);
-            request.Uri = uri;
-            return message;
+            var originalResponse = DeleteAsyncNoRetrySucceeded(cancellationToken);
+            return CreateDeleteAsyncNoRetrySucceededOperation(originalResponse, () => CreateDeleteAsyncNoRetrySucceededRequest());
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<DeleteAsyncRetrycanceledHeaders>> DeleteAsyncRetrycanceledPollingAsync(string pollingLink, CancellationToken cancellationToken = default)
+        /// <param name="originalResponse"> The original response from starting the operation. </param>
+        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
+        public Operation<Response> CreateDeleteAsyncRetryFailedOperation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
         {
-            if (pollingLink == null)
+            if (originalResponse == null)
             {
-                throw new ArgumentNullException(nameof(pollingLink));
+                throw new ArgumentNullException(nameof(originalResponse));
+            }
+            if (createOriginalHttpMessage == null)
+            {
+                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.DeleteAsyncRetrycanceled");
-            scope.Start();
-            try
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsOperations.DeleteAsyncRetryFailed", createOriginalHttpMessage,
+            (r, c) =>
             {
-                using var message = CreateDeleteAsyncRetrycanceledPollingRequest(pollingLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        var headers = new DeleteAsyncRetrycanceledHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
+                return Response.FromValue(r, r);
+            },
+            async (r, c) =>
             {
-                scope.Failed(e);
-                throw;
-            }
+                await Task.CompletedTask;
+                return Response.FromValue(r, r);
+            });
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<DeleteAsyncRetrycanceledHeaders> DeleteAsyncRetrycanceledPolling(string pollingLink, CancellationToken cancellationToken = default)
+        public async ValueTask<Operation<Response>> StartDeleteAsyncRetryFailedOperationAsync(CancellationToken cancellationToken = default)
         {
-            if (pollingLink == null)
+            var originalResponse = await DeleteAsyncRetryFailedAsync(cancellationToken).ConfigureAwait(false);
+            return CreateDeleteAsyncRetryFailedOperation(originalResponse, () => CreateDeleteAsyncRetryFailedRequest());
+        }
+        /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Operation<Response> StartDeleteAsyncRetryFailedOperation(CancellationToken cancellationToken = default)
+        {
+            var originalResponse = DeleteAsyncRetryFailed(cancellationToken);
+            return CreateDeleteAsyncRetryFailedOperation(originalResponse, () => CreateDeleteAsyncRetryFailedRequest());
+        }
+        /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <param name="originalResponse"> The original response from starting the operation. </param>
+        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
+        public Operation<Response> CreateDeleteAsyncRetrycanceledOperation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        {
+            if (originalResponse == null)
             {
-                throw new ArgumentNullException(nameof(pollingLink));
+                throw new ArgumentNullException(nameof(originalResponse));
+            }
+            if (createOriginalHttpMessage == null)
+            {
+                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.DeleteAsyncRetrycanceled");
-            scope.Start();
-            try
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsOperations.DeleteAsyncRetrycanceled", createOriginalHttpMessage,
+            (r, c) =>
             {
-                using var message = CreateDeleteAsyncRetrycanceledPollingRequest(pollingLink);
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        var headers = new DeleteAsyncRetrycanceledHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
+                return Response.FromValue(r, r);
+            },
+            async (r, c) =>
             {
-                scope.Failed(e);
-                throw;
-            }
+                await Task.CompletedTask;
+                return Response.FromValue(r, r);
+            });
         }
-        internal HttpMessage CreatePost200WithPayloadPollingRequest(string pollingLink)
+        /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Operation<Response>> StartDeleteAsyncRetrycanceledOperationAsync(CancellationToken cancellationToken = default)
         {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(pollingLink, false);
-            request.Uri = uri;
-            return message;
+            var originalResponse = await DeleteAsyncRetrycanceledAsync(cancellationToken).ConfigureAwait(false);
+            return CreateDeleteAsyncRetrycanceledOperation(originalResponse, () => CreateDeleteAsyncRetrycanceledRequest());
+        }
+        /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Operation<Response> StartDeleteAsyncRetrycanceledOperation(CancellationToken cancellationToken = default)
+        {
+            var originalResponse = DeleteAsyncRetrycanceled(cancellationToken);
+            return CreateDeleteAsyncRetrycanceledOperation(originalResponse, () => CreateDeleteAsyncRetrycanceledRequest());
         }
         /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; header. Poll returns a 200 with a response body after success. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Sku>> Post200WithPayloadPollingAsync(string pollingLink, CancellationToken cancellationToken = default)
+        /// <param name="originalResponse"> The original response from starting the operation. </param>
+        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
+        public Operation<Sku> CreatePost200WithPayloadOperation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
         {
-            if (pollingLink == null)
+            if (originalResponse == null)
             {
-                throw new ArgumentNullException(nameof(pollingLink));
+                throw new ArgumentNullException(nameof(originalResponse));
+            }
+            if (createOriginalHttpMessage == null)
+            {
+                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.Post200WithPayload");
-            scope.Start();
-            try
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsOperations.Post200WithPayload", createOriginalHttpMessage,
+            (r, c) =>
             {
-                using var message = CreatePost200WithPayloadPollingRequest(pollingLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Sku.DeserializeSku(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
+                using var document = JsonDocument.Parse(r.ContentStream);
+                var value = Sku.DeserializeSku(document.RootElement);
+                return Response.FromValue(value, r);
+            },
+            async (r, c) =>
             {
-                scope.Failed(e);
-                throw;
-            }
+                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                var value0 = Sku.DeserializeSku(document.RootElement);
+                return Response.FromValue(value0, r);
+            });
         }
         /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; header. Poll returns a 200 with a response body after success. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Sku> Post200WithPayloadPolling(string pollingLink, CancellationToken cancellationToken = default)
+        public async ValueTask<Operation<Sku>> StartPost200WithPayloadOperationAsync(CancellationToken cancellationToken = default)
         {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.Post200WithPayload");
-            scope.Start();
-            try
-            {
-                using var message = CreatePost200WithPayloadPollingRequest(pollingLink);
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Sku.DeserializeSku(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            var originalResponse = await Post200WithPayloadAsync(cancellationToken).ConfigureAwait(false);
+            return CreatePost200WithPayloadOperation(originalResponse, () => CreatePost200WithPayloadRequest());
         }
-        internal HttpMessage CreatePost202Retry200PollingRequest(string pollingLink)
+        /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; header. Poll returns a 200 with a response body after success. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Operation<Sku> StartPost200WithPayloadOperation(CancellationToken cancellationToken = default)
         {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(pollingLink, false);
-            request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            return message;
+            var originalResponse = Post200WithPayload(cancellationToken);
+            return CreatePost200WithPayloadOperation(originalResponse, () => CreatePost200WithPayloadRequest());
         }
         /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; and &apos;Retry-After&apos; headers, Polls return a 200 with a response body after success. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<Post202Retry200Headers>> Post202Retry200PollingAsync(string pollingLink, CancellationToken cancellationToken = default)
+        /// <param name="originalResponse"> The original response from starting the operation. </param>
+        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
+        public Operation<Response> CreatePost202Retry200Operation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
         {
-            if (pollingLink == null)
+            if (originalResponse == null)
             {
-                throw new ArgumentNullException(nameof(pollingLink));
+                throw new ArgumentNullException(nameof(originalResponse));
+            }
+            if (createOriginalHttpMessage == null)
+            {
+                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.Post202Retry200");
-            scope.Start();
-            try
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsOperations.Post202Retry200", createOriginalHttpMessage,
+            (r, c) =>
             {
-                using var message = CreatePost202Retry200PollingRequest(pollingLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        var headers = new Post202Retry200Headers(message.Response);
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
+                return Response.FromValue(r, r);
+            },
+            async (r, c) =>
             {
-                scope.Failed(e);
-                throw;
-            }
+                await Task.CompletedTask;
+                return Response.FromValue(r, r);
+            });
         }
         /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; and &apos;Retry-After&apos; headers, Polls return a 200 with a response body after success. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
+        /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<Post202Retry200Headers> Post202Retry200Polling(string pollingLink, CancellationToken cancellationToken = default)
+        public async ValueTask<Operation<Response>> StartPost202Retry200OperationAsync(Product product, CancellationToken cancellationToken = default)
         {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.Post202Retry200");
-            scope.Start();
-            try
-            {
-                using var message = CreatePost202Retry200PollingRequest(pollingLink);
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        var headers = new Post202Retry200Headers(message.Response);
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            var originalResponse = await Post202Retry200Async(product, cancellationToken).ConfigureAwait(false);
+            return CreatePost202Retry200Operation(originalResponse, () => CreatePost202Retry200Request(product));
         }
-        internal HttpMessage CreatePost202NoRetry204PollingRequest(string pollingLink)
+        /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; and &apos;Retry-After&apos; headers, Polls return a 200 with a response body after success. </summary>
+        /// <param name="product"> Product to put. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Operation<Response> StartPost202Retry200Operation(Product product, CancellationToken cancellationToken = default)
         {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(pollingLink, false);
-            request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            return message;
+            var originalResponse = Post202Retry200(product, cancellationToken);
+            return CreatePost202Retry200Operation(originalResponse, () => CreatePost202Retry200Request(product));
         }
         /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; header, 204 with noresponse body after success. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<Product, Post202NoRetry204Headers>> Post202NoRetry204PollingAsync(string pollingLink, CancellationToken cancellationToken = default)
+        /// <param name="originalResponse"> The original response from starting the operation. </param>
+        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
+        public Operation<Product> CreatePost202NoRetry204Operation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
         {
-            if (pollingLink == null)
+            if (originalResponse == null)
             {
-                throw new ArgumentNullException(nameof(pollingLink));
+                throw new ArgumentNullException(nameof(originalResponse));
+            }
+            if (createOriginalHttpMessage == null)
+            {
+                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.Post202NoRetry204");
-            scope.Start();
-            try
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsOperations.Post202NoRetry204", createOriginalHttpMessage,
+            (r, c) =>
             {
-                using var message = CreatePost202NoRetry204PollingRequest(pollingLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            var headers = new Post202NoRetry204Headers(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                        }
-                    default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
+                using var document = JsonDocument.Parse(r.ContentStream);
+                var value = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value, r);
+            },
+            async (r, c) =>
             {
-                scope.Failed(e);
-                throw;
-            }
+                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                var value0 = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value0, r);
+            });
         }
         /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; header, 204 with noresponse body after success. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
+        /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<Product, Post202NoRetry204Headers> Post202NoRetry204Polling(string pollingLink, CancellationToken cancellationToken = default)
+        public async ValueTask<Operation<Product>> StartPost202NoRetry204OperationAsync(Product product, CancellationToken cancellationToken = default)
         {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.Post202NoRetry204");
-            scope.Start();
-            try
-            {
-                using var message = CreatePost202NoRetry204PollingRequest(pollingLink);
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            var headers = new Post202NoRetry204Headers(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                        }
-                    default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            var originalResponse = await Post202NoRetry204Async(product, cancellationToken).ConfigureAwait(false);
+            return CreatePost202NoRetry204Operation(originalResponse, () => CreatePost202NoRetry204Request(product));
         }
-        internal HttpMessage CreatePostDoubleHeadersFinalLocationGetPollingRequest(string pollingLink)
+        /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; header, 204 with noresponse body after success. </summary>
+        /// <param name="product"> Product to put. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Operation<Product> StartPost202NoRetry204Operation(Product product, CancellationToken cancellationToken = default)
         {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(pollingLink, false);
-            request.Uri = uri;
-            return message;
+            var originalResponse = Post202NoRetry204(product, cancellationToken);
+            return CreatePost202NoRetry204Operation(originalResponse, () => CreatePost202NoRetry204Request(product));
         }
         /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should poll Location to get the final object. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Product>> PostDoubleHeadersFinalLocationGetPollingAsync(string pollingLink, CancellationToken cancellationToken = default)
+        /// <param name="originalResponse"> The original response from starting the operation. </param>
+        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
+        public Operation<Product> CreatePostDoubleHeadersFinalLocationGetOperation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
         {
-            if (pollingLink == null)
+            if (originalResponse == null)
             {
-                throw new ArgumentNullException(nameof(pollingLink));
+                throw new ArgumentNullException(nameof(originalResponse));
+            }
+            if (createOriginalHttpMessage == null)
+            {
+                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.PostDoubleHeadersFinalLocationGet");
-            scope.Start();
-            try
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsOperations.PostDoubleHeadersFinalLocationGet", createOriginalHttpMessage,
+            (r, c) =>
             {
-                using var message = CreatePostDoubleHeadersFinalLocationGetPollingRequest(pollingLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
+                using var document = JsonDocument.Parse(r.ContentStream);
+                var value = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value, r);
+            },
+            async (r, c) =>
             {
-                scope.Failed(e);
-                throw;
-            }
+                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                var value0 = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value0, r);
+            });
         }
         /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should poll Location to get the final object. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Product> PostDoubleHeadersFinalLocationGetPolling(string pollingLink, CancellationToken cancellationToken = default)
+        public async ValueTask<Operation<Product>> StartPostDoubleHeadersFinalLocationGetOperationAsync(CancellationToken cancellationToken = default)
         {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.PostDoubleHeadersFinalLocationGet");
-            scope.Start();
-            try
-            {
-                using var message = CreatePostDoubleHeadersFinalLocationGetPollingRequest(pollingLink);
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            var originalResponse = await PostDoubleHeadersFinalLocationGetAsync(cancellationToken).ConfigureAwait(false);
+            return CreatePostDoubleHeadersFinalLocationGetOperation(originalResponse, () => CreatePostDoubleHeadersFinalLocationGetRequest());
         }
-        internal HttpMessage CreatePostDoubleHeadersFinalAzureHeaderGetPollingRequest(string pollingLink)
+        /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should poll Location to get the final object. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Operation<Product> StartPostDoubleHeadersFinalLocationGetOperation(CancellationToken cancellationToken = default)
         {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(pollingLink, false);
-            request.Uri = uri;
-            return message;
+            var originalResponse = PostDoubleHeadersFinalLocationGet(cancellationToken);
+            return CreatePostDoubleHeadersFinalLocationGetOperation(originalResponse, () => CreatePostDoubleHeadersFinalLocationGetRequest());
         }
         /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should NOT poll Location to get the final object. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Product>> PostDoubleHeadersFinalAzureHeaderGetPollingAsync(string pollingLink, CancellationToken cancellationToken = default)
+        /// <param name="originalResponse"> The original response from starting the operation. </param>
+        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
+        public Operation<Product> CreatePostDoubleHeadersFinalAzureHeaderGetOperation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
         {
-            if (pollingLink == null)
+            if (originalResponse == null)
             {
-                throw new ArgumentNullException(nameof(pollingLink));
+                throw new ArgumentNullException(nameof(originalResponse));
+            }
+            if (createOriginalHttpMessage == null)
+            {
+                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.PostDoubleHeadersFinalAzureHeaderGet");
-            scope.Start();
-            try
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsOperations.PostDoubleHeadersFinalAzureHeaderGet", createOriginalHttpMessage,
+            (r, c) =>
             {
-                using var message = CreatePostDoubleHeadersFinalAzureHeaderGetPollingRequest(pollingLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
+                using var document = JsonDocument.Parse(r.ContentStream);
+                var value = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value, r);
+            },
+            async (r, c) =>
             {
-                scope.Failed(e);
-                throw;
-            }
+                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                var value0 = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value0, r);
+            });
         }
         /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should NOT poll Location to get the final object. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Product> PostDoubleHeadersFinalAzureHeaderGetPolling(string pollingLink, CancellationToken cancellationToken = default)
+        public async ValueTask<Operation<Product>> StartPostDoubleHeadersFinalAzureHeaderGetOperationAsync(CancellationToken cancellationToken = default)
         {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.PostDoubleHeadersFinalAzureHeaderGet");
-            scope.Start();
-            try
-            {
-                using var message = CreatePostDoubleHeadersFinalAzureHeaderGetPollingRequest(pollingLink);
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            var originalResponse = await PostDoubleHeadersFinalAzureHeaderGetAsync(cancellationToken).ConfigureAwait(false);
+            return CreatePostDoubleHeadersFinalAzureHeaderGetOperation(originalResponse, () => CreatePostDoubleHeadersFinalAzureHeaderGetRequest());
         }
-        internal HttpMessage CreatePostDoubleHeadersFinalAzureHeaderGetDefaultPollingRequest(string pollingLink)
+        /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should NOT poll Location to get the final object. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Operation<Product> StartPostDoubleHeadersFinalAzureHeaderGetOperation(CancellationToken cancellationToken = default)
         {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(pollingLink, false);
-            request.Uri = uri;
-            return message;
+            var originalResponse = PostDoubleHeadersFinalAzureHeaderGet(cancellationToken);
+            return CreatePostDoubleHeadersFinalAzureHeaderGetOperation(originalResponse, () => CreatePostDoubleHeadersFinalAzureHeaderGetRequest());
         }
         /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should NOT poll Location to get the final object if you support initial Autorest behavior. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Product>> PostDoubleHeadersFinalAzureHeaderGetDefaultPollingAsync(string pollingLink, CancellationToken cancellationToken = default)
+        /// <param name="originalResponse"> The original response from starting the operation. </param>
+        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
+        public Operation<Product> CreatePostDoubleHeadersFinalAzureHeaderGetDefaultOperation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
         {
-            if (pollingLink == null)
+            if (originalResponse == null)
             {
-                throw new ArgumentNullException(nameof(pollingLink));
+                throw new ArgumentNullException(nameof(originalResponse));
+            }
+            if (createOriginalHttpMessage == null)
+            {
+                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.PostDoubleHeadersFinalAzureHeaderGetDefault");
-            scope.Start();
-            try
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsOperations.PostDoubleHeadersFinalAzureHeaderGetDefault", createOriginalHttpMessage,
+            (r, c) =>
             {
-                using var message = CreatePostDoubleHeadersFinalAzureHeaderGetDefaultPollingRequest(pollingLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
+                using var document = JsonDocument.Parse(r.ContentStream);
+                var value = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value, r);
+            },
+            async (r, c) =>
             {
-                scope.Failed(e);
-                throw;
-            }
+                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                var value0 = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value0, r);
+            });
         }
         /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should NOT poll Location to get the final object if you support initial Autorest behavior. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Product> PostDoubleHeadersFinalAzureHeaderGetDefaultPolling(string pollingLink, CancellationToken cancellationToken = default)
+        public async ValueTask<Operation<Product>> StartPostDoubleHeadersFinalAzureHeaderGetDefaultOperationAsync(CancellationToken cancellationToken = default)
         {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.PostDoubleHeadersFinalAzureHeaderGetDefault");
-            scope.Start();
-            try
-            {
-                using var message = CreatePostDoubleHeadersFinalAzureHeaderGetDefaultPollingRequest(pollingLink);
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            var originalResponse = await PostDoubleHeadersFinalAzureHeaderGetDefaultAsync(cancellationToken).ConfigureAwait(false);
+            return CreatePostDoubleHeadersFinalAzureHeaderGetDefaultOperation(originalResponse, () => CreatePostDoubleHeadersFinalAzureHeaderGetDefaultRequest());
         }
-        internal HttpMessage CreatePostAsyncRetrySucceededPollingRequest(string pollingLink)
+        /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should NOT poll Location to get the final object if you support initial Autorest behavior. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Operation<Product> StartPostDoubleHeadersFinalAzureHeaderGetDefaultOperation(CancellationToken cancellationToken = default)
         {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(pollingLink, false);
-            request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            return message;
+            var originalResponse = PostDoubleHeadersFinalAzureHeaderGetDefault(cancellationToken);
+            return CreatePostDoubleHeadersFinalAzureHeaderGetDefaultOperation(originalResponse, () => CreatePostDoubleHeadersFinalAzureHeaderGetDefaultRequest());
         }
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Product>> PostAsyncRetrySucceededPollingAsync(string pollingLink, CancellationToken cancellationToken = default)
+        /// <param name="originalResponse"> The original response from starting the operation. </param>
+        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
+        public Operation<Product> CreatePostAsyncRetrySucceededOperation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
         {
-            if (pollingLink == null)
+            if (originalResponse == null)
             {
-                throw new ArgumentNullException(nameof(pollingLink));
+                throw new ArgumentNullException(nameof(originalResponse));
+            }
+            if (createOriginalHttpMessage == null)
+            {
+                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.PostAsyncRetrySucceeded");
-            scope.Start();
-            try
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsOperations.PostAsyncRetrySucceeded", createOriginalHttpMessage,
+            (r, c) =>
             {
-                using var message = CreatePostAsyncRetrySucceededPollingRequest(pollingLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
+                using var document = JsonDocument.Parse(r.ContentStream);
+                var value = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value, r);
+            },
+            async (r, c) =>
             {
-                scope.Failed(e);
-                throw;
-            }
+                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                var value0 = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value0, r);
+            });
         }
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
+        /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Product> PostAsyncRetrySucceededPolling(string pollingLink, CancellationToken cancellationToken = default)
+        public async ValueTask<Operation<Product>> StartPostAsyncRetrySucceededOperationAsync(Product product, CancellationToken cancellationToken = default)
         {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.PostAsyncRetrySucceeded");
-            scope.Start();
-            try
-            {
-                using var message = CreatePostAsyncRetrySucceededPollingRequest(pollingLink);
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        internal HttpMessage CreatePostAsyncNoRetrySucceededPollingRequest(string pollingLink)
-        {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(pollingLink, false);
-            request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            return message;
+            var originalResponse = await PostAsyncRetrySucceededAsync(product, cancellationToken).ConfigureAwait(false);
+            return CreatePostAsyncRetrySucceededOperation(originalResponse, () => CreatePostAsyncRetrySucceededRequest(product));
         }
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
+        /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Product>> PostAsyncNoRetrySucceededPollingAsync(string pollingLink, CancellationToken cancellationToken = default)
+        public Operation<Product> StartPostAsyncRetrySucceededOperation(Product product, CancellationToken cancellationToken = default)
         {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.PostAsyncNoRetrySucceeded");
-            scope.Start();
-            try
-            {
-                using var message = CreatePostAsyncNoRetrySucceededPollingRequest(pollingLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            var originalResponse = PostAsyncRetrySucceeded(product, cancellationToken);
+            return CreatePostAsyncRetrySucceededOperation(originalResponse, () => CreatePostAsyncRetrySucceededRequest(product));
         }
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Product> PostAsyncNoRetrySucceededPolling(string pollingLink, CancellationToken cancellationToken = default)
+        /// <param name="originalResponse"> The original response from starting the operation. </param>
+        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
+        public Operation<Product> CreatePostAsyncNoRetrySucceededOperation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
         {
-            if (pollingLink == null)
+            if (originalResponse == null)
             {
-                throw new ArgumentNullException(nameof(pollingLink));
+                throw new ArgumentNullException(nameof(originalResponse));
+            }
+            if (createOriginalHttpMessage == null)
+            {
+                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.PostAsyncNoRetrySucceeded");
-            scope.Start();
-            try
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsOperations.PostAsyncNoRetrySucceeded", createOriginalHttpMessage,
+            (r, c) =>
             {
-                using var message = CreatePostAsyncNoRetrySucceededPollingRequest(pollingLink);
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
+                using var document = JsonDocument.Parse(r.ContentStream);
+                var value = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value, r);
+            },
+            async (r, c) =>
             {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        internal HttpMessage CreatePostAsyncRetryFailedPollingRequest(string pollingLink)
-        {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(pollingLink, false);
-            request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            return message;
+                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                var value0 = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value0, r);
+            });
         }
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
+        /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<PostAsyncRetryFailedHeaders>> PostAsyncRetryFailedPollingAsync(string pollingLink, CancellationToken cancellationToken = default)
+        public async ValueTask<Operation<Product>> StartPostAsyncNoRetrySucceededOperationAsync(Product product, CancellationToken cancellationToken = default)
         {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.PostAsyncRetryFailed");
-            scope.Start();
-            try
-            {
-                using var message = CreatePostAsyncRetryFailedPollingRequest(pollingLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        var headers = new PostAsyncRetryFailedHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            var originalResponse = await PostAsyncNoRetrySucceededAsync(product, cancellationToken).ConfigureAwait(false);
+            return CreatePostAsyncNoRetrySucceededOperation(originalResponse, () => CreatePostAsyncNoRetrySucceededRequest(product));
         }
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
+        /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<PostAsyncRetryFailedHeaders> PostAsyncRetryFailedPolling(string pollingLink, CancellationToken cancellationToken = default)
+        public Operation<Product> StartPostAsyncNoRetrySucceededOperation(Product product, CancellationToken cancellationToken = default)
         {
-            if (pollingLink == null)
-            {
-                throw new ArgumentNullException(nameof(pollingLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.PostAsyncRetryFailed");
-            scope.Start();
-            try
-            {
-                using var message = CreatePostAsyncRetryFailedPollingRequest(pollingLink);
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        var headers = new PostAsyncRetryFailedHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        internal HttpMessage CreatePostAsyncRetrycanceledPollingRequest(string pollingLink)
-        {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(pollingLink, false);
-            request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            return message;
+            var originalResponse = PostAsyncNoRetrySucceeded(product, cancellationToken);
+            return CreatePostAsyncNoRetrySucceededOperation(originalResponse, () => CreatePostAsyncNoRetrySucceededRequest(product));
         }
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<PostAsyncRetrycanceledHeaders>> PostAsyncRetrycanceledPollingAsync(string pollingLink, CancellationToken cancellationToken = default)
+        /// <param name="originalResponse"> The original response from starting the operation. </param>
+        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
+        public Operation<Response> CreatePostAsyncRetryFailedOperation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
         {
-            if (pollingLink == null)
+            if (originalResponse == null)
             {
-                throw new ArgumentNullException(nameof(pollingLink));
+                throw new ArgumentNullException(nameof(originalResponse));
+            }
+            if (createOriginalHttpMessage == null)
+            {
+                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.PostAsyncRetrycanceled");
-            scope.Start();
-            try
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsOperations.PostAsyncRetryFailed", createOriginalHttpMessage,
+            (r, c) =>
             {
-                using var message = CreatePostAsyncRetrycanceledPollingRequest(pollingLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        var headers = new PostAsyncRetrycanceledHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
+                return Response.FromValue(r, r);
+            },
+            async (r, c) =>
             {
-                scope.Failed(e);
-                throw;
-            }
+                await Task.CompletedTask;
+                return Response.FromValue(r, r);
+            });
         }
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="pollingLink"> The URL to poll for the final response. </param>
+        /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<PostAsyncRetrycanceledHeaders> PostAsyncRetrycanceledPolling(string pollingLink, CancellationToken cancellationToken = default)
+        public async ValueTask<Operation<Response>> StartPostAsyncRetryFailedOperationAsync(Product product, CancellationToken cancellationToken = default)
         {
-            if (pollingLink == null)
+            var originalResponse = await PostAsyncRetryFailedAsync(product, cancellationToken).ConfigureAwait(false);
+            return CreatePostAsyncRetryFailedOperation(originalResponse, () => CreatePostAsyncRetryFailedRequest(product));
+        }
+        /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <param name="product"> Product to put. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Operation<Response> StartPostAsyncRetryFailedOperation(Product product, CancellationToken cancellationToken = default)
+        {
+            var originalResponse = PostAsyncRetryFailed(product, cancellationToken);
+            return CreatePostAsyncRetryFailedOperation(originalResponse, () => CreatePostAsyncRetryFailedRequest(product));
+        }
+        /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <param name="originalResponse"> The original response from starting the operation. </param>
+        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
+        public Operation<Response> CreatePostAsyncRetrycanceledOperation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        {
+            if (originalResponse == null)
             {
-                throw new ArgumentNullException(nameof(pollingLink));
+                throw new ArgumentNullException(nameof(originalResponse));
+            }
+            if (createOriginalHttpMessage == null)
+            {
+                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            using var scope = clientDiagnostics.CreateScope("LROsOperations.PostAsyncRetrycanceled");
-            scope.Start();
-            try
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsOperations.PostAsyncRetrycanceled", createOriginalHttpMessage,
+            (r, c) =>
             {
-                using var message = CreatePostAsyncRetrycanceledPollingRequest(pollingLink);
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        var headers = new PostAsyncRetrycanceledHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
+                return Response.FromValue(r, r);
+            },
+            async (r, c) =>
             {
-                scope.Failed(e);
-                throw;
-            }
+                await Task.CompletedTask;
+                return Response.FromValue(r, r);
+            });
+        }
+        /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <param name="product"> Product to put. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Operation<Response>> StartPostAsyncRetrycanceledOperationAsync(Product product, CancellationToken cancellationToken = default)
+        {
+            var originalResponse = await PostAsyncRetrycanceledAsync(product, cancellationToken).ConfigureAwait(false);
+            return CreatePostAsyncRetrycanceledOperation(originalResponse, () => CreatePostAsyncRetrycanceledRequest(product));
+        }
+        /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <param name="product"> Product to put. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Operation<Response> StartPostAsyncRetrycanceledOperation(Product product, CancellationToken cancellationToken = default)
+        {
+            var originalResponse = PostAsyncRetrycanceled(product, cancellationToken);
+            return CreatePostAsyncRetrycanceledOperation(originalResponse, () => CreatePostAsyncRetrycanceledRequest(product));
         }
     }
 }
