@@ -667,10 +667,10 @@ namespace lro
             }
         }
 
-        internal Operation<Product> CreatePutAsyncRetrySucceededOperation(Response originalResponse, Func<HttpMessage> createOriginalHttpMethod)
+        internal Operation<Product> CreatePutAsyncRetrySucceededOperation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
         {
             return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, true, "LROsOperations.Put200Succeeded",
-                createOriginalHttpMethod,
+                createOriginalHttpMessage,
                 (r, c) =>
                 {
                     using var document = JsonDocument.Parse(r.ContentStream, default);

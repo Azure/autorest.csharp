@@ -14,99 +14,10 @@ namespace Azure.Core
 {
     internal static class ArmOperationHelpers
     {
-        public static Operation<T> Create<T>(HttpPipeline pipeline, ClientDiagnostics clientDiagnostics, Response originalResponse, bool isPutOrPatch, string scopeName,
-            Func<HttpMessage> createOriginalHttpMethod, Func<Response, CancellationToken, Response<T>> createFinalResponse, Func<Response, CancellationToken, ValueTask<Response<T>>> createFinalResponseAsync) where T : notnull
-        {
-            using HttpMessage originalHttpMethod = createOriginalHttpMethod();
-            string originalUri = originalHttpMethod.Request.Uri.ToString();
-            ScenarioInfo originalInfo = GetScenarioInfo(originalResponse, originalUri);
-            if (!isPutOrPatch && (originalInfo.HeaderFrom == HeaderFrom.None || originalInfo.HeaderFrom != HeaderFrom.Location))
-            {
-                throw clientDiagnostics.CreateRequestFailedException(originalResponse);
-            }
-
-            return OperationFactory.Create(originalResponse, (r, c) =>
-            {
-                ScenarioInfo info = GetScenarioInfo(r, originalUri);
-                return GetResponse(pipeline, clientDiagnostics, scopeName, info.PollUri, c);
-            }, r =>
-            {
-                ScenarioInfo info = GetScenarioInfo(r, originalUri);
-                return IsTerminalState(r, info);
-            }, (r, c) =>
-            {
-                string finalUri = isPutOrPatch ? originalUri : originalInfo.PollUri;
-                Response response = GetResponse(pipeline, clientDiagnostics, scopeName, finalUri, c);
-                switch (response.Status)
-                {
-                    case 200:
-                    case 204 when !isPutOrPatch:
-                    {
-                        return createFinalResponse(response, c);
-                    }
-                    default:
-                        throw clientDiagnostics.CreateRequestFailedException(response);
-                }
-            }, async (r, c) =>
-            {
-                ScenarioInfo info = GetScenarioInfo(r, originalUri);
-                return await GetResponseAsync(pipeline, clientDiagnostics, scopeName, info.PollUri, c).ConfigureAwait(false);
-            }, async (r, c) =>
-            {
-                string finalUri = isPutOrPatch ? originalUri : originalInfo.PollUri;
-                Response response = await GetResponseAsync(pipeline, clientDiagnostics, scopeName, finalUri, c).ConfigureAwait(false);
-                switch (response.Status)
-                {
-                    case 200:
-                    case 204 when !isPutOrPatch:
-                        {
-                            return await createFinalResponseAsync(response, c);
-                        }
-                    default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(response).ConfigureAwait(false);
-                }
-            });
-        }
-        //public static async ValueTask<Operation<T>> CreateAsync<T>(HttpPipeline pipeline, ClientDiagnostics clientDiagnostics,
-        //    Response originalResponse, bool isPutOrPatch, string scopeName, Func<HttpMessage> createOriginalHttpMethod, Func<Response, ValueTask<Response<T>>> createFinalResponse) where T : notnull
+        //public static Operation<T> Create<T>(HttpPipeline pipeline, ClientDiagnostics clientDiagnostics, Response originalResponse, bool isPutOrPatch, string scopeName,
+        //    Func<HttpMessage> createOriginalHttpMessage, Func<Response, CancellationToken, Response<T>> createFinalResponse, Func<Response, CancellationToken, ValueTask<Response<T>>> createFinalResponseAsync) where T : notnull
         //{
-        //    using HttpMessage originalHttpMethod = createOriginalHttpMethod();
-        //    string originalUri = originalHttpMethod.Request.Uri.ToString();
-        //    ScenarioInfo originalInfo = GetScenarioInfo(originalResponse, originalUri);
-        //    if (!isPutOrPatch && (originalInfo.HeaderFrom == HeaderFrom.None || originalInfo.HeaderFrom != HeaderFrom.Location))
-        //    {
-        //        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(originalResponse).ConfigureAwait(false);
-        //    }
-
-        //    return OperationFactory.CreateAsync(originalResponse, async (r, c) =>
-        //    {
-        //        ScenarioInfo info = GetScenarioInfo(r, originalUri);
-        //        return await GetResponseAsync(pipeline, clientDiagnostics, scopeName, info.PollUri, c).ConfigureAwait(false);
-        //    }, r =>
-        //    {
-        //        ScenarioInfo info = GetScenarioInfo(r, originalUri);
-        //        return new ValueTask<bool>(IsTerminalState(r, info));
-        //    }, async (r, c) =>
-        //    {
-        //        string finalUri = isPutOrPatch ? originalUri : originalInfo.PollUri;
-        //        Response response = await GetResponseAsync(pipeline, clientDiagnostics, scopeName, finalUri, c).ConfigureAwait(false);
-        //        switch (response.Status)
-        //        {
-        //            case 200:
-        //            case 204 when !isPutOrPatch:
-        //            {
-        //                return await createFinalResponse(response);
-        //            }
-        //            default:
-        //                throw await clientDiagnostics.CreateRequestFailedExceptionAsync(response).ConfigureAwait(false);
-        //        }
-        //    });
-        //}
-
-        //public static Operation<T> Create<T>(HttpPipeline pipeline, ClientDiagnostics clientDiagnostics,
-        //    Response originalResponse, bool isPutOrPatch, string scopeName, Func<HttpMessage> createOriginalHttpMethod, Func<Response, Response<T>> createFinalResponse) where T : notnull
-        //{
-        //    using HttpMessage originalHttpMethod = createOriginalHttpMethod();
+        //    using HttpMessage originalHttpMethod = createOriginalHttpMessage();
         //    string originalUri = originalHttpMethod.Request.Uri.ToString();
         //    ScenarioInfo originalInfo = GetScenarioInfo(originalResponse, originalUri);
         //    if (!isPutOrPatch && (originalInfo.HeaderFrom == HeaderFrom.None || originalInfo.HeaderFrom != HeaderFrom.Location))
@@ -130,14 +41,208 @@ namespace Azure.Core
         //        {
         //            case 200:
         //            case 204 when !isPutOrPatch:
-        //                {
-        //                    return createFinalResponse(response);
-        //                }
+        //            {
+        //                return createFinalResponse(response, c);
+        //            }
         //            default:
         //                throw clientDiagnostics.CreateRequestFailedException(response);
         //        }
+        //    }, async (r, c) =>
+        //    {
+        //        ScenarioInfo info = GetScenarioInfo(r, originalUri);
+        //        return await GetResponseAsync(pipeline, clientDiagnostics, scopeName, info.PollUri, c).ConfigureAwait(false);
+        //    }, async (r, c) =>
+        //    {
+        //        string finalUri = isPutOrPatch ? originalUri : originalInfo.PollUri;
+        //        Response response = await GetResponseAsync(pipeline, clientDiagnostics, scopeName, finalUri, c).ConfigureAwait(false);
+        //        switch (response.Status)
+        //        {
+        //            case 200:
+        //            case 204 when !isPutOrPatch:
+        //                {
+        //                    return await createFinalResponseAsync(response, c);
+        //                }
+        //            default:
+        //                throw await clientDiagnostics.CreateRequestFailedExceptionAsync(response).ConfigureAwait(false);
+        //        }
         //    });
         //}
+
+        public static Operation<T> Create<T>(HttpPipeline pipeline, ClientDiagnostics clientDiagnostics, Response originalResponse, bool isPutOrPatch, string scopeName,
+            Func<HttpMessage> createOriginalHttpMessage, Func<Response, CancellationToken, Response<T>> createFinalResponse, Func<Response, CancellationToken, ValueTask<Response<T>>> createFinalResponseAsync) where T : notnull
+        {
+            using HttpMessage originalHttpMethod = createOriginalHttpMessage();
+            string originalUri = originalHttpMethod.Request.Uri.ToString();
+            ScenarioInfo originalInfo = GetScenarioInfo(originalResponse, originalUri);
+            if (!isPutOrPatch && (originalInfo.HeaderFrom == HeaderFrom.None || originalInfo.HeaderFrom != HeaderFrom.Location))
+            {
+                throw clientDiagnostics.CreateRequestFailedException(originalResponse);
+            }
+
+            return new ArmOperation<T>(pipeline, clientDiagnostics, originalResponse, isPutOrPatch, scopeName, createFinalResponse, createFinalResponseAsync, originalUri, originalInfo);
+        }
+
+        private class ArmOperation<T> : Operation<T> where T : notnull
+        {
+            private readonly HttpPipeline _pipeline;
+            private readonly ClientDiagnostics _clientDiagnostics;
+            private readonly bool _isPutOrPatch;
+            private readonly string _scopeName;
+            private readonly Func<Response, CancellationToken, Response<T>> _createFinalResponse;
+            private readonly Func<Response, CancellationToken, ValueTask<Response<T>>> _createFinalResponseAsync;
+            private readonly string _originalUri;
+            private readonly ScenarioInfo _originalInfo;
+
+            private Response _rawResponse;
+            private T _value = default!;
+            private bool _hasValue;
+            private bool _hasCompleted;
+            private bool _shouldPoll;
+
+            public ArmOperation(HttpPipeline pipeline, ClientDiagnostics clientDiagnostics, Response originalResponse, bool isPutOrPatch, string scopeName,
+                Func<Response, CancellationToken, Response<T>> createFinalResponse, Func<Response, CancellationToken, ValueTask<Response<T>>> createFinalResponseAsync,
+                string originalUri, ScenarioInfo originalInfo)
+            {
+                _rawResponse = originalResponse;
+                _pipeline = pipeline;
+                _clientDiagnostics = clientDiagnostics;
+                _isPutOrPatch = isPutOrPatch;
+                _scopeName = scopeName;
+                _createFinalResponse = createFinalResponse;
+                _createFinalResponseAsync = createFinalResponseAsync;
+                _originalUri = originalUri;
+                _originalInfo = originalInfo;
+            }
+
+            public override Response GetRawResponse() => _rawResponse;
+
+            public override ValueTask<Response<T>> WaitForCompletionAsync(CancellationToken cancellationToken = default) =>
+                this.DefaultWaitForCompletionAsync(OperationHelpers.DefaultPollingInterval, cancellationToken);
+
+            public override ValueTask<Response<T>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken) =>
+                this.DefaultWaitForCompletionAsync(pollingInterval, cancellationToken);
+
+            private bool CheckCompletion()
+            {
+                ScenarioInfo completionInfo = GetScenarioInfo(GetRawResponse(), _originalUri);
+                return IsTerminalState(GetRawResponse(), completionInfo);
+            }
+
+            public override async ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default)
+            {
+                if (HasCompleted)
+                {
+                    return GetRawResponse();
+                }
+
+                if (_shouldPoll)
+                {
+                    ScenarioInfo pollInfo = GetScenarioInfo(GetRawResponse(), _originalUri);
+                    _rawResponse = await GetResponseAsync(_pipeline, _clientDiagnostics, _scopeName, pollInfo.PollUri, cancellationToken).ConfigureAwait(false);
+                }
+                _shouldPoll = true;
+                _hasCompleted = CheckCompletion();
+                if (HasCompleted)
+                {
+                    string finalUri = _isPutOrPatch ? _originalUri : _originalInfo.PollUri;
+                    Response finalResponse = await GetResponseAsync(_pipeline, _clientDiagnostics, _scopeName, finalUri, cancellationToken).ConfigureAwait(false);
+                    switch (finalResponse.Status)
+                    {
+                        case 200:
+                        case 204 when !_isPutOrPatch:
+                        {
+                            Response<T> typedResponse =  await _createFinalResponseAsync(finalResponse, cancellationToken).ConfigureAwait(false);
+                            _rawResponse = typedResponse.GetRawResponse();
+                            _value = typedResponse.Value;
+                            _hasValue = true;
+                            break;
+                        }
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(finalResponse).ConfigureAwait(false);
+                    }
+                }
+
+                return GetRawResponse();
+            }
+
+            public override Response UpdateStatus(CancellationToken cancellationToken = default)
+            {
+                if (HasCompleted)
+                {
+                    return GetRawResponse();
+                }
+
+                if (_shouldPoll)
+                {
+                    ScenarioInfo pollInfo = GetScenarioInfo(GetRawResponse(), _originalUri);
+                    _rawResponse = GetResponse(_pipeline, _clientDiagnostics, _scopeName, pollInfo.PollUri, cancellationToken);
+                }
+                _shouldPoll = true;
+                _hasCompleted = CheckCompletion();
+                if (HasCompleted)
+                {
+                    string finalUri = _isPutOrPatch ? _originalUri : _originalInfo.PollUri;
+                    Response finalResponse = GetResponse(_pipeline, _clientDiagnostics, _scopeName, finalUri, cancellationToken);
+                    switch (finalResponse.Status)
+                    {
+                        case 200:
+                        case 204 when !_isPutOrPatch:
+                        {
+                            Response<T> typedResponse = _createFinalResponse(finalResponse, cancellationToken);
+                            _rawResponse = typedResponse.GetRawResponse();
+                            _value = typedResponse.Value;
+                            _hasValue = true;
+                            break;
+                        }
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(finalResponse);
+                    }
+                }
+
+                return GetRawResponse();
+            }
+
+            //public override Response UpdateStatus(CancellationToken cancellationToken = default)
+            //{
+            //    if (HasCompleted)
+            //    {
+            //        return GetRawResponse();
+            //    }
+
+            //    Response response = _shouldPoll ? _pollingFunc(GetRawResponse(), cancellationToken) : GetRawResponse();
+            //    _rawResponse = response;
+            //    _shouldPoll = true;
+            //    _hasCompleted = _completionPredicate(GetRawResponse());
+            //    if (HasCompleted)
+            //    {
+            //        Response<T> finalResponse = _finalFunc(GetRawResponse(), cancellationToken);
+            //        _rawResponse = finalResponse.GetRawResponse();
+            //        _value = finalResponse.Value;
+            //        _hasValue = true;
+            //        return GetRawResponse();
+            //    }
+
+            //    return GetRawResponse();
+            //}
+
+            //TODO: This is currently not used.
+            public override string Id { get; } = Guid.NewGuid().ToString();
+
+            public override T Value
+            {
+                get
+                {
+                    if (!HasValue)
+                    {
+                        throw new InvalidOperationException("The operation has not completed yet.");
+                    }
+
+                    return _value;
+                }
+            }
+            public override bool HasCompleted => _hasCompleted;
+            public override bool HasValue => _hasValue;
+        }
 
         private static HttpMessage CreateGetResponseRequest(HttpPipeline pipeline, string link)
         {
@@ -230,7 +335,7 @@ namespace Azure.Core
             return new ScenarioInfo(HeaderFrom.None, originalUri);
         }
 
-        private static readonly string[] TerminalStates = { "Succeeded", "Failed", "Canceled" };
+        private static readonly string[] _terminalStates = { "Succeeded", "Failed", "Canceled" };
 
         private static bool IsTerminalState(Response response, ScenarioInfo info)
         {
@@ -241,7 +346,7 @@ namespace Azure.Core
                 {
                     if (info.HeaderFrom == HeaderFrom.AzureAsyncOperation && property.NameEquals("status"))
                     {
-                        return TerminalStates.Contains(property.Value.GetString());
+                        return _terminalStates.Contains(property.Value.GetString());
                     }
 
                     if ((info.HeaderFrom == HeaderFrom.Location || info.HeaderFrom == HeaderFrom.None) &&
@@ -251,7 +356,7 @@ namespace Azure.Core
                         {
                             if (innerProperty.NameEquals("provisioningState"))
                             {
-                                return TerminalStates.Contains(innerProperty.Value.GetString());
+                                return _terminalStates.Contains(innerProperty.Value.GetString());
                             }
                         }
                     }
