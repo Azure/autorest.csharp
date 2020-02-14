@@ -369,7 +369,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                 bool isPutOrPatch = originalMethod.Request.HttpMethod == RequestMethod.Put ||
                                     originalMethod.Request.HttpMethod == RequestMethod.Patch;
-                writer.Line($"return {typeof(ArmOperationHelpers)}.Create(pipeline, clientDiagnostics, originalResponse, {isPutOrPatch:L}, {originalMethod.Diagnostics.ScopeName:L}, createOriginalHttpMessage,");
+                writer.Append($"return {typeof(ArmOperationHelpers)}.Create(");
+                writer.Line($"pipeline, clientDiagnostics, originalResponse, {isPutOrPatch:L}, {originalMethod.Diagnostics.ScopeName:L}, {typeof(FinalStateVia)}.{lroMethod.FinalStateVia}, createOriginalHttpMessage,");
 
                 string valueVariable = "value";
                 const string document = "document";

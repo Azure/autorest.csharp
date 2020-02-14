@@ -414,7 +414,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             "azure-async-operation" => FinalStateVia.AzureAsyncOperation,
             "location" => FinalStateVia.Location,
             "original-uri" => FinalStateVia.OriginalUri,
-            _ => FinalStateVia.AzureAsyncOperation
+            _ => FinalStateVia.Location
         };
 
         private Parameter BuildParameter(RequestParameter requestParameter) => new Parameter(

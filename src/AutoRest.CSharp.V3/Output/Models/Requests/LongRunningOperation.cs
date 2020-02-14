@@ -3,6 +3,7 @@
 
 using AutoRest.CSharp.V3.Output.Models.Responses;
 using AutoRest.CSharp.V3.Output.Models.Shared;
+using Azure.Core;
 
 namespace AutoRest.CSharp.V3.Output.Models.Requests
 {

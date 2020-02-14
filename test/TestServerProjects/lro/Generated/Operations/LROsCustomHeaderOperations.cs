@@ -305,7 +305,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, true, "LROsCustomHeaderOperations.PutAsyncRetrySucceeded", createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, true, "LROsCustomHeaderOperations.PutAsyncRetrySucceeded", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 using var document = JsonDocument.Parse(r.ContentStream);
@@ -349,7 +349,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, true, "LROsCustomHeaderOperations.Put201CreatingSucceeded200", createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, true, "LROsCustomHeaderOperations.Put201CreatingSucceeded200", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 using var document = JsonDocument.Parse(r.ContentStream);
@@ -393,7 +393,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsCustomHeaderOperations.Post202Retry200", createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsCustomHeaderOperations.Post202Retry200", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 return Response.FromValue(r, r);
@@ -434,7 +434,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsCustomHeaderOperations.PostAsyncRetrySucceeded", createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsCustomHeaderOperations.PostAsyncRetrySucceeded", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 return Response.FromValue(r, r);
