@@ -7,22 +7,6 @@ using Azure.Core;
 
 namespace AutoRest.CSharp.V3.Output.Models.Requests
 {
-    //internal class LongRunningOperation
-    //{
-    //    public LongRunningOperation(Method method, Method pollingMethod, string name, FinalStateVia finalStateVia)
-    //    {
-    //        Method = method;
-    //        PollingMethod = pollingMethod;
-    //        Name = name;
-    //        FinalStateVia = finalStateVia;
-    //    }
-
-    //    public string Name { get; }
-    //    public Method Method { get; }
-    //    public Method PollingMethod { get; }
-    //    public FinalStateVia FinalStateVia { get; }
-    //}
-
     internal class LongRunningOperation
     {
         public LongRunningOperation(Method originalMethod, Response originalResponse, string name, Parameter[] createParameters, FinalStateVia finalStateVia)

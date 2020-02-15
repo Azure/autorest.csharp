@@ -189,19 +189,90 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        public Task LROPut202Retry200() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        [Ignore("Location header without properties.provisioningState. Causes infinite loop.")]
+        public Task LROPut202Retry200() => Test(async (host, pipeline) =>
+        {
+            var value = new Product();
+            var operation = await new LROsOperations(ClientDiagnostics, pipeline, host).StartPut202Retry200OperationAsync(value);
+            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
+            Assert.AreEqual("100", result.Value.Id);
+            Assert.AreEqual("foo", result.Value.Name);
+            Assert.AreEqual(null, result.Value.ProvisioningState);
+
+            operation = new LROsOperations(ClientDiagnostics, pipeline, host).StartPut202Retry200Operation(value);
+            result = operation.WaitForCompletion();
+            Assert.AreEqual("100", result.Value.Id);
+            Assert.AreEqual("foo", result.Value.Name);
+            Assert.AreEqual(null, result.Value.ProvisioningState);
+        });
 
         [Test]
-        public Task LROPutAsyncNoHeaderInRetry() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task LROPutAsyncNoHeaderInRetry() => Test(async (host, pipeline) =>
+        {
+            var value = new Product();
+            var operation = await new LROsOperations(ClientDiagnostics, pipeline, host).StartPutAsyncNoHeaderInRetryOperationAsync(value);
+            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
+            Assert.AreEqual("100", result.Value.Id);
+            Assert.AreEqual("foo", result.Value.Name);
+            Assert.AreEqual("Succeeded", result.Value.ProvisioningState);
+
+            operation = new LROsOperations(ClientDiagnostics, pipeline, host).StartPutAsyncNoHeaderInRetryOperation(value);
+            result = operation.WaitForCompletion();
+            Assert.AreEqual("100", result.Value.Id);
+            Assert.AreEqual("foo", result.Value.Name);
+            Assert.AreEqual("Succeeded", result.Value.ProvisioningState);
+        });
 
         [Test]
-        public Task LROPutAsyncNoRetryCanceled() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task LROPutAsyncNoRetryCanceled() => Test(async (host, pipeline) =>
+        {
+            var value = new Product();
+            var operation = await new LROsOperations(ClientDiagnostics, pipeline, host).StartPutAsyncNoRetrycanceledOperationAsync(value);
+            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
+            Assert.AreEqual("100", result.Value.Id);
+            Assert.AreEqual("foo", result.Value.Name);
+            Assert.AreEqual("Canceled", result.Value.ProvisioningState);
+
+            operation = new LROsOperations(ClientDiagnostics, pipeline, host).StartPutAsyncNoRetrycanceledOperation(value);
+            result = operation.WaitForCompletion();
+            Assert.AreEqual("100", result.Value.Id);
+            Assert.AreEqual("foo", result.Value.Name);
+            Assert.AreEqual("Canceled", result.Value.ProvisioningState);
+        });
 
         [Test]
-        public Task LROPutAsyncNoRetrySucceeded() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task LROPutAsyncNoRetrySucceeded() => Test(async (host, pipeline) =>
+        {
+            var value = new Product();
+            var operation = await new LROsOperations(ClientDiagnostics, pipeline, host).StartPutAsyncNoRetrySucceededOperationAsync(value);
+            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
+            Assert.AreEqual("100", result.Value.Id);
+            Assert.AreEqual("foo", result.Value.Name);
+            Assert.AreEqual("Succeeded", result.Value.ProvisioningState);
+
+            operation = new LROsOperations(ClientDiagnostics, pipeline, host).StartPutAsyncNoRetrySucceededOperation(value);
+            result = operation.WaitForCompletion();
+            Assert.AreEqual("100", result.Value.Id);
+            Assert.AreEqual("foo", result.Value.Name);
+            Assert.AreEqual("Succeeded", result.Value.ProvisioningState);
+        });
 
         [Test]
-        public Task LROPutAsyncRetryFailed() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task LROPutAsyncRetryFailed() => Test(async (host, pipeline) =>
+        {
+            var value = new Product();
+            var operation = await new LROsOperations(ClientDiagnostics, pipeline, host).StartPutAsyncRetryFailedOperationAsync(value);
+            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
+            Assert.AreEqual("100", result.Value.Id);
+            Assert.AreEqual("foo", result.Value.Name);
+            Assert.AreEqual("Failed", result.Value.ProvisioningState);
+
+            operation = new LROsOperations(ClientDiagnostics, pipeline, host).StartPutAsyncRetryFailedOperation(value);
+            result = operation.WaitForCompletion();
+            Assert.AreEqual("100", result.Value.Id);
+            Assert.AreEqual("foo", result.Value.Name);
+            Assert.AreEqual("Failed", result.Value.ProvisioningState);
+        });
 
         [Test]
         public Task LROPutAsyncRetrySucceeded() => Test(async (host, pipeline) =>
@@ -221,10 +292,39 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        public Task LROPutCanceled() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task LROPutCanceled() => Test(async (host, pipeline) =>
+        {
+            var value = new Product();
+            var operation = await new LROsOperations(ClientDiagnostics, pipeline, host).StartPut200Acceptedcanceled200OperationAsync(value);
+            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
+            Assert.AreEqual("100", result.Value.Id);
+            Assert.AreEqual("foo", result.Value.Name);
+            Assert.AreEqual("Canceled", result.Value.ProvisioningState);
+
+            operation = new LROsOperations(ClientDiagnostics, pipeline, host).StartPut200Acceptedcanceled200Operation(value);
+            result = operation.WaitForCompletion();
+            Assert.AreEqual("100", result.Value.Id);
+            Assert.AreEqual("foo", result.Value.Name);
+            Assert.AreEqual("Canceled", result.Value.ProvisioningState);
+        });
 
         [Test]
-        public Task LROPutFailed() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        [Ignore("Handle multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
+        public Task LROPutFailed() => Test(async (host, pipeline) =>
+        {
+            var value = new Product();
+            var operation = await new LROsOperations(ClientDiagnostics, pipeline, host).StartPut201CreatingFailed200OperationAsync(value);
+            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
+            Assert.AreEqual("100", result.Value.Id);
+            Assert.AreEqual("foo", result.Value.Name);
+            Assert.AreEqual("Failed", result.Value.ProvisioningState);
+
+            operation = new LROsOperations(ClientDiagnostics, pipeline, host).StartPut201CreatingFailed200Operation(value);
+            result = operation.WaitForCompletion();
+            Assert.AreEqual("100", result.Value.Id);
+            Assert.AreEqual("foo", result.Value.Name);
+            Assert.AreEqual("Failed", result.Value.ProvisioningState);
+        });
 
         [Test]
         public Task LROPutInlineComplete() => Test(async (host, pipeline) =>
@@ -246,12 +346,18 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task LROPutNoHeaderInRetry() => Test(async (host, pipeline) =>
         {
-            ////TODO: NOT DONE
             var value = new Product();
-            var result = await new LROsOperations(ClientDiagnostics, pipeline, host).PutNoHeaderInRetryAsync(value);
-            //Assert.AreEqual("100", result.Value.Id);
-            //Assert.AreEqual("foo", result.Value.Name);
-            //Assert.AreEqual("Succeeded", result.Value.ProvisioningState);
+            var operation = await new LROsOperations(ClientDiagnostics, pipeline, host).StartPutNoHeaderInRetryOperationAsync(value);
+            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
+            Assert.AreEqual("100", result.Value.Id);
+            Assert.AreEqual("foo", result.Value.Name);
+            Assert.AreEqual("Succeeded", result.Value.ProvisioningState);
+
+            operation = new LROsOperations(ClientDiagnostics, pipeline, host).StartPutNoHeaderInRetryOperation(value);
+            result = operation.WaitForCompletion();
+            Assert.AreEqual("100", result.Value.Id);
+            Assert.AreEqual("foo", result.Value.Name);
+            Assert.AreEqual("Succeeded", result.Value.ProvisioningState);
         });
 
         [Test]
