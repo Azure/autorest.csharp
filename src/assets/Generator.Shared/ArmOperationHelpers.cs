@@ -298,6 +298,11 @@ namespace Azure.Core
 
         private static bool IsTerminalState(Response response, ScenarioInfo info)
         {
+            if (response.Status == 202)
+            {
+                return false;
+            }
+
             try
             {
                 using JsonDocument document = JsonDocument.Parse(response.ContentStream);
@@ -336,12 +341,13 @@ namespace Azure.Core
                 }
             }
 
-            if (info.HeaderFrom == HeaderFrom.None)
-            {
-                return response.Status == 200;
-            }
+            //if (info.HeaderFrom == HeaderFrom.None)
+            //{
+            //    return response.Status == 200;
+            //}
 
-            return false;
+            return response.Status == 200;
+            //return false;
         }
     }
 }
