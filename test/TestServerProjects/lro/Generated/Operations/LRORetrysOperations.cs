@@ -482,7 +482,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, true, "LRORetrysOperations.Put201CreatingSucceeded200", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LRORetrysOperations.Put201CreatingSucceeded200", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 using var document = JsonDocument.Parse(r.ContentStream);
@@ -526,7 +526,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, true, "LRORetrysOperations.PutAsyncRelativeRetrySucceeded", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LRORetrysOperations.PutAsyncRelativeRetrySucceeded", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 using var document = JsonDocument.Parse(r.ContentStream);
@@ -570,7 +570,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LRORetrysOperations.DeleteProvisioning202Accepted200Succeeded", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LRORetrysOperations.DeleteProvisioning202Accepted200Succeeded", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 using var document = JsonDocument.Parse(r.ContentStream);
@@ -612,7 +612,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LRORetrysOperations.Delete202Retry200", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LRORetrysOperations.Delete202Retry200", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 return Response.FromValue(r, r);
@@ -651,7 +651,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LRORetrysOperations.DeleteAsyncRelativeRetrySucceeded", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LRORetrysOperations.DeleteAsyncRelativeRetrySucceeded", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 return Response.FromValue(r, r);
@@ -690,7 +690,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LRORetrysOperations.Post202Retry200", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LRORetrysOperations.Post202Retry200", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 return Response.FromValue(r, r);
@@ -731,7 +731,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LRORetrysOperations.PostAsyncRelativeRetrySucceeded", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LRORetrysOperations.PostAsyncRelativeRetrySucceeded", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 return Response.FromValue(r, r);

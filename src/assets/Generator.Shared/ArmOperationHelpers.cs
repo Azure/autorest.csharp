@@ -33,13 +33,13 @@ namespace Azure.Core
             }
         }
 
-        internal static Operation<T> Create<T>(HttpPipeline pipeline, ClientDiagnostics clientDiagnostics, Response originalResponse, bool isPutOrPatch, string scopeName, FinalStateVia finalStateVia,
+        internal static Operation<T> Create<T>(HttpPipeline pipeline, ClientDiagnostics clientDiagnostics, Response originalResponse, RequestMethod requestMethod, string scopeName, FinalStateVia finalStateVia,
             Func<HttpMessage> createOriginalHttpMessage, Func<Response, CancellationToken, Response<T>> createFinalResponse, Func<Response, CancellationToken, ValueTask<Response<T>>> createFinalResponseAsync) where T : notnull
         {
             using HttpMessage originalHttpMethod = createOriginalHttpMessage();
             string originalUri = originalHttpMethod.Request.Uri.ToString();
-            ScenarioInfo info = GetScenarioInfo(originalResponse, originalUri, isPutOrPatch, finalStateVia);
-            if ((!isPutOrPatch && (info.HeaderFrom == HeaderFrom.None || info.HeaderFrom != HeaderFrom.Location)) || finalStateVia == FinalStateVia.AzureAsyncOperation)
+            ScenarioInfo info = GetScenarioInfo(originalResponse, originalUri, requestMethod, finalStateVia);
+            if ((requestMethod != RequestMethod.Put && (info.HeaderFrom == HeaderFrom.None || info.HeaderFrom != HeaderFrom.Location)) || finalStateVia == FinalStateVia.AzureAsyncOperation)
             {
                 throw clientDiagnostics.CreateRequestFailedException(originalResponse);
             }
@@ -60,7 +60,6 @@ namespace Azure.Core
             private T _value = default!;
             private bool _hasValue;
             private bool _hasCompleted;
-            private bool _shouldPoll;
 
             public ArmOperation(HttpPipeline pipeline, ClientDiagnostics clientDiagnostics, Response originalResponse, string scopeName, ScenarioInfo info,
                 Func<Response, CancellationToken, Response<T>> createFinalResponse, Func<Response, CancellationToken, ValueTask<Response<T>>> createFinalResponseAsync)
@@ -89,11 +88,7 @@ namespace Azure.Core
                     return GetRawResponse();
                 }
 
-                if (_shouldPoll)
-                {
-                    _rawResponse = await GetResponseAsync(_pipeline, _clientDiagnostics, _scopeName, _info.PollUri, cancellationToken).ConfigureAwait(false);
-                }
-                _shouldPoll = true;
+                _rawResponse = await GetResponseAsync(_pipeline, _clientDiagnostics, _scopeName, _info.PollUri, cancellationToken).ConfigureAwait(false);
                 _hasCompleted = IsTerminalState(GetRawResponse(), _info);
                 if (HasCompleted)
                 {
@@ -105,7 +100,7 @@ namespace Azure.Core
                     switch (finalResponse.Status)
                     {
                         case 200:
-                        case 204 when !_info.IsPutOrPatch:
+                        case 204 when !(_info.RequestMethod == RequestMethod.Put || _info.RequestMethod == RequestMethod.Patch):
                         {
                             Response<T> typedResponse =  await _createFinalResponseAsync(finalResponse, cancellationToken).ConfigureAwait(false);
                             _rawResponse = typedResponse.GetRawResponse();
@@ -128,11 +123,7 @@ namespace Azure.Core
                     return GetRawResponse();
                 }
 
-                if (_shouldPoll)
-                {
-                    _rawResponse = GetResponse(_pipeline, _clientDiagnostics, _scopeName, _info.PollUri, cancellationToken);
-                }
-                _shouldPoll = true;
+                _rawResponse = GetResponse(_pipeline, _clientDiagnostics, _scopeName, _info.PollUri, cancellationToken);
                 _hasCompleted = IsTerminalState(GetRawResponse(), _info);
                 if (HasCompleted)
                 {
@@ -144,7 +135,7 @@ namespace Azure.Core
                     switch (finalResponse.Status)
                     {
                         case 200:
-                        case 204 when !_info.IsPutOrPatch:
+                        case 204 when !(_info.RequestMethod == RequestMethod.Put || _info.RequestMethod == RequestMethod.Patch):
                         {
                             Response<T> typedResponse = _createFinalResponse(finalResponse, cancellationToken);
                             _rawResponse = typedResponse.GetRawResponse();
@@ -244,26 +235,26 @@ namespace Azure.Core
 
         private class ScenarioInfo
         {
-            public ScenarioInfo(HeaderFrom headerFrom, string pollUri, string? finalUri, bool isPutOrPatch)
+            public ScenarioInfo(HeaderFrom headerFrom, string pollUri, string? finalUri, RequestMethod requestMethod)
             {
                 HeaderFrom = headerFrom;
                 PollUri = pollUri;
                 FinalUri = finalUri;
-                IsPutOrPatch = isPutOrPatch;
+                RequestMethod = requestMethod;
             }
 
             public HeaderFrom HeaderFrom { get; }
             public string PollUri { get; }
             public string? FinalUri { get; }
-            public bool IsPutOrPatch { get; }
+            public RequestMethod RequestMethod { get; }
         }
 
-        private static ScenarioInfo GetScenarioInfo(Response response, string originalUri, bool isPutOrPatch, FinalStateVia finalStateVia)
+        private static ScenarioInfo GetScenarioInfo(Response response, string originalUri, RequestMethod requestMethod, FinalStateVia finalStateVia)
         {
             bool hasLocation = response.Headers.TryGetValue("Location", out string? location);
             string? GetFinalUri()
             {
-                if (isPutOrPatch || finalStateVia == FinalStateVia.OriginalUri)
+                if (requestMethod == RequestMethod.Put || finalStateVia == FinalStateVia.OriginalUri)
                 {
                     return originalUri;
                 }
@@ -278,29 +269,29 @@ namespace Azure.Core
 
             if (response.Headers.TryGetValue("Operation-Location", out string? operationLocation))
             {
-                return new ScenarioInfo(HeaderFrom.OperationLocation, operationLocation, GetFinalUri(), isPutOrPatch);
+                return new ScenarioInfo(HeaderFrom.OperationLocation, operationLocation, GetFinalUri(), requestMethod);
             }
 
             if (response.Headers.TryGetValue("Azure-AsyncOperation", out string? azureAsyncOperation))
             {
-                return new ScenarioInfo(HeaderFrom.AzureAsyncOperation, azureAsyncOperation, GetFinalUri(), isPutOrPatch);
+                return new ScenarioInfo(HeaderFrom.AzureAsyncOperation, azureAsyncOperation, GetFinalUri(), requestMethod);
             }
 
             if (hasLocation)
             {
-                return new ScenarioInfo(HeaderFrom.Location, location!, null, isPutOrPatch);
+                return new ScenarioInfo(HeaderFrom.Location, location!, null, requestMethod);
             }
 
-            return new ScenarioInfo(HeaderFrom.None, originalUri, null, isPutOrPatch);
+            return new ScenarioInfo(HeaderFrom.None, originalUri, null, requestMethod);
         }
 
         private static readonly string[] _terminalStates = { "Succeeded", "Failed", "Canceled" };
 
         private static bool IsTerminalState(Response response, ScenarioInfo info)
         {
-            if (response.Status == 202)
+            if (info.HeaderFrom == HeaderFrom.Location)
             {
-                return false;
+                return response.Status != 202;
             }
 
             try
@@ -315,8 +306,7 @@ namespace Azure.Core
                         return _terminalStates.Contains(property.Value.GetString());
                     }
 
-                    if ((info.HeaderFrom == HeaderFrom.Location || info.HeaderFrom == HeaderFrom.None) &&
-                        property.NameEquals("properties"))
+                    if (info.HeaderFrom == HeaderFrom.None && property.NameEquals("properties"))
                     {
                         foreach (var innerProperty in property.Value.EnumerateObject())
                         {
@@ -341,13 +331,7 @@ namespace Azure.Core
                 }
             }
 
-            //if (info.HeaderFrom == HeaderFrom.None)
-            //{
-            //    return response.Status == 200;
-            //}
-
-            return response.Status == 200;
-            //return false;
+            return true;
         }
     }
 }

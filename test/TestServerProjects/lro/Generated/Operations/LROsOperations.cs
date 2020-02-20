@@ -2484,7 +2484,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, true, "LROsOperations.Put200Succeeded", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LROsOperations.Put200Succeeded", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 using var document = JsonDocument.Parse(r.ContentStream);
@@ -2528,7 +2528,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, true, "LROsOperations.Put200SucceededNoState", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LROsOperations.Put200SucceededNoState", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 using var document = JsonDocument.Parse(r.ContentStream);
@@ -2572,7 +2572,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, true, "LROsOperations.Put202Retry200", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LROsOperations.Put202Retry200", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 using var document = JsonDocument.Parse(r.ContentStream);
@@ -2616,7 +2616,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, true, "LROsOperations.Put201CreatingSucceeded200", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LROsOperations.Put201CreatingSucceeded200", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 using var document = JsonDocument.Parse(r.ContentStream);
@@ -2660,7 +2660,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, true, "LROsOperations.Put200UpdatingSucceeded204", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LROsOperations.Put200UpdatingSucceeded204", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 using var document = JsonDocument.Parse(r.ContentStream);
@@ -2704,7 +2704,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, true, "LROsOperations.Put201CreatingFailed200", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LROsOperations.Put201CreatingFailed200", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 using var document = JsonDocument.Parse(r.ContentStream);
@@ -2748,7 +2748,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, true, "LROsOperations.Put200Acceptedcanceled200", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LROsOperations.Put200Acceptedcanceled200", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 using var document = JsonDocument.Parse(r.ContentStream);
@@ -2792,7 +2792,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, true, "LROsOperations.PutNoHeaderInRetry", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LROsOperations.PutNoHeaderInRetry", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 using var document = JsonDocument.Parse(r.ContentStream);
@@ -2836,7 +2836,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, true, "LROsOperations.PutAsyncRetrySucceeded", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LROsOperations.PutAsyncRetrySucceeded", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 using var document = JsonDocument.Parse(r.ContentStream);
@@ -2880,7 +2880,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, true, "LROsOperations.PutAsyncNoRetrySucceeded", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LROsOperations.PutAsyncNoRetrySucceeded", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 using var document = JsonDocument.Parse(r.ContentStream);
@@ -2924,7 +2924,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, true, "LROsOperations.PutAsyncRetryFailed", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LROsOperations.PutAsyncRetryFailed", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 using var document = JsonDocument.Parse(r.ContentStream);
@@ -2968,7 +2968,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, true, "LROsOperations.PutAsyncNoRetrycanceled", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LROsOperations.PutAsyncNoRetrycanceled", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 using var document = JsonDocument.Parse(r.ContentStream);
@@ -3012,7 +3012,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, true, "LROsOperations.PutAsyncNoHeaderInRetry", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LROsOperations.PutAsyncNoHeaderInRetry", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 using var document = JsonDocument.Parse(r.ContentStream);
@@ -3056,7 +3056,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, true, "LROsOperations.PutNonResource", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LROsOperations.PutNonResource", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 using var document = JsonDocument.Parse(r.ContentStream);
@@ -3100,7 +3100,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, true, "LROsOperations.PutAsyncNonResource", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LROsOperations.PutAsyncNonResource", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 using var document = JsonDocument.Parse(r.ContentStream);
@@ -3144,7 +3144,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, true, "LROsOperations.PutSubResource", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LROsOperations.PutSubResource", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 using var document = JsonDocument.Parse(r.ContentStream);
@@ -3188,7 +3188,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, true, "LROsOperations.PutAsyncSubResource", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LROsOperations.PutAsyncSubResource", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 using var document = JsonDocument.Parse(r.ContentStream);
@@ -3232,7 +3232,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsOperations.DeleteProvisioning202Accepted200Succeeded", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LROsOperations.DeleteProvisioning202Accepted200Succeeded", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 using var document = JsonDocument.Parse(r.ContentStream);
@@ -3274,7 +3274,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsOperations.DeleteProvisioning202DeletingFailed200", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LROsOperations.DeleteProvisioning202DeletingFailed200", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 using var document = JsonDocument.Parse(r.ContentStream);
@@ -3316,7 +3316,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsOperations.DeleteProvisioning202Deletingcanceled200", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LROsOperations.DeleteProvisioning202Deletingcanceled200", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 using var document = JsonDocument.Parse(r.ContentStream);
@@ -3358,7 +3358,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsOperations.Delete204Succeeded", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LROsOperations.Delete204Succeeded", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 return Response.FromValue(r, r);
@@ -3397,7 +3397,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsOperations.Delete202Retry200", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LROsOperations.Delete202Retry200", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 using var document = JsonDocument.Parse(r.ContentStream);
@@ -3439,7 +3439,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsOperations.Delete202NoRetry204", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LROsOperations.Delete202NoRetry204", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 using var document = JsonDocument.Parse(r.ContentStream);
@@ -3481,7 +3481,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsOperations.DeleteNoHeaderInRetry", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LROsOperations.DeleteNoHeaderInRetry", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 return Response.FromValue(r, r);
@@ -3520,7 +3520,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsOperations.DeleteAsyncNoHeaderInRetry", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LROsOperations.DeleteAsyncNoHeaderInRetry", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 return Response.FromValue(r, r);
@@ -3559,7 +3559,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsOperations.DeleteAsyncRetrySucceeded", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LROsOperations.DeleteAsyncRetrySucceeded", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 return Response.FromValue(r, r);
@@ -3598,7 +3598,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsOperations.DeleteAsyncNoRetrySucceeded", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LROsOperations.DeleteAsyncNoRetrySucceeded", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 return Response.FromValue(r, r);
@@ -3637,7 +3637,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsOperations.DeleteAsyncRetryFailed", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LROsOperations.DeleteAsyncRetryFailed", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 return Response.FromValue(r, r);
@@ -3676,7 +3676,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsOperations.DeleteAsyncRetrycanceled", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LROsOperations.DeleteAsyncRetrycanceled", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 return Response.FromValue(r, r);
@@ -3715,7 +3715,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsOperations.Post200WithPayload", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LROsOperations.Post200WithPayload", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 using var document = JsonDocument.Parse(r.ContentStream);
@@ -3757,7 +3757,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsOperations.Post202Retry200", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LROsOperations.Post202Retry200", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 return Response.FromValue(r, r);
@@ -3798,7 +3798,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsOperations.Post202NoRetry204", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LROsOperations.Post202NoRetry204", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 using var document = JsonDocument.Parse(r.ContentStream);
@@ -3842,7 +3842,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsOperations.PostDoubleHeadersFinalLocationGet", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LROsOperations.PostDoubleHeadersFinalLocationGet", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 using var document = JsonDocument.Parse(r.ContentStream);
@@ -3884,7 +3884,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsOperations.PostDoubleHeadersFinalAzureHeaderGet", FinalStateVia.AzureAsyncOperation, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LROsOperations.PostDoubleHeadersFinalAzureHeaderGet", FinalStateVia.AzureAsyncOperation, createOriginalHttpMessage,
             (r, c) =>
             {
                 using var document = JsonDocument.Parse(r.ContentStream);
@@ -3926,7 +3926,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsOperations.PostDoubleHeadersFinalAzureHeaderGetDefault", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LROsOperations.PostDoubleHeadersFinalAzureHeaderGetDefault", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 using var document = JsonDocument.Parse(r.ContentStream);
@@ -3968,7 +3968,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsOperations.PostAsyncRetrySucceeded", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LROsOperations.PostAsyncRetrySucceeded", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 using var document = JsonDocument.Parse(r.ContentStream);
@@ -4012,7 +4012,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsOperations.PostAsyncNoRetrySucceeded", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LROsOperations.PostAsyncNoRetrySucceeded", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 using var document = JsonDocument.Parse(r.ContentStream);
@@ -4056,7 +4056,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsOperations.PostAsyncRetryFailed", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LROsOperations.PostAsyncRetryFailed", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 return Response.FromValue(r, r);
@@ -4097,7 +4097,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, false, "LROsOperations.PostAsyncRetrycanceled", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LROsOperations.PostAsyncRetrycanceled", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 return Response.FromValue(r, r);

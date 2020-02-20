@@ -367,10 +367,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             {
                 WriteParameterNullChecks(writer, parameters);
 
-                bool isPutOrPatch = originalMethod.Request.HttpMethod == RequestMethod.Put ||
-                                    originalMethod.Request.HttpMethod == RequestMethod.Patch;
                 writer.Append($"return {typeof(ArmOperationHelpers)}.Create(");
-                writer.Line($"pipeline, clientDiagnostics, originalResponse, {isPutOrPatch:L}, {originalMethod.Diagnostics.ScopeName:L}, {typeof(FinalStateVia)}.{lroMethod.FinalStateVia}, createOriginalHttpMessage,");
+                writer.Line($"pipeline, clientDiagnostics, originalResponse, {typeof(RequestMethod)}.{originalMethod.Request.HttpMethod.ToRequestMethodName()}, {originalMethod.Diagnostics.ScopeName:L}, {typeof(FinalStateVia)}.{lroMethod.FinalStateVia}, createOriginalHttpMessage,");
 
                 string valueVariable = "value";
                 const string document = "document";
