@@ -39,7 +39,7 @@ namespace Azure.Core
             using HttpMessage originalHttpMethod = createOriginalHttpMessage();
             string originalUri = originalHttpMethod.Request.Uri.ToString();
             ScenarioInfo info = GetScenarioInfo(originalResponse, originalUri, requestMethod, finalStateVia);
-            if ((requestMethod != RequestMethod.Put && (info.HeaderFrom == HeaderFrom.None || info.HeaderFrom != HeaderFrom.Location)) || finalStateVia == FinalStateVia.AzureAsyncOperation)
+            if ((requestMethod != RequestMethod.Put && (info.HeaderFrom == HeaderFrom.None || !info.HasLocation)) || finalStateVia == FinalStateVia.AzureAsyncOperation)
             {
                 throw clientDiagnostics.CreateRequestFailedException(originalResponse);
             }
@@ -235,18 +235,20 @@ namespace Azure.Core
 
         private class ScenarioInfo
         {
-            public ScenarioInfo(HeaderFrom headerFrom, string pollUri, string? finalUri, RequestMethod requestMethod)
+            public ScenarioInfo(HeaderFrom headerFrom, string pollUri, string? finalUri, RequestMethod requestMethod, bool hasLocation)
             {
                 HeaderFrom = headerFrom;
                 PollUri = pollUri;
                 FinalUri = finalUri;
                 RequestMethod = requestMethod;
+                HasLocation = hasLocation;
             }
 
             public HeaderFrom HeaderFrom { get; }
             public string PollUri { get; }
             public string? FinalUri { get; }
             public RequestMethod RequestMethod { get; }
+            public bool HasLocation { get; }
         }
 
         private static ScenarioInfo GetScenarioInfo(Response response, string originalUri, RequestMethod requestMethod, FinalStateVia finalStateVia)
@@ -269,20 +271,20 @@ namespace Azure.Core
 
             if (response.Headers.TryGetValue("Operation-Location", out string? operationLocation))
             {
-                return new ScenarioInfo(HeaderFrom.OperationLocation, operationLocation, GetFinalUri(), requestMethod);
+                return new ScenarioInfo(HeaderFrom.OperationLocation, operationLocation, GetFinalUri(), requestMethod, hasLocation);
             }
 
             if (response.Headers.TryGetValue("Azure-AsyncOperation", out string? azureAsyncOperation))
             {
-                return new ScenarioInfo(HeaderFrom.AzureAsyncOperation, azureAsyncOperation, GetFinalUri(), requestMethod);
+                return new ScenarioInfo(HeaderFrom.AzureAsyncOperation, azureAsyncOperation, GetFinalUri(), requestMethod, hasLocation);
             }
 
             if (hasLocation)
             {
-                return new ScenarioInfo(HeaderFrom.Location, location!, null, requestMethod);
+                return new ScenarioInfo(HeaderFrom.Location, location!, null, requestMethod, true);
             }
 
-            return new ScenarioInfo(HeaderFrom.None, originalUri, null, requestMethod);
+            return new ScenarioInfo(HeaderFrom.None, originalUri, null, requestMethod, false);
         }
 
         private static readonly string[] _terminalStates = { "Succeeded", "Failed", "Canceled" };
