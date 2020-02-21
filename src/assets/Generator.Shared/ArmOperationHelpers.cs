@@ -88,7 +88,10 @@ namespace Azure.Core
                     return GetRawResponse();
                 }
 
-                _rawResponse = await GetResponseAsync(_pipeline, _clientDiagnostics, _scopeName, _info.PollUri, cancellationToken).ConfigureAwait(false);
+                if (_info.HeaderFrom != HeaderFrom.None)
+                {
+                    _rawResponse = await GetResponseAsync(_pipeline, _clientDiagnostics, _scopeName, _info.PollUri, cancellationToken).ConfigureAwait(false);
+                }
                 _hasCompleted = IsTerminalState(GetRawResponse(), _info);
                 if (HasCompleted)
                 {
@@ -123,7 +126,10 @@ namespace Azure.Core
                     return GetRawResponse();
                 }
 
-                _rawResponse = GetResponse(_pipeline, _clientDiagnostics, _scopeName, _info.PollUri, cancellationToken);
+                if (_info.HeaderFrom != HeaderFrom.None)
+                {
+                    _rawResponse = GetResponse(_pipeline, _clientDiagnostics, _scopeName, _info.PollUri, cancellationToken);
+                }
                 _hasCompleted = IsTerminalState(GetRawResponse(), _info);
                 if (HasCompleted)
                 {
