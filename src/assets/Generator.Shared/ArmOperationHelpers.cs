@@ -41,6 +41,7 @@ namespace Azure.Core
             ScenarioInfo info = GetScenarioInfo(originalResponse, originalUri, requestMethod, finalStateVia);
             if ((requestMethod != RequestMethod.Put && (info.HeaderFrom == HeaderFrom.None || !info.HasLocation)) || finalStateVia == FinalStateVia.AzureAsyncOperation)
             {
+                // Support Operation Resource: https://github.com/Azure/autorest.csharp/issues/447
                 throw clientDiagnostics.CreateRequestFailedException(originalResponse);
             }
 
@@ -60,6 +61,7 @@ namespace Azure.Core
             private T _value = default!;
             private bool _hasValue;
             private bool _hasCompleted;
+            private bool _shouldPoll;
 
             public ArmOperation(HttpPipeline pipeline, ClientDiagnostics clientDiagnostics, Response originalResponse, string scopeName, ScenarioInfo info,
                 Func<Response, CancellationToken, Response<T>> createFinalResponse, Func<Response, CancellationToken, ValueTask<Response<T>>> createFinalResponseAsync)
@@ -71,6 +73,8 @@ namespace Azure.Core
                 _createFinalResponse = createFinalResponse;
                 _createFinalResponseAsync = createFinalResponseAsync;
                 _info = info;
+                // When the original response has no headers, we do not start polling immediately.
+                _shouldPoll = _info.HeaderFrom != HeaderFrom.None;
             }
 
             public override Response GetRawResponse() => _rawResponse;
@@ -88,11 +92,12 @@ namespace Azure.Core
                     return GetRawResponse();
                 }
 
-                if (_info.HeaderFrom != HeaderFrom.None)
+                if (_shouldPoll)
                 {
                     _rawResponse = await GetResponseAsync(_pipeline, _clientDiagnostics, _scopeName, _info.PollUri, cancellationToken).ConfigureAwait(false);
                 }
-                _hasCompleted = IsTerminalState(GetRawResponse(), _info);
+                _shouldPoll = true;
+                _hasCompleted = IsTerminalState(_clientDiagnostics, GetRawResponse(), _info);
                 if (HasCompleted)
                 {
                     Response finalResponse = GetRawResponse();
@@ -126,11 +131,12 @@ namespace Azure.Core
                     return GetRawResponse();
                 }
 
-                if (_info.HeaderFrom != HeaderFrom.None)
+                if (_shouldPoll)
                 {
                     _rawResponse = GetResponse(_pipeline, _clientDiagnostics, _scopeName, _info.PollUri, cancellationToken);
                 }
-                _hasCompleted = IsTerminalState(GetRawResponse(), _info);
+                _shouldPoll = true;
+                _hasCompleted = IsTerminalState(_clientDiagnostics, GetRawResponse(), _info);
                 if (HasCompleted)
                 {
                     Response finalResponse = GetRawResponse();
@@ -293,53 +299,66 @@ namespace Azure.Core
             return new ScenarioInfo(HeaderFrom.None, originalUri, null, requestMethod, false);
         }
 
-        private static readonly string[] _terminalStates = { "Succeeded", "Failed", "Canceled" };
+        private static readonly string[] _terminalStates = { "succeeded", "failed", "canceled" };
 
-        private static bool IsTerminalState(Response response, ScenarioInfo info)
+        private static bool IsTerminalState(ClientDiagnostics clientDiagnostics, Response response, ScenarioInfo info)
+        //private bool IsTerminalState()
         {
             if (info.HeaderFrom == HeaderFrom.Location)
             {
                 return response.Status != 202;
             }
 
-            try
+            //try
+            if (response.ContentStream?.Length > 0)
             {
-                using JsonDocument document = JsonDocument.Parse(response.ContentStream);
-                foreach (var property in document.RootElement.EnumerateObject())
+                try
                 {
-                    if ((info.HeaderFrom == HeaderFrom.OperationLocation ||
-                         info.HeaderFrom == HeaderFrom.AzureAsyncOperation) &&
-                        property.NameEquals("status"))
+                    using JsonDocument document = JsonDocument.Parse(response.ContentStream);
+                    foreach (var property in document.RootElement.EnumerateObject())
                     {
-                        return _terminalStates.Contains(property.Value.GetString());
-                    }
-
-                    if (info.HeaderFrom == HeaderFrom.None && property.NameEquals("properties"))
-                    {
-                        foreach (var innerProperty in property.Value.EnumerateObject())
+                        if ((info.HeaderFrom == HeaderFrom.OperationLocation ||
+                             info.HeaderFrom == HeaderFrom.AzureAsyncOperation) &&
+                            property.NameEquals("status"))
                         {
-                            if (innerProperty.NameEquals("provisioningState"))
+                            return _terminalStates.Contains(property.Value.GetString().ToLowerInvariant());
+                        }
+
+                        if (info.HeaderFrom == HeaderFrom.None && property.NameEquals("properties"))
+                        {
+                            foreach (var innerProperty in property.Value.EnumerateObject())
                             {
-                                return _terminalStates.Contains(innerProperty.Value.GetString());
+                                if (innerProperty.NameEquals("provisioningState"))
+                                {
+                                    return _terminalStates.Contains(innerProperty.Value.GetString().ToLowerInvariant());
+                                }
                             }
                         }
                     }
                 }
-            }
-            catch
-            {
-                // Could not parse JsonDocument. Continue.
-            }
-            finally
-            {
-                // It is required to reset the position of the content after reading as this response may be used for deserialization.
-                if (response.ContentStream != null)
+                finally
                 {
+                    // It is required to reset the position of the content after reading as this response may be used for deserialization.
                     response.ContentStream.Position = 0;
                 }
+            //}
+            //catch
+            //{
+            //    // Could not parse JsonDocument. Continue.
+            //}
+            //finally
+            //{
+            //if (response.ContentStream != null)
+            //{
+
+                //// It is required to reset the position of the content after reading as this response may be used for deserialization.
+                //response.ContentStream.Position = 0;
+
+                //}
             }
 
-            return true;
+            //return true;
+            throw clientDiagnostics.CreateRequestFailedException(response);
         }
     }
 }
