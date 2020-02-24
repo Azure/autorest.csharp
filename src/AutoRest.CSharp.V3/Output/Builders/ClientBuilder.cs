@@ -109,7 +109,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 }
                 // For some reason, booleans in dictionaries are deserialized as string instead of bool.
                 bool longRunningOperation = Convert.ToBoolean(processed.Operation.Extensions.GetValue<string>("x-ms-long-running-operation") ?? "false");
-                if (longRunningOperation)
+                if (longRunningOperation && pageable == null)
                 {
                     Response originalResponse = processed.Method.Response;
                     processed.Method.Response = new Response(null, originalResponse.SuccessfulStatusCodes, null);

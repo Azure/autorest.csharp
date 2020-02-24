@@ -14,13 +14,13 @@ using lro.Models;
 
 namespace lro
 {
-    internal partial class LRORetrysOperations
+    internal partial class LroRetrysOperations
     {
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
-        /// <summary> Initializes a new instance of LRORetrysOperations. </summary>
-        public LRORetrysOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
+        /// <summary> Initializes a new instance of LroRetrysOperations. </summary>
+        public LroRetrysOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
             {
@@ -51,7 +51,7 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Put201CreatingSucceeded200Async(Product product, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LRORetrysOperations.Put201CreatingSucceeded200");
+            using var scope = clientDiagnostics.CreateScope("LroRetrysOperations.Put201CreatingSucceeded200");
             scope.Start();
             try
             {
@@ -76,7 +76,7 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Put201CreatingSucceeded200(Product product, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LRORetrysOperations.Put201CreatingSucceeded200");
+            using var scope = clientDiagnostics.CreateScope("LroRetrysOperations.Put201CreatingSucceeded200");
             scope.Start();
             try
             {
@@ -116,7 +116,7 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutAsyncRelativeRetrySucceededAsync(Product product, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LRORetrysOperations.PutAsyncRelativeRetrySucceeded");
+            using var scope = clientDiagnostics.CreateScope("LroRetrysOperations.PutAsyncRelativeRetrySucceeded");
             scope.Start();
             try
             {
@@ -141,7 +141,7 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutAsyncRelativeRetrySucceeded(Product product, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LRORetrysOperations.PutAsyncRelativeRetrySucceeded");
+            using var scope = clientDiagnostics.CreateScope("LroRetrysOperations.PutAsyncRelativeRetrySucceeded");
             scope.Start();
             try
             {
@@ -176,7 +176,7 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> DeleteProvisioning202Accepted200SucceededAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LRORetrysOperations.DeleteProvisioning202Accepted200Succeeded");
+            using var scope = clientDiagnostics.CreateScope("LroRetrysOperations.DeleteProvisioning202Accepted200Succeeded");
             scope.Start();
             try
             {
@@ -200,7 +200,7 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response DeleteProvisioning202Accepted200Succeeded(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LRORetrysOperations.DeleteProvisioning202Accepted200Succeeded");
+            using var scope = clientDiagnostics.CreateScope("LroRetrysOperations.DeleteProvisioning202Accepted200Succeeded");
             scope.Start();
             try
             {
@@ -235,7 +235,7 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Delete202Retry200Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LRORetrysOperations.Delete202Retry200");
+            using var scope = clientDiagnostics.CreateScope("LroRetrysOperations.Delete202Retry200");
             scope.Start();
             try
             {
@@ -259,7 +259,7 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Delete202Retry200(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LRORetrysOperations.Delete202Retry200");
+            using var scope = clientDiagnostics.CreateScope("LroRetrysOperations.Delete202Retry200");
             scope.Start();
             try
             {
@@ -294,7 +294,7 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> DeleteAsyncRelativeRetrySucceededAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LRORetrysOperations.DeleteAsyncRelativeRetrySucceeded");
+            using var scope = clientDiagnostics.CreateScope("LroRetrysOperations.DeleteAsyncRelativeRetrySucceeded");
             scope.Start();
             try
             {
@@ -318,7 +318,7 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response DeleteAsyncRelativeRetrySucceeded(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LRORetrysOperations.DeleteAsyncRelativeRetrySucceeded");
+            using var scope = clientDiagnostics.CreateScope("LroRetrysOperations.DeleteAsyncRelativeRetrySucceeded");
             scope.Start();
             try
             {
@@ -358,7 +358,7 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Post202Retry200Async(Product product, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LRORetrysOperations.Post202Retry200");
+            using var scope = clientDiagnostics.CreateScope("LroRetrysOperations.Post202Retry200");
             scope.Start();
             try
             {
@@ -383,7 +383,7 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Post202Retry200(Product product, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LRORetrysOperations.Post202Retry200");
+            using var scope = clientDiagnostics.CreateScope("LroRetrysOperations.Post202Retry200");
             scope.Start();
             try
             {
@@ -423,7 +423,7 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PostAsyncRelativeRetrySucceededAsync(Product product, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LRORetrysOperations.PostAsyncRelativeRetrySucceeded");
+            using var scope = clientDiagnostics.CreateScope("LroRetrysOperations.PostAsyncRelativeRetrySucceeded");
             scope.Start();
             try
             {
@@ -448,7 +448,7 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PostAsyncRelativeRetrySucceeded(Product product, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LRORetrysOperations.PostAsyncRelativeRetrySucceeded");
+            using var scope = clientDiagnostics.CreateScope("LroRetrysOperations.PostAsyncRelativeRetrySucceeded");
             scope.Start();
             try
             {
@@ -482,7 +482,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LRORetrysOperations.Put201CreatingSucceeded200", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LroRetrysOperations.Put201CreatingSucceeded200", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 using var document = JsonDocument.Parse(r.ContentStream);
@@ -526,7 +526,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LRORetrysOperations.PutAsyncRelativeRetrySucceeded", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LroRetrysOperations.PutAsyncRelativeRetrySucceeded", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 using var document = JsonDocument.Parse(r.ContentStream);
@@ -570,7 +570,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LRORetrysOperations.DeleteProvisioning202Accepted200Succeeded", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LroRetrysOperations.DeleteProvisioning202Accepted200Succeeded", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 using var document = JsonDocument.Parse(r.ContentStream);
@@ -612,7 +612,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LRORetrysOperations.Delete202Retry200", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LroRetrysOperations.Delete202Retry200", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 return Response.FromValue(r, r);
@@ -651,7 +651,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LRORetrysOperations.DeleteAsyncRelativeRetrySucceeded", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LroRetrysOperations.DeleteAsyncRelativeRetrySucceeded", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 return Response.FromValue(r, r);
@@ -690,7 +690,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LRORetrysOperations.Post202Retry200", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LroRetrysOperations.Post202Retry200", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 return Response.FromValue(r, r);
@@ -731,7 +731,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LRORetrysOperations.PostAsyncRelativeRetrySucceeded", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LroRetrysOperations.PostAsyncRelativeRetrySucceeded", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 return Response.FromValue(r, r);

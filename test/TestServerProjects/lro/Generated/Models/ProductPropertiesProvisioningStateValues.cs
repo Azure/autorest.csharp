@@ -8,7 +8,7 @@ using System.ComponentModel;
 
 namespace lro.Models
 {
-    /// <summary> The Product-properties-provisioningStateValues. </summary>
+    /// <summary> The ProductPropertiesProvisioningStateValues. </summary>
     public readonly partial struct ProductPropertiesProvisioningStateValues : IEquatable<ProductPropertiesProvisioningStateValues>
     {
         private readonly string _value;
@@ -29,7 +29,7 @@ namespace lro.Models
         private const string UpdatedValue = "Updated";
         private const string DeletingValue = "Deleting";
         private const string DeletedValue = "Deleted";
-        private const string OKValue = "OK";
+        private const string OkValue = "OK";
 
         /// <summary> Succeeded. </summary>
         public static ProductPropertiesProvisioningStateValues Succeeded { get; } = new ProductPropertiesProvisioningStateValues(SucceededValue);
@@ -52,7 +52,7 @@ namespace lro.Models
         /// <summary> Deleted. </summary>
         public static ProductPropertiesProvisioningStateValues Deleted { get; } = new ProductPropertiesProvisioningStateValues(DeletedValue);
         /// <summary> OK. </summary>
-        public static ProductPropertiesProvisioningStateValues OK { get; } = new ProductPropertiesProvisioningStateValues(OKValue);
+        public static ProductPropertiesProvisioningStateValues Ok { get; } = new ProductPropertiesProvisioningStateValues(OkValue);
         /// <summary> Determines if two <see cref="ProductPropertiesProvisioningStateValues"/> values are the same. </summary>
         public static bool operator ==(ProductPropertiesProvisioningStateValues left, ProductPropertiesProvisioningStateValues right) => left.Equals(right);
         /// <summary> Determines if two <see cref="ProductPropertiesProvisioningStateValues"/> values are not the same. </summary>

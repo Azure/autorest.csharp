@@ -5,7 +5,7 @@
 
 namespace lro.Models
 {
-    /// <summary> The SubProduct-properties. </summary>
+    /// <summary> The SubProductProperties. </summary>
     public partial class SubProductProperties
     {
         public string ProvisioningState { get; set; }

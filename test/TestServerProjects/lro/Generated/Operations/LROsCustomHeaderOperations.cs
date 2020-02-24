@@ -14,13 +14,13 @@ using lro.Models;
 
 namespace lro
 {
-    internal partial class LROsCustomHeaderOperations
+    internal partial class LrOSCustomHeaderOperations
     {
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
-        /// <summary> Initializes a new instance of LROsCustomHeaderOperations. </summary>
-        public LROsCustomHeaderOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
+        /// <summary> Initializes a new instance of LrOSCustomHeaderOperations. </summary>
+        public LrOSCustomHeaderOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
             {
@@ -51,7 +51,7 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutAsyncRetrySucceededAsync(Product product, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LROsCustomHeaderOperations.PutAsyncRetrySucceeded");
+            using var scope = clientDiagnostics.CreateScope("LrOSCustomHeaderOperations.PutAsyncRetrySucceeded");
             scope.Start();
             try
             {
@@ -76,7 +76,7 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutAsyncRetrySucceeded(Product product, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LROsCustomHeaderOperations.PutAsyncRetrySucceeded");
+            using var scope = clientDiagnostics.CreateScope("LrOSCustomHeaderOperations.PutAsyncRetrySucceeded");
             scope.Start();
             try
             {
@@ -116,7 +116,7 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Put201CreatingSucceeded200Async(Product product, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LROsCustomHeaderOperations.Put201CreatingSucceeded200");
+            using var scope = clientDiagnostics.CreateScope("LrOSCustomHeaderOperations.Put201CreatingSucceeded200");
             scope.Start();
             try
             {
@@ -141,7 +141,7 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Put201CreatingSucceeded200(Product product, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LROsCustomHeaderOperations.Put201CreatingSucceeded200");
+            using var scope = clientDiagnostics.CreateScope("LrOSCustomHeaderOperations.Put201CreatingSucceeded200");
             scope.Start();
             try
             {
@@ -181,7 +181,7 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Post202Retry200Async(Product product, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LROsCustomHeaderOperations.Post202Retry200");
+            using var scope = clientDiagnostics.CreateScope("LrOSCustomHeaderOperations.Post202Retry200");
             scope.Start();
             try
             {
@@ -206,7 +206,7 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Post202Retry200(Product product, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LROsCustomHeaderOperations.Post202Retry200");
+            using var scope = clientDiagnostics.CreateScope("LrOSCustomHeaderOperations.Post202Retry200");
             scope.Start();
             try
             {
@@ -246,7 +246,7 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PostAsyncRetrySucceededAsync(Product product, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LROsCustomHeaderOperations.PostAsyncRetrySucceeded");
+            using var scope = clientDiagnostics.CreateScope("LrOSCustomHeaderOperations.PostAsyncRetrySucceeded");
             scope.Start();
             try
             {
@@ -271,7 +271,7 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PostAsyncRetrySucceeded(Product product, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LROsCustomHeaderOperations.PostAsyncRetrySucceeded");
+            using var scope = clientDiagnostics.CreateScope("LrOSCustomHeaderOperations.PostAsyncRetrySucceeded");
             scope.Start();
             try
             {
@@ -305,7 +305,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LROsCustomHeaderOperations.PutAsyncRetrySucceeded", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrOSCustomHeaderOperations.PutAsyncRetrySucceeded", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 using var document = JsonDocument.Parse(r.ContentStream);
@@ -349,7 +349,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LROsCustomHeaderOperations.Put201CreatingSucceeded200", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrOSCustomHeaderOperations.Put201CreatingSucceeded200", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 using var document = JsonDocument.Parse(r.ContentStream);
@@ -393,7 +393,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LROsCustomHeaderOperations.Post202Retry200", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrOSCustomHeaderOperations.Post202Retry200", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 return Response.FromValue(r, r);
@@ -434,7 +434,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LROsCustomHeaderOperations.PostAsyncRetrySucceeded", FinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrOSCustomHeaderOperations.PostAsyncRetrySucceeded", FinalStateVia.Location, createOriginalHttpMessage,
             (r, c) =>
             {
                 return Response.FromValue(r, r);

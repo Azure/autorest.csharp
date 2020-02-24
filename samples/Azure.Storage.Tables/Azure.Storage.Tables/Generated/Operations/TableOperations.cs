@@ -80,7 +80,6 @@ namespace Azure.Storage.Tables
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<TableQueryResponse, QueryHeaders>> QueryAsync(string requestId, ResponseFormat? format, int? top, string select, string filter, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("TableOperations.Query");
             scope.Start();
             try
@@ -115,7 +114,6 @@ namespace Azure.Storage.Tables
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<TableQueryResponse, QueryHeaders> Query(string requestId, ResponseFormat? format, int? top, string select, string filter, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("TableOperations.Query");
             scope.Start();
             try

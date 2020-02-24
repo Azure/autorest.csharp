@@ -5,7 +5,7 @@
 
 namespace lro.Models
 {
-    /// <summary> The OperationResult-error. </summary>
+    /// <summary> The OperationResultError. </summary>
     public partial class OperationResultError
     {
         /// <summary> The error code for an operation failure. </summary>

@@ -12,13 +12,31 @@ using Azure.Core.Pipeline;
 
 namespace Azure.Core
 {
+    /// <summary>
+    /// Helper methods for ARM long-running operations.
+    /// </summary>
     public static class ArmOperationHelpers
     {
+        /// <summary>
+        /// Waits for the long-running operation to complete.
+        /// </summary>
+        /// <typeparam name="TResult">The response type</typeparam>
+        /// <param name="operation">The operation to wait upon</param>
+        /// <param name="cancellationToken">A cancellation token for the operation</param>
+        /// <returns></returns>
         public static Response<TResult> WaitForCompletion<TResult>(this Operation<TResult> operation, CancellationToken cancellationToken = default) where TResult : notnull
         {
             return operation.WaitForCompletion(OperationHelpers.DefaultPollingInterval, cancellationToken);
         }
 
+        /// <summary>
+        /// Waits for the long-running operation to complete, including a specified polling internal.
+        /// </summary>
+        /// <typeparam name="TResult">The response type</typeparam>
+        /// <param name="operation">The operation to wait upon</param>
+        /// <param name="pollingInterval">The duration to wait in-between each poll</param>
+        /// <param name="cancellationToken">A cancellation token for the operation</param>
+        /// <returns></returns>
         public static Response<TResult> WaitForCompletion<TResult>(this Operation<TResult> operation, TimeSpan pollingInterval, CancellationToken cancellationToken = default) where TResult : notnull
         {
             while (true)
@@ -246,7 +264,7 @@ namespace Azure.Core
                     return response.Status != 202;
                 }
 
-                if (response.ContentStream?.Length > 0)
+                if (response.ContentStream?.Length > 0 && response.Status >= 200 && response.Status <= 204)
                 {
                     try
                     {
