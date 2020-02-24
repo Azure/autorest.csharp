@@ -1,19 +1,19 @@
 !<!CodeModel> 
 schemas: !<!Schemas> 
   objects:
-  - !<!ObjectSchema> &ref_29
+  - !<!ObjectSchema> &ref_28
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
     properties:
     - !<!Property> 
-      schema: !<!NumberSchema> &ref_15
+      schema: !<!NumberSchema> &ref_0
         type: integer
         precision: 32
         language: !<!Languages> 
           default:
-            name: typeForstatus
+            name: Integer
             description: ''
         protocol: !<!Protocols> {}
       serializedName: status
@@ -21,17 +21,16 @@ schemas: !<!Schemas>
         default:
           name: status
           description: ''
-          originalName: status
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_22
+      schema: !<!StringSchema> &ref_21
         type: string
         apiVersions:
         - !<!ApiVersion> 
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: Error-message
+            name: ErrorMessage
             description: ''
         protocol: !<!Protocols> {}
       serializedName: message
@@ -39,7 +38,6 @@ schemas: !<!Schemas>
         default:
           name: message
           description: ''
-          originalName: message
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -47,37 +45,29 @@ schemas: !<!Schemas>
         description: ''
         namespace: Api100
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_3
+  - !<!ObjectSchema> &ref_4
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
     properties:
     - !<!Property> 
-      schema: !<!NumberSchema> &ref_20
-        type: integer
-        precision: 32
-        language: !<!Languages> 
-          default:
-            name: typeForinteger
-            description: ''
-        protocol: !<!Protocols> {}
+      schema: *ref_0
       serializedName: integer
       language: !<!Languages> 
         default:
           name: integer
           description: ''
-          originalName: integer
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_24
+      schema: !<!StringSchema> &ref_23
         type: string
         apiVersions:
         - !<!ApiVersion> 
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: Product-string
+            name: ProductString
             description: ''
         protocol: !<!Protocols> {}
       serializedName: string
@@ -85,7 +75,6 @@ schemas: !<!Schemas>
         default:
           name: string
           description: ''
-          originalName: string
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -94,53 +83,53 @@ schemas: !<!Schemas>
         namespace: Api100
     protocol: !<!Protocols> {}
   dictionaries:
-  - !<!DictionarySchema> &ref_6
+  - !<!DictionarySchema> &ref_7
     type: dictionary
-    elementType: !<!StringSchema> &ref_0
+    elementType: !<!StringSchema> &ref_1
       type: string
       apiVersions:
       - !<!ApiVersion> 
         version: 1.0.0
       language: !<!Languages> 
         default:
-          name: string
+          name: String
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: DictionaryOfstring
+        name: DictionaryOfString
         description: Dictionary of <string>
     protocol: !<!Protocols> {}
   choices:
-  - !<!ChoiceSchema> &ref_2
+  - !<!ChoiceSchema> &ref_3
     choices:
     - !<!ChoiceValue> 
       value: foo1
       language:
         default:
-          name: foo1
+          name: Foo1
           description: ''
     - !<!ChoiceValue> 
       value: foo2
       language:
         default:
-          name: foo2
+          name: Foo2
           description: ''
     - !<!ChoiceValue> 
       value: foo3
       language:
         default:
-          name: foo3
+          name: Foo3
           description: ''
     type: choice
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    choiceType: !<!StringSchema> &ref_1
+    choiceType: !<!StringSchema> &ref_2
       type: string
       language: !<!Languages> 
         default:
-          name: string
+          name: String
           description: simple string
       protocol: !<!Protocols> {}
     language: !<!Languages> 
@@ -149,12 +138,12 @@ schemas: !<!Schemas>
         description: ''
     protocol: !<!Protocols> {}
   arrays:
-  - !<!ArraySchema> &ref_28
+  - !<!ArraySchema> &ref_27
     type: array
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    elementType: !<!NumberSchema> &ref_14
+    elementType: !<!NumberSchema> &ref_15
       type: integer
       apiVersions:
       - !<!ApiVersion> 
@@ -162,15 +151,15 @@ schemas: !<!Schemas>
       precision: 32
       language: !<!Languages> 
         default:
-          name: get-200-application-json-itemsItem
+          name: Get200ApplicationJsonItemsItem
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: ArrayOfget-200-application-json-itemsItem
+        name: ArrayOfGet200ApplicationJsonItemsItem
         description: The null Array value
     protocol: !<!Protocols> {}
-  - !<!ArraySchema> &ref_30
+  - !<!ArraySchema> &ref_29
     type: array
     apiVersions:
     - !<!ApiVersion> 
@@ -183,55 +172,55 @@ schemas: !<!Schemas>
       precision: 32
       language: !<!Languages> 
         default:
-          name: integer
+          name: Integer
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: ArrayOfinteger
+        name: ArrayOfInteger
         description: 'The invalid Array [1, 2, 3'
     protocol: !<!Protocols> {}
-  - !<!ArraySchema> &ref_31
+  - !<!ArraySchema> &ref_30
     type: array
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    elementType: !<!StringSchema> &ref_23
+    elementType: !<!StringSchema> &ref_22
       type: string
       apiVersions:
       - !<!ApiVersion> 
         version: 1.0.0
       language: !<!Languages> 
         default:
-          name: put-content-schemaItem
+          name: PutContentSchemaItem
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: ArrayOfput-content-schemaItem
+        name: ArrayOfPutContentSchemaItem
         description: 'The empty array value []'
     protocol: !<!Protocols> {}
-  - !<!ArraySchema> &ref_33
+  - !<!ArraySchema> &ref_32
     type: array
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    elementType: !<!BooleanSchema> &ref_7
+    elementType: !<!BooleanSchema> &ref_8
       type: boolean
       apiVersions:
       - !<!ApiVersion> 
         version: 1.0.0
       language: !<!Languages> 
         default:
-          name: boolean
+          name: Boolean
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: ArrayOfboolean
+        name: ArrayOfBoolean
         description: 'The array value [true, false, false, true]'
     protocol: !<!Protocols> {}
-  - !<!ArraySchema> &ref_36
+  - !<!ArraySchema> &ref_35
     type: array
     apiVersions:
     - !<!ApiVersion> 
@@ -244,15 +233,15 @@ schemas: !<!Schemas>
       precision: 64
       language: !<!Languages> 
         default:
-          name: integer
+          name: Integer
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: ArrayOfinteger
+        name: ArrayOfInteger
         description: 'The array value [1, -1, 3, 300]'
     protocol: !<!Protocols> {}
-  - !<!ArraySchema> &ref_38
+  - !<!ArraySchema> &ref_37
     type: array
     apiVersions:
     - !<!ApiVersion> 
@@ -265,15 +254,15 @@ schemas: !<!Schemas>
       precision: 32
       language: !<!Languages> 
         default:
-          name: number
+          name: Number
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: ArrayOfnumber
+        name: ArrayOfNumber
         description: 'The array value [0, -0.01, 1.2e20]'
     protocol: !<!Protocols> {}
-  - !<!ArraySchema> &ref_40
+  - !<!ArraySchema> &ref_39
     type: array
     apiVersions:
     - !<!ApiVersion> 
@@ -286,55 +275,55 @@ schemas: !<!Schemas>
       precision: 64
       language: !<!Languages> 
         default:
-          name: number
+          name: Number
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: ArrayOfnumber
+        name: ArrayOfNumber
         description: 'The array value [0, -0.01, 1.2e20]'
     protocol: !<!Protocols> {}
-  - !<!ArraySchema> &ref_4
+  - !<!ArraySchema> &ref_5
     type: array
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    elementType: *ref_0
+    elementType: *ref_1
     language: !<!Languages> 
       default:
-        name: ArrayOfstring
+        name: ArrayOfString
         description: 'The array value [''foo1'', ''foo2'', ''foo3'']'
     protocol: !<!Protocols> {}
-  - !<!ArraySchema> &ref_43
+  - !<!ArraySchema> &ref_42
     type: array
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    elementType: !<!SealedChoiceSchema> &ref_21
+    elementType: !<!SealedChoiceSchema> &ref_20
       choices:
       - !<!ChoiceValue> 
         value: foo1
         language:
           default:
-            name: foo1
+            name: Foo1
             description: ''
       - !<!ChoiceValue> 
         value: foo2
         language:
           default:
-            name: foo2
+            name: Foo2
             description: ''
       - !<!ChoiceValue> 
         value: foo3
         language:
           default:
-            name: foo3
+            name: Foo3
             description: ''
       type: sealed-choice
       apiVersions:
       - !<!ApiVersion> 
         version: 1.0.0
-      choiceType: *ref_1
+      choiceType: *ref_2
       language: !<!Languages> 
         default:
           name: FooEnum
@@ -345,162 +334,7 @@ schemas: !<!Schemas>
         name: ArrayOfFooEnum
         description: 'The array value [''foo1'', ''foo2'', ''foo3'']'
     protocol: !<!Protocols> {}
-  - !<!ArraySchema> &ref_45
-    type: array
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    elementType: *ref_2
-    language: !<!Languages> 
-      default:
-        name: ArrayOfEnum0
-        description: 'The array value [''foo1'', ''foo2'', ''foo3'']'
-    protocol: !<!Protocols> {}
-  - !<!ArraySchema> &ref_47
-    type: array
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    elementType: !<!UuidSchema> &ref_26
-      type: uuid
-      apiVersions:
-      - !<!ApiVersion> 
-        version: 1.0.0
-      language: !<!Languages> 
-        default:
-          name: uuid
-          description: ''
-      protocol: !<!Protocols> {}
-    language: !<!Languages> 
-      default:
-        name: ArrayOfuuid
-        description: 'The array value [''6dcc7237-45fe-45c4-8a6b-3a8a3f625652'', ''d1399005-30f7-40d6-8da6-dd7c89ad34db'', ''f42f6aa1-a5bc-4ddf-907e-5f915de43205'']'
-    protocol: !<!Protocols> {}
-  - !<!ArraySchema> &ref_49
-    type: array
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    elementType: !<!DateSchema> &ref_12
-      type: date
-      apiVersions:
-      - !<!ApiVersion> 
-        version: 1.0.0
-      language: !<!Languages> 
-        default:
-          name: date
-          description: ''
-      protocol: !<!Protocols> {}
-    language: !<!Languages> 
-      default:
-        name: ArrayOfdate
-        description: 'The array value [''2000-12-01'', ''1980-01-02'', ''1492-10-12'']'
-    protocol: !<!Protocols> {}
-  - !<!ArraySchema> &ref_51
-    type: array
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    elementType: !<!DateTimeSchema> &ref_10
-      type: date-time
-      format: date-time
-      apiVersions:
-      - !<!ApiVersion> 
-        version: 1.0.0
-      language: !<!Languages> 
-        default:
-          name: date-time
-          description: ''
-      protocol: !<!Protocols> {}
-    language: !<!Languages> 
-      default:
-        name: ArrayOfdate-time
-        description: 'The array value [''2000-12-01t00:00:01z'', ''1980-01-02T00:11:35+01:00'', ''1492-10-12T10:15:01-08:00'']'
-    protocol: !<!Protocols> {}
-  - !<!ArraySchema> &ref_53
-    type: array
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    elementType: !<!DateTimeSchema> &ref_11
-      type: date-time
-      format: date-time-rfc1123
-      apiVersions:
-      - !<!ApiVersion> 
-        version: 1.0.0
-      language: !<!Languages> 
-        default:
-          name: date-time
-          description: ''
-      protocol: !<!Protocols> {}
-    language: !<!Languages> 
-      default:
-        name: ArrayOfdate-time
-        description: 'The array value [''Fri, 01 Dec 2000 00:00:01 GMT'', ''Wed, 02 Jan 1980 00:11:35 GMT'', ''Wed, 12 Oct 1492 10:15:01 GMT'']'
-    protocol: !<!Protocols> {}
-  - !<!ArraySchema> &ref_55
-    type: array
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    elementType: !<!DurationSchema> &ref_13
-      type: duration
-      apiVersions:
-      - !<!ApiVersion> 
-        version: 1.0.0
-      language: !<!Languages> 
-        default:
-          name: duration
-          description: ''
-      protocol: !<!Protocols> {}
-    language: !<!Languages> 
-      default:
-        name: ArrayOfduration
-        description: 'The array value [''P123DT22H14M12.011S'', ''P5DT1H0M0S'']'
-    protocol: !<!Protocols> {}
-  - !<!ArraySchema> &ref_57
-    type: array
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    elementType: !<!ByteArraySchema> &ref_8
-      type: byte-array
-      format: byte
-      apiVersions:
-      - !<!ApiVersion> 
-        version: 1.0.0
-      language: !<!Languages> 
-        default:
-          name: byte-array
-          description: ''
-      protocol: !<!Protocols> {}
-    language: !<!Languages> 
-      default:
-        name: ArrayOfbyte-array
-        description: 'The array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64'
-    protocol: !<!Protocols> {}
-  - !<!ArraySchema> &ref_59
-    type: array
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    elementType: !<!ByteArraySchema> &ref_9
-      type: byte-array
-      format: base64url
-      apiVersions:
-      - !<!ApiVersion> 
-        version: 1.0.0
-      language: !<!Languages> 
-        default:
-          name: byte-array
-          description: ''
-      protocol: !<!Protocols> {}
-    language: !<!Languages> 
-      default:
-        name: ArrayOfbyte-array
-        description: 'Get array value [''a string that gets encoded with base64url'', ''test string'' ''Lorem ipsum''] with the items base64url encoded'
-    protocol: !<!Protocols> {}
-  - !<!ArraySchema> &ref_60
+  - !<!ArraySchema> &ref_44
     type: array
     apiVersions:
     - !<!ApiVersion> 
@@ -508,10 +342,154 @@ schemas: !<!Schemas>
     elementType: *ref_3
     language: !<!Languages> 
       default:
-        name: ArrayOfProduct
-        description: array of complex type with null value
+        name: ArrayOfEnum0
+        description: 'The array value [''foo1'', ''foo2'', ''foo3'']'
     protocol: !<!Protocols> {}
-  - !<!ArraySchema> &ref_62
+  - !<!ArraySchema> &ref_46
+    type: array
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    elementType: !<!UuidSchema> &ref_25
+      type: uuid
+      apiVersions:
+      - !<!ApiVersion> 
+        version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: Uuid
+          description: ''
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: ArrayOfUuid
+        description: 'The array value [''6dcc7237-45fe-45c4-8a6b-3a8a3f625652'', ''d1399005-30f7-40d6-8da6-dd7c89ad34db'', ''f42f6aa1-a5bc-4ddf-907e-5f915de43205'']'
+    protocol: !<!Protocols> {}
+  - !<!ArraySchema> &ref_48
+    type: array
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    elementType: !<!DateSchema> &ref_13
+      type: date
+      apiVersions:
+      - !<!ApiVersion> 
+        version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: Date
+          description: ''
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: ArrayOfDate
+        description: 'The array value [''2000-12-01'', ''1980-01-02'', ''1492-10-12'']'
+    protocol: !<!Protocols> {}
+  - !<!ArraySchema> &ref_50
+    type: array
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    elementType: !<!DateTimeSchema> &ref_11
+      type: date-time
+      format: date-time
+      apiVersions:
+      - !<!ApiVersion> 
+        version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: DateTime
+          description: ''
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: ArrayOfDateTime
+        description: 'The array value [''2000-12-01t00:00:01z'', ''1980-01-02T00:11:35+01:00'', ''1492-10-12T10:15:01-08:00'']'
+    protocol: !<!Protocols> {}
+  - !<!ArraySchema> &ref_52
+    type: array
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    elementType: !<!DateTimeSchema> &ref_12
+      type: date-time
+      format: date-time-rfc1123
+      apiVersions:
+      - !<!ApiVersion> 
+        version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: DateTime
+          description: ''
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: ArrayOfDateTime
+        description: 'The array value [''Fri, 01 Dec 2000 00:00:01 GMT'', ''Wed, 02 Jan 1980 00:11:35 GMT'', ''Wed, 12 Oct 1492 10:15:01 GMT'']'
+    protocol: !<!Protocols> {}
+  - !<!ArraySchema> &ref_54
+    type: array
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    elementType: !<!DurationSchema> &ref_14
+      type: duration
+      apiVersions:
+      - !<!ApiVersion> 
+        version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: Duration
+          description: ''
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: ArrayOfDuration
+        description: 'The array value [''P123DT22H14M12.011S'', ''P5DT1H0M0S'']'
+    protocol: !<!Protocols> {}
+  - !<!ArraySchema> &ref_56
+    type: array
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    elementType: !<!ByteArraySchema> &ref_9
+      type: byte-array
+      format: byte
+      apiVersions:
+      - !<!ApiVersion> 
+        version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: ByteArray
+          description: ''
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: ArrayOfByteArray
+        description: 'The array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64'
+    protocol: !<!Protocols> {}
+  - !<!ArraySchema> &ref_58
+    type: array
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    elementType: !<!ByteArraySchema> &ref_10
+      type: byte-array
+      format: base64url
+      apiVersions:
+      - !<!ApiVersion> 
+        version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: ByteArray
+          description: ''
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: ArrayOfByteArray
+        description: 'Get array value [''a string that gets encoded with base64url'', ''test string'' ''Lorem ipsum''] with the items base64url encoded'
+    protocol: !<!Protocols> {}
+  - !<!ArraySchema> &ref_59
     type: array
     apiVersions:
     - !<!ApiVersion> 
@@ -519,30 +497,10 @@ schemas: !<!Schemas>
     elementType: *ref_4
     language: !<!Languages> 
       default:
-        name: ArrayOfArrayOfstring
-        description: a null array
+        name: ArrayOfProduct
+        description: array of complex type with null value
     protocol: !<!Protocols> {}
-  - !<!ArraySchema> &ref_5
-    type: array
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    elementType: !<!StringSchema> &ref_25
-      type: string
-      apiVersions:
-      - !<!ApiVersion> 
-        version: 1.0.0
-      language: !<!Languages> 
-        default:
-          name: put-content-schema-itemsItem
-          description: ''
-      protocol: !<!Protocols> {}
-    language: !<!Languages> 
-      default:
-        name: Array of put-content-schema-itemsItem
-        description: ''
-    protocol: !<!Protocols> {}
-  - !<!ArraySchema> &ref_63
+  - !<!ArraySchema> &ref_61
     type: array
     apiVersions:
     - !<!ApiVersion> 
@@ -550,10 +508,30 @@ schemas: !<!Schemas>
     elementType: *ref_5
     language: !<!Languages> 
       default:
-        name: ArrayOfArray of put-content-schema-itemsItem
-        description: 'An array of array of strings [[''1'', ''2'', ''3''], [''4'', ''5'', ''6''], [''7'', ''8'', ''9'']]'
+        name: ArrayOfString
+        description: a null array
     protocol: !<!Protocols> {}
-  - !<!ArraySchema> &ref_65
+  - !<!ArraySchema> &ref_6
+    type: array
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    elementType: !<!StringSchema> &ref_24
+      type: string
+      apiVersions:
+      - !<!ApiVersion> 
+        version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: PutContentSchemaItemsItem
+          description: ''
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: ArrayOfPutContentSchemaItemsItem
+        description: Array of PutContentSchemaItemsItem
+    protocol: !<!Protocols> {}
+  - !<!ArraySchema> &ref_62
     type: array
     apiVersions:
     - !<!ApiVersion> 
@@ -561,43 +539,53 @@ schemas: !<!Schemas>
     elementType: *ref_6
     language: !<!Languages> 
       default:
-        name: ArrayOfDictionaryOfstring
+        name: ArrayOfPutContentSchemaItemsItem
+        description: 'An array of array of strings [[''1'', ''2'', ''3''], [''4'', ''5'', ''6''], [''7'', ''8'', ''9'']]'
+    protocol: !<!Protocols> {}
+  - !<!ArraySchema> &ref_64
+    type: array
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    elementType: *ref_7
+    language: !<!Languages> 
+      default:
+        name: ArrayOfDictionaryOfString
         description: An array of Dictionaries with value null
     protocol: !<!Protocols> {}
   booleans:
-  - *ref_7
-  byteArrays:
   - *ref_8
+  byteArrays:
   - *ref_9
-  dateTimes:
   - *ref_10
+  dateTimes:
   - *ref_11
-  dates:
   - *ref_12
-  durations:
+  dates:
   - *ref_13
-  numbers:
+  durations:
   - *ref_14
+  numbers:
   - *ref_15
+  - *ref_0
   - *ref_16
   - *ref_17
   - *ref_18
   - *ref_19
-  - *ref_20
   sealedChoices:
-  - *ref_21
+  - *ref_20
   strings:
-  - *ref_1
+  - *ref_2
+  - *ref_21
   - *ref_22
+  - *ref_1
   - *ref_23
-  - *ref_0
   - *ref_24
-  - *ref_25
   uuids:
-  - *ref_26
+  - *ref_25
 globalParameters:
-- !<!Parameter> &ref_27
-  schema: *ref_1
+- !<!Parameter> &ref_26
+  schema: *ref_2
   clientDefaultValue: 'http://localhost:3000'
   implementation: Client
   required: true
@@ -624,7 +612,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
+      - *ref_26
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -637,7 +625,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_28
+      schema: *ref_27
       language: !<!Languages> 
         default:
           name: ''
@@ -651,7 +639,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -665,7 +653,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getNull
+        name: GetNull
         description: Get null array value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -674,7 +662,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
+      - *ref_26
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -687,7 +675,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_30
+      schema: *ref_29
       language: !<!Languages> 
         default:
           name: ''
@@ -701,7 +689,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -715,7 +703,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getInvalid
+        name: GetInvalid
         description: 'Get invalid array [1, 2, 3'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -724,7 +712,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
+      - *ref_26
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -737,7 +725,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_30
+      schema: *ref_29
       language: !<!Languages> 
         default:
           name: ''
@@ -751,7 +739,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -765,7 +753,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getEmpty
+        name: GetEmpty
         description: 'Get empty array value []'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -774,9 +762,9 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
-      - !<!Parameter> &ref_32
-        schema: *ref_31
+      - *ref_26
+      - !<!Parameter> &ref_31
+        schema: *ref_30
         implementation: Method
         required: true
         extensions:
@@ -790,7 +778,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_32
+      - *ref_31
       language: !<!Languages> 
         default:
           name: ''
@@ -815,7 +803,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -831,7 +819,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putEmpty
+        name: PutEmpty
         description: 'Set array value empty []'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -840,7 +828,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
+      - *ref_26
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -853,7 +841,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_33
+      schema: *ref_32
       language: !<!Languages> 
         default:
           name: ''
@@ -867,7 +855,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -881,7 +869,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getBooleanTfft
+        name: GetBooleanTfft
         description: 'Get boolean array value [true, false, false, true]'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -890,9 +878,225 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
+      - *ref_26
+      - !<!Parameter> &ref_33
+        schema: *ref_32
+        implementation: Method
+        required: true
+        extensions:
+          x-ms-requestBody-name: arrayBody
+        language: !<!Languages> 
+          default:
+            name: arrayBody
+            description: ''
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      signatureParameters:
+      - *ref_33
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /array/prim/boolean/tfft
+          method: put
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_28
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    extensions:
+      x-ms-requestBody-index: 0
+    language: !<!Languages> 
+      default:
+        name: PutBooleanTfft
+        description: 'Set array value empty [true, false, false, true]'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_26
+      signatureParameters: []
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /array/prim/boolean/true.null.false
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_32
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_28
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: GetBooleanInvalidNull
+        description: 'Get boolean array value [true, null, false]'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_26
+      signatureParameters: []
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /array/prim/boolean/true.boolean.false
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_32
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_28
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: GetBooleanInvalidString
+        description: 'Get boolean array value [true, ''boolean'', false]'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_26
+      signatureParameters: []
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /array/prim/integer/1.-1.3.300
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_29
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_28
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: GetIntegerValid
+        description: 'Get integer array value [1, -1, 3, 300]'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_26
       - !<!Parameter> &ref_34
-        schema: *ref_33
+        schema: *ref_29
         implementation: Method
         required: true
         extensions:
@@ -913,222 +1117,6 @@ operationGroups:
           description: ''
       protocol: !<!Protocols> 
         http: !<!HttpWithBodyRequest> 
-          path: /array/prim/boolean/tfft
-          method: put
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          uri: '{$host}'
-    responses:
-    - !<!Response> 
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_29
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    extensions:
-      x-ms-requestBody-index: 0
-    language: !<!Languages> 
-      default:
-        name: putBooleanTfft
-        description: 'Set array value empty [true, false, false, true]'
-    protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_27
-      signatureParameters: []
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpRequest> 
-          path: /array/prim/boolean/true.null.false
-          method: get
-          uri: '{$host}'
-    responses:
-    - !<!SchemaResponse> 
-      schema: *ref_33
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_29
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    language: !<!Languages> 
-      default:
-        name: getBooleanInvalidNull
-        description: 'Get boolean array value [true, null, false]'
-    protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_27
-      signatureParameters: []
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpRequest> 
-          path: /array/prim/boolean/true.boolean.false
-          method: get
-          uri: '{$host}'
-    responses:
-    - !<!SchemaResponse> 
-      schema: *ref_33
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_29
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    language: !<!Languages> 
-      default:
-        name: getBooleanInvalidString
-        description: 'Get boolean array value [true, ''boolean'', false]'
-    protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_27
-      signatureParameters: []
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpRequest> 
-          path: /array/prim/integer/1.-1.3.300
-          method: get
-          uri: '{$host}'
-    responses:
-    - !<!SchemaResponse> 
-      schema: *ref_30
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_29
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    language: !<!Languages> 
-      default:
-        name: getIntegerValid
-        description: 'Get integer array value [1, -1, 3, 300]'
-    protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_27
-      - !<!Parameter> &ref_35
-        schema: *ref_30
-        implementation: Method
-        required: true
-        extensions:
-          x-ms-requestBody-name: arrayBody
-        language: !<!Languages> 
-          default:
-            name: arrayBody
-            description: ''
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: body
-            style: json
-      signatureParameters:
-      - *ref_35
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpWithBodyRequest> 
           path: /array/prim/integer/1.-1.3.300
           method: put
           knownMediaType: json
@@ -1147,7 +1135,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -1163,7 +1151,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putIntegerValid
+        name: PutIntegerValid
         description: 'Set array value empty [1, -1, 3, 300]'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1172,7 +1160,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
+      - *ref_26
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -1185,7 +1173,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_30
+      schema: *ref_29
       language: !<!Languages> 
         default:
           name: ''
@@ -1199,7 +1187,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -1213,7 +1201,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getIntInvalidNull
+        name: GetIntInvalidNull
         description: 'Get integer array value [1, null, 0]'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1222,7 +1210,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
+      - *ref_26
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -1235,7 +1223,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_30
+      schema: *ref_29
       language: !<!Languages> 
         default:
           name: ''
@@ -1249,7 +1237,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -1263,7 +1251,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getIntInvalidString
+        name: GetIntInvalidString
         description: 'Get integer array value [1, ''integer'', 0]'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1272,7 +1260,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
+      - *ref_26
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -1285,7 +1273,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_36
+      schema: *ref_35
       language: !<!Languages> 
         default:
           name: ''
@@ -1299,7 +1287,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -1313,7 +1301,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getLongValid
+        name: GetLongValid
         description: 'Get integer array value [1, -1, 3, 300]'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1322,9 +1310,9 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
-      - !<!Parameter> &ref_37
-        schema: *ref_36
+      - *ref_26
+      - !<!Parameter> &ref_36
+        schema: *ref_35
         implementation: Method
         required: true
         extensions:
@@ -1338,7 +1326,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_37
+      - *ref_36
       language: !<!Languages> 
         default:
           name: ''
@@ -1363,7 +1351,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -1379,7 +1367,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putLongValid
+        name: PutLongValid
         description: 'Set array value empty [1, -1, 3, 300]'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1388,7 +1376,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
+      - *ref_26
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -1401,7 +1389,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_36
+      schema: *ref_35
       language: !<!Languages> 
         default:
           name: ''
@@ -1415,7 +1403,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -1429,7 +1417,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getLongInvalidNull
+        name: GetLongInvalidNull
         description: 'Get long array value [1, null, 0]'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1438,7 +1426,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
+      - *ref_26
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -1451,7 +1439,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_36
+      schema: *ref_35
       language: !<!Languages> 
         default:
           name: ''
@@ -1465,7 +1453,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -1479,7 +1467,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getLongInvalidString
+        name: GetLongInvalidString
         description: 'Get long array value [1, ''integer'', 0]'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1488,7 +1476,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
+      - *ref_26
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -1501,7 +1489,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_38
+      schema: *ref_37
       language: !<!Languages> 
         default:
           name: ''
@@ -1515,7 +1503,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -1529,7 +1517,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getFloatValid
+        name: GetFloatValid
         description: 'Get float array value [0, -0.01, 1.2e20]'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1538,9 +1526,9 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
-      - !<!Parameter> &ref_39
-        schema: *ref_38
+      - *ref_26
+      - !<!Parameter> &ref_38
+        schema: *ref_37
         implementation: Method
         required: true
         extensions:
@@ -1554,7 +1542,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_39
+      - *ref_38
       language: !<!Languages> 
         default:
           name: ''
@@ -1579,7 +1567,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -1595,7 +1583,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putFloatValid
+        name: PutFloatValid
         description: 'Set array value [0, -0.01, 1.2e20]'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1604,7 +1592,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
+      - *ref_26
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -1617,7 +1605,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_38
+      schema: *ref_37
       language: !<!Languages> 
         default:
           name: ''
@@ -1631,7 +1619,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -1645,7 +1633,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getFloatInvalidNull
+        name: GetFloatInvalidNull
         description: 'Get float array value [0.0, null, -1.2e20]'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1654,7 +1642,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
+      - *ref_26
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -1667,7 +1655,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_38
+      schema: *ref_37
       language: !<!Languages> 
         default:
           name: ''
@@ -1681,7 +1669,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -1695,7 +1683,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getFloatInvalidString
+        name: GetFloatInvalidString
         description: 'Get boolean array value [1.0, ''number'', 0.0]'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1704,7 +1692,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
+      - *ref_26
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -1717,7 +1705,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_40
+      schema: *ref_39
       language: !<!Languages> 
         default:
           name: ''
@@ -1731,7 +1719,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -1745,7 +1733,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getDoubleValid
+        name: GetDoubleValid
         description: 'Get float array value [0, -0.01, 1.2e20]'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1754,9 +1742,225 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
+      - *ref_26
+      - !<!Parameter> &ref_40
+        schema: *ref_39
+        implementation: Method
+        required: true
+        extensions:
+          x-ms-requestBody-name: arrayBody
+        language: !<!Languages> 
+          default:
+            name: arrayBody
+            description: ''
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      signatureParameters:
+      - *ref_40
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /array/prim/double/0--0.01-1.2e20
+          method: put
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_28
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    extensions:
+      x-ms-requestBody-index: 0
+    language: !<!Languages> 
+      default:
+        name: PutDoubleValid
+        description: 'Set array value [0, -0.01, 1.2e20]'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_26
+      signatureParameters: []
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /array/prim/double/0.0-null-1.2e20
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_39
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_28
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: GetDoubleInvalidNull
+        description: 'Get float array value [0.0, null, -1.2e20]'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_26
+      signatureParameters: []
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /array/prim/double/1.number.0
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_39
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_28
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: GetDoubleInvalidString
+        description: 'Get boolean array value [1.0, ''number'', 0.0]'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_26
+      signatureParameters: []
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /array/prim/string/foo1.foo2.foo3
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_5
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_28
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: GetStringValid
+        description: 'Get string array value [''foo1'', ''foo2'', ''foo3'']'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_26
       - !<!Parameter> &ref_41
-        schema: *ref_40
+        schema: *ref_5
         implementation: Method
         required: true
         extensions:
@@ -1777,222 +1981,6 @@ operationGroups:
           description: ''
       protocol: !<!Protocols> 
         http: !<!HttpWithBodyRequest> 
-          path: /array/prim/double/0--0.01-1.2e20
-          method: put
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          uri: '{$host}'
-    responses:
-    - !<!Response> 
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_29
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    extensions:
-      x-ms-requestBody-index: 0
-    language: !<!Languages> 
-      default:
-        name: putDoubleValid
-        description: 'Set array value [0, -0.01, 1.2e20]'
-    protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_27
-      signatureParameters: []
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpRequest> 
-          path: /array/prim/double/0.0-null-1.2e20
-          method: get
-          uri: '{$host}'
-    responses:
-    - !<!SchemaResponse> 
-      schema: *ref_40
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_29
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    language: !<!Languages> 
-      default:
-        name: getDoubleInvalidNull
-        description: 'Get float array value [0.0, null, -1.2e20]'
-    protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_27
-      signatureParameters: []
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpRequest> 
-          path: /array/prim/double/1.number.0
-          method: get
-          uri: '{$host}'
-    responses:
-    - !<!SchemaResponse> 
-      schema: *ref_40
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_29
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    language: !<!Languages> 
-      default:
-        name: getDoubleInvalidString
-        description: 'Get boolean array value [1.0, ''number'', 0.0]'
-    protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_27
-      signatureParameters: []
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpRequest> 
-          path: /array/prim/string/foo1.foo2.foo3
-          method: get
-          uri: '{$host}'
-    responses:
-    - !<!SchemaResponse> 
-      schema: *ref_4
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_29
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    language: !<!Languages> 
-      default:
-        name: getStringValid
-        description: 'Get string array value [''foo1'', ''foo2'', ''foo3'']'
-    protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_27
-      - !<!Parameter> &ref_42
-        schema: *ref_4
-        implementation: Method
-        required: true
-        extensions:
-          x-ms-requestBody-name: arrayBody
-        language: !<!Languages> 
-          default:
-            name: arrayBody
-            description: ''
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: body
-            style: json
-      signatureParameters:
-      - *ref_42
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpWithBodyRequest> 
           path: /array/prim/string/foo1.foo2.foo3
           method: put
           knownMediaType: json
@@ -2011,7 +1999,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -2027,7 +2015,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putStringValid
+        name: PutStringValid
         description: 'Set array value [''foo1'', ''foo2'', ''foo3'']'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2036,7 +2024,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
+      - *ref_26
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -2049,7 +2037,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_43
+      schema: *ref_42
       language: !<!Languages> 
         default:
           name: ''
@@ -2063,7 +2051,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -2077,7 +2065,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getEnumValid
+        name: GetEnumValid
         description: 'Get enum array value [''foo1'', ''foo2'', ''foo3'']'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2086,9 +2074,9 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
-      - !<!Parameter> &ref_44
-        schema: *ref_43
+      - *ref_26
+      - !<!Parameter> &ref_43
+        schema: *ref_42
         implementation: Method
         required: true
         extensions:
@@ -2102,7 +2090,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_44
+      - *ref_43
       language: !<!Languages> 
         default:
           name: ''
@@ -2127,7 +2115,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -2143,7 +2131,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putEnumValid
+        name: PutEnumValid
         description: 'Set array value [''foo1'', ''foo2'', ''foo3'']'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2152,7 +2140,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
+      - *ref_26
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -2165,7 +2153,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_45
+      schema: *ref_44
       language: !<!Languages> 
         default:
           name: ''
@@ -2179,7 +2167,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -2193,7 +2181,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getStringEnumValid
+        name: GetStringEnumValid
         description: 'Get enum array value [''foo1'', ''foo2'', ''foo3'']'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2202,9 +2190,9 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
-      - !<!Parameter> &ref_46
-        schema: *ref_45
+      - *ref_26
+      - !<!Parameter> &ref_45
+        schema: *ref_44
         implementation: Method
         required: true
         extensions:
@@ -2218,7 +2206,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_46
+      - *ref_45
       language: !<!Languages> 
         default:
           name: ''
@@ -2243,7 +2231,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -2259,7 +2247,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putStringEnumValid
+        name: PutStringEnumValid
         description: 'Set array value [''foo1'', ''foo2'', ''foo3'']'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2268,7 +2256,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
+      - *ref_26
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -2281,7 +2269,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_4
+      schema: *ref_5
       language: !<!Languages> 
         default:
           name: ''
@@ -2295,7 +2283,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -2309,7 +2297,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getStringWithNull
+        name: GetStringWithNull
         description: 'Get string array value [''foo'', null, ''foo2'']'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2318,7 +2306,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
+      - *ref_26
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -2331,7 +2319,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_4
+      schema: *ref_5
       language: !<!Languages> 
         default:
           name: ''
@@ -2345,7 +2333,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -2359,7 +2347,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getStringWithInvalid
+        name: GetStringWithInvalid
         description: 'Get string array value [''foo'', 123, ''foo2'']'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2368,7 +2356,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
+      - *ref_26
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -2381,7 +2369,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_47
+      schema: *ref_46
       language: !<!Languages> 
         default:
           name: ''
@@ -2395,7 +2383,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -2409,7 +2397,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getUuidValid
+        name: GetUuidValid
         description: 'Get uuid array value [''6dcc7237-45fe-45c4-8a6b-3a8a3f625652'', ''d1399005-30f7-40d6-8da6-dd7c89ad34db'', ''f42f6aa1-a5bc-4ddf-907e-5f915de43205'']'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2418,9 +2406,9 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
-      - !<!Parameter> &ref_48
-        schema: *ref_47
+      - *ref_26
+      - !<!Parameter> &ref_47
+        schema: *ref_46
         implementation: Method
         required: true
         extensions:
@@ -2434,7 +2422,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_48
+      - *ref_47
       language: !<!Languages> 
         default:
           name: ''
@@ -2459,7 +2447,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -2475,7 +2463,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putUuidValid
+        name: PutUuidValid
         description: 'Set array value  [''6dcc7237-45fe-45c4-8a6b-3a8a3f625652'', ''d1399005-30f7-40d6-8da6-dd7c89ad34db'', ''f42f6aa1-a5bc-4ddf-907e-5f915de43205'']'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2484,7 +2472,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
+      - *ref_26
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -2497,7 +2485,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_47
+      schema: *ref_46
       language: !<!Languages> 
         default:
           name: ''
@@ -2511,7 +2499,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -2525,7 +2513,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getUuidInvalidChars
+        name: GetUuidInvalidChars
         description: 'Get uuid array value [''6dcc7237-45fe-45c4-8a6b-3a8a3f625652'', ''foo'']'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2534,7 +2522,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
+      - *ref_26
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -2547,7 +2535,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_49
+      schema: *ref_48
       language: !<!Languages> 
         default:
           name: ''
@@ -2561,7 +2549,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -2575,7 +2563,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getDateValid
+        name: GetDateValid
         description: 'Get integer array value [''2000-12-01'', ''1980-01-02'', ''1492-10-12'']'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2584,9 +2572,9 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
-      - !<!Parameter> &ref_50
-        schema: *ref_49
+      - *ref_26
+      - !<!Parameter> &ref_49
+        schema: *ref_48
         implementation: Method
         required: true
         extensions:
@@ -2600,7 +2588,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_50
+      - *ref_49
       language: !<!Languages> 
         default:
           name: ''
@@ -2625,7 +2613,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -2641,7 +2629,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putDateValid
+        name: PutDateValid
         description: 'Set array value  [''2000-12-01'', ''1980-01-02'', ''1492-10-12'']'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2650,7 +2638,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
+      - *ref_26
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -2663,7 +2651,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_49
+      schema: *ref_48
       language: !<!Languages> 
         default:
           name: ''
@@ -2677,7 +2665,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -2691,7 +2679,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getDateInvalidNull
+        name: GetDateInvalidNull
         description: 'Get date array value [''2012-01-01'', null, ''1776-07-04'']'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2700,7 +2688,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
+      - *ref_26
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -2713,7 +2701,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_49
+      schema: *ref_48
       language: !<!Languages> 
         default:
           name: ''
@@ -2727,7 +2715,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -2741,7 +2729,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getDateInvalidChars
+        name: GetDateInvalidChars
         description: 'Get date array value [''2011-03-22'', ''date'']'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2750,7 +2738,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
+      - *ref_26
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -2763,7 +2751,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_51
+      schema: *ref_50
       language: !<!Languages> 
         default:
           name: ''
@@ -2777,7 +2765,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -2791,7 +2779,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getDateTimeValid
+        name: GetDateTimeValid
         description: 'Get date-time array value [''2000-12-01t00:00:01z'', ''1980-01-02T00:11:35+01:00'', ''1492-10-12T10:15:01-08:00'']'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2800,9 +2788,9 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
-      - !<!Parameter> &ref_52
-        schema: *ref_51
+      - *ref_26
+      - !<!Parameter> &ref_51
+        schema: *ref_50
         implementation: Method
         required: true
         extensions:
@@ -2816,7 +2804,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_52
+      - *ref_51
       language: !<!Languages> 
         default:
           name: ''
@@ -2841,7 +2829,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -2857,7 +2845,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putDateTimeValid
+        name: PutDateTimeValid
         description: 'Set array value  [''2000-12-01t00:00:01z'', ''1980-01-02T00:11:35+01:00'', ''1492-10-12T10:15:01-08:00'']'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2866,7 +2854,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
+      - *ref_26
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -2879,7 +2867,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_51
+      schema: *ref_50
       language: !<!Languages> 
         default:
           name: ''
@@ -2893,7 +2881,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -2907,7 +2895,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getDateTimeInvalidNull
+        name: GetDateTimeInvalidNull
         description: 'Get date array value [''2000-12-01t00:00:01z'', null]'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2916,7 +2904,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
+      - *ref_26
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -2929,7 +2917,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_51
+      schema: *ref_50
       language: !<!Languages> 
         default:
           name: ''
@@ -2943,7 +2931,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -2957,7 +2945,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getDateTimeInvalidChars
+        name: GetDateTimeInvalidChars
         description: 'Get date array value [''2000-12-01t00:00:01z'', ''date-time'']'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2966,7 +2954,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
+      - *ref_26
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -2979,7 +2967,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_53
+      schema: *ref_52
       language: !<!Languages> 
         default:
           name: ''
@@ -2993,7 +2981,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -3007,7 +2995,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getDateTimeRfc1123Valid
+        name: GetDateTimeRfc1123Valid
         description: 'Get date-time array value [''Fri, 01 Dec 2000 00:00:01 GMT'', ''Wed, 02 Jan 1980 00:11:35 GMT'', ''Wed, 12 Oct 1492 10:15:01 GMT'']'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3016,9 +3004,9 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
-      - !<!Parameter> &ref_54
-        schema: *ref_53
+      - *ref_26
+      - !<!Parameter> &ref_53
+        schema: *ref_52
         implementation: Method
         required: true
         extensions:
@@ -3032,7 +3020,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_54
+      - *ref_53
       language: !<!Languages> 
         default:
           name: ''
@@ -3057,7 +3045,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -3073,7 +3061,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putDateTimeRfc1123Valid
+        name: PutDateTimeRfc1123Valid
         description: 'Set array value  [''Fri, 01 Dec 2000 00:00:01 GMT'', ''Wed, 02 Jan 1980 00:11:35 GMT'', ''Wed, 12 Oct 1492 10:15:01 GMT'']'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3082,7 +3070,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
+      - *ref_26
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -3095,7 +3083,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_55
+      schema: *ref_54
       language: !<!Languages> 
         default:
           name: ''
@@ -3109,7 +3097,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -3123,7 +3111,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getDurationValid
+        name: GetDurationValid
         description: 'Get duration array value [''P123DT22H14M12.011S'', ''P5DT1H0M0S'']'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3132,9 +3120,9 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
-      - !<!Parameter> &ref_56
-        schema: *ref_55
+      - *ref_26
+      - !<!Parameter> &ref_55
+        schema: *ref_54
         implementation: Method
         required: true
         extensions:
@@ -3148,7 +3136,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_56
+      - *ref_55
       language: !<!Languages> 
         default:
           name: ''
@@ -3173,7 +3161,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -3189,7 +3177,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putDurationValid
+        name: PutDurationValid
         description: 'Set array value  [''P123DT22H14M12.011S'', ''P5DT1H0M0S'']'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3198,7 +3186,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
+      - *ref_26
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -3211,7 +3199,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_57
+      schema: *ref_56
       language: !<!Languages> 
         default:
           name: ''
@@ -3225,7 +3213,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -3239,7 +3227,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getByteValid
+        name: GetByteValid
         description: 'Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3248,9 +3236,9 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
-      - !<!Parameter> &ref_58
-        schema: *ref_57
+      - *ref_26
+      - !<!Parameter> &ref_57
+        schema: *ref_56
         implementation: Method
         required: true
         extensions:
@@ -3264,7 +3252,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_58
+      - *ref_57
       language: !<!Languages> 
         default:
           name: ''
@@ -3289,7 +3277,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -3305,7 +3293,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putByteValid
+        name: PutByteValid
         description: 'Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3314,7 +3302,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
+      - *ref_26
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -3327,7 +3315,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_57
+      schema: *ref_56
       language: !<!Languages> 
         default:
           name: ''
@@ -3341,7 +3329,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -3355,7 +3343,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getByteInvalidNull
+        name: GetByteInvalidNull
         description: 'Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3364,7 +3352,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
+      - *ref_26
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -3373,6 +3361,56 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpRequest> 
           path: /array/prim/base64url/valid
+          method: get
+          uri: '{$host}'
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_58
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_28
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: GetBase64Url
+        description: 'Get array value [''a string that gets encoded with base64url'', ''test string'' ''Lorem ipsum''] with the items base64url encoded'
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    request: !<!Request> 
+      parameters:
+      - *ref_26
+      signatureParameters: []
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /array/complex/null
           method: get
           uri: '{$host}'
     responses:
@@ -3391,7 +3429,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -3405,57 +3443,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getBase64Url
-        description: 'Get array value [''a string that gets encoded with base64url'', ''test string'' ''Lorem ipsum''] with the items base64url encoded'
-    protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_27
-      signatureParameters: []
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpRequest> 
-          path: /array/complex/null
-          method: get
-          uri: '{$host}'
-    responses:
-    - !<!SchemaResponse> 
-      schema: *ref_60
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_29
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    language: !<!Languages> 
-      default:
-        name: getComplexNull
+        name: GetComplexNull
         description: Get array of complex type null value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3464,7 +3452,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
+      - *ref_26
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -3477,7 +3465,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_60
+      schema: *ref_59
       language: !<!Languages> 
         default:
           name: ''
@@ -3491,7 +3479,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -3505,7 +3493,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getComplexEmpty
+        name: GetComplexEmpty
         description: 'Get empty array of complex type []'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3514,7 +3502,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
+      - *ref_26
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -3527,7 +3515,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_60
+      schema: *ref_59
       language: !<!Languages> 
         default:
           name: ''
@@ -3541,7 +3529,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -3555,7 +3543,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getComplexItemNull
+        name: GetComplexItemNull
         description: 'Get array of complex type with null item [{''integer'': 1 ''string'': ''2''}, null, {''integer'': 5, ''string'': ''6''}]'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3564,7 +3552,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
+      - *ref_26
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -3577,7 +3565,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_60
+      schema: *ref_59
       language: !<!Languages> 
         default:
           name: ''
@@ -3591,7 +3579,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -3605,7 +3593,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getComplexItemEmpty
+        name: GetComplexItemEmpty
         description: 'Get array of complex type with empty item [{''integer'': 1 ''string'': ''2''}, {}, {''integer'': 5, ''string'': ''6''}]'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3614,7 +3602,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
+      - *ref_26
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -3627,7 +3615,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_60
+      schema: *ref_59
       language: !<!Languages> 
         default:
           name: ''
@@ -3641,7 +3629,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -3655,7 +3643,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getComplexValid
+        name: GetComplexValid
         description: 'Get array of complex type with [{''integer'': 1 ''string'': ''2''}, {''integer'': 3, ''string'': ''4''}, {''integer'': 5, ''string'': ''6''}]'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3664,9 +3652,9 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
-      - !<!Parameter> &ref_61
-        schema: *ref_60
+      - *ref_26
+      - !<!Parameter> &ref_60
+        schema: *ref_59
         implementation: Method
         required: true
         extensions:
@@ -3680,7 +3668,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_61
+      - *ref_60
       language: !<!Languages> 
         default:
           name: ''
@@ -3705,7 +3693,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -3721,7 +3709,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putComplexValid
+        name: PutComplexValid
         description: 'Put an array of complex type with values [{''integer'': 1 ''string'': ''2''}, {''integer'': 3, ''string'': ''4''}, {''integer'': 5, ''string'': ''6''}]'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3730,7 +3718,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
+      - *ref_26
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -3743,7 +3731,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_62
+      schema: *ref_61
       language: !<!Languages> 
         default:
           name: ''
@@ -3757,7 +3745,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -3771,7 +3759,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getArrayNull
+        name: GetArrayNull
         description: Get a null array
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3780,7 +3768,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
+      - *ref_26
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -3793,7 +3781,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_62
+      schema: *ref_61
       language: !<!Languages> 
         default:
           name: ''
@@ -3807,7 +3795,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -3821,7 +3809,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getArrayEmpty
+        name: GetArrayEmpty
         description: 'Get an empty array []'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3830,7 +3818,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
+      - *ref_26
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -3843,7 +3831,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_62
+      schema: *ref_61
       language: !<!Languages> 
         default:
           name: ''
@@ -3857,7 +3845,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -3871,7 +3859,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getArrayItemNull
+        name: GetArrayItemNull
         description: 'Get an array of array of strings [[''1'', ''2'', ''3''], null, [''7'', ''8'', ''9'']]'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3880,7 +3868,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
+      - *ref_26
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -3893,7 +3881,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_62
+      schema: *ref_61
       language: !<!Languages> 
         default:
           name: ''
@@ -3907,7 +3895,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -3921,7 +3909,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getArrayItemEmpty
+        name: GetArrayItemEmpty
         description: 'Get an array of array of strings [[''1'', ''2'', ''3''], [], [''7'', ''8'', ''9'']]'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3930,7 +3918,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
+      - *ref_26
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -3943,7 +3931,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_62
+      schema: *ref_61
       language: !<!Languages> 
         default:
           name: ''
@@ -3957,7 +3945,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -3971,7 +3959,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getArrayValid
+        name: GetArrayValid
         description: 'Get an array of array of strings [[''1'', ''2'', ''3''], [''4'', ''5'', ''6''], [''7'', ''8'', ''9'']]'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -3980,9 +3968,9 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
-      - !<!Parameter> &ref_64
-        schema: *ref_63
+      - *ref_26
+      - !<!Parameter> &ref_63
+        schema: *ref_62
         implementation: Method
         required: true
         extensions:
@@ -3996,7 +3984,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_64
+      - *ref_63
       language: !<!Languages> 
         default:
           name: ''
@@ -4021,7 +4009,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -4037,7 +4025,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putArrayValid
+        name: PutArrayValid
         description: 'Put An array of array of strings [[''1'', ''2'', ''3''], [''4'', ''5'', ''6''], [''7'', ''8'', ''9'']]'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -4046,7 +4034,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
+      - *ref_26
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -4059,7 +4047,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_65
+      schema: *ref_64
       language: !<!Languages> 
         default:
           name: ''
@@ -4073,7 +4061,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -4087,7 +4075,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getDictionaryNull
+        name: GetDictionaryNull
         description: Get an array of Dictionaries with value null
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -4096,7 +4084,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
+      - *ref_26
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -4109,7 +4097,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_65
+      schema: *ref_64
       language: !<!Languages> 
         default:
           name: ''
@@ -4123,7 +4111,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -4137,7 +4125,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getDictionaryEmpty
+        name: GetDictionaryEmpty
         description: 'Get an array of Dictionaries of type <string, string> with value []'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -4146,7 +4134,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
+      - *ref_26
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -4159,7 +4147,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_65
+      schema: *ref_64
       language: !<!Languages> 
         default:
           name: ''
@@ -4173,7 +4161,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -4187,7 +4175,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getDictionaryItemNull
+        name: GetDictionaryItemNull
         description: 'Get an array of Dictionaries of type <string, string> with value [{''1'': ''one'', ''2'': ''two'', ''3'': ''three''}, null, {''7'': ''seven'', ''8'': ''eight'', ''9'': ''nine''}]'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -4196,7 +4184,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
+      - *ref_26
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -4209,7 +4197,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_65
+      schema: *ref_64
       language: !<!Languages> 
         default:
           name: ''
@@ -4223,7 +4211,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -4237,7 +4225,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getDictionaryItemEmpty
+        name: GetDictionaryItemEmpty
         description: 'Get an array of Dictionaries of type <string, string> with value [{''1'': ''one'', ''2'': ''two'', ''3'': ''three''}, {}, {''7'': ''seven'', ''8'': ''eight'', ''9'': ''nine''}]'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -4246,7 +4234,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
+      - *ref_26
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -4259,7 +4247,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_65
+      schema: *ref_64
       language: !<!Languages> 
         default:
           name: ''
@@ -4273,7 +4261,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -4287,7 +4275,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getDictionaryValid
+        name: GetDictionaryValid
         description: 'Get an array of Dictionaries of type <string, string> with value [{''1'': ''one'', ''2'': ''two'', ''3'': ''three''}, {''4'': ''four'', ''5'': ''five'', ''6'': ''six''}, {''7'': ''seven'', ''8'': ''eight'', ''9'': ''nine''}]'
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -4296,9 +4284,9 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_27
-      - !<!Parameter> &ref_66
-        schema: *ref_65
+      - *ref_26
+      - !<!Parameter> &ref_65
+        schema: *ref_64
         implementation: Method
         required: true
         extensions:
@@ -4312,7 +4300,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_66
+      - *ref_65
       language: !<!Languages> 
         default:
           name: ''
@@ -4337,7 +4325,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_29
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -4353,17 +4341,17 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putDictionaryValid
+        name: PutDictionaryValid
         description: 'Get an array of Dictionaries of type <string, string> with value [{''1'': ''one'', ''2'': ''two'', ''3'': ''three''}, {''4'': ''four'', ''5'': ''five'', ''6'': ''six''}, {''7'': ''seven'', ''8'': ''eight'', ''9'': ''nine''}]'
     protocol: !<!Protocols> {}
   language: !<!Languages> 
     default:
-      name: array
+      name: Array
       description: ''
   protocol: !<!Protocols> {}
 language: !<!Languages> 
   default:
-    name: ''
+    name: BodyArray
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

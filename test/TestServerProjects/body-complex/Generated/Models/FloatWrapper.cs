@@ -5,7 +5,7 @@
 
 namespace body_complex.Models
 {
-    /// <summary> The float-wrapper. </summary>
+    /// <summary> The FloatWrapper. </summary>
     public partial class FloatWrapper
     {
         public float? Field1 { get; set; }

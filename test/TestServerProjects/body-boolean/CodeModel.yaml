@@ -13,7 +13,7 @@ schemas: !<!Schemas>
         precision: 32
         language: !<!Languages> 
           default:
-            name: typeForstatus
+            name: Integer
             description: ''
         protocol: !<!Protocols> {}
       serializedName: status
@@ -21,7 +21,6 @@ schemas: !<!Schemas>
         default:
           name: status
           description: ''
-          originalName: status
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_2
@@ -31,7 +30,7 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: Error-message
+            name: ErrorMessage
             description: ''
         protocol: !<!Protocols> {}
       serializedName: message
@@ -39,7 +38,6 @@ schemas: !<!Schemas>
         default:
           name: message
           description: ''
-          originalName: message
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -52,7 +50,7 @@ schemas: !<!Schemas>
     type: boolean
     language: !<!Languages> 
       default:
-        name: bool
+        name: Bool
         description: simple boolean
     protocol: !<!Protocols> {}
   - !<!BooleanSchema> &ref_8
@@ -62,7 +60,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: boolean
+        name: Boolean
         description: ''
     protocol: !<!Protocols> {}
   constants:
@@ -99,7 +97,7 @@ schemas: !<!Schemas>
     type: string
     language: !<!Languages> 
       default:
-        name: string
+        name: String
         description: simple string
     protocol: !<!Protocols> {}
   - *ref_2
@@ -173,7 +171,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getTrue
+        name: GetTrue
         description: Get true Boolean value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -238,7 +236,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putTrue
+        name: PutTrue
         description: Set Boolean value true
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -288,7 +286,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getFalse
+        name: GetFalse
         description: Get false Boolean value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -353,7 +351,7 @@ operationGroups:
       x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
-        name: putFalse
+        name: PutFalse
         description: Set Boolean value false
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -403,7 +401,7 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getNull
+        name: GetNull
         description: Get null Boolean value
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -453,17 +451,17 @@ operationGroups:
           - default
     language: !<!Languages> 
       default:
-        name: getInvalid
+        name: GetInvalid
         description: Get invalid Boolean value
     protocol: !<!Protocols> {}
   language: !<!Languages> 
     default:
-      name: bool
+      name: Bool
       description: ''
   protocol: !<!Protocols> {}
 language: !<!Languages> 
   default:
-    name: ''
+    name: BodyBoolean
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

@@ -8,7 +8,7 @@ using System.ComponentModel;
 
 namespace AppConfiguration.Models
 {
-    /// <summary> The get-7-itemsItem. </summary>
+    /// <summary> The Get7ItemsItem. </summary>
     public readonly partial struct Get7ItemsItem : IEquatable<Get7ItemsItem>
     {
         private readonly string _value;

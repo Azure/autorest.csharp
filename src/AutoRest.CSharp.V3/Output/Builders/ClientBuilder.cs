@@ -50,7 +50,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             }
 
             string clientName = operationGroup.CSharpName();
-            Dictionary<string, OperationMethod> processedMethods = new Dictionary<string, OperationMethod>();
+            Dictionary<string, OperationMethod> processedMethods = new Dictionary<string, OperationMethod>(StringComparer.InvariantCultureIgnoreCase);
             foreach (Operation operation in operationGroup.Operations)
             {
                 Method? method = BuildMethod(operation, clientName, clientParameters);
@@ -222,7 +222,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                             {
                                 skipEncoding = true;
                             }
-                            uriParameters[defaultName] = new PathSegment(constantOrParameter, !skipEncoding, serializationFormat);
+                            uriParameters[serializedName] = new PathSegment(constantOrParameter, !skipEncoding, serializationFormat);
                             break;
                     }
                 }

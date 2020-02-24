@@ -20,7 +20,7 @@ namespace AutoRest.TestServer.Tests
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task JsonInputInXMLSwagger() => TestStatus(async (host, pipeline) =>
         {
-            return await new XmlOperations(ClientDiagnostics, pipeline, host).JsonInputAsync(new JSONInput()
+            return await new XmlOperations(ClientDiagnostics, pipeline, host).JsonInputAsync(new JsonInput()
             {
                 Id = 42
             });
@@ -102,7 +102,7 @@ namespace AutoRest.TestServer.Tests
                 Something = "else",
                 RefToModel = new ComplexTypeNoMeta()
                 {
-                    ID = "myid"
+                    Id = "myid"
                 }
             };
 
@@ -119,7 +119,7 @@ namespace AutoRest.TestServer.Tests
                 Something = "else",
                 RefToModel = new ComplexTypeNoMeta()
                 {
-                    ID = "myid"
+                    Id = "myid"
                 }
             };
 
@@ -133,7 +133,7 @@ namespace AutoRest.TestServer.Tests
             var value = result.Value;
 
             Assert.AreEqual("else", value.Something);
-            Assert.AreEqual("myid", value.RefToModel.ID);
+            Assert.AreEqual("myid", value.RefToModel.Id);
         });
 
         [Test]
@@ -143,7 +143,7 @@ namespace AutoRest.TestServer.Tests
             var value = result.Value;
 
             Assert.AreEqual("else", value.Something);
-            Assert.AreEqual("myid", value.RefToModel.ID);
+            Assert.AreEqual("myid", value.RefToModel.Id);
         });
 
         [Test]
@@ -155,7 +155,7 @@ namespace AutoRest.TestServer.Tests
                 Something = "else",
                 RefToModel = new ComplexTypeWithMeta()
                 {
-                    ID = "myid"
+                    Id = "myid"
                 }
             };
 
@@ -169,7 +169,7 @@ namespace AutoRest.TestServer.Tests
             var value = result.Value;
 
             Assert.AreEqual("else", value.Something);
-            Assert.AreEqual("myid", value.RefToModel.ID);
+            Assert.AreEqual("myid", value.RefToModel.Id);
         });
 
         [Test]
@@ -536,7 +536,7 @@ namespace AutoRest.TestServer.Tests
                 {
                     Version = "1.0",
                     Enabled = true,
-                    IncludeAPIs = false,
+                    IncludeApIs = false,
                     RetentionPolicy = new RetentionPolicy()
                     {
                         Days = 7,
@@ -547,7 +547,7 @@ namespace AutoRest.TestServer.Tests
                 {
                     Version = "1.0",
                     Enabled = true,
-                    IncludeAPIs = true,
+                    IncludeApIs = true,
                     RetentionPolicy = new RetentionPolicy()
                     {
                         Days = 7,
@@ -573,13 +573,13 @@ namespace AutoRest.TestServer.Tests
 
             Assert.AreEqual("1.0", value.HourMetrics.Version);
             Assert.AreEqual(true, value.HourMetrics.Enabled);
-            Assert.AreEqual(false, value.HourMetrics.IncludeAPIs);
+            Assert.AreEqual(false, value.HourMetrics.IncludeApIs);
             Assert.AreEqual(7, value.HourMetrics.RetentionPolicy.Days);
             Assert.AreEqual(true, value.HourMetrics.RetentionPolicy.Enabled);
 
             Assert.AreEqual("1.0", value.MinuteMetrics.Version);
             Assert.AreEqual(true, value.MinuteMetrics.Enabled);
-            Assert.AreEqual(true, value.MinuteMetrics.IncludeAPIs);
+            Assert.AreEqual(true, value.MinuteMetrics.IncludeApIs);
             Assert.AreEqual(7, value.MinuteMetrics.RetentionPolicy.Days);
             Assert.AreEqual(true, value.MinuteMetrics.RetentionPolicy.Enabled);
         });

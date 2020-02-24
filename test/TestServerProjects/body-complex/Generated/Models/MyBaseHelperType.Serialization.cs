@@ -13,10 +13,10 @@ namespace body_complex.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (PropBH1 != null)
+            if (PropBh1 != null)
             {
                 writer.WritePropertyName("propBH1");
-                writer.WriteStringValue(PropBH1);
+                writer.WriteStringValue(PropBh1);
             }
             writer.WriteEndObject();
         }
@@ -31,7 +31,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    result.PropBH1 = property.Value.GetString();
+                    result.PropBh1 = property.Value.GetString();
                     continue;
                 }
             }

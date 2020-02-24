@@ -15,10 +15,10 @@ namespace xml_service.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (ID != null)
+            if (Id != null)
             {
                 writer.WritePropertyName("ID");
-                writer.WriteStringValue(ID);
+                writer.WriteStringValue(Id);
             }
             writer.WriteEndObject();
         }
@@ -33,7 +33,7 @@ namespace xml_service.Models
                     {
                         continue;
                     }
-                    result.ID = property.Value.GetString();
+                    result.Id = property.Value.GetString();
                     continue;
                 }
             }
@@ -42,10 +42,10 @@ namespace xml_service.Models
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
             writer.WriteStartElement(nameHint ?? "ComplexTypeNoMeta");
-            if (ID != null)
+            if (Id != null)
             {
                 writer.WriteStartElement("ID");
-                writer.WriteValue(ID);
+                writer.WriteValue(Id);
                 writer.WriteEndElement();
             }
             writer.WriteEndElement();
@@ -59,7 +59,7 @@ namespace xml_service.Models
             {
                 value = (string)iD;
             }
-            result.ID = value;
+            result.Id = value;
             return result;
         }
     }

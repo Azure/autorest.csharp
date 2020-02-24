@@ -5,7 +5,7 @@
 
 namespace body_complex.Models
 {
-    /// <summary> The cookiecuttershark. </summary>
+    /// <summary> The Cookiecuttershark. </summary>
     public partial class Cookiecuttershark : Shark
     {
         /// <summary> Initializes a new instance of Cookiecuttershark. </summary>

@@ -5,7 +5,7 @@
 
 namespace body_complex.Models
 {
-    /// <summary> The boolean-wrapper. </summary>
+    /// <summary> The BooleanWrapper. </summary>
     public partial class BooleanWrapper
     {
         public bool? FieldTrue { get; set; }

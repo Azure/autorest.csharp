@@ -13,7 +13,7 @@ namespace Azure.Storage.Tables.Models
         /// <summary> Indicates whether metrics are enabled for the Queue service. </summary>
         public bool Enabled { get; set; }
         /// <summary> Indicates whether metrics should generate summary statistics for called API operations. </summary>
-        public bool? IncludeAPIs { get; set; }
+        public bool? IncludeApIs { get; set; }
         /// <summary> the retention policy. </summary>
         public RetentionPolicy RetentionPolicy { get; set; }
     }

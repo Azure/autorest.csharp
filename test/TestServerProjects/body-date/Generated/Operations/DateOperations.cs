@@ -314,7 +314,7 @@ namespace body_date
             return message;
         }
         /// <summary> Put max date value 9999-12-31. </summary>
-        /// <param name="dateBody"> The date to use. </param>
+        /// <param name="dateBody"> The Date to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutMaxDateAsync(DateTimeOffset dateBody, CancellationToken cancellationToken = default)
         {
@@ -340,7 +340,7 @@ namespace body_date
             }
         }
         /// <summary> Put max date value 9999-12-31. </summary>
-        /// <param name="dateBody"> The date to use. </param>
+        /// <param name="dateBody"> The Date to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutMaxDate(DateTimeOffset dateBody, CancellationToken cancellationToken = default)
         {
@@ -448,7 +448,7 @@ namespace body_date
             return message;
         }
         /// <summary> Put min date value 0000-01-01. </summary>
-        /// <param name="dateBody"> The date to use. </param>
+        /// <param name="dateBody"> The Date to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutMinDateAsync(DateTimeOffset dateBody, CancellationToken cancellationToken = default)
         {
@@ -474,7 +474,7 @@ namespace body_date
             }
         }
         /// <summary> Put min date value 0000-01-01. </summary>
-        /// <param name="dateBody"> The date to use. </param>
+        /// <param name="dateBody"> The Date to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutMinDate(DateTimeOffset dateBody, CancellationToken cancellationToken = default)
         {

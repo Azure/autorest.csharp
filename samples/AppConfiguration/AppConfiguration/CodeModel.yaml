@@ -27,7 +27,7 @@ schemas: !<!Schemas>
                 version: '1.0'
               language: !<!Languages> 
                 default:
-                  name: Key-name
+                  name: KeyName
                   description: ''
               protocol: !<!Protocols> {}
             readOnly: true
@@ -36,7 +36,6 @@ schemas: !<!Schemas>
               default:
                 name: name
                 description: ''
-                originalName: name
             protocol: !<!Protocols> {}
           language: !<!Languages> 
             default:
@@ -46,7 +45,7 @@ schemas: !<!Schemas>
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
-            name: KeyListResult-items
+            name: KeyListResultItems
             description: The collection value.
         protocol: !<!Protocols> {}
       serializedName: items
@@ -54,7 +53,6 @@ schemas: !<!Schemas>
         default:
           name: items
           description: The collection value.
-          originalName: items
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_20
@@ -64,15 +62,14 @@ schemas: !<!Schemas>
           version: '1.0'
         language: !<!Languages> 
           default:
-            name: KeyListResult-@nextLink
+            name: KeyListResultNextLink
             description: The URI that can be used to request the next set of paged results.
         protocol: !<!Protocols> {}
       serializedName: '@nextLink'
       language: !<!Languages> 
         default:
-          name: NextLink
+          name: nextLink
           description: The URI that can be used to request the next set of paged results.
-          originalName: '@nextLink'
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -95,7 +92,7 @@ schemas: !<!Schemas>
           version: '1.0'
         language: !<!Languages> 
           default:
-            name: Error-type
+            name: ErrorType
             description: The type of the error.
         protocol: !<!Protocols> {}
       serializedName: type
@@ -103,7 +100,6 @@ schemas: !<!Schemas>
         default:
           name: type
           description: The type of the error.
-          originalName: type
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_22
@@ -113,7 +109,7 @@ schemas: !<!Schemas>
           version: '1.0'
         language: !<!Languages> 
           default:
-            name: Error-title
+            name: ErrorTitle
             description: A brief summary of the error.
         protocol: !<!Protocols> {}
       serializedName: title
@@ -121,7 +117,6 @@ schemas: !<!Schemas>
         default:
           name: title
           description: A brief summary of the error.
-          originalName: title
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_23
@@ -131,7 +126,7 @@ schemas: !<!Schemas>
           version: '1.0'
         language: !<!Languages> 
           default:
-            name: Error-name
+            name: ErrorName
             description: The name of the parameter that resulted in the error.
         protocol: !<!Protocols> {}
       serializedName: name
@@ -139,7 +134,6 @@ schemas: !<!Schemas>
         default:
           name: name
           description: The name of the parameter that resulted in the error.
-          originalName: name
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_24
@@ -149,7 +143,7 @@ schemas: !<!Schemas>
           version: '1.0'
         language: !<!Languages> 
           default:
-            name: Error-detail
+            name: ErrorDetail
             description: A detailed description of the error.
         protocol: !<!Protocols> {}
       serializedName: detail
@@ -157,7 +151,6 @@ schemas: !<!Schemas>
         default:
           name: detail
           description: A detailed description of the error.
-          originalName: detail
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!NumberSchema> &ref_17
@@ -165,7 +158,7 @@ schemas: !<!Schemas>
         precision: 32
         language: !<!Languages> 
           default:
-            name: typeForstatus
+            name: Integer
             description: The HTTP status code that the error maps to.
         protocol: !<!Protocols> {}
       serializedName: status
@@ -173,7 +166,6 @@ schemas: !<!Schemas>
         default:
           name: status
           description: The HTTP status code that the error maps to.
-          originalName: status
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -207,7 +199,7 @@ schemas: !<!Schemas>
                 version: '1.0'
               language: !<!Languages> 
                 default:
-                  name: KeyValue-key
+                  name: KeyValueKey
                   description: ''
               protocol: !<!Protocols> {}
             serializedName: key
@@ -215,7 +207,6 @@ schemas: !<!Schemas>
               default:
                 name: key
                 description: ''
-                originalName: key
             protocol: !<!Protocols> {}
           - !<!Property> 
             schema: !<!StringSchema> &ref_26
@@ -225,7 +216,7 @@ schemas: !<!Schemas>
                 version: '1.0'
               language: !<!Languages> 
                 default:
-                  name: KeyValue-label
+                  name: KeyValueLabel
                   description: ''
               protocol: !<!Protocols> {}
             serializedName: label
@@ -233,7 +224,6 @@ schemas: !<!Schemas>
               default:
                 name: label
                 description: ''
-                originalName: label
             protocol: !<!Protocols> {}
           - !<!Property> 
             schema: !<!StringSchema> &ref_27
@@ -243,7 +233,7 @@ schemas: !<!Schemas>
                 version: '1.0'
               language: !<!Languages> 
                 default:
-                  name: KeyValue-content_type
+                  name: KeyValueContentType
                   description: ''
               protocol: !<!Protocols> {}
             serializedName: content_type
@@ -251,7 +241,6 @@ schemas: !<!Schemas>
               default:
                 name: contentType
                 description: ''
-                originalName: content_type
             protocol: !<!Protocols> {}
           - !<!Property> 
             schema: !<!StringSchema> &ref_28
@@ -261,7 +250,7 @@ schemas: !<!Schemas>
                 version: '1.0'
               language: !<!Languages> 
                 default:
-                  name: KeyValue-value
+                  name: KeyValue
                   description: ''
               protocol: !<!Protocols> {}
             serializedName: value
@@ -269,7 +258,6 @@ schemas: !<!Schemas>
               default:
                 name: value
                 description: ''
-                originalName: value
             protocol: !<!Protocols> {}
           - !<!Property> 
             schema: !<!DateTimeSchema> &ref_16
@@ -280,7 +268,7 @@ schemas: !<!Schemas>
                 version: '1.0'
               language: !<!Languages> 
                 default:
-                  name: KeyValue-last_modified
+                  name: KeyValueLastModified
                   description: ''
               protocol: !<!Protocols> {}
             serializedName: last_modified
@@ -288,7 +276,6 @@ schemas: !<!Schemas>
               default:
                 name: lastModified
                 description: ''
-                originalName: last_modified
             protocol: !<!Protocols> {}
           - !<!Property> 
             schema: !<!DictionarySchema> &ref_3
@@ -300,13 +287,13 @@ schemas: !<!Schemas>
                   version: '1.0'
                 language: !<!Languages> 
                   default:
-                    name: string
+                    name: String
                     description: ''
                     header: Sync-Token
                 protocol: !<!Protocols> {}
               language: !<!Languages> 
                 default:
-                  name: KeyValue-tags
+                  name: KeyValueTags
                   description: Dictionary of <string>
               protocol: !<!Protocols> {}
             serializedName: tags
@@ -314,14 +301,13 @@ schemas: !<!Schemas>
               default:
                 name: tags
                 description: Dictionary of <string>
-                originalName: tags
             protocol: !<!Protocols> {}
           - !<!Property> 
             schema: !<!BooleanSchema> &ref_13
               type: boolean
               language: !<!Languages> 
                 default:
-                  name: typeForlocked
+                  name: Boolean
                   description: ''
               protocol: !<!Protocols> {}
             serializedName: locked
@@ -329,7 +315,6 @@ schemas: !<!Schemas>
               default:
                 name: locked
                 description: ''
-                originalName: locked
             protocol: !<!Protocols> {}
           - !<!Property> 
             schema: !<!StringSchema> &ref_29
@@ -339,7 +324,7 @@ schemas: !<!Schemas>
                 version: '1.0'
               language: !<!Languages> 
                 default:
-                  name: KeyValue-etag
+                  name: KeyValueEtag
                   description: ''
               protocol: !<!Protocols> {}
             serializedName: etag
@@ -347,7 +332,6 @@ schemas: !<!Schemas>
               default:
                 name: etag
                 description: ''
-                originalName: etag
             protocol: !<!Protocols> {}
           language: !<!Languages> 
             default:
@@ -357,7 +341,7 @@ schemas: !<!Schemas>
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
-            name: KeyValueListResult-items
+            name: KeyValueListResultItems
             description: The collection value.
         protocol: !<!Protocols> {}
       serializedName: items
@@ -365,7 +349,6 @@ schemas: !<!Schemas>
         default:
           name: items
           description: The collection value.
-          originalName: items
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_30
@@ -375,15 +358,14 @@ schemas: !<!Schemas>
           version: '1.0'
         language: !<!Languages> 
           default:
-            name: KeyValueListResult-@nextLink
+            name: KeyValueListResultNextLink
             description: The URI that can be used to request the next set of paged results.
         protocol: !<!Protocols> {}
       serializedName: '@nextLink'
       language: !<!Languages> 
         default:
-          name: NextLink
+          name: nextLink
           description: The URI that can be used to request the next set of paged results.
-          originalName: '@nextLink'
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -418,7 +400,7 @@ schemas: !<!Schemas>
                 version: '1.0'
               language: !<!Languages> 
                 default:
-                  name: Label-name
+                  name: LabelName
                   description: ''
               protocol: !<!Protocols> {}
             readOnly: true
@@ -427,7 +409,6 @@ schemas: !<!Schemas>
               default:
                 name: name
                 description: ''
-                originalName: name
             protocol: !<!Protocols> {}
           language: !<!Languages> 
             default:
@@ -437,7 +418,7 @@ schemas: !<!Schemas>
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
-            name: LabelListResult-items
+            name: LabelListResultItems
             description: The collection value.
         protocol: !<!Protocols> {}
       serializedName: items
@@ -445,7 +426,6 @@ schemas: !<!Schemas>
         default:
           name: items
           description: The collection value.
-          originalName: items
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_32
@@ -455,15 +435,14 @@ schemas: !<!Schemas>
           version: '1.0'
         language: !<!Languages> 
           default:
-            name: LabelListResult-@nextLink
+            name: LabelListResultNextLink
             description: The URI that can be used to request the next set of paged results.
         protocol: !<!Protocols> {}
       serializedName: '@nextLink'
       language: !<!Languages> 
         default:
-          name: NextLink
+          name: nextLink
           description: The URI that can be used to request the next set of paged results.
-          originalName: '@nextLink'
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -481,49 +460,49 @@ schemas: !<!Schemas>
       value: key
       language:
         default:
-          name: key
+          name: Key
           description: ''
     - !<!ChoiceValue> 
       value: label
       language:
         default:
-          name: label
+          name: Label
           description: ''
     - !<!ChoiceValue> 
       value: content_type
       language:
         default:
-          name: content_type
+          name: ContentType
           description: ''
     - !<!ChoiceValue> 
       value: value
       language:
         default:
-          name: value
+          name: Value
           description: ''
     - !<!ChoiceValue> 
       value: last_modified
       language:
         default:
-          name: last_modified
+          name: LastModified
           description: ''
     - !<!ChoiceValue> 
       value: tags
       language:
         default:
-          name: tags
+          name: Tags
           description: ''
     - !<!ChoiceValue> 
       value: locked
       language:
         default:
-          name: locked
+          name: Locked
           description: ''
     - !<!ChoiceValue> 
       value: etag
       language:
         default:
-          name: etag
+          name: Etag
           description: ''
     type: choice
     apiVersions:
@@ -533,12 +512,12 @@ schemas: !<!Schemas>
       type: string
       language: !<!Languages> 
         default:
-          name: string
+          name: String
           description: simple string
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: get-6-itemsItem
+        name: Get6ItemsItem
         description: ''
     protocol: !<!Protocols> {}
   - !<!ChoiceSchema> &ref_8
@@ -547,49 +526,49 @@ schemas: !<!Schemas>
       value: key
       language:
         default:
-          name: key
+          name: Key
           description: ''
     - !<!ChoiceValue> 
       value: label
       language:
         default:
-          name: label
+          name: Label
           description: ''
     - !<!ChoiceValue> 
       value: content_type
       language:
         default:
-          name: content_type
+          name: ContentType
           description: ''
     - !<!ChoiceValue> 
       value: value
       language:
         default:
-          name: value
+          name: Value
           description: ''
     - !<!ChoiceValue> 
       value: last_modified
       language:
         default:
-          name: last_modified
+          name: LastModified
           description: ''
     - !<!ChoiceValue> 
       value: tags
       language:
         default:
-          name: tags
+          name: Tags
           description: ''
     - !<!ChoiceValue> 
       value: locked
       language:
         default:
-          name: locked
+          name: Locked
           description: ''
     - !<!ChoiceValue> 
       value: etag
       language:
         default:
-          name: etag
+          name: Etag
           description: ''
     type: choice
     apiVersions:
@@ -598,7 +577,7 @@ schemas: !<!Schemas>
     choiceType: *ref_4
     language: !<!Languages> 
       default:
-        name: head-6-itemsItem
+        name: Head6ItemsItem
         description: ''
     protocol: !<!Protocols> {}
   - !<!ChoiceSchema> &ref_9
@@ -607,49 +586,49 @@ schemas: !<!Schemas>
       value: key
       language:
         default:
-          name: key
+          name: Key
           description: ''
     - !<!ChoiceValue> 
       value: label
       language:
         default:
-          name: label
+          name: Label
           description: ''
     - !<!ChoiceValue> 
       value: content_type
       language:
         default:
-          name: content_type
+          name: ContentType
           description: ''
     - !<!ChoiceValue> 
       value: value
       language:
         default:
-          name: value
+          name: Value
           description: ''
     - !<!ChoiceValue> 
       value: last_modified
       language:
         default:
-          name: last_modified
+          name: LastModified
           description: ''
     - !<!ChoiceValue> 
       value: tags
       language:
         default:
-          name: tags
+          name: Tags
           description: ''
     - !<!ChoiceValue> 
       value: locked
       language:
         default:
-          name: locked
+          name: Locked
           description: ''
     - !<!ChoiceValue> 
       value: etag
       language:
         default:
-          name: etag
+          name: Etag
           description: ''
     type: choice
     apiVersions:
@@ -658,7 +637,7 @@ schemas: !<!Schemas>
     choiceType: *ref_4
     language: !<!Languages> 
       default:
-        name: get-7-itemsItem
+        name: Get7ItemsItem
         description: ''
     protocol: !<!Protocols> {}
   - !<!ChoiceSchema> &ref_10
@@ -667,49 +646,49 @@ schemas: !<!Schemas>
       value: key
       language:
         default:
-          name: key
+          name: Key
           description: ''
     - !<!ChoiceValue> 
       value: label
       language:
         default:
-          name: label
+          name: Label
           description: ''
     - !<!ChoiceValue> 
       value: content_type
       language:
         default:
-          name: content_type
+          name: ContentType
           description: ''
     - !<!ChoiceValue> 
       value: value
       language:
         default:
-          name: value
+          name: Value
           description: ''
     - !<!ChoiceValue> 
       value: last_modified
       language:
         default:
-          name: last_modified
+          name: LastModified
           description: ''
     - !<!ChoiceValue> 
       value: tags
       language:
         default:
-          name: tags
+          name: Tags
           description: ''
     - !<!ChoiceValue> 
       value: locked
       language:
         default:
-          name: locked
+          name: Locked
           description: ''
     - !<!ChoiceValue> 
       value: etag
       language:
         default:
-          name: etag
+          name: Etag
           description: ''
     type: choice
     apiVersions:
@@ -718,7 +697,7 @@ schemas: !<!Schemas>
     choiceType: *ref_4
     language: !<!Languages> 
       default:
-        name: head-7-itemsItem
+        name: Head7ItemsItem
         description: ''
     protocol: !<!Protocols> {}
   - !<!ChoiceSchema> &ref_12
@@ -727,49 +706,49 @@ schemas: !<!Schemas>
       value: key
       language:
         default:
-          name: key
+          name: Key
           description: ''
     - !<!ChoiceValue> 
       value: label
       language:
         default:
-          name: label
+          name: Label
           description: ''
     - !<!ChoiceValue> 
       value: content_type
       language:
         default:
-          name: content_type
+          name: ContentType
           description: ''
     - !<!ChoiceValue> 
       value: value
       language:
         default:
-          name: value
+          name: Value
           description: ''
     - !<!ChoiceValue> 
       value: last_modified
       language:
         default:
-          name: last_modified
+          name: LastModified
           description: ''
     - !<!ChoiceValue> 
       value: tags
       language:
         default:
-          name: tags
+          name: Tags
           description: ''
     - !<!ChoiceValue> 
       value: locked
       language:
         default:
-          name: locked
+          name: Locked
           description: ''
     - !<!ChoiceValue> 
       value: etag
       language:
         default:
-          name: etag
+          name: Etag
           description: ''
     type: choice
     apiVersions:
@@ -778,7 +757,7 @@ schemas: !<!Schemas>
     choiceType: *ref_4
     language: !<!Languages> 
       default:
-        name: Enum0
+        name: Enum4
         description: ''
     protocol: !<!Protocols> {}
   arrays:
@@ -791,8 +770,8 @@ schemas: !<!Schemas>
     elementType: *ref_6
     language: !<!Languages> 
       default:
-        name: Array of get-6-itemsItem
-        description: ''
+        name: ArrayOfGet6ItemsItem
+        description: Array of Get6ItemsItem
     protocol: !<!Protocols> {}
   - *ref_7
   - !<!ArraySchema> &ref_52
@@ -803,8 +782,8 @@ schemas: !<!Schemas>
     elementType: *ref_8
     language: !<!Languages> 
       default:
-        name: Array of head-6-itemsItem
-        description: ''
+        name: ArrayOfHead6ItemsItem
+        description: Array of Head6ItemsItem
     protocol: !<!Protocols> {}
   - !<!ArraySchema> &ref_58
     type: array
@@ -814,8 +793,8 @@ schemas: !<!Schemas>
     elementType: *ref_9
     language: !<!Languages> 
       default:
-        name: Array of get-7-itemsItem
-        description: ''
+        name: ArrayOfGet7ItemsItem
+        description: Array of Get7ItemsItem
     protocol: !<!Protocols> {}
   - !<!ArraySchema> &ref_73
     type: array
@@ -825,8 +804,8 @@ schemas: !<!Schemas>
     elementType: *ref_10
     language: !<!Languages> 
       default:
-        name: Array of head-7-itemsItem
-        description: ''
+        name: ArrayOfHead7ItemsItem
+        description: Array of Head7ItemsItem
     protocol: !<!Protocols> {}
   - !<!ArraySchema> &ref_80
     type: array
@@ -843,13 +822,13 @@ schemas: !<!Schemas>
       valueType: *ref_4
       language: !<!Languages> 
         default:
-          name: get-5-itemsItem
+          name: Get5ItemsItem
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Array of get-5-itemsItem
-        description: ''
+        name: ArrayOfGet5ItemsItem
+        description: Array of Get5ItemsItem
     protocol: !<!Protocols> {}
   - *ref_11
   - !<!ArraySchema> &ref_86
@@ -867,13 +846,13 @@ schemas: !<!Schemas>
       valueType: *ref_4
       language: !<!Languages> 
         default:
-          name: head-5-itemsItem
+          name: Head5ItemsItem
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Array of head-5-itemsItem
-        description: ''
+        name: ArrayOfHead5ItemsItem
+        description: Array of Head5ItemsItem
     protocol: !<!Protocols> {}
   - !<!ArraySchema> &ref_99
     type: array
@@ -883,8 +862,8 @@ schemas: !<!Schemas>
     elementType: *ref_12
     language: !<!Languages> 
       default:
-        name: Array of Enum0
-        description: ''
+        name: ArrayOfEnum4
+        description: Array of Enum4
     protocol: !<!Protocols> {}
   booleans:
   - *ref_13
@@ -896,7 +875,7 @@ schemas: !<!Schemas>
     valueType: *ref_4
     language: !<!Languages> 
       default:
-        name: ApiVersion-1.0
+        name: ApiVersion10
         description: Api Version (1.0)
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> 
@@ -906,7 +885,7 @@ schemas: !<!Schemas>
     valueType: *ref_4
     language: !<!Languages> 
       default:
-        name: ApiVersion-1.0
+        name: ApiVersion10
         description: Api Version (1.0)
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> 
@@ -916,7 +895,7 @@ schemas: !<!Schemas>
     valueType: *ref_4
     language: !<!Languages> 
       default:
-        name: ApiVersion-1.0
+        name: ApiVersion10
         description: Api Version (1.0)
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> 
@@ -926,7 +905,7 @@ schemas: !<!Schemas>
     valueType: *ref_4
     language: !<!Languages> 
       default:
-        name: ApiVersion-1.0
+        name: ApiVersion10
         description: Api Version (1.0)
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> 
@@ -936,7 +915,7 @@ schemas: !<!Schemas>
     valueType: *ref_4
     language: !<!Languages> 
       default:
-        name: ApiVersion-1.0
+        name: ApiVersion10
         description: Api Version (1.0)
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> 
@@ -946,7 +925,7 @@ schemas: !<!Schemas>
     valueType: *ref_4
     language: !<!Languages> 
       default:
-        name: ApiVersion-1.0
+        name: ApiVersion10
         description: Api Version (1.0)
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> 
@@ -956,7 +935,7 @@ schemas: !<!Schemas>
     valueType: *ref_4
     language: !<!Languages> 
       default:
-        name: ApiVersion-1.0
+        name: ApiVersion10
         description: Api Version (1.0)
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> 
@@ -966,7 +945,7 @@ schemas: !<!Schemas>
     valueType: *ref_4
     language: !<!Languages> 
       default:
-        name: ApiVersion-1.0
+        name: ApiVersion10
         description: Api Version (1.0)
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> 
@@ -976,7 +955,7 @@ schemas: !<!Schemas>
     valueType: *ref_4
     language: !<!Languages> 
       default:
-        name: ApiVersion-1.0
+        name: ApiVersion10
         description: Api Version (1.0)
     protocol: !<!Protocols> {}
   - *ref_14
@@ -987,7 +966,7 @@ schemas: !<!Schemas>
     valueType: *ref_4
     language: !<!Languages> 
       default:
-        name: ApiVersion-1.0
+        name: ApiVersion10
         description: Api Version (1.0)
     protocol: !<!Protocols> {}
   - *ref_15
@@ -998,7 +977,7 @@ schemas: !<!Schemas>
     valueType: *ref_4
     language: !<!Languages> 
       default:
-        name: ApiVersion-1.0
+        name: ApiVersion10
         description: Api Version (1.0)
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> 
@@ -1008,7 +987,7 @@ schemas: !<!Schemas>
     valueType: *ref_4
     language: !<!Languages> 
       default:
-        name: ApiVersion-1.0
+        name: ApiVersion10
         description: Api Version (1.0)
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> 
@@ -1018,7 +997,7 @@ schemas: !<!Schemas>
     valueType: *ref_4
     language: !<!Languages> 
       default:
-        name: ApiVersion-1.0
+        name: ApiVersion10
         description: Api Version (1.0)
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> 
@@ -1028,7 +1007,7 @@ schemas: !<!Schemas>
     valueType: *ref_4
     language: !<!Languages> 
       default:
-        name: ApiVersion-1.0
+        name: ApiVersion10
         description: Api Version (1.0)
     protocol: !<!Protocols> {}
   dateTimes:
@@ -1060,7 +1039,7 @@ globalParameters:
     x-ms-priority: 0
   language: !<!Languages> 
     default:
-      name: Sync-Token
+      name: syncToken
       description: Used to guarantee real-time consistency between requests.
       serializedName: Sync-Token
   protocol: !<!Protocols> 
@@ -1124,7 +1103,7 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: After
+            name: after
             description: Instructs the server to return elements that appear after the element referred to by the specified token.
             serializedName: After
         protocol: !<!Protocols> 
@@ -1135,7 +1114,7 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: Accept-Datetime
+            name: acceptDatetime
             description: Requests the server to respond with the state of the resource at the specified time.
             serializedName: Accept-Datetime
         protocol: !<!Protocols> 
@@ -1198,6 +1177,9 @@ operationGroups:
       default:
         name: GetKeys
         description: Gets a list of keys.
+        paging:
+          itemName: items
+          nextLinkName: '@nextLink'
         summary: Gets a list of keys.
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1225,7 +1207,7 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: After
+            name: after
             description: Instructs the server to return elements that appear after the element referred to by the specified token.
             serializedName: After
         protocol: !<!Protocols> 
@@ -1236,7 +1218,7 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: Accept-Datetime
+            name: acceptDatetime
             description: Requests the server to respond with the state of the resource at the specified time.
             serializedName: Accept-Datetime
         protocol: !<!Protocols> 
@@ -1321,7 +1303,7 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: After
+            name: after
             description: Instructs the server to return elements that appear after the element referred to by the specified token.
             serializedName: After
         protocol: !<!Protocols> 
@@ -1332,7 +1314,7 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: Accept-Datetime
+            name: acceptDatetime
             description: Requests the server to respond with the state of the resource at the specified time.
             serializedName: Accept-Datetime
         protocol: !<!Protocols> 
@@ -1343,7 +1325,7 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: $Select
+            name: select
             description: Used to select what fields are present in the returned resource(s).
             serializedName: $Select
         protocol: !<!Protocols> 
@@ -1409,6 +1391,9 @@ operationGroups:
       default:
         name: GetKeyValues
         description: Gets a list of key-values.
+        paging:
+          itemName: items
+          nextLinkName: '@nextLink'
         summary: Gets a list of key-values.
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1447,7 +1432,7 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: After
+            name: after
             description: Instructs the server to return elements that appear after the element referred to by the specified token.
             serializedName: After
         protocol: !<!Protocols> 
@@ -1458,7 +1443,7 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: Accept-Datetime
+            name: acceptDatetime
             description: Requests the server to respond with the state of the resource at the specified time.
             serializedName: Accept-Datetime
         protocol: !<!Protocols> 
@@ -1469,7 +1454,7 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: $Select
+            name: select
             description: Used to select what fields are present in the returned resource(s).
             serializedName: $Select
         protocol: !<!Protocols> 
@@ -1558,7 +1543,7 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: Accept-Datetime
+            name: acceptDatetime
             description: Requests the server to respond with the state of the resource at the specified time.
             serializedName: Accept-Datetime
         protocol: !<!Protocols> 
@@ -1569,7 +1554,7 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: If-Match
+            name: ifMatch
             description: Used to perform an operation only if the targeted resource's etag matches the value provided.
             serializedName: If-Match
         protocol: !<!Protocols> 
@@ -1580,7 +1565,7 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: If-None-Match
+            name: ifNoneMatch
             description: Used to perform an operation only if the targeted resource's etag does not match the value provided.
             serializedName: If-None-Match
         protocol: !<!Protocols> 
@@ -1591,7 +1576,7 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: $Select
+            name: select
             description: Used to select what fields are present in the returned resource(s).
             serializedName: $Select
         protocol: !<!Protocols> 
@@ -1699,7 +1684,7 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: If-Match
+            name: ifMatch
             description: Used to perform an operation only if the targeted resource's etag matches the value provided.
             serializedName: If-Match
         protocol: !<!Protocols> 
@@ -1710,7 +1695,7 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: If-None-Match
+            name: ifNoneMatch
             description: Used to perform an operation only if the targeted resource's etag does not match the value provided.
             serializedName: If-None-Match
         protocol: !<!Protocols> 
@@ -1836,7 +1821,7 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: If-Match
+            name: ifMatch
             description: Used to perform an operation only if the targeted resource's etag matches the value provided.
             serializedName: If-Match
         protocol: !<!Protocols> 
@@ -1950,7 +1935,7 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: Accept-Datetime
+            name: acceptDatetime
             description: Requests the server to respond with the state of the resource at the specified time.
             serializedName: Accept-Datetime
         protocol: !<!Protocols> 
@@ -1961,7 +1946,7 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: If-Match
+            name: ifMatch
             description: Used to perform an operation only if the targeted resource's etag matches the value provided.
             serializedName: If-Match
         protocol: !<!Protocols> 
@@ -1972,7 +1957,7 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: If-None-Match
+            name: ifNoneMatch
             description: Used to perform an operation only if the targeted resource's etag does not match the value provided.
             serializedName: If-None-Match
         protocol: !<!Protocols> 
@@ -1983,7 +1968,7 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: $Select
+            name: select
             description: Used to select what fields are present in the returned resource(s).
             serializedName: $Select
         protocol: !<!Protocols> 
@@ -2067,7 +2052,7 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: After
+            name: after
             description: Instructs the server to return elements that appear after the element referred to by the specified token.
             serializedName: After
         protocol: !<!Protocols> 
@@ -2078,7 +2063,7 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: Accept-Datetime
+            name: acceptDatetime
             description: Requests the server to respond with the state of the resource at the specified time.
             serializedName: Accept-Datetime
         protocol: !<!Protocols> 
@@ -2089,7 +2074,7 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: $Select
+            name: select
             description: Used to select what fields are present in the returned resource(s).
             serializedName: $Select
         protocol: !<!Protocols> 
@@ -2154,6 +2139,9 @@ operationGroups:
       default:
         name: GetLabels
         description: Gets a list of labels.
+        paging:
+          itemName: items
+          nextLinkName: '@nextLink'
         summary: Gets a list of labels.
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2181,7 +2169,7 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: After
+            name: after
             description: Instructs the server to return elements that appear after the element referred to by the specified token.
             serializedName: After
         protocol: !<!Protocols> 
@@ -2192,7 +2180,7 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: Accept-Datetime
+            name: acceptDatetime
             description: Requests the server to respond with the state of the resource at the specified time.
             serializedName: Accept-Datetime
         protocol: !<!Protocols> 
@@ -2203,7 +2191,7 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: $Select
+            name: select
             description: Used to select what fields are present in the returned resource(s).
             serializedName: $Select
         protocol: !<!Protocols> 
@@ -2291,7 +2279,7 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: If-Match
+            name: ifMatch
             description: Used to perform an operation only if the targeted resource's etag matches the value provided.
             serializedName: If-Match
         protocol: !<!Protocols> 
@@ -2302,7 +2290,7 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: If-None-Match
+            name: ifNoneMatch
             description: Used to perform an operation only if the targeted resource's etag does not match the value provided.
             serializedName: If-None-Match
         protocol: !<!Protocols> 
@@ -2404,7 +2392,7 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: If-Match
+            name: ifMatch
             description: Used to perform an operation only if the targeted resource's etag matches the value provided.
             serializedName: If-Match
         protocol: !<!Protocols> 
@@ -2415,7 +2403,7 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: If-None-Match
+            name: ifNoneMatch
             description: Used to perform an operation only if the targeted resource's etag does not match the value provided.
             serializedName: If-None-Match
         protocol: !<!Protocols> 
@@ -2516,7 +2504,7 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: After
+            name: after
             description: Instructs the server to return elements that appear after the element referred to by the specified token.
             serializedName: After
         protocol: !<!Protocols> 
@@ -2527,7 +2515,7 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: Accept-Datetime
+            name: acceptDatetime
             description: Requests the server to respond with the state of the resource at the specified time.
             serializedName: Accept-Datetime
         protocol: !<!Protocols> 
@@ -2538,7 +2526,7 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: $Select
+            name: select
             description: Used to select what fields are present in the returned resource(s).
             serializedName: $Select
         protocol: !<!Protocols> 
@@ -2604,6 +2592,9 @@ operationGroups:
       default:
         name: GetRevisions
         description: Gets a list of key-value revisions.
+        paging:
+          itemName: items
+          nextLinkName: '@nextLink'
         summary: Gets a list of key-value revisions.
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -2642,7 +2633,7 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: After
+            name: after
             description: Instructs the server to return elements that appear after the element referred to by the specified token.
             serializedName: After
         protocol: !<!Protocols> 
@@ -2653,7 +2644,7 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: Accept-Datetime
+            name: acceptDatetime
             description: Requests the server to respond with the state of the resource at the specified time.
             serializedName: Accept-Datetime
         protocol: !<!Protocols> 
@@ -2664,7 +2655,7 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: $Select
+            name: select
             description: Used to select what fields are present in the returned resource(s).
             serializedName: $Select
         protocol: !<!Protocols> 
@@ -2723,7 +2714,7 @@ operationGroups:
   protocol: !<!Protocols> {}
 language: !<!Languages> 
   default:
-    name: ''
+    name: AppConfiguration
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

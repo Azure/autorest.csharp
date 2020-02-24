@@ -17,12 +17,12 @@ namespace AutoRest.TestServer.Tests
             var response = await new PetOperations(ClientDiagnostics, pipeline, host).AddPetAsync( new Pet()
             {
                 Name = "Retriever",
-                IntEnum = IntEnum._2,
+                IntEnum = IntEnum.Two,
                 DaysOfWeek = DaysOfWeekExtensibleEnum.Friday
             });
 
             Assert.AreEqual("Retriever", response.Value.Name);
-            Assert.AreEqual(IntEnum._2, response.Value.IntEnum);
+            Assert.AreEqual(IntEnum.Two, response.Value.IntEnum);
             Assert.AreEqual(DaysOfWeekExtensibleEnum.Friday, response.Value.DaysOfWeek);
 
             return response.GetRawResponse();
@@ -82,7 +82,7 @@ namespace AutoRest.TestServer.Tests
             var response = await new PetOperations(ClientDiagnostics, pipeline, host).GetByPetIdAsync( "tommy");
 
             Assert.AreEqual("Tommy Tomson", response.Value.Name);
-            Assert.AreEqual(IntEnum._1, response.Value.IntEnum);
+            Assert.AreEqual(IntEnum.One, response.Value.IntEnum);
             Assert.AreEqual(DaysOfWeekExtensibleEnum.Monday, response.Value.DaysOfWeek);
 
             return response.GetRawResponse();
@@ -94,7 +94,7 @@ namespace AutoRest.TestServer.Tests
             var response = await new PetOperations(ClientDiagnostics, pipeline, host).GetByPetIdAsync( "casper");
 
             Assert.AreEqual("Casper Ghosty", response.Value.Name);
-            Assert.AreEqual(IntEnum._2, response.Value.IntEnum);
+            Assert.AreEqual(IntEnum.Two, response.Value.IntEnum);
             Assert.AreEqual("Weekend", response.Value.DaysOfWeek.Value.ToString());
 
             return response.GetRawResponse();

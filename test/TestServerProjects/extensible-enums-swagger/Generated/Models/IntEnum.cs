@@ -19,16 +19,16 @@ namespace extensible_enums_swagger.Models
             _value = value ?? throw new ArgumentNullException(nameof(value));
         }
 
-        private const string _1Value = "1";
-        private const string _2Value = "2";
-        private const string _3Value = "3";
+        private const string OneValue = "1";
+        private const string TwoValue = "2";
+        private const string ThreeValue = "3";
 
         /// <summary> one. </summary>
-        public static IntEnum _1 { get; } = new IntEnum(_1Value);
+        public static IntEnum One { get; } = new IntEnum(OneValue);
         /// <summary> two. </summary>
-        public static IntEnum _2 { get; } = new IntEnum(_2Value);
+        public static IntEnum Two { get; } = new IntEnum(TwoValue);
         /// <summary> three. </summary>
-        public static IntEnum _3 { get; } = new IntEnum(_3Value);
+        public static IntEnum Three { get; } = new IntEnum(ThreeValue);
         /// <summary> Determines if two <see cref="IntEnum"/> values are the same. </summary>
         public static bool operator ==(IntEnum left, IntEnum right) => left.Equals(right);
         /// <summary> Determines if two <see cref="IntEnum"/> values are not the same. </summary>

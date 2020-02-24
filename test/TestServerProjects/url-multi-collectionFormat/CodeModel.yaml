@@ -13,7 +13,7 @@ schemas: !<!Schemas>
         precision: 32
         language: !<!Languages> 
           default:
-            name: typeForstatus
+            name: Integer
             description: ''
         protocol: !<!Protocols> {}
       serializedName: status
@@ -21,7 +21,6 @@ schemas: !<!Schemas>
         default:
           name: status
           description: ''
-          originalName: status
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: !<!StringSchema> &ref_2
@@ -31,7 +30,7 @@ schemas: !<!Schemas>
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: Error-message
+            name: ErrorMessage
             description: ''
         protocol: !<!Protocols> {}
       serializedName: message
@@ -39,7 +38,6 @@ schemas: !<!Schemas>
         default:
           name: message
           description: ''
-          originalName: message
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -60,13 +58,13 @@ schemas: !<!Schemas>
         version: 1.0.0
       language: !<!Languages> 
         default:
-          name: get-0-itemsItem
+          name: Get0ItemsItem
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Array of get-0-itemsItem
-        description: ''
+        name: ArrayOfGet0ItemsItem
+        description: Array of Get0ItemsItem
     protocol: !<!Protocols> {}
   - !<!ArraySchema> &ref_9
     type: array
@@ -80,13 +78,13 @@ schemas: !<!Schemas>
         version: 1.0.0
       language: !<!Languages> 
         default:
-          name: string
+          name: String
           description: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Array of string
-        description: ''
+        name: ArrayOfString
+        description: Array of String
     protocol: !<!Protocols> {}
   numbers:
   - *ref_0
@@ -95,7 +93,7 @@ schemas: !<!Schemas>
     type: string
     language: !<!Languages> 
       default:
-        name: string
+        name: String
         description: simple string
     protocol: !<!Protocols> {}
   - *ref_1
@@ -303,12 +301,12 @@ operationGroups:
     protocol: !<!Protocols> {}
   language: !<!Languages> 
     default:
-      name: queries
+      name: Queries
       description: ''
   protocol: !<!Protocols> {}
 language: !<!Languages> 
   default:
-    name: ''
+    name: UrlMultiCollectionFormat
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

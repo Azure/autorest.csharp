@@ -5,7 +5,7 @@
 
 namespace paging.Models
 {
-    /// <summary> The Product-properties. </summary>
+    /// <summary> The ProductProperties. </summary>
     public partial class ProductProperties
     {
         public int? Id { get; set; }

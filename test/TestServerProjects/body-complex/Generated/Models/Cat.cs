@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace body_complex.Models
 {
-    /// <summary> The cat. </summary>
+    /// <summary> The Cat. </summary>
     public partial class Cat : Pet
     {
         public string Color { get; set; }

@@ -5,8 +5,8 @@
 
 namespace xml_service.Models
 {
-    /// <summary> The JSONInput. </summary>
-    public partial class JSONInput
+    /// <summary> The JsonInput. </summary>
+    public partial class JsonInput
     {
         public int? Id { get; set; }
     }

@@ -11,14 +11,14 @@ namespace CognitiveServices.TextAnalytics.Models
     public partial class SentenceSentiment
     {
         /// <summary> The predicted Sentiment for the sentence. </summary>
-        public SentenceSentimentSentiment Sentiment { get; set; }
-        /// <summary> &lt;Any object&gt;. </summary>
-        public object SentenceScores { get; set; }
+        public SentenceSentimentValue Sentiment { get; set; }
+        /// <summary> Represents the confidence scores between 0 and 1 across all sentiment classes: positive, neutral, negative. </summary>
+        public SentimentConfidenceScorePerLabel SentenceScores { get; set; } = new SentimentConfidenceScorePerLabel();
         /// <summary> The sentence offset from the start of the document. </summary>
         public int Offset { get; set; }
         /// <summary> The length of the sentence by Unicode standard. </summary>
         public int Length { get; set; }
         /// <summary> The warnings generated for the sentence. </summary>
-        public ICollection<string> Warnings { get; set; } = new System.Collections.Generic.List<string>();
+        public ICollection<string> Warnings { get; set; }
     }
 }

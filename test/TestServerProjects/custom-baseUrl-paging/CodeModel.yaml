@@ -1,14 +1,14 @@
 !<!CodeModel> 
 schemas: !<!Schemas> 
   objects:
-  - !<!ObjectSchema> &ref_11
+  - !<!ObjectSchema> &ref_10
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
     properties:
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_2
+      schema: !<!ArraySchema> &ref_3
         type: array
         apiVersions:
         - !<!ApiVersion> 
@@ -27,12 +27,12 @@ schemas: !<!Schemas>
                 version: 1.0.0
               properties:
               - !<!Property> 
-                schema: !<!NumberSchema> &ref_3
+                schema: !<!NumberSchema> &ref_2
                   type: integer
                   precision: 32
                   language: !<!Languages> 
                     default:
-                      name: typeForid
+                      name: Integer
                       description: ''
                   protocol: !<!Protocols> {}
                 serializedName: id
@@ -40,17 +40,16 @@ schemas: !<!Schemas>
                   default:
                     name: id
                     description: ''
-                    originalName: id
                 protocol: !<!Protocols> {}
               - !<!Property> 
-                schema: !<!StringSchema> &ref_5
+                schema: !<!StringSchema> &ref_4
                   type: string
                   apiVersions:
                   - !<!ApiVersion> 
                     version: 1.0.0
                   language: !<!Languages> 
                     default:
-                      name: Product-properties-name
+                      name: ProductPropertiesName
                       description: ''
                   protocol: !<!Protocols> {}
                 serializedName: name
@@ -58,11 +57,10 @@ schemas: !<!Schemas>
                   default:
                     name: name
                     description: ''
-                    originalName: name
                 protocol: !<!Protocols> {}
               language: !<!Languages> 
                 default:
-                  name: Product-properties
+                  name: ProductProperties
                   description: ''
                   namespace: Api100
               protocol: !<!Protocols> {}
@@ -71,7 +69,6 @@ schemas: !<!Schemas>
               default:
                 name: properties
                 description: ''
-                originalName: properties
             protocol: !<!Protocols> {}
           language: !<!Languages> 
             default:
@@ -81,25 +78,24 @@ schemas: !<!Schemas>
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
-            name: ProductResult-values
-            description: ''
+            name: ProductResultValues
+            description: Array of Product
         protocol: !<!Protocols> {}
       serializedName: values
       language: !<!Languages> 
         default:
           name: values
           description: ''
-          originalName: values
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_6
+      schema: !<!StringSchema> &ref_5
         type: string
         apiVersions:
         - !<!ApiVersion> 
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: ProductResult-nextLink
+            name: ProductResultNextLink
             description: ''
         protocol: !<!Protocols> {}
       serializedName: nextLink
@@ -107,7 +103,6 @@ schemas: !<!Schemas>
         default:
           name: nextLink
           description: ''
-          originalName: nextLink
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -124,30 +119,22 @@ schemas: !<!Schemas>
       version: 1.0.0
     properties:
     - !<!Property> 
-      schema: !<!NumberSchema> &ref_4
-        type: integer
-        precision: 32
-        language: !<!Languages> 
-          default:
-            name: typeForstatus
-            description: ''
-        protocol: !<!Protocols> {}
+      schema: *ref_2
       serializedName: status
       language: !<!Languages> 
         default:
           name: status
           description: ''
-          originalName: status
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_7
+      schema: !<!StringSchema> &ref_6
         type: string
         apiVersions:
         - !<!ApiVersion> 
           version: 1.0.0
         language: !<!Languages> 
           default:
-            name: Error-message
+            name: ErrorMessage
             description: ''
         protocol: !<!Protocols> {}
       serializedName: message
@@ -155,7 +142,6 @@ schemas: !<!Schemas>
         default:
           name: message
           description: ''
-          originalName: message
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
@@ -164,20 +150,19 @@ schemas: !<!Schemas>
         namespace: Api100
     protocol: !<!Protocols> {}
   arrays:
-  - *ref_2
-  numbers:
   - *ref_3
-  - *ref_4
+  numbers:
+  - *ref_2
   strings:
-  - !<!StringSchema> &ref_8
+  - !<!StringSchema> &ref_7
     type: string
     language: !<!Languages> 
       default:
-        name: string
+        name: String
         description: simple string
     protocol: !<!Protocols> {}
+  - *ref_4
   - *ref_5
-  - *ref_6
   - !<!StringSchema> &ref_13
     type: string
     apiVersions:
@@ -185,7 +170,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: string
+        name: String
         description: ''
     protocol: !<!Protocols> {}
   - !<!StringSchema> 
@@ -196,13 +181,13 @@ schemas: !<!Schemas>
     defaultValue: host
     language: !<!Languages> 
       default:
-        name: string
+        name: String
         description: ''
     protocol: !<!Protocols> {}
-  - *ref_7
+  - *ref_6
 globalParameters:
-- !<!Parameter> &ref_9
-  schema: *ref_8
+- !<!Parameter> &ref_8
+  schema: *ref_7
   clientDefaultValue: host
   implementation: Client
   required: true
@@ -228,14 +213,14 @@ operationGroups:
 - !<!OperationGroup> 
   $key: Paging
   operations:
-  - !<!Operation> 
+  - !<!Operation> &ref_12
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - !<!Parameter> &ref_10
-        schema: *ref_8
+      - !<!Parameter> &ref_9
+        schema: *ref_7
         implementation: Method
         required: true
         extensions:
@@ -252,9 +237,9 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: uri
-      - *ref_9
+      - *ref_8
       signatureParameters:
-      - *ref_10
+      - *ref_9
       language: !<!Languages> 
         default:
           name: ''
@@ -266,7 +251,7 @@ operationGroups:
           uri: 'http://{accountName}{host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_11
+      schema: *ref_10
       language: !<!Languages> 
         default:
           name: ''
@@ -294,8 +279,11 @@ operationGroups:
         nextLinkName: nextLink
     language: !<!Languages> 
       default:
-        name: getPagesPartialUrl
+        name: GetPagesPartialUrl
         description: 'A paging operation that combines custom url, paging and partial URL and expect to concat after host'
+        paging:
+          itemName: values
+          nextLinkName: nextLink
     protocol: !<!Protocols> {}
   - !<!Operation> 
     apiVersions:
@@ -303,8 +291,8 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - !<!Parameter> &ref_12
-        schema: *ref_8
+      - !<!Parameter> &ref_11
+        schema: *ref_7
         implementation: Method
         required: true
         extensions:
@@ -321,9 +309,9 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: uri
-      - *ref_9
+      - *ref_8
       signatureParameters:
-      - *ref_12
+      - *ref_11
       language: !<!Languages> 
         default:
           name: ''
@@ -335,7 +323,7 @@ operationGroups:
           uri: 'http://{accountName}{host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_11
+      schema: *ref_10
       language: !<!Languages> 
         default:
           name: ''
@@ -364,8 +352,14 @@ operationGroups:
         operationName: Paging_getPagesPartialUrlOperationNext
     language: !<!Languages> 
       default:
-        name: getPagesPartialUrlOperation
+        name: GetPagesPartialUrlOperation
         description: 'A paging operation that combines custom url, paging and partial URL with next operation'
+        paging:
+          group: Paging
+          itemName: values
+          member: GetPagesPartialUrlOperationNext
+          nextLinkName: nextLink
+          nextLinkOperation: *ref_12
     protocol: !<!Protocols> {}
   - !<!Operation> 
     apiVersions:
@@ -374,7 +368,7 @@ operationGroups:
     request: !<!Request> 
       parameters:
       - !<!Parameter> &ref_14
-        schema: *ref_8
+        schema: *ref_7
         implementation: Method
         required: true
         extensions:
@@ -391,7 +385,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: uri
-      - *ref_9
+      - *ref_8
       - !<!Parameter> &ref_15
         schema: *ref_13
         implementation: Method
@@ -420,7 +414,7 @@ operationGroups:
           uri: 'http://{accountName}{host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_11
+      schema: *ref_10
       language: !<!Languages> 
         default:
           name: ''
@@ -449,8 +443,14 @@ operationGroups:
         operationName: Paging_getPagesPartialUrlOperationNext
     language: !<!Languages> 
       default:
-        name: getPagesPartialUrlOperationNext
+        name: GetPagesPartialUrlOperationNext
         description: 'A paging operation that combines custom url, paging and partial URL'
+        paging:
+          group: Paging
+          itemName: values
+          member: GetPagesPartialUrlOperationNext
+          nextLinkName: nextLink
+          nextLinkOperation: *ref_12
     protocol: !<!Protocols> {}
   language: !<!Languages> 
     default:
@@ -459,7 +459,7 @@ operationGroups:
   protocol: !<!Protocols> {}
 language: !<!Languages> 
   default:
-    name: ''
+    name: CustomBaseUrlPaging
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

@@ -5,7 +5,7 @@
 
 namespace body_complex.Models
 {
-    /// <summary> The basic. </summary>
+    /// <summary> The Basic. </summary>
     public partial class Basic
     {
         /// <summary> Basic Id. </summary>
