@@ -264,36 +264,45 @@ namespace Azure.Core
                     return response.Status != 202;
                 }
 
-                if (response.ContentStream?.Length > 0 && response.Status >= 200 && response.Status <= 204)
+                if (response.Status >= 200 && response.Status <= 204)
                 {
-                    try
+                    if (response.ContentStream?.Length > 0)
                     {
-                        using JsonDocument document = JsonDocument.Parse(response.ContentStream);
-                        foreach (JsonProperty property in document.RootElement.EnumerateObject())
+                        try
                         {
-                            if ((_info.HeaderFrom == HeaderFrom.OperationLocation ||
-                                 _info.HeaderFrom == HeaderFrom.AzureAsyncOperation) &&
-                                property.NameEquals("status"))
+                            using JsonDocument document = JsonDocument.Parse(response.ContentStream);
+                            foreach (JsonProperty property in document.RootElement.EnumerateObject())
                             {
-                                return s_terminalStates.Contains(property.Value.GetString().ToLowerInvariant());
-                            }
-
-                            if (_info.HeaderFrom == HeaderFrom.None && property.NameEquals("properties"))
-                            {
-                                foreach (JsonProperty innerProperty in property.Value.EnumerateObject())
+                                if ((_info.HeaderFrom == HeaderFrom.OperationLocation ||
+                                     _info.HeaderFrom == HeaderFrom.AzureAsyncOperation) &&
+                                    property.NameEquals("status"))
                                 {
-                                    if (innerProperty.NameEquals("provisioningState"))
+                                    return s_terminalStates.Contains(property.Value.GetString().ToLowerInvariant());
+                                }
+
+                                if (_info.HeaderFrom == HeaderFrom.None && property.NameEquals("properties"))
+                                {
+                                    foreach (JsonProperty innerProperty in property.Value.EnumerateObject())
                                     {
-                                        return s_terminalStates.Contains(innerProperty.Value.GetString().ToLowerInvariant());
+                                        if (innerProperty.NameEquals("provisioningState"))
+                                        {
+                                            return s_terminalStates.Contains(innerProperty.Value.GetString().ToLowerInvariant());
+                                        }
                                     }
                                 }
                             }
                         }
+                        finally
+                        {
+                            // It is required to reset the position of the content after reading as this response may be used for deserialization.
+                            response.ContentStream.Position = 0;
+                        }
                     }
-                    finally
+
+                    // If provisioningState was not found, it defaults to Succeeded.
+                    if (_info.HeaderFrom == HeaderFrom.None)
                     {
-                        // It is required to reset the position of the content after reading as this response may be used for deserialization.
-                        response.ContentStream.Position = 0;
+                        return true;
                     }
                 }
 

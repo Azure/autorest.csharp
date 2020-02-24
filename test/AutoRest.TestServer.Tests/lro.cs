@@ -943,7 +943,10 @@ namespace AutoRest.TestServer.Tests
         {
             var value = new Product();
             var operation = await new LrOSOperations(ClientDiagnostics, pipeline, host).StartPut200SucceededNoStateOperationAsync(value);
-            Assert.ThrowsAsync<RequestFailedException>(async () => await operation.WaitForCompletionAsync().ConfigureAwait(false));
+            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
+            Assert.AreEqual("100", result.Value.Id);
+            Assert.AreEqual("foo", result.Value.Name);
+            Assert.AreEqual(null, result.Value.ProvisioningState);
         });
 
         [Test]
@@ -951,7 +954,10 @@ namespace AutoRest.TestServer.Tests
         {
             var value = new Product();
             var operation = new LrOSOperations(ClientDiagnostics, pipeline, host).StartPut200SucceededNoStateOperation(value);
-            Assert.Throws<RequestFailedException>(() => operation.WaitForCompletion());
+            var result = operation.WaitForCompletion();
+            Assert.AreEqual("100", result.Value.Id);
+            Assert.AreEqual("foo", result.Value.Name);
+            Assert.AreEqual(null, result.Value.ProvisioningState);
         });
 
         [Test]
