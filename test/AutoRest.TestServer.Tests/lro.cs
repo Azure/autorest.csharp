@@ -163,7 +163,7 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("DELETE does final GET and restarts polling, causing failure.")]
+        [Ignore("DELETE does final GET and restarts polling: https://github.com/Azure/autorest.testserver/issues/138")]
         public Task LRODeleteAsyncNoRetrySucceeded() => TestStatus(async (host, pipeline) =>
         {
             var operation = await new LrOSOperations(ClientDiagnostics, pipeline, host).StartDeleteAsyncNoRetrySucceededOperationAsync();
@@ -171,7 +171,7 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("DELETE does final GET and restarts polling, causing failure.")]
+        [Ignore("DELETE does final GET and restarts polling: https://github.com/Azure/autorest.testserver/issues/138")]
         public Task LRODeleteAsyncNoRetrySucceeded_Sync() => TestStatus((host, pipeline) =>
         {
             var operation = new LrOSOperations(ClientDiagnostics, pipeline, host).StartDeleteAsyncNoRetrySucceededOperation();
@@ -179,7 +179,7 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("DELETE does final GET and restarts polling, causing failure.")]
+        [Ignore("DELETE does final GET and restarts polling: https://github.com/Azure/autorest.testserver/issues/138")]
         public Task LRODeleteAsyncRetryCanceled() => TestStatus(async (host, pipeline) =>
         {
             var operation = await new LrOSOperations(ClientDiagnostics, pipeline, host).StartDeleteAsyncRetrycanceledOperationAsync();
@@ -187,7 +187,7 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("DELETE does final GET and restarts polling, causing failure.")]
+        [Ignore("DELETE does final GET and restarts polling: https://github.com/Azure/autorest.testserver/issues/138")]
         public Task LRODeleteAsyncRetryCanceled_Sync() => TestStatus((host, pipeline) =>
         {
             var operation = new LrOSOperations(ClientDiagnostics, pipeline, host).StartDeleteAsyncRetrycanceledOperation();
@@ -195,7 +195,7 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("DELETE does final GET and restarts polling, causing failure.")]
+        [Ignore("DELETE does final GET and restarts polling: https://github.com/Azure/autorest.testserver/issues/138")]
         public Task LRODeleteAsyncRetryFailed() => TestStatus(async (host, pipeline) =>
         {
             var operation = await new LrOSOperations(ClientDiagnostics, pipeline, host).StartDeleteAsyncRetryFailedOperationAsync();
@@ -203,7 +203,7 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("DELETE does final GET and restarts polling, causing failure.")]
+        [Ignore("DELETE does final GET and restarts polling: https://github.com/Azure/autorest.testserver/issues/138")]
         public Task LRODeleteAsyncRetryFailed_Sync() => TestStatus((host, pipeline) =>
         {
             var operation = new LrOSOperations(ClientDiagnostics, pipeline, host).StartDeleteAsyncRetryFailedOperation();
@@ -211,7 +211,7 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("DELETE does final GET and restarts polling, causing failure.")]
+        [Ignore("DELETE does final GET and restarts polling: https://github.com/Azure/autorest.testserver/issues/138")]
         public Task LRODeleteAsyncRetrySucceeded() => TestStatus(async (host, pipeline) =>
         {
             var operation = await new LrOSOperations(ClientDiagnostics, pipeline, host).StartDeleteAsyncRetrySucceededOperationAsync();
@@ -219,7 +219,7 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("DELETE does final GET and restarts polling, causing failure.")]
+        [Ignore("DELETE does final GET and restarts polling: https://github.com/Azure/autorest.testserver/issues/138")]
         public Task LRODeleteAsyncRetrySucceeded_Sync() => TestStatus((host, pipeline) =>
         {
             var operation = new LrOSOperations(ClientDiagnostics, pipeline, host).StartDeleteAsyncRetrySucceededOperation();
