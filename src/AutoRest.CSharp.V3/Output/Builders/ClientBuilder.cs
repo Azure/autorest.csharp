@@ -114,9 +114,6 @@ namespace AutoRest.CSharp.V3.Output.Builders
                     Response originalResponse = processed.Method.Response;
                     processed.Method.Response = new Response(null, originalResponse.SuccessfulStatusCodes, null);
 
-                    //Method pollingMethod = BuildPollingMethod(processed.Method);
-                    //pollingMethods.Add(pollingMethod);
-
                     IDictionary<object, object> options = processed.Operation.Extensions.GetValue<IDictionary<object, object>>("x-ms-long-running-operation-options")
                                                           ?? ImmutableDictionary<object, object>.Empty;
                     LongRunningOperation longRunningOperationMethod = BuildLongRunningOperation(processed.Method, originalResponse, options);
@@ -330,65 +327,6 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 throw new InvalidOperationException($"{itemName} property has to be an array schema, actual {itemProperty.SchemaProperty}");
             }
         }
-
-        //private static Method BuildPollingMethod(Method method)
-        //{
-        //    var pollingLinkParameter = new Parameter(
-        //        "pollingLink",
-        //        "The URL to poll for the final response.",
-        //        new CSharpType(typeof(string)),
-        //        null,
-        //        true);
-        //    var request = new Request(
-        //        RequestMethod.Get,
-        //        new[] { new PathSegment(pollingLinkParameter, false, SerializationFormat.Default) },
-        //        Array.Empty<PathSegment>(),
-        //        Array.Empty<QueryParameter>(),
-        //        method.Request.Headers,
-        //        null
-        //    );
-
-        //    return new Method(
-        //        $"{method.Name}Polling",
-        //        method.Description,
-        //        request,
-        //        new[] { pollingLinkParameter },
-        //        method.Response,
-        //        method.Diagnostics);
-        //}
-
-        //private static Method BuildCreateOperationMethod(Method method)
-        //{
-        //    var originalResponseParameter = new Parameter(
-        //        "originalResponse",
-        //        "The original response from starting the operation.",
-        //        new CSharpType(typeof(Response)),
-        //        null,
-        //        true);
-        //    var httpMessageParameter = new Parameter(
-        //        "createOriginalHttpMessage",
-        //        "Creates the HTTP message used for the original request.",
-        //        new CSharpType(typeof(Func<>), new CSharpType(typeof(HttpMessage))),
-        //        null,
-        //        true);
-
-        //    var request = new Request(
-        //        RequestMethod.Get,
-        //        new[] { new PathSegment(pollingLinkParameter, false, SerializationFormat.Default) },
-        //        Array.Empty<PathSegment>(),
-        //        Array.Empty<QueryParameter>(),
-        //        method.Request.Headers,
-        //        null
-        //    );
-
-        //    return new Method(
-        //        $"Create{method.Name}Operation",
-        //        method.Description,
-        //        request,
-        //        new[] { pollingLinkParameter },
-        //        method.Response,
-        //        method.Diagnostics);
-        //}
 
         private static LongRunningOperation BuildLongRunningOperation(Method method, Response originalResponse, IDictionary<object, object> options)
         {

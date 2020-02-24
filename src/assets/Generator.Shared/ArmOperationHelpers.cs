@@ -94,16 +94,16 @@ namespace Azure.Core
 
                 if (_shouldPoll)
                 {
-                    _rawResponse = await GetResponseAsync(_pipeline, _clientDiagnostics, _scopeName, _info.PollUri, cancellationToken).ConfigureAwait(false);
+                    _rawResponse = await GetResponseAsync(_info.PollUri, cancellationToken).ConfigureAwait(false);
                 }
                 _shouldPoll = true;
-                _hasCompleted = IsTerminalState(_clientDiagnostics, GetRawResponse(), _info);
+                _hasCompleted = IsTerminalState();
                 if (HasCompleted)
                 {
                     Response finalResponse = GetRawResponse();
                     if (_info.FinalUri != null)
                     {
-                        finalResponse = await GetResponseAsync(_pipeline, _clientDiagnostics, _scopeName, _info.FinalUri, cancellationToken).ConfigureAwait(false);
+                        finalResponse = await GetResponseAsync(_info.FinalUri, cancellationToken).ConfigureAwait(false);
                     }
                     switch (finalResponse.Status)
                     {
@@ -133,16 +133,16 @@ namespace Azure.Core
 
                 if (_shouldPoll)
                 {
-                    _rawResponse = GetResponse(_pipeline, _clientDiagnostics, _scopeName, _info.PollUri, cancellationToken);
+                    _rawResponse = GetResponse(_info.PollUri, cancellationToken);
                 }
                 _shouldPoll = true;
-                _hasCompleted = IsTerminalState(_clientDiagnostics, GetRawResponse(), _info);
+                _hasCompleted = IsTerminalState();
                 if (HasCompleted)
                 {
                     Response finalResponse = GetRawResponse();
                     if (_info.FinalUri != null)
                     {
-                        finalResponse = GetResponse(_pipeline, _clientDiagnostics, _scopeName, _info.FinalUri, cancellationToken);
+                        finalResponse = GetResponse(_info.FinalUri, cancellationToken);
                     }
                     switch (finalResponse.Status)
                     {
@@ -180,60 +180,106 @@ namespace Azure.Core
             }
             public override bool HasCompleted => _hasCompleted;
             public override bool HasValue => _hasValue;
-        }
 
-        private static HttpMessage CreateGetResponseRequest(HttpPipeline pipeline, string link)
-        {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(link, false);
-            request.Uri = uri;
-            return message;
-        }
-
-        private static async ValueTask<Response> GetResponseAsync(HttpPipeline pipeline, ClientDiagnostics clientDiagnostics, string scopeName, string link, CancellationToken cancellationToken = default)
-        {
-            if (link == null)
+            private HttpMessage CreateGetResponseRequest(string link)
             {
-                throw new ArgumentNullException(nameof(link));
+                HttpMessage message = _pipeline.CreateMessage();
+                Request request = message.Request;
+                request.Method = RequestMethodAdditional.Get;
+                var uri = new RawRequestUriBuilder();
+                uri.AppendRaw(link, false);
+                request.Uri = uri;
+                return message;
             }
 
-            using var scope = clientDiagnostics.CreateScope(scopeName);
-            scope.Start();
-            try
+            private async ValueTask<Response> GetResponseAsync(string link, CancellationToken cancellationToken = default)
             {
-                using var message = CreateGetResponseRequest(pipeline, link);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                return message.Response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
+                if (link == null)
+                {
+                    throw new ArgumentNullException(nameof(link));
+                }
 
-        private static Response GetResponse(HttpPipeline pipeline, ClientDiagnostics clientDiagnostics, string scopeName, string link, CancellationToken cancellationToken = default)
-        {
-            if (link == null)
-            {
-                throw new ArgumentNullException(nameof(link));
+                using DiagnosticScope scope = _clientDiagnostics.CreateScope(_scopeName);
+                scope.Start();
+                try
+                {
+                    using HttpMessage message = CreateGetResponseRequest(link);
+                    await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                    return message.Response;
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
 
-            using var scope = clientDiagnostics.CreateScope(scopeName);
-            scope.Start();
-            try
+            private Response GetResponse(string link, CancellationToken cancellationToken = default)
             {
-                using var message = CreateGetResponseRequest(pipeline, link);
-                pipeline.Send(message, cancellationToken);
-                return message.Response;
+                if (link == null)
+                {
+                    throw new ArgumentNullException(nameof(link));
+                }
+
+                using DiagnosticScope scope = _clientDiagnostics.CreateScope(_scopeName);
+                scope.Start();
+                try
+                {
+                    using HttpMessage message = CreateGetResponseRequest(link);
+                    _pipeline.Send(message, cancellationToken);
+                    return message.Response;
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
+
+            private static readonly string[] s_terminalStates = { "succeeded", "failed", "canceled" };
+
+            private bool IsTerminalState()
             {
-                scope.Failed(e);
-                throw;
+                Response response = GetRawResponse();
+                if (_info.HeaderFrom == HeaderFrom.Location)
+                {
+                    return response.Status != 202;
+                }
+
+                if (response.ContentStream?.Length > 0)
+                {
+                    try
+                    {
+                        using JsonDocument document = JsonDocument.Parse(response.ContentStream);
+                        foreach (JsonProperty property in document.RootElement.EnumerateObject())
+                        {
+                            if ((_info.HeaderFrom == HeaderFrom.OperationLocation ||
+                                 _info.HeaderFrom == HeaderFrom.AzureAsyncOperation) &&
+                                property.NameEquals("status"))
+                            {
+                                return s_terminalStates.Contains(property.Value.GetString().ToLowerInvariant());
+                            }
+
+                            if (_info.HeaderFrom == HeaderFrom.None && property.NameEquals("properties"))
+                            {
+                                foreach (JsonProperty innerProperty in property.Value.EnumerateObject())
+                                {
+                                    if (innerProperty.NameEquals("provisioningState"))
+                                    {
+                                        return s_terminalStates.Contains(innerProperty.Value.GetString().ToLowerInvariant());
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    finally
+                    {
+                        // It is required to reset the position of the content after reading as this response may be used for deserialization.
+                        response.ContentStream.Position = 0;
+                    }
+                }
+
+                throw _clientDiagnostics.CreateRequestFailedException(response);
             }
         }
 
@@ -297,68 +343,6 @@ namespace Azure.Core
             }
 
             return new ScenarioInfo(HeaderFrom.None, originalUri, null, requestMethod, false);
-        }
-
-        private static readonly string[] _terminalStates = { "succeeded", "failed", "canceled" };
-
-        private static bool IsTerminalState(ClientDiagnostics clientDiagnostics, Response response, ScenarioInfo info)
-        //private bool IsTerminalState()
-        {
-            if (info.HeaderFrom == HeaderFrom.Location)
-            {
-                return response.Status != 202;
-            }
-
-            //try
-            if (response.ContentStream?.Length > 0)
-            {
-                try
-                {
-                    using JsonDocument document = JsonDocument.Parse(response.ContentStream);
-                    foreach (var property in document.RootElement.EnumerateObject())
-                    {
-                        if ((info.HeaderFrom == HeaderFrom.OperationLocation ||
-                             info.HeaderFrom == HeaderFrom.AzureAsyncOperation) &&
-                            property.NameEquals("status"))
-                        {
-                            return _terminalStates.Contains(property.Value.GetString().ToLowerInvariant());
-                        }
-
-                        if (info.HeaderFrom == HeaderFrom.None && property.NameEquals("properties"))
-                        {
-                            foreach (var innerProperty in property.Value.EnumerateObject())
-                            {
-                                if (innerProperty.NameEquals("provisioningState"))
-                                {
-                                    return _terminalStates.Contains(innerProperty.Value.GetString().ToLowerInvariant());
-                                }
-                            }
-                        }
-                    }
-                }
-                finally
-                {
-                    // It is required to reset the position of the content after reading as this response may be used for deserialization.
-                    response.ContentStream.Position = 0;
-                }
-            //}
-            //catch
-            //{
-            //    // Could not parse JsonDocument. Continue.
-            //}
-            //finally
-            //{
-            //if (response.ContentStream != null)
-            //{
-
-                //// It is required to reset the position of the content after reading as this response may be used for deserialization.
-                //response.ContentStream.Position = 0;
-
-                //}
-            }
-
-            //return true;
-            throw clientDiagnostics.CreateRequestFailedException(response);
         }
     }
 }
