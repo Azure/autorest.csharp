@@ -255,6 +255,7 @@ namespace AutoRest.TestServer.Tests
         }, true);
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "Failure after 4 retries")]
         public Task PagingMultipleFailure() => Test(async (host, pipeline) =>
         {
             var id = 1;
