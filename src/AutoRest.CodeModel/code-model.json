@@ -1067,6 +1067,47 @@
         }
       ]
     },
+    "SchemaContext": {
+      "enum": [
+        "input",
+        "output"
+      ],
+      "type": "string"
+    },
+    "SchemaUsage": {
+      "type": "object",
+      "properties": {
+        "usage": {
+          "description": "contexts in which the schema is used",
+          "type": "array",
+          "items": {
+            "enum": [
+              "input",
+              "output"
+            ],
+            "type": "string"
+          }
+        },
+        "serializationFormats": {
+          "description": "Known media types in which this schema can be serialized",
+          "type": "array",
+          "items": {
+            "enum": [
+              "binary",
+              "form",
+              "json",
+              "multipart",
+              "text",
+              "unknown",
+              "xml"
+            ],
+            "type": "string"
+          }
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false
+    },
     "Relations": {
       "type": "object",
       "properties": {
@@ -1144,6 +1185,33 @@
           "items": {
             "$ref": "#/definitions/GroupProperty"
           }
+        },
+        "usage": {
+          "description": "contexts in which the schema is used",
+          "type": "array",
+          "items": {
+            "enum": [
+              "input",
+              "output"
+            ],
+            "type": "string"
+          }
+        },
+        "serializationFormats": {
+          "description": "Known media types in which this schema can be serialized",
+          "type": "array",
+          "items": {
+            "enum": [
+              "binary",
+              "form",
+              "json",
+              "multipart",
+              "text",
+              "unknown",
+              "xml"
+            ],
+            "type": "string"
+          }
         }
       },
       "defaultProperties": [],
@@ -1190,6 +1258,33 @@
         },
         "discriminatorValue": {
           "type": "string"
+        },
+        "usage": {
+          "description": "contexts in which the schema is used",
+          "type": "array",
+          "items": {
+            "enum": [
+              "input",
+              "output"
+            ],
+            "type": "string"
+          }
+        },
+        "serializationFormats": {
+          "description": "Known media types in which this schema can be serialized",
+          "type": "array",
+          "items": {
+            "enum": [
+              "binary",
+              "form",
+              "json",
+              "multipart",
+              "text",
+              "unknown",
+              "xml"
+            ],
+            "type": "string"
+          }
         }
       },
       "defaultProperties": [],
@@ -1458,7 +1553,6 @@
       "defaultProperties": [],
       "additionalProperties": false,
       "required": [
-        "language",
         "value"
       ]
     },
@@ -1566,6 +1660,22 @@
       ]
     },
     "BinarySchema": {
+      "type": "object",
+      "properties": {},
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "language",
+        "protocol",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Schema"
+        }
+      ]
+    },
+    "AnySchema": {
       "type": "object",
       "properties": {},
       "defaultProperties": [],
@@ -1704,7 +1814,7 @@
           }
         },
         "choices": {
-          "description": "- this is essentially can be thought of as an 'enum' \nthat is a choice between one of several items, but an unspecified value is permitted.",
+          "description": "- this is essentially can be thought of as an 'enum'\nthat is a choice between one of several items, but an unspecified value is permitted.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ChoiceSchema"
@@ -1762,7 +1872,7 @@
           }
         },
         "unknowns": {
-          "description": "it's possible that we just may make this an error \nin representation.",
+          "description": "it's possible that we just may make this an error\nin representation.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Schema"
@@ -1932,9 +2042,26 @@
       "description": "represents a single callable endpoint with a discrete set of inputs, and any number of output possibilities (responses or exceptions)",
       "type": "object",
       "properties": {
-        "request": {
-          "$ref": "#/definitions/Request",
-          "description": "the inputs that are used to build the request."
+        "parameters": {
+          "description": "common parameters when there are multiple requests",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Parameter"
+          }
+        },
+        "signatureParameters": {
+          "description": "a common filtered list of parameters that is (assumably) the actual method signature parameters",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Parameter"
+          }
+        },
+        "requests": {
+          "description": "the different possibilities to build the request.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Request"
+          }
         },
         "responses": {
           "description": "responses that indicate a successful call",
@@ -1990,8 +2117,7 @@
       "additionalProperties": false,
       "required": [
         "language",
-        "protocol",
-        "request"
+        "protocol"
       ]
     },
     "Request": {
@@ -2070,22 +2196,6 @@
       },
       "defaultProperties": [],
       "additionalProperties": false
-    },
-    "AnySchema": {
-      "type": "object",
-      "properties": {},
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Schema"
-        }
-      ]
     },
     "SerializationStyle": {
       "description": "The Serialization Style used for the parameter.\n\nDescribes how the parameter value will be serialized depending on the type of the parameter value.",

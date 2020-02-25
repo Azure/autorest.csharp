@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
         public Client BuildClient(OperationGroup operationGroup)
         {
             var allClientParameters = operationGroup.Operations
-                .SelectMany(op => op.Request.Parameters)
+                .SelectMany(op => op.Requests.SelectMany(r => r.Parameters))
                 .Where(p => p.Implementation == ImplementationLocation.Client)
                 .Distinct();
             Dictionary<string, Parameter> clientParameters = new Dictionary<string, Parameter>();
@@ -130,7 +130,9 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
         private Method? BuildMethod(Operation operation, string clientName, IReadOnlyDictionary<string, Parameter> clientParameters)
         {
-            HttpRequest? httpRequest = operation.Request.Protocol.Http as HttpRequest;
+            //TODO: Handle multiple requests: https://github.com/Azure/autorest.csharp/issues/455
+            ServiceRequest? serviceRequest = operation.Requests.FirstOrDefault();
+            HttpRequest? httpRequest = serviceRequest?.Protocol.Http as HttpRequest;
             //TODO: Handle multiple responses: https://github.com/Azure/autorest.csharp/issues/413
             ServiceResponse? response = operation.Responses.FirstOrDefault();
             HttpResponse? httpResponse = response?.Protocol.Http as HttpResponse;
@@ -147,7 +149,8 @@ namespace AutoRest.CSharp.V3.Output.Builders
             List<Parameter> methodParameters = new List<Parameter>();
 
             RequestBody? body = null;
-            foreach (RequestParameter requestParameter in operation.Request.Parameters)
+            RequestParameter[] parameters = serviceRequest?.Parameters.ToArray() ?? Array.Empty<RequestParameter>();
+            foreach (RequestParameter requestParameter in parameters)
             {
                 string defaultName = requestParameter.Language.Default.Name;
                 string serializedName = requestParameter.Language.Default.SerializedName ?? defaultName;
