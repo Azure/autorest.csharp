@@ -115,10 +115,15 @@ namespace Azure.Core
                     _rawResponse = await GetResponseAsync(_info.PollUri, cancellationToken).ConfigureAwait(false);
                 }
                 _shouldPoll = true;
-                _hasCompleted = IsTerminalState();
+                _hasCompleted = IsTerminalState(out string state);
                 if (HasCompleted)
                 {
                     Response finalResponse = GetRawResponse();
+                    if (s_failureStates.Contains(state))
+                    {
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(finalResponse).ConfigureAwait(false);
+                    }
+
                     if (_info.FinalUri != null)
                     {
                         finalResponse = await GetResponseAsync(_info.FinalUri, cancellationToken).ConfigureAwait(false);
@@ -154,10 +159,15 @@ namespace Azure.Core
                     _rawResponse = GetResponse(_info.PollUri, cancellationToken);
                 }
                 _shouldPoll = true;
-                _hasCompleted = IsTerminalState();
+                _hasCompleted = IsTerminalState(out string state);
                 if (HasCompleted)
                 {
                     Response finalResponse = GetRawResponse();
+                    if (s_failureStates.Contains(state))
+                    {
+                        throw _clientDiagnostics.CreateRequestFailedException(finalResponse);
+                    }
+
                     if (_info.FinalUri != null)
                     {
                         finalResponse = GetResponse(_info.FinalUri, cancellationToken);
@@ -254,11 +264,10 @@ namespace Azure.Core
                 }
             }
 
-            private static readonly string[] s_terminalStates = { "succeeded", "failed", "canceled" };
-
-            private bool IsTerminalState()
+            private bool IsTerminalState(out string state)
             {
                 Response response = GetRawResponse();
+                state = string.Empty;
                 if (_info.HeaderFrom == HeaderFrom.Location)
                 {
                     return response.Status != 202;
@@ -277,7 +286,8 @@ namespace Azure.Core
                                      _info.HeaderFrom == HeaderFrom.AzureAsyncOperation) &&
                                     property.NameEquals("status"))
                                 {
-                                    return s_terminalStates.Contains(property.Value.GetString().ToLowerInvariant());
+                                    state = property.Value.GetString().ToLowerInvariant();
+                                    return s_terminalStates.Contains(state);
                                 }
 
                                 if (_info.HeaderFrom == HeaderFrom.None && property.NameEquals("properties"))
@@ -286,7 +296,8 @@ namespace Azure.Core
                                     {
                                         if (innerProperty.NameEquals("provisioningState"))
                                         {
-                                            return s_terminalStates.Contains(innerProperty.Value.GetString().ToLowerInvariant());
+                                            state = innerProperty.Value.GetString().ToLowerInvariant();
+                                            return s_terminalStates.Contains(state);
                                         }
                                     }
                                 }
@@ -309,6 +320,9 @@ namespace Azure.Core
                 throw _clientDiagnostics.CreateRequestFailedException(response);
             }
         }
+
+        private static readonly string[] s_failureStates = { "failed", "canceled" };
+        private static readonly string[] s_terminalStates = s_failureStates.Append("succeeded").ToArray();
 
         private enum HeaderFrom
         {

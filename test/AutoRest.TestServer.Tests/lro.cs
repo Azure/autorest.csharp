@@ -777,35 +777,35 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        public Task LROPostAsyncRetryCanceled() => TestStatus(async (host, pipeline) =>
+        public Task LROPostAsyncRetryCanceled() => Test(async (host, pipeline) =>
         {
             var value = new Product();
             var operation = await new LrOSOperations(ClientDiagnostics, pipeline, host).StartPostAsyncRetrycanceledOperationAsync(value);
-            return await operation.WaitForCompletionAsync().ConfigureAwait(false);
+            Assert.ThrowsAsync<RequestFailedException>(async () => await operation.WaitForCompletionAsync().ConfigureAwait(false));
         });
 
         [Test]
-        public Task LROPostAsyncRetryCanceled_Sync() => TestStatus((host, pipeline) =>
+        public Task LROPostAsyncRetryCanceled_Sync() => Test((host, pipeline) =>
         {
             var value = new Product();
             var operation = new LrOSOperations(ClientDiagnostics, pipeline, host).StartPostAsyncRetrycanceledOperation(value);
-            return operation.WaitForCompletion();
+            Assert.Throws<RequestFailedException>(() => operation.WaitForCompletion());
         });
 
         [Test]
-        public Task LROPostAsyncRetryFailed() => TestStatus(async (host, pipeline) =>
+        public Task LROPostAsyncRetryFailed() => Test(async (host, pipeline) =>
         {
             var value = new Product();
             var operation = await new LrOSOperations(ClientDiagnostics, pipeline, host).StartPostAsyncRetryFailedOperationAsync(value);
-            return await operation.WaitForCompletionAsync().ConfigureAwait(false);
+            Assert.ThrowsAsync<RequestFailedException>(async () => await operation.WaitForCompletionAsync().ConfigureAwait(false));
         });
 
         [Test]
-        public Task LROPostAsyncRetryFailed_Sync() => TestStatus((host, pipeline) =>
+        public Task LROPostAsyncRetryFailed_Sync() => Test((host, pipeline) =>
         {
             var value = new Product();
             var operation = new LrOSOperations(ClientDiagnostics, pipeline, host).StartPostAsyncRetryFailedOperation(value);
-            return operation.WaitForCompletion();
+            Assert.Throws<RequestFailedException>(() => operation.WaitForCompletion());
         });
 
         [Test]
@@ -1009,10 +1009,7 @@ namespace AutoRest.TestServer.Tests
         {
             var value = new Product();
             var operation = await new LrOSOperations(ClientDiagnostics, pipeline, host).StartPutAsyncNoRetrycanceledOperationAsync(value);
-            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
-            Assert.AreEqual("100", result.Value.Id);
-            Assert.AreEqual("foo", result.Value.Name);
-            Assert.AreEqual("Canceled", result.Value.ProvisioningState);
+            Assert.ThrowsAsync<RequestFailedException>(async () => await operation.WaitForCompletionAsync().ConfigureAwait(false));
         });
 
         [Test]
@@ -1020,10 +1017,7 @@ namespace AutoRest.TestServer.Tests
         {
             var value = new Product();
             var operation = new LrOSOperations(ClientDiagnostics, pipeline, host).StartPutAsyncNoRetrycanceledOperation(value);
-            var result = operation.WaitForCompletion();
-            Assert.AreEqual("100", result.Value.Id);
-            Assert.AreEqual("foo", result.Value.Name);
-            Assert.AreEqual("Canceled", result.Value.ProvisioningState);
+            Assert.Throws<RequestFailedException>(() => operation.WaitForCompletion());
         });
 
         [Test]
@@ -1053,10 +1047,7 @@ namespace AutoRest.TestServer.Tests
         {
             var value = new Product();
             var operation = await new LrOSOperations(ClientDiagnostics, pipeline, host).StartPutAsyncRetryFailedOperationAsync(value);
-            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
-            Assert.AreEqual("100", result.Value.Id);
-            Assert.AreEqual("foo", result.Value.Name);
-            Assert.AreEqual("Failed", result.Value.ProvisioningState);
+            Assert.ThrowsAsync<RequestFailedException>(async () => await operation.WaitForCompletionAsync().ConfigureAwait(false));
         });
 
         [Test]
@@ -1064,10 +1055,7 @@ namespace AutoRest.TestServer.Tests
         {
             var value = new Product();
             var operation = new LrOSOperations(ClientDiagnostics, pipeline, host).StartPutAsyncRetryFailedOperation(value);
-            var result = operation.WaitForCompletion();
-            Assert.AreEqual("100", result.Value.Id);
-            Assert.AreEqual("foo", result.Value.Name);
-            Assert.AreEqual("Failed", result.Value.ProvisioningState);
+            Assert.Throws<RequestFailedException>(() => operation.WaitForCompletion());
         });
 
         [Test]
@@ -1097,10 +1085,7 @@ namespace AutoRest.TestServer.Tests
         {
             var value = new Product();
             var operation = await new LrOSOperations(ClientDiagnostics, pipeline, host).StartPut200Acceptedcanceled200OperationAsync(value);
-            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
-            Assert.AreEqual("100", result.Value.Id);
-            Assert.AreEqual("foo", result.Value.Name);
-            Assert.AreEqual("Canceled", result.Value.ProvisioningState);
+            Assert.ThrowsAsync<RequestFailedException>(async () => await operation.WaitForCompletionAsync().ConfigureAwait(false));
         });
 
         [Test]
@@ -1108,10 +1093,7 @@ namespace AutoRest.TestServer.Tests
         {
             var value = new Product();
             var operation = new LrOSOperations(ClientDiagnostics, pipeline, host).StartPut200Acceptedcanceled200Operation(value);
-            var result = operation.WaitForCompletion();
-            Assert.AreEqual("100", result.Value.Id);
-            Assert.AreEqual("foo", result.Value.Name);
-            Assert.AreEqual("Canceled", result.Value.ProvisioningState);
+            Assert.Throws<RequestFailedException>(() => operation.WaitForCompletion());
         });
 
         [Test]
