@@ -318,6 +318,7 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutUtcMaxDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("DatetimeOperations.PutUtcMaxDateTime");
             scope.Start();
             try
@@ -343,6 +344,7 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutUtcMaxDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("DatetimeOperations.PutUtcMaxDateTime");
             scope.Start();
             try
@@ -383,6 +385,7 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutUtcMaxDateTime7DigitsAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("DatetimeOperations.PutUtcMaxDateTime7Digits");
             scope.Start();
             try
@@ -408,6 +411,7 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutUtcMaxDateTime7Digits(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("DatetimeOperations.PutUtcMaxDateTime7Digits");
             scope.Start();
             try
@@ -649,6 +653,7 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutLocalPositiveOffsetMaxDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("DatetimeOperations.PutLocalPositiveOffsetMaxDateTime");
             scope.Start();
             try
@@ -674,6 +679,7 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutLocalPositiveOffsetMaxDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("DatetimeOperations.PutLocalPositiveOffsetMaxDateTime");
             scope.Start();
             try
@@ -848,6 +854,7 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutLocalNegativeOffsetMaxDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("DatetimeOperations.PutLocalNegativeOffsetMaxDateTime");
             scope.Start();
             try
@@ -873,6 +880,7 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutLocalNegativeOffsetMaxDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("DatetimeOperations.PutLocalNegativeOffsetMaxDateTime");
             scope.Start();
             try
@@ -1047,6 +1055,7 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutUtcMinDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("DatetimeOperations.PutUtcMinDateTime");
             scope.Start();
             try
@@ -1072,6 +1081,7 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutUtcMinDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("DatetimeOperations.PutUtcMinDateTime");
             scope.Start();
             try
@@ -1179,6 +1189,7 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutLocalPositiveOffsetMinDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("DatetimeOperations.PutLocalPositiveOffsetMinDateTime");
             scope.Start();
             try
@@ -1204,6 +1215,7 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutLocalPositiveOffsetMinDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("DatetimeOperations.PutLocalPositiveOffsetMinDateTime");
             scope.Start();
             try
@@ -1311,6 +1323,7 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutLocalNegativeOffsetMinDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("DatetimeOperations.PutLocalNegativeOffsetMinDateTime");
             scope.Start();
             try
@@ -1336,6 +1349,7 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutLocalNegativeOffsetMinDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("DatetimeOperations.PutLocalNegativeOffsetMinDateTime");
             scope.Start();
             try

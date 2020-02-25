@@ -376,6 +376,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ListDataSourcesResult>> ListAsync(string select, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("DataSourcesOperations.List");
             scope.Start();
             try
@@ -406,6 +407,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ListDataSourcesResult> List(string select, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("DataSourcesOperations.List");
             scope.Start();
             try

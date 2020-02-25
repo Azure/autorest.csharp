@@ -318,6 +318,7 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutBigFloatAsync(float numberBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("NumberOperations.PutBigFloat");
             scope.Start();
             try
@@ -343,6 +344,7 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutBigFloat(float numberBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("NumberOperations.PutBigFloat");
             scope.Start();
             try
@@ -450,6 +452,7 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutBigDoubleAsync(double numberBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("NumberOperations.PutBigDouble");
             scope.Start();
             try
@@ -475,6 +478,7 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutBigDouble(double numberBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("NumberOperations.PutBigDouble");
             scope.Start();
             try
@@ -842,6 +846,7 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutBigDecimalAsync(decimal numberBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("NumberOperations.PutBigDecimal");
             scope.Start();
             try
@@ -867,6 +872,7 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutBigDecimal(decimal numberBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("NumberOperations.PutBigDecimal");
             scope.Start();
             try
@@ -1234,6 +1240,7 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutSmallFloatAsync(float numberBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("NumberOperations.PutSmallFloat");
             scope.Start();
             try
@@ -1259,6 +1266,7 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutSmallFloat(float numberBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("NumberOperations.PutSmallFloat");
             scope.Start();
             try
@@ -1366,6 +1374,7 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutSmallDoubleAsync(double numberBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("NumberOperations.PutSmallDouble");
             scope.Start();
             try
@@ -1391,6 +1400,7 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutSmallDouble(double numberBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("NumberOperations.PutSmallDouble");
             scope.Start();
             try
@@ -1498,6 +1508,7 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutSmallDecimalAsync(decimal numberBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("NumberOperations.PutSmallDecimal");
             scope.Start();
             try
@@ -1523,6 +1534,7 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutSmallDecimal(decimal numberBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("NumberOperations.PutSmallDecimal");
             scope.Start();
             try

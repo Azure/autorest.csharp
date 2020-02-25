@@ -128,6 +128,7 @@ namespace extensible_enums_swagger
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Pet>> AddPetAsync(Pet petParam, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("PetOperations.AddPet");
             scope.Start();
             try
@@ -156,6 +157,7 @@ namespace extensible_enums_swagger
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Pet> AddPet(Pet petParam, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("PetOperations.AddPet");
             scope.Start();
             try

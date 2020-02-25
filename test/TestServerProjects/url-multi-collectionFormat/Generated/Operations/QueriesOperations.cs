@@ -50,6 +50,7 @@ namespace url_multi_collectionFormat
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> ArrayStringMultiNullAsync(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringMultiNull");
             scope.Start();
             try
@@ -75,6 +76,7 @@ namespace url_multi_collectionFormat
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response ArrayStringMultiNull(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringMultiNull");
             scope.Start();
             try
@@ -115,6 +117,7 @@ namespace url_multi_collectionFormat
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> ArrayStringMultiEmptyAsync(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringMultiEmpty");
             scope.Start();
             try
@@ -140,6 +143,7 @@ namespace url_multi_collectionFormat
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response ArrayStringMultiEmpty(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringMultiEmpty");
             scope.Start();
             try
@@ -180,6 +184,7 @@ namespace url_multi_collectionFormat
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> ArrayStringMultiValidAsync(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringMultiValid");
             scope.Start();
             try
@@ -205,6 +210,7 @@ namespace url_multi_collectionFormat
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response ArrayStringMultiValid(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringMultiValid");
             scope.Start();
             try

@@ -498,16 +498,19 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private void WriteParameterNullChecks(CodeWriter writer, IReadOnlyCollection<Parameter> parameters)
         {
-            Parameter[] nullCheckParameters = parameters.Where(p => p.IsRequired && (p.Type.IsNullable || !p.Type.IsValueType)).ToArray();
-            foreach (Parameter parameter in nullCheckParameters)
+            foreach (Parameter parameter in parameters)
             {
-                using (writer.If($"{parameter.Name} == null"))
+                CSharpType cs = parameter.Type;
+                if (parameter.IsRequired && (cs.IsNullable || !cs.IsValueType))
                 {
-                    writer.Line($"throw new {typeof(ArgumentNullException)}(nameof({parameter.Name}));");
+                    using (writer.If($"{parameter.Name} == null"))
+                    {
+                        writer.Line($"throw new {typeof(ArgumentNullException)}(nameof({parameter.Name}));");
+                    }
                 }
             }
 
-            if (nullCheckParameters.Any())
+            if (parameters.Any())
             {
                 writer.Line();
             }

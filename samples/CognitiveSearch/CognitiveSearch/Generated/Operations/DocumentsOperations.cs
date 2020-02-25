@@ -77,6 +77,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<long>> CountAsync(Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("DocumentsOperations.Count");
             scope.Start();
             try
@@ -106,6 +107,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<long> Count(Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("DocumentsOperations.Count");
             scope.Start();
             try
@@ -242,6 +244,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<SearchDocumentsResult>> SearchGetAsync(string searchText, bool? includeTotalResultCount, IEnumerable<string> facets, string filter, IEnumerable<string> highlightFields, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> orderBy, QueryType? queryType, IEnumerable<string> scoringParameters, string scoringProfile, IEnumerable<string> searchFields, SearchMode? searchMode, IEnumerable<string> select, int? skip, int? top, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("DocumentsOperations.SearchGet");
             scope.Start();
             try
@@ -288,6 +291,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<SearchDocumentsResult> SearchGet(string searchText, bool? includeTotalResultCount, IEnumerable<string> facets, string filter, IEnumerable<string> highlightFields, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> orderBy, QueryType? queryType, IEnumerable<string> scoringParameters, string scoringProfile, IEnumerable<string> searchFields, SearchMode? searchMode, IEnumerable<string> select, int? skip, int? top, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("DocumentsOperations.SearchGet");
             scope.Start();
             try

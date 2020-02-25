@@ -75,6 +75,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<KeyListResult, GetKeysHeaders>> GetKeysAsync(string name, string after, string acceptDatetime, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("AllOperations.GetKeys");
             scope.Start();
             try
@@ -107,6 +108,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<KeyListResult, GetKeysHeaders> GetKeys(string name, string after, string acceptDatetime, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("AllOperations.GetKeys");
             scope.Start();
             try
@@ -167,6 +169,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<CheckKeysHeaders>> CheckKeysAsync(string name, string after, string acceptDatetime, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("AllOperations.CheckKeys");
             scope.Start();
             try
@@ -195,6 +198,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<CheckKeysHeaders> CheckKeys(string name, string after, string acceptDatetime, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("AllOperations.CheckKeys");
             scope.Start();
             try
@@ -261,6 +265,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<KeyValueListResult, GetKeyValuesHeaders>> GetKeyValuesAsync(string key, string label, string after, string acceptDatetime, IEnumerable<Get6ItemsItem> select, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("AllOperations.GetKeyValues");
             scope.Start();
             try
@@ -295,6 +300,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<KeyValueListResult, GetKeyValuesHeaders> GetKeyValues(string key, string label, string after, string acceptDatetime, IEnumerable<Get6ItemsItem> select, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("AllOperations.GetKeyValues");
             scope.Start();
             try
@@ -365,6 +371,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<CheckKeyValuesHeaders>> CheckKeyValuesAsync(string key, string label, string after, string acceptDatetime, IEnumerable<Head6ItemsItem> select, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("AllOperations.CheckKeyValues");
             scope.Start();
             try
@@ -395,6 +402,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<CheckKeyValuesHeaders> CheckKeyValues(string key, string label, string after, string acceptDatetime, IEnumerable<Head6ItemsItem> select, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("AllOperations.CheckKeyValues");
             scope.Start();
             try
@@ -897,6 +905,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<LabelListResult, GetLabelsHeaders>> GetLabelsAsync(string name, string after, string acceptDatetime, IEnumerable<string> select, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("AllOperations.GetLabels");
             scope.Start();
             try
@@ -930,6 +939,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<LabelListResult, GetLabelsHeaders> GetLabels(string name, string after, string acceptDatetime, IEnumerable<string> select, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("AllOperations.GetLabels");
             scope.Start();
             try
@@ -995,6 +1005,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<CheckLabelsHeaders>> CheckLabelsAsync(string name, string after, string acceptDatetime, IEnumerable<string> select, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("AllOperations.CheckLabels");
             scope.Start();
             try
@@ -1024,6 +1035,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<CheckLabelsHeaders> CheckLabels(string name, string after, string acceptDatetime, IEnumerable<string> select, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("AllOperations.CheckLabels");
             scope.Start();
             try
@@ -1300,6 +1312,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<KeyValueListResult, GetRevisionsHeaders>> GetRevisionsAsync(string key, string label, string after, string acceptDatetime, IEnumerable<Enum4> select, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("AllOperations.GetRevisions");
             scope.Start();
             try
@@ -1334,6 +1347,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<KeyValueListResult, GetRevisionsHeaders> GetRevisions(string key, string label, string after, string acceptDatetime, IEnumerable<Enum4> select, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("AllOperations.GetRevisions");
             scope.Start();
             try
@@ -1404,6 +1418,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<CheckRevisionsHeaders>> CheckRevisionsAsync(string key, string label, string after, string acceptDatetime, IEnumerable<Enum4> select, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("AllOperations.CheckRevisions");
             scope.Start();
             try
@@ -1434,6 +1449,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<CheckRevisionsHeaders> CheckRevisions(string key, string label, string after, string acceptDatetime, IEnumerable<Enum4> select, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("AllOperations.CheckRevisions");
             scope.Start();
             try
@@ -1822,6 +1838,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public AsyncPageable<Key> GetKeysPageableAsync(string name, string after, string acceptDatetime, CancellationToken cancellationToken = default)
         {
+
             async Task<Page<Key>> FirstPageFunc(int? pageSizeHint)
             {
                 var response = await GetKeysAsync(name, after, acceptDatetime, cancellationToken).ConfigureAwait(false);
@@ -1841,6 +1858,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Pageable<Key> GetKeysPageable(string name, string after, string acceptDatetime, CancellationToken cancellationToken = default)
         {
+
             Page<Key> FirstPageFunc(int? pageSizeHint)
             {
                 var response = GetKeys(name, after, acceptDatetime, cancellationToken);
@@ -1862,6 +1880,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public AsyncPageable<KeyValue> GetKeyValuesPageableAsync(string key, string label, string after, string acceptDatetime, IEnumerable<Get6ItemsItem> select, CancellationToken cancellationToken = default)
         {
+
             async Task<Page<KeyValue>> FirstPageFunc(int? pageSizeHint)
             {
                 var response = await GetKeyValuesAsync(key, label, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false);
@@ -1883,6 +1902,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Pageable<KeyValue> GetKeyValuesPageable(string key, string label, string after, string acceptDatetime, IEnumerable<Get6ItemsItem> select, CancellationToken cancellationToken = default)
         {
+
             Page<KeyValue> FirstPageFunc(int? pageSizeHint)
             {
                 var response = GetKeyValues(key, label, after, acceptDatetime, select, cancellationToken);
@@ -1903,6 +1923,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public AsyncPageable<Label> GetLabelsPageableAsync(string name, string after, string acceptDatetime, IEnumerable<string> select, CancellationToken cancellationToken = default)
         {
+
             async Task<Page<Label>> FirstPageFunc(int? pageSizeHint)
             {
                 var response = await GetLabelsAsync(name, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false);
@@ -1923,6 +1944,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Pageable<Label> GetLabelsPageable(string name, string after, string acceptDatetime, IEnumerable<string> select, CancellationToken cancellationToken = default)
         {
+
             Page<Label> FirstPageFunc(int? pageSizeHint)
             {
                 var response = GetLabels(name, after, acceptDatetime, select, cancellationToken);
@@ -1944,6 +1966,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public AsyncPageable<KeyValue> GetRevisionsPageableAsync(string key, string label, string after, string acceptDatetime, IEnumerable<Enum4> select, CancellationToken cancellationToken = default)
         {
+
             async Task<Page<KeyValue>> FirstPageFunc(int? pageSizeHint)
             {
                 var response = await GetRevisionsAsync(key, label, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false);
@@ -1965,6 +1988,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Pageable<KeyValue> GetRevisionsPageable(string key, string label, string after, string acceptDatetime, IEnumerable<Enum4> select, CancellationToken cancellationToken = default)
         {
+
             Page<KeyValue> FirstPageFunc(int? pageSizeHint)
             {
                 var response = GetRevisions(key, label, after, acceptDatetime, select, cancellationToken);
