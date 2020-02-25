@@ -255,7 +255,6 @@ namespace AutoRest.TestServer.Tests
         }, true);
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Failure after 4 retries")]
         public Task PagingMultipleFailure() => Test(async (host, pipeline) =>
         {
             var id = 1;
@@ -295,7 +294,7 @@ namespace AutoRest.TestServer.Tests
                 }
             });
             Assert.AreEqual(2, id);
-        }, true);
+        }, true, true);
 
         [Test]
         public Task PagingMultipleFailureUri() => Test(async (host, pipeline) =>

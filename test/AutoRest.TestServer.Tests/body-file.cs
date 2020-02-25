@@ -33,7 +33,7 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("'Stream was too long' buffering issue: https://github.com/Azure/autorest.csharp/issues/454")]
+        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task FileStreamVeryLarge() => Test(async (host, pipeline) =>
         {
             var result = await new FilesOperations(ClientDiagnostics, pipeline, host).GetFileLargeAsync();
@@ -49,10 +49,10 @@ namespace AutoRest.TestServer.Tests
 
             Assert.AreEqual(3000 * 1024 * 1024L, total);
             await result.Value.DisposeAsync().ConfigureAwait(false);
-        });
+        }, false, true);
 
         [Test]
-        [Ignore("'Stream was too long' buffering issue: https://github.com/Azure/autorest.csharp/issues/454")]
+        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task FileStreamVeryLarge_Sync() => Test((host, pipeline) =>
         {
             var result = new FilesOperations(ClientDiagnostics, pipeline, host).GetFileLarge();
@@ -68,6 +68,6 @@ namespace AutoRest.TestServer.Tests
 
             Assert.AreEqual(3000 * 1024 * 1024L, total);
             result.Value.Dispose();
-        });
+        }, false, true);
     }
 }

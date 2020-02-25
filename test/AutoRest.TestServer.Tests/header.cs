@@ -19,8 +19,7 @@ namespace AutoRest.TestServer.Tests
         public HeaderTests(TestServerVersion version) : base(version, "header") { }
 
         [Test]
-        [Ignore("Built pipeline already injects User-Agent, so test fails with 400 Bad Request.")]
-        public Task HeaderParameterExistingKey() => TestStatus(async (host, pipeline) => await new HeaderOperations(ClientDiagnostics, pipeline, host).ParamExistingKeyAsync( "overwrite"));
+        public Task HeaderParameterExistingKey() => TestStatus(async (host, pipeline) => await new HeaderOperations(ClientDiagnostics, pipeline, host).ParamExistingKeyAsync( "overwrite"), false, true);
 
         [Test]
         public Task HeaderResponseExistingKey() => TestStatus(async (host, pipeline) =>
