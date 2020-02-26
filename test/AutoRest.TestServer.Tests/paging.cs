@@ -294,7 +294,7 @@ namespace AutoRest.TestServer.Tests
                 }
             });
             Assert.AreEqual(2, id);
-        }, true, true);
+        }, ignoreScenario: true, useSimplePipeline: true);
 
         [Test]
         public Task PagingMultipleFailureUri() => Test(async (host, pipeline) =>

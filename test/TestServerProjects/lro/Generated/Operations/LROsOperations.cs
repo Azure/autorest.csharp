@@ -2530,18 +2530,18 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrOSOperations.Put200Succeeded", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrOSOperations.Put200Succeeded", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                using var document = JsonDocument.Parse(r.ContentStream);
+                using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, r);
+                return Response.FromValue(value, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
-                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value0 = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value0, r);
+                return Response.FromValue(value0, response);
             });
         }
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’. </summary>
@@ -2576,18 +2576,18 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrOSOperations.Put200SucceededNoState", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrOSOperations.Put200SucceededNoState", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                using var document = JsonDocument.Parse(r.ContentStream);
+                using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, r);
+                return Response.FromValue(value, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
-                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value0 = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value0, r);
+                return Response.FromValue(value0, response);
             });
         }
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’. </summary>
@@ -2622,18 +2622,18 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrOSOperations.Put202Retry200", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrOSOperations.Put202Retry200", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                using var document = JsonDocument.Parse(r.ContentStream);
+                using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, r);
+                return Response.FromValue(value, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
-                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value0 = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value0, r);
+                return Response.FromValue(value0, response);
             });
         }
         /// <summary> Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn&apos;t contains ProvisioningState. </summary>
@@ -2668,18 +2668,18 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrOSOperations.Put201CreatingSucceeded200", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrOSOperations.Put201CreatingSucceeded200", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                using var document = JsonDocument.Parse(r.ContentStream);
+                using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, r);
+                return Response.FromValue(value, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
-                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value0 = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value0, r);
+                return Response.FromValue(value0, response);
             });
         }
         /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
@@ -2714,18 +2714,18 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrOSOperations.Put200UpdatingSucceeded204", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrOSOperations.Put200UpdatingSucceeded204", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                using var document = JsonDocument.Parse(r.ContentStream);
+                using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, r);
+                return Response.FromValue(value, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
-                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value0 = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value0, r);
+                return Response.FromValue(value0, response);
             });
         }
         /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
@@ -2760,18 +2760,18 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrOSOperations.Put201CreatingFailed200", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrOSOperations.Put201CreatingFailed200", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                using var document = JsonDocument.Parse(r.ContentStream);
+                using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, r);
+                return Response.FromValue(value, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
-                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value0 = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value0, r);
+                return Response.FromValue(value0, response);
             });
         }
         /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’. </summary>
@@ -2806,18 +2806,18 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrOSOperations.Put200Acceptedcanceled200", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrOSOperations.Put200Acceptedcanceled200", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                using var document = JsonDocument.Parse(r.ContentStream);
+                using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, r);
+                return Response.FromValue(value, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
-                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value0 = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value0, r);
+                return Response.FromValue(value0, response);
             });
         }
         /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’. </summary>
@@ -2852,18 +2852,18 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrOSOperations.PutNoHeaderInRetry", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrOSOperations.PutNoHeaderInRetry", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                using var document = JsonDocument.Parse(r.ContentStream);
+                using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, r);
+                return Response.FromValue(value, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
-                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value0 = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value0, r);
+                return Response.FromValue(value0, response);
             });
         }
         /// <summary> Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header. </summary>
@@ -2898,18 +2898,18 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrOSOperations.PutAsyncRetrySucceeded", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrOSOperations.PutAsyncRetrySucceeded", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                using var document = JsonDocument.Parse(r.ContentStream);
+                using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, r);
+                return Response.FromValue(value, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
-                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value0 = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value0, r);
+                return Response.FromValue(value0, response);
             });
         }
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -2944,18 +2944,18 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrOSOperations.PutAsyncNoRetrySucceeded", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrOSOperations.PutAsyncNoRetrySucceeded", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                using var document = JsonDocument.Parse(r.ContentStream);
+                using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, r);
+                return Response.FromValue(value, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
-                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value0 = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value0, r);
+                return Response.FromValue(value0, response);
             });
         }
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -2990,18 +2990,18 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrOSOperations.PutAsyncRetryFailed", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrOSOperations.PutAsyncRetryFailed", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                using var document = JsonDocument.Parse(r.ContentStream);
+                using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, r);
+                return Response.FromValue(value, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
-                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value0 = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value0, r);
+                return Response.FromValue(value0, response);
             });
         }
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -3036,18 +3036,18 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrOSOperations.PutAsyncNoRetrycanceled", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrOSOperations.PutAsyncNoRetrycanceled", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                using var document = JsonDocument.Parse(r.ContentStream);
+                using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, r);
+                return Response.FromValue(value, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
-                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value0 = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value0, r);
+                return Response.FromValue(value0, response);
             });
         }
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -3082,18 +3082,18 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrOSOperations.PutAsyncNoHeaderInRetry", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrOSOperations.PutAsyncNoHeaderInRetry", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                using var document = JsonDocument.Parse(r.ContentStream);
+                using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, r);
+                return Response.FromValue(value, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
-                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value0 = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value0, r);
+                return Response.FromValue(value0, response);
             });
         }
         /// <summary> Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header. </summary>
@@ -3128,18 +3128,18 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrOSOperations.PutNonResource", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrOSOperations.PutNonResource", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                using var document = JsonDocument.Parse(r.ContentStream);
+                using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Sku.DeserializeSku(document.RootElement);
-                return Response.FromValue(value, r);
+                return Response.FromValue(value, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
-                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value0 = Sku.DeserializeSku(document.RootElement);
-                return Response.FromValue(value0, r);
+                return Response.FromValue(value0, response);
             });
         }
         /// <summary> Long running put request with non resource. </summary>
@@ -3174,18 +3174,18 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrOSOperations.PutAsyncNonResource", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrOSOperations.PutAsyncNonResource", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                using var document = JsonDocument.Parse(r.ContentStream);
+                using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Sku.DeserializeSku(document.RootElement);
-                return Response.FromValue(value, r);
+                return Response.FromValue(value, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
-                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value0 = Sku.DeserializeSku(document.RootElement);
-                return Response.FromValue(value0, r);
+                return Response.FromValue(value0, response);
             });
         }
         /// <summary> Long running put request with non resource. </summary>
@@ -3220,18 +3220,18 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrOSOperations.PutSubResource", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrOSOperations.PutSubResource", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                using var document = JsonDocument.Parse(r.ContentStream);
+                using var document = JsonDocument.Parse(response.ContentStream);
                 var value = SubProduct.DeserializeSubProduct(document.RootElement);
-                return Response.FromValue(value, r);
+                return Response.FromValue(value, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
-                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value0 = SubProduct.DeserializeSubProduct(document.RootElement);
-                return Response.FromValue(value0, r);
+                return Response.FromValue(value0, response);
             });
         }
         /// <summary> Long running put request with sub resource. </summary>
@@ -3266,18 +3266,18 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrOSOperations.PutAsyncSubResource", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrOSOperations.PutAsyncSubResource", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                using var document = JsonDocument.Parse(r.ContentStream);
+                using var document = JsonDocument.Parse(response.ContentStream);
                 var value = SubProduct.DeserializeSubProduct(document.RootElement);
-                return Response.FromValue(value, r);
+                return Response.FromValue(value, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
-                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value0 = SubProduct.DeserializeSubProduct(document.RootElement);
-                return Response.FromValue(value0, r);
+                return Response.FromValue(value0, response);
             });
         }
         /// <summary> Long running put request with sub resource. </summary>
@@ -3312,18 +3312,18 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrOSOperations.DeleteProvisioning202Accepted200Succeeded", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrOSOperations.DeleteProvisioning202Accepted200Succeeded", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                using var document = JsonDocument.Parse(r.ContentStream);
+                using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, r);
+                return Response.FromValue(value, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
-                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value0 = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value0, r);
+                return Response.FromValue(value0, response);
             });
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
@@ -3354,18 +3354,18 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrOSOperations.DeleteProvisioning202DeletingFailed200", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrOSOperations.DeleteProvisioning202DeletingFailed200", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                using var document = JsonDocument.Parse(r.ContentStream);
+                using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, r);
+                return Response.FromValue(value, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
-                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value0 = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value0, r);
+                return Response.FromValue(value0, response);
             });
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’. </summary>
@@ -3396,18 +3396,18 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrOSOperations.DeleteProvisioning202Deletingcanceled200", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrOSOperations.DeleteProvisioning202Deletingcanceled200", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                using var document = JsonDocument.Parse(r.ContentStream);
+                using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, r);
+                return Response.FromValue(value, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
-                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value0 = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value0, r);
+                return Response.FromValue(value0, response);
             });
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’. </summary>
@@ -3438,15 +3438,15 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrOSOperations.Delete204Succeeded", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrOSOperations.Delete204Succeeded", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
                 await Task.CompletedTask;
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             });
         }
         /// <summary> Long running delete succeeds and returns right away. </summary>
@@ -3477,18 +3477,18 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrOSOperations.Delete202Retry200", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrOSOperations.Delete202Retry200", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                using var document = JsonDocument.Parse(r.ContentStream);
+                using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, r);
+                return Response.FromValue(value, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
-                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value0 = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value0, r);
+                return Response.FromValue(value0, response);
             });
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
@@ -3519,18 +3519,18 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrOSOperations.Delete202NoRetry204", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrOSOperations.Delete202NoRetry204", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                using var document = JsonDocument.Parse(r.ContentStream);
+                using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, r);
+                return Response.FromValue(value, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
-                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value0 = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value0, r);
+                return Response.FromValue(value0, response);
             });
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
@@ -3561,15 +3561,15 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrOSOperations.DeleteNoHeaderInRetry", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrOSOperations.DeleteNoHeaderInRetry", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
                 await Task.CompletedTask;
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             });
         }
         /// <summary> Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header. </summary>
@@ -3600,15 +3600,15 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrOSOperations.DeleteAsyncNoHeaderInRetry", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrOSOperations.DeleteAsyncNoHeaderInRetry", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
                 await Task.CompletedTask;
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             });
         }
         /// <summary> Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header. </summary>
@@ -3639,15 +3639,15 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrOSOperations.DeleteAsyncRetrySucceeded", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrOSOperations.DeleteAsyncRetrySucceeded", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
                 await Task.CompletedTask;
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             });
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -3678,15 +3678,15 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrOSOperations.DeleteAsyncNoRetrySucceeded", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrOSOperations.DeleteAsyncNoRetrySucceeded", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
                 await Task.CompletedTask;
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             });
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -3717,15 +3717,15 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrOSOperations.DeleteAsyncRetryFailed", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrOSOperations.DeleteAsyncRetryFailed", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
                 await Task.CompletedTask;
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             });
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -3756,15 +3756,15 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrOSOperations.DeleteAsyncRetrycanceled", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrOSOperations.DeleteAsyncRetrycanceled", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
                 await Task.CompletedTask;
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             });
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -3795,18 +3795,18 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrOSOperations.Post200WithPayload", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrOSOperations.Post200WithPayload", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                using var document = JsonDocument.Parse(r.ContentStream);
+                using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Sku.DeserializeSku(document.RootElement);
-                return Response.FromValue(value, r);
+                return Response.FromValue(value, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
-                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value0 = Sku.DeserializeSku(document.RootElement);
-                return Response.FromValue(value0, r);
+                return Response.FromValue(value0, response);
             });
         }
         /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; header. Poll returns a 200 with a response body after success. </summary>
@@ -3837,15 +3837,15 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrOSOperations.Post202Retry200", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrOSOperations.Post202Retry200", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
                 await Task.CompletedTask;
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             });
         }
         /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; and &apos;Retry-After&apos; headers, Polls return a 200 with a response body after success. </summary>
@@ -3880,18 +3880,18 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrOSOperations.Post202NoRetry204", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrOSOperations.Post202NoRetry204", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                using var document = JsonDocument.Parse(r.ContentStream);
+                using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, r);
+                return Response.FromValue(value, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
-                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value0 = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value0, r);
+                return Response.FromValue(value0, response);
             });
         }
         /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; header, 204 with noresponse body after success. </summary>
@@ -3926,18 +3926,18 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrOSOperations.PostDoubleHeadersFinalLocationGet", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrOSOperations.PostDoubleHeadersFinalLocationGet", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                using var document = JsonDocument.Parse(r.ContentStream);
+                using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, r);
+                return Response.FromValue(value, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
-                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value0 = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value0, r);
+                return Response.FromValue(value0, response);
             });
         }
         /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should poll Location to get the final object. </summary>
@@ -3968,18 +3968,18 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrOSOperations.PostDoubleHeadersFinalAzureHeaderGet", FinalStateVia.AzureAsyncOperation, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrOSOperations.PostDoubleHeadersFinalAzureHeaderGet", OperationFinalStateVia.AzureAsyncOperation, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                using var document = JsonDocument.Parse(r.ContentStream);
+                using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, r);
+                return Response.FromValue(value, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
-                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value0 = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value0, r);
+                return Response.FromValue(value0, response);
             });
         }
         /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should NOT poll Location to get the final object. </summary>
@@ -4010,18 +4010,18 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrOSOperations.PostDoubleHeadersFinalAzureHeaderGetDefault", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrOSOperations.PostDoubleHeadersFinalAzureHeaderGetDefault", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                using var document = JsonDocument.Parse(r.ContentStream);
+                using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, r);
+                return Response.FromValue(value, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
-                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value0 = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value0, r);
+                return Response.FromValue(value0, response);
             });
         }
         /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should NOT poll Location to get the final object if you support initial Autorest behavior. </summary>
@@ -4052,18 +4052,18 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrOSOperations.PostAsyncRetrySucceeded", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrOSOperations.PostAsyncRetrySucceeded", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                using var document = JsonDocument.Parse(r.ContentStream);
+                using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, r);
+                return Response.FromValue(value, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
-                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value0 = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value0, r);
+                return Response.FromValue(value0, response);
             });
         }
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -4098,18 +4098,18 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrOSOperations.PostAsyncNoRetrySucceeded", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrOSOperations.PostAsyncNoRetrySucceeded", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                using var document = JsonDocument.Parse(r.ContentStream);
+                using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, r);
+                return Response.FromValue(value, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
-                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value0 = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value0, r);
+                return Response.FromValue(value0, response);
             });
         }
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -4144,15 +4144,15 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrOSOperations.PostAsyncRetryFailed", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrOSOperations.PostAsyncRetryFailed", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
                 await Task.CompletedTask;
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             });
         }
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -4187,15 +4187,15 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrOSOperations.PostAsyncRetrycanceled", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrOSOperations.PostAsyncRetrycanceled", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
                 await Task.CompletedTask;
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             });
         }
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>

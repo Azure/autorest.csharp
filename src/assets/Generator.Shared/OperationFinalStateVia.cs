@@ -5,7 +5,7 @@
 
 namespace Azure.Core
 {
-    internal enum FinalStateVia
+    internal enum OperationFinalStateVia
     {
         AzureAsyncOperation,
         Location,

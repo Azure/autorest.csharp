@@ -19,7 +19,7 @@ namespace AutoRest.TestServer.Tests
         public HeaderTests(TestServerVersion version) : base(version, "header") { }
 
         [Test]
-        public Task HeaderParameterExistingKey() => TestStatus(async (host, pipeline) => await new HeaderOperations(ClientDiagnostics, pipeline, host).ParamExistingKeyAsync( "overwrite"), false, true);
+        public Task HeaderParameterExistingKey() => TestStatus(async (host, pipeline) => await new HeaderOperations(ClientDiagnostics, pipeline, host).ParamExistingKeyAsync( "overwrite"), ignoreScenario: false, useSimplePipeline: true);
 
         [Test]
         public Task HeaderResponseExistingKey() => TestStatus(async (host, pipeline) =>

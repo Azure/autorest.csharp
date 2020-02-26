@@ -51,13 +51,13 @@ namespace Azure.Core
             }
         }
 
-        internal static Operation<T> Create<T>(HttpPipeline pipeline, ClientDiagnostics clientDiagnostics, Response originalResponse, RequestMethod requestMethod, string scopeName, FinalStateVia finalStateVia,
+        internal static Operation<T> Create<T>(HttpPipeline pipeline, ClientDiagnostics clientDiagnostics, Response originalResponse, RequestMethod requestMethod, string scopeName, OperationFinalStateVia finalStateVia,
             Func<HttpMessage> createOriginalHttpMessage, Func<Response, CancellationToken, Response<T>> createFinalResponse, Func<Response, CancellationToken, ValueTask<Response<T>>> createFinalResponseAsync) where T : notnull
         {
             using HttpMessage originalHttpMethod = createOriginalHttpMessage();
             string originalUri = originalHttpMethod.Request.Uri.ToString();
             ScenarioInfo info = GetScenarioInfo(originalResponse, originalUri, requestMethod, finalStateVia);
-            if ((requestMethod != RequestMethod.Put && (info.HeaderFrom == HeaderFrom.None || !info.HasLocation)) || finalStateVia == FinalStateVia.AzureAsyncOperation)
+            if ((requestMethod != RequestMethod.Put && (info.HeaderFrom == HeaderFrom.None || !info.HasLocation)) || finalStateVia == OperationFinalStateVia.AzureAsyncOperation)
             {
                 // Support Operation Resource: https://github.com/Azure/autorest.csharp/issues/447
                 throw clientDiagnostics.CreateRequestFailedException(originalResponse);
@@ -322,7 +322,7 @@ namespace Azure.Core
         }
 
         private static readonly string[] s_failureStates = { "failed", "canceled" };
-        private static readonly string[] s_terminalStates = s_failureStates.Append("succeeded").ToArray();
+        private static readonly string[] s_terminalStates = { "succeeded", "failed", "canceled" };
 
         private enum HeaderFrom
         {
@@ -350,17 +350,17 @@ namespace Azure.Core
             public bool HasLocation { get; }
         }
 
-        private static ScenarioInfo GetScenarioInfo(Response response, string originalUri, RequestMethod requestMethod, FinalStateVia finalStateVia)
+        private static ScenarioInfo GetScenarioInfo(Response response, string originalUri, RequestMethod requestMethod, OperationFinalStateVia finalStateVia)
         {
             bool hasLocation = response.Headers.TryGetValue("Location", out string? location);
             string? GetFinalUri()
             {
-                if (requestMethod == RequestMethod.Put || finalStateVia == FinalStateVia.OriginalUri)
+                if (requestMethod == RequestMethod.Put || finalStateVia == OperationFinalStateVia.OriginalUri)
                 {
                     return originalUri;
                 }
 
-                if (finalStateVia == FinalStateVia.Location)
+                if (finalStateVia == OperationFinalStateVia.Location)
                 {
                     return location;
                 }

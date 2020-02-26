@@ -1723,18 +1723,18 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrosaDsOperations.PutNonRetry400", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrosaDsOperations.PutNonRetry400", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                using var document = JsonDocument.Parse(r.ContentStream);
+                using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, r);
+                return Response.FromValue(value, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
-                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value0 = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value0, r);
+                return Response.FromValue(value0, response);
             });
         }
         /// <summary> Long running put request, service returns a 400 to the initial request. </summary>
@@ -1769,18 +1769,18 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrosaDsOperations.PutNonRetry201Creating400", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrosaDsOperations.PutNonRetry201Creating400", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                using var document = JsonDocument.Parse(r.ContentStream);
+                using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, r);
+                return Response.FromValue(value, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
-                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value0 = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value0, r);
+                return Response.FromValue(value0, response);
             });
         }
         /// <summary> Long running put request, service returns a Product with &apos;ProvisioningState&apos; = &apos;Creating&apos; and 201 response code. </summary>
@@ -1815,18 +1815,18 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrosaDsOperations.PutNonRetry201Creating400InvalidJson", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrosaDsOperations.PutNonRetry201Creating400InvalidJson", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                using var document = JsonDocument.Parse(r.ContentStream);
+                using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, r);
+                return Response.FromValue(value, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
-                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value0 = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value0, r);
+                return Response.FromValue(value0, response);
             });
         }
         /// <summary> Long running put request, service returns a Product with &apos;ProvisioningState&apos; = &apos;Creating&apos; and 201 response code. </summary>
@@ -1861,18 +1861,18 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrosaDsOperations.PutAsyncRelativeRetry400", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrosaDsOperations.PutAsyncRelativeRetry400", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                using var document = JsonDocument.Parse(r.ContentStream);
+                using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, r);
+                return Response.FromValue(value, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
-                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value0 = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value0, r);
+                return Response.FromValue(value0, response);
             });
         }
         /// <summary> Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -1907,15 +1907,15 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrosaDsOperations.DeleteNonRetry400", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrosaDsOperations.DeleteNonRetry400", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
                 await Task.CompletedTask;
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             });
         }
         /// <summary> Long running delete request, service returns a 400 with an error body. </summary>
@@ -1946,15 +1946,15 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrosaDsOperations.Delete202NonRetry400", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrosaDsOperations.Delete202NonRetry400", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
                 await Task.CompletedTask;
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             });
         }
         /// <summary> Long running delete request, service returns a 202 with a location header. </summary>
@@ -1985,15 +1985,15 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrosaDsOperations.DeleteAsyncRelativeRetry400", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrosaDsOperations.DeleteAsyncRelativeRetry400", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
                 await Task.CompletedTask;
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             });
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -2024,15 +2024,15 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrosaDsOperations.PostNonRetry400", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrosaDsOperations.PostNonRetry400", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
                 await Task.CompletedTask;
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             });
         }
         /// <summary> Long running post request, service returns a 400 with no error body. </summary>
@@ -2067,15 +2067,15 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrosaDsOperations.Post202NonRetry400", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrosaDsOperations.Post202NonRetry400", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
                 await Task.CompletedTask;
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             });
         }
         /// <summary> Long running post request, service returns a 202 with a location header. </summary>
@@ -2110,15 +2110,15 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrosaDsOperations.PostAsyncRelativeRetry400", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrosaDsOperations.PostAsyncRelativeRetry400", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
                 await Task.CompletedTask;
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             });
         }
         /// <summary> Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -2153,18 +2153,18 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrosaDsOperations.PutError201NoProvisioningStatePayload", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrosaDsOperations.PutError201NoProvisioningStatePayload", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                using var document = JsonDocument.Parse(r.ContentStream);
+                using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, r);
+                return Response.FromValue(value, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
-                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value0 = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value0, r);
+                return Response.FromValue(value0, response);
             });
         }
         /// <summary> Long running put request, service returns a 201 to the initial request with no payload. </summary>
@@ -2199,18 +2199,18 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrosaDsOperations.PutAsyncRelativeRetryNoStatus", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrosaDsOperations.PutAsyncRelativeRetryNoStatus", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                using var document = JsonDocument.Parse(r.ContentStream);
+                using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, r);
+                return Response.FromValue(value, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
-                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value0 = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value0, r);
+                return Response.FromValue(value0, response);
             });
         }
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -2245,18 +2245,18 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrosaDsOperations.PutAsyncRelativeRetryNoStatusPayload", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrosaDsOperations.PutAsyncRelativeRetryNoStatusPayload", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                using var document = JsonDocument.Parse(r.ContentStream);
+                using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, r);
+                return Response.FromValue(value, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
-                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value0 = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value0, r);
+                return Response.FromValue(value0, response);
             });
         }
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -2291,15 +2291,15 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrosaDsOperations.Delete204Succeeded", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrosaDsOperations.Delete204Succeeded", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
                 await Task.CompletedTask;
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             });
         }
         /// <summary> Long running delete request, service returns a 204 to the initial request, indicating success. </summary>
@@ -2330,15 +2330,15 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrosaDsOperations.DeleteAsyncRelativeRetryNoStatus", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrosaDsOperations.DeleteAsyncRelativeRetryNoStatus", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
                 await Task.CompletedTask;
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             });
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -2369,15 +2369,15 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrosaDsOperations.Post202NoLocation", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrosaDsOperations.Post202NoLocation", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
                 await Task.CompletedTask;
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             });
         }
         /// <summary> Long running post request, service returns a 202 to the initial request, without a location header. </summary>
@@ -2412,15 +2412,15 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrosaDsOperations.PostAsyncRelativeRetryNoPayload", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrosaDsOperations.PostAsyncRelativeRetryNoPayload", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
                 await Task.CompletedTask;
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             });
         }
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -2455,18 +2455,18 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrosaDsOperations.Put200InvalidJson", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrosaDsOperations.Put200InvalidJson", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                using var document = JsonDocument.Parse(r.ContentStream);
+                using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, r);
+                return Response.FromValue(value, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
-                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value0 = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value0, r);
+                return Response.FromValue(value0, response);
             });
         }
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json. </summary>
@@ -2501,18 +2501,18 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrosaDsOperations.PutAsyncRelativeRetryInvalidHeader", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrosaDsOperations.PutAsyncRelativeRetryInvalidHeader", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                using var document = JsonDocument.Parse(r.ContentStream);
+                using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, r);
+                return Response.FromValue(value, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
-                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value0 = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value0, r);
+                return Response.FromValue(value0, response);
             });
         }
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid. </summary>
@@ -2547,18 +2547,18 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrosaDsOperations.PutAsyncRelativeRetryInvalidJsonPolling", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrosaDsOperations.PutAsyncRelativeRetryInvalidJsonPolling", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                using var document = JsonDocument.Parse(r.ContentStream);
+                using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, r);
+                return Response.FromValue(value, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
-                using var document = await JsonDocument.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value0 = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value0, r);
+                return Response.FromValue(value0, response);
             });
         }
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -2593,15 +2593,15 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrosaDsOperations.Delete202RetryInvalidHeader", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrosaDsOperations.Delete202RetryInvalidHeader", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
                 await Task.CompletedTask;
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             });
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid &apos;Location&apos; and &apos;Retry-After&apos; headers. </summary>
@@ -2632,15 +2632,15 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrosaDsOperations.DeleteAsyncRelativeRetryInvalidHeader", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrosaDsOperations.DeleteAsyncRelativeRetryInvalidHeader", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
                 await Task.CompletedTask;
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             });
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid. </summary>
@@ -2671,15 +2671,15 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrosaDsOperations.DeleteAsyncRelativeRetryInvalidJsonPolling", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrosaDsOperations.DeleteAsyncRelativeRetryInvalidJsonPolling", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
                 await Task.CompletedTask;
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             });
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -2710,15 +2710,15 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrosaDsOperations.Post202RetryInvalidHeader", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrosaDsOperations.Post202RetryInvalidHeader", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
                 await Task.CompletedTask;
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             });
         }
         /// <summary> Long running post request, service returns a 202 to the initial request, with invalid &apos;Location&apos; and &apos;Retry-After&apos; headers. </summary>
@@ -2753,15 +2753,15 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrosaDsOperations.PostAsyncRelativeRetryInvalidHeader", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrosaDsOperations.PostAsyncRelativeRetryInvalidHeader", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
                 await Task.CompletedTask;
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             });
         }
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid. </summary>
@@ -2796,15 +2796,15 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrosaDsOperations.PostAsyncRelativeRetryInvalidJsonPolling", FinalStateVia.Location, createOriginalHttpMessage,
-            (r, c) =>
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrosaDsOperations.PostAsyncRelativeRetryInvalidJsonPolling", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
             {
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             },
-            async (r, c) =>
+            async (response, cancellationToken) =>
             {
                 await Task.CompletedTask;
-                return Response.FromValue(r, r);
+                return Response.FromValue(response, response);
             });
         }
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>

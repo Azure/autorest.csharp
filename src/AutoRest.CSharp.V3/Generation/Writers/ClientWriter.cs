@@ -368,66 +368,66 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 WriteParameterNullChecks(writer, parameters);
 
                 writer.Append($"return {typeof(ArmOperationHelpers)}.Create(");
-                writer.Line($"pipeline, clientDiagnostics, originalResponse, {typeof(RequestMethod)}.{originalMethod.Request.HttpMethod.ToRequestMethodName()}, {originalMethod.Diagnostics.ScopeName:L}, {typeof(FinalStateVia)}.{lroMethod.FinalStateVia}, createOriginalHttpMessage,");
+                writer.Line($"pipeline, clientDiagnostics, originalResponse, {typeof(RequestMethod)}.{originalMethod.Request.HttpMethod.ToRequestMethodName()}, {originalMethod.Diagnostics.ScopeName:L}, {typeof(OperationFinalStateVia)}.{lroMethod.FinalStateVia}, createOriginalHttpMessage,");
 
                 string valueVariable = "value";
                 const string document = "document";
                 ObjectSerialization? serialization = (lroMethod.OriginalResponse.ResponseBody as ObjectResponseBody)?.Serialization;
-                writer.Line($"(r, c) =>");
+                writer.Line($"(response, cancellationToken) =>");
                 writer.LineRaw("{");
                 switch (serialization)
                 {
                     case JsonSerialization jsonSerialization:
                         writer.Append($"using var {document:D} = ");
-                        writer.Line($"{typeof(JsonDocument)}.Parse(r.ContentStream);");
+                        writer.Line($"{typeof(JsonDocument)}.Parse(response.ContentStream);");
                         writer.ToDeserializeCall(
                             jsonSerialization,
                             w => w.Append($"document.RootElement"),
                             ref valueVariable
                         );
-                        writer.Line($"return {typeof(Response)}.FromValue({valueVariable}, r);");
+                        writer.Line($"return {typeof(Response)}.FromValue({valueVariable}, response);");
                         break;
                     case XmlElementSerialization xmlSerialization:
-                        writer.Line($"var {document:D} = {typeof(XDocument)}.Load(r.ContentStream, LoadOptions.PreserveWhitespace);");
+                        writer.Line($"var {document:D} = {typeof(XDocument)}.Load(response.ContentStream, LoadOptions.PreserveWhitespace);");
                         writer.ToDeserializeCall(
                             xmlSerialization,
                             w => w.Append($"document"),
                             ref valueVariable
                         );
-                        writer.Line($"return {typeof(Response)}.FromValue({valueVariable}, r);");
+                        writer.Line($"return {typeof(Response)}.FromValue({valueVariable}, response);");
                         break;
                     default:
-                        writer.Line($"return Response.FromValue(r, r);");
+                        writer.Line($"return Response.FromValue(response, response);");
                         break;
                 }
                 writer.LineRaw("},");
-                writer.Line($"async (r, c) =>");
+                writer.Line($"async (response, cancellationToken) =>");
                 writer.LineRaw("{");
                 switch (serialization)
                 {
                     case JsonSerialization jsonSerialization:
                         writer.Append($"using var {document:D} = ");
-                        writer.Line($"await {typeof(JsonDocument)}.ParseAsync(r.ContentStream, default, c).ConfigureAwait(false);");
+                        writer.Line($"await {typeof(JsonDocument)}.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);");
                         writer.ToDeserializeCall(
                             jsonSerialization,
                             w => w.Append($"document.RootElement"),
                             ref valueVariable
                         );
-                        writer.Line($"return {typeof(Response)}.FromValue({valueVariable}, r);");
+                        writer.Line($"return {typeof(Response)}.FromValue({valueVariable}, response);");
                         break;
                     case XmlElementSerialization xmlSerialization:
-                        writer.Line($"var {document:D} = {typeof(XDocument)}.Load(r.ContentStream, LoadOptions.PreserveWhitespace);");
+                        writer.Line($"var {document:D} = {typeof(XDocument)}.Load(response.ContentStream, LoadOptions.PreserveWhitespace);");
                         writer.ToDeserializeCall(
                             xmlSerialization,
                             w => w.Append($"document"),
                             ref valueVariable
                         );
-                        writer.Line($"return {typeof(Response)}.FromValue({valueVariable}, r);");
+                        writer.Line($"return {typeof(Response)}.FromValue({valueVariable}, response);");
                         break;
                     default:
                         //TODO: Need this await or it won't compile since we didn't use an await in async lambda.
                         writer.Line($"await Task.CompletedTask;");
-                        writer.Line($"return Response.FromValue(r, r);");
+                        writer.Line($"return Response.FromValue(response, response);");
                         break;
                 }
                 writer.LineRaw("});");

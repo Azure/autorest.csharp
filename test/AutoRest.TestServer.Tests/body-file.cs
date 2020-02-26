@@ -49,7 +49,7 @@ namespace AutoRest.TestServer.Tests
 
             Assert.AreEqual(3000 * 1024 * 1024L, total);
             await result.Value.DisposeAsync().ConfigureAwait(false);
-        }, false, true);
+        }, ignoreScenario: false, useSimplePipeline: true);
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
@@ -68,6 +68,6 @@ namespace AutoRest.TestServer.Tests
 
             Assert.AreEqual(3000 * 1024 * 1024L, total);
             result.Value.Dispose();
-        }, false, true);
+        }, ignoreScenario: false, useSimplePipeline: true);
     }
 }
