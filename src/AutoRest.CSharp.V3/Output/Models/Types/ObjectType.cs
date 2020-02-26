@@ -71,7 +71,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         {
             if (!TryGetPropertyForSchemaProperty(p => p.SchemaProperty == property, out ObjectTypeProperty? objectProperty, includeParents))
             {
-                throw new InvalidOperationException($"Unable to find object property for schema property {property.SerializedName}");
+                throw new InvalidOperationException($"Unable to find object property for schema property {property.SerializedName} in schema {Schema.Name}");
             }
 
             return objectProperty;
@@ -81,7 +81,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         {
             if (!TryGetPropertyForSchemaProperty(p => p.SchemaProperty.SerializedName == serializedName, out ObjectTypeProperty? objectProperty, includeParents))
             {
-                throw new InvalidOperationException($"Unable to find object property with serialized name {serializedName}");
+                throw new InvalidOperationException($"Unable to find object property with serialized name {serializedName} in schema {Schema.Name}");
             }
 
             return objectProperty;
@@ -191,7 +191,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 }
 
                 yield return new ObjectTypeProperty(
-                    BuilderHelpers.CreatMemberDeclaration(property.CSharpName(), type, Accessibility.Public, memberMapping?.ExistingMember),
+                    BuilderHelpers.CreateMemberDeclaration(property.CSharpName(), type, Accessibility.Public, memberMapping?.ExistingMember),
                     BuilderHelpers.EscapeXmlDescription(property.Language.Default.Description),
                     isReadOnly,
                     implementationType,
@@ -207,10 +207,6 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 if (complexSchema is ObjectSchema parentObjectSchema)
                 {
                     CSharpType type = _typeFactory.CreateType(parentObjectSchema, false);
-                    if (type.IsFrameworkType)
-                    {
-
-                    }
                     Debug.Assert(!type.IsFrameworkType);
                     return type;
                 }

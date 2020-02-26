@@ -82,7 +82,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             );
         }
 
-        public static MemberDeclarationOptions CreatMemberDeclaration(string defaultName, CSharpType defaultType, Accessibility defaultAccessibility, ISymbol? existingMember)
+        public static MemberDeclarationOptions CreateMemberDeclaration(string defaultName, CSharpType defaultType, Accessibility defaultAccessibility, ISymbol? existingMember)
         {
             // Not reading the return type information of existing members yet
             return new MemberDeclarationOptions(
