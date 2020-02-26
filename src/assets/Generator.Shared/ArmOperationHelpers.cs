@@ -66,6 +66,14 @@ namespace Azure.Core
             return new ArmOperation<T>(pipeline, clientDiagnostics, originalResponse, scopeName, info, createFinalResponse, createFinalResponseAsync);
         }
 
+        /// <summary>
+        /// This implements the ARM scenarios for LROs. It is highly recommended to read the ARM spec prior to modifying this code:
+        /// https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations
+        /// Other reference documents include:
+        /// https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-long-running-operation
+        /// https://github.com/Azure/adx-documentation-pr/blob/master/sdks/LRO/LRO_AzureSDK.md
+        /// </summary>
+        /// <typeparam name="T">The final result of the LRO.</typeparam>
         private class ArmOperation<T> : Operation<T> where T : notnull
         {
             private readonly HttpPipeline _pipeline;
@@ -103,64 +111,22 @@ namespace Azure.Core
             public override ValueTask<Response<T>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken) =>
                 this.DefaultWaitForCompletionAsync(pollingInterval, cancellationToken);
 
-            public override async ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default)
+            private async ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken, bool async)
             {
-                if (HasCompleted)
+                if (_hasCompleted)
                 {
                     return GetRawResponse();
                 }
 
                 if (_shouldPoll)
                 {
-                    _rawResponse = await GetResponseAsync(_info.PollUri, cancellationToken).ConfigureAwait(false);
+                    _rawResponse = async
+                        ? await GetResponseAsync(_info.PollUri, cancellationToken).ConfigureAwait(false)
+                        : GetResponse(_info.PollUri, cancellationToken);
                 }
                 _shouldPoll = true;
                 _hasCompleted = IsTerminalState(out string state);
-                if (HasCompleted)
-                {
-                    Response finalResponse = GetRawResponse();
-                    if (s_failureStates.Contains(state))
-                    {
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(finalResponse).ConfigureAwait(false);
-                    }
-
-                    if (_info.FinalUri != null)
-                    {
-                        finalResponse = await GetResponseAsync(_info.FinalUri, cancellationToken).ConfigureAwait(false);
-                    }
-                    switch (finalResponse.Status)
-                    {
-                        case 200:
-                        case 204 when !(_info.RequestMethod == RequestMethod.Put || _info.RequestMethod == RequestMethod.Patch):
-                        {
-                            Response<T> typedResponse =  await _createFinalResponseAsync(finalResponse, cancellationToken).ConfigureAwait(false);
-                            _rawResponse = typedResponse.GetRawResponse();
-                            _value = typedResponse.Value;
-                            _hasValue = true;
-                            break;
-                        }
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(finalResponse).ConfigureAwait(false);
-                    }
-                }
-
-                return GetRawResponse();
-            }
-
-            public override Response UpdateStatus(CancellationToken cancellationToken = default)
-            {
-                if (HasCompleted)
-                {
-                    return GetRawResponse();
-                }
-
-                if (_shouldPoll)
-                {
-                    _rawResponse = GetResponse(_info.PollUri, cancellationToken);
-                }
-                _shouldPoll = true;
-                _hasCompleted = IsTerminalState(out string state);
-                if (HasCompleted)
+                if (_hasCompleted)
                 {
                     Response finalResponse = GetRawResponse();
                     if (s_failureStates.Contains(state))
@@ -170,14 +136,18 @@ namespace Azure.Core
 
                     if (_info.FinalUri != null)
                     {
-                        finalResponse = GetResponse(_info.FinalUri, cancellationToken);
+                        finalResponse = async
+                            ? await GetResponseAsync(_info.FinalUri, cancellationToken).ConfigureAwait(false)
+                            : GetResponse(_info.FinalUri, cancellationToken);
                     }
                     switch (finalResponse.Status)
                     {
                         case 200:
                         case 204 when !(_info.RequestMethod == RequestMethod.Put || _info.RequestMethod == RequestMethod.Patch):
                         {
-                            Response<T> typedResponse = _createFinalResponse(finalResponse, cancellationToken);
+                            Response<T> typedResponse = async
+                                ? await _createFinalResponseAsync(finalResponse, cancellationToken).ConfigureAwait(false)
+                                : _createFinalResponse(finalResponse, cancellationToken);
                             _rawResponse = typedResponse.GetRawResponse();
                             _value = typedResponse.Value;
                             _hasValue = true;
@@ -190,6 +160,10 @@ namespace Azure.Core
 
                 return GetRawResponse();
             }
+
+            public override async ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => await UpdateStatusAsync(cancellationToken, async: true);
+
+            public override Response UpdateStatus(CancellationToken cancellationToken = default) => UpdateStatusAsync(cancellationToken, async: false).ConfigureAwait(false).GetAwaiter().GetResult();
 
             //TODO: This is currently unused.
             public override string Id { get; } = Guid.NewGuid().ToString();
@@ -209,14 +183,12 @@ namespace Azure.Core
             public override bool HasCompleted => _hasCompleted;
             public override bool HasValue => _hasValue;
 
-            private HttpMessage CreateGetResponseRequest(string link)
+            private HttpMessage CreateRequest(string link)
             {
                 HttpMessage message = _pipeline.CreateMessage();
                 Request request = message.Request;
                 request.Method = RequestMethodAdditional.Get;
-                var uri = new RawRequestUriBuilder();
-                uri.AppendRaw(link, false);
-                request.Uri = uri;
+                request.Uri.Reset(new Uri(link));
                 return message;
             }
 
@@ -231,7 +203,7 @@ namespace Azure.Core
                 scope.Start();
                 try
                 {
-                    using HttpMessage message = CreateGetResponseRequest(link);
+                    using HttpMessage message = CreateRequest(link);
                     await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                     return message.Response;
                 }
@@ -253,7 +225,7 @@ namespace Azure.Core
                 scope.Start();
                 try
                 {
-                    using HttpMessage message = CreateGetResponseRequest(link);
+                    using HttpMessage message = CreateRequest(link);
                     _pipeline.Send(message, cancellationToken);
                     return message.Response;
                 }
