@@ -495,13 +495,13 @@ namespace lro
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             });
         }
         /// <summary> Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
@@ -541,13 +541,13 @@ namespace lro
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             });
         }
         /// <summary> Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -587,13 +587,13 @@ namespace lro
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             });
         }
         /// <summary> Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
@@ -627,12 +627,12 @@ namespace lro
             return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LroRetrysOperations.Delete202Retry200", OperationFinalStateVia.Location, createOriginalHttpMessage,
             (response, cancellationToken) =>
             {
-                return Response.FromValue(response, response);
+                return response;
             },
             async (response, cancellationToken) =>
             {
                 await Task.CompletedTask;
-                return Response.FromValue(response, response);
+                return response;
             });
         }
         /// <summary> Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
@@ -666,12 +666,12 @@ namespace lro
             return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LroRetrysOperations.DeleteAsyncRelativeRetrySucceeded", OperationFinalStateVia.Location, createOriginalHttpMessage,
             (response, cancellationToken) =>
             {
-                return Response.FromValue(response, response);
+                return response;
             },
             async (response, cancellationToken) =>
             {
                 await Task.CompletedTask;
-                return Response.FromValue(response, response);
+                return response;
             });
         }
         /// <summary> Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -705,12 +705,12 @@ namespace lro
             return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LroRetrysOperations.Post202Retry200", OperationFinalStateVia.Location, createOriginalHttpMessage,
             (response, cancellationToken) =>
             {
-                return Response.FromValue(response, response);
+                return response;
             },
             async (response, cancellationToken) =>
             {
                 await Task.CompletedTask;
-                return Response.FromValue(response, response);
+                return response;
             });
         }
         /// <summary> Long running post request, service returns a 500, then a 202 to the initial request, with &apos;Location&apos; and &apos;Retry-After&apos; headers, Polls return a 200 with a response body after success. </summary>
@@ -748,12 +748,12 @@ namespace lro
             return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LroRetrysOperations.PostAsyncRelativeRetrySucceeded", OperationFinalStateVia.Location, createOriginalHttpMessage,
             (response, cancellationToken) =>
             {
-                return Response.FromValue(response, response);
+                return response;
             },
             async (response, cancellationToken) =>
             {
                 await Task.CompletedTask;
-                return Response.FromValue(response, response);
+                return response;
             });
         }
         /// <summary> Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>

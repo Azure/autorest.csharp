@@ -385,7 +385,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                                 w => w.Append($"document.RootElement"),
                                 ref valueVariable
                             );
-                            writer.Line($"return {typeof(Response)}.FromValue({valueVariable}, response);");
+                            writer.Line($"return {valueVariable};");
                             break;
                         case XmlElementSerialization xmlSerialization:
                             writer.Line($"var {document:D} = {typeof(XDocument)}.Load(response.ContentStream, LoadOptions.PreserveWhitespace);");
@@ -394,10 +394,10 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                                 w => w.Append($"document"),
                                 ref valueVariable
                             );
-                            writer.Line($"return {typeof(Response)}.FromValue({valueVariable}, response);");
+                            writer.Line($"return {valueVariable};");
                             break;
                         default:
-                            writer.Line($"return Response.FromValue(response, response);");
+                            writer.Line($"return response;");
                             break;
                     }
                 }
@@ -414,7 +414,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                                 w => w.Append($"document.RootElement"),
                                 ref valueVariable
                             );
-                            writer.Line($"return {typeof(Response)}.FromValue({valueVariable}, response);");
+                            writer.Line($"return {valueVariable};");
                             break;
                         case XmlElementSerialization xmlSerialization:
                             writer.Line($"var {document:D} = {typeof(XDocument)}.Load(response.ContentStream, LoadOptions.PreserveWhitespace);");
@@ -423,12 +423,12 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                                 w => w.Append($"document"),
                                 ref valueVariable
                             );
-                            writer.Line($"return {typeof(Response)}.FromValue({valueVariable}, response);");
+                            writer.Line($"return {valueVariable};");
                             break;
                         default:
                             //TODO: Need this await or it won't compile since we didn't use an await in async lambda.
                             writer.Line($"await Task.CompletedTask;");
-                            writer.Line($"return Response.FromValue(response, response);");
+                            writer.Line($"return response;");
                             break;
                     }
                 }

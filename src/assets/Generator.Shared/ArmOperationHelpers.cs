@@ -52,7 +52,7 @@ namespace Azure.Core
         }
 
         internal static Operation<T> Create<T>(HttpPipeline pipeline, ClientDiagnostics clientDiagnostics, Response originalResponse, RequestMethod requestMethod, string scopeName, OperationFinalStateVia finalStateVia,
-            Func<HttpMessage> createOriginalHttpMessage, Func<Response, CancellationToken, Response<T>> createFinalResponse, Func<Response, CancellationToken, ValueTask<Response<T>>> createFinalResponseAsync) where T : notnull
+            Func<HttpMessage> createOriginalHttpMessage, Func<Response, CancellationToken, T> createFinalResponse, Func<Response, CancellationToken, ValueTask<T>> createFinalResponseAsync) where T : notnull
         {
             using HttpMessage originalHttpMethod = createOriginalHttpMessage();
             string originalUri = originalHttpMethod.Request.Uri.ToString();
@@ -79,8 +79,8 @@ namespace Azure.Core
             private readonly HttpPipeline _pipeline;
             private readonly ClientDiagnostics _clientDiagnostics;
             private readonly string _scopeName;
-            private readonly Func<Response, CancellationToken, Response<T>> _createFinalResponse;
-            private readonly Func<Response, CancellationToken, ValueTask<Response<T>>> _createFinalResponseAsync;
+            private readonly Func<Response, CancellationToken, T> _createFinalResponse;
+            private readonly Func<Response, CancellationToken, ValueTask<T>> _createFinalResponseAsync;
             private readonly ScenarioInfo _info;
 
             private Response _rawResponse;
@@ -90,7 +90,7 @@ namespace Azure.Core
             private bool _shouldPoll;
 
             public ArmOperation(HttpPipeline pipeline, ClientDiagnostics clientDiagnostics, Response originalResponse, string scopeName, ScenarioInfo info,
-                Func<Response, CancellationToken, Response<T>> createFinalResponse, Func<Response, CancellationToken, ValueTask<Response<T>>> createFinalResponseAsync)
+                Func<Response, CancellationToken, T> createFinalResponse, Func<Response, CancellationToken, ValueTask<T>> createFinalResponseAsync)
             {
                 _rawResponse = originalResponse;
                 _pipeline = pipeline;
@@ -145,11 +145,10 @@ namespace Azure.Core
                         case 200:
                         case 204 when !(_info.RequestMethod == RequestMethod.Put || _info.RequestMethod == RequestMethod.Patch):
                         {
-                            Response<T> typedResponse = async
+                            _value = async
                                 ? await _createFinalResponseAsync(finalResponse, cancellationToken).ConfigureAwait(false)
                                 : _createFinalResponse(finalResponse, cancellationToken);
-                            _rawResponse = typedResponse.GetRawResponse();
-                            _value = typedResponse.Value;
+                            _rawResponse = finalResponse;
                             _hasValue = true;
                             break;
                         }

@@ -318,13 +318,13 @@ namespace lro
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             });
         }
         /// <summary> x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -364,13 +364,13 @@ namespace lro
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             });
         }
         /// <summary> x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
@@ -408,12 +408,12 @@ namespace lro
             return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrOSCustomHeaderOperations.Post202Retry200", OperationFinalStateVia.Location, createOriginalHttpMessage,
             (response, cancellationToken) =>
             {
-                return Response.FromValue(response, response);
+                return response;
             },
             async (response, cancellationToken) =>
             {
                 await Task.CompletedTask;
-                return Response.FromValue(response, response);
+                return response;
             });
         }
         /// <summary> x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; and &apos;Retry-After&apos; headers, Polls return a 200 with a response body after success. </summary>
@@ -451,12 +451,12 @@ namespace lro
             return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrOSCustomHeaderOperations.PostAsyncRetrySucceeded", OperationFinalStateVia.Location, createOriginalHttpMessage,
             (response, cancellationToken) =>
             {
-                return Response.FromValue(response, response);
+                return response;
             },
             async (response, cancellationToken) =>
             {
                 await Task.CompletedTask;
-                return Response.FromValue(response, response);
+                return response;
             });
         }
         /// <summary> x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>

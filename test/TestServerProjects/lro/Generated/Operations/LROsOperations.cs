@@ -2535,13 +2535,13 @@ namespace lro
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             });
         }
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’. </summary>
@@ -2581,13 +2581,13 @@ namespace lro
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             });
         }
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’. </summary>
@@ -2627,13 +2627,13 @@ namespace lro
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             });
         }
         /// <summary> Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn&apos;t contains ProvisioningState. </summary>
@@ -2673,13 +2673,13 @@ namespace lro
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             });
         }
         /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
@@ -2719,13 +2719,13 @@ namespace lro
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             });
         }
         /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
@@ -2765,13 +2765,13 @@ namespace lro
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             });
         }
         /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’. </summary>
@@ -2811,13 +2811,13 @@ namespace lro
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             });
         }
         /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’. </summary>
@@ -2857,13 +2857,13 @@ namespace lro
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             });
         }
         /// <summary> Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header. </summary>
@@ -2903,13 +2903,13 @@ namespace lro
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             });
         }
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -2949,13 +2949,13 @@ namespace lro
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             });
         }
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -2995,13 +2995,13 @@ namespace lro
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             });
         }
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -3041,13 +3041,13 @@ namespace lro
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             });
         }
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -3087,13 +3087,13 @@ namespace lro
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             });
         }
         /// <summary> Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header. </summary>
@@ -3133,13 +3133,13 @@ namespace lro
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Sku.DeserializeSku(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value = Sku.DeserializeSku(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             });
         }
         /// <summary> Long running put request with non resource. </summary>
@@ -3179,13 +3179,13 @@ namespace lro
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Sku.DeserializeSku(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value = Sku.DeserializeSku(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             });
         }
         /// <summary> Long running put request with non resource. </summary>
@@ -3225,13 +3225,13 @@ namespace lro
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
                 var value = SubProduct.DeserializeSubProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value = SubProduct.DeserializeSubProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             });
         }
         /// <summary> Long running put request with sub resource. </summary>
@@ -3271,13 +3271,13 @@ namespace lro
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
                 var value = SubProduct.DeserializeSubProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value = SubProduct.DeserializeSubProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             });
         }
         /// <summary> Long running put request with sub resource. </summary>
@@ -3317,13 +3317,13 @@ namespace lro
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             });
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
@@ -3359,13 +3359,13 @@ namespace lro
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             });
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’. </summary>
@@ -3401,13 +3401,13 @@ namespace lro
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             });
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’. </summary>
@@ -3441,12 +3441,12 @@ namespace lro
             return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrOSOperations.Delete204Succeeded", OperationFinalStateVia.Location, createOriginalHttpMessage,
             (response, cancellationToken) =>
             {
-                return Response.FromValue(response, response);
+                return response;
             },
             async (response, cancellationToken) =>
             {
                 await Task.CompletedTask;
-                return Response.FromValue(response, response);
+                return response;
             });
         }
         /// <summary> Long running delete succeeds and returns right away. </summary>
@@ -3482,13 +3482,13 @@ namespace lro
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             });
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
@@ -3524,13 +3524,13 @@ namespace lro
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             });
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
@@ -3564,12 +3564,12 @@ namespace lro
             return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrOSOperations.DeleteNoHeaderInRetry", OperationFinalStateVia.Location, createOriginalHttpMessage,
             (response, cancellationToken) =>
             {
-                return Response.FromValue(response, response);
+                return response;
             },
             async (response, cancellationToken) =>
             {
                 await Task.CompletedTask;
-                return Response.FromValue(response, response);
+                return response;
             });
         }
         /// <summary> Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header. </summary>
@@ -3603,12 +3603,12 @@ namespace lro
             return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrOSOperations.DeleteAsyncNoHeaderInRetry", OperationFinalStateVia.Location, createOriginalHttpMessage,
             (response, cancellationToken) =>
             {
-                return Response.FromValue(response, response);
+                return response;
             },
             async (response, cancellationToken) =>
             {
                 await Task.CompletedTask;
-                return Response.FromValue(response, response);
+                return response;
             });
         }
         /// <summary> Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header. </summary>
@@ -3642,12 +3642,12 @@ namespace lro
             return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrOSOperations.DeleteAsyncRetrySucceeded", OperationFinalStateVia.Location, createOriginalHttpMessage,
             (response, cancellationToken) =>
             {
-                return Response.FromValue(response, response);
+                return response;
             },
             async (response, cancellationToken) =>
             {
                 await Task.CompletedTask;
-                return Response.FromValue(response, response);
+                return response;
             });
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -3681,12 +3681,12 @@ namespace lro
             return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrOSOperations.DeleteAsyncNoRetrySucceeded", OperationFinalStateVia.Location, createOriginalHttpMessage,
             (response, cancellationToken) =>
             {
-                return Response.FromValue(response, response);
+                return response;
             },
             async (response, cancellationToken) =>
             {
                 await Task.CompletedTask;
-                return Response.FromValue(response, response);
+                return response;
             });
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -3720,12 +3720,12 @@ namespace lro
             return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrOSOperations.DeleteAsyncRetryFailed", OperationFinalStateVia.Location, createOriginalHttpMessage,
             (response, cancellationToken) =>
             {
-                return Response.FromValue(response, response);
+                return response;
             },
             async (response, cancellationToken) =>
             {
                 await Task.CompletedTask;
-                return Response.FromValue(response, response);
+                return response;
             });
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -3759,12 +3759,12 @@ namespace lro
             return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrOSOperations.DeleteAsyncRetrycanceled", OperationFinalStateVia.Location, createOriginalHttpMessage,
             (response, cancellationToken) =>
             {
-                return Response.FromValue(response, response);
+                return response;
             },
             async (response, cancellationToken) =>
             {
                 await Task.CompletedTask;
-                return Response.FromValue(response, response);
+                return response;
             });
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -3800,13 +3800,13 @@ namespace lro
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Sku.DeserializeSku(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value = Sku.DeserializeSku(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             });
         }
         /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; header. Poll returns a 200 with a response body after success. </summary>
@@ -3840,12 +3840,12 @@ namespace lro
             return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrOSOperations.Post202Retry200", OperationFinalStateVia.Location, createOriginalHttpMessage,
             (response, cancellationToken) =>
             {
-                return Response.FromValue(response, response);
+                return response;
             },
             async (response, cancellationToken) =>
             {
                 await Task.CompletedTask;
-                return Response.FromValue(response, response);
+                return response;
             });
         }
         /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; and &apos;Retry-After&apos; headers, Polls return a 200 with a response body after success. </summary>
@@ -3885,13 +3885,13 @@ namespace lro
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             });
         }
         /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; header, 204 with noresponse body after success. </summary>
@@ -3931,13 +3931,13 @@ namespace lro
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             });
         }
         /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should poll Location to get the final object. </summary>
@@ -3973,13 +3973,13 @@ namespace lro
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             });
         }
         /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should NOT poll Location to get the final object. </summary>
@@ -4015,13 +4015,13 @@ namespace lro
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             });
         }
         /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should NOT poll Location to get the final object if you support initial Autorest behavior. </summary>
@@ -4057,13 +4057,13 @@ namespace lro
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             });
         }
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -4103,13 +4103,13 @@ namespace lro
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value, response);
+                return value;
             });
         }
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -4147,12 +4147,12 @@ namespace lro
             return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrOSOperations.PostAsyncRetryFailed", OperationFinalStateVia.Location, createOriginalHttpMessage,
             (response, cancellationToken) =>
             {
-                return Response.FromValue(response, response);
+                return response;
             },
             async (response, cancellationToken) =>
             {
                 await Task.CompletedTask;
-                return Response.FromValue(response, response);
+                return response;
             });
         }
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -4190,12 +4190,12 @@ namespace lro
             return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrOSOperations.PostAsyncRetrycanceled", OperationFinalStateVia.Location, createOriginalHttpMessage,
             (response, cancellationToken) =>
             {
-                return Response.FromValue(response, response);
+                return response;
             },
             async (response, cancellationToken) =>
             {
                 await Task.CompletedTask;
-                return Response.FromValue(response, response);
+                return response;
             });
         }
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
