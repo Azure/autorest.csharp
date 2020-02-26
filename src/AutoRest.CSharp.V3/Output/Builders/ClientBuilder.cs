@@ -290,12 +290,12 @@ namespace AutoRest.CSharp.V3.Output.Builders
             var nextLinkName = pageable.GetValue<string>("nextLinkName");
             var itemName = pageable.GetValue<string>("itemName") ?? "value";
 
-            var itemProperty = type.Properties.Single(p => p.SchemaProperty.SerializedName == itemName);
+            var itemProperty = type.GetPropertyBySerializedName(itemName);
 
             ObjectTypeProperty? nextLinkProperty = null;
             if (nextLinkName != null)
             {
-                nextLinkProperty = type.Properties.Single(p => p.SchemaProperty.SerializedName == nextLinkName);
+                nextLinkProperty = type.GetPropertyBySerializedName(nextLinkName);
             }
 
             if (itemProperty.SchemaProperty.Schema is ArraySchema arraySchema)
@@ -303,7 +303,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 var itemType = _typeFactory.CreateType(arraySchema.ElementType, false);
 
                 var name = $"{method.Name}Pageable";
-                return new Paging(method, nextPageMethod, name, nextLinkProperty?.Name, itemProperty.Name, itemType);
+                return new Paging(method, nextPageMethod, name, nextLinkProperty?.DeclarationOptions.Name, itemProperty.DeclarationOptions.Name, itemType);
             }
             else
             {

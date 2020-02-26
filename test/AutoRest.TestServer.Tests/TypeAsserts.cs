@@ -24,11 +24,18 @@ namespace AutoRest.TestServer.Tests
             return parameterInfo;
         }
 
-        public static PropertyInfo HasProperty(Type type, string name)
+        public static PropertyInfo HasProperty(Type type, string name, BindingFlags bindingFlags)
         {
-            var parameterInfo = type.GetProperties().FirstOrDefault(p=>p.Name == name);
+            var parameterInfo = type.GetProperties(bindingFlags).FirstOrDefault(p=>p.Name == name);
             Assert.NotNull(parameterInfo, $"Property '{name}' is not found");
             return parameterInfo;
+        }
+
+        public static FieldInfo HasField(Type type, string name, BindingFlags bindingFlags)
+        {
+            var fieldInfo = type.GetFields(bindingFlags).FirstOrDefault(p=>p.Name == name);
+            Assert.NotNull(fieldInfo, $"Field '{name}' is not found");
+            return fieldInfo;
         }
     }
 }

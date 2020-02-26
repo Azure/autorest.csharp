@@ -4,9 +4,11 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Input;
+using AutoRest.CSharp.V3.Input.Source;
 using AutoRest.CSharp.V3.Output.Builders;
 using AutoRest.CSharp.V3.Output.Models.Serialization;
 using AutoRest.CSharp.V3.Output.Models.Shared;
@@ -24,11 +26,14 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         private ObjectTypeProperty[]? _properties;
         private ObjectTypeDiscriminator? _discriminator;
         private CSharpType? _inheritsType;
+        private CSharpType? _implementsDictionaryType;
         private ObjectSerialization[]? _serializations;
+        private readonly SourceTypeMapping? _sourceTypeMapping;
 
         public ObjectType(ObjectSchema objectSchema, BuildContext context)
         {
             _objectSchema = objectSchema;
+            _sourceTypeMapping = context.SourceInputModel.FindForSchema(_objectSchema.Name);
             _context = context;
             _typeFactory = _context.TypeFactory;
             _serializationBuilder = new SerializationBuilder(_typeFactory);
@@ -38,7 +43,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 objectSchema.CSharpName(),
                 $"{context.DefaultNamespace}.Models",
                 Accessibility.Public,
-                context.SourceInputModel.FindForSchema(_objectSchema.Name)?.ExistingType);
+                _sourceTypeMapping?.ExistingType);
 
             Description = BuilderHelpers.CreateDescription(objectSchema);
             Type = new CSharpType(this, Declaration.Namespace, Declaration.Name, isValueType: false);;
@@ -50,7 +55,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
         public Schema Schema { get; }
 
-        public CSharpType? Inherits => _inheritsType ?? CreateInheritedType();
+        public CSharpType? Inherits => _inheritsType ??= CreateInheritedType();
 
         public ObjectSerialization[] Serializations => _serializations ??= BuildSerializations();
 
@@ -58,9 +63,53 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
         public ObjectTypeDiscriminator? Discriminator => _discriminator ??= BuildDiscriminator();
 
-        public CSharpType? ImplementsDictionaryElementType => _inheritsType ??= CreateInheritedDictionaryElementType();
+        public CSharpType? ImplementsDictionaryElementType => _implementsDictionaryType ??= CreateInheritedDictionaryElementType();
 
         public CSharpType Type { get; }
+
+        public ObjectTypeProperty GetPropertyForSchemaProperty(Property property, bool includeParents = false)
+        {
+            if (!TryGetPropertyForSchemaProperty(p => p.SchemaProperty == property, out ObjectTypeProperty? objectProperty, includeParents))
+            {
+                throw new InvalidOperationException($"Unable to find object property for schema property {property.SerializedName} in schema {Schema.Name}");
+            }
+
+            return objectProperty;
+        }
+
+        public ObjectTypeProperty GetPropertyBySerializedName(string serializedName, bool includeParents = false)
+        {
+            if (!TryGetPropertyForSchemaProperty(p => p.SchemaProperty.SerializedName == serializedName, out ObjectTypeProperty? objectProperty, includeParents))
+            {
+                throw new InvalidOperationException($"Unable to find object property with serialized name {serializedName} in schema {Schema.Name}");
+            }
+
+            return objectProperty;
+        }
+
+        private bool TryGetPropertyForSchemaProperty(Func<ObjectTypeProperty, bool> propertySelector, [NotNullWhen(true)] out ObjectTypeProperty? objectProperty, bool includeParents = false)
+        {
+            objectProperty = null;
+            ObjectType? type = this;
+
+
+            while (type != null && objectProperty == null)
+            {
+                objectProperty = type.Properties.SingleOrDefault(propertySelector);
+                CSharpType? inheritsType = type.Inherits;
+                if (includeParents &&
+                    inheritsType != null &&
+                    !inheritsType.IsFrameworkType)
+                {
+                    type = inheritsType.Implementation as ObjectType;
+                }
+                else
+                {
+                    type = null;
+                }
+            }
+            return objectProperty != null;
+        }
 
         private ObjectTypeDiscriminator? BuildDiscriminator()
         {
@@ -95,7 +144,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
         private ObjectSerialization[] BuildSerializations()
         {
-            return _context.Library.SupportedMediaTypes.Select(type => _serializationBuilder.BuildObject(type, _objectSchema, isNullable: false)).ToArray();
+            return _context.Library.SupportedMediaTypes.Select(type => _serializationBuilder.BuildObject(type, _objectSchema, this)).ToArray();
         }
 
         private CSharpType CreateDictionaryElementType(DictionarySchema inheritedDictionarySchema)
@@ -116,43 +165,39 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         {
             foreach (Property property in _objectSchema.Properties!)
             {
-                yield return CreateProperty(property);
-            }
-        }
+                SourceMemberMapping? memberMapping = _sourceTypeMapping?.GetMemberForSchema(property.SerializedName);
+                bool isReadOnly = property.IsDiscriminator == true || property.ReadOnly == true;
 
-        private ObjectTypeProperty CreateProperty(Property property)
-        {
-            bool isReadOnly = property.IsDiscriminator == true || property.ReadOnly == true;
+                Constant? defaultValue = null;
 
-            Constant? defaultValue = null;
-
-            CSharpType type;
-            CSharpType? implementationType = null;
-            if (property.Schema is ConstantSchema constantSchema)
-            {
-                type = _typeFactory.CreateType(constantSchema.ValueType, false);
-                defaultValue = BuilderHelpers.ParseConstant(constantSchema.Value.Value, type);
-            }
-            else
-            {
-                type = _typeFactory.CreateType(property.Schema, property.IsNullable());
-                if (property.ClientDefaultValue != null)
+                CSharpType type;
+                CSharpType? implementationType = null;
+                if (property.Schema is ConstantSchema constantSchema)
                 {
-                    defaultValue = BuilderHelpers.ParseConstant(property.ClientDefaultValue, type);
+                    type = _typeFactory.CreateType(constantSchema.ValueType, false);
+                    defaultValue = BuilderHelpers.ParseConstant(constantSchema.Value.Value, type);
                 }
-                else if (property.Required == true && (property.Schema is ObjectSchema || property.Schema is ArraySchema || property.Schema is DictionarySchema))
+                else
                 {
-                    implementationType = _typeFactory.CreateImplementationType(property.Schema, property.IsNullable());
+                    type = _typeFactory.CreateType(property.Schema, property.IsNullable());
+                    if (property.ClientDefaultValue != null)
+                    {
+                        defaultValue = BuilderHelpers.ParseConstant(property.ClientDefaultValue, type);
+                    }
+                    else if (property.Required == true && (property.Schema is ObjectSchema || property.Schema is ArraySchema || property.Schema is DictionarySchema))
+                    {
+                        implementationType = _typeFactory.CreateImplementationType(property.Schema, property.IsNullable());
+                    }
                 }
-            }
 
-            return new ObjectTypeProperty(property.CSharpName(),
-                BuilderHelpers.EscapeXmlDescription(property.Language.Default.Description),
-                type,
-                isReadOnly,
-                implementationType,
-                property,
-                defaultValue);
+                yield return new ObjectTypeProperty(
+                    BuilderHelpers.CreateMemberDeclaration(property.CSharpName(), type, Accessibility.Public, memberMapping?.ExistingMember),
+                    BuilderHelpers.EscapeXmlDescription(property.Language.Default.Description),
+                    isReadOnly,
+                    implementationType,
+                    property,
+                    defaultValue);
+            }
         }
 
         private CSharpType? CreateInheritedType()
@@ -161,7 +206,9 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             {
                 if (complexSchema is ObjectSchema parentObjectSchema)
                 {
-                    return _typeFactory.CreateType(parentObjectSchema, false);
+                    CSharpType type = _typeFactory.CreateType(parentObjectSchema, false);
+                    Debug.Assert(!type.IsFrameworkType);
+                    return type;
                 }
             }
 

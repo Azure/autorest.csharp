@@ -82,6 +82,17 @@ namespace AutoRest.CSharp.V3.Output.Builders
             );
         }
 
+        public static MemberDeclarationOptions CreateMemberDeclaration(string defaultName, CSharpType defaultType, Accessibility defaultAccessibility, ISymbol? existingMember)
+        {
+            // Not reading the return type information of existing members yet
+            return new MemberDeclarationOptions(
+                SyntaxFacts.GetText(existingMember?.DeclaredAccessibility ?? defaultAccessibility),
+                existingMember?.Name ?? defaultName,
+                defaultType,
+                existingMember != null
+                );
+        }
+
         public static string CreateDescription(Schema schema)
         {
             return string.IsNullOrWhiteSpace(schema.Language.Default.Description) ?
