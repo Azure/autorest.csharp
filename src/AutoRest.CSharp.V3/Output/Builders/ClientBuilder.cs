@@ -359,7 +359,8 @@ namespace AutoRest.CSharp.V3.Output.Builders
             "azure-async-operation" => OperationFinalStateVia.AzureAsyncOperation,
             "location" => OperationFinalStateVia.Location,
             "original-uri" => OperationFinalStateVia.OriginalUri,
-            _ => OperationFinalStateVia.Location
+            null => OperationFinalStateVia.Location,
+            _ => throw new ArgumentException($"Unknown final-state-via value: {rawValue}")
         };
 
         private Parameter BuildParameter(RequestParameter requestParameter) => new Parameter(

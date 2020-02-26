@@ -500,8 +500,8 @@ namespace lro
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                var value0 = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value0, response);
+                var value = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value, response);
             });
         }
         /// <summary> Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
@@ -546,8 +546,8 @@ namespace lro
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                var value0 = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value0, response);
+                var value = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value, response);
             });
         }
         /// <summary> Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -592,8 +592,8 @@ namespace lro
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                var value0 = Product.DeserializeProduct(document.RootElement);
-                return Response.FromValue(value0, response);
+                var value = Product.DeserializeProduct(document.RootElement);
+                return Response.FromValue(value, response);
             });
         }
         /// <summary> Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
