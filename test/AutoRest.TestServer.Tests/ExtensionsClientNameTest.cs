@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Reflection;
 using ExtensionClientName;
 using ExtensionClientName.Models;
 using NUnit.Framework;
@@ -22,8 +23,8 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void PropertiesAreRenamed()
         {
-            TypeAsserts.HasProperty(typeof(RenamedSchema), "RenamedProperty");
-            TypeAsserts.HasProperty(typeof(RenamedSchema), "RenamedPropertyString");
+            TypeAsserts.HasProperty(typeof(RenamedSchema), "RenamedProperty", BindingFlags.Instance | BindingFlags.Public);
+            TypeAsserts.HasProperty(typeof(RenamedSchema), "RenamedPropertyString", BindingFlags.Instance | BindingFlags.Public);
         }
 
         [Test]
