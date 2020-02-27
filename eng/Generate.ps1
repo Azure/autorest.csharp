@@ -98,7 +98,7 @@ $testNames =
     #'subscriptionId-apiVersion',
     'url',
     'validation',
-    #'xml-service',
+    'xml-service',
     #'xms-error-responses',
     'url-multi-collectionFormat';
 
