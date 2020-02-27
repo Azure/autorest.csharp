@@ -119,6 +119,10 @@ $configurationPath = Join-Path $testSwaggerPath 'readme.md'
 foreach ($directory in Get-ChildItem $testSwaggerPath -Directory)
 {
     $testName = $directory.Name
+    if($testName -eq 'TypeSchemaMapping')
+    {
+        continue;
+    }
     $inputFile = Join-Path $directory "$testName.json"
     $swaggerDefinitions[$testName] = @{
         'title'=$testName;

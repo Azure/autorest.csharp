@@ -39,6 +39,12 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                 if (plugin.DeserializeCodeModel)
                 {
                     var codeModelFileName = (await autoRest.ListInputs()).FirstOrDefault();
+                    var i = 0;
+                    foreach (var input in await autoRest.ListInputs())
+                    {
+                        await autoRest.Message($"INPUT {++i}: {input}");
+                    }
+
                     if (codeModelFileName.IsNullOrEmpty()) throw new Exception("Generator did not receive the code model file.");
 
                     var codeModelYaml = await autoRest.ReadFile(codeModelFileName);
