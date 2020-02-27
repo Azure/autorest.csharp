@@ -1,14 +1,14 @@
 !<!CodeModel> 
 schemas: !<!Schemas> 
   objects:
-  - !<!ObjectSchema> &ref_6
+  - !<!ObjectSchema> &ref_5
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
     properties:
     - !<!Property> 
-      schema: !<!NumberSchema> &ref_2
+      schema: !<!NumberSchema> &ref_0
         type: integer
         precision: 32
         language: !<!Languages> 
@@ -23,7 +23,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_3
+      schema: !<!StringSchema> &ref_1
         type: string
         apiVersions:
         - !<!ApiVersion> 
@@ -46,7 +46,7 @@ schemas: !<!Schemas>
         namespace: Api100
     protocol: !<!Protocols> {}
   byteArrays:
-  - !<!ByteArraySchema> &ref_0
+  - !<!ByteArraySchema> &ref_4
     type: byte-array
     format: byte
     apiVersions:
@@ -56,70 +56,21 @@ schemas: !<!Schemas>
       default:
         name: ByteArray
         description: The null byte value
-    protocol: !<!Protocols> {}
-  - !<!ByteArraySchema> &ref_1
-    type: byte-array
-    format: byte
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    language: !<!Languages> 
-      default:
-        name: ByteArray
-        description: The empty byte value ''
-    protocol: !<!Protocols> {}
-  - !<!ByteArraySchema> &ref_7
-    type: byte-array
-    format: byte
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    language: !<!Languages> 
-      default:
-        name: ByteArray
-        description: Non-ascii base-64 encoded byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
-    protocol: !<!Protocols> {}
-  constants:
-  - !<!ConstantSchema> 
-    type: constant
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    value: !<!ConstantValue> 
-      value: null
-    valueType: *ref_0
-    language: !<!Languages> 
-      default:
-        name: Constant0
-        description: The null byte value
-    protocol: !<!Protocols> {}
-  - !<!ConstantSchema> 
-    type: constant
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    value: !<!ConstantValue> 
-      value: ''
-    valueType: *ref_1
-    language: !<!Languages> 
-      default:
-        name: Constant1
-        description: The empty byte value ''
     protocol: !<!Protocols> {}
   numbers:
-  - *ref_2
+  - *ref_0
   strings:
-  - !<!StringSchema> &ref_4
+  - !<!StringSchema> &ref_2
     type: string
     language: !<!Languages> 
       default:
         name: String
         description: simple string
     protocol: !<!Protocols> {}
-  - *ref_3
+  - *ref_1
 globalParameters:
-- !<!Parameter> &ref_5
-  schema: *ref_4
+- !<!Parameter> &ref_3
+  schema: *ref_2
   clientDefaultValue: 'http://localhost:3000'
   implementation: Client
   required: true
@@ -146,7 +97,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_5
+      - *ref_3
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -159,7 +110,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_0
+      schema: *ref_4
       language: !<!Languages> 
         default:
           name: ''
@@ -173,7 +124,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_5
       language: !<!Languages> 
         default:
           name: ''
@@ -196,7 +147,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_5
+      - *ref_3
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -209,7 +160,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_1
+      schema: *ref_4
       language: !<!Languages> 
         default:
           name: ''
@@ -223,7 +174,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_5
       language: !<!Languages> 
         default:
           name: ''
@@ -246,7 +197,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_5
+      - *ref_3
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -259,7 +210,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_7
+      schema: *ref_4
       language: !<!Languages> 
         default:
           name: ''
@@ -273,7 +224,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_5
       language: !<!Languages> 
         default:
           name: ''
@@ -296,9 +247,9 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_5
-      - !<!Parameter> &ref_8
-        schema: *ref_7
+      - *ref_3
+      - !<!Parameter> &ref_6
+        schema: *ref_4
         implementation: Method
         required: true
         extensions:
@@ -312,7 +263,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_8
+      - *ref_6
       language: !<!Languages> 
         default:
           name: ''
@@ -337,7 +288,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_5
       language: !<!Languages> 
         default:
           name: ''
@@ -362,7 +313,7 @@ operationGroups:
       version: 1.0.0
     request: !<!Request> 
       parameters:
-      - *ref_5
+      - *ref_3
       signatureParameters: []
       language: !<!Languages> 
         default:
@@ -375,7 +326,7 @@ operationGroups:
           uri: '{$host}'
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_7
+      schema: *ref_4
       language: !<!Languages> 
         default:
           name: ''
@@ -389,7 +340,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_5
       language: !<!Languages> 
         default:
           name: ''
