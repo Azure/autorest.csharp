@@ -185,7 +185,7 @@ namespace AutoRest.TestServer.Tests
                 Capacity = "Large",
                 OdataValue = "http://foo"
             };
-            var result = await new AllOperations(ClientDiagnostics, pipeline, host).PutSimpleProductWithGroupingAsync(value, "groupproduct");
+            var result = await new AllOperations(ClientDiagnostics, pipeline, host).PutSimpleProductWithGroupingAsync("groupproduct", value);
             Assert.AreEqual("123", result.Value.ProductId);
             Assert.AreEqual("product description", result.Value.Description);
             Assert.AreEqual("max name", result.Value.MaxProductDisplayName);

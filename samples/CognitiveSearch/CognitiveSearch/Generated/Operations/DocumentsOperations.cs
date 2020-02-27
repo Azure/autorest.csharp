@@ -316,7 +316,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
-        internal HttpMessage CreateSearchPostRequest(SearchRequest searchRequest, Guid? clientRequestId)
+        internal HttpMessage CreateSearchPostRequest(Guid? clientRequestId, SearchRequest searchRequest)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -343,10 +343,10 @@ namespace CognitiveSearch
             return message;
         }
         /// <summary> Searches for documents in the index. </summary>
-        /// <param name="searchRequest"> The definition of the Search request. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="searchRequest"> The definition of the Search request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<SearchDocumentsResult>> SearchPostAsync(SearchRequest searchRequest, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<SearchDocumentsResult>> SearchPostAsync(Guid? clientRequestId, SearchRequest searchRequest, CancellationToken cancellationToken = default)
         {
             if (searchRequest == null)
             {
@@ -357,7 +357,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateSearchPostRequest(searchRequest, clientRequestId);
+                using var message = CreateSearchPostRequest(clientRequestId, searchRequest);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -378,10 +378,10 @@ namespace CognitiveSearch
             }
         }
         /// <summary> Searches for documents in the index. </summary>
-        /// <param name="searchRequest"> The definition of the Search request. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="searchRequest"> The definition of the Search request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<SearchDocumentsResult> SearchPost(SearchRequest searchRequest, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public Response<SearchDocumentsResult> SearchPost(Guid? clientRequestId, SearchRequest searchRequest, CancellationToken cancellationToken = default)
         {
             if (searchRequest == null)
             {
@@ -392,7 +392,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateSearchPostRequest(searchRequest, clientRequestId);
+                using var message = CreateSearchPostRequest(clientRequestId, searchRequest);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -670,7 +670,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
-        internal HttpMessage CreateSuggestPostRequest(SuggestRequest suggestRequest, Guid? clientRequestId)
+        internal HttpMessage CreateSuggestPostRequest(Guid? clientRequestId, SuggestRequest suggestRequest)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -697,10 +697,10 @@ namespace CognitiveSearch
             return message;
         }
         /// <summary> Suggests documents in the index that match the given partial query text. </summary>
-        /// <param name="suggestRequest"> The Suggest request. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="suggestRequest"> The Suggest request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<SuggestDocumentsResult>> SuggestPostAsync(SuggestRequest suggestRequest, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<SuggestDocumentsResult>> SuggestPostAsync(Guid? clientRequestId, SuggestRequest suggestRequest, CancellationToken cancellationToken = default)
         {
             if (suggestRequest == null)
             {
@@ -711,7 +711,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateSuggestPostRequest(suggestRequest, clientRequestId);
+                using var message = CreateSuggestPostRequest(clientRequestId, suggestRequest);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -732,10 +732,10 @@ namespace CognitiveSearch
             }
         }
         /// <summary> Suggests documents in the index that match the given partial query text. </summary>
-        /// <param name="suggestRequest"> The Suggest request. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="suggestRequest"> The Suggest request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<SuggestDocumentsResult> SuggestPost(SuggestRequest suggestRequest, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public Response<SuggestDocumentsResult> SuggestPost(Guid? clientRequestId, SuggestRequest suggestRequest, CancellationToken cancellationToken = default)
         {
             if (suggestRequest == null)
             {
@@ -746,7 +746,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateSuggestPostRequest(suggestRequest, clientRequestId);
+                using var message = CreateSuggestPostRequest(clientRequestId, suggestRequest);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -766,7 +766,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
-        internal HttpMessage CreateIndexRequest(IndexBatch batch, Guid? clientRequestId)
+        internal HttpMessage CreateIndexRequest(Guid? clientRequestId, IndexBatch batch)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -793,10 +793,10 @@ namespace CognitiveSearch
             return message;
         }
         /// <summary> Sends a batch of document write actions to the index. </summary>
-        /// <param name="batch"> The batch of index actions. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="batch"> The batch of index actions. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IndexDocumentsResult>> IndexAsync(IndexBatch batch, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IndexDocumentsResult>> IndexAsync(Guid? clientRequestId, IndexBatch batch, CancellationToken cancellationToken = default)
         {
             if (batch == null)
             {
@@ -807,7 +807,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateIndexRequest(batch, clientRequestId);
+                using var message = CreateIndexRequest(clientRequestId, batch);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -828,10 +828,10 @@ namespace CognitiveSearch
             }
         }
         /// <summary> Sends a batch of document write actions to the index. </summary>
-        /// <param name="batch"> The batch of index actions. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="batch"> The batch of index actions. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<IndexDocumentsResult> Index(IndexBatch batch, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public Response<IndexDocumentsResult> Index(Guid? clientRequestId, IndexBatch batch, CancellationToken cancellationToken = default)
         {
             if (batch == null)
             {
@@ -842,7 +842,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateIndexRequest(batch, clientRequestId);
+                using var message = CreateIndexRequest(clientRequestId, batch);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -1014,7 +1014,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
-        internal HttpMessage CreateAutocompletePostRequest(AutocompleteRequest autocompleteRequest, Guid? clientRequestId)
+        internal HttpMessage CreateAutocompletePostRequest(Guid? clientRequestId, AutocompleteRequest autocompleteRequest)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1041,10 +1041,10 @@ namespace CognitiveSearch
             return message;
         }
         /// <summary> Autocompletes incomplete query terms based on input text and matching terms in the index. </summary>
-        /// <param name="autocompleteRequest"> The definition of the Autocomplete request. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="autocompleteRequest"> The definition of the Autocomplete request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<AutocompleteResult>> AutocompletePostAsync(AutocompleteRequest autocompleteRequest, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<AutocompleteResult>> AutocompletePostAsync(Guid? clientRequestId, AutocompleteRequest autocompleteRequest, CancellationToken cancellationToken = default)
         {
             if (autocompleteRequest == null)
             {
@@ -1055,7 +1055,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateAutocompletePostRequest(autocompleteRequest, clientRequestId);
+                using var message = CreateAutocompletePostRequest(clientRequestId, autocompleteRequest);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1076,10 +1076,10 @@ namespace CognitiveSearch
             }
         }
         /// <summary> Autocompletes incomplete query terms based on input text and matching terms in the index. </summary>
-        /// <param name="autocompleteRequest"> The definition of the Autocomplete request. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="autocompleteRequest"> The definition of the Autocomplete request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<AutocompleteResult> AutocompletePost(AutocompleteRequest autocompleteRequest, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public Response<AutocompleteResult> AutocompletePost(Guid? clientRequestId, AutocompleteRequest autocompleteRequest, CancellationToken cancellationToken = default)
         {
             if (autocompleteRequest == null)
             {
@@ -1090,7 +1090,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateAutocompletePostRequest(autocompleteRequest, clientRequestId);
+                using var message = CreateAutocompletePostRequest(clientRequestId, autocompleteRequest);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {

@@ -43,7 +43,7 @@ namespace CognitiveSearch
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
-        internal HttpMessage CreateCreateOrUpdateRequest(DataSource dataSource, string dataSourceName, Guid? clientRequestId, string ifMatch, string ifNoneMatch)
+        internal HttpMessage CreateCreateOrUpdateRequest(string dataSourceName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, DataSource dataSource)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -78,28 +78,28 @@ namespace CognitiveSearch
             return message;
         }
         /// <summary> Creates a new datasource or updates a datasource if it already exists. </summary>
-        /// <param name="dataSource"> The definition of the datasource to create or update. </param>
         /// <param name="dataSourceName"> The name of the datasource to create or update. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
+        /// <param name="dataSource"> The definition of the datasource to create or update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<DataSource>> CreateOrUpdateAsync(DataSource dataSource, string dataSourceName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<DataSource>> CreateOrUpdateAsync(string dataSourceName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, DataSource dataSource, CancellationToken cancellationToken = default)
         {
-            if (dataSource == null)
-            {
-                throw new ArgumentNullException(nameof(dataSource));
-            }
             if (dataSourceName == null)
             {
                 throw new ArgumentNullException(nameof(dataSourceName));
+            }
+            if (dataSource == null)
+            {
+                throw new ArgumentNullException(nameof(dataSource));
             }
 
             using var scope = clientDiagnostics.CreateScope("DataSourcesOperations.CreateOrUpdate");
             scope.Start();
             try
             {
-                using var message = CreateCreateOrUpdateRequest(dataSource, dataSourceName, clientRequestId, ifMatch, ifNoneMatch);
+                using var message = CreateCreateOrUpdateRequest(dataSourceName, clientRequestId, ifMatch, ifNoneMatch, dataSource);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -120,28 +120,28 @@ namespace CognitiveSearch
             }
         }
         /// <summary> Creates a new datasource or updates a datasource if it already exists. </summary>
-        /// <param name="dataSource"> The definition of the datasource to create or update. </param>
         /// <param name="dataSourceName"> The name of the datasource to create or update. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
+        /// <param name="dataSource"> The definition of the datasource to create or update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<DataSource> CreateOrUpdate(DataSource dataSource, string dataSourceName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
+        public Response<DataSource> CreateOrUpdate(string dataSourceName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, DataSource dataSource, CancellationToken cancellationToken = default)
         {
-            if (dataSource == null)
-            {
-                throw new ArgumentNullException(nameof(dataSource));
-            }
             if (dataSourceName == null)
             {
                 throw new ArgumentNullException(nameof(dataSourceName));
+            }
+            if (dataSource == null)
+            {
+                throw new ArgumentNullException(nameof(dataSource));
             }
 
             using var scope = clientDiagnostics.CreateScope("DataSourcesOperations.CreateOrUpdate");
             scope.Start();
             try
             {
-                using var message = CreateCreateOrUpdateRequest(dataSource, dataSourceName, clientRequestId, ifMatch, ifNoneMatch);
+                using var message = CreateCreateOrUpdateRequest(dataSourceName, clientRequestId, ifMatch, ifNoneMatch, dataSource);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -432,7 +432,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
-        internal HttpMessage CreateCreateRequest(DataSource dataSource, Guid? clientRequestId)
+        internal HttpMessage CreateCreateRequest(Guid? clientRequestId, DataSource dataSource)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -456,10 +456,10 @@ namespace CognitiveSearch
             return message;
         }
         /// <summary> Creates a new datasource. </summary>
-        /// <param name="dataSource"> The definition of the datasource to create or update. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="dataSource"> The definition of the datasource to create or update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<DataSource>> CreateAsync(DataSource dataSource, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<DataSource>> CreateAsync(Guid? clientRequestId, DataSource dataSource, CancellationToken cancellationToken = default)
         {
             if (dataSource == null)
             {
@@ -470,7 +470,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateCreateRequest(dataSource, clientRequestId);
+                using var message = CreateCreateRequest(clientRequestId, dataSource);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -491,10 +491,10 @@ namespace CognitiveSearch
             }
         }
         /// <summary> Creates a new datasource. </summary>
-        /// <param name="dataSource"> The definition of the datasource to create or update. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="dataSource"> The definition of the datasource to create or update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<DataSource> Create(DataSource dataSource, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public Response<DataSource> Create(Guid? clientRequestId, DataSource dataSource, CancellationToken cancellationToken = default)
         {
             if (dataSource == null)
             {
@@ -505,7 +505,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateCreateRequest(dataSource, clientRequestId);
+                using var message = CreateCreateRequest(clientRequestId, dataSource);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
