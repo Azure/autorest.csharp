@@ -39,11 +39,6 @@ namespace AutoRest.CSharp.V3.AutoRest.Communication
             return Message(text, Channel.Fatal);
         }
 
-        public Task Information(string text)
-        {
-            return Message(text, Channel.Information);
-        }
-
         // Convenience Interfaces
         public Task Message(string text, Channel channel = Channel.Warning) => Message(new Message { Channel = channel, Text = text });
 
