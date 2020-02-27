@@ -15,7 +15,7 @@ namespace Azure.Core
     /// <summary>
     /// Helper methods for ARM long-running operations.
     /// </summary>
-    public static class ArmOperationHelpers
+    internal static class ArmOperationHelpers
     {
         /// <summary>
         /// Waits for the long-running operation to complete.
