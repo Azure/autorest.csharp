@@ -52,6 +52,13 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         WritePagingOperation(writer, pagingMethod, true);
                         WritePagingOperation(writer, pagingMethod, false);
                     }
+
+                    foreach (var longRunningOperation in operationGroup.LongRunningOperationMethods)
+                    {
+                        WriteCreateOperationOperation(writer, longRunningOperation);
+                        WriteStartOperationOperation(writer, longRunningOperation, true);
+                        WriteStartOperationOperation(writer, longRunningOperation, false);
+                    }
                 }
             }
         }
@@ -106,6 +113,10 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         private string CreateMethodName(string name, bool async) => $"{name}{(async ? "Async" : string.Empty)}";
 
         private string CreateRequestMethodName(string name) => $"Create{name}Request";
+
+        private string CreateCreateOperationName(string name) => $"Create{name}";
+
+        private string CreateStartOperationName(string name, bool async) => $"Start{name}{(async ? "Async" : string.Empty)}";
 
         private void WriteRequestCreation(CodeWriter writer, Method operation)
         {
@@ -328,6 +339,145 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     writer.Line($"return {typeof(Page)}.FromValues(response.Value.{pagingMethod.ItemName}, {continuationTokenText}, response.GetRawResponse());");
                 }
                 writer.Line($"return {typeof(PageableHelpers)}.Create{(async ? "Async" : string.Empty)}Enumerable(FirstPageFunc, NextPageFunc);");
+            }
+        }
+
+        private void WriteCreateOperationOperation(CodeWriter writer, LongRunningOperation lroMethod)
+        {
+            Method originalMethod = lroMethod.OriginalMethod;
+            CSharpType responseType = new CSharpType(typeof(Operation<>), lroMethod.OriginalResponse.ResponseBody?.Type ?? new CSharpType(typeof(Response)));
+            Parameter[] parameters = lroMethod.CreateParameters;
+
+            writer.WriteXmlDocumentationSummary(originalMethod.Description);
+
+            foreach (Parameter parameter in parameters)
+            {
+                writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
+            }
+
+            writer.Append($"public {responseType} {CreateCreateOperationName(lroMethod.Name)}(");
+            foreach (Parameter parameter in parameters)
+            {
+                WriteParameter(writer, parameter);
+            }
+            writer.RemoveTrailingComma();
+            writer.Line($")");
+
+            using (writer.Scope())
+            {
+                WriteParameterNullChecks(writer, parameters);
+
+                writer.Append($"return {typeof(ArmOperationHelpers)}.Create(");
+                writer.Line($"pipeline, clientDiagnostics, originalResponse, {typeof(RequestMethod)}.{originalMethod.Request.HttpMethod.ToRequestMethodName()}, {originalMethod.Diagnostics.ScopeName:L}, {typeof(OperationFinalStateVia)}.{lroMethod.FinalStateVia}, createOriginalHttpMessage,");
+
+                string valueVariable = "value";
+                const string document = "document";
+                ObjectSerialization? serialization = (lroMethod.OriginalResponse.ResponseBody as ObjectResponseBody)?.Serialization;
+                using (writer.Scope($"(response, cancellationToken) =>", "{", "},"))
+                {
+                    switch (serialization)
+                    {
+                        case JsonSerialization jsonSerialization:
+                            writer.Append($"using var {document:D} = ");
+                            writer.Line($"{typeof(JsonDocument)}.Parse(response.ContentStream);");
+                            writer.ToDeserializeCall(
+                                jsonSerialization,
+                                w => w.Append($"document.RootElement"),
+                                ref valueVariable
+                            );
+                            writer.Line($"return {valueVariable};");
+                            break;
+                        case XmlElementSerialization xmlSerialization:
+                            writer.Line($"var {document:D} = {typeof(XDocument)}.Load(response.ContentStream, LoadOptions.PreserveWhitespace);");
+                            writer.ToDeserializeCall(
+                                xmlSerialization,
+                                w => w.Append($"document"),
+                                ref valueVariable
+                            );
+                            writer.Line($"return {valueVariable};");
+                            break;
+                        default:
+                            writer.Line($"return response;");
+                            break;
+                    }
+                }
+
+                using (writer.Scope($"async (response, cancellationToken) =>", "{", "});"))
+                {
+                    switch (serialization)
+                    {
+                        case JsonSerialization jsonSerialization:
+                            writer.Append($"using var {document:D} = ");
+                            writer.Line($"await {typeof(JsonDocument)}.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);");
+                            writer.ToDeserializeCall(
+                                jsonSerialization,
+                                w => w.Append($"document.RootElement"),
+                                ref valueVariable
+                            );
+                            writer.Line($"return {valueVariable};");
+                            break;
+                        case XmlElementSerialization xmlSerialization:
+                            writer.Line($"var {document:D} = {typeof(XDocument)}.Load(response.ContentStream, LoadOptions.PreserveWhitespace);");
+                            writer.ToDeserializeCall(
+                                xmlSerialization,
+                                w => w.Append($"document"),
+                                ref valueVariable
+                            );
+                            writer.Line($"return {valueVariable};");
+                            break;
+                        default:
+                            //TODO: Need this await or it won't compile since we didn't use an await in async lambda.
+                            writer.Line($"await Task.CompletedTask;");
+                            writer.Line($"return response;");
+                            break;
+                    }
+                }
+            }
+        }
+
+        private void WriteStartOperationOperation(CodeWriter writer, LongRunningOperation lroMethod, bool async)
+        {
+            Method originalMethod = lroMethod.OriginalMethod;
+            CSharpType responseType = new CSharpType(typeof(Operation<>), lroMethod.OriginalResponse.ResponseBody?.Type ?? new CSharpType(typeof(Response)));
+            responseType = async ? new CSharpType(typeof(ValueTask<>), responseType) : responseType;
+            Parameter[] parameters = originalMethod.Parameters;
+
+            writer.WriteXmlDocumentationSummary(originalMethod.Description);
+
+            foreach (Parameter parameter in parameters)
+            {
+                writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
+            }
+            writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
+
+            string asyncText = async ? "async " : string.Empty;
+            writer.Append($"public {asyncText}{responseType} {CreateStartOperationName(lroMethod.Name, async)}(");
+            foreach (Parameter parameter in parameters)
+            {
+                WriteParameter(writer, parameter);
+            }
+            writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
+
+            using (writer.Scope())
+            {
+                WriteParameterNullChecks(writer, parameters);
+
+                string awaitText = async ? "await " : string.Empty;
+                string configureText = async ? ".ConfigureAwait(false)" : string.Empty;
+                writer.Append($"var originalResponse = {awaitText}{CreateMethodName(originalMethod.Name, async)}(");
+                foreach (Parameter parameter in parameters)
+                {
+                    writer.Append($"{parameter.Name}, ");
+                }
+                writer.Line($"cancellationToken){configureText};");
+
+                writer.Append($"return {CreateCreateOperationName(lroMethod.Name)}(originalResponse, () => {CreateRequestMethodName(originalMethod.Name)}(");
+                foreach (Parameter parameter in parameters)
+                {
+                    writer.Append($"{parameter.Name}, ");
+                }
+                writer.RemoveTrailingComma();
+                writer.Line($"));");
             }
         }
 

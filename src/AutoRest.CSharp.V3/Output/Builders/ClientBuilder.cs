@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.V3.Generation.Types;
@@ -18,6 +19,7 @@ using Azure.Core;
 using Microsoft.CodeAnalysis;
 using Diagnostic = AutoRest.CSharp.V3.Output.Models.Requests.Diagnostic;
 using Request = AutoRest.CSharp.V3.Output.Models.Requests.Request;
+using AzureResponse = Azure.Response;
 
 namespace AutoRest.CSharp.V3.Output.Builders
 {
@@ -60,6 +62,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
             List<Method> nextPageMethods = new List<Method>();
             List<Paging> pagingMethods = new List<Paging>();
+            List<LongRunningOperation> longRunningOperationMethods = new List<LongRunningOperation>();
             foreach ((string processedName, OperationMethod processed) in processedMethods)
             {
                 IDictionary<object, object>? pageable = processed.Operation.Extensions.GetValue<IDictionary<object, object>>("x-ms-pageable");
@@ -72,7 +75,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                     OperationMethod? next = null;
                     if (operationName != null)
                     {
-                        if (!processedMethods.TryGetValue(operationName, out OperationMethod nextOperationMethod))
+                        if (!processedMethods.TryGetValue(operationName, out OperationMethod? nextOperationMethod))
                         {
                             throw new Exception(
                                 $"The x-ms-pageable operationName \"{extensionOperationName}\" for operation {operationGroup.Key}_{processedName} was not found.");
@@ -103,6 +106,26 @@ namespace AutoRest.CSharp.V3.Output.Builders
                     Paging pagingMethod = GetClientMethodPaging(processed.Method, nextPageMethod, pageable, objectType);
                     pagingMethods.Add(pagingMethod);
                 }
+                // For some reason, booleans in dictionaries are deserialized as string instead of bool.
+                bool longRunningOperation = Convert.ToBoolean(processed.Operation.Extensions.GetValue<string>("x-ms-long-running-operation") ?? "false");
+                if (longRunningOperation && pageable == null)
+                {
+                    Method method = processed.Method;
+                    Response originalResponse = processed.Method.Response;
+                    processedMethods[processedName].Method = new Method(
+                        method.Name,
+                        method.Description,
+                        method.Request,
+                        method.Parameters,
+                        new Response(null, originalResponse.SuccessfulStatusCodes, null),
+                        method.Diagnostics
+                    );
+
+                    IDictionary<object, object> options = processed.Operation.Extensions.GetValue<IDictionary<object, object>>("x-ms-long-running-operation-options")
+                                                          ?? ImmutableDictionary<object, object>.Empty;
+                    LongRunningOperation longRunningOperationMethod = BuildLongRunningOperation(method, originalResponse, options);
+                    longRunningOperationMethods.Add(longRunningOperationMethod);
+                }
             }
 
             Method[] methods = processedMethods.Select(om => om.Value.Method).Concat(nextPageMethods).ToArray();
@@ -111,10 +134,11 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 operationGroup.Language.Default.Description,
                 OrderParameters(clientParameters.Values),
                 methods,
-                pagingMethods.ToArray());
+                pagingMethods.ToArray(),
+                longRunningOperationMethods.ToArray());
         }
 
-        private struct OperationMethod
+        private class OperationMethod
         {
             public OperationMethod(Operation operation, Method method)
             {
@@ -123,7 +147,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             }
 
             public Operation Operation { get; }
-            public Method Method { get; }
+            public Method Method { get; set; }
         }
 
         private static Parameter[] OrderParameters(IEnumerable<Parameter> parameters) => parameters.OrderBy(p => p.DefaultValue != null).ToArray();
@@ -310,6 +334,34 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 throw new InvalidOperationException($"{itemName} property has to be an array schema, actual {itemProperty.SchemaProperty}");
             }
         }
+
+        private static LongRunningOperation BuildLongRunningOperation(Method method, Response originalResponse, IDictionary<object, object> options)
+        {
+            var originalResponseParameter = new Parameter(
+                "originalResponse",
+                "The original response from starting the operation.",
+                new CSharpType(typeof(AzureResponse)),
+                null,
+                true);
+            var httpMessageParameter = new Parameter(
+                "createOriginalHttpMessage",
+                "Creates the HTTP message used for the original request.",
+                new CSharpType(typeof(Func<>), new CSharpType(typeof(HttpMessage))),
+                null,
+                true);
+            OperationFinalStateVia finalStateVia = GetFinalStateVia(options.GetValue<string>("final-state-via"));
+            string name = $"{method.Name}Operation";
+            return new LongRunningOperation(method, originalResponse, name, new[] { originalResponseParameter, httpMessageParameter }, finalStateVia);
+        }
+
+        private static OperationFinalStateVia GetFinalStateVia(string? rawValue) => rawValue switch
+        {
+            "azure-async-operation" => OperationFinalStateVia.AzureAsyncOperation,
+            "location" => OperationFinalStateVia.Location,
+            "original-uri" => OperationFinalStateVia.OriginalUri,
+            null => OperationFinalStateVia.Location,
+            _ => throw new ArgumentException($"Unknown final-state-via value: {rawValue}")
+        };
 
         private Parameter BuildParameter(RequestParameter requestParameter) => new Parameter(
             requestParameter.CSharpName(),
