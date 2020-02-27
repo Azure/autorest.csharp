@@ -62,10 +62,15 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     foreach (var property in schema.Properties)
                     {
+                        if (property.DeclarationOptions.IsUserDefined)
+                        {
+                            continue;
+                        }
+
                         writer.WriteXmlDocumentationSummary(property.Description);
 
-                        CSharpType propertyType = property.Type;
-                        writer.Append($"public {propertyType} {property.Name:D}");
+                        CSharpType propertyType = property.DeclarationOptions.Type;
+                        writer.Append($"{property.DeclarationOptions.Accessibility} {propertyType} {property.DeclarationOptions.Name:D}");
                         writer.AppendRaw(property.IsReadOnly ? "{ get; internal set; }" : "{ get; set; }");
 
                         if (property.DefaultValue != null)
