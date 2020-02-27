@@ -13,11 +13,11 @@ namespace CognitiveSearch.Models
         {
             OdataType = "#Microsoft.Skills.Text.TranslationSkill";
         }
-        /// <summary> The language codes supported for input text by TextTranslationSkill. </summary>
+        /// <summary> The language code to translate documents into for documents that don&apos;t specify the to language explicitly. </summary>
         public TextTranslationSkillLanguage DefaultToLanguageCode { get; set; }
-        /// <summary> The language codes supported for input text by TextTranslationSkill. </summary>
+        /// <summary> The language code to translate documents from for documents that don&apos;t specify the from language explicitly. </summary>
         public TextTranslationSkillLanguage? DefaultFromLanguageCode { get; set; }
-        /// <summary> The language codes supported for input text by TextTranslationSkill. </summary>
+        /// <summary> The language code to translate documents from when neither the fromLanguageCode input nor the defaultFromLanguageCode parameter are provided, and the automatic language detection is unsuccessful. Default is en. </summary>
         public TextTranslationSkillLanguage? SuggestedFrom { get; set; }
     }
 }

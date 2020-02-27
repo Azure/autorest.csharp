@@ -8,9 +8,9 @@ namespace CognitiveSearch.Models
     /// <summary> Response from a get service statistics request. If successful, it includes service level counters and limits. </summary>
     public partial class ServiceStatistics
     {
-        /// <summary> Represents service-level resource counters and quotas. </summary>
+        /// <summary> Service level resource counters. </summary>
         public ServiceCounters Counters { get; set; }
-        /// <summary> Represents various service level limits. </summary>
+        /// <summary> Service level general limits. </summary>
         public ServiceLimits Limits { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace CognitiveSearch.Models
         public int? MaxTokenLength { get; set; }
         /// <summary> A value indicating how the tokenizer is used. Set to true if used as the search tokenizer, set to false if used as the indexing tokenizer. Default is false. </summary>
         public bool? IsSearchTokenizer { get; set; }
-        /// <summary> Lists the languages supported by the Microsoft language tokenizer. </summary>
+        /// <summary> The language to use. The default is English. </summary>
         public MicrosoftTokenizerLanguage? Language { get; set; }
     }
 }

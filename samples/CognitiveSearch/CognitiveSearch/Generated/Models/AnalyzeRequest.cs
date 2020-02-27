@@ -12,9 +12,9 @@ namespace CognitiveSearch.Models
     {
         /// <summary> The text to break into tokens. </summary>
         public string Text { get; set; }
-        /// <summary> Defines the names of all text analyzers supported by Azure Cognitive Search. </summary>
+        /// <summary> The name of the analyzer to use to break the given text. If this parameter is not specified, you must specify a tokenizer instead. The tokenizer and analyzer parameters are mutually exclusive. </summary>
         public AnalyzerName? Analyzer { get; set; }
-        /// <summary> Defines the names of all tokenizers supported by Azure Cognitive Search. </summary>
+        /// <summary> The name of the tokenizer to use to break the given text. If this parameter is not specified, you must specify an analyzer instead. The tokenizer and analyzer parameters are mutually exclusive. </summary>
         public TokenizerName? Tokenizer { get; set; }
         /// <summary> An optional list of token filters to use when breaking the given text. This parameter can only be set when using the tokenizer parameter. </summary>
         public ICollection<TokenFilterName> TokenFilters { get; set; }

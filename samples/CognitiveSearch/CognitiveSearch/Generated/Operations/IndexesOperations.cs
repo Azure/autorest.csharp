@@ -43,7 +43,7 @@ namespace CognitiveSearch
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
-        internal HttpMessage CreateCreateRequest(Guid? clientRequestId, Models.Index index)
+        internal HttpMessage CreateCreateRequest(Models.Index index, Guid? clientRequestId)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -67,10 +67,10 @@ namespace CognitiveSearch
             return message;
         }
         /// <summary> Creates a new search index. </summary>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="index"> The definition of the index to create. </param>
+        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Models.Index>> CreateAsync(Guid? clientRequestId, Models.Index index, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<Models.Index>> CreateAsync(Models.Index index, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
             if (index == null)
             {
@@ -81,7 +81,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateCreateRequest(clientRequestId, index);
+                using var message = CreateCreateRequest(index, clientRequestId);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -102,10 +102,10 @@ namespace CognitiveSearch
             }
         }
         /// <summary> Creates a new search index. </summary>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="index"> The definition of the index to create. </param>
+        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Models.Index> Create(Guid? clientRequestId, Models.Index index, CancellationToken cancellationToken = default)
+        public Response<Models.Index> Create(Models.Index index, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
             if (index == null)
             {
@@ -116,7 +116,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateCreateRequest(clientRequestId, index);
+                using var message = CreateCreateRequest(index, clientRequestId);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -221,7 +221,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
-        internal HttpMessage CreateCreateOrUpdateRequest(string indexName, bool? allowIndexDowntime, Guid? clientRequestId, string ifMatch, string ifNoneMatch, Models.Index index)
+        internal HttpMessage CreateCreateOrUpdateRequest(Models.Index index, string indexName, bool? allowIndexDowntime, Guid? clientRequestId, string ifMatch, string ifNoneMatch)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -260,29 +260,29 @@ namespace CognitiveSearch
             return message;
         }
         /// <summary> Creates a new search index or updates an index if it already exists. </summary>
+        /// <param name="index"> The definition of the index to create. </param>
         /// <param name="indexName"> The definition of the index to create or update. </param>
         /// <param name="allowIndexDowntime"> Allows new analyzers, tokenizers, token filters, or char filters to be added to an index by taking the index offline for at least a few seconds. This temporarily causes indexing and query requests to fail. Performance and write availability of the index can be impaired for several minutes after the index is updated, or longer for very large indexes. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
-        /// <param name="index"> The definition of the index to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Models.Index>> CreateOrUpdateAsync(string indexName, bool? allowIndexDowntime, Guid? clientRequestId, string ifMatch, string ifNoneMatch, Models.Index index, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<Models.Index>> CreateOrUpdateAsync(Models.Index index, string indexName, bool? allowIndexDowntime, Guid? clientRequestId, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
         {
-            if (indexName == null)
-            {
-                throw new ArgumentNullException(nameof(indexName));
-            }
             if (index == null)
             {
                 throw new ArgumentNullException(nameof(index));
+            }
+            if (indexName == null)
+            {
+                throw new ArgumentNullException(nameof(indexName));
             }
 
             using var scope = clientDiagnostics.CreateScope("IndexesOperations.CreateOrUpdate");
             scope.Start();
             try
             {
-                using var message = CreateCreateOrUpdateRequest(indexName, allowIndexDowntime, clientRequestId, ifMatch, ifNoneMatch, index);
+                using var message = CreateCreateOrUpdateRequest(index, indexName, allowIndexDowntime, clientRequestId, ifMatch, ifNoneMatch);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -303,29 +303,29 @@ namespace CognitiveSearch
             }
         }
         /// <summary> Creates a new search index or updates an index if it already exists. </summary>
+        /// <param name="index"> The definition of the index to create. </param>
         /// <param name="indexName"> The definition of the index to create or update. </param>
         /// <param name="allowIndexDowntime"> Allows new analyzers, tokenizers, token filters, or char filters to be added to an index by taking the index offline for at least a few seconds. This temporarily causes indexing and query requests to fail. Performance and write availability of the index can be impaired for several minutes after the index is updated, or longer for very large indexes. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
-        /// <param name="index"> The definition of the index to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Models.Index> CreateOrUpdate(string indexName, bool? allowIndexDowntime, Guid? clientRequestId, string ifMatch, string ifNoneMatch, Models.Index index, CancellationToken cancellationToken = default)
+        public Response<Models.Index> CreateOrUpdate(Models.Index index, string indexName, bool? allowIndexDowntime, Guid? clientRequestId, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
         {
-            if (indexName == null)
-            {
-                throw new ArgumentNullException(nameof(indexName));
-            }
             if (index == null)
             {
                 throw new ArgumentNullException(nameof(index));
+            }
+            if (indexName == null)
+            {
+                throw new ArgumentNullException(nameof(indexName));
             }
 
             using var scope = clientDiagnostics.CreateScope("IndexesOperations.CreateOrUpdate");
             scope.Start();
             try
             {
-                using var message = CreateCreateOrUpdateRequest(indexName, allowIndexDowntime, clientRequestId, ifMatch, ifNoneMatch, index);
+                using var message = CreateCreateOrUpdateRequest(index, indexName, allowIndexDowntime, clientRequestId, ifMatch, ifNoneMatch);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -622,7 +622,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
-        internal HttpMessage CreateAnalyzeRequest(string indexName, Guid? clientRequestId, AnalyzeRequest requestTodo)
+        internal HttpMessage CreateAnalyzeRequest(AnalyzeRequest requestTodo, string indexName, Guid? clientRequestId)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -648,26 +648,26 @@ namespace CognitiveSearch
             return message;
         }
         /// <summary> Shows how an analyzer breaks text into tokens. </summary>
+        /// <param name="requestTodo"> The text and analyzer or analysis components to test. </param>
         /// <param name="indexName"> The definition of the index to create or update. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
-        /// <param name="requestTodo"> The text and analyzer or analysis components to test. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<AnalyzeResult>> AnalyzeAsync(string indexName, Guid? clientRequestId, AnalyzeRequest requestTodo, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<AnalyzeResult>> AnalyzeAsync(AnalyzeRequest requestTodo, string indexName, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
-            if (indexName == null)
-            {
-                throw new ArgumentNullException(nameof(indexName));
-            }
             if (requestTodo == null)
             {
                 throw new ArgumentNullException(nameof(requestTodo));
+            }
+            if (indexName == null)
+            {
+                throw new ArgumentNullException(nameof(indexName));
             }
 
             using var scope = clientDiagnostics.CreateScope("IndexesOperations.Analyze");
             scope.Start();
             try
             {
-                using var message = CreateAnalyzeRequest(indexName, clientRequestId, requestTodo);
+                using var message = CreateAnalyzeRequest(requestTodo, indexName, clientRequestId);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -688,26 +688,26 @@ namespace CognitiveSearch
             }
         }
         /// <summary> Shows how an analyzer breaks text into tokens. </summary>
+        /// <param name="requestTodo"> The text and analyzer or analysis components to test. </param>
         /// <param name="indexName"> The definition of the index to create or update. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
-        /// <param name="requestTodo"> The text and analyzer or analysis components to test. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<AnalyzeResult> Analyze(string indexName, Guid? clientRequestId, AnalyzeRequest requestTodo, CancellationToken cancellationToken = default)
+        public Response<AnalyzeResult> Analyze(AnalyzeRequest requestTodo, string indexName, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
-            if (indexName == null)
-            {
-                throw new ArgumentNullException(nameof(indexName));
-            }
             if (requestTodo == null)
             {
                 throw new ArgumentNullException(nameof(requestTodo));
+            }
+            if (indexName == null)
+            {
+                throw new ArgumentNullException(nameof(indexName));
             }
 
             using var scope = clientDiagnostics.CreateScope("IndexesOperations.Analyze");
             scope.Start();
             try
             {
-                using var message = CreateAnalyzeRequest(indexName, clientRequestId, requestTodo);
+                using var message = CreateAnalyzeRequest(requestTodo, indexName, clientRequestId);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {

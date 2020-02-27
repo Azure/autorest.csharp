@@ -16,7 +16,7 @@ namespace CognitiveServices.TextAnalytics.Models
         public DocumentSentimentValue Sentiment { get; set; }
         /// <summary> if showStats=true was specified in the request this field will contain information about the document payload. </summary>
         public DocumentStatistics Statistics { get; set; }
-        /// <summary> Represents the confidence scores between 0 and 1 across all sentiment classes: positive, neutral, negative. </summary>
+        /// <summary> Document level sentiment confidence scores between 0 and 1 for each sentiment class. </summary>
         public SentimentConfidenceScorePerLabel DocumentScores { get; set; } = new SentimentConfidenceScorePerLabel();
         /// <summary> Sentence level sentiment analysis. </summary>
         public ICollection<SentenceSentiment> Sentences { get; set; } = new System.Collections.Generic.List<CognitiveServices.TextAnalytics.Models.SentenceSentiment>();

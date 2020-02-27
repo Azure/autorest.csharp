@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
         public Client BuildClient(OperationGroup operationGroup)
         {
             var allClientParameters = operationGroup.Operations
-                .SelectMany(op => op.Requests.SelectMany(r => r.Parameters))
+                .SelectMany(op => op.Requests.SelectMany(r => r.Parameters).Concat(op.Parameters))
                 .Where(p => p.Implementation == ImplementationLocation.Client)
                 .Distinct();
             Dictionary<string, Parameter> clientParameters = new Dictionary<string, Parameter>();
@@ -149,7 +149,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             List<Parameter> methodParameters = new List<Parameter>();
 
             RequestBody? body = null;
-            RequestParameter[] parameters = serviceRequest?.Parameters.ToArray() ?? Array.Empty<RequestParameter>();
+            RequestParameter[] parameters = (serviceRequest?.Parameters.ToArray() ?? Array.Empty<RequestParameter>()).Concat(operation.Parameters).ToArray();
             foreach (RequestParameter requestParameter in parameters)
             {
                 string defaultName = requestParameter.Language.Default.Name;

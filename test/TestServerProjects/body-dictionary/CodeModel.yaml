@@ -1,101 +1,134 @@
 !<!CodeModel> 
+info: !<!Info> 
+  description: Test Infrastructure for AutoRest Swagger BAT
+  title: body-dictionary
 schemas: !<!Schemas> 
-  objects:
-  - !<!ObjectSchema> &ref_24
-    type: object
+  booleans:
+  - !<!BooleanSchema> &ref_2
+    type: boolean
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    properties:
-    - !<!Property> 
-      schema: !<!NumberSchema> &ref_0
-        type: integer
-        precision: 32
-        language: !<!Languages> 
-          default:
-            name: Integer
-            description: ''
-        protocol: !<!Protocols> {}
-      serializedName: status
-      language: !<!Languages> 
-        default:
-          name: status
-          description: ''
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: !<!StringSchema> &ref_17
-        type: string
-        apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-        language: !<!Languages> 
-          default:
-            name: ErrorMessage
-            description: ''
-        protocol: !<!Protocols> {}
-      serializedName: message
-      language: !<!Languages> 
-        default:
-          name: message
-          description: ''
-      protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Error
+        name: Boolean
         description: ''
-        namespace: Api100
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_1
-    type: object
+  numbers:
+  - !<!NumberSchema> &ref_0
+    type: integer
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    properties:
-    - !<!Property> 
-      schema: *ref_0
-      serializedName: integer
-      language: !<!Languages> 
-        default:
-          name: integer
-          description: ''
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: !<!StringSchema> &ref_18
-        type: string
-        apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-        language: !<!Languages> 
-          default:
-            name: WidgetString
-            description: ''
-        protocol: !<!Protocols> {}
-      serializedName: string
-      language: !<!Languages> 
-        default:
-          name: string
-          description: ''
-      protocol: !<!Protocols> {}
+    precision: 32
     language: !<!Languages> 
       default:
-        name: Widget
+        name: Integer
         description: ''
-        namespace: Api100
+    protocol: !<!Protocols> {}
+  - !<!NumberSchema> &ref_6
+    type: integer
+    precision: 32
+    language: !<!Languages> 
+      default:
+        name: Integer
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!NumberSchema> &ref_3
+    type: integer
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    precision: 64
+    language: !<!Languages> 
+      default:
+        name: Integer
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!NumberSchema> &ref_4
+    type: number
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    precision: 32
+    language: !<!Languages> 
+      default:
+        name: Number
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!NumberSchema> &ref_5
+    type: number
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    precision: 64
+    language: !<!Languages> 
+      default:
+        name: Number
+        description: ''
+    protocol: !<!Protocols> {}
+  strings:
+  - !<!StringSchema> &ref_21
+    type: string
+    language: !<!Languages> 
+      default:
+        name: String
+        description: simple string
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_16
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: ErrorMessage
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_1
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: String
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_7
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: WidgetString
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_8
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: Get200ApplicationJsonAdditionalPropertiesItem
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_9
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: PutContentSchemaItemsItem
+        description: ''
     protocol: !<!Protocols> {}
   dictionaries:
   - !<!DictionarySchema> &ref_23
     type: dictionary
-    elementType: !<!NumberSchema> &ref_13
-      type: integer
-      apiVersions:
-      - !<!ApiVersion> 
-        version: 1.0.0
-      precision: 32
-      language: !<!Languages> 
-        default:
-          name: Integer
-          description: ''
-      protocol: !<!Protocols> {}
+    elementType: *ref_0
     language: !<!Languages> 
       default:
         name: DictionaryOfInteger
@@ -103,16 +136,7 @@ schemas: !<!Schemas>
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_25
     type: dictionary
-    elementType: !<!StringSchema> &ref_2
-      type: string
-      apiVersions:
-      - !<!ApiVersion> 
-        version: 1.0.0
-      language: !<!Languages> 
-        default:
-          name: String
-          description: ''
-      protocol: !<!Protocols> {}
+    elementType: *ref_1
     language: !<!Languages> 
       default:
         name: DictionaryOfString
@@ -120,16 +144,7 @@ schemas: !<!Schemas>
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_27
     type: dictionary
-    elementType: !<!BooleanSchema> &ref_6
-      type: boolean
-      apiVersions:
-      - !<!ApiVersion> 
-        version: 1.0.0
-      language: !<!Languages> 
-        default:
-          name: Boolean
-          description: ''
-      protocol: !<!Protocols> {}
+    elementType: *ref_2
     language: !<!Languages> 
       default:
         name: DictionaryOfBoolean
@@ -137,17 +152,7 @@ schemas: !<!Schemas>
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_30
     type: dictionary
-    elementType: !<!NumberSchema> &ref_14
-      type: integer
-      apiVersions:
-      - !<!ApiVersion> 
-        version: 1.0.0
-      precision: 64
-      language: !<!Languages> 
-        default:
-          name: Integer
-          description: ''
-      protocol: !<!Protocols> {}
+    elementType: *ref_3
     language: !<!Languages> 
       default:
         name: DictionaryOfInteger
@@ -155,17 +160,7 @@ schemas: !<!Schemas>
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_32
     type: dictionary
-    elementType: !<!NumberSchema> &ref_15
-      type: number
-      apiVersions:
-      - !<!ApiVersion> 
-        version: 1.0.0
-      precision: 32
-      language: !<!Languages> 
-        default:
-          name: Number
-          description: ''
-      protocol: !<!Protocols> {}
+    elementType: *ref_4
     language: !<!Languages> 
       default:
         name: DictionaryOfNumber
@@ -173,17 +168,7 @@ schemas: !<!Schemas>
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_34
     type: dictionary
-    elementType: !<!NumberSchema> &ref_16
-      type: number
-      apiVersions:
-      - !<!ApiVersion> 
-        version: 1.0.0
-      precision: 64
-      language: !<!Languages> 
-        default:
-          name: Number
-          description: ''
-      protocol: !<!Protocols> {}
+    elementType: *ref_5
     language: !<!Languages> 
       default:
         name: DictionaryOfNumber
@@ -191,7 +176,7 @@ schemas: !<!Schemas>
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_37
     type: dictionary
-    elementType: !<!DateSchema> &ref_11
+    elementType: !<!DateSchema> &ref_14
       type: date
       apiVersions:
       - !<!ApiVersion> 
@@ -208,7 +193,7 @@ schemas: !<!Schemas>
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_39
     type: dictionary
-    elementType: !<!DateTimeSchema> &ref_9
+    elementType: !<!DateTimeSchema> &ref_12
       type: date-time
       format: date-time
       apiVersions:
@@ -226,7 +211,7 @@ schemas: !<!Schemas>
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_41
     type: dictionary
-    elementType: !<!DateTimeSchema> &ref_10
+    elementType: !<!DateTimeSchema> &ref_13
       type: date-time
       format: date-time-rfc1123
       apiVersions:
@@ -244,7 +229,7 @@ schemas: !<!Schemas>
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_43
     type: dictionary
-    elementType: !<!DurationSchema> &ref_12
+    elementType: !<!DurationSchema> &ref_15
       type: duration
       apiVersions:
       - !<!ApiVersion> 
@@ -261,7 +246,7 @@ schemas: !<!Schemas>
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_45
     type: dictionary
-    elementType: !<!ByteArraySchema> &ref_7
+    elementType: !<!ByteArraySchema> &ref_10
       type: byte-array
       format: byte
       apiVersions:
@@ -279,7 +264,7 @@ schemas: !<!Schemas>
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_47
     type: dictionary
-    elementType: !<!ByteArraySchema> &ref_8
+    elementType: !<!ByteArraySchema> &ref_11
       type: byte-array
       format: base64url
       apiVersions:
@@ -297,7 +282,39 @@ schemas: !<!Schemas>
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_48
     type: dictionary
-    elementType: *ref_1
+    elementType: !<!ObjectSchema> &ref_17
+      type: object
+      apiVersions:
+      - !<!ApiVersion> 
+        version: 1.0.0
+      properties:
+      - !<!Property> 
+        schema: *ref_6
+        serializedName: integer
+        language: !<!Languages> 
+          default:
+            name: integer
+            description: ''
+        protocol: !<!Protocols> {}
+      - !<!Property> 
+        schema: *ref_7
+        serializedName: string
+        language: !<!Languages> 
+          default:
+            name: string
+            description: ''
+        protocol: !<!Protocols> {}
+      serializationFormats:
+      - json
+      usage:
+      - output
+      - input
+      language: !<!Languages> 
+        default:
+          name: Widget
+          description: ''
+          namespace: ''
+      protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
         name: DictionaryOfWidget
@@ -305,21 +322,12 @@ schemas: !<!Schemas>
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_50
     type: dictionary
-    elementType: !<!ArraySchema> &ref_3
+    elementType: !<!ArraySchema> &ref_18
       type: array
       apiVersions:
       - !<!ApiVersion> 
         version: 1.0.0
-      elementType: !<!StringSchema> &ref_19
-        type: string
-        apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-        language: !<!Languages> 
-          default:
-            name: Get200ApplicationJsonAdditionalPropertiesItem
-            description: ''
-        protocol: !<!Protocols> {}
+      elementType: *ref_8
       language: !<!Languages> 
         default:
           name: ArrayOfGet200ApplicationJsonAdditionalPropertiesItem
@@ -332,12 +340,12 @@ schemas: !<!Schemas>
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_51
     type: dictionary
-    elementType: !<!ArraySchema> &ref_4
+    elementType: !<!ArraySchema> &ref_19
       type: array
       apiVersions:
       - !<!ApiVersion> 
         version: 1.0.0
-      elementType: *ref_2
+      elementType: *ref_1
       language: !<!Languages> 
         default:
           name: ArrayOfString
@@ -350,21 +358,12 @@ schemas: !<!Schemas>
     protocol: !<!Protocols> {}
   - !<!DictionarySchema> &ref_52
     type: dictionary
-    elementType: !<!ArraySchema> &ref_5
+    elementType: !<!ArraySchema> &ref_20
       type: array
       apiVersions:
       - !<!ApiVersion> 
         version: 1.0.0
-      elementType: !<!StringSchema> &ref_20
-        type: string
-        apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-        language: !<!Languages> 
-          default:
-            name: PutContentSchemaItemsItem
-            description: ''
-        protocol: !<!Protocols> {}
+      elementType: *ref_9
       language: !<!Languages> 
         default:
           name: ArrayOfPutContentSchemaItemsItem
@@ -389,38 +388,51 @@ schemas: !<!Schemas>
         name: DictionaryOfany
         description: An dictionaries of dictionaries with value null
     protocol: !<!Protocols> {}
-  arrays:
-  - *ref_3
-  - *ref_4
-  - *ref_5
-  booleans:
-  - *ref_6
   byteArrays:
-  - *ref_7
-  - *ref_8
-  dateTimes:
-  - *ref_9
   - *ref_10
-  dates:
   - *ref_11
-  durations:
+  dateTimes:
   - *ref_12
-  numbers:
   - *ref_13
-  - *ref_0
+  dates:
   - *ref_14
+  durations:
   - *ref_15
-  - *ref_16
-  strings:
-  - !<!StringSchema> &ref_21
-    type: string
+  objects:
+  - !<!ObjectSchema> &ref_24
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    properties:
+    - !<!Property> 
+      schema: *ref_6
+      serializedName: status
+      language: !<!Languages> 
+        default:
+          name: status
+          description: ''
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: *ref_16
+      serializedName: message
+      language: !<!Languages> 
+        default:
+          name: message
+          description: ''
+      protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - output
     language: !<!Languages> 
       default:
-        name: String
-        description: simple string
+        name: Error
+        description: ''
+        namespace: ''
     protocol: !<!Protocols> {}
   - *ref_17
-  - *ref_2
+  arrays:
   - *ref_18
   - *ref_19
   - *ref_20
@@ -440,9 +452,6 @@ globalParameters:
   protocol: !<!Protocols> 
     http: !<!HttpParameter> 
       in: uri
-info: !<!Info> 
-  description: Test Infrastructure for AutoRest Swagger BAT
-  title: body-dictionary
 operationGroups:
 - !<!OperationGroup> 
   $key: dictionary
@@ -451,10 +460,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -464,6 +473,7 @@ operationGroups:
           path: /dictionary/null
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_23
@@ -501,10 +511,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -514,6 +524,7 @@ operationGroups:
           path: /dictionary/empty
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_23
@@ -551,15 +562,15 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_22
       - !<!Parameter> &ref_26
         schema: *ref_25
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: arrayBody
         language: !<!Languages> 
           default:
             name: arrayBody
@@ -582,6 +593,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -606,8 +618,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutEmpty
@@ -617,10 +627,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -630,6 +640,7 @@ operationGroups:
           path: /dictionary/nullvalue
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_25
@@ -667,10 +678,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -680,6 +691,7 @@ operationGroups:
           path: /dictionary/nullkey
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_25
@@ -717,10 +729,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -730,6 +742,7 @@ operationGroups:
           path: /dictionary/keyemptystring
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_25
@@ -767,10 +780,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -780,6 +793,7 @@ operationGroups:
           path: /dictionary/invalid
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_25
@@ -817,10 +831,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -830,6 +844,7 @@ operationGroups:
           path: /dictionary/prim/boolean/tfft
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_27
@@ -867,15 +882,15 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_22
       - !<!Parameter> &ref_28
         schema: *ref_27
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: arrayBody
         language: !<!Languages> 
           default:
             name: arrayBody
@@ -898,6 +913,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -922,8 +938,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutBooleanTfft
@@ -933,10 +947,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -946,6 +960,7 @@ operationGroups:
           path: /dictionary/prim/boolean/true.null.false
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_27
@@ -983,10 +998,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -996,6 +1011,7 @@ operationGroups:
           path: /dictionary/prim/boolean/true.boolean.false
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_27
@@ -1033,10 +1049,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -1046,6 +1062,7 @@ operationGroups:
           path: /dictionary/prim/integer/1.-1.3.300
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_23
@@ -1083,15 +1100,15 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_22
       - !<!Parameter> &ref_29
         schema: *ref_23
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: arrayBody
         language: !<!Languages> 
           default:
             name: arrayBody
@@ -1114,6 +1131,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -1138,8 +1156,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutIntegerValid
@@ -1149,10 +1165,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -1162,6 +1178,7 @@ operationGroups:
           path: /dictionary/prim/integer/1.null.zero
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_23
@@ -1199,10 +1216,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -1212,6 +1229,7 @@ operationGroups:
           path: /dictionary/prim/integer/1.integer.0
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_23
@@ -1249,10 +1267,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -1262,6 +1280,7 @@ operationGroups:
           path: /dictionary/prim/long/1.-1.3.300
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_30
@@ -1299,15 +1318,15 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_22
       - !<!Parameter> &ref_31
         schema: *ref_30
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: arrayBody
         language: !<!Languages> 
           default:
             name: arrayBody
@@ -1330,6 +1349,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -1354,8 +1374,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutLongValid
@@ -1365,10 +1383,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -1378,6 +1396,7 @@ operationGroups:
           path: /dictionary/prim/long/1.null.zero
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_30
@@ -1415,10 +1434,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -1428,6 +1447,7 @@ operationGroups:
           path: /dictionary/prim/long/1.integer.0
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_30
@@ -1465,10 +1485,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -1478,6 +1498,7 @@ operationGroups:
           path: /dictionary/prim/float/0--0.01-1.2e20
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_32
@@ -1515,15 +1536,15 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_22
       - !<!Parameter> &ref_33
         schema: *ref_32
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: arrayBody
         language: !<!Languages> 
           default:
             name: arrayBody
@@ -1546,6 +1567,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -1570,8 +1592,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutFloatValid
@@ -1581,10 +1601,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -1594,6 +1614,7 @@ operationGroups:
           path: /dictionary/prim/float/0.0-null-1.2e20
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_32
@@ -1631,10 +1652,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -1644,6 +1665,7 @@ operationGroups:
           path: /dictionary/prim/float/1.number.0
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_32
@@ -1681,10 +1703,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -1694,6 +1716,7 @@ operationGroups:
           path: /dictionary/prim/double/0--0.01-1.2e20
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_34
@@ -1731,15 +1754,15 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_22
       - !<!Parameter> &ref_35
         schema: *ref_34
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: arrayBody
         language: !<!Languages> 
           default:
             name: arrayBody
@@ -1762,6 +1785,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -1786,8 +1810,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutDoubleValid
@@ -1797,10 +1819,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -1810,6 +1832,7 @@ operationGroups:
           path: /dictionary/prim/double/0.0-null-1.2e20
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_34
@@ -1847,10 +1870,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -1860,6 +1883,7 @@ operationGroups:
           path: /dictionary/prim/double/1.number.0
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_34
@@ -1897,10 +1921,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -1910,6 +1934,7 @@ operationGroups:
           path: /dictionary/prim/string/foo1.foo2.foo3
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_25
@@ -1947,15 +1972,15 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_22
       - !<!Parameter> &ref_36
         schema: *ref_25
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: arrayBody
         language: !<!Languages> 
           default:
             name: arrayBody
@@ -1978,6 +2003,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -2002,8 +2028,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutStringValid
@@ -2013,10 +2037,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -2026,6 +2050,7 @@ operationGroups:
           path: /dictionary/prim/string/foo.null.foo2
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_25
@@ -2063,10 +2088,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -2076,6 +2101,7 @@ operationGroups:
           path: /dictionary/prim/string/foo.123.foo2
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_25
@@ -2113,10 +2139,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -2126,6 +2152,7 @@ operationGroups:
           path: /dictionary/prim/date/valid
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_37
@@ -2163,15 +2190,15 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_22
       - !<!Parameter> &ref_38
         schema: *ref_37
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: arrayBody
         language: !<!Languages> 
           default:
             name: arrayBody
@@ -2194,6 +2221,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -2218,8 +2246,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutDateValid
@@ -2229,10 +2255,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -2242,6 +2268,7 @@ operationGroups:
           path: /dictionary/prim/date/invalidnull
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_37
@@ -2279,10 +2306,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -2292,6 +2319,7 @@ operationGroups:
           path: /dictionary/prim/date/invalidchars
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_37
@@ -2329,10 +2357,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -2342,6 +2370,7 @@ operationGroups:
           path: /dictionary/prim/date-time/valid
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_39
@@ -2379,15 +2408,15 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_22
       - !<!Parameter> &ref_40
         schema: *ref_39
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: arrayBody
         language: !<!Languages> 
           default:
             name: arrayBody
@@ -2410,6 +2439,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -2434,8 +2464,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutDateTimeValid
@@ -2445,10 +2473,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -2458,6 +2486,7 @@ operationGroups:
           path: /dictionary/prim/date-time/invalidnull
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_39
@@ -2495,10 +2524,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -2508,6 +2537,7 @@ operationGroups:
           path: /dictionary/prim/date-time/invalidchars
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_39
@@ -2545,10 +2575,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -2558,6 +2588,7 @@ operationGroups:
           path: /dictionary/prim/date-time-rfc1123/valid
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_41
@@ -2595,15 +2626,15 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_22
       - !<!Parameter> &ref_42
         schema: *ref_41
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: arrayBody
         language: !<!Languages> 
           default:
             name: arrayBody
@@ -2626,6 +2657,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -2650,8 +2682,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutDateTimeRfc1123Valid
@@ -2661,10 +2691,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -2674,6 +2704,7 @@ operationGroups:
           path: /dictionary/prim/duration/valid
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_43
@@ -2711,15 +2742,15 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_22
       - !<!Parameter> &ref_44
         schema: *ref_43
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: arrayBody
         language: !<!Languages> 
           default:
             name: arrayBody
@@ -2742,6 +2773,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -2766,8 +2798,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutDurationValid
@@ -2777,10 +2807,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -2790,6 +2820,7 @@ operationGroups:
           path: /dictionary/prim/byte/valid
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_45
@@ -2827,15 +2858,15 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_22
       - !<!Parameter> &ref_46
         schema: *ref_45
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: arrayBody
         language: !<!Languages> 
           default:
             name: arrayBody
@@ -2858,6 +2889,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -2882,8 +2914,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutByteValid
@@ -2893,10 +2923,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -2906,6 +2936,7 @@ operationGroups:
           path: /dictionary/prim/byte/invalidnull
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_45
@@ -2943,10 +2974,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -2956,6 +2987,7 @@ operationGroups:
           path: /dictionary/prim/base64url/valid
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_47
@@ -2993,10 +3025,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -3006,6 +3038,7 @@ operationGroups:
           path: /dictionary/complex/null
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_48
@@ -3043,10 +3076,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -3056,6 +3089,7 @@ operationGroups:
           path: /dictionary/complex/empty
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_48
@@ -3093,10 +3127,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -3106,6 +3140,7 @@ operationGroups:
           path: /dictionary/complex/itemnull
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_48
@@ -3143,10 +3178,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -3156,6 +3191,7 @@ operationGroups:
           path: /dictionary/complex/itemempty
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_48
@@ -3193,10 +3229,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -3206,6 +3242,7 @@ operationGroups:
           path: /dictionary/complex/valid
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_48
@@ -3243,15 +3280,15 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_22
       - !<!Parameter> &ref_49
         schema: *ref_48
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: arrayBody
         language: !<!Languages> 
           default:
             name: arrayBody
@@ -3274,6 +3311,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -3298,8 +3336,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutComplexValid
@@ -3309,10 +3345,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -3322,6 +3358,7 @@ operationGroups:
           path: /dictionary/array/null
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_50
@@ -3359,10 +3396,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -3372,6 +3409,7 @@ operationGroups:
           path: /dictionary/array/empty
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_51
@@ -3409,10 +3447,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -3422,6 +3460,7 @@ operationGroups:
           path: /dictionary/array/itemnull
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_51
@@ -3459,10 +3498,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -3472,6 +3511,7 @@ operationGroups:
           path: /dictionary/array/itemempty
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_51
@@ -3509,10 +3549,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -3522,6 +3562,7 @@ operationGroups:
           path: /dictionary/array/valid
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_51
@@ -3559,15 +3600,15 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_22
       - !<!Parameter> &ref_53
         schema: *ref_52
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: arrayBody
         language: !<!Languages> 
           default:
             name: arrayBody
@@ -3590,6 +3631,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -3614,8 +3656,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutArrayValid
@@ -3625,10 +3665,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -3638,6 +3678,7 @@ operationGroups:
           path: /dictionary/dictionary/null
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_54
@@ -3675,10 +3716,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -3688,6 +3729,7 @@ operationGroups:
           path: /dictionary/dictionary/empty
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_54
@@ -3725,10 +3767,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -3738,6 +3780,7 @@ operationGroups:
           path: /dictionary/dictionary/itemnull
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_54
@@ -3775,10 +3818,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -3788,6 +3831,7 @@ operationGroups:
           path: /dictionary/dictionary/itemempty
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_54
@@ -3825,10 +3869,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_22
-      signatureParameters: []
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -3838,6 +3882,7 @@ operationGroups:
           path: /dictionary/dictionary/valid
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_54
@@ -3875,15 +3920,15 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
+    parameters:
+    - *ref_22
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_22
       - !<!Parameter> &ref_55
         schema: *ref_54
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: arrayBody
         language: !<!Languages> 
           default:
             name: arrayBody
@@ -3906,6 +3951,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -3930,8 +3976,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutDictionaryValid

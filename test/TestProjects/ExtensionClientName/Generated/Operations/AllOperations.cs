@@ -30,7 +30,7 @@ namespace ExtensionClientName
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
-        internal HttpMessage CreateRenamedOperationRequest(string renamedPathParameter, string renamedQueryParameter, RenamedSchema renamedBodyParameter)
+        internal HttpMessage CreateRenamedOperationRequest(RenamedSchema renamedBodyParameter, string renamedPathParameter, string renamedQueryParameter)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -47,12 +47,16 @@ namespace ExtensionClientName
             request.Content = content;
             return message;
         }
+        /// <param name="renamedBodyParameter"> The RenamedSchema to use. </param>
         /// <param name="renamedPathParameter"> The String to use. </param>
         /// <param name="renamedQueryParameter"> The String to use. </param>
-        /// <param name="renamedBodyParameter"> The RenamedSchema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<RenamedSchema, RenamedOperationHeaders>> RenamedOperationAsync(string renamedPathParameter, string renamedQueryParameter, RenamedSchema renamedBodyParameter, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<RenamedSchema, RenamedOperationHeaders>> RenamedOperationAsync(RenamedSchema renamedBodyParameter, string renamedPathParameter, string renamedQueryParameter, CancellationToken cancellationToken = default)
         {
+            if (renamedBodyParameter == null)
+            {
+                throw new ArgumentNullException(nameof(renamedBodyParameter));
+            }
             if (renamedPathParameter == null)
             {
                 throw new ArgumentNullException(nameof(renamedPathParameter));
@@ -61,16 +65,12 @@ namespace ExtensionClientName
             {
                 throw new ArgumentNullException(nameof(renamedQueryParameter));
             }
-            if (renamedBodyParameter == null)
-            {
-                throw new ArgumentNullException(nameof(renamedBodyParameter));
-            }
 
             using var scope = clientDiagnostics.CreateScope("AllOperations.RenamedOperation");
             scope.Start();
             try
             {
-                using var message = CreateRenamedOperationRequest(renamedPathParameter, renamedQueryParameter, renamedBodyParameter);
+                using var message = CreateRenamedOperationRequest(renamedBodyParameter, renamedPathParameter, renamedQueryParameter);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -91,12 +91,16 @@ namespace ExtensionClientName
                 throw;
             }
         }
+        /// <param name="renamedBodyParameter"> The RenamedSchema to use. </param>
         /// <param name="renamedPathParameter"> The String to use. </param>
         /// <param name="renamedQueryParameter"> The String to use. </param>
-        /// <param name="renamedBodyParameter"> The RenamedSchema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<RenamedSchema, RenamedOperationHeaders> RenamedOperation(string renamedPathParameter, string renamedQueryParameter, RenamedSchema renamedBodyParameter, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<RenamedSchema, RenamedOperationHeaders> RenamedOperation(RenamedSchema renamedBodyParameter, string renamedPathParameter, string renamedQueryParameter, CancellationToken cancellationToken = default)
         {
+            if (renamedBodyParameter == null)
+            {
+                throw new ArgumentNullException(nameof(renamedBodyParameter));
+            }
             if (renamedPathParameter == null)
             {
                 throw new ArgumentNullException(nameof(renamedPathParameter));
@@ -105,16 +109,12 @@ namespace ExtensionClientName
             {
                 throw new ArgumentNullException(nameof(renamedQueryParameter));
             }
-            if (renamedBodyParameter == null)
-            {
-                throw new ArgumentNullException(nameof(renamedBodyParameter));
-            }
 
             using var scope = clientDiagnostics.CreateScope("AllOperations.RenamedOperation");
             scope.Start();
             try
             {
-                using var message = CreateRenamedOperationRequest(renamedPathParameter, renamedQueryParameter, renamedBodyParameter);
+                using var message = CreateRenamedOperationRequest(renamedBodyParameter, renamedPathParameter, renamedQueryParameter);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {

@@ -18,7 +18,7 @@ namespace CognitiveSearch.Models
         }
         /// <summary> The url for the Web API. </summary>
         public string Uri { get; set; }
-        /// <summary> A dictionary of http request headers. </summary>
+        /// <summary> The headers required to make the http request. </summary>
         public IDictionary<string, string> HttpHeaders { get; set; }
         /// <summary> The method for the http request. </summary>
         public string HttpMethod { get; set; }

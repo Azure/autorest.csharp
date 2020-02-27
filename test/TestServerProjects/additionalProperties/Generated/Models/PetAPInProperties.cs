@@ -7,8 +7,8 @@ using System.Collections.Generic;
 
 namespace additionalProperties.Models
 {
-    /// <summary> The PetApInProperties. </summary>
-    public partial class PetApInProperties
+    /// <summary> The PetAPInProperties. </summary>
+    public partial class PetAPInProperties
     {
         public int Id { get; set; }
         public string Name { get; set; }

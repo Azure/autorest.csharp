@@ -541,7 +541,7 @@ namespace AppConfiguration
                 throw;
             }
         }
-        internal HttpMessage CreatePutKeyValueRequest(string key, string label, string ifMatch, string ifNoneMatch, KeyValue entity)
+        internal HttpMessage CreatePutKeyValueRequest(KeyValue entity, string key, string label, string ifMatch, string ifNoneMatch)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -580,13 +580,13 @@ namespace AppConfiguration
             return message;
         }
         /// <summary> Creates a key-value. </summary>
+        /// <param name="entity"> The key-value to create. </param>
         /// <param name="key"> The key of the key-value to retrieve. </param>
         /// <param name="label"> A filter used to match labels. </param>
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
-        /// <param name="entity"> The key-value to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<KeyValue, PutKeyValueHeaders>> PutKeyValueAsync(string key, string label, string ifMatch, string ifNoneMatch, KeyValue entity, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<KeyValue, PutKeyValueHeaders>> PutKeyValueAsync(KeyValue entity, string key, string label, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -597,7 +597,7 @@ namespace AppConfiguration
             scope.Start();
             try
             {
-                using var message = CreatePutKeyValueRequest(key, label, ifMatch, ifNoneMatch, entity);
+                using var message = CreatePutKeyValueRequest(entity, key, label, ifMatch, ifNoneMatch);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -619,13 +619,13 @@ namespace AppConfiguration
             }
         }
         /// <summary> Creates a key-value. </summary>
+        /// <param name="entity"> The key-value to create. </param>
         /// <param name="key"> The key of the key-value to retrieve. </param>
         /// <param name="label"> A filter used to match labels. </param>
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
-        /// <param name="entity"> The key-value to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<KeyValue, PutKeyValueHeaders> PutKeyValue(string key, string label, string ifMatch, string ifNoneMatch, KeyValue entity, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<KeyValue, PutKeyValueHeaders> PutKeyValue(KeyValue entity, string key, string label, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -636,7 +636,7 @@ namespace AppConfiguration
             scope.Start();
             try
             {
-                using var message = CreatePutKeyValueRequest(key, label, ifMatch, ifNoneMatch, entity);
+                using var message = CreatePutKeyValueRequest(entity, key, label, ifMatch, ifNoneMatch);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {

@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
         {
             OdataType = "#Microsoft.Azure.Search.StemmerTokenFilter";
         }
-        /// <summary> The language to use for a stemmer token filter. </summary>
+        /// <summary> The language to use. </summary>
         public StemmerTokenFilterLanguage Language { get; set; }
     }
 }

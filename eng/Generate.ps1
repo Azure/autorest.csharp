@@ -59,7 +59,7 @@ $testNames =
     #'azure-resource-x',
     #'azure-special-properties',
     'body-array',
-    #'body-boolean',
+    'body-boolean',
     #'body-boolean.quirks',
     'body-byte',
     'body-complex',
@@ -96,7 +96,7 @@ $testNames =
     #'required-optional',
     #'storage',
     #'subscriptionId-apiVersion',
-    #'url',
+    'url',
     'validation',
     #'xml-service',
     #'xms-error-responses',
@@ -108,7 +108,7 @@ foreach ($testName in $testNames)
     $swaggerDefinitions[$testName] = @{
         'title'=$testName;
         'output'=$testServerDirectory;
-        'arguments'="--require=$configurationPath --input-file=$inputFile --csharpgen.attach"
+        'arguments'="--require=$configurationPath --input-file=$inputFile"
     }
 }
 
@@ -119,10 +119,6 @@ $configurationPath = Join-Path $testSwaggerPath 'readme.md'
 foreach ($directory in Get-ChildItem $testSwaggerPath -Directory)
 {
     $testName = $directory.Name
-    if($testName -eq 'TypeSchemaMapping')
-    {
-        continue;
-    }
     $inputFile = Join-Path $directory "$testName.json"
     $swaggerDefinitions[$testName] = @{
         'title'=$testName;

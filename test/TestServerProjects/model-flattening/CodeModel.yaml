@@ -1,304 +1,433 @@
 !<!CodeModel> 
+info: !<!Info> 
+  description: Resource Flattening for AutoRest
+  title: model-flattening
 schemas: !<!Schemas> 
-  objects:
-  - !<!ObjectSchema> &ref_0
-    type: object
+  numbers:
+  - !<!NumberSchema> &ref_13
+    type: integer
+    precision: 32
+    language: !<!Languages> 
+      default:
+        name: Integer
+        description: ''
+    protocol: !<!Protocols> {}
+  strings:
+  - !<!StringSchema> &ref_0
+    type: string
+    language: !<!Languages> 
+      default:
+        name: String
+        description: simple string
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_3
+    type: string
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    children: !<!Relations> 
-      all:
-      - !<!ObjectSchema> &ref_1
-        type: object
-        apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-        parents: !<!Relations> 
-          all:
-          - *ref_0
-          immediate:
-          - *ref_0
-        properties:
-        - !<!Property> 
-          schema: !<!StringSchema> &ref_3
-            type: string
-            apiVersions:
-            - !<!ApiVersion> 
-              version: 1.0.0
-            language: !<!Languages> 
-              default:
-                name: FlattenedProductPropertiesPName
-                description: ''
-            protocol: !<!Protocols> {}
-          flattenedNames:
-          - properties
-          - p.name
-          serializedName: p.name
-          language: !<!Languages> 
-            default:
-              name: pName
-              description: ''
-          protocol: !<!Protocols> {}
-        - !<!Property> 
-          schema: !<!StringSchema> &ref_4
-            type: string
-            apiVersions:
-            - !<!ApiVersion> 
-              version: 1.0.0
-            language: !<!Languages> 
-              default:
-                name: FlattenedProductPropertiesType
-                description: ''
-            protocol: !<!Protocols> {}
-          flattenedNames:
-          - properties
-          - type
-          serializedName: type
-          language: !<!Languages> 
-            default:
-              name: typePropertiesType
-              description: ''
-          protocol: !<!Protocols> {}
-        - !<!Property> 
-          schema: !<!ChoiceSchema> &ref_5
-            choices:
-            - !<!ChoiceValue> 
-              value: Succeeded
-              language:
-                default:
-                  name: Succeeded
-                  description: ''
-            - !<!ChoiceValue> 
-              value: Failed
-              language:
-                default:
-                  name: Failed
-                  description: ''
-            - !<!ChoiceValue> 
-              value: canceled
-              language:
-                default:
-                  name: Canceled
-                  description: ''
-            - !<!ChoiceValue> 
-              value: Accepted
-              language:
-                default:
-                  name: Accepted
-                  description: ''
-            - !<!ChoiceValue> 
-              value: Creating
-              language:
-                default:
-                  name: Creating
-                  description: ''
-            - !<!ChoiceValue> 
-              value: Created
-              language:
-                default:
-                  name: Created
-                  description: ''
-            - !<!ChoiceValue> 
-              value: Updating
-              language:
-                default:
-                  name: Updating
-                  description: ''
-            - !<!ChoiceValue> 
-              value: Updated
-              language:
-                default:
-                  name: Updated
-                  description: ''
-            - !<!ChoiceValue> 
-              value: Deleting
-              language:
-                default:
-                  name: Deleting
-                  description: ''
-            - !<!ChoiceValue> 
-              value: Deleted
-              language:
-                default:
-                  name: Deleted
-                  description: ''
-            - !<!ChoiceValue> 
-              value: OK
-              language:
-                default:
-                  name: Ok
-                  description: ''
-            type: choice
-            apiVersions:
-            - !<!ApiVersion> 
-              version: 1.0.0
-            choiceType: !<!StringSchema> &ref_9
-              type: string
-              language: !<!Languages> 
-                default:
-                  name: String
-                  description: simple string
-              protocol: !<!Protocols> {}
-            language: !<!Languages> 
-              default:
-                name: FlattenedProductPropertiesProvisioningStateValues
-                description: ''
-            protocol: !<!Protocols> {}
-          flattenedNames:
-          - properties
-          - provisioningStateValues
-          readOnly: true
-          serializedName: provisioningStateValues
-          language: !<!Languages> 
-            default:
-              name: provisioningStateValues
-              description: ''
-          protocol: !<!Protocols> {}
-        - !<!Property> 
-          schema: !<!StringSchema> &ref_6
-            type: string
-            apiVersions:
-            - !<!ApiVersion> 
-              version: 1.0.0
-            language: !<!Languages> 
-              default:
-                name: FlattenedProductPropertiesProvisioningState
-                description: ''
-            protocol: !<!Protocols> {}
-          flattenedNames:
-          - properties
-          - provisioningState
-          serializedName: provisioningState
-          language: !<!Languages> 
-            default:
-              name: provisioningState
-              description: ''
-          protocol: !<!Protocols> {}
-        language: !<!Languages> 
-          default:
-            name: FlattenedProduct
-            description: Flattened product.
-            namespace: Api100
-        protocol: !<!Protocols> {}
-      immediate:
-      - *ref_1
-    properties:
-    - !<!Property> 
-      schema: !<!StringSchema> &ref_23
-        type: string
-        apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-        language: !<!Languages> 
-          default:
-            name: ResourceId
-            description: Resource Id
-        protocol: !<!Protocols> {}
-      readOnly: true
-      serializedName: id
-      language: !<!Languages> 
+    language: !<!Languages> 
+      default:
+        name: ResourceId
+        description: Resource Id
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_4
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: ResourceType
+        description: Resource Type
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_1
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: String
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_6
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: ResourceLocation
+        description: Resource Location
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_7
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: ResourceName
+        description: Resource Name
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_14
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: ErrorMessage
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_9
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: FlattenedProductPropertiesPName
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_10
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: FlattenedProductPropertiesType
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_12
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: FlattenedProductPropertiesProvisioningState
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_16
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: WrappedProductValue
+        description: the product value
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_24
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: ProductId
+        description: 'Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.'
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_25
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: Description
+        description: Description of product.
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_19
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: SimpleProductPropertiesMaxProductDisplayName
+        description: Display name of product.
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_21
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: GenericUrlGenericValue
+        description: Generic URL value.
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_22
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: ProductUrlOdataValue
+        description: URL value.
+    protocol: !<!Protocols> {}
+  choices:
+  - !<!ChoiceSchema> &ref_11
+    choices:
+    - !<!ChoiceValue> 
+      value: Succeeded
+      language:
         default:
-          name: id
-          description: Resource Id
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: !<!StringSchema> &ref_24
-        type: string
-        apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-        language: !<!Languages> 
-          default:
-            name: ResourceType
-            description: Resource Type
-        protocol: !<!Protocols> {}
-      readOnly: true
-      serializedName: type
-      language: !<!Languages> 
+          name: Succeeded
+          description: ''
+    - !<!ChoiceValue> 
+      value: Failed
+      language:
         default:
-          name: type
-          description: Resource Type
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: !<!DictionarySchema> &ref_17
-        type: dictionary
-        elementType: !<!StringSchema> &ref_25
-          type: string
+          name: Failed
+          description: ''
+    - !<!ChoiceValue> 
+      value: canceled
+      language:
+        default:
+          name: Canceled
+          description: ''
+    - !<!ChoiceValue> 
+      value: Accepted
+      language:
+        default:
+          name: Accepted
+          description: ''
+    - !<!ChoiceValue> 
+      value: Creating
+      language:
+        default:
+          name: Creating
+          description: ''
+    - !<!ChoiceValue> 
+      value: Created
+      language:
+        default:
+          name: Created
+          description: ''
+    - !<!ChoiceValue> 
+      value: Updating
+      language:
+        default:
+          name: Updating
+          description: ''
+    - !<!ChoiceValue> 
+      value: Updated
+      language:
+        default:
+          name: Updated
+          description: ''
+    - !<!ChoiceValue> 
+      value: Deleting
+      language:
+        default:
+          name: Deleting
+          description: ''
+    - !<!ChoiceValue> 
+      value: Deleted
+      language:
+        default:
+          name: Deleted
+          description: ''
+    - !<!ChoiceValue> 
+      value: OK
+      language:
+        default:
+          name: OK
+          description: ''
+    type: choice
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    choiceType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: FlattenedProductPropertiesProvisioningStateValues
+        description: ''
+    protocol: !<!Protocols> {}
+  constants:
+  - !<!ConstantSchema> &ref_20
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: Large
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Capacity
+        description: 'Capacity of product. For example, 4 people.'
+    protocol: !<!Protocols> {}
+  dictionaries:
+  - !<!DictionarySchema> &ref_5
+    type: dictionary
+    elementType: *ref_1
+    language: !<!Languages> 
+      default:
+        name: ResourceTags
+        description: Dictionary of <string>
+    protocol: !<!Protocols> {}
+  - !<!DictionarySchema> &ref_38
+    type: dictionary
+    elementType: !<!ObjectSchema> &ref_2
+      type: object
+      apiVersions:
+      - !<!ApiVersion> 
+        version: 1.0.0
+      parents: !<!Relations> 
+        all:
+        - !<!ObjectSchema> &ref_8
+          type: object
           apiVersions:
           - !<!ApiVersion> 
             version: 1.0.0
+          children: !<!Relations> 
+            all:
+            - *ref_2
+            immediate:
+            - *ref_2
+          properties:
+          - !<!Property> 
+            schema: *ref_3
+            readOnly: true
+            serializedName: id
+            language: !<!Languages> 
+              default:
+                name: id
+                description: Resource Id
+            protocol: !<!Protocols> {}
+          - !<!Property> 
+            schema: *ref_4
+            readOnly: true
+            serializedName: type
+            language: !<!Languages> 
+              default:
+                name: type
+                description: Resource Type
+            protocol: !<!Protocols> {}
+          - !<!Property> 
+            schema: *ref_5
+            serializedName: tags
+            language: !<!Languages> 
+              default:
+                name: tags
+                description: Dictionary of <string>
+            protocol: !<!Protocols> {}
+          - !<!Property> 
+            schema: *ref_6
+            serializedName: location
+            language: !<!Languages> 
+              default:
+                name: location
+                description: Resource Location
+            protocol: !<!Protocols> {}
+          - !<!Property> 
+            schema: *ref_7
+            readOnly: true
+            serializedName: name
+            language: !<!Languages> 
+              default:
+                name: name
+                description: Resource Name
+            protocol: !<!Protocols> {}
+          serializationFormats:
+          - json
+          usage:
+          - input
+          - output
           language: !<!Languages> 
             default:
-              name: String
+              name: Resource
               description: ''
+              namespace: ''
           protocol: !<!Protocols> {}
+        immediate:
+        - *ref_8
+      properties:
+      - !<!Property> 
+        schema: *ref_9
+        flattenedNames:
+        - properties
+        - p.name
+        serializedName: p.name
         language: !<!Languages> 
           default:
-            name: ResourceTags
-            description: Dictionary of <string>
+            name: pName
+            description: ''
         protocol: !<!Protocols> {}
-      serializedName: tags
-      language: !<!Languages> 
-        default:
-          name: tags
-          description: Dictionary of <string>
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: !<!StringSchema> &ref_26
-        type: string
-        apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
+      - !<!Property> 
+        schema: *ref_10
+        flattenedNames:
+        - properties
+        - type
+        serializedName: type
         language: !<!Languages> 
           default:
-            name: ResourceLocation
-            description: Resource Location
+            name: typePropertiesType
+            description: ''
         protocol: !<!Protocols> {}
-      serializedName: location
-      language: !<!Languages> 
-        default:
-          name: location
-          description: Resource Location
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: !<!StringSchema> &ref_27
-        type: string
-        apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
+      - !<!Property> 
+        schema: *ref_11
+        flattenedNames:
+        - properties
+        - provisioningStateValues
+        readOnly: true
+        serializedName: provisioningStateValues
         language: !<!Languages> 
           default:
-            name: ResourceName
-            description: Resource Name
+            name: provisioningStateValues
+            description: ''
         protocol: !<!Protocols> {}
-      readOnly: true
-      serializedName: name
+      - !<!Property> 
+        schema: *ref_12
+        flattenedNames:
+        - properties
+        - provisioningState
+        serializedName: provisioningState
+        language: !<!Languages> 
+          default:
+            name: provisioningState
+            description: ''
+        protocol: !<!Protocols> {}
+      serializationFormats:
+      - json
+      usage:
+      - output
+      - input
       language: !<!Languages> 
         default:
-          name: name
-          description: Resource Name
+          name: FlattenedProduct
+          description: Flattened product.
+          namespace: ''
       protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Resource
-        description: ''
-        namespace: Api100
+        name: DictionaryOfFlattenedProduct
+        description: Dictionary of <FlattenedProduct>
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_2
+  - !<!DictionarySchema> &ref_17
+    type: dictionary
+    elementType: *ref_2
+    language: !<!Languages> 
+      default:
+        name: ResourceCollectionDictionaryofresources
+        description: Dictionary of <FlattenedProduct>
+    protocol: !<!Protocols> {}
+  objects:
+  - *ref_8
+  - !<!ObjectSchema> &ref_15
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
     properties:
     - !<!Property> 
-      schema: !<!NumberSchema> &ref_22
-        type: integer
-        precision: 32
-        language: !<!Languages> 
-          default:
-            name: Integer
-            description: ''
-        protocol: !<!Protocols> {}
+      schema: *ref_13
       serializedName: status
       language: !<!Languages> 
         default:
@@ -306,16 +435,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_28
-        type: string
-        apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-        language: !<!Languages> 
-          default:
-            name: ErrorMessage
-            description: ''
-        protocol: !<!Protocols> {}
+      schema: *ref_14
       serializedName: message
       language: !<!Languages> 
         default:
@@ -323,20 +443,24 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_2
+      schema: *ref_15
       serializedName: parentError
       language: !<!Languages> 
         default:
           name: parentError
           description: ''
       protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - output
     language: !<!Languages> 
       default:
         name: Error
         description: ''
-        namespace: Api100
+        namespace: ''
     protocol: !<!Protocols> {}
-  - *ref_1
+  - *ref_2
   - !<!ObjectSchema> 
     type: object
     apiVersions:
@@ -344,7 +468,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     properties:
     - !<!Property> 
-      schema: *ref_3
+      schema: *ref_9
       serializedName: p.name
       language: !<!Languages> 
         default:
@@ -352,7 +476,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_4
+      schema: *ref_10
       serializedName: type
       language: !<!Languages> 
         default:
@@ -360,7 +484,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_5
+      schema: *ref_11
       readOnly: true
       serializedName: provisioningStateValues
       language: !<!Languages> 
@@ -369,13 +493,18 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_6
+      schema: *ref_12
       serializedName: provisioningState
       language: !<!Languages> 
         default:
           name: provisioningState
           description: ''
       protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - output
+    - input
     extensions:
       x-ms-client-flatten: true
       x-ms-flattened: true
@@ -383,47 +512,43 @@ schemas: !<!Schemas>
       default:
         name: FlattenedProductProperties
         description: ''
-        namespace: Api100
+        namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_19
+  - !<!ObjectSchema> &ref_28
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
     properties:
     - !<!Property> 
-      schema: !<!StringSchema> &ref_7
-        type: string
-        apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-        language: !<!Languages> 
-          default:
-            name: WrappedProductValue
-            description: the product value
-        protocol: !<!Protocols> {}
+      schema: *ref_16
       serializedName: value
       language: !<!Languages> 
         default:
           name: value
           description: the product value
       protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - input
+    - output
     extensions:
       x-ms-flattened: true
     language: !<!Languages> 
       default:
         name: WrappedProduct
         description: The wrapped produc.
-        namespace: Api100
+        namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_20
+  - !<!ObjectSchema> &ref_29
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
     properties:
     - !<!Property> 
-      schema: *ref_7
+      schema: *ref_16
       flattenedNames:
       - property
       - value
@@ -433,11 +558,15 @@ schemas: !<!Schemas>
           name: value
           description: the product value
       protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - output
     language: !<!Languages> 
       default:
         name: ProductWrapper
         description: The wrapped produc.
-        namespace: Api100
+        namespace: ''
     protocol: !<!Protocols> {}
   - !<!ObjectSchema> &ref_40
     type: object
@@ -446,7 +575,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     properties:
     - !<!Property> 
-      schema: *ref_1
+      schema: *ref_2
       serializedName: productresource
       language: !<!Languages> 
         default:
@@ -454,12 +583,12 @@ schemas: !<!Schemas>
           description: Flattened product.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_21
+      schema: !<!ArraySchema> &ref_30
         type: array
         apiVersions:
         - !<!ApiVersion> 
           version: 1.0.0
-        elementType: *ref_1
+        elementType: *ref_2
         language: !<!Languages> 
           default:
             name: ResourceCollectionArrayofresources
@@ -472,55 +601,44 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!DictionarySchema> &ref_18
-        type: dictionary
-        elementType: *ref_1
-        language: !<!Languages> 
-          default:
-            name: ResourceCollectionDictionaryofresources
-            description: Dictionary of <FlattenedProduct>
-        protocol: !<!Protocols> {}
+      schema: *ref_17
       serializedName: dictionaryofresources
       language: !<!Languages> 
         default:
           name: dictionaryofresources
           description: Dictionary of <FlattenedProduct>
       protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - input
+    - output
     language: !<!Languages> 
       default:
         name: ResourceCollection
         description: ''
-        namespace: Api100
+        namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_8
+  - !<!ObjectSchema> &ref_18
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
     children: !<!Relations> 
       all:
-      - !<!ObjectSchema> &ref_10
+      - !<!ObjectSchema> &ref_23
         type: object
         apiVersions:
         - !<!ApiVersion> 
           version: 1.0.0
         parents: !<!Relations> 
           all:
-          - *ref_8
+          - *ref_18
           immediate:
-          - *ref_8
+          - *ref_18
         properties:
         - !<!Property> 
-          schema: !<!StringSchema> &ref_11
-            type: string
-            apiVersions:
-            - !<!ApiVersion> 
-              version: 1.0.0
-            language: !<!Languages> 
-              default:
-                name: SimpleProductPropertiesMaxProductDisplayName
-                description: Display name of product.
-            protocol: !<!Protocols> {}
+          schema: *ref_19
           flattenedNames:
           - details
           - max_product_display_name
@@ -531,19 +649,7 @@ schemas: !<!Schemas>
               description: Display name of product.
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: !<!ConstantSchema> &ref_12
-            type: constant
-            apiVersions:
-            - !<!ApiVersion> 
-              version: 1.0.0
-            value: !<!ConstantValue> 
-              value: Large
-            valueType: *ref_9
-            language: !<!Languages> 
-              default:
-                name: Capacity
-                description: 'Capacity of product. For example, 4 people.'
-            protocol: !<!Protocols> {}
+          schema: *ref_20
           flattenedNames:
           - details
           - max_product_capacity
@@ -554,16 +660,7 @@ schemas: !<!Schemas>
               description: 'Capacity of product. For example, 4 people.'
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: !<!StringSchema> &ref_13
-            type: string
-            apiVersions:
-            - !<!ApiVersion> 
-              version: 1.0.0
-            language: !<!Languages> 
-              default:
-                name: GenericUrlGenericValue
-                description: Generic URL value.
-            protocol: !<!Protocols> {}
+          schema: *ref_21
           flattenedNames:
           - details
           - max_product_image
@@ -575,16 +672,7 @@ schemas: !<!Schemas>
               description: Generic URL value.
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: !<!StringSchema> &ref_14
-            type: string
-            apiVersions:
-            - !<!ApiVersion> 
-              version: 1.0.0
-            language: !<!Languages> 
-              default:
-                name: ProductUrlOdataValue
-                description: URL value.
-            protocol: !<!Protocols> {}
+          schema: *ref_22
           flattenedNames:
           - details
           - max_product_image
@@ -595,26 +683,22 @@ schemas: !<!Schemas>
               name: odataValue
               description: URL value.
           protocol: !<!Protocols> {}
+        serializationFormats:
+        - json
+        usage:
+        - input
+        - output
         language: !<!Languages> 
           default:
             name: SimpleProduct
             description: The product documentation.
-            namespace: Api100
+            namespace: ''
         protocol: !<!Protocols> {}
       immediate:
-      - *ref_10
+      - *ref_23
     properties:
     - !<!Property> 
-      schema: !<!StringSchema> &ref_29
-        type: string
-        apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-        language: !<!Languages> 
-          default:
-            name: ProductId
-            description: 'Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.'
-        protocol: !<!Protocols> {}
+      schema: *ref_24
       required: true
       serializedName: base_product_id
       language: !<!Languages> 
@@ -623,16 +707,7 @@ schemas: !<!Schemas>
           description: 'Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.'
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_30
-        type: string
-        apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-        language: !<!Languages> 
-          default:
-            name: Description
-            description: Description of product.
-        protocol: !<!Protocols> {}
+      schema: *ref_25
       required: false
       serializedName: base_product_description
       language: !<!Languages> 
@@ -640,13 +715,18 @@ schemas: !<!Schemas>
           name: description
           description: Description of product.
       protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - input
+    - output
     language: !<!Languages> 
       default:
         name: BaseProduct
         description: The product documentation.
-        namespace: Api100
+        namespace: ''
     protocol: !<!Protocols> {}
-  - *ref_10
+  - *ref_23
   - !<!ObjectSchema> 
     type: object
     apiVersions:
@@ -654,7 +734,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     properties:
     - !<!Property> 
-      schema: *ref_11
+      schema: *ref_19
       required: true
       serializedName: max_product_display_name
       language: !<!Languages> 
@@ -663,7 +743,7 @@ schemas: !<!Schemas>
           description: Display name of product.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_12
+      schema: *ref_20
       required: true
       serializedName: max_product_capacity
       language: !<!Languages> 
@@ -672,7 +752,7 @@ schemas: !<!Schemas>
           description: 'Capacity of product. For example, 4 people.'
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_13
+      schema: *ref_21
       flattenedNames:
       - max_product_image
       - generic_value
@@ -684,7 +764,7 @@ schemas: !<!Schemas>
           description: Generic URL value.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_14
+      schema: *ref_22
       flattenedNames:
       - max_product_image
       - '@odata.value'
@@ -695,86 +775,88 @@ schemas: !<!Schemas>
           name: odataValue
           description: URL value.
       protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - input
+    - output
     extensions:
       x-ms-flattened: true
     language: !<!Languages> 
       default:
         name: SimpleProductProperties
         description: The product documentation.
-        namespace: Api100
+        namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_15
+  - !<!ObjectSchema> &ref_26
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
     children: !<!Relations> 
       all:
-      - !<!ObjectSchema> &ref_16
+      - !<!ObjectSchema> &ref_27
         type: object
         apiVersions:
         - !<!ApiVersion> 
           version: 1.0.0
         parents: !<!Relations> 
           all:
-          - *ref_15
+          - *ref_26
           immediate:
-          - *ref_15
+          - *ref_26
         properties:
         - !<!Property> 
-          schema: *ref_14
+          schema: *ref_22
           serializedName: '@odata.value'
           language: !<!Languages> 
             default:
               name: odataValue
               description: URL value.
           protocol: !<!Protocols> {}
+        serializationFormats:
+        - json
+        usage:
+        - input
+        - output
         extensions:
           x-ms-flattened: true
         language: !<!Languages> 
           default:
             name: ProductUrl
             description: The product URL.
-            namespace: Api100
+            namespace: ''
         protocol: !<!Protocols> {}
       immediate:
-      - *ref_16
+      - *ref_27
     properties:
     - !<!Property> 
-      schema: *ref_13
+      schema: *ref_21
       serializedName: generic_value
       language: !<!Languages> 
         default:
           name: genericValue
           description: Generic URL value.
       protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - input
+    - output
     language: !<!Languages> 
       default:
         name: GenericUrl
         description: The Generic URL.
-        namespace: Api100
+        namespace: ''
     protocol: !<!Protocols> {}
-  - *ref_16
-  dictionaries:
-  - *ref_17
-  - !<!DictionarySchema> &ref_38
-    type: dictionary
-    elementType: *ref_1
-    language: !<!Languages> 
-      default:
-        name: DictionaryOfFlattenedProduct
-        description: Dictionary of <FlattenedProduct>
-    protocol: !<!Protocols> {}
-  - *ref_18
-  choices:
-  - *ref_5
+  - *ref_27
   arrays:
   - !<!ArraySchema> &ref_32
     type: array
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    elementType: *ref_0
+    elementType: *ref_8
     language: !<!Languages> 
       default:
         name: ArrayOfResource
@@ -785,7 +867,7 @@ schemas: !<!Schemas>
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    elementType: *ref_1
+    elementType: *ref_2
     language: !<!Languages> 
       default:
         name: ArrayOfFlattenedProduct
@@ -796,7 +878,7 @@ schemas: !<!Schemas>
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    elementType: *ref_19
+    elementType: *ref_28
     language: !<!Languages> 
       default:
         name: ArrayOfWrappedProduct
@@ -807,37 +889,16 @@ schemas: !<!Schemas>
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    elementType: *ref_20
+    elementType: *ref_29
     language: !<!Languages> 
       default:
         name: ArrayOfProductWrapper
         description: Array of ProductWrapper
     protocol: !<!Protocols> {}
-  - *ref_21
-  constants:
-  - *ref_12
-  numbers:
-  - *ref_22
-  strings:
-  - *ref_9
-  - *ref_23
-  - *ref_24
-  - *ref_25
-  - *ref_26
-  - *ref_27
-  - *ref_28
-  - *ref_3
-  - *ref_4
-  - *ref_6
-  - *ref_7
-  - *ref_29
   - *ref_30
-  - *ref_11
-  - *ref_13
-  - *ref_14
 globalParameters:
 - !<!Parameter> &ref_31
-  schema: *ref_9
+  schema: *ref_0
   clientDefaultValue: 'http://localhost:3000'
   implementation: Client
   required: true
@@ -851,9 +912,6 @@ globalParameters:
   protocol: !<!Protocols> 
     http: !<!HttpParameter> 
       in: uri
-info: !<!Info> 
-  description: Resource Flattening for AutoRest
-  title: model-flattening
 operationGroups:
 - !<!OperationGroup> 
   $key: ''
@@ -862,14 +920,14 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
+    parameters:
+    - *ref_31
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_31
       - !<!Parameter> &ref_33
         schema: *ref_32
         implementation: Method
-        extensions:
-          x-ms-requestBody-name: ResourceArray
         language: !<!Languages> 
           default:
             name: resourceArray
@@ -892,6 +950,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -904,7 +963,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_2
+      schema: *ref_15
       language: !<!Languages> 
         default:
           name: ''
@@ -916,8 +975,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutArray
@@ -927,10 +984,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_31
-      signatureParameters: []
+    parameters:
+    - *ref_31
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -940,6 +997,7 @@ operationGroups:
           path: /model-flatten/array
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_34
@@ -956,7 +1014,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_2
+      schema: *ref_15
       language: !<!Languages> 
         default:
           name: ''
@@ -977,14 +1035,14 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
+    parameters:
+    - *ref_31
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_31
       - !<!Parameter> &ref_36
         schema: *ref_35
         implementation: Method
-        extensions:
-          x-ms-requestBody-name: ResourceArray
         language: !<!Languages> 
           default:
             name: resourceArray
@@ -1007,6 +1065,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -1019,7 +1078,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_2
+      schema: *ref_15
       language: !<!Languages> 
         default:
           name: ''
@@ -1031,8 +1090,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutWrappedArray
@@ -1042,10 +1099,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_31
-      signatureParameters: []
+    parameters:
+    - *ref_31
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -1055,6 +1112,7 @@ operationGroups:
           path: /model-flatten/wrappedarray
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_37
@@ -1071,7 +1129,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_2
+      schema: *ref_15
       language: !<!Languages> 
         default:
           name: ''
@@ -1092,14 +1150,14 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
+    parameters:
+    - *ref_31
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_31
       - !<!Parameter> &ref_39
         schema: *ref_38
         implementation: Method
-        extensions:
-          x-ms-requestBody-name: ResourceDictionary
         language: !<!Languages> 
           default:
             name: resourceDictionary
@@ -1122,6 +1180,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -1134,7 +1193,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_2
+      schema: *ref_15
       language: !<!Languages> 
         default:
           name: ''
@@ -1146,8 +1205,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutDictionary
@@ -1157,10 +1214,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_31
-      signatureParameters: []
+    parameters:
+    - *ref_31
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -1170,6 +1227,7 @@ operationGroups:
           path: /model-flatten/dictionary
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_38
@@ -1186,7 +1244,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_2
+      schema: *ref_15
       language: !<!Languages> 
         default:
           name: ''
@@ -1207,14 +1265,14 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
+    parameters:
+    - *ref_31
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_31
       - !<!Parameter> &ref_41
         schema: *ref_40
         implementation: Method
-        extensions:
-          x-ms-requestBody-name: ResourceComplexObject
         language: !<!Languages> 
           default:
             name: resourceComplexObject
@@ -1237,6 +1295,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -1249,7 +1308,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_2
+      schema: *ref_15
       language: !<!Languages> 
         default:
           name: ''
@@ -1261,8 +1320,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutResourceCollection
@@ -1272,10 +1329,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_31
-      signatureParameters: []
+    parameters:
+    - *ref_31
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -1285,6 +1342,7 @@ operationGroups:
           path: /model-flatten/resourcecollection
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_40
@@ -1301,7 +1359,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_2
+      schema: *ref_15
       language: !<!Languages> 
         default:
           name: ''
@@ -1322,14 +1380,14 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
+    parameters:
+    - *ref_31
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_31
       - !<!Parameter> &ref_42
-        schema: *ref_10
+        schema: *ref_23
         implementation: Method
-        extensions:
-          x-ms-requestBody-name: SimpleBodyProduct
         language: !<!Languages> 
           default:
             name: simpleBodyProduct
@@ -1352,9 +1410,10 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_10
+      schema: *ref_23
       language: !<!Languages> 
         default:
           name: ''
@@ -1368,7 +1427,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_2
+      schema: *ref_15
       language: !<!Languages> 
         default:
           name: ''
@@ -1380,8 +1439,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutSimpleProduct
@@ -1391,15 +1448,16 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
+    parameters:
+    - *ref_31
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_31
       - !<!Parameter> &ref_43
-        schema: *ref_10
+        schema: *ref_23
         implementation: Method
         extensions:
           x-ms-client-flatten: true
-          x-ms-requestBody-name: SimpleBodyProduct
         language: !<!Languages> 
           default:
             name: simpleBodyProduct
@@ -1422,9 +1480,10 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_10
+      schema: *ref_23
       language: !<!Languages> 
         default:
           name: ''
@@ -1438,7 +1497,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_2
+      schema: *ref_15
       language: !<!Languages> 
         default:
           name: ''
@@ -1450,8 +1509,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PostFlattenedSimpleProduct
@@ -1461,32 +1518,33 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
+    parameters:
+    - *ref_31
+    - !<!Parameter> &ref_45
+      schema: *ref_1
+      implementation: Method
+      required: true
+      extensions:
+        x-ms-parameter-grouping:
+          name: flatten-parameter-group
+      language: !<!Languages> 
+        default:
+          name: name
+          description: Product name with value 'groupproduct'
+          serializedName: name
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: path
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_31
       - !<!Parameter> &ref_44
-        schema: *ref_25
-        implementation: Method
-        required: true
-        extensions:
-          x-ms-parameter-grouping:
-            name: flatten-parameter-group
-        language: !<!Languages> 
-          default:
-            name: name
-            description: Product name with value 'groupproduct'
-            serializedName: name
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: path
-      - !<!Parameter> &ref_45
-        schema: *ref_10
+        schema: *ref_23
         implementation: Method
         extensions:
           x-ms-client-flatten: true
           x-ms-parameter-grouping:
             name: flatten-parameter-group
-          x-ms-requestBody-name: SimpleBodyProduct
         language: !<!Languages> 
           default:
             name: simpleBodyProduct
@@ -1497,7 +1555,6 @@ operationGroups:
             style: json
       signatureParameters:
       - *ref_44
-      - *ref_45
       language: !<!Languages> 
         default:
           name: ''
@@ -1510,9 +1567,11 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters:
+    - *ref_45
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_10
+      schema: *ref_23
       language: !<!Languages> 
         default:
           name: ''
@@ -1526,7 +1585,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_2
+      schema: *ref_15
       language: !<!Languages> 
         default:
           name: ''
@@ -1538,8 +1597,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutSimpleProductWithGrouping

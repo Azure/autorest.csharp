@@ -20,9 +20,9 @@ namespace CognitiveSearch.Models
         public string SkillsetName { get; set; }
         /// <summary> The name of the index to which this indexer writes data. </summary>
         public string TargetIndexName { get; set; }
-        /// <summary> Represents a schedule for indexer execution. </summary>
+        /// <summary> The schedule for this indexer. </summary>
         public IndexingSchedule Schedule { get; set; }
-        /// <summary> Represents parameters for indexer execution. </summary>
+        /// <summary> Parameters for indexer execution. </summary>
         public IndexingParameters Parameters { get; set; }
         /// <summary> Defines mappings between fields in the data source and corresponding target fields in the index. </summary>
         public ICollection<FieldMapping> FieldMappings { get; set; }

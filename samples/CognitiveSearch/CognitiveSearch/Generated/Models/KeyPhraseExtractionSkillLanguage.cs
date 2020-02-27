@@ -31,7 +31,7 @@ namespace CognitiveSearch.Models
         private const string NoValue = "no";
         private const string PlValue = "pl";
         private const string PtValue = "pt-PT";
-        private const string PtBrValue = "pt-BR";
+        private const string PtBRValue = "pt-BR";
         private const string RuValue = "ru";
         private const string EsValue = "es";
         private const string SvValue = "sv";
@@ -61,7 +61,7 @@ namespace CognitiveSearch.Models
         /// <summary> Portuguese (Portugal). </summary>
         public static KeyPhraseExtractionSkillLanguage Pt { get; } = new KeyPhraseExtractionSkillLanguage(PtValue);
         /// <summary> Portuguese (Brazil). </summary>
-        public static KeyPhraseExtractionSkillLanguage PtBr { get; } = new KeyPhraseExtractionSkillLanguage(PtBrValue);
+        public static KeyPhraseExtractionSkillLanguage PtBR { get; } = new KeyPhraseExtractionSkillLanguage(PtBRValue);
         /// <summary> Russian. </summary>
         public static KeyPhraseExtractionSkillLanguage Ru { get; } = new KeyPhraseExtractionSkillLanguage(RuValue);
         /// <summary> Spanish. </summary>

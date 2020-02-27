@@ -8,7 +8,7 @@ using Azure.Core;
 
 namespace additionalProperties.Models
 {
-    public partial class PetApString : IUtf8JsonSerializable
+    public partial class PetAPString : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -32,9 +32,9 @@ namespace additionalProperties.Models
             }
             writer.WriteEndObject();
         }
-        internal static PetApString DeserializePetApString(JsonElement element)
+        internal static PetAPString DeserializePetAPString(JsonElement element)
         {
-            PetApString result = new PetApString();
+            PetAPString result = new PetAPString();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))

@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Communication
             return Message(text, Channel.Fatal);
         }
 
-        public Task Message(string text)
+        public Task Information(string text)
         {
             return Message(text, Channel.Information);
         }

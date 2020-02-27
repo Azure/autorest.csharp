@@ -13,9 +13,9 @@ namespace CognitiveSearch.Models
         {
             OdataType = "#Microsoft.Skills.Vision.OcrSkill";
         }
-        /// <summary> A value indicating which algorithm to use. Default is printed. </summary>
+        /// <summary> A value indicating which algorithm to use for extracting text. Default is printed. </summary>
         public TextExtractionAlgorithm? TextExtractionAlgorithm { get; set; }
-        /// <summary> The language codes supported for input by OcrSkill. </summary>
+        /// <summary> A value indicating which language code to use. Default is en. </summary>
         public OcrSkillLanguage? DefaultLanguageCode { get; set; }
         /// <summary> A value indicating to turn orientation detection on or not. Default is false. </summary>
         public bool? ShouldDetectOrientation { get; set; }

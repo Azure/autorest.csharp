@@ -31,7 +31,7 @@ namespace additionalProperties
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
-        internal HttpMessage CreateCreateApTrueRequest(PetApTrue createParameters)
+        internal HttpMessage CreateCreateAPTrueRequest(PetAPTrue createParameters)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -47,27 +47,27 @@ namespace additionalProperties
             return message;
         }
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
-        /// <param name="createParameters"> The PetApTrue to use. </param>
+        /// <param name="createParameters"> The PetAPTrue to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<PetApTrue>> CreateApTrueAsync(PetApTrue createParameters, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<PetAPTrue>> CreateAPTrueAsync(PetAPTrue createParameters, CancellationToken cancellationToken = default)
         {
             if (createParameters == null)
             {
                 throw new ArgumentNullException(nameof(createParameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PetsOperations.CreateApTrue");
+            using var scope = clientDiagnostics.CreateScope("PetsOperations.CreateAPTrue");
             scope.Start();
             try
             {
-                using var message = CreateCreateApTrueRequest(createParameters);
+                using var message = CreateCreateAPTrueRequest(createParameters);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = PetApTrue.DeserializePetApTrue(document.RootElement);
+                            var value = PetAPTrue.DeserializePetAPTrue(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -81,27 +81,27 @@ namespace additionalProperties
             }
         }
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
-        /// <param name="createParameters"> The PetApTrue to use. </param>
+        /// <param name="createParameters"> The PetAPTrue to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<PetApTrue> CreateApTrue(PetApTrue createParameters, CancellationToken cancellationToken = default)
+        public Response<PetAPTrue> CreateAPTrue(PetAPTrue createParameters, CancellationToken cancellationToken = default)
         {
             if (createParameters == null)
             {
                 throw new ArgumentNullException(nameof(createParameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PetsOperations.CreateApTrue");
+            using var scope = clientDiagnostics.CreateScope("PetsOperations.CreateAPTrue");
             scope.Start();
             try
             {
-                using var message = CreateCreateApTrueRequest(createParameters);
+                using var message = CreateCreateAPTrueRequest(createParameters);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = PetApTrue.DeserializePetApTrue(document.RootElement);
+                            var value = PetAPTrue.DeserializePetAPTrue(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -114,7 +114,7 @@ namespace additionalProperties
                 throw;
             }
         }
-        internal HttpMessage CreateCreateCatApTrueRequest(CatApTrue createParameters)
+        internal HttpMessage CreateCreateCatAPTrueRequest(CatAPTrue createParameters)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -130,27 +130,27 @@ namespace additionalProperties
             return message;
         }
         /// <summary> Create a CatAPTrue which contains more properties than what is defined. </summary>
-        /// <param name="createParameters"> The CatApTrue to use. </param>
+        /// <param name="createParameters"> The CatAPTrue to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<CatApTrue>> CreateCatApTrueAsync(CatApTrue createParameters, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<CatAPTrue>> CreateCatAPTrueAsync(CatAPTrue createParameters, CancellationToken cancellationToken = default)
         {
             if (createParameters == null)
             {
                 throw new ArgumentNullException(nameof(createParameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PetsOperations.CreateCatApTrue");
+            using var scope = clientDiagnostics.CreateScope("PetsOperations.CreateCatAPTrue");
             scope.Start();
             try
             {
-                using var message = CreateCreateCatApTrueRequest(createParameters);
+                using var message = CreateCreateCatAPTrueRequest(createParameters);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = CatApTrue.DeserializeCatApTrue(document.RootElement);
+                            var value = CatAPTrue.DeserializeCatAPTrue(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -164,27 +164,27 @@ namespace additionalProperties
             }
         }
         /// <summary> Create a CatAPTrue which contains more properties than what is defined. </summary>
-        /// <param name="createParameters"> The CatApTrue to use. </param>
+        /// <param name="createParameters"> The CatAPTrue to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<CatApTrue> CreateCatApTrue(CatApTrue createParameters, CancellationToken cancellationToken = default)
+        public Response<CatAPTrue> CreateCatAPTrue(CatAPTrue createParameters, CancellationToken cancellationToken = default)
         {
             if (createParameters == null)
             {
                 throw new ArgumentNullException(nameof(createParameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PetsOperations.CreateCatApTrue");
+            using var scope = clientDiagnostics.CreateScope("PetsOperations.CreateCatAPTrue");
             scope.Start();
             try
             {
-                using var message = CreateCreateCatApTrueRequest(createParameters);
+                using var message = CreateCreateCatAPTrueRequest(createParameters);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = CatApTrue.DeserializeCatApTrue(document.RootElement);
+                            var value = CatAPTrue.DeserializeCatAPTrue(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -197,7 +197,7 @@ namespace additionalProperties
                 throw;
             }
         }
-        internal HttpMessage CreateCreateApObjectRequest(PetApObject createParameters)
+        internal HttpMessage CreateCreateAPObjectRequest(PetAPObject createParameters)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -213,27 +213,27 @@ namespace additionalProperties
             return message;
         }
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
-        /// <param name="createParameters"> The PetApObject to use. </param>
+        /// <param name="createParameters"> The PetAPObject to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<PetApObject>> CreateApObjectAsync(PetApObject createParameters, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<PetAPObject>> CreateAPObjectAsync(PetAPObject createParameters, CancellationToken cancellationToken = default)
         {
             if (createParameters == null)
             {
                 throw new ArgumentNullException(nameof(createParameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PetsOperations.CreateApObject");
+            using var scope = clientDiagnostics.CreateScope("PetsOperations.CreateAPObject");
             scope.Start();
             try
             {
-                using var message = CreateCreateApObjectRequest(createParameters);
+                using var message = CreateCreateAPObjectRequest(createParameters);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = PetApObject.DeserializePetApObject(document.RootElement);
+                            var value = PetAPObject.DeserializePetAPObject(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -247,27 +247,27 @@ namespace additionalProperties
             }
         }
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
-        /// <param name="createParameters"> The PetApObject to use. </param>
+        /// <param name="createParameters"> The PetAPObject to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<PetApObject> CreateApObject(PetApObject createParameters, CancellationToken cancellationToken = default)
+        public Response<PetAPObject> CreateAPObject(PetAPObject createParameters, CancellationToken cancellationToken = default)
         {
             if (createParameters == null)
             {
                 throw new ArgumentNullException(nameof(createParameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PetsOperations.CreateApObject");
+            using var scope = clientDiagnostics.CreateScope("PetsOperations.CreateAPObject");
             scope.Start();
             try
             {
-                using var message = CreateCreateApObjectRequest(createParameters);
+                using var message = CreateCreateAPObjectRequest(createParameters);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = PetApObject.DeserializePetApObject(document.RootElement);
+                            var value = PetAPObject.DeserializePetAPObject(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -280,7 +280,7 @@ namespace additionalProperties
                 throw;
             }
         }
-        internal HttpMessage CreateCreateApStringRequest(PetApString createParameters)
+        internal HttpMessage CreateCreateAPStringRequest(PetAPString createParameters)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -296,27 +296,27 @@ namespace additionalProperties
             return message;
         }
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
-        /// <param name="createParameters"> The PetApString to use. </param>
+        /// <param name="createParameters"> The PetAPString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<PetApString>> CreateApStringAsync(PetApString createParameters, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<PetAPString>> CreateAPStringAsync(PetAPString createParameters, CancellationToken cancellationToken = default)
         {
             if (createParameters == null)
             {
                 throw new ArgumentNullException(nameof(createParameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PetsOperations.CreateApString");
+            using var scope = clientDiagnostics.CreateScope("PetsOperations.CreateAPString");
             scope.Start();
             try
             {
-                using var message = CreateCreateApStringRequest(createParameters);
+                using var message = CreateCreateAPStringRequest(createParameters);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = PetApString.DeserializePetApString(document.RootElement);
+                            var value = PetAPString.DeserializePetAPString(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -330,27 +330,27 @@ namespace additionalProperties
             }
         }
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
-        /// <param name="createParameters"> The PetApString to use. </param>
+        /// <param name="createParameters"> The PetAPString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<PetApString> CreateApString(PetApString createParameters, CancellationToken cancellationToken = default)
+        public Response<PetAPString> CreateAPString(PetAPString createParameters, CancellationToken cancellationToken = default)
         {
             if (createParameters == null)
             {
                 throw new ArgumentNullException(nameof(createParameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PetsOperations.CreateApString");
+            using var scope = clientDiagnostics.CreateScope("PetsOperations.CreateAPString");
             scope.Start();
             try
             {
-                using var message = CreateCreateApStringRequest(createParameters);
+                using var message = CreateCreateAPStringRequest(createParameters);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = PetApString.DeserializePetApString(document.RootElement);
+                            var value = PetAPString.DeserializePetAPString(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -363,7 +363,7 @@ namespace additionalProperties
                 throw;
             }
         }
-        internal HttpMessage CreateCreateApInPropertiesRequest(PetApInProperties createParameters)
+        internal HttpMessage CreateCreateAPInPropertiesRequest(PetAPInProperties createParameters)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -379,27 +379,27 @@ namespace additionalProperties
             return message;
         }
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
-        /// <param name="createParameters"> The PetApInProperties to use. </param>
+        /// <param name="createParameters"> The PetAPInProperties to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<PetApInProperties>> CreateApInPropertiesAsync(PetApInProperties createParameters, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<PetAPInProperties>> CreateAPInPropertiesAsync(PetAPInProperties createParameters, CancellationToken cancellationToken = default)
         {
             if (createParameters == null)
             {
                 throw new ArgumentNullException(nameof(createParameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PetsOperations.CreateApInProperties");
+            using var scope = clientDiagnostics.CreateScope("PetsOperations.CreateAPInProperties");
             scope.Start();
             try
             {
-                using var message = CreateCreateApInPropertiesRequest(createParameters);
+                using var message = CreateCreateAPInPropertiesRequest(createParameters);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = PetApInProperties.DeserializePetApInProperties(document.RootElement);
+                            var value = PetAPInProperties.DeserializePetAPInProperties(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -413,27 +413,27 @@ namespace additionalProperties
             }
         }
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
-        /// <param name="createParameters"> The PetApInProperties to use. </param>
+        /// <param name="createParameters"> The PetAPInProperties to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<PetApInProperties> CreateApInProperties(PetApInProperties createParameters, CancellationToken cancellationToken = default)
+        public Response<PetAPInProperties> CreateAPInProperties(PetAPInProperties createParameters, CancellationToken cancellationToken = default)
         {
             if (createParameters == null)
             {
                 throw new ArgumentNullException(nameof(createParameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PetsOperations.CreateApInProperties");
+            using var scope = clientDiagnostics.CreateScope("PetsOperations.CreateAPInProperties");
             scope.Start();
             try
             {
-                using var message = CreateCreateApInPropertiesRequest(createParameters);
+                using var message = CreateCreateAPInPropertiesRequest(createParameters);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = PetApInProperties.DeserializePetApInProperties(document.RootElement);
+                            var value = PetAPInProperties.DeserializePetAPInProperties(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -446,7 +446,7 @@ namespace additionalProperties
                 throw;
             }
         }
-        internal HttpMessage CreateCreateApInPropertiesWithApStringRequest(PetApInPropertiesWithApString createParameters)
+        internal HttpMessage CreateCreateAPInPropertiesWithAPStringRequest(PetAPInPropertiesWithAPString createParameters)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -462,27 +462,27 @@ namespace additionalProperties
             return message;
         }
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
-        /// <param name="createParameters"> The PetApInPropertiesWithApString to use. </param>
+        /// <param name="createParameters"> The PetAPInPropertiesWithAPString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<PetApInPropertiesWithApString>> CreateApInPropertiesWithApStringAsync(PetApInPropertiesWithApString createParameters, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<PetAPInPropertiesWithAPString>> CreateAPInPropertiesWithAPStringAsync(PetAPInPropertiesWithAPString createParameters, CancellationToken cancellationToken = default)
         {
             if (createParameters == null)
             {
                 throw new ArgumentNullException(nameof(createParameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PetsOperations.CreateApInPropertiesWithApString");
+            using var scope = clientDiagnostics.CreateScope("PetsOperations.CreateAPInPropertiesWithAPString");
             scope.Start();
             try
             {
-                using var message = CreateCreateApInPropertiesWithApStringRequest(createParameters);
+                using var message = CreateCreateAPInPropertiesWithAPStringRequest(createParameters);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = PetApInPropertiesWithApString.DeserializePetApInPropertiesWithApString(document.RootElement);
+                            var value = PetAPInPropertiesWithAPString.DeserializePetAPInPropertiesWithAPString(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -496,27 +496,27 @@ namespace additionalProperties
             }
         }
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
-        /// <param name="createParameters"> The PetApInPropertiesWithApString to use. </param>
+        /// <param name="createParameters"> The PetAPInPropertiesWithAPString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<PetApInPropertiesWithApString> CreateApInPropertiesWithApString(PetApInPropertiesWithApString createParameters, CancellationToken cancellationToken = default)
+        public Response<PetAPInPropertiesWithAPString> CreateAPInPropertiesWithAPString(PetAPInPropertiesWithAPString createParameters, CancellationToken cancellationToken = default)
         {
             if (createParameters == null)
             {
                 throw new ArgumentNullException(nameof(createParameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PetsOperations.CreateApInPropertiesWithApString");
+            using var scope = clientDiagnostics.CreateScope("PetsOperations.CreateAPInPropertiesWithAPString");
             scope.Start();
             try
             {
-                using var message = CreateCreateApInPropertiesWithApStringRequest(createParameters);
+                using var message = CreateCreateAPInPropertiesWithAPStringRequest(createParameters);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = PetApInPropertiesWithApString.DeserializePetApInPropertiesWithApString(document.RootElement);
+                            var value = PetAPInPropertiesWithAPString.DeserializePetAPInPropertiesWithAPString(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:

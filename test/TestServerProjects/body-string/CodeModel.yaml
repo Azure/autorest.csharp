@@ -1,117 +1,84 @@
 !<!CodeModel> 
+info: !<!Info> 
+  description: Test Infrastructure for AutoRest Swagger BAT
+  title: body-string
 schemas: !<!Schemas> 
-  objects:
-  - !<!ObjectSchema> &ref_6
-    type: object
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    properties:
-    - !<!Property> 
-      schema: !<!NumberSchema> &ref_2
-        type: integer
-        precision: 32
-        language: !<!Languages> 
-          default:
-            name: Integer
-            description: ''
-        protocol: !<!Protocols> {}
-      serializedName: status
-      language: !<!Languages> 
-        default:
-          name: status
-          description: ''
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: !<!StringSchema> &ref_3
-        type: string
-        apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-        language: !<!Languages> 
-          default:
-            name: ErrorMessage
-            description: ''
-        protocol: !<!Protocols> {}
-      serializedName: message
-      language: !<!Languages> 
-        default:
-          name: message
-          description: ''
-      protocol: !<!Protocols> {}
+  numbers:
+  - !<!NumberSchema> &ref_1
+    type: integer
+    precision: 32
     language: !<!Languages> 
       default:
-        name: Error
+        name: Integer
         description: ''
-        namespace: Api100
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_17
-    type: object
+  strings:
+  - !<!StringSchema> &ref_0
+    type: string
+    language: !<!Languages> 
+      default:
+        name: String
+        description: simple string
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_2
+    type: string
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    properties:
-    - !<!Property> 
-      schema: !<!ConstantSchema> &ref_1
-        type: constant
-        apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-        value: !<!ConstantValue> 
-          value: green-color
-        valueType: !<!StringSchema> &ref_0
-          type: string
-          language: !<!Languages> 
-            default:
-              name: String
-              description: simple string
-          protocol: !<!Protocols> {}
-        language: !<!Languages> 
-          default:
-            name: ColorConstant
-            description: Referenced Color Constant Description.
-        protocol: !<!Protocols> {}
-      required: true
-      serializedName: ColorConstant
-      language: !<!Languages> 
-        default:
-          name: colorConstant
-          description: Referenced Color Constant Description.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: !<!StringSchema> &ref_4
-        type: string
-        apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-        language: !<!Languages> 
-          default:
-            name: RefColorConstantField1
-            description: Sample string.
-        protocol: !<!Protocols> {}
-      required: false
-      serializedName: field1
-      language: !<!Languages> 
-        default:
-          name: field1
-          description: Sample string.
-      protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: RefColorConstant
+        name: ErrorMessage
         description: ''
-        namespace: Api100
     protocol: !<!Protocols> {}
-  byteArrays:
-  - !<!ByteArraySchema> &ref_12
-    type: byte-array
-    format: base64url
+  - !<!StringSchema> &ref_4
+    type: string
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
     language: !<!Languages> 
       default:
-        name: ByteArray
+        name: RefColorConstantField1
+        description: Sample string.
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_11
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: String
+        description: ''
+    protocol: !<!Protocols> {}
+  sealedChoices:
+  - !<!SealedChoiceSchema> &ref_14
+    choices:
+    - !<!ChoiceValue> 
+      value: red color
+      language:
+        default:
+          name: RedColor
+          description: ''
+    - !<!ChoiceValue> 
+      value: green-color
+      language:
+        default:
+          name: GreenColor
+          description: ''
+    - !<!ChoiceValue> 
+      value: blue_color
+      language:
+        default:
+          name: BlueColor
+          description: ''
+    type: sealed-choice
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    choiceType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Colors
         description: ''
     protocol: !<!Protocols> {}
   constants:
@@ -167,53 +134,98 @@ schemas: !<!Schemas>
         name: Constant4
         description: ''
     protocol: !<!Protocols> {}
-  - *ref_1
-  numbers:
-  - *ref_2
-  sealedChoices:
-  - !<!SealedChoiceSchema> &ref_14
-    choices:
-    - !<!ChoiceValue> 
-      value: red color
-      language:
-        default:
-          name: RedColor
-          description: ''
-    - !<!ChoiceValue> 
-      value: green-color
-      language:
-        default:
-          name: GreenColor
-          description: ''
-    - !<!ChoiceValue> 
-      value: blue_color
-      language:
-        default:
-          name: BlueColor
-          description: ''
-    type: sealed-choice
+  - !<!ConstantSchema> &ref_3
+    type: constant
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    choiceType: *ref_0
+    value: !<!ConstantValue> 
+      value: green-color
+    valueType: *ref_0
     language: !<!Languages> 
       default:
-        name: Colors
+        name: ColorConstant
+        description: Referenced Color Constant Description.
+    protocol: !<!Protocols> {}
+  byteArrays:
+  - !<!ByteArraySchema> &ref_12
+    type: byte-array
+    format: base64url
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: ByteArray
         description: ''
     protocol: !<!Protocols> {}
-  strings:
-  - *ref_0
-  - *ref_3
-  - *ref_4
-  - !<!StringSchema> &ref_11
-    type: string
+  objects:
+  - !<!ObjectSchema> &ref_6
+    type: object
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
+    properties:
+    - !<!Property> 
+      schema: *ref_1
+      serializedName: status
+      language: !<!Languages> 
+        default:
+          name: status
+          description: ''
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: *ref_2
+      serializedName: message
+      language: !<!Languages> 
+        default:
+          name: message
+          description: ''
+      protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - output
     language: !<!Languages> 
       default:
-        name: String
+        name: Error
         description: ''
+        namespace: ''
+    protocol: !<!Protocols> {}
+  - !<!ObjectSchema> &ref_17
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    properties:
+    - !<!Property> 
+      schema: *ref_3
+      required: true
+      serializedName: ColorConstant
+      language: !<!Languages> 
+        default:
+          name: colorConstant
+          description: Referenced Color Constant Description.
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: *ref_4
+      required: false
+      serializedName: field1
+      language: !<!Languages> 
+        default:
+          name: field1
+          description: Sample string.
+      protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - output
+    - input
+    language: !<!Languages> 
+      default:
+        name: RefColorConstant
+        description: ''
+        namespace: ''
     protocol: !<!Protocols> {}
 globalParameters:
 - !<!Parameter> &ref_5
@@ -231,9 +243,6 @@ globalParameters:
   protocol: !<!Protocols> 
     http: !<!HttpParameter> 
       in: uri
-info: !<!Info> 
-  description: Test Infrastructure for AutoRest Swagger BAT
-  title: body-string
 operationGroups:
 - !<!OperationGroup> 
   $key: string
@@ -242,10 +251,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_5
-      signatureParameters: []
+    parameters:
+    - *ref_5
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -255,6 +264,7 @@ operationGroups:
           path: /string/null
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_0
@@ -292,17 +302,17 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
+    parameters:
+    - *ref_5
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_5
       - !<!Parameter> 
         schema: *ref_7
         implementation: Method
-        extensions:
-          x-ms-requestBody-name: stringBody
         language: !<!Languages> 
           default:
-            name: stringBody
+            name: StringBody
             description: ''
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -321,6 +331,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -345,8 +356,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutNull
@@ -356,10 +365,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_5
-      signatureParameters: []
+    parameters:
+    - *ref_5
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -369,6 +378,7 @@ operationGroups:
           path: /string/empty
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_0
@@ -406,18 +416,18 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
+    parameters:
+    - *ref_5
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_5
       - !<!Parameter> 
         schema: *ref_8
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: stringBody
         language: !<!Languages> 
           default:
-            name: stringBody
+            name: StringBody
             description: ''
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -436,6 +446,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -460,8 +471,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutEmpty
@@ -471,10 +480,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_5
-      signatureParameters: []
+    parameters:
+    - *ref_5
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -484,6 +493,7 @@ operationGroups:
           path: /string/mbcs
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_0
@@ -521,18 +531,18 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
+    parameters:
+    - *ref_5
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_5
       - !<!Parameter> 
         schema: *ref_9
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: stringBody
         language: !<!Languages> 
           default:
-            name: stringBody
+            name: StringBody
             description: ''
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -551,6 +561,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -575,8 +586,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutMbcs
@@ -586,10 +595,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_5
-      signatureParameters: []
+    parameters:
+    - *ref_5
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -599,6 +608,7 @@ operationGroups:
           path: /string/whitespace
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_0
@@ -636,18 +646,18 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
+    parameters:
+    - *ref_5
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_5
       - !<!Parameter> 
         schema: *ref_10
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: stringBody
         language: !<!Languages> 
           default:
-            name: stringBody
+            name: StringBody
             description: ''
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -666,6 +676,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -690,8 +701,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutWhitespace
@@ -701,10 +710,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_5
-      signatureParameters: []
+    parameters:
+    - *ref_5
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -714,6 +723,7 @@ operationGroups:
           path: /string/notProvided
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_11
@@ -751,10 +761,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_5
-      signatureParameters: []
+    parameters:
+    - *ref_5
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -764,6 +774,7 @@ operationGroups:
           path: /string/base64Encoding
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_12
@@ -801,10 +812,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_5
-      signatureParameters: []
+    parameters:
+    - *ref_5
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -814,6 +825,7 @@ operationGroups:
           path: /string/base64UrlEncoding
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_12
@@ -851,15 +863,15 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
+    parameters:
+    - *ref_5
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_5
       - !<!Parameter> &ref_13
         schema: *ref_12
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: stringBody
         language: !<!Languages> 
           default:
             name: stringBody
@@ -882,6 +894,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -906,8 +919,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutBase64UrlEncoded
@@ -917,10 +928,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_5
-      signatureParameters: []
+    parameters:
+    - *ref_5
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -930,6 +941,7 @@ operationGroups:
           path: /string/nullBase64UrlEncoding
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_12
@@ -975,10 +987,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_5
-      signatureParameters: []
+    parameters:
+    - *ref_5
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -988,6 +1000,7 @@ operationGroups:
           path: /string/enum/notExpandable
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_14
@@ -1025,15 +1038,15 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
+    parameters:
+    - *ref_5
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_5
       - !<!Parameter> &ref_15
         schema: *ref_14
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: stringBody
         language: !<!Languages> 
           default:
             name: stringBody
@@ -1056,6 +1069,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -1080,8 +1094,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutNotExpandable
@@ -1091,10 +1103,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_5
-      signatureParameters: []
+    parameters:
+    - *ref_5
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -1104,6 +1116,7 @@ operationGroups:
           path: /string/enum/Referenced
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_14
@@ -1141,15 +1154,15 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
+    parameters:
+    - *ref_5
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_5
       - !<!Parameter> &ref_16
         schema: *ref_14
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: enumStringBody
         language: !<!Languages> 
           default:
             name: enumStringBody
@@ -1172,6 +1185,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -1196,8 +1210,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutReferenced
@@ -1207,10 +1219,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_5
-      signatureParameters: []
+    parameters:
+    - *ref_5
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -1220,6 +1232,7 @@ operationGroups:
           path: /string/enum/ReferencedConstant
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_17
@@ -1257,15 +1270,15 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
+    parameters:
+    - *ref_5
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_5
       - !<!Parameter> &ref_18
         schema: *ref_17
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: enumStringBody
         language: !<!Languages> 
           default:
             name: enumStringBody
@@ -1288,6 +1301,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -1312,8 +1326,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutReferencedConstant

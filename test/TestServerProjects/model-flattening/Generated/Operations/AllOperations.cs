@@ -758,7 +758,7 @@ namespace model_flattening
                 throw;
             }
         }
-        internal HttpMessage CreatePutSimpleProductWithGroupingRequest(string name, SimpleProduct simpleBodyProduct)
+        internal HttpMessage CreatePutSimpleProductWithGroupingRequest(SimpleProduct simpleBodyProduct, string name)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -776,10 +776,10 @@ namespace model_flattening
             return message;
         }
         /// <summary> Put Simple Product with client flattening true on the model. </summary>
-        /// <param name="name"> Product name with value &apos;groupproduct&apos;. </param>
         /// <param name="simpleBodyProduct"> Simple body product to put. </param>
+        /// <param name="name"> Product name with value &apos;groupproduct&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<SimpleProduct>> PutSimpleProductWithGroupingAsync(string name, SimpleProduct simpleBodyProduct, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<SimpleProduct>> PutSimpleProductWithGroupingAsync(SimpleProduct simpleBodyProduct, string name, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -790,7 +790,7 @@ namespace model_flattening
             scope.Start();
             try
             {
-                using var message = CreatePutSimpleProductWithGroupingRequest(name, simpleBodyProduct);
+                using var message = CreatePutSimpleProductWithGroupingRequest(simpleBodyProduct, name);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -811,10 +811,10 @@ namespace model_flattening
             }
         }
         /// <summary> Put Simple Product with client flattening true on the model. </summary>
-        /// <param name="name"> Product name with value &apos;groupproduct&apos;. </param>
         /// <param name="simpleBodyProduct"> Simple body product to put. </param>
+        /// <param name="name"> Product name with value &apos;groupproduct&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<SimpleProduct> PutSimpleProductWithGrouping(string name, SimpleProduct simpleBodyProduct, CancellationToken cancellationToken = default)
+        public Response<SimpleProduct> PutSimpleProductWithGrouping(SimpleProduct simpleBodyProduct, string name, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -825,7 +825,7 @@ namespace model_flattening
             scope.Start();
             try
             {
-                using var message = CreatePutSimpleProductWithGroupingRequest(name, simpleBodyProduct);
+                using var message = CreatePutSimpleProductWithGroupingRequest(simpleBodyProduct, name);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {

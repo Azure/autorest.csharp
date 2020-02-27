@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
         {
             OdataType = "#Microsoft.Azure.Search.PhoneticTokenFilter";
         }
-        /// <summary> Identifies the type of phonetic encoder to use with a PhoneticTokenFilter. </summary>
+        /// <summary> The phonetic encoder to use. Default is &quot;metaphone&quot;. </summary>
         public PhoneticEncoder? Encoder { get; set; }
         /// <summary> A value indicating whether encoded tokens should replace original tokens. If false, encoded tokens are added as synonyms. Default is true. </summary>
         public bool? ReplaceOriginalTokens { get; set; }

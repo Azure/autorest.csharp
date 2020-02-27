@@ -1,5 +1,523 @@
 !<!CodeModel> 
+info: !<!Info> 
+  description: Test Infrastructure for AutoRest
+  title: body-complex
 schemas: !<!Schemas> 
+  booleans:
+  - !<!BooleanSchema> &ref_10
+    type: boolean
+    language: !<!Languages> 
+      default:
+        name: Boolean
+        description: ''
+    protocol: !<!Protocols> {}
+  numbers:
+  - !<!NumberSchema> &ref_2
+    type: integer
+    precision: 32
+    language: !<!Languages> 
+      default:
+        name: Integer
+        description: Basic Id
+    protocol: !<!Protocols> {}
+  - !<!NumberSchema> &ref_5
+    type: integer
+    precision: 32
+    language: !<!Languages> 
+      default:
+        name: Integer
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!NumberSchema> &ref_7
+    type: integer
+    precision: 64
+    language: !<!Languages> 
+      default:
+        name: Integer
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!NumberSchema> &ref_8
+    type: number
+    precision: 32
+    language: !<!Languages> 
+      default:
+        name: Number
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!NumberSchema> &ref_9
+    type: number
+    precision: 64
+    language: !<!Languages> 
+      default:
+        name: Number
+        description: ''
+    protocol: !<!Protocols> {}
+  strings:
+  - !<!StringSchema> &ref_0
+    type: string
+    language: !<!Languages> 
+      default:
+        name: String
+        description: simple string
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_3
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    language: !<!Languages> 
+      default:
+        name: BasicName
+        description: Name property with a very long description that does not fit on a single line and a line break.
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_6
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    language: !<!Languages> 
+      default:
+        name: ErrorMessage
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_11
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    language: !<!Languages> 
+      default:
+        name: StringWrapperField
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_12
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    language: !<!Languages> 
+      default:
+        name: StringWrapperEmpty
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_13
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    language: !<!Languages> 
+      default:
+        name: StringWrapperNull
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_22
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    language: !<!Languages> 
+      default:
+        name: ArrayWrapperArrayItem
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_1
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    language: !<!Languages> 
+      default:
+        name: String
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_31
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    language: !<!Languages> 
+      default:
+        name: PetName
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_29
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    language: !<!Languages> 
+      default:
+        name: CatColor
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_25
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    language: !<!Languages> 
+      default:
+        name: DogFood
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_27
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    language: !<!Languages> 
+      default:
+        name: SiameseBreed
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_37
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    language: !<!Languages> 
+      default:
+        name: FishFishtype
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_47
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    language: !<!Languages> 
+      default:
+        name: FishSpecies
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_51
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    language: !<!Languages> 
+      default:
+        name: DotFishType
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_53
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    language: !<!Languages> 
+      default:
+        name: DotFishSpecies
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_49
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    language: !<!Languages> 
+      default:
+        name: DotSalmonLocation
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_38
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    language: !<!Languages> 
+      default:
+        name: SalmonLocation
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_54
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    language: !<!Languages> 
+      default:
+        name: ReadonlyObjId
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_60
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    language: !<!Languages> 
+      default:
+        name: MyBaseTypePropB1
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_61
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    language: !<!Languages> 
+      default:
+        name: MyBaseHelperTypePropBH1
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_35
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    language: !<!Languages> 
+      default:
+        name: SmartSalmonCollegeDegree
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_56
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    language: !<!Languages> 
+      default:
+        name: MyDerivedTypePropD1
+        description: ''
+    protocol: !<!Protocols> {}
+  choices:
+  - !<!ChoiceSchema> &ref_4
+    choices:
+    - !<!ChoiceValue> 
+      value: cyan
+      language:
+        default:
+          name: Cyan
+          description: ''
+    - !<!ChoiceValue> 
+      value: Magenta
+      language:
+        default:
+          name: Magenta
+          description: ''
+    - !<!ChoiceValue> 
+      value: YELLOW
+      language:
+        default:
+          name: Yellow
+          description: ''
+    - !<!ChoiceValue> 
+      value: blacK
+      language:
+        default:
+          name: BlacK
+          description: ''
+    type: choice
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    choiceType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: CMYKColors
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!ChoiceSchema> &ref_41
+    choices:
+    - !<!ChoiceValue> 
+      value: pink
+      language:
+        default:
+          name: Pink
+          description: ''
+    - !<!ChoiceValue> 
+      value: gray
+      language:
+        default:
+          name: Gray
+          description: ''
+    - !<!ChoiceValue> 
+      value: brown
+      language:
+        default:
+          name: Brown
+          description: ''
+    - !<!ChoiceValue> 
+      value: RED
+      language:
+        default:
+          name: UpperRed
+          description: Uppercase RED
+    - !<!ChoiceValue> 
+      value: red
+      language:
+        default:
+          name: LowerRed
+          description: Lowercase RED
+    type: choice
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    choiceType: *ref_0
+    defaultValue: gray
+    language: !<!Languages> 
+      default:
+        name: GoblinSharkColor
+        description: Colors possible
+    protocol: !<!Protocols> {}
+  constants:
+  - !<!ConstantSchema> &ref_67
+    type: constant
+    value: !<!ConstantValue> 
+      value: '2016-02-29'
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: ApiVersion20160229
+        description: Api Version (2016-02-29)
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_58
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    value: !<!ConstantValue> 
+      value: Kind1
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: MyKind
+        description: ''
+    protocol: !<!Protocols> {}
+  dictionaries:
+  - !<!DictionarySchema> &ref_23
+    type: dictionary
+    elementType: *ref_1
+    language: !<!Languages> 
+      default:
+        name: DictionaryWrapperDefaultProgram
+        description: Dictionary of <string>
+    protocol: !<!Protocols> {}
+  - !<!DictionarySchema> &ref_33
+    type: dictionary
+    elementType: !<!AnySchema> 
+      type: any
+      language: !<!Languages> 
+        default:
+          name: any
+          description: Any object
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: SmartSalmon
+        description: Dictionary of <any>
+    protocol: !<!Protocols> {}
+  byteArrays:
+  - !<!ByteArraySchema> &ref_21
+    type: byte-array
+    format: byte
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    language: !<!Languages> 
+      default:
+        name: ByteWrapperField
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!ByteArraySchema> &ref_40
+    type: byte-array
+    format: byte
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    language: !<!Languages> 
+      default:
+        name: SawsharkPicture
+        description: ''
+    protocol: !<!Protocols> {}
+  dateTimes:
+  - !<!DateTimeSchema> &ref_16
+    type: date-time
+    format: date-time
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    language: !<!Languages> 
+      default:
+        name: DatetimeWrapperField
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!DateTimeSchema> &ref_17
+    type: date-time
+    format: date-time
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    language: !<!Languages> 
+      default:
+        name: DatetimeWrapperNow
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!DateTimeSchema> &ref_18
+    type: date-time
+    format: date-time-rfc1123
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    language: !<!Languages> 
+      default:
+        name: Datetimerfc1123WrapperField
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!DateTimeSchema> &ref_19
+    type: date-time
+    format: date-time-rfc1123
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    language: !<!Languages> 
+      default:
+        name: Datetimerfc1123WrapperNow
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!DateTimeSchema> &ref_46
+    type: date-time
+    format: date-time
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    language: !<!Languages> 
+      default:
+        name: SharkBirthday
+        description: ''
+    protocol: !<!Protocols> {}
+  dates:
+  - !<!DateSchema> &ref_14
+    type: date
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    language: !<!Languages> 
+      default:
+        name: DateWrapperField
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!DateSchema> &ref_15
+    type: date
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    language: !<!Languages> 
+      default:
+        name: DateWrapperLeap
+        description: ''
+    protocol: !<!Protocols> {}
+  durations:
+  - !<!DurationSchema> &ref_20
+    type: duration
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    language: !<!Languages> 
+      default:
+        name: DurationWrapperField
+        description: ''
+    protocol: !<!Protocols> {}
   objects:
   - !<!ObjectSchema> &ref_69
     type: object
@@ -8,14 +526,7 @@ schemas: !<!Schemas>
       version: '2016-02-29'
     properties:
     - !<!Property> 
-      schema: !<!NumberSchema> &ref_45
-        type: integer
-        precision: 32
-        language: !<!Languages> 
-          default:
-            name: Integer
-            description: Basic Id
-        protocol: !<!Protocols> {}
+      schema: *ref_2
       serializedName: id
       language: !<!Languages> 
         default:
@@ -23,16 +534,7 @@ schemas: !<!Schemas>
           description: Basic Id
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_46
-        type: string
-        apiVersions:
-        - !<!ApiVersion> 
-          version: '2016-02-29'
-        language: !<!Languages> 
-          default:
-            name: BasicName
-            description: Name property with a very long description that does not fit on a single line and a line break.
-        protocol: !<!Protocols> {}
+      schema: *ref_3
       serializedName: name
       language: !<!Languages> 
         default:
@@ -40,59 +542,23 @@ schemas: !<!Schemas>
           description: Name property with a very long description that does not fit on a single line and a line break.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!ChoiceSchema> &ref_27
-        choices:
-        - !<!ChoiceValue> 
-          value: cyan
-          language:
-            default:
-              name: Cyan
-              description: ''
-        - !<!ChoiceValue> 
-          value: Magenta
-          language:
-            default:
-              name: Magenta
-              description: ''
-        - !<!ChoiceValue> 
-          value: YELLOW
-          language:
-            default:
-              name: Yellow
-              description: ''
-        - !<!ChoiceValue> 
-          value: blacK
-          language:
-            default:
-              name: BlacK
-              description: ''
-        type: choice
-        apiVersions:
-        - !<!ApiVersion> 
-          version: '2016-02-29'
-        choiceType: !<!StringSchema> &ref_14
-          type: string
-          language: !<!Languages> 
-            default:
-              name: String
-              description: simple string
-          protocol: !<!Protocols> {}
-        language: !<!Languages> 
-          default:
-            name: CMYKColors
-            description: ''
-        protocol: !<!Protocols> {}
+      schema: *ref_4
       serializedName: color
       language: !<!Languages> 
         default:
           name: color
           description: ''
       protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - output
+    - input
     language: !<!Languages> 
       default:
         name: Basic
         description: ''
-        namespace: Api20160229
+        namespace: ''
     protocol: !<!Protocols> {}
   - !<!ObjectSchema> &ref_70
     type: object
@@ -101,14 +567,7 @@ schemas: !<!Schemas>
       version: '2016-02-29'
     properties:
     - !<!Property> 
-      schema: !<!NumberSchema> &ref_0
-        type: integer
-        precision: 32
-        language: !<!Languages> 
-          default:
-            name: Integer
-            description: ''
-        protocol: !<!Protocols> {}
+      schema: *ref_5
       serializedName: status
       language: !<!Languages> 
         default:
@@ -116,27 +575,22 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_47
-        type: string
-        apiVersions:
-        - !<!ApiVersion> 
-          version: '2016-02-29'
-        language: !<!Languages> 
-          default:
-            name: ErrorMessage
-            description: ''
-        protocol: !<!Protocols> {}
+      schema: *ref_6
       serializedName: message
       language: !<!Languages> 
         default:
           name: message
           description: ''
       protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - output
     language: !<!Languages> 
       default:
         name: Error
         description: ''
-        namespace: Api20160229
+        namespace: ''
     protocol: !<!Protocols> {}
   - !<!ObjectSchema> &ref_73
     type: object
@@ -145,7 +599,7 @@ schemas: !<!Schemas>
       version: '2016-02-29'
     properties:
     - !<!Property> 
-      schema: *ref_0
+      schema: *ref_5
       serializedName: field1
       language: !<!Languages> 
         default:
@@ -153,18 +607,23 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_0
+      schema: *ref_5
       serializedName: field2
       language: !<!Languages> 
         default:
           name: field2
           description: ''
       protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - output
+    - input
     language: !<!Languages> 
       default:
         name: IntWrapper
         description: ''
-        namespace: Api20160229
+        namespace: ''
     protocol: !<!Protocols> {}
   - !<!ObjectSchema> &ref_75
     type: object
@@ -173,14 +632,7 @@ schemas: !<!Schemas>
       version: '2016-02-29'
     properties:
     - !<!Property> 
-      schema: !<!NumberSchema> &ref_1
-        type: integer
-        precision: 64
-        language: !<!Languages> 
-          default:
-            name: Integer
-            description: ''
-        protocol: !<!Protocols> {}
+      schema: *ref_7
       serializedName: field1
       language: !<!Languages> 
         default:
@@ -188,18 +640,23 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_1
+      schema: *ref_7
       serializedName: field2
       language: !<!Languages> 
         default:
           name: field2
           description: ''
       protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - output
+    - input
     language: !<!Languages> 
       default:
         name: LongWrapper
         description: ''
-        namespace: Api20160229
+        namespace: ''
     protocol: !<!Protocols> {}
   - !<!ObjectSchema> &ref_77
     type: object
@@ -208,14 +665,7 @@ schemas: !<!Schemas>
       version: '2016-02-29'
     properties:
     - !<!Property> 
-      schema: !<!NumberSchema> &ref_2
-        type: number
-        precision: 32
-        language: !<!Languages> 
-          default:
-            name: Number
-            description: ''
-        protocol: !<!Protocols> {}
+      schema: *ref_8
       serializedName: field1
       language: !<!Languages> 
         default:
@@ -223,18 +673,23 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_2
+      schema: *ref_8
       serializedName: field2
       language: !<!Languages> 
         default:
           name: field2
           description: ''
       protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - output
+    - input
     language: !<!Languages> 
       default:
         name: FloatWrapper
         description: ''
-        namespace: Api20160229
+        namespace: ''
     protocol: !<!Protocols> {}
   - !<!ObjectSchema> &ref_79
     type: object
@@ -243,14 +698,7 @@ schemas: !<!Schemas>
       version: '2016-02-29'
     properties:
     - !<!Property> 
-      schema: !<!NumberSchema> &ref_3
-        type: number
-        precision: 64
-        language: !<!Languages> 
-          default:
-            name: Number
-            description: ''
-        protocol: !<!Protocols> {}
+      schema: *ref_9
       serializedName: field1
       language: !<!Languages> 
         default:
@@ -258,18 +706,23 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_3
+      schema: *ref_9
       serializedName: field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose
       language: !<!Languages> 
         default:
           name: field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose
           description: ''
       protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - output
+    - input
     language: !<!Languages> 
       default:
         name: DoubleWrapper
         description: ''
-        namespace: Api20160229
+        namespace: ''
     protocol: !<!Protocols> {}
   - !<!ObjectSchema> &ref_81
     type: object
@@ -278,13 +731,7 @@ schemas: !<!Schemas>
       version: '2016-02-29'
     properties:
     - !<!Property> 
-      schema: !<!BooleanSchema> &ref_4
-        type: boolean
-        language: !<!Languages> 
-          default:
-            name: Boolean
-            description: ''
-        protocol: !<!Protocols> {}
+      schema: *ref_10
       serializedName: field_true
       language: !<!Languages> 
         default:
@@ -292,18 +739,23 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_4
+      schema: *ref_10
       serializedName: field_false
       language: !<!Languages> 
         default:
           name: fieldFalse
           description: ''
       protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - output
+    - input
     language: !<!Languages> 
       default:
         name: BooleanWrapper
         description: ''
-        namespace: Api20160229
+        namespace: ''
     protocol: !<!Protocols> {}
   - !<!ObjectSchema> &ref_83
     type: object
@@ -312,16 +764,7 @@ schemas: !<!Schemas>
       version: '2016-02-29'
     properties:
     - !<!Property> 
-      schema: !<!StringSchema> &ref_48
-        type: string
-        apiVersions:
-        - !<!ApiVersion> 
-          version: '2016-02-29'
-        language: !<!Languages> 
-          default:
-            name: StringWrapperField
-            description: ''
-        protocol: !<!Protocols> {}
+      schema: *ref_11
       serializedName: field
       language: !<!Languages> 
         default:
@@ -329,16 +772,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_49
-        type: string
-        apiVersions:
-        - !<!ApiVersion> 
-          version: '2016-02-29'
-        language: !<!Languages> 
-          default:
-            name: StringWrapperEmpty
-            description: ''
-        protocol: !<!Protocols> {}
+      schema: *ref_12
       serializedName: empty
       language: !<!Languages> 
         default:
@@ -346,27 +780,23 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_50
-        type: string
-        apiVersions:
-        - !<!ApiVersion> 
-          version: '2016-02-29'
-        language: !<!Languages> 
-          default:
-            name: StringWrapperNull
-            description: ''
-        protocol: !<!Protocols> {}
+      schema: *ref_13
       serializedName: 'null'
       language: !<!Languages> 
         default:
           name: 'null'
           description: ''
       protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - output
+    - input
     language: !<!Languages> 
       default:
         name: StringWrapper
         description: ''
-        namespace: Api20160229
+        namespace: ''
     protocol: !<!Protocols> {}
   - !<!ObjectSchema> &ref_85
     type: object
@@ -375,16 +805,7 @@ schemas: !<!Schemas>
       version: '2016-02-29'
     properties:
     - !<!Property> 
-      schema: !<!DateSchema> &ref_42
-        type: date
-        apiVersions:
-        - !<!ApiVersion> 
-          version: '2016-02-29'
-        language: !<!Languages> 
-          default:
-            name: DateWrapperField
-            description: ''
-        protocol: !<!Protocols> {}
+      schema: *ref_14
       serializedName: field
       language: !<!Languages> 
         default:
@@ -392,27 +813,23 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!DateSchema> &ref_43
-        type: date
-        apiVersions:
-        - !<!ApiVersion> 
-          version: '2016-02-29'
-        language: !<!Languages> 
-          default:
-            name: DateWrapperLeap
-            description: ''
-        protocol: !<!Protocols> {}
+      schema: *ref_15
       serializedName: leap
       language: !<!Languages> 
         default:
           name: leap
           description: ''
       protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - output
+    - input
     language: !<!Languages> 
       default:
         name: DateWrapper
         description: ''
-        namespace: Api20160229
+        namespace: ''
     protocol: !<!Protocols> {}
   - !<!ObjectSchema> &ref_87
     type: object
@@ -421,17 +838,7 @@ schemas: !<!Schemas>
       version: '2016-02-29'
     properties:
     - !<!Property> 
-      schema: !<!DateTimeSchema> &ref_37
-        type: date-time
-        format: date-time
-        apiVersions:
-        - !<!ApiVersion> 
-          version: '2016-02-29'
-        language: !<!Languages> 
-          default:
-            name: DatetimeWrapperField
-            description: ''
-        protocol: !<!Protocols> {}
+      schema: *ref_16
       serializedName: field
       language: !<!Languages> 
         default:
@@ -439,28 +846,23 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!DateTimeSchema> &ref_38
-        type: date-time
-        format: date-time
-        apiVersions:
-        - !<!ApiVersion> 
-          version: '2016-02-29'
-        language: !<!Languages> 
-          default:
-            name: DatetimeWrapperNow
-            description: ''
-        protocol: !<!Protocols> {}
+      schema: *ref_17
       serializedName: now
       language: !<!Languages> 
         default:
           name: now
           description: ''
       protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - output
+    - input
     language: !<!Languages> 
       default:
         name: DatetimeWrapper
         description: ''
-        namespace: Api20160229
+        namespace: ''
     protocol: !<!Protocols> {}
   - !<!ObjectSchema> &ref_89
     type: object
@@ -469,17 +871,7 @@ schemas: !<!Schemas>
       version: '2016-02-29'
     properties:
     - !<!Property> 
-      schema: !<!DateTimeSchema> &ref_39
-        type: date-time
-        format: date-time-rfc1123
-        apiVersions:
-        - !<!ApiVersion> 
-          version: '2016-02-29'
-        language: !<!Languages> 
-          default:
-            name: Datetimerfc1123WrapperField
-            description: ''
-        protocol: !<!Protocols> {}
+      schema: *ref_18
       serializedName: field
       language: !<!Languages> 
         default:
@@ -487,28 +879,23 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!DateTimeSchema> &ref_40
-        type: date-time
-        format: date-time-rfc1123
-        apiVersions:
-        - !<!ApiVersion> 
-          version: '2016-02-29'
-        language: !<!Languages> 
-          default:
-            name: Datetimerfc1123WrapperNow
-            description: ''
-        protocol: !<!Protocols> {}
+      schema: *ref_19
       serializedName: now
       language: !<!Languages> 
         default:
           name: now
           description: ''
       protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - output
+    - input
     language: !<!Languages> 
       default:
         name: Datetimerfc1123Wrapper
         description: ''
-        namespace: Api20160229
+        namespace: ''
     protocol: !<!Protocols> {}
   - !<!ObjectSchema> &ref_91
     type: object
@@ -517,27 +904,23 @@ schemas: !<!Schemas>
       version: '2016-02-29'
     properties:
     - !<!Property> 
-      schema: !<!DurationSchema> &ref_44
-        type: duration
-        apiVersions:
-        - !<!ApiVersion> 
-          version: '2016-02-29'
-        language: !<!Languages> 
-          default:
-            name: DurationWrapperField
-            description: ''
-        protocol: !<!Protocols> {}
+      schema: *ref_20
       serializedName: field
       language: !<!Languages> 
         default:
           name: field
           description: ''
       protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - output
+    - input
     language: !<!Languages> 
       default:
         name: DurationWrapper
         description: ''
-        namespace: Api20160229
+        namespace: ''
     protocol: !<!Protocols> {}
   - !<!ObjectSchema> &ref_93
     type: object
@@ -546,28 +929,23 @@ schemas: !<!Schemas>
       version: '2016-02-29'
     properties:
     - !<!Property> 
-      schema: !<!ByteArraySchema> &ref_34
-        type: byte-array
-        format: byte
-        apiVersions:
-        - !<!ApiVersion> 
-          version: '2016-02-29'
-        language: !<!Languages> 
-          default:
-            name: ByteWrapperField
-            description: ''
-        protocol: !<!Protocols> {}
+      schema: *ref_21
       serializedName: field
       language: !<!Languages> 
         default:
           name: field
           description: ''
       protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - output
+    - input
     language: !<!Languages> 
       default:
         name: ByteWrapper
         description: ''
-        namespace: Api20160229
+        namespace: ''
     protocol: !<!Protocols> {}
   - !<!ObjectSchema> &ref_95
     type: object
@@ -576,21 +954,12 @@ schemas: !<!Schemas>
       version: '2016-02-29'
     properties:
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_29
+      schema: !<!ArraySchema> &ref_62
         type: array
         apiVersions:
         - !<!ApiVersion> 
           version: '2016-02-29'
-        elementType: !<!StringSchema> &ref_51
-          type: string
-          apiVersions:
-          - !<!ApiVersion> 
-            version: '2016-02-29'
-          language: !<!Languages> 
-            default:
-              name: ArrayWrapperArrayItem
-              description: ''
-          protocol: !<!Protocols> {}
+        elementType: *ref_22
         language: !<!Languages> 
           default:
             name: ArrayWrapperArray
@@ -602,11 +971,16 @@ schemas: !<!Schemas>
           name: array
           description: ''
       protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - output
+    - input
     language: !<!Languages> 
       default:
         name: ArrayWrapper
         description: ''
-        namespace: Api20160229
+        namespace: ''
     protocol: !<!Protocols> {}
   - !<!ObjectSchema> &ref_98
     type: object
@@ -615,137 +989,109 @@ schemas: !<!Schemas>
       version: '2016-02-29'
     properties:
     - !<!Property> 
-      schema: !<!DictionarySchema> &ref_26
-        type: dictionary
-        elementType: !<!StringSchema> &ref_52
-          type: string
-          apiVersions:
-          - !<!ApiVersion> 
-            version: '2016-02-29'
-          language: !<!Languages> 
-            default:
-              name: String
-              description: ''
-          protocol: !<!Protocols> {}
-        language: !<!Languages> 
-          default:
-            name: DictionaryWrapperDefaultProgram
-            description: Dictionary of <string>
-        protocol: !<!Protocols> {}
+      schema: *ref_23
       serializedName: defaultProgram
       language: !<!Languages> 
         default:
           name: defaultProgram
           description: Dictionary of <string>
       protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - output
+    - input
     language: !<!Languages> 
       default:
         name: DictionaryWrapper
         description: ''
-        namespace: Api20160229
+        namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_5
+  - !<!ObjectSchema> &ref_24
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
     children: !<!Relations> 
       all:
-      - !<!ObjectSchema> &ref_8
+      - !<!ObjectSchema> &ref_30
         type: object
         apiVersions:
         - !<!ApiVersion> 
           version: '2016-02-29'
         parents: !<!Relations> 
           all:
-          - *ref_5
+          - *ref_24
           immediate:
-          - *ref_5
+          - *ref_24
         properties:
         - !<!Property> 
-          schema: !<!StringSchema> &ref_55
-            type: string
-            apiVersions:
-            - !<!ApiVersion> 
-              version: '2016-02-29'
-            language: !<!Languages> 
-              default:
-                name: DogFood
-                description: ''
-            protocol: !<!Protocols> {}
+          schema: *ref_25
           serializedName: food
           language: !<!Languages> 
             default:
               name: food
               description: ''
           protocol: !<!Protocols> {}
+        serializationFormats:
+        - json
+        usage:
+        - output
+        - input
         language: !<!Languages> 
           default:
             name: Dog
             description: ''
-            namespace: Api20160229
+            namespace: ''
         protocol: !<!Protocols> {}
-      - !<!ObjectSchema> &ref_6
+      - !<!ObjectSchema> &ref_26
         type: object
         apiVersions:
         - !<!ApiVersion> 
           version: '2016-02-29'
         children: !<!Relations> 
           all:
-          - !<!ObjectSchema> &ref_7
+          - !<!ObjectSchema> &ref_28
             type: object
             apiVersions:
             - !<!ApiVersion> 
               version: '2016-02-29'
             parents: !<!Relations> 
               all:
-              - *ref_6
-              - *ref_5
+              - *ref_26
+              - *ref_24
               immediate:
-              - *ref_6
+              - *ref_26
             properties:
             - !<!Property> 
-              schema: !<!StringSchema> &ref_56
-                type: string
-                apiVersions:
-                - !<!ApiVersion> 
-                  version: '2016-02-29'
-                language: !<!Languages> 
-                  default:
-                    name: SiameseBreed
-                    description: ''
-                protocol: !<!Protocols> {}
+              schema: *ref_27
               serializedName: breed
               language: !<!Languages> 
                 default:
                   name: breed
                   description: ''
               protocol: !<!Protocols> {}
+            serializationFormats:
+            - json
+            usage:
+            - output
+            - input
             language: !<!Languages> 
               default:
                 name: Siamese
                 description: ''
-                namespace: Api20160229
+                namespace: ''
             protocol: !<!Protocols> {}
           immediate:
-          - *ref_7
+          - *ref_28
         parents: !<!Relations> 
           all:
-          - *ref_5
+          - *ref_24
           immediate:
-          - *ref_5
+          - *ref_24
         properties:
         - !<!Property> 
-          schema: !<!StringSchema> &ref_54
-            type: string
-            apiVersions:
-            - !<!ApiVersion> 
-              version: '2016-02-29'
-            language: !<!Languages> 
-              default:
-                name: CatColor
-                description: ''
-            protocol: !<!Protocols> {}
+          schema: *ref_29
           serializedName: color
           language: !<!Languages> 
             default:
@@ -753,12 +1099,12 @@ schemas: !<!Schemas>
               description: ''
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: !<!ArraySchema> &ref_30
+          schema: !<!ArraySchema> &ref_63
             type: array
             apiVersions:
             - !<!ApiVersion> 
               version: '2016-02-29'
-            elementType: *ref_8
+            elementType: *ref_30
             language: !<!Languages> 
               default:
                 name: CatHates
@@ -770,19 +1116,24 @@ schemas: !<!Schemas>
               name: hates
               description: ''
           protocol: !<!Protocols> {}
+        serializationFormats:
+        - json
+        usage:
+        - output
+        - input
         language: !<!Languages> 
           default:
             name: Cat
             description: ''
-            namespace: Api20160229
+            namespace: ''
         protocol: !<!Protocols> {}
-      - *ref_7
+      - *ref_28
       immediate:
-      - *ref_8
-      - *ref_6
+      - *ref_30
+      - *ref_26
     properties:
     - !<!Property> 
-      schema: *ref_0
+      schema: *ref_5
       serializedName: id
       language: !<!Languages> 
         default:
@@ -790,46 +1141,42 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_53
-        type: string
-        apiVersions:
-        - !<!ApiVersion> 
-          version: '2016-02-29'
-        language: !<!Languages> 
-          default:
-            name: PetName
-            description: ''
-        protocol: !<!Protocols> {}
+      schema: *ref_31
       serializedName: name
       language: !<!Languages> 
         default:
           name: name
           description: ''
       protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - output
+    - input
     language: !<!Languages> 
       default:
         name: Pet
         description: ''
-        namespace: Api20160229
+        namespace: ''
     protocol: !<!Protocols> {}
-  - *ref_6
-  - *ref_8
-  - *ref_7
-  - !<!ObjectSchema> &ref_10
+  - *ref_26
+  - *ref_30
+  - *ref_28
+  - !<!ObjectSchema> &ref_34
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
     children: !<!Relations> 
       all:
-      - !<!ObjectSchema> &ref_9
+      - !<!ObjectSchema> &ref_32
         type: object
         apiVersions:
         - !<!ApiVersion> 
           version: '2016-02-29'
         children: !<!Relations> 
           all:
-          - !<!ObjectSchema> &ref_12
+          - !<!ObjectSchema> &ref_36
             type: object
             apiVersions:
             - !<!ApiVersion> 
@@ -837,38 +1184,16 @@ schemas: !<!Schemas>
             discriminatorValue: smart_salmon
             parents: !<!Relations> 
               all:
-              - *ref_9
-              - !<!DictionarySchema> &ref_11
-                type: dictionary
-                elementType: !<!AnySchema> 
-                  type: any
-                  language: !<!Languages> 
-                    default:
-                      name: any
-                      description: Any object
-                  protocol: !<!Protocols> {}
-                language: !<!Languages> 
-                  default:
-                    name: SmartSalmon
-                    description: Dictionary of <any>
-                protocol: !<!Protocols> {}
-              - *ref_10
-              - *ref_11
+              - *ref_32
+              - *ref_33
+              - *ref_34
+              - *ref_33
               immediate:
-              - *ref_9
-              - *ref_11
+              - *ref_32
+              - *ref_33
             properties:
             - !<!Property> 
-              schema: !<!StringSchema> &ref_65
-                type: string
-                apiVersions:
-                - !<!ApiVersion> 
-                  version: '2016-02-29'
-                language: !<!Languages> 
-                  default:
-                    name: SmartSalmonCollegeDegree
-                    description: ''
-                protocol: !<!Protocols> {}
+              schema: *ref_35
               serializedName: college_degree
               language: !<!Languages> 
                 default:
@@ -879,26 +1204,17 @@ schemas: !<!Schemas>
               default:
                 name: SmartSalmon
                 description: ''
-                namespace: Api20160229
+                namespace: ''
             protocol: !<!Protocols> {}
           immediate:
-          - *ref_12
+          - *ref_36
         discriminator: !<!Discriminator> 
           all:
-            smart_salmon: *ref_12
+            smart_salmon: *ref_36
           immediate:
-            smart_salmon: *ref_12
-          property: !<!Property> &ref_18
-            schema: !<!StringSchema> &ref_57
-              type: string
-              apiVersions:
-              - !<!ApiVersion> 
-                version: '2016-02-29'
-              language: !<!Languages> 
-                default:
-                  name: FishFishtype
-                  description: ''
-              protocol: !<!Protocols> {}
+            smart_salmon: *ref_36
+          property: !<!Property> &ref_45
+            schema: *ref_37
             isDiscriminator: true
             required: true
             serializedName: fishtype
@@ -910,21 +1226,12 @@ schemas: !<!Schemas>
         discriminatorValue: salmon
         parents: !<!Relations> 
           all:
-          - *ref_10
+          - *ref_34
           immediate:
-          - *ref_10
+          - *ref_34
         properties:
         - !<!Property> 
-          schema: !<!StringSchema> &ref_62
-            type: string
-            apiVersions:
-            - !<!ApiVersion> 
-              version: '2016-02-29'
-            language: !<!Languages> 
-              default:
-                name: SalmonLocation
-                description: ''
-            protocol: !<!Protocols> {}
+          schema: *ref_38
           serializedName: location
           language: !<!Languages> 
             default:
@@ -932,28 +1239,33 @@ schemas: !<!Schemas>
               description: ''
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: *ref_4
+          schema: *ref_10
           serializedName: iswild
           language: !<!Languages> 
             default:
               name: iswild
               description: ''
           protocol: !<!Protocols> {}
+        serializationFormats:
+        - json
+        usage:
+        - output
+        - input
         language: !<!Languages> 
           default:
             name: Salmon
             description: ''
-            namespace: Api20160229
+            namespace: ''
         protocol: !<!Protocols> {}
-      - *ref_12
-      - !<!ObjectSchema> &ref_13
+      - *ref_36
+      - !<!ObjectSchema> &ref_39
         type: object
         apiVersions:
         - !<!ApiVersion> 
           version: '2016-02-29'
         children: !<!Relations> 
           all:
-          - !<!ObjectSchema> &ref_15
+          - !<!ObjectSchema> &ref_42
             type: object
             apiVersions:
             - !<!ApiVersion> 
@@ -961,23 +1273,13 @@ schemas: !<!Schemas>
             discriminatorValue: sawshark
             parents: !<!Relations> 
               all:
-              - *ref_13
-              - *ref_10
+              - *ref_39
+              - *ref_34
               immediate:
-              - *ref_13
+              - *ref_39
             properties:
             - !<!Property> 
-              schema: !<!ByteArraySchema> &ref_35
-                type: byte-array
-                format: byte
-                apiVersions:
-                - !<!ApiVersion> 
-                  version: '2016-02-29'
-                language: !<!Languages> 
-                  default:
-                    name: SawsharkPicture
-                    description: ''
-                protocol: !<!Protocols> {}
+              schema: *ref_40
               serializedName: picture
               language: !<!Languages> 
                 default:
@@ -988,9 +1290,9 @@ schemas: !<!Schemas>
               default:
                 name: Sawshark
                 description: ''
-                namespace: Api20160229
+                namespace: ''
             protocol: !<!Protocols> {}
-          - !<!ObjectSchema> &ref_16
+          - !<!ObjectSchema> &ref_43
             type: object
             apiVersions:
             - !<!ApiVersion> 
@@ -998,13 +1300,13 @@ schemas: !<!Schemas>
             discriminatorValue: goblin
             parents: !<!Relations> 
               all:
-              - *ref_13
-              - *ref_10
+              - *ref_39
+              - *ref_34
               immediate:
-              - *ref_13
+              - *ref_39
             properties:
             - !<!Property> 
-              schema: *ref_0
+              schema: *ref_5
               serializedName: jawsize
               language: !<!Languages> 
                 default:
@@ -1012,49 +1314,7 @@ schemas: !<!Schemas>
                   description: ''
               protocol: !<!Protocols> {}
             - !<!Property> 
-              schema: !<!ChoiceSchema> &ref_28
-                choices:
-                - !<!ChoiceValue> 
-                  value: pink
-                  language:
-                    default:
-                      name: Pink
-                      description: ''
-                - !<!ChoiceValue> 
-                  value: gray
-                  language:
-                    default:
-                      name: Gray
-                      description: ''
-                - !<!ChoiceValue> 
-                  value: brown
-                  language:
-                    default:
-                      name: Brown
-                      description: ''
-                - !<!ChoiceValue> 
-                  value: RED
-                  language:
-                    default:
-                      name: UpperRed
-                      description: Uppercase RED
-                - !<!ChoiceValue> 
-                  value: red
-                  language:
-                    default:
-                      name: LowerRed
-                      description: Lowercase RED
-                type: choice
-                apiVersions:
-                - !<!ApiVersion> 
-                  version: '2016-02-29'
-                choiceType: *ref_14
-                defaultValue: gray
-                language: !<!Languages> 
-                  default:
-                    name: GoblinSharkColor
-                    description: Colors possible
-                protocol: !<!Protocols> {}
+              schema: *ref_41
               serializedName: color
               language: !<!Languages> 
                 default:
@@ -1067,9 +1327,9 @@ schemas: !<!Schemas>
               default:
                 name: Goblinshark
                 description: ''
-                namespace: Api20160229
+                namespace: ''
             protocol: !<!Protocols> {}
-          - !<!ObjectSchema> &ref_17
+          - !<!ObjectSchema> &ref_44
             type: object
             apiVersions:
             - !<!ApiVersion> 
@@ -1077,39 +1337,39 @@ schemas: !<!Schemas>
             discriminatorValue: cookiecuttershark
             parents: !<!Relations> 
               all:
-              - *ref_13
-              - *ref_10
+              - *ref_39
+              - *ref_34
               immediate:
-              - *ref_13
+              - *ref_39
             language: !<!Languages> 
               default:
                 name: Cookiecuttershark
                 description: ''
-                namespace: Api20160229
+                namespace: ''
             protocol: !<!Protocols> {}
           immediate:
-          - *ref_15
-          - *ref_16
-          - *ref_17
+          - *ref_42
+          - *ref_43
+          - *ref_44
         discriminator: !<!Discriminator> 
           all:
-            cookiecuttershark: *ref_17
-            goblin: *ref_16
-            sawshark: *ref_15
+            cookiecuttershark: *ref_44
+            goblin: *ref_43
+            sawshark: *ref_42
           immediate:
-            cookiecuttershark: *ref_17
-            goblin: *ref_16
-            sawshark: *ref_15
-          property: *ref_18
+            cookiecuttershark: *ref_44
+            goblin: *ref_43
+            sawshark: *ref_42
+          property: *ref_45
         discriminatorValue: shark
         parents: !<!Relations> 
           all:
-          - *ref_10
+          - *ref_34
           immediate:
-          - *ref_10
+          - *ref_34
         properties:
         - !<!Property> 
-          schema: *ref_0
+          schema: *ref_5
           required: false
           serializedName: age
           language: !<!Languages> 
@@ -1118,17 +1378,7 @@ schemas: !<!Schemas>
               description: ''
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: !<!DateTimeSchema> &ref_41
-            type: date-time
-            format: date-time
-            apiVersions:
-            - !<!ApiVersion> 
-              version: '2016-02-29'
-            language: !<!Languages> 
-              default:
-                name: SharkBirthday
-                description: ''
-            protocol: !<!Protocols> {}
+          schema: *ref_46
           required: true
           serializedName: birthday
           language: !<!Languages> 
@@ -1140,39 +1390,30 @@ schemas: !<!Schemas>
           default:
             name: Shark
             description: ''
-            namespace: Api20160229
+            namespace: ''
         protocol: !<!Protocols> {}
-      - *ref_15
-      - *ref_16
-      - *ref_17
+      - *ref_42
+      - *ref_43
+      - *ref_44
       immediate:
-      - *ref_9
-      - *ref_13
+      - *ref_32
+      - *ref_39
     discriminator: !<!Discriminator> 
       all:
-        cookiecuttershark: *ref_17
-        goblin: *ref_16
-        salmon: *ref_9
-        sawshark: *ref_15
-        shark: *ref_13
-        smart_salmon: *ref_12
+        cookiecuttershark: *ref_44
+        goblin: *ref_43
+        salmon: *ref_32
+        sawshark: *ref_42
+        shark: *ref_39
+        smart_salmon: *ref_36
       immediate:
-        salmon: *ref_9
-        shark: *ref_13
-      property: *ref_18
+        salmon: *ref_32
+        shark: *ref_39
+      property: *ref_45
     properties:
-    - *ref_18
+    - *ref_45
     - !<!Property> 
-      schema: !<!StringSchema> &ref_58
-        type: string
-        apiVersions:
-        - !<!ApiVersion> 
-          version: '2016-02-29'
-        language: !<!Languages> 
-          default:
-            name: FishSpecies
-            description: ''
-        protocol: !<!Protocols> {}
+      schema: *ref_47
       required: false
       serializedName: species
       language: !<!Languages> 
@@ -1181,7 +1422,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_2
+      schema: *ref_8
       required: true
       serializedName: length
       language: !<!Languages> 
@@ -1190,12 +1431,12 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_31
+      schema: !<!ArraySchema> &ref_64
         type: array
         apiVersions:
         - !<!ApiVersion> 
           version: '2016-02-29'
-        elementType: *ref_10
+        elementType: *ref_34
         language: !<!Languages> 
           default:
             name: FishSiblings
@@ -1208,20 +1449,25 @@ schemas: !<!Schemas>
           name: siblings
           description: ''
       protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - output
+    - input
     language: !<!Languages> 
       default:
         name: Fish
         description: ''
-        namespace: Api20160229
+        namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_19
+  - !<!ObjectSchema> &ref_48
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
     children: !<!Relations> 
       all:
-      - !<!ObjectSchema> &ref_20
+      - !<!ObjectSchema> &ref_50
         type: object
         apiVersions:
         - !<!ApiVersion> 
@@ -1229,21 +1475,12 @@ schemas: !<!Schemas>
         discriminatorValue: DotSalmon
         parents: !<!Relations> 
           all:
-          - *ref_19
+          - *ref_48
           immediate:
-          - *ref_19
+          - *ref_48
         properties:
         - !<!Property> 
-          schema: !<!StringSchema> &ref_61
-            type: string
-            apiVersions:
-            - !<!ApiVersion> 
-              version: '2016-02-29'
-            language: !<!Languages> 
-              default:
-                name: DotSalmonLocation
-                description: ''
-            protocol: !<!Protocols> {}
+          schema: *ref_49
           serializedName: location
           language: !<!Languages> 
             default:
@@ -1251,37 +1488,32 @@ schemas: !<!Schemas>
               description: ''
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: *ref_4
+          schema: *ref_10
           serializedName: iswild
           language: !<!Languages> 
             default:
               name: iswild
               description: ''
           protocol: !<!Protocols> {}
+        serializationFormats:
+        - json
+        usage:
+        - output
         language: !<!Languages> 
           default:
             name: DotSalmon
             description: ''
-            namespace: Api20160229
+            namespace: ''
         protocol: !<!Protocols> {}
       immediate:
-      - *ref_20
+      - *ref_50
     discriminator: !<!Discriminator> 
       all:
-        DotSalmon: *ref_20
+        DotSalmon: *ref_50
       immediate:
-        DotSalmon: *ref_20
-      property: !<!Property> &ref_21
-        schema: !<!StringSchema> &ref_59
-          type: string
-          apiVersions:
-          - !<!ApiVersion> 
-            version: '2016-02-29'
-          language: !<!Languages> 
-            default:
-              name: DotFishType
-              description: ''
-          protocol: !<!Protocols> {}
+        DotSalmon: *ref_50
+      property: !<!Property> &ref_52
+        schema: *ref_51
         isDiscriminator: true
         required: true
         serializedName: fish.type
@@ -1291,18 +1523,9 @@ schemas: !<!Schemas>
             description: ''
         protocol: !<!Protocols> {}
     properties:
-    - *ref_21
+    - *ref_52
     - !<!Property> 
-      schema: !<!StringSchema> &ref_60
-        type: string
-        apiVersions:
-        - !<!ApiVersion> 
-          version: '2016-02-29'
-        language: !<!Languages> 
-          default:
-            name: DotFishSpecies
-            description: ''
-        protocol: !<!Protocols> {}
+      schema: *ref_53
       required: false
       serializedName: species
       language: !<!Languages> 
@@ -1310,11 +1533,15 @@ schemas: !<!Schemas>
           name: species
           description: ''
       protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - output
     language: !<!Languages> 
       default:
         name: DotFish
         description: ''
-        namespace: Api20160229
+        namespace: ''
     protocol: !<!Protocols> {}
   - !<!ObjectSchema> &ref_103
     type: object
@@ -1323,7 +1550,7 @@ schemas: !<!Schemas>
       version: '2016-02-29'
     properties:
     - !<!Property> 
-      schema: *ref_20
+      schema: *ref_50
       serializedName: sampleSalmon
       language: !<!Languages> 
         default:
@@ -1331,12 +1558,12 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_32
+      schema: !<!ArraySchema> &ref_65
         type: array
         apiVersions:
         - !<!ApiVersion> 
           version: '2016-02-29'
-        elementType: *ref_20
+        elementType: *ref_50
         language: !<!Languages> 
           default:
             name: DotFishMarketSalmons
@@ -1349,7 +1576,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_19
+      schema: *ref_48
       serializedName: sampleFish
       language: !<!Languages> 
         default:
@@ -1357,12 +1584,12 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_33
+      schema: !<!ArraySchema> &ref_66
         type: array
         apiVersions:
         - !<!ApiVersion> 
           version: '2016-02-29'
-        elementType: *ref_19
+        elementType: *ref_48
         language: !<!Languages> 
           default:
             name: DotFishMarketFishes
@@ -1374,14 +1601,18 @@ schemas: !<!Schemas>
           name: fishes
           description: ''
       protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - output
     language: !<!Languages> 
       default:
         name: DotFishMarket
         description: ''
-        namespace: Api20160229
+        namespace: ''
     protocol: !<!Protocols> {}
-  - *ref_20
-  - *ref_9
+  - *ref_50
+  - *ref_32
   - !<!ObjectSchema> &ref_108
     type: object
     apiVersions:
@@ -1389,16 +1620,7 @@ schemas: !<!Schemas>
       version: '2016-02-29'
     properties:
     - !<!Property> 
-      schema: !<!StringSchema> &ref_63
-        type: string
-        apiVersions:
-        - !<!ApiVersion> 
-          version: '2016-02-29'
-        language: !<!Languages> 
-          default:
-            name: ReadonlyObjId
-            description: ''
-        protocol: !<!Protocols> {}
+      schema: *ref_54
       readOnly: true
       serializedName: id
       language: !<!Languages> 
@@ -1407,27 +1629,32 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_0
+      schema: *ref_5
       serializedName: size
       language: !<!Languages> 
         default:
           name: size
           description: ''
       protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - output
+    - input
     language: !<!Languages> 
       default:
         name: ReadonlyObj
         description: ''
-        namespace: Api20160229
+        namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_22
+  - !<!ObjectSchema> &ref_55
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
     children: !<!Relations> 
       all:
-      - !<!ObjectSchema> &ref_23
+      - !<!ObjectSchema> &ref_57
         type: object
         apiVersions:
         - !<!ApiVersion> 
@@ -1435,21 +1662,12 @@ schemas: !<!Schemas>
         discriminatorValue: Kind1
         parents: !<!Relations> 
           all:
-          - *ref_22
+          - *ref_55
           immediate:
-          - *ref_22
+          - *ref_55
         properties:
         - !<!Property> 
-          schema: !<!StringSchema> &ref_66
-            type: string
-            apiVersions:
-            - !<!ApiVersion> 
-              version: '2016-02-29'
-            language: !<!Languages> 
-              default:
-                name: MyDerivedTypePropD1
-                description: ''
-            protocol: !<!Protocols> {}
+          schema: *ref_56
           serializedName: propD1
           language: !<!Languages> 
             default:
@@ -1462,29 +1680,17 @@ schemas: !<!Schemas>
           default:
             name: MyDerivedType
             description: ''
-            namespace: Api20160229
+            namespace: ''
         protocol: !<!Protocols> {}
       immediate:
-      - *ref_23
+      - *ref_57
     discriminator: !<!Discriminator> 
       all:
-        Kind1: *ref_23
+        Kind1: *ref_57
       immediate:
-        Kind1: *ref_23
-      property: !<!Property> &ref_24
-        schema: !<!ConstantSchema> &ref_36
-          type: constant
-          apiVersions:
-          - !<!ApiVersion> 
-            version: '2016-02-29'
-          value: !<!ConstantValue> 
-            value: Kind1
-          valueType: *ref_14
-          language: !<!Languages> 
-            default:
-              name: MyKind
-              description: ''
-          protocol: !<!Protocols> {}
+        Kind1: *ref_57
+      property: !<!Property> &ref_59
+        schema: *ref_58
         isDiscriminator: true
         required: true
         serializedName: kind
@@ -1494,18 +1700,9 @@ schemas: !<!Schemas>
             description: ''
         protocol: !<!Protocols> {}
     properties:
-    - *ref_24
+    - *ref_59
     - !<!Property> 
-      schema: !<!StringSchema> &ref_64
-        type: string
-        apiVersions:
-        - !<!ApiVersion> 
-          version: '2016-02-29'
-        language: !<!Languages> 
-          default:
-            name: MyBaseTypePropB1
-            description: ''
-        protocol: !<!Protocols> {}
+      schema: *ref_60
       required: false
       serializedName: propB1
       language: !<!Languages> 
@@ -1514,16 +1711,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_25
-        type: string
-        apiVersions:
-        - !<!ApiVersion> 
-          version: '2016-02-29'
-        language: !<!Languages> 
-          default:
-            name: MyBaseHelperTypePropBh1
-            description: ''
-        protocol: !<!Protocols> {}
+      schema: *ref_61
       flattenedNames:
       - helper
       - propBH1
@@ -1531,14 +1719,18 @@ schemas: !<!Schemas>
       serializedName: propBH1
       language: !<!Languages> 
         default:
-          name: propBh1
+          name: propBH1
           description: ''
       protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - output
     language: !<!Languages> 
       default:
         name: MyBaseType
         description: ''
-        namespace: Api20160229
+        namespace: ''
     protocol: !<!Protocols> {}
   - !<!ObjectSchema> 
     type: object
@@ -1547,100 +1739,40 @@ schemas: !<!Schemas>
       version: '2016-02-29'
     properties:
     - !<!Property> 
-      schema: *ref_25
+      schema: *ref_61
       serializedName: propBH1
       language: !<!Languages> 
         default:
-          name: propBh1
+          name: propBH1
           description: ''
       protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - output
     extensions:
       x-ms-flattened: true
     language: !<!Languages> 
       default:
         name: MyBaseHelperType
         description: ''
-        namespace: Api20160229
-    protocol: !<!Protocols> {}
-  - *ref_12
-  - *ref_13
-  - *ref_15
-  - *ref_16
-  - *ref_17
-  - *ref_23
-  dictionaries:
-  - *ref_26
-  - *ref_11
-  choices:
-  - *ref_27
-  - *ref_28
-  arrays:
-  - *ref_29
-  - *ref_30
-  - *ref_31
-  - *ref_32
-  - *ref_33
-  booleans:
-  - *ref_4
-  byteArrays:
-  - *ref_34
-  - *ref_35
-  constants:
-  - !<!ConstantSchema> &ref_67
-    type: constant
-    value: !<!ConstantValue> 
-      value: '2016-02-29'
-    valueType: *ref_14
-    language: !<!Languages> 
-      default:
-        name: ApiVersion20160229
-        description: Api Version (2016-02-29)
+        namespace: ''
     protocol: !<!Protocols> {}
   - *ref_36
-  dateTimes:
-  - *ref_37
-  - *ref_38
   - *ref_39
-  - *ref_40
-  - *ref_41
-  dates:
   - *ref_42
   - *ref_43
-  durations:
   - *ref_44
-  numbers:
-  - *ref_45
-  - *ref_0
-  - *ref_1
-  - *ref_2
-  - *ref_3
-  strings:
-  - *ref_14
-  - *ref_46
-  - *ref_47
-  - *ref_48
-  - *ref_49
-  - *ref_50
-  - *ref_51
-  - *ref_52
-  - *ref_53
-  - *ref_54
-  - *ref_55
-  - *ref_56
   - *ref_57
-  - *ref_58
-  - *ref_59
-  - *ref_60
-  - *ref_61
+  arrays:
   - *ref_62
   - *ref_63
   - *ref_64
-  - *ref_25
   - *ref_65
   - *ref_66
 globalParameters:
 - !<!Parameter> &ref_68
-  schema: *ref_14
+  schema: *ref_0
   clientDefaultValue: 'http://localhost:3000'
   implementation: Client
   required: true
@@ -1666,9 +1798,6 @@ globalParameters:
   protocol: !<!Protocols> 
     http: !<!HttpParameter> 
       in: query
-info: !<!Info> 
-  description: Test Infrastructure for AutoRest
-  title: body-complex
 operationGroups:
 - !<!OperationGroup> 
   $key: basic
@@ -1677,10 +1806,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_68
-      signatureParameters: []
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -1690,6 +1819,7 @@ operationGroups:
           path: /complex/basic/valid
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_69
@@ -1727,16 +1857,16 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
+    parameters:
+    - *ref_68
+    - *ref_71
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_68
-      - *ref_71
       - !<!Parameter> &ref_72
         schema: *ref_69
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: complexBody
         language: !<!Languages> 
           default:
             name: complexBody
@@ -1759,6 +1889,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -1783,8 +1914,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutValid
@@ -1794,10 +1923,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_68
-      signatureParameters: []
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -1807,6 +1936,7 @@ operationGroups:
           path: /complex/basic/invalid
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_69
@@ -1844,10 +1974,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_68
-      signatureParameters: []
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -1857,6 +1987,7 @@ operationGroups:
           path: /complex/basic/empty
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_69
@@ -1894,10 +2025,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_68
-      signatureParameters: []
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -1907,6 +2038,7 @@ operationGroups:
           path: /complex/basic/null
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_69
@@ -1944,10 +2076,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_68
-      signatureParameters: []
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -1957,6 +2089,7 @@ operationGroups:
           path: /complex/basic/notprovided
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_69
@@ -2002,10 +2135,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_68
-      signatureParameters: []
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -2015,6 +2148,7 @@ operationGroups:
           path: /complex/primitive/integer
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_73
@@ -2052,15 +2186,15 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_68
       - !<!Parameter> &ref_74
         schema: *ref_73
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: complexBody
         language: !<!Languages> 
           default:
             name: complexBody
@@ -2083,6 +2217,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -2107,8 +2242,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutInt
@@ -2118,10 +2251,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_68
-      signatureParameters: []
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -2131,6 +2264,7 @@ operationGroups:
           path: /complex/primitive/long
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_75
@@ -2168,15 +2302,15 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_68
       - !<!Parameter> &ref_76
         schema: *ref_75
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: complexBody
         language: !<!Languages> 
           default:
             name: complexBody
@@ -2199,6 +2333,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -2223,8 +2358,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutLong
@@ -2234,10 +2367,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_68
-      signatureParameters: []
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -2247,6 +2380,7 @@ operationGroups:
           path: /complex/primitive/float
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_77
@@ -2284,15 +2418,15 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_68
       - !<!Parameter> &ref_78
         schema: *ref_77
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: complexBody
         language: !<!Languages> 
           default:
             name: complexBody
@@ -2315,6 +2449,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -2339,8 +2474,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutFloat
@@ -2350,10 +2483,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_68
-      signatureParameters: []
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -2363,6 +2496,7 @@ operationGroups:
           path: /complex/primitive/double
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_79
@@ -2400,15 +2534,15 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_68
       - !<!Parameter> &ref_80
         schema: *ref_79
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: complexBody
         language: !<!Languages> 
           default:
             name: complexBody
@@ -2431,6 +2565,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -2455,8 +2590,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutDouble
@@ -2466,10 +2599,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_68
-      signatureParameters: []
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -2479,6 +2612,7 @@ operationGroups:
           path: /complex/primitive/bool
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_81
@@ -2516,15 +2650,15 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_68
       - !<!Parameter> &ref_82
         schema: *ref_81
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: complexBody
         language: !<!Languages> 
           default:
             name: complexBody
@@ -2547,6 +2681,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -2571,8 +2706,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutBool
@@ -2582,10 +2715,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_68
-      signatureParameters: []
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -2595,6 +2728,7 @@ operationGroups:
           path: /complex/primitive/string
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_83
@@ -2632,15 +2766,15 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_68
       - !<!Parameter> &ref_84
         schema: *ref_83
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: complexBody
         language: !<!Languages> 
           default:
             name: complexBody
@@ -2663,6 +2797,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -2687,8 +2822,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutString
@@ -2698,10 +2831,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_68
-      signatureParameters: []
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -2711,6 +2844,7 @@ operationGroups:
           path: /complex/primitive/date
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_85
@@ -2748,15 +2882,15 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_68
       - !<!Parameter> &ref_86
         schema: *ref_85
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: complexBody
         language: !<!Languages> 
           default:
             name: complexBody
@@ -2779,6 +2913,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -2803,8 +2938,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutDate
@@ -2814,10 +2947,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_68
-      signatureParameters: []
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -2827,6 +2960,7 @@ operationGroups:
           path: /complex/primitive/datetime
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_87
@@ -2864,15 +2998,15 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_68
       - !<!Parameter> &ref_88
         schema: *ref_87
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: complexBody
         language: !<!Languages> 
           default:
             name: complexBody
@@ -2895,6 +3029,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -2919,8 +3054,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutDateTime
@@ -2930,10 +3063,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_68
-      signatureParameters: []
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -2943,6 +3076,7 @@ operationGroups:
           path: /complex/primitive/datetimerfc1123
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_89
@@ -2980,15 +3114,15 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_68
       - !<!Parameter> &ref_90
         schema: *ref_89
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: complexBody
         language: !<!Languages> 
           default:
             name: complexBody
@@ -3011,6 +3145,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -3035,8 +3170,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutDateTimeRfc1123
@@ -3046,10 +3179,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_68
-      signatureParameters: []
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -3059,6 +3192,7 @@ operationGroups:
           path: /complex/primitive/duration
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_91
@@ -3096,15 +3230,15 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_68
       - !<!Parameter> &ref_92
         schema: *ref_91
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: complexBody
         language: !<!Languages> 
           default:
             name: complexBody
@@ -3127,6 +3261,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -3151,8 +3286,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutDuration
@@ -3162,10 +3295,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_68
-      signatureParameters: []
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -3175,6 +3308,7 @@ operationGroups:
           path: /complex/primitive/byte
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_93
@@ -3212,15 +3346,15 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_68
       - !<!Parameter> &ref_94
         schema: *ref_93
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: complexBody
         language: !<!Languages> 
           default:
             name: complexBody
@@ -3243,6 +3377,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -3267,8 +3402,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutByte
@@ -3286,10 +3419,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_68
-      signatureParameters: []
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -3299,6 +3432,7 @@ operationGroups:
           path: /complex/array/valid
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_95
@@ -3336,15 +3470,15 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_68
       - !<!Parameter> &ref_96
         schema: *ref_95
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: complexBody
         language: !<!Languages> 
           default:
             name: complexBody
@@ -3367,6 +3501,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -3391,8 +3526,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutValid
@@ -3402,10 +3535,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_68
-      signatureParameters: []
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -3415,6 +3548,7 @@ operationGroups:
           path: /complex/array/empty
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_95
@@ -3452,15 +3586,15 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_68
       - !<!Parameter> &ref_97
         schema: *ref_95
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: complexBody
         language: !<!Languages> 
           default:
             name: complexBody
@@ -3483,6 +3617,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -3507,8 +3642,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutEmpty
@@ -3518,10 +3651,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_68
-      signatureParameters: []
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -3531,6 +3664,7 @@ operationGroups:
           path: /complex/array/notprovided
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_95
@@ -3576,10 +3710,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_68
-      signatureParameters: []
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -3589,6 +3723,7 @@ operationGroups:
           path: /complex/dictionary/typed/valid
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_98
@@ -3626,15 +3761,15 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_68
       - !<!Parameter> &ref_99
         schema: *ref_98
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: complexBody
         language: !<!Languages> 
           default:
             name: complexBody
@@ -3657,6 +3792,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -3681,8 +3817,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutValid
@@ -3692,10 +3826,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_68
-      signatureParameters: []
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -3705,6 +3839,7 @@ operationGroups:
           path: /complex/dictionary/typed/empty
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_98
@@ -3742,15 +3877,15 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_68
       - !<!Parameter> &ref_100
         schema: *ref_98
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: complexBody
         language: !<!Languages> 
           default:
             name: complexBody
@@ -3773,6 +3908,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -3797,8 +3933,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutEmpty
@@ -3808,10 +3942,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_68
-      signatureParameters: []
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -3821,6 +3955,7 @@ operationGroups:
           path: /complex/dictionary/typed/null
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_98
@@ -3858,10 +3993,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_68
-      signatureParameters: []
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -3871,6 +4006,7 @@ operationGroups:
           path: /complex/dictionary/typed/notprovided
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_98
@@ -3916,10 +4052,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_68
-      signatureParameters: []
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -3929,9 +4065,10 @@ operationGroups:
           path: /complex/inheritance/valid
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_7
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -3966,15 +4103,15 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_68
       - !<!Parameter> &ref_101
-        schema: *ref_7
+        schema: *ref_28
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: complexBody
         language: !<!Languages> 
           default:
             name: complexBody
@@ -3997,6 +4134,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -4021,8 +4159,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutValid
@@ -4040,10 +4176,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_68
-      signatureParameters: []
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -4053,9 +4189,10 @@ operationGroups:
           path: /complex/polymorphism/valid
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_10
+      schema: *ref_34
       language: !<!Languages> 
         default:
           name: ''
@@ -4090,15 +4227,15 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_68
       - !<!Parameter> &ref_102
-        schema: *ref_10
+        schema: *ref_34
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: complexBody
         language: !<!Languages> 
           default:
             name: complexBody
@@ -4154,6 +4291,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -4178,8 +4316,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutValid
@@ -4189,10 +4325,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_68
-      signatureParameters: []
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -4202,9 +4338,10 @@ operationGroups:
           path: /complex/polymorphism/dotsyntax
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_19
+      schema: *ref_48
       language: !<!Languages> 
         default:
           name: ''
@@ -4239,10 +4376,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_68
-      signatureParameters: []
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -4252,6 +4389,7 @@ operationGroups:
           path: /complex/polymorphism/composedWithDiscriminator
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_103
@@ -4289,10 +4427,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_68
-      signatureParameters: []
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -4302,6 +4440,7 @@ operationGroups:
           path: /complex/polymorphism/composedWithoutDiscriminator
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_103
@@ -4339,10 +4478,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_68
-      signatureParameters: []
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -4352,9 +4491,10 @@ operationGroups:
           path: /complex/polymorphism/complicated
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_9
+      schema: *ref_32
       language: !<!Languages> 
         default:
           name: ''
@@ -4389,15 +4529,15 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_68
       - !<!Parameter> &ref_104
-        schema: *ref_9
+        schema: *ref_32
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: complexBody
         language: !<!Languages> 
           default:
             name: complexBody
@@ -4420,6 +4560,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -4444,8 +4585,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutComplicated
@@ -4455,15 +4594,15 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_68
       - !<!Parameter> &ref_105
-        schema: *ref_9
+        schema: *ref_32
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: complexBody
         language: !<!Languages> 
           default:
             name: complexBody
@@ -4486,9 +4625,10 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_9
+      schema: *ref_32
       language: !<!Languages> 
         default:
           name: ''
@@ -4514,8 +4654,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutMissingDiscriminator
@@ -4525,15 +4663,15 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_68
       - !<!Parameter> &ref_106
-        schema: *ref_10
+        schema: *ref_34
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: complexBody
         language: !<!Languages> 
           default:
             name: complexBody
@@ -4589,6 +4727,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -4613,8 +4752,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutValidMissingRequired
@@ -4632,10 +4769,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_68
-      signatureParameters: []
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -4645,9 +4782,10 @@ operationGroups:
           path: /complex/polymorphicrecursive/valid
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_10
+      schema: *ref_34
       language: !<!Languages> 
         default:
           name: ''
@@ -4682,15 +4820,15 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_68
       - !<!Parameter> &ref_107
-        schema: *ref_10
+        schema: *ref_34
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: complexBody
         language: !<!Languages> 
           default:
             name: complexBody
@@ -4746,6 +4884,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -4770,8 +4909,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutValid
@@ -4789,10 +4926,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_68
-      signatureParameters: []
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -4802,6 +4939,7 @@ operationGroups:
           path: /complex/readonlyproperty/valid
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_108
@@ -4839,15 +4977,15 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_68
       - !<!Parameter> &ref_109
         schema: *ref_108
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: complexBody
         language: !<!Languages> 
           default:
             name: complexBody
@@ -4870,6 +5008,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -4894,8 +5033,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutValid
@@ -4913,10 +5050,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
-    request: !<!Request> 
-      parameters:
-      - *ref_68
-      signatureParameters: []
+    parameters:
+    - *ref_68
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -4926,9 +5063,10 @@ operationGroups:
           path: /complex/flatten/valid
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_22
+      schema: *ref_55
       language: !<!Languages> 
         default:
           name: ''

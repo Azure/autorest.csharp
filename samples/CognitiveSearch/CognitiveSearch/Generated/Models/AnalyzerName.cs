@@ -72,15 +72,15 @@ namespace CognitiveSearch.Models
         private const string LvLuceneValue = "lv.lucene";
         private const string LtMicrosoftValue = "lt.microsoft";
         private const string MlMicrosoftValue = "ml.microsoft";
-        private const string MSMicrosoftValue = "ms.microsoft";
+        private const string MsMicrosoftValue = "ms.microsoft";
         private const string MrMicrosoftValue = "mr.microsoft";
         private const string NbMicrosoftValue = "nb.microsoft";
         private const string NoLuceneValue = "no.lucene";
         private const string FaLuceneValue = "fa.lucene";
         private const string PlMicrosoftValue = "pl.microsoft";
         private const string PlLuceneValue = "pl.lucene";
-        private const string PtBrMicrosoftValue = "pt-BR.microsoft";
-        private const string PtBrLuceneValue = "pt-BR.lucene";
+        private const string PtBRMicrosoftValue = "pt-BR.microsoft";
+        private const string PtBRLuceneValue = "pt-BR.lucene";
         private const string PtMicrosoftValue = "pt-PT.microsoft";
         private const string PtLuceneValue = "pt-PT.lucene";
         private const string PaMicrosoftValue = "pa.microsoft";
@@ -220,7 +220,7 @@ namespace CognitiveSearch.Models
         /// <summary> ml.microsoft. </summary>
         public static AnalyzerName MlMicrosoft { get; } = new AnalyzerName(MlMicrosoftValue);
         /// <summary> ms.microsoft. </summary>
-        public static AnalyzerName MSMicrosoft { get; } = new AnalyzerName(MSMicrosoftValue);
+        public static AnalyzerName MsMicrosoft { get; } = new AnalyzerName(MsMicrosoftValue);
         /// <summary> mr.microsoft. </summary>
         public static AnalyzerName MrMicrosoft { get; } = new AnalyzerName(MrMicrosoftValue);
         /// <summary> nb.microsoft. </summary>
@@ -234,9 +234,9 @@ namespace CognitiveSearch.Models
         /// <summary> pl.lucene. </summary>
         public static AnalyzerName PlLucene { get; } = new AnalyzerName(PlLuceneValue);
         /// <summary> pt-BR.microsoft. </summary>
-        public static AnalyzerName PtBrMicrosoft { get; } = new AnalyzerName(PtBrMicrosoftValue);
+        public static AnalyzerName PtBRMicrosoft { get; } = new AnalyzerName(PtBRMicrosoftValue);
         /// <summary> pt-BR.lucene. </summary>
-        public static AnalyzerName PtBrLucene { get; } = new AnalyzerName(PtBrLuceneValue);
+        public static AnalyzerName PtBRLucene { get; } = new AnalyzerName(PtBRLuceneValue);
         /// <summary> pt-PT.microsoft. </summary>
         public static AnalyzerName PtMicrosoft { get; } = new AnalyzerName(PtMicrosoftValue);
         /// <summary> pt-PT.lucene. </summary>

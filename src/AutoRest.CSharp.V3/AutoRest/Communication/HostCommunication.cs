@@ -91,7 +91,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Communication
             await Console.Error.WriteLineAsync("FATAL: " + text);
         }
 
-        public Task Message(string text)
+        public Task Information(string text)
         {
             return Task.Run(() => Console.WriteLine(text));
         }

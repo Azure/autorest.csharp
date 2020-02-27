@@ -12,7 +12,9 @@ namespace Azure.Storage.Tables.Models
     {
         /// <summary> Azure Analytics Logging settings. </summary>
         public Logging Logging { get; set; }
+        /// <summary> A summary of request statistics grouped by API in hourly aggregates for queues. </summary>
         public Metrics HourMetrics { get; set; }
+        /// <summary> a summary of request statistics grouped by API in minute aggregates for queues. </summary>
         public Metrics MinuteMetrics { get; set; }
         /// <summary> The set of CORS rules. </summary>
         public ICollection<CorsRule> Cors { get; set; }

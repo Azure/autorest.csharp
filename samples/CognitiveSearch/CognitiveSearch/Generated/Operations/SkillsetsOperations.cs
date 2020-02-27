@@ -43,7 +43,7 @@ namespace CognitiveSearch
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
-        internal HttpMessage CreateCreateOrUpdateRequest(string skillsetName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, Skillset skillset)
+        internal HttpMessage CreateCreateOrUpdateRequest(Skillset skillset, string skillsetName, Guid? clientRequestId, string ifMatch, string ifNoneMatch)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -78,28 +78,28 @@ namespace CognitiveSearch
             return message;
         }
         /// <summary> Creates a new skillset in a search service or updates the skillset if it already exists. </summary>
+        /// <param name="skillset"> The skillset containing one or more skills to create or update in a search service. </param>
         /// <param name="skillsetName"> The name of the skillset to create or update. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
-        /// <param name="skillset"> The skillset containing one or more skills to create or update in a search service. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Skillset>> CreateOrUpdateAsync(string skillsetName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, Skillset skillset, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<Skillset>> CreateOrUpdateAsync(Skillset skillset, string skillsetName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
         {
-            if (skillsetName == null)
-            {
-                throw new ArgumentNullException(nameof(skillsetName));
-            }
             if (skillset == null)
             {
                 throw new ArgumentNullException(nameof(skillset));
+            }
+            if (skillsetName == null)
+            {
+                throw new ArgumentNullException(nameof(skillsetName));
             }
 
             using var scope = clientDiagnostics.CreateScope("SkillsetsOperations.CreateOrUpdate");
             scope.Start();
             try
             {
-                using var message = CreateCreateOrUpdateRequest(skillsetName, clientRequestId, ifMatch, ifNoneMatch, skillset);
+                using var message = CreateCreateOrUpdateRequest(skillset, skillsetName, clientRequestId, ifMatch, ifNoneMatch);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -120,28 +120,28 @@ namespace CognitiveSearch
             }
         }
         /// <summary> Creates a new skillset in a search service or updates the skillset if it already exists. </summary>
+        /// <param name="skillset"> The skillset containing one or more skills to create or update in a search service. </param>
         /// <param name="skillsetName"> The name of the skillset to create or update. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
-        /// <param name="skillset"> The skillset containing one or more skills to create or update in a search service. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Skillset> CreateOrUpdate(string skillsetName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, Skillset skillset, CancellationToken cancellationToken = default)
+        public Response<Skillset> CreateOrUpdate(Skillset skillset, string skillsetName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
         {
-            if (skillsetName == null)
-            {
-                throw new ArgumentNullException(nameof(skillsetName));
-            }
             if (skillset == null)
             {
                 throw new ArgumentNullException(nameof(skillset));
+            }
+            if (skillsetName == null)
+            {
+                throw new ArgumentNullException(nameof(skillsetName));
             }
 
             using var scope = clientDiagnostics.CreateScope("SkillsetsOperations.CreateOrUpdate");
             scope.Start();
             try
             {
-                using var message = CreateCreateOrUpdateRequest(skillsetName, clientRequestId, ifMatch, ifNoneMatch, skillset);
+                using var message = CreateCreateOrUpdateRequest(skillset, skillsetName, clientRequestId, ifMatch, ifNoneMatch);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -432,7 +432,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
-        internal HttpMessage CreateCreateRequest(Guid? clientRequestId, Skillset skillset)
+        internal HttpMessage CreateCreateRequest(Skillset skillset, Guid? clientRequestId)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -456,10 +456,10 @@ namespace CognitiveSearch
             return message;
         }
         /// <summary> Creates a new skillset in a search service. </summary>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="skillset"> The skillset containing one or more skills to create or update in a search service. </param>
+        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Skillset>> CreateAsync(Guid? clientRequestId, Skillset skillset, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<Skillset>> CreateAsync(Skillset skillset, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
             if (skillset == null)
             {
@@ -470,7 +470,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateCreateRequest(clientRequestId, skillset);
+                using var message = CreateCreateRequest(skillset, clientRequestId);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -491,10 +491,10 @@ namespace CognitiveSearch
             }
         }
         /// <summary> Creates a new skillset in a search service. </summary>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="skillset"> The skillset containing one or more skills to create or update in a search service. </param>
+        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Skillset> Create(Guid? clientRequestId, Skillset skillset, CancellationToken cancellationToken = default)
+        public Response<Skillset> Create(Skillset skillset, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
             if (skillset == null)
             {
@@ -505,7 +505,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateCreateRequest(clientRequestId, skillset);
+                using var message = CreateCreateRequest(skillset, clientRequestId);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {

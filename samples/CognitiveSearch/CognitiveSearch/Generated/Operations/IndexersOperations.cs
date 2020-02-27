@@ -209,7 +209,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
-        internal HttpMessage CreateCreateOrUpdateRequest(string indexerName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, Indexer indexer)
+        internal HttpMessage CreateCreateOrUpdateRequest(Indexer indexer, string indexerName, Guid? clientRequestId, string ifMatch, string ifNoneMatch)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -244,28 +244,28 @@ namespace CognitiveSearch
             return message;
         }
         /// <summary> Creates a new indexer or updates an indexer if it already exists. </summary>
+        /// <param name="indexer"> The definition of the indexer to create or update. </param>
         /// <param name="indexerName"> The name of the indexer to reset. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
-        /// <param name="indexer"> The definition of the indexer to create or update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Indexer>> CreateOrUpdateAsync(string indexerName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, Indexer indexer, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<Indexer>> CreateOrUpdateAsync(Indexer indexer, string indexerName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
         {
-            if (indexerName == null)
-            {
-                throw new ArgumentNullException(nameof(indexerName));
-            }
             if (indexer == null)
             {
                 throw new ArgumentNullException(nameof(indexer));
+            }
+            if (indexerName == null)
+            {
+                throw new ArgumentNullException(nameof(indexerName));
             }
 
             using var scope = clientDiagnostics.CreateScope("IndexersOperations.CreateOrUpdate");
             scope.Start();
             try
             {
-                using var message = CreateCreateOrUpdateRequest(indexerName, clientRequestId, ifMatch, ifNoneMatch, indexer);
+                using var message = CreateCreateOrUpdateRequest(indexer, indexerName, clientRequestId, ifMatch, ifNoneMatch);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -286,28 +286,28 @@ namespace CognitiveSearch
             }
         }
         /// <summary> Creates a new indexer or updates an indexer if it already exists. </summary>
+        /// <param name="indexer"> The definition of the indexer to create or update. </param>
         /// <param name="indexerName"> The name of the indexer to reset. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
-        /// <param name="indexer"> The definition of the indexer to create or update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Indexer> CreateOrUpdate(string indexerName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, Indexer indexer, CancellationToken cancellationToken = default)
+        public Response<Indexer> CreateOrUpdate(Indexer indexer, string indexerName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
         {
-            if (indexerName == null)
-            {
-                throw new ArgumentNullException(nameof(indexerName));
-            }
             if (indexer == null)
             {
                 throw new ArgumentNullException(nameof(indexer));
+            }
+            if (indexerName == null)
+            {
+                throw new ArgumentNullException(nameof(indexerName));
             }
 
             using var scope = clientDiagnostics.CreateScope("IndexersOperations.CreateOrUpdate");
             scope.Start();
             try
             {
-                using var message = CreateCreateOrUpdateRequest(indexerName, clientRequestId, ifMatch, ifNoneMatch, indexer);
+                using var message = CreateCreateOrUpdateRequest(indexer, indexerName, clientRequestId, ifMatch, ifNoneMatch);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -598,7 +598,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
-        internal HttpMessage CreateCreateRequest(Guid? clientRequestId, Indexer indexer)
+        internal HttpMessage CreateCreateRequest(Indexer indexer, Guid? clientRequestId)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -622,10 +622,10 @@ namespace CognitiveSearch
             return message;
         }
         /// <summary> Creates a new indexer. </summary>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="indexer"> The definition of the indexer to create or update. </param>
+        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Indexer>> CreateAsync(Guid? clientRequestId, Indexer indexer, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<Indexer>> CreateAsync(Indexer indexer, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
             if (indexer == null)
             {
@@ -636,7 +636,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateCreateRequest(clientRequestId, indexer);
+                using var message = CreateCreateRequest(indexer, clientRequestId);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -657,10 +657,10 @@ namespace CognitiveSearch
             }
         }
         /// <summary> Creates a new indexer. </summary>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="indexer"> The definition of the indexer to create or update. </param>
+        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Indexer> Create(Guid? clientRequestId, Indexer indexer, CancellationToken cancellationToken = default)
+        public Response<Indexer> Create(Indexer indexer, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
             if (indexer == null)
             {
@@ -671,7 +671,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateCreateRequest(clientRequestId, indexer);
+                using var message = CreateCreateRequest(indexer, clientRequestId);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {

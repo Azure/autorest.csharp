@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
         {
             OdataType = "#Microsoft.Skills.Vision.ImageAnalysisSkill";
         }
-        /// <summary> The language codes supported for input by ImageAnalysisSkill. </summary>
+        /// <summary> A value indicating which language code to use. Default is en. </summary>
         public ImageAnalysisSkillLanguage? DefaultLanguageCode { get; set; }
         /// <summary> A list of visual features. </summary>
         public ICollection<VisualFeature> VisualFeatures { get; set; }

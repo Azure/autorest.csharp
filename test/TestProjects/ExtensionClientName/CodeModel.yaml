@@ -1,65 +1,8 @@
 !<!CodeModel> 
+info: !<!Info> 
+  description: Resource Flattening for AutoRest
+  title: ExtensionClientName
 schemas: !<!Schemas> 
-  objects:
-  - !<!ObjectSchema> &ref_5
-    type: object
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    properties:
-    - !<!Property> 
-      schema: !<!DictionarySchema> &ref_0
-        type: dictionary
-        elementType: !<!StringSchema> &ref_1
-          type: string
-          apiVersions:
-          - !<!ApiVersion> 
-            version: 1.0.0
-          language: !<!Languages> 
-            default:
-              name: String
-              description: ''
-              header: originalHeader
-          protocol: !<!Protocols> {}
-        language: !<!Languages> 
-          default:
-            name: RenamedProperty
-            description: A description about the set of tags.
-        protocol: !<!Protocols> {}
-      required: false
-      serializedName: originalProperty
-      language: !<!Languages> 
-        default:
-          name: renamedProperty
-          description: A description about the set of tags.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: !<!StringSchema> &ref_2
-        type: string
-        apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-        summary: A set of tags.
-        language: !<!Languages> 
-          default:
-            name: RenamedPropertyString
-            description: A description about the set of tags.
-        protocol: !<!Protocols> {}
-      required: false
-      serializedName: originalPropertyString
-      language: !<!Languages> 
-        default:
-          name: renamedPropertyString
-          description: A description about the set of tags.
-      protocol: !<!Protocols> {}
-    language: !<!Languages> 
-      default:
-        name: RenamedSchema
-        description: ''
-        namespace: Api100
-    protocol: !<!Protocols> {}
-  dictionaries:
-  - *ref_0
   strings:
   - !<!StringSchema> &ref_3
     type: string
@@ -68,8 +11,73 @@ schemas: !<!Schemas>
         name: String
         description: simple string
     protocol: !<!Protocols> {}
-  - *ref_1
-  - *ref_2
+  - !<!StringSchema> &ref_0
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: String
+        description: ''
+        header: originalHeader
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_2
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    summary: A set of tags.
+    language: !<!Languages> 
+      default:
+        name: RenamedPropertyString
+        description: A description about the set of tags.
+    protocol: !<!Protocols> {}
+  dictionaries:
+  - !<!DictionarySchema> &ref_1
+    type: dictionary
+    elementType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: RenamedProperty
+        description: A description about the set of tags.
+    protocol: !<!Protocols> {}
+  objects:
+  - !<!ObjectSchema> &ref_5
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    properties:
+    - !<!Property> 
+      schema: *ref_1
+      required: false
+      serializedName: originalProperty
+      language: !<!Languages> 
+        default:
+          name: renamedProperty
+          description: A description about the set of tags.
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: *ref_2
+      required: false
+      serializedName: originalPropertyString
+      language: !<!Languages> 
+        default:
+          name: renamedPropertyString
+          description: A description about the set of tags.
+      protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - input
+    - output
+    language: !<!Languages> 
+      default:
+        name: RenamedSchema
+        description: ''
+        namespace: ''
+    protocol: !<!Protocols> {}
 globalParameters:
 - !<!Parameter> &ref_4
   schema: *ref_3
@@ -86,9 +94,6 @@ globalParameters:
   protocol: !<!Protocols> 
     http: !<!HttpParameter> 
       in: uri
-info: !<!Info> 
-  description: Resource Flattening for AutoRest
-  title: ExtensionClientName
 operationGroups:
 - !<!OperationGroup> 
   $key: ''
@@ -97,39 +102,39 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
+    parameters:
+    - *ref_4
+    - !<!Parameter> &ref_7
+      schema: *ref_0
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: renamedPathParameter
+          description: ''
+          serializedName: originalPathParameter
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: path
+    - !<!Parameter> &ref_8
+      schema: *ref_0
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: renamedQueryParameter
+          description: ''
+          serializedName: originalQueryParameter
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_4
       - !<!Parameter> &ref_6
-        schema: *ref_1
-        implementation: Method
-        required: true
-        language: !<!Languages> 
-          default:
-            name: renamedPathParameter
-            description: ''
-            serializedName: originalPathParameter
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: path
-      - !<!Parameter> &ref_7
-        schema: *ref_1
-        implementation: Method
-        required: true
-        language: !<!Languages> 
-          default:
-            name: renamedQueryParameter
-            description: ''
-            serializedName: originalQueryParameter
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: query
-      - !<!Parameter> &ref_8
         schema: *ref_5
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: RenamedBodyParameter
         language: !<!Languages> 
           default:
             name: renamedBodyParameter
@@ -140,8 +145,6 @@ operationGroups:
             style: json
       signatureParameters:
       - *ref_6
-      - *ref_7
-      - *ref_8
       language: !<!Languages> 
         default:
           name: ''
@@ -154,6 +157,9 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters:
+    - *ref_7
+    - *ref_8
     responses:
     - !<!SchemaResponse> 
       schema: *ref_5
@@ -165,15 +171,13 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_1
+            schema: *ref_0
             header: originalHeader
           knownMediaType: json
           mediaTypes:
           - application/json
           statusCodes:
           - '200'
-    extensions:
-      x-ms-requestBody-index: 2
     language: !<!Languages> 
       default:
         name: RenamedOperation
