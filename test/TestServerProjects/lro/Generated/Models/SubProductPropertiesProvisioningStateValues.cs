@@ -29,7 +29,7 @@ namespace lro.Models
         private const string UpdatedValue = "Updated";
         private const string DeletingValue = "Deleting";
         private const string DeletedValue = "Deleted";
-        private const string OkValue = "OK";
+        private const string OKValue = "OK";
 
         /// <summary> Succeeded. </summary>
         public static SubProductPropertiesProvisioningStateValues Succeeded { get; } = new SubProductPropertiesProvisioningStateValues(SucceededValue);
@@ -52,7 +52,7 @@ namespace lro.Models
         /// <summary> Deleted. </summary>
         public static SubProductPropertiesProvisioningStateValues Deleted { get; } = new SubProductPropertiesProvisioningStateValues(DeletedValue);
         /// <summary> OK. </summary>
-        public static SubProductPropertiesProvisioningStateValues Ok { get; } = new SubProductPropertiesProvisioningStateValues(OkValue);
+        public static SubProductPropertiesProvisioningStateValues OK { get; } = new SubProductPropertiesProvisioningStateValues(OKValue);
         /// <summary> Determines if two <see cref="SubProductPropertiesProvisioningStateValues"/> values are the same. </summary>
         public static bool operator ==(SubProductPropertiesProvisioningStateValues left, SubProductPropertiesProvisioningStateValues right) => left.Equals(right);
         /// <summary> Determines if two <see cref="SubProductPropertiesProvisioningStateValues"/> values are not the same. </summary>

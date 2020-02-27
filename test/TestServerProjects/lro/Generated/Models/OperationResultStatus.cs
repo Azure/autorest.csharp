@@ -29,7 +29,7 @@ namespace lro.Models
         private const string UpdatedValue = "Updated";
         private const string DeletingValue = "Deleting";
         private const string DeletedValue = "Deleted";
-        private const string OkValue = "OK";
+        private const string OKValue = "OK";
 
         /// <summary> Succeeded. </summary>
         public static OperationResultStatus Succeeded { get; } = new OperationResultStatus(SucceededValue);
@@ -52,7 +52,7 @@ namespace lro.Models
         /// <summary> Deleted. </summary>
         public static OperationResultStatus Deleted { get; } = new OperationResultStatus(DeletedValue);
         /// <summary> OK. </summary>
-        public static OperationResultStatus Ok { get; } = new OperationResultStatus(OkValue);
+        public static OperationResultStatus OK { get; } = new OperationResultStatus(OKValue);
         /// <summary> Determines if two <see cref="OperationResultStatus"/> values are the same. </summary>
         public static bool operator ==(OperationResultStatus left, OperationResultStatus right) => left.Equals(right);
         /// <summary> Determines if two <see cref="OperationResultStatus"/> values are not the same. </summary>
