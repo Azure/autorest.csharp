@@ -1056,7 +1056,7 @@ globalParameters:
   protocol: !<!Protocols> 
     http: !<!HttpParameter> 
       in: uri
-- !<!Parameter> &ref_131
+- !<!Parameter> &ref_45
   schema: *ref_43
   implementation: Client
   required: true
@@ -1112,7 +1112,7 @@ globalParameters:
   protocol: !<!Protocols> 
     http: !<!HttpParameter> 
       in: header
-- !<!Parameter> &ref_45
+- !<!Parameter> &ref_79
   schema: *ref_43
   implementation: Client
   required: true
@@ -1126,7 +1126,7 @@ globalParameters:
   protocol: !<!Protocols> 
     http: !<!HttpParameter> 
       in: header
-- !<!Parameter> &ref_122
+- !<!Parameter> &ref_88
   schema: *ref_43
   implementation: Client
   required: true
@@ -1140,7 +1140,7 @@ globalParameters:
   protocol: !<!Protocols> 
     http: !<!HttpParameter> 
       in: header
-- !<!Parameter> &ref_127
+- !<!Parameter> &ref_96
   schema: *ref_43
   implementation: Client
   required: true
@@ -1182,34 +1182,6 @@ globalParameters:
   protocol: !<!Protocols> 
     http: !<!HttpParameter> 
       in: header
-- !<!Parameter> &ref_79
-  schema: *ref_43
-  implementation: Client
-  required: true
-  extensions:
-    x-ms-priority: 1
-  language: !<!Languages> 
-    default:
-      name: Version
-      description: Specifies the version of the operation to use for this request.
-      serializedName: x-ms-version
-  protocol: !<!Protocols> 
-    http: !<!HttpParameter> 
-      in: header
-- !<!Parameter> &ref_88
-  schema: *ref_43
-  implementation: Client
-  required: true
-  extensions:
-    x-ms-priority: 1
-  language: !<!Languages> 
-    default:
-      name: Version
-      description: Specifies the version of the operation to use for this request.
-      serializedName: x-ms-version
-  protocol: !<!Protocols> 
-    http: !<!HttpParameter> 
-      in: header
 - !<!Parameter> &ref_115
   schema: *ref_43
   implementation: Client
@@ -1224,7 +1196,35 @@ globalParameters:
   protocol: !<!Protocols> 
     http: !<!HttpParameter> 
       in: header
-- !<!Parameter> &ref_96
+- !<!Parameter> &ref_122
+  schema: *ref_43
+  implementation: Client
+  required: true
+  extensions:
+    x-ms-priority: 1
+  language: !<!Languages> 
+    default:
+      name: Version
+      description: Specifies the version of the operation to use for this request.
+      serializedName: x-ms-version
+  protocol: !<!Protocols> 
+    http: !<!HttpParameter> 
+      in: header
+- !<!Parameter> &ref_127
+  schema: *ref_43
+  implementation: Client
+  required: true
+  extensions:
+    x-ms-priority: 1
+  language: !<!Languages> 
+    default:
+      name: Version
+      description: Specifies the version of the operation to use for this request.
+      serializedName: x-ms-version
+  protocol: !<!Protocols> 
+    http: !<!HttpParameter> 
+      in: header
+- !<!Parameter> &ref_131
   schema: *ref_43
   implementation: Client
   required: true
