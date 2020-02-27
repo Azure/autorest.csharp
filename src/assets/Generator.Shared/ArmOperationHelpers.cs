@@ -56,15 +56,11 @@ namespace Azure.Core
         {
             using HttpMessage originalHttpMethod = createOriginalHttpMessage();
             string originalUri = originalHttpMethod.Request.Uri.ToString();
-            ScenarioInfo info = GetScenarioInfo(originalResponse, originalUri, requestMethod, finalStateVia);
-            if ((requestMethod != RequestMethod.Put && (info.HeaderFrom == HeaderFrom.None || !info.HasLocation)) || finalStateVia == OperationFinalStateVia.AzureAsyncOperation)
-            {
-                // Support Operation Resource: https://github.com/Azure/autorest.csharp/issues/447
-                throw clientDiagnostics.CreateRequestFailedException(originalResponse);
-            }
-
-            return new ArmOperation<T>(pipeline, clientDiagnostics, originalResponse, scopeName, info, createFinalResponse, createFinalResponseAsync);
+            return new ArmOperation<T>(pipeline, clientDiagnostics, originalResponse, originalUri, requestMethod, finalStateVia, scopeName, createFinalResponse, createFinalResponseAsync);
         }
+
+        private static readonly string[] s_failureStates = { "failed", "canceled" };
+        private static readonly string[] s_terminalStates = { "succeeded", "failed", "canceled" };
 
         /// <summary>
         /// This implements the ARM scenarios for LROs. It is highly recommended to read the ARM spec prior to modifying this code:
@@ -81,7 +77,11 @@ namespace Azure.Core
             private readonly string _scopeName;
             private readonly Func<Response, CancellationToken, T> _createFinalResponse;
             private readonly Func<Response, CancellationToken, ValueTask<T>> _createFinalResponseAsync;
-            private readonly ScenarioInfo _info;
+            private readonly RequestMethod _requestMethod;
+            private HeaderFrom _headerFrom;
+            private string _pollUri = default!;
+            private string? _finalUri;
+            private bool _hasLocation;
 
             private Response _rawResponse;
             private T _value = default!;
@@ -89,18 +89,26 @@ namespace Azure.Core
             private bool _hasCompleted;
             private bool _shouldPoll;
 
-            public ArmOperation(HttpPipeline pipeline, ClientDiagnostics clientDiagnostics, Response originalResponse, string scopeName, ScenarioInfo info,
+            public ArmOperation(HttpPipeline pipeline, ClientDiagnostics clientDiagnostics, Response originalResponse,
+                string originalUri, RequestMethod requestMethod, OperationFinalStateVia finalStateVia, string scopeName,
                 Func<Response, CancellationToken, T> createFinalResponse, Func<Response, CancellationToken, ValueTask<T>> createFinalResponseAsync)
             {
                 _rawResponse = originalResponse;
+                _requestMethod = requestMethod;
+                InitializeScenarioInfo(originalUri, finalStateVia);
+                if ((requestMethod != RequestMethod.Put && (_headerFrom == HeaderFrom.None || !_hasLocation)) || finalStateVia == OperationFinalStateVia.AzureAsyncOperation)
+                {
+                    // Support Operation Resource: https://github.com/Azure/autorest.csharp/issues/447
+                    throw clientDiagnostics.CreateRequestFailedException(originalResponse);
+                }
+
                 _pipeline = pipeline;
                 _clientDiagnostics = clientDiagnostics;
                 _scopeName = scopeName;
                 _createFinalResponse = createFinalResponse;
                 _createFinalResponseAsync = createFinalResponseAsync;
-                _info = info;
                 // When the original response has no headers, we do not start polling immediately.
-                _shouldPoll = _info.HeaderFrom != HeaderFrom.None;
+                _shouldPoll = _headerFrom != HeaderFrom.None;
             }
 
             public override Response GetRawResponse() => _rawResponse;
@@ -121,8 +129,8 @@ namespace Azure.Core
                 if (_shouldPoll)
                 {
                     _rawResponse = async
-                        ? await GetResponseAsync(_info.PollUri, cancellationToken).ConfigureAwait(false)
-                        : GetResponse(_info.PollUri, cancellationToken);
+                        ? await GetResponseAsync(_pollUri, cancellationToken).ConfigureAwait(false)
+                        : GetResponse(_pollUri, cancellationToken);
                 }
                 _shouldPoll = true;
                 _hasCompleted = IsTerminalState(out string state);
@@ -134,16 +142,16 @@ namespace Azure.Core
                         throw _clientDiagnostics.CreateRequestFailedException(finalResponse);
                     }
 
-                    if (_info.FinalUri != null)
+                    if (_finalUri != null)
                     {
                         finalResponse = async
-                            ? await GetResponseAsync(_info.FinalUri, cancellationToken).ConfigureAwait(false)
-                            : GetResponse(_info.FinalUri, cancellationToken);
+                            ? await GetResponseAsync(_finalUri, cancellationToken).ConfigureAwait(false)
+                            : GetResponse(_finalUri, cancellationToken);
                     }
                     switch (finalResponse.Status)
                     {
                         case 200:
-                        case 204 when !(_info.RequestMethod == RequestMethod.Put || _info.RequestMethod == RequestMethod.Patch):
+                        case 204 when !(_requestMethod == RequestMethod.Put || _requestMethod == RequestMethod.Patch):
                         {
                             _value = async
                                 ? await _createFinalResponseAsync(finalResponse, cancellationToken).ConfigureAwait(false)
@@ -239,7 +247,7 @@ namespace Azure.Core
             {
                 Response response = GetRawResponse();
                 state = string.Empty;
-                if (_info.HeaderFrom == HeaderFrom.Location)
+                if (_headerFrom == HeaderFrom.Location)
                 {
                     return response.Status != 202;
                 }
@@ -253,15 +261,15 @@ namespace Azure.Core
                             using JsonDocument document = JsonDocument.Parse(response.ContentStream);
                             foreach (JsonProperty property in document.RootElement.EnumerateObject())
                             {
-                                if ((_info.HeaderFrom == HeaderFrom.OperationLocation ||
-                                     _info.HeaderFrom == HeaderFrom.AzureAsyncOperation) &&
+                                if ((_headerFrom == HeaderFrom.OperationLocation ||
+                                     _headerFrom == HeaderFrom.AzureAsyncOperation) &&
                                     property.NameEquals("status"))
                                 {
                                     state = property.Value.GetString().ToLowerInvariant();
                                     return s_terminalStates.Contains(state);
                                 }
 
-                                if (_info.HeaderFrom == HeaderFrom.None && property.NameEquals("properties"))
+                                if (_headerFrom == HeaderFrom.None && property.NameEquals("properties"))
                                 {
                                     foreach (JsonProperty innerProperty in property.Value.EnumerateObject())
                                     {
@@ -282,7 +290,7 @@ namespace Azure.Core
                     }
 
                     // If provisioningState was not found, it defaults to Succeeded.
-                    if (_info.HeaderFrom == HeaderFrom.None)
+                    if (_headerFrom == HeaderFrom.None)
                     {
                         return true;
                     }
@@ -290,71 +298,59 @@ namespace Azure.Core
 
                 throw _clientDiagnostics.CreateRequestFailedException(response);
             }
-        }
 
-        private static readonly string[] s_failureStates = { "failed", "canceled" };
-        private static readonly string[] s_terminalStates = { "succeeded", "failed", "canceled" };
-
-        private enum HeaderFrom
-        {
-            None,
-            OperationLocation,
-            AzureAsyncOperation,
-            Location
-        }
-
-        private class ScenarioInfo
-        {
-            public ScenarioInfo(HeaderFrom headerFrom, string pollUri, string? finalUri, RequestMethod requestMethod, bool hasLocation)
+            private enum HeaderFrom
             {
-                HeaderFrom = headerFrom;
-                PollUri = pollUri;
-                FinalUri = finalUri;
-                RequestMethod = requestMethod;
-                HasLocation = hasLocation;
+                None,
+                OperationLocation,
+                AzureAsyncOperation,
+                Location
             }
 
-            public HeaderFrom HeaderFrom { get; }
-            public string PollUri { get; }
-            public string? FinalUri { get; }
-            public RequestMethod RequestMethod { get; }
-            public bool HasLocation { get; }
-        }
-
-        private static ScenarioInfo GetScenarioInfo(Response response, string originalUri, RequestMethod requestMethod, OperationFinalStateVia finalStateVia)
-        {
-            bool hasLocation = response.Headers.TryGetValue("Location", out string? location);
-            string? GetFinalUri()
+            private void InitializeScenarioInfo(string originalUri, OperationFinalStateVia finalStateVia)
             {
-                if (requestMethod == RequestMethod.Put || finalStateVia == OperationFinalStateVia.OriginalUri)
+                _hasLocation = _rawResponse.Headers.TryGetValue("Location", out string? location);
+                string? GetFinalUri()
                 {
-                    return originalUri;
+                    if (_requestMethod == RequestMethod.Put || finalStateVia == OperationFinalStateVia.OriginalUri)
+                    {
+                        return originalUri;
+                    }
+
+                    if (finalStateVia == OperationFinalStateVia.Location)
+                    {
+                        return location;
+                    }
+
+                    return null;
                 }
 
-                if (finalStateVia == OperationFinalStateVia.Location)
+                if (_rawResponse.Headers.TryGetValue("Operation-Location", out string? operationLocation))
                 {
-                    return location;
+                    _headerFrom = HeaderFrom.OperationLocation;
+                    _pollUri = operationLocation;
+                    _finalUri = GetFinalUri();
+                    return;
                 }
 
-                return null;
-            }
+                if (_rawResponse.Headers.TryGetValue("Azure-AsyncOperation", out string? azureAsyncOperation))
+                {
+                    _headerFrom = HeaderFrom.AzureAsyncOperation;
+                    _pollUri = azureAsyncOperation;
+                    _finalUri = GetFinalUri();
+                    return;
+                }
 
-            if (response.Headers.TryGetValue("Operation-Location", out string? operationLocation))
-            {
-                return new ScenarioInfo(HeaderFrom.OperationLocation, operationLocation, GetFinalUri(), requestMethod, hasLocation);
-            }
+                if (_hasLocation)
+                {
+                    _headerFrom = HeaderFrom.Location;
+                    _pollUri = location!;
+                    return;
+                }
 
-            if (response.Headers.TryGetValue("Azure-AsyncOperation", out string? azureAsyncOperation))
-            {
-                return new ScenarioInfo(HeaderFrom.AzureAsyncOperation, azureAsyncOperation, GetFinalUri(), requestMethod, hasLocation);
+                _headerFrom = HeaderFrom.None;
+                _pollUri = originalUri;
             }
-
-            if (hasLocation)
-            {
-                return new ScenarioInfo(HeaderFrom.Location, location!, null, requestMethod, true);
-            }
-
-            return new ScenarioInfo(HeaderFrom.None, originalUri, null, requestMethod, false);
         }
     }
 }
