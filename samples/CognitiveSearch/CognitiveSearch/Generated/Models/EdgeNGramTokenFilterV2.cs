@@ -17,7 +17,7 @@ namespace CognitiveSearch.Models
         public int? MinGram { get; set; }
         /// <summary> The maximum n-gram length. Default is 2. Maximum is 300. </summary>
         public int? MaxGram { get; set; }
-        /// <summary> Specifies which side of the input an n-gram should be generated from. </summary>
+        /// <summary> Specifies which side of the input the n-gram should be generated from. Default is &quot;front&quot;. </summary>
         public EdgeNGramTokenFilterSide? Side { get; set; }
     }
 }

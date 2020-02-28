@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
         {
             Type = "distance";
         }
-        /// <summary> Provides parameter values to a distance scoring function. </summary>
+        /// <summary> Parameter values for the distance scoring function. </summary>
         public DistanceScoringParameters Parameters { get; set; } = new DistanceScoringParameters();
     }
 }

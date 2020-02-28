@@ -55,7 +55,7 @@ namespace CognitiveSearch.Models
         private const string LvValue = "lv";
         private const string LtValue = "lt";
         private const string MgValue = "mg";
-        private const string MSValue = "ms";
+        private const string MsValue = "ms";
         private const string MtValue = "mt";
         private const string NbValue = "nb";
         private const string FaValue = "fa";
@@ -156,7 +156,7 @@ namespace CognitiveSearch.Models
         /// <summary> Malagasy. </summary>
         public static TextTranslationSkillLanguage Mg { get; } = new TextTranslationSkillLanguage(MgValue);
         /// <summary> Malay. </summary>
-        public static TextTranslationSkillLanguage MS { get; } = new TextTranslationSkillLanguage(MSValue);
+        public static TextTranslationSkillLanguage Ms { get; } = new TextTranslationSkillLanguage(MsValue);
         /// <summary> Maltese. </summary>
         public static TextTranslationSkillLanguage Mt { get; } = new TextTranslationSkillLanguage(MtValue);
         /// <summary> Norwegian. </summary>

@@ -22,10 +22,10 @@ namespace Azure.Storage.Tables.Models
             }
             writer.WritePropertyName("Enabled");
             writer.WriteBooleanValue(Enabled);
-            if (IncludeApIs != null)
+            if (IncludeAPIs != null)
             {
                 writer.WritePropertyName("IncludeAPIs");
-                writer.WriteBooleanValue(IncludeApIs.Value);
+                writer.WriteBooleanValue(IncludeAPIs.Value);
             }
             if (RetentionPolicy != null)
             {
@@ -59,7 +59,7 @@ namespace Azure.Storage.Tables.Models
                     {
                         continue;
                     }
-                    result.IncludeApIs = property.Value.GetBoolean();
+                    result.IncludeAPIs = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("RetentionPolicy"))
@@ -86,10 +86,10 @@ namespace Azure.Storage.Tables.Models
             writer.WriteStartElement("Enabled");
             writer.WriteValue(Enabled);
             writer.WriteEndElement();
-            if (IncludeApIs != null)
+            if (IncludeAPIs != null)
             {
                 writer.WriteStartElement("IncludeAPIs");
-                writer.WriteValue(IncludeApIs.Value);
+                writer.WriteValue(IncludeAPIs.Value);
                 writer.WriteEndElement();
             }
             if (RetentionPolicy != null)
@@ -121,7 +121,7 @@ namespace Azure.Storage.Tables.Models
             {
                 value1 = (bool?)includeAPIs;
             }
-            result.IncludeApIs = value1;
+            result.IncludeAPIs = value1;
             RetentionPolicy value2 = default;
             var retentionPolicy = element.Element("RetentionPolicy");
             if (retentionPolicy != null)

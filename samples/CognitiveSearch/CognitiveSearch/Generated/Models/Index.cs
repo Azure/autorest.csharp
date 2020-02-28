@@ -18,7 +18,7 @@ namespace CognitiveSearch.Models
         public ICollection<ScoringProfile> ScoringProfiles { get; set; }
         /// <summary> The name of the scoring profile to use if none is specified in the query. If this property is not set and no scoring profile is specified in the query, then default scoring (tf-idf) will be used. </summary>
         public string DefaultScoringProfile { get; set; }
-        /// <summary> Defines options to control Cross-Origin Resource Sharing (CORS) for an index. </summary>
+        /// <summary> Options to control Cross-Origin Resource Sharing (CORS) for the index. </summary>
         public CorsOptions CorsOptions { get; set; }
         /// <summary> The suggesters for the index. </summary>
         public ICollection<Suggester> Suggesters { get; set; }

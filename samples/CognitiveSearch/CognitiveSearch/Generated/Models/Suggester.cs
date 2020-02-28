@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
         /// <summary> The name of the suggester. </summary>
         public string Name { get; set; }
         /// <summary> A value indicating the capabilities of the suggester. </summary>
-        public string SearchMode { get; set; } = "analyzingInfixMatching";
+        public SearchMode SearchMode { get; set; }
         /// <summary> The list of field names to which the suggester applies. Each field must be searchable. </summary>
         public ICollection<string> SourceFields { get; set; } = new System.Collections.Generic.List<string>();
     }

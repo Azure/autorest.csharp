@@ -1,5 +1,542 @@
 !<!CodeModel> 
+info: !<!Info> 
+  title: AppConfiguration
 schemas: !<!Schemas> 
+  booleans:
+  - !<!BooleanSchema> &ref_16
+    type: boolean
+    language: !<!Languages> 
+      default:
+        name: Boolean
+        description: ''
+    protocol: !<!Protocols> {}
+  numbers:
+  - !<!NumberSchema> &ref_9
+    type: integer
+    precision: 32
+    language: !<!Languages> 
+      default:
+        name: Integer
+        description: The HTTP status code that the error maps to.
+    protocol: !<!Protocols> {}
+  strings:
+  - !<!StringSchema> &ref_0
+    type: string
+    language: !<!Languages> 
+      default:
+        name: String
+        description: simple string
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_1
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '1.0'
+    language: !<!Languages> 
+      default:
+        name: String
+        description: ''
+        header: Sync-Token
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_2
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '1.0'
+    language: !<!Languages> 
+      default:
+        name: KeyName
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_3
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '1.0'
+    language: !<!Languages> 
+      default:
+        name: KeyListResultNextLink
+        description: The URI that can be used to request the next set of paged results.
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_5
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '1.0'
+    language: !<!Languages> 
+      default:
+        name: ErrorType
+        description: The type of the error.
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_6
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '1.0'
+    language: !<!Languages> 
+      default:
+        name: ErrorTitle
+        description: A brief summary of the error.
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_7
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '1.0'
+    language: !<!Languages> 
+      default:
+        name: ErrorName
+        description: The name of the parameter that resulted in the error.
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_8
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '1.0'
+    language: !<!Languages> 
+      default:
+        name: ErrorDetail
+        description: A detailed description of the error.
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_10
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '1.0'
+    language: !<!Languages> 
+      default:
+        name: KeyValueKey
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_11
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '1.0'
+    language: !<!Languages> 
+      default:
+        name: KeyValueLabel
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_12
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '1.0'
+    language: !<!Languages> 
+      default:
+        name: KeyValueContentType
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_13
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '1.0'
+    language: !<!Languages> 
+      default:
+        name: KeyValue
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_17
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '1.0'
+    language: !<!Languages> 
+      default:
+        name: KeyValueEtag
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_18
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '1.0'
+    language: !<!Languages> 
+      default:
+        name: KeyValueListResultNextLink
+        description: The URI that can be used to request the next set of paged results.
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_20
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '1.0'
+    language: !<!Languages> 
+      default:
+        name: LabelName
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_21
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '1.0'
+    language: !<!Languages> 
+      default:
+        name: LabelListResultNextLink
+        description: The URI that can be used to request the next set of paged results.
+    protocol: !<!Protocols> {}
+  choices:
+  - !<!ChoiceSchema> &ref_24
+    choices:
+    - !<!ChoiceValue> 
+      value: key
+      language:
+        default:
+          name: Key
+          description: ''
+    - !<!ChoiceValue> 
+      value: label
+      language:
+        default:
+          name: Label
+          description: ''
+    - !<!ChoiceValue> 
+      value: content_type
+      language:
+        default:
+          name: ContentType
+          description: ''
+    - !<!ChoiceValue> 
+      value: value
+      language:
+        default:
+          name: Value
+          description: ''
+    - !<!ChoiceValue> 
+      value: last_modified
+      language:
+        default:
+          name: LastModified
+          description: ''
+    - !<!ChoiceValue> 
+      value: tags
+      language:
+        default:
+          name: Tags
+          description: ''
+    - !<!ChoiceValue> 
+      value: locked
+      language:
+        default:
+          name: Locked
+          description: ''
+    - !<!ChoiceValue> 
+      value: etag
+      language:
+        default:
+          name: Etag
+          description: ''
+    type: choice
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '1.0'
+    choiceType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Get6ItemsItem
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!ChoiceSchema> &ref_26
+    choices:
+    - !<!ChoiceValue> 
+      value: key
+      language:
+        default:
+          name: Key
+          description: ''
+    - !<!ChoiceValue> 
+      value: label
+      language:
+        default:
+          name: Label
+          description: ''
+    - !<!ChoiceValue> 
+      value: content_type
+      language:
+        default:
+          name: ContentType
+          description: ''
+    - !<!ChoiceValue> 
+      value: value
+      language:
+        default:
+          name: Value
+          description: ''
+    - !<!ChoiceValue> 
+      value: last_modified
+      language:
+        default:
+          name: LastModified
+          description: ''
+    - !<!ChoiceValue> 
+      value: tags
+      language:
+        default:
+          name: Tags
+          description: ''
+    - !<!ChoiceValue> 
+      value: locked
+      language:
+        default:
+          name: Locked
+          description: ''
+    - !<!ChoiceValue> 
+      value: etag
+      language:
+        default:
+          name: Etag
+          description: ''
+    type: choice
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '1.0'
+    choiceType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Head6ItemsItem
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!ChoiceSchema> &ref_27
+    choices:
+    - !<!ChoiceValue> 
+      value: key
+      language:
+        default:
+          name: Key
+          description: ''
+    - !<!ChoiceValue> 
+      value: label
+      language:
+        default:
+          name: Label
+          description: ''
+    - !<!ChoiceValue> 
+      value: content_type
+      language:
+        default:
+          name: ContentType
+          description: ''
+    - !<!ChoiceValue> 
+      value: value
+      language:
+        default:
+          name: Value
+          description: ''
+    - !<!ChoiceValue> 
+      value: last_modified
+      language:
+        default:
+          name: LastModified
+          description: ''
+    - !<!ChoiceValue> 
+      value: tags
+      language:
+        default:
+          name: Tags
+          description: ''
+    - !<!ChoiceValue> 
+      value: locked
+      language:
+        default:
+          name: Locked
+          description: ''
+    - !<!ChoiceValue> 
+      value: etag
+      language:
+        default:
+          name: Etag
+          description: ''
+    type: choice
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '1.0'
+    choiceType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Get7ItemsItem
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!ChoiceSchema> &ref_28
+    choices:
+    - !<!ChoiceValue> 
+      value: key
+      language:
+        default:
+          name: Key
+          description: ''
+    - !<!ChoiceValue> 
+      value: label
+      language:
+        default:
+          name: Label
+          description: ''
+    - !<!ChoiceValue> 
+      value: content_type
+      language:
+        default:
+          name: ContentType
+          description: ''
+    - !<!ChoiceValue> 
+      value: value
+      language:
+        default:
+          name: Value
+          description: ''
+    - !<!ChoiceValue> 
+      value: last_modified
+      language:
+        default:
+          name: LastModified
+          description: ''
+    - !<!ChoiceValue> 
+      value: tags
+      language:
+        default:
+          name: Tags
+          description: ''
+    - !<!ChoiceValue> 
+      value: locked
+      language:
+        default:
+          name: Locked
+          description: ''
+    - !<!ChoiceValue> 
+      value: etag
+      language:
+        default:
+          name: Etag
+          description: ''
+    type: choice
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '1.0'
+    choiceType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Head7ItemsItem
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!ChoiceSchema> &ref_32
+    choices:
+    - !<!ChoiceValue> 
+      value: key
+      language:
+        default:
+          name: Key
+          description: ''
+    - !<!ChoiceValue> 
+      value: label
+      language:
+        default:
+          name: Label
+          description: ''
+    - !<!ChoiceValue> 
+      value: content_type
+      language:
+        default:
+          name: ContentType
+          description: ''
+    - !<!ChoiceValue> 
+      value: value
+      language:
+        default:
+          name: Value
+          description: ''
+    - !<!ChoiceValue> 
+      value: last_modified
+      language:
+        default:
+          name: LastModified
+          description: ''
+    - !<!ChoiceValue> 
+      value: tags
+      language:
+        default:
+          name: Tags
+          description: ''
+    - !<!ChoiceValue> 
+      value: locked
+      language:
+        default:
+          name: Locked
+          description: ''
+    - !<!ChoiceValue> 
+      value: etag
+      language:
+        default:
+          name: Etag
+          description: ''
+    type: choice
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '1.0'
+    choiceType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Enum4
+        description: ''
+    protocol: !<!Protocols> {}
+  constants:
+  - !<!ConstantSchema> &ref_33
+    type: constant
+    value: !<!ConstantValue> 
+      value: '1.0'
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: ApiVersion10
+        description: Api Version (1.0)
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_29
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '1.0'
+    value: !<!ConstantValue> 
+      value: name
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Get5ItemsItem
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_31
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '1.0'
+    value: !<!ConstantValue> 
+      value: name
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Head5ItemsItem
+        description: ''
+    protocol: !<!Protocols> {}
+  dictionaries:
+  - !<!DictionarySchema> &ref_15
+    type: dictionary
+    elementType: *ref_1
+    language: !<!Languages> 
+      default:
+        name: KeyValueTags
+        description: Dictionary of <string>
+    protocol: !<!Protocols> {}
+  dateTimes:
+  - !<!DateTimeSchema> &ref_14
+    type: date-time
+    format: date-time
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '1.0'
+    language: !<!Languages> 
+      default:
+        name: KeyValueLastModified
+        description: ''
+    protocol: !<!Protocols> {}
   objects:
   - !<!ObjectSchema> &ref_40
     type: object
@@ -8,28 +545,19 @@ schemas: !<!Schemas>
       version: '1.0'
     properties:
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_5
+      schema: !<!ArraySchema> &ref_23
         type: array
         apiVersions:
         - !<!ApiVersion> 
           version: '1.0'
-        elementType: !<!ObjectSchema> &ref_0
+        elementType: !<!ObjectSchema> &ref_4
           type: object
           apiVersions:
           - !<!ApiVersion> 
             version: '1.0'
           properties:
           - !<!Property> 
-            schema: !<!StringSchema> &ref_19
-              type: string
-              apiVersions:
-              - !<!ApiVersion> 
-                version: '1.0'
-              language: !<!Languages> 
-                default:
-                  name: KeyName
-                  description: ''
-              protocol: !<!Protocols> {}
+            schema: *ref_2
             readOnly: true
             serializedName: name
             language: !<!Languages> 
@@ -37,11 +565,15 @@ schemas: !<!Schemas>
                 name: name
                 description: ''
             protocol: !<!Protocols> {}
+          serializationFormats:
+          - json
+          usage:
+          - output
           language: !<!Languages> 
             default:
               name: Key
               description: ''
-              namespace: Api10
+              namespace: ''
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
@@ -55,29 +587,24 @@ schemas: !<!Schemas>
           description: The collection value.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_20
-        type: string
-        apiVersions:
-        - !<!ApiVersion> 
-          version: '1.0'
-        language: !<!Languages> 
-          default:
-            name: KeyListResultNextLink
-            description: The URI that can be used to request the next set of paged results.
-        protocol: !<!Protocols> {}
+      schema: *ref_3
       serializedName: '@nextLink'
       language: !<!Languages> 
         default:
           name: nextLink
           description: The URI that can be used to request the next set of paged results.
       protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - output
     language: !<!Languages> 
       default:
         name: KeyListResult
         description: The result of a list request.
-        namespace: Api10
+        namespace: ''
     protocol: !<!Protocols> {}
-  - *ref_0
+  - *ref_4
   - !<!ObjectSchema> &ref_41
     type: object
     apiVersions:
@@ -85,16 +612,7 @@ schemas: !<!Schemas>
       version: '1.0'
     properties:
     - !<!Property> 
-      schema: !<!StringSchema> &ref_21
-        type: string
-        apiVersions:
-        - !<!ApiVersion> 
-          version: '1.0'
-        language: !<!Languages> 
-          default:
-            name: ErrorType
-            description: The type of the error.
-        protocol: !<!Protocols> {}
+      schema: *ref_5
       serializedName: type
       language: !<!Languages> 
         default:
@@ -102,16 +620,7 @@ schemas: !<!Schemas>
           description: The type of the error.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_22
-        type: string
-        apiVersions:
-        - !<!ApiVersion> 
-          version: '1.0'
-        language: !<!Languages> 
-          default:
-            name: ErrorTitle
-            description: A brief summary of the error.
-        protocol: !<!Protocols> {}
+      schema: *ref_6
       serializedName: title
       language: !<!Languages> 
         default:
@@ -119,16 +628,7 @@ schemas: !<!Schemas>
           description: A brief summary of the error.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_23
-        type: string
-        apiVersions:
-        - !<!ApiVersion> 
-          version: '1.0'
-        language: !<!Languages> 
-          default:
-            name: ErrorName
-            description: The name of the parameter that resulted in the error.
-        protocol: !<!Protocols> {}
+      schema: *ref_7
       serializedName: name
       language: !<!Languages> 
         default:
@@ -136,16 +636,7 @@ schemas: !<!Schemas>
           description: The name of the parameter that resulted in the error.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_24
-        type: string
-        apiVersions:
-        - !<!ApiVersion> 
-          version: '1.0'
-        language: !<!Languages> 
-          default:
-            name: ErrorDetail
-            description: A detailed description of the error.
-        protocol: !<!Protocols> {}
+      schema: *ref_8
       serializedName: detail
       language: !<!Languages> 
         default:
@@ -153,25 +644,22 @@ schemas: !<!Schemas>
           description: A detailed description of the error.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!NumberSchema> &ref_17
-        type: integer
-        precision: 32
-        language: !<!Languages> 
-          default:
-            name: Integer
-            description: The HTTP status code that the error maps to.
-        protocol: !<!Protocols> {}
+      schema: *ref_9
       serializedName: status
       language: !<!Languages> 
         default:
           name: status
           description: The HTTP status code that the error maps to.
       protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - output
     language: !<!Languages> 
       default:
         name: Error
         description: Azure App Configuration error object.
-        namespace: Api10
+        namespace: ''
     protocol: !<!Protocols> {}
   - !<!ObjectSchema> &ref_51
     type: object
@@ -180,28 +668,19 @@ schemas: !<!Schemas>
       version: '1.0'
     properties:
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_7
+      schema: !<!ArraySchema> &ref_25
         type: array
         apiVersions:
         - !<!ApiVersion> 
           version: '1.0'
-        elementType: !<!ObjectSchema> &ref_1
+        elementType: !<!ObjectSchema> &ref_19
           type: object
           apiVersions:
           - !<!ApiVersion> 
             version: '1.0'
           properties:
           - !<!Property> 
-            schema: !<!StringSchema> &ref_25
-              type: string
-              apiVersions:
-              - !<!ApiVersion> 
-                version: '1.0'
-              language: !<!Languages> 
-                default:
-                  name: KeyValueKey
-                  description: ''
-              protocol: !<!Protocols> {}
+            schema: *ref_10
             serializedName: key
             language: !<!Languages> 
               default:
@@ -209,16 +688,7 @@ schemas: !<!Schemas>
                 description: ''
             protocol: !<!Protocols> {}
           - !<!Property> 
-            schema: !<!StringSchema> &ref_26
-              type: string
-              apiVersions:
-              - !<!ApiVersion> 
-                version: '1.0'
-              language: !<!Languages> 
-                default:
-                  name: KeyValueLabel
-                  description: ''
-              protocol: !<!Protocols> {}
+            schema: *ref_11
             serializedName: label
             language: !<!Languages> 
               default:
@@ -226,16 +696,7 @@ schemas: !<!Schemas>
                 description: ''
             protocol: !<!Protocols> {}
           - !<!Property> 
-            schema: !<!StringSchema> &ref_27
-              type: string
-              apiVersions:
-              - !<!ApiVersion> 
-                version: '1.0'
-              language: !<!Languages> 
-                default:
-                  name: KeyValueContentType
-                  description: ''
-              protocol: !<!Protocols> {}
+            schema: *ref_12
             serializedName: content_type
             language: !<!Languages> 
               default:
@@ -243,16 +704,7 @@ schemas: !<!Schemas>
                 description: ''
             protocol: !<!Protocols> {}
           - !<!Property> 
-            schema: !<!StringSchema> &ref_28
-              type: string
-              apiVersions:
-              - !<!ApiVersion> 
-                version: '1.0'
-              language: !<!Languages> 
-                default:
-                  name: KeyValue
-                  description: ''
-              protocol: !<!Protocols> {}
+            schema: *ref_13
             serializedName: value
             language: !<!Languages> 
               default:
@@ -260,17 +712,7 @@ schemas: !<!Schemas>
                 description: ''
             protocol: !<!Protocols> {}
           - !<!Property> 
-            schema: !<!DateTimeSchema> &ref_16
-              type: date-time
-              format: date-time
-              apiVersions:
-              - !<!ApiVersion> 
-                version: '1.0'
-              language: !<!Languages> 
-                default:
-                  name: KeyValueLastModified
-                  description: ''
-              protocol: !<!Protocols> {}
+            schema: *ref_14
             serializedName: last_modified
             language: !<!Languages> 
               default:
@@ -278,24 +720,7 @@ schemas: !<!Schemas>
                 description: ''
             protocol: !<!Protocols> {}
           - !<!Property> 
-            schema: !<!DictionarySchema> &ref_3
-              type: dictionary
-              elementType: !<!StringSchema> &ref_18
-                type: string
-                apiVersions:
-                - !<!ApiVersion> 
-                  version: '1.0'
-                language: !<!Languages> 
-                  default:
-                    name: String
-                    description: ''
-                    header: Sync-Token
-                protocol: !<!Protocols> {}
-              language: !<!Languages> 
-                default:
-                  name: KeyValueTags
-                  description: Dictionary of <string>
-              protocol: !<!Protocols> {}
+            schema: *ref_15
             serializedName: tags
             language: !<!Languages> 
               default:
@@ -303,13 +728,7 @@ schemas: !<!Schemas>
                 description: Dictionary of <string>
             protocol: !<!Protocols> {}
           - !<!Property> 
-            schema: !<!BooleanSchema> &ref_13
-              type: boolean
-              language: !<!Languages> 
-                default:
-                  name: Boolean
-                  description: ''
-              protocol: !<!Protocols> {}
+            schema: *ref_16
             serializedName: locked
             language: !<!Languages> 
               default:
@@ -317,27 +736,23 @@ schemas: !<!Schemas>
                 description: ''
             protocol: !<!Protocols> {}
           - !<!Property> 
-            schema: !<!StringSchema> &ref_29
-              type: string
-              apiVersions:
-              - !<!ApiVersion> 
-                version: '1.0'
-              language: !<!Languages> 
-                default:
-                  name: KeyValueEtag
-                  description: ''
-              protocol: !<!Protocols> {}
+            schema: *ref_17
             serializedName: etag
             language: !<!Languages> 
               default:
                 name: etag
                 description: ''
             protocol: !<!Protocols> {}
+          serializationFormats:
+          - json
+          usage:
+          - output
+          - input
           language: !<!Languages> 
             default:
               name: KeyValue
               description: ''
-              namespace: Api10
+              namespace: ''
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
@@ -351,29 +766,24 @@ schemas: !<!Schemas>
           description: The collection value.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_30
-        type: string
-        apiVersions:
-        - !<!ApiVersion> 
-          version: '1.0'
-        language: !<!Languages> 
-          default:
-            name: KeyValueListResultNextLink
-            description: The URI that can be used to request the next set of paged results.
-        protocol: !<!Protocols> {}
+      schema: *ref_18
       serializedName: '@nextLink'
       language: !<!Languages> 
         default:
           name: nextLink
           description: The URI that can be used to request the next set of paged results.
       protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - output
     language: !<!Languages> 
       default:
         name: KeyValueListResult
         description: The result of a list request.
-        namespace: Api10
+        namespace: ''
     protocol: !<!Protocols> {}
-  - *ref_1
+  - *ref_19
   - !<!ObjectSchema> &ref_85
     type: object
     apiVersions:
@@ -381,28 +791,19 @@ schemas: !<!Schemas>
       version: '1.0'
     properties:
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_11
+      schema: !<!ArraySchema> &ref_30
         type: array
         apiVersions:
         - !<!ApiVersion> 
           version: '1.0'
-        elementType: !<!ObjectSchema> &ref_2
+        elementType: !<!ObjectSchema> &ref_22
           type: object
           apiVersions:
           - !<!ApiVersion> 
             version: '1.0'
           properties:
           - !<!Property> 
-            schema: !<!StringSchema> &ref_31
-              type: string
-              apiVersions:
-              - !<!ApiVersion> 
-                version: '1.0'
-              language: !<!Languages> 
-                default:
-                  name: LabelName
-                  description: ''
-              protocol: !<!Protocols> {}
+            schema: *ref_20
             readOnly: true
             serializedName: name
             language: !<!Languages> 
@@ -410,11 +811,15 @@ schemas: !<!Schemas>
                 name: name
                 description: ''
             protocol: !<!Protocols> {}
+          serializationFormats:
+          - json
+          usage:
+          - output
           language: !<!Languages> 
             default:
               name: Label
               description: ''
-              namespace: Api10
+              namespace: ''
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
@@ -428,358 +833,44 @@ schemas: !<!Schemas>
           description: The collection value.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_32
-        type: string
-        apiVersions:
-        - !<!ApiVersion> 
-          version: '1.0'
-        language: !<!Languages> 
-          default:
-            name: LabelListResultNextLink
-            description: The URI that can be used to request the next set of paged results.
-        protocol: !<!Protocols> {}
+      schema: *ref_21
       serializedName: '@nextLink'
       language: !<!Languages> 
         default:
           name: nextLink
           description: The URI that can be used to request the next set of paged results.
       protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - output
     language: !<!Languages> 
       default:
         name: LabelListResult
         description: The result of a list request.
-        namespace: Api10
+        namespace: ''
     protocol: !<!Protocols> {}
-  - *ref_2
-  dictionaries:
-  - *ref_3
-  choices:
-  - !<!ChoiceSchema> &ref_6
-    choices:
-    - !<!ChoiceValue> 
-      value: key
-      language:
-        default:
-          name: Key
-          description: ''
-    - !<!ChoiceValue> 
-      value: label
-      language:
-        default:
-          name: Label
-          description: ''
-    - !<!ChoiceValue> 
-      value: content_type
-      language:
-        default:
-          name: ContentType
-          description: ''
-    - !<!ChoiceValue> 
-      value: value
-      language:
-        default:
-          name: Value
-          description: ''
-    - !<!ChoiceValue> 
-      value: last_modified
-      language:
-        default:
-          name: LastModified
-          description: ''
-    - !<!ChoiceValue> 
-      value: tags
-      language:
-        default:
-          name: Tags
-          description: ''
-    - !<!ChoiceValue> 
-      value: locked
-      language:
-        default:
-          name: Locked
-          description: ''
-    - !<!ChoiceValue> 
-      value: etag
-      language:
-        default:
-          name: Etag
-          description: ''
-    type: choice
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '1.0'
-    choiceType: !<!StringSchema> &ref_4
-      type: string
-      language: !<!Languages> 
-        default:
-          name: String
-          description: simple string
-      protocol: !<!Protocols> {}
-    language: !<!Languages> 
-      default:
-        name: Get6ItemsItem
-        description: ''
-    protocol: !<!Protocols> {}
-  - !<!ChoiceSchema> &ref_8
-    choices:
-    - !<!ChoiceValue> 
-      value: key
-      language:
-        default:
-          name: Key
-          description: ''
-    - !<!ChoiceValue> 
-      value: label
-      language:
-        default:
-          name: Label
-          description: ''
-    - !<!ChoiceValue> 
-      value: content_type
-      language:
-        default:
-          name: ContentType
-          description: ''
-    - !<!ChoiceValue> 
-      value: value
-      language:
-        default:
-          name: Value
-          description: ''
-    - !<!ChoiceValue> 
-      value: last_modified
-      language:
-        default:
-          name: LastModified
-          description: ''
-    - !<!ChoiceValue> 
-      value: tags
-      language:
-        default:
-          name: Tags
-          description: ''
-    - !<!ChoiceValue> 
-      value: locked
-      language:
-        default:
-          name: Locked
-          description: ''
-    - !<!ChoiceValue> 
-      value: etag
-      language:
-        default:
-          name: Etag
-          description: ''
-    type: choice
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '1.0'
-    choiceType: *ref_4
-    language: !<!Languages> 
-      default:
-        name: Head6ItemsItem
-        description: ''
-    protocol: !<!Protocols> {}
-  - !<!ChoiceSchema> &ref_9
-    choices:
-    - !<!ChoiceValue> 
-      value: key
-      language:
-        default:
-          name: Key
-          description: ''
-    - !<!ChoiceValue> 
-      value: label
-      language:
-        default:
-          name: Label
-          description: ''
-    - !<!ChoiceValue> 
-      value: content_type
-      language:
-        default:
-          name: ContentType
-          description: ''
-    - !<!ChoiceValue> 
-      value: value
-      language:
-        default:
-          name: Value
-          description: ''
-    - !<!ChoiceValue> 
-      value: last_modified
-      language:
-        default:
-          name: LastModified
-          description: ''
-    - !<!ChoiceValue> 
-      value: tags
-      language:
-        default:
-          name: Tags
-          description: ''
-    - !<!ChoiceValue> 
-      value: locked
-      language:
-        default:
-          name: Locked
-          description: ''
-    - !<!ChoiceValue> 
-      value: etag
-      language:
-        default:
-          name: Etag
-          description: ''
-    type: choice
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '1.0'
-    choiceType: *ref_4
-    language: !<!Languages> 
-      default:
-        name: Get7ItemsItem
-        description: ''
-    protocol: !<!Protocols> {}
-  - !<!ChoiceSchema> &ref_10
-    choices:
-    - !<!ChoiceValue> 
-      value: key
-      language:
-        default:
-          name: Key
-          description: ''
-    - !<!ChoiceValue> 
-      value: label
-      language:
-        default:
-          name: Label
-          description: ''
-    - !<!ChoiceValue> 
-      value: content_type
-      language:
-        default:
-          name: ContentType
-          description: ''
-    - !<!ChoiceValue> 
-      value: value
-      language:
-        default:
-          name: Value
-          description: ''
-    - !<!ChoiceValue> 
-      value: last_modified
-      language:
-        default:
-          name: LastModified
-          description: ''
-    - !<!ChoiceValue> 
-      value: tags
-      language:
-        default:
-          name: Tags
-          description: ''
-    - !<!ChoiceValue> 
-      value: locked
-      language:
-        default:
-          name: Locked
-          description: ''
-    - !<!ChoiceValue> 
-      value: etag
-      language:
-        default:
-          name: Etag
-          description: ''
-    type: choice
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '1.0'
-    choiceType: *ref_4
-    language: !<!Languages> 
-      default:
-        name: Head7ItemsItem
-        description: ''
-    protocol: !<!Protocols> {}
-  - !<!ChoiceSchema> &ref_12
-    choices:
-    - !<!ChoiceValue> 
-      value: key
-      language:
-        default:
-          name: Key
-          description: ''
-    - !<!ChoiceValue> 
-      value: label
-      language:
-        default:
-          name: Label
-          description: ''
-    - !<!ChoiceValue> 
-      value: content_type
-      language:
-        default:
-          name: ContentType
-          description: ''
-    - !<!ChoiceValue> 
-      value: value
-      language:
-        default:
-          name: Value
-          description: ''
-    - !<!ChoiceValue> 
-      value: last_modified
-      language:
-        default:
-          name: LastModified
-          description: ''
-    - !<!ChoiceValue> 
-      value: tags
-      language:
-        default:
-          name: Tags
-          description: ''
-    - !<!ChoiceValue> 
-      value: locked
-      language:
-        default:
-          name: Locked
-          description: ''
-    - !<!ChoiceValue> 
-      value: etag
-      language:
-        default:
-          name: Etag
-          description: ''
-    type: choice
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '1.0'
-    choiceType: *ref_4
-    language: !<!Languages> 
-      default:
-        name: Enum4
-        description: ''
-    protocol: !<!Protocols> {}
+  - *ref_22
   arrays:
-  - *ref_5
+  - *ref_23
   - !<!ArraySchema> &ref_45
     type: array
     apiVersions:
     - !<!ApiVersion> 
       version: '1.0'
-    elementType: *ref_6
+    elementType: *ref_24
     language: !<!Languages> 
       default:
         name: ArrayOfGet6ItemsItem
         description: Array of Get6ItemsItem
     protocol: !<!Protocols> {}
-  - *ref_7
+  - *ref_25
   - !<!ArraySchema> &ref_52
     type: array
     apiVersions:
     - !<!ApiVersion> 
       version: '1.0'
-    elementType: *ref_8
+    elementType: *ref_26
     language: !<!Languages> 
       default:
         name: ArrayOfHead6ItemsItem
@@ -790,7 +881,7 @@ schemas: !<!Schemas>
     apiVersions:
     - !<!ApiVersion> 
       version: '1.0'
-    elementType: *ref_9
+    elementType: *ref_27
     language: !<!Languages> 
       default:
         name: ArrayOfGet7ItemsItem
@@ -801,7 +892,7 @@ schemas: !<!Schemas>
     apiVersions:
     - !<!ApiVersion> 
       version: '1.0'
-    elementType: *ref_10
+    elementType: *ref_28
     language: !<!Languages> 
       default:
         name: ArrayOfHead7ItemsItem
@@ -812,43 +903,19 @@ schemas: !<!Schemas>
     apiVersions:
     - !<!ApiVersion> 
       version: '1.0'
-    elementType: !<!ConstantSchema> &ref_14
-      type: constant
-      apiVersions:
-      - !<!ApiVersion> 
-        version: '1.0'
-      value: !<!ConstantValue> 
-        value: name
-      valueType: *ref_4
-      language: !<!Languages> 
-        default:
-          name: Get5ItemsItem
-          description: ''
-      protocol: !<!Protocols> {}
+    elementType: *ref_29
     language: !<!Languages> 
       default:
         name: ArrayOfGet5ItemsItem
         description: Array of Get5ItemsItem
     protocol: !<!Protocols> {}
-  - *ref_11
+  - *ref_30
   - !<!ArraySchema> &ref_86
     type: array
     apiVersions:
     - !<!ApiVersion> 
       version: '1.0'
-    elementType: !<!ConstantSchema> &ref_15
-      type: constant
-      apiVersions:
-      - !<!ApiVersion> 
-        version: '1.0'
-      value: !<!ConstantValue> 
-        value: name
-      valueType: *ref_4
-      language: !<!Languages> 
-        default:
-          name: Head5ItemsItem
-          description: ''
-      protocol: !<!Protocols> {}
+    elementType: *ref_31
     language: !<!Languages> 
       default:
         name: ArrayOfHead5ItemsItem
@@ -859,194 +926,28 @@ schemas: !<!Schemas>
     apiVersions:
     - !<!ApiVersion> 
       version: '1.0'
-    elementType: *ref_12
+    elementType: *ref_32
     language: !<!Languages> 
       default:
         name: ArrayOfEnum4
         description: Array of Enum4
     protocol: !<!Protocols> {}
-  booleans:
-  - *ref_13
-  constants:
-  - !<!ConstantSchema> &ref_33
-    type: constant
-    value: !<!ConstantValue> 
-      value: '1.0'
-    valueType: *ref_4
-    language: !<!Languages> 
-      default:
-        name: ApiVersion10
-        description: Api Version (1.0)
-    protocol: !<!Protocols> {}
-  - !<!ConstantSchema> 
-    type: constant
-    value: !<!ConstantValue> 
-      value: '1.0'
-    valueType: *ref_4
-    language: !<!Languages> 
-      default:
-        name: ApiVersion10
-        description: Api Version (1.0)
-    protocol: !<!Protocols> {}
-  - !<!ConstantSchema> 
-    type: constant
-    value: !<!ConstantValue> 
-      value: '1.0'
-    valueType: *ref_4
-    language: !<!Languages> 
-      default:
-        name: ApiVersion10
-        description: Api Version (1.0)
-    protocol: !<!Protocols> {}
-  - !<!ConstantSchema> 
-    type: constant
-    value: !<!ConstantValue> 
-      value: '1.0'
-    valueType: *ref_4
-    language: !<!Languages> 
-      default:
-        name: ApiVersion10
-        description: Api Version (1.0)
-    protocol: !<!Protocols> {}
-  - !<!ConstantSchema> 
-    type: constant
-    value: !<!ConstantValue> 
-      value: '1.0'
-    valueType: *ref_4
-    language: !<!Languages> 
-      default:
-        name: ApiVersion10
-        description: Api Version (1.0)
-    protocol: !<!Protocols> {}
-  - !<!ConstantSchema> 
-    type: constant
-    value: !<!ConstantValue> 
-      value: '1.0'
-    valueType: *ref_4
-    language: !<!Languages> 
-      default:
-        name: ApiVersion10
-        description: Api Version (1.0)
-    protocol: !<!Protocols> {}
-  - !<!ConstantSchema> 
-    type: constant
-    value: !<!ConstantValue> 
-      value: '1.0'
-    valueType: *ref_4
-    language: !<!Languages> 
-      default:
-        name: ApiVersion10
-        description: Api Version (1.0)
-    protocol: !<!Protocols> {}
-  - !<!ConstantSchema> 
-    type: constant
-    value: !<!ConstantValue> 
-      value: '1.0'
-    valueType: *ref_4
-    language: !<!Languages> 
-      default:
-        name: ApiVersion10
-        description: Api Version (1.0)
-    protocol: !<!Protocols> {}
-  - !<!ConstantSchema> 
-    type: constant
-    value: !<!ConstantValue> 
-      value: '1.0'
-    valueType: *ref_4
-    language: !<!Languages> 
-      default:
-        name: ApiVersion10
-        description: Api Version (1.0)
-    protocol: !<!Protocols> {}
-  - *ref_14
-  - !<!ConstantSchema> 
-    type: constant
-    value: !<!ConstantValue> 
-      value: '1.0'
-    valueType: *ref_4
-    language: !<!Languages> 
-      default:
-        name: ApiVersion10
-        description: Api Version (1.0)
-    protocol: !<!Protocols> {}
-  - *ref_15
-  - !<!ConstantSchema> 
-    type: constant
-    value: !<!ConstantValue> 
-      value: '1.0'
-    valueType: *ref_4
-    language: !<!Languages> 
-      default:
-        name: ApiVersion10
-        description: Api Version (1.0)
-    protocol: !<!Protocols> {}
-  - !<!ConstantSchema> 
-    type: constant
-    value: !<!ConstantValue> 
-      value: '1.0'
-    valueType: *ref_4
-    language: !<!Languages> 
-      default:
-        name: ApiVersion10
-        description: Api Version (1.0)
-    protocol: !<!Protocols> {}
-  - !<!ConstantSchema> 
-    type: constant
-    value: !<!ConstantValue> 
-      value: '1.0'
-    valueType: *ref_4
-    language: !<!Languages> 
-      default:
-        name: ApiVersion10
-        description: Api Version (1.0)
-    protocol: !<!Protocols> {}
-  - !<!ConstantSchema> 
-    type: constant
-    value: !<!ConstantValue> 
-      value: '1.0'
-    valueType: *ref_4
-    language: !<!Languages> 
-      default:
-        name: ApiVersion10
-        description: Api Version (1.0)
-    protocol: !<!Protocols> {}
-  dateTimes:
-  - *ref_16
-  numbers:
-  - *ref_17
-  strings:
-  - *ref_4
-  - *ref_18
-  - *ref_19
-  - *ref_20
-  - *ref_21
-  - *ref_22
-  - *ref_23
-  - *ref_24
-  - *ref_25
-  - *ref_26
-  - *ref_27
-  - *ref_28
-  - *ref_29
-  - *ref_30
-  - *ref_31
-  - *ref_32
 globalParameters:
 - !<!Parameter> &ref_35
-  schema: *ref_18
+  schema: *ref_1
   implementation: Client
   extensions:
     x-ms-priority: 0
   language: !<!Languages> 
     default:
-      name: syncToken
+      name: SyncToken
       description: Used to guarantee real-time consistency between requests.
       serializedName: Sync-Token
   protocol: !<!Protocols> 
     http: !<!HttpParameter> 
       in: header
 - !<!Parameter> &ref_34
-  schema: *ref_4
+  schema: *ref_0
   clientDefaultValue: ''
   implementation: Client
   required: true
@@ -1072,8 +973,6 @@ globalParameters:
   protocol: !<!Protocols> 
     http: !<!HttpParameter> 
       in: query
-info: !<!Info> 
-  title: AppConfiguration
 operationGroups:
 - !<!OperationGroup> 
   $key: ''
@@ -1082,48 +981,45 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '1.0'
-    request: !<!Request> 
-      parameters:
-      - *ref_34
-      - !<!Parameter> &ref_37
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: name
-            description: A filter for the name of the returned keys.
-            serializedName: name
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: query
-      - *ref_35
-      - *ref_36
-      - !<!Parameter> &ref_38
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: after
-            description: Instructs the server to return elements that appear after the element referred to by the specified token.
-            serializedName: After
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: query
-      - !<!Parameter> &ref_39
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: acceptDatetime
-            description: Requests the server to respond with the state of the resource at the specified time.
-            serializedName: Accept-Datetime
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: header
-      signatureParameters:
-      - *ref_37
-      - *ref_38
-      - *ref_39
+    parameters:
+    - *ref_34
+    - !<!Parameter> &ref_37
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: name
+          description: A filter for the name of the returned keys.
+          serializedName: name
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+    - *ref_35
+    - *ref_36
+    - !<!Parameter> &ref_38
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: after
+          description: Instructs the server to return elements that appear after the element referred to by the specified token.
+          serializedName: After
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+    - !<!Parameter> &ref_39
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: acceptDatetime
+          description: Requests the server to respond with the state of the resource at the specified time.
+          serializedName: Accept-Datetime
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: header
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -1133,6 +1029,10 @@ operationGroups:
           path: /keys
           method: get
           uri: '{$host}'
+    signatureParameters:
+    - *ref_37
+    - *ref_38
+    - *ref_39
     responses:
     - !<!SchemaResponse> 
       schema: *ref_40
@@ -1144,7 +1044,7 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_18
+            schema: *ref_1
             header: Sync-Token
           knownMediaType: json
           mediaTypes:
@@ -1186,48 +1086,45 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '1.0'
-    request: !<!Request> 
-      parameters:
-      - *ref_34
-      - !<!Parameter> &ref_42
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: name
-            description: A filter for the name of the returned keys.
-            serializedName: name
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: query
-      - *ref_35
-      - *ref_36
-      - !<!Parameter> &ref_43
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: after
-            description: Instructs the server to return elements that appear after the element referred to by the specified token.
-            serializedName: After
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: query
-      - !<!Parameter> &ref_44
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: acceptDatetime
-            description: Requests the server to respond with the state of the resource at the specified time.
-            serializedName: Accept-Datetime
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: header
-      signatureParameters:
-      - *ref_42
-      - *ref_43
-      - *ref_44
+    parameters:
+    - *ref_34
+    - !<!Parameter> &ref_42
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: name
+          description: A filter for the name of the returned keys.
+          serializedName: name
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+    - *ref_35
+    - *ref_36
+    - !<!Parameter> &ref_43
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: after
+          description: Instructs the server to return elements that appear after the element referred to by the specified token.
+          serializedName: After
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+    - !<!Parameter> &ref_44
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: acceptDatetime
+          description: Requests the server to respond with the state of the resource at the specified time.
+          serializedName: Accept-Datetime
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: header
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -1237,6 +1134,10 @@ operationGroups:
           path: /keys
           method: head
           uri: '{$host}'
+    signatureParameters:
+    - *ref_42
+    - *ref_43
+    - *ref_44
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -1247,7 +1148,7 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_18
+            schema: *ref_1
             header: Sync-Token
           statusCodes:
           - '200'
@@ -1271,73 +1172,68 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '1.0'
-    request: !<!Request> 
-      parameters:
-      - *ref_34
-      - !<!Parameter> &ref_46
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: key
-            description: A filter used to match keys.
-            serializedName: key
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: query
-      - !<!Parameter> &ref_47
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: label
-            description: A filter used to match labels
-            serializedName: label
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: query
-      - *ref_35
-      - *ref_36
-      - !<!Parameter> &ref_48
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: after
-            description: Instructs the server to return elements that appear after the element referred to by the specified token.
-            serializedName: After
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: query
-      - !<!Parameter> &ref_49
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: acceptDatetime
-            description: Requests the server to respond with the state of the resource at the specified time.
-            serializedName: Accept-Datetime
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: header
-      - !<!Parameter> &ref_50
-        schema: *ref_45
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: select
-            description: Used to select what fields are present in the returned resource(s).
-            serializedName: $Select
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: query
-            style: form
-      signatureParameters:
-      - *ref_46
-      - *ref_47
-      - *ref_48
-      - *ref_49
-      - *ref_50
+    parameters:
+    - *ref_34
+    - !<!Parameter> &ref_46
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: key
+          description: A filter used to match keys.
+          serializedName: key
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+    - !<!Parameter> &ref_47
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: label
+          description: A filter used to match labels
+          serializedName: label
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+    - *ref_35
+    - *ref_36
+    - !<!Parameter> &ref_48
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: after
+          description: Instructs the server to return elements that appear after the element referred to by the specified token.
+          serializedName: After
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+    - !<!Parameter> &ref_49
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: acceptDatetime
+          description: Requests the server to respond with the state of the resource at the specified time.
+          serializedName: Accept-Datetime
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: header
+    - !<!Parameter> &ref_50
+      schema: *ref_45
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: select
+          description: Used to select what fields are present in the returned resource(s).
+          serializedName: $Select
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+          style: form
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -1347,6 +1243,12 @@ operationGroups:
           path: /kv
           method: get
           uri: '{$host}'
+    signatureParameters:
+    - *ref_46
+    - *ref_47
+    - *ref_48
+    - *ref_49
+    - *ref_50
     responses:
     - !<!SchemaResponse> 
       schema: *ref_51
@@ -1358,7 +1260,7 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_18
+            schema: *ref_1
             header: Sync-Token
           knownMediaType: json
           mediaTypes:
@@ -1400,73 +1302,68 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '1.0'
-    request: !<!Request> 
-      parameters:
-      - *ref_34
-      - !<!Parameter> &ref_53
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: key
-            description: A filter used to match keys.
-            serializedName: key
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: query
-      - !<!Parameter> &ref_54
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: label
-            description: A filter used to match labels
-            serializedName: label
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: query
-      - *ref_35
-      - *ref_36
-      - !<!Parameter> &ref_55
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: after
-            description: Instructs the server to return elements that appear after the element referred to by the specified token.
-            serializedName: After
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: query
-      - !<!Parameter> &ref_56
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: acceptDatetime
-            description: Requests the server to respond with the state of the resource at the specified time.
-            serializedName: Accept-Datetime
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: header
-      - !<!Parameter> &ref_57
-        schema: *ref_52
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: select
-            description: Used to select what fields are present in the returned resource(s).
-            serializedName: $Select
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: query
-            style: form
-      signatureParameters:
-      - *ref_53
-      - *ref_54
-      - *ref_55
-      - *ref_56
-      - *ref_57
+    parameters:
+    - *ref_34
+    - !<!Parameter> &ref_53
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: key
+          description: A filter used to match keys.
+          serializedName: key
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+    - !<!Parameter> &ref_54
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: label
+          description: A filter used to match labels
+          serializedName: label
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+    - *ref_35
+    - *ref_36
+    - !<!Parameter> &ref_55
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: after
+          description: Instructs the server to return elements that appear after the element referred to by the specified token.
+          serializedName: After
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+    - !<!Parameter> &ref_56
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: acceptDatetime
+          description: Requests the server to respond with the state of the resource at the specified time.
+          serializedName: Accept-Datetime
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: header
+    - !<!Parameter> &ref_57
+      schema: *ref_52
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: select
+          description: Used to select what fields are present in the returned resource(s).
+          serializedName: $Select
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+          style: form
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -1476,6 +1373,12 @@ operationGroups:
           path: /kv
           method: head
           uri: '{$host}'
+    signatureParameters:
+    - *ref_53
+    - *ref_54
+    - *ref_55
+    - *ref_56
+    - *ref_57
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -1486,7 +1389,7 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_18
+            schema: *ref_1
             header: Sync-Token
           statusCodes:
           - '200'
@@ -1510,86 +1413,80 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '1.0'
-    request: !<!Request> 
-      parameters:
-      - *ref_34
-      - !<!Parameter> &ref_59
-        schema: *ref_18
-        implementation: Method
-        required: true
-        language: !<!Languages> 
-          default:
-            name: key
-            description: The key of the key-value to retrieve.
-            serializedName: key
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: path
-      - !<!Parameter> &ref_60
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: label
-            description: A filter used to match labels
-            serializedName: label
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: query
-      - *ref_35
-      - *ref_36
-      - !<!Parameter> &ref_61
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: acceptDatetime
-            description: Requests the server to respond with the state of the resource at the specified time.
-            serializedName: Accept-Datetime
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: header
-      - !<!Parameter> &ref_62
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: ifMatch
-            description: Used to perform an operation only if the targeted resource's etag matches the value provided.
-            serializedName: If-Match
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: header
-      - !<!Parameter> &ref_63
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: ifNoneMatch
-            description: Used to perform an operation only if the targeted resource's etag does not match the value provided.
-            serializedName: If-None-Match
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: header
-      - !<!Parameter> &ref_64
-        schema: *ref_58
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: select
-            description: Used to select what fields are present in the returned resource(s).
-            serializedName: $Select
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: query
-            style: form
-      signatureParameters:
-      - *ref_59
-      - *ref_60
-      - *ref_61
-      - *ref_62
-      - *ref_63
-      - *ref_64
+    parameters:
+    - *ref_34
+    - !<!Parameter> &ref_59
+      schema: *ref_1
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: key
+          description: The key of the key-value to retrieve.
+          serializedName: key
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: path
+    - !<!Parameter> &ref_60
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: label
+          description: A filter used to match labels
+          serializedName: label
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+    - *ref_35
+    - *ref_36
+    - !<!Parameter> &ref_61
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: acceptDatetime
+          description: Requests the server to respond with the state of the resource at the specified time.
+          serializedName: Accept-Datetime
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: header
+    - !<!Parameter> &ref_62
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: ifMatch
+          description: Used to perform an operation only if the targeted resource's etag matches the value provided.
+          serializedName: If-Match
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: header
+    - !<!Parameter> &ref_63
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: ifNoneMatch
+          description: Used to perform an operation only if the targeted resource's etag does not match the value provided.
+          serializedName: If-None-Match
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: header
+    - !<!Parameter> &ref_64
+      schema: *ref_58
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: select
+          description: Used to select what fields are present in the returned resource(s).
+          serializedName: $Select
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+          style: form
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -1599,9 +1496,16 @@ operationGroups:
           path: '/kv/{key}'
           method: get
           uri: '{$host}'
+    signatureParameters:
+    - *ref_59
+    - *ref_60
+    - *ref_61
+    - *ref_62
+    - *ref_63
+    - *ref_64
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_1
+      schema: *ref_19
       language: !<!Languages> 
         default:
           name: ''
@@ -1610,13 +1514,13 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_18
+            schema: *ref_1
             header: Sync-Token
           - !<!HttpHeader> 
-            schema: *ref_18
+            schema: *ref_1
             header: ETag
           - !<!HttpHeader> 
-            schema: *ref_18
+            schema: *ref_1
             header: Last-Modified
           knownMediaType: json
           mediaTypes:
@@ -1651,61 +1555,61 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '1.0'
-    request: !<!Request> 
+    parameters:
+    - *ref_34
+    - !<!Parameter> &ref_66
+      schema: *ref_1
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: key
+          description: The key of the key-value to retrieve.
+          serializedName: key
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: path
+    - !<!Parameter> &ref_67
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: label
+          description: A filter used to match labels
+          serializedName: label
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+    - *ref_35
+    - *ref_36
+    - !<!Parameter> &ref_68
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: ifMatch
+          description: Used to perform an operation only if the targeted resource's etag matches the value provided.
+          serializedName: If-Match
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: header
+    - !<!Parameter> &ref_69
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: ifNoneMatch
+          description: Used to perform an operation only if the targeted resource's etag does not match the value provided.
+          serializedName: If-None-Match
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: header
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_34
       - !<!Parameter> &ref_65
-        schema: *ref_18
+        schema: *ref_19
         implementation: Method
-        required: true
-        language: !<!Languages> 
-          default:
-            name: key
-            description: The key of the key-value to retrieve.
-            serializedName: key
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: path
-      - !<!Parameter> &ref_66
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: label
-            description: A filter used to match labels
-            serializedName: label
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: query
-      - *ref_35
-      - *ref_36
-      - !<!Parameter> &ref_67
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: ifMatch
-            description: Used to perform an operation only if the targeted resource's etag matches the value provided.
-            serializedName: If-Match
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: header
-      - !<!Parameter> &ref_68
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: ifNoneMatch
-            description: Used to perform an operation only if the targeted resource's etag does not match the value provided.
-            serializedName: If-None-Match
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: header
-      - !<!Parameter> &ref_69
-        schema: *ref_1
-        implementation: Method
-        extensions:
-          x-ms-requestBody-name: entity
         language: !<!Languages> 
           default:
             name: entity
@@ -1716,10 +1620,6 @@ operationGroups:
             style: json
       signatureParameters:
       - *ref_65
-      - *ref_66
-      - *ref_67
-      - *ref_68
-      - *ref_69
       language: !<!Languages> 
         default:
           name: ''
@@ -1737,9 +1637,14 @@ operationGroups:
           - application/*+json
           - application/json-patch+json
           uri: '{$host}'
+    signatureParameters:
+    - *ref_66
+    - *ref_67
+    - *ref_68
+    - *ref_69
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_1
+      schema: *ref_19
       language: !<!Languages> 
         default:
           name: ''
@@ -1748,10 +1653,10 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_18
+            schema: *ref_1
             header: Sync-Token
           - !<!HttpHeader> 
-            schema: *ref_18
+            schema: *ref_1
             header: ETag
           knownMediaType: json
           mediaTypes:
@@ -1776,8 +1681,6 @@ operationGroups:
           - application/problem+json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 2
     language: !<!Languages> 
       default:
         name: PutKeyValue
@@ -1788,49 +1691,46 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '1.0'
-    request: !<!Request> 
-      parameters:
-      - *ref_34
-      - !<!Parameter> &ref_70
-        schema: *ref_18
-        implementation: Method
-        required: true
-        language: !<!Languages> 
-          default:
-            name: key
-            description: The key of the key-value to retrieve.
-            serializedName: key
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: path
-      - !<!Parameter> &ref_71
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: label
-            description: A filter used to match labels
-            serializedName: label
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: query
-      - *ref_35
-      - *ref_36
-      - !<!Parameter> &ref_72
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: ifMatch
-            description: Used to perform an operation only if the targeted resource's etag matches the value provided.
-            serializedName: If-Match
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: header
-      signatureParameters:
-      - *ref_70
-      - *ref_71
-      - *ref_72
+    parameters:
+    - *ref_34
+    - !<!Parameter> &ref_70
+      schema: *ref_1
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: key
+          description: The key of the key-value to retrieve.
+          serializedName: key
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: path
+    - !<!Parameter> &ref_71
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: label
+          description: A filter used to match labels
+          serializedName: label
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+    - *ref_35
+    - *ref_36
+    - !<!Parameter> &ref_72
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: ifMatch
+          description: Used to perform an operation only if the targeted resource's etag matches the value provided.
+          serializedName: If-Match
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: header
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -1840,9 +1740,13 @@ operationGroups:
           path: '/kv/{key}'
           method: delete
           uri: '{$host}'
+    signatureParameters:
+    - *ref_70
+    - *ref_71
+    - *ref_72
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_1
+      schema: *ref_19
       language: !<!Languages> 
         default:
           name: ''
@@ -1851,10 +1755,10 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_18
+            schema: *ref_1
             header: Sync-Token
           - !<!HttpHeader> 
-            schema: *ref_18
+            schema: *ref_1
             header: ETag
           knownMediaType: json
           mediaTypes:
@@ -1872,7 +1776,7 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_18
+            schema: *ref_1
             header: Sync-Token
           statusCodes:
           - '204'
@@ -1902,86 +1806,80 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '1.0'
-    request: !<!Request> 
-      parameters:
-      - *ref_34
-      - !<!Parameter> &ref_74
-        schema: *ref_18
-        implementation: Method
-        required: true
-        language: !<!Languages> 
-          default:
-            name: key
-            description: The key of the key-value to retrieve.
-            serializedName: key
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: path
-      - !<!Parameter> &ref_75
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: label
-            description: A filter used to match labels
-            serializedName: label
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: query
-      - *ref_35
-      - *ref_36
-      - !<!Parameter> &ref_76
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: acceptDatetime
-            description: Requests the server to respond with the state of the resource at the specified time.
-            serializedName: Accept-Datetime
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: header
-      - !<!Parameter> &ref_77
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: ifMatch
-            description: Used to perform an operation only if the targeted resource's etag matches the value provided.
-            serializedName: If-Match
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: header
-      - !<!Parameter> &ref_78
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: ifNoneMatch
-            description: Used to perform an operation only if the targeted resource's etag does not match the value provided.
-            serializedName: If-None-Match
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: header
-      - !<!Parameter> &ref_79
-        schema: *ref_73
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: select
-            description: Used to select what fields are present in the returned resource(s).
-            serializedName: $Select
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: query
-            style: form
-      signatureParameters:
-      - *ref_74
-      - *ref_75
-      - *ref_76
-      - *ref_77
-      - *ref_78
-      - *ref_79
+    parameters:
+    - *ref_34
+    - !<!Parameter> &ref_74
+      schema: *ref_1
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: key
+          description: The key of the key-value to retrieve.
+          serializedName: key
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: path
+    - !<!Parameter> &ref_75
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: label
+          description: A filter used to match labels
+          serializedName: label
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+    - *ref_35
+    - *ref_36
+    - !<!Parameter> &ref_76
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: acceptDatetime
+          description: Requests the server to respond with the state of the resource at the specified time.
+          serializedName: Accept-Datetime
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: header
+    - !<!Parameter> &ref_77
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: ifMatch
+          description: Used to perform an operation only if the targeted resource's etag matches the value provided.
+          serializedName: If-Match
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: header
+    - !<!Parameter> &ref_78
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: ifNoneMatch
+          description: Used to perform an operation only if the targeted resource's etag does not match the value provided.
+          serializedName: If-None-Match
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: header
+    - !<!Parameter> &ref_79
+      schema: *ref_73
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: select
+          description: Used to select what fields are present in the returned resource(s).
+          serializedName: $Select
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+          style: form
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -1991,6 +1889,13 @@ operationGroups:
           path: '/kv/{key}'
           method: head
           uri: '{$host}'
+    signatureParameters:
+    - *ref_74
+    - *ref_75
+    - *ref_76
+    - *ref_77
+    - *ref_78
+    - *ref_79
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -2001,13 +1906,13 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_18
+            schema: *ref_1
             header: Sync-Token
           - !<!HttpHeader> 
-            schema: *ref_18
+            schema: *ref_1
             header: ETag
           - !<!HttpHeader> 
-            schema: *ref_18
+            schema: *ref_1
             header: Last-Modified
           statusCodes:
           - '200'
@@ -2031,61 +1936,57 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '1.0'
-    request: !<!Request> 
-      parameters:
-      - *ref_34
-      - !<!Parameter> &ref_81
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: name
-            description: A filter for the name of the returned keys.
-            serializedName: name
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: query
-      - *ref_35
-      - *ref_36
-      - !<!Parameter> &ref_82
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: after
-            description: Instructs the server to return elements that appear after the element referred to by the specified token.
-            serializedName: After
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: query
-      - !<!Parameter> &ref_83
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: acceptDatetime
-            description: Requests the server to respond with the state of the resource at the specified time.
-            serializedName: Accept-Datetime
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: header
-      - !<!Parameter> &ref_84
-        schema: *ref_80
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: select
-            description: Used to select what fields are present in the returned resource(s).
-            serializedName: $Select
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: query
-            style: form
-      signatureParameters:
-      - *ref_81
-      - *ref_82
-      - *ref_83
-      - *ref_84
+    parameters:
+    - *ref_34
+    - !<!Parameter> &ref_81
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: name
+          description: A filter for the name of the returned keys.
+          serializedName: name
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+    - *ref_35
+    - *ref_36
+    - !<!Parameter> &ref_82
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: after
+          description: Instructs the server to return elements that appear after the element referred to by the specified token.
+          serializedName: After
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+    - !<!Parameter> &ref_83
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: acceptDatetime
+          description: Requests the server to respond with the state of the resource at the specified time.
+          serializedName: Accept-Datetime
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: header
+    - !<!Parameter> &ref_84
+      schema: *ref_80
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: select
+          description: Used to select what fields are present in the returned resource(s).
+          serializedName: $Select
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+          style: form
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -2095,6 +1996,11 @@ operationGroups:
           path: /labels
           method: get
           uri: '{$host}'
+    signatureParameters:
+    - *ref_81
+    - *ref_82
+    - *ref_83
+    - *ref_84
     responses:
     - !<!SchemaResponse> 
       schema: *ref_85
@@ -2106,7 +2012,7 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_18
+            schema: *ref_1
             header: Sync-Token
           knownMediaType: json
           mediaTypes:
@@ -2148,61 +2054,57 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '1.0'
-    request: !<!Request> 
-      parameters:
-      - *ref_34
-      - !<!Parameter> &ref_87
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: name
-            description: A filter for the name of the returned keys.
-            serializedName: name
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: query
-      - *ref_35
-      - *ref_36
-      - !<!Parameter> &ref_88
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: after
-            description: Instructs the server to return elements that appear after the element referred to by the specified token.
-            serializedName: After
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: query
-      - !<!Parameter> &ref_89
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: acceptDatetime
-            description: Requests the server to respond with the state of the resource at the specified time.
-            serializedName: Accept-Datetime
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: header
-      - !<!Parameter> &ref_90
-        schema: *ref_86
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: select
-            description: Used to select what fields are present in the returned resource(s).
-            serializedName: $Select
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: query
-            style: form
-      signatureParameters:
-      - *ref_87
-      - *ref_88
-      - *ref_89
-      - *ref_90
+    parameters:
+    - *ref_34
+    - !<!Parameter> &ref_87
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: name
+          description: A filter for the name of the returned keys.
+          serializedName: name
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+    - *ref_35
+    - *ref_36
+    - !<!Parameter> &ref_88
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: after
+          description: Instructs the server to return elements that appear after the element referred to by the specified token.
+          serializedName: After
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+    - !<!Parameter> &ref_89
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: acceptDatetime
+          description: Requests the server to respond with the state of the resource at the specified time.
+          serializedName: Accept-Datetime
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: header
+    - !<!Parameter> &ref_90
+      schema: *ref_86
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: select
+          description: Used to select what fields are present in the returned resource(s).
+          serializedName: $Select
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+          style: form
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -2212,6 +2114,11 @@ operationGroups:
           path: /labels
           method: head
           uri: '{$host}'
+    signatureParameters:
+    - *ref_87
+    - *ref_88
+    - *ref_89
+    - *ref_90
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -2222,7 +2129,7 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_18
+            schema: *ref_1
             header: Sync-Token
           statusCodes:
           - '200'
@@ -2246,61 +2153,57 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '1.0'
-    request: !<!Request> 
-      parameters:
-      - *ref_34
-      - !<!Parameter> &ref_91
-        schema: *ref_18
-        implementation: Method
-        required: true
-        language: !<!Languages> 
-          default:
-            name: key
-            description: The key of the key-value to retrieve.
-            serializedName: key
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: path
-      - !<!Parameter> &ref_92
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: label
-            description: A filter used to match labels
-            serializedName: label
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: query
-      - *ref_35
-      - *ref_36
-      - !<!Parameter> &ref_93
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: ifMatch
-            description: Used to perform an operation only if the targeted resource's etag matches the value provided.
-            serializedName: If-Match
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: header
-      - !<!Parameter> &ref_94
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: ifNoneMatch
-            description: Used to perform an operation only if the targeted resource's etag does not match the value provided.
-            serializedName: If-None-Match
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: header
-      signatureParameters:
-      - *ref_91
-      - *ref_92
-      - *ref_93
-      - *ref_94
+    parameters:
+    - *ref_34
+    - !<!Parameter> &ref_91
+      schema: *ref_1
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: key
+          description: The key of the key-value to retrieve.
+          serializedName: key
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: path
+    - !<!Parameter> &ref_92
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: label
+          description: A filter used to match labels
+          serializedName: label
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+    - *ref_35
+    - *ref_36
+    - !<!Parameter> &ref_93
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: ifMatch
+          description: Used to perform an operation only if the targeted resource's etag matches the value provided.
+          serializedName: If-Match
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: header
+    - !<!Parameter> &ref_94
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: ifNoneMatch
+          description: Used to perform an operation only if the targeted resource's etag does not match the value provided.
+          serializedName: If-None-Match
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: header
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -2310,9 +2213,14 @@ operationGroups:
           path: '/locks/{key}'
           method: put
           uri: '{$host}'
+    signatureParameters:
+    - *ref_91
+    - *ref_92
+    - *ref_93
+    - *ref_94
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_1
+      schema: *ref_19
       language: !<!Languages> 
         default:
           name: ''
@@ -2321,10 +2229,10 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_18
+            schema: *ref_1
             header: Sync-Token
           - !<!HttpHeader> 
-            schema: *ref_18
+            schema: *ref_1
             header: ETag
           knownMediaType: json
           mediaTypes:
@@ -2359,61 +2267,57 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '1.0'
-    request: !<!Request> 
-      parameters:
-      - *ref_34
-      - !<!Parameter> &ref_95
-        schema: *ref_18
-        implementation: Method
-        required: true
-        language: !<!Languages> 
-          default:
-            name: key
-            description: The key of the key-value to retrieve.
-            serializedName: key
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: path
-      - !<!Parameter> &ref_96
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: label
-            description: A filter used to match labels
-            serializedName: label
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: query
-      - *ref_35
-      - *ref_36
-      - !<!Parameter> &ref_97
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: ifMatch
-            description: Used to perform an operation only if the targeted resource's etag matches the value provided.
-            serializedName: If-Match
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: header
-      - !<!Parameter> &ref_98
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: ifNoneMatch
-            description: Used to perform an operation only if the targeted resource's etag does not match the value provided.
-            serializedName: If-None-Match
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: header
-      signatureParameters:
-      - *ref_95
-      - *ref_96
-      - *ref_97
-      - *ref_98
+    parameters:
+    - *ref_34
+    - !<!Parameter> &ref_95
+      schema: *ref_1
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: key
+          description: The key of the key-value to retrieve.
+          serializedName: key
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: path
+    - !<!Parameter> &ref_96
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: label
+          description: A filter used to match labels
+          serializedName: label
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+    - *ref_35
+    - *ref_36
+    - !<!Parameter> &ref_97
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: ifMatch
+          description: Used to perform an operation only if the targeted resource's etag matches the value provided.
+          serializedName: If-Match
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: header
+    - !<!Parameter> &ref_98
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: ifNoneMatch
+          description: Used to perform an operation only if the targeted resource's etag does not match the value provided.
+          serializedName: If-None-Match
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: header
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -2423,9 +2327,14 @@ operationGroups:
           path: '/locks/{key}'
           method: delete
           uri: '{$host}'
+    signatureParameters:
+    - *ref_95
+    - *ref_96
+    - *ref_97
+    - *ref_98
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_1
+      schema: *ref_19
       language: !<!Languages> 
         default:
           name: ''
@@ -2434,10 +2343,10 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_18
+            schema: *ref_1
             header: Sync-Token
           - !<!HttpHeader> 
-            schema: *ref_18
+            schema: *ref_1
             header: ETag
           knownMediaType: json
           mediaTypes:
@@ -2472,73 +2381,68 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '1.0'
-    request: !<!Request> 
-      parameters:
-      - *ref_34
-      - !<!Parameter> &ref_100
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: key
-            description: A filter used to match keys.
-            serializedName: key
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: query
-      - !<!Parameter> &ref_101
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: label
-            description: A filter used to match labels
-            serializedName: label
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: query
-      - *ref_35
-      - *ref_36
-      - !<!Parameter> &ref_102
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: after
-            description: Instructs the server to return elements that appear after the element referred to by the specified token.
-            serializedName: After
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: query
-      - !<!Parameter> &ref_103
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: acceptDatetime
-            description: Requests the server to respond with the state of the resource at the specified time.
-            serializedName: Accept-Datetime
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: header
-      - !<!Parameter> &ref_104
-        schema: *ref_99
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: select
-            description: Used to select what fields are present in the returned resource(s).
-            serializedName: $Select
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: query
-            style: form
-      signatureParameters:
-      - *ref_100
-      - *ref_101
-      - *ref_102
-      - *ref_103
-      - *ref_104
+    parameters:
+    - *ref_34
+    - !<!Parameter> &ref_100
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: key
+          description: A filter used to match keys.
+          serializedName: key
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+    - !<!Parameter> &ref_101
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: label
+          description: A filter used to match labels
+          serializedName: label
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+    - *ref_35
+    - *ref_36
+    - !<!Parameter> &ref_102
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: after
+          description: Instructs the server to return elements that appear after the element referred to by the specified token.
+          serializedName: After
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+    - !<!Parameter> &ref_103
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: acceptDatetime
+          description: Requests the server to respond with the state of the resource at the specified time.
+          serializedName: Accept-Datetime
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: header
+    - !<!Parameter> &ref_104
+      schema: *ref_99
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: select
+          description: Used to select what fields are present in the returned resource(s).
+          serializedName: $Select
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+          style: form
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -2548,6 +2452,12 @@ operationGroups:
           path: /revisions
           method: get
           uri: '{$host}'
+    signatureParameters:
+    - *ref_100
+    - *ref_101
+    - *ref_102
+    - *ref_103
+    - *ref_104
     responses:
     - !<!SchemaResponse> 
       schema: *ref_51
@@ -2559,7 +2469,7 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_18
+            schema: *ref_1
             header: Sync-Token
           knownMediaType: json
           mediaTypes:
@@ -2601,73 +2511,68 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: '1.0'
-    request: !<!Request> 
-      parameters:
-      - *ref_34
-      - !<!Parameter> &ref_105
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: key
-            description: A filter used to match keys.
-            serializedName: key
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: query
-      - !<!Parameter> &ref_106
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: label
-            description: A filter used to match labels
-            serializedName: label
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: query
-      - *ref_35
-      - *ref_36
-      - !<!Parameter> &ref_107
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: after
-            description: Instructs the server to return elements that appear after the element referred to by the specified token.
-            serializedName: After
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: query
-      - !<!Parameter> &ref_108
-        schema: *ref_18
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: acceptDatetime
-            description: Requests the server to respond with the state of the resource at the specified time.
-            serializedName: Accept-Datetime
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: header
-      - !<!Parameter> &ref_109
-        schema: *ref_99
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: select
-            description: Used to select what fields are present in the returned resource(s).
-            serializedName: $Select
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: query
-            style: form
-      signatureParameters:
-      - *ref_105
-      - *ref_106
-      - *ref_107
-      - *ref_108
-      - *ref_109
+    parameters:
+    - *ref_34
+    - !<!Parameter> &ref_105
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: key
+          description: A filter used to match keys.
+          serializedName: key
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+    - !<!Parameter> &ref_106
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: label
+          description: A filter used to match labels
+          serializedName: label
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+    - *ref_35
+    - *ref_36
+    - !<!Parameter> &ref_107
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: after
+          description: Instructs the server to return elements that appear after the element referred to by the specified token.
+          serializedName: After
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+    - !<!Parameter> &ref_108
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: acceptDatetime
+          description: Requests the server to respond with the state of the resource at the specified time.
+          serializedName: Accept-Datetime
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: header
+    - !<!Parameter> &ref_109
+      schema: *ref_99
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: select
+          description: Used to select what fields are present in the returned resource(s).
+          serializedName: $Select
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+          style: form
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -2677,6 +2582,12 @@ operationGroups:
           path: /revisions
           method: head
           uri: '{$host}'
+    signatureParameters:
+    - *ref_105
+    - *ref_106
+    - *ref_107
+    - *ref_108
+    - *ref_109
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -2687,7 +2598,7 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_18
+            schema: *ref_1
             header: Sync-Token
           statusCodes:
           - '200'

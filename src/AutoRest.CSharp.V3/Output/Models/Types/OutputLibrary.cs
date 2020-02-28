@@ -68,9 +68,12 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             {
                 foreach (Operation operation in operationGroup.Operations)
                 {
-                    if (operation.Request.Protocol.Http is HttpWithBodyRequest bodyRequest)
+                    foreach (var request in operation.Requests)
                     {
-                        types.Add(bodyRequest.KnownMediaType);
+                        if (request.Protocol.Http is HttpWithBodyRequest bodyRequest)
+                        {
+                            types.Add(bodyRequest.KnownMediaType);
+                        }
                     }
 
                     foreach (var response in operation.Responses)

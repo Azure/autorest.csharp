@@ -22,10 +22,10 @@ namespace body_complex.Models
             }
             writer.WritePropertyName("helper");
             writer.WriteStartObject();
-            if (PropBh1 != null)
+            if (PropBH1 != null)
             {
                 writer.WritePropertyName("propBH1");
-                writer.WriteStringValue(PropBh1);
+                writer.WriteStringValue(PropBH1);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();
@@ -66,7 +66,7 @@ namespace body_complex.Models
                             {
                                 continue;
                             }
-                            result.PropBh1 = property0.Value.GetString();
+                            result.PropBH1 = property0.Value.GetString();
                             continue;
                         }
                     }

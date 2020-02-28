@@ -12,13 +12,15 @@ namespace xml_service.Models
     {
         /// <summary> Azure Analytics Logging settings. </summary>
         public Logging Logging { get; set; }
+        /// <summary> A summary of request statistics grouped by API in hourly aggregates for blobs. </summary>
         public Metrics HourMetrics { get; set; }
+        /// <summary> a summary of request statistics grouped by API in minute aggregates for blobs. </summary>
         public Metrics MinuteMetrics { get; set; }
         /// <summary> The set of CORS rules. </summary>
         public ICollection<CorsRule> Cors { get; set; }
         /// <summary> The default version to use for requests to the Blob service if an incoming request&apos;s version is not specified. Possible values include version 2008-10-27 and all more recent versions. </summary>
         public string DefaultServiceVersion { get; set; }
-        /// <summary> the retention policy. </summary>
+        /// <summary> The Delete Retention Policy for the service. </summary>
         public RetentionPolicy DeleteRetentionPolicy { get; set; }
     }
 }

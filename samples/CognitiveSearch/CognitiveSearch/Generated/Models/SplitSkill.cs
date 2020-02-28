@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
         {
             OdataType = "#Microsoft.Skills.Text.SplitSkill";
         }
-        /// <summary> The language codes supported for input text by SplitSkill. </summary>
+        /// <summary> A value indicating which language code to use. Default is en. </summary>
         public SplitSkillLanguage? DefaultLanguageCode { get; set; }
         /// <summary> A value indicating which split mode to perform. </summary>
         public TextSplitMode? TextSplitMode { get; set; }

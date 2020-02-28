@@ -445,7 +445,7 @@ namespace CognitiveSearch
         /// <param name="selectedFields"> List of field names to retrieve for the document; Any field not retrieved will be missing from the returned document. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Components1Fm1TvaSchemasFacetresultAdditionalproperties>> GetAsync(string key, IEnumerable<string> selectedFields, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<object>> GetAsync(string key, IEnumerable<string> selectedFields, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -463,7 +463,7 @@ namespace CognitiveSearch
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Components1Fm1TvaSchemasFacetresultAdditionalproperties.DeserializeComponents1Fm1TvaSchemasFacetresultAdditionalproperties(document.RootElement);
+                            var value = document.RootElement.GetObject();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -481,7 +481,7 @@ namespace CognitiveSearch
         /// <param name="selectedFields"> List of field names to retrieve for the document; Any field not retrieved will be missing from the returned document. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Components1Fm1TvaSchemasFacetresultAdditionalproperties> Get(string key, IEnumerable<string> selectedFields, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public Response<object> Get(string key, IEnumerable<string> selectedFields, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -499,7 +499,7 @@ namespace CognitiveSearch
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Components1Fm1TvaSchemasFacetresultAdditionalproperties.DeserializeComponents1Fm1TvaSchemasFacetresultAdditionalproperties(document.RootElement);
+                            var value = document.RootElement.GetObject();
                             return Response.FromValue(value, message.Response);
                         }
                     default:

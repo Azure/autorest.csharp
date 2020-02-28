@@ -17,7 +17,7 @@ namespace CognitiveSearch.Models
         }
         /// <summary> A list of entity categories that should be extracted. </summary>
         public ICollection<EntityCategory> Categories { get; set; }
-        /// <summary> The language codes supported for input text by EntityRecognitionSkill. </summary>
+        /// <summary> A value indicating which language code to use. Default is en. </summary>
         public EntityRecognitionSkillLanguage? DefaultLanguageCode { get; set; }
         /// <summary> Determines whether or not to include entities which are well known but don&apos;t conform to a pre-defined type. If this configuration is not set (default), set to null or set to false, entities which don&apos;t conform to one of the pre-defined types will not be surfaced. </summary>
         public bool? IncludeTypelessEntities { get; set; }

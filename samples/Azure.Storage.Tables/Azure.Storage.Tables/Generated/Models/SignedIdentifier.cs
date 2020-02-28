@@ -10,7 +10,7 @@ namespace Azure.Storage.Tables.Models
     {
         /// <summary> a unique id. </summary>
         public string Id { get; set; }
-        /// <summary> An Access policy. </summary>
+        /// <summary> The access policy. </summary>
         public AccessPolicy AccessPolicy { get; set; } = new AccessPolicy();
     }
 }

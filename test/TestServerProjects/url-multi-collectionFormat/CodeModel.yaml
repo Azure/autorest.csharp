@@ -1,5 +1,55 @@
 !<!CodeModel> 
+info: !<!Info> 
+  description: Test Infrastructure for AutoRest
+  title: url-multi-collectionFormat
 schemas: !<!Schemas> 
+  numbers:
+  - !<!NumberSchema> &ref_0
+    type: integer
+    precision: 32
+    language: !<!Languages> 
+      default:
+        name: Integer
+        description: ''
+    protocol: !<!Protocols> {}
+  strings:
+  - !<!StringSchema> &ref_4
+    type: string
+    language: !<!Languages> 
+      default:
+        name: String
+        description: simple string
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_2
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: Get0ItemsItem
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_1
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: ErrorMessage
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_3
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: String
+        description: ''
+    protocol: !<!Protocols> {}
   objects:
   - !<!ObjectSchema> &ref_8
     type: object
@@ -8,14 +58,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     properties:
     - !<!Property> 
-      schema: !<!NumberSchema> &ref_0
-        type: integer
-        precision: 32
-        language: !<!Languages> 
-          default:
-            name: Integer
-            description: ''
-        protocol: !<!Protocols> {}
+      schema: *ref_0
       serializedName: status
       language: !<!Languages> 
         default:
@@ -23,27 +66,22 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_2
-        type: string
-        apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-        language: !<!Languages> 
-          default:
-            name: ErrorMessage
-            description: ''
-        protocol: !<!Protocols> {}
+      schema: *ref_1
       serializedName: message
       language: !<!Languages> 
         default:
           name: message
           description: ''
       protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - output
     language: !<!Languages> 
       default:
         name: Error
         description: ''
-        namespace: Api100
+        namespace: ''
     protocol: !<!Protocols> {}
   arrays:
   - !<!ArraySchema> &ref_6
@@ -51,16 +89,7 @@ schemas: !<!Schemas>
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    elementType: !<!StringSchema> &ref_1
-      type: string
-      apiVersions:
-      - !<!ApiVersion> 
-        version: 1.0.0
-      language: !<!Languages> 
-        default:
-          name: Get0ItemsItem
-          description: ''
-      protocol: !<!Protocols> {}
+    elementType: *ref_2
     language: !<!Languages> 
       default:
         name: ArrayOfGet0ItemsItem
@@ -71,34 +100,12 @@ schemas: !<!Schemas>
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    elementType: !<!StringSchema> &ref_3
-      type: string
-      apiVersions:
-      - !<!ApiVersion> 
-        version: 1.0.0
-      language: !<!Languages> 
-        default:
-          name: String
-          description: ''
-      protocol: !<!Protocols> {}
+    elementType: *ref_3
     language: !<!Languages> 
       default:
         name: ArrayOfString
         description: Array of String
     protocol: !<!Protocols> {}
-  numbers:
-  - *ref_0
-  strings:
-  - !<!StringSchema> &ref_4
-    type: string
-    language: !<!Languages> 
-      default:
-        name: String
-        description: simple string
-    protocol: !<!Protocols> {}
-  - *ref_1
-  - *ref_2
-  - *ref_3
 globalParameters:
 - !<!Parameter> &ref_5
   schema: *ref_4
@@ -115,9 +122,6 @@ globalParameters:
   protocol: !<!Protocols> 
     http: !<!HttpParameter> 
       in: uri
-info: !<!Info> 
-  description: Test Infrastructure for AutoRest
-  title: url-multi-collectionFormat
 operationGroups:
 - !<!OperationGroup> 
   $key: queries
@@ -126,23 +130,22 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_5
-      - !<!Parameter> &ref_7
-        schema: *ref_6
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: arrayQuery
-            description: a null array of string using the multi-array format
-            serializedName: arrayQuery
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: query
-            style: form
-      signatureParameters:
-      - *ref_7
+    parameters:
+    - *ref_5
+    - !<!Parameter> &ref_7
+      schema: *ref_6
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: arrayQuery
+          description: a null array of string using the multi-array format
+          serializedName: arrayQuery
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+          style: form
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -152,6 +155,8 @@ operationGroups:
           path: /queries/array/multi/string/null
           method: get
           uri: '{$host}'
+    signatureParameters:
+    - *ref_7
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -185,23 +190,22 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_5
-      - !<!Parameter> &ref_10
-        schema: *ref_9
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: arrayQuery
-            description: 'an empty array [] of string using the multi-array format'
-            serializedName: arrayQuery
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: query
-            style: form
-      signatureParameters:
-      - *ref_10
+    parameters:
+    - *ref_5
+    - !<!Parameter> &ref_10
+      schema: *ref_9
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: arrayQuery
+          description: 'an empty array [] of string using the multi-array format'
+          serializedName: arrayQuery
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+          style: form
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -211,6 +215,8 @@ operationGroups:
           path: /queries/array/multi/string/empty
           method: get
           uri: '{$host}'
+    signatureParameters:
+    - *ref_10
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -244,23 +250,22 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_5
-      - !<!Parameter> &ref_11
-        schema: *ref_9
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: arrayQuery
-            description: 'an empty array [] of string using the multi-array format'
-            serializedName: arrayQuery
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: query
-            style: form
-      signatureParameters:
-      - *ref_11
+    parameters:
+    - *ref_5
+    - !<!Parameter> &ref_11
+      schema: *ref_9
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: arrayQuery
+          description: 'an empty array [] of string using the multi-array format'
+          serializedName: arrayQuery
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+          style: form
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -270,6 +275,8 @@ operationGroups:
           path: /queries/array/multi/string/valid
           method: get
           uri: '{$host}'
+    signatureParameters:
+    - *ref_11
     responses:
     - !<!Response> 
       language: !<!Languages> 

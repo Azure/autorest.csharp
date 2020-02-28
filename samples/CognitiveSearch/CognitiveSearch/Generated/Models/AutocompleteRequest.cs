@@ -10,6 +10,7 @@ namespace CognitiveSearch.Models
     {
         /// <summary> The search text on which to base autocomplete results. </summary>
         public string SearchText { get; set; }
+        /// <summary> Specifies the mode for Autocomplete. The default is &apos;oneTerm&apos;. Use &apos;twoTerms&apos; to get shingles and &apos;oneTermWithContext&apos; to use the current context while producing auto-completed terms. </summary>
         public AutocompleteMode? AutocompleteMode { get; set; }
         /// <summary> An OData expression that filters the documents used to produce completed terms for the Autocomplete result. </summary>
         public string Filter { get; set; }

@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
         {
             Type = "freshness";
         }
-        /// <summary> Provides parameter values to a freshness scoring function. </summary>
+        /// <summary> Parameter values for the freshness scoring function. </summary>
         public FreshnessScoringParameters Parameters { get; set; } = new FreshnessScoringParameters();
     }
 }

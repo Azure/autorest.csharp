@@ -12,7 +12,7 @@ namespace CognitiveSearch.Models
     {
         /// <summary> The name of the field, which must be unique within the fields collection of the index or parent field. </summary>
         public string Name { get; set; }
-        /// <summary> Defines the data type of a field in a search index. </summary>
+        /// <summary> The data type of the field. </summary>
         public DataType Type { get; set; }
         /// <summary> A value indicating whether the field uniquely identifies documents in the index. Exactly one top-level field in each index must be chosen as the key field and it must be of type Edm.String. Key fields can be used to look up documents directly and update or delete specific documents. Default is false for simple fields and null for complex fields. </summary>
         public bool? Key { get; set; }
@@ -26,11 +26,11 @@ namespace CognitiveSearch.Models
         public bool? Sortable { get; set; }
         /// <summary> A value indicating whether to enable the field to be referenced in facet queries. Typically used in a presentation of search results that includes hit count by category (for example, search for digital cameras and see hits by brand, by megapixels, by price, and so on). This property must be null for complex fields. Fields of type Edm.GeographyPoint or Collection(Edm.GeographyPoint) cannot be facetable. Default is true for all other simple fields. </summary>
         public bool? Facetable { get; set; }
-        /// <summary> Defines the names of all text analyzers supported by Azure Cognitive Search. </summary>
+        /// <summary> The name of the language analyzer to use for the field. This option can be used only with searchable fields and it can&apos;t be set together with either searchAnalyzer or indexAnalyzer. Once the analyzer is chosen, it cannot be changed for the field. Must be null for complex fields. </summary>
         public AnalyzerName? Analyzer { get; set; }
-        /// <summary> Defines the names of all text analyzers supported by Azure Cognitive Search. </summary>
+        /// <summary> The name of the analyzer used at search time for the field. This option can be used only with searchable fields. It must be set together with indexAnalyzer and it cannot be set together with the analyzer option. This analyzer can be updated on an existing field. Must be null for complex fields. </summary>
         public AnalyzerName? SearchAnalyzer { get; set; }
-        /// <summary> Defines the names of all text analyzers supported by Azure Cognitive Search. </summary>
+        /// <summary> The name of the analyzer used at indexing time for the field. This option can be used only with searchable fields. It must be set together with searchAnalyzer and it cannot be set together with the analyzer option. Once the analyzer is chosen, it cannot be changed for the field. Must be null for complex fields. </summary>
         public AnalyzerName? IndexAnalyzer { get; set; }
         /// <summary> A list of the names of synonym maps to associate with this field. This option can be used only with searchable fields. Currently only one synonym map per field is supported. Assigning a synonym map to a field ensures that query terms targeting that field are expanded at query-time using the rules in the synonym map. This attribute can be changed on existing fields. Must be null or an empty collection for complex fields. </summary>
         public ICollection<string> SynonymMaps { get; set; }

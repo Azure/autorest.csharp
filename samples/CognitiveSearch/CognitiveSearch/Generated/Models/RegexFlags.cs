@@ -19,7 +19,7 @@ namespace CognitiveSearch.Models
             _value = value ?? throw new ArgumentNullException(nameof(value));
         }
 
-        private const string CanonEqValue = "CANON_EQ";
+        private const string CanonEQValue = "CANON_EQ";
         private const string CaseInsensitiveValue = "CASE_INSENSITIVE";
         private const string CommentsValue = "COMMENTS";
         private const string DotallValue = "DOTALL";
@@ -29,7 +29,7 @@ namespace CognitiveSearch.Models
         private const string UnixLinesValue = "UNIX_LINES";
 
         /// <summary> CANON_EQ. </summary>
-        public static RegexFlags CanonEq { get; } = new RegexFlags(CanonEqValue);
+        public static RegexFlags CanonEQ { get; } = new RegexFlags(CanonEQValue);
         /// <summary> CASE_INSENSITIVE. </summary>
         public static RegexFlags CaseInsensitive { get; } = new RegexFlags(CaseInsensitiveValue);
         /// <summary> COMMENTS. </summary>
