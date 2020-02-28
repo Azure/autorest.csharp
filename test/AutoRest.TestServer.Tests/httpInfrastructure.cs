@@ -250,22 +250,19 @@ namespace AutoRest.TestServer.Tests
             await new HttpRetryOperations(ClientDiagnostics, pipeline, host).Head408Async());
 
         [Test]
-        [Ignore("Implement retry logic: https://github.com/Azure/autorest.csharp/issues/398")]
         public Task HttpRetry500Patch() => TestStatus(async (host, pipeline) =>
             await new HttpRetryOperations(ClientDiagnostics, pipeline, host).Patch500Async());
 
         [Test]
-        [Ignore("Implement retry logic: https://github.com/Azure/autorest.csharp/issues/398")]
         public Task HttpRetry500Put() => TestStatus(async (host, pipeline) =>
             await new HttpRetryOperations(ClientDiagnostics, pipeline, host).Put500Async());
 
         [Test]
-        [Ignore("Implement retry logic: https://github.com/Azure/autorest.csharp/issues/398")]
         public Task HttpRetry502Get() => TestStatus(async (host, pipeline) =>
             await new HttpRetryOperations(ClientDiagnostics, pipeline, host).Get502Async());
 
         [Test]
-        [Ignore("Implement retry logic: https://github.com/Azure/autorest.csharp/issues/398")]
+        [Ignore("For whatever reason, this test is returning 204 and is considered a failure. It should be returning 200 and succeed.")]
         public Task HttpRetry502Options() => Test(async (host, pipeline) =>
         {
             var result = await new HttpRetryOperations(ClientDiagnostics, pipeline, host).Options502Async();
@@ -273,22 +270,18 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Implement retry logic: https://github.com/Azure/autorest.csharp/issues/398")]
         public Task HttpRetry503Delete() => TestStatus(async (host, pipeline) =>
             await new HttpRetryOperations(ClientDiagnostics, pipeline, host).Delete503Async());
 
         [Test]
-        [Ignore("Implement retry logic: https://github.com/Azure/autorest.csharp/issues/398")]
         public Task HttpRetry503Post() => TestStatus(async (host, pipeline) =>
             await new HttpRetryOperations(ClientDiagnostics, pipeline, host).Post503Async());
 
         [Test]
-        [Ignore("Implement retry logic: https://github.com/Azure/autorest.csharp/issues/398")]
         public Task HttpRetry504Patch() => TestStatus(async (host, pipeline) =>
             await new HttpRetryOperations(ClientDiagnostics, pipeline, host).Patch504Async());
 
         [Test]
-        [Ignore("Implement retry logic: https://github.com/Azure/autorest.csharp/issues/398")]
         public Task HttpRetry504Put() => TestStatus(async (host, pipeline) =>
             await new HttpRetryOperations(ClientDiagnostics, pipeline, host).Put504Async());
 

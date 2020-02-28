@@ -103,7 +103,8 @@ namespace AutoRest.TestServer.Tests.Infrastructure
                     ? new HttpPipeline(new HttpClientTransport(server.Server.Client))
                     : HttpPipelineBuilder.Build(new TestClientOptions
                     {
-                        Transport = new HttpClientTransport(server.Server.Client)
+                        Transport = new HttpClientTransport(server.Server.Client),
+                        Retry = { Delay = TimeSpan.FromMilliseconds(50) }
                     });
 
                 await test(server.Host, pipeline);
