@@ -19,6 +19,9 @@ jobs:
         displayName: "Use .NET Core sdk $(DotNetCoreSDKVersion)"
         inputs:
           version: "$(DotNetCoreSDKVersion)"
+      - task: NodeTool@0
+        inputs:
+          versionSpec: '13.x'
       - script: |
           npm ci
         displayName: "Install packages"

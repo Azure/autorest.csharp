@@ -2,7 +2,7 @@
 > see https://aka.ms/autorest
 
 ## Setup
-- [NodeJS](https://nodejs.org/en/) (10.x.x, 12.x.x, or 13.x.x)
+- [NodeJS](https://nodejs.org/en/) (13.x.x)
 - `npm install` (at root)
 - `npm install -g @autorest/autorest`
 - [.NET Core SDK](https://dotnet.microsoft.com/download/dotnet-core/3.0) (3.0.100)
