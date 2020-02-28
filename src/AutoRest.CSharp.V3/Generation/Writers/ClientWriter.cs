@@ -499,7 +499,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private void WriteParameterNullChecks(CodeWriter writer, IReadOnlyCollection<Parameter> parameters)
         {
-            //Parameter[] nullCheckParameters = parameters.Where(p => p.IsRequired && (p.Type.IsNullable || !p.Type.IsValueType)).ToArray();
             foreach (Parameter parameter in parameters)
             {
                 CSharpType cs = parameter.Type;
