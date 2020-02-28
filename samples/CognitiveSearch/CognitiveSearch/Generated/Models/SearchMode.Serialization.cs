@@ -13,6 +13,7 @@ namespace CognitiveSearch.Models
         {
             SearchMode.Any => "any",
             SearchMode.All => "all",
+            SearchMode.AnalyzingInfixMatching => "analyzingInfixMatching",
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown SearchMode value.")
         };
 
@@ -20,6 +21,7 @@ namespace CognitiveSearch.Models
         {
             "any" => SearchMode.Any,
             "all" => SearchMode.All,
+            "analyzingInfixMatching" => SearchMode.AnalyzingInfixMatching,
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown SearchMode value.")
         };
     }

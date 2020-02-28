@@ -17,7 +17,7 @@ namespace CognitiveSearch.Models
         }
         /// <summary> The list of stopwords. This property and the stopwords list property cannot both be set. </summary>
         public ICollection<string> Stopwords { get; set; }
-        /// <summary> Identifies a predefined list of language-specific stopwords. </summary>
+        /// <summary> A predefined list of stopwords to use. This property and the stopwords property cannot both be set. Default is English. </summary>
         public StopwordsList? StopwordsList { get; set; }
         /// <summary> A value indicating whether to ignore case. If true, all words are converted to lower case first. Default is false. </summary>
         public bool? IgnoreCase { get; set; }

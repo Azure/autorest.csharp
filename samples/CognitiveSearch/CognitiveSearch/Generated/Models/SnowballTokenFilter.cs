@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
         {
             OdataType = "#Microsoft.Azure.Search.SnowballTokenFilter";
         }
-        /// <summary> The language to use for a Snowball token filter. </summary>
+        /// <summary> The language to use. </summary>
         public SnowballTokenFilterLanguage Language { get; set; }
     }
 }

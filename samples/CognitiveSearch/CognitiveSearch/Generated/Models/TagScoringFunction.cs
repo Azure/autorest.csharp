@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
         {
             Type = "tag";
         }
-        /// <summary> Provides parameter values to a tag scoring function. </summary>
+        /// <summary> Parameter values for the tag scoring function. </summary>
         public TagScoringParameters Parameters { get; set; } = new TagScoringParameters();
     }
 }

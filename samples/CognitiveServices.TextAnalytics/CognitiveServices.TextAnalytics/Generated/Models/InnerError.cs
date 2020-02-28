@@ -18,6 +18,7 @@ namespace CognitiveServices.TextAnalytics.Models
         public IDictionary<string, string> Details { get; set; }
         /// <summary> Error target. </summary>
         public string Target { get; set; }
+        /// <summary> Inner error contains more specific information. </summary>
         public InnerError InnerError { get; set; }
     }
 }

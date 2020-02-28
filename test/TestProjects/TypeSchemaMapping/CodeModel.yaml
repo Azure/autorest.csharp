@@ -1,5 +1,105 @@
 !<!CodeModel> 
+info: !<!Info> 
+  description: Schema mapping
+  title: TypeSchemaMapping
 schemas: !<!Schemas> 
+  strings:
+  - !<!StringSchema> &ref_0
+    type: string
+    language: !<!Languages> 
+      default:
+        name: String
+        description: simple string
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_1
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: ModelProperty
+        description: A description about the set of tags.
+    protocol: !<!Protocols> {}
+  choices:
+  - !<!ChoiceSchema> &ref_2
+    choices:
+    - !<!ChoiceValue> 
+      value: apple
+      language:
+        default:
+          name: Apple
+          description: ''
+    - !<!ChoiceValue> 
+      value: pear
+      language:
+        default:
+          name: Pear
+          description: ''
+    type: choice
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    choiceType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Fruit
+        description: Fruit
+    protocol: !<!Protocols> {}
+  - !<!ChoiceSchema> &ref_3
+    choices:
+    - !<!ChoiceValue> 
+      value: Monday
+      language:
+        default:
+          name: Monday
+          description: ''
+    - !<!ChoiceValue> 
+      value: Tuesday
+      language:
+        default:
+          name: Tuesday
+          description: ''
+    - !<!ChoiceValue> 
+      value: Wednesday
+      language:
+        default:
+          name: Wednesday
+          description: ''
+    - !<!ChoiceValue> 
+      value: Thursday
+      language:
+        default:
+          name: Thursday
+          description: ''
+    - !<!ChoiceValue> 
+      value: Friday
+      language:
+        default:
+          name: Friday
+          description: ''
+    - !<!ChoiceValue> 
+      value: Saturday
+      language:
+        default:
+          name: Saturday
+          description: ''
+    - !<!ChoiceValue> 
+      value: Sunday
+      language:
+        default:
+          name: Sunday
+          description: ''
+    type: choice
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    choiceType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: DaysOfWeek
+        description: Day of week
+    protocol: !<!Protocols> {}
   objects:
   - !<!ObjectSchema> &ref_5
     type: object
@@ -8,16 +108,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     properties:
     - !<!Property> 
-      schema: !<!StringSchema> &ref_3
-        type: string
-        apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-        language: !<!Languages> 
-          default:
-            name: ModelProperty
-            description: A description about the set of tags.
-        protocol: !<!Protocols> {}
+      schema: *ref_1
       required: false
       serializedName: ModelProperty
       language: !<!Languages> 
@@ -26,36 +117,7 @@ schemas: !<!Schemas>
           description: A description about the set of tags.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!ChoiceSchema> &ref_1
-        choices:
-        - !<!ChoiceValue> 
-          value: apple
-          language:
-            default:
-              name: Apple
-              description: ''
-        - !<!ChoiceValue> 
-          value: pear
-          language:
-            default:
-              name: Pear
-              description: ''
-        type: choice
-        apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-        choiceType: !<!StringSchema> &ref_0
-          type: string
-          language: !<!Languages> 
-            default:
-              name: String
-              description: simple string
-          protocol: !<!Protocols> {}
-        language: !<!Languages> 
-          default:
-            name: Fruit
-            description: Fruit
-        protocol: !<!Protocols> {}
+      schema: *ref_2
       required: true
       serializedName: Fruit
       language: !<!Languages> 
@@ -64,60 +126,7 @@ schemas: !<!Schemas>
           description: Fruit
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!ChoiceSchema> &ref_2
-        choices:
-        - !<!ChoiceValue> 
-          value: Monday
-          language:
-            default:
-              name: Monday
-              description: ''
-        - !<!ChoiceValue> 
-          value: Tuesday
-          language:
-            default:
-              name: Tuesday
-              description: ''
-        - !<!ChoiceValue> 
-          value: Wednesday
-          language:
-            default:
-              name: Wednesday
-              description: ''
-        - !<!ChoiceValue> 
-          value: Thursday
-          language:
-            default:
-              name: Thursday
-              description: ''
-        - !<!ChoiceValue> 
-          value: Friday
-          language:
-            default:
-              name: Friday
-              description: ''
-        - !<!ChoiceValue> 
-          value: Saturday
-          language:
-            default:
-              name: Saturday
-              description: ''
-        - !<!ChoiceValue> 
-          value: Sunday
-          language:
-            default:
-              name: Sunday
-              description: ''
-        type: choice
-        apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-        choiceType: *ref_0
-        language: !<!Languages> 
-          default:
-            name: DaysOfWeek
-            description: Day of week
-        protocol: !<!Protocols> {}
+      schema: *ref_3
       required: true
       serializedName: DaysOfWeek
       language: !<!Languages> 
@@ -125,18 +134,17 @@ schemas: !<!Schemas>
           name: daysOfWeek
           description: Day of week
       protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - input
+    - output
     language: !<!Languages> 
       default:
         name: Model
         description: ''
-        namespace: Api100
+        namespace: ''
     protocol: !<!Protocols> {}
-  choices:
-  - *ref_1
-  - *ref_2
-  strings:
-  - *ref_0
-  - *ref_3
 globalParameters:
 - !<!Parameter> &ref_4
   schema: *ref_0
@@ -153,9 +161,6 @@ globalParameters:
   protocol: !<!Protocols> 
     http: !<!HttpParameter> 
       in: uri
-info: !<!Info> 
-  description: Schema mapping
-  title: TypeSchemaMapping
 operationGroups:
 - !<!OperationGroup> 
   $key: ''
@@ -164,14 +169,14 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
+    parameters:
+    - *ref_4
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_4
       - !<!Parameter> &ref_6
         schema: *ref_5
         implementation: Method
-        extensions:
-          x-ms-requestBody-name: body
         language: !<!Languages> 
           default:
             name: body
@@ -194,6 +199,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_5
@@ -208,8 +214,6 @@ operationGroups:
           - application/json
           statusCodes:
           - '200'
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: Operation

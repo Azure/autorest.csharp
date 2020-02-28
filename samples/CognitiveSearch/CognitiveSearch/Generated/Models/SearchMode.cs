@@ -11,6 +11,8 @@ namespace CognitiveSearch.Models
         /// <summary> any. </summary>
         Any,
         /// <summary> all. </summary>
-        All
+        All,
+        /// <summary> analyzingInfixMatching. </summary>
+        AnalyzingInfixMatching
     }
 }

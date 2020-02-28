@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
         {
             OdataType = "#Microsoft.Skills.Text.KeyPhraseExtractionSkill";
         }
-        /// <summary> The language codes supported for input text by KeyPhraseExtractionSkill. </summary>
+        /// <summary> A value indicating which language code to use. Default is en. </summary>
         public KeyPhraseExtractionSkillLanguage? DefaultLanguageCode { get; set; }
         /// <summary> A number indicating how many key phrases to return. If absent, all identified key phrases will be returned. </summary>
         public int? MaxKeyPhraseCount { get; set; }

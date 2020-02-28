@@ -1,50 +1,8 @@
 !<!CodeModel> 
+info: !<!Info> 
+  description: Test Infrastructure for AutoRest
+  title: body-integer
 schemas: !<!Schemas> 
-  objects:
-  - !<!ObjectSchema> &ref_5
-    type: object
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    properties:
-    - !<!Property> 
-      schema: !<!NumberSchema> &ref_0
-        type: integer
-        precision: 32
-        language: !<!Languages> 
-          default:
-            name: Integer
-            description: ''
-        protocol: !<!Protocols> {}
-      serializedName: status
-      language: !<!Languages> 
-        default:
-          name: status
-          description: ''
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: !<!StringSchema> &ref_1
-        type: string
-        apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-        language: !<!Languages> 
-          default:
-            name: ErrorMessage
-            description: ''
-        protocol: !<!Protocols> {}
-      serializedName: message
-      language: !<!Languages> 
-        default:
-          name: message
-          description: ''
-      protocol: !<!Protocols> {}
-    language: !<!Languages> 
-      default:
-        name: Error
-        description: ''
-        namespace: Api100
-    protocol: !<!Protocols> {}
   numbers:
   - !<!NumberSchema> &ref_4
     type: integer
@@ -57,7 +15,14 @@ schemas: !<!Schemas>
         name: Integer
         description: ''
     protocol: !<!Protocols> {}
-  - *ref_0
+  - !<!NumberSchema> &ref_0
+    type: integer
+    precision: 32
+    language: !<!Languages> 
+      default:
+        name: Integer
+        description: ''
+    protocol: !<!Protocols> {}
   - !<!NumberSchema> &ref_6
     type: integer
     apiVersions:
@@ -77,7 +42,16 @@ schemas: !<!Schemas>
         name: String
         description: simple string
     protocol: !<!Protocols> {}
-  - *ref_1
+  - !<!StringSchema> &ref_1
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: ErrorMessage
+        description: ''
+    protocol: !<!Protocols> {}
   unixtimes:
   - !<!UnixTimeSchema> &ref_11
     type: unixtime
@@ -88,6 +62,39 @@ schemas: !<!Schemas>
       default:
         name: Unixtime
         description: 'date in seconds since 1970-01-01T00:00:00Z.'
+    protocol: !<!Protocols> {}
+  objects:
+  - !<!ObjectSchema> &ref_5
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    properties:
+    - !<!Property> 
+      schema: *ref_0
+      serializedName: status
+      language: !<!Languages> 
+        default:
+          name: status
+          description: ''
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: *ref_1
+      serializedName: message
+      language: !<!Languages> 
+        default:
+          name: message
+          description: ''
+      protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - output
+    language: !<!Languages> 
+      default:
+        name: Error
+        description: ''
+        namespace: ''
     protocol: !<!Protocols> {}
 globalParameters:
 - !<!Parameter> &ref_3
@@ -105,9 +112,6 @@ globalParameters:
   protocol: !<!Protocols> 
     http: !<!HttpParameter> 
       in: uri
-info: !<!Info> 
-  description: Test Infrastructure for AutoRest
-  title: body-integer
 operationGroups:
 - !<!OperationGroup> 
   $key: int
@@ -116,10 +120,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_3
-      signatureParameters: []
+    parameters:
+    - *ref_3
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -129,6 +133,7 @@ operationGroups:
           path: /int/null
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_4
@@ -166,10 +171,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_3
-      signatureParameters: []
+    parameters:
+    - *ref_3
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -179,6 +184,7 @@ operationGroups:
           path: /int/invalid
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_4
@@ -216,10 +222,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_3
-      signatureParameters: []
+    parameters:
+    - *ref_3
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -229,6 +235,7 @@ operationGroups:
           path: /int/overflowint32
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_4
@@ -266,10 +273,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_3
-      signatureParameters: []
+    parameters:
+    - *ref_3
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -279,6 +286,7 @@ operationGroups:
           path: /int/underflowint32
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_4
@@ -316,10 +324,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_3
-      signatureParameters: []
+    parameters:
+    - *ref_3
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -329,6 +337,7 @@ operationGroups:
           path: /int/overflowint64
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_6
@@ -366,10 +375,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_3
-      signatureParameters: []
+    parameters:
+    - *ref_3
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -379,6 +388,7 @@ operationGroups:
           path: /int/underflowint64
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_6
@@ -416,15 +426,15 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
+    parameters:
+    - *ref_3
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_3
       - !<!Parameter> &ref_7
         schema: *ref_4
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: intBody
         language: !<!Languages> 
           default:
             name: intBody
@@ -447,6 +457,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -471,8 +482,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutMax32
@@ -482,15 +491,15 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
+    parameters:
+    - *ref_3
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_3
       - !<!Parameter> &ref_8
         schema: *ref_6
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: intBody
         language: !<!Languages> 
           default:
             name: intBody
@@ -513,6 +522,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -537,8 +547,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutMax64
@@ -548,15 +556,15 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
+    parameters:
+    - *ref_3
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_3
       - !<!Parameter> &ref_9
         schema: *ref_4
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: intBody
         language: !<!Languages> 
           default:
             name: intBody
@@ -579,6 +587,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -603,8 +612,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutMin32
@@ -614,15 +621,15 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
+    parameters:
+    - *ref_3
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_3
       - !<!Parameter> &ref_10
         schema: *ref_6
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: intBody
         language: !<!Languages> 
           default:
             name: intBody
@@ -645,6 +652,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -669,8 +677,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutMin64
@@ -680,10 +686,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_3
-      signatureParameters: []
+    parameters:
+    - *ref_3
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -693,6 +699,7 @@ operationGroups:
           path: /int/unixtime
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_11
@@ -730,15 +737,15 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
+    parameters:
+    - *ref_3
+    requests:
+    - !<!Request> 
       parameters:
-      - *ref_3
       - !<!Parameter> &ref_12
         schema: *ref_11
         implementation: Method
         required: true
-        extensions:
-          x-ms-requestBody-name: intBody
         language: !<!Languages> 
           default:
             name: intBody
@@ -761,6 +768,7 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -785,8 +793,6 @@ operationGroups:
           - application/json
           statusCodes:
           - default
-    extensions:
-      x-ms-requestBody-index: 0
     language: !<!Languages> 
       default:
         name: PutUnixTimeDate
@@ -796,10 +802,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_3
-      signatureParameters: []
+    parameters:
+    - *ref_3
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -809,6 +815,7 @@ operationGroups:
           path: /int/invalidunixtime
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_11
@@ -846,10 +853,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_3
-      signatureParameters: []
+    parameters:
+    - *ref_3
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -859,6 +866,7 @@ operationGroups:
           path: /int/nullunixtime
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_11

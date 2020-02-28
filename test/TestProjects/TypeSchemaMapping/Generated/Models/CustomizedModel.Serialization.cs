@@ -15,13 +15,13 @@ namespace CustomNamespace
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (ModelProperty != null)
+            if (CustomizedStringProperty != null)
             {
                 writer.WritePropertyName("ModelProperty");
-                writer.WriteStringValue(ModelProperty);
+                writer.WriteStringValue(CustomizedStringProperty);
             }
             writer.WritePropertyName("Fruit");
-            writer.WriteStringValue(Fruit.ToString());
+            writer.WriteStringValue(CustomizedFancyField.ToString());
             writer.WritePropertyName("DaysOfWeek");
             writer.WriteStringValue(DaysOfWeek.ToString());
             writer.WriteEndObject();
@@ -37,12 +37,12 @@ namespace CustomNamespace
                     {
                         continue;
                     }
-                    result.ModelProperty = property.Value.GetString();
+                    result.CustomizedStringProperty = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("Fruit"))
                 {
-                    result.Fruit = new CustomFruitEnum(property.Value.GetString());
+                    result.CustomizedFancyField = new CustomFruitEnum(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("DaysOfWeek"))

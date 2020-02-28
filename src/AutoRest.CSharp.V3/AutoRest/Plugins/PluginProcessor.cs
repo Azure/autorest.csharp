@@ -32,16 +32,16 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
             }
             try
             {
-                var configuration = new Configuration(autoRest);
+                Configuration configuration = new Configuration(autoRest);
 
-                var plugin = Plugins[autoRest.PluginName]();
-                var codeModel = new CodeModel();
+                IPlugin plugin = Plugins[autoRest.PluginName]();
+                CodeModel codeModel = new CodeModel();
                 if (plugin.DeserializeCodeModel)
                 {
-                    var codeModelFileName = (await autoRest.ListInputs()).FirstOrDefault();
+                    string codeModelFileName = (await autoRest.ListInputs()).FirstOrDefault();
                     if (codeModelFileName.IsNullOrEmpty()) throw new Exception("Generator did not receive the code model file.");
 
-                    var codeModelYaml = await autoRest.ReadFile(codeModelFileName);
+                    string codeModelYaml = await autoRest.ReadFile(codeModelFileName);
 
                     if (configuration.SaveCodeModel)
                     {

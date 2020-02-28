@@ -12,7 +12,7 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         /// <summary> The predicted Sentiment for the sentence. </summary>
         public SentenceSentimentValue Sentiment { get; set; }
-        /// <summary> Represents the confidence scores between 0 and 1 across all sentiment classes: positive, neutral, negative. </summary>
+        /// <summary> The sentiment confidence score between 0 and 1 for the sentence for all classes. </summary>
         public SentimentConfidenceScorePerLabel SentenceScores { get; set; } = new SentimentConfidenceScorePerLabel();
         /// <summary> The sentence offset from the start of the document. </summary>
         public int Offset { get; set; }

@@ -17,7 +17,7 @@ namespace xml_service.Models
         public string ContentType { get; set; }
         public string ContentEncoding { get; set; }
         public string ContentLanguage { get; set; }
-        public string ContentMd5 { get; set; }
+        public string ContentMD5 { get; set; }
         public string ContentDisposition { get; set; }
         public string CacheControl { get; set; }
         public int? BlobSequenceNumber { get; set; }

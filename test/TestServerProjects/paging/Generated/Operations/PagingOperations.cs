@@ -1007,7 +1007,7 @@ namespace paging
                 throw;
             }
         }
-        internal HttpMessage CreateGetMultiplePagesLroRequest(string clientRequestId, int? maxresults, int? timeout)
+        internal HttpMessage CreateGetMultiplePagesLRORequest(string clientRequestId, int? maxresults, int? timeout)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1035,13 +1035,13 @@ namespace paging
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ProductResult>> GetMultiplePagesLroAsync(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ProductResult>> GetMultiplePagesLROAsync(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesLro");
+            using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesLRO");
             scope.Start();
             try
             {
-                using var message = CreateGetMultiplePagesLroRequest(clientRequestId, maxresults, timeout);
+                using var message = CreateGetMultiplePagesLRORequest(clientRequestId, maxresults, timeout);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1066,13 +1066,13 @@ namespace paging
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ProductResult> GetMultiplePagesLro(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        public Response<ProductResult> GetMultiplePagesLRO(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesLro");
+            using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesLRO");
             scope.Start();
             try
             {
-                using var message = CreateGetMultiplePagesLroRequest(clientRequestId, maxresults, timeout);
+                using var message = CreateGetMultiplePagesLRORequest(clientRequestId, maxresults, timeout);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -2210,7 +2210,7 @@ namespace paging
                 throw;
             }
         }
-        internal HttpMessage CreateGetMultiplePagesLroNextPageRequest(string clientRequestId, int? maxresults, int? timeout, string nextLink)
+        internal HttpMessage CreateGetMultiplePagesLRONextPageRequest(string clientRequestId, int? maxresults, int? timeout, string nextLink)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -2238,18 +2238,18 @@ namespace paging
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ProductResult>> GetMultiplePagesLroNextPageAsync(string clientRequestId, int? maxresults, int? timeout, string nextLink, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ProductResult>> GetMultiplePagesLRONextPageAsync(string clientRequestId, int? maxresults, int? timeout, string nextLink, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesLro");
+            using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesLRO");
             scope.Start();
             try
             {
-                using var message = CreateGetMultiplePagesLroNextPageRequest(clientRequestId, maxresults, timeout, nextLink);
+                using var message = CreateGetMultiplePagesLRONextPageRequest(clientRequestId, maxresults, timeout, nextLink);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -2275,18 +2275,18 @@ namespace paging
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ProductResult> GetMultiplePagesLroNextPage(string clientRequestId, int? maxresults, int? timeout, string nextLink, CancellationToken cancellationToken = default)
+        public Response<ProductResult> GetMultiplePagesLRONextPage(string clientRequestId, int? maxresults, int? timeout, string nextLink, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesLro");
+            using var scope = clientDiagnostics.CreateScope("PagingOperations.GetMultiplePagesLRO");
             scope.Start();
             try
             {
-                using var message = CreateGetMultiplePagesLroNextPageRequest(clientRequestId, maxresults, timeout, nextLink);
+                using var message = CreateGetMultiplePagesLRONextPageRequest(clientRequestId, maxresults, timeout, nextLink);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -2791,16 +2791,16 @@ namespace paging
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public AsyncPageable<Product> GetMultiplePagesLroPageableAsync(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        public AsyncPageable<Product> GetMultiplePagesLROPageableAsync(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await GetMultiplePagesLroAsync(clientRequestId, maxresults, timeout, cancellationToken).ConfigureAwait(false);
+                var response = await GetMultiplePagesLROAsync(clientRequestId, maxresults, timeout, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             async Task<Page<Product>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await GetMultiplePagesLroNextPageAsync(clientRequestId, maxresults, timeout, nextLink, cancellationToken).ConfigureAwait(false);
+                var response = await GetMultiplePagesLRONextPageAsync(clientRequestId, maxresults, timeout, nextLink, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
@@ -2810,16 +2810,16 @@ namespace paging
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Pageable<Product> GetMultiplePagesLroPageable(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        public Pageable<Product> GetMultiplePagesLROPageable(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
             Page<Product> FirstPageFunc(int? pageSizeHint)
             {
-                var response = GetMultiplePagesLro(clientRequestId, maxresults, timeout, cancellationToken);
+                var response = GetMultiplePagesLRO(clientRequestId, maxresults, timeout, cancellationToken);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             Page<Product> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = GetMultiplePagesLroNextPage(clientRequestId, maxresults, timeout, nextLink, cancellationToken);
+                var response = GetMultiplePagesLRONextPage(clientRequestId, maxresults, timeout, nextLink, cancellationToken);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);

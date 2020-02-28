@@ -16,7 +16,7 @@ namespace CognitiveSearch.Models
             writer.WritePropertyName("name");
             writer.WriteStringValue(Name);
             writer.WritePropertyName("searchMode");
-            writer.WriteStringValue(SearchMode);
+            writer.WriteStringValue(SearchMode.ToSerialString());
             writer.WritePropertyName("sourceFields");
             writer.WriteStartArray();
             foreach (var item in SourceFields)
@@ -38,7 +38,7 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("searchMode"))
                 {
-                    result.SearchMode = property.Value.GetString();
+                    result.SearchMode = property.Value.GetString().ToSearchMode();
                     continue;
                 }
                 if (property.NameEquals("sourceFields"))

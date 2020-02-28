@@ -29,7 +29,7 @@ namespace model_flattening.Models
         private const string UpdatedValue = "Updated";
         private const string DeletingValue = "Deleting";
         private const string DeletedValue = "Deleted";
-        private const string OkValue = "OK";
+        private const string OKValue = "OK";
 
         /// <summary> Succeeded. </summary>
         public static FlattenedProductPropertiesProvisioningStateValues Succeeded { get; } = new FlattenedProductPropertiesProvisioningStateValues(SucceededValue);
@@ -52,7 +52,7 @@ namespace model_flattening.Models
         /// <summary> Deleted. </summary>
         public static FlattenedProductPropertiesProvisioningStateValues Deleted { get; } = new FlattenedProductPropertiesProvisioningStateValues(DeletedValue);
         /// <summary> OK. </summary>
-        public static FlattenedProductPropertiesProvisioningStateValues Ok { get; } = new FlattenedProductPropertiesProvisioningStateValues(OkValue);
+        public static FlattenedProductPropertiesProvisioningStateValues OK { get; } = new FlattenedProductPropertiesProvisioningStateValues(OKValue);
         /// <summary> Determines if two <see cref="FlattenedProductPropertiesProvisioningStateValues"/> values are the same. </summary>
         public static bool operator ==(FlattenedProductPropertiesProvisioningStateValues left, FlattenedProductPropertiesProvisioningStateValues right) => left.Equals(right);
         /// <summary> Determines if two <see cref="FlattenedProductPropertiesProvisioningStateValues"/> values are not the same. </summary>

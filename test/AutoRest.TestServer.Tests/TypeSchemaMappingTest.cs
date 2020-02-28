@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Reflection;
 using AnotherCustomNamespace;
 using CustomNamespace;
 using NUnit.Framework;
@@ -15,10 +16,12 @@ namespace AutoRest.TestServer.Tests
             var modelType = typeof(CustomizedModel);
             Assert.AreEqual(false, modelType.IsPublic);
             Assert.AreEqual("CustomNamespace", modelType.Namespace);
-            TypeAsserts.HasProperty(modelType, "ModelProperty");
 
-            var fruitProperty = TypeAsserts.HasProperty(modelType, "Fruit");
-            Assert.AreEqual(typeof(CustomFruitEnum), fruitProperty.PropertyType);
+            var property = TypeAsserts.HasProperty(modelType, "CustomizedStringProperty", BindingFlags.Instance | BindingFlags.NonPublic);
+            Assert.AreEqual(typeof(string), property.PropertyType);
+
+            var field = TypeAsserts.HasField(modelType, "CustomizedFancyField", BindingFlags.Instance | BindingFlags.NonPublic);
+            Assert.AreEqual(typeof(CustomFruitEnum), field.FieldType);
         }
 
         [Test]
@@ -27,7 +30,7 @@ namespace AutoRest.TestServer.Tests
             var modelType = typeof(CustomFruitEnum);
             Assert.AreEqual(false, modelType.IsPublic);
             Assert.AreEqual("AnotherCustomNamespace", modelType.Namespace);
-            TypeAsserts.HasProperty(modelType, "Apple");
+            TypeAsserts.HasProperty(modelType, "Apple", BindingFlags.Static | BindingFlags.Public);
         }
     }
 }

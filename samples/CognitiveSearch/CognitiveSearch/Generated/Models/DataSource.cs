@@ -12,15 +12,15 @@ namespace CognitiveSearch.Models
         public string Name { get; set; }
         /// <summary> The description of the datasource. </summary>
         public string Description { get; set; }
-        /// <summary> Defines the type of a datasource. </summary>
+        /// <summary> The type of the datasource. </summary>
         public DataSourceType Type { get; set; }
-        /// <summary> Represents credentials that can be used to connect to a datasource. </summary>
+        /// <summary> Credentials for the datasource. </summary>
         public DataSourceCredentials Credentials { get; set; } = new DataSourceCredentials();
-        /// <summary> Represents information about the entity (such as Azure SQL table or CosmosDB collection) that will be indexed. </summary>
+        /// <summary> The data container for the datasource. </summary>
         public DataContainer Container { get; set; } = new DataContainer();
-        /// <summary> Abstract base class for data change detection policies. </summary>
+        /// <summary> The data change detection policy for the datasource. </summary>
         public DataChangeDetectionPolicy DataChangeDetectionPolicy { get; set; }
-        /// <summary> Abstract base class for data deletion detection policies. </summary>
+        /// <summary> The data deletion detection policy for the datasource. </summary>
         public DataDeletionDetectionPolicy DataDeletionDetectionPolicy { get; set; }
         /// <summary> The ETag of the DataSource. </summary>
         public string ETag { get; set; }

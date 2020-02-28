@@ -18,7 +18,7 @@ namespace CognitiveSearch.Models
         public string FieldName { get; set; }
         /// <summary> A multiplier for the raw score. Must be a positive number not equal to 1.0. </summary>
         public double Boost { get; set; }
-        /// <summary> Defines the function used to interpolate score boosting across a range of documents. </summary>
+        /// <summary> A value indicating how boosting will be interpolated across document scores; defaults to &quot;Linear&quot;. </summary>
         public ScoringFunctionInterpolation? Interpolation { get; set; }
     }
 }

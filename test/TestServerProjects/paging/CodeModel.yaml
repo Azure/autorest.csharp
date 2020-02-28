@@ -1,5 +1,177 @@
 !<!CodeModel> 
+info: !<!Info> 
+  description: Long-running Operation for AutoRest
+  title: paging
 schemas: !<!Schemas> 
+  numbers:
+  - !<!NumberSchema> &ref_1
+    type: integer
+    precision: 32
+    language: !<!Languages> 
+      default:
+        name: Integer
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!NumberSchema> &ref_16
+    type: integer
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    precision: 32
+    language: !<!Languages> 
+      default:
+        name: Integer
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!NumberSchema> &ref_17
+    type: integer
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    defaultValue: 30
+    precision: 32
+    language: !<!Languages> 
+      default:
+        name: Integer
+        description: ''
+    protocol: !<!Protocols> {}
+  strings:
+  - !<!StringSchema> &ref_0
+    type: string
+    language: !<!Languages> 
+      default:
+        name: String
+        description: simple string
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_2
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: ProductPropertiesName
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_3
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: ProductResultValueNextLink
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_6
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: ProductResultNextLink
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_15
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: String
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_7
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: OdataProductResultOdataNextLink
+        description: ''
+    protocol: !<!Protocols> {}
+  choices:
+  - !<!ChoiceSchema> &ref_8
+    choices:
+    - !<!ChoiceValue> 
+      value: Succeeded
+      language:
+        default:
+          name: Succeeded
+          description: ''
+    - !<!ChoiceValue> 
+      value: Failed
+      language:
+        default:
+          name: Failed
+          description: ''
+    - !<!ChoiceValue> 
+      value: canceled
+      language:
+        default:
+          name: Canceled
+          description: ''
+    - !<!ChoiceValue> 
+      value: Accepted
+      language:
+        default:
+          name: Accepted
+          description: ''
+    - !<!ChoiceValue> 
+      value: Creating
+      language:
+        default:
+          name: Creating
+          description: ''
+    - !<!ChoiceValue> 
+      value: Created
+      language:
+        default:
+          name: Created
+          description: ''
+    - !<!ChoiceValue> 
+      value: Updating
+      language:
+        default:
+          name: Updating
+          description: ''
+    - !<!ChoiceValue> 
+      value: Updated
+      language:
+        default:
+          name: Updated
+          description: ''
+    - !<!ChoiceValue> 
+      value: Deleting
+      language:
+        default:
+          name: Deleting
+          description: ''
+    - !<!ChoiceValue> 
+      value: Deleted
+      language:
+        default:
+          name: Deleted
+          description: ''
+    - !<!ChoiceValue> 
+      value: OK
+      language:
+        default:
+          name: OK
+          description: ''
+    type: choice
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    choiceType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: OperationResultStatus
+        description: The status of the request
+    protocol: !<!Protocols> {}
   objects:
   - !<!ObjectSchema> &ref_13
     type: object
@@ -8,33 +180,26 @@ schemas: !<!Schemas>
       version: 1.0.0
     properties:
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_3
+      schema: !<!ArraySchema> &ref_9
         type: array
         apiVersions:
         - !<!ApiVersion> 
           version: 1.0.0
-        elementType: !<!ObjectSchema> &ref_0
+        elementType: !<!ObjectSchema> &ref_4
           type: object
           apiVersions:
           - !<!ApiVersion> 
             version: 1.0.0
           properties:
           - !<!Property> 
-            schema: !<!ObjectSchema> &ref_1
+            schema: !<!ObjectSchema> &ref_5
               type: object
               apiVersions:
               - !<!ApiVersion> 
                 version: 1.0.0
               properties:
               - !<!Property> 
-                schema: !<!NumberSchema> &ref_6
-                  type: integer
-                  precision: 32
-                  language: !<!Languages> 
-                    default:
-                      name: Integer
-                      description: ''
-                  protocol: !<!Protocols> {}
+                schema: *ref_1
                 serializedName: id
                 language: !<!Languages> 
                   default:
@@ -42,27 +207,22 @@ schemas: !<!Schemas>
                     description: ''
                 protocol: !<!Protocols> {}
               - !<!Property> 
-                schema: !<!StringSchema> &ref_8
-                  type: string
-                  apiVersions:
-                  - !<!ApiVersion> 
-                    version: 1.0.0
-                  language: !<!Languages> 
-                    default:
-                      name: ProductPropertiesName
-                      description: ''
-                  protocol: !<!Protocols> {}
+                schema: *ref_2
                 serializedName: name
                 language: !<!Languages> 
                   default:
                     name: name
                     description: ''
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - output
               language: !<!Languages> 
                 default:
                   name: ProductProperties
                   description: ''
-                  namespace: Api100
+                  namespace: ''
               protocol: !<!Protocols> {}
             serializedName: properties
             language: !<!Languages> 
@@ -70,11 +230,15 @@ schemas: !<!Schemas>
                 name: properties
                 description: ''
             protocol: !<!Protocols> {}
+          serializationFormats:
+          - json
+          usage:
+          - output
           language: !<!Languages> 
             default:
               name: Product
               description: ''
-              namespace: Api100
+              namespace: ''
           protocol: !<!Protocols> {}
         language: !<!Languages> 
           default:
@@ -88,30 +252,25 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_9
-        type: string
-        apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-        language: !<!Languages> 
-          default:
-            name: ProductResultValueNextLink
-            description: ''
-        protocol: !<!Protocols> {}
+      schema: *ref_3
       serializedName: nextLink
       language: !<!Languages> 
         default:
           name: nextLink
           description: ''
       protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - output
     language: !<!Languages> 
       default:
         name: ProductResultValue
         description: ''
-        namespace: Api100
+        namespace: ''
     protocol: !<!Protocols> {}
-  - *ref_0
-  - *ref_1
+  - *ref_4
+  - *ref_5
   - !<!ObjectSchema> &ref_14
     type: object
     apiVersions:
@@ -119,12 +278,12 @@ schemas: !<!Schemas>
       version: 1.0.0
     properties:
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_4
+      schema: !<!ArraySchema> &ref_10
         type: array
         apiVersions:
         - !<!ApiVersion> 
           version: 1.0.0
-        elementType: *ref_0
+        elementType: *ref_4
         language: !<!Languages> 
           default:
             name: ProductResultValues
@@ -137,41 +296,36 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_10
-        type: string
-        apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-        language: !<!Languages> 
-          default:
-            name: ProductResultNextLink
-            description: ''
-        protocol: !<!Protocols> {}
+      schema: *ref_6
       serializedName: nextLink
       language: !<!Languages> 
         default:
           name: nextLink
           description: ''
       protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - output
     language: !<!Languages> 
       default:
         name: ProductResult
         description: ''
-        namespace: Api100
+        namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_27
+  - !<!ObjectSchema> &ref_26
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
     properties:
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_5
+      schema: !<!ArraySchema> &ref_11
         type: array
         apiVersions:
         - !<!ApiVersion> 
           version: 1.0.0
-        elementType: *ref_0
+        elementType: *ref_4
         language: !<!Languages> 
           default:
             name: OdataProductResultValues
@@ -184,27 +338,22 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!StringSchema> &ref_11
-        type: string
-        apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-        language: !<!Languages> 
-          default:
-            name: OdataProductResultOdataNextLink
-            description: ''
-        protocol: !<!Protocols> {}
+      schema: *ref_7
       serializedName: odata.nextLink
       language: !<!Languages> 
         default:
           name: odataNextLink
           description: ''
       protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - output
     language: !<!Languages> 
       default:
         name: OdataProductResult
         description: ''
-        namespace: Api100
+        namespace: ''
     protocol: !<!Protocols> {}
   - !<!ObjectSchema> 
     type: object
@@ -213,90 +362,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     properties:
     - !<!Property> 
-      schema: !<!ChoiceSchema> &ref_2
-        choices:
-        - !<!ChoiceValue> 
-          value: Succeeded
-          language:
-            default:
-              name: Succeeded
-              description: ''
-        - !<!ChoiceValue> 
-          value: Failed
-          language:
-            default:
-              name: Failed
-              description: ''
-        - !<!ChoiceValue> 
-          value: canceled
-          language:
-            default:
-              name: Canceled
-              description: ''
-        - !<!ChoiceValue> 
-          value: Accepted
-          language:
-            default:
-              name: Accepted
-              description: ''
-        - !<!ChoiceValue> 
-          value: Creating
-          language:
-            default:
-              name: Creating
-              description: ''
-        - !<!ChoiceValue> 
-          value: Created
-          language:
-            default:
-              name: Created
-              description: ''
-        - !<!ChoiceValue> 
-          value: Updating
-          language:
-            default:
-              name: Updating
-              description: ''
-        - !<!ChoiceValue> 
-          value: Updated
-          language:
-            default:
-              name: Updated
-              description: ''
-        - !<!ChoiceValue> 
-          value: Deleting
-          language:
-            default:
-              name: Deleting
-              description: ''
-        - !<!ChoiceValue> 
-          value: Deleted
-          language:
-            default:
-              name: Deleted
-              description: ''
-        - !<!ChoiceValue> 
-          value: OK
-          language:
-            default:
-              name: Ok
-              description: ''
-        type: choice
-        apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-        choiceType: !<!StringSchema> &ref_7
-          type: string
-          language: !<!Languages> 
-            default:
-              name: String
-              description: simple string
-          protocol: !<!Protocols> {}
-        language: !<!Languages> 
-          default:
-            name: OperationResultStatus
-            description: The status of the request
-        protocol: !<!Protocols> {}
+      schema: *ref_8
       serializedName: status
       language: !<!Languages> 
         default:
@@ -307,58 +373,15 @@ schemas: !<!Schemas>
       default:
         name: OperationResult
         description: ''
-        namespace: Api100
+        namespace: ''
     protocol: !<!Protocols> {}
-  choices:
-  - *ref_2
   arrays:
-  - *ref_3
-  - *ref_4
-  - *ref_5
-  numbers:
-  - *ref_6
-  - !<!NumberSchema> &ref_17
-    type: integer
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    precision: 32
-    language: !<!Languages> 
-      default:
-        name: Integer
-        description: ''
-    protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_18
-    type: integer
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    defaultValue: 30
-    precision: 32
-    language: !<!Languages> 
-      default:
-        name: Integer
-        description: ''
-    protocol: !<!Protocols> {}
-  strings:
-  - *ref_7
-  - *ref_8
   - *ref_9
   - *ref_10
-  - !<!StringSchema> &ref_16
-    type: string
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    language: !<!Languages> 
-      default:
-        name: String
-        description: ''
-    protocol: !<!Protocols> {}
   - *ref_11
 globalParameters:
 - !<!Parameter> &ref_12
-  schema: *ref_7
+  schema: *ref_0
   clientDefaultValue: 'http://localhost:3000'
   implementation: Client
   required: true
@@ -372,21 +395,18 @@ globalParameters:
   protocol: !<!Protocols> 
     http: !<!HttpParameter> 
       in: uri
-info: !<!Info> 
-  description: Long-running Operation for AutoRest
-  title: paging
 operationGroups:
 - !<!OperationGroup> 
   $key: Paging
   operations:
-  - !<!Operation> &ref_34
+  - !<!Operation> 
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_12
-      signatureParameters: []
+    parameters:
+    - *ref_12
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -396,6 +416,7 @@ operationGroups:
           path: /paging/noitemname
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_13
@@ -434,10 +455,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_12
-      signatureParameters: []
+    parameters:
+    - *ref_12
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -447,6 +468,7 @@ operationGroups:
           path: /paging/nullnextlink
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_14
@@ -474,23 +496,23 @@ operationGroups:
     extensions:
       x-ms-pageable:
         itemName: values
-        nextLinkName: &ref_15 {}
+        nextLinkName: null
     language: !<!Languages> 
       default:
         name: GetNullNextLinkNamePages
         description: 'A paging operation that must ignore any kind of nextLink, and stop after page 1.'
         paging:
           itemName: values
-          nextLinkName: *ref_15
+          nextLinkName: null
     protocol: !<!Protocols> {}
   - !<!Operation> 
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_12
-      signatureParameters: []
+    parameters:
+    - *ref_12
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -500,6 +522,7 @@ operationGroups:
           path: /paging/single
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_14
@@ -540,52 +563,49 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_12
-      - !<!Parameter> &ref_19
-        schema: *ref_16
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: clientRequestId
-            description: ''
-            serializedName: client-request-id
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: header
-      - !<!Parameter> &ref_20
-        schema: *ref_17
-        implementation: Method
-        extensions:
-          x-ms-parameter-grouping: &ref_22
-            postfix: Options
-        language: !<!Languages> 
-          default:
-            name: maxresults
-            description: Sets the maximum number of items to return in the response.
-            serializedName: maxresults
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: header
-      - !<!Parameter> &ref_21
-        schema: *ref_18
-        implementation: Method
-        extensions:
-          x-ms-parameter-grouping: &ref_23
-            postfix: Options
-        language: !<!Languages> 
-          default:
-            name: timeout
-            description: 'Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.'
-            serializedName: timeout
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: header
-      signatureParameters:
-      - *ref_19
-      - *ref_20
-      - *ref_21
+    parameters:
+    - *ref_12
+    - !<!Parameter> &ref_18
+      schema: *ref_15
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: clientRequestId
+          description: ''
+          serializedName: client-request-id
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: header
+    - !<!Parameter> &ref_19
+      schema: *ref_16
+      implementation: Method
+      extensions:
+        x-ms-parameter-grouping: &ref_21
+          postfix: Options
+      language: !<!Languages> 
+        default:
+          name: maxresults
+          description: Sets the maximum number of items to return in the response.
+          serializedName: maxresults
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: header
+    - !<!Parameter> &ref_20
+      schema: *ref_17
+      implementation: Method
+      extensions:
+        x-ms-parameter-grouping: &ref_22
+          postfix: Options
+      language: !<!Languages> 
+        default:
+          name: timeout
+          description: 'Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.'
+          serializedName: timeout
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: header
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -595,6 +615,10 @@ operationGroups:
           path: /paging/multiple
           method: get
           uri: '{$host}'
+    signatureParameters:
+    - *ref_18
+    - *ref_19
+    - *ref_20
     responses:
     - !<!SchemaResponse> 
       schema: *ref_14
@@ -635,50 +659,47 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_12
-      - !<!Parameter> &ref_24
-        schema: *ref_16
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: clientRequestId
-            description: ''
-            serializedName: client-request-id
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: header
-      - !<!Parameter> &ref_25
-        schema: *ref_17
-        implementation: Method
-        extensions:
-          x-ms-parameter-grouping: *ref_22
-        language: !<!Languages> 
-          default:
-            name: maxresults
-            description: Sets the maximum number of items to return in the response.
-            serializedName: maxresults
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: header
-      - !<!Parameter> &ref_26
-        schema: *ref_18
-        implementation: Method
-        extensions:
-          x-ms-parameter-grouping: *ref_23
-        language: !<!Languages> 
-          default:
-            name: timeout
-            description: 'Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.'
-            serializedName: timeout
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: header
-      signatureParameters:
-      - *ref_24
-      - *ref_25
-      - *ref_26
+    parameters:
+    - *ref_12
+    - !<!Parameter> &ref_23
+      schema: *ref_15
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: clientRequestId
+          description: ''
+          serializedName: client-request-id
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: header
+    - !<!Parameter> &ref_24
+      schema: *ref_16
+      implementation: Method
+      extensions:
+        x-ms-parameter-grouping: *ref_21
+      language: !<!Languages> 
+        default:
+          name: maxresults
+          description: Sets the maximum number of items to return in the response.
+          serializedName: maxresults
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: header
+    - !<!Parameter> &ref_25
+      schema: *ref_17
+      implementation: Method
+      extensions:
+        x-ms-parameter-grouping: *ref_22
+      language: !<!Languages> 
+        default:
+          name: timeout
+          description: 'Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.'
+          serializedName: timeout
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: header
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -688,9 +709,13 @@ operationGroups:
           path: /paging/multiple/odata
           method: get
           uri: '{$host}'
+    signatureParameters:
+    - *ref_23
+    - *ref_24
+    - *ref_25
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_27
+      schema: *ref_26
       language: !<!Languages> 
         default:
           name: ''
@@ -728,66 +753,62 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_12
-      - !<!Parameter> &ref_28
-        schema: *ref_16
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: clientRequestId
-            description: ''
-            serializedName: client-request-id
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: header
-      - !<!Parameter> &ref_29
-        schema: *ref_17
-        implementation: Method
-        extensions:
-          x-ms-parameter-grouping: *ref_22
-        language: !<!Languages> 
-          default:
-            name: maxresults
-            description: Sets the maximum number of items to return in the response.
-            serializedName: maxresults
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: header
-      - !<!Parameter> &ref_30
-        schema: *ref_17
-        implementation: Method
-        required: true
-        extensions:
-          x-ms-parameter-grouping:
-            postfix: Options
-        language: !<!Languages> 
-          default:
-            name: offset
-            description: Offset of return value
-            serializedName: offset
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: path
-      - !<!Parameter> &ref_31
-        schema: *ref_18
-        implementation: Method
-        extensions:
-          x-ms-parameter-grouping: *ref_23
-        language: !<!Languages> 
-          default:
-            name: timeout
-            description: 'Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.'
-            serializedName: timeout
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: header
-      signatureParameters:
-      - *ref_28
-      - *ref_29
-      - *ref_30
-      - *ref_31
+    parameters:
+    - *ref_12
+    - !<!Parameter> &ref_27
+      schema: *ref_15
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: clientRequestId
+          description: ''
+          serializedName: client-request-id
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: header
+    - !<!Parameter> &ref_28
+      schema: *ref_16
+      implementation: Method
+      extensions:
+        x-ms-parameter-grouping: *ref_21
+      language: !<!Languages> 
+        default:
+          name: maxresults
+          description: Sets the maximum number of items to return in the response.
+          serializedName: maxresults
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: header
+    - !<!Parameter> &ref_29
+      schema: *ref_16
+      implementation: Method
+      required: true
+      extensions:
+        x-ms-parameter-grouping:
+          postfix: Options
+      language: !<!Languages> 
+        default:
+          name: offset
+          description: Offset of return value
+          serializedName: offset
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: path
+    - !<!Parameter> &ref_30
+      schema: *ref_17
+      implementation: Method
+      extensions:
+        x-ms-parameter-grouping: *ref_22
+      language: !<!Languages> 
+        default:
+          name: timeout
+          description: 'Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.'
+          serializedName: timeout
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: header
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -797,6 +818,11 @@ operationGroups:
           path: '/paging/multiple/withpath/{offset}'
           method: get
           uri: '{$host}'
+    signatureParameters:
+    - *ref_27
+    - *ref_28
+    - *ref_29
+    - *ref_30
     responses:
     - !<!SchemaResponse> 
       schema: *ref_14
@@ -837,10 +863,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_12
-      signatureParameters: []
+    parameters:
+    - *ref_12
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -850,6 +876,7 @@ operationGroups:
           path: /paging/multiple/retryfirst
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_14
@@ -890,10 +917,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_12
-      signatureParameters: []
+    parameters:
+    - *ref_12
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -903,6 +930,7 @@ operationGroups:
           path: /paging/multiple/retrysecond
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_14
@@ -943,10 +971,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_12
-      signatureParameters: []
+    parameters:
+    - *ref_12
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -956,6 +984,7 @@ operationGroups:
           path: /paging/single/failure
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_14
@@ -996,10 +1025,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_12
-      signatureParameters: []
+    parameters:
+    - *ref_12
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -1009,6 +1038,7 @@ operationGroups:
           path: /paging/multiple/failure
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_14
@@ -1049,10 +1079,10 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_12
-      signatureParameters: []
+    parameters:
+    - *ref_12
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -1062,6 +1092,7 @@ operationGroups:
           path: /paging/multiple/failureuri
           method: get
           uri: '{$host}'
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
       schema: *ref_14
@@ -1102,36 +1133,34 @@ operationGroups:
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_12
-      - !<!Parameter> &ref_32
-        schema: *ref_16
-        implementation: Method
-        required: true
-        language: !<!Languages> 
-          default:
-            name: apiVersion
-            description: Sets the api version to use.
-            serializedName: api_version
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: query
-      - !<!Parameter> &ref_33
-        schema: *ref_16
-        implementation: Method
-        required: true
-        language: !<!Languages> 
-          default:
-            name: tenant
-            description: Sets the tenant to use.
-            serializedName: tenant
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: path
-      signatureParameters:
-      - *ref_32
-      - *ref_33
+    parameters:
+    - *ref_12
+    - !<!Parameter> &ref_31
+      schema: *ref_15
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: apiVersion
+          description: Sets the api version to use.
+          serializedName: api_version
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+    - !<!Parameter> &ref_32
+      schema: *ref_15
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: tenant
+          description: Sets the tenant to use.
+          serializedName: tenant
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: path
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -1141,9 +1170,12 @@ operationGroups:
           path: '/paging/multiple/fragment/{tenant}'
           method: get
           uri: '{$host}'
+    signatureParameters:
+    - *ref_31
+    - *ref_32
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_27
+      schema: *ref_26
       language: !<!Languages> 
         default:
           name: ''
@@ -1179,48 +1211,144 @@ operationGroups:
           itemName: values
           member: NextFragment
           nextLinkName: odata.nextLink
-          nextLinkOperation: *ref_34
+          nextLinkOperation: !<!Operation> &ref_36
+            apiVersions:
+            - !<!ApiVersion> 
+              version: 1.0.0
+            parameters:
+            - *ref_12
+            - !<!Parameter> &ref_33
+              schema: *ref_15
+              implementation: Method
+              required: true
+              language: !<!Languages> 
+                default:
+                  name: apiVersion
+                  description: Sets the api version to use.
+                  serializedName: api_version
+              protocol: !<!Protocols> 
+                http: !<!HttpParameter> 
+                  in: query
+            - !<!Parameter> &ref_34
+              schema: *ref_15
+              implementation: Method
+              required: true
+              language: !<!Languages> 
+                default:
+                  name: tenant
+                  description: Sets the tenant to use.
+                  serializedName: tenant
+              protocol: !<!Protocols> 
+                http: !<!HttpParameter> 
+                  in: path
+            - !<!Parameter> &ref_35
+              schema: *ref_15
+              implementation: Method
+              required: true
+              extensions:
+                x-ms-skip-url-encoding: true
+              language: !<!Languages> 
+                default:
+                  name: nextLink
+                  description: Next link for list operation.
+                  serializedName: nextLink
+              protocol: !<!Protocols> 
+                http: !<!HttpParameter> 
+                  in: path
+            requests:
+            - !<!Request> 
+              language: !<!Languages> 
+                default:
+                  name: ''
+                  description: ''
+              protocol: !<!Protocols> 
+                http: !<!HttpRequest> 
+                  path: '/paging/multiple/fragment/{tenant}/{nextLink}'
+                  method: get
+                  uri: '{$host}'
+            signatureParameters:
+            - *ref_33
+            - *ref_34
+            - *ref_35
+            responses:
+            - !<!SchemaResponse> 
+              schema: *ref_26
+              language: !<!Languages> 
+                default:
+                  name: ''
+                  description: ''
+              protocol: !<!Protocols> 
+                http: !<!HttpResponse> 
+                  knownMediaType: json
+                  mediaTypes:
+                  - application/json
+                  statusCodes:
+                  - '200'
+            exceptions:
+            - !<!Response> 
+              language: !<!Languages> 
+                default:
+                  name: ''
+                  description: ''
+              protocol: !<!Protocols> 
+                http: !<!HttpResponse> 
+                  statusCodes:
+                  - default
+            extensions:
+              x-ms-pageable:
+                itemName: values
+                nextLinkName: odata.nextLink
+                operationName: Paging_nextFragment
+            language: !<!Languages> 
+              default:
+                name: NextFragment
+                description: 'A paging operation that doesn''t return a full URL, just a fragment'
+                paging:
+                  group: Paging
+                  itemName: values
+                  member: NextFragment
+                  nextLinkName: odata.nextLink
+                  nextLinkOperation: *ref_36
+            protocol: !<!Protocols> {}
     protocol: !<!Protocols> {}
   - !<!Operation> 
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_12
-      - !<!Parameter> &ref_35
-        schema: *ref_16
-        implementation: Method
-        required: true
-        extensions:
-          x-ms-parameter-grouping: &ref_43
-            name: custom-parameter-group
-        language: !<!Languages> 
-          default:
-            name: apiVersion
-            description: Sets the api version to use.
-            serializedName: api_version
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: query
-      - !<!Parameter> &ref_36
-        schema: *ref_16
-        implementation: Method
-        required: true
-        extensions:
-          x-ms-parameter-grouping: &ref_44
-            name: custom-parameter-group
-        language: !<!Languages> 
-          default:
-            name: tenant
-            description: Sets the tenant to use.
-            serializedName: tenant
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: path
-      signatureParameters:
-      - *ref_35
-      - *ref_36
+    parameters:
+    - *ref_12
+    - !<!Parameter> &ref_37
+      schema: *ref_15
+      implementation: Method
+      required: true
+      extensions:
+        x-ms-parameter-grouping: &ref_39
+          name: custom-parameter-group
+      language: !<!Languages> 
+        default:
+          name: apiVersion
+          description: Sets the api version to use.
+          serializedName: api_version
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+    - !<!Parameter> &ref_38
+      schema: *ref_15
+      implementation: Method
+      required: true
+      extensions:
+        x-ms-parameter-grouping: &ref_40
+          name: custom-parameter-group
+      language: !<!Languages> 
+        default:
+          name: tenant
+          description: Sets the tenant to use.
+          serializedName: tenant
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: path
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -1230,9 +1358,12 @@ operationGroups:
           path: '/paging/multiple/fragmentwithgrouping/{tenant}'
           method: get
           uri: '{$host}'
+    signatureParameters:
+    - *ref_37
+    - *ref_38
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_27
+      schema: *ref_26
       language: !<!Languages> 
         default:
           name: ''
@@ -1268,56 +1399,155 @@ operationGroups:
           itemName: values
           member: NextFragmentWithGrouping
           nextLinkName: odata.nextLink
-          nextLinkOperation: *ref_34
+          nextLinkOperation: !<!Operation> &ref_44
+            apiVersions:
+            - !<!ApiVersion> 
+              version: 1.0.0
+            parameters:
+            - *ref_12
+            - !<!Parameter> &ref_41
+              schema: *ref_15
+              implementation: Method
+              required: true
+              extensions:
+                x-ms-parameter-grouping: *ref_39
+              language: !<!Languages> 
+                default:
+                  name: apiVersion
+                  description: Sets the api version to use.
+                  serializedName: api_version
+              protocol: !<!Protocols> 
+                http: !<!HttpParameter> 
+                  in: query
+            - !<!Parameter> &ref_42
+              schema: *ref_15
+              implementation: Method
+              required: true
+              extensions:
+                x-ms-parameter-grouping: *ref_40
+              language: !<!Languages> 
+                default:
+                  name: tenant
+                  description: Sets the tenant to use.
+                  serializedName: tenant
+              protocol: !<!Protocols> 
+                http: !<!HttpParameter> 
+                  in: path
+            - !<!Parameter> &ref_43
+              schema: *ref_15
+              implementation: Method
+              required: true
+              extensions:
+                x-ms-skip-url-encoding: true
+              language: !<!Languages> 
+                default:
+                  name: nextLink
+                  description: Next link for list operation.
+                  serializedName: nextLink
+              protocol: !<!Protocols> 
+                http: !<!HttpParameter> 
+                  in: path
+            requests:
+            - !<!Request> 
+              language: !<!Languages> 
+                default:
+                  name: ''
+                  description: ''
+              protocol: !<!Protocols> 
+                http: !<!HttpRequest> 
+                  path: '/paging/multiple/fragmentwithgrouping/{tenant}/{nextLink}'
+                  method: get
+                  uri: '{$host}'
+            signatureParameters:
+            - *ref_41
+            - *ref_42
+            - *ref_43
+            responses:
+            - !<!SchemaResponse> 
+              schema: *ref_26
+              language: !<!Languages> 
+                default:
+                  name: ''
+                  description: ''
+              protocol: !<!Protocols> 
+                http: !<!HttpResponse> 
+                  knownMediaType: json
+                  mediaTypes:
+                  - application/json
+                  statusCodes:
+                  - '200'
+            exceptions:
+            - !<!Response> 
+              language: !<!Languages> 
+                default:
+                  name: ''
+                  description: ''
+              protocol: !<!Protocols> 
+                http: !<!HttpResponse> 
+                  statusCodes:
+                  - default
+            extensions:
+              x-ms-pageable:
+                itemName: values
+                nextLinkName: odata.nextLink
+                operationName: Paging_nextFragmentWithGrouping
+            language: !<!Languages> 
+              default:
+                name: NextFragmentWithGrouping
+                description: 'A paging operation that doesn''t return a full URL, just a fragment'
+                paging:
+                  group: Paging
+                  itemName: values
+                  member: NextFragmentWithGrouping
+                  nextLinkName: odata.nextLink
+                  nextLinkOperation: *ref_44
+            protocol: !<!Protocols> {}
     protocol: !<!Protocols> {}
   - !<!Operation> 
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_12
-      - !<!Parameter> &ref_37
-        schema: *ref_16
-        implementation: Method
-        language: !<!Languages> 
-          default:
-            name: clientRequestId
-            description: ''
-            serializedName: client-request-id
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: header
-      - !<!Parameter> &ref_38
-        schema: *ref_17
-        implementation: Method
-        extensions:
-          x-ms-parameter-grouping: *ref_22
-        language: !<!Languages> 
-          default:
-            name: maxresults
-            description: Sets the maximum number of items to return in the response.
-            serializedName: maxresults
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: header
-      - !<!Parameter> &ref_39
-        schema: *ref_18
-        implementation: Method
-        extensions:
-          x-ms-parameter-grouping: *ref_23
-        language: !<!Languages> 
-          default:
-            name: timeout
-            description: 'Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.'
-            serializedName: timeout
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: header
-      signatureParameters:
-      - *ref_37
-      - *ref_38
-      - *ref_39
+    parameters:
+    - *ref_12
+    - !<!Parameter> &ref_45
+      schema: *ref_15
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: clientRequestId
+          description: ''
+          serializedName: client-request-id
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: header
+    - !<!Parameter> &ref_46
+      schema: *ref_16
+      implementation: Method
+      extensions:
+        x-ms-parameter-grouping: *ref_21
+      language: !<!Languages> 
+        default:
+          name: maxresults
+          description: Sets the maximum number of items to return in the response.
+          serializedName: maxresults
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: header
+    - !<!Parameter> &ref_47
+      schema: *ref_17
+      implementation: Method
+      extensions:
+        x-ms-parameter-grouping: *ref_22
+      language: !<!Languages> 
+        default:
+          name: timeout
+          description: 'Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.'
+          serializedName: timeout
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: header
+    requests:
+    - !<!Request> 
       language: !<!Languages> 
         default:
           name: ''
@@ -1327,6 +1557,10 @@ operationGroups:
           path: /paging/multiple/lro
           method: post
           uri: '{$host}'
+    signatureParameters:
+    - *ref_45
+    - *ref_46
+    - *ref_47
     responses:
     - !<!SchemaResponse> 
       schema: *ref_14
@@ -1358,212 +1592,14 @@ operationGroups:
         nextLinkName: nextLink
     language: !<!Languages> 
       default:
-        name: GetMultiplePagesLro
+        name: GetMultiplePagesLRO
         description: A long-running paging operation that includes a nextLink that has 10 pages
         paging:
           itemName: values
           nextLinkName: nextLink
     protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_12
-      - !<!Parameter> &ref_40
-        schema: *ref_16
-        implementation: Method
-        required: true
-        language: !<!Languages> 
-          default:
-            name: apiVersion
-            description: Sets the api version to use.
-            serializedName: api_version
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: query
-      - !<!Parameter> &ref_41
-        schema: *ref_16
-        implementation: Method
-        required: true
-        language: !<!Languages> 
-          default:
-            name: tenant
-            description: Sets the tenant to use.
-            serializedName: tenant
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: path
-      - !<!Parameter> &ref_42
-        schema: *ref_16
-        implementation: Method
-        required: true
-        extensions:
-          x-ms-skip-url-encoding: true
-        language: !<!Languages> 
-          default:
-            name: nextLink
-            description: Next link for list operation.
-            serializedName: nextLink
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: path
-      signatureParameters:
-      - *ref_40
-      - *ref_41
-      - *ref_42
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpRequest> 
-          path: '/paging/multiple/fragment/{tenant}/{nextLink}'
-          method: get
-          uri: '{$host}'
-    responses:
-    - !<!SchemaResponse> 
-      schema: *ref_27
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!Response> 
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          statusCodes:
-          - default
-    extensions:
-      x-ms-pageable:
-        itemName: values
-        nextLinkName: odata.nextLink
-        operationName: Paging_nextFragment
-    language: !<!Languages> 
-      default:
-        name: NextFragment
-        description: 'A paging operation that doesn''t return a full URL, just a fragment'
-        paging:
-          group: Paging
-          itemName: values
-          member: NextFragment
-          nextLinkName: odata.nextLink
-          nextLinkOperation: *ref_34
-    protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    request: !<!Request> 
-      parameters:
-      - *ref_12
-      - !<!Parameter> &ref_45
-        schema: *ref_16
-        implementation: Method
-        required: true
-        extensions:
-          x-ms-parameter-grouping: *ref_43
-        language: !<!Languages> 
-          default:
-            name: apiVersion
-            description: Sets the api version to use.
-            serializedName: api_version
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: query
-      - !<!Parameter> &ref_46
-        schema: *ref_16
-        implementation: Method
-        required: true
-        extensions:
-          x-ms-parameter-grouping: *ref_44
-        language: !<!Languages> 
-          default:
-            name: tenant
-            description: Sets the tenant to use.
-            serializedName: tenant
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: path
-      - !<!Parameter> &ref_47
-        schema: *ref_16
-        implementation: Method
-        required: true
-        extensions:
-          x-ms-skip-url-encoding: true
-        language: !<!Languages> 
-          default:
-            name: nextLink
-            description: Next link for list operation.
-            serializedName: nextLink
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: path
-      signatureParameters:
-      - *ref_45
-      - *ref_46
-      - *ref_47
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpRequest> 
-          path: '/paging/multiple/fragmentwithgrouping/{tenant}/{nextLink}'
-          method: get
-          uri: '{$host}'
-    responses:
-    - !<!SchemaResponse> 
-      schema: *ref_27
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!Response> 
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          statusCodes:
-          - default
-    extensions:
-      x-ms-pageable:
-        itemName: values
-        nextLinkName: odata.nextLink
-        operationName: Paging_nextFragmentWithGrouping
-    language: !<!Languages> 
-      default:
-        name: NextFragmentWithGrouping
-        description: 'A paging operation that doesn''t return a full URL, just a fragment'
-        paging:
-          group: Paging
-          itemName: values
-          member: NextFragmentWithGrouping
-          nextLinkName: odata.nextLink
-          nextLinkOperation: *ref_34
-    protocol: !<!Protocols> {}
+  - *ref_36
+  - *ref_44
   language: !<!Languages> 
     default:
       name: Paging

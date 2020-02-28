@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
         {
             Type = "magnitude";
         }
-        /// <summary> Provides parameter values to a magnitude scoring function. </summary>
+        /// <summary> Parameter values for the magnitude scoring function. </summary>
         public MagnitudeScoringParameters Parameters { get; set; } = new MagnitudeScoringParameters();
     }
 }

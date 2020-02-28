@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
         {
             OdataType = "#Microsoft.Skills.Text.SentimentSkill";
         }
-        /// <summary> The language codes supported for input text by SentimentSkill. </summary>
+        /// <summary> A value indicating which language code to use. Default is en. </summary>
         public SentimentSkillLanguage? DefaultLanguageCode { get; set; }
     }
 }

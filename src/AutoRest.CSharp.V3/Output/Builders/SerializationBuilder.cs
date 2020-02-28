@@ -9,7 +9,7 @@ using AutoRest.CSharp.V3.Input;
 using AutoRest.CSharp.V3.Output.Models.Serialization;
 using AutoRest.CSharp.V3.Output.Models.Serialization.Json;
 using AutoRest.CSharp.V3.Output.Models.Serialization.Xml;
-
+using AutoRest.CSharp.V3.Output.Models.Types;
 
 namespace AutoRest.CSharp.V3.Output.Builders
 {
@@ -22,16 +22,14 @@ namespace AutoRest.CSharp.V3.Output.Builders
             _typeFactory = typeFactory;
         }
 
-        public ObjectSerialization BuildObject(KnownMediaType mediaType, ObjectSchema objectSchema, bool isNullable)
+        public ObjectSerialization BuildObject(KnownMediaType mediaType, ObjectSchema objectSchema, ObjectType type)
         {
-            CSharpType schemaTypeReference = _typeFactory.CreateType(objectSchema, isNullable);
-
             switch (mediaType)
             {
                 case KnownMediaType.Json:
-                    return BuildJsonObjectSerialization(objectSchema, schemaTypeReference, isNullable);
+                    return BuildJsonObjectSerialization(objectSchema, type);
                 case KnownMediaType.Xml:
-                    return BuildXmlObjectSerialization(objectSchema, schemaTypeReference, isNullable);
+                    return BuildXmlObjectSerialization(objectSchema, type);
                 default:
                     throw new NotImplementedException(mediaType.ToString());
             }
@@ -113,7 +111,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             }
         }
 
-        private XmlObjectSerialization BuildXmlObjectSerialization(ObjectSchema objectSchema, CSharpType schemaTypeReference, bool isNullable)
+        private XmlObjectSerialization BuildXmlObjectSerialization(ObjectSchema objectSchema, ObjectType objectType)
         {
             List<XmlObjectElementSerialization> elements = new List<XmlObjectElementSerialization>();
             List<XmlObjectAttributeSerialization> attributes = new List<XmlObjectAttributeSerialization>();
@@ -125,12 +123,14 @@ namespace AutoRest.CSharp.V3.Output.Builders
                     var name = property.SerializedName;
                     var isAttribute = property.Schema.Serialization?.Xml?.Attribute == true;
 
+                    var propertyName = objectType.GetPropertyForSchemaProperty(property, includeParents: true).DeclarationOptions.Name;
+
                     if (isAttribute)
                     {
                         attributes.Add(
                             new XmlObjectAttributeSerialization(
                                 name,
-                                property.CSharpName(),
+                                propertyName,
                                 BuildXmlValueSerialization(property.Schema, property.IsNullable())
                             )
                         );
@@ -141,13 +141,13 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
                         if (valueSerialization is XmlArraySerialization arraySerialization)
                         {
-                            embeddedArrays.Add(new XmlObjectArraySerialization(property.CSharpName(), arraySerialization));
+                            embeddedArrays.Add(new XmlObjectArraySerialization(propertyName, arraySerialization));
                         }
                         else
                         {
                             elements.Add(
                                 new XmlObjectElementSerialization(
-                                    property.CSharpName(),
+                                    propertyName,
                                     valueSerialization
                                 )
                             );
@@ -158,36 +158,38 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
             return new XmlObjectSerialization(
                 objectSchema.Serialization?.Xml?.Name ?? objectSchema.Language.Default.Name,
-                schemaTypeReference, elements.ToArray(), attributes.ToArray(), embeddedArrays.ToArray(),
-                schemaTypeReference
+                objectType.Type, elements.ToArray(), attributes.ToArray(), embeddedArrays.ToArray(),
+                objectType.Type
                 );
         }
 
-        private IEnumerable<JsonPropertySerialization> GetPropertySerializationsFromBag(PropertyBag propertyBag)
+        private IEnumerable<JsonPropertySerialization> GetPropertySerializationsFromBag(PropertyBag propertyBag, ObjectType objectType)
         {
             foreach (Property property in propertyBag.Properties)
             {
+                string propertyName = objectType.GetPropertyForSchemaProperty(property, includeParents: true).DeclarationOptions.Name;
+
                 yield return new JsonPropertySerialization(
                     property.SerializedName,
-                    property.CSharpName(),
+                    propertyName,
                     BuildSerialization(property.Schema, property.IsNullable())
                     );
             }
 
             foreach ((string name, PropertyBag innerBag) in propertyBag.Bag)
             {
-                JsonPropertySerialization[] serializationProperties = GetPropertySerializationsFromBag(innerBag).ToArray();
+                JsonPropertySerialization[] serializationProperties = GetPropertySerializationsFromBag(innerBag, objectType).ToArray();
                 JsonObjectSerialization objectSerialization = new JsonObjectSerialization(null, serializationProperties, null, null);
                 yield return new JsonPropertySerialization(name, null, objectSerialization);
             }
         }
 
-        private JsonObjectSerialization BuildJsonObjectSerialization(ObjectSchema objectSchema, CSharpType schemaTypeReference, bool isNullable)
+        private JsonObjectSerialization BuildJsonObjectSerialization(ObjectSchema objectSchema, ObjectType objectType)
         {
             PropertyBag propertyBag = new PropertyBag();
             propertyBag.Properties.AddRange(EnumerateHierarchy(objectSchema).SelectMany(s => s.Properties!));
             PopulatePropertyBag(propertyBag, 0);
-            return new JsonObjectSerialization(schemaTypeReference, GetPropertySerializationsFromBag(propertyBag).ToArray(), CreateAdditionalProperties(objectSchema), schemaTypeReference);
+            return new JsonObjectSerialization(objectType.Type, GetPropertySerializationsFromBag(propertyBag, objectType).ToArray(), CreateAdditionalProperties(objectSchema), objectType.Type);
         }
 
         private class PropertyBag

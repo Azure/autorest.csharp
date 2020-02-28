@@ -8,7 +8,7 @@ namespace xml_service.Models
     /// <summary> I am root, and I ref a model WITH meta. </summary>
     public partial class RootWithRefAndMeta
     {
-        /// <summary> I am a complex type with XML node. </summary>
+        /// <summary> XML will use XMLComplexTypeWithMeta. </summary>
         public ComplexTypeWithMeta RefToModel { get; set; }
         /// <summary> Something else (just to avoid flattening). </summary>
         public string Something { get; set; }

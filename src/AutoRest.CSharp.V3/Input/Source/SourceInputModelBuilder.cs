@@ -13,11 +13,13 @@ namespace AutoRest.CSharp.V3.Input.Source
     {
         private readonly Compilation _compilation;
         private readonly INamedTypeSymbol _schemaNameAttribute;
+        private readonly INamedTypeSymbol _schemaMemberAttribute;
 
         private SourceInputModelBuilder(Compilation compilation)
         {
             _compilation = compilation;
             _schemaNameAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenSchemaAttribute).FullName);
+            _schemaMemberAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenSchemaMemberAttribute).FullName);
         }
 
         public static SourceInputModel Build(Compilation compilation)
@@ -37,9 +39,18 @@ namespace AutoRest.CSharp.V3.Input.Source
                 {
                     if (type is INamedTypeSymbol namedTypeSymbol)
                     {
-                        if (TryGetSchemaName(type, out var schemaName))
+                        if (TryGetSchemaName(type, _schemaNameAttribute, out var schemaName))
                         {
-                            definedSchemas.Add(new SourceTypeMapping(schemaName, namedTypeSymbol));
+                            List<SourceMemberMapping> memberMappings = new List<SourceMemberMapping>();
+                            foreach (var member in namedTypeSymbol.GetMembers())
+                            {
+                                if (TryGetSchemaName(member, _schemaMemberAttribute, out var schemaMemberName))
+                                {
+                                    memberMappings.Add(new SourceMemberMapping(schemaMemberName, member));
+                                }
+                            }
+
+                            definedSchemas.Add(new SourceTypeMapping(schemaName, namedTypeSymbol, memberMappings.ToArray()));
                         }
                     }
                 }
@@ -48,11 +59,11 @@ namespace AutoRest.CSharp.V3.Input.Source
             return new SourceInputModel(definedSchemas.ToArray());
         }
 
-        private bool TryGetSchemaName(ITypeSymbol type, [NotNullWhen(true)] out string? name)
+        private bool TryGetSchemaName(ISymbol symbol, INamedTypeSymbol attributeType, [NotNullWhen(true)] out string? name)
         {
             name = null;
 #pragma warning disable RS1024
-            var attribute = type.GetAttributes().SingleOrDefault(a => a.AttributeClass.Equals(_schemaNameAttribute));
+            var attribute = symbol.GetAttributes().SingleOrDefault(a => a.AttributeClass.Equals(attributeType));
 #pragma warning restore
             if (attribute == null)
             {

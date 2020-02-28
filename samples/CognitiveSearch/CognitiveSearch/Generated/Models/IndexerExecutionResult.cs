@@ -11,7 +11,7 @@ namespace CognitiveSearch.Models
     /// <summary> Represents the result of an individual indexer execution. </summary>
     public partial class IndexerExecutionResult
     {
-        /// <summary> Represents the status of an individual indexer execution. </summary>
+        /// <summary> The outcome of this indexer execution. </summary>
         public IndexerExecutionStatus? Status { get; internal set; }
         /// <summary> The error message indicating the top-level error, if any. </summary>
         public string ErrorMessage { get; internal set; }
