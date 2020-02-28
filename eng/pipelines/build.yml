@@ -20,6 +20,7 @@ jobs:
         inputs:
           version: "$(DotNetCoreSDKVersion)"
       - task: NodeTool@0
+        displayName: "Install Node 13.x"
         inputs:
           versionSpec: '13.x'
       - script: |
