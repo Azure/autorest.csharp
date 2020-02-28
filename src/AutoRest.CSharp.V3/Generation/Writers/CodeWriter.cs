@@ -269,13 +269,13 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         public CodeWriter Line(FormattableString formattableString)
         {
             Append(formattableString);
-            Line();
+            _builder.AppendLine();
             return this;
         }
 
         public CodeWriter Line()
         {
-            _builder.AppendLine();
+            CreateNewLine();
             return this;
         }
 
@@ -367,7 +367,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             Debug.Assert(actual == expected);
         }
 
-        public void RemoveTrailingComma()
+        private void ActionOnLast(Action<int> action)
         {
             for (int i = _builder.Length - 1; i >= 0; i--)
             {
@@ -376,13 +376,32 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     continue;
                 }
 
+                action(i);
+
+                break;
+            }
+        }
+
+        public void RemoveTrailingComma()
+        {
+            ActionOnLast(i =>
+            {
                 if (_builder[i] == ',')
                 {
                     _builder.Remove(i, _builder.Length - i);
                 }
+            });
+        }
 
-                break;
-            }
+        private void CreateNewLine()
+        {
+            ActionOnLast(i =>
+            {
+                if (_builder[i] != '{')
+                {
+                    _builder.AppendLine();
+                }
+            });
         }
     }
 }
