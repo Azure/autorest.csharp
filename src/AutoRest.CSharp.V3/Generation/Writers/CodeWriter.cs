@@ -269,13 +269,28 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         public CodeWriter Line(FormattableString formattableString)
         {
             Append(formattableString);
-            _builder.AppendLine();
+            if (!string.IsNullOrEmpty(formattableString.ToString()))
+            {
+                LineRaw();
+            }
+
             return this;
         }
 
         public CodeWriter Line()
         {
-            CreateNewLine();
+            int? lastCharIndex = FindLastNonWhitespaceCharacterIndex();
+            if (lastCharIndex.HasValue && _builder[lastCharIndex.Value] != '{')
+            {
+                LineRaw();
+            }
+
+            return this;
+        }
+
+        public CodeWriter LineRaw()
+        {
+            _builder.AppendLine();
             return this;
         }
 
@@ -367,7 +382,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             Debug.Assert(actual == expected);
         }
 
-        private void ActionOnLast(Action<int> action)
+        private int? FindLastNonWhitespaceCharacterIndex()
         {
             for (int i = _builder.Length - 1; i >= 0; i--)
             {
@@ -376,32 +391,19 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     continue;
                 }
 
-                action(i);
-
-                break;
+                return i;
             }
+
+            return null;
         }
 
         public void RemoveTrailingComma()
         {
-            ActionOnLast(i =>
+            int? lastCharIndex = FindLastNonWhitespaceCharacterIndex();
+            if (lastCharIndex.HasValue && _builder[lastCharIndex.Value] == ',')
             {
-                if (_builder[i] == ',')
-                {
-                    _builder.Remove(i, _builder.Length - i);
-                }
-            });
-        }
-
-        private void CreateNewLine()
-        {
-            ActionOnLast(i =>
-            {
-                if (_builder[i] != '{')
-                {
-                    _builder.AppendLine();
-                }
-            });
+                _builder.Remove(lastCharIndex.Value, _builder.Length - lastCharIndex.Value);
+            }
         }
     }
 }
