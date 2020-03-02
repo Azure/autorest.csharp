@@ -17,9 +17,9 @@ using AutoRest.CSharp.V3.Output.Models.Types;
 using AutoRest.CSharp.V3.Utilities;
 using Azure.Core;
 using Microsoft.CodeAnalysis;
+using AzureResponse = Azure.Response;
 using Diagnostic = AutoRest.CSharp.V3.Output.Models.Requests.Diagnostic;
 using Request = AutoRest.CSharp.V3.Output.Models.Requests.Request;
-using AzureResponse = Azure.Response;
 
 namespace AutoRest.CSharp.V3.Output.Builders
 {
@@ -53,9 +53,16 @@ namespace AutoRest.CSharp.V3.Output.Builders
             Dictionary<string, OperationMethod> processedMethods = new Dictionary<string, OperationMethod>(StringComparer.InvariantCultureIgnoreCase);
             foreach (Operation operation in operationGroup.Operations)
             {
-                Method? method = BuildMethod(operation, clientName, clientParameters);
-                if (method != null)
+                foreach (ServiceRequest serviceRequest in operation.Requests)
                 {
+                    HttpRequest? httpRequest = serviceRequest.Protocol.Http as HttpRequest;
+                    if (httpRequest == null)
+                    {
+                        // Only handles HTTP requests
+                        continue;
+                    }
+
+                    Method method = BuildMethod(operation, clientName, clientParameters, httpRequest, serviceRequest.Parameters);
                     processedMethods.Add(operation.Language.Default.Name, new OperationMethod(operation, method));
                 }
             }
@@ -152,18 +159,11 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
         private static Parameter[] OrderParameters(IEnumerable<Parameter> parameters) => parameters.OrderBy(p => p.DefaultValue != null).ToArray();
 
-        private Method? BuildMethod(Operation operation, string clientName, IReadOnlyDictionary<string, Parameter> clientParameters)
+        private Method BuildMethod(Operation operation, string clientName, IReadOnlyDictionary<string, Parameter> clientParameters, HttpRequest httpRequest, IEnumerable<RequestParameter> requestParameters)
         {
-            //TODO: Handle multiple requests: https://github.com/Azure/autorest.csharp/issues/455
-            ServiceRequest? serviceRequest = operation.Requests.FirstOrDefault();
-            HttpRequest? httpRequest = serviceRequest?.Protocol.Http as HttpRequest;
             //TODO: Handle multiple responses: https://github.com/Azure/autorest.csharp/issues/413
             ServiceResponse? response = operation.Responses.FirstOrDefault();
             HttpResponse? httpResponse = response?.Protocol.Http as HttpResponse;
-            if (httpRequest == null)
-            {
-                return null;
-            }
 
             HttpWithBodyRequest? httpRequestWithBody = httpRequest as HttpWithBodyRequest;
             Dictionary<string, PathSegment> uriParameters = new Dictionary<string, PathSegment>();
@@ -173,7 +173,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             List<Parameter> methodParameters = new List<Parameter>();
 
             RequestBody? body = null;
-            RequestParameter[] parameters = operation.Parameters.Concat(serviceRequest?.Parameters ?? Enumerable.Empty<RequestParameter>()).ToArray();
+            RequestParameter[] parameters = operation.Parameters.Concat(requestParameters).ToArray();
             foreach (RequestParameter requestParameter in parameters)
             {
                 string defaultName = requestParameter.Language.Default.Name;

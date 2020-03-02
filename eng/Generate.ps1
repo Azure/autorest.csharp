@@ -89,6 +89,7 @@ $testNames =
     'httpInfrastructure',
     #'httpInfrastructure.quirks',
     'lro',
+    'media_types',
     'model-flattening',
     'paging',
     #'parameter-flattening',

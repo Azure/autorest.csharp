@@ -46,6 +46,13 @@ namespace AutoRest.CSharp.V3.Input
 
     }
 
+    // TODO: Temporary
+    internal partial class HttpWithBodyRequest
+    {
+        [YamlMember(Alias = "binary")]
+        public bool? Binary { get; set; }
+    }
+
     /// <summary>language metadata specific to schema instances</summary>
     internal partial class Language : IDictionary<string, object>
     {
