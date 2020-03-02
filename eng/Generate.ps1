@@ -30,7 +30,7 @@ function Invoke-AutoRest($baseOutput, $title, $autoRestArguments)
 
     if ($clean)
     {
-        Get-ChildItem $outputPath -Filter Generated -Directory -Recurse | Remove-Item -Force -Recurse;
+        Get-ChildItem $outputPath -Filter Generated -Directory -Recurse | Remove-Item -Force -Recurse
     }
 
     Invoke $command

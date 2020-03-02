@@ -117,7 +117,6 @@ namespace body_duration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutPositiveDurationAsync(TimeSpan durationBody, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DurationOperations.PutPositiveDuration");
             scope.Start();
             try
@@ -143,7 +142,6 @@ namespace body_duration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutPositiveDuration(TimeSpan durationBody, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DurationOperations.PutPositiveDuration");
             scope.Start();
             try

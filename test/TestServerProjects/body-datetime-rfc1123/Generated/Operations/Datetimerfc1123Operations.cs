@@ -318,7 +318,6 @@ namespace body_datetime_rfc1123
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutUtcMaxDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Operations.PutUtcMaxDateTime");
             scope.Start();
             try
@@ -344,7 +343,6 @@ namespace body_datetime_rfc1123
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutUtcMaxDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Operations.PutUtcMaxDateTime");
             scope.Start();
             try
@@ -519,7 +517,6 @@ namespace body_datetime_rfc1123
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutUtcMinDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Operations.PutUtcMinDateTime");
             scope.Start();
             try
@@ -545,7 +542,6 @@ namespace body_datetime_rfc1123
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutUtcMinDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Operations.PutUtcMinDateTime");
             scope.Start();
             try

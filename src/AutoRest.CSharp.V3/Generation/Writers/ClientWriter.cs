@@ -511,10 +511,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 }
             }
 
-            if (parameters.Any())
-            {
-                writer.Line();
-            }
+            writer.Line();
         }
 
         private void WriteConstant(CodeWriter writer, Constant constant)

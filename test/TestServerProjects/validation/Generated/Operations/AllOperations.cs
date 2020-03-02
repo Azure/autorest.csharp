@@ -303,7 +303,6 @@ namespace validation
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Product>> PostWithConstantInBodyAsync(Product body, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("AllOperations.PostWithConstantInBody");
             scope.Start();
             try
@@ -332,7 +331,6 @@ namespace validation
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Product> PostWithConstantInBody(Product body, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("AllOperations.PostWithConstantInBody");
             scope.Start();
             try
