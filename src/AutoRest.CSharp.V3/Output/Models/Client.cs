@@ -10,7 +10,7 @@ namespace AutoRest.CSharp.V3.Output.Models
 {
     internal class Client: ITypeProvider
     {
-        public Client(TypeDeclarationOptions declaredType, string description, Parameter[] parameters, Method[] methods, Paging[] pagingMethods, LongRunningOperation[] longRunningOperationMethods)
+        public Client(TypeDeclarationOptions declaredType, string description, Parameter[] parameters, Method[] methods, PagingInfo[] pagingMethods, LongRunningOperation[] longRunningOperationMethods)
         {
             DeclaredType = declaredType;
             Parameters = parameters;
@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.V3.Output.Models
 
         public string Description { get; }
         public Method[] Methods { get; }
-        public Paging[] PagingMethods { get; }
+        public PagingInfo[] PagingMethods { get; }
         public LongRunningOperation[] LongRunningOperationMethods { get; }
         public TypeDeclarationOptions DeclaredType { get; }
         public Parameter[] Parameters { get; }

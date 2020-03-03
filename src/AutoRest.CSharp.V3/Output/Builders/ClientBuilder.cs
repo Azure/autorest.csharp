@@ -50,69 +50,64 @@ namespace AutoRest.CSharp.V3.Output.Builders
             }
 
             string clientName = operationGroup.CSharpName();
-            Dictionary<string, OperationMethod> processedMethods = new Dictionary<string, OperationMethod>(StringComparer.InvariantCultureIgnoreCase);
+            Dictionary<string, OperationMethod> operationMethods = new Dictionary<string, OperationMethod>(StringComparer.InvariantCultureIgnoreCase);
             foreach (Operation operation in operationGroup.Operations)
             {
                 Method? method = BuildMethod(operation, clientName, clientParameters);
                 if (method != null)
                 {
-                    processedMethods.Add(operation.Language.Default.Name, new OperationMethod(operation, method));
+                    operationMethods.Add(operation.Language.Default.Name, new OperationMethod(operation, method));
                 }
             }
 
             List<Method> nextPageMethods = new List<Method>();
-            List<Paging> pagingMethods = new List<Paging>();
+            List<PagingInfo> pagingMethods = new List<PagingInfo>();
             List<LongRunningOperation> longRunningOperationMethods = new List<LongRunningOperation>();
-            foreach ((string processedName, OperationMethod processed) in processedMethods)
+            foreach ((string operationName, (Operation operation, Method method)) in operationMethods)
             {
-                IDictionary<object, object>? pageable = processed.Operation.Extensions.GetValue<IDictionary<object, object>>("x-ms-pageable");
-                if (pageable != null)
+                Paging? paging = operation.Language.Default.Paging;
+                if (paging != null)
                 {
-                    //TODO: Assuming operationName is in this operation group: https://github.com/Azure/autorest.modelerfour/issues/85
-                    string? extensionOperationName = pageable.GetValue<string>("operationName");
-                    string? operationName = extensionOperationName?.Split('_').Last();
-
-                    OperationMethod? next = null;
-                    if (operationName != null)
+                    Method? next = null;
+                    if (paging.NextLinkOperation != null)
                     {
-                        if (!processedMethods.TryGetValue(operationName, out OperationMethod? nextOperationMethod))
+                        //TODO: This assumes the operation is within this operationGroup
+                        string nextOperationName = paging.NextLinkOperation.Language.Default.Name;
+                        if (!operationMethods.TryGetValue(nextOperationName, out OperationMethod? nextOperationMethod))
                         {
-                            throw new Exception(
-                                $"The x-ms-pageable operationName \"{extensionOperationName}\" for operation {operationGroup.Key}_{processedName} was not found.");
+                            throw new Exception($"The x-ms-pageable operationName \"{paging.Group}_{paging.Member}\" for operation {operationGroup.Key}_{operation.Language.Default.Name} was not found.");
                         }
 
-                        next = nextOperationMethod;
+                        next = nextOperationMethod.Method;
                     }
                     // If there is no operationName or we didn't find an existing operation, we use the original method to construct the nextPageMethod.
-                    Method nextPageMethod = next?.Method ?? BuildNextPageMethod(processed.Method);
+                    Method nextPageMethod = next ?? BuildNextPageMethod(method);
                     // Only add the method if it didn't previously exist
                     if (next == null)
                     {
                         nextPageMethods.Add(nextPageMethod);
                     }
 
-                    if (!(processed.Method.Response.ResponseBody is ObjectResponseBody objectResponseBody))
+                    if (!(method.Response.ResponseBody is ObjectResponseBody objectResponseBody))
                     {
-                        throw new InvalidOperationException($"Method {processed.Method.Name} has to have a return value");
+                        throw new InvalidOperationException($"Method {method.Name} has to have a return value");
                     }
 
-                    var type = objectResponseBody.Type;
-                    var implementation = type.Implementation;
+                    ITypeProvider implementation = objectResponseBody.Type.Implementation;
                     if (!(implementation is ObjectType objectType))
                     {
-                        throw new InvalidOperationException($"The return type of {processed.Method.Name} has to be and object schema to be used in paging");
+                        throw new InvalidOperationException($"The return type of {method.Name} has to be and object schema to be used in paging");
                     }
 
-                    Paging pagingMethod = GetClientMethodPaging(processed.Method, nextPageMethod, pageable, objectType);
-                    pagingMethods.Add(pagingMethod);
+                    PagingInfo pagingInfo = GetPagingInfo(method, nextPageMethod, paging, objectType);
+                    pagingMethods.Add(pagingInfo);
                 }
                 // For some reason, booleans in dictionaries are deserialized as string instead of bool.
-                bool longRunningOperation = Convert.ToBoolean(processed.Operation.Extensions.GetValue<string>("x-ms-long-running-operation") ?? "false");
-                if (longRunningOperation && pageable == null)
+                bool longRunningOperation = Convert.ToBoolean(operation.Extensions.GetValue<string>("x-ms-long-running-operation") ?? "false");
+                if (longRunningOperation && paging == null)
                 {
-                    Method method = processed.Method;
-                    Response originalResponse = processed.Method.Response;
-                    processedMethods[processedName].Method = new Method(
+                    Response originalResponse = method.Response;
+                    operationMethods[operationName].Method = new Method(
                         method.Name,
                         method.Description,
                         method.Request,
@@ -121,14 +116,14 @@ namespace AutoRest.CSharp.V3.Output.Builders
                         method.Diagnostics
                     );
 
-                    IDictionary<object, object> options = processed.Operation.Extensions.GetValue<IDictionary<object, object>>("x-ms-long-running-operation-options")
+                    IDictionary<object, object> options = operation.Extensions.GetValue<IDictionary<object, object>>("x-ms-long-running-operation-options")
                                                           ?? ImmutableDictionary<object, object>.Empty;
                     LongRunningOperation longRunningOperationMethod = BuildLongRunningOperation(method, originalResponse, options);
                     longRunningOperationMethods.Add(longRunningOperationMethod);
                 }
             }
 
-            Method[] methods = processedMethods.Select(om => om.Value.Method).Concat(nextPageMethods).ToArray();
+            Method[] methods = operationMethods.Select(om => om.Value.Method).Concat(nextPageMethods).ToArray();
             return new Client(
                 BuilderHelpers.CreateTypeAttributes(clientName, _context.DefaultNamespace, Accessibility.Internal),
                 operationGroup.Language.Default.Description,
@@ -144,6 +139,12 @@ namespace AutoRest.CSharp.V3.Output.Builders
             {
                 Operation = operation;
                 Method = method;
+            }
+
+            public void Deconstruct(out Operation operation, out Method method)
+            {
+                operation = Operation;
+                method = Method;
             }
 
             public Operation Operation { get; }
@@ -312,12 +313,12 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 method.Diagnostics);
         }
 
-        private Paging GetClientMethodPaging(Method method, Method nextPageMethod, IDictionary<object, object> pageable, ObjectType type)
+        private PagingInfo GetPagingInfo(Method method, Method nextPageMethod, Paging paging, ObjectType type)
         {
-            var nextLinkName = pageable.GetValue<string>("nextLinkName");
-            var itemName = pageable.GetValue<string>("itemName") ?? "value";
+            string? nextLinkName = paging.NextLinkName;
+            string itemName = paging.ItemName ?? "value";
 
-            var itemProperty = type.GetPropertyBySerializedName(itemName);
+            ObjectTypeProperty itemProperty = type.GetPropertyBySerializedName(itemName);
 
             ObjectTypeProperty? nextLinkProperty = null;
             if (nextLinkName != null)
@@ -327,15 +328,13 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
             if (itemProperty.SchemaProperty.Schema is ArraySchema arraySchema)
             {
-                var itemType = _typeFactory.CreateType(arraySchema.ElementType, false);
+                CSharpType itemType = _typeFactory.CreateType(arraySchema.ElementType, false);
 
-                var name = $"{method.Name}Pageable";
-                return new Paging(method, nextPageMethod, name, nextLinkProperty?.DeclarationOptions.Name, itemProperty.DeclarationOptions.Name, itemType);
+                string name = $"{method.Name}Pageable";
+                return new PagingInfo(method, nextPageMethod, name, nextLinkProperty?.DeclarationOptions.Name, itemProperty.DeclarationOptions.Name, itemType);
             }
-            else
-            {
-                throw new InvalidOperationException($"{itemName} property has to be an array schema, actual {itemProperty.SchemaProperty}");
-            }
+
+            throw new InvalidOperationException($"{itemName} property has to be an array schema, actual {itemProperty.SchemaProperty}");
         }
 
         private static LongRunningOperation BuildLongRunningOperation(Method method, Response originalResponse, IDictionary<object, object> options)

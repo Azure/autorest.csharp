@@ -46,6 +46,24 @@ namespace AutoRest.CSharp.V3.Input
 
     }
 
+    internal partial class Paging
+    {
+        [YamlMember(Alias = "group")]
+        public string? Group { get; set; }
+
+        [YamlMember(Alias = "itemName")]
+        public string? ItemName { get; set; }
+
+        [YamlMember(Alias = "member")]
+        public string? Member { get; set; }
+
+        [YamlMember(Alias = "nextLinkName")]
+        public string? NextLinkName { get; set; }
+
+        [YamlMember(Alias = "nextLinkOperation")]
+        public Operation? NextLinkOperation { get; set; }
+    }
+
     /// <summary>language metadata specific to schema instances</summary>
     internal partial class Language : IDictionary<string, object>
     {
@@ -65,6 +83,9 @@ namespace AutoRest.CSharp.V3.Input
 
         [YamlMember(Alias = "serializedName")]
         public string? SerializedName { get; set; }
+
+        [YamlMember(Alias = "paging")]
+        public Paging? Paging { get; set; }
 
         [YamlIgnore]
         public IDictionary<string, object> AdditionalProperties = new Dictionary<string, object>();
