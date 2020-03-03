@@ -135,11 +135,11 @@ namespace xml_service.Models
                 value2 = BlobProperties.DeserializeBlobProperties(properties);
             }
             result.Properties = value2;
-            System.Collections.Generic.IDictionary<string, string> value3 = default;
+            IDictionary<string, string> value3 = default;
             var metadata = element.Element("Metadata");
             if (metadata != null)
             {
-                value3 = new System.Collections.Generic.Dictionary<string, string>(); var elements = metadata.Elements();
+                value3 = new Dictionary<string, string>(); var elements = metadata.Elements();
                 foreach (var e in elements)
                 {
                     string value4 = default;

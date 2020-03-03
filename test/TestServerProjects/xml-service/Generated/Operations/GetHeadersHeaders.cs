@@ -12,8 +12,8 @@ namespace xml_service
 {
     internal class GetHeadersHeaders
     {
-        private readonly Azure.Response _response;
-        public GetHeadersHeaders(Azure.Response response)
+        private readonly Response _response;
+        public GetHeadersHeaders(Response response)
         {
             _response = response;
         }

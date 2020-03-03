@@ -141,7 +141,7 @@ namespace xml_service.Models
             {
                 result.Author = (string)author;
             }
-            result.Slides = new System.Collections.Generic.List<xml_service.Models.Slide>();
+            result.Slides = new List<Slide>();
             foreach (var e in element.Elements("slide"))
             {
                 Slide value = default;

@@ -107,7 +107,7 @@ namespace xml_service.Models
             result = new AppleBarrel(); var goodApples = element.Element("GoodApples");
             if (goodApples != null)
             {
-                result.GoodApples = new System.Collections.Generic.List<string>();
+                result.GoodApples = new List<string>();
                 foreach (var e in goodApples.Elements("Apple"))
                 {
                     string value = default;
@@ -118,7 +118,7 @@ namespace xml_service.Models
             var badApples = element.Element("BadApples");
             if (badApples != null)
             {
-                result.BadApples = new System.Collections.Generic.List<string>();
+                result.BadApples = new List<string>();
                 foreach (var e in badApples.Elements("Apple"))
                 {
                     string value = default;

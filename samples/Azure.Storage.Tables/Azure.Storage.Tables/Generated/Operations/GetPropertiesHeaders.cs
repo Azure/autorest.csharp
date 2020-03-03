@@ -12,8 +12,8 @@ namespace Azure.Storage.Tables
 {
     internal class GetPropertiesHeaders
     {
-        private readonly Azure.Response _response;
-        public GetPropertiesHeaders(Azure.Response response)
+        private readonly Response _response;
+        public GetPropertiesHeaders(Response response)
         {
             _response = response;
         }

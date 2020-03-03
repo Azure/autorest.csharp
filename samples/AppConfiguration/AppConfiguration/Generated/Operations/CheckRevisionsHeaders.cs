@@ -12,8 +12,8 @@ namespace AppConfiguration
 {
     internal class CheckRevisionsHeaders
     {
-        private readonly Azure.Response _response;
-        public CheckRevisionsHeaders(Azure.Response response)
+        private readonly Response _response;
+        public CheckRevisionsHeaders(Response response)
         {
             _response = response;
         }

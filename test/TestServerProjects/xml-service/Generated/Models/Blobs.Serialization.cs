@@ -96,14 +96,14 @@ namespace xml_service.Models
         internal static Blobs DeserializeBlobs(XElement element)
         {
             Blobs result = default;
-            result = new Blobs(); result.BlobPrefix = new System.Collections.Generic.List<xml_service.Models.BlobPrefix>();
+            result = new Blobs(); result.BlobPrefix = new List<BlobPrefix>();
             foreach (var e in element.Elements("BlobPrefix"))
             {
                 BlobPrefix value = default;
                 value = Models.BlobPrefix.DeserializeBlobPrefix(e);
                 result.BlobPrefix.Add(value);
             }
-            result.Blob = new System.Collections.Generic.List<xml_service.Models.Blob>();
+            result.Blob = new List<Blob>();
             foreach (var e0 in element.Elements("Blob"))
             {
                 Blob value = default;

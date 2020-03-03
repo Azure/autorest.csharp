@@ -12,8 +12,8 @@ namespace AppConfiguration
 {
     internal class CheckLabelsHeaders
     {
-        private readonly Azure.Response _response;
-        public CheckLabelsHeaders(Azure.Response response)
+        private readonly Response _response;
+        public CheckLabelsHeaders(Response response)
         {
             _response = response;
         }

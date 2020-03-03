@@ -93,7 +93,7 @@ namespace Azure.Storage.Tables.Models
                 value = (string)odatametadata;
             }
             result.OdataMetadata = value;
-            result.Value = new System.Collections.Generic.List<Azure.Storage.Tables.Models.TableResponseProperties>();
+            result.Value = new List<TableResponseProperties>();
             foreach (var e in element.Elements("TableResponseProperties"))
             {
                 TableResponseProperties value0 = default;

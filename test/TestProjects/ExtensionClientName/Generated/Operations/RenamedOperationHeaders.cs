@@ -12,8 +12,8 @@ namespace ExtensionClientName
 {
     internal class RenamedOperationHeaders
     {
-        private readonly Azure.Response _response;
-        public RenamedOperationHeaders(Azure.Response response)
+        private readonly Response _response;
+        public RenamedOperationHeaders(Response response)
         {
             _response = response;
         }

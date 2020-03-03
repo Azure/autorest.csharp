@@ -19,7 +19,7 @@ namespace body_complex.Models
             Fishtype = "smart_salmon";
         }
         public string CollegeDegree { get; set; }
-        private readonly IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
+        private readonly IDictionary<string, object> _additionalProperties = new Dictionary<string, object>();
         /// <inheritdoc />
         public IEnumerator<KeyValuePair<string, object>> GetEnumerator() => _additionalProperties.GetEnumerator();
         /// <inheritdoc />
