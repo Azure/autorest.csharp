@@ -249,7 +249,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
             void WriteNullCheck()
             {
-                using (writer.If($"{itemVariable}.Value.ValueKind == {writer.Type(typeof(JsonValueKind))}.Null"))
+                using (writer.If($"{itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.Null"))
                 {
                     writer.Append($"continue;");
                 }
