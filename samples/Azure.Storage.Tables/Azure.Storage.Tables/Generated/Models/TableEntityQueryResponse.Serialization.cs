@@ -107,11 +107,11 @@ namespace Azure.Storage.Tables.Models
                 value = (string)odatametadata;
             }
             result.OdataMetadata = value;
-            result.Value = new System.Collections.Generic.List<System.Collections.Generic.IDictionary<string, object>>();
+            result.Value = new List<IDictionary<string, object>>();
             foreach (var e in element.Elements("TableEntityProperties"))
             {
-                System.Collections.Generic.IDictionary<string, object> value0 = default;
-                value0 = new System.Collections.Generic.Dictionary<string, object>(); var elements = e.Elements();
+                IDictionary<string, object> value0 = default;
+                value0 = new Dictionary<string, object>(); var elements = e.Elements();
                 foreach (var e0 in elements)
                 {
                     object value1 = default;

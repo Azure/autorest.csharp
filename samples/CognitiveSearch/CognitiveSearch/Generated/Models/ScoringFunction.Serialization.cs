@@ -10,9 +10,9 @@ using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class ScoringFunction : Azure.Core.IUtf8JsonSerializable
+    public partial class ScoringFunction : IUtf8JsonSerializable
     {
-        void Azure.Core.IUtf8JsonSerializable.Write(System.Text.Json.Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("type");
@@ -28,19 +28,19 @@ namespace CognitiveSearch.Models
             }
             writer.WriteEndObject();
         }
-        internal static CognitiveSearch.Models.ScoringFunction DeserializeScoringFunction(System.Text.Json.JsonElement element)
+        internal static ScoringFunction DeserializeScoringFunction(JsonElement element)
         {
-            if (element.TryGetProperty("type", out System.Text.Json.JsonElement discriminator))
+            if (element.TryGetProperty("type", out JsonElement discriminator))
             {
                 switch (discriminator.GetString())
                 {
-                    case "distance": return CognitiveSearch.Models.DistanceScoringFunction.DeserializeDistanceScoringFunction(element);
-                    case "freshness": return CognitiveSearch.Models.FreshnessScoringFunction.DeserializeFreshnessScoringFunction(element);
-                    case "magnitude": return CognitiveSearch.Models.MagnitudeScoringFunction.DeserializeMagnitudeScoringFunction(element);
-                    case "tag": return CognitiveSearch.Models.TagScoringFunction.DeserializeTagScoringFunction(element);
+                    case "distance": return DistanceScoringFunction.DeserializeDistanceScoringFunction(element);
+                    case "freshness": return FreshnessScoringFunction.DeserializeFreshnessScoringFunction(element);
+                    case "magnitude": return MagnitudeScoringFunction.DeserializeMagnitudeScoringFunction(element);
+                    case "tag": return TagScoringFunction.DeserializeTagScoringFunction(element);
                 }
             }
-            CognitiveSearch.Models.ScoringFunction result = new CognitiveSearch.Models.ScoringFunction();
+            ScoringFunction result = new ScoringFunction();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("type"))
@@ -60,7 +60,7 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("interpolation"))
                 {
-                    if (property.Value.ValueKind == System.Text.Json.JsonValueKind.Null)
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         continue;
                     }

@@ -16,7 +16,7 @@ namespace additionalProperties.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public bool? Status { get; internal set; }
-        private readonly IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
+        private readonly IDictionary<string, object> _additionalProperties = new Dictionary<string, object>();
         /// <inheritdoc />
         public IEnumerator<KeyValuePair<string, object>> GetEnumerator() => _additionalProperties.GetEnumerator();
         /// <inheritdoc />

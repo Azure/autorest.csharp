@@ -10,9 +10,9 @@ using Azure.Core;
 
 namespace body_complex.Models
 {
-    public partial class MyBaseType : Azure.Core.IUtf8JsonSerializable
+    public partial class MyBaseType : IUtf8JsonSerializable
     {
-        void Azure.Core.IUtf8JsonSerializable.Write(System.Text.Json.Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("kind");
@@ -32,16 +32,16 @@ namespace body_complex.Models
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
-        internal static body_complex.Models.MyBaseType DeserializeMyBaseType(System.Text.Json.JsonElement element)
+        internal static MyBaseType DeserializeMyBaseType(JsonElement element)
         {
-            if (element.TryGetProperty("kind", out System.Text.Json.JsonElement discriminator))
+            if (element.TryGetProperty("kind", out JsonElement discriminator))
             {
                 switch (discriminator.GetString())
                 {
-                    case "Kind1": return body_complex.Models.MyDerivedType.DeserializeMyDerivedType(element);
+                    case "Kind1": return MyDerivedType.DeserializeMyDerivedType(element);
                 }
             }
-            body_complex.Models.MyBaseType result = new body_complex.Models.MyBaseType();
+            MyBaseType result = new MyBaseType();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("kind"))
@@ -51,7 +51,7 @@ namespace body_complex.Models
                 }
                 if (property.NameEquals("propB1"))
                 {
-                    if (property.Value.ValueKind == System.Text.Json.JsonValueKind.Null)
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         continue;
                     }
@@ -64,7 +64,7 @@ namespace body_complex.Models
                     {
                         if (property0.NameEquals("propBH1"))
                         {
-                            if (property0.Value.ValueKind == System.Text.Json.JsonValueKind.Null)
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
                                 continue;
                             }

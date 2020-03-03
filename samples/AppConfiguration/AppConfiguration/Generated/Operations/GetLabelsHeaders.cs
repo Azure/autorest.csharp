@@ -12,8 +12,8 @@ namespace AppConfiguration
 {
     internal class GetLabelsHeaders
     {
-        private readonly Azure.Response _response;
-        public GetLabelsHeaders(Azure.Response response)
+        private readonly Response _response;
+        public GetLabelsHeaders(Response response)
         {
             _response = response;
         }

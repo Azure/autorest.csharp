@@ -18,8 +18,8 @@ namespace AutoRest.CSharp.V3.Input.Source
         private SourceInputModelBuilder(Compilation compilation)
         {
             _compilation = compilation;
-            _schemaNameAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenSchemaAttribute).FullName);
-            _schemaMemberAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenSchemaMemberAttribute).FullName);
+            _schemaNameAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenSchemaAttribute).FullName!)!;
+            _schemaMemberAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenSchemaMemberAttribute).FullName!)!;
         }
 
         public static SourceInputModel Build(Compilation compilation)

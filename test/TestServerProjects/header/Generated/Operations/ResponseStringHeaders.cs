@@ -12,8 +12,8 @@ namespace header
 {
     internal class ResponseStringHeaders
     {
-        private readonly Azure.Response _response;
-        public ResponseStringHeaders(Azure.Response response)
+        private readonly Response _response;
+        public ResponseStringHeaders(Response response)
         {
             _response = response;
         }

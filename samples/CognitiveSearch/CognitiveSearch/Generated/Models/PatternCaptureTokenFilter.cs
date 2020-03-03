@@ -18,7 +18,7 @@ namespace CognitiveSearch.Models
             OdataType = "#Microsoft.Azure.Search.PatternCaptureTokenFilter";
         }
         /// <summary> A list of patterns to match against each token. </summary>
-        public ICollection<string> Patterns { get; set; } = new System.Collections.Generic.List<string>();
+        public ICollection<string> Patterns { get; set; } = new List<string>();
         /// <summary> A value indicating whether to return the original token even if one of the patterns matches. Default is true. </summary>
         public bool? PreserveOriginal { get; set; }
     }

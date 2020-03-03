@@ -12,8 +12,8 @@ namespace header
 {
     internal class ResponseProtectedKeyHeaders
     {
-        private readonly Azure.Response _response;
-        public ResponseProtectedKeyHeaders(Azure.Response response)
+        private readonly Response _response;
+        public ResponseProtectedKeyHeaders(Response response)
         {
             _response = response;
         }

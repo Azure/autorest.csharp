@@ -120,7 +120,7 @@ namespace xml_service.Models
                 value = (string)title;
             }
             result.Title = value;
-            result.Items = new System.Collections.Generic.List<string>();
+            result.Items = new List<string>();
             foreach (var e in element.Elements("item"))
             {
                 string value0 = default;

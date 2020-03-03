@@ -51,16 +51,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
 
                 root = root.WithAdditionalAnnotations(Simplifier.Annotation);
                 var simplified = document.WithSyntaxRoot(root);
-
-                try
-                {
-                    simplified = await Simplifier.ReduceAsync(simplified);
-                }
-                catch (InvalidOperationException)
-                {
-                    // Workaround for https://github.com/dotnet/roslyn/issues/40592
-                }
-
+                simplified = await Simplifier.ReduceAsync(simplified);
                 simplified = await Formatter.FormatAsync(simplified);
 
                 SourceText text = await simplified.GetTextAsync();

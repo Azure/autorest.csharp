@@ -10,9 +10,9 @@ using Azure.Core;
 
 namespace body_complex.Models
 {
-    public partial class DotFish : Azure.Core.IUtf8JsonSerializable
+    public partial class DotFish : IUtf8JsonSerializable
     {
-        void Azure.Core.IUtf8JsonSerializable.Write(System.Text.Json.Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("fish.type");
@@ -24,16 +24,16 @@ namespace body_complex.Models
             }
             writer.WriteEndObject();
         }
-        internal static body_complex.Models.DotFish DeserializeDotFish(System.Text.Json.JsonElement element)
+        internal static DotFish DeserializeDotFish(JsonElement element)
         {
-            if (element.TryGetProperty("fish.type", out System.Text.Json.JsonElement discriminator))
+            if (element.TryGetProperty("fish.type", out JsonElement discriminator))
             {
                 switch (discriminator.GetString())
                 {
-                    case "DotSalmon": return body_complex.Models.DotSalmon.DeserializeDotSalmon(element);
+                    case "DotSalmon": return DotSalmon.DeserializeDotSalmon(element);
                 }
             }
-            body_complex.Models.DotFish result = new body_complex.Models.DotFish();
+            DotFish result = new DotFish();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("fish.type"))
@@ -43,7 +43,7 @@ namespace body_complex.Models
                 }
                 if (property.NameEquals("species"))
                 {
-                    if (property.Value.ValueKind == System.Text.Json.JsonValueKind.Null)
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         continue;
                     }
