@@ -6,66 +6,14 @@
 #nullable disable
 
 using System.Collections.Generic;
-using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class Container : IUtf8JsonSerializable, IXmlSerializable
+    public partial class Container : IXmlSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            writer.WritePropertyName("Name");
-            writer.WriteStringValue(Name);
-            writer.WritePropertyName("Properties");
-            writer.WriteObjectValue(Properties);
-            if (Metadata != null)
-            {
-                writer.WritePropertyName("Metadata");
-                writer.WriteStartObject();
-                foreach (var item in Metadata)
-                {
-                    writer.WritePropertyName(item.Key);
-                    writer.WriteStringValue(item.Value);
-                }
-                writer.WriteEndObject();
-            }
-            writer.WriteEndObject();
-        }
-        internal static Container DeserializeContainer(JsonElement element)
-        {
-            Container result = new Container();
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("Name"))
-                {
-                    result.Name = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("Properties"))
-                {
-                    result.Properties = ContainerProperties.DeserializeContainerProperties(property.Value);
-                    continue;
-                }
-                if (property.NameEquals("Metadata"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    result.Metadata = new Dictionary<string, string>();
-                    foreach (var property0 in property.Value.EnumerateObject())
-                    {
-                        result.Metadata.Add(property0.Name, property0.Value.GetString());
-                    }
-                    continue;
-                }
-            }
-            return result;
-        }
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
             writer.WriteStartElement(nameHint ?? "Container");

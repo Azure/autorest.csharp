@@ -6,79 +6,14 @@
 #nullable disable
 
 using System.Collections.Generic;
-using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class Slide : IUtf8JsonSerializable, IXmlSerializable
+    public partial class Slide : IXmlSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (Type != null)
-            {
-                writer.WritePropertyName("type");
-                writer.WriteStringValue(Type);
-            }
-            if (Title != null)
-            {
-                writer.WritePropertyName("title");
-                writer.WriteStringValue(Title);
-            }
-            if (Items != null)
-            {
-                writer.WritePropertyName("items");
-                writer.WriteStartArray();
-                foreach (var item in Items)
-                {
-                    writer.WriteStringValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            writer.WriteEndObject();
-        }
-        internal static Slide DeserializeSlide(JsonElement element)
-        {
-            Slide result = new Slide();
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("type"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    result.Type = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("title"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    result.Title = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("items"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    result.Items = new List<string>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        result.Items.Add(item.GetString());
-                    }
-                    continue;
-                }
-            }
-            return result;
-        }
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
             writer.WriteStartElement(nameHint ?? "slide");

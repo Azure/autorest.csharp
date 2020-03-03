@@ -5,42 +5,14 @@
 
 #nullable disable
 
-using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace Azure.Storage.Tables.Models
 {
-    public partial class SignedIdentifier : IUtf8JsonSerializable, IXmlSerializable
+    public partial class SignedIdentifier : IXmlSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            writer.WritePropertyName("Id");
-            writer.WriteStringValue(Id);
-            writer.WritePropertyName("AccessPolicy");
-            writer.WriteObjectValue(AccessPolicy);
-            writer.WriteEndObject();
-        }
-        internal static SignedIdentifier DeserializeSignedIdentifier(JsonElement element)
-        {
-            SignedIdentifier result = new SignedIdentifier();
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("Id"))
-                {
-                    result.Id = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("AccessPolicy"))
-                {
-                    result.AccessPolicy = AccessPolicy.DeserializeAccessPolicy(property.Value);
-                    continue;
-                }
-            }
-            return result;
-        }
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
             writer.WriteStartElement(nameHint ?? "SignedIdentifier");

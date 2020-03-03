@@ -5,35 +5,14 @@
 
 #nullable disable
 
-using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class BlobPrefix : IUtf8JsonSerializable, IXmlSerializable
+    public partial class BlobPrefix : IXmlSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            writer.WritePropertyName("Name");
-            writer.WriteStringValue(Name);
-            writer.WriteEndObject();
-        }
-        internal static BlobPrefix DeserializeBlobPrefix(JsonElement element)
-        {
-            BlobPrefix result = new BlobPrefix();
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("Name"))
-                {
-                    result.Name = property.Value.GetString();
-                    continue;
-                }
-            }
-            return result;
-        }
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
             writer.WriteStartElement(nameHint ?? "BlobPrefix");

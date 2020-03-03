@@ -5,56 +5,14 @@
 
 #nullable disable
 
-using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class RootWithRefAndNoMeta : IUtf8JsonSerializable, IXmlSerializable
+    public partial class RootWithRefAndNoMeta : IXmlSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (RefToModel != null)
-            {
-                writer.WritePropertyName("RefToModel");
-                writer.WriteObjectValue(RefToModel);
-            }
-            if (Something != null)
-            {
-                writer.WritePropertyName("Something");
-                writer.WriteStringValue(Something);
-            }
-            writer.WriteEndObject();
-        }
-        internal static RootWithRefAndNoMeta DeserializeRootWithRefAndNoMeta(JsonElement element)
-        {
-            RootWithRefAndNoMeta result = new RootWithRefAndNoMeta();
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("RefToModel"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    result.RefToModel = ComplexTypeNoMeta.DeserializeComplexTypeNoMeta(property.Value);
-                    continue;
-                }
-                if (property.NameEquals("Something"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    result.Something = property.Value.GetString();
-                    continue;
-                }
-            }
-            return result;
-        }
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
             writer.WriteStartElement(nameHint ?? "RootWithRefAndNoMeta");

@@ -6,49 +6,14 @@
 #nullable disable
 
 using System;
-using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace Azure.Storage.Tables.Models
 {
-    public partial class AccessPolicy : IUtf8JsonSerializable, IXmlSerializable
+    public partial class AccessPolicy : IXmlSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            writer.WritePropertyName("Start");
-            writer.WriteStringValue(Start, "S");
-            writer.WritePropertyName("Expiry");
-            writer.WriteStringValue(Expiry, "S");
-            writer.WritePropertyName("Permission");
-            writer.WriteStringValue(Permission);
-            writer.WriteEndObject();
-        }
-        internal static AccessPolicy DeserializeAccessPolicy(JsonElement element)
-        {
-            AccessPolicy result = new AccessPolicy();
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("Start"))
-                {
-                    result.Start = property.Value.GetDateTimeOffset("S");
-                    continue;
-                }
-                if (property.NameEquals("Expiry"))
-                {
-                    result.Expiry = property.Value.GetDateTimeOffset("S");
-                    continue;
-                }
-                if (property.NameEquals("Permission"))
-                {
-                    result.Permission = property.Value.GetString();
-                    continue;
-                }
-            }
-            return result;
-        }
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
             writer.WriteStartElement(nameHint ?? "AccessPolicy");

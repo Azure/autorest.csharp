@@ -6,13 +6,11 @@
 #nullable disable
 
 using System.Text.Json;
-using System.Xml;
-using System.Xml.Linq;
 using Azure.Core;
 
 namespace Azure.Storage.Tables.Models
 {
-    public partial class TableProperties : IUtf8JsonSerializable, IXmlSerializable
+    public partial class TableProperties : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -39,29 +37,6 @@ namespace Azure.Storage.Tables.Models
                     continue;
                 }
             }
-            return result;
-        }
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
-        {
-            writer.WriteStartElement(nameHint ?? "TableProperties");
-            if (TableName != null)
-            {
-                writer.WriteStartElement("TableName");
-                writer.WriteValue(TableName);
-                writer.WriteEndElement();
-            }
-            writer.WriteEndElement();
-        }
-        internal static TableProperties DeserializeTableProperties(XElement element)
-        {
-            TableProperties result = default;
-            result = new TableProperties(); string value = default;
-            var tableName = element.Element("TableName");
-            if (tableName != null)
-            {
-                value = (string)tableName;
-            }
-            result.TableName = value;
             return result;
         }
     }

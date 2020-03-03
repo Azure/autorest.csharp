@@ -6,98 +6,14 @@
 #nullable disable
 
 using System;
-using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class ContainerProperties : IUtf8JsonSerializable, IXmlSerializable
+    public partial class ContainerProperties : IXmlSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            writer.WritePropertyName("Last-Modified");
-            writer.WriteStringValue(LastModified, "R");
-            writer.WritePropertyName("Etag");
-            writer.WriteStringValue(Etag);
-            if (LeaseStatus != null)
-            {
-                writer.WritePropertyName("LeaseStatus");
-                writer.WriteStringValue(LeaseStatus.Value.ToSerialString());
-            }
-            if (LeaseState != null)
-            {
-                writer.WritePropertyName("LeaseState");
-                writer.WriteStringValue(LeaseState.Value.ToSerialString());
-            }
-            if (LeaseDuration != null)
-            {
-                writer.WritePropertyName("LeaseDuration");
-                writer.WriteStringValue(LeaseDuration.Value.ToSerialString());
-            }
-            if (PublicAccess != null)
-            {
-                writer.WritePropertyName("PublicAccess");
-                writer.WriteStringValue(PublicAccess.Value.ToString());
-            }
-            writer.WriteEndObject();
-        }
-        internal static ContainerProperties DeserializeContainerProperties(JsonElement element)
-        {
-            ContainerProperties result = new ContainerProperties();
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("Last-Modified"))
-                {
-                    result.LastModified = property.Value.GetDateTimeOffset("R");
-                    continue;
-                }
-                if (property.NameEquals("Etag"))
-                {
-                    result.Etag = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("LeaseStatus"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    result.LeaseStatus = property.Value.GetString().ToLeaseStatusType();
-                    continue;
-                }
-                if (property.NameEquals("LeaseState"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    result.LeaseState = property.Value.GetString().ToLeaseStateType();
-                    continue;
-                }
-                if (property.NameEquals("LeaseDuration"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    result.LeaseDuration = property.Value.GetString().ToLeaseDurationType();
-                    continue;
-                }
-                if (property.NameEquals("PublicAccess"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    result.PublicAccess = new PublicAccessType(property.Value.GetString());
-                    continue;
-                }
-            }
-            return result;
-        }
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
             writer.WriteStartElement(nameHint ?? "ContainerProperties");

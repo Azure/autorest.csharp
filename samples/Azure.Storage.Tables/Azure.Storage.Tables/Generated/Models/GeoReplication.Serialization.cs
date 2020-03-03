@@ -6,42 +6,14 @@
 #nullable disable
 
 using System;
-using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace Azure.Storage.Tables.Models
 {
-    public partial class GeoReplication : IUtf8JsonSerializable, IXmlSerializable
+    public partial class GeoReplication : IXmlSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            writer.WritePropertyName("Status");
-            writer.WriteStringValue(Status.ToString());
-            writer.WritePropertyName("LastSyncTime");
-            writer.WriteStringValue(LastSyncTime, "R");
-            writer.WriteEndObject();
-        }
-        internal static GeoReplication DeserializeGeoReplication(JsonElement element)
-        {
-            GeoReplication result = new GeoReplication();
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("Status"))
-                {
-                    result.Status = new GeoReplicationStatusType(property.Value.GetString());
-                    continue;
-                }
-                if (property.NameEquals("LastSyncTime"))
-                {
-                    result.LastSyncTime = property.Value.GetDateTimeOffset("R");
-                    continue;
-                }
-            }
-            return result;
-        }
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
             writer.WriteStartElement(nameHint ?? "GeoReplication");
