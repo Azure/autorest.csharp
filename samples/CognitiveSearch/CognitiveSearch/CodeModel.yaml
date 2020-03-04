@@ -6882,8 +6882,8 @@ schemas: !<!Schemas>
         serializationFormats:
         - json
         usage:
-        - output
         - input
+        - output
         language: !<!Languages> 
           default:
             name: SearchRequest
@@ -7637,6 +7637,11 @@ schemas: !<!Schemas>
                   name: highWaterMarkColumnName
                   description: The name of the high water mark column.
               protocol: !<!Protocols> {}
+            serializationFormats:
+            - json
+            usage:
+            - input
+            - output
             extensions:
               x-ms-discriminator-value: '#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy'
             language: !<!Languages> 
@@ -7656,6 +7661,11 @@ schemas: !<!Schemas>
               - *ref_76
               immediate:
               - *ref_76
+            serializationFormats:
+            - json
+            usage:
+            - input
+            - output
             extensions:
               x-ms-discriminator-value: '#Microsoft.Azure.Search.SqlIntegratedChangeTrackingPolicy'
             language: !<!Languages> 
@@ -7740,6 +7750,11 @@ schemas: !<!Schemas>
                   name: softDeleteMarkerValue
                   description: The marker value that identifies an item as deleted.
               protocol: !<!Protocols> {}
+            serializationFormats:
+            - json
+            usage:
+            - input
+            - output
             extensions:
               x-ms-discriminator-value: '#Microsoft.Azure.Search.SoftDeleteColumnDeletionDetectionPolicy'
             language: !<!Languages> 
@@ -8603,6 +8618,11 @@ schemas: !<!Schemas>
                 - *ref_144
                 immediate:
                 - *ref_144
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Skills.Util.ConditionalSkill'
               language: !<!Languages> 
@@ -8640,6 +8660,11 @@ schemas: !<!Schemas>
                     name: maxKeyPhraseCount
                     description: 'A number indicating how many key phrases to return. If absent, all identified key phrases will be returned.'
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Skills.Text.KeyPhraseExtractionSkill'
               language: !<!Languages> 
@@ -8684,6 +8709,11 @@ schemas: !<!Schemas>
                     name: shouldDetectOrientation
                     description: A value indicating to turn orientation detection on or not. Default is false.
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Skills.Vision.OcrSkill'
               language: !<!Languages> 
@@ -8748,6 +8778,11 @@ schemas: !<!Schemas>
                     name: details
                     description: A string indicating which domain-specific details to return.
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Skills.Vision.ImageAnalysisSkill'
               language: !<!Languages> 
@@ -8767,6 +8802,11 @@ schemas: !<!Schemas>
                 - *ref_144
                 immediate:
                 - *ref_144
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Skills.Text.LanguageDetectionSkill'
               language: !<!Languages> 
@@ -8786,6 +8826,11 @@ schemas: !<!Schemas>
                 - *ref_144
                 immediate:
                 - *ref_144
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Skills.Util.ShaperSkill'
               language: !<!Languages> 
@@ -8822,6 +8867,11 @@ schemas: !<!Schemas>
                     name: insertPostTag
                     description: 'The tag indicates the end of the merged text. By default, the tag is an empty space.'
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Skills.Text.MergeSkill'
               language: !<!Languages> 
@@ -8888,6 +8938,11 @@ schemas: !<!Schemas>
                     name: minimumPrecision
                     description: 'A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included.'
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Skills.Text.EntityRecognitionSkill'
               language: !<!Languages> 
@@ -8916,6 +8971,11 @@ schemas: !<!Schemas>
                     name: defaultLanguageCode
                     description: A value indicating which language code to use. Default is en.
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Skills.Text.SentimentSkill'
               language: !<!Languages> 
@@ -8963,6 +9023,11 @@ schemas: !<!Schemas>
                     name: maximumPageLength
                     description: The desired maximum page length. Default is 10000.
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Skills.Text.SplitSkill'
               language: !<!Languages> 
@@ -9010,6 +9075,11 @@ schemas: !<!Schemas>
                     name: suggestedFrom
                     description: 'The language code to translate documents from when neither the fromLanguageCode input nor the defaultFromLanguageCode parameter are provided, and the automatic language detection is unsuccessful. Default is en.'
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Skills.Text.TranslationSkill'
               language: !<!Languages> 
@@ -9086,6 +9156,11 @@ schemas: !<!Schemas>
                     name: degreeOfParallelism
                     description: 'If set, the number of parallel calls that can be made to the Web API.'
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Skills.Custom.WebApiSkill'
               language: !<!Languages> 
@@ -9349,6 +9424,11 @@ schemas: !<!Schemas>
               - *ref_193
               immediate:
               - *ref_193
+            serializationFormats:
+            - json
+            usage:
+            - input
+            - output
             extensions:
               x-ms-discriminator-value: '#Microsoft.Azure.Search.DefaultCognitiveServices'
             language: !<!Languages> 
@@ -9378,6 +9458,11 @@ schemas: !<!Schemas>
                   name: key
                   description: ''
               protocol: !<!Protocols> {}
+            serializationFormats:
+            - json
+            usage:
+            - input
+            - output
             extensions:
               x-ms-discriminator-value: '#Microsoft.Azure.Search.CognitiveServicesByKey'
             language: !<!Languages> 
@@ -9903,6 +9988,11 @@ schemas: !<!Schemas>
                               name: boostingDistance
                               description: The distance in kilometers from the reference location where the boosting range ends.
                           protocol: !<!Protocols> {}
+                        serializationFormats:
+                        - json
+                        usage:
+                        - input
+                        - output
                         language: !<!Languages> 
                           default:
                             name: DistanceScoringParameters
@@ -9916,6 +10006,11 @@ schemas: !<!Schemas>
                           name: parameters
                           description: Parameter values for the distance scoring function.
                       protocol: !<!Protocols> {}
+                    serializationFormats:
+                    - json
+                    usage:
+                    - input
+                    - output
                     extensions:
                       x-ms-discriminator-value: distance
                     language: !<!Languages> 
@@ -9952,6 +10047,11 @@ schemas: !<!Schemas>
                               name: boostingDuration
                               description: The expiration period after which boosting will stop for a particular document.
                           protocol: !<!Protocols> {}
+                        serializationFormats:
+                        - json
+                        usage:
+                        - input
+                        - output
                         language: !<!Languages> 
                           default:
                             name: FreshnessScoringParameters
@@ -9965,6 +10065,11 @@ schemas: !<!Schemas>
                           name: parameters
                           description: Parameter values for the freshness scoring function.
                       protocol: !<!Protocols> {}
+                    serializationFormats:
+                    - json
+                    usage:
+                    - input
+                    - output
                     extensions:
                       x-ms-discriminator-value: freshness
                     language: !<!Languages> 
@@ -10019,6 +10124,11 @@ schemas: !<!Schemas>
                               name: shouldBoostBeyondRangeByConstant
                               description: A value indicating whether to apply a constant boost for field values beyond the range end value; default is false.
                           protocol: !<!Protocols> {}
+                        serializationFormats:
+                        - json
+                        usage:
+                        - input
+                        - output
                         language: !<!Languages> 
                           default:
                             name: MagnitudeScoringParameters
@@ -10032,6 +10142,11 @@ schemas: !<!Schemas>
                           name: parameters
                           description: Parameter values for the magnitude scoring function.
                       protocol: !<!Protocols> {}
+                    serializationFormats:
+                    - json
+                    usage:
+                    - input
+                    - output
                     extensions:
                       x-ms-discriminator-value: magnitude
                     language: !<!Languages> 
@@ -10068,6 +10183,11 @@ schemas: !<!Schemas>
                               name: tagsParameter
                               description: The name of the parameter passed in search queries to specify the list of tags to compare against the target field.
                           protocol: !<!Protocols> {}
+                        serializationFormats:
+                        - json
+                        usage:
+                        - input
+                        - output
                         language: !<!Languages> 
                           default:
                             name: TagScoringParameters
@@ -10081,6 +10201,11 @@ schemas: !<!Schemas>
                           name: parameters
                           description: Parameter values for the tag scoring function.
                       protocol: !<!Protocols> {}
+                    serializationFormats:
+                    - json
+                    usage:
+                    - input
+                    - output
                     extensions:
                       x-ms-discriminator-value: tag
                     language: !<!Languages> 
@@ -10413,6 +10538,11 @@ schemas: !<!Schemas>
                     name: charFilters
                     description: 'A list of character filters used to prepare input text before it is processed by the tokenizer. For instance, they can replace certain characters or symbols. The filters are run in the order in which they are listed.'
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Azure.Search.CustomAnalyzer'
               language: !<!Languages> 
@@ -10477,6 +10607,11 @@ schemas: !<!Schemas>
                     name: stopwords
                     description: A list of stopwords.
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Azure.Search.PatternAnalyzer'
               language: !<!Languages> 
@@ -10523,6 +10658,11 @@ schemas: !<!Schemas>
                     name: stopwords
                     description: A list of stopwords.
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Azure.Search.StandardAnalyzer'
               language: !<!Languages> 
@@ -10561,6 +10701,11 @@ schemas: !<!Schemas>
                     name: stopwords
                     description: A list of stopwords.
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Azure.Search.StopAnalyzer'
               language: !<!Languages> 
@@ -10662,6 +10807,11 @@ schemas: !<!Schemas>
                     name: maxTokenLength
                     description: The maximum token length. Default is 255. Tokens longer than the maximum length are split. The maximum token length that can be used is 300 characters.
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Azure.Search.ClassicTokenizer'
               language: !<!Languages> 
@@ -10716,6 +10866,11 @@ schemas: !<!Schemas>
                     name: tokenChars
                     description: Character classes to keep in the tokens.
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Azure.Search.EdgeNGramTokenizer'
               language: !<!Languages> 
@@ -10744,6 +10899,11 @@ schemas: !<!Schemas>
                     name: bufferSize
                     description: The read buffer size in bytes. Default is 256.
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Azure.Search.KeywordTokenizer'
                 x-ms-external: true
@@ -10773,6 +10933,11 @@ schemas: !<!Schemas>
                     name: maxTokenLength
                     description: The maximum token length. Default is 256. Tokens longer than the maximum length are split. The maximum token length that can be used is 300 characters.
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Azure.Search.KeywordTokenizerV2'
               language: !<!Languages> 
@@ -10819,6 +10984,11 @@ schemas: !<!Schemas>
                     name: language
                     description: The language to use. The default is English.
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Azure.Search.MicrosoftLanguageTokenizer'
               language: !<!Languages> 
@@ -10865,6 +11035,11 @@ schemas: !<!Schemas>
                     name: language
                     description: The language to use. The default is English.
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Azure.Search.MicrosoftLanguageStemmingTokenizer'
               language: !<!Languages> 
@@ -10919,6 +11094,11 @@ schemas: !<!Schemas>
                     name: tokenChars
                     description: Character classes to keep in the tokens.
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Azure.Search.NGramTokenizer'
               language: !<!Languages> 
@@ -10979,6 +11159,11 @@ schemas: !<!Schemas>
                     name: numberOfTokensToSkip
                     description: The number of initial tokens to skip. Default is 0.
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Azure.Search.PathHierarchyTokenizer'
                 x-ms-external: true
@@ -11040,6 +11225,11 @@ schemas: !<!Schemas>
                     name: numberOfTokensToSkip
                     description: The number of initial tokens to skip. Default is 0.
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Azure.Search.PathHierarchyTokenizerV2'
               language: !<!Languages> 
@@ -11086,6 +11276,11 @@ schemas: !<!Schemas>
                       The zero-based ordinal of the matching group in the regular expression pattern to extract into tokens. Use -1 if you want to use the entire pattern to split the input into tokens, irrespective of matching groups.
                       Default is -1.
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Azure.Search.PatternTokenizer'
               language: !<!Languages> 
@@ -11114,6 +11309,11 @@ schemas: !<!Schemas>
                     name: maxTokenLength
                     description: The maximum token length. Default is 255. Tokens longer than the maximum length are split.
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Azure.Search.StandardTokenizer'
                 x-ms-external: true
@@ -11143,6 +11343,11 @@ schemas: !<!Schemas>
                     name: maxTokenLength
                     description: The maximum token length. Default is 255. Tokens longer than the maximum length are split. The maximum token length that can be used is 300 characters.
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Azure.Search.StandardTokenizerV2'
               language: !<!Languages> 
@@ -11171,6 +11376,11 @@ schemas: !<!Schemas>
                     name: maxTokenLength
                     description: The maximum token length. Default is 255. Tokens longer than the maximum length are split. The maximum token length that can be used is 300 characters.
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Azure.Search.UaxUrlEmailTokenizer'
               language: !<!Languages> 
@@ -11299,6 +11509,11 @@ schemas: !<!Schemas>
                     name: preserveOriginal
                     description: A value indicating whether the original token will be kept. Default is false.
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Azure.Search.AsciiFoldingTokenFilter'
               language: !<!Languages> 
@@ -11347,6 +11562,11 @@ schemas: !<!Schemas>
                     name: outputUnigrams
                     description: 'A value indicating whether to output both unigrams and bigrams (if true), or just bigrams (if false). Default is false.'
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Azure.Search.CjkBigramTokenFilter'
               language: !<!Languages> 
@@ -11404,6 +11624,11 @@ schemas: !<!Schemas>
                     name: useQueryMode
                     description: 'A value that indicates whether the token filter is in query mode. When in query mode, the token filter generates bigrams and then removes common words and single terms followed by a common word. Default is false.'
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Azure.Search.CommonGramTokenFilter'
               language: !<!Languages> 
@@ -11479,6 +11704,11 @@ schemas: !<!Schemas>
                     name: onlyLongestMatch
                     description: A value indicating whether to add only the longest matching subword to the output. Default is false.
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Azure.Search.DictionaryDecompounderTokenFilter'
               language: !<!Languages> 
@@ -11523,6 +11753,11 @@ schemas: !<!Schemas>
                     name: side
                     description: Specifies which side of the input the n-gram should be generated from. Default is "front".
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Azure.Search.EdgeNGramTokenFilter'
                 x-ms-external: true
@@ -11568,6 +11803,11 @@ schemas: !<!Schemas>
                     name: side
                     description: Specifies which side of the input the n-gram should be generated from. Default is "front".
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Azure.Search.EdgeNGramTokenFilterV2'
               language: !<!Languages> 
@@ -11606,6 +11846,11 @@ schemas: !<!Schemas>
                     name: articles
                     description: The set of articles to remove.
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Azure.Search.ElisionTokenFilter'
               language: !<!Languages> 
@@ -11654,6 +11899,11 @@ schemas: !<!Schemas>
                     name: lowerCaseKeepWords
                     description: A value indicating whether to lower case all words first. Default is false.
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Azure.Search.KeepTokenFilter'
               language: !<!Languages> 
@@ -11702,6 +11952,11 @@ schemas: !<!Schemas>
                     name: ignoreCase
                     description: 'A value indicating whether to ignore case. If true, all words are converted to lower case first. Default is false.'
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Azure.Search.KeywordMarkerTokenFilter'
               language: !<!Languages> 
@@ -11738,6 +11993,11 @@ schemas: !<!Schemas>
                     name: max
                     description: The maximum length in characters. Default and maximum is 300.
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Azure.Search.LengthTokenFilter'
               language: !<!Languages> 
@@ -11774,6 +12034,11 @@ schemas: !<!Schemas>
                     name: consumeAllTokens
                     description: A value indicating whether all tokens from the input must be consumed even if maxTokenCount is reached. Default is false.
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Azure.Search.LimitTokenFilter'
               language: !<!Languages> 
@@ -11810,6 +12075,11 @@ schemas: !<!Schemas>
                     name: maxGram
                     description: The maximum n-gram length. Default is 2.
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Azure.Search.NGramTokenFilter'
                 x-ms-external: true
@@ -11847,6 +12117,11 @@ schemas: !<!Schemas>
                     name: maxGram
                     description: The maximum n-gram length. Default is 2. Maximum is 300.
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Azure.Search.NGramTokenFilterV2'
               language: !<!Languages> 
@@ -11895,6 +12170,11 @@ schemas: !<!Schemas>
                     name: preserveOriginal
                     description: A value indicating whether to return the original token even if one of the patterns matches. Default is true.
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Azure.Search.PatternCaptureTokenFilter'
               language: !<!Languages> 
@@ -11933,6 +12213,11 @@ schemas: !<!Schemas>
                     name: replacement
                     description: The replacement text.
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Azure.Search.PatternReplaceTokenFilter'
               language: !<!Languages> 
@@ -11971,6 +12256,11 @@ schemas: !<!Schemas>
                     name: replaceOriginalTokens
                     description: 'A value indicating whether encoded tokens should replace original tokens. If false, encoded tokens are added as synonyms. Default is true.'
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Azure.Search.PhoneticTokenFilter'
               language: !<!Languages> 
@@ -12039,6 +12329,11 @@ schemas: !<!Schemas>
                     name: filterToken
                     description: The string to insert for each position at which there is no token. Default is an underscore ("_").
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Azure.Search.ShingleTokenFilter'
               language: !<!Languages> 
@@ -12068,6 +12363,11 @@ schemas: !<!Schemas>
                     name: language
                     description: The language to use.
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Azure.Search.SnowballTokenFilter'
               language: !<!Languages> 
@@ -12097,6 +12397,11 @@ schemas: !<!Schemas>
                     name: language
                     description: The language to use.
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Azure.Search.StemmerTokenFilter'
               language: !<!Languages> 
@@ -12136,6 +12441,11 @@ schemas: !<!Schemas>
                     name: rules
                     description: 'A list of stemming rules in the following format: "word => stem", for example: "ran => run".'
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Azure.Search.StemmerOverrideTokenFilter'
               language: !<!Languages> 
@@ -12200,6 +12510,11 @@ schemas: !<!Schemas>
                     name: removeTrailingStopWords
                     description: A value indicating whether to ignore the last search term if it's a stop word. Default is true.
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Azure.Search.StopwordsTokenFilter'
               language: !<!Languages> 
@@ -12264,6 +12579,11 @@ schemas: !<!Schemas>
                       following list: incredible, unbelievable, fabulous, amazing is equivalent to: incredible, unbelievable, fabulous, amazing => incredible, unbelievable, fabulous, amazing. If false, the following list: incredible,
                       unbelievable, fabulous, amazing will be equivalent to: incredible, unbelievable, fabulous, amazing => incredible. Default is true.
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Azure.Search.SynonymTokenFilter'
               language: !<!Languages> 
@@ -12292,6 +12612,11 @@ schemas: !<!Schemas>
                     name: length
                     description: The length at which terms will be truncated. Default and maximum is 300.
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Azure.Search.TruncateTokenFilter'
               language: !<!Languages> 
@@ -12320,6 +12645,11 @@ schemas: !<!Schemas>
                     name: onlyOnSamePosition
                     description: A value indicating whether to remove duplicates only at the same position. Default is false.
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Azure.Search.UniqueTokenFilter'
               language: !<!Languages> 
@@ -12430,6 +12760,11 @@ schemas: !<!Schemas>
                     name: protectedWords
                     description: A list of tokens to protect from being delimited.
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Azure.Search.WordDelimiterTokenFilter'
               language: !<!Languages> 
@@ -12605,6 +12940,11 @@ schemas: !<!Schemas>
                     name: mappings
                     description: 'A list of mappings of the following format: "a=>b" (all occurrences of the character "a" will be replaced with character "b").'
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Azure.Search.MappingCharFilter'
               language: !<!Languages> 
@@ -12645,6 +12985,11 @@ schemas: !<!Schemas>
                     name: replacement
                     description: The replacement text.
                 protocol: !<!Protocols> {}
+              serializationFormats:
+              - json
+              usage:
+              - input
+              - output
               extensions:
                 x-ms-discriminator-value: '#Microsoft.Azure.Search.PatternReplaceCharFilter'
               language: !<!Languages> 
