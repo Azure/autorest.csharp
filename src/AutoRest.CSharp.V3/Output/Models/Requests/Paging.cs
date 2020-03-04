@@ -8,7 +8,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Requests
 {
     internal class Paging
     {
-        public Paging(Method method, Method nextPageMethod, string name, string? nextLinkName, string itemName, CSharpType itemType)
+        public Paging(RestClientMethod method, RestClientMethod nextPageMethod, string name, string? nextLinkName, string itemName, CSharpType itemType)
         {
             Method = method;
             NextPageMethod = nextPageMethod;
@@ -19,8 +19,8 @@ namespace AutoRest.CSharp.V3.Output.Models.Requests
         }
 
         public string Name { get; }
-        public Method Method { get; }
-        public Method NextPageMethod { get; }
+        public RestClientMethod Method { get; }
+        public RestClientMethod NextPageMethod { get; }
         public string? NextLinkName { get; }
         public string ItemName { get; }
         public CSharpType ItemType { get; }

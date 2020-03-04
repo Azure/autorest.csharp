@@ -36,33 +36,34 @@ namespace AutoRest.CSharp.V3.Output.Builders
             _typeFactory = _context.TypeFactory;
         }
 
-        public Client BuildClient(OperationGroup operationGroup)
+        public (Client Client, RestClient RestClient) BuildClient(OperationGroup operationGroup)
         {
+            var clientName = GetClientName(operationGroup, "Client");
+
             var allClientParameters = operationGroup.Operations
                 .SelectMany(op => op.Parameters.Concat(op.Requests.SelectMany(r => r.Parameters)))
                 .Where(p => p.Implementation == ImplementationLocation.Client)
                 .Distinct();
             Dictionary<string, Parameter> clientParameters = new Dictionary<string, Parameter>();
-            // Deduplication required because of https://github.com/Azure/autorest.modelerfour/issues/100
             foreach (RequestParameter clientParameter in allClientParameters)
             {
                 clientParameters[clientParameter.Language.Default.Name] = BuildParameter(clientParameter);
             }
 
-            string clientName = operationGroup.CSharpName();
             Dictionary<string, OperationMethod> processedMethods = new Dictionary<string, OperationMethod>(StringComparer.InvariantCultureIgnoreCase);
             foreach (Operation operation in operationGroup.Operations)
             {
-                Method? method = BuildMethod(operation, clientName, clientParameters);
+                RestClientMethod? method = BuildMethod(operation, clientName, clientParameters);
                 if (method != null)
                 {
                     processedMethods.Add(operation.Language.Default.Name, new OperationMethod(operation, method));
                 }
             }
 
-            List<Method> nextPageMethods = new List<Method>();
+            List<RestClientMethod> nextPageMethods = new List<RestClientMethod>();
             List<Paging> pagingMethods = new List<Paging>();
             List<LongRunningOperation> longRunningOperationMethods = new List<LongRunningOperation>();
+            List<ClientMethod> clientMethods = new List<ClientMethod>();
             foreach ((string processedName, OperationMethod processed) in processedMethods)
             {
                 IDictionary<object, object>? pageable = processed.Operation.Extensions.GetValue<IDictionary<object, object>>("x-ms-pageable");
@@ -84,7 +85,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                         next = nextOperationMethod;
                     }
                     // If there is no operationName or we didn't find an existing operation, we use the original method to construct the nextPageMethod.
-                    Method nextPageMethod = next?.Method ?? BuildNextPageMethod(processed.Method);
+                    RestClientMethod nextPageMethod = next?.Method ?? BuildNextPageMethod(processed.Method);
                     // Only add the method if it didn't previously exist
                     if (next == null)
                     {
@@ -105,14 +106,17 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
                     Paging pagingMethod = GetClientMethodPaging(processed.Method, nextPageMethod, pageable, objectType);
                     pagingMethods.Add(pagingMethod);
+
+                    continue;
                 }
+
                 // For some reason, booleans in dictionaries are deserialized as string instead of bool.
                 bool longRunningOperation = Convert.ToBoolean(processed.Operation.Extensions.GetValue<string>("x-ms-long-running-operation") ?? "false");
-                if (longRunningOperation && pageable == null)
+                if (longRunningOperation)
                 {
-                    Method method = processed.Method;
+                    RestClientMethod method = processed.Method;
                     Response originalResponse = processed.Method.Response;
-                    processedMethods[processedName].Method = new Method(
+                    processedMethods[processedName].Method = new RestClientMethod(
                         method.Name,
                         method.Description,
                         method.Request,
@@ -125,34 +129,65 @@ namespace AutoRest.CSharp.V3.Output.Builders
                                                           ?? ImmutableDictionary<object, object>.Empty;
                     LongRunningOperation longRunningOperationMethod = BuildLongRunningOperation(method, originalResponse, options);
                     longRunningOperationMethods.Add(longRunningOperationMethod);
+
+                    continue;
                 }
+
+                clientMethods.Add(new ClientMethod(
+                    processed.Operation.CSharpName(),
+                    processed.Method,
+                    BuilderHelpers.EscapeXmlDescription(processed.Operation.Language.Default.Description)
+                ));
             }
 
-            Method[] methods = processedMethods.Select(om => om.Value.Method).Concat(nextPageMethods).ToArray();
-            return new Client(
-                BuilderHelpers.CreateTypeAttributes(clientName, _context.DefaultNamespace, Accessibility.Internal),
+            RestClientMethod[] methods = processedMethods.Select(om => om.Value.Method).Concat(nextPageMethods).ToArray();
+
+            var restClient = new RestClient(
+                BuilderHelpers.CreateTypeAttributes(GetClientName(operationGroup, "RestClient"), _context.DefaultNamespace, "internal"),
                 operationGroup.Language.Default.Description,
                 OrderParameters(clientParameters.Values),
-                methods,
+                methods);
+
+            var existingClient = _context.SourceInputModel.FindForOperationGroup(operationGroup.Key);
+            var client = new Client(
+                BuilderHelpers.CreateTypeAttributes(clientName, _context.DefaultNamespace, "public", existingClient?.ExistingType),
+                BuilderHelpers.EscapeXmlDescription(operationGroup.Language.Default.Description),
+                restClient,
+                clientMethods.ToArray(),
                 pagingMethods.ToArray(),
                 longRunningOperationMethods.ToArray());
+
+            return (client, restClient);
+        }
+
+        private string GetClientName(OperationGroup operationGroup, string suffix)
+        {
+            var name = operationGroup.CSharpName();
+
+            var operationsSuffix = "Operations";
+            if (name.EndsWith(operationsSuffix))
+            {
+                name = name.Substring(0, name.Length - operationsSuffix.Length);
+            }
+
+            return name + suffix;
         }
 
         private class OperationMethod
         {
-            public OperationMethod(Operation operation, Method method)
+            public OperationMethod(Operation operation, RestClientMethod method)
             {
                 Operation = operation;
                 Method = method;
             }
 
             public Operation Operation { get; }
-            public Method Method { get; set; }
+            public RestClientMethod Method { get; set; }
         }
 
         private static Parameter[] OrderParameters(IEnumerable<Parameter> parameters) => parameters.OrderBy(p => p.DefaultValue != null).ToArray();
 
-        private Method? BuildMethod(Operation operation, string clientName, IReadOnlyDictionary<string, Parameter> clientParameters)
+        private RestClientMethod? BuildMethod(Operation operation, string clientName, IReadOnlyDictionary<string, Parameter> clientParameters)
         {
             //TODO: Handle multiple requests: https://github.com/Azure/autorest.csharp/issues/455
             ServiceRequest? serviceRequest = operation.Requests.FirstOrDefault();
@@ -274,7 +309,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             );
 
             string operationName = operation.CSharpName();
-            return new Method(
+            return new RestClientMethod(
                 operationName,
                 BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description),
                 request,
@@ -284,7 +319,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             );
         }
 
-        private static Method BuildNextPageMethod(Method method)
+        private static RestClientMethod BuildNextPageMethod(RestClientMethod method)
         {
             var nextPageUrlParameter = new Parameter(
                 "nextLink",
@@ -303,7 +338,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 null
             );
 
-            return new Method(
+            return new RestClientMethod(
                 $"{method.Name}NextPage",
                 method.Description,
                 request,
@@ -312,7 +347,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 method.Diagnostics);
         }
 
-        private Paging GetClientMethodPaging(Method method, Method nextPageMethod, IDictionary<object, object> pageable, ObjectType type)
+        private Paging GetClientMethodPaging(RestClientMethod method, RestClientMethod nextPageMethod, IDictionary<object, object> pageable, ObjectType type)
         {
             var nextLinkName = pageable.GetValue<string>("nextLinkName");
             var itemName = pageable.GetValue<string>("itemName") ?? "value";
@@ -328,9 +363,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             if (itemProperty.SchemaProperty.Schema is ArraySchema arraySchema)
             {
                 var itemType = _typeFactory.CreateType(arraySchema.ElementType, false);
-
-                var name = $"{method.Name}Pageable";
-                return new Paging(method, nextPageMethod, name, nextLinkProperty?.DeclarationOptions.Name, itemProperty.DeclarationOptions.Name, itemType);
+                return new Paging(method, nextPageMethod, method.Name, nextLinkProperty?.DeclarationOptions.Name, itemProperty.DeclarationOptions.Name, itemType);
             }
             else
             {
@@ -338,7 +371,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             }
         }
 
-        private static LongRunningOperation BuildLongRunningOperation(Method method, Response originalResponse, IDictionary<object, object> options)
+        private static LongRunningOperation BuildLongRunningOperation(RestClientMethod method, Response originalResponse, IDictionary<object, object> options)
         {
             var originalResponseParameter = new Parameter(
                 "originalResponse",
@@ -386,7 +419,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             string operationName = operation.CSharpName();
 
             return new ResponseHeaderGroupType(
-                BuilderHelpers.CreateTypeAttributes(operationName + "Headers", _context.DefaultNamespace, Accessibility.Internal),
+                BuilderHelpers.CreateTypeAttributes(operationName + "Headers", _context.DefaultNamespace, "internal"),
                 $"Header model for {operationName}",
                 httpResponse.Headers.Select(CreateResponseHeader).ToArray()
                 );

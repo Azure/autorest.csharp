@@ -1,0 +1,118 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
+#nullable disable
+
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Azure;
+using Azure.Core.Pipeline;
+using CognitiveSearch.Models;
+
+namespace CognitiveSearch
+{
+    public partial class DataSourcesClient
+    {
+        private DataSourcesRestClient restClient;
+        private ClientDiagnostics clientDiagnostics;
+        private HttpPipeline pipeline;
+        /// <summary> Initializes a new instance of DataSourcesClient. </summary>
+        internal DataSourcesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string searchServiceName, string searchDnsSuffix = "search.windows.net", string ApiVersion = "2019-05-06")
+        {
+            restClient = new DataSourcesRestClient(clientDiagnostics, pipeline, searchServiceName, searchDnsSuffix, ApiVersion);
+            this.clientDiagnostics = clientDiagnostics;
+            this.pipeline = pipeline;
+        }
+        /// <summary> Creates a new datasource or updates a datasource if it already exists. </summary>
+        /// <param name="dataSourceName"> The name of the datasource to create or update. </param>
+        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
+        /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
+        /// <param name="dataSource"> The definition of the datasource to create or update. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Response<DataSource>> CreateOrUpdateAsync(string dataSourceName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, DataSource dataSource, CancellationToken cancellationToken = default)
+        {
+            return await restClient.CreateOrUpdateAsync(dataSourceName, clientRequestId, ifMatch, ifNoneMatch, dataSource, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary> Creates a new datasource or updates a datasource if it already exists. </summary>
+        /// <param name="dataSourceName"> The name of the datasource to create or update. </param>
+        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
+        /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
+        /// <param name="dataSource"> The definition of the datasource to create or update. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response<DataSource> CreateOrUpdate(string dataSourceName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, DataSource dataSource, CancellationToken cancellationToken = default)
+        {
+            return restClient.CreateOrUpdate(dataSourceName, clientRequestId, ifMatch, ifNoneMatch, dataSource, cancellationToken);
+        }
+        /// <summary> Deletes a datasource. </summary>
+        /// <param name="dataSourceName"> The name of the datasource to create or update. </param>
+        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
+        /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Response> DeleteAsync(string dataSourceName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
+        {
+            return await restClient.DeleteAsync(dataSourceName, clientRequestId, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary> Deletes a datasource. </summary>
+        /// <param name="dataSourceName"> The name of the datasource to create or update. </param>
+        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
+        /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response Delete(string dataSourceName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
+        {
+            return restClient.Delete(dataSourceName, clientRequestId, ifMatch, ifNoneMatch, cancellationToken);
+        }
+        /// <summary> Retrieves a datasource definition. </summary>
+        /// <param name="dataSourceName"> The name of the datasource to create or update. </param>
+        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Response<DataSource>> GetAsync(string dataSourceName, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        {
+            return await restClient.GetAsync(dataSourceName, clientRequestId, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary> Retrieves a datasource definition. </summary>
+        /// <param name="dataSourceName"> The name of the datasource to create or update. </param>
+        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response<DataSource> Get(string dataSourceName, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        {
+            return restClient.Get(dataSourceName, clientRequestId, cancellationToken);
+        }
+        /// <summary> Lists all datasources available for a search service. </summary>
+        /// <param name="select"> Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
+        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Response<ListDataSourcesResult>> ListAsync(string select, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        {
+            return await restClient.ListAsync(select, clientRequestId, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary> Lists all datasources available for a search service. </summary>
+        /// <param name="select"> Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
+        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response<ListDataSourcesResult> List(string select, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        {
+            return restClient.List(select, clientRequestId, cancellationToken);
+        }
+        /// <summary> Creates a new datasource. </summary>
+        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="dataSource"> The definition of the datasource to create or update. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Response<DataSource>> CreateAsync(Guid? clientRequestId, DataSource dataSource, CancellationToken cancellationToken = default)
+        {
+            return await restClient.CreateAsync(clientRequestId, dataSource, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary> Creates a new datasource. </summary>
+        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="dataSource"> The definition of the datasource to create or update. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response<DataSource> Create(Guid? clientRequestId, DataSource dataSource, CancellationToken cancellationToken = default)
+        {
+            return restClient.Create(clientRequestId, dataSource, cancellationToken);
+        }
+    }
+}

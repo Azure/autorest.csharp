@@ -18,14 +18,14 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task FileStreamEmpty() => Test(async (host, pipeline) =>
         {
-            var result = await new FilesOperations(ClientDiagnostics, pipeline, host).GetEmptyFileAsync();
+            var result = await new FilesClient(ClientDiagnostics, pipeline, host).GetEmptyFileAsync();
             Assert.AreEqual(0, await result.Value.ReadAsync(new byte[10]));
         });
 
         [Test]
         public Task FileStreamNonempty() => Test(async (host, pipeline) =>
         {
-            var result = await new FilesOperations(ClientDiagnostics, pipeline, host).GetFileAsync();
+            var result = await new FilesClient(ClientDiagnostics, pipeline, host).GetFileAsync();
             var memoryStream = new MemoryStream();
             await result.Value.CopyToAsync(memoryStream);
 
@@ -36,7 +36,7 @@ namespace AutoRest.TestServer.Tests
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task FileStreamVeryLarge() => Test(async (host, pipeline) =>
         {
-            var result = await new FilesOperations(ClientDiagnostics, pipeline, host).GetFileLargeAsync();
+            var result = await new FilesClient(ClientDiagnostics, pipeline, host).GetFileLargeAsync();
             var buffer = new byte[2 * 1024 * 1024L];
             var stream = result.Value;
             long total = 0;
@@ -55,7 +55,7 @@ namespace AutoRest.TestServer.Tests
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task FileStreamVeryLarge_Sync() => Test((host, pipeline) =>
         {
-            var result = new FilesOperations(ClientDiagnostics, pipeline, host).GetFileLarge();
+            var result = new FilesClient(ClientDiagnostics, pipeline, host).GetFileLarge();
             var buffer = new byte[2 * 1024 * 1024L];
             var stream = result.Value;
             long total = 0;

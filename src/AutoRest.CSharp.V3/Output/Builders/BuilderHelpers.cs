@@ -73,23 +73,37 @@ namespace AutoRest.CSharp.V3.Output.Builders
         public static string CSharpName(this Schema operation) =>
             operation.Language.Default.Name.ToCleanName();
 
-        public static TypeDeclarationOptions CreateTypeAttributes(string defaultName, string defaultNamespace, Accessibility defaultAccessibility, INamedTypeSymbol? existingType = null)
+        public static TypeDeclarationOptions CreateTypeAttributes(string defaultName, string defaultNamespace, string defaultAccessibility, INamedTypeSymbol? existingType = null)
         {
-            return new TypeDeclarationOptions(
-                existingType?.Name ?? defaultName,
-                existingType?.ContainingNamespace.ToDisplayString() ?? defaultNamespace,
-                SyntaxFacts.GetText(existingType?.DeclaredAccessibility ?? defaultAccessibility)
-            );
+            if (existingType != null)
+            {
+                return new TypeDeclarationOptions(existingType.Name,
+                    existingType.ContainingNamespace.ToDisplayString(),
+                    SyntaxFacts.GetText(existingType.DeclaredAccessibility)
+                );
+            }
+
+            return new TypeDeclarationOptions(defaultName,defaultNamespace, defaultAccessibility);
         }
 
-        public static MemberDeclarationOptions CreateMemberDeclaration(string defaultName, CSharpType defaultType, Accessibility defaultAccessibility, ISymbol? existingMember)
+        public static MemberDeclarationOptions CreateMemberDeclaration(string defaultName, CSharpType defaultType, string defaultAccessibility, ISymbol? existingMember)
         {
+            if (existingMember != null)
+            {
+                // Not reading the return type information of existing members yet
+                return new MemberDeclarationOptions(
+                    SyntaxFacts.GetText(existingMember.DeclaredAccessibility),
+                    existingMember.Name,
+                    defaultType,
+                    isUserDefined: true
+                );
+            }
             // Not reading the return type information of existing members yet
             return new MemberDeclarationOptions(
-                SyntaxFacts.GetText(existingMember?.DeclaredAccessibility ?? defaultAccessibility),
-                existingMember?.Name ?? defaultName,
+                defaultAccessibility,
+                defaultName,
                 defaultType,
-                existingMember != null
+                isUserDefined: false
                 );
         }
 

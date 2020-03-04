@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         private CSharpType? _inheritsType;
         private CSharpType? _implementsDictionaryType;
         private ObjectSerialization[]? _serializations;
-        private readonly SourceTypeMapping? _sourceTypeMapping;
+        private readonly ModelTypeMapping? _sourceTypeMapping;
 
         public ObjectType(ObjectSchema objectSchema, BuildContext context)
         {
@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             Declaration = BuilderHelpers.CreateTypeAttributes(
                 objectSchema.CSharpName(),
                 $"{context.DefaultNamespace}.Models",
-                Accessibility.Public,
+                "public",
                 _sourceTypeMapping?.ExistingType);
 
             Description = BuilderHelpers.CreateDescription(objectSchema);
@@ -191,7 +191,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 }
 
                 yield return new ObjectTypeProperty(
-                    BuilderHelpers.CreateMemberDeclaration(property.CSharpName(), type, Accessibility.Public, memberMapping?.ExistingMember),
+                    BuilderHelpers.CreateMemberDeclaration(property.CSharpName(), type, "public", memberMapping?.ExistingMember),
                     BuilderHelpers.EscapeXmlDescription(property.Language.Default.Description),
                     isReadOnly,
                     implementationType,

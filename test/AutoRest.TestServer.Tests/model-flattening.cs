@@ -18,7 +18,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetModelFlattenArray() => Test(async (host, pipeline) =>
         {
-            var result = await new AllOperations(ClientDiagnostics, pipeline, host).GetArrayAsync();
+            var result = await new AllClient(ClientDiagnostics, pipeline, host).GetArrayAsync();
             var product1 = result.Value.ElementAt(0);
             Assert.AreEqual("1", product1.Id);
             Assert.AreEqual("Building 44", product1.Location);
@@ -42,7 +42,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetModelFlattenDictionary() => Test(async (host, pipeline) =>
         {
-            var result = await new AllOperations(ClientDiagnostics, pipeline, host).GetDictionaryAsync();
+            var result = await new AllClient(ClientDiagnostics, pipeline, host).GetDictionaryAsync();
             var product1 = result.Value["Product1"];
             Assert.AreEqual("1", product1.Id);
             Assert.AreEqual("Building 44", product1.Location);
@@ -66,7 +66,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetModelFlattenResourceCollection() => Test(async (host, pipeline) =>
         {
-            var result = await new AllOperations(ClientDiagnostics, pipeline, host).GetResourceCollectionAsync();
+            var result = await new AllClient(ClientDiagnostics, pipeline, host).GetResourceCollectionAsync();
             var product1 = result.Value.Dictionaryofresources["Product1"];
             Assert.AreEqual("1", product1.Id);
             Assert.AreEqual("Building 44", product1.Location);
@@ -122,7 +122,7 @@ namespace AutoRest.TestServer.Tests
                 Capacity = "Large",
                 OdataValue = "http://foo"
             };
-            var result = await new AllOperations(ClientDiagnostics, pipeline, host).PostFlattenedSimpleProductAsync(value);
+            var result = await new AllClient(ClientDiagnostics, pipeline, host).PostFlattenedSimpleProductAsync(value);
             Assert.AreEqual("123", result.Value.ProductId);
             Assert.AreEqual("product description", result.Value.Description);
             Assert.AreEqual("max name", result.Value.MaxProductDisplayName);
@@ -149,7 +149,7 @@ namespace AutoRest.TestServer.Tests
                     Location = "Building 44"
                 }
             };
-            return await new AllOperations(ClientDiagnostics, pipeline, host).PutArrayAsync(value);
+            return await new AllClient(ClientDiagnostics, pipeline, host).PutArrayAsync(value);
         });
 
         [Test]
@@ -165,7 +165,7 @@ namespace AutoRest.TestServer.Tests
                 OdataValue = "http://foo",
                 //GenericValue = "https://generic"
             };
-            var result = await new AllOperations(ClientDiagnostics, pipeline, host).PutSimpleProductAsync(value);
+            var result = await new AllClient(ClientDiagnostics, pipeline, host).PutSimpleProductAsync(value);
             Assert.AreEqual("123", result.Value.ProductId);
             Assert.AreEqual("product description", result.Value.Description);
             Assert.AreEqual("max name", result.Value.MaxProductDisplayName);
@@ -185,7 +185,7 @@ namespace AutoRest.TestServer.Tests
                 Capacity = "Large",
                 OdataValue = "http://foo"
             };
-            var result = await new AllOperations(ClientDiagnostics, pipeline, host).PutSimpleProductWithGroupingAsync("groupproduct", value);
+            var result = await new AllClient(ClientDiagnostics, pipeline, host).PutSimpleProductWithGroupingAsync("groupproduct", value);
             Assert.AreEqual("123", result.Value.ProductId);
             Assert.AreEqual("product description", result.Value.Description);
             Assert.AreEqual("max name", result.Value.MaxProductDisplayName);
@@ -218,7 +218,7 @@ namespace AutoRest.TestServer.Tests
                     }
                 }
             };
-            return await new AllOperations(ClientDiagnostics, pipeline, host).PutDictionaryAsync(value);
+            return await new AllClient(ClientDiagnostics, pipeline, host).PutDictionaryAsync(value);
         });
 
         [Test]
@@ -275,7 +275,7 @@ namespace AutoRest.TestServer.Tests
                     TypePropertiesType = "Flat"
                 }
             };
-            return await new AllOperations(ClientDiagnostics, pipeline, host).PutResourceCollectionAsync(value);
+            return await new AllClient(ClientDiagnostics, pipeline, host).PutResourceCollectionAsync(value);
         });
     }
 }

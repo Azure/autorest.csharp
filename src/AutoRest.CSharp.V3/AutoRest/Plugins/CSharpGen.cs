@@ -30,10 +30,11 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
             var project = GeneratedCodeWorkspace.Create(configuration.OutputFolder, configuration.SharedSourceFolder);
             var sourceInputModel = SourceInputModelBuilder.Build(await project.GetCompilationAsync());
 
-            var context = new BuildContext(codeModel, configuration.Namespace, sourceInputModel);
+            var context = new BuildContext(codeModel, configuration, sourceInputModel);
 
             var modelWriter = new ModelWriter();
-            var writer = new ClientWriter();
+            var clientWriter = new ClientWriter();
+            var restClientWriter = new RestClientWriter();
             var serializeWriter = new SerializationWriter();
             var headerModelModelWriter = new ResponseHeaderGroupWriter();
 
@@ -50,12 +51,12 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                 project.AddGeneratedFile($"Models/{name}.Serialization.cs", serializerCodeWriter.ToFormattedCode());
             }
 
-            foreach (var client in context.Library.Clients)
+            foreach (var client in context.Library.RestClients)
             {
-                var codeWriter = new CodeWriter();
-                writer.WriteClient(codeWriter, client);
+                var restCodeWriter = new CodeWriter();
+                restClientWriter.WriteClient(restCodeWriter, client);
 
-                project.AddGeneratedFile($"Operations/{client.Type.Name}.cs", codeWriter.ToFormattedCode());
+                project.AddGeneratedFile($"Operations/{client.Type.Name}.cs", restCodeWriter.ToFormattedCode());
 
                 var headerModels = client.Methods.Select(m => m.Response.HeaderModel).OfType<ResponseHeaderGroupType>().Distinct();
                 foreach (ResponseHeaderGroupType responseHeaderModel in headerModels)
@@ -65,6 +66,14 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
 
                     project.AddGeneratedFile($"Operations/{responseHeaderModel.Type.Name}.cs", headerModelCodeWriter.ToFormattedCode());
                 }
+            }
+
+            foreach (var client in context.Library.Clients)
+            {
+                var codeWriter = new CodeWriter();
+                clientWriter.WriteClient(codeWriter, client);
+
+                project.AddGeneratedFile($"Operations/{client.Type.Name}.cs", codeWriter.ToFormattedCode());
             }
 
             await foreach (var file in project.GetGeneratedFilesAsync())
