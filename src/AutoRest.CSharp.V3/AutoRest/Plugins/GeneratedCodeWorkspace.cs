@@ -78,9 +78,16 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
             generatedCodeProject = generatedCodeProject.WithCompilationOptions(new CSharpCompilationOptions(
                 OutputKind.DynamicallyLinkedLibrary, nullableContextOptions: NullableContextOptions.Annotations));
 
-            foreach (string sharedSourceFile in Directory.GetFiles(projectDirectory, "*.cs"))
+            var generatedCodeDirectory = Path.Combine(projectDirectory, "Generated");
+
+            foreach (string sourceFile in Directory.GetFiles(projectDirectory, "*.cs", SearchOption.AllDirectories))
             {
-                generatedCodeProject = generatedCodeProject.AddDocument(sharedSourceFile, File.ReadAllText(sharedSourceFile), Array.Empty<string>(), sharedSourceFile).Project;
+                // Ignore existing generated code
+                if (sourceFile.StartsWith(generatedCodeDirectory))
+                {
+                    continue;
+                }
+                generatedCodeProject = generatedCodeProject.AddDocument(sourceFile, File.ReadAllText(sourceFile), Array.Empty<string>(), sourceFile).Project;
             }
 
             foreach (string sharedSourceFile in Directory.GetFiles(sharedSourceFolder, "*.cs", SearchOption.AllDirectories))
