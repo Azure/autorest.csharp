@@ -1313,7 +1313,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Retry on 500 logic: https://github.com/Azure/autorest.csharp/issues/398")]
         public Task LRORetryErrorDelete202Retry200Succeeded() => TestStatus(async (host, pipeline) =>
         {
             var operation = await new LRORetrysClient(ClientDiagnostics, pipeline, host).StartDelete202Retry200OperationAsync();
@@ -1321,7 +1320,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Retry on 500 logic: https://github.com/Azure/autorest.csharp/issues/398")]
         public Task LRORetryErrorDelete202Retry200Succeeded_Sync() => TestStatus((host, pipeline) =>
         {
             var operation = new LRORetrysClient(ClientDiagnostics, pipeline, host).StartDelete202Retry200Operation();
@@ -1329,7 +1327,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Retry on 500 logic: https://github.com/Azure/autorest.csharp/issues/398")]
         public Task LRORetryErrorDeleteAsyncRetrySucceeded() => TestStatus(async (host, pipeline) =>
         {
             var operation = await new LRORetrysClient(ClientDiagnostics, pipeline, host).StartDeleteAsyncRelativeRetrySucceededOperationAsync();
@@ -1337,7 +1334,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Retry on 500 logic: https://github.com/Azure/autorest.csharp/issues/398")]
         public Task LRORetryErrorDeleteAsyncRetrySucceeded_Sync() => TestStatus((host, pipeline) =>
         {
             var operation = new LRORetrysClient(ClientDiagnostics, pipeline, host).StartDeleteAsyncRelativeRetrySucceededOperation();
@@ -1345,7 +1341,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Retry on 500 logic: https://github.com/Azure/autorest.csharp/issues/398")]
         public Task LRORetryErrorPost202Retry200Succeeded() => TestStatus(async (host, pipeline) =>
         {
             var value = new Product();
@@ -1354,7 +1349,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Retry on 500 logic: https://github.com/Azure/autorest.csharp/issues/398")]
         public Task LRORetryErrorPost202Retry200Succeeded_Sync() => TestStatus((host, pipeline) =>
         {
             var value = new Product();
@@ -1363,7 +1357,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Retry on 500 logic: https://github.com/Azure/autorest.csharp/issues/398")]
         public Task LRORetryErrorPostAsyncRetrySucceeded() => TestStatus(async (host, pipeline) =>
         {
             var value = new Product();
@@ -1372,7 +1365,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Retry on 500 logic: https://github.com/Azure/autorest.csharp/issues/398")]
         public Task LRORetryErrorPostAsyncRetrySucceeded_Sync() => TestStatus((host, pipeline) =>
         {
             var value = new Product();
@@ -1381,7 +1373,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Retry on 500 logic: https://github.com/Azure/autorest.csharp/issues/398")]
         public Task LRORetryErrorPutAsyncSucceeded() => Test(async (host, pipeline) =>
         {
             var value = new Product();
@@ -1393,7 +1384,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Retry on 500 logic: https://github.com/Azure/autorest.csharp/issues/398")]
         public Task LRORetryErrorPutAsyncSucceeded_Sync() => Test((host, pipeline) =>
         {
             var value = new Product();
@@ -1405,7 +1395,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Retry on 500 logic: https://github.com/Azure/autorest.csharp/issues/398")]
         public Task LRORetryErrorPutAsyncSucceededPolling() => Test(async (host, pipeline) =>
         {
             var value = new Product();
@@ -1417,7 +1406,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Retry on 500 logic: https://github.com/Azure/autorest.csharp/issues/398")]
         public Task LRORetryErrorPutAsyncSucceededPolling_Sync() => Test((host, pipeline) =>
         {
             var value = new Product();

@@ -6,9 +6,9 @@ using AutoRest.CSharp.V3.Generation.Types;
 
 namespace AutoRest.CSharp.V3.Output.Models.Requests
 {
-    internal class Paging
+    internal class PagingInfo
     {
-        public Paging(RestClientMethod method, RestClientMethod nextPageMethod, string name, string? nextLinkName, string itemName, CSharpType itemType)
+        public PagingInfo(RestClientMethod method, RestClientMethod nextPageMethod, string name, string? nextLinkName, string itemName, CSharpType itemType)
         {
             Method = method;
             NextPageMethod = nextPageMethod;

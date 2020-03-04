@@ -38,11 +38,27 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
             using (writer.Namespace(model.Declaration.Namespace))
             {
-                writer.Append($"{model.Declaration.Accessibility} partial class {model.Declaration.Name}: {typeof(IUtf8JsonSerializable)}");
+                writer.Append($"{model.Declaration.Accessibility} partial class {model.Declaration.Name}");
 
-                if (model.Serializations.OfType<XmlElementSerialization>().Any())
+                bool hasJson = model.Serializations.OfType<JsonSerialization>().Any();
+                bool hasXml = model.Serializations.OfType<XmlElementSerialization>().Any();
+                if (hasJson || hasXml)
                 {
-                    writer.Append($", {typeof(IXmlSerializable)}");
+                    writer.Append($": ");
+                }
+
+                if (hasJson)
+                {
+                    writer.Append($"{typeof(IUtf8JsonSerializable)}");
+                }
+
+                if (hasXml)
+                {
+                    if (hasJson)
+                    {
+                        writer.Append($", ");
+                    }
+                    writer.Append($"{typeof(IXmlSerializable)}");
                 }
 
                 using (writer.Scope())
@@ -97,7 +113,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             {
                 if (model.Discriminator?.HasDescendants == true)
                 {
-                    using (writer.If($"element.TryGetProperty(\"{model.Discriminator.SerializedName}\", out {writer.Type(typeof(JsonElement))} discriminator)"))
+                    using (writer.If($"element.TryGetProperty(\"{model.Discriminator.SerializedName}\", out {typeof(JsonElement)} discriminator)"))
                     {
                         writer.Line($"switch (discriminator.GetString())");
                         using (writer.Scope())

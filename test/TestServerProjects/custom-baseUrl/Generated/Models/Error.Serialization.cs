@@ -8,7 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace body_number.Models
+namespace custom_baseUrl.Models
 {
     public partial class Error : IUtf8JsonSerializable
     {

@@ -1,4 +1,4 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
 using AutoRest.CSharp.V3.Generation.Types;
@@ -9,7 +9,7 @@ namespace AutoRest.CSharp.V3.Output.Models
 {
     internal class Client: ITypeProvider
     {
-        public Client(TypeDeclarationOptions declaredType, string description, RestClient restClient, ClientMethod[] methods, Paging[] pagingMethods, LongRunningOperation[] longRunningOperationMethods)
+        public Client(TypeDeclarationOptions declaredType, string description, RestClient restClient, ClientMethod[] methods, PagingMethods[] pagingMethods, LongRunningOperation[] longRunningOperationMethods)
         {
             DeclaredType = declaredType;
             Description = description;
@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.V3.Output.Models
         public string Description { get; }
         public RestClient RestClient { get; }
         public ClientMethod[] Methods { get; }
-        public Paging[] PagingMethods { get; }
+        public PagingInfo[] PagingMethods { get; }
         public LongRunningOperation[] LongRunningOperationMethods { get; }
         public CSharpType Type => new CSharpType(this, DeclaredType.Namespace, DeclaredType.Name);
     }
