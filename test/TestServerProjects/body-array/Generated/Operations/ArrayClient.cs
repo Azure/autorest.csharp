@@ -17,9 +17,9 @@ namespace body_array
 {
     public partial class ArrayClient
     {
+        private readonly ClientDiagnostics clientDiagnostics;
+        private readonly HttpPipeline pipeline;
         internal ArrayRestClient RestClient { get; }
-        private ClientDiagnostics clientDiagnostics;
-        private HttpPipeline pipeline;
         /// <summary> Initializes a new instance of ArrayClient. </summary>
         internal ArrayClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {

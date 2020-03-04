@@ -15,9 +15,9 @@ namespace CustomNamespace
 {
     internal partial class MainClient
     {
+        private readonly ClientDiagnostics clientDiagnostics;
+        private readonly HttpPipeline pipeline;
         internal ServiceRestClient RestClient { get; }
-        private ClientDiagnostics clientDiagnostics;
-        private HttpPipeline pipeline;
         /// <summary> Initializes a new instance of MainClient. </summary>
         internal MainClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {

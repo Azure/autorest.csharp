@@ -15,9 +15,9 @@ namespace additionalProperties
 {
     public partial class PetsClient
     {
+        private readonly ClientDiagnostics clientDiagnostics;
+        private readonly HttpPipeline pipeline;
         internal PetsRestClient RestClient { get; }
-        private ClientDiagnostics clientDiagnostics;
-        private HttpPipeline pipeline;
         /// <summary> Initializes a new instance of PetsClient. </summary>
         internal PetsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {

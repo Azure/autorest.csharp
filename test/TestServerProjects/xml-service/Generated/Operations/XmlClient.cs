@@ -16,9 +16,9 @@ namespace xml_service
 {
     public partial class XmlClient
     {
+        private readonly ClientDiagnostics clientDiagnostics;
+        private readonly HttpPipeline pipeline;
         internal XmlRestClient RestClient { get; }
-        private ClientDiagnostics clientDiagnostics;
-        private HttpPipeline pipeline;
         /// <summary> Initializes a new instance of XmlClient. </summary>
         internal XmlClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {

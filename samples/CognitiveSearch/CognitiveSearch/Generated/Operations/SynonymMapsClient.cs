@@ -16,9 +16,9 @@ namespace CognitiveSearch
 {
     public partial class SynonymMapsClient
     {
+        private readonly ClientDiagnostics clientDiagnostics;
+        private readonly HttpPipeline pipeline;
         internal SynonymMapsRestClient RestClient { get; }
-        private ClientDiagnostics clientDiagnostics;
-        private HttpPipeline pipeline;
         /// <summary> Initializes a new instance of SynonymMapsClient. </summary>
         internal SynonymMapsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string searchServiceName, string searchDnsSuffix = "search.windows.net", string ApiVersion = "2019-05-06")
         {

@@ -128,14 +128,9 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private void WriteClientFields(CodeWriter writer, Client client)
         {
-            // foreach (Parameter clientParameter in client.RestClient.Parameters)
-            // {
-            //     writer.Line($"private {clientParameter.Type} {clientParameter.Name};");
-            // }
-
+            writer.Line($"private readonly {typeof(ClientDiagnostics)} clientDiagnostics;");
+            writer.Line($"private readonly {typeof(HttpPipeline)} pipeline;");
             writer.Append($"internal {client.RestClient.Type} RestClient").LineRaw(" { get; }");
-            writer.Line($"private {typeof(ClientDiagnostics)} clientDiagnostics;");
-            writer.Line($"private {typeof(HttpPipeline)} pipeline;");
         }
 
         private void WriteClientCtor(CodeWriter writer, Client client)

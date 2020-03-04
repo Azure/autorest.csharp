@@ -18,9 +18,9 @@ namespace lro
 {
     public partial class LROsCustomHeaderClient
     {
+        private readonly ClientDiagnostics clientDiagnostics;
+        private readonly HttpPipeline pipeline;
         internal LROsCustomHeaderRestClient RestClient { get; }
-        private ClientDiagnostics clientDiagnostics;
-        private HttpPipeline pipeline;
         /// <summary> Initializes a new instance of LROsCustomHeaderClient. </summary>
         internal LROsCustomHeaderClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {

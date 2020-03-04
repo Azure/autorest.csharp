@@ -15,9 +15,9 @@ namespace body_complex
 {
     public partial class ReadonlypropertyClient
     {
+        private readonly ClientDiagnostics clientDiagnostics;
+        private readonly HttpPipeline pipeline;
         internal ReadonlypropertyRestClient RestClient { get; }
-        private ClientDiagnostics clientDiagnostics;
-        private HttpPipeline pipeline;
         /// <summary> Initializes a new instance of ReadonlypropertyClient. </summary>
         internal ReadonlypropertyClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {

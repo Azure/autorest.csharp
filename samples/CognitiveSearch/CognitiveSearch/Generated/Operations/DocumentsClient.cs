@@ -17,9 +17,9 @@ namespace CognitiveSearch
 {
     public partial class DocumentsClient
     {
+        private readonly ClientDiagnostics clientDiagnostics;
+        private readonly HttpPipeline pipeline;
         internal DocumentsRestClient RestClient { get; }
-        private ClientDiagnostics clientDiagnostics;
-        private HttpPipeline pipeline;
         /// <summary> Initializes a new instance of DocumentsClient. </summary>
         internal DocumentsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string searchServiceName, string indexName, string searchDnsSuffix = "search.windows.net", string ApiVersion = "2019-05-06")
         {
