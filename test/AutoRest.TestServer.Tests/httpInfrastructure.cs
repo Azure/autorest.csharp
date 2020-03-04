@@ -191,7 +191,7 @@ namespace AutoRest.TestServer.Tests
         [Ignore("This test is not supposed to redirect, but it does. I'm not sure why it is not supposed to redirect.")]
         public Task HttpRedirect301Put() => Test(async (host, pipeline) =>
         {
-            var result = await new HttpRedirectsClient(ClientDiagnostics, pipeline, host).Put301Async();
+            var result = await new HttpRedirectsClient(ClientDiagnostics, pipeline, host).RestClient.Put301Async();
             Assert.AreEqual("/http/failure/500", result.Headers.Location);
         });
 
@@ -207,7 +207,7 @@ namespace AutoRest.TestServer.Tests
         [Ignore("This test is not supposed to redirect, but it does. I'm not sure why it is not supposed to redirect.")]
         public Task HttpRedirect302Patch() => Test(async (host, pipeline) =>
         {
-            var result = await new HttpRedirectsClient(ClientDiagnostics, pipeline, host).Patch302Async();
+            var result = await new HttpRedirectsClient(ClientDiagnostics, pipeline, host).RestClient.Patch302Async();
             Assert.AreEqual("/http/failure/500", result.Headers.Location);
         });
 

@@ -14,13 +14,14 @@ namespace CognitiveSearch
 {
     public partial class SkillsetsClient
     {
-        private SkillsetsRestClient restClient;
+        internal SkillsetsRestClient RestClient
+        { get; }
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
         /// <summary> Initializes a new instance of SkillsetsClient. </summary>
         internal SkillsetsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string searchServiceName, string searchDnsSuffix = "search.windows.net", string ApiVersion = "2019-05-06")
         {
-            restClient = new SkillsetsRestClient(clientDiagnostics, pipeline, searchServiceName, searchDnsSuffix, ApiVersion);
+            RestClient = new SkillsetsRestClient(clientDiagnostics, pipeline, searchServiceName, searchDnsSuffix, ApiVersion);
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
@@ -33,7 +34,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Skillset>> CreateOrUpdateAsync(string skillsetName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, Skillset skillset, CancellationToken cancellationToken = default)
         {
-            return await restClient.CreateOrUpdateAsync(skillsetName, clientRequestId, ifMatch, ifNoneMatch, skillset, cancellationToken).ConfigureAwait(false);
+            return await RestClient.CreateOrUpdateAsync(skillsetName, clientRequestId, ifMatch, ifNoneMatch, skillset, cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Creates a new skillset in a search service or updates the skillset if it already exists. </summary>
         /// <param name="skillsetName"> The name of the skillset to create or update. </param>
@@ -44,7 +45,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Skillset> CreateOrUpdate(string skillsetName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, Skillset skillset, CancellationToken cancellationToken = default)
         {
-            return restClient.CreateOrUpdate(skillsetName, clientRequestId, ifMatch, ifNoneMatch, skillset, cancellationToken);
+            return RestClient.CreateOrUpdate(skillsetName, clientRequestId, ifMatch, ifNoneMatch, skillset, cancellationToken);
         }
         /// <summary> Deletes a skillset in a search service. </summary>
         /// <param name="skillsetName"> The name of the skillset to create or update. </param>
@@ -54,7 +55,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> DeleteAsync(string skillsetName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
         {
-            return await restClient.DeleteAsync(skillsetName, clientRequestId, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
+            return await RestClient.DeleteAsync(skillsetName, clientRequestId, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Deletes a skillset in a search service. </summary>
         /// <param name="skillsetName"> The name of the skillset to create or update. </param>
@@ -64,7 +65,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Delete(string skillsetName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
         {
-            return restClient.Delete(skillsetName, clientRequestId, ifMatch, ifNoneMatch, cancellationToken);
+            return RestClient.Delete(skillsetName, clientRequestId, ifMatch, ifNoneMatch, cancellationToken);
         }
         /// <summary> Retrieves a skillset in a search service. </summary>
         /// <param name="skillsetName"> The name of the skillset to create or update. </param>
@@ -72,7 +73,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Skillset>> GetAsync(string skillsetName, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
-            return await restClient.GetAsync(skillsetName, clientRequestId, cancellationToken).ConfigureAwait(false);
+            return await RestClient.GetAsync(skillsetName, clientRequestId, cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Retrieves a skillset in a search service. </summary>
         /// <param name="skillsetName"> The name of the skillset to create or update. </param>
@@ -80,7 +81,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Skillset> Get(string skillsetName, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
-            return restClient.Get(skillsetName, clientRequestId, cancellationToken);
+            return RestClient.Get(skillsetName, clientRequestId, cancellationToken);
         }
         /// <summary> List all skillsets in a search service. </summary>
         /// <param name="select"> Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
@@ -88,7 +89,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ListSkillsetsResult>> ListAsync(string select, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
-            return await restClient.ListAsync(select, clientRequestId, cancellationToken).ConfigureAwait(false);
+            return await RestClient.ListAsync(select, clientRequestId, cancellationToken).ConfigureAwait(false);
         }
         /// <summary> List all skillsets in a search service. </summary>
         /// <param name="select"> Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
@@ -96,7 +97,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ListSkillsetsResult> List(string select, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
-            return restClient.List(select, clientRequestId, cancellationToken);
+            return RestClient.List(select, clientRequestId, cancellationToken);
         }
         /// <summary> Creates a new skillset in a search service. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -104,7 +105,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Skillset>> CreateAsync(Guid? clientRequestId, Skillset skillset, CancellationToken cancellationToken = default)
         {
-            return await restClient.CreateAsync(clientRequestId, skillset, cancellationToken).ConfigureAwait(false);
+            return await RestClient.CreateAsync(clientRequestId, skillset, cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Creates a new skillset in a search service. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -112,7 +113,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Skillset> Create(Guid? clientRequestId, Skillset skillset, CancellationToken cancellationToken = default)
         {
-            return restClient.Create(clientRequestId, skillset, cancellationToken);
+            return RestClient.Create(clientRequestId, skillset, cancellationToken);
         }
     }
 }

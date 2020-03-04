@@ -13,13 +13,14 @@ namespace body_complex
 {
     public partial class PolymorphicrecursiveClient
     {
-        private PolymorphicrecursiveRestClient restClient;
+        internal PolymorphicrecursiveRestClient RestClient
+        { get; }
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
         /// <summary> Initializes a new instance of PolymorphicrecursiveClient. </summary>
         internal PolymorphicrecursiveClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            restClient = new PolymorphicrecursiveRestClient(clientDiagnostics, pipeline, host);
+            RestClient = new PolymorphicrecursiveRestClient(clientDiagnostics, pipeline, host);
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
@@ -27,13 +28,13 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Fish>> GetValidAsync(CancellationToken cancellationToken = default)
         {
-            return await restClient.GetValidAsync(cancellationToken).ConfigureAwait(false);
+            return await RestClient.GetValidAsync(cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Get complex types that are polymorphic and have recursive references. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Fish> GetValid(CancellationToken cancellationToken = default)
         {
-            return restClient.GetValid(cancellationToken);
+            return RestClient.GetValid(cancellationToken);
         }
         /// <summary> Put complex types that are polymorphic and have recursive references. </summary>
         /// <param name="complexBody">
@@ -74,7 +75,7 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutValidAsync(Fish complexBody, CancellationToken cancellationToken = default)
         {
-            return await restClient.PutValidAsync(complexBody, cancellationToken).ConfigureAwait(false);
+            return await RestClient.PutValidAsync(complexBody, cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Put complex types that are polymorphic and have recursive references. </summary>
         /// <param name="complexBody">
@@ -115,7 +116,7 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutValid(Fish complexBody, CancellationToken cancellationToken = default)
         {
-            return restClient.PutValid(complexBody, cancellationToken);
+            return RestClient.PutValid(complexBody, cancellationToken);
         }
     }
 }

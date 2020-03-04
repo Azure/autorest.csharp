@@ -15,13 +15,14 @@ namespace CognitiveSearch
 {
     public partial class DocumentsClient
     {
-        private DocumentsRestClient restClient;
+        internal DocumentsRestClient RestClient
+        { get; }
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
         /// <summary> Initializes a new instance of DocumentsClient. </summary>
         internal DocumentsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string searchServiceName, string indexName, string searchDnsSuffix = "search.windows.net", string ApiVersion = "2019-05-06")
         {
-            restClient = new DocumentsRestClient(clientDiagnostics, pipeline, searchServiceName, indexName, searchDnsSuffix, ApiVersion);
+            RestClient = new DocumentsRestClient(clientDiagnostics, pipeline, searchServiceName, indexName, searchDnsSuffix, ApiVersion);
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
@@ -30,14 +31,14 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<long>> CountAsync(Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
-            return await restClient.CountAsync(clientRequestId, cancellationToken).ConfigureAwait(false);
+            return await RestClient.CountAsync(clientRequestId, cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Queries the number of documents in the index. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<long> Count(Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
-            return restClient.Count(clientRequestId, cancellationToken);
+            return RestClient.Count(clientRequestId, cancellationToken);
         }
         /// <summary> Searches for documents in the index. </summary>
         /// <param name="searchText"> A full-text search query expression; Use &quot;*&quot; or omit this parameter to match all documents. </param>
@@ -61,7 +62,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<SearchDocumentsResult>> SearchGetAsync(string searchText, bool? includeTotalResultCount, IEnumerable<string> facets, string filter, IEnumerable<string> highlightFields, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> orderBy, QueryType? queryType, IEnumerable<string> scoringParameters, string scoringProfile, IEnumerable<string> searchFields, SearchMode? searchMode, IEnumerable<string> select, int? skip, int? top, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
-            return await restClient.SearchGetAsync(searchText, includeTotalResultCount, facets, filter, highlightFields, highlightPostTag, highlightPreTag, minimumCoverage, orderBy, queryType, scoringParameters, scoringProfile, searchFields, searchMode, select, skip, top, clientRequestId, cancellationToken).ConfigureAwait(false);
+            return await RestClient.SearchGetAsync(searchText, includeTotalResultCount, facets, filter, highlightFields, highlightPostTag, highlightPreTag, minimumCoverage, orderBy, queryType, scoringParameters, scoringProfile, searchFields, searchMode, select, skip, top, clientRequestId, cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Searches for documents in the index. </summary>
         /// <param name="searchText"> A full-text search query expression; Use &quot;*&quot; or omit this parameter to match all documents. </param>
@@ -85,7 +86,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<SearchDocumentsResult> SearchGet(string searchText, bool? includeTotalResultCount, IEnumerable<string> facets, string filter, IEnumerable<string> highlightFields, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> orderBy, QueryType? queryType, IEnumerable<string> scoringParameters, string scoringProfile, IEnumerable<string> searchFields, SearchMode? searchMode, IEnumerable<string> select, int? skip, int? top, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
-            return restClient.SearchGet(searchText, includeTotalResultCount, facets, filter, highlightFields, highlightPostTag, highlightPreTag, minimumCoverage, orderBy, queryType, scoringParameters, scoringProfile, searchFields, searchMode, select, skip, top, clientRequestId, cancellationToken);
+            return RestClient.SearchGet(searchText, includeTotalResultCount, facets, filter, highlightFields, highlightPostTag, highlightPreTag, minimumCoverage, orderBy, queryType, scoringParameters, scoringProfile, searchFields, searchMode, select, skip, top, clientRequestId, cancellationToken);
         }
         /// <summary> Searches for documents in the index. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -93,7 +94,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<SearchDocumentsResult>> SearchPostAsync(Guid? clientRequestId, SearchRequest searchRequest, CancellationToken cancellationToken = default)
         {
-            return await restClient.SearchPostAsync(clientRequestId, searchRequest, cancellationToken).ConfigureAwait(false);
+            return await RestClient.SearchPostAsync(clientRequestId, searchRequest, cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Searches for documents in the index. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -101,7 +102,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<SearchDocumentsResult> SearchPost(Guid? clientRequestId, SearchRequest searchRequest, CancellationToken cancellationToken = default)
         {
-            return restClient.SearchPost(clientRequestId, searchRequest, cancellationToken);
+            return RestClient.SearchPost(clientRequestId, searchRequest, cancellationToken);
         }
         /// <summary> Retrieves a document from the index. </summary>
         /// <param name="key"> The key of the document to retrieve. </param>
@@ -110,7 +111,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<object>> GetAsync(string key, IEnumerable<string> selectedFields, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
-            return await restClient.GetAsync(key, selectedFields, clientRequestId, cancellationToken).ConfigureAwait(false);
+            return await RestClient.GetAsync(key, selectedFields, clientRequestId, cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Retrieves a document from the index. </summary>
         /// <param name="key"> The key of the document to retrieve. </param>
@@ -119,7 +120,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<object> Get(string key, IEnumerable<string> selectedFields, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
-            return restClient.Get(key, selectedFields, clientRequestId, cancellationToken);
+            return RestClient.Get(key, selectedFields, clientRequestId, cancellationToken);
         }
         /// <summary> Suggests documents in the index that match the given partial query text. </summary>
         /// <param name="searchText"> The search text to use to suggest documents. Must be at least 1 character, and no more than 100 characters. </param>
@@ -137,7 +138,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<SuggestDocumentsResult>> SuggestGetAsync(string searchText, string suggesterName, string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> orderBy, IEnumerable<string> searchFields, IEnumerable<string> select, int? top, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
-            return await restClient.SuggestGetAsync(searchText, suggesterName, filter, useFuzzyMatching, highlightPostTag, highlightPreTag, minimumCoverage, orderBy, searchFields, select, top, clientRequestId, cancellationToken).ConfigureAwait(false);
+            return await RestClient.SuggestGetAsync(searchText, suggesterName, filter, useFuzzyMatching, highlightPostTag, highlightPreTag, minimumCoverage, orderBy, searchFields, select, top, clientRequestId, cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Suggests documents in the index that match the given partial query text. </summary>
         /// <param name="searchText"> The search text to use to suggest documents. Must be at least 1 character, and no more than 100 characters. </param>
@@ -155,7 +156,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<SuggestDocumentsResult> SuggestGet(string searchText, string suggesterName, string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> orderBy, IEnumerable<string> searchFields, IEnumerable<string> select, int? top, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
-            return restClient.SuggestGet(searchText, suggesterName, filter, useFuzzyMatching, highlightPostTag, highlightPreTag, minimumCoverage, orderBy, searchFields, select, top, clientRequestId, cancellationToken);
+            return RestClient.SuggestGet(searchText, suggesterName, filter, useFuzzyMatching, highlightPostTag, highlightPreTag, minimumCoverage, orderBy, searchFields, select, top, clientRequestId, cancellationToken);
         }
         /// <summary> Suggests documents in the index that match the given partial query text. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -163,7 +164,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<SuggestDocumentsResult>> SuggestPostAsync(Guid? clientRequestId, SuggestRequest suggestRequest, CancellationToken cancellationToken = default)
         {
-            return await restClient.SuggestPostAsync(clientRequestId, suggestRequest, cancellationToken).ConfigureAwait(false);
+            return await RestClient.SuggestPostAsync(clientRequestId, suggestRequest, cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Suggests documents in the index that match the given partial query text. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -171,7 +172,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<SuggestDocumentsResult> SuggestPost(Guid? clientRequestId, SuggestRequest suggestRequest, CancellationToken cancellationToken = default)
         {
-            return restClient.SuggestPost(clientRequestId, suggestRequest, cancellationToken);
+            return RestClient.SuggestPost(clientRequestId, suggestRequest, cancellationToken);
         }
         /// <summary> Sends a batch of document write actions to the index. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -179,7 +180,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IndexDocumentsResult>> IndexAsync(Guid? clientRequestId, IndexBatch batch, CancellationToken cancellationToken = default)
         {
-            return await restClient.IndexAsync(clientRequestId, batch, cancellationToken).ConfigureAwait(false);
+            return await RestClient.IndexAsync(clientRequestId, batch, cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Sends a batch of document write actions to the index. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -187,7 +188,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IndexDocumentsResult> Index(Guid? clientRequestId, IndexBatch batch, CancellationToken cancellationToken = default)
         {
-            return restClient.Index(clientRequestId, batch, cancellationToken);
+            return RestClient.Index(clientRequestId, batch, cancellationToken);
         }
         /// <summary> Autocompletes incomplete query terms based on input text and matching terms in the index. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -204,7 +205,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<AutocompleteResult>> AutocompleteGetAsync(Guid? clientRequestId, string searchText, string suggesterName, AutocompleteMode? autocompleteMode, string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> searchFields, int? top, CancellationToken cancellationToken = default)
         {
-            return await restClient.AutocompleteGetAsync(clientRequestId, searchText, suggesterName, autocompleteMode, filter, useFuzzyMatching, highlightPostTag, highlightPreTag, minimumCoverage, searchFields, top, cancellationToken).ConfigureAwait(false);
+            return await RestClient.AutocompleteGetAsync(clientRequestId, searchText, suggesterName, autocompleteMode, filter, useFuzzyMatching, highlightPostTag, highlightPreTag, minimumCoverage, searchFields, top, cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Autocompletes incomplete query terms based on input text and matching terms in the index. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -221,7 +222,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<AutocompleteResult> AutocompleteGet(Guid? clientRequestId, string searchText, string suggesterName, AutocompleteMode? autocompleteMode, string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> searchFields, int? top, CancellationToken cancellationToken = default)
         {
-            return restClient.AutocompleteGet(clientRequestId, searchText, suggesterName, autocompleteMode, filter, useFuzzyMatching, highlightPostTag, highlightPreTag, minimumCoverage, searchFields, top, cancellationToken);
+            return RestClient.AutocompleteGet(clientRequestId, searchText, suggesterName, autocompleteMode, filter, useFuzzyMatching, highlightPostTag, highlightPreTag, minimumCoverage, searchFields, top, cancellationToken);
         }
         /// <summary> Autocompletes incomplete query terms based on input text and matching terms in the index. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -229,7 +230,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<AutocompleteResult>> AutocompletePostAsync(Guid? clientRequestId, AutocompleteRequest autocompleteRequest, CancellationToken cancellationToken = default)
         {
-            return await restClient.AutocompletePostAsync(clientRequestId, autocompleteRequest, cancellationToken).ConfigureAwait(false);
+            return await RestClient.AutocompletePostAsync(clientRequestId, autocompleteRequest, cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Autocompletes incomplete query terms based on input text and matching terms in the index. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -237,7 +238,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<AutocompleteResult> AutocompletePost(Guid? clientRequestId, AutocompleteRequest autocompleteRequest, CancellationToken cancellationToken = default)
         {
-            return restClient.AutocompletePost(clientRequestId, autocompleteRequest, cancellationToken);
+            return RestClient.AutocompletePost(clientRequestId, autocompleteRequest, cancellationToken);
         }
     }
 }

@@ -13,7 +13,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void ParametersAreRenamed()
         {
-            var method = TypeAsserts.HasPublicInstanceMethod(typeof(AllOperations), "RenamedOperationAsync");
+            var method = TypeAsserts.HasPublicInstanceMethod(typeof(AllClient), "RenamedOperationAsync");
             // TODO: Add more tests here
             TypeAsserts.HasParameter(method, "renamedBodyParameter");
             TypeAsserts.HasParameter(method, "renamedPathParameter");

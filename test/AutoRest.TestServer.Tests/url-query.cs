@@ -124,13 +124,13 @@ namespace AutoRest.TestServer.Tests
         public Task UrlQueriesArrayPipesValid() => TestStatus(async (host, pipeline) => await new QueriesClient(ClientDiagnostics, pipeline, host).ArrayStringPipesValidAsync( new[] { "ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", "" }));
 
         [Test]
-        public void UrlQueriesArrayMultiNull() => TestStatus(async (host, pipeline) => await new url_multi_collectionFormat.QueriesOperations(ClientDiagnostics, pipeline, host).ArrayStringMultiNullAsync( null));
+        public void UrlQueriesArrayMultiNull() => TestStatus(async (host, pipeline) => await new url_multi_collectionFormat.QueriesClient(ClientDiagnostics, pipeline, host).ArrayStringMultiNullAsync( null));
 
         [Test]
-        public void UrlQueriesArrayMultiEmpty() => TestStatus(async (host, pipeline) => await new url_multi_collectionFormat.QueriesOperations(ClientDiagnostics, pipeline, host).ArrayStringMultiEmptyAsync( new string[] { }));
+        public void UrlQueriesArrayMultiEmpty() => TestStatus(async (host, pipeline) => await new url_multi_collectionFormat.QueriesClient(ClientDiagnostics, pipeline, host).ArrayStringMultiEmptyAsync( new string[] { }));
 
         [Test]
-        public void UrlQueriesArrayMultiValid() => TestStatus(async (host, pipeline) => await new url_multi_collectionFormat.QueriesOperations(ClientDiagnostics, pipeline, host).ArrayStringMultiValidAsync( new[] { "ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", "" }));
+        public void UrlQueriesArrayMultiValid() => TestStatus(async (host, pipeline) => await new url_multi_collectionFormat.QueriesClient(ClientDiagnostics, pipeline, host).ArrayStringMultiValidAsync( new[] { "ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", "" }));
 
         public override IEnumerable<string> AdditionalKnownScenarios { get; } = new string[]
         {

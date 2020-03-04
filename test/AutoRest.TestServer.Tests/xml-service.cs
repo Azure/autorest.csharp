@@ -421,7 +421,7 @@ namespace AutoRest.TestServer.Tests
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task GetHeadersAsync() => Test(async (host, pipeline) =>
         {
-            var result = await new XmlClient(ClientDiagnostics, pipeline, host).GetHeadersAsync();
+            var result = await new XmlClient(ClientDiagnostics, pipeline, host).RestClient.GetHeadersAsync();
             var value = result.Headers;
 
             Assert.AreEqual("custom-value", value.CustomHeader);

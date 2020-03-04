@@ -13,13 +13,14 @@ namespace extensible_enums_swagger
 {
     public partial class PetClient
     {
-        private PetRestClient restClient;
+        internal PetRestClient RestClient
+        { get; }
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
         /// <summary> Initializes a new instance of PetClient. </summary>
         internal PetClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            restClient = new PetRestClient(clientDiagnostics, pipeline, host);
+            RestClient = new PetRestClient(clientDiagnostics, pipeline, host);
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
@@ -27,25 +28,25 @@ namespace extensible_enums_swagger
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Pet>> GetByPetIdAsync(string petId, CancellationToken cancellationToken = default)
         {
-            return await restClient.GetByPetIdAsync(petId, cancellationToken).ConfigureAwait(false);
+            return await RestClient.GetByPetIdAsync(petId, cancellationToken).ConfigureAwait(false);
         }
         /// <param name="petId"> Pet id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Pet> GetByPetId(string petId, CancellationToken cancellationToken = default)
         {
-            return restClient.GetByPetId(petId, cancellationToken);
+            return RestClient.GetByPetId(petId, cancellationToken);
         }
         /// <param name="petParam"> The Pet to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Pet>> AddPetAsync(Pet petParam, CancellationToken cancellationToken = default)
         {
-            return await restClient.AddPetAsync(petParam, cancellationToken).ConfigureAwait(false);
+            return await RestClient.AddPetAsync(petParam, cancellationToken).ConfigureAwait(false);
         }
         /// <param name="petParam"> The Pet to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Pet> AddPet(Pet petParam, CancellationToken cancellationToken = default)
         {
-            return restClient.AddPet(petParam, cancellationToken);
+            return RestClient.AddPet(petParam, cancellationToken);
         }
     }
 }

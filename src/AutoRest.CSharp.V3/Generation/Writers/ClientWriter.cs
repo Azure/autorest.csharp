@@ -133,7 +133,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             //     writer.Line($"private {clientParameter.Type} {clientParameter.Name};");
             // }
 
-            writer.Line($"internal {client.RestClient.Type} RestClient").AppendRaw(" { get; }");
+            writer.Append($"internal {client.RestClient.Type} RestClient").LineRaw(" { get; }");
             writer.Line($"private {typeof(ClientDiagnostics)} clientDiagnostics;");
             writer.Line($"private {typeof(HttpPipeline)} pipeline;");
         }

@@ -13,13 +13,14 @@ namespace validation
 {
     public partial class AllClient
     {
-        private AllRestClient restClient;
+        internal AllRestClient RestClient
+        { get; }
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
         /// <summary> Initializes a new instance of AllClient. </summary>
         internal AllClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "http://localhost:3000", string ApiVersion = "1.0.0")
         {
-            restClient = new AllRestClient(clientDiagnostics, pipeline, subscriptionId, host, ApiVersion);
+            RestClient = new AllRestClient(clientDiagnostics, pipeline, subscriptionId, host, ApiVersion);
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
@@ -29,7 +30,7 @@ namespace validation
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Product>> ValidationOfMethodParametersAsync(string resourceGroupName, int id, CancellationToken cancellationToken = default)
         {
-            return await restClient.ValidationOfMethodParametersAsync(resourceGroupName, id, cancellationToken).ConfigureAwait(false);
+            return await RestClient.ValidationOfMethodParametersAsync(resourceGroupName, id, cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Validates input parameters on the method. See swagger for details. </summary>
         /// <param name="resourceGroupName"> Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+. </param>
@@ -37,7 +38,7 @@ namespace validation
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Product> ValidationOfMethodParameters(string resourceGroupName, int id, CancellationToken cancellationToken = default)
         {
-            return restClient.ValidationOfMethodParameters(resourceGroupName, id, cancellationToken);
+            return RestClient.ValidationOfMethodParameters(resourceGroupName, id, cancellationToken);
         }
         /// <summary> Validates body parameters on the method. See swagger for details. </summary>
         /// <param name="resourceGroupName"> Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+. </param>
@@ -46,7 +47,7 @@ namespace validation
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Product>> ValidationOfBodyAsync(string resourceGroupName, int id, Product body, CancellationToken cancellationToken = default)
         {
-            return await restClient.ValidationOfBodyAsync(resourceGroupName, id, body, cancellationToken).ConfigureAwait(false);
+            return await RestClient.ValidationOfBodyAsync(resourceGroupName, id, body, cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Validates body parameters on the method. See swagger for details. </summary>
         /// <param name="resourceGroupName"> Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+. </param>
@@ -55,29 +56,29 @@ namespace validation
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Product> ValidationOfBody(string resourceGroupName, int id, Product body, CancellationToken cancellationToken = default)
         {
-            return restClient.ValidationOfBody(resourceGroupName, id, body, cancellationToken);
+            return RestClient.ValidationOfBody(resourceGroupName, id, body, cancellationToken);
         }
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetWithConstantInPathAsync(CancellationToken cancellationToken = default)
         {
-            return await restClient.GetWithConstantInPathAsync(cancellationToken).ConfigureAwait(false);
+            return await RestClient.GetWithConstantInPathAsync(cancellationToken).ConfigureAwait(false);
         }
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetWithConstantInPath(CancellationToken cancellationToken = default)
         {
-            return restClient.GetWithConstantInPath(cancellationToken);
+            return RestClient.GetWithConstantInPath(cancellationToken);
         }
         /// <param name="body"> The Product to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Product>> PostWithConstantInBodyAsync(Product body, CancellationToken cancellationToken = default)
         {
-            return await restClient.PostWithConstantInBodyAsync(body, cancellationToken).ConfigureAwait(false);
+            return await RestClient.PostWithConstantInBodyAsync(body, cancellationToken).ConfigureAwait(false);
         }
         /// <param name="body"> The Product to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Product> PostWithConstantInBody(Product body, CancellationToken cancellationToken = default)
         {
-            return restClient.PostWithConstantInBody(body, cancellationToken);
+            return RestClient.PostWithConstantInBody(body, cancellationToken);
         }
     }
 }

@@ -13,13 +13,14 @@ namespace body_file
 {
     public partial class FilesClient
     {
-        private FilesRestClient restClient;
+        internal FilesRestClient RestClient
+        { get; }
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
         /// <summary> Initializes a new instance of FilesClient. </summary>
         internal FilesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            restClient = new FilesRestClient(clientDiagnostics, pipeline, host);
+            RestClient = new FilesRestClient(clientDiagnostics, pipeline, host);
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
@@ -27,37 +28,37 @@ namespace body_file
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Stream>> GetFileAsync(CancellationToken cancellationToken = default)
         {
-            return await restClient.GetFileAsync(cancellationToken).ConfigureAwait(false);
+            return await RestClient.GetFileAsync(cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Get file. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Stream> GetFile(CancellationToken cancellationToken = default)
         {
-            return restClient.GetFile(cancellationToken);
+            return RestClient.GetFile(cancellationToken);
         }
         /// <summary> Get a large file. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Stream>> GetFileLargeAsync(CancellationToken cancellationToken = default)
         {
-            return await restClient.GetFileLargeAsync(cancellationToken).ConfigureAwait(false);
+            return await RestClient.GetFileLargeAsync(cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Get a large file. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Stream> GetFileLarge(CancellationToken cancellationToken = default)
         {
-            return restClient.GetFileLarge(cancellationToken);
+            return RestClient.GetFileLarge(cancellationToken);
         }
         /// <summary> Get empty file. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Stream>> GetEmptyFileAsync(CancellationToken cancellationToken = default)
         {
-            return await restClient.GetEmptyFileAsync(cancellationToken).ConfigureAwait(false);
+            return await RestClient.GetEmptyFileAsync(cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Get empty file. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Stream> GetEmptyFile(CancellationToken cancellationToken = default)
         {
-            return restClient.GetEmptyFile(cancellationToken);
+            return RestClient.GetEmptyFile(cancellationToken);
         }
     }
 }

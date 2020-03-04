@@ -13,13 +13,14 @@ namespace ExtensionClientName
 {
     public partial class AllClient
     {
-        private AllRestClient restClient;
+        internal AllRestClient RestClient
+        { get; }
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
         /// <summary> Initializes a new instance of AllClient. </summary>
         internal AllClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            restClient = new AllRestClient(clientDiagnostics, pipeline, host);
+            RestClient = new AllRestClient(clientDiagnostics, pipeline, host);
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
@@ -29,7 +30,7 @@ namespace ExtensionClientName
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<RenamedSchema>> RenamedOperationAsync(string renamedPathParameter, string renamedQueryParameter, RenamedSchema renamedBodyParameter, CancellationToken cancellationToken = default)
         {
-            return await restClient.RenamedOperationAsync(renamedPathParameter, renamedQueryParameter, renamedBodyParameter, cancellationToken).ConfigureAwait(false);
+            return await RestClient.RenamedOperationAsync(renamedPathParameter, renamedQueryParameter, renamedBodyParameter, cancellationToken).ConfigureAwait(false);
         }
         /// <param name="renamedPathParameter"> The String to use. </param>
         /// <param name="renamedQueryParameter"> The String to use. </param>
@@ -37,7 +38,7 @@ namespace ExtensionClientName
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<RenamedSchema> RenamedOperation(string renamedPathParameter, string renamedQueryParameter, RenamedSchema renamedBodyParameter, CancellationToken cancellationToken = default)
         {
-            return restClient.RenamedOperation(renamedPathParameter, renamedQueryParameter, renamedBodyParameter, cancellationToken);
+            return RestClient.RenamedOperation(renamedPathParameter, renamedQueryParameter, renamedBodyParameter, cancellationToken);
         }
     }
 }

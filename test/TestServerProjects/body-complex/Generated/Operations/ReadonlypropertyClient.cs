@@ -13,13 +13,14 @@ namespace body_complex
 {
     public partial class ReadonlypropertyClient
     {
-        private ReadonlypropertyRestClient restClient;
+        internal ReadonlypropertyRestClient RestClient
+        { get; }
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
         /// <summary> Initializes a new instance of ReadonlypropertyClient. </summary>
         internal ReadonlypropertyClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            restClient = new ReadonlypropertyRestClient(clientDiagnostics, pipeline, host);
+            RestClient = new ReadonlypropertyRestClient(clientDiagnostics, pipeline, host);
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
@@ -27,27 +28,27 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ReadonlyObj>> GetValidAsync(CancellationToken cancellationToken = default)
         {
-            return await restClient.GetValidAsync(cancellationToken).ConfigureAwait(false);
+            return await RestClient.GetValidAsync(cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Get complex types that have readonly properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ReadonlyObj> GetValid(CancellationToken cancellationToken = default)
         {
-            return restClient.GetValid(cancellationToken);
+            return RestClient.GetValid(cancellationToken);
         }
         /// <summary> Put complex types that have readonly properties. </summary>
         /// <param name="complexBody"> The ReadonlyObj to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutValidAsync(ReadonlyObj complexBody, CancellationToken cancellationToken = default)
         {
-            return await restClient.PutValidAsync(complexBody, cancellationToken).ConfigureAwait(false);
+            return await RestClient.PutValidAsync(complexBody, cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Put complex types that have readonly properties. </summary>
         /// <param name="complexBody"> The ReadonlyObj to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutValid(ReadonlyObj complexBody, CancellationToken cancellationToken = default)
         {
-            return restClient.PutValid(complexBody, cancellationToken);
+            return RestClient.PutValid(complexBody, cancellationToken);
         }
     }
 }

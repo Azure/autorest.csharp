@@ -13,25 +13,26 @@ namespace body_complex
 {
     public partial class FlattencomplexClient
     {
-        private FlattencomplexRestClient restClient;
+        internal FlattencomplexRestClient RestClient
+        { get; }
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
         /// <summary> Initializes a new instance of FlattencomplexClient. </summary>
         internal FlattencomplexClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            restClient = new FlattencomplexRestClient(clientDiagnostics, pipeline, host);
+            RestClient = new FlattencomplexRestClient(clientDiagnostics, pipeline, host);
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<MyBaseType>> GetValidAsync(CancellationToken cancellationToken = default)
         {
-            return await restClient.GetValidAsync(cancellationToken).ConfigureAwait(false);
+            return await RestClient.GetValidAsync(cancellationToken).ConfigureAwait(false);
         }
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<MyBaseType> GetValid(CancellationToken cancellationToken = default)
         {
-            return restClient.GetValid(cancellationToken);
+            return RestClient.GetValid(cancellationToken);
         }
     }
 }

@@ -12,13 +12,14 @@ namespace url
 {
     public partial class PathItemsClient
     {
-        private PathItemsRestClient restClient;
+        internal PathItemsRestClient RestClient
+        { get; }
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
         /// <summary> Initializes a new instance of PathItemsClient. </summary>
         internal PathItemsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string globalStringPath, string globalStringQuery, string host = "http://localhost:3000")
         {
-            restClient = new PathItemsRestClient(clientDiagnostics, pipeline, globalStringPath, globalStringQuery, host);
+            RestClient = new PathItemsRestClient(clientDiagnostics, pipeline, globalStringPath, globalStringQuery, host);
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
@@ -30,7 +31,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetAllWithValuesAsync(string pathItemStringPath, string pathItemStringQuery, string localStringPath, string localStringQuery, CancellationToken cancellationToken = default)
         {
-            return await restClient.GetAllWithValuesAsync(pathItemStringPath, pathItemStringQuery, localStringPath, localStringQuery, cancellationToken).ConfigureAwait(false);
+            return await RestClient.GetAllWithValuesAsync(pathItemStringPath, pathItemStringQuery, localStringPath, localStringQuery, cancellationToken).ConfigureAwait(false);
         }
         /// <summary> send globalStringPath=&apos;globalStringPath&apos;, pathItemStringPath=&apos;pathItemStringPath&apos;, localStringPath=&apos;localStringPath&apos;, globalStringQuery=&apos;globalStringQuery&apos;, pathItemStringQuery=&apos;pathItemStringQuery&apos;, localStringQuery=&apos;localStringQuery&apos;. </summary>
         /// <param name="pathItemStringPath"> A string value &apos;pathItemStringPath&apos; that appears in the path. </param>
@@ -40,7 +41,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetAllWithValues(string pathItemStringPath, string pathItemStringQuery, string localStringPath, string localStringQuery, CancellationToken cancellationToken = default)
         {
-            return restClient.GetAllWithValues(pathItemStringPath, pathItemStringQuery, localStringPath, localStringQuery, cancellationToken);
+            return RestClient.GetAllWithValues(pathItemStringPath, pathItemStringQuery, localStringPath, localStringQuery, cancellationToken);
         }
         /// <summary> send globalStringPath=&apos;globalStringPath&apos;, pathItemStringPath=&apos;pathItemStringPath&apos;, localStringPath=&apos;localStringPath&apos;, globalStringQuery=null, pathItemStringQuery=&apos;pathItemStringQuery&apos;, localStringQuery=&apos;localStringQuery&apos;. </summary>
         /// <param name="pathItemStringPath"> A string value &apos;pathItemStringPath&apos; that appears in the path. </param>
@@ -50,7 +51,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetGlobalQueryNullAsync(string pathItemStringPath, string pathItemStringQuery, string localStringPath, string localStringQuery, CancellationToken cancellationToken = default)
         {
-            return await restClient.GetGlobalQueryNullAsync(pathItemStringPath, pathItemStringQuery, localStringPath, localStringQuery, cancellationToken).ConfigureAwait(false);
+            return await RestClient.GetGlobalQueryNullAsync(pathItemStringPath, pathItemStringQuery, localStringPath, localStringQuery, cancellationToken).ConfigureAwait(false);
         }
         /// <summary> send globalStringPath=&apos;globalStringPath&apos;, pathItemStringPath=&apos;pathItemStringPath&apos;, localStringPath=&apos;localStringPath&apos;, globalStringQuery=null, pathItemStringQuery=&apos;pathItemStringQuery&apos;, localStringQuery=&apos;localStringQuery&apos;. </summary>
         /// <param name="pathItemStringPath"> A string value &apos;pathItemStringPath&apos; that appears in the path. </param>
@@ -60,7 +61,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetGlobalQueryNull(string pathItemStringPath, string pathItemStringQuery, string localStringPath, string localStringQuery, CancellationToken cancellationToken = default)
         {
-            return restClient.GetGlobalQueryNull(pathItemStringPath, pathItemStringQuery, localStringPath, localStringQuery, cancellationToken);
+            return RestClient.GetGlobalQueryNull(pathItemStringPath, pathItemStringQuery, localStringPath, localStringQuery, cancellationToken);
         }
         /// <summary> send globalStringPath=globalStringPath, pathItemStringPath=&apos;pathItemStringPath&apos;, localStringPath=&apos;localStringPath&apos;, globalStringQuery=null, pathItemStringQuery=&apos;pathItemStringQuery&apos;, localStringQuery=null. </summary>
         /// <param name="pathItemStringPath"> A string value &apos;pathItemStringPath&apos; that appears in the path. </param>
@@ -70,7 +71,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetGlobalAndLocalQueryNullAsync(string pathItemStringPath, string pathItemStringQuery, string localStringPath, string localStringQuery, CancellationToken cancellationToken = default)
         {
-            return await restClient.GetGlobalAndLocalQueryNullAsync(pathItemStringPath, pathItemStringQuery, localStringPath, localStringQuery, cancellationToken).ConfigureAwait(false);
+            return await RestClient.GetGlobalAndLocalQueryNullAsync(pathItemStringPath, pathItemStringQuery, localStringPath, localStringQuery, cancellationToken).ConfigureAwait(false);
         }
         /// <summary> send globalStringPath=globalStringPath, pathItemStringPath=&apos;pathItemStringPath&apos;, localStringPath=&apos;localStringPath&apos;, globalStringQuery=null, pathItemStringQuery=&apos;pathItemStringQuery&apos;, localStringQuery=null. </summary>
         /// <param name="pathItemStringPath"> A string value &apos;pathItemStringPath&apos; that appears in the path. </param>
@@ -80,7 +81,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetGlobalAndLocalQueryNull(string pathItemStringPath, string pathItemStringQuery, string localStringPath, string localStringQuery, CancellationToken cancellationToken = default)
         {
-            return restClient.GetGlobalAndLocalQueryNull(pathItemStringPath, pathItemStringQuery, localStringPath, localStringQuery, cancellationToken);
+            return RestClient.GetGlobalAndLocalQueryNull(pathItemStringPath, pathItemStringQuery, localStringPath, localStringQuery, cancellationToken);
         }
         /// <summary> send globalStringPath=&apos;globalStringPath&apos;, pathItemStringPath=&apos;pathItemStringPath&apos;, localStringPath=&apos;localStringPath&apos;, globalStringQuery=&apos;globalStringQuery&apos;, pathItemStringQuery=null, localStringQuery=null. </summary>
         /// <param name="pathItemStringPath"> A string value &apos;pathItemStringPath&apos; that appears in the path. </param>
@@ -90,7 +91,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetLocalPathItemQueryNullAsync(string pathItemStringPath, string pathItemStringQuery, string localStringPath, string localStringQuery, CancellationToken cancellationToken = default)
         {
-            return await restClient.GetLocalPathItemQueryNullAsync(pathItemStringPath, pathItemStringQuery, localStringPath, localStringQuery, cancellationToken).ConfigureAwait(false);
+            return await RestClient.GetLocalPathItemQueryNullAsync(pathItemStringPath, pathItemStringQuery, localStringPath, localStringQuery, cancellationToken).ConfigureAwait(false);
         }
         /// <summary> send globalStringPath=&apos;globalStringPath&apos;, pathItemStringPath=&apos;pathItemStringPath&apos;, localStringPath=&apos;localStringPath&apos;, globalStringQuery=&apos;globalStringQuery&apos;, pathItemStringQuery=null, localStringQuery=null. </summary>
         /// <param name="pathItemStringPath"> A string value &apos;pathItemStringPath&apos; that appears in the path. </param>
@@ -100,7 +101,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetLocalPathItemQueryNull(string pathItemStringPath, string pathItemStringQuery, string localStringPath, string localStringQuery, CancellationToken cancellationToken = default)
         {
-            return restClient.GetLocalPathItemQueryNull(pathItemStringPath, pathItemStringQuery, localStringPath, localStringQuery, cancellationToken);
+            return RestClient.GetLocalPathItemQueryNull(pathItemStringPath, pathItemStringQuery, localStringPath, localStringQuery, cancellationToken);
         }
     }
 }

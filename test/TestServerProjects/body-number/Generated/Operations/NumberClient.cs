@@ -12,13 +12,14 @@ namespace body_number
 {
     public partial class NumberClient
     {
-        private NumberRestClient restClient;
+        internal NumberRestClient RestClient
+        { get; }
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
         /// <summary> Initializes a new instance of NumberClient. </summary>
         internal NumberClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            restClient = new NumberRestClient(clientDiagnostics, pipeline, host);
+            RestClient = new NumberRestClient(clientDiagnostics, pipeline, host);
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
@@ -26,301 +27,301 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<float>> GetNullAsync(CancellationToken cancellationToken = default)
         {
-            return await restClient.GetNullAsync(cancellationToken).ConfigureAwait(false);
+            return await RestClient.GetNullAsync(cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Get null Number value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<float> GetNull(CancellationToken cancellationToken = default)
         {
-            return restClient.GetNull(cancellationToken);
+            return RestClient.GetNull(cancellationToken);
         }
         /// <summary> Get invalid float Number value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<float>> GetInvalidFloatAsync(CancellationToken cancellationToken = default)
         {
-            return await restClient.GetInvalidFloatAsync(cancellationToken).ConfigureAwait(false);
+            return await RestClient.GetInvalidFloatAsync(cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Get invalid float Number value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<float> GetInvalidFloat(CancellationToken cancellationToken = default)
         {
-            return restClient.GetInvalidFloat(cancellationToken);
+            return RestClient.GetInvalidFloat(cancellationToken);
         }
         /// <summary> Get invalid double Number value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<double>> GetInvalidDoubleAsync(CancellationToken cancellationToken = default)
         {
-            return await restClient.GetInvalidDoubleAsync(cancellationToken).ConfigureAwait(false);
+            return await RestClient.GetInvalidDoubleAsync(cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Get invalid double Number value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<double> GetInvalidDouble(CancellationToken cancellationToken = default)
         {
-            return restClient.GetInvalidDouble(cancellationToken);
+            return RestClient.GetInvalidDouble(cancellationToken);
         }
         /// <summary> Get invalid decimal Number value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<decimal>> GetInvalidDecimalAsync(CancellationToken cancellationToken = default)
         {
-            return await restClient.GetInvalidDecimalAsync(cancellationToken).ConfigureAwait(false);
+            return await RestClient.GetInvalidDecimalAsync(cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Get invalid decimal Number value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<decimal> GetInvalidDecimal(CancellationToken cancellationToken = default)
         {
-            return restClient.GetInvalidDecimal(cancellationToken);
+            return RestClient.GetInvalidDecimal(cancellationToken);
         }
         /// <summary> Put big float value 3.402823e+20. </summary>
         /// <param name="numberBody"> The Number to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutBigFloatAsync(float numberBody, CancellationToken cancellationToken = default)
         {
-            return await restClient.PutBigFloatAsync(numberBody, cancellationToken).ConfigureAwait(false);
+            return await RestClient.PutBigFloatAsync(numberBody, cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Put big float value 3.402823e+20. </summary>
         /// <param name="numberBody"> The Number to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutBigFloat(float numberBody, CancellationToken cancellationToken = default)
         {
-            return restClient.PutBigFloat(numberBody, cancellationToken);
+            return RestClient.PutBigFloat(numberBody, cancellationToken);
         }
         /// <summary> Get big float value 3.402823e+20. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<float>> GetBigFloatAsync(CancellationToken cancellationToken = default)
         {
-            return await restClient.GetBigFloatAsync(cancellationToken).ConfigureAwait(false);
+            return await RestClient.GetBigFloatAsync(cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Get big float value 3.402823e+20. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<float> GetBigFloat(CancellationToken cancellationToken = default)
         {
-            return restClient.GetBigFloat(cancellationToken);
+            return RestClient.GetBigFloat(cancellationToken);
         }
         /// <summary> Put big double value 2.5976931e+101. </summary>
         /// <param name="numberBody"> The Number to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutBigDoubleAsync(double numberBody, CancellationToken cancellationToken = default)
         {
-            return await restClient.PutBigDoubleAsync(numberBody, cancellationToken).ConfigureAwait(false);
+            return await RestClient.PutBigDoubleAsync(numberBody, cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Put big double value 2.5976931e+101. </summary>
         /// <param name="numberBody"> The Number to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutBigDouble(double numberBody, CancellationToken cancellationToken = default)
         {
-            return restClient.PutBigDouble(numberBody, cancellationToken);
+            return RestClient.PutBigDouble(numberBody, cancellationToken);
         }
         /// <summary> Get big double value 2.5976931e+101. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<double>> GetBigDoubleAsync(CancellationToken cancellationToken = default)
         {
-            return await restClient.GetBigDoubleAsync(cancellationToken).ConfigureAwait(false);
+            return await RestClient.GetBigDoubleAsync(cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Get big double value 2.5976931e+101. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<double> GetBigDouble(CancellationToken cancellationToken = default)
         {
-            return restClient.GetBigDouble(cancellationToken);
+            return RestClient.GetBigDouble(cancellationToken);
         }
         /// <summary> Put big double value 99999999.99. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutBigDoublePositiveDecimalAsync(CancellationToken cancellationToken = default)
         {
-            return await restClient.PutBigDoublePositiveDecimalAsync(cancellationToken).ConfigureAwait(false);
+            return await RestClient.PutBigDoublePositiveDecimalAsync(cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Put big double value 99999999.99. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutBigDoublePositiveDecimal(CancellationToken cancellationToken = default)
         {
-            return restClient.PutBigDoublePositiveDecimal(cancellationToken);
+            return RestClient.PutBigDoublePositiveDecimal(cancellationToken);
         }
         /// <summary> Get big double value 99999999.99. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<double>> GetBigDoublePositiveDecimalAsync(CancellationToken cancellationToken = default)
         {
-            return await restClient.GetBigDoublePositiveDecimalAsync(cancellationToken).ConfigureAwait(false);
+            return await RestClient.GetBigDoublePositiveDecimalAsync(cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Get big double value 99999999.99. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<double> GetBigDoublePositiveDecimal(CancellationToken cancellationToken = default)
         {
-            return restClient.GetBigDoublePositiveDecimal(cancellationToken);
+            return RestClient.GetBigDoublePositiveDecimal(cancellationToken);
         }
         /// <summary> Put big double value -99999999.99. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutBigDoubleNegativeDecimalAsync(CancellationToken cancellationToken = default)
         {
-            return await restClient.PutBigDoubleNegativeDecimalAsync(cancellationToken).ConfigureAwait(false);
+            return await RestClient.PutBigDoubleNegativeDecimalAsync(cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Put big double value -99999999.99. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutBigDoubleNegativeDecimal(CancellationToken cancellationToken = default)
         {
-            return restClient.PutBigDoubleNegativeDecimal(cancellationToken);
+            return RestClient.PutBigDoubleNegativeDecimal(cancellationToken);
         }
         /// <summary> Get big double value -99999999.99. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<double>> GetBigDoubleNegativeDecimalAsync(CancellationToken cancellationToken = default)
         {
-            return await restClient.GetBigDoubleNegativeDecimalAsync(cancellationToken).ConfigureAwait(false);
+            return await RestClient.GetBigDoubleNegativeDecimalAsync(cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Get big double value -99999999.99. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<double> GetBigDoubleNegativeDecimal(CancellationToken cancellationToken = default)
         {
-            return restClient.GetBigDoubleNegativeDecimal(cancellationToken);
+            return RestClient.GetBigDoubleNegativeDecimal(cancellationToken);
         }
         /// <summary> Put big decimal value 2.5976931e+101. </summary>
         /// <param name="numberBody"> The Number to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutBigDecimalAsync(decimal numberBody, CancellationToken cancellationToken = default)
         {
-            return await restClient.PutBigDecimalAsync(numberBody, cancellationToken).ConfigureAwait(false);
+            return await RestClient.PutBigDecimalAsync(numberBody, cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Put big decimal value 2.5976931e+101. </summary>
         /// <param name="numberBody"> The Number to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutBigDecimal(decimal numberBody, CancellationToken cancellationToken = default)
         {
-            return restClient.PutBigDecimal(numberBody, cancellationToken);
+            return RestClient.PutBigDecimal(numberBody, cancellationToken);
         }
         /// <summary> Get big decimal value 2.5976931e+101. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<decimal>> GetBigDecimalAsync(CancellationToken cancellationToken = default)
         {
-            return await restClient.GetBigDecimalAsync(cancellationToken).ConfigureAwait(false);
+            return await RestClient.GetBigDecimalAsync(cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Get big decimal value 2.5976931e+101. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<decimal> GetBigDecimal(CancellationToken cancellationToken = default)
         {
-            return restClient.GetBigDecimal(cancellationToken);
+            return RestClient.GetBigDecimal(cancellationToken);
         }
         /// <summary> Put big decimal value 99999999.99. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutBigDecimalPositiveDecimalAsync(CancellationToken cancellationToken = default)
         {
-            return await restClient.PutBigDecimalPositiveDecimalAsync(cancellationToken).ConfigureAwait(false);
+            return await RestClient.PutBigDecimalPositiveDecimalAsync(cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Put big decimal value 99999999.99. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutBigDecimalPositiveDecimal(CancellationToken cancellationToken = default)
         {
-            return restClient.PutBigDecimalPositiveDecimal(cancellationToken);
+            return RestClient.PutBigDecimalPositiveDecimal(cancellationToken);
         }
         /// <summary> Get big decimal value 99999999.99. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<decimal>> GetBigDecimalPositiveDecimalAsync(CancellationToken cancellationToken = default)
         {
-            return await restClient.GetBigDecimalPositiveDecimalAsync(cancellationToken).ConfigureAwait(false);
+            return await RestClient.GetBigDecimalPositiveDecimalAsync(cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Get big decimal value 99999999.99. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<decimal> GetBigDecimalPositiveDecimal(CancellationToken cancellationToken = default)
         {
-            return restClient.GetBigDecimalPositiveDecimal(cancellationToken);
+            return RestClient.GetBigDecimalPositiveDecimal(cancellationToken);
         }
         /// <summary> Put big decimal value -99999999.99. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutBigDecimalNegativeDecimalAsync(CancellationToken cancellationToken = default)
         {
-            return await restClient.PutBigDecimalNegativeDecimalAsync(cancellationToken).ConfigureAwait(false);
+            return await RestClient.PutBigDecimalNegativeDecimalAsync(cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Put big decimal value -99999999.99. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutBigDecimalNegativeDecimal(CancellationToken cancellationToken = default)
         {
-            return restClient.PutBigDecimalNegativeDecimal(cancellationToken);
+            return RestClient.PutBigDecimalNegativeDecimal(cancellationToken);
         }
         /// <summary> Get big decimal value -99999999.99. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<decimal>> GetBigDecimalNegativeDecimalAsync(CancellationToken cancellationToken = default)
         {
-            return await restClient.GetBigDecimalNegativeDecimalAsync(cancellationToken).ConfigureAwait(false);
+            return await RestClient.GetBigDecimalNegativeDecimalAsync(cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Get big decimal value -99999999.99. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<decimal> GetBigDecimalNegativeDecimal(CancellationToken cancellationToken = default)
         {
-            return restClient.GetBigDecimalNegativeDecimal(cancellationToken);
+            return RestClient.GetBigDecimalNegativeDecimal(cancellationToken);
         }
         /// <summary> Put small float value 3.402823e-20. </summary>
         /// <param name="numberBody"> The Number to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutSmallFloatAsync(float numberBody, CancellationToken cancellationToken = default)
         {
-            return await restClient.PutSmallFloatAsync(numberBody, cancellationToken).ConfigureAwait(false);
+            return await RestClient.PutSmallFloatAsync(numberBody, cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Put small float value 3.402823e-20. </summary>
         /// <param name="numberBody"> The Number to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutSmallFloat(float numberBody, CancellationToken cancellationToken = default)
         {
-            return restClient.PutSmallFloat(numberBody, cancellationToken);
+            return RestClient.PutSmallFloat(numberBody, cancellationToken);
         }
         /// <summary> Get big double value 3.402823e-20. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<double>> GetSmallFloatAsync(CancellationToken cancellationToken = default)
         {
-            return await restClient.GetSmallFloatAsync(cancellationToken).ConfigureAwait(false);
+            return await RestClient.GetSmallFloatAsync(cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Get big double value 3.402823e-20. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<double> GetSmallFloat(CancellationToken cancellationToken = default)
         {
-            return restClient.GetSmallFloat(cancellationToken);
+            return RestClient.GetSmallFloat(cancellationToken);
         }
         /// <summary> Put small double value 2.5976931e-101. </summary>
         /// <param name="numberBody"> The Number to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutSmallDoubleAsync(double numberBody, CancellationToken cancellationToken = default)
         {
-            return await restClient.PutSmallDoubleAsync(numberBody, cancellationToken).ConfigureAwait(false);
+            return await RestClient.PutSmallDoubleAsync(numberBody, cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Put small double value 2.5976931e-101. </summary>
         /// <param name="numberBody"> The Number to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutSmallDouble(double numberBody, CancellationToken cancellationToken = default)
         {
-            return restClient.PutSmallDouble(numberBody, cancellationToken);
+            return RestClient.PutSmallDouble(numberBody, cancellationToken);
         }
         /// <summary> Get big double value 2.5976931e-101. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<double>> GetSmallDoubleAsync(CancellationToken cancellationToken = default)
         {
-            return await restClient.GetSmallDoubleAsync(cancellationToken).ConfigureAwait(false);
+            return await RestClient.GetSmallDoubleAsync(cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Get big double value 2.5976931e-101. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<double> GetSmallDouble(CancellationToken cancellationToken = default)
         {
-            return restClient.GetSmallDouble(cancellationToken);
+            return RestClient.GetSmallDouble(cancellationToken);
         }
         /// <summary> Put small decimal value 2.5976931e-101. </summary>
         /// <param name="numberBody"> The Number to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutSmallDecimalAsync(decimal numberBody, CancellationToken cancellationToken = default)
         {
-            return await restClient.PutSmallDecimalAsync(numberBody, cancellationToken).ConfigureAwait(false);
+            return await RestClient.PutSmallDecimalAsync(numberBody, cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Put small decimal value 2.5976931e-101. </summary>
         /// <param name="numberBody"> The Number to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutSmallDecimal(decimal numberBody, CancellationToken cancellationToken = default)
         {
-            return restClient.PutSmallDecimal(numberBody, cancellationToken);
+            return RestClient.PutSmallDecimal(numberBody, cancellationToken);
         }
         /// <summary> Get small decimal value 2.5976931e-101. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<decimal>> GetSmallDecimalAsync(CancellationToken cancellationToken = default)
         {
-            return await restClient.GetSmallDecimalAsync(cancellationToken).ConfigureAwait(false);
+            return await RestClient.GetSmallDecimalAsync(cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Get small decimal value 2.5976931e-101. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<decimal> GetSmallDecimal(CancellationToken cancellationToken = default)
         {
-            return restClient.GetSmallDecimal(cancellationToken);
+            return RestClient.GetSmallDecimal(cancellationToken);
         }
     }
 }

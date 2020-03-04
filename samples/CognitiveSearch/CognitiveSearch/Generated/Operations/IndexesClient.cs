@@ -14,13 +14,14 @@ namespace CognitiveSearch
 {
     public partial class IndexesClient
     {
-        private IndexesRestClient restClient;
+        internal IndexesRestClient RestClient
+        { get; }
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
         /// <summary> Initializes a new instance of IndexesClient. </summary>
         internal IndexesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string searchServiceName, string searchDnsSuffix = "search.windows.net", string ApiVersion = "2019-05-06")
         {
-            restClient = new IndexesRestClient(clientDiagnostics, pipeline, searchServiceName, searchDnsSuffix, ApiVersion);
+            RestClient = new IndexesRestClient(clientDiagnostics, pipeline, searchServiceName, searchDnsSuffix, ApiVersion);
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
@@ -30,7 +31,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Models.Index>> CreateAsync(Guid? clientRequestId, Models.Index index, CancellationToken cancellationToken = default)
         {
-            return await restClient.CreateAsync(clientRequestId, index, cancellationToken).ConfigureAwait(false);
+            return await RestClient.CreateAsync(clientRequestId, index, cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Creates a new search index. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -38,7 +39,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Models.Index> Create(Guid? clientRequestId, Models.Index index, CancellationToken cancellationToken = default)
         {
-            return restClient.Create(clientRequestId, index, cancellationToken);
+            return RestClient.Create(clientRequestId, index, cancellationToken);
         }
         /// <summary> Lists all indexes available for a search service. </summary>
         /// <param name="select"> Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
@@ -46,7 +47,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ListIndexesResult>> ListAsync(string select, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
-            return await restClient.ListAsync(select, clientRequestId, cancellationToken).ConfigureAwait(false);
+            return await RestClient.ListAsync(select, clientRequestId, cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Lists all indexes available for a search service. </summary>
         /// <param name="select"> Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
@@ -54,7 +55,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ListIndexesResult> List(string select, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
-            return restClient.List(select, clientRequestId, cancellationToken);
+            return RestClient.List(select, clientRequestId, cancellationToken);
         }
         /// <summary> Creates a new search index or updates an index if it already exists. </summary>
         /// <param name="indexName"> The definition of the index to create or update. </param>
@@ -66,7 +67,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Models.Index>> CreateOrUpdateAsync(string indexName, bool? allowIndexDowntime, Guid? clientRequestId, string ifMatch, string ifNoneMatch, Models.Index index, CancellationToken cancellationToken = default)
         {
-            return await restClient.CreateOrUpdateAsync(indexName, allowIndexDowntime, clientRequestId, ifMatch, ifNoneMatch, index, cancellationToken).ConfigureAwait(false);
+            return await RestClient.CreateOrUpdateAsync(indexName, allowIndexDowntime, clientRequestId, ifMatch, ifNoneMatch, index, cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Creates a new search index or updates an index if it already exists. </summary>
         /// <param name="indexName"> The definition of the index to create or update. </param>
@@ -78,7 +79,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Models.Index> CreateOrUpdate(string indexName, bool? allowIndexDowntime, Guid? clientRequestId, string ifMatch, string ifNoneMatch, Models.Index index, CancellationToken cancellationToken = default)
         {
-            return restClient.CreateOrUpdate(indexName, allowIndexDowntime, clientRequestId, ifMatch, ifNoneMatch, index, cancellationToken);
+            return RestClient.CreateOrUpdate(indexName, allowIndexDowntime, clientRequestId, ifMatch, ifNoneMatch, index, cancellationToken);
         }
         /// <summary> Deletes a search index and all the documents it contains. </summary>
         /// <param name="indexName"> The definition of the index to create or update. </param>
@@ -88,7 +89,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> DeleteAsync(string indexName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
         {
-            return await restClient.DeleteAsync(indexName, clientRequestId, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
+            return await RestClient.DeleteAsync(indexName, clientRequestId, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Deletes a search index and all the documents it contains. </summary>
         /// <param name="indexName"> The definition of the index to create or update. </param>
@@ -98,7 +99,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Delete(string indexName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
         {
-            return restClient.Delete(indexName, clientRequestId, ifMatch, ifNoneMatch, cancellationToken);
+            return RestClient.Delete(indexName, clientRequestId, ifMatch, ifNoneMatch, cancellationToken);
         }
         /// <summary> Retrieves an index definition. </summary>
         /// <param name="indexName"> The definition of the index to create or update. </param>
@@ -106,7 +107,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Models.Index>> GetAsync(string indexName, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
-            return await restClient.GetAsync(indexName, clientRequestId, cancellationToken).ConfigureAwait(false);
+            return await RestClient.GetAsync(indexName, clientRequestId, cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Retrieves an index definition. </summary>
         /// <param name="indexName"> The definition of the index to create or update. </param>
@@ -114,7 +115,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Models.Index> Get(string indexName, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
-            return restClient.Get(indexName, clientRequestId, cancellationToken);
+            return RestClient.Get(indexName, clientRequestId, cancellationToken);
         }
         /// <summary> Returns statistics for the given index, including a document count and storage usage. </summary>
         /// <param name="indexName"> The definition of the index to create or update. </param>
@@ -122,7 +123,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<GetIndexStatisticsResult>> GetStatisticsAsync(string indexName, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
-            return await restClient.GetStatisticsAsync(indexName, clientRequestId, cancellationToken).ConfigureAwait(false);
+            return await RestClient.GetStatisticsAsync(indexName, clientRequestId, cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Returns statistics for the given index, including a document count and storage usage. </summary>
         /// <param name="indexName"> The definition of the index to create or update. </param>
@@ -130,7 +131,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<GetIndexStatisticsResult> GetStatistics(string indexName, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
-            return restClient.GetStatistics(indexName, clientRequestId, cancellationToken);
+            return RestClient.GetStatistics(indexName, clientRequestId, cancellationToken);
         }
         /// <summary> Shows how an analyzer breaks text into tokens. </summary>
         /// <param name="indexName"> The definition of the index to create or update. </param>
@@ -139,7 +140,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<AnalyzeResult>> AnalyzeAsync(string indexName, Guid? clientRequestId, AnalyzeRequest requestTodo, CancellationToken cancellationToken = default)
         {
-            return await restClient.AnalyzeAsync(indexName, clientRequestId, requestTodo, cancellationToken).ConfigureAwait(false);
+            return await RestClient.AnalyzeAsync(indexName, clientRequestId, requestTodo, cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Shows how an analyzer breaks text into tokens. </summary>
         /// <param name="indexName"> The definition of the index to create or update. </param>
@@ -148,7 +149,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<AnalyzeResult> Analyze(string indexName, Guid? clientRequestId, AnalyzeRequest requestTodo, CancellationToken cancellationToken = default)
         {
-            return restClient.Analyze(indexName, clientRequestId, requestTodo, cancellationToken);
+            return RestClient.Analyze(indexName, clientRequestId, requestTodo, cancellationToken);
         }
     }
 }

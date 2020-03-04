@@ -9,7 +9,7 @@ using Azure;
 using Azure.Core;
 using NUnit.Framework;
 using paging;
-using CustomPagingOperations = custom_baseUrl_paging.PagingOperations;
+using CustomPagingClient = custom_baseUrl_paging.PagingClient;
 
 namespace AutoRest.TestServer.Tests
 {
@@ -26,14 +26,14 @@ namespace AutoRest.TestServer.Tests
             // host is not a full hostname for CustomPagingOperations; it is a partial host
             host = host.Replace("http://", String.Empty);
             var linkPart = "/paging/customurl/partialnextlink/page/";
-            var result = await new CustomPagingClient(ClientDiagnostics, pipeline, host).GetPagesPartialUrlAsync(string.Empty);
+            var result = await new CustomPagingClient(ClientDiagnostics, pipeline, host).RestClient.GetPagesPartialUrlAsync(string.Empty);
             var resultPage = Page.FromValues(result.Value.Values, result.Value.NextLink, result.GetRawResponse());
             while (resultPage.ContinuationToken != null)
             {
                 Assert.AreEqual(id, resultPage.Values.First().Properties.Id);
                 Assert.AreEqual(product, resultPage.Values.First().Properties.Name);
                 StringAssert.EndsWith($"{linkPart}{++id}", resultPage.ContinuationToken);
-                result = await new CustomPagingClient(ClientDiagnostics, pipeline, host).GetPagesPartialUrlNextPageAsync(resultPage.ContinuationToken);
+                result = await new CustomPagingClient(ClientDiagnostics, pipeline, host).RestClient.GetPagesPartialUrlNextPageAsync(resultPage.ContinuationToken);
                 resultPage = Page.FromValues(result.Value.Values, result.Value.NextLink, result.GetRawResponse());
             }
             Assert.AreEqual(2, id);
@@ -58,7 +58,7 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(2, id);
 
             id = 1;
-            var pageable = new CustomPagingClient(ClientDiagnostics, pipeline, host).GetPagesPartialUrlPageable(string.Empty);
+            var pageable = new CustomPagingClient(ClientDiagnostics, pipeline, host).GetPagesPartialUrl(string.Empty);
             foreach (var page in pageable.AsPages())
             {
                 Assert.AreEqual(id, page.Values.First().Properties.Id);
@@ -85,14 +85,14 @@ namespace AutoRest.TestServer.Tests
             // host is not a full hostname for CustomPagingOperations; it is a partial host
             host = host.Replace("http://", String.Empty);
             var linkPart = "partialnextlinkop/page/";
-            var result = await new CustomPagingClient(ClientDiagnostics, pipeline, host).GetPagesPartialUrlOperationAsync(accountName);
+            var result = await new CustomPagingClient(ClientDiagnostics, pipeline, host).RestClient.GetPagesPartialUrlOperationAsync(accountName);
             var resultPage = Page.FromValues(result.Value.Values, result.Value.NextLink, result.GetRawResponse());
             while (resultPage.ContinuationToken != null)
             {
                 Assert.AreEqual(id, resultPage.Values.First().Properties.Id);
                 Assert.AreEqual(product, resultPage.Values.First().Properties.Name);
                 StringAssert.EndsWith($"{linkPart}{++id}", resultPage.ContinuationToken);
-                result = await new CustomPagingClient(ClientDiagnostics, pipeline, host).GetPagesPartialUrlOperationNextAsync(accountName, resultPage.ContinuationToken);
+                result = await new CustomPagingClient(ClientDiagnostics, pipeline, host).RestClient.GetPagesPartialUrlOperationNextAsync(accountName, resultPage.ContinuationToken);
                 resultPage = Page.FromValues(result.Value.Values, result.Value.NextLink, result.GetRawResponse());
             }
             Assert.AreEqual(2, id);
@@ -117,7 +117,7 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(2, id);
 
             id = 1;
-            var pageable = new CustomPagingClient(ClientDiagnostics, pipeline, host).GetPagesPartialUrlOperationPageable(accountName);
+            var pageable = new CustomPagingClient(ClientDiagnostics, pipeline, host).GetPagesPartialUrlOperation(accountName);
             foreach (var page in pageable.AsPages())
             {
                 Assert.AreEqual(id, page.Values.First().Properties.Id);
@@ -142,14 +142,14 @@ namespace AutoRest.TestServer.Tests
             var product = "product";
             var tenant = "test_user";
             var linkPart = "next?page=";
-            var result = await new PagingClient(ClientDiagnostics, pipeline, host).GetMultiplePagesFragmentNextLinkAsync("1.6", tenant);
+            var result = await new PagingClient(ClientDiagnostics, pipeline, host).RestClient.GetMultiplePagesFragmentNextLinkAsync("1.6", tenant);
             var resultPage = Page.FromValues(result.Value.Values, result.Value.OdataNextLink, result.GetRawResponse());
             while (resultPage.ContinuationToken != null)
             {
                 Assert.AreEqual(id, resultPage.Values.First().Properties.Id);
                 Assert.AreEqual(product, resultPage.Values.First().Properties.Name);
                 StringAssert.EndsWith($"{linkPart}{++id}", resultPage.ContinuationToken);
-                result = await new PagingClient(ClientDiagnostics, pipeline, host).NextFragmentAsync("1.6", tenant, resultPage.ContinuationToken);
+                result = await new PagingClient(ClientDiagnostics, pipeline, host).RestClient.NextFragmentAsync("1.6", tenant, resultPage.ContinuationToken);
                 resultPage = Page.FromValues(result.Value.Values, result.Value.OdataNextLink, result.GetRawResponse());
             }
             Assert.AreEqual(10, id);
@@ -175,7 +175,7 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(10, id);
 
             id = 1;
-            var pageable = new PagingClient(ClientDiagnostics, pipeline, host).GetMultiplePagesFragmentNextLinkPageable("1.6", tenant);
+            var pageable = new PagingClient(ClientDiagnostics, pipeline, host).GetMultiplePagesFragmentNextLink("1.6", tenant);
             foreach (var page in pageable.AsPages())
             {
                 Assert.AreEqual(id, page.Values.First().Properties.Id);
@@ -200,14 +200,14 @@ namespace AutoRest.TestServer.Tests
             var id = 1;
             var product = "Product";
             var linkPart = "/paging/multiple/page/";
-            var result = await new PagingClient(ClientDiagnostics, pipeline, host).GetMultiplePagesAsync(null, null, null);
+            var result = await new PagingClient(ClientDiagnostics, pipeline, host).RestClient.GetMultiplePagesAsync(null, null, null);
             var resultPage = Page.FromValues(result.Value.Values, result.Value.NextLink, result.GetRawResponse());
             while (resultPage.ContinuationToken != null)
             {
                 Assert.AreEqual(id, resultPage.Values.First().Properties.Id);
                 Assert.AreEqual(product, resultPage.Values.First().Properties.Name);
                 StringAssert.EndsWith($"{linkPart}{++id}", resultPage.ContinuationToken);
-                result = await new PagingClient(ClientDiagnostics, pipeline, host).GetMultiplePagesNextPageAsync(null, null, null, resultPage.ContinuationToken);
+                result = await new PagingClient(ClientDiagnostics, pipeline, host).RestClient.GetMultiplePagesNextPageAsync(null, null, null, resultPage.ContinuationToken);
                 resultPage = Page.FromValues(result.Value.Values, result.Value.NextLink, result.GetRawResponse());
                 product = "product";
             }
@@ -236,7 +236,7 @@ namespace AutoRest.TestServer.Tests
 
             id = 1;
             product = "Product";
-            var pageable = new PagingClient(ClientDiagnostics, pipeline, host).GetMultiplePagesPageable(null, null, null);
+            var pageable = new PagingClient(ClientDiagnostics, pipeline, host).GetMultiplePages(null, null, null);
             foreach (var page in pageable.AsPages())
             {
                 Assert.AreEqual(id, page.Values.First().Properties.Id);
@@ -260,13 +260,13 @@ namespace AutoRest.TestServer.Tests
             var id = 1;
             var product = "Product";
             var linkPart = "/paging/multiple/failure/page/";
-            var result = await new PagingClient(ClientDiagnostics, pipeline, host).GetMultiplePagesFailureAsync();
+            var result = await new PagingClient(ClientDiagnostics, pipeline, host).RestClient.GetMultiplePagesFailureAsync();
             var resultPage = Page.FromValues(result.Value.Values, result.Value.NextLink, result.GetRawResponse());
 
             Assert.AreEqual(id, resultPage.Values.First().Properties.Id);
             Assert.AreEqual(product, resultPage.Values.First().Properties.Name);
             StringAssert.EndsWith($"{linkPart}{++id}", resultPage.ContinuationToken);
-            Assert.ThrowsAsync<RequestFailedException>(async () => await new PagingClient(ClientDiagnostics, pipeline, host).GetMultiplePagesFailureNextPageAsync(resultPage.ContinuationToken));
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new PagingClient(ClientDiagnostics, pipeline, host).RestClient.GetMultiplePagesFailureNextPageAsync(resultPage.ContinuationToken));
             Assert.AreEqual(2, id);
 
             id = 1;
@@ -283,7 +283,7 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(2, id);
 
             id = 1;
-            var pageable = new PagingClient(ClientDiagnostics, pipeline, host).GetMultiplePagesFailurePageable();
+            var pageable = new PagingClient(ClientDiagnostics, pipeline, host).GetMultiplePagesFailure();
             Assert.Throws<RequestFailedException>(() =>
             {
                 foreach (var page in pageable.AsPages())
@@ -301,13 +301,13 @@ namespace AutoRest.TestServer.Tests
         {
             var id = 1;
             var product = "Product";
-            var result = await new PagingClient(ClientDiagnostics, pipeline, host).GetMultiplePagesFailureUriAsync();
+            var result = await new PagingClient(ClientDiagnostics, pipeline, host).RestClient.GetMultiplePagesFailureUriAsync();
             var resultPage = Page.FromValues(result.Value.Values, result.Value.NextLink, result.GetRawResponse());
 
             Assert.AreEqual(id, resultPage.Values.First().Properties.Id);
             Assert.AreEqual(product, resultPage.Values.First().Properties.Name);
             Assert.AreEqual("*&*#&$", resultPage.ContinuationToken);
-            Assert.ThrowsAsync<UriFormatException>(async () => await new PagingClient(ClientDiagnostics, pipeline, host).GetMultiplePagesFailureNextPageAsync(resultPage.ContinuationToken));
+            Assert.ThrowsAsync<UriFormatException>(async () => await new PagingClient(ClientDiagnostics, pipeline, host).RestClient.GetMultiplePagesFailureNextPageAsync(resultPage.ContinuationToken));
 
             var pageableAsync = new PagingClient(ClientDiagnostics, pipeline, host).GetMultiplePagesFailureUriAsync();
             Assert.ThrowsAsync<UriFormatException>(async () =>
@@ -323,7 +323,7 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(2, id);
 
             id = 1;
-            var pageable = new PagingClient(ClientDiagnostics, pipeline, host).GetMultiplePagesFailureUriPageable();
+            var pageable = new PagingClient(ClientDiagnostics, pipeline, host).GetMultiplePagesFailureUri();
             Assert.Throws<UriFormatException>(() =>
             {
                 foreach (var page in pageable.AsPages())
@@ -350,14 +350,14 @@ namespace AutoRest.TestServer.Tests
             var product = "Product";
             var offset = 100;
             var linkPart = $"/paging/multiple/withpath/page/{offset}/";
-            var result = await new PagingClient(ClientDiagnostics, pipeline, host).GetMultiplePagesWithOffsetAsync(null, null, offset, null);
+            var result = await new PagingClient(ClientDiagnostics, pipeline, host).RestClient.GetMultiplePagesWithOffsetAsync(null, null, offset, null);
             var resultPage = Page.FromValues(result.Value.Values, result.Value.NextLink, result.GetRawResponse());
             while (resultPage.ContinuationToken != null)
             {
                 Assert.AreEqual(id, resultPage.Values.First().Properties.Id);
                 Assert.AreEqual(product, resultPage.Values.First().Properties.Name);
                 StringAssert.EndsWith($"{linkPart}{++pageNumber}", resultPage.ContinuationToken);
-                result = await new PagingClient(ClientDiagnostics, pipeline, host).GetMultiplePagesWithOffsetNextPageAsync(null, null, null, resultPage.ContinuationToken);
+                result = await new PagingClient(ClientDiagnostics, pipeline, host).RestClient.GetMultiplePagesWithOffsetNextPageAsync(null, null, null, resultPage.ContinuationToken);
                 resultPage = Page.FromValues(result.Value.Values, result.Value.NextLink, result.GetRawResponse());
                 if (product == "Product")
                 {
@@ -400,7 +400,7 @@ namespace AutoRest.TestServer.Tests
             id = 1;
             pageNumber = 1;
             product = "Product";
-            var pageable = new PagingClient(ClientDiagnostics, pipeline, host).GetMultiplePagesWithOffsetPageable(null, null, offset, null);
+            var pageable = new PagingClient(ClientDiagnostics, pipeline, host).GetMultiplePagesWithOffset(null, null, offset, null);
             foreach (var page in pageable.AsPages())
             {
                 Assert.AreEqual(id, page.Values.First().Properties.Id);
@@ -436,7 +436,7 @@ namespace AutoRest.TestServer.Tests
         [IgnoreOnTestServer(TestServerVersion.V2, "Request not matched.")]
         public Task PagingNextLinkNameNull() => Test(async (host, pipeline) =>
         {
-            var result = await new PagingClient(ClientDiagnostics, pipeline, host).GetNullNextLinkNamePagesAsync();
+            var result = await new PagingClient(ClientDiagnostics, pipeline, host).RestClient.GetNullNextLinkNamePagesAsync();
             var resultPage = Page.FromValues(result.Value.Values, null, result.GetRawResponse());
             Assert.AreEqual(1, resultPage.Values.First().Properties.Id);
             Assert.AreEqual("Product", resultPage.Values.First().Properties.Name);
@@ -450,7 +450,7 @@ namespace AutoRest.TestServer.Tests
                 Assert.IsNull(page.ContinuationToken);
             }
 
-            var pageable = new PagingClient(ClientDiagnostics, pipeline, host).GetNoItemNamePagesPageable();
+            var pageable = new PagingClient(ClientDiagnostics, pipeline, host).GetNoItemNamePages();
             foreach (var page in pageable.AsPages())
             {
                 Assert.AreEqual(1, page.Values.First().Properties.Id);
@@ -463,7 +463,7 @@ namespace AutoRest.TestServer.Tests
         [IgnoreOnTestServer(TestServerVersion.V2, "Request not matched.")]
         public Task PagingNoItemName() => Test(async (host, pipeline) =>
         {
-            var result = await new PagingClient(ClientDiagnostics, pipeline, host).GetNoItemNamePagesAsync();
+            var result = await new PagingClient(ClientDiagnostics, pipeline, host).RestClient.GetNoItemNamePagesAsync();
             var resultPage = Page.FromValues(result.Value.Value, result.Value.NextLink, result.GetRawResponse());
             Assert.AreEqual(1, resultPage.Values.First().Properties.Id);
             Assert.AreEqual("Product", resultPage.Values.First().Properties.Name);
@@ -477,7 +477,7 @@ namespace AutoRest.TestServer.Tests
                 Assert.IsNull(page.ContinuationToken);
             }
 
-            var pageable = new PagingClient(ClientDiagnostics, pipeline, host).GetNoItemNamePagesPageable();
+            var pageable = new PagingClient(ClientDiagnostics, pipeline, host).GetNoItemNamePages();
             foreach (var page in pageable.AsPages())
             {
                 Assert.AreEqual(1, page.Values.First().Properties.Id);
@@ -493,14 +493,14 @@ namespace AutoRest.TestServer.Tests
             var id = 1;
             var product = "Product";
             var linkPart = "/paging/multiple/odata/page/";
-            var result = await new PagingClient(ClientDiagnostics, pipeline, host).GetOdataMultiplePagesAsync(null, null, null);
+            var result = await new PagingClient(ClientDiagnostics, pipeline, host).RestClient.GetOdataMultiplePagesAsync(null, null, null);
             var resultPage = Page.FromValues(result.Value.Values, result.Value.OdataNextLink, result.GetRawResponse());
             while (resultPage.ContinuationToken != null)
             {
                 Assert.AreEqual(id, resultPage.Values.First().Properties.Id);
                 Assert.AreEqual(product, resultPage.Values.First().Properties.Name);
                 StringAssert.EndsWith($"{linkPart}{++id}", resultPage.ContinuationToken);
-                result = await new PagingClient(ClientDiagnostics, pipeline, host).GetOdataMultiplePagesNextPageAsync(null, null, null, resultPage.ContinuationToken);
+                result = await new PagingClient(ClientDiagnostics, pipeline, host).RestClient.GetOdataMultiplePagesNextPageAsync(null, null, null, resultPage.ContinuationToken);
                 resultPage = Page.FromValues(result.Value.Values, result.Value.OdataNextLink, result.GetRawResponse());
                 product = "product";
             }
@@ -529,7 +529,7 @@ namespace AutoRest.TestServer.Tests
 
             id = 1;
             product = "Product";
-            var pageable = new PagingClient(ClientDiagnostics, pipeline, host).GetOdataMultiplePagesPageable(null, null, null);
+            var pageable = new PagingClient(ClientDiagnostics, pipeline, host).GetOdataMultiplePages(null, null, null);
             foreach (var page in pageable.AsPages())
             {
                 Assert.AreEqual(id, page.Values.First().Properties.Id);
@@ -550,7 +550,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task PagingSingle() => Test(async (host, pipeline) =>
         {
-            var result = await new PagingClient(ClientDiagnostics, pipeline, host).GetSinglePagesAsync();
+            var result = await new PagingClient(ClientDiagnostics, pipeline, host).RestClient.GetSinglePagesAsync();
             var resultPage = Page.FromValues(result.Value.Values, result.Value.NextLink, result.GetRawResponse());
             Assert.AreEqual(1, resultPage.Values.First().Properties.Id);
             Assert.AreEqual("Product", resultPage.Values.First().Properties.Name);
@@ -564,7 +564,7 @@ namespace AutoRest.TestServer.Tests
                 Assert.IsNull(page.ContinuationToken);
             }
 
-            var pageable = new PagingClient(ClientDiagnostics, pipeline, host).GetSinglePagesPageable();
+            var pageable = new PagingClient(ClientDiagnostics, pipeline, host).GetSinglePages();
             foreach (var page in pageable.AsPages())
             {
                 Assert.AreEqual(1, page.Values.First().Properties.Id);
@@ -576,12 +576,12 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task PagingSingleFailure() => Test((host, pipeline) =>
         {
-            Assert.ThrowsAsync<RequestFailedException>(async () => await new PagingClient(ClientDiagnostics, pipeline, host).GetSinglePagesFailureAsync());
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new PagingClient(ClientDiagnostics, pipeline, host).RestClient.GetSinglePagesFailureAsync());
 
             var pageableAsync = new PagingClient(ClientDiagnostics, pipeline, host).GetSinglePagesFailureAsync();
             Assert.ThrowsAsync<RequestFailedException>(async () => { await foreach (var page in pageableAsync.AsPages()) { } });
 
-            var pageable = new PagingClient(ClientDiagnostics, pipeline, host).GetSinglePagesFailurePageable();
+            var pageable = new PagingClient(ClientDiagnostics, pipeline, host).GetSinglePagesFailure();
             Assert.Throws<RequestFailedException>(() => { foreach (var page in pageable.AsPages()) { } });
         }, true);
 
