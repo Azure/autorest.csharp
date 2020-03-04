@@ -8,8 +8,11 @@ namespace Azure.Core
     [AttributeUsage(AttributeTargets.Class)]
     internal class CodeGenClientAttribute : Attribute
     {
-        public CodeGenClientAttribute(string clientName)
+        public string OperationGroupName { get; }
+
+        public CodeGenClientAttribute(string operationGroupName)
         {
+            OperationGroupName = operationGroupName;
         }
     }
 }
