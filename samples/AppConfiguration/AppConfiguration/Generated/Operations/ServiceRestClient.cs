@@ -16,15 +16,15 @@ using Azure.Core.Pipeline;
 
 namespace AppConfiguration
 {
-    internal partial class AllRestClient
+    internal partial class ServiceRestClient
     {
         private string syncToken;
         private string host;
         private string ApiVersion;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
-        /// <summary> Initializes a new instance of AllRestClient. </summary>
-        public AllRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string syncToken, string host = "", string ApiVersion = "1.0")
+        /// <summary> Initializes a new instance of ServiceRestClient. </summary>
+        public ServiceRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string syncToken, string host = "", string ApiVersion = "1.0")
         {
             if (host == null)
             {
@@ -76,7 +76,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<KeyListResult, GetKeysHeaders>> GetKeysAsync(string name, string after, string acceptDatetime, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("AllClient.GetKeys");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.GetKeys");
             scope.Start();
             try
             {
@@ -108,7 +108,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<KeyListResult, GetKeysHeaders> GetKeys(string name, string after, string acceptDatetime, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("AllClient.GetKeys");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.GetKeys");
             scope.Start();
             try
             {
@@ -168,7 +168,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<CheckKeysHeaders>> CheckKeysAsync(string name, string after, string acceptDatetime, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("AllClient.CheckKeys");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.CheckKeys");
             scope.Start();
             try
             {
@@ -196,7 +196,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<CheckKeysHeaders> CheckKeys(string name, string after, string acceptDatetime, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("AllClient.CheckKeys");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.CheckKeys");
             scope.Start();
             try
             {
@@ -262,7 +262,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<KeyValueListResult, GetKeyValuesHeaders>> GetKeyValuesAsync(string key, string label, string after, string acceptDatetime, IEnumerable<Get6ItemsItem> select, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("AllClient.GetKeyValues");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.GetKeyValues");
             scope.Start();
             try
             {
@@ -296,7 +296,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<KeyValueListResult, GetKeyValuesHeaders> GetKeyValues(string key, string label, string after, string acceptDatetime, IEnumerable<Get6ItemsItem> select, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("AllClient.GetKeyValues");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.GetKeyValues");
             scope.Start();
             try
             {
@@ -366,7 +366,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<CheckKeyValuesHeaders>> CheckKeyValuesAsync(string key, string label, string after, string acceptDatetime, IEnumerable<Head6ItemsItem> select, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("AllClient.CheckKeyValues");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.CheckKeyValues");
             scope.Start();
             try
             {
@@ -396,7 +396,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<CheckKeyValuesHeaders> CheckKeyValues(string key, string label, string after, string acceptDatetime, IEnumerable<Head6ItemsItem> select, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("AllClient.CheckKeyValues");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.CheckKeyValues");
             scope.Start();
             try
             {
@@ -469,7 +469,7 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = clientDiagnostics.CreateScope("AllClient.GetKeyValue");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.GetKeyValue");
             scope.Start();
             try
             {
@@ -509,7 +509,7 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = clientDiagnostics.CreateScope("AllClient.GetKeyValue");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.GetKeyValue");
             scope.Start();
             try
             {
@@ -586,7 +586,7 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = clientDiagnostics.CreateScope("AllClient.PutKeyValue");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.PutKeyValue");
             scope.Start();
             try
             {
@@ -625,7 +625,7 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = clientDiagnostics.CreateScope("AllClient.PutKeyValue");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.PutKeyValue");
             scope.Start();
             try
             {
@@ -687,7 +687,7 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = clientDiagnostics.CreateScope("AllClient.DeleteKeyValue");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.DeleteKeyValue");
             scope.Start();
             try
             {
@@ -724,7 +724,7 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = clientDiagnostics.CreateScope("AllClient.DeleteKeyValue");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.DeleteKeyValue");
             scope.Start();
             try
             {
@@ -801,7 +801,7 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = clientDiagnostics.CreateScope("AllClient.CheckKeyValue");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.CheckKeyValue");
             scope.Start();
             try
             {
@@ -837,7 +837,7 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = clientDiagnostics.CreateScope("AllClient.CheckKeyValue");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.CheckKeyValue");
             scope.Start();
             try
             {
@@ -898,7 +898,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<LabelListResult, GetLabelsHeaders>> GetLabelsAsync(string name, string after, string acceptDatetime, IEnumerable<string> select, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("AllClient.GetLabels");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.GetLabels");
             scope.Start();
             try
             {
@@ -931,7 +931,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<LabelListResult, GetLabelsHeaders> GetLabels(string name, string after, string acceptDatetime, IEnumerable<string> select, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("AllClient.GetLabels");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.GetLabels");
             scope.Start();
             try
             {
@@ -996,7 +996,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<CheckLabelsHeaders>> CheckLabelsAsync(string name, string after, string acceptDatetime, IEnumerable<string> select, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("AllClient.CheckLabels");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.CheckLabels");
             scope.Start();
             try
             {
@@ -1025,7 +1025,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<CheckLabelsHeaders> CheckLabels(string name, string after, string acceptDatetime, IEnumerable<string> select, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("AllClient.CheckLabels");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.CheckLabels");
             scope.Start();
             try
             {
@@ -1088,7 +1088,7 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = clientDiagnostics.CreateScope("AllClient.PutLock");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.PutLock");
             scope.Start();
             try
             {
@@ -1126,7 +1126,7 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = clientDiagnostics.CreateScope("AllClient.PutLock");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.PutLock");
             scope.Start();
             try
             {
@@ -1193,7 +1193,7 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = clientDiagnostics.CreateScope("AllClient.DeleteLock");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.DeleteLock");
             scope.Start();
             try
             {
@@ -1231,7 +1231,7 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = clientDiagnostics.CreateScope("AllClient.DeleteLock");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.DeleteLock");
             scope.Start();
             try
             {
@@ -1301,7 +1301,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<KeyValueListResult, GetRevisionsHeaders>> GetRevisionsAsync(string key, string label, string after, string acceptDatetime, IEnumerable<Enum4> select, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("AllClient.GetRevisions");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.GetRevisions");
             scope.Start();
             try
             {
@@ -1335,7 +1335,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<KeyValueListResult, GetRevisionsHeaders> GetRevisions(string key, string label, string after, string acceptDatetime, IEnumerable<Enum4> select, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("AllClient.GetRevisions");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.GetRevisions");
             scope.Start();
             try
             {
@@ -1405,7 +1405,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<CheckRevisionsHeaders>> CheckRevisionsAsync(string key, string label, string after, string acceptDatetime, IEnumerable<Enum4> select, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("AllClient.CheckRevisions");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.CheckRevisions");
             scope.Start();
             try
             {
@@ -1435,7 +1435,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<CheckRevisionsHeaders> CheckRevisions(string key, string label, string after, string acceptDatetime, IEnumerable<Enum4> select, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("AllClient.CheckRevisions");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.CheckRevisions");
             scope.Start();
             try
             {
@@ -1485,7 +1485,7 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("AllClient.GetKeys");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.GetKeys");
             scope.Start();
             try
             {
@@ -1521,7 +1521,7 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("AllClient.GetKeys");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.GetKeys");
             scope.Start();
             try
             {
@@ -1575,7 +1575,7 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("AllClient.GetKeyValues");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.GetKeyValues");
             scope.Start();
             try
             {
@@ -1611,7 +1611,7 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("AllClient.GetKeyValues");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.GetKeyValues");
             scope.Start();
             try
             {
@@ -1665,7 +1665,7 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("AllClient.GetLabels");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.GetLabels");
             scope.Start();
             try
             {
@@ -1701,7 +1701,7 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("AllClient.GetLabels");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.GetLabels");
             scope.Start();
             try
             {
@@ -1755,7 +1755,7 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("AllClient.GetRevisions");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.GetRevisions");
             scope.Start();
             try
             {
@@ -1791,7 +1791,7 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("AllClient.GetRevisions");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.GetRevisions");
             scope.Start();
             try
             {

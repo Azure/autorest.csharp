@@ -16,13 +16,13 @@ using CustomNamespace;
 
 namespace TypeSchemaMapping
 {
-    internal partial class AllRestClient
+    internal partial class ServiceRestClient
     {
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
-        /// <summary> Initializes a new instance of AllRestClient. </summary>
-        public AllRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
+        /// <summary> Initializes a new instance of ServiceRestClient. </summary>
+        public ServiceRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
             {
@@ -52,7 +52,7 @@ namespace TypeSchemaMapping
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<CustomizedModel>> OperationAsync(CustomizedModel body, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("AllClient.Operation");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.Operation");
             scope.Start();
             try
             {
@@ -80,7 +80,7 @@ namespace TypeSchemaMapping
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<CustomizedModel> Operation(CustomizedModel body, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("AllClient.Operation");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.Operation");
             scope.Start();
             try
             {

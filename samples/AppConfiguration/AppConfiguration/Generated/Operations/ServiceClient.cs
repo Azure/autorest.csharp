@@ -15,15 +15,15 @@ using Azure.Core.Pipeline;
 
 namespace AppConfiguration
 {
-    public partial class AllClient
+    public partial class ServiceClient
     {
-        internal AllRestClient RestClient { get; }
+        internal ServiceRestClient RestClient { get; }
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
-        /// <summary> Initializes a new instance of AllClient. </summary>
-        internal AllClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string syncToken, string host = "", string ApiVersion = "1.0")
+        /// <summary> Initializes a new instance of ServiceClient. </summary>
+        internal ServiceClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string syncToken, string host = "", string ApiVersion = "1.0")
         {
-            RestClient = new AllRestClient(clientDiagnostics, pipeline, syncToken, host, ApiVersion);
+            RestClient = new ServiceRestClient(clientDiagnostics, pipeline, syncToken, host, ApiVersion);
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }

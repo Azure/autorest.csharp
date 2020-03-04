@@ -14,15 +14,15 @@ using model_flattening.Models;
 
 namespace model_flattening
 {
-    public partial class AllClient
+    public partial class ServiceClient
     {
-        internal AllRestClient RestClient { get; }
+        internal ServiceRestClient RestClient { get; }
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
-        /// <summary> Initializes a new instance of AllClient. </summary>
-        internal AllClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
+        /// <summary> Initializes a new instance of ServiceClient. </summary>
+        internal ServiceClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            RestClient = new AllRestClient(clientDiagnostics, pipeline, host);
+            RestClient = new ServiceRestClient(clientDiagnostics, pipeline, host);
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }

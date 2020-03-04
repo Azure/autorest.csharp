@@ -16,15 +16,15 @@ using CognitiveSearch.Models;
 
 namespace CognitiveSearch
 {
-    internal partial class AllRestClient
+    internal partial class ServiceRestClient
     {
         private string searchServiceName;
         private string searchDnsSuffix;
         private string ApiVersion;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
-        /// <summary> Initializes a new instance of AllRestClient. </summary>
-        public AllRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string searchServiceName, string searchDnsSuffix = "search.windows.net", string ApiVersion = "2019-05-06")
+        /// <summary> Initializes a new instance of ServiceRestClient. </summary>
+        public ServiceRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string searchServiceName, string searchDnsSuffix = "search.windows.net", string ApiVersion = "2019-05-06")
         {
             if (searchServiceName == null)
             {
@@ -69,7 +69,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ServiceStatistics>> GetServiceStatisticsAsync(Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("AllClient.GetServiceStatistics");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.GetServiceStatistics");
             scope.Start();
             try
             {
@@ -98,7 +98,7 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ServiceStatistics> GetServiceStatistics(Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("AllClient.GetServiceStatistics");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.GetServiceStatistics");
             scope.Start();
             try
             {

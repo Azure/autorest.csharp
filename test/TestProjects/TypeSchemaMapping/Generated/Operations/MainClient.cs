@@ -15,13 +15,13 @@ namespace CustomNamespace
 {
     internal partial class MainClient
     {
-        internal AllRestClient RestClient { get; }
+        internal ServiceRestClient RestClient { get; }
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
         /// <summary> Initializes a new instance of MainClient. </summary>
         internal MainClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            RestClient = new AllRestClient(clientDiagnostics, pipeline, host);
+            RestClient = new ServiceRestClient(clientDiagnostics, pipeline, host);
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }

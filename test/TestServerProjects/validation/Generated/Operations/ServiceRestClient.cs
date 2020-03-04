@@ -16,15 +16,15 @@ using validation.Models;
 
 namespace validation
 {
-    internal partial class AllRestClient
+    internal partial class ServiceRestClient
     {
         private string subscriptionId;
         private string host;
         private string ApiVersion;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
-        /// <summary> Initializes a new instance of AllRestClient. </summary>
-        public AllRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "http://localhost:3000", string ApiVersion = "1.0.0")
+        /// <summary> Initializes a new instance of ServiceRestClient. </summary>
+        public ServiceRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "http://localhost:3000", string ApiVersion = "1.0.0")
         {
             if (subscriptionId == null)
             {
@@ -73,7 +73,7 @@ namespace validation
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("AllClient.ValidationOfMethodParameters");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.ValidationOfMethodParameters");
             scope.Start();
             try
             {
@@ -108,7 +108,7 @@ namespace validation
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("AllClient.ValidationOfMethodParameters");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.ValidationOfMethodParameters");
             scope.Start();
             try
             {
@@ -165,7 +165,7 @@ namespace validation
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("AllClient.ValidationOfBody");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.ValidationOfBody");
             scope.Start();
             try
             {
@@ -201,7 +201,7 @@ namespace validation
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("AllClient.ValidationOfBody");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.ValidationOfBody");
             scope.Start();
             try
             {
@@ -241,7 +241,7 @@ namespace validation
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetWithConstantInPathAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("AllClient.GetWithConstantInPath");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.GetWithConstantInPath");
             scope.Start();
             try
             {
@@ -264,7 +264,7 @@ namespace validation
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetWithConstantInPath(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("AllClient.GetWithConstantInPath");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.GetWithConstantInPath");
             scope.Start();
             try
             {
@@ -305,7 +305,7 @@ namespace validation
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Product>> PostWithConstantInBodyAsync(Product body, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("AllClient.PostWithConstantInBody");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.PostWithConstantInBody");
             scope.Start();
             try
             {
@@ -333,7 +333,7 @@ namespace validation
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Product> PostWithConstantInBody(Product body, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("AllClient.PostWithConstantInBody");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.PostWithConstantInBody");
             scope.Start();
             try
             {

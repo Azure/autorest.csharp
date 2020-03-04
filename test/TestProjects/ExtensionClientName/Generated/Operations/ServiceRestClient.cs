@@ -15,13 +15,13 @@ using ExtensionClientName.Models;
 
 namespace ExtensionClientName
 {
-    internal partial class AllRestClient
+    internal partial class ServiceRestClient
     {
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
-        /// <summary> Initializes a new instance of AllRestClient. </summary>
-        public AllRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
+        /// <summary> Initializes a new instance of ServiceRestClient. </summary>
+        public ServiceRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             if (host == null)
             {
@@ -68,7 +68,7 @@ namespace ExtensionClientName
                 throw new ArgumentNullException(nameof(renamedBodyParameter));
             }
 
-            using var scope = clientDiagnostics.CreateScope("AllClient.RenamedOperation");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.RenamedOperation");
             scope.Start();
             try
             {
@@ -112,7 +112,7 @@ namespace ExtensionClientName
                 throw new ArgumentNullException(nameof(renamedBodyParameter));
             }
 
-            using var scope = clientDiagnostics.CreateScope("AllClient.RenamedOperation");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.RenamedOperation");
             scope.Start();
             try
             {

@@ -16,13 +16,13 @@ using CognitiveServices.TextAnalytics.Models;
 
 namespace CognitiveServices.TextAnalytics
 {
-    internal partial class AllRestClient
+    internal partial class ServiceRestClient
     {
         private string endpoint;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
-        /// <summary> Initializes a new instance of AllRestClient. </summary>
-        public AllRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint)
+        /// <summary> Initializes a new instance of ServiceRestClient. </summary>
+        public ServiceRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint)
         {
             if (endpoint == null)
             {
@@ -70,7 +70,7 @@ namespace CognitiveServices.TextAnalytics
                 throw new ArgumentNullException(nameof(input));
             }
 
-            using var scope = clientDiagnostics.CreateScope("AllClient.EntitiesRecognitionGeneral");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.EntitiesRecognitionGeneral");
             scope.Start();
             try
             {
@@ -106,7 +106,7 @@ namespace CognitiveServices.TextAnalytics
                 throw new ArgumentNullException(nameof(input));
             }
 
-            using var scope = clientDiagnostics.CreateScope("AllClient.EntitiesRecognitionGeneral");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.EntitiesRecognitionGeneral");
             scope.Start();
             try
             {
@@ -170,7 +170,7 @@ namespace CognitiveServices.TextAnalytics
                 throw new ArgumentNullException(nameof(input));
             }
 
-            using var scope = clientDiagnostics.CreateScope("AllClient.EntitiesRecognitionPii");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.EntitiesRecognitionPii");
             scope.Start();
             try
             {
@@ -209,7 +209,7 @@ namespace CognitiveServices.TextAnalytics
                 throw new ArgumentNullException(nameof(input));
             }
 
-            using var scope = clientDiagnostics.CreateScope("AllClient.EntitiesRecognitionPii");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.EntitiesRecognitionPii");
             scope.Start();
             try
             {
@@ -270,7 +270,7 @@ namespace CognitiveServices.TextAnalytics
                 throw new ArgumentNullException(nameof(input));
             }
 
-            using var scope = clientDiagnostics.CreateScope("AllClient.EntitiesLinking");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.EntitiesLinking");
             scope.Start();
             try
             {
@@ -306,7 +306,7 @@ namespace CognitiveServices.TextAnalytics
                 throw new ArgumentNullException(nameof(input));
             }
 
-            using var scope = clientDiagnostics.CreateScope("AllClient.EntitiesLinking");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.EntitiesLinking");
             scope.Start();
             try
             {
@@ -367,7 +367,7 @@ namespace CognitiveServices.TextAnalytics
                 throw new ArgumentNullException(nameof(input));
             }
 
-            using var scope = clientDiagnostics.CreateScope("AllClient.KeyPhrases");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.KeyPhrases");
             scope.Start();
             try
             {
@@ -403,7 +403,7 @@ namespace CognitiveServices.TextAnalytics
                 throw new ArgumentNullException(nameof(input));
             }
 
-            using var scope = clientDiagnostics.CreateScope("AllClient.KeyPhrases");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.KeyPhrases");
             scope.Start();
             try
             {
@@ -464,7 +464,7 @@ namespace CognitiveServices.TextAnalytics
                 throw new ArgumentNullException(nameof(input));
             }
 
-            using var scope = clientDiagnostics.CreateScope("AllClient.Languages");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.Languages");
             scope.Start();
             try
             {
@@ -500,7 +500,7 @@ namespace CognitiveServices.TextAnalytics
                 throw new ArgumentNullException(nameof(input));
             }
 
-            using var scope = clientDiagnostics.CreateScope("AllClient.Languages");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.Languages");
             scope.Start();
             try
             {
@@ -561,7 +561,7 @@ namespace CognitiveServices.TextAnalytics
                 throw new ArgumentNullException(nameof(input));
             }
 
-            using var scope = clientDiagnostics.CreateScope("AllClient.Sentiment");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.Sentiment");
             scope.Start();
             try
             {
@@ -597,7 +597,7 @@ namespace CognitiveServices.TextAnalytics
                 throw new ArgumentNullException(nameof(input));
             }
 
-            using var scope = clientDiagnostics.CreateScope("AllClient.Sentiment");
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.Sentiment");
             scope.Start();
             try
             {

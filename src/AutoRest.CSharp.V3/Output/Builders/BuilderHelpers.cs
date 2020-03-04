@@ -64,9 +64,6 @@ namespace AutoRest.CSharp.V3.Output.Builders
         public static string CSharpName(this Property property) =>
             (property.Language.Default.Name == null || property.Language.Default.Name == "null") ? "NullProperty" : property.Language.Default.Name.ToCleanName();
 
-        public static string CSharpName(this OperationGroup operationGroup) =>
-            $"{(!operationGroup.Language.Default.Name.IsNullOrEmpty() ? operationGroup.Language.Default.Name.ToCleanName() : "All")}Operations";
-
         public static string CSharpName(this Operation operation) =>
             operation.Language.Default.Name.ToCleanName();
 

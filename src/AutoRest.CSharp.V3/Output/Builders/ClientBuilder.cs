@@ -157,7 +157,8 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
         private string GetClientName(OperationGroup operationGroup, string suffix)
         {
-            var name = operationGroup.CSharpName();
+            var name = operationGroup.Language.Default.Name;
+            name = string.IsNullOrEmpty(name) ? "Service" : name.ToCleanName();
 
             var operationsSuffix = "Operations";
             if (name.EndsWith(operationsSuffix))

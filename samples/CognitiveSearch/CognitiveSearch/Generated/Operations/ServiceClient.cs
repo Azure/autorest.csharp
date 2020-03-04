@@ -14,15 +14,15 @@ using CognitiveSearch.Models;
 
 namespace CognitiveSearch
 {
-    public partial class AllClient
+    public partial class ServiceClient
     {
-        internal AllRestClient RestClient { get; }
+        internal ServiceRestClient RestClient { get; }
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
-        /// <summary> Initializes a new instance of AllClient. </summary>
-        internal AllClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string searchServiceName, string searchDnsSuffix = "search.windows.net", string ApiVersion = "2019-05-06")
+        /// <summary> Initializes a new instance of ServiceClient. </summary>
+        internal ServiceClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string searchServiceName, string searchDnsSuffix = "search.windows.net", string ApiVersion = "2019-05-06")
         {
-            RestClient = new AllRestClient(clientDiagnostics, pipeline, searchServiceName, searchDnsSuffix, ApiVersion);
+            RestClient = new ServiceRestClient(clientDiagnostics, pipeline, searchServiceName, searchDnsSuffix, ApiVersion);
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }

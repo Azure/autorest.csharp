@@ -13,15 +13,15 @@ using CognitiveServices.TextAnalytics.Models;
 
 namespace CognitiveServices.TextAnalytics
 {
-    public partial class AllClient
+    public partial class ServiceClient
     {
-        internal AllRestClient RestClient { get; }
+        internal ServiceRestClient RestClient { get; }
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
-        /// <summary> Initializes a new instance of AllClient. </summary>
-        internal AllClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint)
+        /// <summary> Initializes a new instance of ServiceClient. </summary>
+        internal ServiceClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint)
         {
-            RestClient = new AllRestClient(clientDiagnostics, pipeline, endpoint);
+            RestClient = new ServiceRestClient(clientDiagnostics, pipeline, endpoint);
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
