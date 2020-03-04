@@ -281,7 +281,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
         }
 
-        private void WritePagingOperation(CodeWriter writer, Paging pagingMethod, bool async)
+        private void WritePagingOperation(CodeWriter writer, PagingInfo pagingMethod, bool async)
         {
             var pageType = pagingMethod.ItemType;
             CSharpType responseType = async ? new CSharpType(typeof(AsyncPageable<>), pageType) : new CSharpType(typeof(Pageable<>), pageType);

@@ -113,7 +113,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             {
                 if (model.Discriminator?.HasDescendants == true)
                 {
-                    using (writer.If($"element.TryGetProperty(\"{model.Discriminator.SerializedName}\", out {writer.Type(typeof(JsonElement))} discriminator)"))
+                    using (writer.If($"element.TryGetProperty(\"{model.Discriminator.SerializedName}\", out {typeof(JsonElement)} discriminator)"))
                     {
                         writer.Line($"switch (discriminator.GetString())");
                         using (writer.Scope())

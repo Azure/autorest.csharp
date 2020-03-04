@@ -11,9 +11,9 @@ using Azure.Core;
 
 namespace body_complex.Models
 {
-    public partial class Salmon : Azure.Core.IUtf8JsonSerializable
+    public partial class Salmon : IUtf8JsonSerializable
     {
-        void Azure.Core.IUtf8JsonSerializable.Write(System.Text.Json.Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             if (Location != null)
@@ -47,21 +47,21 @@ namespace body_complex.Models
             }
             writer.WriteEndObject();
         }
-        internal static body_complex.Models.Salmon DeserializeSalmon(System.Text.Json.JsonElement element)
+        internal static Salmon DeserializeSalmon(JsonElement element)
         {
-            if (element.TryGetProperty("fishtype", out System.Text.Json.JsonElement discriminator))
+            if (element.TryGetProperty("fishtype", out JsonElement discriminator))
             {
                 switch (discriminator.GetString())
                 {
-                    case "smart_salmon": return body_complex.Models.SmartSalmon.DeserializeSmartSalmon(element);
+                    case "smart_salmon": return SmartSalmon.DeserializeSmartSalmon(element);
                 }
             }
-            body_complex.Models.Salmon result = new body_complex.Models.Salmon();
+            Salmon result = new Salmon();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("location"))
                 {
-                    if (property.Value.ValueKind == System.Text.Json.JsonValueKind.Null)
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         continue;
                     }
@@ -70,7 +70,7 @@ namespace body_complex.Models
                 }
                 if (property.NameEquals("iswild"))
                 {
-                    if (property.Value.ValueKind == System.Text.Json.JsonValueKind.Null)
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         continue;
                     }
@@ -84,7 +84,7 @@ namespace body_complex.Models
                 }
                 if (property.NameEquals("species"))
                 {
-                    if (property.Value.ValueKind == System.Text.Json.JsonValueKind.Null)
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         continue;
                     }
@@ -98,14 +98,14 @@ namespace body_complex.Models
                 }
                 if (property.NameEquals("siblings"))
                 {
-                    if (property.Value.ValueKind == System.Text.Json.JsonValueKind.Null)
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         continue;
                     }
-                    result.Siblings = new System.Collections.Generic.List<body_complex.Models.Fish>();
+                    result.Siblings = new List<Fish>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Siblings.Add(body_complex.Models.Fish.DeserializeFish(item));
+                        result.Siblings.Add(DeserializeFish(item));
                     }
                     continue;
                 }

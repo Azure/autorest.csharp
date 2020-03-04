@@ -12,8 +12,8 @@ namespace httpInfrastructure
 {
     internal class Patch302Headers
     {
-        private readonly Azure.Response _response;
-        public Patch302Headers(Azure.Response response)
+        private readonly Response _response;
+        public Patch302Headers(Response response)
         {
             _response = response;
         }

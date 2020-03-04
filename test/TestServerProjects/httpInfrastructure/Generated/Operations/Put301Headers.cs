@@ -12,8 +12,8 @@ namespace httpInfrastructure
 {
     internal class Put301Headers
     {
-        private readonly Azure.Response _response;
-        public Put301Headers(Azure.Response response)
+        private readonly Response _response;
+        public Put301Headers(Response response)
         {
             _response = response;
         }

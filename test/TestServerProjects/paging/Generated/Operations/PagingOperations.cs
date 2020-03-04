@@ -2308,6 +2308,162 @@ namespace paging
                 throw;
             }
         }
+        internal HttpMessage CreateNextFragmentNextPageRequest(string nextLink)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethodAdditional.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(nextLink, false);
+            request.Uri = uri;
+            return message;
+        }
+        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
+        /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Response<OdataProductResult>> NextFragmentNextPageAsync(string nextLink, CancellationToken cancellationToken = default)
+        {
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("PagingOperations.NextFragment");
+            scope.Start();
+            try
+            {
+                using var message = CreateNextFragmentNextPageRequest(nextLink);
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            var value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
+        /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response<OdataProductResult> NextFragmentNextPage(string nextLink, CancellationToken cancellationToken = default)
+        {
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("PagingOperations.NextFragment");
+            scope.Start();
+            try
+            {
+                using var message = CreateNextFragmentNextPageRequest(nextLink);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        internal HttpMessage CreateNextFragmentWithGroupingNextPageRequest(string nextLink)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethodAdditional.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(nextLink, false);
+            request.Uri = uri;
+            return message;
+        }
+        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
+        /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Response<OdataProductResult>> NextFragmentWithGroupingNextPageAsync(string nextLink, CancellationToken cancellationToken = default)
+        {
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("PagingOperations.NextFragmentWithGrouping");
+            scope.Start();
+            try
+            {
+                using var message = CreateNextFragmentWithGroupingNextPageRequest(nextLink);
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            var value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
+        /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response<OdataProductResult> NextFragmentWithGroupingNextPage(string nextLink, CancellationToken cancellationToken = default)
+        {
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("PagingOperations.NextFragmentWithGrouping");
+            scope.Start();
+            try
+            {
+                using var message = CreateNextFragmentWithGroupingNextPageRequest(nextLink);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            var value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         /// <summary> A paging operation that must return result of the default &apos;value&apos; node. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public AsyncPageable<Product> GetNoItemNamePagesPageableAsync(CancellationToken cancellationToken = default)
@@ -2853,7 +3009,7 @@ namespace paging
             }
             async Task<Page<Product>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await NextFragmentAsync(apiVersion, tenant, nextLink, cancellationToken).ConfigureAwait(false);
+                var response = await NextFragmentNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
@@ -2885,7 +3041,7 @@ namespace paging
             }
             Page<Product> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = NextFragment(apiVersion, tenant, nextLink, cancellationToken);
+                var response = NextFragmentNextPage(nextLink, cancellationToken);
                 return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
@@ -2917,7 +3073,7 @@ namespace paging
             }
             async Task<Page<Product>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await NextFragmentWithGroupingAsync(apiVersion, tenant, nextLink, cancellationToken).ConfigureAwait(false);
+                var response = await NextFragmentWithGroupingNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
@@ -2949,7 +3105,7 @@ namespace paging
             }
             Page<Product> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = NextFragmentWithGrouping(apiVersion, tenant, nextLink, cancellationToken);
+                var response = NextFragmentWithGroupingNextPage(nextLink, cancellationToken);
                 return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
