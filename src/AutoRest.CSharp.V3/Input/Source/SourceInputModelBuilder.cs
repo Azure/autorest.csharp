@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.V3.Input.Source
                         if (TryGetSchemaName(type, _schemaNameAttribute, out var schemaName))
                         {
                             List<SourceMemberMapping> memberMappings = new List<SourceMemberMapping>();
-                            foreach (var member in namedTypeSymbol.GetMembers())
+                            foreach (var member in GetMembers(namedTypeSymbol))
                             {
                                 if (TryGetSchemaName(member, _schemaMemberAttribute, out var schemaMemberName))
                                 {
@@ -57,6 +57,19 @@ namespace AutoRest.CSharp.V3.Input.Source
             }
 
             return new SourceInputModel(definedSchemas.ToArray());
+        }
+
+        private IEnumerable<ISymbol> GetMembers(INamedTypeSymbol? typeSymbol)
+        {
+            while (typeSymbol != null)
+            {
+                foreach (var symbol in typeSymbol.GetMembers())
+                {
+                    yield return symbol;
+                }
+
+                typeSymbol = typeSymbol.BaseType;
+            }
         }
 
         private bool TryGetSchemaName(ISymbol symbol, INamedTypeSymbol attributeType, [NotNullWhen(true)] out string? name)
