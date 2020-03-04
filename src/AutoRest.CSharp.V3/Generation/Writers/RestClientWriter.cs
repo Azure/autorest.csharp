@@ -26,20 +26,20 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 {
     internal class RestClientWriter
     {
-        public void WriteClient(CodeWriter writer, RestClient operationGroup)
+        public void WriteClient(CodeWriter writer, RestClient restClient)
         {
-            var cs = operationGroup.Type;
+            var cs = restClient.Type;
             var @namespace = cs.Namespace;
             using (writer.Namespace(@namespace))
             {
-                writer.WriteXmlDocumentationSummary(operationGroup.Description);
-                using (writer.Class(operationGroup.DeclaredType.Accessibility, "partial", cs.Name))
+                writer.WriteXmlDocumentationSummary(restClient.Description);
+                using (writer.Class(restClient.DeclaredType.Accessibility, "partial", cs.Name))
                 {
-                    WriteClientFields(writer, operationGroup);
+                    WriteClientFields(writer, restClient);
 
-                    WriteClientCtor(writer, operationGroup, cs);
+                    WriteClientCtor(writer, restClient, cs);
 
-                    foreach (var method in operationGroup.Methods)
+                    foreach (var method in restClient.Methods)
                     {
                         WriteRequestCreation(writer, method);
                         WriteOperation(writer, method, true);
@@ -50,9 +50,9 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
         }
 
-        private void WriteClientFields(CodeWriter writer, RestClient operationGroup)
+        private void WriteClientFields(CodeWriter writer, RestClient restClient)
         {
-            foreach (Parameter clientParameter in operationGroup.Parameters)
+            foreach (Parameter clientParameter in restClient.Parameters)
             {
                 writer.Line($"private {clientParameter.Type} {clientParameter.Name};");
             }
@@ -61,11 +61,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             writer.Line($"private {typeof(HttpPipeline)} pipeline;");
         }
 
-        private void WriteClientCtor(CodeWriter writer, RestClient operationGroup, CSharpType cs)
+        private void WriteClientCtor(CodeWriter writer, RestClient restClient, CSharpType cs)
         {
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of {cs.Name}");
             writer.Append($"public {cs.Name:D}({typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline,");
-            foreach (Parameter clientParameter in operationGroup.Parameters)
+            foreach (Parameter clientParameter in restClient.Parameters)
             {
                 writer.WriteParameter(clientParameter);
             }
@@ -74,9 +74,9 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             writer.Line($")");
             using (writer.Scope())
             {
-                writer.WriteParameterNullChecks(operationGroup.Parameters);
+                writer.WriteParameterNullChecks(restClient.Parameters);
 
-                foreach (Parameter clientParameter in operationGroup.Parameters)
+                foreach (Parameter clientParameter in restClient.Parameters)
                 {
                     writer.Line($"this.{clientParameter.Name} = {clientParameter.Name};");
                 }
