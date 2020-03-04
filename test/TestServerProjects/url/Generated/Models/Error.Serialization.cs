@@ -8,7 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace custom_baseUrl_paging.Models
+namespace url.Models
 {
     public partial class Error : IUtf8JsonSerializable
     {

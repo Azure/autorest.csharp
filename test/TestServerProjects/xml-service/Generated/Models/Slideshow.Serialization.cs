@@ -6,93 +6,14 @@
 #nullable disable
 
 using System.Collections.Generic;
-using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class Slideshow : IUtf8JsonSerializable, IXmlSerializable
+    public partial class Slideshow : IXmlSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (Title != null)
-            {
-                writer.WritePropertyName("title");
-                writer.WriteStringValue(Title);
-            }
-            if (Date != null)
-            {
-                writer.WritePropertyName("date");
-                writer.WriteStringValue(Date);
-            }
-            if (Author != null)
-            {
-                writer.WritePropertyName("author");
-                writer.WriteStringValue(Author);
-            }
-            if (Slides != null)
-            {
-                writer.WritePropertyName("slides");
-                writer.WriteStartArray();
-                foreach (var item in Slides)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            writer.WriteEndObject();
-        }
-        internal static Slideshow DeserializeSlideshow(JsonElement element)
-        {
-            Slideshow result = new Slideshow();
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("title"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    result.Title = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("date"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    result.Date = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("author"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    result.Author = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("slides"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    result.Slides = new List<Slide>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        result.Slides.Add(Slide.DeserializeSlide(item));
-                    }
-                    continue;
-                }
-            }
-            return result;
-        }
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
             writer.WriteStartElement(nameHint ?? "slideshow");

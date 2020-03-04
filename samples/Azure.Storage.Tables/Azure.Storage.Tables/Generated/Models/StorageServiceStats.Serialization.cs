@@ -5,42 +5,14 @@
 
 #nullable disable
 
-using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace Azure.Storage.Tables.Models
 {
-    public partial class StorageServiceStats : IUtf8JsonSerializable, IXmlSerializable
+    public partial class StorageServiceStats : IXmlSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (GeoReplication != null)
-            {
-                writer.WritePropertyName("GeoReplication");
-                writer.WriteObjectValue(GeoReplication);
-            }
-            writer.WriteEndObject();
-        }
-        internal static StorageServiceStats DeserializeStorageServiceStats(JsonElement element)
-        {
-            StorageServiceStats result = new StorageServiceStats();
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("GeoReplication"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    result.GeoReplication = GeoReplication.DeserializeGeoReplication(property.Value);
-                    continue;
-                }
-            }
-            return result;
-        }
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
             writer.WriteStartElement(nameHint ?? "StorageServiceStats");

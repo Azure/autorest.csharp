@@ -6,74 +6,14 @@
 #nullable disable
 
 using System.Collections.Generic;
-using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class AppleBarrel : IUtf8JsonSerializable, IXmlSerializable
+    public partial class AppleBarrel : IXmlSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (GoodApples != null)
-            {
-                writer.WritePropertyName("GoodApples");
-                writer.WriteStartArray();
-                foreach (var item in GoodApples)
-                {
-                    writer.WriteStringValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            if (BadApples != null)
-            {
-                writer.WritePropertyName("BadApples");
-                writer.WriteStartArray();
-                foreach (var item in BadApples)
-                {
-                    writer.WriteStringValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            writer.WriteEndObject();
-        }
-        internal static AppleBarrel DeserializeAppleBarrel(JsonElement element)
-        {
-            AppleBarrel result = new AppleBarrel();
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("GoodApples"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    result.GoodApples = new List<string>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        result.GoodApples.Add(item.GetString());
-                    }
-                    continue;
-                }
-                if (property.NameEquals("BadApples"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    result.BadApples = new List<string>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        result.BadApples.Add(item.GetString());
-                    }
-                    continue;
-                }
-            }
-            return result;
-        }
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
             writer.WriteStartElement(nameHint ?? "AppleBarrel");

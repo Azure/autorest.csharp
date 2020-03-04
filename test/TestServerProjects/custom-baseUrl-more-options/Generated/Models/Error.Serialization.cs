@@ -8,9 +8,9 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace paging.Models
+namespace custom_baseUrl_more_options.Models
 {
-    public partial class OperationResult : IUtf8JsonSerializable
+    public partial class Error : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -18,13 +18,18 @@ namespace paging.Models
             if (Status != null)
             {
                 writer.WritePropertyName("status");
-                writer.WriteStringValue(Status.Value.ToString());
+                writer.WriteNumberValue(Status.Value);
+            }
+            if (Message != null)
+            {
+                writer.WritePropertyName("message");
+                writer.WriteStringValue(Message);
             }
             writer.WriteEndObject();
         }
-        internal static OperationResult DeserializeOperationResult(JsonElement element)
+        internal static Error DeserializeError(JsonElement element)
         {
-            OperationResult result = new OperationResult();
+            Error result = new Error();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("status"))
@@ -33,7 +38,16 @@ namespace paging.Models
                     {
                         continue;
                     }
-                    result.Status = new OperationResultStatus(property.Value.GetString());
+                    result.Status = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("message"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    result.Message = property.Value.GetString();
                     continue;
                 }
             }

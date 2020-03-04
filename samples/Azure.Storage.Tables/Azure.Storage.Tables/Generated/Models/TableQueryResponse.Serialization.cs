@@ -7,13 +7,11 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using System.Xml;
-using System.Xml.Linq;
 using Azure.Core;
 
 namespace Azure.Storage.Tables.Models
 {
-    public partial class TableQueryResponse : IUtf8JsonSerializable, IXmlSerializable
+    public partial class TableQueryResponse : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -62,43 +60,6 @@ namespace Azure.Storage.Tables.Models
                     }
                     continue;
                 }
-            }
-            return result;
-        }
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
-        {
-            writer.WriteStartElement(nameHint ?? "TableQueryResponse");
-            if (OdataMetadata != null)
-            {
-                writer.WriteStartElement("odata.metadata");
-                writer.WriteValue(OdataMetadata);
-                writer.WriteEndElement();
-            }
-            if (Value != null)
-            {
-                foreach (var item in Value)
-                {
-                    writer.WriteObjectValue(item, "TableResponseProperties");
-                }
-            }
-            writer.WriteEndElement();
-        }
-        internal static TableQueryResponse DeserializeTableQueryResponse(XElement element)
-        {
-            TableQueryResponse result = default;
-            result = new TableQueryResponse(); string value = default;
-            var odatametadata = element.Element("odata.metadata");
-            if (odatametadata != null)
-            {
-                value = (string)odatametadata;
-            }
-            result.OdataMetadata = value;
-            result.Value = new List<TableResponseProperties>();
-            foreach (var e in element.Elements("TableResponseProperties"))
-            {
-                TableResponseProperties value0 = default;
-                value0 = TableResponseProperties.DeserializeTableResponseProperties(e);
-                result.Value.Add(value0);
             }
             return result;
         }

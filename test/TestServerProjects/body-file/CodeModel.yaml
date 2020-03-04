@@ -30,19 +30,8 @@ schemas: !<!Schemas>
         name: ErrorMessage
         description: ''
     protocol: !<!Protocols> {}
-  binaries:
-  - !<!BinarySchema> &ref_4
-    type: binary
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    language: !<!Languages> 
-      default:
-        name: binary
-        description: ''
-    protocol: !<!Protocols> {}
   objects:
-  - !<!ObjectSchema> &ref_5
+  - !<!ObjectSchema> &ref_4
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -124,24 +113,12 @@ operationGroups:
           knownMediaType: binary
           mediaTypes:
           - image/png
-          statusCodes:
-          - '200'
-    - !<!SchemaResponse> 
-      schema: *ref_4
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
           - application/json
           statusCodes:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_5
+      schema: *ref_4
       language: !<!Languages> 
         default:
           name: ''
@@ -188,24 +165,12 @@ operationGroups:
           knownMediaType: binary
           mediaTypes:
           - image/png
-          statusCodes:
-          - '200'
-    - !<!SchemaResponse> 
-      schema: *ref_4
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
           - application/json
           statusCodes:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_5
+      schema: *ref_4
       language: !<!Languages> 
         default:
           name: ''
@@ -252,24 +217,12 @@ operationGroups:
           knownMediaType: binary
           mediaTypes:
           - image/png
-          statusCodes:
-          - '200'
-    - !<!SchemaResponse> 
-      schema: *ref_4
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
           - application/json
           statusCodes:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_5
+      schema: *ref_4
       language: !<!Languages> 
         default:
           name: ''

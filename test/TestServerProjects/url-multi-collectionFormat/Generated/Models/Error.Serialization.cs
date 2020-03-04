@@ -8,9 +8,9 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace lro.Models
+namespace url_multi_collectionFormat.Models
 {
-    public partial class OperationResult : IUtf8JsonSerializable
+    public partial class Error : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -18,18 +18,18 @@ namespace lro.Models
             if (Status != null)
             {
                 writer.WritePropertyName("status");
-                writer.WriteStringValue(Status.Value.ToString());
+                writer.WriteNumberValue(Status.Value);
             }
-            if (Error != null)
+            if (Message != null)
             {
-                writer.WritePropertyName("error");
-                writer.WriteObjectValue(Error);
+                writer.WritePropertyName("message");
+                writer.WriteStringValue(Message);
             }
             writer.WriteEndObject();
         }
-        internal static OperationResult DeserializeOperationResult(JsonElement element)
+        internal static Error DeserializeError(JsonElement element)
         {
-            OperationResult result = new OperationResult();
+            Error result = new Error();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("status"))
@@ -38,16 +38,16 @@ namespace lro.Models
                     {
                         continue;
                     }
-                    result.Status = new OperationResultStatus(property.Value.GetString());
+                    result.Status = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("error"))
+                if (property.NameEquals("message"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         continue;
                     }
-                    result.Error = OperationResultError.DeserializeOperationResultError(property.Value);
+                    result.Message = property.Value.GetString();
                     continue;
                 }
             }
