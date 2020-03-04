@@ -1,9 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License. See License.txt in the project root for license information.
+// Licensed under the MIT License.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -16,7 +13,6 @@ using AutoRest.CSharp.V3.Output.Models.Serialization;
 using AutoRest.CSharp.V3.Output.Models.Serialization.Json;
 using AutoRest.CSharp.V3.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.V3.Output.Models.Shared;
-using AutoRest.CSharp.V3.Output.Models.Types;
 using AutoRest.CSharp.V3.Utilities;
 using Azure;
 using Azure.Core;
@@ -27,33 +23,31 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 {
     internal class ClientWriter
     {
-        public void WriteClient(CodeWriter writer, Client operationGroup)
+        public void WriteClient(CodeWriter writer, Client client)
         {
-            var cs = operationGroup.Type;
+            var cs = client.Type;
             var @namespace = cs.Namespace;
             using (writer.Namespace(@namespace))
             {
-                writer.WriteXmlDocumentationSummary(operationGroup.Description);
-                using (writer.Class(operationGroup.DeclaredType.Accessibility, "partial", cs.Name))
+                writer.WriteXmlDocumentationSummary(client.Description);
+                using (writer.Class(client.DeclaredType.Accessibility, "partial", cs.Name))
                 {
-                    WriteClientFields(writer, operationGroup);
+                    WriteClientFields(writer, client);
+                    WriteClientCtor(writer, client);
 
-                    WriteClientCtor(writer, operationGroup, cs);
-
-                    foreach (var method in operationGroup.Methods)
+                    foreach (var clientMethod in client.Methods)
                     {
-                        WriteRequestCreation(writer, method);
-                        WriteOperation(writer, method, true);
-                        WriteOperation(writer, method, false);
+                        WriteClientMethod(writer, clientMethod, true);
+                        WriteClientMethod(writer, clientMethod, false);
                     }
 
-                    foreach (var pagingMethod in operationGroup.PagingMethods)
+                    foreach (var pagingMethod in client.PagingMethods)
                     {
                         WritePagingOperation(writer, pagingMethod, true);
                         WritePagingOperation(writer, pagingMethod, false);
                     }
 
-                    foreach (var longRunningOperation in operationGroup.LongRunningOperationMethods)
+                    foreach (var longRunningOperation in client.LongRunningOperationMethods)
                     {
                         WriteCreateOperationOperation(writer, longRunningOperation);
                         WriteStartOperationOperation(writer, longRunningOperation, true);
@@ -63,162 +57,18 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
         }
 
-        private void WriteClientFields(CodeWriter writer, Client operationGroup)
+        private void WriteClientMethod(CodeWriter writer, ClientMethod clientMethod, bool async)
         {
-            foreach (Parameter clientParameter in operationGroup.Parameters)
-            {
-                writer.Line($"private {clientParameter.Type} {clientParameter.Name};");
-            }
-
-            writer.Line($"private {typeof(ClientDiagnostics)} clientDiagnostics;");
-            writer.Line($"private {typeof(HttpPipeline)} pipeline;");
-        }
-
-        private void WriteClientCtor(CodeWriter writer, Client operationGroup, CSharpType cs)
-        {
-            writer.WriteXmlDocumentationSummary($"Initializes a new instance of {cs.Name}");
-            writer.Append($"public {cs.Name:D}({typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline,");
-            foreach (Parameter clientParameter in operationGroup.Parameters)
-            {
-                WriteParameter(writer, clientParameter);
-            }
-
-            writer.RemoveTrailingComma();
-            writer.Line($")");
-            using (writer.Scope())
-            {
-                WriteParameterNullChecks(writer, operationGroup.Parameters);
-
-                foreach (Parameter clientParameter in operationGroup.Parameters)
-                {
-                    writer.Line($"this.{clientParameter.Name} = {clientParameter.Name};");
-                }
-
-                writer.Line($"this.clientDiagnostics = clientDiagnostics;");
-                writer.Line($"this.pipeline = pipeline;");
-            }
-        }
-
-        private void WriteParameter(CodeWriter writer, Parameter clientParameter)
-        {
-            writer.Append($"{clientParameter.Type} {clientParameter.Name}");
-            if (clientParameter.DefaultValue != null)
-            {
-                writer.Append($" = {clientParameter.DefaultValue.Value.Value:L}");
-            }
-
-            writer.AppendRaw(",");
-        }
-
-        private string CreateMethodName(string name, bool async) => $"{name}{(async ? "Async" : string.Empty)}";
-
-        private string CreateRequestMethodName(string name) => $"Create{name}Request";
-
-        private string CreateCreateOperationName(string name) => $"Create{name}";
-
-        private string CreateStartOperationName(string name, bool async) => $"Start{name}{(async ? "Async" : string.Empty)}";
-
-        private void WriteRequestCreation(CodeWriter writer, Method operation)
-        {
-            var methodName = CreateRequestMethodName(operation.Name);
-            writer.Append($"internal {typeof(HttpMessage)} {methodName}(");
-            var parameters = operation.Parameters;
-            foreach (Parameter clientParameter in parameters)
-            {
-                writer.Append($"{clientParameter.Type} {clientParameter.Name},");
-            }
-            writer.RemoveTrailingComma();
-            writer.Line($")");
-            using (writer.Scope())
-            {
-                writer.Line($"var message = pipeline.CreateMessage();");
-                writer.Line($"var request = message.Request;");
-                var method = operation.Request.HttpMethod;
-                writer.Line($"request.Method = {typeof(RequestMethodAdditional)}.{method.ToRequestMethodName()};");
-
-                //TODO: Add logic to escape the strings when specified, using Uri.EscapeDataString(value);
-                //TODO: Need proper logic to convert the values to strings. Right now, everything is just using default ToString().
-                //TODO: Need logic to trim duplicate slashes (/) so when combined, you don't end  up with multiple // together
-
-                writer.Line($"var uri = new RawRequestUriBuilder();");
-                foreach (var segment in operation.Request.HostSegments)
-                {
-                    WriteUriFragment(writer, segment);
-                }
-                writer.RemoveTrailingComma();
-
-                foreach (var segment in operation.Request.PathSegments)
-                {
-                    WritePathSegment(writer, segment);
-                }
-
-                //TODO: Duplicate code between query and header parameter processing logic
-                foreach (var queryParameter in operation.Request.Query)
-                {
-                    WriteQueryParameter(writer, queryParameter);
-                }
-
-                writer.Line($"request.Uri = uri;");
-
-                foreach (var header in operation.Request.Headers)
-                {
-                    WriteHeader(writer, header);
-                }
-
-                if (operation.Request.Body is RequestBody body && body.Serialization is JsonSerialization jsonSerialization)
-                {
-                    writer.Line($"using var content = new {typeof(Utf8JsonRequestContent)}();");
-
-                    ParameterOrConstant value = body.Value;
-
-                    writer.ToSerializeCall(
-                        jsonSerialization,
-                        WriteConstantOrParameter(value, ignoreNullability: true),
-                        writerName: w => w.Append($"content.{nameof(Utf8JsonRequestContent.JsonWriter)}"));
-
-                    writer.Line($"request.Content = content;");
-                }
-                else if (operation.Request.Body is RequestBody xmlBody && xmlBody.Serialization is XmlElementSerialization xmlSerialization)
-                {
-                    writer.Line($"using var content = new {typeof(XmlWriterContent)}();");
-
-                    ParameterOrConstant value = xmlBody.Value;
-
-                    writer.ToSerializeCall(
-                        xmlSerialization,
-                        WriteConstantOrParameter(value, ignoreNullability: true),
-                        writerName: w => w.Append($"content.{nameof(XmlWriterContent.XmlWriter)}"));
-
-                    writer.Line($"request.Content = content;");
-                }
-
-                writer.Line($"return message;");
-            }
-        }
-
-        private void WriteUriFragment(CodeWriter writer, PathSegment segment)
-        {
-            writer.Append($"uri.AppendRaw({WriteConstantOrParameter(segment.Value)}");
-            WriteSerializationFormat(writer, segment.Format);
-            writer.Line($", {segment.Escape:L});");
-        }
-
-        private void WriteOperation(CodeWriter writer, Method operation, bool async)
-        {
-            //TODO: Handle multiple responses: https://github.com/Azure/autorest.csharp/issues/413
-            var responseBody = operation.Response.ResponseBody;
+            var responseBody = clientMethod.RestClientMethod.Response.ResponseBody;
             CSharpType? bodyType = responseBody?.Type;
-            CSharpType? headerModelType = operation.Response.HeaderModel?.Type;
-            CSharpType responseType = bodyType switch
-            {
-                null when headerModelType != null => new CSharpType(typeof(ResponseWithHeaders<>), headerModelType),
-                { } when headerModelType == null => new CSharpType(typeof(Response<>), bodyType),
-                { } => new CSharpType(typeof(ResponseWithHeaders<>), bodyType, headerModelType),
-                _ => new CSharpType(typeof(Response)),
-            };
+            CSharpType responseType = bodyType != null ?
+                new CSharpType(typeof(Response<>), bodyType) :
+                new CSharpType(typeof(Response));
+
             responseType = async ? new CSharpType(typeof(ValueTask<>), responseType) : responseType;
-            var parameters = operation.Parameters;
-            writer.WriteXmlDocumentationSummary(operation.Description);
+
+            var parameters = clientMethod.RestClientMethod.Parameters;
+            writer.WriteXmlDocumentationSummary(clientMethod.Description);
 
             foreach (Parameter parameter in parameters)
             {
@@ -227,57 +77,85 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
             writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
 
-            var methodName = CreateMethodName(operation.Name, async);
-            var asyncText = async ? "async " : string.Empty;
-            writer.Append($"public {asyncText}{responseType} {methodName}(");
+            var methodName = CreateMethodName(clientMethod.Name, async);
+            var asyncText = async ? "async" : string.Empty;
+            writer.Append($"public {asyncText} {responseType} {methodName}(");
 
             foreach (Parameter parameter in parameters)
             {
-                WriteParameter(writer, parameter);
+                writer.WriteParameter(parameter);
             }
             writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
 
             using (writer.Scope())
             {
-                WriteParameterNullChecks(writer, parameters);
-
-                writer.Line($"using var scope = clientDiagnostics.CreateScope({operation.Diagnostics.ScopeName:L});");
-                foreach (DiagnosticAttribute diagnosticScopeAttributes in operation.Diagnostics.Attributes)
+                writer.Append($"return (");
+                if (async)
                 {
-                    writer.Line($"scope.AddAttribute({diagnosticScopeAttributes.Name:L}, {WriteConstantOrParameter(diagnosticScopeAttributes.Value)};");
-                }
-                writer.Line($"scope.Start();");
-
-                using (writer.Scope($"try"))
-                {
-                    var requestMethodName = CreateRequestMethodName(operation.Name);
-                    writer.Append($"using var message = {requestMethodName}(");
-
-                    foreach (Parameter parameter in parameters)
-                    {
-                        writer.Append($"{parameter.Name}, ");
-                    }
-
-                    writer.RemoveTrailingComma();
-                    writer.Line($");");
-
-                    if (async)
-                    {
-                        writer.Line($"await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);");
-                    }
-                    else
-                    {
-                        writer.Line($"pipeline.Send(message, cancellationToken);");
-                    }
-
-                    WriteStatusCodeSwitch(writer, responseBody, headerModelType, operation, async);
+                    writer.Append($"await ");
                 }
 
-                using (writer.Scope($"catch ({typeof(Exception)} e)"))
+                writer.Append($"RestClient.{CreateMethodName(clientMethod.RestClientMethod.Name, async)}(");
+                foreach (var parameter in clientMethod.RestClientMethod.Parameters)
                 {
-                    writer.Line($"scope.Failed(e);");
-                    writer.Line($"throw;");
+                    writer.Append($"{parameter.Name}, ");
                 }
+                writer.Append($"cancellationToken)");
+
+                if (async)
+                {
+                    writer.Append($".ConfigureAwait(false)");
+                }
+
+                writer.Append($")");
+
+                if (bodyType == null && clientMethod.RestClientMethod.Response.HeaderModel != null)
+                {
+                    writer.Append($".GetRawResponse()");
+                }
+
+                writer.Line($";");
+            }
+        }
+
+        private string CreateRequestMethodName(string name) => $"Create{name}Request";
+
+        private string CreateCreateOperationName(string name) => $"Create{name}";
+
+        private string CreateStartOperationName(string name, bool async) => $"Start{name}{(async ? "Async" : string.Empty)}";
+
+        private string CreateMethodName(string name, bool async) => $"{name}{(async ? "Async" : string.Empty)}";
+
+        private void WriteClientFields(CodeWriter writer, Client client)
+        {
+            writer.Line($"private readonly {typeof(ClientDiagnostics)} clientDiagnostics;");
+            writer.Line($"private readonly {typeof(HttpPipeline)} pipeline;");
+            writer.Append($"internal {client.RestClient.Type} RestClient").LineRaw(" { get; }");
+        }
+
+        private void WriteClientCtor(CodeWriter writer, Client client)
+        {
+            writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name}");
+            writer.Append($"internal {client.Type.Name:D}({typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline,");
+            foreach (Parameter parameter in client.RestClient.Parameters)
+            {
+                writer.WriteParameter(parameter);
+            }
+
+            writer.RemoveTrailingComma();
+            writer.Line($")");
+            using (writer.Scope())
+            {
+                writer.Append($"this.RestClient = new {client.RestClient.Type}(clientDiagnostics, pipeline, ");
+                foreach (var parameter in client.RestClient.Parameters)
+                {
+                    writer.Append($"{parameter.Name}, ");
+                }
+                writer.RemoveTrailingComma();
+                writer.Line($");");
+
+                writer.Line($"this.clientDiagnostics = clientDiagnostics;");
+                writer.Line($"this.pipeline = pipeline;");
             }
         }
 
@@ -300,26 +178,26 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             writer.Append($"public {responseType} {CreateMethodName(pagingMethod.Name, async)}(");
             foreach (Parameter parameter in parameters)
             {
-                WriteParameter(writer, parameter);
+                writer.WriteParameter(parameter);
             }
 
             writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
 
             using (writer.Scope())
             {
-                WriteParameterNullChecks(writer, parameters);
+                writer.WriteParameterNullChecks(parameters);
 
                 var pageWrappedType = new CSharpType(typeof(Page<>), pageType);
                 var funcType = async ? new CSharpType(typeof(Task<>), pageWrappedType) : pageWrappedType;
                 var nullableInt = new CSharpType(typeof(int), true);
 
                 var continuationTokenText = pagingMethod.NextLinkName != null ? $"response.Value.{pagingMethod.NextLinkName}" : "null";
-                var asyncText = async ? "async " : string.Empty;
-                var awaitText = async ? "await " : string.Empty;
+                var asyncText = async ? "async" : string.Empty;
+                var awaitText = async ? "await" : string.Empty;
                 var configureAwaitText = async ? ".ConfigureAwait(false)" : string.Empty;
-                using (writer.Scope($"{asyncText}{funcType} FirstPageFunc({nullableInt} pageSizeHint)"))
+                using (writer.Scope($"{asyncText} {funcType} FirstPageFunc({nullableInt} pageSizeHint)"))
                 {
-                    writer.Append($"var response = {awaitText}{CreateMethodName(pagingMethod.Method.Name, async)}(");
+                    writer.Append($"var response = {awaitText} RestClient.{CreateMethodName(pagingMethod.Method.Name, async)}(");
                     foreach (Parameter parameter in parameters)
                     {
                         writer.Append($"{parameter.Name}, ");
@@ -328,9 +206,9 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     writer.Line($"return {typeof(Page)}.FromValues(response.Value.{pagingMethod.ItemName}, {continuationTokenText}, response.GetRawResponse());");
                 }
 
-                using (writer.Scope($"{asyncText}{funcType} NextPageFunc({typeof(string)} nextLink, {nullableInt} pageSizeHint)"))
+                using (writer.Scope($"{asyncText} {funcType} NextPageFunc({typeof(string)} nextLink, {nullableInt} pageSizeHint)"))
                 {
-                    writer.Append($"var response = {awaitText}{CreateMethodName(pagingMethod.NextPageMethod.Name, async)}(");
+                    writer.Append($"var response = {awaitText} RestClient.{CreateMethodName(pagingMethod.NextPageMethod.Name, async)}(");
                     foreach (Parameter parameter in nextPageParameters)
                     {
                         writer.Append($"{parameter.Name}, ");
@@ -344,7 +222,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private void WriteCreateOperationOperation(CodeWriter writer, LongRunningOperation lroMethod)
         {
-            Method originalMethod = lroMethod.OriginalMethod;
+            RestClientMethod originalMethod = lroMethod.OriginalMethod;
             CSharpType responseType = new CSharpType(typeof(Operation<>), lroMethod.OriginalResponse.ResponseBody?.Type ?? new CSharpType(typeof(Response)));
             Parameter[] parameters = lroMethod.CreateParameters;
 
@@ -358,14 +236,14 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             writer.Append($"public {responseType} {CreateCreateOperationName(lroMethod.Name)}(");
             foreach (Parameter parameter in parameters)
             {
-                WriteParameter(writer, parameter);
+                writer.WriteParameter(parameter);
             }
             writer.RemoveTrailingComma();
             writer.Line($")");
 
             using (writer.Scope())
             {
-                WriteParameterNullChecks(writer, parameters);
+                writer.WriteParameterNullChecks(parameters);
 
                 writer.Append($"return {typeof(ArmOperationHelpers)}.Create(");
                 writer.Line($"pipeline, clientDiagnostics, originalResponse, {typeof(RequestMethod)}.{originalMethod.Request.HttpMethod.ToRequestMethodName()}, {originalMethod.Diagnostics.ScopeName:L}, {typeof(OperationFinalStateVia)}.{lroMethod.FinalStateVia}, createOriginalHttpMessage,");
@@ -437,7 +315,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private void WriteStartOperationOperation(CodeWriter writer, LongRunningOperation lroMethod, bool async)
         {
-            Method originalMethod = lroMethod.OriginalMethod;
+            RestClientMethod originalMethod = lroMethod.OriginalMethod;
             CSharpType responseType = new CSharpType(typeof(Operation<>), lroMethod.OriginalResponse.ResponseBody?.Type ?? new CSharpType(typeof(Response)));
             responseType = async ? new CSharpType(typeof(ValueTask<>), responseType) : responseType;
             Parameter[] parameters = originalMethod.Parameters;
@@ -454,284 +332,30 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             writer.Append($"public {asyncText}{responseType} {CreateStartOperationName(lroMethod.Name, async)}(");
             foreach (Parameter parameter in parameters)
             {
-                WriteParameter(writer, parameter);
+                writer.WriteParameter(parameter);
             }
             writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
 
             using (writer.Scope())
             {
-                WriteParameterNullChecks(writer, parameters);
+                writer.WriteParameterNullChecks(parameters);
 
-                string awaitText = async ? "await " : string.Empty;
+                string awaitText = async ? "await" : string.Empty;
                 string configureText = async ? ".ConfigureAwait(false)" : string.Empty;
-                writer.Append($"var originalResponse = {awaitText}{CreateMethodName(originalMethod.Name, async)}(");
+                writer.Append($"var originalResponse = {awaitText} RestClient.{CreateMethodName(originalMethod.Name, async)}(");
                 foreach (Parameter parameter in parameters)
                 {
                     writer.Append($"{parameter.Name}, ");
                 }
                 writer.Line($"cancellationToken){configureText};");
 
-                writer.Append($"return {CreateCreateOperationName(lroMethod.Name)}(originalResponse, () => {CreateRequestMethodName(originalMethod.Name)}(");
+                writer.Append($"return {CreateCreateOperationName(lroMethod.Name)}(originalResponse, () => RestClient.{CreateRequestMethodName(originalMethod.Name)}(");
                 foreach (Parameter parameter in parameters)
                 {
                     writer.Append($"{parameter.Name}, ");
                 }
                 writer.RemoveTrailingComma();
                 writer.Line($"));");
-            }
-        }
-
-        private CodeWriterDelegate WriteConstantOrParameter(ParameterOrConstant constantOrParameter, bool ignoreNullability = false) => writer =>
-        {
-            if (constantOrParameter.IsConstant)
-            {
-                WriteConstant(writer, constantOrParameter.Constant);
-            }
-            else
-            {
-                writer.AppendRaw(constantOrParameter.Parameter.Name);
-                if (!ignoreNullability)
-                {
-                    writer.AppendNullableValue(constantOrParameter.Type);
-                }
-            }
-        };
-
-        private void WriteParameterNullChecks(CodeWriter writer, IReadOnlyCollection<Parameter> parameters)
-        {
-            foreach (Parameter parameter in parameters)
-            {
-                CSharpType cs = parameter.Type;
-                if (parameter.IsRequired && (cs.IsNullable || !cs.IsValueType))
-                {
-                    using (writer.If($"{parameter.Name} == null"))
-                    {
-                        writer.Line($"throw new {typeof(ArgumentNullException)}(nameof({parameter.Name}));");
-                    }
-                }
-            }
-
-            writer.Line();
-        }
-
-        private void WriteConstant(CodeWriter writer, Constant constant)
-        {
-            if (constant.Value == null)
-            {
-                // Cast helps the overload resolution
-                writer.Append($"({constant.Type}){null:L}");
-                return;
-            }
-
-            Type? frameworkType = constant.Type.FrameworkType;
-
-            if (frameworkType == typeof(DateTimeOffset))
-            {
-                var d = (DateTimeOffset) constant.Value;
-                d = d.ToUniversalTime();
-                writer.Append($"new {typeof(DateTimeOffset)}({d.Year:L}, {d.Month:L}, {d.Day:L} ,{d.Hour:L}, {d.Minute:L}, {d.Second:L}, {d.Millisecond:L}, {typeof(TimeSpan)}.{nameof(TimeSpan.Zero)})");
-            }
-            else if (frameworkType == typeof(byte[]))
-            {
-                var value = (byte[]) constant.Value;
-                writer.Append($"new byte[] {{");
-                foreach (byte b in value)
-                {
-                    writer.Append($"{b}, ");
-                }
-
-                writer.Append($"}}");
-            }
-            else if (frameworkType != null)
-            {
-                writer.Literal(constant.Value);
-            }
-            else
-            {
-                throw new InvalidOperationException("Unknown constant type");
-            }
-        }
-
-        private void WritePathSegment(CodeWriter writer, PathSegment segment)
-        {
-            writer.Append($"uri.AppendPath({WriteConstantOrParameter(segment.Value)}");
-            WriteSerializationFormat(writer, segment.Format);
-            writer.Line($", {segment.Escape:L});");
-        }
-
-        private void WriteHeader(CodeWriter writer, RequestHeader header)
-        {
-            using (WriteValueNullCheck(writer, header.Value))
-            {
-                writer.Append($"request.Headers.Add({header.Name:L}, {WriteConstantOrParameter(header.Value)}");
-                WriteSerializationFormat(writer, header.Format);
-                writer.Line($");");
-            }
-        }
-
-        private CodeWriter.CodeWriterScope? WriteValueNullCheck(CodeWriter writer, ParameterOrConstant value)
-        {
-            if (value.IsConstant)
-                return default;
-
-            var type = value.Type;
-            if (type.IsNullable)
-            {
-                return writer.If($"{value.Parameter.Name} != null");
-            }
-
-            return default;
-        }
-
-        private void WriteSerializationFormat(CodeWriter writer, SerializationFormat format)
-        {
-            if (format == SerializationFormat.Bytes_Base64Url)
-            {
-                // base64url is the only options for paths ns queries
-                return;
-            }
-
-            var formatSpecifier = format.ToFormatSpecifier();
-            if (formatSpecifier != null)
-            {
-                writer.Append($", {formatSpecifier:L}");
-            }
-        }
-
-        private void WriteQueryParameter(CodeWriter writer, QueryParameter queryParameter)
-        {
-            string method;
-            string? delimiter = null;
-            switch (queryParameter.SerializationStyle)
-            {
-                case QuerySerializationStyle.PipeDelimited:
-                    method = nameof(RequestUriBuilderExtensions.AppendQueryDelimited);
-                    delimiter = "|";
-                    break;
-                case QuerySerializationStyle.TabDelimited:
-                    method = nameof(RequestUriBuilderExtensions.AppendQueryDelimited);
-                    delimiter = "\t";
-                    break;
-                case QuerySerializationStyle.SpaceDelimited:
-                    method = nameof(RequestUriBuilderExtensions.AppendQueryDelimited);
-                    delimiter = " ";
-                    break;
-                case QuerySerializationStyle.CommaDelimited:
-                    method = nameof(RequestUriBuilderExtensions.AppendQueryDelimited);
-                    delimiter = ",";
-                    break;
-
-                default:
-                    method = nameof(RequestUriBuilderExtensions.AppendQuery);
-                    break;
-            }
-
-            ParameterOrConstant value = queryParameter.Value;
-            using (WriteValueNullCheck(writer, value))
-            {
-                writer.Append($"uri.{method}({queryParameter.Name:L}, {WriteConstantOrParameter(value)}");
-
-                // TODO: Hack to support extensible enums in query. https://github.com/Azure/autorest.csharp/issues/325
-                var type = value.Type;
-                if (!type.IsFrameworkType && type.Implementation is EnumType enumType && enumType.IsStringBased)
-                {
-                    writer.Append($".ToString()");
-                }
-
-                if (delimiter != null)
-                {
-                    writer.Append($", {delimiter:L}");
-                }
-                WriteSerializationFormat(writer, queryParameter.SerializationFormat);
-                writer.Line($", {queryParameter.Escape:L});");
-            }
-        }
-
-        //TODO: Do multiple status codes
-        private void WriteStatusCodeSwitch(CodeWriter writer, ResponseBody? responseBody, CSharpType? headersModelType, Method operation, bool async)
-        {
-            using (writer.Switch("message.Response.Status"))
-            {
-                var statusCodes = operation.Response.SuccessfulStatusCodes;
-                foreach (var statusCode in statusCodes)
-                {
-                    writer.Line($"case {statusCode}:");
-                }
-
-                using (responseBody != null ? writer.Scope() : default)
-                {
-                    string valueVariable = "value";
-
-                    if (responseBody is ObjectResponseBody objectResponseBody)
-                    {
-                        const string document = "document";
-                        switch (objectResponseBody.Serialization)
-                        {
-                            case JsonSerialization jsonSerialization:
-                                writer.Append($"using var {document:D} = ");
-                                if (async)
-                                {
-                                    writer.Line($"await {typeof(JsonDocument)}.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);");
-                                }
-                                else
-                                {
-                                    writer.Line($"{typeof(JsonDocument)}.Parse(message.Response.ContentStream);");
-                                }
-
-                                writer.ToDeserializeCall(
-                                    jsonSerialization,
-                                    w => w.Append($"document.RootElement"),
-                                    ref valueVariable
-                                );
-                                break;
-                            case XmlElementSerialization xmlSerialization:
-                                writer.Line($"var {document:D} = {typeof(XDocument)}.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);");
-                                writer.ToDeserializeCall(
-                                    xmlSerialization,
-                                    w => w.Append($"document"),
-                                    ref valueVariable
-                                );
-                                break;
-                        }
-                    }
-                    else if (responseBody is StreamResponseBody _)
-                    {
-                        writer.Line($"var {valueVariable:D} = message.ExtractResponseContent();");
-                    }
-
-                    if (headersModelType != null)
-                    {
-                        writer.Line($"var headers = new {headersModelType}(message.Response);");
-                    }
-
-                    switch (responseBody)
-                    {
-                        case null when headersModelType != null:
-                            writer.Append($"return {typeof(ResponseWithHeaders)}.FromValue(headers, message.Response);");
-                            break;
-                        case { } when headersModelType != null:
-                            writer.Append($"return {typeof(ResponseWithHeaders)}.FromValue({valueVariable}, headers, message.Response);");
-                            break;
-                        case { }:
-                            writer.Append($"return {typeof(Response)}.FromValue({valueVariable}, message.Response);");
-                            break;
-                        case null when !statusCodes.Any():
-                            break;
-                        case null:
-                            writer.Append($"return message.Response;");
-                            break;
-                    }
-                }
-
-                writer.Line($"default:");
-                if (async)
-                {
-                    writer.Line($"throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);");
-                }
-                else
-                {
-                    writer.Line($"throw clientDiagnostics.CreateRequestFailedException(message.Response);");
-                }
             }
         }
     }

@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             Declaration = BuilderHelpers.CreateTypeAttributes(
                 schema.CSharpName(),
                 $"{context.DefaultNamespace}.Models",
-                Accessibility.Public,
+                "public",
                 context.SourceInputModel.FindForSchema(schema.Name)?.ExistingType);
             Description = BuilderHelpers.CreateDescription(schema);
             Values = choices.Select(c => new EnumTypeValue(

@@ -9,7 +9,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Requests
 {
     internal class LongRunningOperation
     {
-        public LongRunningOperation(Method originalMethod, Response originalResponse, string name, Parameter[] createParameters, OperationFinalStateVia finalStateVia)
+        public LongRunningOperation(RestClientMethod originalMethod, Response originalResponse, string name, Parameter[] createParameters, OperationFinalStateVia finalStateVia)
         {
             OriginalMethod = originalMethod;
             OriginalResponse = originalResponse;
@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Requests
         }
 
         public string Name { get; }
-        public Method OriginalMethod { get; }
+        public RestClientMethod OriginalMethod { get; }
         public Response OriginalResponse { get; }
         public Parameter[] CreateParameters { get; }
         public OperationFinalStateVia FinalStateVia { get; }

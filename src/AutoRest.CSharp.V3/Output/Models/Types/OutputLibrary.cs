@@ -15,6 +15,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         private readonly BuildContext _context;
         private Dictionary<Schema, ISchemaType>? _models;
         private Client[]? _clients;
+        private RestClient[]? _restClients;
 
         public OutputLibrary(CodeModel codeModel, BuildContext context)
         {
@@ -24,7 +25,23 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
         public IEnumerable<ISchemaType> Models => SchemaMap.Values;
 
-        public Client[] Clients => _clients ??= BuildClients();
+        public RestClient[] RestClients
+        {
+            get
+            {
+                EnsureClients();
+                return _restClients!;
+            }
+        }
+
+        public Client[] Clients
+        {
+            get
+            {
+                EnsureClients();
+                return _clients!;
+            }
+        }
 
         public ISchemaType FindTypeForSchema(Schema schema)
         {
@@ -33,11 +50,14 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
         private Dictionary<Schema, ISchemaType> SchemaMap => _models ??= BuildModels();
 
-        private Client[] BuildClients()
+        private void EnsureClients()
         {
             var clientBuilder = new ClientBuilder(_context);
 
-            return _codeModel.OperationGroups.Select(clientBuilder.BuildClient).ToArray();
+            var allClients = _codeModel.OperationGroups.Select(clientBuilder.BuildClient).ToArray();
+
+            _clients = allClients.Select(c => c.Client).ToArray();
+            _restClients = allClients.Select(c => c.RestClient).ToArray();
         }
 
         private Dictionary<Schema, ISchemaType> BuildModels()

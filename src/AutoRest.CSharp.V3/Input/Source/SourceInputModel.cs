@@ -10,18 +10,24 @@ namespace AutoRest.CSharp.V3.Input.Source
     public class SourceInputModel
     {
         public SourceInputModel(
-            SourceTypeMapping[] definedSchemaTypes)
+            ModelTypeMapping[] definedSchemaTypes,
+            ClientTypeMapping[] definedClientTypes)
         {
             DefinedSchemaTypes = definedSchemaTypes;
+            DefinedClientTypes = definedClientTypes;
         }
 
-        public SourceTypeMapping[] DefinedSchemaTypes { get; }
+        public ModelTypeMapping[] DefinedSchemaTypes { get; }
+        public ClientTypeMapping[] DefinedClientTypes { get; }
 
-        public SourceTypeMapping? FindForSchema(string name) => FindByName(DefinedSchemaTypes, name);
-
-        private static SourceTypeMapping FindByName(IEnumerable<SourceTypeMapping> sourceTypes, string name)
+        public ModelTypeMapping? FindForSchema(string name)
         {
-            return sourceTypes.SingleOrDefault(s => string.Compare(s.SchemaName, name, StringComparison.InvariantCultureIgnoreCase) == 0);
+            return DefinedSchemaTypes.SingleOrDefault(s => string.Compare(s.SchemaName, name, StringComparison.InvariantCultureIgnoreCase) == 0);
+        }
+
+        public ClientTypeMapping? FindForOperationGroup(string name)
+        {
+            return DefinedClientTypes.SingleOrDefault(s => string.Compare(s.OperationGroupName, name, StringComparison.InvariantCultureIgnoreCase) == 0);
         }
     }
 }
