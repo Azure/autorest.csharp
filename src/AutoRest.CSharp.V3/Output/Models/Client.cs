@@ -9,7 +9,7 @@ namespace AutoRest.CSharp.V3.Output.Models
 {
     internal class Client: ITypeProvider
     {
-        public Client(TypeDeclarationOptions declaredType, string description, RestClient restClient, ClientMethod[] methods, PagingMethods[] pagingMethods, LongRunningOperation[] longRunningOperationMethods)
+        public Client(TypeDeclarationOptions declaredType, string description, RestClient restClient, ClientMethod[] methods, PagingInfo[] pagingMethods, LongRunningOperation[] longRunningOperationMethods)
         {
             DeclaredType = declaredType;
             Description = description;

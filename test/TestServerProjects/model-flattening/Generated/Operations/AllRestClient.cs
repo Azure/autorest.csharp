@@ -59,12 +59,7 @@ namespace model_flattening
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutArrayAsync(IEnumerable<Resource> resourceArray, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/model-flattening/Generated/Operations/AllRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("AllClient.PutArray");
-=======
-            using var scope = clientDiagnostics.CreateScope("AllOperations.PutArray");
->>>>>>> feature/v3:test/TestServerProjects/model-flattening/Generated/Operations/AllOperations.cs
             scope.Start();
             try
             {
@@ -89,12 +84,7 @@ namespace model_flattening
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutArray(IEnumerable<Resource> resourceArray, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/model-flattening/Generated/Operations/AllRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("AllClient.PutArray");
-=======
-            using var scope = clientDiagnostics.CreateScope("AllOperations.PutArray");
->>>>>>> feature/v3:test/TestServerProjects/model-flattening/Generated/Operations/AllOperations.cs
             scope.Start();
             try
             {
@@ -214,12 +204,7 @@ namespace model_flattening
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutWrappedArrayAsync(IEnumerable<WrappedProduct> resourceArray, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/model-flattening/Generated/Operations/AllRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("AllClient.PutWrappedArray");
-=======
-            using var scope = clientDiagnostics.CreateScope("AllOperations.PutWrappedArray");
->>>>>>> feature/v3:test/TestServerProjects/model-flattening/Generated/Operations/AllOperations.cs
             scope.Start();
             try
             {
@@ -244,12 +229,7 @@ namespace model_flattening
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutWrappedArray(IEnumerable<WrappedProduct> resourceArray, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/model-flattening/Generated/Operations/AllRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("AllClient.PutWrappedArray");
-=======
-            using var scope = clientDiagnostics.CreateScope("AllOperations.PutWrappedArray");
->>>>>>> feature/v3:test/TestServerProjects/model-flattening/Generated/Operations/AllOperations.cs
             scope.Start();
             try
             {
@@ -370,12 +350,7 @@ namespace model_flattening
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutDictionaryAsync(IDictionary<string, FlattenedProduct> resourceDictionary, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/model-flattening/Generated/Operations/AllRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("AllClient.PutDictionary");
-=======
-            using var scope = clientDiagnostics.CreateScope("AllOperations.PutDictionary");
->>>>>>> feature/v3:test/TestServerProjects/model-flattening/Generated/Operations/AllOperations.cs
             scope.Start();
             try
             {
@@ -400,12 +375,7 @@ namespace model_flattening
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutDictionary(IDictionary<string, FlattenedProduct> resourceDictionary, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/model-flattening/Generated/Operations/AllRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("AllClient.PutDictionary");
-=======
-            using var scope = clientDiagnostics.CreateScope("AllOperations.PutDictionary");
->>>>>>> feature/v3:test/TestServerProjects/model-flattening/Generated/Operations/AllOperations.cs
             scope.Start();
             try
             {
@@ -520,12 +490,7 @@ namespace model_flattening
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutResourceCollectionAsync(ResourceCollection resourceComplexObject, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/model-flattening/Generated/Operations/AllRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("AllClient.PutResourceCollection");
-=======
-            using var scope = clientDiagnostics.CreateScope("AllOperations.PutResourceCollection");
->>>>>>> feature/v3:test/TestServerProjects/model-flattening/Generated/Operations/AllOperations.cs
             scope.Start();
             try
             {
@@ -550,12 +515,7 @@ namespace model_flattening
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutResourceCollection(ResourceCollection resourceComplexObject, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/model-flattening/Generated/Operations/AllRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("AllClient.PutResourceCollection");
-=======
-            using var scope = clientDiagnostics.CreateScope("AllOperations.PutResourceCollection");
->>>>>>> feature/v3:test/TestServerProjects/model-flattening/Generated/Operations/AllOperations.cs
             scope.Start();
             try
             {
@@ -662,12 +622,7 @@ namespace model_flattening
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<SimpleProduct>> PutSimpleProductAsync(SimpleProduct simpleBodyProduct, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/model-flattening/Generated/Operations/AllRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("AllClient.PutSimpleProduct");
-=======
-            using var scope = clientDiagnostics.CreateScope("AllOperations.PutSimpleProduct");
->>>>>>> feature/v3:test/TestServerProjects/model-flattening/Generated/Operations/AllOperations.cs
             scope.Start();
             try
             {
@@ -696,12 +651,7 @@ namespace model_flattening
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<SimpleProduct> PutSimpleProduct(SimpleProduct simpleBodyProduct, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/model-flattening/Generated/Operations/AllRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("AllClient.PutSimpleProduct");
-=======
-            using var scope = clientDiagnostics.CreateScope("AllOperations.PutSimpleProduct");
->>>>>>> feature/v3:test/TestServerProjects/model-flattening/Generated/Operations/AllOperations.cs
             scope.Start();
             try
             {
@@ -745,12 +695,7 @@ namespace model_flattening
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<SimpleProduct>> PostFlattenedSimpleProductAsync(SimpleProduct simpleBodyProduct, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/model-flattening/Generated/Operations/AllRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("AllClient.PostFlattenedSimpleProduct");
-=======
-            using var scope = clientDiagnostics.CreateScope("AllOperations.PostFlattenedSimpleProduct");
->>>>>>> feature/v3:test/TestServerProjects/model-flattening/Generated/Operations/AllOperations.cs
             scope.Start();
             try
             {
@@ -779,12 +724,7 @@ namespace model_flattening
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<SimpleProduct> PostFlattenedSimpleProduct(SimpleProduct simpleBodyProduct, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/model-flattening/Generated/Operations/AllRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("AllClient.PostFlattenedSimpleProduct");
-=======
-            using var scope = clientDiagnostics.CreateScope("AllOperations.PostFlattenedSimpleProduct");
->>>>>>> feature/v3:test/TestServerProjects/model-flattening/Generated/Operations/AllOperations.cs
             scope.Start();
             try
             {

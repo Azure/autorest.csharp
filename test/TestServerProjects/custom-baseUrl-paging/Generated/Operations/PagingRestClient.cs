@@ -365,8 +365,6 @@ namespace custom_baseUrl_paging
                 throw;
             }
         }
-<<<<<<< HEAD:test/TestServerProjects/custom-baseUrl-paging/Generated/Operations/PagingRestClient.cs
-=======
         internal HttpMessage CreateGetPagesPartialUrlOperationNextNextPageRequest(string nextLink)
         {
             var message = pipeline.CreateMessage();
@@ -387,7 +385,7 @@ namespace custom_baseUrl_paging
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingOperations.GetPagesPartialUrlOperationNext");
+            using var scope = clientDiagnostics.CreateScope("PagingClient.GetPagesPartialUrlOperationNext");
             scope.Start();
             try
             {
@@ -421,7 +419,7 @@ namespace custom_baseUrl_paging
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingOperations.GetPagesPartialUrlOperationNext");
+            using var scope = clientDiagnostics.CreateScope("PagingClient.GetPagesPartialUrlOperationNext");
             scope.Start();
             try
             {
@@ -445,148 +443,5 @@ namespace custom_baseUrl_paging
                 throw;
             }
         }
-        /// <summary> A paging operation that combines custom url, paging and partial URL and expect to concat after host. </summary>
-        /// <param name="accountName"> Account Name. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public AsyncPageable<Product> GetPagesPartialUrlPageableAsync(string accountName, CancellationToken cancellationToken = default)
-        {
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
-
-            async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
-            {
-                var response = await GetPagesPartialUrlAsync(accountName, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
-            }
-            async Task<Page<Product>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                var response = await GetPagesPartialUrlNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
-        }
-        /// <summary> A paging operation that combines custom url, paging and partial URL and expect to concat after host. </summary>
-        /// <param name="accountName"> Account Name. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Pageable<Product> GetPagesPartialUrlPageable(string accountName, CancellationToken cancellationToken = default)
-        {
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
-
-            Page<Product> FirstPageFunc(int? pageSizeHint)
-            {
-                var response = GetPagesPartialUrl(accountName, cancellationToken);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
-            }
-            Page<Product> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                var response = GetPagesPartialUrlNextPage(nextLink, cancellationToken);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
-        }
-        /// <summary> A paging operation that combines custom url, paging and partial URL with next operation. </summary>
-        /// <param name="accountName"> Account Name. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public AsyncPageable<Product> GetPagesPartialUrlOperationPageableAsync(string accountName, CancellationToken cancellationToken = default)
-        {
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
-
-            async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
-            {
-                var response = await GetPagesPartialUrlOperationAsync(accountName, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
-            }
-            async Task<Page<Product>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                var response = await GetPagesPartialUrlOperationNextAsync(accountName, nextLink, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
-        }
-        /// <summary> A paging operation that combines custom url, paging and partial URL with next operation. </summary>
-        /// <param name="accountName"> Account Name. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Pageable<Product> GetPagesPartialUrlOperationPageable(string accountName, CancellationToken cancellationToken = default)
-        {
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
-
-            Page<Product> FirstPageFunc(int? pageSizeHint)
-            {
-                var response = GetPagesPartialUrlOperation(accountName, cancellationToken);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
-            }
-            Page<Product> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                var response = GetPagesPartialUrlOperationNext(accountName, nextLink, cancellationToken);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
-        }
-        /// <summary> A paging operation that combines custom url, paging and partial URL. </summary>
-        /// <param name="accountName"> Account Name. </param>
-        /// <param name="nextLink"> Next link for the list operation. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public AsyncPageable<Product> GetPagesPartialUrlOperationNextPageableAsync(string accountName, string nextLink, CancellationToken cancellationToken = default)
-        {
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
-            {
-                var response = await GetPagesPartialUrlOperationNextAsync(accountName, nextLink, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
-            }
-            async Task<Page<Product>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                var response = await GetPagesPartialUrlOperationNextNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
-        }
-        /// <summary> A paging operation that combines custom url, paging and partial URL. </summary>
-        /// <param name="accountName"> Account Name. </param>
-        /// <param name="nextLink"> Next link for the list operation. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Pageable<Product> GetPagesPartialUrlOperationNextPageable(string accountName, string nextLink, CancellationToken cancellationToken = default)
-        {
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            Page<Product> FirstPageFunc(int? pageSizeHint)
-            {
-                var response = GetPagesPartialUrlOperationNext(accountName, nextLink, cancellationToken);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
-            }
-            Page<Product> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                var response = GetPagesPartialUrlOperationNextNextPage(nextLink, cancellationToken);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
-        }
->>>>>>> feature/v3:test/TestServerProjects/custom-baseUrl-paging/Generated/Operations/PagingOperations.cs
     }
 }

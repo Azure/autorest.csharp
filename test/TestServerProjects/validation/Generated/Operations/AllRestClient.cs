@@ -305,12 +305,7 @@ namespace validation
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Product>> PostWithConstantInBodyAsync(Product body, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/validation/Generated/Operations/AllRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("AllClient.PostWithConstantInBody");
-=======
-            using var scope = clientDiagnostics.CreateScope("AllOperations.PostWithConstantInBody");
->>>>>>> feature/v3:test/TestServerProjects/validation/Generated/Operations/AllOperations.cs
             scope.Start();
             try
             {
@@ -338,12 +333,7 @@ namespace validation
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Product> PostWithConstantInBody(Product body, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/validation/Generated/Operations/AllRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("AllClient.PostWithConstantInBody");
-=======
-            using var scope = clientDiagnostics.CreateScope("AllOperations.PostWithConstantInBody");
->>>>>>> feature/v3:test/TestServerProjects/validation/Generated/Operations/AllOperations.cs
             scope.Start();
             try
             {

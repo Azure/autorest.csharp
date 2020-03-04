@@ -454,12 +454,7 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutMax32Async(int intBody, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/body-integer/Generated/Operations/IntRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("IntClient.PutMax32");
-=======
-            using var scope = clientDiagnostics.CreateScope("IntOperations.PutMax32");
->>>>>>> feature/v3:test/TestServerProjects/body-integer/Generated/Operations/IntOperations.cs
             scope.Start();
             try
             {
@@ -484,12 +479,7 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutMax32(int intBody, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/body-integer/Generated/Operations/IntRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("IntClient.PutMax32");
-=======
-            using var scope = clientDiagnostics.CreateScope("IntOperations.PutMax32");
->>>>>>> feature/v3:test/TestServerProjects/body-integer/Generated/Operations/IntOperations.cs
             scope.Start();
             try
             {
@@ -529,12 +519,7 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutMax64Async(long intBody, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/body-integer/Generated/Operations/IntRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("IntClient.PutMax64");
-=======
-            using var scope = clientDiagnostics.CreateScope("IntOperations.PutMax64");
->>>>>>> feature/v3:test/TestServerProjects/body-integer/Generated/Operations/IntOperations.cs
             scope.Start();
             try
             {
@@ -559,12 +544,7 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutMax64(long intBody, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/body-integer/Generated/Operations/IntRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("IntClient.PutMax64");
-=======
-            using var scope = clientDiagnostics.CreateScope("IntOperations.PutMax64");
->>>>>>> feature/v3:test/TestServerProjects/body-integer/Generated/Operations/IntOperations.cs
             scope.Start();
             try
             {
@@ -604,12 +584,7 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutMin32Async(int intBody, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/body-integer/Generated/Operations/IntRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("IntClient.PutMin32");
-=======
-            using var scope = clientDiagnostics.CreateScope("IntOperations.PutMin32");
->>>>>>> feature/v3:test/TestServerProjects/body-integer/Generated/Operations/IntOperations.cs
             scope.Start();
             try
             {
@@ -634,12 +609,7 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutMin32(int intBody, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/body-integer/Generated/Operations/IntRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("IntClient.PutMin32");
-=======
-            using var scope = clientDiagnostics.CreateScope("IntOperations.PutMin32");
->>>>>>> feature/v3:test/TestServerProjects/body-integer/Generated/Operations/IntOperations.cs
             scope.Start();
             try
             {
@@ -679,12 +649,7 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutMin64Async(long intBody, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/body-integer/Generated/Operations/IntRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("IntClient.PutMin64");
-=======
-            using var scope = clientDiagnostics.CreateScope("IntOperations.PutMin64");
->>>>>>> feature/v3:test/TestServerProjects/body-integer/Generated/Operations/IntOperations.cs
             scope.Start();
             try
             {
@@ -709,12 +674,7 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutMin64(long intBody, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/body-integer/Generated/Operations/IntRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("IntClient.PutMin64");
-=======
-            using var scope = clientDiagnostics.CreateScope("IntOperations.PutMin64");
->>>>>>> feature/v3:test/TestServerProjects/body-integer/Generated/Operations/IntOperations.cs
             scope.Start();
             try
             {
@@ -821,12 +781,7 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutUnixTimeDateAsync(DateTimeOffset intBody, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/body-integer/Generated/Operations/IntRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("IntClient.PutUnixTimeDate");
-=======
-            using var scope = clientDiagnostics.CreateScope("IntOperations.PutUnixTimeDate");
->>>>>>> feature/v3:test/TestServerProjects/body-integer/Generated/Operations/IntOperations.cs
             scope.Start();
             try
             {
@@ -851,12 +806,7 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutUnixTimeDate(DateTimeOffset intBody, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/body-integer/Generated/Operations/IntRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("IntClient.PutUnixTimeDate");
-=======
-            using var scope = clientDiagnostics.CreateScope("IntOperations.PutUnixTimeDate");
->>>>>>> feature/v3:test/TestServerProjects/body-integer/Generated/Operations/IntOperations.cs
             scope.Start();
             try
             {

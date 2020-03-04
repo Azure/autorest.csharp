@@ -173,12 +173,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetBooleanNullAsync(bool? boolQuery, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url/Generated/Operations/QueriesRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("QueriesClient.GetBooleanNull");
-=======
-            using var scope = clientDiagnostics.CreateScope("QueriesOperations.GetBooleanNull");
->>>>>>> feature/v3:test/TestServerProjects/url/Generated/Operations/QueriesOperations.cs
             scope.Start();
             try
             {
@@ -203,12 +198,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetBooleanNull(bool? boolQuery, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url/Generated/Operations/QueriesRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("QueriesClient.GetBooleanNull");
-=======
-            using var scope = clientDiagnostics.CreateScope("QueriesOperations.GetBooleanNull");
->>>>>>> feature/v3:test/TestServerProjects/url/Generated/Operations/QueriesOperations.cs
             scope.Start();
             try
             {
@@ -368,12 +358,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetIntNullAsync(int? intQuery, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url/Generated/Operations/QueriesRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("QueriesClient.GetIntNull");
-=======
-            using var scope = clientDiagnostics.CreateScope("QueriesOperations.GetIntNull");
->>>>>>> feature/v3:test/TestServerProjects/url/Generated/Operations/QueriesOperations.cs
             scope.Start();
             try
             {
@@ -398,12 +383,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetIntNull(int? intQuery, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url/Generated/Operations/QueriesRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("QueriesClient.GetIntNull");
-=======
-            using var scope = clientDiagnostics.CreateScope("QueriesOperations.GetIntNull");
->>>>>>> feature/v3:test/TestServerProjects/url/Generated/Operations/QueriesOperations.cs
             scope.Start();
             try
             {
@@ -563,12 +543,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetLongNullAsync(long? longQuery, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url/Generated/Operations/QueriesRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("QueriesClient.GetLongNull");
-=======
-            using var scope = clientDiagnostics.CreateScope("QueriesOperations.GetLongNull");
->>>>>>> feature/v3:test/TestServerProjects/url/Generated/Operations/QueriesOperations.cs
             scope.Start();
             try
             {
@@ -593,12 +568,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetLongNull(long? longQuery, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url/Generated/Operations/QueriesRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("QueriesClient.GetLongNull");
-=======
-            using var scope = clientDiagnostics.CreateScope("QueriesOperations.GetLongNull");
->>>>>>> feature/v3:test/TestServerProjects/url/Generated/Operations/QueriesOperations.cs
             scope.Start();
             try
             {
@@ -758,12 +728,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> FloatNullAsync(float? floatQuery, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url/Generated/Operations/QueriesRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("QueriesClient.FloatNull");
-=======
-            using var scope = clientDiagnostics.CreateScope("QueriesOperations.FloatNull");
->>>>>>> feature/v3:test/TestServerProjects/url/Generated/Operations/QueriesOperations.cs
             scope.Start();
             try
             {
@@ -788,12 +753,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response FloatNull(float? floatQuery, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url/Generated/Operations/QueriesRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("QueriesClient.FloatNull");
-=======
-            using var scope = clientDiagnostics.CreateScope("QueriesOperations.FloatNull");
->>>>>>> feature/v3:test/TestServerProjects/url/Generated/Operations/QueriesOperations.cs
             scope.Start();
             try
             {
@@ -953,12 +913,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> DoubleNullAsync(double? doubleQuery, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url/Generated/Operations/QueriesRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("QueriesClient.DoubleNull");
-=======
-            using var scope = clientDiagnostics.CreateScope("QueriesOperations.DoubleNull");
->>>>>>> feature/v3:test/TestServerProjects/url/Generated/Operations/QueriesOperations.cs
             scope.Start();
             try
             {
@@ -983,12 +938,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response DoubleNull(double? doubleQuery, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url/Generated/Operations/QueriesRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("QueriesClient.DoubleNull");
-=======
-            using var scope = clientDiagnostics.CreateScope("QueriesOperations.DoubleNull");
->>>>>>> feature/v3:test/TestServerProjects/url/Generated/Operations/QueriesOperations.cs
             scope.Start();
             try
             {
@@ -1208,12 +1158,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> StringNullAsync(string stringQuery, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url/Generated/Operations/QueriesRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("QueriesClient.StringNull");
-=======
-            using var scope = clientDiagnostics.CreateScope("QueriesOperations.StringNull");
->>>>>>> feature/v3:test/TestServerProjects/url/Generated/Operations/QueriesOperations.cs
             scope.Start();
             try
             {
@@ -1238,12 +1183,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response StringNull(string stringQuery, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url/Generated/Operations/QueriesRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("QueriesClient.StringNull");
-=======
-            using var scope = clientDiagnostics.CreateScope("QueriesOperations.StringNull");
->>>>>>> feature/v3:test/TestServerProjects/url/Generated/Operations/QueriesOperations.cs
             scope.Start();
             try
             {
@@ -1283,12 +1223,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> EnumValidAsync(UriColor? enumQuery, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url/Generated/Operations/QueriesRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("QueriesClient.EnumValid");
-=======
-            using var scope = clientDiagnostics.CreateScope("QueriesOperations.EnumValid");
->>>>>>> feature/v3:test/TestServerProjects/url/Generated/Operations/QueriesOperations.cs
             scope.Start();
             try
             {
@@ -1313,12 +1248,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response EnumValid(UriColor? enumQuery, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url/Generated/Operations/QueriesRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("QueriesClient.EnumValid");
-=======
-            using var scope = clientDiagnostics.CreateScope("QueriesOperations.EnumValid");
->>>>>>> feature/v3:test/TestServerProjects/url/Generated/Operations/QueriesOperations.cs
             scope.Start();
             try
             {
@@ -1358,12 +1288,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> EnumNullAsync(UriColor? enumQuery, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url/Generated/Operations/QueriesRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("QueriesClient.EnumNull");
-=======
-            using var scope = clientDiagnostics.CreateScope("QueriesOperations.EnumNull");
->>>>>>> feature/v3:test/TestServerProjects/url/Generated/Operations/QueriesOperations.cs
             scope.Start();
             try
             {
@@ -1388,12 +1313,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response EnumNull(UriColor? enumQuery, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url/Generated/Operations/QueriesRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("QueriesClient.EnumNull");
-=======
-            using var scope = clientDiagnostics.CreateScope("QueriesOperations.EnumNull");
->>>>>>> feature/v3:test/TestServerProjects/url/Generated/Operations/QueriesOperations.cs
             scope.Start();
             try
             {
@@ -1433,12 +1353,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> ByteMultiByteAsync(byte[] byteQuery, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url/Generated/Operations/QueriesRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ByteMultiByte");
-=======
-            using var scope = clientDiagnostics.CreateScope("QueriesOperations.ByteMultiByte");
->>>>>>> feature/v3:test/TestServerProjects/url/Generated/Operations/QueriesOperations.cs
             scope.Start();
             try
             {
@@ -1463,12 +1378,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response ByteMultiByte(byte[] byteQuery, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url/Generated/Operations/QueriesRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ByteMultiByte");
-=======
-            using var scope = clientDiagnostics.CreateScope("QueriesOperations.ByteMultiByte");
->>>>>>> feature/v3:test/TestServerProjects/url/Generated/Operations/QueriesOperations.cs
             scope.Start();
             try
             {
@@ -1568,12 +1478,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> ByteNullAsync(byte[] byteQuery, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url/Generated/Operations/QueriesRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ByteNull");
-=======
-            using var scope = clientDiagnostics.CreateScope("QueriesOperations.ByteNull");
->>>>>>> feature/v3:test/TestServerProjects/url/Generated/Operations/QueriesOperations.cs
             scope.Start();
             try
             {
@@ -1598,12 +1503,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response ByteNull(byte[] byteQuery, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url/Generated/Operations/QueriesRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ByteNull");
-=======
-            using var scope = clientDiagnostics.CreateScope("QueriesOperations.ByteNull");
->>>>>>> feature/v3:test/TestServerProjects/url/Generated/Operations/QueriesOperations.cs
             scope.Start();
             try
             {
@@ -1703,12 +1603,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> DateNullAsync(DateTimeOffset? dateQuery, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url/Generated/Operations/QueriesRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("QueriesClient.DateNull");
-=======
-            using var scope = clientDiagnostics.CreateScope("QueriesOperations.DateNull");
->>>>>>> feature/v3:test/TestServerProjects/url/Generated/Operations/QueriesOperations.cs
             scope.Start();
             try
             {
@@ -1733,12 +1628,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response DateNull(DateTimeOffset? dateQuery, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url/Generated/Operations/QueriesRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("QueriesClient.DateNull");
-=======
-            using var scope = clientDiagnostics.CreateScope("QueriesOperations.DateNull");
->>>>>>> feature/v3:test/TestServerProjects/url/Generated/Operations/QueriesOperations.cs
             scope.Start();
             try
             {
@@ -1838,12 +1728,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> DateTimeNullAsync(DateTimeOffset? dateTimeQuery, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url/Generated/Operations/QueriesRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("QueriesClient.DateTimeNull");
-=======
-            using var scope = clientDiagnostics.CreateScope("QueriesOperations.DateTimeNull");
->>>>>>> feature/v3:test/TestServerProjects/url/Generated/Operations/QueriesOperations.cs
             scope.Start();
             try
             {
@@ -1868,12 +1753,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response DateTimeNull(DateTimeOffset? dateTimeQuery, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url/Generated/Operations/QueriesRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("QueriesClient.DateTimeNull");
-=======
-            using var scope = clientDiagnostics.CreateScope("QueriesOperations.DateTimeNull");
->>>>>>> feature/v3:test/TestServerProjects/url/Generated/Operations/QueriesOperations.cs
             scope.Start();
             try
             {
@@ -1913,12 +1793,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> ArrayStringCsvValidAsync(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url/Generated/Operations/QueriesRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvValid");
-=======
-            using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringCsvValid");
->>>>>>> feature/v3:test/TestServerProjects/url/Generated/Operations/QueriesOperations.cs
             scope.Start();
             try
             {
@@ -1943,12 +1818,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response ArrayStringCsvValid(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url/Generated/Operations/QueriesRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvValid");
-=======
-            using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringCsvValid");
->>>>>>> feature/v3:test/TestServerProjects/url/Generated/Operations/QueriesOperations.cs
             scope.Start();
             try
             {
@@ -1988,12 +1858,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> ArrayStringCsvNullAsync(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url/Generated/Operations/QueriesRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvNull");
-=======
-            using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringCsvNull");
->>>>>>> feature/v3:test/TestServerProjects/url/Generated/Operations/QueriesOperations.cs
             scope.Start();
             try
             {
@@ -2018,12 +1883,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response ArrayStringCsvNull(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url/Generated/Operations/QueriesRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvNull");
-=======
-            using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringCsvNull");
->>>>>>> feature/v3:test/TestServerProjects/url/Generated/Operations/QueriesOperations.cs
             scope.Start();
             try
             {
@@ -2063,12 +1923,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> ArrayStringCsvEmptyAsync(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url/Generated/Operations/QueriesRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvEmpty");
-=======
-            using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringCsvEmpty");
->>>>>>> feature/v3:test/TestServerProjects/url/Generated/Operations/QueriesOperations.cs
             scope.Start();
             try
             {
@@ -2093,12 +1948,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response ArrayStringCsvEmpty(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url/Generated/Operations/QueriesRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvEmpty");
-=======
-            using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringCsvEmpty");
->>>>>>> feature/v3:test/TestServerProjects/url/Generated/Operations/QueriesOperations.cs
             scope.Start();
             try
             {
@@ -2138,12 +1988,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> ArrayStringSsvValidAsync(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url/Generated/Operations/QueriesRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringSsvValid");
-=======
-            using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringSsvValid");
->>>>>>> feature/v3:test/TestServerProjects/url/Generated/Operations/QueriesOperations.cs
             scope.Start();
             try
             {
@@ -2168,12 +2013,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response ArrayStringSsvValid(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url/Generated/Operations/QueriesRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringSsvValid");
-=======
-            using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringSsvValid");
->>>>>>> feature/v3:test/TestServerProjects/url/Generated/Operations/QueriesOperations.cs
             scope.Start();
             try
             {
@@ -2213,12 +2053,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> ArrayStringTsvValidAsync(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url/Generated/Operations/QueriesRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringTsvValid");
-=======
-            using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringTsvValid");
->>>>>>> feature/v3:test/TestServerProjects/url/Generated/Operations/QueriesOperations.cs
             scope.Start();
             try
             {
@@ -2243,12 +2078,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response ArrayStringTsvValid(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url/Generated/Operations/QueriesRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringTsvValid");
-=======
-            using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringTsvValid");
->>>>>>> feature/v3:test/TestServerProjects/url/Generated/Operations/QueriesOperations.cs
             scope.Start();
             try
             {
@@ -2288,12 +2118,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> ArrayStringPipesValidAsync(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url/Generated/Operations/QueriesRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringPipesValid");
-=======
-            using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringPipesValid");
->>>>>>> feature/v3:test/TestServerProjects/url/Generated/Operations/QueriesOperations.cs
             scope.Start();
             try
             {
@@ -2318,12 +2143,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response ArrayStringPipesValid(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url/Generated/Operations/QueriesRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringPipesValid");
-=======
-            using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringPipesValid");
->>>>>>> feature/v3:test/TestServerProjects/url/Generated/Operations/QueriesOperations.cs
             scope.Start();
             try
             {

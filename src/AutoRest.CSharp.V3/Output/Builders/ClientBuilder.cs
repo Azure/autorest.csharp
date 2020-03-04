@@ -64,12 +64,12 @@ namespace AutoRest.CSharp.V3.Output.Builders
             List<PagingInfo> pagingMethods = new List<PagingInfo>();
             List<LongRunningOperation> longRunningOperationMethods = new List<LongRunningOperation>();
             List<ClientMethod> clientMethods = new List<ClientMethod>();
-            foreach ((string operationName, (Operation operation, Method method)) in operationMethods)
+            foreach ((string operationName, (Operation operation, RestClientMethod method)) in operationMethods)
             {
                 Paging? paging = operation.Language.Default.Paging;
                 if (paging != null)
                 {
-                    Method? next = null;
+                    RestClientMethod? next = null;
                     if (paging.NextLinkOperation != null)
                     {
                         //TODO: This assumes the operation is within this operationGroup
@@ -110,9 +110,8 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 bool longRunningOperation = Convert.ToBoolean(operation.Extensions.GetValue<string>("x-ms-long-running-operation") ?? "false");
                 if (longRunningOperation)
                 {
-                    Method method = processed.Method;
                     Response originalResponse = method.Response;
-                    processedMethods[processedName].Method = new Method(
+                    operationMethods[operationName].Method = new RestClientMethod(
                         method.Name,
                         method.Description,
                         method.Request,
@@ -130,13 +129,13 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 }
 
                 clientMethods.Add(new ClientMethod(
-                    processed.Operation.CSharpName(),
-                    processed.Method,
-                    BuilderHelpers.EscapeXmlDescription(processed.Operation.Language.Default.Description)
+                    operation.CSharpName(),
+                    method,
+                    BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description)
                 ));
             }
 
-            RestClientMethod[] methods = processedMethods.Select(om => om.Value.Method).Concat(nextPageMethods).ToArray();
+            RestClientMethod[] methods = operationMethods.Select(om => om.Value.Method).Concat(nextPageMethods).ToArray();
 
             var restClient = new RestClient(
                 BuilderHelpers.CreateTypeAttributes(GetClientName(operationGroup, "RestClient"), _context.DefaultNamespace, "internal"),
@@ -177,7 +176,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 Method = method;
             }
 
-            public void Deconstruct(out Operation operation, out Method method)
+            public void Deconstruct(out Operation operation, out RestClientMethod method)
             {
                 operation = Operation;
                 method = Method;
@@ -349,7 +348,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 method.Diagnostics);
         }
 
-        private PagingInfo GetClientMethodPaging(RestClientMethod method, RestClientMethod nextPageMethod, IDictionary<object, object> pageable, ObjectType type)
+        private PagingInfo GetPagingInfo(RestClientMethod method, RestClientMethod nextPageMethod, Paging paging, ObjectType type)
         {
             string? nextLinkName = paging.NextLinkName;
             string itemName = paging.ItemName ?? "value";

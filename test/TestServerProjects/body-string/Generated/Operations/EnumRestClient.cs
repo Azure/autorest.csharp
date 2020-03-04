@@ -120,12 +120,7 @@ namespace body_string
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutNotExpandableAsync(Colors stringBody, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/body-string/Generated/Operations/EnumRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("EnumClient.PutNotExpandable");
-=======
-            using var scope = clientDiagnostics.CreateScope("EnumOperations.PutNotExpandable");
->>>>>>> feature/v3:test/TestServerProjects/body-string/Generated/Operations/EnumOperations.cs
             scope.Start();
             try
             {
@@ -150,12 +145,7 @@ namespace body_string
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutNotExpandable(Colors stringBody, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/body-string/Generated/Operations/EnumRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("EnumClient.PutNotExpandable");
-=======
-            using var scope = clientDiagnostics.CreateScope("EnumOperations.PutNotExpandable");
->>>>>>> feature/v3:test/TestServerProjects/body-string/Generated/Operations/EnumOperations.cs
             scope.Start();
             try
             {
@@ -262,12 +252,7 @@ namespace body_string
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutReferencedAsync(Colors enumStringBody, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/body-string/Generated/Operations/EnumRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("EnumClient.PutReferenced");
-=======
-            using var scope = clientDiagnostics.CreateScope("EnumOperations.PutReferenced");
->>>>>>> feature/v3:test/TestServerProjects/body-string/Generated/Operations/EnumOperations.cs
             scope.Start();
             try
             {
@@ -292,12 +277,7 @@ namespace body_string
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutReferenced(Colors enumStringBody, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/body-string/Generated/Operations/EnumRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("EnumClient.PutReferenced");
-=======
-            using var scope = clientDiagnostics.CreateScope("EnumOperations.PutReferenced");
->>>>>>> feature/v3:test/TestServerProjects/body-string/Generated/Operations/EnumOperations.cs
             scope.Start();
             try
             {

@@ -962,12 +962,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> EnumValidAsync(UriColor enumPath, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url/Generated/Operations/PathsRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("PathsClient.EnumValid");
-=======
-            using var scope = clientDiagnostics.CreateScope("PathsOperations.EnumValid");
->>>>>>> feature/v3:test/TestServerProjects/url/Generated/Operations/PathsOperations.cs
             scope.Start();
             try
             {
@@ -992,12 +987,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response EnumValid(UriColor enumPath, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url/Generated/Operations/PathsRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("PathsClient.EnumValid");
-=======
-            using var scope = clientDiagnostics.CreateScope("PathsOperations.EnumValid");
->>>>>>> feature/v3:test/TestServerProjects/url/Generated/Operations/PathsOperations.cs
             scope.Start();
             try
             {
@@ -1034,12 +1024,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> EnumNullAsync(UriColor enumPath, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url/Generated/Operations/PathsRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("PathsClient.EnumNull");
-=======
-            using var scope = clientDiagnostics.CreateScope("PathsOperations.EnumNull");
->>>>>>> feature/v3:test/TestServerProjects/url/Generated/Operations/PathsOperations.cs
             scope.Start();
             try
             {
@@ -1064,12 +1049,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response EnumNull(UriColor enumPath, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url/Generated/Operations/PathsRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("PathsClient.EnumNull");
-=======
-            using var scope = clientDiagnostics.CreateScope("PathsOperations.EnumNull");
->>>>>>> feature/v3:test/TestServerProjects/url/Generated/Operations/PathsOperations.cs
             scope.Start();
             try
             {
@@ -1370,12 +1350,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> DateNullAsync(DateTimeOffset datePath, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url/Generated/Operations/PathsRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("PathsClient.DateNull");
-=======
-            using var scope = clientDiagnostics.CreateScope("PathsOperations.DateNull");
->>>>>>> feature/v3:test/TestServerProjects/url/Generated/Operations/PathsOperations.cs
             scope.Start();
             try
             {
@@ -1400,12 +1375,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response DateNull(DateTimeOffset datePath, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url/Generated/Operations/PathsRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("PathsClient.DateNull");
-=======
-            using var scope = clientDiagnostics.CreateScope("PathsOperations.DateNull");
->>>>>>> feature/v3:test/TestServerProjects/url/Generated/Operations/PathsOperations.cs
             scope.Start();
             try
             {
@@ -1502,12 +1472,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> DateTimeNullAsync(DateTimeOffset dateTimePath, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url/Generated/Operations/PathsRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("PathsClient.DateTimeNull");
-=======
-            using var scope = clientDiagnostics.CreateScope("PathsOperations.DateTimeNull");
->>>>>>> feature/v3:test/TestServerProjects/url/Generated/Operations/PathsOperations.cs
             scope.Start();
             try
             {
@@ -1532,12 +1497,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response DateTimeNull(DateTimeOffset dateTimePath, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url/Generated/Operations/PathsRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("PathsClient.DateTimeNull");
-=======
-            using var scope = clientDiagnostics.CreateScope("PathsOperations.DateTimeNull");
->>>>>>> feature/v3:test/TestServerProjects/url/Generated/Operations/PathsOperations.cs
             scope.Start();
             try
             {
@@ -1718,12 +1678,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> UnixTimeUrlAsync(DateTimeOffset unixTimeUrlPath, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url/Generated/Operations/PathsRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("PathsClient.UnixTimeUrl");
-=======
-            using var scope = clientDiagnostics.CreateScope("PathsOperations.UnixTimeUrl");
->>>>>>> feature/v3:test/TestServerProjects/url/Generated/Operations/PathsOperations.cs
             scope.Start();
             try
             {
@@ -1748,12 +1703,7 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response UnixTimeUrl(DateTimeOffset unixTimeUrlPath, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url/Generated/Operations/PathsRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("PathsClient.UnixTimeUrl");
-=======
-            using var scope = clientDiagnostics.CreateScope("PathsOperations.UnixTimeUrl");
->>>>>>> feature/v3:test/TestServerProjects/url/Generated/Operations/PathsOperations.cs
             scope.Start();
             try
             {

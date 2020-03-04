@@ -320,12 +320,7 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutBigFloatAsync(float numberBody, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/body-number/Generated/Operations/NumberRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("NumberClient.PutBigFloat");
-=======
-            using var scope = clientDiagnostics.CreateScope("NumberOperations.PutBigFloat");
->>>>>>> feature/v3:test/TestServerProjects/body-number/Generated/Operations/NumberOperations.cs
             scope.Start();
             try
             {
@@ -350,12 +345,7 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutBigFloat(float numberBody, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/body-number/Generated/Operations/NumberRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("NumberClient.PutBigFloat");
-=======
-            using var scope = clientDiagnostics.CreateScope("NumberOperations.PutBigFloat");
->>>>>>> feature/v3:test/TestServerProjects/body-number/Generated/Operations/NumberOperations.cs
             scope.Start();
             try
             {
@@ -462,12 +452,7 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutBigDoubleAsync(double numberBody, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/body-number/Generated/Operations/NumberRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("NumberClient.PutBigDouble");
-=======
-            using var scope = clientDiagnostics.CreateScope("NumberOperations.PutBigDouble");
->>>>>>> feature/v3:test/TestServerProjects/body-number/Generated/Operations/NumberOperations.cs
             scope.Start();
             try
             {
@@ -492,12 +477,7 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutBigDouble(double numberBody, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/body-number/Generated/Operations/NumberRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("NumberClient.PutBigDouble");
-=======
-            using var scope = clientDiagnostics.CreateScope("NumberOperations.PutBigDouble");
->>>>>>> feature/v3:test/TestServerProjects/body-number/Generated/Operations/NumberOperations.cs
             scope.Start();
             try
             {
@@ -864,12 +844,7 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutBigDecimalAsync(decimal numberBody, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/body-number/Generated/Operations/NumberRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("NumberClient.PutBigDecimal");
-=======
-            using var scope = clientDiagnostics.CreateScope("NumberOperations.PutBigDecimal");
->>>>>>> feature/v3:test/TestServerProjects/body-number/Generated/Operations/NumberOperations.cs
             scope.Start();
             try
             {
@@ -894,12 +869,7 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutBigDecimal(decimal numberBody, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/body-number/Generated/Operations/NumberRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("NumberClient.PutBigDecimal");
-=======
-            using var scope = clientDiagnostics.CreateScope("NumberOperations.PutBigDecimal");
->>>>>>> feature/v3:test/TestServerProjects/body-number/Generated/Operations/NumberOperations.cs
             scope.Start();
             try
             {
@@ -1266,12 +1236,7 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutSmallFloatAsync(float numberBody, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/body-number/Generated/Operations/NumberRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("NumberClient.PutSmallFloat");
-=======
-            using var scope = clientDiagnostics.CreateScope("NumberOperations.PutSmallFloat");
->>>>>>> feature/v3:test/TestServerProjects/body-number/Generated/Operations/NumberOperations.cs
             scope.Start();
             try
             {
@@ -1296,12 +1261,7 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutSmallFloat(float numberBody, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/body-number/Generated/Operations/NumberRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("NumberClient.PutSmallFloat");
-=======
-            using var scope = clientDiagnostics.CreateScope("NumberOperations.PutSmallFloat");
->>>>>>> feature/v3:test/TestServerProjects/body-number/Generated/Operations/NumberOperations.cs
             scope.Start();
             try
             {
@@ -1408,12 +1368,7 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutSmallDoubleAsync(double numberBody, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/body-number/Generated/Operations/NumberRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("NumberClient.PutSmallDouble");
-=======
-            using var scope = clientDiagnostics.CreateScope("NumberOperations.PutSmallDouble");
->>>>>>> feature/v3:test/TestServerProjects/body-number/Generated/Operations/NumberOperations.cs
             scope.Start();
             try
             {
@@ -1438,12 +1393,7 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutSmallDouble(double numberBody, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/body-number/Generated/Operations/NumberRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("NumberClient.PutSmallDouble");
-=======
-            using var scope = clientDiagnostics.CreateScope("NumberOperations.PutSmallDouble");
->>>>>>> feature/v3:test/TestServerProjects/body-number/Generated/Operations/NumberOperations.cs
             scope.Start();
             try
             {
@@ -1550,12 +1500,7 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutSmallDecimalAsync(decimal numberBody, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/body-number/Generated/Operations/NumberRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("NumberClient.PutSmallDecimal");
-=======
-            using var scope = clientDiagnostics.CreateScope("NumberOperations.PutSmallDecimal");
->>>>>>> feature/v3:test/TestServerProjects/body-number/Generated/Operations/NumberOperations.cs
             scope.Start();
             try
             {
@@ -1580,12 +1525,7 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutSmallDecimal(decimal numberBody, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/body-number/Generated/Operations/NumberRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("NumberClient.PutSmallDecimal");
-=======
-            using var scope = clientDiagnostics.CreateScope("NumberOperations.PutSmallDecimal");
->>>>>>> feature/v3:test/TestServerProjects/body-number/Generated/Operations/NumberOperations.cs
             scope.Start();
             try
             {

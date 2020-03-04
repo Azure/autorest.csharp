@@ -130,12 +130,7 @@ namespace extensible_enums_swagger
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Pet>> AddPetAsync(Pet petParam, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/extensible-enums-swagger/Generated/Operations/PetRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("PetClient.AddPet");
-=======
-            using var scope = clientDiagnostics.CreateScope("PetOperations.AddPet");
->>>>>>> feature/v3:test/TestServerProjects/extensible-enums-swagger/Generated/Operations/PetOperations.cs
             scope.Start();
             try
             {
@@ -163,12 +158,7 @@ namespace extensible_enums_swagger
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Pet> AddPet(Pet petParam, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/extensible-enums-swagger/Generated/Operations/PetRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("PetClient.AddPet");
-=======
-            using var scope = clientDiagnostics.CreateScope("PetOperations.AddPet");
->>>>>>> feature/v3:test/TestServerProjects/extensible-enums-swagger/Generated/Operations/PetOperations.cs
             scope.Start();
             try
             {

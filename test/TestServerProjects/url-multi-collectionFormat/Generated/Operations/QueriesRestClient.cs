@@ -52,12 +52,7 @@ namespace url_multi_collectionFormat
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> ArrayStringMultiNullAsync(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url-multi-collectionFormat/Generated/Operations/QueriesRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiNull");
-=======
-            using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringMultiNull");
->>>>>>> feature/v3:test/TestServerProjects/url-multi-collectionFormat/Generated/Operations/QueriesOperations.cs
             scope.Start();
             try
             {
@@ -82,12 +77,7 @@ namespace url_multi_collectionFormat
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response ArrayStringMultiNull(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url-multi-collectionFormat/Generated/Operations/QueriesRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiNull");
-=======
-            using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringMultiNull");
->>>>>>> feature/v3:test/TestServerProjects/url-multi-collectionFormat/Generated/Operations/QueriesOperations.cs
             scope.Start();
             try
             {
@@ -127,12 +117,7 @@ namespace url_multi_collectionFormat
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> ArrayStringMultiEmptyAsync(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url-multi-collectionFormat/Generated/Operations/QueriesRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiEmpty");
-=======
-            using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringMultiEmpty");
->>>>>>> feature/v3:test/TestServerProjects/url-multi-collectionFormat/Generated/Operations/QueriesOperations.cs
             scope.Start();
             try
             {
@@ -157,12 +142,7 @@ namespace url_multi_collectionFormat
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response ArrayStringMultiEmpty(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url-multi-collectionFormat/Generated/Operations/QueriesRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiEmpty");
-=======
-            using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringMultiEmpty");
->>>>>>> feature/v3:test/TestServerProjects/url-multi-collectionFormat/Generated/Operations/QueriesOperations.cs
             scope.Start();
             try
             {
@@ -202,12 +182,7 @@ namespace url_multi_collectionFormat
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> ArrayStringMultiValidAsync(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url-multi-collectionFormat/Generated/Operations/QueriesRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiValid");
-=======
-            using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringMultiValid");
->>>>>>> feature/v3:test/TestServerProjects/url-multi-collectionFormat/Generated/Operations/QueriesOperations.cs
             scope.Start();
             try
             {
@@ -232,12 +207,7 @@ namespace url_multi_collectionFormat
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response ArrayStringMultiValid(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestServerProjects/url-multi-collectionFormat/Generated/Operations/QueriesRestClient.cs
-
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiValid");
-=======
-            using var scope = clientDiagnostics.CreateScope("QueriesOperations.ArrayStringMultiValid");
->>>>>>> feature/v3:test/TestServerProjects/url-multi-collectionFormat/Generated/Operations/QueriesOperations.cs
             scope.Start();
             try
             {
