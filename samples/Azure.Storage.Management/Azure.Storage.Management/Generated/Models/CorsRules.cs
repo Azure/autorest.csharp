@@ -5,14 +5,10 @@
 
 #nullable disable
 
-using System.Collections.Generic;
-
 namespace Azure.Storage.Management.Models
 {
     /// <summary> Sets the CORS rules. You can include up to five CorsRule elements in the request. </summary>
     public partial class CorsRules
     {
-        /// <summary> The List of CORS rules. You can include up to five CorsRule elements in the request. </summary>
-        public ICollection<CorsRule> CorsRules { get; set; }
     }
 }

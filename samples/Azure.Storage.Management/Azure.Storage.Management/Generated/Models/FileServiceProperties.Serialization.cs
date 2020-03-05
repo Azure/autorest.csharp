@@ -15,6 +15,28 @@ namespace Azure.Storage.Management.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
+            if (Sku != null)
+            {
+                writer.WritePropertyName("sku");
+                writer.WriteObjectValue(Sku);
+            }
+            if (Id != null)
+            {
+                writer.WritePropertyName("id");
+                writer.WriteStringValue(Id);
+            }
+            if (Name != null)
+            {
+                writer.WritePropertyName("name");
+                writer.WriteStringValue(Name);
+            }
+            if (Type != null)
+            {
+                writer.WritePropertyName("type");
+                writer.WriteStringValue(Type);
+            }
+            writer.WritePropertyName("properties");
+            writer.WriteStartObject();
             if (Cors != null)
             {
                 writer.WritePropertyName("cors");
@@ -26,28 +48,72 @@ namespace Azure.Storage.Management.Models
                 writer.WriteObjectValue(ShareDeleteRetentionPolicy);
             }
             writer.WriteEndObject();
+            writer.WriteEndObject();
         }
         internal static FileServiceProperties DeserializeFileServiceProperties(JsonElement element)
         {
             FileServiceProperties result = new FileServiceProperties();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("cors"))
+                if (property.NameEquals("sku"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         continue;
                     }
-                    result.Cors = CorsRules.DeserializeCorsRules(property.Value);
+                    result.Sku = Sku.DeserializeSku(property.Value);
                     continue;
                 }
-                if (property.NameEquals("shareDeleteRetentionPolicy"))
+                if (property.NameEquals("id"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         continue;
                     }
-                    result.ShareDeleteRetentionPolicy = DeleteRetentionPolicy.DeserializeDeleteRetentionPolicy(property.Value);
+                    result.Id = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("name"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    result.Name = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("type"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    result.Type = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("properties"))
+                {
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        if (property0.NameEquals("cors"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                continue;
+                            }
+                            result.Cors = CorsRules.DeserializeCorsRules(property0.Value);
+                            continue;
+                        }
+                        if (property0.NameEquals("shareDeleteRetentionPolicy"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                continue;
+                            }
+                            result.ShareDeleteRetentionPolicy = DeleteRetentionPolicy.DeserializeDeleteRetentionPolicy(property0.Value);
+                            continue;
+                        }
+                    }
                     continue;
                 }
             }

@@ -8,10 +8,8 @@
 namespace Azure.Storage.Management.Models
 {
     /// <summary> The properties of File services in storage account. </summary>
-    public partial class FileServiceProperties : Resource
+    public partial class FileServiceProperties2
     {
-        /// <summary> Sku name and tier. </summary>
-        public Sku Sku { get; internal set; }
         /// <summary> Specifies CORS rules for the File service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the File service. </summary>
         public CorsRules Cors { get; set; }
         /// <summary> The file service properties for share soft delete. </summary>

@@ -15,6 +15,28 @@ namespace Azure.Storage.Management.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
+            if (Sku != null)
+            {
+                writer.WritePropertyName("sku");
+                writer.WriteObjectValue(Sku);
+            }
+            if (Id != null)
+            {
+                writer.WritePropertyName("id");
+                writer.WriteStringValue(Id);
+            }
+            if (Name != null)
+            {
+                writer.WritePropertyName("name");
+                writer.WriteStringValue(Name);
+            }
+            if (Type != null)
+            {
+                writer.WritePropertyName("type");
+                writer.WriteStringValue(Type);
+            }
+            writer.WritePropertyName("properties");
+            writer.WriteStartObject();
             if (Cors != null)
             {
                 writer.WritePropertyName("cors");
@@ -56,82 +78,126 @@ namespace Azure.Storage.Management.Models
                 writer.WriteObjectValue(ContainerDeleteRetentionPolicy);
             }
             writer.WriteEndObject();
+            writer.WriteEndObject();
         }
         internal static BlobServiceProperties DeserializeBlobServiceProperties(JsonElement element)
         {
             BlobServiceProperties result = new BlobServiceProperties();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("cors"))
+                if (property.NameEquals("sku"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         continue;
                     }
-                    result.Cors = CorsRules.DeserializeCorsRules(property.Value);
+                    result.Sku = Sku.DeserializeSku(property.Value);
                     continue;
                 }
-                if (property.NameEquals("defaultServiceVersion"))
+                if (property.NameEquals("id"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         continue;
                     }
-                    result.DefaultServiceVersion = property.Value.GetString();
+                    result.Id = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("deleteRetentionPolicy"))
+                if (property.NameEquals("name"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         continue;
                     }
-                    result.DeleteRetentionPolicy = Models.DeleteRetentionPolicy.DeserializeDeleteRetentionPolicy(property.Value);
+                    result.Name = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("isVersioningEnabled"))
+                if (property.NameEquals("type"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         continue;
                     }
-                    result.IsVersioningEnabled = property.Value.GetBoolean();
+                    result.Type = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("automaticSnapshotPolicyEnabled"))
+                if (property.NameEquals("properties"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        continue;
+                        if (property0.NameEquals("cors"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                continue;
+                            }
+                            result.Cors = CorsRules.DeserializeCorsRules(property0.Value);
+                            continue;
+                        }
+                        if (property0.NameEquals("defaultServiceVersion"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                continue;
+                            }
+                            result.DefaultServiceVersion = property0.Value.GetString();
+                            continue;
+                        }
+                        if (property0.NameEquals("deleteRetentionPolicy"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                continue;
+                            }
+                            result.DeleteRetentionPolicy = DeleteRetentionPolicy.DeserializeDeleteRetentionPolicy(property0.Value);
+                            continue;
+                        }
+                        if (property0.NameEquals("isVersioningEnabled"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                continue;
+                            }
+                            result.IsVersioningEnabled = property0.Value.GetBoolean();
+                            continue;
+                        }
+                        if (property0.NameEquals("automaticSnapshotPolicyEnabled"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                continue;
+                            }
+                            result.AutomaticSnapshotPolicyEnabled = property0.Value.GetBoolean();
+                            continue;
+                        }
+                        if (property0.NameEquals("changeFeed"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                continue;
+                            }
+                            result.ChangeFeed = ChangeFeed.DeserializeChangeFeed(property0.Value);
+                            continue;
+                        }
+                        if (property0.NameEquals("restorePolicy"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                continue;
+                            }
+                            result.RestorePolicy = RestorePolicyProperties.DeserializeRestorePolicyProperties(property0.Value);
+                            continue;
+                        }
+                        if (property0.NameEquals("containerDeleteRetentionPolicy"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                continue;
+                            }
+                            result.ContainerDeleteRetentionPolicy = DeleteRetentionPolicy.DeserializeDeleteRetentionPolicy(property0.Value);
+                            continue;
+                        }
                     }
-                    result.AutomaticSnapshotPolicyEnabled = property.Value.GetBoolean();
-                    continue;
-                }
-                if (property.NameEquals("changeFeed"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    result.ChangeFeed = Models.ChangeFeed.DeserializeChangeFeed(property.Value);
-                    continue;
-                }
-                if (property.NameEquals("restorePolicy"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    result.RestorePolicy = RestorePolicyProperties.DeserializeRestorePolicyProperties(property.Value);
-                    continue;
-                }
-                if (property.NameEquals("containerDeleteRetentionPolicy"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    result.ContainerDeleteRetentionPolicy = Models.DeleteRetentionPolicy.DeserializeDeleteRetentionPolicy(property.Value);
                     continue;
                 }
             }

@@ -6441,7 +6441,7 @@ schemas: !<!Schemas>
       x-ms-flattened: true
     language: !<!Languages> 
       default:
-        name: BlobServiceProperties
+        name: BlobServiceProperties2
         description: The properties of a storage account’s Blob service.
         namespace: ''
     protocol: !<!Protocols> {}
@@ -6871,7 +6871,7 @@ schemas: !<!Schemas>
       x-ms-flattened: true
     language: !<!Languages> 
       default:
-        name: FileServiceProperties
+        name: FileServiceProperties2
         description: The properties of File services in storage account.
         namespace: ''
     protocol: !<!Protocols> {}

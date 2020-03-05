@@ -16,11 +16,11 @@ namespace Azure.Storage.Management.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (CorsRules != null)
+            if (Rules != null)
             {
                 writer.WritePropertyName("corsRules");
                 writer.WriteStartArray();
-                foreach (var item in CorsRules)
+                foreach (var item in Rules)
                 {
                     writer.WriteObjectValue(item);
                 }
@@ -39,10 +39,10 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.CorsRules = new List<CorsRule>();
+                    result.Rules = new List<CorsRule>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.CorsRules.Add(CorsRule.DeserializeCorsRule(item));
+                        result.Rules.Add(CorsRule.DeserializeCorsRule(item));
                     }
                     continue;
                 }
