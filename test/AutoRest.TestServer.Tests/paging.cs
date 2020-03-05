@@ -338,7 +338,7 @@ namespace AutoRest.TestServer.Tests
         }, true);
 
         [Test]
-        [Ignore("Needs long running operation logic: https://github.com/Azure/autorest.csharp/issues/399")]
+        [Ignore("Needs LRO for paging: https://github.com/Azure/autorest.csharp/issues/450")]
         public Task PagingMultipleLRO() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
 
         [Test]
@@ -425,12 +425,132 @@ namespace AutoRest.TestServer.Tests
         }, true);
 
         [Test]
-        [Ignore("Needs retry logic: https://github.com/Azure/autorest.csharp/issues/398")]
-        public Task PagingMultipleRetryFirst() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        [IgnoreOnTestServer(TestServerVersion.V2, "Retry times out.")]
+        public Task PagingMultipleRetryFirst() => Test(async (host, pipeline) =>
+        {
+            var id = 1;
+            var product = "Product";
+            var linkPart = "/paging/multiple/page/";
+            var result = await new PagingClient(ClientDiagnostics, pipeline, host).RestClient.GetMultiplePagesRetryFirstAsync();
+            var resultPage = Page.FromValues(result.Value.Values, result.Value.NextLink, result.GetRawResponse());
+            while (resultPage.ContinuationToken != null)
+            {
+                Assert.AreEqual(id, resultPage.Values.First().Properties.Id);
+                Assert.AreEqual(product, resultPage.Values.First().Properties.Name);
+                StringAssert.EndsWith($"{linkPart}{++id}", resultPage.ContinuationToken);
+                result = await new PagingClient(ClientDiagnostics, pipeline, host).RestClient.GetMultiplePagesRetryFirstNextPageAsync(resultPage.ContinuationToken);
+                resultPage = Page.FromValues(result.Value.Values, result.Value.NextLink, result.GetRawResponse());
+                product = "product";
+            }
+            Assert.AreEqual(10, id);
+            Assert.AreEqual(id, resultPage.Values.First().Properties.Id);
+            Assert.AreEqual(product, resultPage.Values.First().Properties.Name);
+
+            id = 1;
+            product = "Product";
+            var pageableAsync = new PagingClient(ClientDiagnostics, pipeline, host).GetMultiplePagesRetryFirstAsync();
+            await foreach (var page in pageableAsync.AsPages())
+            {
+                Assert.AreEqual(id, page.Values.First().Properties.Id);
+                Assert.AreEqual(product, page.Values.First().Properties.Name);
+                if (id == 10)
+                {
+                    Assert.IsNull(page.ContinuationToken);
+                }
+                else
+                {
+                    StringAssert.EndsWith($"{linkPart}{++id}", page.ContinuationToken);
+                }
+                product = "product";
+            }
+            Assert.AreEqual(10, id);
+
+            id = 1;
+            product = "Product";
+            var pageable = new PagingClient(ClientDiagnostics, pipeline, host).GetMultiplePagesRetryFirst();
+            foreach (var page in pageable.AsPages())
+            {
+                Assert.AreEqual(id, page.Values.First().Properties.Id);
+                Assert.AreEqual(product, page.Values.First().Properties.Name);
+                if (id == 10)
+                {
+                    Assert.IsNull(page.ContinuationToken);
+                }
+                else
+                {
+                    StringAssert.EndsWith($"{linkPart}{++id}", page.ContinuationToken);
+                }
+                product = "product";
+            }
+            Assert.AreEqual(10, id);
+        }, true);
 
         [Test]
-        [Ignore("Needs retry logic: https://github.com/Azure/autorest.csharp/issues/398")]
-        public Task PagingMultipleRetrySecond() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        [IgnoreOnTestServer(TestServerVersion.V2, "Retry times out.")]
+        public Task PagingMultipleRetrySecond() => Test(async (host, pipeline) =>
+        {
+            var id = 1;
+            var product = "Product";
+            var linkPart = "/paging/multiple/retrysecond/page/";
+            var result = await new PagingClient(ClientDiagnostics, pipeline, host).RestClient.GetMultiplePagesRetrySecondAsync();
+            var resultPage = Page.FromValues(result.Value.Values, result.Value.NextLink, result.GetRawResponse());
+            while (resultPage.ContinuationToken != null)
+            {
+                var tempId = id == 2 ? 1 : id;
+                Assert.AreEqual(tempId, resultPage.Values.First().Properties.Id);
+                var tempProduct = id == 2 ? "Product" : product;
+                Assert.AreEqual(tempProduct, resultPage.Values.First().Properties.Name);
+                StringAssert.EndsWith($"{linkPart}{++id}", resultPage.ContinuationToken);
+                result = await new PagingClient(ClientDiagnostics, pipeline, host).RestClient.GetMultiplePagesRetrySecondNextPageAsync(resultPage.ContinuationToken);
+                resultPage = Page.FromValues(result.Value.Values, result.Value.NextLink, result.GetRawResponse());
+                product = "product";
+            }
+            Assert.AreEqual(10, id);
+            Assert.AreEqual(id, resultPage.Values.First().Properties.Id);
+            Assert.AreEqual(product, resultPage.Values.First().Properties.Name);
+
+            id = 1;
+            product = "Product";
+            var pageableAsync = new PagingClient(ClientDiagnostics, pipeline, host).GetMultiplePagesRetrySecondAsync();
+            await foreach (var page in pageableAsync.AsPages())
+            {
+                var tempId = id == 2 ? 1 : id;
+                Assert.AreEqual(tempId, page.Values.First().Properties.Id);
+                var tempProduct = id == 2 ? "Product" : product;
+                Assert.AreEqual(tempProduct, page.Values.First().Properties.Name);
+                if (id == 10)
+                {
+                    Assert.IsNull(page.ContinuationToken);
+                }
+                else
+                {
+                    StringAssert.EndsWith($"{linkPart}{++id}", page.ContinuationToken);
+                }
+                product = "product";
+            }
+            Assert.AreEqual(10, id);
+
+            id = 1;
+            product = "Product";
+            var pageable = new PagingClient(ClientDiagnostics, pipeline, host).GetMultiplePagesRetrySecond();
+            foreach (var page in pageable.AsPages())
+            {
+                var tempId = id == 2 ? 1 : id;
+                Assert.AreEqual(tempId, page.Values.First().Properties.Id);
+                var tempProduct = id == 2 ? "Product" : product;
+                Assert.AreEqual(tempProduct, page.Values.First().Properties.Name);
+                if (id == 10)
+                {
+                    Assert.IsNull(page.ContinuationToken);
+                }
+                else
+                {
+                    StringAssert.EndsWith($"{linkPart}{++id}", page.ContinuationToken);
+                }
+                product = "product";
+            }
+            Assert.AreEqual(10, id);
+        }, true);
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "Request not matched.")]

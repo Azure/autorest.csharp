@@ -245,7 +245,6 @@ namespace AutoRest.TestServer.Tests
             await new HttpRedirectsClient(ClientDiagnostics, pipeline, host).Put307Async());
 
         [Test]
-        [Ignore("Implement retry logic: https://github.com/Azure/autorest.csharp/issues/398")]
         public Task HttpRetry408Head() => TestStatus(async (host, pipeline) =>
             await new HttpRetryClient(ClientDiagnostics, pipeline, host).Head408Async());
 
