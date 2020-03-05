@@ -27,79 +27,79 @@ namespace body_string
         }
         /// <summary> Get enum value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Colors>> GetNotExpandableAsync(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<Colors>> GetNotExpandableAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetNotExpandableAsync(cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Get enum value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Colors> GetNotExpandable(CancellationToken cancellationToken = default)
+        public virtual Response<Colors> GetNotExpandable(CancellationToken cancellationToken = default)
         {
             return RestClient.GetNotExpandable(cancellationToken);
         }
         /// <summary> Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
         /// <param name="stringBody"> The Colors to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutNotExpandableAsync(Colors stringBody, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> PutNotExpandableAsync(Colors stringBody, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutNotExpandableAsync(stringBody, cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
         /// <param name="stringBody"> The Colors to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutNotExpandable(Colors stringBody, CancellationToken cancellationToken = default)
+        public virtual Response PutNotExpandable(Colors stringBody, CancellationToken cancellationToken = default)
         {
             return RestClient.PutNotExpandable(stringBody, cancellationToken);
         }
         /// <summary> Get enum value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Colors>> GetReferencedAsync(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<Colors>> GetReferencedAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetReferencedAsync(cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Get enum value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Colors> GetReferenced(CancellationToken cancellationToken = default)
+        public virtual Response<Colors> GetReferenced(CancellationToken cancellationToken = default)
         {
             return RestClient.GetReferenced(cancellationToken);
         }
         /// <summary> Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
         /// <param name="enumStringBody"> The Colors to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutReferencedAsync(Colors enumStringBody, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> PutReferencedAsync(Colors enumStringBody, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutReferencedAsync(enumStringBody, cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
         /// <param name="enumStringBody"> The Colors to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutReferenced(Colors enumStringBody, CancellationToken cancellationToken = default)
+        public virtual Response PutReferenced(Colors enumStringBody, CancellationToken cancellationToken = default)
         {
             return RestClient.PutReferenced(enumStringBody, cancellationToken);
         }
         /// <summary> Get value &apos;green-color&apos; from the constant. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<RefColorConstant>> GetReferencedConstantAsync(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<RefColorConstant>> GetReferencedConstantAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetReferencedConstantAsync(cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Get value &apos;green-color&apos; from the constant. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<RefColorConstant> GetReferencedConstant(CancellationToken cancellationToken = default)
+        public virtual Response<RefColorConstant> GetReferencedConstant(CancellationToken cancellationToken = default)
         {
             return RestClient.GetReferencedConstant(cancellationToken);
         }
         /// <summary> Sends value &apos;green-color&apos; from a constant. </summary>
         /// <param name="enumStringBody"> The RefColorConstant to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutReferencedConstantAsync(RefColorConstant enumStringBody, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> PutReferencedConstantAsync(RefColorConstant enumStringBody, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutReferencedConstantAsync(enumStringBody, cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Sends value &apos;green-color&apos; from a constant. </summary>
         /// <param name="enumStringBody"> The RefColorConstant to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutReferencedConstant(RefColorConstant enumStringBody, CancellationToken cancellationToken = default)
+        public virtual Response PutReferencedConstant(RefColorConstant enumStringBody, CancellationToken cancellationToken = default)
         {
             return RestClient.PutReferencedConstant(enumStringBody, cancellationToken);
         }

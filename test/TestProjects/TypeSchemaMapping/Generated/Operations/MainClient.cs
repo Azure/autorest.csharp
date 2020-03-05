@@ -27,13 +27,13 @@ namespace CustomNamespace
         }
         /// <param name="body"> The Model to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<CustomizedModel>> OperationAsync(CustomizedModel body, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<CustomizedModel>> OperationAsync(CustomizedModel body, CancellationToken cancellationToken = default)
         {
             return await RestClient.OperationAsync(body, cancellationToken).ConfigureAwait(false);
         }
         /// <param name="body"> The Model to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<CustomizedModel> Operation(CustomizedModel body, CancellationToken cancellationToken = default)
+        public virtual Response<CustomizedModel> Operation(CustomizedModel body, CancellationToken cancellationToken = default)
         {
             return RestClient.Operation(body, cancellationToken);
         }

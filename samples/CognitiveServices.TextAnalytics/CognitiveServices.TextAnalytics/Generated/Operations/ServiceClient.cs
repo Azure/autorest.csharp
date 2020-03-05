@@ -30,7 +30,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
         /// <param name="input"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<EntitiesResult>> EntitiesRecognitionGeneralAsync(string modelVersion, bool? showStats, MultiLanguageBatchInput input, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<EntitiesResult>> EntitiesRecognitionGeneralAsync(string modelVersion, bool? showStats, MultiLanguageBatchInput input, CancellationToken cancellationToken = default)
         {
             return await RestClient.EntitiesRecognitionGeneralAsync(modelVersion, showStats, input, cancellationToken).ConfigureAwait(false);
         }
@@ -39,7 +39,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
         /// <param name="input"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<EntitiesResult> EntitiesRecognitionGeneral(string modelVersion, bool? showStats, MultiLanguageBatchInput input, CancellationToken cancellationToken = default)
+        public virtual Response<EntitiesResult> EntitiesRecognitionGeneral(string modelVersion, bool? showStats, MultiLanguageBatchInput input, CancellationToken cancellationToken = default)
         {
             return RestClient.EntitiesRecognitionGeneral(modelVersion, showStats, input, cancellationToken);
         }
@@ -51,7 +51,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
         /// <param name="input"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<EntitiesResult>> EntitiesRecognitionPiiAsync(string modelVersion, bool? showStats, MultiLanguageBatchInput input, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<EntitiesResult>> EntitiesRecognitionPiiAsync(string modelVersion, bool? showStats, MultiLanguageBatchInput input, CancellationToken cancellationToken = default)
         {
             return await RestClient.EntitiesRecognitionPiiAsync(modelVersion, showStats, input, cancellationToken).ConfigureAwait(false);
         }
@@ -63,7 +63,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
         /// <param name="input"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<EntitiesResult> EntitiesRecognitionPii(string modelVersion, bool? showStats, MultiLanguageBatchInput input, CancellationToken cancellationToken = default)
+        public virtual Response<EntitiesResult> EntitiesRecognitionPii(string modelVersion, bool? showStats, MultiLanguageBatchInput input, CancellationToken cancellationToken = default)
         {
             return RestClient.EntitiesRecognitionPii(modelVersion, showStats, input, cancellationToken);
         }
@@ -72,7 +72,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
         /// <param name="input"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<EntityLinkingResult>> EntitiesLinkingAsync(string modelVersion, bool? showStats, MultiLanguageBatchInput input, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<EntityLinkingResult>> EntitiesLinkingAsync(string modelVersion, bool? showStats, MultiLanguageBatchInput input, CancellationToken cancellationToken = default)
         {
             return await RestClient.EntitiesLinkingAsync(modelVersion, showStats, input, cancellationToken).ConfigureAwait(false);
         }
@@ -81,7 +81,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
         /// <param name="input"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<EntityLinkingResult> EntitiesLinking(string modelVersion, bool? showStats, MultiLanguageBatchInput input, CancellationToken cancellationToken = default)
+        public virtual Response<EntityLinkingResult> EntitiesLinking(string modelVersion, bool? showStats, MultiLanguageBatchInput input, CancellationToken cancellationToken = default)
         {
             return RestClient.EntitiesLinking(modelVersion, showStats, input, cancellationToken);
         }
@@ -90,7 +90,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
         /// <param name="input"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<KeyPhraseResult>> KeyPhrasesAsync(string modelVersion, bool? showStats, MultiLanguageBatchInput input, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<KeyPhraseResult>> KeyPhrasesAsync(string modelVersion, bool? showStats, MultiLanguageBatchInput input, CancellationToken cancellationToken = default)
         {
             return await RestClient.KeyPhrasesAsync(modelVersion, showStats, input, cancellationToken).ConfigureAwait(false);
         }
@@ -99,7 +99,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
         /// <param name="input"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<KeyPhraseResult> KeyPhrases(string modelVersion, bool? showStats, MultiLanguageBatchInput input, CancellationToken cancellationToken = default)
+        public virtual Response<KeyPhraseResult> KeyPhrases(string modelVersion, bool? showStats, MultiLanguageBatchInput input, CancellationToken cancellationToken = default)
         {
             return RestClient.KeyPhrases(modelVersion, showStats, input, cancellationToken);
         }
@@ -108,7 +108,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
         /// <param name="input"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<LanguageResult>> LanguagesAsync(string modelVersion, bool? showStats, LanguageBatchInput input, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<LanguageResult>> LanguagesAsync(string modelVersion, bool? showStats, LanguageBatchInput input, CancellationToken cancellationToken = default)
         {
             return await RestClient.LanguagesAsync(modelVersion, showStats, input, cancellationToken).ConfigureAwait(false);
         }
@@ -117,7 +117,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
         /// <param name="input"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<LanguageResult> Languages(string modelVersion, bool? showStats, LanguageBatchInput input, CancellationToken cancellationToken = default)
+        public virtual Response<LanguageResult> Languages(string modelVersion, bool? showStats, LanguageBatchInput input, CancellationToken cancellationToken = default)
         {
             return RestClient.Languages(modelVersion, showStats, input, cancellationToken);
         }
@@ -126,7 +126,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
         /// <param name="input"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<SentimentResponse>> SentimentAsync(string modelVersion, bool? showStats, MultiLanguageBatchInput input, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<SentimentResponse>> SentimentAsync(string modelVersion, bool? showStats, MultiLanguageBatchInput input, CancellationToken cancellationToken = default)
         {
             return await RestClient.SentimentAsync(modelVersion, showStats, input, cancellationToken).ConfigureAwait(false);
         }
@@ -135,7 +135,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
         /// <param name="input"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<SentimentResponse> Sentiment(string modelVersion, bool? showStats, MultiLanguageBatchInput input, CancellationToken cancellationToken = default)
+        public virtual Response<SentimentResponse> Sentiment(string modelVersion, bool? showStats, MultiLanguageBatchInput input, CancellationToken cancellationToken = default)
         {
             return RestClient.Sentiment(modelVersion, showStats, input, cancellationToken);
         }

@@ -79,7 +79,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
             var methodName = CreateMethodName(clientMethod.Name, async);
             var asyncText = async ? "async" : string.Empty;
-            writer.Append($"public {asyncText} {responseType} {methodName}(");
+            writer.Append($"public virtual {asyncText} {responseType} {methodName}(");
 
             foreach (Parameter parameter in parameters)
             {
@@ -175,7 +175,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
             writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
 
-            writer.Append($"public {responseType} {CreateMethodName(pagingMethod.Name, async)}(");
+            writer.Append($"public virtual {responseType} {CreateMethodName(pagingMethod.Name, async)}(");
             foreach (Parameter parameter in parameters)
             {
                 writer.WriteParameter(parameter);
@@ -329,7 +329,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
 
             string asyncText = async ? "async " : string.Empty;
-            writer.Append($"public {asyncText}{responseType} {CreateStartOperationName(lroMethod.Name, async)}(");
+            writer.Append($"public virtual {asyncText}{responseType} {CreateStartOperationName(lroMethod.Name, async)}(");
             foreach (Parameter parameter in parameters)
             {
                 writer.WriteParameter(parameter);

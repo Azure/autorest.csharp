@@ -33,7 +33,7 @@ namespace CognitiveSearch
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
         /// <param name="dataSource"> The definition of the datasource to create or update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<DataSource>> CreateOrUpdateAsync(string dataSourceName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, DataSource dataSource, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<DataSource>> CreateOrUpdateAsync(string dataSourceName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, DataSource dataSource, CancellationToken cancellationToken = default)
         {
             return await RestClient.CreateOrUpdateAsync(dataSourceName, clientRequestId, ifMatch, ifNoneMatch, dataSource, cancellationToken).ConfigureAwait(false);
         }
@@ -44,7 +44,7 @@ namespace CognitiveSearch
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
         /// <param name="dataSource"> The definition of the datasource to create or update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<DataSource> CreateOrUpdate(string dataSourceName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, DataSource dataSource, CancellationToken cancellationToken = default)
+        public virtual Response<DataSource> CreateOrUpdate(string dataSourceName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, DataSource dataSource, CancellationToken cancellationToken = default)
         {
             return RestClient.CreateOrUpdate(dataSourceName, clientRequestId, ifMatch, ifNoneMatch, dataSource, cancellationToken);
         }
@@ -54,7 +54,7 @@ namespace CognitiveSearch
         /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DeleteAsync(string dataSourceName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> DeleteAsync(string dataSourceName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
         {
             return await RestClient.DeleteAsync(dataSourceName, clientRequestId, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
         }
@@ -64,7 +64,7 @@ namespace CognitiveSearch
         /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Delete(string dataSourceName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
+        public virtual Response Delete(string dataSourceName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
         {
             return RestClient.Delete(dataSourceName, clientRequestId, ifMatch, ifNoneMatch, cancellationToken);
         }
@@ -72,7 +72,7 @@ namespace CognitiveSearch
         /// <param name="dataSourceName"> The name of the datasource to create or update. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<DataSource>> GetAsync(string dataSourceName, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<DataSource>> GetAsync(string dataSourceName, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
             return await RestClient.GetAsync(dataSourceName, clientRequestId, cancellationToken).ConfigureAwait(false);
         }
@@ -80,7 +80,7 @@ namespace CognitiveSearch
         /// <param name="dataSourceName"> The name of the datasource to create or update. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<DataSource> Get(string dataSourceName, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public virtual Response<DataSource> Get(string dataSourceName, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
             return RestClient.Get(dataSourceName, clientRequestId, cancellationToken);
         }
@@ -88,7 +88,7 @@ namespace CognitiveSearch
         /// <param name="select"> Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ListDataSourcesResult>> ListAsync(string select, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<ListDataSourcesResult>> ListAsync(string select, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
             return await RestClient.ListAsync(select, clientRequestId, cancellationToken).ConfigureAwait(false);
         }
@@ -96,7 +96,7 @@ namespace CognitiveSearch
         /// <param name="select"> Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ListDataSourcesResult> List(string select, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public virtual Response<ListDataSourcesResult> List(string select, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
             return RestClient.List(select, clientRequestId, cancellationToken);
         }
@@ -104,7 +104,7 @@ namespace CognitiveSearch
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="dataSource"> The definition of the datasource to create or update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<DataSource>> CreateAsync(Guid? clientRequestId, DataSource dataSource, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<DataSource>> CreateAsync(Guid? clientRequestId, DataSource dataSource, CancellationToken cancellationToken = default)
         {
             return await RestClient.CreateAsync(clientRequestId, dataSource, cancellationToken).ConfigureAwait(false);
         }
@@ -112,7 +112,7 @@ namespace CognitiveSearch
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="dataSource"> The definition of the datasource to create or update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<DataSource> Create(Guid? clientRequestId, DataSource dataSource, CancellationToken cancellationToken = default)
+        public virtual Response<DataSource> Create(Guid? clientRequestId, DataSource dataSource, CancellationToken cancellationToken = default)
         {
             return RestClient.Create(clientRequestId, dataSource, cancellationToken);
         }

@@ -29,14 +29,14 @@ namespace CognitiveSearch
         /// <summary> Gets service level statistics for a search service. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ServiceStatistics>> GetServiceStatisticsAsync(Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<ServiceStatistics>> GetServiceStatisticsAsync(Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
             return await RestClient.GetServiceStatisticsAsync(clientRequestId, cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Gets service level statistics for a search service. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ServiceStatistics> GetServiceStatistics(Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public virtual Response<ServiceStatistics> GetServiceStatistics(Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
             return RestClient.GetServiceStatistics(clientRequestId, cancellationToken);
         }

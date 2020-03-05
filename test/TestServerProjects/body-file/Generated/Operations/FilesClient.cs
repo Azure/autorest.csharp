@@ -27,37 +27,37 @@ namespace body_file
         }
         /// <summary> Get file. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Stream>> GetFileAsync(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<Stream>> GetFileAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetFileAsync(cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Get file. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Stream> GetFile(CancellationToken cancellationToken = default)
+        public virtual Response<Stream> GetFile(CancellationToken cancellationToken = default)
         {
             return RestClient.GetFile(cancellationToken);
         }
         /// <summary> Get a large file. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Stream>> GetFileLargeAsync(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<Stream>> GetFileLargeAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetFileLargeAsync(cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Get a large file. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Stream> GetFileLarge(CancellationToken cancellationToken = default)
+        public virtual Response<Stream> GetFileLarge(CancellationToken cancellationToken = default)
         {
             return RestClient.GetFileLarge(cancellationToken);
         }
         /// <summary> Get empty file. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Stream>> GetEmptyFileAsync(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<Stream>> GetEmptyFileAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetEmptyFileAsync(cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Get empty file. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Stream> GetEmptyFile(CancellationToken cancellationToken = default)
+        public virtual Response<Stream> GetEmptyFile(CancellationToken cancellationToken = default)
         {
             return RestClient.GetEmptyFile(cancellationToken);
         }

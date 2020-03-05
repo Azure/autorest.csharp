@@ -26,37 +26,37 @@ namespace httpInfrastructure
         }
         /// <summary> Get empty error form server. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<bool>> GetEmptyErrorAsync(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<bool>> GetEmptyErrorAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetEmptyErrorAsync(cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Get empty error form server. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<bool> GetEmptyError(CancellationToken cancellationToken = default)
+        public virtual Response<bool> GetEmptyError(CancellationToken cancellationToken = default)
         {
             return RestClient.GetEmptyError(cancellationToken);
         }
         /// <summary> Get empty error form server. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<bool>> GetNoModelErrorAsync(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<bool>> GetNoModelErrorAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetNoModelErrorAsync(cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Get empty error form server. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<bool> GetNoModelError(CancellationToken cancellationToken = default)
+        public virtual Response<bool> GetNoModelError(CancellationToken cancellationToken = default)
         {
             return RestClient.GetNoModelError(cancellationToken);
         }
         /// <summary> Get empty response from server. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<bool>> GetNoModelEmptyAsync(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<bool>> GetNoModelEmptyAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetNoModelEmptyAsync(cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Get empty response from server. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<bool> GetNoModelEmpty(CancellationToken cancellationToken = default)
+        public virtual Response<bool> GetNoModelEmpty(CancellationToken cancellationToken = default)
         {
             return RestClient.GetNoModelEmpty(cancellationToken);
         }
