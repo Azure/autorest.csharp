@@ -163,7 +163,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("DELETE does final GET and restarts polling: https://github.com/Azure/autorest.testserver/issues/138")]
         public Task LRODeleteAsyncNoRetrySucceeded() => TestStatus(async (host, pipeline) =>
         {
             var operation = await new LROsClient(ClientDiagnostics, pipeline, host).StartDeleteAsyncNoRetrySucceededOperationAsync();
@@ -171,7 +170,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("DELETE does final GET and restarts polling: https://github.com/Azure/autorest.testserver/issues/138")]
         public Task LRODeleteAsyncNoRetrySucceeded_Sync() => TestStatus((host, pipeline) =>
         {
             var operation = new LROsClient(ClientDiagnostics, pipeline, host).StartDeleteAsyncNoRetrySucceededOperation();
@@ -179,39 +177,34 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("DELETE does final GET and restarts polling: https://github.com/Azure/autorest.testserver/issues/138")]
-        public Task LRODeleteAsyncRetryCanceled() => TestStatus(async (host, pipeline) =>
+        public Task LRODeleteAsyncRetryCanceled() => Test(async (host, pipeline) =>
         {
             var operation = await new LROsClient(ClientDiagnostics, pipeline, host).StartDeleteAsyncRetrycanceledOperationAsync();
-            return await operation.WaitForCompletionAsync().ConfigureAwait(false);
+            Assert.ThrowsAsync<RequestFailedException>(async () => await operation.WaitForCompletionAsync().ConfigureAwait(false));
         });
 
         [Test]
-        [Ignore("DELETE does final GET and restarts polling: https://github.com/Azure/autorest.testserver/issues/138")]
-        public Task LRODeleteAsyncRetryCanceled_Sync() => TestStatus((host, pipeline) =>
+        public Task LRODeleteAsyncRetryCanceled_Sync() => Test((host, pipeline) =>
         {
             var operation = new LROsClient(ClientDiagnostics, pipeline, host).StartDeleteAsyncRetrycanceledOperation();
-            return operation.WaitForCompletion();
+            Assert.Throws<RequestFailedException>(() => operation.WaitForCompletion());
         });
 
         [Test]
-        [Ignore("DELETE does final GET and restarts polling: https://github.com/Azure/autorest.testserver/issues/138")]
-        public Task LRODeleteAsyncRetryFailed() => TestStatus(async (host, pipeline) =>
+        public Task LRODeleteAsyncRetryFailed() => Test(async (host, pipeline) =>
         {
             var operation = await new LROsClient(ClientDiagnostics, pipeline, host).StartDeleteAsyncRetryFailedOperationAsync();
-            return await operation.WaitForCompletionAsync().ConfigureAwait(false);
+            Assert.ThrowsAsync<RequestFailedException>(async () => await operation.WaitForCompletionAsync().ConfigureAwait(false));
         });
 
         [Test]
-        [Ignore("DELETE does final GET and restarts polling: https://github.com/Azure/autorest.testserver/issues/138")]
-        public Task LRODeleteAsyncRetryFailed_Sync() => TestStatus((host, pipeline) =>
+        public Task LRODeleteAsyncRetryFailed_Sync() => Test((host, pipeline) =>
         {
             var operation = new LROsClient(ClientDiagnostics, pipeline, host).StartDeleteAsyncRetryFailedOperation();
-            return operation.WaitForCompletion();
+            Assert.Throws<RequestFailedException>(() => operation.WaitForCompletion());
         });
 
         [Test]
-        [Ignore("DELETE does final GET and restarts polling: https://github.com/Azure/autorest.testserver/issues/138")]
         public Task LRODeleteAsyncRetrySucceeded() => TestStatus(async (host, pipeline) =>
         {
             var operation = await new LROsClient(ClientDiagnostics, pipeline, host).StartDeleteAsyncRetrySucceededOperationAsync();
@@ -219,7 +212,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("DELETE does final GET and restarts polling: https://github.com/Azure/autorest.testserver/issues/138")]
         public Task LRODeleteAsyncRetrySucceeded_Sync() => TestStatus((host, pipeline) =>
         {
             var operation = new LROsClient(ClientDiagnostics, pipeline, host).StartDeleteAsyncRetrySucceededOperation();
@@ -227,7 +219,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Support Operation Resource: https://github.com/Azure/autorest.csharp/issues/447")]
         public Task LRODeleteInlineComplete() => TestStatus(async (host, pipeline) =>
         {
             var operation = await new LROsClient(ClientDiagnostics, pipeline, host).StartDelete204SucceededOperationAsync();
@@ -235,7 +226,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Support Operation Resource: https://github.com/Azure/autorest.csharp/issues/447")]
         public Task LRODeleteInlineComplete_Sync() => TestStatus((host, pipeline) =>
         {
             var operation = new LROsClient(ClientDiagnostics, pipeline, host).StartDelete204SucceededOperation();
@@ -379,7 +369,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Support Operation Resource: https://github.com/Azure/autorest.csharp/issues/447")]
         public Task LROErrorDeleteNoLocation() => TestStatus(async (host, pipeline) =>
         {
             var operation = await new LrosaDsClient(ClientDiagnostics, pipeline, host).StartDelete204SucceededOperationAsync();
@@ -387,7 +376,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Support Operation Resource: https://github.com/Azure/autorest.csharp/issues/447")]
         public Task LROErrorDeleteNoLocation_Sync() => TestStatus((host, pipeline) =>
         {
             var operation = new LrosaDsClient(ClientDiagnostics, pipeline, host).StartDelete204SucceededOperation();
@@ -459,21 +447,19 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Support Operation Resource: https://github.com/Azure/autorest.csharp/issues/447")]
-        public Task LROErrorPostNoLocation() => TestStatus(async (host, pipeline) =>
+        public Task LROErrorPostNoLocation() => Test(async (host, pipeline) =>
         {
             var value = new Product();
             var operation = await new LrosaDsClient(ClientDiagnostics, pipeline, host).StartPost202NoLocationOperationAsync(value);
-            return await operation.WaitForCompletionAsync().ConfigureAwait(false);
+            Assert.ThrowsAsync<RequestFailedException>(async () => await operation.WaitForCompletionAsync().ConfigureAwait(false));
         });
 
         [Test]
-        [Ignore("Support Operation Resource: https://github.com/Azure/autorest.csharp/issues/447")]
-        public Task LROErrorPostNoLocation_Sync() => TestStatus((host, pipeline) =>
+        public Task LROErrorPostNoLocation_Sync() => Test((host, pipeline) =>
         {
             var value = new Product();
             var operation = new LrosaDsClient(ClientDiagnostics, pipeline, host).StartPost202NoLocationOperation(value);
-            return operation.WaitForCompletion();
+            Assert.Throws<RequestFailedException>(() => operation.WaitForCompletion());
         });
 
         [Test]
@@ -833,25 +819,23 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Support Operation Resource: https://github.com/Azure/autorest.csharp/issues/447")]
         public Task LROPostDoubleHeadersFinalAzureHeaderGet() => Test(async (host, pipeline) =>
         {
             var operation = await new LROsClient(ClientDiagnostics, pipeline, host).StartPostDoubleHeadersFinalAzureHeaderGetOperationAsync();
             var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
             Assert.AreEqual("100", result.Value.Id);
-            Assert.AreEqual("foo", result.Value.Name);
-            Assert.AreEqual("Succeeded", result.Value.ProvisioningState);
+            Assert.AreEqual(null, result.Value.Name);
+            Assert.AreEqual(null, result.Value.ProvisioningState);
         });
 
         [Test]
-        [Ignore("Support Operation Resource: https://github.com/Azure/autorest.csharp/issues/447")]
         public Task LROPostDoubleHeadersFinalAzureHeaderGet_Sync() => Test((host, pipeline) =>
         {
             var operation = new LROsClient(ClientDiagnostics, pipeline, host).StartPostDoubleHeadersFinalAzureHeaderGetOperation();
             var result = operation.WaitForCompletion();
             Assert.AreEqual("100", result.Value.Id);
-            Assert.AreEqual("foo", result.Value.Name);
-            Assert.AreEqual("Succeeded", result.Value.ProvisioningState);
+            Assert.AreEqual(null, result.Value.Name);
+            Assert.AreEqual(null, result.Value.ProvisioningState);
         });
 
         [Test]
@@ -896,32 +880,25 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(null, result.Value.ProvisioningState);
         });
 
+        // Note: This test changes if https://github.com/Azure/autorest.csharp/issues/300 is implemented.
         [Test]
-        [Ignore("Explicitly checks if final GET uses polled Location header, instead of original Location header")]
         public Task LROPostSuccededNoBody() => Test(async (host, pipeline) =>
         {
             var value = new Product();
             var operation = await new LROsClient(ClientDiagnostics, pipeline, host).StartPost202NoRetry204OperationAsync(value);
-            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
-            Assert.AreEqual("100", result.Value.Id);
-            Assert.AreEqual("foo", result.Value.Name);
-            Assert.AreEqual("Succeeded", result.Value.ProvisioningState);
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await operation.WaitForCompletionAsync().ConfigureAwait(false));
         });
 
+        // Note: This test changes if https://github.com/Azure/autorest.csharp/issues/300 is implemented.
         [Test]
-        [Ignore("Explicitly checks if final GET uses polled Location header, instead of original Location header")]
         public Task LROPostSuccededNoBody_Sync() => Test((host, pipeline) =>
         {
             var value = new Product();
             var operation = new LROsClient(ClientDiagnostics, pipeline, host).StartPost202NoRetry204Operation(value);
-            var result = operation.WaitForCompletion();
-            Assert.AreEqual("100", result.Value.Id);
-            Assert.AreEqual("foo", result.Value.Name);
-            Assert.AreEqual("Succeeded", result.Value.ProvisioningState);
+            Assert.Throws(Is.InstanceOf<JsonException>(), () => operation.WaitForCompletion());
         });
 
         [Test]
-        [Ignore("Explicitly checks if final GET uses polled Location header, instead of original Location header")]
         public Task LROPostSuccededWithBody() => TestStatus(async (host, pipeline) =>
         {
             var value = new Product();
@@ -930,7 +907,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Explicitly checks if final GET uses polled Location header, instead of original Location header")]
         public Task LROPostSuccededWithBody_Sync() => TestStatus((host, pipeline) =>
         {
             var value = new Product();
@@ -1291,7 +1267,7 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Retry on 500 logic: https://github.com/Azure/autorest.csharp/issues/398")]
+        [Ignore("Handle multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
         public Task LRORetryErrorDelete202Accepted200Succeeded() => Test(async (host, pipeline) =>
         {
             var operation = await new LRORetrysClient(ClientDiagnostics, pipeline, host).StartDeleteProvisioning202Accepted200SucceededOperationAsync();
@@ -1302,7 +1278,7 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Retry on 500 logic: https://github.com/Azure/autorest.csharp/issues/398")]
+        [Ignore("Handle multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
         public Task LRORetryErrorDelete202Accepted200Succeeded_Sync() => Test((host, pipeline) =>
         {
             var operation = new LRORetrysClient(ClientDiagnostics, pipeline, host).StartDeleteProvisioning202Accepted200SucceededOperation();
@@ -1417,7 +1393,7 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Retry on 500 logic: https://github.com/Azure/autorest.csharp/issues/398")]
+        [Ignore("Handle multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
         public Task LRORetryPutSucceededWithBody() => Test(async (host, pipeline) =>
         {
             var value = new Product();
@@ -1429,7 +1405,7 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Retry on 500 logic: https://github.com/Azure/autorest.csharp/issues/398")]
+        [Ignore("Handle multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
         public Task LRORetryPutSucceededWithBody_Sync() => Test((host, pipeline) =>
         {
             var value = new Product();
