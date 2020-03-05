@@ -30,7 +30,7 @@ namespace Azure.Storage.Tables
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="storageServiceProperties"> The StorageService properties. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> SetPropertiesAsync(int? timeout, string requestId, StorageServiceProperties storageServiceProperties, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> SetPropertiesAsync(int? timeout, string requestId, StorageServiceProperties storageServiceProperties, CancellationToken cancellationToken = default)
         {
             return (await RestClient.SetPropertiesAsync(timeout, requestId, storageServiceProperties, cancellationToken).ConfigureAwait(false)).GetRawResponse();
         }
@@ -39,7 +39,7 @@ namespace Azure.Storage.Tables
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="storageServiceProperties"> The StorageService properties. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response SetProperties(int? timeout, string requestId, StorageServiceProperties storageServiceProperties, CancellationToken cancellationToken = default)
+        public virtual Response SetProperties(int? timeout, string requestId, StorageServiceProperties storageServiceProperties, CancellationToken cancellationToken = default)
         {
             return RestClient.SetProperties(timeout, requestId, storageServiceProperties, cancellationToken).GetRawResponse();
         }
@@ -47,7 +47,7 @@ namespace Azure.Storage.Tables
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<StorageServiceProperties>> GetPropertiesAsync(int? timeout, string requestId, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<StorageServiceProperties>> GetPropertiesAsync(int? timeout, string requestId, CancellationToken cancellationToken = default)
         {
             return await RestClient.GetPropertiesAsync(timeout, requestId, cancellationToken).ConfigureAwait(false);
         }
@@ -55,7 +55,7 @@ namespace Azure.Storage.Tables
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<StorageServiceProperties> GetProperties(int? timeout, string requestId, CancellationToken cancellationToken = default)
+        public virtual Response<StorageServiceProperties> GetProperties(int? timeout, string requestId, CancellationToken cancellationToken = default)
         {
             return RestClient.GetProperties(timeout, requestId, cancellationToken);
         }
@@ -63,7 +63,7 @@ namespace Azure.Storage.Tables
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<StorageServiceStats>> GetStatisticsAsync(int? timeout, string requestId, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<StorageServiceStats>> GetStatisticsAsync(int? timeout, string requestId, CancellationToken cancellationToken = default)
         {
             return await RestClient.GetStatisticsAsync(timeout, requestId, cancellationToken).ConfigureAwait(false);
         }
@@ -71,7 +71,7 @@ namespace Azure.Storage.Tables
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<StorageServiceStats> GetStatistics(int? timeout, string requestId, CancellationToken cancellationToken = default)
+        public virtual Response<StorageServiceStats> GetStatistics(int? timeout, string requestId, CancellationToken cancellationToken = default)
         {
             return RestClient.GetStatistics(timeout, requestId, cancellationToken);
         }

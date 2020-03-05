@@ -27,27 +27,27 @@ namespace body_complex
         }
         /// <summary> Get complex types that extend others. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Siamese>> GetValidAsync(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<Siamese>> GetValidAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetValidAsync(cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Get complex types that extend others. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Siamese> GetValid(CancellationToken cancellationToken = default)
+        public virtual Response<Siamese> GetValid(CancellationToken cancellationToken = default)
         {
             return RestClient.GetValid(cancellationToken);
         }
         /// <summary> Put complex types that extend others. </summary>
         /// <param name="complexBody"> Please put a siamese with id=2, name=&quot;Siameee&quot;, color=green, breed=persion, which hates 2 dogs, the 1st one named &quot;Potato&quot; with id=1 and food=&quot;tomato&quot;, and the 2nd one named &quot;Tomato&quot; with id=-1 and food=&quot;french fries&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutValidAsync(Siamese complexBody, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> PutValidAsync(Siamese complexBody, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutValidAsync(complexBody, cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Put complex types that extend others. </summary>
         /// <param name="complexBody"> Please put a siamese with id=2, name=&quot;Siameee&quot;, color=green, breed=persion, which hates 2 dogs, the 1st one named &quot;Potato&quot; with id=1 and food=&quot;tomato&quot;, and the 2nd one named &quot;Tomato&quot; with id=-1 and food=&quot;french fries&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutValid(Siamese complexBody, CancellationToken cancellationToken = default)
+        public virtual Response PutValid(Siamese complexBody, CancellationToken cancellationToken = default)
         {
             return RestClient.PutValid(complexBody, cancellationToken);
         }

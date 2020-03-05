@@ -26,12 +26,12 @@ namespace body_complex
             this.pipeline = pipeline;
         }
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<MyBaseType>> GetValidAsync(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<MyBaseType>> GetValidAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetValidAsync(cancellationToken).ConfigureAwait(false);
         }
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<MyBaseType> GetValid(CancellationToken cancellationToken = default)
+        public virtual Response<MyBaseType> GetValid(CancellationToken cancellationToken = default)
         {
             return RestClient.GetValid(cancellationToken);
         }

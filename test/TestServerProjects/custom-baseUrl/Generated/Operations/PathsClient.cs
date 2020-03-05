@@ -27,14 +27,14 @@ namespace custom_baseUrl
         /// <summary> Get a 200 to test a valid base uri. </summary>
         /// <param name="accountName"> Account Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetEmptyAsync(string accountName, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> GetEmptyAsync(string accountName, CancellationToken cancellationToken = default)
         {
             return await RestClient.GetEmptyAsync(accountName, cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Get a 200 to test a valid base uri. </summary>
         /// <param name="accountName"> Account Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response GetEmpty(string accountName, CancellationToken cancellationToken = default)
+        public virtual Response GetEmpty(string accountName, CancellationToken cancellationToken = default)
         {
             return RestClient.GetEmpty(accountName, cancellationToken);
         }

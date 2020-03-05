@@ -30,7 +30,7 @@ namespace CognitiveSearch
         /// <param name="indexerName"> The name of the indexer to reset. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> ResetAsync(string indexerName, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> ResetAsync(string indexerName, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
             return await RestClient.ResetAsync(indexerName, clientRequestId, cancellationToken).ConfigureAwait(false);
         }
@@ -38,7 +38,7 @@ namespace CognitiveSearch
         /// <param name="indexerName"> The name of the indexer to reset. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Reset(string indexerName, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public virtual Response Reset(string indexerName, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
             return RestClient.Reset(indexerName, clientRequestId, cancellationToken);
         }
@@ -46,7 +46,7 @@ namespace CognitiveSearch
         /// <param name="indexerName"> The name of the indexer to reset. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> RunAsync(string indexerName, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> RunAsync(string indexerName, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
             return await RestClient.RunAsync(indexerName, clientRequestId, cancellationToken).ConfigureAwait(false);
         }
@@ -54,7 +54,7 @@ namespace CognitiveSearch
         /// <param name="indexerName"> The name of the indexer to reset. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Run(string indexerName, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public virtual Response Run(string indexerName, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
             return RestClient.Run(indexerName, clientRequestId, cancellationToken);
         }
@@ -65,7 +65,7 @@ namespace CognitiveSearch
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
         /// <param name="indexer"> The definition of the indexer to create or update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Indexer>> CreateOrUpdateAsync(string indexerName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, Indexer indexer, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<Indexer>> CreateOrUpdateAsync(string indexerName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, Indexer indexer, CancellationToken cancellationToken = default)
         {
             return await RestClient.CreateOrUpdateAsync(indexerName, clientRequestId, ifMatch, ifNoneMatch, indexer, cancellationToken).ConfigureAwait(false);
         }
@@ -76,7 +76,7 @@ namespace CognitiveSearch
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
         /// <param name="indexer"> The definition of the indexer to create or update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Indexer> CreateOrUpdate(string indexerName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, Indexer indexer, CancellationToken cancellationToken = default)
+        public virtual Response<Indexer> CreateOrUpdate(string indexerName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, Indexer indexer, CancellationToken cancellationToken = default)
         {
             return RestClient.CreateOrUpdate(indexerName, clientRequestId, ifMatch, ifNoneMatch, indexer, cancellationToken);
         }
@@ -86,7 +86,7 @@ namespace CognitiveSearch
         /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DeleteAsync(string indexerName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> DeleteAsync(string indexerName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
         {
             return await RestClient.DeleteAsync(indexerName, clientRequestId, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
         }
@@ -96,7 +96,7 @@ namespace CognitiveSearch
         /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Delete(string indexerName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
+        public virtual Response Delete(string indexerName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
         {
             return RestClient.Delete(indexerName, clientRequestId, ifMatch, ifNoneMatch, cancellationToken);
         }
@@ -104,7 +104,7 @@ namespace CognitiveSearch
         /// <param name="indexerName"> The name of the indexer to reset. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Indexer>> GetAsync(string indexerName, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<Indexer>> GetAsync(string indexerName, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
             return await RestClient.GetAsync(indexerName, clientRequestId, cancellationToken).ConfigureAwait(false);
         }
@@ -112,7 +112,7 @@ namespace CognitiveSearch
         /// <param name="indexerName"> The name of the indexer to reset. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Indexer> Get(string indexerName, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public virtual Response<Indexer> Get(string indexerName, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
             return RestClient.Get(indexerName, clientRequestId, cancellationToken);
         }
@@ -120,7 +120,7 @@ namespace CognitiveSearch
         /// <param name="select"> Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ListIndexersResult>> ListAsync(string select, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<ListIndexersResult>> ListAsync(string select, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
             return await RestClient.ListAsync(select, clientRequestId, cancellationToken).ConfigureAwait(false);
         }
@@ -128,7 +128,7 @@ namespace CognitiveSearch
         /// <param name="select"> Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ListIndexersResult> List(string select, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public virtual Response<ListIndexersResult> List(string select, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
             return RestClient.List(select, clientRequestId, cancellationToken);
         }
@@ -136,7 +136,7 @@ namespace CognitiveSearch
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="indexer"> The definition of the indexer to create or update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Indexer>> CreateAsync(Guid? clientRequestId, Indexer indexer, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<Indexer>> CreateAsync(Guid? clientRequestId, Indexer indexer, CancellationToken cancellationToken = default)
         {
             return await RestClient.CreateAsync(clientRequestId, indexer, cancellationToken).ConfigureAwait(false);
         }
@@ -144,7 +144,7 @@ namespace CognitiveSearch
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="indexer"> The definition of the indexer to create or update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Indexer> Create(Guid? clientRequestId, Indexer indexer, CancellationToken cancellationToken = default)
+        public virtual Response<Indexer> Create(Guid? clientRequestId, Indexer indexer, CancellationToken cancellationToken = default)
         {
             return RestClient.Create(clientRequestId, indexer, cancellationToken);
         }
@@ -152,7 +152,7 @@ namespace CognitiveSearch
         /// <param name="indexerName"> The name of the indexer to reset. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IndexerExecutionInfo>> GetStatusAsync(string indexerName, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<IndexerExecutionInfo>> GetStatusAsync(string indexerName, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
             return await RestClient.GetStatusAsync(indexerName, clientRequestId, cancellationToken).ConfigureAwait(false);
         }
@@ -160,7 +160,7 @@ namespace CognitiveSearch
         /// <param name="indexerName"> The name of the indexer to reset. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<IndexerExecutionInfo> GetStatus(string indexerName, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public virtual Response<IndexerExecutionInfo> GetStatus(string indexerName, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
             return RestClient.GetStatus(indexerName, clientRequestId, cancellationToken);
         }
