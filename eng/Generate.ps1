@@ -115,7 +115,8 @@ $projectNames =
     'CognitiveServices.TextAnalytics',
     'CognitiveSearch',
     'Azure.Storage.Tables',
-    'Azure.Storage.Management'
+    'Azure.Storage.Management',
+    'Azure.Network.Management.Interface'
 
 foreach ($projectName in $projectNames)
 {
