@@ -10,4 +10,5 @@ require: $(this-folder)/../readme.samples.md
 input-file:
     -  $(this-folder)/table.json
 namespace: Azure.Storage.Tables
+include-csproj: disable
 ```

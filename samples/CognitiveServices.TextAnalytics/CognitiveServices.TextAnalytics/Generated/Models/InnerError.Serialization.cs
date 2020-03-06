@@ -36,10 +36,10 @@ namespace CognitiveServices.TextAnalytics.Models
                 writer.WritePropertyName("target");
                 writer.WriteStringValue(Target);
             }
-            if (InnerError != null)
+            if (Inner != null)
             {
                 writer.WritePropertyName("innerError");
-                writer.WriteObjectValue(InnerError);
+                writer.WriteObjectValue(Inner);
             }
             writer.WriteEndObject();
         }
@@ -86,7 +86,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     {
                         continue;
                     }
-                    result.InnerError = DeserializeInnerError(property.Value);
+                    result.Inner = DeserializeInnerError(property.Value);
                     continue;
                 }
             }
