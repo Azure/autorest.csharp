@@ -14,15 +14,15 @@ using Azure.Storage.Management.Models;
 
 namespace Azure.Storage.Management
 {
-    public partial class Client
+    public partial class OperationsClient
     {
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
-        internal RestClient RestClient { get; }
-        /// <summary> Initializes a new instance of Client. </summary>
-        internal Client(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "https://management.azure.com", string ApiVersion = "2019-06-01")
+        internal OperationsRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of OperationsClient. </summary>
+        internal OperationsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "https://management.azure.com", string ApiVersion = "2019-06-01")
         {
-            RestClient = new RestClient(clientDiagnostics, pipeline, host, ApiVersion);
+            RestClient = new OperationsRestClient(clientDiagnostics, pipeline, host, ApiVersion);
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
