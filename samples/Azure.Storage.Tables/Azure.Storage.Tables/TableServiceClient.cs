@@ -8,7 +8,7 @@ namespace Azure.Storage.Tables
 {
     public class TableServiceClient
     {
-        private readonly TableOperations _tableOperations;
+        private readonly TableInternalClient _tableOperations;
         private readonly ResponseFormat _format = ResponseFormat.ApplicationJsonOdataFullmetadata;
 
         public TableServiceClient(Uri endpoint, StorageSharedKeyCredential credential, TableClientOptions options = null)
@@ -18,7 +18,7 @@ namespace Azure.Storage.Tables
             var endpoint1 = endpoint.ToString();
             var pipeline = HttpPipelineBuilder.Build(options, new TablesSharedKeyPipelinePolicy(credential));
             var diagnostics = new ClientDiagnostics(options);
-            _tableOperations = new TableOperations(diagnostics, pipeline, endpoint1, "2019-02-02");
+            _tableOperations = new TableInternalClient(diagnostics, pipeline, endpoint1, "2019-02-02");
         }
 
         public TableClient GetTableClient(string tableName)
@@ -30,7 +30,7 @@ namespace Azure.Storage.Tables
         {
             return PageableHelpers.CreateAsyncEnumerable(async _ =>
             {
-                var response = await _tableOperations.QueryAsync(null, _format, null, null, null, cancellationToken);
+                var response = await _tableOperations.RestClient.QueryAsync(null, _format, null, null, null, cancellationToken);
                 return Page.FromValues(response.Value.Value, response.Headers.XMsContinuationNextTableName, response.GetRawResponse());
             });
         }

@@ -53,8 +53,8 @@ namespace Azure.CognitiveSearch
         internal HttpPipeline Pipeline { get; }
         internal ClientDiagnostics ClientDiagnostics { get; }
         internal CognitiveSearchClientOptions.ServiceVersion Version { get; }
-        private AllOperations AllOperations { get; }
-        private IndexesOperations IndexesOperations { get; }
+        private ServiceClient AllOperations { get; }
+        private IndexesClient IndexesOperations { get; }
 
         public CognitiveSearchClient(string serviceName, CognitiveSearchCredential credential) : this(serviceName, credential, null) { }
         public CognitiveSearchClient(string serviceName, CognitiveSearchCredential credential, CognitiveSearchClientOptions options)
@@ -64,8 +64,8 @@ namespace Azure.CognitiveSearch
             Pipeline = options.Build(credential);
             ClientDiagnostics = new ClientDiagnostics(options);
             Version = options.Version;
-            AllOperations = new AllOperations(ClientDiagnostics, Pipeline, ServiceName, ApiVersion: Version.ToVersionString());
-            IndexesOperations = new IndexesOperations(ClientDiagnostics, Pipeline, ServiceName, ApiVersion: Version.ToVersionString());
+            AllOperations = new ServiceClient(ClientDiagnostics, Pipeline, ServiceName, ApiVersion: Version.ToVersionString());
+            IndexesOperations = new IndexesClient(ClientDiagnostics, Pipeline, ServiceName, ApiVersion: Version.ToVersionString());
         }
         public IndexClient GetIndexClient(string indexName) => new IndexClient(this, indexName);
     }
@@ -74,13 +74,13 @@ namespace Azure.CognitiveSearch
     {
         internal CognitiveSearchClient SearchClient { get; }
         public string IndexName { get; }
-        private DocumentsOperations Operations { get; }
+        private DocumentsClient Operations { get; }
 
         internal IndexClient(CognitiveSearchClient searchClient, string name)
         {
             SearchClient = searchClient;
             IndexName = name;
-            Operations = new DocumentsOperations(SearchClient.ClientDiagnostics, SearchClient.Pipeline, SearchClient.ServiceName, IndexName, ApiVersion: SearchClient.Version.ToVersionString());
+            Operations = new DocumentsClient(SearchClient.ClientDiagnostics, SearchClient.Pipeline, SearchClient.ServiceName, IndexName, ApiVersion: SearchClient.Version.ToVersionString());
         }
 
         public virtual async Task<Response<SearchDocumentsResult>> SearchAsync(string searchText, string filter = null, CancellationToken cancellationToken = default) =>
