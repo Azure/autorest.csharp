@@ -161,7 +161,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             name = string.IsNullOrEmpty(name) ? "Service" : name.ToCleanName();
 
             var operationsSuffix = "Operations";
-            if (name.EndsWith(operationsSuffix))
+            if (name.EndsWith(operationsSuffix) && name.Length > operationsSuffix.Length)
             {
                 name = name.Substring(0, name.Length - operationsSuffix.Length);
             }
