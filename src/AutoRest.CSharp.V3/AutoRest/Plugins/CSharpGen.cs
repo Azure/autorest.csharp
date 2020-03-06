@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.CSharp.V3.AutoRest.Communication;
@@ -27,6 +28,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
     {
         public async Task<bool> Execute(IPluginCommunication autoRest, CodeModel codeModel, Configuration configuration)
         {
+            Directory.CreateDirectory(configuration.OutputFolder);
             var project = GeneratedCodeWorkspace.Create(configuration.OutputFolder, configuration.SharedSourceFolder);
             var sourceInputModel = SourceInputModelBuilder.Build(await project.GetCompilationAsync());
 
