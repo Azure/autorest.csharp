@@ -114,6 +114,7 @@ $projectNames =
     'AppConfiguration',
     'CognitiveServices.TextAnalytics',
     'CognitiveSearch',
+    'Azure.AI.FormRecognizer',
     'Azure.Storage.Tables',
     'Azure.Storage.Management',
     'Azure.Network.Management.Interface'

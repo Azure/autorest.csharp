@@ -13,6 +13,13 @@ using YamlDotNet.Serialization;
 // ReSharper disable once CheckNamespace
 namespace AutoRest.CSharp.V3.Input
 {
+    // TODO: Temporary workaround for https://github.com/Azure/autorest.modelerfour/issues/197
+    internal partial class HttpWithBodyRequest
+    {
+        [YamlMember(Alias = "binary")]
+        public bool? Binary { get; set; }
+    }
+
     internal partial class Value
     {
         public Value()
