@@ -1,5 +1,5 @@
 #Requires -Version 6.0
-param($name, [switch]$noDebug, [switch]$reset, [switch]$noBuild, [switch]$fast, [switch]$updateLaunchSettings, [switch]$clean = $true)
+param($name, [switch]$noDebug, [switch]$reset, [switch]$noBuild, [switch]$noProjectBuild, [switch]$fast, [switch]$updateLaunchSettings, [switch]$clean = $true)
 
 $ErrorActionPreference = 'Stop'
 
@@ -20,7 +20,7 @@ function Invoke-AutoRest($baseOutput, $title, $autoRestArguments)
 {
     $outputPath = Join-Path $baseOutput $title
     $namespace = $title.Replace('-', '_')
-    $command = "$script:autorestBinary $script:debugFlags $autoRestArguments --title=$title --namespace=$namespace"
+    $command = "$script:autorestBinary $script:debugFlags $autoRestArguments --title=$title --namespace=$namespace --output-folder=$outputPath"
 
     if ($fast)
     {
@@ -48,7 +48,7 @@ $testServerDirectory = Join-Path $repoRoot 'test' 'TestServerProjects'
 $sharedSource = Join-Path $repoRoot 'src' 'assets'
 $autorestPluginProject = Resolve-Path (Join-Path $repoRoot 'src' 'AutoRest.CSharp.V3')
 $launchSettings = Join-Path $autorestPluginProject 'Properties' 'launchSettings.json'
-$configurationPath = Join-Path $testServerDirectory 'readme.tests.md'
+$configurationPath = Join-Path $repoRoot 'readme.md'
 $testServerSwaggerPath = Join-Path $repoRoot 'node_modules' '@microsoft.azure' 'autorest.testserver' 'swagger'
 $testNames =
     'additionalProperties',
@@ -97,7 +97,6 @@ foreach ($testName in $testNames)
 
 # Local test projects
 $testSwaggerPath = Join-Path $repoRoot 'test' 'TestProjects'
-$configurationPath = Join-Path $testSwaggerPath 'readme.md'
 
 foreach ($directory in Get-ChildItem $testSwaggerPath -Directory)
 {
@@ -170,5 +169,10 @@ foreach ($key in $keys)
 {
     $definition = $swaggerDefinitions[$key];
     Invoke-AutoRest $definition.output $definition.title $definition.arguments
+    $projectPath = Join-Path $definition.output $definition.title;
+    if (!$noProjectBuild)
+    {
+        Invoke "dotnet build $projectPath --verbosity quiet /nologo"
+    }
 }
 

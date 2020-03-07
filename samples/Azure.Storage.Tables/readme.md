@@ -5,7 +5,7 @@
 
 ``` yaml
 title: Azure.Storage.Tables
-require: $(this-folder)/../readme.samples.md
+require: $(this-folder)/../../readme.md
 # https://github.com/shurd/azure-rest-api-specs/tree/tablesSwagger/specification/cosmos-db/data-plane/Microsoft.TablesStorage/preview/2018-10-10
 input-file:
     -  $(this-folder)/table.json
