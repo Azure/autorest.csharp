@@ -1,0 +1,10 @@
+<Project>
+
+  <ItemGroup>
+    <PackageReference Include="Azure.Storage.Common" Version="12.2.0" />
+  </ItemGroup>
+  
+  <Import Project="..\..\Directory.Build.props" />
+
+</Project>
+
