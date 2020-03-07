@@ -1,5 +1,5 @@
 #Requires -Version 6.0
-param($name, [switch]$noDebug, [switch]$reset, [switch]$noBuild, [switch]$fast, [switch]$updateLaunchSettings, [switch]$clean = $true)
+param($name, [switch]$noDebug, [switch]$reset, [switch]$noBuild, [switch]$noProjectBuild, [switch]$fast, [switch]$updateLaunchSettings, [switch]$clean = $true)
 
 $ErrorActionPreference = 'Stop'
 
@@ -170,5 +170,10 @@ foreach ($key in $keys)
 {
     $definition = $swaggerDefinitions[$key];
     Invoke-AutoRest $definition.output $definition.title $definition.arguments
+    $projectPath = $definition.output;
+    if (!$noProjectBuild)
+    {
+        Invoke "dotnet build $projectPath --verbosity quiet /nologo"
+    }
 }
 
