@@ -6,17 +6,3 @@ output-folder: $(this-folder)/$(title)
 clear-output-folder: false
 client-accessibility: internal
 ```
-
-``` yaml
-pipeline:
-  csharpproj:
-    input: modelerfour/identity
-  csharpproj/emitter:
-    input: csharpproj
-    scope: output-scope
-  csharpproj/emitter/command:
-    input:
-    - csharpgen/emitter
-    - csharpproj/emitter
-    run: dotnet build $(title).csproj --verbosity quiet /nologo
-```
