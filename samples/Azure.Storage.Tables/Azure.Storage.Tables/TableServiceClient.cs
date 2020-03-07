@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using System.Threading.Tasks;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.Storage.Tables.Models;
@@ -31,8 +32,8 @@ namespace Azure.Storage.Tables
             return PageableHelpers.CreateAsyncEnumerable(async _ =>
             {
                 var response = await _tableOperations.RestClient.QueryAsync(null, _format, null, null, null, cancellationToken);
-                return Page.FromValues(response.Value.Value, response.Headers.XMsContinuationNextTableName, response.GetRawResponse());
-            });
+                return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+            }, (_, __) => throw new NotImplementedException());
         }
     }
 }

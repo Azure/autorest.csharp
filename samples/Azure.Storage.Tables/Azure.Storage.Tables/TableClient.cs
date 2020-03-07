@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure.Core;
@@ -40,7 +41,7 @@ namespace Azure.Storage.Tables
             {
                 var response = await _tableOperations.RestClient.QueryEntitiesAsync(_operationTimeout, string.Empty, _format, limit, @select, filter, _table, cancellationToken);
                 return Page.FromValues(response.Value.Value, response.Headers.XMsContinuationNextTableName, response.GetRawResponse());
-            });
+            },(_, __) => throw new NotImplementedException());
         }
     }
 }
