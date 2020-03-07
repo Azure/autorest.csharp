@@ -4,7 +4,7 @@ info: !<!Info>
   title: body-byte
 schemas: !<!Schemas> 
   numbers:
-  - !<!NumberSchema> &ref_0
+  - !<!NumberSchema> &ref_2
     type: integer
     precision: 32
     language: !<!Languages> 
@@ -13,14 +13,14 @@ schemas: !<!Schemas>
         description: ''
     protocol: !<!Protocols> {}
   strings:
-  - !<!StringSchema> &ref_2
+  - !<!StringSchema> &ref_4
     type: string
     language: !<!Languages> 
       default:
         name: String
         description: simple string
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_1
+  - !<!StringSchema> &ref_3
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -30,8 +30,57 @@ schemas: !<!Schemas>
         name: ErrorMessage
         description: ''
     protocol: !<!Protocols> {}
+  constants:
+  - !<!ConstantSchema> 
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: null
+    valueType: !<!ByteArraySchema> &ref_0
+      type: byte-array
+      format: byte
+      apiVersions:
+      - !<!ApiVersion> 
+        version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: ByteArray
+          description: The null byte value
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: Constant0
+        description: The null byte value
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> 
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: ''
+    valueType: !<!ByteArraySchema> &ref_1
+      type: byte-array
+      format: byte
+      apiVersions:
+      - !<!ApiVersion> 
+        version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: ByteArray
+          description: The empty byte value ''
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: Constant1
+        description: The empty byte value ''
+    protocol: !<!Protocols> {}
   byteArrays:
-  - !<!ByteArraySchema> &ref_4
+  - *ref_0
+  - *ref_1
+  - !<!ByteArraySchema> &ref_7
     type: byte-array
     format: byte
     apiVersions:
@@ -40,17 +89,17 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: ByteArray
-        description: The null byte value
+        description: Non-ascii base-64 encoded byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
     protocol: !<!Protocols> {}
   objects:
-  - !<!ObjectSchema> &ref_5
+  - !<!ObjectSchema> &ref_6
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
     properties:
     - !<!Property> 
-      schema: *ref_0
+      schema: *ref_2
       serializedName: status
       language: !<!Languages> 
         default:
@@ -58,7 +107,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_1
+      schema: *ref_3
       serializedName: message
       language: !<!Languages> 
         default:
@@ -76,8 +125,8 @@ schemas: !<!Schemas>
         namespace: ''
     protocol: !<!Protocols> {}
 globalParameters:
-- !<!Parameter> &ref_3
-  schema: *ref_2
+- !<!Parameter> &ref_5
+  schema: *ref_4
   clientDefaultValue: 'http://localhost:3000'
   implementation: Client
   required: true
@@ -100,7 +149,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_3
+    - *ref_5
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -115,7 +164,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_4
+      schema: *ref_0
       language: !<!Languages> 
         default:
           name: ''
@@ -129,7 +178,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_5
+      schema: *ref_6
       language: !<!Languages> 
         default:
           name: ''
@@ -151,7 +200,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_3
+    - *ref_5
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -166,7 +215,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_4
+      schema: *ref_1
       language: !<!Languages> 
         default:
           name: ''
@@ -180,7 +229,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_5
+      schema: *ref_6
       language: !<!Languages> 
         default:
           name: ''
@@ -202,7 +251,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_3
+    - *ref_5
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -217,7 +266,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_4
+      schema: *ref_7
       language: !<!Languages> 
         default:
           name: ''
@@ -231,7 +280,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_5
+      schema: *ref_6
       language: !<!Languages> 
         default:
           name: ''
@@ -253,12 +302,12 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_3
+    - *ref_5
     requests:
     - !<!Request> 
       parameters:
-      - !<!Parameter> &ref_6
-        schema: *ref_4
+      - !<!Parameter> &ref_8
+        schema: *ref_7
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -270,7 +319,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_6
+      - *ref_8
       language: !<!Languages> 
         default:
           name: ''
@@ -296,7 +345,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_5
+      schema: *ref_6
       language: !<!Languages> 
         default:
           name: ''
@@ -318,7 +367,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_3
+    - *ref_5
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -333,7 +382,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_4
+      schema: *ref_7
       language: !<!Languages> 
         default:
           name: ''
@@ -347,7 +396,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_5
+      schema: *ref_6
       language: !<!Languages> 
         default:
           name: ''

@@ -5,7 +5,7 @@
 
 ``` yaml
 title: CognitiveServices
-require: $(this-folder)/../readme.samples.md
+require: $(this-folder)/../../readme.md
 # https://github.com/Azure/azure-rest-api-specs/blob/master/specification/search/data-plane/Microsoft.Azure.Search.Data/stable/2019-05-06/searchindex.json
 # https://github.com/Azure/azure-rest-api-specs/blob/master/specification/search/data-plane/Microsoft.Azure.Search.Service/stable/2019-05-06/searchservice.json
 input-file:
