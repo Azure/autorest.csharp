@@ -39,7 +39,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/complex-type-ref-no-meta", false);
@@ -116,7 +116,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/complex-type-ref-no-meta", false);
@@ -191,7 +191,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/complex-type-ref-with-meta", false);
@@ -268,7 +268,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/complex-type-ref-with-meta", false);
@@ -343,7 +343,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/simple", false);
@@ -420,7 +420,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/simple", false);
@@ -495,7 +495,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/wrapped-lists", false);
@@ -572,7 +572,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/wrapped-lists", false);
@@ -647,7 +647,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/headers", false);
@@ -708,7 +708,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/empty-list", false);
@@ -785,7 +785,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/empty-list", false);
@@ -860,7 +860,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/empty-wrapped-lists", false);
@@ -937,7 +937,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/empty-wrapped-lists", false);
@@ -1012,7 +1012,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/root-list", false);
@@ -1101,7 +1101,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/root-list", false);
@@ -1181,7 +1181,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/root-list-single-item", false);
@@ -1270,7 +1270,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/root-list-single-item", false);
@@ -1350,7 +1350,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/empty-root-list", false);
@@ -1439,7 +1439,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/empty-root-list", false);
@@ -1519,7 +1519,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/empty-child-element", false);
@@ -1596,7 +1596,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/empty-child-element", false);
@@ -1671,7 +1671,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/", false);
@@ -1749,7 +1749,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/", false);
@@ -1828,7 +1828,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/", false);
@@ -1905,7 +1905,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/mycontainer", false);
@@ -1996,7 +1996,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/mycontainer", false);
@@ -2078,7 +2078,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/mycontainer", false);
@@ -2157,7 +2157,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/jsoninput", false);
@@ -2232,7 +2232,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/jsonoutput", false);

@@ -36,7 +36,7 @@ namespace lro
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/lro/customheader/putasync/retry/succeeded", false);
@@ -101,7 +101,7 @@ namespace lro
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/lro/customheader/put/201/creating/succeeded/200", false);
@@ -166,7 +166,7 @@ namespace lro
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/lro/customheader/post/202/retry/200", false);
@@ -231,7 +231,7 @@ namespace lro
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/lro/customheader/postasync/retry/succeeded", false);

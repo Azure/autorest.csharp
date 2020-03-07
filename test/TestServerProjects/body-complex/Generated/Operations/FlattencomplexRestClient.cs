@@ -37,7 +37,7 @@ namespace body_complex
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/complex/flatten/valid", false);

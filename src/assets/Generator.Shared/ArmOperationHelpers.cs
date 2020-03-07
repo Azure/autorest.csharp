@@ -195,7 +195,7 @@ namespace Azure.Core
             {
                 HttpMessage message = _pipeline.CreateMessage();
                 Request request = message.Request;
-                request.Method = RequestMethodAdditional.Get;
+                request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri(link));
                 return message;
             }

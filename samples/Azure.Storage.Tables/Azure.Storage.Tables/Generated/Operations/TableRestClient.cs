@@ -44,7 +44,7 @@ namespace Azure.Storage.Tables
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(url, false);
             uri.AppendPath("/Tables", false);
@@ -145,7 +145,7 @@ namespace Azure.Storage.Tables
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(url, false);
             uri.AppendPath("/Tables", false);
@@ -244,7 +244,7 @@ namespace Azure.Storage.Tables
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Delete;
+            request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(url, false);
             uri.AppendPath("/Tables('", false);
@@ -326,7 +326,7 @@ namespace Azure.Storage.Tables
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(url, false);
             uri.AppendPath("/", false);
@@ -447,7 +447,7 @@ namespace Azure.Storage.Tables
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(url, false);
             uri.AppendPath("/", false);
@@ -586,7 +586,7 @@ namespace Azure.Storage.Tables
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(url, false);
             uri.AppendPath("/", false);
@@ -717,7 +717,7 @@ namespace Azure.Storage.Tables
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Delete;
+            request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(url, false);
             uri.AppendPath("/", false);
@@ -836,7 +836,7 @@ namespace Azure.Storage.Tables
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(url, false);
             uri.AppendPath("/", false);
@@ -958,7 +958,7 @@ namespace Azure.Storage.Tables
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(url, false);
             uri.AppendPath("/", false);
@@ -1076,7 +1076,7 @@ namespace Azure.Storage.Tables
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(url, false);
             uri.AppendPath("/", false);

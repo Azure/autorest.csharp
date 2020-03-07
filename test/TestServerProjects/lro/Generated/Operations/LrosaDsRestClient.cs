@@ -36,7 +36,7 @@ namespace lro
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/lro/nonretryerror/put/400", false);
@@ -101,7 +101,7 @@ namespace lro
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/lro/nonretryerror/put/201/creating/400", false);
@@ -166,7 +166,7 @@ namespace lro
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/lro/nonretryerror/put/201/creating/400/invalidjson", false);
@@ -231,7 +231,7 @@ namespace lro
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/lro/nonretryerror/putasync/retry/400", false);
@@ -296,7 +296,7 @@ namespace lro
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Delete;
+            request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/lro/nonretryerror/delete/400", false);
@@ -355,7 +355,7 @@ namespace lro
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Delete;
+            request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/lro/nonretryerror/delete/202/retry/400", false);
@@ -414,7 +414,7 @@ namespace lro
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Delete;
+            request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/lro/nonretryerror/deleteasync/retry/400", false);
@@ -473,7 +473,7 @@ namespace lro
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/lro/nonretryerror/post/400", false);
@@ -538,7 +538,7 @@ namespace lro
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/lro/nonretryerror/post/202/retry/400", false);
@@ -603,7 +603,7 @@ namespace lro
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/lro/nonretryerror/postasync/retry/400", false);
@@ -668,7 +668,7 @@ namespace lro
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/lro/error/put/201/noprovisioningstatepayload", false);
@@ -733,7 +733,7 @@ namespace lro
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/lro/error/putasync/retry/nostatus", false);
@@ -798,7 +798,7 @@ namespace lro
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/lro/error/putasync/retry/nostatuspayload", false);
@@ -863,7 +863,7 @@ namespace lro
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Delete;
+            request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/lro/error/delete/204/nolocation", false);
@@ -922,7 +922,7 @@ namespace lro
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Delete;
+            request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/lro/error/deleteasync/retry/nostatus", false);
@@ -981,7 +981,7 @@ namespace lro
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/lro/error/post/202/nolocation", false);
@@ -1046,7 +1046,7 @@ namespace lro
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/lro/error/postasync/retry/nopayload", false);
@@ -1111,7 +1111,7 @@ namespace lro
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/lro/error/put/200/invalidjson", false);
@@ -1176,7 +1176,7 @@ namespace lro
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/lro/error/putasync/retry/invalidheader", false);
@@ -1241,7 +1241,7 @@ namespace lro
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/lro/error/putasync/retry/invalidjsonpolling", false);
@@ -1306,7 +1306,7 @@ namespace lro
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Delete;
+            request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/lro/error/delete/202/retry/invalidheader", false);
@@ -1365,7 +1365,7 @@ namespace lro
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Delete;
+            request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/lro/error/deleteasync/retry/invalidheader", false);
@@ -1424,7 +1424,7 @@ namespace lro
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Delete;
+            request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/lro/error/deleteasync/retry/invalidjsonpolling", false);
@@ -1483,7 +1483,7 @@ namespace lro
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/lro/error/post/202/retry/invalidheader", false);
@@ -1548,7 +1548,7 @@ namespace lro
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/lro/error/postasync/retry/invalidheader", false);
@@ -1613,7 +1613,7 @@ namespace lro
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/lro/error/postasync/retry/invalidjsonpolling", false);

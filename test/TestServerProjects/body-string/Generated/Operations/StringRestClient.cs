@@ -36,7 +36,7 @@ namespace body_string
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/string/null", false);
@@ -103,7 +103,7 @@ namespace body_string
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/string/null", false);
@@ -166,7 +166,7 @@ namespace body_string
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/string/empty", false);
@@ -233,7 +233,7 @@ namespace body_string
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/string/empty", false);
@@ -296,7 +296,7 @@ namespace body_string
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/string/mbcs", false);
@@ -363,7 +363,7 @@ namespace body_string
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/string/mbcs", false);
@@ -426,7 +426,7 @@ namespace body_string
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/string/whitespace", false);
@@ -493,7 +493,7 @@ namespace body_string
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/string/whitespace", false);
@@ -556,7 +556,7 @@ namespace body_string
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/string/notProvided", false);
@@ -623,7 +623,7 @@ namespace body_string
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/string/base64Encoding", false);
@@ -690,7 +690,7 @@ namespace body_string
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/string/base64UrlEncoding", false);
@@ -757,7 +757,7 @@ namespace body_string
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/string/base64UrlEncoding", false);
@@ -832,7 +832,7 @@ namespace body_string
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/string/nullBase64UrlEncoding", false);

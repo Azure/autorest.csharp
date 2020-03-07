@@ -11,27 +11,27 @@ namespace AutoRest.CSharp.V3.Utilities
     {
         public static string ToRequestMethodName(this RequestMethod method) => method.ToString() switch
         {
-            "GET" => nameof(RequestMethodAdditional.Get),
-            "POST" => nameof(RequestMethodAdditional.Post),
-            "PUT" => nameof(RequestMethodAdditional.Put),
-            "PATCH" => nameof(RequestMethodAdditional.Patch),
-            "DELETE" => nameof(RequestMethodAdditional.Delete),
-            "HEAD" => nameof(RequestMethodAdditional.Head),
-            "OPTIONS" => nameof(RequestMethodAdditional.Options),
-            "TRACE" => nameof(RequestMethodAdditional.Trace),
+            "GET" => nameof(RequestMethod.Get),
+            "POST" => nameof(RequestMethod.Post),
+            "PUT" => nameof(RequestMethod.Put),
+            "PATCH" => nameof(RequestMethod.Patch),
+            "DELETE" => nameof(RequestMethod.Delete),
+            "HEAD" => nameof(RequestMethod.Head),
+            "OPTIONS" => nameof(RequestMethod.Options),
+            "TRACE" => nameof(RequestMethod.Trace),
             _ => String.Empty
         };
 
         public static RequestMethod? ToCoreRequestMethod(this HttpMethod method) => method switch
         {
-            HttpMethod.Delete => RequestMethodAdditional.Delete,
-            HttpMethod.Get => RequestMethodAdditional.Get,
-            HttpMethod.Head => RequestMethodAdditional.Head,
-            HttpMethod.Options => RequestMethodAdditional.Options,
-            HttpMethod.Patch => RequestMethodAdditional.Patch,
-            HttpMethod.Post => RequestMethodAdditional.Post,
-            HttpMethod.Put => RequestMethodAdditional.Put,
-            HttpMethod.Trace => RequestMethodAdditional.Trace,
+            HttpMethod.Delete => RequestMethod.Delete,
+            HttpMethod.Get => RequestMethod.Get,
+            HttpMethod.Head => RequestMethod.Head,
+            HttpMethod.Options => RequestMethod.Options,
+            HttpMethod.Patch => RequestMethod.Patch,
+            HttpMethod.Post => RequestMethod.Post,
+            HttpMethod.Put => RequestMethod.Put,
+            HttpMethod.Trace => RequestMethod.Trace,
             _ => (RequestMethod?)null
         };
     }

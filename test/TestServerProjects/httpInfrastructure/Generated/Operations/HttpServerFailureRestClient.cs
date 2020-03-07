@@ -35,7 +35,7 @@ namespace httpInfrastructure
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Head;
+            request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/http/failure/server/501", false);
@@ -90,7 +90,7 @@ namespace httpInfrastructure
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/http/failure/server/501", false);
@@ -145,7 +145,7 @@ namespace httpInfrastructure
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/http/failure/server/505", false);
@@ -204,7 +204,7 @@ namespace httpInfrastructure
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Delete;
+            request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/http/failure/server/505", false);
