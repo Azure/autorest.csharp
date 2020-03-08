@@ -18,7 +18,6 @@ namespace AppConfiguration
             _response = response;
         }
         public string SyncToken => _response.Headers.TryGetValue("Sync-Token", out string value) ? value : null;
-        public string ETag => _response.Headers.TryGetValue("ETag", out string value) ? value : null;
         public string LastModified => _response.Headers.TryGetValue("Last-Modified", out string value) ? value : null;
     }
 }
