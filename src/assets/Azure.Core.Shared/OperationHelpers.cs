@@ -5,7 +5,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-#pragma warning disable CS8600, CS8604, CS8605
+#nullable enable
 
 namespace Azure.Core
 {
