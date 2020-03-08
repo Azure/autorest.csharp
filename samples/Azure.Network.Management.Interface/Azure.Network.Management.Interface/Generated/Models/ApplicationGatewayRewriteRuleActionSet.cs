@@ -13,9 +13,9 @@ namespace Azure.Network.Management.Interface.Models
     public partial class ApplicationGatewayRewriteRuleActionSet
     {
         /// <summary> Request Header Actions in the Action Set. </summary>
-        public ICollection<ApplicationGatewayHeaderConfiguration> RequestHeaderConfigurations { get; set; }
+        public IList<ApplicationGatewayHeaderConfiguration> RequestHeaderConfigurations { get; set; }
         /// <summary> Response Header Actions in the Action Set. </summary>
-        public ICollection<ApplicationGatewayHeaderConfiguration> ResponseHeaderConfigurations { get; set; }
+        public IList<ApplicationGatewayHeaderConfiguration> ResponseHeaderConfigurations { get; set; }
         /// <summary> Url Configuration Action in the Action Set. </summary>
         public ApplicationGatewayUrlConfiguration UrlConfiguration { get; set; }
     }

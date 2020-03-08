@@ -17,6 +17,6 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> The required member name for current private link connection. </summary>
         public string RequiredMemberName { get; internal set; }
         /// <summary> List of FQDNs for current private link connection. </summary>
-        public ICollection<string> Fqdns { get; internal set; }
+        public IList<string> Fqdns { get; internal set; }
     }
 }

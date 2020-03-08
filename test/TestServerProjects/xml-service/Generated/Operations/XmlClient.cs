@@ -196,13 +196,13 @@ namespace xml_service
         }
         /// <summary> Gets a list as the root element. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<ICollection<Banana>>> GetRootListAsync(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<IList<Banana>>> GetRootListAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetRootListAsync(cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Gets a list as the root element. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<ICollection<Banana>> GetRootList(CancellationToken cancellationToken = default)
+        public virtual Response<IList<Banana>> GetRootList(CancellationToken cancellationToken = default)
         {
             return RestClient.GetRootList(cancellationToken);
         }
@@ -222,13 +222,13 @@ namespace xml_service
         }
         /// <summary> Gets a list with a single item. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<ICollection<Banana>>> GetRootListSingleItemAsync(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<IList<Banana>>> GetRootListSingleItemAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetRootListSingleItemAsync(cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Gets a list with a single item. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<ICollection<Banana>> GetRootListSingleItem(CancellationToken cancellationToken = default)
+        public virtual Response<IList<Banana>> GetRootListSingleItem(CancellationToken cancellationToken = default)
         {
             return RestClient.GetRootListSingleItem(cancellationToken);
         }
@@ -248,13 +248,13 @@ namespace xml_service
         }
         /// <summary> Gets an empty list as the root element. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<ICollection<Banana>>> GetEmptyRootListAsync(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<IList<Banana>>> GetEmptyRootListAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetEmptyRootListAsync(cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Gets an empty list as the root element. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<ICollection<Banana>> GetEmptyRootList(CancellationToken cancellationToken = default)
+        public virtual Response<IList<Banana>> GetEmptyRootList(CancellationToken cancellationToken = default)
         {
             return RestClient.GetEmptyRootList(cancellationToken);
         }
@@ -338,13 +338,13 @@ namespace xml_service
         }
         /// <summary> Gets storage ACLs for a container. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<ICollection<SignedIdentifier>>> GetAclsAsync(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<IList<SignedIdentifier>>> GetAclsAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetAclsAsync(cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Gets storage ACLs for a container. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<ICollection<SignedIdentifier>> GetAcls(CancellationToken cancellationToken = default)
+        public virtual Response<IList<SignedIdentifier>> GetAcls(CancellationToken cancellationToken = default)
         {
             return RestClient.GetAcls(cancellationToken);
         }

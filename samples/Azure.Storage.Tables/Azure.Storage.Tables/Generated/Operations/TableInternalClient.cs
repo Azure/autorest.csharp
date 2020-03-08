@@ -213,7 +213,7 @@ namespace Azure.Storage.Tables
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="table"> The name of the table. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<ICollection<SignedIdentifier>>> GetAccessPolicyAsync(int? timeout, string requestId, string table, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<IList<SignedIdentifier>>> GetAccessPolicyAsync(int? timeout, string requestId, string table, CancellationToken cancellationToken = default)
         {
             return await RestClient.GetAccessPolicyAsync(timeout, requestId, table, cancellationToken).ConfigureAwait(false);
         }
@@ -222,7 +222,7 @@ namespace Azure.Storage.Tables
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="table"> The name of the table. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<ICollection<SignedIdentifier>> GetAccessPolicy(int? timeout, string requestId, string table, CancellationToken cancellationToken = default)
+        public virtual Response<IList<SignedIdentifier>> GetAccessPolicy(int? timeout, string requestId, string table, CancellationToken cancellationToken = default)
         {
             return RestClient.GetAccessPolicy(timeout, requestId, table, cancellationToken);
         }

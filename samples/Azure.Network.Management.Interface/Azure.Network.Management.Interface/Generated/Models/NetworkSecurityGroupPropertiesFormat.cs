@@ -13,13 +13,13 @@ namespace Azure.Network.Management.Interface.Models
     public partial class NetworkSecurityGroupPropertiesFormat
     {
         /// <summary> A collection of security rules of the network security group. </summary>
-        public ICollection<SecurityRule> SecurityRules { get; set; }
+        public IList<SecurityRule> SecurityRules { get; set; }
         /// <summary> The default security rules of network security group. </summary>
-        public ICollection<SecurityRule> DefaultSecurityRules { get; internal set; }
+        public IList<SecurityRule> DefaultSecurityRules { get; internal set; }
         /// <summary> A collection of references to network interfaces. </summary>
-        public ICollection<NetworkInterface> NetworkInterfaces { get; internal set; }
+        public IList<NetworkInterface> NetworkInterfaces { get; internal set; }
         /// <summary> A collection of references to subnets. </summary>
-        public ICollection<Subnet> Subnets { get; internal set; }
+        public IList<Subnet> Subnets { get; internal set; }
         /// <summary> The resource GUID property of the network security group resource. </summary>
         public string ResourceGuid { get; internal set; }
         /// <summary> The provisioning state of the network security group resource. </summary>

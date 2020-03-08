@@ -13,7 +13,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class VirtualNetworkTapPropertiesFormat
     {
         /// <summary> Specifies the list of resource IDs for the network interface IP configuration that needs to be tapped. </summary>
-        public ICollection<NetworkInterfaceTapConfiguration> NetworkInterfaceTapConfigurations { get; internal set; }
+        public IList<NetworkInterfaceTapConfiguration> NetworkInterfaceTapConfigurations { get; internal set; }
         /// <summary> The resource GUID property of the virtual network tap resource. </summary>
         public string ResourceGuid { get; internal set; }
         /// <summary> The provisioning state of the virtual network tap resource. </summary>

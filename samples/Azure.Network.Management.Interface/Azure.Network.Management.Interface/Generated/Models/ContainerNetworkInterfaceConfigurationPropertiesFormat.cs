@@ -13,9 +13,9 @@ namespace Azure.Network.Management.Interface.Models
     public partial class ContainerNetworkInterfaceConfigurationPropertiesFormat
     {
         /// <summary> A list of ip configurations of the container network interface configuration. </summary>
-        public ICollection<IPConfigurationProfile> IpConfigurations { get; set; }
+        public IList<IPConfigurationProfile> IpConfigurations { get; set; }
         /// <summary> A list of container network interfaces created from this container network interface configuration. </summary>
-        public ICollection<SubResource> ContainerNetworkInterfaces { get; set; }
+        public IList<SubResource> ContainerNetworkInterfaces { get; set; }
         /// <summary> The provisioning state of the container network interface configuration resource. </summary>
         public ProvisioningState? ProvisioningState { get; internal set; }
     }

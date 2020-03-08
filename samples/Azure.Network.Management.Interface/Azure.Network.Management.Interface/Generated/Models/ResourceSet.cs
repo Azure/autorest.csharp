@@ -13,6 +13,6 @@ namespace Azure.Network.Management.Interface.Models
     public partial class ResourceSet
     {
         /// <summary> The list of subscriptions. </summary>
-        public ICollection<string> Subscriptions { get; set; }
+        public IList<string> Subscriptions { get; set; }
     }
 }

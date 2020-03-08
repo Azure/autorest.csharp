@@ -1021,7 +1021,7 @@ namespace xml_service
         }
         /// <summary> Gets a list as the root element. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<Banana>>> GetRootListAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<Banana>>> GetRootListAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("XmlClient.GetRootList");
             scope.Start();
@@ -1034,7 +1034,7 @@ namespace xml_service
                     case 200:
                         {
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            ICollection<Banana> value = default;
+                            IList<Banana> value = default;
                             var bananas = document.Element("bananas");
                             if (bananas != null)
                             {
@@ -1060,7 +1060,7 @@ namespace xml_service
         }
         /// <summary> Gets a list as the root element. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<Banana>> GetRootList(CancellationToken cancellationToken = default)
+        public Response<IList<Banana>> GetRootList(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("XmlClient.GetRootList");
             scope.Start();
@@ -1073,7 +1073,7 @@ namespace xml_service
                     case 200:
                         {
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            ICollection<Banana> value = default;
+                            IList<Banana> value = default;
                             var bananas = document.Element("bananas");
                             if (bananas != null)
                             {
@@ -1190,7 +1190,7 @@ namespace xml_service
         }
         /// <summary> Gets a list with a single item. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<Banana>>> GetRootListSingleItemAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<Banana>>> GetRootListSingleItemAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("XmlClient.GetRootListSingleItem");
             scope.Start();
@@ -1203,7 +1203,7 @@ namespace xml_service
                     case 200:
                         {
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            ICollection<Banana> value = default;
+                            IList<Banana> value = default;
                             var bananas = document.Element("bananas");
                             if (bananas != null)
                             {
@@ -1229,7 +1229,7 @@ namespace xml_service
         }
         /// <summary> Gets a list with a single item. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<Banana>> GetRootListSingleItem(CancellationToken cancellationToken = default)
+        public Response<IList<Banana>> GetRootListSingleItem(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("XmlClient.GetRootListSingleItem");
             scope.Start();
@@ -1242,7 +1242,7 @@ namespace xml_service
                     case 200:
                         {
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            ICollection<Banana> value = default;
+                            IList<Banana> value = default;
                             var bananas = document.Element("bananas");
                             if (bananas != null)
                             {
@@ -1359,7 +1359,7 @@ namespace xml_service
         }
         /// <summary> Gets an empty list as the root element. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<Banana>>> GetEmptyRootListAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<Banana>>> GetEmptyRootListAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("XmlClient.GetEmptyRootList");
             scope.Start();
@@ -1372,7 +1372,7 @@ namespace xml_service
                     case 200:
                         {
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            ICollection<Banana> value = default;
+                            IList<Banana> value = default;
                             var bananas = document.Element("bananas");
                             if (bananas != null)
                             {
@@ -1398,7 +1398,7 @@ namespace xml_service
         }
         /// <summary> Gets an empty list as the root element. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<Banana>> GetEmptyRootList(CancellationToken cancellationToken = default)
+        public Response<IList<Banana>> GetEmptyRootList(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("XmlClient.GetEmptyRootList");
             scope.Start();
@@ -1411,7 +1411,7 @@ namespace xml_service
                     case 200:
                         {
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            ICollection<Banana> value = default;
+                            IList<Banana> value = default;
                             var bananas = document.Element("bananas");
                             if (bananas != null)
                             {
@@ -1916,7 +1916,7 @@ namespace xml_service
         }
         /// <summary> Gets storage ACLs for a container. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<SignedIdentifier>>> GetAclsAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<SignedIdentifier>>> GetAclsAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("XmlClient.GetAcls");
             scope.Start();
@@ -1929,7 +1929,7 @@ namespace xml_service
                     case 200:
                         {
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            ICollection<SignedIdentifier> value = default;
+                            IList<SignedIdentifier> value = default;
                             var signedIdentifiers = document.Element("SignedIdentifiers");
                             if (signedIdentifiers != null)
                             {
@@ -1955,7 +1955,7 @@ namespace xml_service
         }
         /// <summary> Gets storage ACLs for a container. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<SignedIdentifier>> GetAcls(CancellationToken cancellationToken = default)
+        public Response<IList<SignedIdentifier>> GetAcls(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("XmlClient.GetAcls");
             scope.Start();
@@ -1968,7 +1968,7 @@ namespace xml_service
                     case 200:
                         {
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            ICollection<SignedIdentifier> value = default;
+                            IList<SignedIdentifier> value = default;
                             var signedIdentifiers = document.Element("SignedIdentifiers");
                             if (signedIdentifiers != null)
                             {

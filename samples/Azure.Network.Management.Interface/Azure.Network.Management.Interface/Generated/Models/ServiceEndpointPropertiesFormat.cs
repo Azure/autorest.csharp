@@ -15,7 +15,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> The type of the endpoint service. </summary>
         public string Service { get; set; }
         /// <summary> A list of locations. </summary>
-        public ICollection<string> Locations { get; set; }
+        public IList<string> Locations { get; set; }
         /// <summary> The provisioning state of the service endpoint resource. </summary>
         public ProvisioningState? ProvisioningState { get; internal set; }
     }

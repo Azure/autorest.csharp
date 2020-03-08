@@ -21,7 +21,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> Service endpoint name. </summary>
         public string Service { get; set; }
         /// <summary> A list of service resources. </summary>
-        public ICollection<string> ServiceResources { get; set; }
+        public IList<string> ServiceResources { get; set; }
         /// <summary> The provisioning state of the service endpoint policy definition resource. </summary>
         public ProvisioningState? ProvisioningState { get; internal set; }
     }

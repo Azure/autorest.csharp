@@ -20,8 +20,8 @@ namespace CognitiveSearch.Models
         /// <summary> A value indicating which language code to use. Default is en. </summary>
         public ImageAnalysisSkillLanguage? DefaultLanguageCode { get; set; }
         /// <summary> A list of visual features. </summary>
-        public ICollection<VisualFeature> VisualFeatures { get; set; }
+        public IList<VisualFeature> VisualFeatures { get; set; }
         /// <summary> A string indicating which domain-specific details to return. </summary>
-        public ICollection<ImageDetail> Details { get; set; }
+        public IList<ImageDetail> Details { get; set; }
     }
 }

@@ -12,6 +12,6 @@ namespace CognitiveServices.TextAnalytics.Models
     /// <summary> The LanguageBatchInput. </summary>
     public partial class LanguageBatchInput
     {
-        public ICollection<LanguageInput> Documents { get; set; } = new List<LanguageInput>();
+        public IList<LanguageInput> Documents { get; set; } = new List<LanguageInput>();
     }
 }

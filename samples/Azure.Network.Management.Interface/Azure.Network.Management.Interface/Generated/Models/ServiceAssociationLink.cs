@@ -27,6 +27,6 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> If true, the resource can be deleted. </summary>
         public bool? AllowDelete { get; set; }
         /// <summary> A list of locations. </summary>
-        public ICollection<string> Locations { get; set; }
+        public IList<string> Locations { get; set; }
     }
 }

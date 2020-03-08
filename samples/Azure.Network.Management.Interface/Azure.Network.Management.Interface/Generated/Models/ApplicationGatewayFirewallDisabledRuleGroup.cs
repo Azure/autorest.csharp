@@ -15,6 +15,6 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> The name of the rule group that will be disabled. </summary>
         public string RuleGroupName { get; set; }
         /// <summary> The list of rules that will be disabled. If null, all rules of the rule group will be disabled. </summary>
-        public ICollection<int> Rules { get; set; }
+        public IList<int> Rules { get; set; }
     }
 }

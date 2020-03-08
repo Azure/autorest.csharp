@@ -42,13 +42,13 @@ namespace model_flattening
         }
         /// <summary> Get External Resource as an Array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<ICollection<FlattenedProduct>>> GetArrayAsync(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<IList<FlattenedProduct>>> GetArrayAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetArrayAsync(cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Get External Resource as an Array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<ICollection<FlattenedProduct>> GetArray(CancellationToken cancellationToken = default)
+        public virtual Response<IList<FlattenedProduct>> GetArray(CancellationToken cancellationToken = default)
         {
             return RestClient.GetArray(cancellationToken);
         }
@@ -68,13 +68,13 @@ namespace model_flattening
         }
         /// <summary> No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it&apos;s referenced in an array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<ICollection<ProductWrapper>>> GetWrappedArrayAsync(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<IList<ProductWrapper>>> GetWrappedArrayAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetWrappedArrayAsync(cancellationToken).ConfigureAwait(false);
         }
         /// <summary> No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it&apos;s referenced in an array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<ICollection<ProductWrapper>> GetWrappedArray(CancellationToken cancellationToken = default)
+        public virtual Response<IList<ProductWrapper>> GetWrappedArray(CancellationToken cancellationToken = default)
         {
             return RestClient.GetWrappedArray(cancellationToken);
         }

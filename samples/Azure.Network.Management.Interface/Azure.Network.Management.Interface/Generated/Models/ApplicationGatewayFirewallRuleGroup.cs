@@ -17,6 +17,6 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> The description of the web application firewall rule group. </summary>
         public string Description { get; set; }
         /// <summary> The rules of the web application firewall rule group. </summary>
-        public ICollection<ApplicationGatewayFirewallRule> Rules { get; set; } = new List<ApplicationGatewayFirewallRule>();
+        public IList<ApplicationGatewayFirewallRule> Rules { get; set; } = new List<ApplicationGatewayFirewallRule>();
     }
 }

@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.V3.Generation.Types
             ConstantSchema constantSchema => CreateType(constantSchema.ValueType, isNullable),
             BinarySchema _ => new CSharpType(typeof(byte[]), isNullable),
             ByteArraySchema _ => new CSharpType(typeof(byte[]), isNullable),
-            ArraySchema array => new CSharpType(typeof(ICollection<>), isNullable, CreateType(array.ElementType, false)),
+            ArraySchema array => new CSharpType(typeof(IList<>), isNullable, CreateType(array.ElementType, false)),
             DictionarySchema dictionary => new CSharpType(typeof(IDictionary<,>), isNullable, new CSharpType(typeof(string)), CreateType(dictionary.ElementType, false)),
             NumberSchema number => new CSharpType(ToFrameworkNumericType(number), isNullable),
             _ when ToFrameworkType(schema.Type) is Type type => new CSharpType(type, isNullable),
@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.V3.Generation.Types
                 return definitionType;
             }
 
-            if (definitionType.FrameworkType == typeof(ICollection<>))
+            if (definitionType.FrameworkType == typeof(IList<>))
             {
                 return new CSharpType(typeof(List<>), definitionType.IsNullable, definitionType.Arguments);
             }
@@ -60,7 +60,7 @@ namespace AutoRest.CSharp.V3.Generation.Types
                 return definitionType;
             }
 
-            if (definitionType.FrameworkType == typeof(ICollection<>))
+            if (definitionType.FrameworkType == typeof(IList<>))
             {
                 return new CSharpType(typeof(IEnumerable<>), definitionType.IsNullable, definitionType.Arguments);
             }

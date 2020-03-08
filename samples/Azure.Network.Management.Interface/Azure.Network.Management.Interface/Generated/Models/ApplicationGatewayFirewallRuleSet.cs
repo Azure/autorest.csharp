@@ -19,6 +19,6 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> The version of the web application firewall rule set type. </summary>
         public string RuleSetVersion { get; set; }
         /// <summary> The rule groups of the web application firewall rule set. </summary>
-        public ICollection<ApplicationGatewayFirewallRuleGroup> RuleGroups { get; set; }
+        public IList<ApplicationGatewayFirewallRuleGroup> RuleGroups { get; set; }
     }
 }

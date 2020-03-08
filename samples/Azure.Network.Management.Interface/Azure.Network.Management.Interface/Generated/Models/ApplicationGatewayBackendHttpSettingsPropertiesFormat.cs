@@ -23,9 +23,9 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> Probe resource of an application gateway. </summary>
         public SubResource Probe { get; set; }
         /// <summary> Array of references to application gateway authentication certificates. </summary>
-        public ICollection<SubResource> AuthenticationCertificates { get; set; }
+        public IList<SubResource> AuthenticationCertificates { get; set; }
         /// <summary> Array of references to application gateway trusted root certificates. </summary>
-        public ICollection<SubResource> TrustedRootCertificates { get; set; }
+        public IList<SubResource> TrustedRootCertificates { get; set; }
         /// <summary> Connection draining of the backend http settings resource. </summary>
         public ApplicationGatewayConnectionDraining ConnectionDraining { get; set; }
         /// <summary> Host header to be sent to the backend servers. </summary>

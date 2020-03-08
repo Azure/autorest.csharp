@@ -13,12 +13,12 @@ namespace Azure.Network.Management.Interface.Models
     public partial class ApplicationGatewayAvailableSslOptionsPropertiesFormat
     {
         /// <summary> List of available Ssl predefined policy. </summary>
-        public ICollection<SubResource> PredefinedPolicies { get; set; }
+        public IList<SubResource> PredefinedPolicies { get; set; }
         /// <summary> Name of the Ssl predefined policy applied by default to application gateway. </summary>
         public ApplicationGatewaySslPolicyName? DefaultPolicy { get; set; }
         /// <summary> List of available Ssl cipher suites. </summary>
-        public ICollection<ApplicationGatewaySslCipherSuite> AvailableCipherSuites { get; set; }
+        public IList<ApplicationGatewaySslCipherSuite> AvailableCipherSuites { get; set; }
         /// <summary> List of available Ssl protocols. </summary>
-        public ICollection<ApplicationGatewaySslProtocol> AvailableProtocols { get; set; }
+        public IList<ApplicationGatewaySslProtocol> AvailableProtocols { get; set; }
     }
 }

@@ -13,6 +13,6 @@ namespace CognitiveSearch.Models
     public partial class AnalyzeResult
     {
         /// <summary> The list of tokens returned by the analyzer specified in the request. </summary>
-        public ICollection<TokenInfo> Tokens { get; set; }
+        public IList<TokenInfo> Tokens { get; set; }
     }
 }

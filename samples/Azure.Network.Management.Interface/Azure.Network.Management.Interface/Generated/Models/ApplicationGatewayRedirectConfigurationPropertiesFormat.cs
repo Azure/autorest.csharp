@@ -23,10 +23,10 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> Include query string in the redirected url. </summary>
         public bool? IncludeQueryString { get; set; }
         /// <summary> Request routing specifying redirect configuration. </summary>
-        public ICollection<SubResource> RequestRoutingRules { get; set; }
+        public IList<SubResource> RequestRoutingRules { get; set; }
         /// <summary> Url path maps specifying default redirect configuration. </summary>
-        public ICollection<SubResource> UrlPathMaps { get; set; }
+        public IList<SubResource> UrlPathMaps { get; set; }
         /// <summary> Path rules specifying redirect configuration. </summary>
-        public ICollection<SubResource> PathRules { get; set; }
+        public IList<SubResource> PathRules { get; set; }
     }
 }

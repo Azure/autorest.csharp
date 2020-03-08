@@ -19,9 +19,9 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> A reference to the private endpoint to which the network interface is linked. </summary>
         public PrivateEndpoint PrivateEndpoint { get; internal set; }
         /// <summary> A list of IPConfigurations of the network interface. </summary>
-        public ICollection<NetworkInterfaceIPConfiguration> IpConfigurations { get; set; }
+        public IList<NetworkInterfaceIPConfiguration> IpConfigurations { get; set; }
         /// <summary> A list of TapConfigurations of the network interface. </summary>
-        public ICollection<NetworkInterfaceTapConfiguration> TapConfigurations { get; internal set; }
+        public IList<NetworkInterfaceTapConfiguration> TapConfigurations { get; internal set; }
         /// <summary> The DNS settings in network interface. </summary>
         public NetworkInterfaceDnsSettings DnsSettings { get; set; }
         /// <summary> The MAC address of the network interface. </summary>
@@ -33,7 +33,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> Indicates whether IP forwarding is enabled on this network interface. </summary>
         public bool? EnableIPForwarding { get; set; }
         /// <summary> A list of references to linked BareMetal resources. </summary>
-        public ICollection<string> HostedWorkloads { get; internal set; }
+        public IList<string> HostedWorkloads { get; internal set; }
         /// <summary> The resource GUID property of the network interface resource. </summary>
         public string ResourceGuid { get; internal set; }
         /// <summary> The provisioning state of the network interface resource. </summary>

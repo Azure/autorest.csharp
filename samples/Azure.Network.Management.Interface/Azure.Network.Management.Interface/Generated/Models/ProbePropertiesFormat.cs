@@ -13,7 +13,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class ProbePropertiesFormat
     {
         /// <summary> The load balancer rules that use this probe. </summary>
-        public ICollection<SubResource> LoadBalancingRules { get; internal set; }
+        public IList<SubResource> LoadBalancingRules { get; internal set; }
         /// <summary> The protocol of the end point. If &apos;Tcp&apos; is specified, a received ACK is required for the probe to be successful. If &apos;Http&apos; or &apos;Https&apos; is specified, a 200 OK response from the specifies URI is required for the probe to be successful. </summary>
         public ProbeProtocol Protocol { get; set; }
         /// <summary> The port for communicating the probe. Possible values range from 1 to 65535, inclusive. </summary>

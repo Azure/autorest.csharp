@@ -15,7 +15,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> The name of the service to whom the subnet should be delegated (e.g. Microsoft.Sql/servers). </summary>
         public string ServiceName { get; set; }
         /// <summary> The actions permitted to the service upon delegation. </summary>
-        public ICollection<string> Actions { get; internal set; }
+        public IList<string> Actions { get; internal set; }
         /// <summary> The provisioning state of the service delegation resource. </summary>
         public ProvisioningState? ProvisioningState { get; internal set; }
     }

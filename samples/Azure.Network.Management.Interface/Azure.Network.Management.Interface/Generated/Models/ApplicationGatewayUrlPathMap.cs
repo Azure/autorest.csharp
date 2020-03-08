@@ -27,7 +27,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> Default redirect configuration resource of URL path map. </summary>
         public SubResource DefaultRedirectConfiguration { get; set; }
         /// <summary> Path rule of URL path map resource. </summary>
-        public ICollection<ApplicationGatewayPathRule> PathRules { get; set; }
+        public IList<ApplicationGatewayPathRule> PathRules { get; set; }
         /// <summary> The provisioning state of the URL path map resource. </summary>
         public ProvisioningState? ProvisioningState { get; internal set; }
     }

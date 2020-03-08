@@ -17,6 +17,6 @@ namespace Azure.AI.FormRecognizer.Models
         /// <summary> Number of columns. </summary>
         public int Columns { get; set; }
         /// <summary> List of cells contained in the table. </summary>
-        public ICollection<DataTableCell> Cells { get; set; } = new List<DataTableCell>();
+        public IList<DataTableCell> Cells { get; set; } = new List<DataTableCell>();
     }
 }
