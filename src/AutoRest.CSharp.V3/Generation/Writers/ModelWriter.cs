@@ -151,6 +151,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private void WriteSealedChoiceSchema(CodeWriter writer, EnumType schema)
         {
+            if (schema.Declaration.IsUserDefined)
+            {
+                return;
+            }
+
             using (writer.Namespace(schema.Declaration.Namespace))
             {
                 writer.WriteXmlDocumentationSummary(schema.Description);
@@ -159,8 +164,12 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 {
                     foreach (EnumTypeValue value in schema.Values)
                     {
+                        if (value.Declaration.IsUserDefined)
+                        {
+                            continue;
+                        }
                         writer.WriteXmlDocumentationSummary(value.Description);
-                        writer.Line($"{value.Name},");
+                        writer.Line($"{value.Declaration.Name},");
                     }
                     writer.RemoveTrailingComma();
                 }
@@ -190,14 +199,18 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     foreach (var choice in schema.Values)
                     {
-                        writer.Line($"private const string {choice.Name}Value = {choice.Value.Value:L};");
+                        writer.Line($"private const string {choice.Declaration.Name}Value = {choice.Value.Value:L};");
                     }
                     writer.Line();
 
                     foreach (var choice in schema.Values)
                     {
+                        if (choice.Declaration.IsUserDefined)
+                        {
+                            continue;
+                        }
                         writer.WriteXmlDocumentationSummary(choice.Description);
-                        writer.Append($"public static {cs} {choice.Name}").AppendRaw("{ get; }").Append($" = new {cs}({choice.Name}Value);").Line();
+                        writer.Append($"public static {cs} {choice.Declaration.Name}").AppendRaw("{ get; }").Append($" = new {cs}({choice.Declaration.Name}Value);").Line();
                     }
 
                     writer.WriteXmlDocumentationSummary($"Determines if two <see cref=\"{name}\"/> values are the same.");

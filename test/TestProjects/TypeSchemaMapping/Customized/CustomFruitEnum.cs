@@ -1,9 +1,12 @@
 using Azure.Core;
 
-namespace AnotherCustomNamespace
+namespace NamespaceForEnums
 {
     [CodeGenSchema("Fruit")]
-    internal partial struct CustomFruitEnum
+    internal enum CustomFruitEnum
     {
+        [CodeGenSchemaMember("apple")]
+        Apple2,
+        Pear
     }
 }
