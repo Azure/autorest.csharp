@@ -25,6 +25,13 @@ namespace AutoRest.CSharp.V3.Output.Builders
 {
     internal class ClientBuilder
     {
+        private static string[] _knownResponseHeaders = new[]
+        {
+            "Date",
+            "ETag",
+            "x-ms-client-request-id",
+            "x-ms-request-id"
+        };
         private readonly BuildContext _context;
         private readonly SerializationBuilder _serializationBuilder;
         private readonly TypeFactory _typeFactory;
@@ -409,7 +416,15 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
         private ResponseHeaderGroupType? BuildResponseHeaderModel(Operation operation, HttpResponse? httpResponse)
         {
-            if (httpResponse == null || !httpResponse.Headers.Any())
+            if (httpResponse == null)
+            {
+                return null;
+            }
+            var httpResponseHeaders = httpResponse.Headers
+                .Where(h => !_knownResponseHeaders.Contains(h.Header, StringComparer.InvariantCultureIgnoreCase))
+                .ToArray();
+
+            if (!httpResponseHeaders.Any())
             {
                 return null;
             }
@@ -422,7 +437,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             return new ResponseHeaderGroupType(
                 BuilderHelpers.CreateTypeAttributes(operationName + "Headers", _context.DefaultNamespace, "internal"),
                 $"Header model for {operationName}",
-                httpResponse.Headers.Select(CreateResponseHeader).ToArray()
+                httpResponseHeaders.Select(CreateResponseHeader).ToArray()
                 );
         }
 

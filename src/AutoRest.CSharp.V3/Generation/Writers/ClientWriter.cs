@@ -65,7 +65,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 new CSharpType(typeof(Response<>), bodyType) :
                 new CSharpType(typeof(Response));
 
-            responseType = async ? new CSharpType(typeof(ValueTask<>), responseType) : responseType;
+            responseType = async ? new CSharpType(typeof(Task<>), responseType) : responseType;
 
             var parameters = clientMethod.RestClientMethod.Parameters;
             writer.WriteXmlDocumentationSummary(clientMethod.Description);

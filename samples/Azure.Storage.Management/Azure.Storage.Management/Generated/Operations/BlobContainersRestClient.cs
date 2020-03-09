@@ -881,7 +881,7 @@ namespace Azure.Storage.Management
         /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
         /// <param name="parameters"> The ImmutabilityPolicy Properties that will be created or updated to a blob container. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<ImmutabilityPolicy, CreateOrUpdateImmutabilityPolicyHeaders>> CreateOrUpdateImmutabilityPolicyAsync(string resourceGroupName, string accountName, string containerName, string ifMatch, ImmutabilityPolicy parameters, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ImmutabilityPolicy>> CreateOrUpdateImmutabilityPolicyAsync(string resourceGroupName, string accountName, string containerName, string ifMatch, ImmutabilityPolicy parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -908,8 +908,7 @@ namespace Azure.Storage.Management
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
-                            var headers = new CreateOrUpdateImmutabilityPolicyHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -928,7 +927,7 @@ namespace Azure.Storage.Management
         /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
         /// <param name="parameters"> The ImmutabilityPolicy Properties that will be created or updated to a blob container. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<ImmutabilityPolicy, CreateOrUpdateImmutabilityPolicyHeaders> CreateOrUpdateImmutabilityPolicy(string resourceGroupName, string accountName, string containerName, string ifMatch, ImmutabilityPolicy parameters, CancellationToken cancellationToken = default)
+        public Response<ImmutabilityPolicy> CreateOrUpdateImmutabilityPolicy(string resourceGroupName, string accountName, string containerName, string ifMatch, ImmutabilityPolicy parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -955,8 +954,7 @@ namespace Azure.Storage.Management
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
-                            var headers = new CreateOrUpdateImmutabilityPolicyHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -999,7 +997,7 @@ namespace Azure.Storage.Management
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<ImmutabilityPolicy, GetImmutabilityPolicyHeaders>> GetImmutabilityPolicyAsync(string resourceGroupName, string accountName, string containerName, string ifMatch, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ImmutabilityPolicy>> GetImmutabilityPolicyAsync(string resourceGroupName, string accountName, string containerName, string ifMatch, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -1026,8 +1024,7 @@ namespace Azure.Storage.Management
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
-                            var headers = new GetImmutabilityPolicyHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1045,7 +1042,7 @@ namespace Azure.Storage.Management
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<ImmutabilityPolicy, GetImmutabilityPolicyHeaders> GetImmutabilityPolicy(string resourceGroupName, string accountName, string containerName, string ifMatch, CancellationToken cancellationToken = default)
+        public Response<ImmutabilityPolicy> GetImmutabilityPolicy(string resourceGroupName, string accountName, string containerName, string ifMatch, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -1072,8 +1069,7 @@ namespace Azure.Storage.Management
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
-                            var headers = new GetImmutabilityPolicyHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1113,7 +1109,7 @@ namespace Azure.Storage.Management
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<ImmutabilityPolicy, DeleteImmutabilityPolicyHeaders>> DeleteImmutabilityPolicyAsync(string resourceGroupName, string accountName, string containerName, string ifMatch, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ImmutabilityPolicy>> DeleteImmutabilityPolicyAsync(string resourceGroupName, string accountName, string containerName, string ifMatch, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -1144,8 +1140,7 @@ namespace Azure.Storage.Management
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
-                            var headers = new DeleteImmutabilityPolicyHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1163,7 +1158,7 @@ namespace Azure.Storage.Management
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<ImmutabilityPolicy, DeleteImmutabilityPolicyHeaders> DeleteImmutabilityPolicy(string resourceGroupName, string accountName, string containerName, string ifMatch, CancellationToken cancellationToken = default)
+        public Response<ImmutabilityPolicy> DeleteImmutabilityPolicy(string resourceGroupName, string accountName, string containerName, string ifMatch, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -1194,8 +1189,7 @@ namespace Azure.Storage.Management
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
-                            var headers = new DeleteImmutabilityPolicyHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1234,7 +1228,7 @@ namespace Azure.Storage.Management
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<ImmutabilityPolicy, LockImmutabilityPolicyHeaders>> LockImmutabilityPolicyAsync(string resourceGroupName, string accountName, string containerName, string ifMatch, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ImmutabilityPolicy>> LockImmutabilityPolicyAsync(string resourceGroupName, string accountName, string containerName, string ifMatch, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -1265,8 +1259,7 @@ namespace Azure.Storage.Management
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
-                            var headers = new LockImmutabilityPolicyHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1284,7 +1277,7 @@ namespace Azure.Storage.Management
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<ImmutabilityPolicy, LockImmutabilityPolicyHeaders> LockImmutabilityPolicy(string resourceGroupName, string accountName, string containerName, string ifMatch, CancellationToken cancellationToken = default)
+        public Response<ImmutabilityPolicy> LockImmutabilityPolicy(string resourceGroupName, string accountName, string containerName, string ifMatch, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -1315,8 +1308,7 @@ namespace Azure.Storage.Management
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
-                            var headers = new LockImmutabilityPolicyHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1360,7 +1352,7 @@ namespace Azure.Storage.Management
         /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
         /// <param name="parameters"> The ImmutabilityPolicy Properties that will be created or updated to a blob container. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<ImmutabilityPolicy, ExtendImmutabilityPolicyHeaders>> ExtendImmutabilityPolicyAsync(string resourceGroupName, string accountName, string containerName, string ifMatch, ImmutabilityPolicy parameters, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ImmutabilityPolicy>> ExtendImmutabilityPolicyAsync(string resourceGroupName, string accountName, string containerName, string ifMatch, ImmutabilityPolicy parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -1391,8 +1383,7 @@ namespace Azure.Storage.Management
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
-                            var headers = new ExtendImmutabilityPolicyHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1411,7 +1402,7 @@ namespace Azure.Storage.Management
         /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
         /// <param name="parameters"> The ImmutabilityPolicy Properties that will be created or updated to a blob container. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<ImmutabilityPolicy, ExtendImmutabilityPolicyHeaders> ExtendImmutabilityPolicy(string resourceGroupName, string accountName, string containerName, string ifMatch, ImmutabilityPolicy parameters, CancellationToken cancellationToken = default)
+        public Response<ImmutabilityPolicy> ExtendImmutabilityPolicy(string resourceGroupName, string accountName, string containerName, string ifMatch, ImmutabilityPolicy parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -1442,8 +1433,7 @@ namespace Azure.Storage.Management
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
-                            var headers = new ExtendImmutabilityPolicyHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
