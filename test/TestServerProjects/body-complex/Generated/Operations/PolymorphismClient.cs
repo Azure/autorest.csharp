@@ -18,6 +18,10 @@ namespace body_complex
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal PolymorphismRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of PolymorphismClient for mocking. </summary>
+        protected PolymorphismClient()
+        {
+        }
         /// <summary> Initializes a new instance of PolymorphismClient. </summary>
         internal PolymorphismClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {

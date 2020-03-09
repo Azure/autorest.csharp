@@ -21,6 +21,10 @@ namespace Azure.Network.Management.Interface
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal NetworkInterfaceTapConfigurationsRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of NetworkInterfaceTapConfigurationsClient for mocking. </summary>
+        protected NetworkInterfaceTapConfigurationsClient()
+        {
+        }
         /// <summary> Initializes a new instance of NetworkInterfaceTapConfigurationsClient. </summary>
         internal NetworkInterfaceTapConfigurationsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string ApiVersion = "2019-11-01")
         {
@@ -114,16 +118,7 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "NetworkInterfaceTapConfigurationsClient.Delete", OperationFinalStateVia.Location, createOriginalHttpMessage,
-            (response, cancellationToken) =>
-            {
-                return response;
-            },
-            async (response, cancellationToken) =>
-            {
-                await Task.CompletedTask;
-                return response;
-            });
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "NetworkInterfaceTapConfigurationsClient.Delete", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
         /// <summary> Deletes the specified tap configuration from the NetworkInterface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -197,7 +192,8 @@ namespace Azure.Network.Management.Interface
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value = NetworkInterfaceTapConfiguration.DeserializeNetworkInterfaceTapConfiguration(document.RootElement);
                 return value;
-            });
+            }
+            );
         }
         /// <summary> Creates or updates a Tap configuration in the specified NetworkInterface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>

@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -33,7 +34,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 using (writer.Scope($"{client.DeclaredType.Accessibility} partial class {cs.Name}"))
                 {
                     WriteClientFields(writer, client);
-                    WriteClientCtor(writer, client);
+                    WriteClientCtors(writer, client);
 
                     foreach (var clientMethod in client.Methods)
                     {
@@ -133,8 +134,13 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             writer.Append($"internal {client.RestClient.Type} RestClient").LineRaw(" { get; }");
         }
 
-        private void WriteClientCtor(CodeWriter writer, Client client)
+        private void WriteClientCtors(CodeWriter writer, Client client)
         {
+            writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name} for mocking.");
+            using (writer.Scope($"protected {client.Type.Name:D}()"))
+            {
+            }
+
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name}");
             writer.Append($"internal {client.Type.Name:D}({typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline,");
             foreach (Parameter parameter in client.RestClient.Parameters)
@@ -223,7 +229,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         private void WriteCreateOperationOperation(CodeWriter writer, LongRunningOperation lroMethod)
         {
             RestClientMethod originalMethod = lroMethod.OriginalMethod;
-            CSharpType responseType = new CSharpType(typeof(Operation<>), lroMethod.OriginalResponse.ResponseBody?.Type ?? new CSharpType(typeof(Response)));
+            CSharpType? responseBodyType = lroMethod.OriginalResponse.ResponseBody?.Type;
+            CSharpType responseType = new CSharpType(typeof(Operation<>), responseBodyType ?? new CSharpType(typeof(Response)));
             Parameter[] parameters = lroMethod.CreateParameters;
 
             writer.WriteXmlDocumentationSummary(originalMethod.Description);
@@ -246,70 +253,72 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.WriteParameterNullChecks(parameters);
 
                 writer.Append($"return {typeof(ArmOperationHelpers)}.Create(");
-                writer.Line($"pipeline, clientDiagnostics, originalResponse, {typeof(RequestMethod)}.{originalMethod.Request.HttpMethod.ToRequestMethodName()}, {originalMethod.Diagnostics.ScopeName:L}, {typeof(OperationFinalStateVia)}.{lroMethod.FinalStateVia}, createOriginalHttpMessage,");
+                writer.Append($"pipeline, clientDiagnostics, originalResponse, {typeof(RequestMethod)}.{originalMethod.Request.HttpMethod.ToRequestMethodName()}, {originalMethod.Diagnostics.ScopeName:L}, {typeof(OperationFinalStateVia)}.{lroMethod.FinalStateVia}, createOriginalHttpMessage");
 
-                string valueVariable = "value";
-                const string document = "document";
-                ObjectSerialization? serialization = (lroMethod.OriginalResponse.ResponseBody as ObjectResponseBody)?.Serialization;
-                using (writer.Scope($"(response, cancellationToken) =>", "{", "},"))
+                if (responseBodyType != null)
                 {
-                    switch (serialization)
+                    writer.Line($", ");
+                    string valueVariable = "value";
+                    const string document = "document";
+                    ObjectSerialization? serialization = (lroMethod.OriginalResponse.ResponseBody as ObjectResponseBody)?.Serialization;
+                    using (writer.Scope($"(response, cancellationToken) =>", "{", "},"))
                     {
-                        case JsonSerialization jsonSerialization:
-                            writer.Append($"using var {document:D} = ");
-                            writer.Line($"{typeof(JsonDocument)}.Parse(response.ContentStream);");
-                            writer.ToDeserializeCall(
-                                jsonSerialization,
-                                w => w.Append($"document.RootElement"),
-                                ref valueVariable
-                            );
-                            writer.Line($"return {valueVariable};");
-                            break;
-                        case XmlElementSerialization xmlSerialization:
-                            writer.Line($"var {document:D} = {typeof(XDocument)}.Load(response.ContentStream, LoadOptions.PreserveWhitespace);");
-                            writer.ToDeserializeCall(
-                                xmlSerialization,
-                                w => w.Append($"document"),
-                                ref valueVariable
-                            );
-                            writer.Line($"return {valueVariable};");
-                            break;
-                        default:
-                            writer.Line($"return response;");
-                            break;
+                        switch (serialization)
+                        {
+                            case JsonSerialization jsonSerialization:
+                                writer.Append($"using var {document:D} = ");
+                                writer.Line($"{typeof(JsonDocument)}.Parse(response.ContentStream);");
+                                writer.ToDeserializeCall(
+                                    jsonSerialization,
+                                    w => w.Append($"document.RootElement"),
+                                    ref valueVariable
+                                );
+                                writer.Line($"return {valueVariable};");
+                                break;
+                            case XmlElementSerialization xmlSerialization:
+                                writer.Line($"var {document:D} = {typeof(XDocument)}.Load(response.ContentStream, LoadOptions.PreserveWhitespace);");
+                                writer.ToDeserializeCall(
+                                    xmlSerialization,
+                                    w => w.Append($"document"),
+                                    ref valueVariable
+                                );
+                                writer.Line($"return {valueVariable};");
+                                break;
+                            default:
+                                throw new NotSupportedException();
+                        }
+                    }
+
+                    using (writer.Scope($"async (response, cancellationToken) =>"))
+                    {
+                        switch (serialization)
+                        {
+                            case JsonSerialization jsonSerialization:
+                                writer.Append($"using var {document:D} = ");
+                                writer.Line($"await {typeof(JsonDocument)}.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);");
+                                writer.ToDeserializeCall(
+                                    jsonSerialization,
+                                    w => w.Append($"document.RootElement"),
+                                    ref valueVariable
+                                );
+                                writer.Line($"return {valueVariable};");
+                                break;
+                            case XmlElementSerialization xmlSerialization:
+                                writer.Line($"var {document:D} = {typeof(XDocument)}.Load(response.ContentStream, LoadOptions.PreserveWhitespace);");
+                                writer.ToDeserializeCall(
+                                    xmlSerialization,
+                                    w => w.Append($"document"),
+                                    ref valueVariable
+                                );
+                                writer.Line($"return {valueVariable};");
+                                break;
+                            default:
+                                throw new NotSupportedException();
+                        }
                     }
                 }
 
-                using (writer.Scope($"async (response, cancellationToken) =>", "{", "});"))
-                {
-                    switch (serialization)
-                    {
-                        case JsonSerialization jsonSerialization:
-                            writer.Append($"using var {document:D} = ");
-                            writer.Line($"await {typeof(JsonDocument)}.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);");
-                            writer.ToDeserializeCall(
-                                jsonSerialization,
-                                w => w.Append($"document.RootElement"),
-                                ref valueVariable
-                            );
-                            writer.Line($"return {valueVariable};");
-                            break;
-                        case XmlElementSerialization xmlSerialization:
-                            writer.Line($"var {document:D} = {typeof(XDocument)}.Load(response.ContentStream, LoadOptions.PreserveWhitespace);");
-                            writer.ToDeserializeCall(
-                                xmlSerialization,
-                                w => w.Append($"document"),
-                                ref valueVariable
-                            );
-                            writer.Line($"return {valueVariable};");
-                            break;
-                        default:
-                            //TODO: Need this await or it won't compile since we didn't use an await in async lambda.
-                            writer.Line($"await Task.CompletedTask;");
-                            writer.Line($"return response;");
-                            break;
-                    }
-                }
+                writer.Line($");");
             }
         }
 

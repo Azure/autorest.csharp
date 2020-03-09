@@ -20,6 +20,10 @@ namespace Azure.Network.Management.Interface
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal NetworkInterfaceIPConfigurationsRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of NetworkInterfaceIPConfigurationsClient for mocking. </summary>
+        protected NetworkInterfaceIPConfigurationsClient()
+        {
+        }
         /// <summary> Initializes a new instance of NetworkInterfaceIPConfigurationsClient. </summary>
         internal NetworkInterfaceIPConfigurationsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string ApiVersion = "2019-11-01")
         {

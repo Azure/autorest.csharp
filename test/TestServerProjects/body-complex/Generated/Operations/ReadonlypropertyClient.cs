@@ -18,6 +18,10 @@ namespace body_complex
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal ReadonlypropertyRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of ReadonlypropertyClient for mocking. </summary>
+        protected ReadonlypropertyClient()
+        {
+        }
         /// <summary> Initializes a new instance of ReadonlypropertyClient. </summary>
         internal ReadonlypropertyClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {

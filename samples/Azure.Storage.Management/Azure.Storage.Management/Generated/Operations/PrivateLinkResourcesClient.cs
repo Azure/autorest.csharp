@@ -18,6 +18,10 @@ namespace Azure.Storage.Management
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal PrivateLinkResourcesRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of PrivateLinkResourcesClient for mocking. </summary>
+        protected PrivateLinkResourcesClient()
+        {
+        }
         /// <summary> Initializes a new instance of PrivateLinkResourcesClient. </summary>
         internal PrivateLinkResourcesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string ApiVersion = "2019-06-01")
         {

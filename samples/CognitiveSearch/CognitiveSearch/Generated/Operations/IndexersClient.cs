@@ -19,6 +19,10 @@ namespace CognitiveSearch
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal IndexersRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of IndexersClient for mocking. </summary>
+        protected IndexersClient()
+        {
+        }
         /// <summary> Initializes a new instance of IndexersClient. </summary>
         internal IndexersClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string searchServiceName, string searchDnsSuffix = "search.windows.net", string ApiVersion = "2019-05-06")
         {

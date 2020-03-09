@@ -21,6 +21,10 @@ namespace Azure.Network.Management.Interface
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal NetworkInterfacesRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of NetworkInterfacesClient for mocking. </summary>
+        protected NetworkInterfacesClient()
+        {
+        }
         /// <summary> Initializes a new instance of NetworkInterfacesClient. </summary>
         internal NetworkInterfacesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string ApiVersion = "2019-11-01")
         {
@@ -154,16 +158,7 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "NetworkInterfacesClient.Delete", OperationFinalStateVia.Location, createOriginalHttpMessage,
-            (response, cancellationToken) =>
-            {
-                return response;
-            },
-            async (response, cancellationToken) =>
-            {
-                await Task.CompletedTask;
-                return response;
-            });
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "NetworkInterfacesClient.Delete", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
         /// <summary> Deletes the specified network interface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -227,7 +222,8 @@ namespace Azure.Network.Management.Interface
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value = NetworkInterface.DeserializeNetworkInterface(document.RootElement);
                 return value;
-            });
+            }
+            );
         }
         /// <summary> Creates or updates a network interface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -301,7 +297,8 @@ namespace Azure.Network.Management.Interface
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value = EffectiveRouteListResult.DeserializeEffectiveRouteListResult(document.RootElement);
                 return value;
-            });
+            }
+            );
         }
         /// <summary> Gets all route tables applied to a network interface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -365,7 +362,8 @@ namespace Azure.Network.Management.Interface
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value = EffectiveNetworkSecurityGroupListResult.DeserializeEffectiveNetworkSecurityGroupListResult(document.RootElement);
                 return value;
-            });
+            }
+            );
         }
         /// <summary> Gets all network security groups applied to a network interface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>

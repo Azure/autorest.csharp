@@ -18,6 +18,10 @@ namespace body_byte
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal ByteRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of ByteClient for mocking. </summary>
+        protected ByteClient()
+        {
+        }
         /// <summary> Initializes a new instance of ByteClient. </summary>
         internal ByteClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {

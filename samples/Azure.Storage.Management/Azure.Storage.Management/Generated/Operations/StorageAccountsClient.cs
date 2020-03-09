@@ -21,6 +21,10 @@ namespace Azure.Storage.Management
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal StorageAccountsRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of StorageAccountsClient for mocking. </summary>
+        protected StorageAccountsClient()
+        {
+        }
         /// <summary> Initializes a new instance of StorageAccountsClient. </summary>
         internal StorageAccountsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string ApiVersion = "2019-06-01")
         {
@@ -282,7 +286,8 @@ namespace Azure.Storage.Management
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value = StorageAccount.DeserializeStorageAccount(document.RootElement);
                 return value;
-            });
+            }
+            );
         }
         /// <summary> Asynchronously creates a new storage account with the specified parameters. If an account is already created and a subsequent create request is issued with different properties, the account properties will be updated. If an account is already created and a subsequent create or update request is issued with the exact same set of properties, the request will succeed. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
@@ -344,16 +349,7 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "StorageAccountsClient.Failover", OperationFinalStateVia.Location, createOriginalHttpMessage,
-            (response, cancellationToken) =>
-            {
-                return response;
-            },
-            async (response, cancellationToken) =>
-            {
-                await Task.CompletedTask;
-                return response;
-            });
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "StorageAccountsClient.Failover", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
         /// <summary> Failover request can be triggered for a storage account in case of availability issues. The failover occurs from the storage account&apos;s primary cluster to secondary cluster for RA-GRS accounts. The secondary cluster will become primary after failover. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
@@ -417,7 +413,8 @@ namespace Azure.Storage.Management
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value = BlobRestoreStatus.DeserializeBlobRestoreStatus(document.RootElement);
                 return value;
-            });
+            }
+            );
         }
         /// <summary> Restore blobs in the specified blob ranges. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
