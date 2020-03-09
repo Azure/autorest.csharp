@@ -17,8 +17,6 @@ namespace Azure.Storage.Tables
         {
             _response = response;
         }
-        public string XMsClientRequestId => _response.Headers.TryGetValue("x-ms-client-request-id", out string value) ? value : null;
-        public string XMsRequestId => _response.Headers.TryGetValue("x-ms-request-id", out string value) ? value : null;
         public string XMsVersion => _response.Headers.TryGetValue("x-ms-version", out string value) ? value : null;
     }
 }
