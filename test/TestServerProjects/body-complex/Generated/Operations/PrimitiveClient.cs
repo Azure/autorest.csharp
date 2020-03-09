@@ -27,7 +27,7 @@ namespace body_complex
         }
         /// <summary> Get complex types with integer properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<IntWrapper>> GetIntAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IntWrapper>> GetIntAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetIntAsync(cancellationToken).ConfigureAwait(false);
         }
@@ -40,7 +40,7 @@ namespace body_complex
         /// <summary> Put complex types with integer properties. </summary>
         /// <param name="complexBody"> Please put -1 and 2. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> PutIntAsync(IntWrapper complexBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutIntAsync(IntWrapper complexBody, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutIntAsync(complexBody, cancellationToken).ConfigureAwait(false);
         }
@@ -53,7 +53,7 @@ namespace body_complex
         }
         /// <summary> Get complex types with long properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<LongWrapper>> GetLongAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<LongWrapper>> GetLongAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetLongAsync(cancellationToken).ConfigureAwait(false);
         }
@@ -66,7 +66,7 @@ namespace body_complex
         /// <summary> Put complex types with long properties. </summary>
         /// <param name="complexBody"> Please put 1099511627775 and -999511627788. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> PutLongAsync(LongWrapper complexBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutLongAsync(LongWrapper complexBody, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutLongAsync(complexBody, cancellationToken).ConfigureAwait(false);
         }
@@ -79,7 +79,7 @@ namespace body_complex
         }
         /// <summary> Get complex types with float properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<FloatWrapper>> GetFloatAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<FloatWrapper>> GetFloatAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetFloatAsync(cancellationToken).ConfigureAwait(false);
         }
@@ -92,7 +92,7 @@ namespace body_complex
         /// <summary> Put complex types with float properties. </summary>
         /// <param name="complexBody"> Please put 1.05 and -0.003. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> PutFloatAsync(FloatWrapper complexBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutFloatAsync(FloatWrapper complexBody, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutFloatAsync(complexBody, cancellationToken).ConfigureAwait(false);
         }
@@ -105,7 +105,7 @@ namespace body_complex
         }
         /// <summary> Get complex types with double properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<DoubleWrapper>> GetDoubleAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DoubleWrapper>> GetDoubleAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetDoubleAsync(cancellationToken).ConfigureAwait(false);
         }
@@ -118,7 +118,7 @@ namespace body_complex
         /// <summary> Put complex types with double properties. </summary>
         /// <param name="complexBody"> Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> PutDoubleAsync(DoubleWrapper complexBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutDoubleAsync(DoubleWrapper complexBody, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutDoubleAsync(complexBody, cancellationToken).ConfigureAwait(false);
         }
@@ -131,7 +131,7 @@ namespace body_complex
         }
         /// <summary> Get complex types with bool properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<BooleanWrapper>> GetBoolAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<BooleanWrapper>> GetBoolAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetBoolAsync(cancellationToken).ConfigureAwait(false);
         }
@@ -144,7 +144,7 @@ namespace body_complex
         /// <summary> Put complex types with bool properties. </summary>
         /// <param name="complexBody"> Please put true and false. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> PutBoolAsync(BooleanWrapper complexBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutBoolAsync(BooleanWrapper complexBody, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutBoolAsync(complexBody, cancellationToken).ConfigureAwait(false);
         }
@@ -157,7 +157,7 @@ namespace body_complex
         }
         /// <summary> Get complex types with string properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<StringWrapper>> GetStringAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<StringWrapper>> GetStringAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetStringAsync(cancellationToken).ConfigureAwait(false);
         }
@@ -170,7 +170,7 @@ namespace body_complex
         /// <summary> Put complex types with string properties. </summary>
         /// <param name="complexBody"> Please put &apos;goodrequest&apos;, &apos;&apos;, and null. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> PutStringAsync(StringWrapper complexBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutStringAsync(StringWrapper complexBody, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutStringAsync(complexBody, cancellationToken).ConfigureAwait(false);
         }
@@ -183,7 +183,7 @@ namespace body_complex
         }
         /// <summary> Get complex types with date properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<DateWrapper>> GetDateAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DateWrapper>> GetDateAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetDateAsync(cancellationToken).ConfigureAwait(false);
         }
@@ -196,7 +196,7 @@ namespace body_complex
         /// <summary> Put complex types with date properties. </summary>
         /// <param name="complexBody"> Please put &apos;0001-01-01&apos; and &apos;2016-02-29&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> PutDateAsync(DateWrapper complexBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutDateAsync(DateWrapper complexBody, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutDateAsync(complexBody, cancellationToken).ConfigureAwait(false);
         }
@@ -209,7 +209,7 @@ namespace body_complex
         }
         /// <summary> Get complex types with datetime properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<DatetimeWrapper>> GetDateTimeAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DatetimeWrapper>> GetDateTimeAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetDateTimeAsync(cancellationToken).ConfigureAwait(false);
         }
@@ -222,7 +222,7 @@ namespace body_complex
         /// <summary> Put complex types with datetime properties. </summary>
         /// <param name="complexBody"> Please put &apos;0001-01-01T12:00:00-04:00&apos; and &apos;2015-05-18T11:38:00-08:00&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> PutDateTimeAsync(DatetimeWrapper complexBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutDateTimeAsync(DatetimeWrapper complexBody, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutDateTimeAsync(complexBody, cancellationToken).ConfigureAwait(false);
         }
@@ -235,7 +235,7 @@ namespace body_complex
         }
         /// <summary> Get complex types with datetimeRfc1123 properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<Datetimerfc1123Wrapper>> GetDateTimeRfc1123Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Datetimerfc1123Wrapper>> GetDateTimeRfc1123Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetDateTimeRfc1123Async(cancellationToken).ConfigureAwait(false);
         }
@@ -248,7 +248,7 @@ namespace body_complex
         /// <summary> Put complex types with datetimeRfc1123 properties. </summary>
         /// <param name="complexBody"> Please put &apos;Mon, 01 Jan 0001 12:00:00 GMT&apos; and &apos;Mon, 18 May 2015 11:38:00 GMT&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> PutDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutDateTimeRfc1123Async(complexBody, cancellationToken).ConfigureAwait(false);
         }
@@ -261,7 +261,7 @@ namespace body_complex
         }
         /// <summary> Get complex types with duration properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<DurationWrapper>> GetDurationAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DurationWrapper>> GetDurationAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetDurationAsync(cancellationToken).ConfigureAwait(false);
         }
@@ -274,7 +274,7 @@ namespace body_complex
         /// <summary> Put complex types with duration properties. </summary>
         /// <param name="complexBody"> Please put &apos;P123DT22H14M12.011S&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> PutDurationAsync(DurationWrapper complexBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutDurationAsync(DurationWrapper complexBody, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutDurationAsync(complexBody, cancellationToken).ConfigureAwait(false);
         }
@@ -287,7 +287,7 @@ namespace body_complex
         }
         /// <summary> Get complex types with byte properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<ByteWrapper>> GetByteAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ByteWrapper>> GetByteAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetByteAsync(cancellationToken).ConfigureAwait(false);
         }
@@ -300,7 +300,7 @@ namespace body_complex
         /// <summary> Put complex types with byte properties. </summary>
         /// <param name="complexBody"> Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> PutByteAsync(ByteWrapper complexBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutByteAsync(ByteWrapper complexBody, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutByteAsync(complexBody, cancellationToken).ConfigureAwait(false);
         }

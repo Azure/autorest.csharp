@@ -27,7 +27,7 @@ namespace body_datetime
         }
         /// <summary> Get null datetime value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<DateTimeOffset>> GetNullAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DateTimeOffset>> GetNullAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetNullAsync(cancellationToken).ConfigureAwait(false);
         }
@@ -39,7 +39,7 @@ namespace body_datetime
         }
         /// <summary> Get invalid datetime value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<DateTimeOffset>> GetInvalidAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DateTimeOffset>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetInvalidAsync(cancellationToken).ConfigureAwait(false);
         }
@@ -51,7 +51,7 @@ namespace body_datetime
         }
         /// <summary> Get overflow datetime value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<DateTimeOffset>> GetOverflowAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DateTimeOffset>> GetOverflowAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetOverflowAsync(cancellationToken).ConfigureAwait(false);
         }
@@ -63,7 +63,7 @@ namespace body_datetime
         }
         /// <summary> Get underflow datetime value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<DateTimeOffset>> GetUnderflowAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DateTimeOffset>> GetUnderflowAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetUnderflowAsync(cancellationToken).ConfigureAwait(false);
         }
@@ -76,7 +76,7 @@ namespace body_datetime
         /// <summary> Put max datetime value 9999-12-31T23:59:59.999Z. </summary>
         /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> PutUtcMaxDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutUtcMaxDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutUtcMaxDateTimeAsync(datetimeBody, cancellationToken).ConfigureAwait(false);
         }
@@ -90,7 +90,7 @@ namespace body_datetime
         /// <summary> Put max datetime value 9999-12-31T23:59:59.9999999Z. </summary>
         /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> PutUtcMaxDateTime7DigitsAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutUtcMaxDateTime7DigitsAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutUtcMaxDateTime7DigitsAsync(datetimeBody, cancellationToken).ConfigureAwait(false);
         }
@@ -103,7 +103,7 @@ namespace body_datetime
         }
         /// <summary> Get max datetime value 9999-12-31t23:59:59.999z. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<DateTimeOffset>> GetUtcLowercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DateTimeOffset>> GetUtcLowercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetUtcLowercaseMaxDateTimeAsync(cancellationToken).ConfigureAwait(false);
         }
@@ -115,7 +115,7 @@ namespace body_datetime
         }
         /// <summary> Get max datetime value 9999-12-31T23:59:59.999Z. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<DateTimeOffset>> GetUtcUppercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DateTimeOffset>> GetUtcUppercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetUtcUppercaseMaxDateTimeAsync(cancellationToken).ConfigureAwait(false);
         }
@@ -127,7 +127,7 @@ namespace body_datetime
         }
         /// <summary> Get max datetime value 9999-12-31T23:59:59.9999999Z. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<DateTimeOffset>> GetUtcUppercaseMaxDateTime7DigitsAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DateTimeOffset>> GetUtcUppercaseMaxDateTime7DigitsAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetUtcUppercaseMaxDateTime7DigitsAsync(cancellationToken).ConfigureAwait(false);
         }
@@ -140,7 +140,7 @@ namespace body_datetime
         /// <summary> Put max datetime value with positive numoffset 9999-12-31t23:59:59.999+14:00. </summary>
         /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> PutLocalPositiveOffsetMaxDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutLocalPositiveOffsetMaxDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutLocalPositiveOffsetMaxDateTimeAsync(datetimeBody, cancellationToken).ConfigureAwait(false);
         }
@@ -153,7 +153,7 @@ namespace body_datetime
         }
         /// <summary> Get max datetime value with positive num offset 9999-12-31t23:59:59.999+14:00. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<DateTimeOffset>> GetLocalPositiveOffsetLowercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DateTimeOffset>> GetLocalPositiveOffsetLowercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetLocalPositiveOffsetLowercaseMaxDateTimeAsync(cancellationToken).ConfigureAwait(false);
         }
@@ -165,7 +165,7 @@ namespace body_datetime
         }
         /// <summary> Get max datetime value with positive num offset 9999-12-31T23:59:59.999+14:00. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<DateTimeOffset>> GetLocalPositiveOffsetUppercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DateTimeOffset>> GetLocalPositiveOffsetUppercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetLocalPositiveOffsetUppercaseMaxDateTimeAsync(cancellationToken).ConfigureAwait(false);
         }
@@ -178,7 +178,7 @@ namespace body_datetime
         /// <summary> Put max datetime value with positive numoffset 9999-12-31t23:59:59.999-14:00. </summary>
         /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> PutLocalNegativeOffsetMaxDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutLocalNegativeOffsetMaxDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutLocalNegativeOffsetMaxDateTimeAsync(datetimeBody, cancellationToken).ConfigureAwait(false);
         }
@@ -191,7 +191,7 @@ namespace body_datetime
         }
         /// <summary> Get max datetime value with positive num offset 9999-12-31T23:59:59.999-14:00. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<DateTimeOffset>> GetLocalNegativeOffsetUppercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DateTimeOffset>> GetLocalNegativeOffsetUppercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetLocalNegativeOffsetUppercaseMaxDateTimeAsync(cancellationToken).ConfigureAwait(false);
         }
@@ -203,7 +203,7 @@ namespace body_datetime
         }
         /// <summary> Get max datetime value with positive num offset 9999-12-31t23:59:59.999-14:00. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<DateTimeOffset>> GetLocalNegativeOffsetLowercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DateTimeOffset>> GetLocalNegativeOffsetLowercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetLocalNegativeOffsetLowercaseMaxDateTimeAsync(cancellationToken).ConfigureAwait(false);
         }
@@ -216,7 +216,7 @@ namespace body_datetime
         /// <summary> Put min datetime value 0001-01-01T00:00:00Z. </summary>
         /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> PutUtcMinDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutUtcMinDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutUtcMinDateTimeAsync(datetimeBody, cancellationToken).ConfigureAwait(false);
         }
@@ -229,7 +229,7 @@ namespace body_datetime
         }
         /// <summary> Get min datetime value 0001-01-01T00:00:00Z. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<DateTimeOffset>> GetUtcMinDateTimeAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DateTimeOffset>> GetUtcMinDateTimeAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetUtcMinDateTimeAsync(cancellationToken).ConfigureAwait(false);
         }
@@ -242,7 +242,7 @@ namespace body_datetime
         /// <summary> Put min datetime value 0001-01-01T00:00:00+14:00. </summary>
         /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> PutLocalPositiveOffsetMinDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutLocalPositiveOffsetMinDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutLocalPositiveOffsetMinDateTimeAsync(datetimeBody, cancellationToken).ConfigureAwait(false);
         }
@@ -255,7 +255,7 @@ namespace body_datetime
         }
         /// <summary> Get min datetime value 0001-01-01T00:00:00+14:00. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<DateTimeOffset>> GetLocalPositiveOffsetMinDateTimeAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DateTimeOffset>> GetLocalPositiveOffsetMinDateTimeAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetLocalPositiveOffsetMinDateTimeAsync(cancellationToken).ConfigureAwait(false);
         }
@@ -268,7 +268,7 @@ namespace body_datetime
         /// <summary> Put min datetime value 0001-01-01T00:00:00-14:00. </summary>
         /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> PutLocalNegativeOffsetMinDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutLocalNegativeOffsetMinDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutLocalNegativeOffsetMinDateTimeAsync(datetimeBody, cancellationToken).ConfigureAwait(false);
         }
@@ -281,7 +281,7 @@ namespace body_datetime
         }
         /// <summary> Get min datetime value 0001-01-01T00:00:00-14:00. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<DateTimeOffset>> GetLocalNegativeOffsetMinDateTimeAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DateTimeOffset>> GetLocalNegativeOffsetMinDateTimeAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetLocalNegativeOffsetMinDateTimeAsync(cancellationToken).ConfigureAwait(false);
         }

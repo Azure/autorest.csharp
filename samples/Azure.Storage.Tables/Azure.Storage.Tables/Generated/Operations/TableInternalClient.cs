@@ -33,7 +33,7 @@ namespace Azure.Storage.Tables
         /// <param name="select"> Select expression using OData notation. Limits the columns on each record to just those requested, e.g. &quot;$select=PolicyAssignmentId, ResourceId&quot;. </param>
         /// <param name="filter"> OData filter expression. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<TableQueryResponse>> QueryAsync(string requestId, ResponseFormat? format, int? top, string select, string filter, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<TableQueryResponse>> QueryAsync(string requestId, ResponseFormat? format, int? top, string select, string filter, CancellationToken cancellationToken = default)
         {
             return await RestClient.QueryAsync(requestId, format, top, select, filter, cancellationToken).ConfigureAwait(false);
         }
@@ -53,7 +53,7 @@ namespace Azure.Storage.Tables
         /// <param name="format"> Specifies the media type for the response. </param>
         /// <param name="tableProperties"> The Table properties. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<TableResponse>> CreateAsync(string requestId, ResponseFormat? format, TableProperties tableProperties, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<TableResponse>> CreateAsync(string requestId, ResponseFormat? format, TableProperties tableProperties, CancellationToken cancellationToken = default)
         {
             return await RestClient.CreateAsync(requestId, format, tableProperties, cancellationToken).ConfigureAwait(false);
         }
@@ -70,7 +70,7 @@ namespace Azure.Storage.Tables
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="table"> The name of the table. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> DeleteAsync(string requestId, string table, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> DeleteAsync(string requestId, string table, CancellationToken cancellationToken = default)
         {
             return (await RestClient.DeleteAsync(requestId, table, cancellationToken).ConfigureAwait(false)).GetRawResponse();
         }
@@ -91,7 +91,7 @@ namespace Azure.Storage.Tables
         /// <param name="filter"> OData filter expression. </param>
         /// <param name="table"> The name of the table. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<TableEntityQueryResponse>> QueryEntitiesAsync(int? timeout, string requestId, ResponseFormat? format, int? top, string select, string filter, string table, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<TableEntityQueryResponse>> QueryEntitiesAsync(int? timeout, string requestId, ResponseFormat? format, int? top, string select, string filter, string table, CancellationToken cancellationToken = default)
         {
             return await RestClient.QueryEntitiesAsync(timeout, requestId, format, top, select, filter, table, cancellationToken).ConfigureAwait(false);
         }
@@ -118,7 +118,7 @@ namespace Azure.Storage.Tables
         /// <param name="partitionKey"> The partition key of the entity. </param>
         /// <param name="rowKey"> The row key of the entity. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<TableEntityQueryResponse>> QueryEntitiesWithPartitionAndRowKeyAsync(int? timeout, string requestId, ResponseFormat? format, string select, string filter, string table, string partitionKey, string rowKey, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<TableEntityQueryResponse>> QueryEntitiesWithPartitionAndRowKeyAsync(int? timeout, string requestId, ResponseFormat? format, string select, string filter, string table, string partitionKey, string rowKey, CancellationToken cancellationToken = default)
         {
             return await RestClient.QueryEntitiesWithPartitionAndRowKeyAsync(timeout, requestId, format, select, filter, table, partitionKey, rowKey, cancellationToken).ConfigureAwait(false);
         }
@@ -145,7 +145,7 @@ namespace Azure.Storage.Tables
         /// <param name="rowKey"> The row key of the entity. </param>
         /// <param name="tableEntityProperties"> The properties for the table entity. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> UpdateEntityAsync(int? timeout, string requestId, ResponseFormat? format, string table, string partitionKey, string rowKey, IDictionary<string, object> tableEntityProperties, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> UpdateEntityAsync(int? timeout, string requestId, ResponseFormat? format, string table, string partitionKey, string rowKey, IDictionary<string, object> tableEntityProperties, CancellationToken cancellationToken = default)
         {
             return (await RestClient.UpdateEntityAsync(timeout, requestId, format, table, partitionKey, rowKey, tableEntityProperties, cancellationToken).ConfigureAwait(false)).GetRawResponse();
         }
@@ -170,7 +170,7 @@ namespace Azure.Storage.Tables
         /// <param name="partitionKey"> The partition key of the entity. </param>
         /// <param name="rowKey"> The row key of the entity. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> DeleteEntityAsync(int? timeout, string requestId, ResponseFormat? format, string table, string partitionKey, string rowKey, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> DeleteEntityAsync(int? timeout, string requestId, ResponseFormat? format, string table, string partitionKey, string rowKey, CancellationToken cancellationToken = default)
         {
             return (await RestClient.DeleteEntityAsync(timeout, requestId, format, table, partitionKey, rowKey, cancellationToken).ConfigureAwait(false)).GetRawResponse();
         }
@@ -193,7 +193,7 @@ namespace Azure.Storage.Tables
         /// <param name="table"> The name of the table. </param>
         /// <param name="tableEntityProperties"> The properties for the table entity. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<IDictionary<string, object>>> InsertEntityAsync(int? timeout, string requestId, ResponseFormat? format, string table, IDictionary<string, object> tableEntityProperties, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IDictionary<string, object>>> InsertEntityAsync(int? timeout, string requestId, ResponseFormat? format, string table, IDictionary<string, object> tableEntityProperties, CancellationToken cancellationToken = default)
         {
             return await RestClient.InsertEntityAsync(timeout, requestId, format, table, tableEntityProperties, cancellationToken).ConfigureAwait(false);
         }
@@ -213,7 +213,7 @@ namespace Azure.Storage.Tables
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="table"> The name of the table. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<IList<SignedIdentifier>>> GetAccessPolicyAsync(int? timeout, string requestId, string table, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IList<SignedIdentifier>>> GetAccessPolicyAsync(int? timeout, string requestId, string table, CancellationToken cancellationToken = default)
         {
             return await RestClient.GetAccessPolicyAsync(timeout, requestId, table, cancellationToken).ConfigureAwait(false);
         }
@@ -232,7 +232,7 @@ namespace Azure.Storage.Tables
         /// <param name="table"> The name of the table. </param>
         /// <param name="tableAcl"> the acls for the table. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> SetAccessPolicyAsync(int? timeout, string requestId, string table, IEnumerable<SignedIdentifier> tableAcl, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> SetAccessPolicyAsync(int? timeout, string requestId, string table, IEnumerable<SignedIdentifier> tableAcl, CancellationToken cancellationToken = default)
         {
             return (await RestClient.SetAccessPolicyAsync(timeout, requestId, table, tableAcl, cancellationToken).ConfigureAwait(false)).GetRawResponse();
         }

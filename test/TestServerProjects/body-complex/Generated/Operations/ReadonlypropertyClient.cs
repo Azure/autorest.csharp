@@ -27,7 +27,7 @@ namespace body_complex
         }
         /// <summary> Get complex types that have readonly properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<ReadonlyObj>> GetValidAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ReadonlyObj>> GetValidAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetValidAsync(cancellationToken).ConfigureAwait(false);
         }
@@ -40,7 +40,7 @@ namespace body_complex
         /// <summary> Put complex types that have readonly properties. </summary>
         /// <param name="complexBody"> The ReadonlyObj to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> PutValidAsync(ReadonlyObj complexBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutValidAsync(ReadonlyObj complexBody, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutValidAsync(complexBody, cancellationToken).ConfigureAwait(false);
         }

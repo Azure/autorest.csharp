@@ -26,7 +26,7 @@ namespace httpInfrastructure
         }
         /// <summary> Return 300 status code and redirect to /http/success/200. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> Head300Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Head300Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Head300Async(cancellationToken).ConfigureAwait(false);
         }
@@ -38,7 +38,7 @@ namespace httpInfrastructure
         }
         /// <summary> Return 300 status code and redirect to /http/success/200. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> Get300Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Get300Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Get300Async(cancellationToken).ConfigureAwait(false);
         }
@@ -50,7 +50,7 @@ namespace httpInfrastructure
         }
         /// <summary> Return 301 status code and redirect to /http/success/200. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> Head301Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Head301Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Head301Async(cancellationToken).ConfigureAwait(false);
         }
@@ -62,7 +62,7 @@ namespace httpInfrastructure
         }
         /// <summary> Return 301 status code and redirect to /http/success/200. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> Get301Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Get301Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Get301Async(cancellationToken).ConfigureAwait(false);
         }
@@ -74,7 +74,7 @@ namespace httpInfrastructure
         }
         /// <summary> Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> Put301Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Put301Async(CancellationToken cancellationToken = default)
         {
             return (await RestClient.Put301Async(cancellationToken).ConfigureAwait(false)).GetRawResponse();
         }
@@ -86,7 +86,7 @@ namespace httpInfrastructure
         }
         /// <summary> Return 302 status code and redirect to /http/success/200. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> Head302Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Head302Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Head302Async(cancellationToken).ConfigureAwait(false);
         }
@@ -98,7 +98,7 @@ namespace httpInfrastructure
         }
         /// <summary> Return 302 status code and redirect to /http/success/200. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> Get302Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Get302Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Get302Async(cancellationToken).ConfigureAwait(false);
         }
@@ -110,7 +110,7 @@ namespace httpInfrastructure
         }
         /// <summary> Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> Patch302Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Patch302Async(CancellationToken cancellationToken = default)
         {
             return (await RestClient.Patch302Async(cancellationToken).ConfigureAwait(false)).GetRawResponse();
         }
@@ -122,7 +122,7 @@ namespace httpInfrastructure
         }
         /// <summary> Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> Post303Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Post303Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Post303Async(cancellationToken).ConfigureAwait(false);
         }
@@ -134,7 +134,7 @@ namespace httpInfrastructure
         }
         /// <summary> Redirect with 307, resulting in a 200 success. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> Head307Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Head307Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Head307Async(cancellationToken).ConfigureAwait(false);
         }
@@ -146,7 +146,7 @@ namespace httpInfrastructure
         }
         /// <summary> Redirect get with 307, resulting in a 200 success. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> Get307Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Get307Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Get307Async(cancellationToken).ConfigureAwait(false);
         }
@@ -158,7 +158,7 @@ namespace httpInfrastructure
         }
         /// <summary> options redirected with 307, resulting in a 200 after redirect. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> Options307Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Options307Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Options307Async(cancellationToken).ConfigureAwait(false);
         }
@@ -170,7 +170,7 @@ namespace httpInfrastructure
         }
         /// <summary> Put redirected with 307, resulting in a 200 after redirect. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> Put307Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Put307Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Put307Async(cancellationToken).ConfigureAwait(false);
         }
@@ -182,7 +182,7 @@ namespace httpInfrastructure
         }
         /// <summary> Patch redirected with 307, resulting in a 200 after redirect. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> Patch307Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Patch307Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Patch307Async(cancellationToken).ConfigureAwait(false);
         }
@@ -194,7 +194,7 @@ namespace httpInfrastructure
         }
         /// <summary> Post redirected with 307, resulting in a 200 after redirect. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> Post307Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Post307Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Post307Async(cancellationToken).ConfigureAwait(false);
         }
@@ -206,7 +206,7 @@ namespace httpInfrastructure
         }
         /// <summary> Delete redirected with 307, resulting in a 200 after redirect. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> Delete307Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Delete307Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Delete307Async(cancellationToken).ConfigureAwait(false);
         }

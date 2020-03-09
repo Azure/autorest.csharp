@@ -26,7 +26,7 @@ namespace httpInfrastructure
         }
         /// <summary> Get empty error form server. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<bool>> GetEmptyErrorAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> GetEmptyErrorAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetEmptyErrorAsync(cancellationToken).ConfigureAwait(false);
         }
@@ -38,7 +38,7 @@ namespace httpInfrastructure
         }
         /// <summary> Get empty error form server. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<bool>> GetNoModelErrorAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> GetNoModelErrorAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetNoModelErrorAsync(cancellationToken).ConfigureAwait(false);
         }
@@ -50,7 +50,7 @@ namespace httpInfrastructure
         }
         /// <summary> Get empty response from server. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<bool>> GetNoModelEmptyAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> GetNoModelEmptyAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetNoModelEmptyAsync(cancellationToken).ConfigureAwait(false);
         }

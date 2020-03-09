@@ -33,7 +33,7 @@ namespace Azure.Network.Management.Interface
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
         /// <param name="expand"> Expands referenced resources. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<NetworkInterface>> GetAsync(string resourceGroupName, string networkInterfaceName, string expand, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<NetworkInterface>> GetAsync(string resourceGroupName, string networkInterfaceName, string expand, CancellationToken cancellationToken = default)
         {
             return await RestClient.GetAsync(resourceGroupName, networkInterfaceName, expand, cancellationToken).ConfigureAwait(false);
         }
@@ -51,7 +51,7 @@ namespace Azure.Network.Management.Interface
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
         /// <param name="parameters"> Parameters supplied to update network interface tags. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<NetworkInterface>> UpdateTagsAsync(string resourceGroupName, string networkInterfaceName, TagsObject parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<NetworkInterface>> UpdateTagsAsync(string resourceGroupName, string networkInterfaceName, TagsObject parameters, CancellationToken cancellationToken = default)
         {
             return await RestClient.UpdateTagsAsync(resourceGroupName, networkInterfaceName, parameters, cancellationToken).ConfigureAwait(false);
         }

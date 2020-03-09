@@ -27,7 +27,7 @@ namespace body_string
         }
         /// <summary> Get enum value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<Colors>> GetNotExpandableAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Colors>> GetNotExpandableAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetNotExpandableAsync(cancellationToken).ConfigureAwait(false);
         }
@@ -40,7 +40,7 @@ namespace body_string
         /// <summary> Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
         /// <param name="stringBody"> The Colors to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> PutNotExpandableAsync(Colors stringBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutNotExpandableAsync(Colors stringBody, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutNotExpandableAsync(stringBody, cancellationToken).ConfigureAwait(false);
         }
@@ -53,7 +53,7 @@ namespace body_string
         }
         /// <summary> Get enum value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<Colors>> GetReferencedAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Colors>> GetReferencedAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetReferencedAsync(cancellationToken).ConfigureAwait(false);
         }
@@ -66,7 +66,7 @@ namespace body_string
         /// <summary> Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
         /// <param name="enumStringBody"> The Colors to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> PutReferencedAsync(Colors enumStringBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutReferencedAsync(Colors enumStringBody, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutReferencedAsync(enumStringBody, cancellationToken).ConfigureAwait(false);
         }
@@ -79,7 +79,7 @@ namespace body_string
         }
         /// <summary> Get value &apos;green-color&apos; from the constant. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<RefColorConstant>> GetReferencedConstantAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<RefColorConstant>> GetReferencedConstantAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetReferencedConstantAsync(cancellationToken).ConfigureAwait(false);
         }
@@ -92,7 +92,7 @@ namespace body_string
         /// <summary> Sends value &apos;green-color&apos; from a constant. </summary>
         /// <param name="enumStringBody"> The RefColorConstant to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> PutReferencedConstantAsync(RefColorConstant enumStringBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutReferencedConstantAsync(RefColorConstant enumStringBody, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutReferencedConstantAsync(enumStringBody, cancellationToken).ConfigureAwait(false);
         }
