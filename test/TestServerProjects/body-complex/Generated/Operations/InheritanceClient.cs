@@ -18,6 +18,10 @@ namespace body_complex
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal InheritanceRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of InheritanceClient for mocking. </summary>
+        protected InheritanceClient()
+        {
+        }
         /// <summary> Initializes a new instance of InheritanceClient. </summary>
         internal InheritanceClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {

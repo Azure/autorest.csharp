@@ -20,6 +20,10 @@ namespace url
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal PathsRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of PathsClient for mocking. </summary>
+        protected PathsClient()
+        {
+        }
         /// <summary> Initializes a new instance of PathsClient. </summary>
         internal PathsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {

@@ -19,6 +19,10 @@ namespace header
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal HeaderRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of HeaderClient for mocking. </summary>
+        protected HeaderClient()
+        {
+        }
         /// <summary> Initializes a new instance of HeaderClient. </summary>
         internal HeaderClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {

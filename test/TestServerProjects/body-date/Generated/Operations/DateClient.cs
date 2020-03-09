@@ -18,6 +18,10 @@ namespace body_date
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal DateRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of DateClient for mocking. </summary>
+        protected DateClient()
+        {
+        }
         /// <summary> Initializes a new instance of DateClient. </summary>
         internal DateClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {

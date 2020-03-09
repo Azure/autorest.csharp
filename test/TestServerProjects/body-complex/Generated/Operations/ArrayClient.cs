@@ -18,6 +18,10 @@ namespace body_complex
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal ArrayRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of ArrayClient for mocking. </summary>
+        protected ArrayClient()
+        {
+        }
         /// <summary> Initializes a new instance of ArrayClient. </summary>
         internal ArrayClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {

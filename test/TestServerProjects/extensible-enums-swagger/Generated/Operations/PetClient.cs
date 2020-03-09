@@ -18,6 +18,10 @@ namespace extensible_enums_swagger
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal PetRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of PetClient for mocking. </summary>
+        protected PetClient()
+        {
+        }
         /// <summary> Initializes a new instance of PetClient. </summary>
         internal PetClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {

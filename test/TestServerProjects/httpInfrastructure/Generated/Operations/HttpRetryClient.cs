@@ -17,6 +17,10 @@ namespace httpInfrastructure
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal HttpRetryRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of HttpRetryClient for mocking. </summary>
+        protected HttpRetryClient()
+        {
+        }
         /// <summary> Initializes a new instance of HttpRetryClient. </summary>
         internal HttpRetryClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {

@@ -20,6 +20,10 @@ namespace paging
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal PagingRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of PagingClient for mocking. </summary>
+        protected PagingClient()
+        {
+        }
         /// <summary> Initializes a new instance of PagingClient. </summary>
         internal PagingClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {

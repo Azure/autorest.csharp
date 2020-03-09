@@ -21,6 +21,10 @@ namespace lro
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal LRORetrysRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of LRORetrysClient for mocking. </summary>
+        protected LRORetrysClient()
+        {
+        }
         /// <summary> Initializes a new instance of LRORetrysClient. </summary>
         internal LRORetrysClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
@@ -172,16 +176,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LRORetrysClient.Delete202Retry200", OperationFinalStateVia.Location, createOriginalHttpMessage,
-            (response, cancellationToken) =>
-            {
-                return response;
-            },
-            async (response, cancellationToken) =>
-            {
-                await Task.CompletedTask;
-                return response;
-            });
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LRORetrysClient.Delete202Retry200", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
         /// <summary> Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -211,16 +206,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LRORetrysClient.DeleteAsyncRelativeRetrySucceeded", OperationFinalStateVia.Location, createOriginalHttpMessage,
-            (response, cancellationToken) =>
-            {
-                return response;
-            },
-            async (response, cancellationToken) =>
-            {
-                await Task.CompletedTask;
-                return response;
-            });
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LRORetrysClient.DeleteAsyncRelativeRetrySucceeded", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
         /// <summary> Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -250,16 +236,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LRORetrysClient.Post202Retry200", OperationFinalStateVia.Location, createOriginalHttpMessage,
-            (response, cancellationToken) =>
-            {
-                return response;
-            },
-            async (response, cancellationToken) =>
-            {
-                await Task.CompletedTask;
-                return response;
-            });
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LRORetrysClient.Post202Retry200", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
         /// <summary> Long running post request, service returns a 500, then a 202 to the initial request, with &apos;Location&apos; and &apos;Retry-After&apos; headers, Polls return a 200 with a response body after success. </summary>
         /// <param name="product"> Product to put. </param>
@@ -291,16 +268,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LRORetrysClient.PostAsyncRelativeRetrySucceeded", OperationFinalStateVia.Location, createOriginalHttpMessage,
-            (response, cancellationToken) =>
-            {
-                return response;
-            },
-            async (response, cancellationToken) =>
-            {
-                await Task.CompletedTask;
-                return response;
-            });
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LRORetrysClient.PostAsyncRelativeRetrySucceeded", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
         /// <summary> Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>

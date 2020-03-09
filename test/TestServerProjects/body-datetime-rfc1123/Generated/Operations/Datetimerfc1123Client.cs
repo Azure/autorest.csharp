@@ -18,6 +18,10 @@ namespace body_datetime_rfc1123
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal Datetimerfc1123RestClient RestClient { get; }
+        /// <summary> Initializes a new instance of Datetimerfc1123Client for mocking. </summary>
+        protected Datetimerfc1123Client()
+        {
+        }
         /// <summary> Initializes a new instance of Datetimerfc1123Client. </summary>
         internal Datetimerfc1123Client(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {

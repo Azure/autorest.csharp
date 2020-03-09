@@ -20,6 +20,10 @@ namespace Azure.Storage.Management
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal BlobContainersRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of BlobContainersClient for mocking. </summary>
+        protected BlobContainersClient()
+        {
+        }
         /// <summary> Initializes a new instance of BlobContainersClient. </summary>
         internal BlobContainersClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string ApiVersion = "2019-06-01")
         {

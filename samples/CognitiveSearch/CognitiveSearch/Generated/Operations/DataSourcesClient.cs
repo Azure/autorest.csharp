@@ -19,6 +19,10 @@ namespace CognitiveSearch
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal DataSourcesRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of DataSourcesClient for mocking. </summary>
+        protected DataSourcesClient()
+        {
+        }
         /// <summary> Initializes a new instance of DataSourcesClient. </summary>
         internal DataSourcesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string searchServiceName, string searchDnsSuffix = "search.windows.net", string ApiVersion = "2019-05-06")
         {
