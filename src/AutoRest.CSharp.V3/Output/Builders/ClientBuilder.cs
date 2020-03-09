@@ -60,7 +60,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             Dictionary<string, OperationMethod> operationMethods = new Dictionary<string, OperationMethod>(StringComparer.InvariantCultureIgnoreCase);
             foreach (Operation operation in operationGroup.Operations)
             {
-                int overloadCount = 0;
+                int overloadSuffix = 0;
                 foreach (ServiceRequest serviceRequest in operation.Requests)
                 {
                     HttpRequest? httpRequest = serviceRequest.Protocol.Http as HttpRequest;
@@ -71,7 +71,9 @@ namespace AutoRest.CSharp.V3.Output.Builders
                     }
 
                     RestClientMethod method = BuildMethod(operation, clientName, clientParameters, httpRequest, serviceRequest.Parameters);
-                    operationMethods.Add($"{operation.Language.Default.Name}{overloadCount++}", new OperationMethod(operation, method));
+                    string suffix = overloadSuffix > 0 ? $"{overloadSuffix}" : String.Empty;
+                    overloadSuffix++;
+                    operationMethods.Add($"{operation.Language.Default.Name}{suffix}", new OperationMethod(operation, method));
                 }
             }
 
