@@ -18,6 +18,10 @@ namespace body_string
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal EnumRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of EnumClient for mocking. </summary>
+        protected EnumClient()
+        {
+        }
         /// <summary> Initializes a new instance of EnumClient. </summary>
         internal EnumClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {

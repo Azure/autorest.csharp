@@ -20,6 +20,10 @@ namespace Azure.Storage.Management
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal EncryptionScopesRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of EncryptionScopesClient for mocking. </summary>
+        protected EncryptionScopesClient()
+        {
+        }
         /// <summary> Initializes a new instance of EncryptionScopesClient. </summary>
         internal EncryptionScopesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string ApiVersion = "2019-06-01")
         {

@@ -20,6 +20,10 @@ namespace body_dictionary
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal DictionaryRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of DictionaryClient for mocking. </summary>
+        protected DictionaryClient()
+        {
+        }
         /// <summary> Initializes a new instance of DictionaryClient. </summary>
         internal DictionaryClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {

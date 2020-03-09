@@ -18,6 +18,10 @@ namespace additionalProperties
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal PetsRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of PetsClient for mocking. </summary>
+        protected PetsClient()
+        {
+        }
         /// <summary> Initializes a new instance of PetsClient. </summary>
         internal PetsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {

@@ -18,6 +18,10 @@ namespace body_duration
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal DurationRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of DurationClient for mocking. </summary>
+        protected DurationClient()
+        {
+        }
         /// <summary> Initializes a new instance of DurationClient. </summary>
         internal DurationClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {

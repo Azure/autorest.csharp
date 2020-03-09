@@ -19,6 +19,10 @@ namespace Azure.Storage.Tables
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal TableRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of TableInternalClient for mocking. </summary>
+        protected TableInternalClient()
+        {
+        }
         /// <summary> Initializes a new instance of TableInternalClient. </summary>
         internal TableInternalClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string url, string Version = "2018-10-10")
         {

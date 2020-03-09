@@ -20,6 +20,10 @@ namespace CognitiveSearch
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal DocumentsRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of DocumentsClient for mocking. </summary>
+        protected DocumentsClient()
+        {
+        }
         /// <summary> Initializes a new instance of DocumentsClient. </summary>
         internal DocumentsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string searchServiceName, string indexName, string searchDnsSuffix = "search.windows.net", string ApiVersion = "2019-05-06")
         {

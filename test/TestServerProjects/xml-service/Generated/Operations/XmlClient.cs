@@ -19,6 +19,10 @@ namespace xml_service
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal XmlRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of XmlClient for mocking. </summary>
+        protected XmlClient()
+        {
+        }
         /// <summary> Initializes a new instance of XmlClient. </summary>
         internal XmlClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {

@@ -20,6 +20,10 @@ namespace url
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal QueriesRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of QueriesClient for mocking. </summary>
+        protected QueriesClient()
+        {
+        }
         /// <summary> Initializes a new instance of QueriesClient. </summary>
         internal QueriesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {

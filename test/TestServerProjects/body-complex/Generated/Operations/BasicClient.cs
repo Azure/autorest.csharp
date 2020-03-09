@@ -18,6 +18,10 @@ namespace body_complex
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal BasicRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of BasicClient for mocking. </summary>
+        protected BasicClient()
+        {
+        }
         /// <summary> Initializes a new instance of BasicClient. </summary>
         internal BasicClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", string ApiVersion = "2016-02-29")
         {

@@ -18,6 +18,10 @@ namespace body_complex
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal PrimitiveRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of PrimitiveClient for mocking. </summary>
+        protected PrimitiveClient()
+        {
+        }
         /// <summary> Initializes a new instance of PrimitiveClient. </summary>
         internal PrimitiveClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {

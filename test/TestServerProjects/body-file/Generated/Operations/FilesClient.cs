@@ -18,6 +18,10 @@ namespace body_file
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal FilesRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of FilesClient for mocking. </summary>
+        protected FilesClient()
+        {
+        }
         /// <summary> Initializes a new instance of FilesClient. </summary>
         internal FilesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {

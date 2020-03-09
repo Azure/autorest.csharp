@@ -17,6 +17,10 @@ namespace httpInfrastructure
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal HttpSuccessRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of HttpSuccessClient for mocking. </summary>
+        protected HttpSuccessClient()
+        {
+        }
         /// <summary> Initializes a new instance of HttpSuccessClient. </summary>
         internal HttpSuccessClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {

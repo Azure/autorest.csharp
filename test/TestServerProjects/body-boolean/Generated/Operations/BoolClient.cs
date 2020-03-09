@@ -17,6 +17,10 @@ namespace body_boolean
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal BoolRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of BoolClient for mocking. </summary>
+        protected BoolClient()
+        {
+        }
         /// <summary> Initializes a new instance of BoolClient. </summary>
         internal BoolClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {

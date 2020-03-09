@@ -18,6 +18,10 @@ namespace body_complex
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal PolymorphicrecursiveRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of PolymorphicrecursiveClient for mocking. </summary>
+        protected PolymorphicrecursiveClient()
+        {
+        }
         /// <summary> Initializes a new instance of PolymorphicrecursiveClient. </summary>
         internal PolymorphicrecursiveClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {

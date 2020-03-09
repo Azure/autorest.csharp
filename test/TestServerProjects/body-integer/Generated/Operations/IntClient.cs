@@ -18,6 +18,10 @@ namespace body_integer
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal IntRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of IntClient for mocking. </summary>
+        protected IntClient()
+        {
+        }
         /// <summary> Initializes a new instance of IntClient. </summary>
         internal IntClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {

@@ -18,6 +18,10 @@ namespace body_complex
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal FlattencomplexRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of FlattencomplexClient for mocking. </summary>
+        protected FlattencomplexClient()
+        {
+        }
         /// <summary> Initializes a new instance of FlattencomplexClient. </summary>
         internal FlattencomplexClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {

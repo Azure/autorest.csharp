@@ -18,6 +18,10 @@ namespace httpInfrastructure
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal MultipleResponsesRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of MultipleResponsesClient for mocking. </summary>
+        protected MultipleResponsesClient()
+        {
+        }
         /// <summary> Initializes a new instance of MultipleResponsesClient. </summary>
         internal MultipleResponsesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
