@@ -75,7 +75,7 @@ $testNames =
     'header',
     'httpInfrastructure',
     'lro',
-    #'media_types',
+    'media_types',
     'model-flattening',
     'paging',
     #'required-optional',

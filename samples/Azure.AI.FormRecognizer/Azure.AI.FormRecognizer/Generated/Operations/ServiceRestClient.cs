@@ -403,6 +403,84 @@ namespace Azure.AI.FormRecognizer
                 throw;
             }
         }
+        internal HttpMessage CreateAnalyzeWithCustomModelRequest(Guid modelId, bool? includeTextDetails, SourcePath fileStream)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(endpoint, false);
+            uri.AppendRaw("/formrecognizer/v2.0-preview", false);
+            uri.AppendPath("/custom/models/", false);
+            uri.AppendPath(modelId, true);
+            uri.AppendPath("/analyze", false);
+            if (includeTextDetails != null)
+            {
+                uri.AppendQuery("includeTextDetails", includeTextDetails.Value, true);
+            }
+            request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(fileStream);
+            request.Content = content;
+            return message;
+        }
+        /// <summary> Extract key-value pairs, tables, and semantic values from a given document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
+        /// <param name="modelId"> Model identifier. </param>
+        /// <param name="includeTextDetails"> Include text lines and element references in the result. </param>
+        /// <param name="fileStream"> .json, .pdf, .jpg, .png or .tiff type file stream. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<ResponseWithHeaders<AnalyzeWithCustomModelHeaders>> AnalyzeWithCustomModelAsync(Guid modelId, bool? includeTextDetails, SourcePath fileStream, CancellationToken cancellationToken = default)
+        {
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.AnalyzeWithCustomModel");
+            scope.Start();
+            try
+            {
+                using var message = CreateAnalyzeWithCustomModelRequest(modelId, includeTextDetails, fileStream);
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
+                {
+                    case 202:
+                        var headers = new AnalyzeWithCustomModelHeaders(message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
+                    default:
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        /// <summary> Extract key-value pairs, tables, and semantic values from a given document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
+        /// <param name="modelId"> Model identifier. </param>
+        /// <param name="includeTextDetails"> Include text lines and element references in the result. </param>
+        /// <param name="fileStream"> .json, .pdf, .jpg, .png or .tiff type file stream. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public ResponseWithHeaders<AnalyzeWithCustomModelHeaders> AnalyzeWithCustomModel(Guid modelId, bool? includeTextDetails, SourcePath fileStream, CancellationToken cancellationToken = default)
+        {
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.AnalyzeWithCustomModel");
+            scope.Start();
+            try
+            {
+                using var message = CreateAnalyzeWithCustomModelRequest(modelId, includeTextDetails, fileStream);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 202:
+                        var headers = new AnalyzeWithCustomModelHeaders(message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
+                    default:
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetAnalyzeFormResultRequest(Guid modelId, Guid resultId)
         {
             var message = pipeline.CreateMessage();
@@ -552,6 +630,80 @@ namespace Azure.AI.FormRecognizer
                 throw;
             }
         }
+        internal HttpMessage CreateAnalyzeReceiptAsyncRequest(bool? includeTextDetails, SourcePath fileStream)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(endpoint, false);
+            uri.AppendRaw("/formrecognizer/v2.0-preview", false);
+            uri.AppendPath("/prebuilt/receipt/analyze", false);
+            if (includeTextDetails != null)
+            {
+                uri.AppendQuery("includeTextDetails", includeTextDetails.Value, true);
+            }
+            request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(fileStream);
+            request.Content = content;
+            return message;
+        }
+        /// <summary> Extract field text and semantic values from a given receipt document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
+        /// <param name="includeTextDetails"> Include text lines and element references in the result. </param>
+        /// <param name="fileStream"> .json, .pdf, .jpg, .png or .tiff type file stream. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<ResponseWithHeaders<AnalyzeReceiptAsyncHeaders>> AnalyzeReceiptAsyncAsync(bool? includeTextDetails, SourcePath fileStream, CancellationToken cancellationToken = default)
+        {
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.AnalyzeReceiptAsync");
+            scope.Start();
+            try
+            {
+                using var message = CreateAnalyzeReceiptAsyncRequest(includeTextDetails, fileStream);
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
+                {
+                    case 202:
+                        var headers = new AnalyzeReceiptAsyncHeaders(message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
+                    default:
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        /// <summary> Extract field text and semantic values from a given receipt document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
+        /// <param name="includeTextDetails"> Include text lines and element references in the result. </param>
+        /// <param name="fileStream"> .json, .pdf, .jpg, .png or .tiff type file stream. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public ResponseWithHeaders<AnalyzeReceiptAsyncHeaders> AnalyzeReceiptAsync(bool? includeTextDetails, SourcePath fileStream, CancellationToken cancellationToken = default)
+        {
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.AnalyzeReceiptAsync");
+            scope.Start();
+            try
+            {
+                using var message = CreateAnalyzeReceiptAsyncRequest(includeTextDetails, fileStream);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 202:
+                        var headers = new AnalyzeReceiptAsyncHeaders(message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
+                    default:
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
         internal HttpMessage CreateGetAnalyzeReceiptResultRequest(Guid resultId)
         {
             var message = pipeline.CreateMessage();
@@ -675,6 +827,74 @@ namespace Azure.AI.FormRecognizer
             try
             {
                 using var message = CreateAnalyzeLayoutAsyncRequest(contentType);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 202:
+                        var headers = new AnalyzeLayoutAsyncHeaders(message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
+                    default:
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        internal HttpMessage CreateAnalyzeLayoutAsyncRequest(SourcePath fileStream)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(endpoint, false);
+            uri.AppendRaw("/formrecognizer/v2.0-preview", false);
+            uri.AppendPath("/layout/analyze", false);
+            request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(fileStream);
+            request.Content = content;
+            return message;
+        }
+        /// <summary> Extract text and layout information from a given document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
+        /// <param name="fileStream"> .json, .pdf, .jpg, .png or .tiff type file stream. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<ResponseWithHeaders<AnalyzeLayoutAsyncHeaders>> AnalyzeLayoutAsyncAsync(SourcePath fileStream, CancellationToken cancellationToken = default)
+        {
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.AnalyzeLayoutAsync");
+            scope.Start();
+            try
+            {
+                using var message = CreateAnalyzeLayoutAsyncRequest(fileStream);
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
+                {
+                    case 202:
+                        var headers = new AnalyzeLayoutAsyncHeaders(message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
+                    default:
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        /// <summary> Extract text and layout information from a given document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
+        /// <param name="fileStream"> .json, .pdf, .jpg, .png or .tiff type file stream. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public ResponseWithHeaders<AnalyzeLayoutAsyncHeaders> AnalyzeLayoutAsync(SourcePath fileStream, CancellationToken cancellationToken = default)
+        {
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.AnalyzeLayoutAsync");
+            scope.Start();
+            try
+            {
+                using var message = CreateAnalyzeLayoutAsyncRequest(fileStream);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {

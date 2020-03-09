@@ -116,6 +116,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\lro\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\lro --namespace=lro --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
     },
+    "media_types": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\media_types\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\media_types --namespace=media_types --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+    },
     "model-flattening": {
       "commandName": "Project",
       "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\model-flattening\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\model-flattening --namespace=model_flattening --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
