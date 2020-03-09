@@ -8,7 +8,7 @@ Write-Host 'Downloading shared source files...'
 # & (Join-Path $PSScriptRoot 'DownloadSharedSource.ps1')
 
 Write-Host 'Generating test clients...'
-& (Join-Path $PSScriptRoot 'Generate.ps1')
+& (Join-Path $PSScriptRoot 'Generate.ps1') -reset -updateLaunchSettings
 
 Write-Host 'Checking generated file differences...'
 git -c core.safecrlf=false diff --ignore-space-at-eol --exit-code
