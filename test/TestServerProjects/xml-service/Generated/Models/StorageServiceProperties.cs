@@ -19,7 +19,7 @@ namespace xml_service.Models
         /// <summary> a summary of request statistics grouped by API in minute aggregates for blobs. </summary>
         public Metrics MinuteMetrics { get; set; }
         /// <summary> The set of CORS rules. </summary>
-        public ICollection<CorsRule> Cors { get; set; }
+        public IList<CorsRule> Cors { get; set; }
         /// <summary> The default version to use for requests to the Blob service if an incoming request&apos;s version is not specified. Possible values include version 2008-10-27 and all more recent versions. </summary>
         public string DefaultServiceVersion { get; set; }
         /// <summary> The Delete Retention Policy for the service. </summary>

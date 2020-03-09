@@ -19,6 +19,6 @@ namespace CognitiveSearch.Models
         /// <summary> The source context used for selecting recursive inputs. </summary>
         public string SourceContext { get; set; }
         /// <summary> The recursive inputs used when creating a complex type. </summary>
-        public ICollection<InputFieldMappingEntry> Inputs { get; set; }
+        public IList<InputFieldMappingEntry> Inputs { get; set; }
     }
 }

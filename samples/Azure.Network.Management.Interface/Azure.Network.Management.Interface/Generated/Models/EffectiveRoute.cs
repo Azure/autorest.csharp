@@ -21,9 +21,9 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> The value of effective route. </summary>
         public EffectiveRouteState? State { get; set; }
         /// <summary> The address prefixes of the effective routes in CIDR notation. </summary>
-        public ICollection<string> AddressPrefix { get; set; }
+        public IList<string> AddressPrefix { get; set; }
         /// <summary> The IP address of the next hop of the effective route. </summary>
-        public ICollection<string> NextHopIpAddress { get; set; }
+        public IList<string> NextHopIpAddress { get; set; }
         /// <summary> The type of Azure hop the packet should be sent to. </summary>
         public RouteNextHopType? NextHopType { get; set; }
     }

@@ -17,7 +17,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>
         public string Etag { get; internal set; }
         /// <summary> Rewrite rules in the rewrite rule set. </summary>
-        public ICollection<ApplicationGatewayRewriteRule> RewriteRules { get; set; }
+        public IList<ApplicationGatewayRewriteRule> RewriteRules { get; set; }
         /// <summary> The provisioning state of the rewrite rule set resource. </summary>
         public ProvisioningState? ProvisioningState { get; internal set; }
     }

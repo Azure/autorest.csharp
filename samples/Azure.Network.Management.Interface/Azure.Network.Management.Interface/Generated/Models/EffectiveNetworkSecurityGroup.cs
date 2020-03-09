@@ -17,7 +17,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> Associated resources. </summary>
         public EffectiveNetworkSecurityGroupAssociation Association { get; set; }
         /// <summary> A collection of effective security rules. </summary>
-        public ICollection<EffectiveNetworkSecurityRule> EffectiveSecurityRules { get; set; }
+        public IList<EffectiveNetworkSecurityRule> EffectiveSecurityRules { get; set; }
         /// <summary> Mapping of tags to list of IP Addresses included within the tag. </summary>
         public string TagMap { get; set; }
     }

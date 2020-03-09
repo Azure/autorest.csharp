@@ -18,6 +18,6 @@ namespace CognitiveSearch.Models
             OdataType = "#Microsoft.Azure.Search.ElisionTokenFilter";
         }
         /// <summary> The set of articles to remove. </summary>
-        public ICollection<string> Articles { get; set; }
+        public IList<string> Articles { get; set; }
     }
 }

@@ -15,10 +15,10 @@ namespace Azure.AI.FormRecognizer.Models
         /// <summary> The text content of the line. </summary>
         public string Text { get; set; }
         /// <summary> Bounding box of an extracted line. </summary>
-        public ICollection<float> BoundingBox { get; set; } = new List<float>();
+        public IList<float> BoundingBox { get; set; } = new List<float>();
         /// <summary> The detected language of this line, if different from the overall page language. </summary>
         public Language? Language { get; set; }
         /// <summary> List of words in the text line. </summary>
-        public ICollection<TextWord> Words { get; set; } = new List<TextWord>();
+        public IList<TextWord> Words { get; set; } = new List<TextWord>();
     }
 }

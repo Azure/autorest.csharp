@@ -23,7 +23,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> The DDoS protection custom policy associated with the public IP address. </summary>
         public DdosSettings DdosSettings { get; set; }
         /// <summary> The list of tags associated with the public IP address. </summary>
-        public ICollection<IpTag> IpTags { get; set; }
+        public IList<IpTag> IpTags { get; set; }
         /// <summary> The IP address associated with the public IP address resource. </summary>
         public string IpAddress { get; set; }
         /// <summary> The Public IP Prefix this Public IP Address should be allocated from. </summary>

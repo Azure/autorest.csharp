@@ -15,12 +15,12 @@ namespace Azure.AI.FormRecognizer.Models
         /// <summary> Version of schema used for this result. </summary>
         public string Version { get; set; }
         /// <summary> Text extracted from the input. </summary>
-        public ICollection<ReadResult> ReadResults { get; set; } = new List<ReadResult>();
+        public IList<ReadResult> ReadResults { get; set; } = new List<ReadResult>();
         /// <summary> Page-level information extracted from the input. </summary>
-        public ICollection<PageResult> PageResults { get; set; }
+        public IList<PageResult> PageResults { get; set; }
         /// <summary> Document-level information extracted from the input. </summary>
-        public ICollection<DocumentResult> DocumentResults { get; set; }
+        public IList<DocumentResult> DocumentResults { get; set; }
         /// <summary> List of errors reported during the analyze operation. </summary>
-        public ICollection<ErrorInformation> Errors { get; set; }
+        public IList<ErrorInformation> Errors { get; set; }
     }
 }

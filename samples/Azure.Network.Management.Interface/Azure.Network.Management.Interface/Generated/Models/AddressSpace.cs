@@ -13,6 +13,6 @@ namespace Azure.Network.Management.Interface.Models
     public partial class AddressSpace
     {
         /// <summary> A list of address blocks reserved for this virtual network in CIDR notation. </summary>
-        public ICollection<string> AddressPrefixes { get; set; }
+        public IList<string> AddressPrefixes { get; set; }
     }
 }

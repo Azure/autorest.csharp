@@ -19,9 +19,9 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> The dhcpOptions that contains an array of DNS servers available to VMs deployed in the virtual network. </summary>
         public DhcpOptions DhcpOptions { get; set; }
         /// <summary> A list of subnets in a Virtual Network. </summary>
-        public ICollection<Subnet> Subnets { get; set; }
+        public IList<Subnet> Subnets { get; set; }
         /// <summary> A list of peerings in a Virtual Network. </summary>
-        public ICollection<VirtualNetworkPeering> VirtualNetworkPeerings { get; set; }
+        public IList<VirtualNetworkPeering> VirtualNetworkPeerings { get; set; }
         /// <summary> The resourceGuid property of the Virtual Network resource. </summary>
         public string ResourceGuid { get; internal set; }
         /// <summary> The provisioning state of the virtual network resource. </summary>

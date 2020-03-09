@@ -22,9 +22,9 @@ namespace CognitiveSearch.Models
         /// <summary> The end time of this indexer execution, if the execution has already completed. </summary>
         public DateTimeOffset? EndTime { get; internal set; }
         /// <summary> The item-level indexing errors. </summary>
-        public ICollection<ItemError> Errors { get; internal set; }
+        public IList<ItemError> Errors { get; internal set; }
         /// <summary> The item-level indexing warnings. </summary>
-        public ICollection<ItemWarning> Warnings { get; internal set; }
+        public IList<ItemWarning> Warnings { get; internal set; }
         /// <summary> The number of items that were processed during this indexer execution. This includes both successfully processed items and items where indexing was attempted but failed. </summary>
         public int? ItemCount { get; internal set; }
         /// <summary> The number of items that failed to be indexed during this indexer execution. </summary>

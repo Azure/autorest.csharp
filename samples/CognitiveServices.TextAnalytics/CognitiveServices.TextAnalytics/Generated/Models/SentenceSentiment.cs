@@ -21,6 +21,6 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <summary> The length of the sentence by Unicode standard. </summary>
         public int Length { get; set; }
         /// <summary> The warnings generated for the sentence. </summary>
-        public ICollection<string> Warnings { get; set; }
+        public IList<string> Warnings { get; set; }
     }
 }

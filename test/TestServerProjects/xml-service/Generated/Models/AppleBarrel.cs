@@ -12,7 +12,7 @@ namespace xml_service.Models
     /// <summary> A barrel of apples. </summary>
     public partial class AppleBarrel
     {
-        public ICollection<string> GoodApples { get; set; }
-        public ICollection<string> BadApples { get; set; }
+        public IList<string> GoodApples { get; set; }
+        public IList<string> BadApples { get; set; }
     }
 }

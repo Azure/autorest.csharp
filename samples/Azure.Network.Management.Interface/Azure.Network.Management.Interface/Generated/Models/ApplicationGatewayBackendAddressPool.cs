@@ -19,9 +19,9 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> Type of the resource. </summary>
         public string Type { get; internal set; }
         /// <summary> Collection of references to IPs defined in network interfaces. </summary>
-        public ICollection<NetworkInterfaceIPConfiguration> BackendIPConfigurations { get; internal set; }
+        public IList<NetworkInterfaceIPConfiguration> BackendIPConfigurations { get; internal set; }
         /// <summary> Backend addresses. </summary>
-        public ICollection<ApplicationGatewayBackendAddress> BackendAddresses { get; set; }
+        public IList<ApplicationGatewayBackendAddress> BackendAddresses { get; set; }
         /// <summary> The provisioning state of the backend address pool resource. </summary>
         public ProvisioningState? ProvisioningState { get; internal set; }
     }

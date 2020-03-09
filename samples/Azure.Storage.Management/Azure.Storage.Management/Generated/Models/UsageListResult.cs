@@ -13,6 +13,6 @@ namespace Azure.Storage.Management.Models
     public partial class UsageListResult
     {
         /// <summary> Gets or sets the list of Storage Resource Usages. </summary>
-        public ICollection<Usage> Value { get; set; }
+        public IList<Usage> Value { get; set; }
     }
 }

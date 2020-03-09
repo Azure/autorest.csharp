@@ -15,7 +15,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> The address prefix for the subnet. </summary>
         public string AddressPrefix { get; set; }
         /// <summary> List of address prefixes for the subnet. </summary>
-        public ICollection<string> AddressPrefixes { get; set; }
+        public IList<string> AddressPrefixes { get; set; }
         /// <summary> The reference to the NetworkSecurityGroup resource. </summary>
         public NetworkSecurityGroup NetworkSecurityGroup { get; set; }
         /// <summary> The reference to the RouteTable resource. </summary>
@@ -23,21 +23,21 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> Nat gateway associated with this subnet. </summary>
         public SubResource NatGateway { get; set; }
         /// <summary> An array of service endpoints. </summary>
-        public ICollection<ServiceEndpointPropertiesFormat> ServiceEndpoints { get; set; }
+        public IList<ServiceEndpointPropertiesFormat> ServiceEndpoints { get; set; }
         /// <summary> An array of service endpoint policies. </summary>
-        public ICollection<ServiceEndpointPolicy> ServiceEndpointPolicies { get; set; }
+        public IList<ServiceEndpointPolicy> ServiceEndpointPolicies { get; set; }
         /// <summary> An array of references to private endpoints. </summary>
-        public ICollection<PrivateEndpoint> PrivateEndpoints { get; internal set; }
+        public IList<PrivateEndpoint> PrivateEndpoints { get; internal set; }
         /// <summary> An array of references to the network interface IP configurations using subnet. </summary>
-        public ICollection<IPConfiguration> IpConfigurations { get; internal set; }
+        public IList<IPConfiguration> IpConfigurations { get; internal set; }
         /// <summary> Array of IP configuration profiles which reference this subnet. </summary>
-        public ICollection<IPConfigurationProfile> IpConfigurationProfiles { get; internal set; }
+        public IList<IPConfigurationProfile> IpConfigurationProfiles { get; internal set; }
         /// <summary> An array of references to the external resources using subnet. </summary>
-        public ICollection<ResourceNavigationLink> ResourceNavigationLinks { get; internal set; }
+        public IList<ResourceNavigationLink> ResourceNavigationLinks { get; internal set; }
         /// <summary> An array of references to services injecting into this subnet. </summary>
-        public ICollection<ServiceAssociationLink> ServiceAssociationLinks { get; internal set; }
+        public IList<ServiceAssociationLink> ServiceAssociationLinks { get; internal set; }
         /// <summary> An array of references to the delegations on the subnet. </summary>
-        public ICollection<Delegation> Delegations { get; set; }
+        public IList<Delegation> Delegations { get; set; }
         /// <summary> A read-only string identifying the intention of use for this subnet based on delegations and other user-defined properties. </summary>
         public string Purpose { get; internal set; }
         /// <summary> The provisioning state of the subnet resource. </summary>

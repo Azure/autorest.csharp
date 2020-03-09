@@ -27,10 +27,10 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> The provisioning state of the HTTP listener resource. </summary>
         public ProvisioningState? ProvisioningState { get; internal set; }
         /// <summary> Custom error configurations of the HTTP listener. </summary>
-        public ICollection<ApplicationGatewayCustomError> CustomErrorConfigurations { get; set; }
+        public IList<ApplicationGatewayCustomError> CustomErrorConfigurations { get; set; }
         /// <summary> Reference to the FirewallPolicy resource. </summary>
         public SubResource FirewallPolicy { get; set; }
         /// <summary> List of Host names for HTTP Listener that allows special wildcard characters as well. </summary>
-        public ICollection<string> Hostnames { get; set; }
+        public IList<string> Hostnames { get; set; }
     }
 }

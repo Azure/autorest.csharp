@@ -19,6 +19,6 @@ namespace Azure.Storage.Tables.Models
         /// <summary> a summary of request statistics grouped by API in minute aggregates for queues. </summary>
         public Metrics MinuteMetrics { get; set; }
         /// <summary> The set of CORS rules. </summary>
-        public ICollection<CorsRule> Cors { get; set; }
+        public IList<CorsRule> Cors { get; set; }
     }
 }

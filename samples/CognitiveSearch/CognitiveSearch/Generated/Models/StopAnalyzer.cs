@@ -18,6 +18,6 @@ namespace CognitiveSearch.Models
             OdataType = "#Microsoft.Azure.Search.StopAnalyzer";
         }
         /// <summary> A list of stopwords. </summary>
-        public ICollection<string> Stopwords { get; set; }
+        public IList<string> Stopwords { get; set; }
     }
 }

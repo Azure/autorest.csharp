@@ -23,7 +23,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> Reference to the container to which this container network interface is attached. </summary>
         public Container Container { get; set; }
         /// <summary> Reference to the ip configuration on this container nic. </summary>
-        public ICollection<ContainerNetworkInterfaceIpConfiguration> IpConfigurations { get; internal set; }
+        public IList<ContainerNetworkInterfaceIpConfiguration> IpConfigurations { get; internal set; }
         /// <summary> The provisioning state of the container network interface resource. </summary>
         public ProvisioningState? ProvisioningState { get; internal set; }
     }

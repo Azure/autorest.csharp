@@ -19,13 +19,13 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> Type of the resource. </summary>
         public string Type { get; internal set; }
         /// <summary> An array of references to IP addresses defined in network interfaces. </summary>
-        public ICollection<NetworkInterfaceIPConfiguration> BackendIPConfigurations { get; internal set; }
+        public IList<NetworkInterfaceIPConfiguration> BackendIPConfigurations { get; internal set; }
         /// <summary> An array of references to load balancing rules that use this backend address pool. </summary>
-        public ICollection<SubResource> LoadBalancingRules { get; internal set; }
+        public IList<SubResource> LoadBalancingRules { get; internal set; }
         /// <summary> A reference to an outbound rule that uses this backend address pool. </summary>
         public SubResource OutboundRule { get; internal set; }
         /// <summary> An array of references to outbound rules that use this backend address pool. </summary>
-        public ICollection<SubResource> OutboundRules { get; internal set; }
+        public IList<SubResource> OutboundRules { get; internal set; }
         /// <summary> The provisioning state of the backend address pool resource. </summary>
         public ProvisioningState? ProvisioningState { get; internal set; }
     }

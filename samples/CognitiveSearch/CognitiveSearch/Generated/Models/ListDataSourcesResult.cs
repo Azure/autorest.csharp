@@ -13,6 +13,6 @@ namespace CognitiveSearch.Models
     public partial class ListDataSourcesResult
     {
         /// <summary> The datasources in the Search service. </summary>
-        public ICollection<DataSource> DataSources { get; internal set; }
+        public IList<DataSource> DataSources { get; internal set; }
     }
 }

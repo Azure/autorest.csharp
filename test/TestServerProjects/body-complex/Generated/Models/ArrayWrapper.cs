@@ -12,6 +12,6 @@ namespace body_complex.Models
     /// <summary> The ArrayWrapper. </summary>
     public partial class ArrayWrapper
     {
-        public ICollection<string> Array { get; set; }
+        public IList<string> Array { get; set; }
     }
 }

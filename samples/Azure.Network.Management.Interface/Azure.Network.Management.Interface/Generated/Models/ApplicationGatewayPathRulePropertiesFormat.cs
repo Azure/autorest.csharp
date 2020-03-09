@@ -13,7 +13,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class ApplicationGatewayPathRulePropertiesFormat
     {
         /// <summary> Path rules of URL path map. </summary>
-        public ICollection<string> Paths { get; set; }
+        public IList<string> Paths { get; set; }
         /// <summary> Backend address pool resource of URL path map path rule. </summary>
         public SubResource BackendAddressPool { get; set; }
         /// <summary> Backend http settings resource of URL path map path rule. </summary>

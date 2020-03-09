@@ -13,7 +13,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class NetworkInterfaceListResult
     {
         /// <summary> A list of network interfaces in a resource group. </summary>
-        public ICollection<NetworkInterface> Value { get; set; }
+        public IList<NetworkInterface> Value { get; set; }
         /// <summary> The URL to get the next set of results. </summary>
         public string NextLink { get; internal set; }
     }

@@ -15,9 +15,9 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>
         public string Etag { get; internal set; }
         /// <summary> List of child container network interfaces. </summary>
-        public ICollection<ContainerNetworkInterface> ContainerNetworkInterfaces { get; internal set; }
+        public IList<ContainerNetworkInterface> ContainerNetworkInterfaces { get; internal set; }
         /// <summary> List of chid container network interface configurations. </summary>
-        public ICollection<ContainerNetworkInterfaceConfiguration> ContainerNetworkInterfaceConfigurations { get; set; }
+        public IList<ContainerNetworkInterfaceConfiguration> ContainerNetworkInterfaceConfigurations { get; set; }
         /// <summary> The resource GUID property of the network profile resource. </summary>
         public string ResourceGuid { get; internal set; }
         /// <summary> The provisioning state of the network profile resource. </summary>

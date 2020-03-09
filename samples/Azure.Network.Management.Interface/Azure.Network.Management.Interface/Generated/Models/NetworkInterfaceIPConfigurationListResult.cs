@@ -13,7 +13,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class NetworkInterfaceIPConfigurationListResult
     {
         /// <summary> A list of ip configurations. </summary>
-        public ICollection<NetworkInterfaceIPConfiguration> Value { get; set; }
+        public IList<NetworkInterfaceIPConfiguration> Value { get; set; }
         /// <summary> The URL to get the next set of results. </summary>
         public string NextLink { get; internal set; }
     }

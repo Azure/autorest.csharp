@@ -27,9 +27,9 @@ namespace CognitiveSearch.Models
         /// <summary> Parameters for indexer execution. </summary>
         public IndexingParameters Parameters { get; set; }
         /// <summary> Defines mappings between fields in the data source and corresponding target fields in the index. </summary>
-        public ICollection<FieldMapping> FieldMappings { get; set; }
+        public IList<FieldMapping> FieldMappings { get; set; }
         /// <summary> Output field mappings are applied after enrichment and immediately before indexing. </summary>
-        public ICollection<FieldMapping> OutputFieldMappings { get; set; }
+        public IList<FieldMapping> OutputFieldMappings { get; set; }
         /// <summary> A value indicating whether the indexer is disabled. Default is false. </summary>
         public bool? IsDisabled { get; set; }
         /// <summary> The ETag of the Indexer. </summary>
