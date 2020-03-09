@@ -53,6 +53,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             Dictionary<string, OperationMethod> operationMethods = new Dictionary<string, OperationMethod>(StringComparer.InvariantCultureIgnoreCase);
             foreach (Operation operation in operationGroup.Operations)
             {
+                int overloadCount = 0;
                 foreach (ServiceRequest serviceRequest in operation.Requests)
                 {
                     HttpRequest? httpRequest = serviceRequest.Protocol.Http as HttpRequest;
@@ -62,8 +63,8 @@ namespace AutoRest.CSharp.V3.Output.Builders
                         continue;
                     }
 
-                    Method method = BuildMethod(operation, clientName, clientParameters, httpRequest, serviceRequest.Parameters);
-                    processedMethods.Add(operation.Language.Default.Name, new OperationMethod(operation, method));
+                    RestClientMethod method = BuildMethod(operation, clientName, clientParameters, httpRequest, serviceRequest.Parameters);
+                    operationMethods.Add($"{operation.Language.Default.Name}{overloadCount++}", new OperationMethod(operation, method));
                 }
             }
 
@@ -71,7 +72,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             List<PagingInfo> pagingMethods = new List<PagingInfo>();
             List<LongRunningOperation> longRunningOperationMethods = new List<LongRunningOperation>();
             List<ClientMethod> clientMethods = new List<ClientMethod>();
-            foreach ((string operationName, (Operation operation, RestClientMethod method)) in operationMethods)
+            foreach ((string operationKey, (Operation operation, RestClientMethod method)) in operationMethods)
             {
                 Paging? paging = operation.Language.Default.Paging;
                 if (paging != null)
@@ -118,7 +119,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 if (longRunningOperation)
                 {
                     Response originalResponse = method.Response;
-                    operationMethods[operationName].Method = new RestClientMethod(
+                    operationMethods[operationKey].Method = new RestClientMethod(
                         method.Name,
                         method.Description,
                         method.Request,
