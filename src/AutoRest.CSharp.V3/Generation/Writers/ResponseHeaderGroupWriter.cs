@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             {
                 writer.UseNamespace(new CSharpType(typeof(ResponseHeadersExtensions)).Namespace);
 
-                using (writer.Class(responseHeaderGroup.Declaration.Accessibility, null, responseHeaderGroup.Declaration.Name))
+                using (writer.Scope($"{responseHeaderGroup.Declaration.Accessibility} class {responseHeaderGroup.Declaration.Name}"))
                 {
                     WriteField(writer);
                     WriteConstructor(writer, responseHeaderGroup);
@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private void WriteConstructor(CodeWriter writer, ResponseHeaderGroupType responseHeaderGroup)
         {
-            using (writer.Method("public", null, responseHeaderGroup.Declaration.Name, writer.Pair(typeof(Response), ResponseParameter)))
+            using (writer.Scope($"public {responseHeaderGroup.Declaration.Name}({typeof(Response)} {ResponseParameter})"))
             {
                 writer.Line($"{ResponseField} = {ResponseParameter};");
             }

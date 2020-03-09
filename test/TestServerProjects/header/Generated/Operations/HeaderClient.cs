@@ -29,7 +29,7 @@ namespace header
         /// <summary> Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </summary>
         /// <param name="userAgent"> Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ParamExistingKeyAsync(string userAgent, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> ParamExistingKeyAsync(string userAgent, CancellationToken cancellationToken = default)
         {
             return await RestClient.ParamExistingKeyAsync(userAgent, cancellationToken).ConfigureAwait(false);
         }
@@ -42,7 +42,7 @@ namespace header
         }
         /// <summary> Get a response with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ResponseExistingKeyAsync(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> ResponseExistingKeyAsync(CancellationToken cancellationToken = default)
         {
             return (await RestClient.ResponseExistingKeyAsync(cancellationToken).ConfigureAwait(false)).GetRawResponse();
         }
@@ -55,7 +55,7 @@ namespace header
         /// <summary> Send a post request with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </summary>
         /// <param name="contentType"> Send a post request with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ParamProtectedKeyAsync(string contentType, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> ParamProtectedKeyAsync(string contentType, CancellationToken cancellationToken = default)
         {
             return await RestClient.ParamProtectedKeyAsync(contentType, cancellationToken).ConfigureAwait(false);
         }
@@ -68,7 +68,7 @@ namespace header
         }
         /// <summary> Get a response with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ResponseProtectedKeyAsync(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> ResponseProtectedKeyAsync(CancellationToken cancellationToken = default)
         {
             return (await RestClient.ResponseProtectedKeyAsync(cancellationToken).ConfigureAwait(false)).GetRawResponse();
         }
@@ -82,7 +82,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 1 or -2. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ParamIntegerAsync(string scenario, int value, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> ParamIntegerAsync(string scenario, int value, CancellationToken cancellationToken = default)
         {
             return await RestClient.ParamIntegerAsync(scenario, value, cancellationToken).ConfigureAwait(false);
         }
@@ -97,7 +97,7 @@ namespace header
         /// <summary> Get a response with header value &quot;value&quot;: 1 or -2. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ResponseIntegerAsync(string scenario, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> ResponseIntegerAsync(string scenario, CancellationToken cancellationToken = default)
         {
             return (await RestClient.ResponseIntegerAsync(scenario, cancellationToken).ConfigureAwait(false)).GetRawResponse();
         }
@@ -112,7 +112,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 105 or -2. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ParamLongAsync(string scenario, long value, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> ParamLongAsync(string scenario, long value, CancellationToken cancellationToken = default)
         {
             return await RestClient.ParamLongAsync(scenario, value, cancellationToken).ConfigureAwait(false);
         }
@@ -127,7 +127,7 @@ namespace header
         /// <summary> Get a response with header value &quot;value&quot;: 105 or -2. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ResponseLongAsync(string scenario, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> ResponseLongAsync(string scenario, CancellationToken cancellationToken = default)
         {
             return (await RestClient.ResponseLongAsync(scenario, cancellationToken).ConfigureAwait(false)).GetRawResponse();
         }
@@ -142,7 +142,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 0.07 or -3.0. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ParamFloatAsync(string scenario, float value, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> ParamFloatAsync(string scenario, float value, CancellationToken cancellationToken = default)
         {
             return await RestClient.ParamFloatAsync(scenario, value, cancellationToken).ConfigureAwait(false);
         }
@@ -157,7 +157,7 @@ namespace header
         /// <summary> Get a response with header value &quot;value&quot;: 0.07 or -3.0. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ResponseFloatAsync(string scenario, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> ResponseFloatAsync(string scenario, CancellationToken cancellationToken = default)
         {
             return (await RestClient.ResponseFloatAsync(scenario, cancellationToken).ConfigureAwait(false)).GetRawResponse();
         }
@@ -172,7 +172,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 7e120 or -3.0. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ParamDoubleAsync(string scenario, double value, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> ParamDoubleAsync(string scenario, double value, CancellationToken cancellationToken = default)
         {
             return await RestClient.ParamDoubleAsync(scenario, value, cancellationToken).ConfigureAwait(false);
         }
@@ -187,7 +187,7 @@ namespace header
         /// <summary> Get a response with header value &quot;value&quot;: 7e120 or -3.0. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ResponseDoubleAsync(string scenario, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> ResponseDoubleAsync(string scenario, CancellationToken cancellationToken = default)
         {
             return (await RestClient.ResponseDoubleAsync(scenario, cancellationToken).ConfigureAwait(false)).GetRawResponse();
         }
@@ -202,7 +202,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values true or false. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ParamBoolAsync(string scenario, bool value, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> ParamBoolAsync(string scenario, bool value, CancellationToken cancellationToken = default)
         {
             return await RestClient.ParamBoolAsync(scenario, value, cancellationToken).ConfigureAwait(false);
         }
@@ -217,7 +217,7 @@ namespace header
         /// <summary> Get a response with header value &quot;value&quot;: true or false. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ResponseBoolAsync(string scenario, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> ResponseBoolAsync(string scenario, CancellationToken cancellationToken = default)
         {
             return (await RestClient.ResponseBoolAsync(scenario, cancellationToken).ConfigureAwait(false)).GetRawResponse();
         }
@@ -232,7 +232,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ParamStringAsync(string scenario, string value, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> ParamStringAsync(string scenario, string value, CancellationToken cancellationToken = default)
         {
             return await RestClient.ParamStringAsync(scenario, value, cancellationToken).ConfigureAwait(false);
         }
@@ -247,7 +247,7 @@ namespace header
         /// <summary> Get a response with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ResponseStringAsync(string scenario, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> ResponseStringAsync(string scenario, CancellationToken cancellationToken = default)
         {
             return (await RestClient.ResponseStringAsync(scenario, cancellationToken).ConfigureAwait(false)).GetRawResponse();
         }
@@ -262,7 +262,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ParamDateAsync(string scenario, DateTimeOffset value, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> ParamDateAsync(string scenario, DateTimeOffset value, CancellationToken cancellationToken = default)
         {
             return await RestClient.ParamDateAsync(scenario, value, cancellationToken).ConfigureAwait(false);
         }
@@ -277,7 +277,7 @@ namespace header
         /// <summary> Get a response with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ResponseDateAsync(string scenario, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> ResponseDateAsync(string scenario, CancellationToken cancellationToken = default)
         {
             return (await RestClient.ResponseDateAsync(scenario, cancellationToken).ConfigureAwait(false)).GetRawResponse();
         }
@@ -292,7 +292,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ParamDatetimeAsync(string scenario, DateTimeOffset value, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> ParamDatetimeAsync(string scenario, DateTimeOffset value, CancellationToken cancellationToken = default)
         {
             return await RestClient.ParamDatetimeAsync(scenario, value, cancellationToken).ConfigureAwait(false);
         }
@@ -307,7 +307,7 @@ namespace header
         /// <summary> Get a response with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ResponseDatetimeAsync(string scenario, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> ResponseDatetimeAsync(string scenario, CancellationToken cancellationToken = default)
         {
             return (await RestClient.ResponseDatetimeAsync(scenario, cancellationToken).ConfigureAwait(false)).GetRawResponse();
         }
@@ -322,7 +322,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ParamDatetimeRfc1123Async(string scenario, DateTimeOffset? value, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> ParamDatetimeRfc1123Async(string scenario, DateTimeOffset? value, CancellationToken cancellationToken = default)
         {
             return await RestClient.ParamDatetimeRfc1123Async(scenario, value, cancellationToken).ConfigureAwait(false);
         }
@@ -337,7 +337,7 @@ namespace header
         /// <summary> Get a response with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ResponseDatetimeRfc1123Async(string scenario, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> ResponseDatetimeRfc1123Async(string scenario, CancellationToken cancellationToken = default)
         {
             return (await RestClient.ResponseDatetimeRfc1123Async(scenario, cancellationToken).ConfigureAwait(false)).GetRawResponse();
         }
@@ -352,7 +352,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;P123DT22H14M12.011S&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ParamDurationAsync(string scenario, TimeSpan value, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> ParamDurationAsync(string scenario, TimeSpan value, CancellationToken cancellationToken = default)
         {
             return await RestClient.ParamDurationAsync(scenario, value, cancellationToken).ConfigureAwait(false);
         }
@@ -367,7 +367,7 @@ namespace header
         /// <summary> Get a response with header values &quot;P123DT22H14M12.011S&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ResponseDurationAsync(string scenario, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> ResponseDurationAsync(string scenario, CancellationToken cancellationToken = default)
         {
             return (await RestClient.ResponseDurationAsync(scenario, cancellationToken).ConfigureAwait(false)).GetRawResponse();
         }
@@ -382,7 +382,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ParamByteAsync(string scenario, byte[] value, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> ParamByteAsync(string scenario, byte[] value, CancellationToken cancellationToken = default)
         {
             return await RestClient.ParamByteAsync(scenario, value, cancellationToken).ConfigureAwait(false);
         }
@@ -397,7 +397,7 @@ namespace header
         /// <summary> Get a response with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ResponseByteAsync(string scenario, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> ResponseByteAsync(string scenario, CancellationToken cancellationToken = default)
         {
             return (await RestClient.ResponseByteAsync(scenario, cancellationToken).ConfigureAwait(false)).GetRawResponse();
         }
@@ -412,7 +412,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values &apos;GREY&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ParamEnumAsync(string scenario, GreyscaleColors? value, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> ParamEnumAsync(string scenario, GreyscaleColors? value, CancellationToken cancellationToken = default)
         {
             return await RestClient.ParamEnumAsync(scenario, value, cancellationToken).ConfigureAwait(false);
         }
@@ -427,7 +427,7 @@ namespace header
         /// <summary> Get a response with header values &quot;GREY&quot; or null. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ResponseEnumAsync(string scenario, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> ResponseEnumAsync(string scenario, CancellationToken cancellationToken = default)
         {
             return (await RestClient.ResponseEnumAsync(scenario, cancellationToken).ConfigureAwait(false)).GetRawResponse();
         }
@@ -440,7 +440,7 @@ namespace header
         }
         /// <summary> Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> CustomRequestIdAsync(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> CustomRequestIdAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.CustomRequestIdAsync(cancellationToken).ConfigureAwait(false);
         }

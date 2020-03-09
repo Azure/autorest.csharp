@@ -27,7 +27,7 @@ namespace body_duration
         }
         /// <summary> Get null duration value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<TimeSpan>> GetNullAsync(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<TimeSpan>> GetNullAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetNullAsync(cancellationToken).ConfigureAwait(false);
         }
@@ -40,7 +40,7 @@ namespace body_duration
         /// <summary> Put a positive duration value. </summary>
         /// <param name="durationBody"> The Duration to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutPositiveDurationAsync(TimeSpan durationBody, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> PutPositiveDurationAsync(TimeSpan durationBody, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutPositiveDurationAsync(durationBody, cancellationToken).ConfigureAwait(false);
         }
@@ -53,7 +53,7 @@ namespace body_duration
         }
         /// <summary> Get a positive duration value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<TimeSpan>> GetPositiveDurationAsync(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<TimeSpan>> GetPositiveDurationAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetPositiveDurationAsync(cancellationToken).ConfigureAwait(false);
         }
@@ -65,7 +65,7 @@ namespace body_duration
         }
         /// <summary> Get an invalid duration value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<TimeSpan>> GetInvalidAsync(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<TimeSpan>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetInvalidAsync(cancellationToken).ConfigureAwait(false);
         }

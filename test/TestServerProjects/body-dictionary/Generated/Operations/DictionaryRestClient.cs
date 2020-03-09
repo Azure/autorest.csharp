@@ -38,7 +38,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/null", false);
@@ -113,7 +113,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/empty", false);
@@ -188,7 +188,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/empty", false);
@@ -269,7 +269,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/nullvalue", false);
@@ -344,7 +344,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/nullkey", false);
@@ -419,7 +419,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/keyemptystring", false);
@@ -494,7 +494,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/invalid", false);
@@ -569,7 +569,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/boolean/tfft", false);
@@ -644,7 +644,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/boolean/tfft", false);
@@ -725,7 +725,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/boolean/true.null.false", false);
@@ -800,7 +800,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/boolean/true.boolean.false", false);
@@ -875,7 +875,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/integer/1.-1.3.300", false);
@@ -950,7 +950,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/integer/1.-1.3.300", false);
@@ -1031,7 +1031,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/integer/1.null.zero", false);
@@ -1106,7 +1106,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/integer/1.integer.0", false);
@@ -1181,7 +1181,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/long/1.-1.3.300", false);
@@ -1256,7 +1256,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/long/1.-1.3.300", false);
@@ -1337,7 +1337,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/long/1.null.zero", false);
@@ -1412,7 +1412,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/long/1.integer.0", false);
@@ -1487,7 +1487,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/float/0--0.01-1.2e20", false);
@@ -1562,7 +1562,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/float/0--0.01-1.2e20", false);
@@ -1643,7 +1643,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/float/0.0-null-1.2e20", false);
@@ -1718,7 +1718,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/float/1.number.0", false);
@@ -1793,7 +1793,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/double/0--0.01-1.2e20", false);
@@ -1868,7 +1868,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/double/0--0.01-1.2e20", false);
@@ -1949,7 +1949,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/double/0.0-null-1.2e20", false);
@@ -2024,7 +2024,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/double/1.number.0", false);
@@ -2099,7 +2099,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/string/foo1.foo2.foo3", false);
@@ -2174,7 +2174,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/string/foo1.foo2.foo3", false);
@@ -2255,7 +2255,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/string/foo.null.foo2", false);
@@ -2330,7 +2330,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/string/foo.123.foo2", false);
@@ -2405,7 +2405,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/date/valid", false);
@@ -2480,7 +2480,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/date/valid", false);
@@ -2561,7 +2561,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/date/invalidnull", false);
@@ -2636,7 +2636,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/date/invalidchars", false);
@@ -2711,7 +2711,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/date-time/valid", false);
@@ -2786,7 +2786,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/date-time/valid", false);
@@ -2867,7 +2867,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/date-time/invalidnull", false);
@@ -2942,7 +2942,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/date-time/invalidchars", false);
@@ -3017,7 +3017,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/date-time-rfc1123/valid", false);
@@ -3092,7 +3092,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/date-time-rfc1123/valid", false);
@@ -3173,7 +3173,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/duration/valid", false);
@@ -3248,7 +3248,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/duration/valid", false);
@@ -3329,7 +3329,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/byte/valid", false);
@@ -3404,7 +3404,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/byte/valid", false);
@@ -3485,7 +3485,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/byte/invalidnull", false);
@@ -3560,7 +3560,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/base64url/valid", false);
@@ -3635,7 +3635,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/complex/null", false);
@@ -3710,7 +3710,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/complex/empty", false);
@@ -3785,7 +3785,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/complex/itemnull", false);
@@ -3860,7 +3860,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/complex/itemempty", false);
@@ -3935,7 +3935,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/complex/valid", false);
@@ -4010,7 +4010,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/complex/valid", false);
@@ -4091,7 +4091,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/array/null", false);
@@ -4100,7 +4100,7 @@ namespace body_dictionary
         }
         /// <summary> Get a null array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IDictionary<string, ICollection<string>>>> GetArrayNullAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, IList<string>>>> GetArrayNullAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetArrayNull");
             scope.Start();
@@ -4113,10 +4113,10 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, ICollection<string>> value = new Dictionary<string, ICollection<string>>();
+                            IDictionary<string, IList<string>> value = new Dictionary<string, IList<string>>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                ICollection<string> value0 = new List<string>();
+                                IList<string> value0 = new List<string>();
                                 foreach (var item in property.Value.EnumerateArray())
                                 {
                                     value0.Add(item.GetString());
@@ -4137,7 +4137,7 @@ namespace body_dictionary
         }
         /// <summary> Get a null array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<IDictionary<string, ICollection<string>>> GetArrayNull(CancellationToken cancellationToken = default)
+        public Response<IDictionary<string, IList<string>>> GetArrayNull(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetArrayNull");
             scope.Start();
@@ -4150,10 +4150,10 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, ICollection<string>> value = new Dictionary<string, ICollection<string>>();
+                            IDictionary<string, IList<string>> value = new Dictionary<string, IList<string>>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                ICollection<string> value0 = new List<string>();
+                                IList<string> value0 = new List<string>();
                                 foreach (var item in property.Value.EnumerateArray())
                                 {
                                     value0.Add(item.GetString());
@@ -4176,7 +4176,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/array/empty", false);
@@ -4185,7 +4185,7 @@ namespace body_dictionary
         }
         /// <summary> Get an empty dictionary {}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IDictionary<string, ICollection<string>>>> GetArrayEmptyAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, IList<string>>>> GetArrayEmptyAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetArrayEmpty");
             scope.Start();
@@ -4198,10 +4198,10 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, ICollection<string>> value = new Dictionary<string, ICollection<string>>();
+                            IDictionary<string, IList<string>> value = new Dictionary<string, IList<string>>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                ICollection<string> value0 = new List<string>();
+                                IList<string> value0 = new List<string>();
                                 foreach (var item in property.Value.EnumerateArray())
                                 {
                                     value0.Add(item.GetString());
@@ -4222,7 +4222,7 @@ namespace body_dictionary
         }
         /// <summary> Get an empty dictionary {}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<IDictionary<string, ICollection<string>>> GetArrayEmpty(CancellationToken cancellationToken = default)
+        public Response<IDictionary<string, IList<string>>> GetArrayEmpty(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetArrayEmpty");
             scope.Start();
@@ -4235,10 +4235,10 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, ICollection<string>> value = new Dictionary<string, ICollection<string>>();
+                            IDictionary<string, IList<string>> value = new Dictionary<string, IList<string>>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                ICollection<string> value0 = new List<string>();
+                                IList<string> value0 = new List<string>();
                                 foreach (var item in property.Value.EnumerateArray())
                                 {
                                     value0.Add(item.GetString());
@@ -4261,7 +4261,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/array/itemnull", false);
@@ -4270,7 +4270,7 @@ namespace body_dictionary
         }
         /// <summary> Get an dictionary of array of strings {&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: null, &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IDictionary<string, ICollection<string>>>> GetArrayItemNullAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, IList<string>>>> GetArrayItemNullAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetArrayItemNull");
             scope.Start();
@@ -4283,10 +4283,10 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, ICollection<string>> value = new Dictionary<string, ICollection<string>>();
+                            IDictionary<string, IList<string>> value = new Dictionary<string, IList<string>>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                ICollection<string> value0 = new List<string>();
+                                IList<string> value0 = new List<string>();
                                 foreach (var item in property.Value.EnumerateArray())
                                 {
                                     value0.Add(item.GetString());
@@ -4307,7 +4307,7 @@ namespace body_dictionary
         }
         /// <summary> Get an dictionary of array of strings {&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: null, &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<IDictionary<string, ICollection<string>>> GetArrayItemNull(CancellationToken cancellationToken = default)
+        public Response<IDictionary<string, IList<string>>> GetArrayItemNull(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetArrayItemNull");
             scope.Start();
@@ -4320,10 +4320,10 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, ICollection<string>> value = new Dictionary<string, ICollection<string>>();
+                            IDictionary<string, IList<string>> value = new Dictionary<string, IList<string>>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                ICollection<string> value0 = new List<string>();
+                                IList<string> value0 = new List<string>();
                                 foreach (var item in property.Value.EnumerateArray())
                                 {
                                     value0.Add(item.GetString());
@@ -4346,7 +4346,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/array/itemempty", false);
@@ -4355,7 +4355,7 @@ namespace body_dictionary
         }
         /// <summary> Get an array of array of strings [{&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: [], &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IDictionary<string, ICollection<string>>>> GetArrayItemEmptyAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, IList<string>>>> GetArrayItemEmptyAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetArrayItemEmpty");
             scope.Start();
@@ -4368,10 +4368,10 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, ICollection<string>> value = new Dictionary<string, ICollection<string>>();
+                            IDictionary<string, IList<string>> value = new Dictionary<string, IList<string>>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                ICollection<string> value0 = new List<string>();
+                                IList<string> value0 = new List<string>();
                                 foreach (var item in property.Value.EnumerateArray())
                                 {
                                     value0.Add(item.GetString());
@@ -4392,7 +4392,7 @@ namespace body_dictionary
         }
         /// <summary> Get an array of array of strings [{&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: [], &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<IDictionary<string, ICollection<string>>> GetArrayItemEmpty(CancellationToken cancellationToken = default)
+        public Response<IDictionary<string, IList<string>>> GetArrayItemEmpty(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetArrayItemEmpty");
             scope.Start();
@@ -4405,10 +4405,10 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, ICollection<string>> value = new Dictionary<string, ICollection<string>>();
+                            IDictionary<string, IList<string>> value = new Dictionary<string, IList<string>>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                ICollection<string> value0 = new List<string>();
+                                IList<string> value0 = new List<string>();
                                 foreach (var item in property.Value.EnumerateArray())
                                 {
                                     value0.Add(item.GetString());
@@ -4431,7 +4431,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/array/valid", false);
@@ -4440,7 +4440,7 @@ namespace body_dictionary
         }
         /// <summary> Get an array of array of strings {&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: [&quot;4&quot;, &quot;5&quot;, &quot;6&quot;], &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IDictionary<string, ICollection<string>>>> GetArrayValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, IList<string>>>> GetArrayValidAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetArrayValid");
             scope.Start();
@@ -4453,10 +4453,10 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, ICollection<string>> value = new Dictionary<string, ICollection<string>>();
+                            IDictionary<string, IList<string>> value = new Dictionary<string, IList<string>>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                ICollection<string> value0 = new List<string>();
+                                IList<string> value0 = new List<string>();
                                 foreach (var item in property.Value.EnumerateArray())
                                 {
                                     value0.Add(item.GetString());
@@ -4477,7 +4477,7 @@ namespace body_dictionary
         }
         /// <summary> Get an array of array of strings {&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: [&quot;4&quot;, &quot;5&quot;, &quot;6&quot;], &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<IDictionary<string, ICollection<string>>> GetArrayValid(CancellationToken cancellationToken = default)
+        public Response<IDictionary<string, IList<string>>> GetArrayValid(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetArrayValid");
             scope.Start();
@@ -4490,10 +4490,10 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, ICollection<string>> value = new Dictionary<string, ICollection<string>>();
+                            IDictionary<string, IList<string>> value = new Dictionary<string, IList<string>>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                ICollection<string> value0 = new List<string>();
+                                IList<string> value0 = new List<string>();
                                 foreach (var item in property.Value.EnumerateArray())
                                 {
                                     value0.Add(item.GetString());
@@ -4512,11 +4512,11 @@ namespace body_dictionary
                 throw;
             }
         }
-        internal HttpMessage CreatePutArrayValidRequest(IDictionary<string, ICollection<string>> arrayBody)
+        internal HttpMessage CreatePutArrayValidRequest(IDictionary<string, IList<string>> arrayBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/array/valid", false);
@@ -4541,7 +4541,7 @@ namespace body_dictionary
         /// <summary> Put An array of array of strings {&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: [&quot;4&quot;, &quot;5&quot;, &quot;6&quot;], &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
         /// <param name="arrayBody"> The DictionaryOfpaths1Dxz488DictionaryArrayValidPutRequestbodyContentApplicationJsonSchemaAdditionalproperties to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutArrayValidAsync(IDictionary<string, ICollection<string>> arrayBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutArrayValidAsync(IDictionary<string, IList<string>> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -4571,7 +4571,7 @@ namespace body_dictionary
         /// <summary> Put An array of array of strings {&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: [&quot;4&quot;, &quot;5&quot;, &quot;6&quot;], &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
         /// <param name="arrayBody"> The DictionaryOfpaths1Dxz488DictionaryArrayValidPutRequestbodyContentApplicationJsonSchemaAdditionalproperties to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutArrayValid(IDictionary<string, ICollection<string>> arrayBody, CancellationToken cancellationToken = default)
+        public Response PutArrayValid(IDictionary<string, IList<string>> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -4602,7 +4602,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/dictionary/null", false);
@@ -4677,7 +4677,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/dictionary/empty", false);
@@ -4752,7 +4752,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/dictionary/itemnull", false);
@@ -4827,7 +4827,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/dictionary/itemempty", false);
@@ -4902,7 +4902,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/dictionary/valid", false);
@@ -4977,7 +4977,7 @@ namespace body_dictionary
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/dictionary/valid", false);

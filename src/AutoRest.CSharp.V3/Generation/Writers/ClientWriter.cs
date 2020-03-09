@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             using (writer.Namespace(@namespace))
             {
                 writer.WriteXmlDocumentationSummary(client.Description);
-                using (writer.Class(client.DeclaredType.Accessibility, "partial", cs.Name))
+                using (writer.Scope($"{client.DeclaredType.Accessibility} partial class {cs.Name}"))
                 {
                     WriteClientFields(writer, client);
                     WriteClientCtor(writer, client);

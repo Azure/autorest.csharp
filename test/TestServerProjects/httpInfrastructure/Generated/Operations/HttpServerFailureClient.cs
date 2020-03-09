@@ -26,7 +26,7 @@ namespace httpInfrastructure
         }
         /// <summary> Return 501 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Head501Async(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> Head501Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Head501Async(cancellationToken).ConfigureAwait(false);
         }
@@ -38,7 +38,7 @@ namespace httpInfrastructure
         }
         /// <summary> Return 501 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Get501Async(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> Get501Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Get501Async(cancellationToken).ConfigureAwait(false);
         }
@@ -50,7 +50,7 @@ namespace httpInfrastructure
         }
         /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Post505Async(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> Post505Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Post505Async(cancellationToken).ConfigureAwait(false);
         }
@@ -62,7 +62,7 @@ namespace httpInfrastructure
         }
         /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Delete505Async(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> Delete505Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Delete505Async(cancellationToken).ConfigureAwait(false);
         }

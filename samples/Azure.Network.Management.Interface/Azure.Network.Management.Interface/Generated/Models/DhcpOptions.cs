@@ -13,6 +13,6 @@ namespace Azure.Network.Management.Interface.Models
     public partial class DhcpOptions
     {
         /// <summary> The list of DNS servers IP addresses. </summary>
-        public ICollection<string> DnsServers { get; set; }
+        public IList<string> DnsServers { get; set; }
     }
 }

@@ -28,7 +28,7 @@ namespace url_multi_collectionFormat
         /// <summary> Get a null array of string using the multi-array format. </summary>
         /// <param name="arrayQuery"> a null array of string using the multi-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ArrayStringMultiNullAsync(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> ArrayStringMultiNullAsync(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
             return await RestClient.ArrayStringMultiNullAsync(arrayQuery, cancellationToken).ConfigureAwait(false);
         }
@@ -42,7 +42,7 @@ namespace url_multi_collectionFormat
         /// <summary> Get an empty array [] of string using the multi-array format. </summary>
         /// <param name="arrayQuery"> an empty array [] of string using the multi-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ArrayStringMultiEmptyAsync(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> ArrayStringMultiEmptyAsync(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
             return await RestClient.ArrayStringMultiEmptyAsync(arrayQuery, cancellationToken).ConfigureAwait(false);
         }
@@ -56,7 +56,7 @@ namespace url_multi_collectionFormat
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </summary>
         /// <param name="arrayQuery"> an empty array [] of string using the multi-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ArrayStringMultiValidAsync(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> ArrayStringMultiValidAsync(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
             return await RestClient.ArrayStringMultiValidAsync(arrayQuery, cancellationToken).ConfigureAwait(false);
         }

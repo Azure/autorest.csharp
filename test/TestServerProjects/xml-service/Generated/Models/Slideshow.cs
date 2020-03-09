@@ -15,6 +15,6 @@ namespace xml_service.Models
         public string Title { get; set; }
         public string Date { get; set; }
         public string Author { get; set; }
-        public ICollection<Slide> Slides { get; set; }
+        public IList<Slide> Slides { get; set; }
     }
 }

@@ -15,7 +15,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> The number of outbound ports to be used for NAT. </summary>
         public int? AllocatedOutboundPorts { get; set; }
         /// <summary> The Frontend IP addresses of the load balancer. </summary>
-        public ICollection<SubResource> FrontendIPConfigurations { get; set; } = new List<SubResource>();
+        public IList<SubResource> FrontendIPConfigurations { get; set; } = new List<SubResource>();
         /// <summary> A reference to a pool of DIPs. Outbound traffic is randomly load balanced across IPs in the backend IPs. </summary>
         public SubResource BackendAddressPool { get; set; } = new SubResource();
         /// <summary> The provisioning state of the outbound rule resource. </summary>

@@ -64,7 +64,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     foreach (XmlObjectAttributeSerialization property in objectSerialization.Attributes)
                     {
-                        using (property.Type.IsNullable ? writer.If($"{property.MemberName} != null") : default)
+                        using (property.Type.IsNullable ? writer.Scope($"if ({property.MemberName} != null)") : default)
                         {
                             writer.Line($"{writerName}.WriteStartAttribute({property.Name:L});");
                             writer.ToSerializeValueCall(
@@ -77,7 +77,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     foreach (XmlObjectElementSerialization property in objectSerialization.Elements)
                     {
-                        using (property.Type.IsNullable ? writer.If($"{property.MemberName} != null") : default)
+                        using (property.Type.IsNullable ? writer.Scope($"if ({property.MemberName} != null)") : default)
                         {
                             writer.ToSerializeCall(
                                 property.ValueSerialization,
@@ -87,7 +87,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     foreach (XmlObjectArraySerialization property in objectSerialization.EmbeddedArrays)
                     {
-                        using (property.ArraySerialization.Type.IsNullable ? writer.If($"{property.MemberName} != null") : default)
+                        using (property.ArraySerialization.Type.IsNullable ? writer.Scope($"if ({property.MemberName} != null)") : default)
                         {
                             writer.ToSerializeCall(
                                 property.ArraySerialization,

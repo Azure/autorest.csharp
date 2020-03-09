@@ -24,6 +24,6 @@ namespace CognitiveSearch.Models
         /// <summary> Regular expression flags. </summary>
         public RegexFlags? Flags { get; set; }
         /// <summary> A list of stopwords. </summary>
-        public ICollection<string> Stopwords { get; set; }
+        public IList<string> Stopwords { get; set; }
     }
 }

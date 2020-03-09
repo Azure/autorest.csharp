@@ -13,6 +13,6 @@ namespace CognitiveSearch.Models
     public partial class ListIndexesResult
     {
         /// <summary> The indexes in the Search service. </summary>
-        public ICollection<Index> Indexes { get; internal set; }
+        public IList<Index> Indexes { get; internal set; }
     }
 }

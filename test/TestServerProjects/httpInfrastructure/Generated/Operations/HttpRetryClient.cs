@@ -26,7 +26,7 @@ namespace httpInfrastructure
         }
         /// <summary> Return 408 status code, then 200 after retry. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Head408Async(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> Head408Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Head408Async(cancellationToken).ConfigureAwait(false);
         }
@@ -38,7 +38,7 @@ namespace httpInfrastructure
         }
         /// <summary> Return 500 status code, then 200 after retry. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Put500Async(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> Put500Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Put500Async(cancellationToken).ConfigureAwait(false);
         }
@@ -50,7 +50,7 @@ namespace httpInfrastructure
         }
         /// <summary> Return 500 status code, then 200 after retry. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Patch500Async(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> Patch500Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Patch500Async(cancellationToken).ConfigureAwait(false);
         }
@@ -62,7 +62,7 @@ namespace httpInfrastructure
         }
         /// <summary> Return 502 status code, then 200 after retry. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Get502Async(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> Get502Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Get502Async(cancellationToken).ConfigureAwait(false);
         }
@@ -74,7 +74,7 @@ namespace httpInfrastructure
         }
         /// <summary> Return 502 status code, then 200 after retry. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<bool>> Options502Async(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<bool>> Options502Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Options502Async(cancellationToken).ConfigureAwait(false);
         }
@@ -86,7 +86,7 @@ namespace httpInfrastructure
         }
         /// <summary> Return 503 status code, then 200 after retry. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Post503Async(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> Post503Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Post503Async(cancellationToken).ConfigureAwait(false);
         }
@@ -98,7 +98,7 @@ namespace httpInfrastructure
         }
         /// <summary> Return 503 status code, then 200 after retry. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Delete503Async(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> Delete503Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Delete503Async(cancellationToken).ConfigureAwait(false);
         }
@@ -110,7 +110,7 @@ namespace httpInfrastructure
         }
         /// <summary> Return 504 status code, then 200 after retry. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Put504Async(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> Put504Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Put504Async(cancellationToken).ConfigureAwait(false);
         }
@@ -122,7 +122,7 @@ namespace httpInfrastructure
         }
         /// <summary> Return 504 status code, then 200 after retry. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Patch504Async(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> Patch504Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Patch504Async(cancellationToken).ConfigureAwait(false);
         }

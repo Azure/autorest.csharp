@@ -21,7 +21,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> The version of the rule set type. </summary>
         public string RuleSetVersion { get; set; }
         /// <summary> The disabled rule groups. </summary>
-        public ICollection<ApplicationGatewayFirewallDisabledRuleGroup> DisabledRuleGroups { get; set; }
+        public IList<ApplicationGatewayFirewallDisabledRuleGroup> DisabledRuleGroups { get; set; }
         /// <summary> Whether allow WAF to check request Body. </summary>
         public bool? RequestBodyCheck { get; set; }
         /// <summary> Maximum request body size for WAF. </summary>
@@ -31,6 +31,6 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> Maximum file upload size in Mb for WAF. </summary>
         public int? FileUploadLimitInMb { get; set; }
         /// <summary> The exclusion list. </summary>
-        public ICollection<ApplicationGatewayFirewallExclusion> Exclusions { get; set; }
+        public IList<ApplicationGatewayFirewallExclusion> Exclusions { get; set; }
     }
 }

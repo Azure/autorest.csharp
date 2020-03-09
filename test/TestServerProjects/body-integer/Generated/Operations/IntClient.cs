@@ -27,7 +27,7 @@ namespace body_integer
         }
         /// <summary> Get null Int value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<int>> GetNullAsync(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<int>> GetNullAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetNullAsync(cancellationToken).ConfigureAwait(false);
         }
@@ -39,7 +39,7 @@ namespace body_integer
         }
         /// <summary> Get invalid Int value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<int>> GetInvalidAsync(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<int>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetInvalidAsync(cancellationToken).ConfigureAwait(false);
         }
@@ -51,7 +51,7 @@ namespace body_integer
         }
         /// <summary> Get overflow Int32 value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<int>> GetOverflowInt32Async(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<int>> GetOverflowInt32Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetOverflowInt32Async(cancellationToken).ConfigureAwait(false);
         }
@@ -63,7 +63,7 @@ namespace body_integer
         }
         /// <summary> Get underflow Int32 value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<int>> GetUnderflowInt32Async(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<int>> GetUnderflowInt32Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetUnderflowInt32Async(cancellationToken).ConfigureAwait(false);
         }
@@ -75,7 +75,7 @@ namespace body_integer
         }
         /// <summary> Get overflow Int64 value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<long>> GetOverflowInt64Async(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<long>> GetOverflowInt64Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetOverflowInt64Async(cancellationToken).ConfigureAwait(false);
         }
@@ -87,7 +87,7 @@ namespace body_integer
         }
         /// <summary> Get underflow Int64 value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<long>> GetUnderflowInt64Async(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<long>> GetUnderflowInt64Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetUnderflowInt64Async(cancellationToken).ConfigureAwait(false);
         }
@@ -100,7 +100,7 @@ namespace body_integer
         /// <summary> Put max int32 value. </summary>
         /// <param name="intBody"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutMax32Async(int intBody, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> PutMax32Async(int intBody, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutMax32Async(intBody, cancellationToken).ConfigureAwait(false);
         }
@@ -114,7 +114,7 @@ namespace body_integer
         /// <summary> Put max int64 value. </summary>
         /// <param name="intBody"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutMax64Async(long intBody, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> PutMax64Async(long intBody, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutMax64Async(intBody, cancellationToken).ConfigureAwait(false);
         }
@@ -128,7 +128,7 @@ namespace body_integer
         /// <summary> Put min int32 value. </summary>
         /// <param name="intBody"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutMin32Async(int intBody, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> PutMin32Async(int intBody, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutMin32Async(intBody, cancellationToken).ConfigureAwait(false);
         }
@@ -142,7 +142,7 @@ namespace body_integer
         /// <summary> Put min int64 value. </summary>
         /// <param name="intBody"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutMin64Async(long intBody, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> PutMin64Async(long intBody, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutMin64Async(intBody, cancellationToken).ConfigureAwait(false);
         }
@@ -155,7 +155,7 @@ namespace body_integer
         }
         /// <summary> Get datetime encoded as Unix time value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<DateTimeOffset>> GetUnixTimeAsync(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<DateTimeOffset>> GetUnixTimeAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetUnixTimeAsync(cancellationToken).ConfigureAwait(false);
         }
@@ -168,7 +168,7 @@ namespace body_integer
         /// <summary> Put datetime encoded as Unix time. </summary>
         /// <param name="intBody"> The Unixtime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutUnixTimeDateAsync(DateTimeOffset intBody, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> PutUnixTimeDateAsync(DateTimeOffset intBody, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutUnixTimeDateAsync(intBody, cancellationToken).ConfigureAwait(false);
         }
@@ -181,7 +181,7 @@ namespace body_integer
         }
         /// <summary> Get invalid Unix time value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<DateTimeOffset>> GetInvalidUnixTimeAsync(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<DateTimeOffset>> GetInvalidUnixTimeAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetInvalidUnixTimeAsync(cancellationToken).ConfigureAwait(false);
         }
@@ -193,7 +193,7 @@ namespace body_integer
         }
         /// <summary> Get null Unix time value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<DateTimeOffset>> GetNullUnixTimeAsync(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<DateTimeOffset>> GetNullUnixTimeAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetNullUnixTimeAsync(cancellationToken).ConfigureAwait(false);
         }

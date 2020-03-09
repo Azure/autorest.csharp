@@ -1,4 +1,4 @@
-using AnotherCustomNamespace;
+using NamespaceForEnums;
 using Azure.Core;
 
 namespace CustomNamespace

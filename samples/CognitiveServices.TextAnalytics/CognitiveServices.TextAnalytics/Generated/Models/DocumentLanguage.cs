@@ -15,7 +15,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <summary> Unique, non-empty document identifier. </summary>
         public string Id { get; set; }
         /// <summary> A list of extracted languages. </summary>
-        public ICollection<DetectedLanguage> DetectedLanguages { get; set; } = new List<DetectedLanguage>();
+        public IList<DetectedLanguage> DetectedLanguages { get; set; } = new List<DetectedLanguage>();
         /// <summary> if showStats=true was specified in the request this field will contain information about the document payload. </summary>
         public DocumentStatistics Statistics { get; set; }
     }

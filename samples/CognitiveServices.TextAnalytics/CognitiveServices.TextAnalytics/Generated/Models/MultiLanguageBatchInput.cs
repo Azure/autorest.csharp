@@ -13,6 +13,6 @@ namespace CognitiveServices.TextAnalytics.Models
     public partial class MultiLanguageBatchInput
     {
         /// <summary> The set of documents to process as part of this batch. </summary>
-        public ICollection<MultiLanguageInput> Documents { get; set; } = new List<MultiLanguageInput>();
+        public IList<MultiLanguageInput> Documents { get; set; } = new List<MultiLanguageInput>();
     }
 }

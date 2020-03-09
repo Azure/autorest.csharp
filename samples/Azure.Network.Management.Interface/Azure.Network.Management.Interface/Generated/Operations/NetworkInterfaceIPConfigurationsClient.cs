@@ -32,7 +32,7 @@ namespace Azure.Network.Management.Interface
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
         /// <param name="ipConfigurationName"> The name of the ip configuration name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<NetworkInterfaceIPConfiguration>> GetAsync(string resourceGroupName, string networkInterfaceName, string ipConfigurationName, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<NetworkInterfaceIPConfiguration>> GetAsync(string resourceGroupName, string networkInterfaceName, string ipConfigurationName, CancellationToken cancellationToken = default)
         {
             return await RestClient.GetAsync(resourceGroupName, networkInterfaceName, ipConfigurationName, cancellationToken).ConfigureAwait(false);
         }

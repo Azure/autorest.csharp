@@ -15,6 +15,6 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> Body that must be contained in the health response. Default value is empty. </summary>
         public string Body { get; set; }
         /// <summary> Allowed ranges of healthy status codes. Default range of healthy status codes is 200-399. </summary>
-        public ICollection<string> StatusCodes { get; set; }
+        public IList<string> StatusCodes { get; set; }
     }
 }

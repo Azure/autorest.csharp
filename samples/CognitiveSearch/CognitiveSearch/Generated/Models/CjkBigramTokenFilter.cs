@@ -18,7 +18,7 @@ namespace CognitiveSearch.Models
             OdataType = "#Microsoft.Azure.Search.CjkBigramTokenFilter";
         }
         /// <summary> The scripts to ignore. </summary>
-        public ICollection<CjkBigramTokenFilterScripts> IgnoreScripts { get; set; }
+        public IList<CjkBigramTokenFilterScripts> IgnoreScripts { get; set; }
         /// <summary> A value indicating whether to output both unigrams and bigrams (if true), or just bigrams (if false). Default is false. </summary>
         public bool? OutputUnigrams { get; set; }
     }

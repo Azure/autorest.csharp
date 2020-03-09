@@ -44,7 +44,7 @@ namespace Azure.Storage.Tables
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(url, false);
             uri.AppendPath("/Tables", false);
@@ -145,7 +145,7 @@ namespace Azure.Storage.Tables
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(url, false);
             uri.AppendPath("/Tables", false);
@@ -244,7 +244,7 @@ namespace Azure.Storage.Tables
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Delete;
+            request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(url, false);
             uri.AppendPath("/Tables('", false);
@@ -326,7 +326,7 @@ namespace Azure.Storage.Tables
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(url, false);
             uri.AppendPath("/", false);
@@ -447,7 +447,7 @@ namespace Azure.Storage.Tables
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(url, false);
             uri.AppendPath("/", false);
@@ -586,7 +586,7 @@ namespace Azure.Storage.Tables
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(url, false);
             uri.AppendPath("/", false);
@@ -717,7 +717,7 @@ namespace Azure.Storage.Tables
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Delete;
+            request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(url, false);
             uri.AppendPath("/", false);
@@ -836,7 +836,7 @@ namespace Azure.Storage.Tables
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(url, false);
             uri.AppendPath("/", false);
@@ -958,7 +958,7 @@ namespace Azure.Storage.Tables
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(url, false);
             uri.AppendPath("/", false);
@@ -981,7 +981,7 @@ namespace Azure.Storage.Tables
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="table"> The name of the table. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<ICollection<SignedIdentifier>, GetAccessPolicyHeaders>> GetAccessPolicyAsync(int? timeout, string requestId, string table, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<IList<SignedIdentifier>, GetAccessPolicyHeaders>> GetAccessPolicyAsync(int? timeout, string requestId, string table, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -999,7 +999,7 @@ namespace Azure.Storage.Tables
                     case 200:
                         {
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            ICollection<SignedIdentifier> value = default;
+                            IList<SignedIdentifier> value = default;
                             var signedIdentifiers = document.Element("SignedIdentifiers");
                             if (signedIdentifiers != null)
                             {
@@ -1029,7 +1029,7 @@ namespace Azure.Storage.Tables
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="table"> The name of the table. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<ICollection<SignedIdentifier>, GetAccessPolicyHeaders> GetAccessPolicy(int? timeout, string requestId, string table, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<IList<SignedIdentifier>, GetAccessPolicyHeaders> GetAccessPolicy(int? timeout, string requestId, string table, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -1047,7 +1047,7 @@ namespace Azure.Storage.Tables
                     case 200:
                         {
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            ICollection<SignedIdentifier> value = default;
+                            IList<SignedIdentifier> value = default;
                             var signedIdentifiers = document.Element("SignedIdentifiers");
                             if (signedIdentifiers != null)
                             {
@@ -1076,7 +1076,7 @@ namespace Azure.Storage.Tables
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(url, false);
             uri.AppendPath("/", false);

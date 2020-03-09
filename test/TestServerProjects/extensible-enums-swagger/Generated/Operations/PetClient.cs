@@ -27,7 +27,7 @@ namespace extensible_enums_swagger
         }
         /// <param name="petId"> Pet id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Pet>> GetByPetIdAsync(string petId, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<Pet>> GetByPetIdAsync(string petId, CancellationToken cancellationToken = default)
         {
             return await RestClient.GetByPetIdAsync(petId, cancellationToken).ConfigureAwait(false);
         }
@@ -39,7 +39,7 @@ namespace extensible_enums_swagger
         }
         /// <param name="petParam"> The Pet to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Pet>> AddPetAsync(Pet petParam, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<Pet>> AddPetAsync(Pet petParam, CancellationToken cancellationToken = default)
         {
             return await RestClient.AddPetAsync(petParam, cancellationToken).ConfigureAwait(false);
         }

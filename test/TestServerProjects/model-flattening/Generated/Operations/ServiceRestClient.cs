@@ -38,7 +38,7 @@ namespace model_flattening
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/model-flatten/array", false);
@@ -108,7 +108,7 @@ namespace model_flattening
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/model-flatten/array", false);
@@ -117,7 +117,7 @@ namespace model_flattening
         }
         /// <summary> Get External Resource as an Array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<FlattenedProduct>>> GetArrayAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<FlattenedProduct>>> GetArrayAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetArray");
             scope.Start();
@@ -130,7 +130,7 @@ namespace model_flattening
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<FlattenedProduct> value = new List<FlattenedProduct>();
+                            IList<FlattenedProduct> value = new List<FlattenedProduct>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(FlattenedProduct.DeserializeFlattenedProduct(item));
@@ -149,7 +149,7 @@ namespace model_flattening
         }
         /// <summary> Get External Resource as an Array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<FlattenedProduct>> GetArray(CancellationToken cancellationToken = default)
+        public Response<IList<FlattenedProduct>> GetArray(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetArray");
             scope.Start();
@@ -162,7 +162,7 @@ namespace model_flattening
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<FlattenedProduct> value = new List<FlattenedProduct>();
+                            IList<FlattenedProduct> value = new List<FlattenedProduct>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(FlattenedProduct.DeserializeFlattenedProduct(item));
@@ -183,7 +183,7 @@ namespace model_flattening
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/model-flatten/wrappedarray", false);
@@ -253,7 +253,7 @@ namespace model_flattening
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/model-flatten/wrappedarray", false);
@@ -262,7 +262,7 @@ namespace model_flattening
         }
         /// <summary> No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it&apos;s referenced in an array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<ProductWrapper>>> GetWrappedArrayAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<ProductWrapper>>> GetWrappedArrayAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetWrappedArray");
             scope.Start();
@@ -275,7 +275,7 @@ namespace model_flattening
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<ProductWrapper> value = new List<ProductWrapper>();
+                            IList<ProductWrapper> value = new List<ProductWrapper>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(ProductWrapper.DeserializeProductWrapper(item));
@@ -294,7 +294,7 @@ namespace model_flattening
         }
         /// <summary> No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it&apos;s referenced in an array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<ProductWrapper>> GetWrappedArray(CancellationToken cancellationToken = default)
+        public Response<IList<ProductWrapper>> GetWrappedArray(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetWrappedArray");
             scope.Start();
@@ -307,7 +307,7 @@ namespace model_flattening
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<ProductWrapper> value = new List<ProductWrapper>();
+                            IList<ProductWrapper> value = new List<ProductWrapper>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(ProductWrapper.DeserializeProductWrapper(item));
@@ -328,7 +328,7 @@ namespace model_flattening
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/model-flatten/dictionary", false);
@@ -399,7 +399,7 @@ namespace model_flattening
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/model-flatten/dictionary", false);
@@ -474,7 +474,7 @@ namespace model_flattening
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/model-flatten/resourcecollection", false);
@@ -539,7 +539,7 @@ namespace model_flattening
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/model-flatten/resourcecollection", false);
@@ -606,7 +606,7 @@ namespace model_flattening
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/model-flatten/customFlattening", false);
@@ -679,7 +679,7 @@ namespace model_flattening
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/model-flatten/customFlattening", false);
@@ -752,7 +752,7 @@ namespace model_flattening
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/model-flatten/customFlattening/parametergrouping/", false);

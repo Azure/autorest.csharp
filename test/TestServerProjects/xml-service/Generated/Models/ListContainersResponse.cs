@@ -16,7 +16,7 @@ namespace xml_service.Models
         public string Prefix { get; set; }
         public string Marker { get; set; }
         public int MaxResults { get; set; }
-        public ICollection<Container> Containers { get; set; }
+        public IList<Container> Containers { get; set; }
         public string NextMarker { get; set; }
     }
 }

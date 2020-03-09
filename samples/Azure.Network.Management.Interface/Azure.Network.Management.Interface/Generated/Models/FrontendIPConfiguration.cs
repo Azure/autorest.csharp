@@ -19,15 +19,15 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> Type of the resource. </summary>
         public string Type { get; internal set; }
         /// <summary> A list of availability zones denoting the IP allocated for the resource needs to come from. </summary>
-        public ICollection<string> Zones { get; set; }
+        public IList<string> Zones { get; set; }
         /// <summary> An array of references to inbound rules that use this frontend IP. </summary>
-        public ICollection<SubResource> InboundNatRules { get; internal set; }
+        public IList<SubResource> InboundNatRules { get; internal set; }
         /// <summary> An array of references to inbound pools that use this frontend IP. </summary>
-        public ICollection<SubResource> InboundNatPools { get; internal set; }
+        public IList<SubResource> InboundNatPools { get; internal set; }
         /// <summary> An array of references to outbound rules that use this frontend IP. </summary>
-        public ICollection<SubResource> OutboundRules { get; internal set; }
+        public IList<SubResource> OutboundRules { get; internal set; }
         /// <summary> An array of references to load balancing rules that use this frontend IP. </summary>
-        public ICollection<SubResource> LoadBalancingRules { get; internal set; }
+        public IList<SubResource> LoadBalancingRules { get; internal set; }
         /// <summary> The private IP address of the IP configuration. </summary>
         public string PrivateIPAddress { get; set; }
         /// <summary> The Private IP allocation method. </summary>

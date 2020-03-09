@@ -39,7 +39,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/complex-type-ref-no-meta", false);
@@ -116,7 +116,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/complex-type-ref-no-meta", false);
@@ -191,7 +191,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/complex-type-ref-with-meta", false);
@@ -268,7 +268,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/complex-type-ref-with-meta", false);
@@ -343,7 +343,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/simple", false);
@@ -420,7 +420,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/simple", false);
@@ -495,7 +495,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/wrapped-lists", false);
@@ -572,7 +572,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/wrapped-lists", false);
@@ -647,7 +647,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/headers", false);
@@ -708,7 +708,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/empty-list", false);
@@ -785,7 +785,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/empty-list", false);
@@ -860,7 +860,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/empty-wrapped-lists", false);
@@ -937,7 +937,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/empty-wrapped-lists", false);
@@ -1012,7 +1012,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/root-list", false);
@@ -1021,7 +1021,7 @@ namespace xml_service
         }
         /// <summary> Gets a list as the root element. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<Banana>>> GetRootListAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<Banana>>> GetRootListAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("XmlClient.GetRootList");
             scope.Start();
@@ -1034,7 +1034,7 @@ namespace xml_service
                     case 200:
                         {
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            ICollection<Banana> value = default;
+                            IList<Banana> value = default;
                             var bananas = document.Element("bananas");
                             if (bananas != null)
                             {
@@ -1060,7 +1060,7 @@ namespace xml_service
         }
         /// <summary> Gets a list as the root element. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<Banana>> GetRootList(CancellationToken cancellationToken = default)
+        public Response<IList<Banana>> GetRootList(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("XmlClient.GetRootList");
             scope.Start();
@@ -1073,7 +1073,7 @@ namespace xml_service
                     case 200:
                         {
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            ICollection<Banana> value = default;
+                            IList<Banana> value = default;
                             var bananas = document.Element("bananas");
                             if (bananas != null)
                             {
@@ -1101,7 +1101,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/root-list", false);
@@ -1181,7 +1181,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/root-list-single-item", false);
@@ -1190,7 +1190,7 @@ namespace xml_service
         }
         /// <summary> Gets a list with a single item. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<Banana>>> GetRootListSingleItemAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<Banana>>> GetRootListSingleItemAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("XmlClient.GetRootListSingleItem");
             scope.Start();
@@ -1203,7 +1203,7 @@ namespace xml_service
                     case 200:
                         {
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            ICollection<Banana> value = default;
+                            IList<Banana> value = default;
                             var bananas = document.Element("bananas");
                             if (bananas != null)
                             {
@@ -1229,7 +1229,7 @@ namespace xml_service
         }
         /// <summary> Gets a list with a single item. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<Banana>> GetRootListSingleItem(CancellationToken cancellationToken = default)
+        public Response<IList<Banana>> GetRootListSingleItem(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("XmlClient.GetRootListSingleItem");
             scope.Start();
@@ -1242,7 +1242,7 @@ namespace xml_service
                     case 200:
                         {
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            ICollection<Banana> value = default;
+                            IList<Banana> value = default;
                             var bananas = document.Element("bananas");
                             if (bananas != null)
                             {
@@ -1270,7 +1270,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/root-list-single-item", false);
@@ -1350,7 +1350,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/empty-root-list", false);
@@ -1359,7 +1359,7 @@ namespace xml_service
         }
         /// <summary> Gets an empty list as the root element. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<Banana>>> GetEmptyRootListAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<Banana>>> GetEmptyRootListAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("XmlClient.GetEmptyRootList");
             scope.Start();
@@ -1372,7 +1372,7 @@ namespace xml_service
                     case 200:
                         {
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            ICollection<Banana> value = default;
+                            IList<Banana> value = default;
                             var bananas = document.Element("bananas");
                             if (bananas != null)
                             {
@@ -1398,7 +1398,7 @@ namespace xml_service
         }
         /// <summary> Gets an empty list as the root element. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<Banana>> GetEmptyRootList(CancellationToken cancellationToken = default)
+        public Response<IList<Banana>> GetEmptyRootList(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("XmlClient.GetEmptyRootList");
             scope.Start();
@@ -1411,7 +1411,7 @@ namespace xml_service
                     case 200:
                         {
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            ICollection<Banana> value = default;
+                            IList<Banana> value = default;
                             var bananas = document.Element("bananas");
                             if (bananas != null)
                             {
@@ -1439,7 +1439,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/empty-root-list", false);
@@ -1519,7 +1519,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/empty-child-element", false);
@@ -1596,7 +1596,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/empty-child-element", false);
@@ -1671,7 +1671,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/", false);
@@ -1749,7 +1749,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/", false);
@@ -1828,7 +1828,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/", false);
@@ -1905,7 +1905,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/mycontainer", false);
@@ -1916,7 +1916,7 @@ namespace xml_service
         }
         /// <summary> Gets storage ACLs for a container. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<SignedIdentifier>>> GetAclsAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<SignedIdentifier>>> GetAclsAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("XmlClient.GetAcls");
             scope.Start();
@@ -1929,7 +1929,7 @@ namespace xml_service
                     case 200:
                         {
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            ICollection<SignedIdentifier> value = default;
+                            IList<SignedIdentifier> value = default;
                             var signedIdentifiers = document.Element("SignedIdentifiers");
                             if (signedIdentifiers != null)
                             {
@@ -1955,7 +1955,7 @@ namespace xml_service
         }
         /// <summary> Gets storage ACLs for a container. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<SignedIdentifier>> GetAcls(CancellationToken cancellationToken = default)
+        public Response<IList<SignedIdentifier>> GetAcls(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("XmlClient.GetAcls");
             scope.Start();
@@ -1968,7 +1968,7 @@ namespace xml_service
                     case 200:
                         {
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            ICollection<SignedIdentifier> value = default;
+                            IList<SignedIdentifier> value = default;
                             var signedIdentifiers = document.Element("SignedIdentifiers");
                             if (signedIdentifiers != null)
                             {
@@ -1996,7 +1996,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/mycontainer", false);
@@ -2078,7 +2078,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/mycontainer", false);
@@ -2157,7 +2157,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/jsoninput", false);
@@ -2232,7 +2232,7 @@ namespace xml_service
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/jsonoutput", false);

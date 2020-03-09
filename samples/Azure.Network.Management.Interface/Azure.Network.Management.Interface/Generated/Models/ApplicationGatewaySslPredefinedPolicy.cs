@@ -15,7 +15,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> Name of the Ssl predefined policy. </summary>
         public string Name { get; set; }
         /// <summary> Ssl cipher suites to be enabled in the specified order for application gateway. </summary>
-        public ICollection<ApplicationGatewaySslCipherSuite> CipherSuites { get; set; }
+        public IList<ApplicationGatewaySslCipherSuite> CipherSuites { get; set; }
         /// <summary> Minimum version of Ssl protocol to be supported on application gateway. </summary>
         public ApplicationGatewaySslProtocol? MinProtocolVersion { get; set; }
     }

@@ -26,7 +26,7 @@ namespace httpInfrastructure
         }
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Head400Async(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> Head400Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Head400Async(cancellationToken).ConfigureAwait(false);
         }
@@ -38,7 +38,7 @@ namespace httpInfrastructure
         }
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Get400Async(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> Get400Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Get400Async(cancellationToken).ConfigureAwait(false);
         }
@@ -50,7 +50,7 @@ namespace httpInfrastructure
         }
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Options400Async(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> Options400Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Options400Async(cancellationToken).ConfigureAwait(false);
         }
@@ -62,7 +62,7 @@ namespace httpInfrastructure
         }
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Put400Async(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> Put400Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Put400Async(cancellationToken).ConfigureAwait(false);
         }
@@ -74,7 +74,7 @@ namespace httpInfrastructure
         }
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Patch400Async(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> Patch400Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Patch400Async(cancellationToken).ConfigureAwait(false);
         }
@@ -86,7 +86,7 @@ namespace httpInfrastructure
         }
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Post400Async(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> Post400Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Post400Async(cancellationToken).ConfigureAwait(false);
         }
@@ -98,7 +98,7 @@ namespace httpInfrastructure
         }
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Delete400Async(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> Delete400Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Delete400Async(cancellationToken).ConfigureAwait(false);
         }
@@ -110,7 +110,7 @@ namespace httpInfrastructure
         }
         /// <summary> Return 401 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Head401Async(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> Head401Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Head401Async(cancellationToken).ConfigureAwait(false);
         }
@@ -122,7 +122,7 @@ namespace httpInfrastructure
         }
         /// <summary> Return 402 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Get402Async(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> Get402Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Get402Async(cancellationToken).ConfigureAwait(false);
         }
@@ -134,7 +134,7 @@ namespace httpInfrastructure
         }
         /// <summary> Return 403 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Options403Async(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> Options403Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Options403Async(cancellationToken).ConfigureAwait(false);
         }
@@ -146,7 +146,7 @@ namespace httpInfrastructure
         }
         /// <summary> Return 403 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Get403Async(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> Get403Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Get403Async(cancellationToken).ConfigureAwait(false);
         }
@@ -158,7 +158,7 @@ namespace httpInfrastructure
         }
         /// <summary> Return 404 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Put404Async(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> Put404Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Put404Async(cancellationToken).ConfigureAwait(false);
         }
@@ -170,7 +170,7 @@ namespace httpInfrastructure
         }
         /// <summary> Return 405 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Patch405Async(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> Patch405Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Patch405Async(cancellationToken).ConfigureAwait(false);
         }
@@ -182,7 +182,7 @@ namespace httpInfrastructure
         }
         /// <summary> Return 406 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Post406Async(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> Post406Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Post406Async(cancellationToken).ConfigureAwait(false);
         }
@@ -194,7 +194,7 @@ namespace httpInfrastructure
         }
         /// <summary> Return 407 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Delete407Async(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> Delete407Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Delete407Async(cancellationToken).ConfigureAwait(false);
         }
@@ -206,7 +206,7 @@ namespace httpInfrastructure
         }
         /// <summary> Return 409 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Put409Async(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> Put409Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Put409Async(cancellationToken).ConfigureAwait(false);
         }
@@ -218,7 +218,7 @@ namespace httpInfrastructure
         }
         /// <summary> Return 410 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Head410Async(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> Head410Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Head410Async(cancellationToken).ConfigureAwait(false);
         }
@@ -230,7 +230,7 @@ namespace httpInfrastructure
         }
         /// <summary> Return 411 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Get411Async(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> Get411Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Get411Async(cancellationToken).ConfigureAwait(false);
         }
@@ -242,7 +242,7 @@ namespace httpInfrastructure
         }
         /// <summary> Return 412 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Options412Async(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> Options412Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Options412Async(cancellationToken).ConfigureAwait(false);
         }
@@ -254,7 +254,7 @@ namespace httpInfrastructure
         }
         /// <summary> Return 412 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Get412Async(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> Get412Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Get412Async(cancellationToken).ConfigureAwait(false);
         }
@@ -266,7 +266,7 @@ namespace httpInfrastructure
         }
         /// <summary> Return 413 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Put413Async(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> Put413Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Put413Async(cancellationToken).ConfigureAwait(false);
         }
@@ -278,7 +278,7 @@ namespace httpInfrastructure
         }
         /// <summary> Return 414 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Patch414Async(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> Patch414Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Patch414Async(cancellationToken).ConfigureAwait(false);
         }
@@ -290,7 +290,7 @@ namespace httpInfrastructure
         }
         /// <summary> Return 415 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Post415Async(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> Post415Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Post415Async(cancellationToken).ConfigureAwait(false);
         }
@@ -302,7 +302,7 @@ namespace httpInfrastructure
         }
         /// <summary> Return 416 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Get416Async(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> Get416Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Get416Async(cancellationToken).ConfigureAwait(false);
         }
@@ -314,7 +314,7 @@ namespace httpInfrastructure
         }
         /// <summary> Return 417 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Delete417Async(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> Delete417Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Delete417Async(cancellationToken).ConfigureAwait(false);
         }
@@ -326,7 +326,7 @@ namespace httpInfrastructure
         }
         /// <summary> Return 429 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Head429Async(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> Head429Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Head429Async(cancellationToken).ConfigureAwait(false);
         }

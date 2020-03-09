@@ -27,7 +27,7 @@ namespace body_complex
         }
         /// <summary> Get complex types that are polymorphic and have recursive references. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Fish>> GetValidAsync(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response<Fish>> GetValidAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetValidAsync(cancellationToken).ConfigureAwait(false);
         }
@@ -74,7 +74,7 @@ namespace body_complex
         ///       };.
         /// </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutValidAsync(Fish complexBody, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Response> PutValidAsync(Fish complexBody, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutValidAsync(complexBody, cancellationToken).ConfigureAwait(false);
         }
