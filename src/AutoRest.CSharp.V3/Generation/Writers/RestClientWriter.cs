@@ -106,7 +106,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.Line($"var message = pipeline.CreateMessage();");
                 writer.Line($"var request = message.Request;");
                 var method = operation.Request.HttpMethod;
-                writer.Line($"request.Method = {typeof(RequestMethodAdditional)}.{method.ToRequestMethodName()};");
+                writer.Line($"request.Method = {typeof(RequestMethod)}.{method.ToRequestMethodName()};");
 
                 //TODO: Add logic to escape the strings when specified, using Uri.EscapeDataString(value);
                 //TODO: Need proper logic to convert the values to strings. Right now, everything is just using default ToString().

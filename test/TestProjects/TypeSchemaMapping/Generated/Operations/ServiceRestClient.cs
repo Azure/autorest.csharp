@@ -37,7 +37,7 @@ namespace TypeSchemaMapping
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Patch;
+            request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/Operation/", false);

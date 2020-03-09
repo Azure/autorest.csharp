@@ -41,7 +41,7 @@ namespace custom_baseUrl_more_options
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(vault, false);
             uri.AppendRaw(secret, false);

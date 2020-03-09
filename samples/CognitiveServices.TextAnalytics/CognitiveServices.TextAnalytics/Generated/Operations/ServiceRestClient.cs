@@ -37,7 +37,7 @@ namespace CognitiveServices.TextAnalytics
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(endpoint, false);
             uri.AppendRaw("/text/analytics/v3.0-preview.1", false);
@@ -134,7 +134,7 @@ namespace CognitiveServices.TextAnalytics
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(endpoint, false);
             uri.AppendRaw("/text/analytics/v3.0-preview.1", false);
@@ -237,7 +237,7 @@ namespace CognitiveServices.TextAnalytics
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(endpoint, false);
             uri.AppendRaw("/text/analytics/v3.0-preview.1", false);
@@ -334,7 +334,7 @@ namespace CognitiveServices.TextAnalytics
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(endpoint, false);
             uri.AppendRaw("/text/analytics/v3.0-preview.1", false);
@@ -431,7 +431,7 @@ namespace CognitiveServices.TextAnalytics
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(endpoint, false);
             uri.AppendRaw("/text/analytics/v3.0-preview.1", false);
@@ -528,7 +528,7 @@ namespace CognitiveServices.TextAnalytics
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(endpoint, false);
             uri.AppendRaw("/text/analytics/v3.0-preview.1", false);
