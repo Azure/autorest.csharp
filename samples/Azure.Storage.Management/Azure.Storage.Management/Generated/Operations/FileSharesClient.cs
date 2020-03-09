@@ -33,7 +33,7 @@ namespace Azure.Storage.Management
         /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="fileShare"> Properties of the file share to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<FileShare>> CreateAsync(string resourceGroupName, string accountName, string shareName, FileShare fileShare, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<FileShare>> CreateAsync(string resourceGroupName, string accountName, string shareName, FileShare fileShare, CancellationToken cancellationToken = default)
         {
             return await RestClient.CreateAsync(resourceGroupName, accountName, shareName, fileShare, cancellationToken).ConfigureAwait(false);
         }
@@ -53,7 +53,7 @@ namespace Azure.Storage.Management
         /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="fileShare"> Properties of the file share to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<FileShare>> UpdateAsync(string resourceGroupName, string accountName, string shareName, FileShare fileShare, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<FileShare>> UpdateAsync(string resourceGroupName, string accountName, string shareName, FileShare fileShare, CancellationToken cancellationToken = default)
         {
             return await RestClient.UpdateAsync(resourceGroupName, accountName, shareName, fileShare, cancellationToken).ConfigureAwait(false);
         }
@@ -72,7 +72,7 @@ namespace Azure.Storage.Management
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<FileShare>> GetAsync(string resourceGroupName, string accountName, string shareName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<FileShare>> GetAsync(string resourceGroupName, string accountName, string shareName, CancellationToken cancellationToken = default)
         {
             return await RestClient.GetAsync(resourceGroupName, accountName, shareName, cancellationToken).ConfigureAwait(false);
         }
@@ -90,7 +90,7 @@ namespace Azure.Storage.Management
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> DeleteAsync(string resourceGroupName, string accountName, string shareName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> DeleteAsync(string resourceGroupName, string accountName, string shareName, CancellationToken cancellationToken = default)
         {
             return await RestClient.DeleteAsync(resourceGroupName, accountName, shareName, cancellationToken).ConfigureAwait(false);
         }

@@ -30,7 +30,7 @@ namespace CognitiveSearch
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="index"> The definition of the index to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<Models.Index>> CreateAsync(Guid? clientRequestId, Models.Index index, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Models.Index>> CreateAsync(Guid? clientRequestId, Models.Index index, CancellationToken cancellationToken = default)
         {
             return await RestClient.CreateAsync(clientRequestId, index, cancellationToken).ConfigureAwait(false);
         }
@@ -46,7 +46,7 @@ namespace CognitiveSearch
         /// <param name="select"> Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<ListIndexesResult>> ListAsync(string select, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ListIndexesResult>> ListAsync(string select, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
             return await RestClient.ListAsync(select, clientRequestId, cancellationToken).ConfigureAwait(false);
         }
@@ -66,7 +66,7 @@ namespace CognitiveSearch
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
         /// <param name="index"> The definition of the index to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<Models.Index>> CreateOrUpdateAsync(string indexName, bool? allowIndexDowntime, Guid? clientRequestId, string ifMatch, string ifNoneMatch, Models.Index index, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Models.Index>> CreateOrUpdateAsync(string indexName, bool? allowIndexDowntime, Guid? clientRequestId, string ifMatch, string ifNoneMatch, Models.Index index, CancellationToken cancellationToken = default)
         {
             return await RestClient.CreateOrUpdateAsync(indexName, allowIndexDowntime, clientRequestId, ifMatch, ifNoneMatch, index, cancellationToken).ConfigureAwait(false);
         }
@@ -88,7 +88,7 @@ namespace CognitiveSearch
         /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> DeleteAsync(string indexName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> DeleteAsync(string indexName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
         {
             return await RestClient.DeleteAsync(indexName, clientRequestId, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
         }
@@ -106,7 +106,7 @@ namespace CognitiveSearch
         /// <param name="indexName"> The definition of the index to create or update. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<Models.Index>> GetAsync(string indexName, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Models.Index>> GetAsync(string indexName, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
             return await RestClient.GetAsync(indexName, clientRequestId, cancellationToken).ConfigureAwait(false);
         }
@@ -122,7 +122,7 @@ namespace CognitiveSearch
         /// <param name="indexName"> The definition of the index to create or update. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<GetIndexStatisticsResult>> GetStatisticsAsync(string indexName, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<GetIndexStatisticsResult>> GetStatisticsAsync(string indexName, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
             return await RestClient.GetStatisticsAsync(indexName, clientRequestId, cancellationToken).ConfigureAwait(false);
         }
@@ -139,7 +139,7 @@ namespace CognitiveSearch
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="requestTodo"> The text and analyzer or analysis components to test. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<AnalyzeResult>> AnalyzeAsync(string indexName, Guid? clientRequestId, AnalyzeRequest requestTodo, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<AnalyzeResult>> AnalyzeAsync(string indexName, Guid? clientRequestId, AnalyzeRequest requestTodo, CancellationToken cancellationToken = default)
         {
             return await RestClient.AnalyzeAsync(indexName, clientRequestId, requestTodo, cancellationToken).ConfigureAwait(false);
         }
