@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     {
         /// <summary> The text of the suggestion result. </summary>
         public string Text { get; internal set; }
-        private readonly IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
+        private readonly IDictionary<string, object> _additionalProperties = new Dictionary<string, object>();
         /// <inheritdoc />
         public IEnumerator<KeyValuePair<string, object>> GetEnumerator() => _additionalProperties.GetEnumerator();
         /// <inheritdoc />

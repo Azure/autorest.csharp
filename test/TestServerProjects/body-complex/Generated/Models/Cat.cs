@@ -13,6 +13,6 @@ namespace body_complex.Models
     public partial class Cat : Pet
     {
         public string Color { get; set; }
-        public ICollection<Dog> Hates { get; set; }
+        public IList<Dog> Hates { get; set; }
     }
 }

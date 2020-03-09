@@ -6,93 +6,14 @@
 #nullable disable
 
 using System.Collections.Generic;
-using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class ListContainersResponse : IUtf8JsonSerializable, IXmlSerializable
+    public partial class ListContainersResponse : IXmlSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            writer.WritePropertyName("ServiceEndpoint");
-            writer.WriteStringValue(ServiceEndpoint);
-            writer.WritePropertyName("Prefix");
-            writer.WriteStringValue(Prefix);
-            if (Marker != null)
-            {
-                writer.WritePropertyName("Marker");
-                writer.WriteStringValue(Marker);
-            }
-            writer.WritePropertyName("MaxResults");
-            writer.WriteNumberValue(MaxResults);
-            if (Containers != null)
-            {
-                writer.WritePropertyName("Containers");
-                writer.WriteStartArray();
-                foreach (var item in Containers)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            writer.WritePropertyName("NextMarker");
-            writer.WriteStringValue(NextMarker);
-            writer.WriteEndObject();
-        }
-        internal static ListContainersResponse DeserializeListContainersResponse(JsonElement element)
-        {
-            ListContainersResponse result = new ListContainersResponse();
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("ServiceEndpoint"))
-                {
-                    result.ServiceEndpoint = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("Prefix"))
-                {
-                    result.Prefix = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("Marker"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    result.Marker = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("MaxResults"))
-                {
-                    result.MaxResults = property.Value.GetInt32();
-                    continue;
-                }
-                if (property.NameEquals("Containers"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    result.Containers = new List<Container>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        result.Containers.Add(Container.DeserializeContainer(item));
-                    }
-                    continue;
-                }
-                if (property.NameEquals("NextMarker"))
-                {
-                    result.NextMarker = property.Value.GetString();
-                    continue;
-                }
-            }
-            return result;
-        }
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
             writer.WriteStartElement(nameHint ?? "EnumerationResults");

@@ -17,7 +17,7 @@ namespace CognitiveSearch.Models
         /// <summary> The result of the most recent or an in-progress indexer execution. </summary>
         public IndexerExecutionResult LastResult { get; internal set; }
         /// <summary> History of the recent indexer executions, sorted in reverse chronological order. </summary>
-        public ICollection<IndexerExecutionResult> ExecutionHistory { get; internal set; }
+        public IList<IndexerExecutionResult> ExecutionHistory { get; internal set; }
         /// <summary> The execution limits for the indexer. </summary>
         public IndexerLimits Limits { get; internal set; }
     }

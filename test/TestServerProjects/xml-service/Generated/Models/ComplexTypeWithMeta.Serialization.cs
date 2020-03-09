@@ -5,42 +5,14 @@
 
 #nullable disable
 
-using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class ComplexTypeWithMeta : IUtf8JsonSerializable, IXmlSerializable
+    public partial class ComplexTypeWithMeta : IXmlSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (ID != null)
-            {
-                writer.WritePropertyName("ID");
-                writer.WriteStringValue(ID);
-            }
-            writer.WriteEndObject();
-        }
-        internal static ComplexTypeWithMeta DeserializeComplexTypeWithMeta(JsonElement element)
-        {
-            ComplexTypeWithMeta result = new ComplexTypeWithMeta();
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("ID"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    result.ID = property.Value.GetString();
-                    continue;
-                }
-            }
-            return result;
-        }
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
             writer.WriteStartElement(nameHint ?? "XMLComplexTypeWithMeta");

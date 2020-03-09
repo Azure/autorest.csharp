@@ -19,7 +19,7 @@ namespace additionalProperties.Models
         public string OdataLocation { get; set; }
         /// <summary> Dictionary of &lt;number&gt;. </summary>
         public IDictionary<string, float> AdditionalProperties { get; set; }
-        private readonly IDictionary<string, string> _additionalProperties = new System.Collections.Generic.Dictionary<string, string>();
+        private readonly IDictionary<string, string> _additionalProperties = new Dictionary<string, string>();
         /// <inheritdoc />
         public IEnumerator<KeyValuePair<string, string>> GetEnumerator() => _additionalProperties.GetEnumerator();
         /// <inheritdoc />

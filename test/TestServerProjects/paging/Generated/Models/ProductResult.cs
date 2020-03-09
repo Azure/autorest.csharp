@@ -12,7 +12,7 @@ namespace paging.Models
     /// <summary> The ProductResult. </summary>
     public partial class ProductResult
     {
-        public ICollection<Product> Values { get; set; }
+        public IList<Product> Values { get; set; }
         public string NextLink { get; set; }
     }
 }

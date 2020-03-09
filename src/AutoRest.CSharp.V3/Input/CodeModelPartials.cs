@@ -13,6 +13,13 @@ using YamlDotNet.Serialization;
 // ReSharper disable once CheckNamespace
 namespace AutoRest.CSharp.V3.Input
 {
+    // TODO: Temporary workaround for https://github.com/Azure/autorest.modelerfour/issues/197
+    internal partial class HttpWithBodyRequest
+    {
+        [YamlMember(Alias = "binary")]
+        public bool? Binary { get; set; }
+    }
+
     internal partial class Value
     {
         public Value()
@@ -46,11 +53,22 @@ namespace AutoRest.CSharp.V3.Input
 
     }
 
-    // TODO: Temporary
-    internal partial class HttpWithBodyRequest
+    internal partial class Paging
     {
-        [YamlMember(Alias = "binary")]
-        public bool? Binary { get; set; }
+        [YamlMember(Alias = "group")]
+        public string? Group { get; set; }
+
+        [YamlMember(Alias = "itemName")]
+        public string? ItemName { get; set; }
+
+        [YamlMember(Alias = "member")]
+        public string? Member { get; set; }
+
+        [YamlMember(Alias = "nextLinkName")]
+        public string? NextLinkName { get; set; }
+
+        [YamlMember(Alias = "nextLinkOperation")]
+        public Operation? NextLinkOperation { get; set; }
     }
 
     /// <summary>language metadata specific to schema instances</summary>
@@ -72,6 +90,9 @@ namespace AutoRest.CSharp.V3.Input
 
         [YamlMember(Alias = "serializedName")]
         public string? SerializedName { get; set; }
+
+        [YamlMember(Alias = "paging")]
+        public Paging? Paging { get; set; }
 
         [YamlIgnore]
         public IDictionary<string, object> AdditionalProperties = new Dictionary<string, object>();

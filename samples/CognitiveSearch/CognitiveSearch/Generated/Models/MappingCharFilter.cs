@@ -18,6 +18,6 @@ namespace CognitiveSearch.Models
             OdataType = "#Microsoft.Azure.Search.MappingCharFilter";
         }
         /// <summary> A list of mappings of the following format: &quot;a=&gt;b&quot; (all occurrences of the character &quot;a&quot; will be replaced with character &quot;b&quot;). </summary>
-        public ICollection<string> Mappings { get; set; } = new System.Collections.Generic.List<string>();
+        public IList<string> Mappings { get; set; } = new List<string>();
     }
 }

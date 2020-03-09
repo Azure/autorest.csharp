@@ -6,13 +6,11 @@
 #nullable disable
 
 using System.Text.Json;
-using System.Xml;
-using System.Xml.Linq;
 using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class JsonOutput : IUtf8JsonSerializable, IXmlSerializable
+    public partial class JsonOutput : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -39,29 +37,6 @@ namespace xml_service.Models
                     continue;
                 }
             }
-            return result;
-        }
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
-        {
-            writer.WriteStartElement(nameHint ?? "JsonOutput");
-            if (Id != null)
-            {
-                writer.WriteStartElement("id");
-                writer.WriteValue(Id.Value);
-                writer.WriteEndElement();
-            }
-            writer.WriteEndElement();
-        }
-        internal static JsonOutput DeserializeJsonOutput(XElement element)
-        {
-            JsonOutput result = default;
-            result = new JsonOutput(); int? value = default;
-            var id = element.Element("id");
-            if (id != null)
-            {
-                value = (int?)id;
-            }
-            result.Id = value;
             return result;
         }
     }

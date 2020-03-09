@@ -1,5 +1,5 @@
 #Requires -Version 6.0
-param($name, [switch]$noDebug, [switch]$reset, [switch]$noBuild, [switch]$fast, [switch]$updateLaunchSettings, [switch]$clean = $true)
+param($name, [switch]$noDebug, [switch]$reset, [switch]$noBuild, [switch]$noProjectBuild, [switch]$fast, [switch]$updateLaunchSettings, [switch]$clean = $true)
 
 $ErrorActionPreference = 'Stop'
 
@@ -20,7 +20,7 @@ function Invoke-AutoRest($baseOutput, $title, $autoRestArguments)
 {
     $outputPath = Join-Path $baseOutput $title
     $namespace = $title.Replace('-', '_')
-    $command = "$script:autorestBinary $script:debugFlags $autoRestArguments --title=$title --namespace=$namespace"
+    $command = "$script:autorestBinary $script:debugFlags $autoRestArguments --title=$title --namespace=$namespace --output-folder=$outputPath"
 
     if ($fast)
     {
@@ -30,7 +30,7 @@ function Invoke-AutoRest($baseOutput, $title, $autoRestArguments)
 
     if ($clean)
     {
-        Get-ChildItem $outputPath -Filter Generated -Directory -Recurse | Remove-Item -Force -Recurse
+        Get-ChildItem $outputPath -Filter Generated -Directory -Recurse | Get-ChildItem -File -Recurse | Remove-Item -Force
     }
 
     Invoke $command
@@ -48,19 +48,14 @@ $testServerDirectory = Join-Path $repoRoot 'test' 'TestServerProjects'
 $sharedSource = Join-Path $repoRoot 'src' 'assets'
 $autorestPluginProject = Resolve-Path (Join-Path $repoRoot 'src' 'AutoRest.CSharp.V3')
 $launchSettings = Join-Path $autorestPluginProject 'Properties' 'launchSettings.json'
-$configurationPath = Join-Path $testServerDirectory 'readme.tests.md'
+$configurationPath = Join-Path $repoRoot 'readme.md'
 $testServerSwaggerPath = Join-Path $repoRoot 'node_modules' '@microsoft.azure' 'autorest.testserver' 'swagger'
 $testNames =
     'additionalProperties',
-    #'azure-composite-swagger',
     #'azure-parameter-grouping',
-    #'azure-report',
-    #'azure-resource',
-    #'azure-resource-x',
     #'azure-special-properties',
     'body-array',
     'body-boolean',
-    #'body-boolean.quirks',
     'body-byte',
     'body-complex',
     'body-date',
@@ -70,33 +65,20 @@ $testNames =
     'body-duration',
     'body-file',
     #'body-formdata',
-    #'body-formdata-urlencoded',
     'body-integer',
     'body-number',
-    #'body-number.quirks',
     'body-string',
-    #'body-string.quirks',
-    #'complex-model',
-    #'composite-swagger',
-    #'composite-swagger.quirks',
     'custom-baseUrl',
     'custom-baseUrl-more-options',
     'custom-baseUrl-paging',
     'extensible-enums-swagger',
-    #'head',
     'header',
-    #'head-exceptions',
     'httpInfrastructure',
-    #'httpInfrastructure.quirks',
     'lro',
     'media_types',
     'model-flattening',
     'paging',
-    #'parameter-flattening',
-    #'report',
     #'required-optional',
-    #'storage',
-    #'subscriptionId-apiVersion',
     'url',
     'validation',
     'xml-service',
@@ -115,7 +97,6 @@ foreach ($testName in $testNames)
 
 # Local test projects
 $testSwaggerPath = Join-Path $repoRoot 'test' 'TestProjects'
-$configurationPath = Join-Path $testSwaggerPath 'readme.md'
 
 foreach ($directory in Get-ChildItem $testSwaggerPath -Directory)
 {
@@ -128,7 +109,15 @@ foreach ($directory in Get-ChildItem $testSwaggerPath -Directory)
     }
 }
 # Sample configuration
-$projectNames = 'AppConfiguration', 'CognitiveServices.TextAnalytics', 'CognitiveSearch', 'Azure.Storage.Tables'
+$projectNames =
+    'AppConfiguration',
+    'CognitiveServices.TextAnalytics',
+    'CognitiveSearch',
+    'Azure.AI.FormRecognizer',
+    'Azure.Storage.Tables',
+    'Azure.Storage.Management',
+    'Azure.Network.Management.Interface'
+
 foreach ($projectName in $projectNames)
 {
     $projectDirectory = Join-Path $repoRoot 'samples' $projectName
@@ -155,7 +144,7 @@ if ($updateLaunchSettings)
         $codeModel = Join-Path $outputPath 'CodeModel.yaml'
         $namespace = $definition.title.Replace('-', '_')
 
-        $settings.profiles[$key] = @{
+        $settings.profiles[$key] = [ordered]@{
             'commandName'='Project';
             'commandLineArgs'="--standalone --input-codemodel=$codeModel --plugin=csharpgen --output-folder=$outputPath --namespace=$namespace --shared-source-folder=$sharedSourceNormalized --save-code-model=true"
         }
@@ -180,5 +169,10 @@ foreach ($key in $keys)
 {
     $definition = $swaggerDefinitions[$key];
     Invoke-AutoRest $definition.output $definition.title $definition.arguments
+    $projectPath = Join-Path $definition.output $definition.title;
+    if (!$noProjectBuild)
+    {
+        Invoke "dotnet build $projectPath --verbosity quiet /nologo"
+    }
 }
 

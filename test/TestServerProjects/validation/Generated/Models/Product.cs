@@ -13,7 +13,7 @@ namespace validation.Models
     public partial class Product
     {
         /// <summary> Non required array of unique items from 0 to 6 elements. </summary>
-        public ICollection<string> DisplayNames { get; set; }
+        public IList<string> DisplayNames { get; set; }
         /// <summary> Non required int betwen 0 and 100 exclusive. </summary>
         public int? Capacity { get; set; }
         /// <summary> Image URL representing the product. </summary>

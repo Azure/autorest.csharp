@@ -11,9 +11,9 @@ using Azure.Core;
 
 namespace body_complex.Models
 {
-    public partial class Fish : Azure.Core.IUtf8JsonSerializable
+    public partial class Fish : IUtf8JsonSerializable
     {
-        void Azure.Core.IUtf8JsonSerializable.Write(System.Text.Json.Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("fishtype");
@@ -37,21 +37,21 @@ namespace body_complex.Models
             }
             writer.WriteEndObject();
         }
-        internal static body_complex.Models.Fish DeserializeFish(System.Text.Json.JsonElement element)
+        internal static Fish DeserializeFish(JsonElement element)
         {
-            if (element.TryGetProperty("fishtype", out System.Text.Json.JsonElement discriminator))
+            if (element.TryGetProperty("fishtype", out JsonElement discriminator))
             {
                 switch (discriminator.GetString())
                 {
-                    case "cookiecuttershark": return body_complex.Models.Cookiecuttershark.DeserializeCookiecuttershark(element);
-                    case "goblin": return body_complex.Models.Goblinshark.DeserializeGoblinshark(element);
-                    case "salmon": return body_complex.Models.Salmon.DeserializeSalmon(element);
-                    case "sawshark": return body_complex.Models.Sawshark.DeserializeSawshark(element);
-                    case "shark": return body_complex.Models.Shark.DeserializeShark(element);
-                    case "smart_salmon": return body_complex.Models.SmartSalmon.DeserializeSmartSalmon(element);
+                    case "cookiecuttershark": return Cookiecuttershark.DeserializeCookiecuttershark(element);
+                    case "goblin": return Goblinshark.DeserializeGoblinshark(element);
+                    case "salmon": return Salmon.DeserializeSalmon(element);
+                    case "sawshark": return Sawshark.DeserializeSawshark(element);
+                    case "shark": return Shark.DeserializeShark(element);
+                    case "smart_salmon": return SmartSalmon.DeserializeSmartSalmon(element);
                 }
             }
-            body_complex.Models.Fish result = new body_complex.Models.Fish();
+            Fish result = new Fish();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("fishtype"))
@@ -61,7 +61,7 @@ namespace body_complex.Models
                 }
                 if (property.NameEquals("species"))
                 {
-                    if (property.Value.ValueKind == System.Text.Json.JsonValueKind.Null)
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         continue;
                     }
@@ -75,14 +75,14 @@ namespace body_complex.Models
                 }
                 if (property.NameEquals("siblings"))
                 {
-                    if (property.Value.ValueKind == System.Text.Json.JsonValueKind.Null)
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         continue;
                     }
-                    result.Siblings = new System.Collections.Generic.List<body_complex.Models.Fish>();
+                    result.Siblings = new List<Fish>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Siblings.Add(body_complex.Models.Fish.DeserializeFish(item));
+                        result.Siblings.Add(DeserializeFish(item));
                     }
                     continue;
                 }

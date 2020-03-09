@@ -1,31 +1,30 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License. See License.txt in the project root for license information.
+// Licensed under the MIT License.
 
 using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Output.Models.Requests;
-using AutoRest.CSharp.V3.Output.Models.Shared;
 using AutoRest.CSharp.V3.Output.Models.Types;
 
 namespace AutoRest.CSharp.V3.Output.Models
 {
     internal class Client: ITypeProvider
     {
-        public Client(TypeDeclarationOptions declaredType, string description, Parameter[] parameters, Method[] methods, Paging[] pagingMethods, LongRunningOperation[] longRunningOperationMethods)
+        public Client(TypeDeclarationOptions declaredType, string description, RestClient restClient, ClientMethod[] methods, PagingInfo[] pagingMethods, LongRunningOperation[] longRunningOperationMethods)
         {
             DeclaredType = declaredType;
-            Parameters = parameters;
+            Description = description;
+            RestClient = restClient;
             Methods = methods;
             PagingMethods = pagingMethods;
             LongRunningOperationMethods = longRunningOperationMethods;
-            Description = description;
         }
 
-        public string Description { get; }
-        public Method[] Methods { get; }
-        public Paging[] PagingMethods { get; }
-        public LongRunningOperation[] LongRunningOperationMethods { get; }
         public TypeDeclarationOptions DeclaredType { get; }
-        public Parameter[] Parameters { get; }
+        public string Description { get; }
+        public RestClient RestClient { get; }
+        public ClientMethod[] Methods { get; }
+        public PagingInfo[] PagingMethods { get; }
+        public LongRunningOperation[] LongRunningOperationMethods { get; }
         public CSharpType Type => new CSharpType(this, DeclaredType.Namespace, DeclaredType.Name);
     }
 }

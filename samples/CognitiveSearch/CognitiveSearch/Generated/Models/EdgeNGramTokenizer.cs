@@ -22,6 +22,6 @@ namespace CognitiveSearch.Models
         /// <summary> The maximum n-gram length. Default is 2. Maximum is 300. </summary>
         public int? MaxGram { get; set; }
         /// <summary> Character classes to keep in the tokens. </summary>
-        public ICollection<TokenCharacterKind> TokenChars { get; set; }
+        public IList<TokenCharacterKind> TokenChars { get; set; }
     }
 }

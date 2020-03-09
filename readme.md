@@ -19,4 +19,12 @@ version: 3.0.6237
 shared-source-folder: $(this-folder)/src/assets
 save-code-model: true
 use: $(this-folder)/artifacts/bin/AutoRest.CSharp.V3/Debug/netcoreapp3.0/
+clear-output-folder: false
+
+pipeline:
+  csharpproj:
+    input: modelerfour/identity
+  csharpproj/emitter:
+    input: csharpproj
+    scope: output-scope
 ```

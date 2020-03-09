@@ -18,7 +18,7 @@ namespace CognitiveSearch.Models
             OdataType = "#Microsoft.Azure.Search.KeepTokenFilter";
         }
         /// <summary> The list of words to keep. </summary>
-        public ICollection<string> KeepWords { get; set; } = new System.Collections.Generic.List<string>();
+        public IList<string> KeepWords { get; set; } = new List<string>();
         /// <summary> A value indicating whether to lower case all words first. Default is false. </summary>
         public bool? LowerCaseKeepWords { get; set; }
     }

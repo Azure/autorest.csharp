@@ -12,7 +12,6 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
         public string Namespace { get; }
         public string Title { get; }
         public string SharedSourceFolder { get; }
-
         public bool SaveCodeModel { get; }
 
         public Configuration(IPluginCommunication autoRest)

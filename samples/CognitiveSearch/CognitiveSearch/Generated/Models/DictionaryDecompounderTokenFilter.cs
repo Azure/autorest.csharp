@@ -18,7 +18,7 @@ namespace CognitiveSearch.Models
             OdataType = "#Microsoft.Azure.Search.DictionaryDecompounderTokenFilter";
         }
         /// <summary> The list of words to match against. </summary>
-        public ICollection<string> WordList { get; set; } = new System.Collections.Generic.List<string>();
+        public IList<string> WordList { get; set; } = new List<string>();
         /// <summary> The minimum word size. Only words longer than this get processed. Default is 5. Maximum is 300. </summary>
         public int? MinWordSize { get; set; }
         /// <summary> The minimum subword size. Only subwords longer than this are outputted. Default is 2. Maximum is 300. </summary>

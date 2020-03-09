@@ -1200,6 +1200,11 @@ schemas: !<!Schemas>
                   name: collegeDegree
                   description: ''
               protocol: !<!Protocols> {}
+            serializationFormats:
+            - json
+            usage:
+            - output
+            - input
             language: !<!Languages> 
               default:
                 name: SmartSalmon
@@ -1286,6 +1291,11 @@ schemas: !<!Schemas>
                   name: picture
                   description: ''
               protocol: !<!Protocols> {}
+            serializationFormats:
+            - json
+            usage:
+            - output
+            - input
             language: !<!Languages> 
               default:
                 name: Sawshark
@@ -1321,6 +1331,11 @@ schemas: !<!Schemas>
                   name: color
                   description: Colors possible
               protocol: !<!Protocols> {}
+            serializationFormats:
+            - json
+            usage:
+            - output
+            - input
             extensions:
               x-ms-discriminator-value: goblin
             language: !<!Languages> 
@@ -1341,6 +1356,11 @@ schemas: !<!Schemas>
               - *ref_34
               immediate:
               - *ref_39
+            serializationFormats:
+            - json
+            usage:
+            - output
+            - input
             language: !<!Languages> 
               default:
                 name: Cookiecuttershark
@@ -1386,6 +1406,11 @@ schemas: !<!Schemas>
               name: birthday
               description: ''
           protocol: !<!Protocols> {}
+        serializationFormats:
+        - json
+        usage:
+        - output
+        - input
         language: !<!Languages> 
           default:
             name: Shark
@@ -1674,6 +1699,10 @@ schemas: !<!Schemas>
               name: propD1
               description: ''
           protocol: !<!Protocols> {}
+        serializationFormats:
+        - json
+        usage:
+        - output
         extensions:
           x-ms-discriminator-value: Kind1
         language: !<!Languages> 

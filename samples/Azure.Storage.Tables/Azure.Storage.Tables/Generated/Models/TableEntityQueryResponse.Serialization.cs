@@ -7,13 +7,11 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using System.Xml;
-using System.Xml.Linq;
 using Azure.Core;
 
 namespace Azure.Storage.Tables.Models
 {
-    public partial class TableEntityQueryResponse : IUtf8JsonSerializable, IXmlSerializable
+    public partial class TableEntityQueryResponse : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -73,52 +71,6 @@ namespace Azure.Storage.Tables.Models
                     }
                     continue;
                 }
-            }
-            return result;
-        }
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
-        {
-            writer.WriteStartElement(nameHint ?? "TableEntityQueryResponse");
-            if (OdataMetadata != null)
-            {
-                writer.WriteStartElement("odata.metadata");
-                writer.WriteValue(OdataMetadata);
-                writer.WriteEndElement();
-            }
-            if (Value != null)
-            {
-                foreach (var item in Value)
-                {
-                    foreach (var pair in item)
-                    {
-                        writer.WriteObjectValue(pair.Value, "!dictionary-item");
-                    }
-                }
-            }
-            writer.WriteEndElement();
-        }
-        internal static TableEntityQueryResponse DeserializeTableEntityQueryResponse(XElement element)
-        {
-            TableEntityQueryResponse result = default;
-            result = new TableEntityQueryResponse(); string value = default;
-            var odatametadata = element.Element("odata.metadata");
-            if (odatametadata != null)
-            {
-                value = (string)odatametadata;
-            }
-            result.OdataMetadata = value;
-            result.Value = new System.Collections.Generic.List<System.Collections.Generic.IDictionary<string, object>>();
-            foreach (var e in element.Elements("TableEntityProperties"))
-            {
-                System.Collections.Generic.IDictionary<string, object> value0 = default;
-                value0 = new System.Collections.Generic.Dictionary<string, object>(); var elements = e.Elements();
-                foreach (var e0 in elements)
-                {
-                    object value1 = default;
-                    value1 = e0.GetObjectValue(null);
-                    value0.Add(e0.Name.LocalName, value1);
-                }
-                result.Value.Add(value0);
             }
             return result;
         }

@@ -14,12 +14,14 @@ namespace AutoRest.CSharp.V3.Input.Source
         private readonly Compilation _compilation;
         private readonly INamedTypeSymbol _schemaNameAttribute;
         private readonly INamedTypeSymbol _schemaMemberAttribute;
+        private readonly INamedTypeSymbol _clientAttribute;
 
         private SourceInputModelBuilder(Compilation compilation)
         {
             _compilation = compilation;
-            _schemaNameAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenSchemaAttribute).FullName);
-            _schemaMemberAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenSchemaMemberAttribute).FullName);
+            _schemaNameAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenSchemaAttribute).FullName!)!;
+            _schemaMemberAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenSchemaMemberAttribute).FullName!)!;
+            _clientAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenClientAttribute).FullName!)!;
         }
 
         public static SourceInputModel Build(Compilation compilation)
@@ -31,7 +33,8 @@ namespace AutoRest.CSharp.V3.Input.Source
         {
             var assembly = _compilation.Assembly;
 
-            var definedSchemas = new List<SourceTypeMapping>();
+            var definedSchemas = new List<ModelTypeMapping>();
+            var definedClients = new List<ClientTypeMapping>();
 
             foreach (IModuleSymbol module in assembly.Modules)
             {
@@ -39,27 +42,47 @@ namespace AutoRest.CSharp.V3.Input.Source
                 {
                     if (type is INamedTypeSymbol namedTypeSymbol)
                     {
-                        if (TryGetSchemaName(type, _schemaNameAttribute, out var schemaName))
+                        if (TryGetName(type, _schemaNameAttribute, out var schemaName))
                         {
                             List<SourceMemberMapping> memberMappings = new List<SourceMemberMapping>();
-                            foreach (var member in namedTypeSymbol.GetMembers())
+                            foreach (var member in GetMembers(namedTypeSymbol))
                             {
-                                if (TryGetSchemaName(member, _schemaMemberAttribute, out var schemaMemberName))
+                                if (TryGetName(member, _schemaMemberAttribute, out var schemaMemberName))
                                 {
                                     memberMappings.Add(new SourceMemberMapping(schemaMemberName, member));
                                 }
                             }
 
-                            definedSchemas.Add(new SourceTypeMapping(schemaName, namedTypeSymbol, memberMappings.ToArray()));
+                            definedSchemas.Add(new ModelTypeMapping(schemaName, namedTypeSymbol, memberMappings.ToArray()));
+                        }
+
+                        if (TryGetName(type, _clientAttribute, out var operationName))
+                        {
+                            definedClients.Add(new ClientTypeMapping(operationName, namedTypeSymbol));
                         }
                     }
                 }
             }
 
-            return new SourceInputModel(definedSchemas.ToArray());
+            return new SourceInputModel(
+                definedSchemas.ToArray(),
+                definedClients.ToArray());
         }
 
-        private bool TryGetSchemaName(ISymbol symbol, INamedTypeSymbol attributeType, [NotNullWhen(true)] out string? name)
+        private IEnumerable<ISymbol> GetMembers(INamedTypeSymbol? typeSymbol)
+        {
+            while (typeSymbol != null)
+            {
+                foreach (var symbol in typeSymbol.GetMembers())
+                {
+                    yield return symbol;
+                }
+
+                typeSymbol = typeSymbol.BaseType;
+            }
+        }
+
+        private bool TryGetName(ISymbol symbol, INamedTypeSymbol attributeType, [NotNullWhen(true)] out string? name)
         {
             name = null;
 #pragma warning disable RS1024

@@ -12,8 +12,8 @@ namespace AppConfiguration
 {
     internal class GetKeyValueHeaders
     {
-        private readonly Azure.Response _response;
-        public GetKeyValueHeaders(Azure.Response response)
+        private readonly Response _response;
+        public GetKeyValueHeaders(Response response)
         {
             _response = response;
         }

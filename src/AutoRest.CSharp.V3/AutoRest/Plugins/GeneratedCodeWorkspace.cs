@@ -32,11 +32,16 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
 
         public void AddGeneratedFile(string name, string text)
         {
-            _project = _project.AddDocument(GeneratedFolder + "/" + name, text, GeneratedFolders).Project;
+            var document = _project.AddDocument(GeneratedFolder + "/" + name, text, GeneratedFolders);
+            var root = document.GetSyntaxRootAsync().Result;
+            Debug.Assert(root != null);
+            root = root.WithAdditionalAnnotations(Simplifier.Annotation);
+            _project = document.WithSyntaxRoot(root).Project;
         }
 
         public async IAsyncEnumerable<(string Name, string Text)> GetGeneratedFilesAsync()
         {
+            List<Task<Document>> documents = new List<Task<Document>>();
             foreach (Document document in _project.Documents)
             {
                 // Skip writing shared files or originals
@@ -45,27 +50,23 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                     continue;
                 }
 
-                var root = await document.GetSyntaxRootAsync()!;
-
-                Debug.Assert(root != null);
-
-                root = root.WithAdditionalAnnotations(Simplifier.Annotation);
-                var simplified = document.WithSyntaxRoot(root);
-
-                try
-                {
-                    simplified = await Simplifier.ReduceAsync(simplified);
-                }
-                catch (InvalidOperationException)
-                {
-                    // Workaround for https://github.com/dotnet/roslyn/issues/40592
-                }
-
-                simplified = await Formatter.FormatAsync(simplified);
-
-                SourceText text = await simplified.GetTextAsync();
-                yield return (document.Name, text.ToString());
+                documents.Add(Task.Run(() => ProcessDocument(document)));
             }
+
+            foreach (var task in documents)
+            {
+                var processed = await task;
+                var text = await processed.GetSyntaxTreeAsync();
+
+                yield return (processed.Name, text.ToString());
+            }
+        }
+
+        private static async Task<Document> ProcessDocument(Document document)
+        {
+            document = await Simplifier.ReduceAsync(document);
+            document = await Formatter.FormatAsync(document);
+            return document;
         }
 
         public static GeneratedCodeWorkspace Create(string projectDirectory, string sharedSourceFolder)
@@ -75,21 +76,31 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
             Project generatedCodeProject = workspace.AddProject("GeneratedCode", LanguageNames.CSharp);
 
             var corlibLocation = typeof(object).Assembly.Location;
+            var references = new List<MetadataReference>();
 
-            generatedCodeProject = generatedCodeProject.AddMetadataReference(MetadataReference.CreateFromFile(corlibLocation));
+            references.Add(MetadataReference.CreateFromFile(corlibLocation));
 
             var trustedAssemblies = ((string?)AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES") ?? "").Split(Path.PathSeparator);
             foreach (var tpl in trustedAssemblies)
             {
-                generatedCodeProject = generatedCodeProject.AddMetadataReference(MetadataReference.CreateFromFile(tpl));
+                references.Add(MetadataReference.CreateFromFile(tpl));
             }
 
-            generatedCodeProject = generatedCodeProject.WithCompilationOptions(new CSharpCompilationOptions(
+            generatedCodeProject = generatedCodeProject
+                .AddMetadataReferences(references)
+                .WithCompilationOptions(new CSharpCompilationOptions(
                 OutputKind.DynamicallyLinkedLibrary, nullableContextOptions: NullableContextOptions.Annotations));
 
-            foreach (string sharedSourceFile in Directory.GetFiles(projectDirectory, "*.cs"))
+            var generatedCodeDirectory = Path.Combine(projectDirectory, "Generated");
+
+            foreach (string sourceFile in Directory.GetFiles(projectDirectory, "*.cs", SearchOption.AllDirectories))
             {
-                generatedCodeProject = generatedCodeProject.AddDocument(sharedSourceFile, File.ReadAllText(sharedSourceFile), Array.Empty<string>(), sharedSourceFile).Project;
+                // Ignore existing generated code
+                if (sourceFile.StartsWith(generatedCodeDirectory))
+                {
+                    continue;
+                }
+                generatedCodeProject = generatedCodeProject.AddDocument(sourceFile, File.ReadAllText(sourceFile), Array.Empty<string>(), sourceFile).Project;
             }
 
             foreach (string sharedSourceFile in Directory.GetFiles(sharedSourceFolder, "*.cs", SearchOption.AllDirectories))

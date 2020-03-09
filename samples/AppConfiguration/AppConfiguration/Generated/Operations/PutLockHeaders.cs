@@ -12,8 +12,8 @@ namespace AppConfiguration
 {
     internal class PutLockHeaders
     {
-        private readonly Azure.Response _response;
-        public PutLockHeaders(Azure.Response response)
+        private readonly Response _response;
+        public PutLockHeaders(Response response)
         {
             _response = response;
         }

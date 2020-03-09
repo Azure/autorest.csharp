@@ -15,7 +15,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <summary> Entity Linking formal name. </summary>
         public string Name { get; set; }
         /// <summary> List of instances this entity appears in the text. </summary>
-        public ICollection<Match> Matches { get; set; } = new System.Collections.Generic.List<CognitiveServices.TextAnalytics.Models.Match>();
+        public IList<Match> Matches { get; set; } = new List<Match>();
         /// <summary> Language used in the data source. </summary>
         public string Language { get; set; }
         /// <summary> Unique identifier of the recognized entity from the data source. </summary>

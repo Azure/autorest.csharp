@@ -4,7 +4,7 @@
 ## Configuration
 ```yaml
 use-extension:
-  "@autorest/modelerfour": "4.9.225"
+  "@autorest/modelerfour": "4.9.236"
 modelerfour:
   flatten-models: true
 pipeline:

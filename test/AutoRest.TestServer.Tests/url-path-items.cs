@@ -15,7 +15,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "No recording")]
         public Task UrlPathItemGetAll() => TestStatus(async (host, pipeline) =>
-            await new PathItemsOperations(ClientDiagnostics,
+            await new PathItemsClient(ClientDiagnostics,
                     pipeline,
                     globalStringPath: "globalStringPath",
                     globalStringQuery: "globalStringQuery",
@@ -28,7 +28,7 @@ namespace AutoRest.TestServer.Tests
 
         [Test]
         public Task UrlPathItemGetPathItemAndLocalNull() => TestStatus(async (host, pipeline) =>
-            await new PathItemsOperations(
+            await new PathItemsClient(
                     ClientDiagnostics,
                     pipeline,
                     globalStringPath: "globalStringPath",
@@ -43,7 +43,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "No recording")]
         public Task UrlPathItemGetGlobalNull() => TestStatus(async (host, pipeline) =>
-            await new PathItemsOperations(
+            await new PathItemsClient(
                     ClientDiagnostics,
                     pipeline,
                     globalStringPath: "globalStringPath",
@@ -57,7 +57,7 @@ namespace AutoRest.TestServer.Tests
 
         [Test]
         public Task UrlPathItemGetGlobalAndLocalNull() => TestStatus(async (host, pipeline) =>
-            await new PathItemsOperations(
+            await new PathItemsClient(
                     ClientDiagnostics,
                     pipeline,
                     globalStringPath: "globalStringPath",

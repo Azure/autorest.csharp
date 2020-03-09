@@ -12,8 +12,8 @@ namespace header
 {
     internal class ResponseExistingKeyHeaders
     {
-        private readonly Azure.Response _response;
-        public ResponseExistingKeyHeaders(Azure.Response response)
+        private readonly Response _response;
+        public ResponseExistingKeyHeaders(Response response)
         {
             _response = response;
         }
