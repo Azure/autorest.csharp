@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Linq;
 using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Output.Models.Types;
 
@@ -35,26 +36,38 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         {
             using (writer.Namespace(schema.Declaration.Namespace))
             {
-                List<string> implementsTypes = new List<string>();
+                List<CSharpType> implementsTypes = new List<CSharpType>();
                 if (schema.Inherits != null)
                 {
-                    implementsTypes.Add(writer.Type(schema.Inherits));
+                    implementsTypes.Add(schema.Inherits);
                 }
 
                 if (schema.ImplementsDictionaryElementType != null)
                 {
                     var elementType = schema.ImplementsDictionaryElementType;
-                    implementsTypes.Add(
-                        writer.Type(new CSharpType(typeof(IDictionary<,>), new CSharpType(typeof(string)), elementType)));
+                    implementsTypes.Add(new CSharpType(typeof(IDictionary<,>), new CSharpType(typeof(string)), elementType));
                 }
 
                 writer.WriteXmlDocumentationSummary(schema.Description);
-                using (writer.Class(schema.Declaration.Accessibility, "partial", schema.Declaration.Name, implements: string.Join(", ", implementsTypes)))
+
+                writer.Append($"{schema.Declaration.Accessibility} partial class {schema.Declaration.Name}");
+                if (implementsTypes.Any())
+                {
+                    writer.AppendRaw(" : ");
+                    foreach (var type in implementsTypes)
+                    {
+                        writer.Append($"{type} ,");
+                    }
+                    writer.RemoveTrailingComma();
+                }
+
+                writer.Line();
+                using (writer.Scope())
                 {
                     if (schema.Discriminator != null)
                     {
                         writer.WriteXmlDocumentationSummary($"Initializes a new instance of {schema.Declaration.Name}");
-                        using (writer.Method("public", null, schema.Declaration.Name))
+                        using (writer.Scope($"public {schema.Declaration.Name}()"))
                         {
                             writer.Line($"{schema.Discriminator.Property} = {schema.Discriminator.Value:L};");
                         }

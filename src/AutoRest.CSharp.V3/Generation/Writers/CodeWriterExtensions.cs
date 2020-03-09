@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 CSharpType cs = parameter.Type;
                 if (parameter.IsRequired && (cs.IsNullable || !cs.IsValueType))
                 {
-                    using (writer.If($"{parameter.Name} == null"))
+                    using (writer.Scope($"if ({parameter.Name} == null)"))
                     {
                         writer.Line($"throw new {typeof(ArgumentNullException)}(nameof({parameter.Name}));");
                     }

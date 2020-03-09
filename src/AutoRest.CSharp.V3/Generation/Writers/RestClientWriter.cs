@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             using (writer.Namespace(@namespace))
             {
                 writer.WriteXmlDocumentationSummary(restClient.Description);
-                using (writer.Class(restClient.DeclaredType.Accessibility, "partial", cs.Name))
+                using (writer.Scope($"{restClient.DeclaredType.Accessibility} partial class {cs.Name}"))
                 {
                     WriteClientFields(writer, restClient);
 
@@ -332,7 +332,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             var type = value.Type;
             if (type.IsNullable)
             {
-                return writer.If($"{value.Parameter.Name} != null");
+                return writer.Scope($"if ({value.Parameter.Name} != null)");
             }
 
             return default;
@@ -405,7 +405,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         //TODO: Do multiple status codes
         private void WriteStatusCodeSwitch(CodeWriter writer, ResponseBody? responseBody, CSharpType? headersModelType, RestClientMethod operation, bool async)
         {
-            using (writer.Switch("message.Response.Status"))
+            using (writer.Scope($"switch (message.Response.Status)"))
             {
                 var statusCodes = operation.Response.SuccessfulStatusCodes;
                 foreach (var statusCode in statusCodes)
