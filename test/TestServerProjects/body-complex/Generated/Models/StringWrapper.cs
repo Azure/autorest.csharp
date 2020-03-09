@@ -10,6 +10,17 @@ namespace body_complex.Models
     /// <summary> The StringWrapper. </summary>
     public partial class StringWrapper
     {
+        /// <summary> Initializes a new instance of StringWrapper. </summary>
+        public StringWrapper()
+        {
+        }
+        /// <summary> Initializes a new instance of StringWrapper. </summary>
+        internal StringWrapper(string field, string empty, string nullProperty)
+        {
+            Field = field;
+            Empty = empty;
+            NullProperty = nullProperty;
+        }
         public string Field { get; set; }
         public string Empty { get; set; }
         public string NullProperty { get; set; }

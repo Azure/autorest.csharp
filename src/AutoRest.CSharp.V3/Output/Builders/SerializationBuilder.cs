@@ -123,7 +123,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                     var name = property.SerializedName;
                     var isAttribute = property.Schema.Serialization?.Xml?.Attribute == true;
 
-                    var propertyName = objectType.GetPropertyForSchemaProperty(property, includeParents: true).DeclarationOptions.Name;
+                    var propertyName = objectType.GetPropertyForSchemaProperty(property, includeParents: true).Declaration.Name;
 
                     if (isAttribute)
                     {
@@ -167,7 +167,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
         {
             foreach (Property property in propertyBag.Properties)
             {
-                string propertyName = objectType.GetPropertyForSchemaProperty(property, includeParents: true).DeclarationOptions.Name;
+                string propertyName = objectType.GetPropertyForSchemaProperty(property, includeParents: true).Declaration.Name;
 
                 yield return new JsonPropertySerialization(
                     property.SerializedName,

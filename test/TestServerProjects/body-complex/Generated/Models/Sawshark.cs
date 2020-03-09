@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace body_complex.Models
 {
@@ -16,6 +17,11 @@ namespace body_complex.Models
         public Sawshark()
         {
             Fishtype = "sawshark";
+        }
+        /// <summary> Initializes a new instance of Sawshark. </summary>
+        internal Sawshark(byte[] picture, int? age, DateTimeOffset birthday, string fishtype, string species, float length, ICollection<Fish> siblings) : base(age, birthday, fishtype, species, length, siblings)
+        {
+            Picture = picture;
         }
         public byte[] Picture { get; set; }
     }

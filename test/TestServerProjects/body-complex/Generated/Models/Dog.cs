@@ -10,6 +10,15 @@ namespace body_complex.Models
     /// <summary> The Dog. </summary>
     public partial class Dog : Pet
     {
+        /// <summary> Initializes a new instance of Dog. </summary>
+        public Dog()
+        {
+        }
+        /// <summary> Initializes a new instance of Dog. </summary>
+        internal Dog(string food, int? id, string name) : base(id, name)
+        {
+            Food = food;
+        }
         public string Food { get; set; }
     }
 }

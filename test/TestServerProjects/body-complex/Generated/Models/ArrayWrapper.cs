@@ -12,6 +12,15 @@ namespace body_complex.Models
     /// <summary> The ArrayWrapper. </summary>
     public partial class ArrayWrapper
     {
+        /// <summary> Initializes a new instance of ArrayWrapper. </summary>
+        public ArrayWrapper()
+        {
+        }
+        /// <summary> Initializes a new instance of ArrayWrapper. </summary>
+        internal ArrayWrapper(ICollection<string> array)
+        {
+            Array = array;
+        }
         public ICollection<string> Array { get; set; }
     }
 }

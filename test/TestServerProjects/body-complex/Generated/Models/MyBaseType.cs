@@ -15,6 +15,13 @@ namespace body_complex.Models
         {
             Kind = null;
         }
+        /// <summary> Initializes a new instance of MyBaseType. </summary>
+        internal MyBaseType(string kind, string propB1, string propBH1)
+        {
+            Kind = kind;
+            PropB1 = propB1;
+            PropBH1 = propBH1;
+        }
         public string Kind { get; internal set; } = "Kind1";
         public string PropB1 { get; set; }
         public string PropBH1 { get; set; }

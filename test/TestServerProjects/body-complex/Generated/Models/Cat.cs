@@ -12,6 +12,16 @@ namespace body_complex.Models
     /// <summary> The Cat. </summary>
     public partial class Cat : Pet
     {
+        /// <summary> Initializes a new instance of Cat. </summary>
+        public Cat()
+        {
+        }
+        /// <summary> Initializes a new instance of Cat. </summary>
+        internal Cat(string color, ICollection<Dog> hates, int? id, string name) : base(id, name)
+        {
+            Color = color;
+            Hates = hates;
+        }
         public string Color { get; set; }
         public ICollection<Dog> Hates { get; set; }
     }

@@ -12,6 +12,15 @@ namespace body_complex.Models
     /// <summary> The DurationWrapper. </summary>
     public partial class DurationWrapper
     {
+        /// <summary> Initializes a new instance of DurationWrapper. </summary>
+        public DurationWrapper()
+        {
+        }
+        /// <summary> Initializes a new instance of DurationWrapper. </summary>
+        internal DurationWrapper(TimeSpan? field)
+        {
+            Field = field;
+        }
         public TimeSpan? Field { get; set; }
     }
 }

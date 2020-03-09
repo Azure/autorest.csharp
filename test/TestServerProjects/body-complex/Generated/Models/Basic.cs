@@ -10,6 +10,17 @@ namespace body_complex.Models
     /// <summary> The Basic. </summary>
     public partial class Basic
     {
+        /// <summary> Initializes a new instance of Basic. </summary>
+        public Basic()
+        {
+        }
+        /// <summary> Initializes a new instance of Basic. </summary>
+        internal Basic(int? id, string name, CMYKColors? color)
+        {
+            Id = id;
+            Name = name;
+            Color = color;
+        }
         /// <summary> Basic Id. </summary>
         public int? Id { get; set; }
         /// <summary> Name property with a very long description that does not fit on a single line and a line break. </summary>

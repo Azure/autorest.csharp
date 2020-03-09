@@ -17,6 +17,14 @@ namespace body_complex.Models
         {
             Fishtype = null;
         }
+        /// <summary> Initializes a new instance of Fish. </summary>
+        internal Fish(string fishtype, string species, float length, ICollection<Fish> siblings)
+        {
+            Fishtype = fishtype;
+            Species = species;
+            Length = length;
+            Siblings = siblings;
+        }
         public string Fishtype { get; internal set; }
         public string Species { get; set; }
         public float Length { get; set; }

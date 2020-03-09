@@ -15,6 +15,12 @@ namespace body_complex.Models
         {
             FishType = "DotSalmon";
         }
+        /// <summary> Initializes a new instance of DotSalmon. </summary>
+        internal DotSalmon(string location, bool? iswild, string fishType, string species) : base(fishType, species)
+        {
+            Location = location;
+            Iswild = iswild;
+        }
         public string Location { get; set; }
         public bool? Iswild { get; set; }
     }

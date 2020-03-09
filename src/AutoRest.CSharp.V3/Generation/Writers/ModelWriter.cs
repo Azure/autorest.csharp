@@ -6,8 +6,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Linq;
 using AutoRest.CSharp.V3.Generation.Types;
+using AutoRest.CSharp.V3.Input;
 using AutoRest.CSharp.V3.Output.Models.Types;
+using AutoRest.CSharp.V3.Utilities;
 
 namespace AutoRest.CSharp.V3.Generation.Writers
 {
@@ -51,26 +54,28 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.WriteXmlDocumentationSummary(schema.Description);
                 using (writer.Class(schema.Declaration.Accessibility, "partial", schema.Declaration.Name, implements: string.Join(", ", implementsTypes)))
                 {
-                    if (schema.Discriminator != null)
+                    writer.WriteXmlDocumentationSummary($"Initializes a new instance of {schema.Declaration.Name}");
+                    using (writer.Method("public", null, schema.Declaration.Name))
                     {
-                        writer.WriteXmlDocumentationSummary($"Initializes a new instance of {schema.Declaration.Name}");
-                        using (writer.Method("public", null, schema.Declaration.Name))
+                        if (schema.Discriminator != null)
                         {
                             writer.Line($"{schema.Discriminator.Property} = {schema.Discriminator.Value:L};");
                         }
                     }
 
+                    WriteConstructor(writer, schema);
+
                     foreach (var property in schema.Properties)
                     {
-                        if (property.DeclarationOptions.IsUserDefined)
+                        if (property.Declaration.IsUserDefined)
                         {
                             continue;
                         }
 
                         writer.WriteXmlDocumentationSummary(property.Description);
 
-                        CSharpType propertyType = property.DeclarationOptions.Type;
-                        writer.Append($"{property.DeclarationOptions.Accessibility} {propertyType} {property.DeclarationOptions.Name:D}");
+                        CSharpType propertyType = property.Declaration.Type;
+                        writer.Append($"{property.Declaration.Accessibility} {propertyType} {property.Declaration.Name:D}");
                         writer.AppendRaw(property.IsReadOnly ? "{ get; internal set; }" : "{ get; set; }");
 
                         if (property.DefaultValue != null)
@@ -145,6 +150,63 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                                 .Line($"set => _additionalProperties[key] = value;");
                         }
                     }
+                }
+            }
+        }
+
+        private static void WriteConstructor(CodeWriter writer, ObjectType schema)
+        {
+            if (!schema.Properties.Any()) return;
+
+            var ownPropertyMap = new List<(ObjectTypeProperty, string)>();
+            var basePropertyMap = new List<(ObjectTypeProperty, string)>();
+
+            foreach (var property in schema.Properties)
+            {
+                ownPropertyMap.Add((
+                    property,
+                    property.Declaration.Name.ToVariableName()));
+            }
+
+            var baseType = schema.Inherits;
+
+            while (baseType?.Implementation is ObjectType objectType)
+            {
+                foreach (var baseTypeProperty in objectType.Properties)
+                {
+                    basePropertyMap.Add((
+                        baseTypeProperty,
+                        baseTypeProperty.Declaration.Name.ToVariableName()));
+                }
+
+                baseType = objectType.Inherits;
+            }
+
+            writer.WriteXmlDocumentationSummary($"Initializes a new instance of {schema.Declaration.Name}");
+            writer.Append($"internal {schema.Type.Name}(");
+            foreach ((ObjectTypeProperty property, string parameter) in ownPropertyMap.Concat(basePropertyMap))
+            {
+                writer.Append($"{property.Declaration.Type} {parameter},");
+            }
+            writer.RemoveTrailingComma();
+            writer.Append($")");
+
+            if (basePropertyMap.Any())
+            {
+                writer.Append($": base(");
+                foreach ((_, string parameter) in basePropertyMap)
+                {
+                    writer.Append($"{parameter},");
+                }
+                writer.RemoveTrailingComma();
+                writer.Append($")");
+            }
+
+            using (writer.Scope())
+            {
+                foreach ((ObjectTypeProperty property, string parameter) in ownPropertyMap)
+                {
+                    writer.Line($"{property.Declaration.Name} = {parameter};");
                 }
             }
         }

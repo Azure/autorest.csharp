@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace body_complex.Models
 {
@@ -16,6 +17,12 @@ namespace body_complex.Models
         public Shark()
         {
             Fishtype = "shark";
+        }
+        /// <summary> Initializes a new instance of Shark. </summary>
+        internal Shark(int? age, DateTimeOffset birthday, string fishtype, string species, float length, ICollection<Fish> siblings) : base(fishtype, species, length, siblings)
+        {
+            Age = age;
+            Birthday = birthday;
         }
         public int? Age { get; set; }
         public DateTimeOffset Birthday { get; set; }

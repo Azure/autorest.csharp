@@ -15,6 +15,12 @@ namespace body_complex.Models
         {
             FishType = null;
         }
+        /// <summary> Initializes a new instance of DotFish. </summary>
+        internal DotFish(string fishType, string species)
+        {
+            FishType = fishType;
+            Species = species;
+        }
         public string FishType { get; internal set; }
         public string Species { get; set; }
     }

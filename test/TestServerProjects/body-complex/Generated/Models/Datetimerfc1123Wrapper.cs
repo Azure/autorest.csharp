@@ -12,6 +12,16 @@ namespace body_complex.Models
     /// <summary> The Datetimerfc1123Wrapper. </summary>
     public partial class Datetimerfc1123Wrapper
     {
+        /// <summary> Initializes a new instance of Datetimerfc1123Wrapper. </summary>
+        public Datetimerfc1123Wrapper()
+        {
+        }
+        /// <summary> Initializes a new instance of Datetimerfc1123Wrapper. </summary>
+        internal Datetimerfc1123Wrapper(DateTimeOffset? field, DateTimeOffset? now)
+        {
+            Field = field;
+            Now = now;
+        }
         public DateTimeOffset? Field { get; set; }
         public DateTimeOffset? Now { get; set; }
     }

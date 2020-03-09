@@ -10,6 +10,15 @@ namespace body_complex.Models
     /// <summary> The MyBaseHelperType. </summary>
     public partial class MyBaseHelperType
     {
+        /// <summary> Initializes a new instance of MyBaseHelperType. </summary>
+        public MyBaseHelperType()
+        {
+        }
+        /// <summary> Initializes a new instance of MyBaseHelperType. </summary>
+        internal MyBaseHelperType(string propBH1)
+        {
+            PropBH1 = propBH1;
+        }
         public string PropBH1 { get; set; }
     }
 }

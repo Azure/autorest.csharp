@@ -12,6 +12,18 @@ namespace body_complex.Models
     /// <summary> The DotFishMarket. </summary>
     public partial class DotFishMarket
     {
+        /// <summary> Initializes a new instance of DotFishMarket. </summary>
+        public DotFishMarket()
+        {
+        }
+        /// <summary> Initializes a new instance of DotFishMarket. </summary>
+        internal DotFishMarket(DotSalmon sampleSalmon, ICollection<DotSalmon> salmons, DotFish sampleFish, ICollection<DotFish> fishes)
+        {
+            SampleSalmon = sampleSalmon;
+            Salmons = salmons;
+            SampleFish = sampleFish;
+            Fishes = fishes;
+        }
         public DotSalmon SampleSalmon { get; set; }
         public ICollection<DotSalmon> Salmons { get; set; }
         public DotFish SampleFish { get; set; }
