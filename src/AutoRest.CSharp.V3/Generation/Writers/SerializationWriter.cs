@@ -156,7 +156,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     {
                         foreach (EnumTypeValue value in schema.Values)
                         {
-                            writer.Line($"{declaredTypeName}.{value.Name} => {value.Value.Value:L},");
+                            writer.Line($"{declaredTypeName}.{value.Declaration.Name} => {value.Value.Value:L},");
                         }
 
                         writer.Line($"_ => throw new {typeof(ArgumentOutOfRangeException)}(nameof(value), value, \"Unknown {declaredTypeName} value.\")");
@@ -167,7 +167,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     {
                         foreach (EnumTypeValue value in schema.Values)
                         {
-                            writer.Line($"{value.Value.Value:L} => {declaredTypeName}.{value.Name},");
+                            writer.Line($"{value.Value.Value:L} => {declaredTypeName}.{value.Declaration.Name},");
                         }
 
                         writer.Line($"_ => throw new {typeof(ArgumentOutOfRangeException)}(nameof(value), value, \"Unknown {declaredTypeName} value.\")");

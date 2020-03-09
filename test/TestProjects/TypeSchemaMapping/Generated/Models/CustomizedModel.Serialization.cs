@@ -6,9 +6,8 @@
 #nullable disable
 
 using System.Text.Json;
-using AnotherCustomNamespace;
 using Azure.Core;
-using TypeSchemaMapping.Models;
+using NamespaceForEnums;
 
 namespace CustomNamespace
 {
@@ -23,7 +22,7 @@ namespace CustomNamespace
                 writer.WriteStringValue(CustomizedStringProperty);
             }
             writer.WritePropertyName("Fruit");
-            writer.WriteStringValue(CustomizedFancyField.ToString());
+            writer.WriteStringValue(CustomizedFancyField.ToSerialString());
             writer.WritePropertyName("DaysOfWeek");
             writer.WriteStringValue(DaysOfWeek.ToString());
             writer.WriteEndObject();
@@ -44,12 +43,12 @@ namespace CustomNamespace
                 }
                 if (property.NameEquals("Fruit"))
                 {
-                    result.CustomizedFancyField = new CustomFruitEnum(property.Value.GetString());
+                    result.CustomizedFancyField = property.Value.GetString().ToCustomFruitEnum();
                     continue;
                 }
                 if (property.NameEquals("DaysOfWeek"))
                 {
-                    result.DaysOfWeek = new DaysOfWeek(property.Value.GetString());
+                    result.DaysOfWeek = new CustomDaysOfWeek(property.Value.GetString());
                     continue;
                 }
             }
