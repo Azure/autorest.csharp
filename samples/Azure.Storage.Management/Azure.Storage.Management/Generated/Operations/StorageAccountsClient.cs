@@ -286,8 +286,7 @@ namespace Azure.Storage.Management
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value = StorageAccount.DeserializeStorageAccount(document.RootElement);
                 return value;
-            }
-            );
+            });
         }
         /// <summary> Asynchronously creates a new storage account with the specified parameters. If an account is already created and a subsequent create request is issued with different properties, the account properties will be updated. If an account is already created and a subsequent create or update request is issued with the exact same set of properties, the request will succeed. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
@@ -413,8 +412,7 @@ namespace Azure.Storage.Management
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value = BlobRestoreStatus.DeserializeBlobRestoreStatus(document.RootElement);
                 return value;
-            }
-            );
+            });
         }
         /// <summary> Restore blobs in the specified blob ranges. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>

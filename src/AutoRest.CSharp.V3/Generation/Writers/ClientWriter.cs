@@ -289,7 +289,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         }
                     }
 
-                    using (writer.Scope($"async (response, cancellationToken) =>"))
+                    using (writer.Scope($"async (response, cancellationToken) =>", newLine: false))
                     {
                         switch (serialization)
                         {

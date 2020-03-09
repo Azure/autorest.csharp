@@ -222,8 +222,7 @@ namespace Azure.Network.Management.Interface
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value = NetworkInterface.DeserializeNetworkInterface(document.RootElement);
                 return value;
-            }
-            );
+            });
         }
         /// <summary> Creates or updates a network interface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -297,8 +296,7 @@ namespace Azure.Network.Management.Interface
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value = EffectiveRouteListResult.DeserializeEffectiveRouteListResult(document.RootElement);
                 return value;
-            }
-            );
+            });
         }
         /// <summary> Gets all route tables applied to a network interface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -362,8 +360,7 @@ namespace Azure.Network.Management.Interface
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                 var value = EffectiveNetworkSecurityGroupListResult.DeserializeEffectiveNetworkSecurityGroupListResult(document.RootElement);
                 return value;
-            }
-            );
+            });
         }
         /// <summary> Gets all network security groups applied to a network interface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
