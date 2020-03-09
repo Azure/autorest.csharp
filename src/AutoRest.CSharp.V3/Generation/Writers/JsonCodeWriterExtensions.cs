@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     {
                         CSharpType? serializationType = property.ValueSerialization.Type;
                         bool hasNullableType = serializationType != null && serializationType.IsNullable;
-                        using (hasNullableType ? writer.If($"{property.MemberName} != null") : default)
+                        using (hasNullableType ? writer.Scope($"if ({property.MemberName} != null)") : default)
                         {
                             writer.Line($"{writerName}.WritePropertyName({property.Name:L});");
                             writer.ToSerializeCall(
@@ -249,7 +249,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
             void WriteNullCheck()
             {
-                using (writer.If($"{itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.Null"))
+                using (writer.Scope($"if ({itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.Null)"))
                 {
                     writer.Append($"continue;");
                 }
