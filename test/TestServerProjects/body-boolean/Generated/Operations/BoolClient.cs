@@ -26,7 +26,7 @@ namespace body_boolean
         }
         /// <summary> Get true Boolean value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<bool>> GetTrueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> GetTrueAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetTrueAsync(cancellationToken).ConfigureAwait(false);
         }
@@ -38,7 +38,7 @@ namespace body_boolean
         }
         /// <summary> Set Boolean value true. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> PutTrueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutTrueAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.PutTrueAsync(cancellationToken).ConfigureAwait(false);
         }
@@ -50,7 +50,7 @@ namespace body_boolean
         }
         /// <summary> Get false Boolean value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<bool>> GetFalseAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> GetFalseAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetFalseAsync(cancellationToken).ConfigureAwait(false);
         }
@@ -62,7 +62,7 @@ namespace body_boolean
         }
         /// <summary> Set Boolean value false. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> PutFalseAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutFalseAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.PutFalseAsync(cancellationToken).ConfigureAwait(false);
         }
@@ -74,7 +74,7 @@ namespace body_boolean
         }
         /// <summary> Get null Boolean value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<bool>> GetNullAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> GetNullAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetNullAsync(cancellationToken).ConfigureAwait(false);
         }
@@ -86,7 +86,7 @@ namespace body_boolean
         }
         /// <summary> Get invalid Boolean value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<bool>> GetInvalidAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetInvalidAsync(cancellationToken).ConfigureAwait(false);
         }

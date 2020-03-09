@@ -28,7 +28,7 @@ namespace additionalProperties
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The PetAPTrue to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<PetAPTrue>> CreateAPTrueAsync(PetAPTrue createParameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<PetAPTrue>> CreateAPTrueAsync(PetAPTrue createParameters, CancellationToken cancellationToken = default)
         {
             return await RestClient.CreateAPTrueAsync(createParameters, cancellationToken).ConfigureAwait(false);
         }
@@ -42,7 +42,7 @@ namespace additionalProperties
         /// <summary> Create a CatAPTrue which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The CatAPTrue to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<CatAPTrue>> CreateCatAPTrueAsync(CatAPTrue createParameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<CatAPTrue>> CreateCatAPTrueAsync(CatAPTrue createParameters, CancellationToken cancellationToken = default)
         {
             return await RestClient.CreateCatAPTrueAsync(createParameters, cancellationToken).ConfigureAwait(false);
         }
@@ -56,7 +56,7 @@ namespace additionalProperties
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The PetAPObject to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<PetAPObject>> CreateAPObjectAsync(PetAPObject createParameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<PetAPObject>> CreateAPObjectAsync(PetAPObject createParameters, CancellationToken cancellationToken = default)
         {
             return await RestClient.CreateAPObjectAsync(createParameters, cancellationToken).ConfigureAwait(false);
         }
@@ -70,7 +70,7 @@ namespace additionalProperties
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The PetAPString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<PetAPString>> CreateAPStringAsync(PetAPString createParameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<PetAPString>> CreateAPStringAsync(PetAPString createParameters, CancellationToken cancellationToken = default)
         {
             return await RestClient.CreateAPStringAsync(createParameters, cancellationToken).ConfigureAwait(false);
         }
@@ -84,7 +84,7 @@ namespace additionalProperties
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The PetAPInProperties to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<PetAPInProperties>> CreateAPInPropertiesAsync(PetAPInProperties createParameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<PetAPInProperties>> CreateAPInPropertiesAsync(PetAPInProperties createParameters, CancellationToken cancellationToken = default)
         {
             return await RestClient.CreateAPInPropertiesAsync(createParameters, cancellationToken).ConfigureAwait(false);
         }
@@ -98,7 +98,7 @@ namespace additionalProperties
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The PetAPInPropertiesWithAPString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<PetAPInPropertiesWithAPString>> CreateAPInPropertiesWithAPStringAsync(PetAPInPropertiesWithAPString createParameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<PetAPInPropertiesWithAPString>> CreateAPInPropertiesWithAPStringAsync(PetAPInPropertiesWithAPString createParameters, CancellationToken cancellationToken = default)
         {
             return await RestClient.CreateAPInPropertiesWithAPStringAsync(createParameters, cancellationToken).ConfigureAwait(false);
         }

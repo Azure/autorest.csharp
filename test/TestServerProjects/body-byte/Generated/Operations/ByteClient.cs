@@ -27,7 +27,7 @@ namespace body_byte
         }
         /// <summary> Get null byte value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<byte[]>> GetNullAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<byte[]>> GetNullAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetNullAsync(cancellationToken).ConfigureAwait(false);
         }
@@ -39,7 +39,7 @@ namespace body_byte
         }
         /// <summary> Get empty byte value &apos;&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<byte[]>> GetEmptyAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<byte[]>> GetEmptyAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetEmptyAsync(cancellationToken).ConfigureAwait(false);
         }
@@ -51,7 +51,7 @@ namespace body_byte
         }
         /// <summary> Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6). </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<byte[]>> GetNonAsciiAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<byte[]>> GetNonAsciiAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetNonAsciiAsync(cancellationToken).ConfigureAwait(false);
         }
@@ -64,7 +64,7 @@ namespace body_byte
         /// <summary> Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6). </summary>
         /// <param name="byteBody"> Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> PutNonAsciiAsync(byte[] byteBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutNonAsciiAsync(byte[] byteBody, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutNonAsciiAsync(byteBody, cancellationToken).ConfigureAwait(false);
         }
@@ -77,7 +77,7 @@ namespace body_byte
         }
         /// <summary> Get invalid byte value &apos;:::SWAGGER::::&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<byte[]>> GetInvalidAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<byte[]>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetInvalidAsync(cancellationToken).ConfigureAwait(false);
         }
