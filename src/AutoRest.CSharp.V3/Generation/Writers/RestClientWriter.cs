@@ -136,31 +136,31 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     WriteHeader(writer, header);
                 }
 
-                if (operation.Request.Body is RequestBody body && body.Serialization is JsonSerialization jsonSerialization)
+                if (operation.Request.Body is RequestBody body)
                 {
-                    writer.Line($"using var content = new {typeof(Utf8JsonRequestContent)}();");
-
                     ParameterOrConstant value = body.Value;
-
-                    writer.ToSerializeCall(
-                        jsonSerialization,
-                        WriteConstantOrParameter(value, ignoreNullability: true),
-                        writerName: w => w.Append($"content.{nameof(Utf8JsonRequestContent.JsonWriter)}"));
-
-                    writer.Line($"request.Content = content;");
-                }
-                else if (operation.Request.Body is RequestBody xmlBody && xmlBody.Serialization is XmlElementSerialization xmlSerialization)
-                {
-                    writer.Line($"using var content = new {typeof(XmlWriterContent)}();");
-
-                    ParameterOrConstant value = xmlBody.Value;
-
-                    writer.ToSerializeCall(
-                        xmlSerialization,
-                        WriteConstantOrParameter(value, ignoreNullability: true),
-                        writerName: w => w.Append($"content.{nameof(XmlWriterContent.XmlWriter)}"));
-
-                    writer.Line($"request.Content = content;");
+                    switch (body.Serialization)
+                    {
+                        case JsonSerialization jsonSerialization:
+                            writer.Line($"using var content = new {typeof(Utf8JsonRequestContent)}();");
+                            writer.ToSerializeCall(
+                                jsonSerialization,
+                                WriteConstantOrParameter(value, ignoreNullability: true),
+                                writerName: w => w.Append($"content.{nameof(Utf8JsonRequestContent.JsonWriter)}"));
+                            writer.Line($"request.Content = content;");
+                            break;
+                        case XmlElementSerialization xmlSerialization:
+                            writer.Line($"using var content = new {typeof(XmlWriterContent)}();");
+                            writer.ToSerializeCall(
+                                xmlSerialization,
+                                WriteConstantOrParameter(value, ignoreNullability: true),
+                                writerName: w => w.Append($"content.{nameof(XmlWriterContent.XmlWriter)}"));
+                            writer.Line($"request.Content = content;");
+                            break;
+                        case BinarySerialization _:
+                            writer.Line($"request.Content = {typeof(RequestContent)}.Create({WriteConstantOrParameter(value, ignoreNullability: true)});");
+                            break;
+                    }
                 }
 
                 writer.Line($"return message;");
@@ -418,39 +418,18 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     if (responseBody is ObjectResponseBody objectResponseBody)
                     {
-                        const string document = "document";
                         switch (objectResponseBody.Serialization)
                         {
                             case JsonSerialization jsonSerialization:
-                                writer.Append($"using var {document:D} = ");
-                                if (async)
-                                {
-                                    writer.Line($"await {typeof(JsonDocument)}.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);");
-                                }
-                                else
-                                {
-                                    writer.Line($"{typeof(JsonDocument)}.Parse(message.Response.ContentStream);");
-                                }
-
-                                writer.ToDeserializeCall(
-                                    jsonSerialization,
-                                    w => w.Append($"document.RootElement"),
-                                    ref valueVariable
-                                );
+                                writer.WriteMethodDeserialization(jsonSerialization, async, ref valueVariable);
                                 break;
                             case XmlElementSerialization xmlSerialization:
-                                writer.Line($"var {document:D} = {typeof(XDocument)}.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);");
-                                writer.ToDeserializeCall(
-                                    xmlSerialization,
-                                    w => w.Append($"document"),
-                                    ref valueVariable
-                                );
+                                writer.WriteMethodDeserialization(xmlSerialization, ref valueVariable);
+                                break;
+                            case BinarySerialization _:
+                                writer.WriteMethodDeserialization(async, ref valueVariable);
                                 break;
                         }
-                    }
-                    else if (responseBody is StreamResponseBody _)
-                    {
-                        writer.Line($"var {valueVariable:D} = message.ExtractResponseContent();");
                     }
 
                     if (headersModelType != null)

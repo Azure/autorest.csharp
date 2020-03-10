@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -31,17 +32,19 @@ namespace media_types
         }
         /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="contentType"> Upload file type. </param>
+        /// <param name="input"> Input parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<string>> AnalyzeBodyAsync(ContentType? contentType, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<string>> AnalyzeBodyAsync(ContentType? contentType, Stream input, CancellationToken cancellationToken = default)
         {
-            return await RestClient.AnalyzeBodyAsync(contentType, cancellationToken).ConfigureAwait(false);
+            return await RestClient.AnalyzeBodyAsync(contentType, input, cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="contentType"> Upload file type. </param>
+        /// <param name="input"> Input parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<string> AnalyzeBody(ContentType? contentType, CancellationToken cancellationToken = default)
+        public virtual Response<string> AnalyzeBody(ContentType? contentType, Stream input, CancellationToken cancellationToken = default)
         {
-            return RestClient.AnalyzeBody(contentType, cancellationToken);
+            return RestClient.AnalyzeBody(contentType, input, cancellationToken);
         }
         /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="input"> Input parameter. </param>

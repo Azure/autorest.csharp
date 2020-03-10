@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.IO;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -33,7 +34,7 @@ namespace media_types
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
-        internal HttpMessage CreateAnalyzeBodyRequest(ContentType? contentType)
+        internal HttpMessage CreateAnalyzeBodyRequest(ContentType? contentType, Stream input)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -46,18 +47,20 @@ namespace media_types
             request.Headers.Add("Content-Type", "image/jpeg");
             request.Headers.Add("Content-Type", "image/png");
             request.Headers.Add("Content-Type", "image/tiff");
+            request.Content = RequestContent.Create(input);
             return message;
         }
         /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="contentType"> Upload file type. </param>
+        /// <param name="input"> Input parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<string>> AnalyzeBodyAsync(ContentType? contentType, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<string>> AnalyzeBodyAsync(ContentType? contentType, Stream input, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.AnalyzeBody");
             scope.Start();
             try
             {
-                using var message = CreateAnalyzeBodyRequest(contentType);
+                using var message = CreateAnalyzeBodyRequest(contentType, input);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -79,14 +82,15 @@ namespace media_types
         }
         /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="contentType"> Upload file type. </param>
+        /// <param name="input"> Input parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<string> AnalyzeBody(ContentType? contentType, CancellationToken cancellationToken = default)
+        public Response<string> AnalyzeBody(ContentType? contentType, Stream input, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.AnalyzeBody");
             scope.Start();
             try
             {
-                using var message = CreateAnalyzeBodyRequest(contentType);
+                using var message = CreateAnalyzeBodyRequest(contentType, input);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {

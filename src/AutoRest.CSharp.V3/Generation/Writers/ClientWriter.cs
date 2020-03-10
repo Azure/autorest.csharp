@@ -259,34 +259,24 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 {
                     writer.Line($", ");
                     string valueVariable = "value";
-                    const string document = "document";
                     ObjectSerialization? serialization = (lroMethod.OriginalResponse.ResponseBody as ObjectResponseBody)?.Serialization;
                     using (writer.Scope($"(response, cancellationToken) =>", "{", "},"))
                     {
                         switch (serialization)
                         {
                             case JsonSerialization jsonSerialization:
-                                writer.Append($"using var {document:D} = ");
-                                writer.Line($"{typeof(JsonDocument)}.Parse(response.ContentStream);");
-                                writer.ToDeserializeCall(
-                                    jsonSerialization,
-                                    w => w.Append($"document.RootElement"),
-                                    ref valueVariable
-                                );
-                                writer.Line($"return {valueVariable};");
+                                writer.WriteMethodDeserialization(jsonSerialization, async: false, ref valueVariable);
                                 break;
                             case XmlElementSerialization xmlSerialization:
-                                writer.Line($"var {document:D} = {typeof(XDocument)}.Load(response.ContentStream, LoadOptions.PreserveWhitespace);");
-                                writer.ToDeserializeCall(
-                                    xmlSerialization,
-                                    w => w.Append($"document"),
-                                    ref valueVariable
-                                );
-                                writer.Line($"return {valueVariable};");
+                                writer.WriteMethodDeserialization(xmlSerialization, ref valueVariable);
+                                break;
+                            case BinarySerialization _:
+                                writer.WriteMethodDeserialization(async: false, ref valueVariable);
                                 break;
                             default:
                                 throw new NotSupportedException();
                         }
+                        writer.Line($"return {valueVariable};");
                     }
 
                     using (writer.Scope($"async (response, cancellationToken) =>", newLine: false))
@@ -294,27 +284,18 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         switch (serialization)
                         {
                             case JsonSerialization jsonSerialization:
-                                writer.Append($"using var {document:D} = ");
-                                writer.Line($"await {typeof(JsonDocument)}.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);");
-                                writer.ToDeserializeCall(
-                                    jsonSerialization,
-                                    w => w.Append($"document.RootElement"),
-                                    ref valueVariable
-                                );
-                                writer.Line($"return {valueVariable};");
+                                writer.WriteMethodDeserialization(jsonSerialization, async: true, ref valueVariable);
                                 break;
                             case XmlElementSerialization xmlSerialization:
-                                writer.Line($"var {document:D} = {typeof(XDocument)}.Load(response.ContentStream, LoadOptions.PreserveWhitespace);");
-                                writer.ToDeserializeCall(
-                                    xmlSerialization,
-                                    w => w.Append($"document"),
-                                    ref valueVariable
-                                );
-                                writer.Line($"return {valueVariable};");
+                                writer.WriteMethodDeserialization(xmlSerialization, ref valueVariable);
+                                break;
+                            case BinarySerialization _:
+                                writer.WriteMethodDeserialization(async: true, ref valueVariable);
                                 break;
                             default:
                                 throw new NotSupportedException();
                         }
+                        writer.Line($"return {valueVariable};");
                     }
                 }
 

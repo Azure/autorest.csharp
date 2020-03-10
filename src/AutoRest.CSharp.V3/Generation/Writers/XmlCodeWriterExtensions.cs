@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Xml.Linq;
 using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.V3.Output.Models.Types;
@@ -374,6 +375,17 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 default:
                     throw new NotSupportedException();
             }
+        }
+
+        public static void WriteMethodDeserialization(this CodeWriter writer, XmlElementSerialization serialization,
+            ref string destination, string document = "document")
+        {
+            writer.Line($"var {document:D} = {typeof(XDocument)}.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);");
+            writer.ToDeserializeCall(
+                serialization,
+                w => w.Append($"{document:D}"),
+                ref destination
+            );
         }
     }
 }
