@@ -18,6 +18,10 @@ namespace Azure.Storage.Management
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal FileServicesRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of FileServicesClient for mocking. </summary>
+        protected FileServicesClient()
+        {
+        }
         /// <summary> Initializes a new instance of FileServicesClient. </summary>
         internal FileServicesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string ApiVersion = "2019-06-01")
         {

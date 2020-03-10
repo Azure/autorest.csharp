@@ -19,6 +19,10 @@ namespace CognitiveSearch
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal SkillsetsRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of SkillsetsClient for mocking. </summary>
+        protected SkillsetsClient()
+        {
+        }
         /// <summary> Initializes a new instance of SkillsetsClient. </summary>
         internal SkillsetsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string searchServiceName, string searchDnsSuffix = "search.windows.net", string ApiVersion = "2019-05-06")
         {

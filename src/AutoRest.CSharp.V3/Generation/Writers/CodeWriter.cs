@@ -22,12 +22,12 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         public CodeWriter()
         {
             _scopes = new Stack<CodeWriterScope>();
-            _scopes.Push(new CodeWriterScope(this, ""));
+            _scopes.Push(new CodeWriterScope(this, "", false));
         }
 
-        public CodeWriterScope Scope(FormattableString line, string start = "{", string end = "}")
+        public CodeWriterScope Scope(FormattableString line, string start = "{", string end = "}", bool newLine = true)
         {
-            return Line(line).ScopeRaw(start, end);
+            return Line(line).ScopeRaw(start, end, newLine);
         }
 
         public CodeWriterScope Scope()
@@ -35,10 +35,10 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             return ScopeRaw();
         }
 
-        public CodeWriterScope ScopeRaw(string start = "{", string end = "}")
+        private CodeWriterScope ScopeRaw(string start = "{", string end = "}", bool newLine = true)
         {
             LineRaw(start);
-            CodeWriterScope codeWriterScope = new CodeWriterScope(this, end);
+            CodeWriterScope codeWriterScope = new CodeWriterScope(this, end, newLine);
             _scopes.Push(codeWriterScope);
             return codeWriterScope;
         }
@@ -347,19 +347,26 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         {
             private readonly CodeWriter _writer;
             private readonly string _end;
+            private readonly bool _newLine;
 
             public List<string> Identifiers { get; } = new List<string>();
 
-            public CodeWriterScope(CodeWriter writer, string end)
+            public CodeWriterScope(CodeWriter writer, string end, bool newLine)
             {
                 _writer = writer;
                 _end = end;
+                _newLine = newLine;
             }
 
             public void Dispose()
             {
                 _writer.PopScope(this);
-                _writer?.LineRaw(_end);
+                _writer?.AppendRaw(_end);
+
+                if (_newLine)
+                {
+                    _writer?.LineRaw();
+                }
             }
         }
 

@@ -17,6 +17,10 @@ namespace httpInfrastructure
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal HttpFailureRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of HttpFailureClient for mocking. </summary>
+        protected HttpFailureClient()
+        {
+        }
         /// <summary> Initializes a new instance of HttpFailureClient. </summary>
         internal HttpFailureClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {

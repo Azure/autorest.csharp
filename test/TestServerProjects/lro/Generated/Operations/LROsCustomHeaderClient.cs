@@ -21,6 +21,10 @@ namespace lro
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal LROsCustomHeaderRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of LROsCustomHeaderClient for mocking. </summary>
+        protected LROsCustomHeaderClient()
+        {
+        }
         /// <summary> Initializes a new instance of LROsCustomHeaderClient. </summary>
         internal LROsCustomHeaderClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
@@ -130,16 +134,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LROsCustomHeaderClient.Post202Retry200", OperationFinalStateVia.Location, createOriginalHttpMessage,
-            (response, cancellationToken) =>
-            {
-                return response;
-            },
-            async (response, cancellationToken) =>
-            {
-                await Task.CompletedTask;
-                return response;
-            });
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LROsCustomHeaderClient.Post202Retry200", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
         /// <summary> x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; and &apos;Retry-After&apos; headers, Polls return a 200 with a response body after success. </summary>
         /// <param name="product"> Product to put. </param>
@@ -171,16 +166,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LROsCustomHeaderClient.PostAsyncRetrySucceeded", OperationFinalStateVia.Location, createOriginalHttpMessage,
-            (response, cancellationToken) =>
-            {
-                return response;
-            },
-            async (response, cancellationToken) =>
-            {
-                await Task.CompletedTask;
-                return response;
-            });
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LROsCustomHeaderClient.PostAsyncRetrySucceeded", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
         /// <summary> x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>

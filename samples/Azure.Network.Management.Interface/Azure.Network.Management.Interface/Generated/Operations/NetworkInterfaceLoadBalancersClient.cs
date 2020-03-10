@@ -20,6 +20,10 @@ namespace Azure.Network.Management.Interface
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal NetworkInterfaceLoadBalancersRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of NetworkInterfaceLoadBalancersClient for mocking. </summary>
+        protected NetworkInterfaceLoadBalancersClient()
+        {
+        }
         /// <summary> Initializes a new instance of NetworkInterfaceLoadBalancersClient. </summary>
         internal NetworkInterfaceLoadBalancersClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string ApiVersion = "2019-11-01")
         {

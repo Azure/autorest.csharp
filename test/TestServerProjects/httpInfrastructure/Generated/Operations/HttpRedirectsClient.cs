@@ -17,6 +17,10 @@ namespace httpInfrastructure
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal HttpRedirectsRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of HttpRedirectsClient for mocking. </summary>
+        protected HttpRedirectsClient()
+        {
+        }
         /// <summary> Initializes a new instance of HttpRedirectsClient. </summary>
         internal HttpRedirectsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {

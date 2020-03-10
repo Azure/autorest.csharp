@@ -17,6 +17,10 @@ namespace url
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal PathItemsRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of PathItemsClient for mocking. </summary>
+        protected PathItemsClient()
+        {
+        }
         /// <summary> Initializes a new instance of PathItemsClient. </summary>
         internal PathItemsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string globalStringPath, string globalStringQuery, string host = "http://localhost:3000")
         {

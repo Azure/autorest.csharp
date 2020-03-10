@@ -18,6 +18,10 @@ namespace Azure.Storage.Management
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal ManagementPoliciesRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of ManagementPoliciesClient for mocking. </summary>
+        protected ManagementPoliciesClient()
+        {
+        }
         /// <summary> Initializes a new instance of ManagementPoliciesClient. </summary>
         internal ManagementPoliciesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string ApiVersion = "2019-06-01")
         {

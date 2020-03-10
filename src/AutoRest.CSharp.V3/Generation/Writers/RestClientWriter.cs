@@ -45,7 +45,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         WriteOperation(writer, method, true);
                         WriteOperation(writer, method, false);
                     }
-
                 }
             }
         }

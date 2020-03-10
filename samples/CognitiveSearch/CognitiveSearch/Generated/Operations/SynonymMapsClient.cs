@@ -19,6 +19,10 @@ namespace CognitiveSearch
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal SynonymMapsRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of SynonymMapsClient for mocking. </summary>
+        protected SynonymMapsClient()
+        {
+        }
         /// <summary> Initializes a new instance of SynonymMapsClient. </summary>
         internal SynonymMapsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string searchServiceName, string searchDnsSuffix = "search.windows.net", string ApiVersion = "2019-05-06")
         {

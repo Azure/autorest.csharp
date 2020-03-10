@@ -1,0 +1,228 @@
+!<!CodeModel> 
+info: !<!Info> 
+  description: Play with produces/consumes and media-types in general.
+  title: media_types
+schemas: !<!Schemas> 
+  strings:
+  - !<!StringSchema> &ref_1
+    type: string
+    language: !<!Languages> 
+      default:
+        name: String
+        description: simple string
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_0
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 2.0-preview
+    maxLength: 2048
+    language: !<!Languages> 
+      default:
+        name: SourcePathSource
+        description: File source path.
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_9
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 2.0-preview
+    language: !<!Languages> 
+      default:
+        name: String
+        description: ''
+    protocol: !<!Protocols> {}
+  sealedChoices:
+  - !<!SealedChoiceSchema> &ref_3
+    choices:
+    - !<!ChoiceValue> 
+      value: application/pdf
+      language:
+        default:
+          name: ApplicationPdf
+          description: Content Type 'application/pdf'
+    - !<!ChoiceValue> 
+      value: image/jpeg
+      language:
+        default:
+          name: ImageJpeg
+          description: Content Type 'image/jpeg'
+    - !<!ChoiceValue> 
+      value: image/png
+      language:
+        default:
+          name: ImagePng
+          description: Content Type 'image/png'
+    - !<!ChoiceValue> 
+      value: image/tiff
+      language:
+        default:
+          name: ImageTiff
+          description: Content Type 'image/tiff'
+    type: sealed-choice
+    language: !<!Languages> 
+      default:
+        name: ContentType
+        description: Content type for upload
+    protocol: !<!Protocols> {}
+  binaries:
+  - !<!BinarySchema> &ref_4
+    type: binary
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 2.0-preview
+    language: !<!Languages> 
+      default:
+        name: binary
+        description: Uri or local path to source data.
+    protocol: !<!Protocols> {}
+  objects:
+  - !<!ObjectSchema> &ref_7
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 2.0-preview
+    properties:
+    - !<!Property> 
+      schema: *ref_0
+      serializedName: source
+      language: !<!Languages> 
+        default:
+          name: source
+          description: File source path.
+      protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - input
+    language: !<!Languages> 
+      default:
+        name: SourcePath
+        description: Uri or local path to source data.
+        namespace: ''
+    protocol: !<!Protocols> {}
+globalParameters:
+- !<!Parameter> &ref_2
+  schema: *ref_1
+  clientDefaultValue: 'http://localhost:3000'
+  implementation: Client
+  required: true
+  extensions:
+    x-ms-skip-url-encoding: true
+  language: !<!Languages> 
+    default:
+      name: $host
+      description: server parameter
+      serializedName: $host
+  protocol: !<!Protocols> 
+    http: !<!HttpParameter> 
+      in: uri
+operationGroups:
+- !<!OperationGroup> 
+  $key: ''
+  operations:
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 2.0-preview
+    parameters:
+    - *ref_2
+    requests:
+    - !<!Request> 
+      parameters:
+      - !<!Parameter> &ref_5
+        schema: *ref_3
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Upload file type
+        protocol: !<!Protocols> {}
+      - !<!Parameter> &ref_6
+        schema: *ref_4
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: input
+            description: Input parameter.
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: binary
+      signatureParameters:
+      - *ref_5
+      - *ref_6
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /mediatypes/analyze
+          method: post
+          binary: true
+          knownMediaType: binary
+          mediaTypes:
+          - application/pdf
+          - image/jpeg
+          - image/png
+          - image/tiff
+          uri: '{$host}'
+    - !<!Request> 
+      parameters:
+      - !<!Parameter> &ref_8
+        schema: *ref_7
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: input
+            description: Input parameter.
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      signatureParameters:
+      - *ref_8
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /mediatypes/analyze
+          method: post
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    signatureParameters: []
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_9
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    language: !<!Languages> 
+      default:
+        name: AnalyzeBody
+        description: 'Analyze body, that could be different media types.'
+    protocol: !<!Protocols> {}
+  language: !<!Languages> 
+    default:
+      name: ''
+      description: ''
+  protocol: !<!Protocols> {}
+language: !<!Languages> 
+  default:
+    name: MediaTypes
+    description: ''
+protocol: !<!Protocols> 
+  http: !<!HttpModel> {}

@@ -18,6 +18,10 @@ namespace body_string
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal StringRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of StringClient for mocking. </summary>
+        protected StringClient()
+        {
+        }
         /// <summary> Initializes a new instance of StringClient. </summary>
         internal StringClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {

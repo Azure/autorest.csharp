@@ -21,6 +21,10 @@ namespace lro
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal LROsRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of LROsClient for mocking. </summary>
+        protected LROsClient()
+        {
+        }
         /// <summary> Initializes a new instance of LROsClient. </summary>
         internal LROsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
@@ -916,16 +920,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LROsClient.Delete204Succeeded", OperationFinalStateVia.Location, createOriginalHttpMessage,
-            (response, cancellationToken) =>
-            {
-                return response;
-            },
-            async (response, cancellationToken) =>
-            {
-                await Task.CompletedTask;
-                return response;
-            });
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LROsClient.Delete204Succeeded", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
         /// <summary> Long running delete succeeds and returns right away. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1039,16 +1034,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LROsClient.DeleteNoHeaderInRetry", OperationFinalStateVia.Location, createOriginalHttpMessage,
-            (response, cancellationToken) =>
-            {
-                return response;
-            },
-            async (response, cancellationToken) =>
-            {
-                await Task.CompletedTask;
-                return response;
-            });
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LROsClient.DeleteNoHeaderInRetry", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
         /// <summary> Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1078,16 +1064,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LROsClient.DeleteAsyncNoHeaderInRetry", OperationFinalStateVia.Location, createOriginalHttpMessage,
-            (response, cancellationToken) =>
-            {
-                return response;
-            },
-            async (response, cancellationToken) =>
-            {
-                await Task.CompletedTask;
-                return response;
-            });
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LROsClient.DeleteAsyncNoHeaderInRetry", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
         /// <summary> Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1117,16 +1094,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LROsClient.DeleteAsyncRetrySucceeded", OperationFinalStateVia.Location, createOriginalHttpMessage,
-            (response, cancellationToken) =>
-            {
-                return response;
-            },
-            async (response, cancellationToken) =>
-            {
-                await Task.CompletedTask;
-                return response;
-            });
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LROsClient.DeleteAsyncRetrySucceeded", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1156,16 +1124,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LROsClient.DeleteAsyncNoRetrySucceeded", OperationFinalStateVia.Location, createOriginalHttpMessage,
-            (response, cancellationToken) =>
-            {
-                return response;
-            },
-            async (response, cancellationToken) =>
-            {
-                await Task.CompletedTask;
-                return response;
-            });
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LROsClient.DeleteAsyncNoRetrySucceeded", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1195,16 +1154,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LROsClient.DeleteAsyncRetryFailed", OperationFinalStateVia.Location, createOriginalHttpMessage,
-            (response, cancellationToken) =>
-            {
-                return response;
-            },
-            async (response, cancellationToken) =>
-            {
-                await Task.CompletedTask;
-                return response;
-            });
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LROsClient.DeleteAsyncRetryFailed", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1234,16 +1184,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LROsClient.DeleteAsyncRetrycanceled", OperationFinalStateVia.Location, createOriginalHttpMessage,
-            (response, cancellationToken) =>
-            {
-                return response;
-            },
-            async (response, cancellationToken) =>
-            {
-                await Task.CompletedTask;
-                return response;
-            });
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LROsClient.DeleteAsyncRetrycanceled", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1315,16 +1256,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LROsClient.Post202Retry200", OperationFinalStateVia.Location, createOriginalHttpMessage,
-            (response, cancellationToken) =>
-            {
-                return response;
-            },
-            async (response, cancellationToken) =>
-            {
-                await Task.CompletedTask;
-                return response;
-            });
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LROsClient.Post202Retry200", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
         /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; and &apos;Retry-After&apos; headers, Polls return a 200 with a response body after success. </summary>
         /// <param name="product"> Product to put. </param>
@@ -1614,16 +1546,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LROsClient.PostAsyncRetryFailed", OperationFinalStateVia.Location, createOriginalHttpMessage,
-            (response, cancellationToken) =>
-            {
-                return response;
-            },
-            async (response, cancellationToken) =>
-            {
-                await Task.CompletedTask;
-                return response;
-            });
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LROsClient.PostAsyncRetryFailed", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
@@ -1655,16 +1578,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LROsClient.PostAsyncRetrycanceled", OperationFinalStateVia.Location, createOriginalHttpMessage,
-            (response, cancellationToken) =>
-            {
-                return response;
-            },
-            async (response, cancellationToken) =>
-            {
-                await Task.CompletedTask;
-                return response;
-            });
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LROsClient.PostAsyncRetrycanceled", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>

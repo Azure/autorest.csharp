@@ -18,6 +18,10 @@ namespace CustomNamespace
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal ServiceRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of MainClient for mocking. </summary>
+        protected MainClient()
+        {
+        }
         /// <summary> Initializes a new instance of MainClient. </summary>
         internal MainClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {

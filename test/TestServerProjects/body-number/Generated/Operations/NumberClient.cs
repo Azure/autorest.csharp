@@ -17,6 +17,10 @@ namespace body_number
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal NumberRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of NumberClient for mocking. </summary>
+        protected NumberClient()
+        {
+        }
         /// <summary> Initializes a new instance of NumberClient. </summary>
         internal NumberClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
