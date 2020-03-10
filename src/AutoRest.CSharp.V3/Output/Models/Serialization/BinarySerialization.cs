@@ -8,13 +8,5 @@ namespace AutoRest.CSharp.V3.Output.Models.Serialization.Xml
 {
     internal class BinarySerialization : ObjectSerialization
     {
-        public BinarySerialization(string name, CSharpType type)
-        {
-            Type = type;
-            Name = name;
-        }
-
-        public string Name { get; }
-        public CSharpType Type { get; }
     }
 }
