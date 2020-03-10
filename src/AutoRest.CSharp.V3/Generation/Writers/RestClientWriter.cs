@@ -431,7 +431,18 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     }
                     else if (responseBody is StreamResponseBody _)
                     {
-                        writer.WriteMethodDeserialization(async, ref valueVariable, messageVariable);
+                        writer.Line($"var {valueVariable:D} = {messageVariable:D}.ExtractResponseContent();");
+                        using (writer.Scope($"if ({valueVariable:D} == null)"))
+                        {
+                            if (async)
+                            {
+                                writer.Line($"throw await clientDiagnostics.CreateRequestFailedExceptionAsync({responseVariable:D}).ConfigureAwait(false);");
+                            }
+                            else
+                            {
+                                writer.Line($"throw clientDiagnostics.CreateRequestFailedException({responseVariable:D});");
+                            }
+                        }
                     }
 
                     if (headersModelType != null)
