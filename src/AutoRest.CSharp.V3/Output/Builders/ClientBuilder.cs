@@ -236,9 +236,6 @@ namespace AutoRest.CSharp.V3.Output.Builders
                             constantOrParameter = ParseConstant(constant);
                             valueSchema = constant.ValueType;
                             break;
-                        case BinarySchema _:
-                            // skip
-                            continue;
                         default:
                             constantOrParameter = BuildParameter(requestParameter);
                             break;

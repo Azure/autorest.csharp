@@ -30,6 +30,8 @@ namespace AutoRest.CSharp.V3.Output.Builders
                     return BuildJsonObjectSerialization(objectSchema, type);
                 case KnownMediaType.Xml:
                     return BuildXmlObjectSerialization(objectSchema, type);
+                case KnownMediaType.Binary:
+                    return BuildBinarySerialization(objectSchema, type);
                 default:
                     throw new NotImplementedException(mediaType.ToString());
             }
@@ -43,6 +45,8 @@ namespace AutoRest.CSharp.V3.Output.Builders
                     return BuildSerialization(schema, isNullable);
                 case KnownMediaType.Xml:
                     return BuildXmlElementSerialization(schema, isNullable, schema.XmlName ?? schema.Name, true);
+                case KnownMediaType.Binary:
+                    return BuildBinarySerialization(schema, isNullable);
                 default:
                     throw new NotImplementedException(mediaType.ToString());
             }
@@ -248,6 +252,16 @@ namespace AutoRest.CSharp.V3.Output.Builders
             return new JsonDynamicPropertiesSerialization(
                 BuildSerialization(inheritedDictionarySchema.ElementType, false)
             );
+        }
+
+        private BinarySerialization BuildBinarySerialization(ObjectSchema objectSchema, ObjectType objectType)
+        {
+            return new BinarySerialization(objectSchema.Language.Default.Name, objectType.Type);
+        }
+
+        private BinarySerialization BuildBinarySerialization(Schema schema, bool isNullable)
+        {
+            return new BinarySerialization(schema.Language.Default.Name, _typeFactory.CreateType(schema, isNullable));
         }
     }
 }
