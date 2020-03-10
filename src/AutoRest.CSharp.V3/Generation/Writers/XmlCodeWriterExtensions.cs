@@ -378,9 +378,9 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         }
 
         public static void WriteMethodDeserialization(this CodeWriter writer, XmlElementSerialization serialization,
-            ref string destination, string document = "document")
+            ref string destination, string response, string document = "document")
         {
-            writer.Line($"var {document:D} = {typeof(XDocument)}.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);");
+            writer.Line($"var {document:D} = {typeof(XDocument)}.Load({response:D}.ContentStream, LoadOptions.PreserveWhitespace);");
             writer.ToDeserializeCall(
                 serialization,
                 w => w.Append($"{document:D}"),

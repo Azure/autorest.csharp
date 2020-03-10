@@ -415,21 +415,23 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 using (responseBody != null ? writer.Scope() : default)
                 {
                     string valueVariable = "value";
-
+                    string messageVariable = "message";
+                    string responseVariable = $"{messageVariable}.Response";
                     if (responseBody is ObjectResponseBody objectResponseBody)
                     {
                         switch (objectResponseBody.Serialization)
                         {
                             case JsonSerialization jsonSerialization:
-                                writer.WriteMethodDeserialization(jsonSerialization, async, ref valueVariable);
+                                writer.WriteMethodDeserialization(jsonSerialization, async, ref valueVariable, responseVariable);
                                 break;
                             case XmlElementSerialization xmlSerialization:
-                                writer.WriteMethodDeserialization(xmlSerialization, ref valueVariable);
-                                break;
-                            case BinarySerialization _:
-                                writer.WriteMethodDeserialization(async, ref valueVariable);
+                                writer.WriteMethodDeserialization(xmlSerialization, ref valueVariable, responseVariable);
                                 break;
                         }
+                    }
+                    else if (responseBody is StreamResponseBody _)
+                    {
+                        writer.WriteMethodDeserialization(async, ref valueVariable, messageVariable);
                     }
 
                     if (headersModelType != null)

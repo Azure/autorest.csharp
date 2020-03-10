@@ -254,7 +254,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             );
         }
 
-        private BinarySerialization BuildBinarySerialization(ObjectSchema objectSchema, ObjectType objectType)
+        private static BinarySerialization BuildBinarySerialization(ObjectSchema objectSchema, ObjectType objectType)
         {
             return new BinarySerialization(objectSchema.Language.Default.Name, objectType.Type);
         }

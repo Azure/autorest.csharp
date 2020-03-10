@@ -385,16 +385,16 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         };
 
         public static void WriteMethodDeserialization(this CodeWriter writer, JsonSerialization serialization, bool async,
-            ref string destination, string document = "document")
+            ref string destination, string response, string document = "document")
         {
             writer.Append($"using var {document:D} = ");
             if (async)
             {
-                writer.Line($"await {typeof(JsonDocument)}.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);");
+                writer.Line($"await {typeof(JsonDocument)}.ParseAsync({response:D}.ContentStream, default, cancellationToken).ConfigureAwait(false);");
             }
             else
             {
-                writer.Line($"{typeof(JsonDocument)}.Parse(message.Response.ContentStream);");
+                writer.Line($"{typeof(JsonDocument)}.Parse({response:D}.ContentStream);");
             }
 
             writer.ToDeserializeCall(

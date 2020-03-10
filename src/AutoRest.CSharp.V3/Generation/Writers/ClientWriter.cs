@@ -259,43 +259,45 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 {
                     writer.Line($", ");
                     string valueVariable = "value";
-                    ObjectSerialization? serialization = (lroMethod.OriginalResponse.ResponseBody as ObjectResponseBody)?.Serialization;
-                    using (writer.Scope($"(response, cancellationToken) =>", "{", "},"))
+                    string responseVariable = "response";
+                    if (lroMethod.OriginalResponse.ResponseBody is ObjectResponseBody objectResponseBody)
                     {
-                        switch (serialization)
+                        ObjectSerialization serialization = objectResponseBody.Serialization;
+                        using (writer.Scope($"({responseVariable:D}, cancellationToken) =>", "{", "},"))
                         {
-                            case JsonSerialization jsonSerialization:
-                                writer.WriteMethodDeserialization(jsonSerialization, async: false, ref valueVariable);
-                                break;
-                            case XmlElementSerialization xmlSerialization:
-                                writer.WriteMethodDeserialization(xmlSerialization, ref valueVariable);
-                                break;
-                            case BinarySerialization _:
-                                writer.WriteMethodDeserialization(async: false, ref valueVariable);
-                                break;
-                            default:
-                                throw new NotSupportedException();
+                            switch (serialization)
+                            {
+                                case JsonSerialization jsonSerialization:
+                                    writer.WriteMethodDeserialization(jsonSerialization, async: false, ref valueVariable, responseVariable);
+                                    break;
+                                case XmlElementSerialization xmlSerialization:
+                                    writer.WriteMethodDeserialization(xmlSerialization, ref valueVariable, responseVariable);
+                                    break;
+                                default:
+                                    throw new NotSupportedException();
+                            }
+                            writer.Line($"return {valueVariable};");
                         }
-                        writer.Line($"return {valueVariable};");
-                    }
 
-                    using (writer.Scope($"async (response, cancellationToken) =>", newLine: false))
-                    {
-                        switch (serialization)
+                        using (writer.Scope($"async ({responseVariable:D}, cancellationToken) =>", newLine: false))
                         {
-                            case JsonSerialization jsonSerialization:
-                                writer.WriteMethodDeserialization(jsonSerialization, async: true, ref valueVariable);
-                                break;
-                            case XmlElementSerialization xmlSerialization:
-                                writer.WriteMethodDeserialization(xmlSerialization, ref valueVariable);
-                                break;
-                            case BinarySerialization _:
-                                writer.WriteMethodDeserialization(async: true, ref valueVariable);
-                                break;
-                            default:
-                                throw new NotSupportedException();
+                            switch (serialization)
+                            {
+                                case JsonSerialization jsonSerialization:
+                                    writer.WriteMethodDeserialization(jsonSerialization, async: true, ref valueVariable, responseVariable);
+                                    break;
+                                case XmlElementSerialization xmlSerialization:
+                                    writer.WriteMethodDeserialization(xmlSerialization, ref valueVariable, responseVariable);
+                                    break;
+                                default:
+                                    throw new NotSupportedException();
+                            }
+                            writer.Line($"return {valueVariable};");
                         }
-                        writer.Line($"return {valueVariable};");
+                    }
+                    else if (lroMethod.OriginalResponse.ResponseBody is StreamResponseBody)
+                    {
+                        throw new NotSupportedException("Binary is not supported as message (not response) is required for ExtractResponseContent() call.");
                     }
                 }
 
