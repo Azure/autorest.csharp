@@ -1009,7 +1009,7 @@ namespace paging
                 throw;
             }
         }
-        internal HttpMessage CreateGetMultiplePagesLROOperationRequest(string clientRequestId, int? maxresults, int? timeout)
+        internal HttpMessage CreateGetMultiplePagesLRORequest(string clientRequestId, int? maxresults, int? timeout)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1037,13 +1037,13 @@ namespace paging
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetMultiplePagesLROOperationAsync(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> GetMultiplePagesLROAsync(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesLROOperation");
+            using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesLRO");
             scope.Start();
             try
             {
-                using var message = CreateGetMultiplePagesLROOperationRequest(clientRequestId, maxresults, timeout);
+                using var message = CreateGetMultiplePagesLRORequest(clientRequestId, maxresults, timeout);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1064,13 +1064,13 @@ namespace paging
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response GetMultiplePagesLROOperation(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        public Response GetMultiplePagesLRO(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesLROOperation");
+            using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesLRO");
             scope.Start();
             try
             {
-                using var message = CreateGetMultiplePagesLROOperationRequest(clientRequestId, maxresults, timeout);
+                using var message = CreateGetMultiplePagesLRORequest(clientRequestId, maxresults, timeout);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {

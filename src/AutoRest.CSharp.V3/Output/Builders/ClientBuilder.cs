@@ -309,10 +309,6 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
                     responseHeaderModel = BuildResponseHeaderModel(operation, response);
                 }
-                else
-                {
-                    operationName += "Operation";
-                }
 
                 clientResponse = new Response(
                     responseBody,
@@ -322,7 +318,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             }
             else
             {
-                // Special case for some testServer swaggers, method always fails
+                // Special case for httpInfrastructure testServer swagger, service method always fails
                 clientResponse = new Response(null, Array.Empty<int>(), null);
             }
 

@@ -158,7 +158,7 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "NetworkInterfacesClient.DeleteOperation", OperationFinalStateVia.Location, createOriginalHttpMessage);
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "NetworkInterfacesClient.Delete", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
         /// <summary> Deletes the specified network interface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -175,8 +175,8 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(networkInterfaceName));
             }
 
-            var originalResponse = await RestClient.DeleteOperationAsync(resourceGroupName, networkInterfaceName, cancellationToken).ConfigureAwait(false);
-            return CreateDelete(originalResponse, () => RestClient.CreateDeleteOperationRequest(resourceGroupName, networkInterfaceName));
+            var originalResponse = await RestClient.DeleteAsync(resourceGroupName, networkInterfaceName, cancellationToken).ConfigureAwait(false);
+            return CreateDelete(originalResponse, () => RestClient.CreateDeleteRequest(resourceGroupName, networkInterfaceName));
         }
         /// <summary> Deletes the specified network interface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -193,8 +193,8 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(networkInterfaceName));
             }
 
-            var originalResponse = RestClient.DeleteOperation(resourceGroupName, networkInterfaceName, cancellationToken);
-            return CreateDelete(originalResponse, () => RestClient.CreateDeleteOperationRequest(resourceGroupName, networkInterfaceName));
+            var originalResponse = RestClient.Delete(resourceGroupName, networkInterfaceName, cancellationToken);
+            return CreateDelete(originalResponse, () => RestClient.CreateDeleteRequest(resourceGroupName, networkInterfaceName));
         }
         /// <summary> Creates or updates a network interface. </summary>
         /// <param name="originalResponse"> The original response from starting the operation. </param>
@@ -210,7 +210,7 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "NetworkInterfacesClient.CreateOrUpdateOperation", OperationFinalStateVia.AzureAsyncOperation, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "NetworkInterfacesClient.CreateOrUpdate", OperationFinalStateVia.AzureAsyncOperation, createOriginalHttpMessage,
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
@@ -244,8 +244,8 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            var originalResponse = await RestClient.CreateOrUpdateOperationAsync(resourceGroupName, networkInterfaceName, parameters, cancellationToken).ConfigureAwait(false);
-            return CreateCreateOrUpdate(originalResponse, () => RestClient.CreateCreateOrUpdateOperationRequest(resourceGroupName, networkInterfaceName, parameters));
+            var originalResponse = await RestClient.CreateOrUpdateAsync(resourceGroupName, networkInterfaceName, parameters, cancellationToken).ConfigureAwait(false);
+            return CreateCreateOrUpdate(originalResponse, () => RestClient.CreateCreateOrUpdateRequest(resourceGroupName, networkInterfaceName, parameters));
         }
         /// <summary> Creates or updates a network interface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -267,8 +267,8 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            var originalResponse = RestClient.CreateOrUpdateOperation(resourceGroupName, networkInterfaceName, parameters, cancellationToken);
-            return CreateCreateOrUpdate(originalResponse, () => RestClient.CreateCreateOrUpdateOperationRequest(resourceGroupName, networkInterfaceName, parameters));
+            var originalResponse = RestClient.CreateOrUpdate(resourceGroupName, networkInterfaceName, parameters, cancellationToken);
+            return CreateCreateOrUpdate(originalResponse, () => RestClient.CreateCreateOrUpdateRequest(resourceGroupName, networkInterfaceName, parameters));
         }
         /// <summary> Gets all route tables applied to a network interface. </summary>
         /// <param name="originalResponse"> The original response from starting the operation. </param>
@@ -284,7 +284,7 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "NetworkInterfacesClient.GetEffectiveRouteTableOperation", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "NetworkInterfacesClient.GetEffectiveRouteTable", OperationFinalStateVia.Location, createOriginalHttpMessage,
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
@@ -313,8 +313,8 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(networkInterfaceName));
             }
 
-            var originalResponse = await RestClient.GetEffectiveRouteTableOperationAsync(resourceGroupName, networkInterfaceName, cancellationToken).ConfigureAwait(false);
-            return CreateGetEffectiveRouteTable(originalResponse, () => RestClient.CreateGetEffectiveRouteTableOperationRequest(resourceGroupName, networkInterfaceName));
+            var originalResponse = await RestClient.GetEffectiveRouteTableAsync(resourceGroupName, networkInterfaceName, cancellationToken).ConfigureAwait(false);
+            return CreateGetEffectiveRouteTable(originalResponse, () => RestClient.CreateGetEffectiveRouteTableRequest(resourceGroupName, networkInterfaceName));
         }
         /// <summary> Gets all route tables applied to a network interface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -331,8 +331,8 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(networkInterfaceName));
             }
 
-            var originalResponse = RestClient.GetEffectiveRouteTableOperation(resourceGroupName, networkInterfaceName, cancellationToken);
-            return CreateGetEffectiveRouteTable(originalResponse, () => RestClient.CreateGetEffectiveRouteTableOperationRequest(resourceGroupName, networkInterfaceName));
+            var originalResponse = RestClient.GetEffectiveRouteTable(resourceGroupName, networkInterfaceName, cancellationToken);
+            return CreateGetEffectiveRouteTable(originalResponse, () => RestClient.CreateGetEffectiveRouteTableRequest(resourceGroupName, networkInterfaceName));
         }
         /// <summary> Gets all network security groups applied to a network interface. </summary>
         /// <param name="originalResponse"> The original response from starting the operation. </param>
@@ -348,7 +348,7 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "NetworkInterfacesClient.ListEffectiveNetworkSecurityGroupsOperation", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "NetworkInterfacesClient.ListEffectiveNetworkSecurityGroups", OperationFinalStateVia.Location, createOriginalHttpMessage,
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
@@ -377,8 +377,8 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(networkInterfaceName));
             }
 
-            var originalResponse = await RestClient.ListEffectiveNetworkSecurityGroupsOperationAsync(resourceGroupName, networkInterfaceName, cancellationToken).ConfigureAwait(false);
-            return CreateListEffectiveNetworkSecurityGroups(originalResponse, () => RestClient.CreateListEffectiveNetworkSecurityGroupsOperationRequest(resourceGroupName, networkInterfaceName));
+            var originalResponse = await RestClient.ListEffectiveNetworkSecurityGroupsAsync(resourceGroupName, networkInterfaceName, cancellationToken).ConfigureAwait(false);
+            return CreateListEffectiveNetworkSecurityGroups(originalResponse, () => RestClient.CreateListEffectiveNetworkSecurityGroupsRequest(resourceGroupName, networkInterfaceName));
         }
         /// <summary> Gets all network security groups applied to a network interface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -395,8 +395,8 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(networkInterfaceName));
             }
 
-            var originalResponse = RestClient.ListEffectiveNetworkSecurityGroupsOperation(resourceGroupName, networkInterfaceName, cancellationToken);
-            return CreateListEffectiveNetworkSecurityGroups(originalResponse, () => RestClient.CreateListEffectiveNetworkSecurityGroupsOperationRequest(resourceGroupName, networkInterfaceName));
+            var originalResponse = RestClient.ListEffectiveNetworkSecurityGroups(resourceGroupName, networkInterfaceName, cancellationToken);
+            return CreateListEffectiveNetworkSecurityGroups(originalResponse, () => RestClient.CreateListEffectiveNetworkSecurityGroupsRequest(resourceGroupName, networkInterfaceName));
         }
     }
 }

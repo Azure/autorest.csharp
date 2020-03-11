@@ -654,7 +654,7 @@ namespace paging
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "PagingClient.GetMultiplePagesLROOperation", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "PagingClient.GetMultiplePagesLRO", OperationFinalStateVia.Location, createOriginalHttpMessage,
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
@@ -675,8 +675,8 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async ValueTask<Operation<ProductResult>> StartGetMultiplePagesLROAsync(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
-            var originalResponse = await RestClient.GetMultiplePagesLROOperationAsync(clientRequestId, maxresults, timeout, cancellationToken).ConfigureAwait(false);
-            return CreateGetMultiplePagesLRO(originalResponse, () => RestClient.CreateGetMultiplePagesLROOperationRequest(clientRequestId, maxresults, timeout));
+            var originalResponse = await RestClient.GetMultiplePagesLROAsync(clientRequestId, maxresults, timeout, cancellationToken).ConfigureAwait(false);
+            return CreateGetMultiplePagesLRO(originalResponse, () => RestClient.CreateGetMultiplePagesLRORequest(clientRequestId, maxresults, timeout));
         }
         /// <summary> A long-running paging operation that includes a nextLink that has 10 pages. </summary>
         /// <param name="clientRequestId"> The String to use. </param>
@@ -685,8 +685,8 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Operation<ProductResult> StartGetMultiplePagesLRO(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
-            var originalResponse = RestClient.GetMultiplePagesLROOperation(clientRequestId, maxresults, timeout, cancellationToken);
-            return CreateGetMultiplePagesLRO(originalResponse, () => RestClient.CreateGetMultiplePagesLROOperationRequest(clientRequestId, maxresults, timeout));
+            var originalResponse = RestClient.GetMultiplePagesLRO(clientRequestId, maxresults, timeout, cancellationToken);
+            return CreateGetMultiplePagesLRO(originalResponse, () => RestClient.CreateGetMultiplePagesLRORequest(clientRequestId, maxresults, timeout));
         }
     }
 }

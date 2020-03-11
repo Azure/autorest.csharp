@@ -274,7 +274,7 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "StorageAccountsClient.CreateOperation", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "StorageAccountsClient.Create", OperationFinalStateVia.Location, createOriginalHttpMessage,
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
@@ -308,8 +308,8 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            var originalResponse = await RestClient.CreateOperationAsync(resourceGroupName, accountName, parameters, cancellationToken).ConfigureAwait(false);
-            return CreateCreate(originalResponse, () => RestClient.CreateCreateOperationRequest(resourceGroupName, accountName, parameters));
+            var originalResponse = await RestClient.CreateAsync(resourceGroupName, accountName, parameters, cancellationToken).ConfigureAwait(false);
+            return CreateCreate(originalResponse, () => RestClient.CreateCreateRequest(resourceGroupName, accountName, parameters));
         }
         /// <summary> Asynchronously creates a new storage account with the specified parameters. If an account is already created and a subsequent create request is issued with different properties, the account properties will be updated. If an account is already created and a subsequent create or update request is issued with the exact same set of properties, the request will succeed. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
@@ -331,8 +331,8 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            var originalResponse = RestClient.CreateOperation(resourceGroupName, accountName, parameters, cancellationToken);
-            return CreateCreate(originalResponse, () => RestClient.CreateCreateOperationRequest(resourceGroupName, accountName, parameters));
+            var originalResponse = RestClient.Create(resourceGroupName, accountName, parameters, cancellationToken);
+            return CreateCreate(originalResponse, () => RestClient.CreateCreateRequest(resourceGroupName, accountName, parameters));
         }
         /// <summary> Failover request can be triggered for a storage account in case of availability issues. The failover occurs from the storage account&apos;s primary cluster to secondary cluster for RA-GRS accounts. The secondary cluster will become primary after failover. </summary>
         /// <param name="originalResponse"> The original response from starting the operation. </param>
@@ -348,7 +348,7 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "StorageAccountsClient.FailoverOperation", OperationFinalStateVia.Location, createOriginalHttpMessage);
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "StorageAccountsClient.Failover", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
         /// <summary> Failover request can be triggered for a storage account in case of availability issues. The failover occurs from the storage account&apos;s primary cluster to secondary cluster for RA-GRS accounts. The secondary cluster will become primary after failover. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
@@ -365,8 +365,8 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            var originalResponse = await RestClient.FailoverOperationAsync(resourceGroupName, accountName, cancellationToken).ConfigureAwait(false);
-            return CreateFailover(originalResponse, () => RestClient.CreateFailoverOperationRequest(resourceGroupName, accountName));
+            var originalResponse = await RestClient.FailoverAsync(resourceGroupName, accountName, cancellationToken).ConfigureAwait(false);
+            return CreateFailover(originalResponse, () => RestClient.CreateFailoverRequest(resourceGroupName, accountName));
         }
         /// <summary> Failover request can be triggered for a storage account in case of availability issues. The failover occurs from the storage account&apos;s primary cluster to secondary cluster for RA-GRS accounts. The secondary cluster will become primary after failover. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
@@ -383,8 +383,8 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            var originalResponse = RestClient.FailoverOperation(resourceGroupName, accountName, cancellationToken);
-            return CreateFailover(originalResponse, () => RestClient.CreateFailoverOperationRequest(resourceGroupName, accountName));
+            var originalResponse = RestClient.Failover(resourceGroupName, accountName, cancellationToken);
+            return CreateFailover(originalResponse, () => RestClient.CreateFailoverRequest(resourceGroupName, accountName));
         }
         /// <summary> Restore blobs in the specified blob ranges. </summary>
         /// <param name="originalResponse"> The original response from starting the operation. </param>
@@ -400,7 +400,7 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "StorageAccountsClient.RestoreBlobRangesOperation", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "StorageAccountsClient.RestoreBlobRanges", OperationFinalStateVia.Location, createOriginalHttpMessage,
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
@@ -434,8 +434,8 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            var originalResponse = await RestClient.RestoreBlobRangesOperationAsync(resourceGroupName, accountName, parameters, cancellationToken).ConfigureAwait(false);
-            return CreateRestoreBlobRanges(originalResponse, () => RestClient.CreateRestoreBlobRangesOperationRequest(resourceGroupName, accountName, parameters));
+            var originalResponse = await RestClient.RestoreBlobRangesAsync(resourceGroupName, accountName, parameters, cancellationToken).ConfigureAwait(false);
+            return CreateRestoreBlobRanges(originalResponse, () => RestClient.CreateRestoreBlobRangesRequest(resourceGroupName, accountName, parameters));
         }
         /// <summary> Restore blobs in the specified blob ranges. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
@@ -457,8 +457,8 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            var originalResponse = RestClient.RestoreBlobRangesOperation(resourceGroupName, accountName, parameters, cancellationToken);
-            return CreateRestoreBlobRanges(originalResponse, () => RestClient.CreateRestoreBlobRangesOperationRequest(resourceGroupName, accountName, parameters));
+            var originalResponse = RestClient.RestoreBlobRanges(resourceGroupName, accountName, parameters, cancellationToken);
+            return CreateRestoreBlobRanges(originalResponse, () => RestClient.CreateRestoreBlobRangesRequest(resourceGroupName, accountName, parameters));
         }
     }
 }

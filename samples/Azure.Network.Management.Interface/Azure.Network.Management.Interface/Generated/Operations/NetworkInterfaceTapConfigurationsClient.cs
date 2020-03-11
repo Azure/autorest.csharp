@@ -118,7 +118,7 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "NetworkInterfaceTapConfigurationsClient.DeleteOperation", OperationFinalStateVia.Location, createOriginalHttpMessage);
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "NetworkInterfaceTapConfigurationsClient.Delete", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
         /// <summary> Deletes the specified tap configuration from the NetworkInterface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -140,8 +140,8 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(tapConfigurationName));
             }
 
-            var originalResponse = await RestClient.DeleteOperationAsync(resourceGroupName, networkInterfaceName, tapConfigurationName, cancellationToken).ConfigureAwait(false);
-            return CreateDelete(originalResponse, () => RestClient.CreateDeleteOperationRequest(resourceGroupName, networkInterfaceName, tapConfigurationName));
+            var originalResponse = await RestClient.DeleteAsync(resourceGroupName, networkInterfaceName, tapConfigurationName, cancellationToken).ConfigureAwait(false);
+            return CreateDelete(originalResponse, () => RestClient.CreateDeleteRequest(resourceGroupName, networkInterfaceName, tapConfigurationName));
         }
         /// <summary> Deletes the specified tap configuration from the NetworkInterface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -163,8 +163,8 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(tapConfigurationName));
             }
 
-            var originalResponse = RestClient.DeleteOperation(resourceGroupName, networkInterfaceName, tapConfigurationName, cancellationToken);
-            return CreateDelete(originalResponse, () => RestClient.CreateDeleteOperationRequest(resourceGroupName, networkInterfaceName, tapConfigurationName));
+            var originalResponse = RestClient.Delete(resourceGroupName, networkInterfaceName, tapConfigurationName, cancellationToken);
+            return CreateDelete(originalResponse, () => RestClient.CreateDeleteRequest(resourceGroupName, networkInterfaceName, tapConfigurationName));
         }
         /// <summary> Creates or updates a Tap configuration in the specified NetworkInterface. </summary>
         /// <param name="originalResponse"> The original response from starting the operation. </param>
@@ -180,7 +180,7 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "NetworkInterfaceTapConfigurationsClient.CreateOrUpdateOperation", OperationFinalStateVia.AzureAsyncOperation, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "NetworkInterfaceTapConfigurationsClient.CreateOrUpdate", OperationFinalStateVia.AzureAsyncOperation, createOriginalHttpMessage,
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
@@ -219,8 +219,8 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(tapConfigurationParameters));
             }
 
-            var originalResponse = await RestClient.CreateOrUpdateOperationAsync(resourceGroupName, networkInterfaceName, tapConfigurationName, tapConfigurationParameters, cancellationToken).ConfigureAwait(false);
-            return CreateCreateOrUpdate(originalResponse, () => RestClient.CreateCreateOrUpdateOperationRequest(resourceGroupName, networkInterfaceName, tapConfigurationName, tapConfigurationParameters));
+            var originalResponse = await RestClient.CreateOrUpdateAsync(resourceGroupName, networkInterfaceName, tapConfigurationName, tapConfigurationParameters, cancellationToken).ConfigureAwait(false);
+            return CreateCreateOrUpdate(originalResponse, () => RestClient.CreateCreateOrUpdateRequest(resourceGroupName, networkInterfaceName, tapConfigurationName, tapConfigurationParameters));
         }
         /// <summary> Creates or updates a Tap configuration in the specified NetworkInterface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -247,8 +247,8 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(tapConfigurationParameters));
             }
 
-            var originalResponse = RestClient.CreateOrUpdateOperation(resourceGroupName, networkInterfaceName, tapConfigurationName, tapConfigurationParameters, cancellationToken);
-            return CreateCreateOrUpdate(originalResponse, () => RestClient.CreateCreateOrUpdateOperationRequest(resourceGroupName, networkInterfaceName, tapConfigurationName, tapConfigurationParameters));
+            var originalResponse = RestClient.CreateOrUpdate(resourceGroupName, networkInterfaceName, tapConfigurationName, tapConfigurationParameters, cancellationToken);
+            return CreateCreateOrUpdate(originalResponse, () => RestClient.CreateCreateOrUpdateRequest(resourceGroupName, networkInterfaceName, tapConfigurationName, tapConfigurationParameters));
         }
     }
 }
