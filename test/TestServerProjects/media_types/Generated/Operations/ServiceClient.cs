@@ -30,20 +30,6 @@ namespace media_types
             this.pipeline = pipeline;
         }
         /// <summary> Analyze body, that could be different media types. </summary>
-        /// <param name="contentType"> Upload file type. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<string>> AnalyzeBodyAsync(ContentType? contentType, CancellationToken cancellationToken = default)
-        {
-            return await RestClient.AnalyzeBodyAsync(contentType, cancellationToken).ConfigureAwait(false);
-        }
-        /// <summary> Analyze body, that could be different media types. </summary>
-        /// <param name="contentType"> Upload file type. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<string> AnalyzeBody(ContentType? contentType, CancellationToken cancellationToken = default)
-        {
-            return RestClient.AnalyzeBody(contentType, cancellationToken);
-        }
-        /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="input"> Input parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<string>> AnalyzeBodyAsync(SourcePath input, CancellationToken cancellationToken = default)

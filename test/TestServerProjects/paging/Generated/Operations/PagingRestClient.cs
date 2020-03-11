@@ -1009,7 +1009,7 @@ namespace paging
                 throw;
             }
         }
-        internal HttpMessage CreateGetMultiplePagesLRORequest(string clientRequestId, int? maxresults, int? timeout)
+        internal HttpMessage CreateGetMultiplePagesLROOperationRequest(string clientRequestId, int? maxresults, int? timeout)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1037,22 +1037,18 @@ namespace paging
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ProductResult>> GetMultiplePagesLROAsync(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> GetMultiplePagesLROOperationAsync(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesLRO");
+            using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesLROOperation");
             scope.Start();
             try
             {
-                using var message = CreateGetMultiplePagesLRORequest(clientRequestId, maxresults, timeout);
+                using var message = CreateGetMultiplePagesLROOperationRequest(clientRequestId, maxresults, timeout);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 202:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -1068,22 +1064,18 @@ namespace paging
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ProductResult> GetMultiplePagesLRO(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        public Response GetMultiplePagesLROOperation(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesLRO");
+            using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesLROOperation");
             scope.Start();
             try
             {
-                using var message = CreateGetMultiplePagesLRORequest(clientRequestId, maxresults, timeout);
+                using var message = CreateGetMultiplePagesLROOperationRequest(clientRequestId, maxresults, timeout);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 202:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
+                        return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -2197,102 +2189,6 @@ namespace paging
                 switch (message.Response.Status)
                 {
                     case 200:
-                        {
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        internal HttpMessage CreateGetMultiplePagesLRONextPageRequest(string clientRequestId, int? maxresults, int? timeout, string nextLink)
-        {
-            var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(nextLink, false);
-            request.Uri = uri;
-            if (clientRequestId != null)
-            {
-                request.Headers.Add("client-request-id", clientRequestId);
-            }
-            if (maxresults != null)
-            {
-                request.Headers.Add("maxresults", maxresults.Value);
-            }
-            if (timeout != null)
-            {
-                request.Headers.Add("timeout", timeout.Value);
-            }
-            return message;
-        }
-        /// <summary> A long-running paging operation that includes a nextLink that has 10 pages. </summary>
-        /// <param name="clientRequestId"> The String to use. </param>
-        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
-        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
-        /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ProductResult>> GetMultiplePagesLRONextPageAsync(string clientRequestId, int? maxresults, int? timeout, string nextLink, CancellationToken cancellationToken = default)
-        {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesLRO");
-            scope.Start();
-            try
-            {
-                using var message = CreateGetMultiplePagesLRONextPageRequest(clientRequestId, maxresults, timeout, nextLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        {
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        /// <summary> A long-running paging operation that includes a nextLink that has 10 pages. </summary>
-        /// <param name="clientRequestId"> The String to use. </param>
-        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
-        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
-        /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ProductResult> GetMultiplePagesLRONextPage(string clientRequestId, int? maxresults, int? timeout, string nextLink, CancellationToken cancellationToken = default)
-        {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesLRO");
-            scope.Start();
-            try
-            {
-                using var message = CreateGetMultiplePagesLRONextPageRequest(clientRequestId, maxresults, timeout, nextLink);
-                pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = ProductResult.DeserializeProductResult(document.RootElement);

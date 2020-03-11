@@ -35,7 +35,7 @@ namespace lro
         /// <summary> Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="originalResponse"> The original response from starting the operation. </param>
         /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
-        public Operation<Product> CreatePut201CreatingSucceeded200(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        internal Operation<Product> CreatePut201CreatingSucceeded200(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
         {
             if (originalResponse == null)
             {
@@ -79,7 +79,7 @@ namespace lro
         /// <summary> Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="originalResponse"> The original response from starting the operation. </param>
         /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
-        public Operation<Product> CreatePutAsyncRelativeRetrySucceeded(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        internal Operation<Product> CreatePutAsyncRelativeRetrySucceeded(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
         {
             if (originalResponse == null)
             {
@@ -123,7 +123,7 @@ namespace lro
         /// <summary> Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="originalResponse"> The original response from starting the operation. </param>
         /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
-        public Operation<Product> CreateDeleteProvisioning202Accepted200Succeeded(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        internal Operation<Product> CreateDeleteProvisioning202Accepted200Succeeded(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
         {
             if (originalResponse == null)
             {
@@ -165,7 +165,7 @@ namespace lro
         /// <summary> Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="originalResponse"> The original response from starting the operation. </param>
         /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
-        public Operation<Response> CreateDelete202Retry200(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        internal Operation<Response> CreateDelete202Retry200(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
         {
             if (originalResponse == null)
             {
@@ -195,7 +195,7 @@ namespace lro
         /// <summary> Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="originalResponse"> The original response from starting the operation. </param>
         /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
-        public Operation<Response> CreateDeleteAsyncRelativeRetrySucceeded(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        internal Operation<Response> CreateDeleteAsyncRelativeRetrySucceeded(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
         {
             if (originalResponse == null)
             {
@@ -225,7 +225,7 @@ namespace lro
         /// <summary> Long running post request, service returns a 500, then a 202 to the initial request, with &apos;Location&apos; and &apos;Retry-After&apos; headers, Polls return a 200 with a response body after success. </summary>
         /// <param name="originalResponse"> The original response from starting the operation. </param>
         /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
-        public Operation<Response> CreatePost202Retry200(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        internal Operation<Response> CreatePost202Retry200(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
         {
             if (originalResponse == null)
             {
@@ -257,7 +257,7 @@ namespace lro
         /// <summary> Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="originalResponse"> The original response from starting the operation. </param>
         /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
-        public Operation<Response> CreatePostAsyncRelativeRetrySucceeded(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        internal Operation<Response> CreatePostAsyncRelativeRetrySucceeded(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
         {
             if (originalResponse == null)
             {

@@ -81,6 +81,12 @@ namespace AutoRest.CSharp.V3.Output.Builders
             List<ClientMethod> clientMethods = new List<ClientMethod>();
             foreach ((Operation operation, RestClientMethod method) in operationMethods.Values)
             {
+                if (operation.IsLongRunning)
+                {
+                    longRunningOperationMethods.Add(BuildLongRunningOperation(operation, method));
+                    continue;
+                }
+
                 Paging? paging = operation.Language.Default.Paging;
                 if (paging != null)
                 {
@@ -118,12 +124,6 @@ namespace AutoRest.CSharp.V3.Output.Builders
                     PagingInfo pagingInfo = GetPagingInfo(method, nextPageMethod, paging, objectType);
                     pagingMethods.Add(pagingInfo);
 
-                    continue;
-                }
-
-                if (operation.IsLongRunning)
-                {
-                    longRunningOperationMethods.Add(BuildLongRunningOperation(operation, method));
                     continue;
                 }
 
@@ -190,27 +190,6 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
         private RestClientMethod BuildMethod(Operation operation, string clientName, IReadOnlyDictionary<string, Parameter> clientParameters, HttpRequest httpRequest, IEnumerable<RequestParameter> requestParameters)
         {
-            //TODO: Handle multiple responses: https://github.com/Azure/autorest.csharp/issues/413
-
-            ServiceResponse? response = null;
-
-            // if operation is a long-running operation than we're generating an initial call here so find a response with non 200/204 code
-            // fallback to the first on otherwise
-
-            if (operation.IsLongRunning)
-            {
-                response = operation.LongRunningInitialResponse;
-            }
-
-            response ??= operation.Responses.FirstOrDefault();
-
-            HttpResponse? httpResponse = response?.Protocol.Http as HttpResponse;
-
-            if (response == null || httpResponse == null)
-            {
-                throw new InvalidOperationException($"Expected to have at least one HTTP response in operation {operation.Language.Default.Name}");
-            }
-
             HttpWithBodyRequest? httpRequestWithBody = httpRequest as HttpWithBodyRequest;
             Dictionary<string, PathSegment> uriParameters = new Dictionary<string, PathSegment>();
             Dictionary<string, PathSegment> pathParameters = new Dictionary<string, PathSegment>();
@@ -302,23 +281,45 @@ namespace AutoRest.CSharp.V3.Output.Builders
             ResponseHeaderGroupType? responseHeaderModel = null;
             string operationName = operation.CSharpName();
 
-            // Ignore response body and headers for LROs as the ArmOperationHelpers figures out them dynamically
-            if (!operation.IsLongRunning)
-            {
-                responseBody = BuildResponseBody(response);
+            //TODO: Handle multiple responses: https://github.com/Azure/autorest.csharp/issues/413
+            ServiceResponse? response = null;
 
-                responseHeaderModel = BuildResponseHeaderModel(operation, response);
+            // if operation is a long-running operation than we're generating an initial call here so find a response with non 200/204 code
+            // fallback to the first on otherwise
+
+            if (operation.IsLongRunning)
+            {
+                response = operation.LongRunningInitialResponse;
+            }
+
+            response ??= operation.Responses.FirstOrDefault();
+
+            Response clientResponse;
+            if (response != null)
+            {
+                // Ignore response body and headers for LROs as the ArmOperationHelpers figures out them dynamically
+                if (!operation.IsLongRunning)
+                {
+                    responseBody = BuildResponseBody(response);
+
+                    responseHeaderModel = BuildResponseHeaderModel(operation, response);
+                }
+                else
+                {
+                    operationName += "Operation";
+                }
+
+                clientResponse = new Response(
+                    responseBody,
+                    response.HttpResponse.StatusCodes.Select(ToStatusCode).ToArray(),
+                    responseHeaderModel
+                );
             }
             else
             {
-                operationName += "Operation";
+                // Special case for some testServer swaggers, method always fails
+                clientResponse = new Response(null, Array.Empty<int>(), null);
             }
-
-            Response clientResponse = new Response(
-                responseBody,
-                httpResponse.StatusCodes.Select(ToStatusCode).ToArray(),
-                responseHeaderModel
-            );
 
             return new RestClientMethod(
                 operationName,
@@ -332,14 +333,13 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
         private ResponseBody? BuildResponseBody(ServiceResponse response)
         {
-            HttpResponse httpResponse = response.Protocol.Http as HttpResponse ?? throw new InvalidOperationException($"Expected an HTTP response");
             ResponseBody? responseBody = null;
             if (response is SchemaResponse schemaResponse)
             {
                 Schema schema = schemaResponse.Schema is ConstantSchema constantSchema ? constantSchema.ValueType : schemaResponse.Schema;
                 CSharpType responseType = _typeFactory.CreateType(schema, isNullable: false);
 
-                ObjectSerialization serialization = _serializationBuilder.Build(httpResponse.KnownMediaType, schema, isNullable: false);
+                ObjectSerialization serialization = _serializationBuilder.Build(response.HttpResponse.KnownMediaType, schema, isNullable: false);
 
                 responseBody = new ObjectResponseBody(responseType, serialization);
             }
@@ -448,7 +448,6 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
         private ResponseHeaderGroupType? BuildResponseHeaderModel(Operation operation, ServiceResponse response)
         {
-
             var httpResponseHeaders = response.HttpResponse.Headers
                 .Where(h => !_knownResponseHeaders.Contains(h.Header, StringComparer.InvariantCultureIgnoreCase))
                 .ToArray();

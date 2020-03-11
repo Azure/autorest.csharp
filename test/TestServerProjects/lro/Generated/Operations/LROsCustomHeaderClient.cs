@@ -35,7 +35,7 @@ namespace lro
         /// <summary> x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="originalResponse"> The original response from starting the operation. </param>
         /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
-        public Operation<Product> CreatePutAsyncRetrySucceeded(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        internal Operation<Product> CreatePutAsyncRetrySucceeded(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
         {
             if (originalResponse == null)
             {
@@ -79,7 +79,7 @@ namespace lro
         /// <summary> x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="originalResponse"> The original response from starting the operation. </param>
         /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
-        public Operation<Product> CreatePut201CreatingSucceeded200(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        internal Operation<Product> CreatePut201CreatingSucceeded200(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
         {
             if (originalResponse == null)
             {
@@ -123,7 +123,7 @@ namespace lro
         /// <summary> x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; and &apos;Retry-After&apos; headers, Polls return a 200 with a response body after success. </summary>
         /// <param name="originalResponse"> The original response from starting the operation. </param>
         /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
-        public Operation<Response> CreatePost202Retry200(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        internal Operation<Response> CreatePost202Retry200(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
         {
             if (originalResponse == null)
             {
@@ -155,7 +155,7 @@ namespace lro
         /// <summary> x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="originalResponse"> The original response from starting the operation. </param>
         /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
-        public Operation<Response> CreatePostAsyncRetrySucceeded(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        internal Operation<Response> CreatePostAsyncRetrySucceeded(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
         {
             if (originalResponse == null)
             {

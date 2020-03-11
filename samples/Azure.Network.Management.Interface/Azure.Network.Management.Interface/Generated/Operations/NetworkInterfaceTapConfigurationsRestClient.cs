@@ -45,7 +45,7 @@ namespace Azure.Network.Management.Interface
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
-        internal HttpMessage CreateDeleteRequest(string resourceGroupName, string networkInterfaceName, string tapConfigurationName)
+        internal HttpMessage CreateDeleteOperationRequest(string resourceGroupName, string networkInterfaceName, string tapConfigurationName)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -69,7 +69,7 @@ namespace Azure.Network.Management.Interface
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
         /// <param name="tapConfigurationName"> The name of the tap configuration. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DeleteAsync(string resourceGroupName, string networkInterfaceName, string tapConfigurationName, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> DeleteOperationAsync(string resourceGroupName, string networkInterfaceName, string tapConfigurationName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -84,15 +84,15 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(tapConfigurationName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("NetworkInterfaceTapConfigurationsClient.Delete");
+            using var scope = clientDiagnostics.CreateScope("NetworkInterfaceTapConfigurationsClient.DeleteOperation");
             scope.Start();
             try
             {
-                using var message = CreateDeleteRequest(resourceGroupName, networkInterfaceName, tapConfigurationName);
+                using var message = CreateDeleteOperationRequest(resourceGroupName, networkInterfaceName, tapConfigurationName);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
-                    case 200:
+                    case 202:
                         return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -109,7 +109,7 @@ namespace Azure.Network.Management.Interface
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
         /// <param name="tapConfigurationName"> The name of the tap configuration. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Delete(string resourceGroupName, string networkInterfaceName, string tapConfigurationName, CancellationToken cancellationToken = default)
+        public Response DeleteOperation(string resourceGroupName, string networkInterfaceName, string tapConfigurationName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -124,15 +124,15 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(tapConfigurationName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("NetworkInterfaceTapConfigurationsClient.Delete");
+            using var scope = clientDiagnostics.CreateScope("NetworkInterfaceTapConfigurationsClient.DeleteOperation");
             scope.Start();
             try
             {
-                using var message = CreateDeleteRequest(resourceGroupName, networkInterfaceName, tapConfigurationName);
+                using var message = CreateDeleteOperationRequest(resourceGroupName, networkInterfaceName, tapConfigurationName);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
-                    case 200:
+                    case 202:
                         return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -251,7 +251,7 @@ namespace Azure.Network.Management.Interface
                 throw;
             }
         }
-        internal HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string networkInterfaceName, string tapConfigurationName, NetworkInterfaceTapConfiguration tapConfigurationParameters)
+        internal HttpMessage CreateCreateOrUpdateOperationRequest(string resourceGroupName, string networkInterfaceName, string tapConfigurationName, NetworkInterfaceTapConfiguration tapConfigurationParameters)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -280,7 +280,7 @@ namespace Azure.Network.Management.Interface
         /// <param name="tapConfigurationName"> The name of the tap configuration. </param>
         /// <param name="tapConfigurationParameters"> Parameters supplied to the create or update tap configuration operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> CreateOrUpdateAsync(string resourceGroupName, string networkInterfaceName, string tapConfigurationName, NetworkInterfaceTapConfiguration tapConfigurationParameters, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> CreateOrUpdateOperationAsync(string resourceGroupName, string networkInterfaceName, string tapConfigurationName, NetworkInterfaceTapConfiguration tapConfigurationParameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -299,15 +299,15 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(tapConfigurationParameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("NetworkInterfaceTapConfigurationsClient.CreateOrUpdate");
+            using var scope = clientDiagnostics.CreateScope("NetworkInterfaceTapConfigurationsClient.CreateOrUpdateOperation");
             scope.Start();
             try
             {
-                using var message = CreateCreateOrUpdateRequest(resourceGroupName, networkInterfaceName, tapConfigurationName, tapConfigurationParameters);
+                using var message = CreateCreateOrUpdateOperationRequest(resourceGroupName, networkInterfaceName, tapConfigurationName, tapConfigurationParameters);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
-                    case 200:
+                    case 201:
                         return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -325,7 +325,7 @@ namespace Azure.Network.Management.Interface
         /// <param name="tapConfigurationName"> The name of the tap configuration. </param>
         /// <param name="tapConfigurationParameters"> Parameters supplied to the create or update tap configuration operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response CreateOrUpdate(string resourceGroupName, string networkInterfaceName, string tapConfigurationName, NetworkInterfaceTapConfiguration tapConfigurationParameters, CancellationToken cancellationToken = default)
+        public Response CreateOrUpdateOperation(string resourceGroupName, string networkInterfaceName, string tapConfigurationName, NetworkInterfaceTapConfiguration tapConfigurationParameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -344,15 +344,15 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(tapConfigurationParameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("NetworkInterfaceTapConfigurationsClient.CreateOrUpdate");
+            using var scope = clientDiagnostics.CreateScope("NetworkInterfaceTapConfigurationsClient.CreateOrUpdateOperation");
             scope.Start();
             try
             {
-                using var message = CreateCreateOrUpdateRequest(resourceGroupName, networkInterfaceName, tapConfigurationName, tapConfigurationParameters);
+                using var message = CreateCreateOrUpdateOperationRequest(resourceGroupName, networkInterfaceName, tapConfigurationName, tapConfigurationParameters);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
-                    case 200:
+                    case 201:
                         return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

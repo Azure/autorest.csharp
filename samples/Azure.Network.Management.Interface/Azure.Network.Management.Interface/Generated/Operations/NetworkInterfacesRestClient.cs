@@ -45,7 +45,7 @@ namespace Azure.Network.Management.Interface
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
-        internal HttpMessage CreateDeleteRequest(string resourceGroupName, string networkInterfaceName)
+        internal HttpMessage CreateDeleteOperationRequest(string resourceGroupName, string networkInterfaceName)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -66,7 +66,7 @@ namespace Azure.Network.Management.Interface
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DeleteAsync(string resourceGroupName, string networkInterfaceName, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> DeleteOperationAsync(string resourceGroupName, string networkInterfaceName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -77,15 +77,15 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(networkInterfaceName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("NetworkInterfacesClient.Delete");
+            using var scope = clientDiagnostics.CreateScope("NetworkInterfacesClient.DeleteOperation");
             scope.Start();
             try
             {
-                using var message = CreateDeleteRequest(resourceGroupName, networkInterfaceName);
+                using var message = CreateDeleteOperationRequest(resourceGroupName, networkInterfaceName);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
-                    case 200:
+                    case 202:
                         return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -101,7 +101,7 @@ namespace Azure.Network.Management.Interface
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Delete(string resourceGroupName, string networkInterfaceName, CancellationToken cancellationToken = default)
+        public Response DeleteOperation(string resourceGroupName, string networkInterfaceName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -112,15 +112,15 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(networkInterfaceName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("NetworkInterfacesClient.Delete");
+            using var scope = clientDiagnostics.CreateScope("NetworkInterfacesClient.DeleteOperation");
             scope.Start();
             try
             {
-                using var message = CreateDeleteRequest(resourceGroupName, networkInterfaceName);
+                using var message = CreateDeleteOperationRequest(resourceGroupName, networkInterfaceName);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
-                    case 200:
+                    case 202:
                         return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -233,7 +233,7 @@ namespace Azure.Network.Management.Interface
                 throw;
             }
         }
-        internal HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string networkInterfaceName, NetworkInterface parameters)
+        internal HttpMessage CreateCreateOrUpdateOperationRequest(string resourceGroupName, string networkInterfaceName, NetworkInterface parameters)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -259,7 +259,7 @@ namespace Azure.Network.Management.Interface
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
         /// <param name="parameters"> Parameters supplied to the create or update network interface operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> CreateOrUpdateAsync(string resourceGroupName, string networkInterfaceName, NetworkInterface parameters, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> CreateOrUpdateOperationAsync(string resourceGroupName, string networkInterfaceName, NetworkInterface parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -274,15 +274,15 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("NetworkInterfacesClient.CreateOrUpdate");
+            using var scope = clientDiagnostics.CreateScope("NetworkInterfacesClient.CreateOrUpdateOperation");
             scope.Start();
             try
             {
-                using var message = CreateCreateOrUpdateRequest(resourceGroupName, networkInterfaceName, parameters);
+                using var message = CreateCreateOrUpdateOperationRequest(resourceGroupName, networkInterfaceName, parameters);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
-                    case 200:
+                    case 201:
                         return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -299,7 +299,7 @@ namespace Azure.Network.Management.Interface
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
         /// <param name="parameters"> Parameters supplied to the create or update network interface operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response CreateOrUpdate(string resourceGroupName, string networkInterfaceName, NetworkInterface parameters, CancellationToken cancellationToken = default)
+        public Response CreateOrUpdateOperation(string resourceGroupName, string networkInterfaceName, NetworkInterface parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -314,15 +314,15 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("NetworkInterfacesClient.CreateOrUpdate");
+            using var scope = clientDiagnostics.CreateScope("NetworkInterfacesClient.CreateOrUpdateOperation");
             scope.Start();
             try
             {
-                using var message = CreateCreateOrUpdateRequest(resourceGroupName, networkInterfaceName, parameters);
+                using var message = CreateCreateOrUpdateOperationRequest(resourceGroupName, networkInterfaceName, parameters);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
-                    case 200:
+                    case 201:
                         return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -597,7 +597,7 @@ namespace Azure.Network.Management.Interface
                 throw;
             }
         }
-        internal HttpMessage CreateGetEffectiveRouteTableRequest(string resourceGroupName, string networkInterfaceName)
+        internal HttpMessage CreateGetEffectiveRouteTableOperationRequest(string resourceGroupName, string networkInterfaceName)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -619,7 +619,7 @@ namespace Azure.Network.Management.Interface
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetEffectiveRouteTableAsync(string resourceGroupName, string networkInterfaceName, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> GetEffectiveRouteTableOperationAsync(string resourceGroupName, string networkInterfaceName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -630,15 +630,15 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(networkInterfaceName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("NetworkInterfacesClient.GetEffectiveRouteTable");
+            using var scope = clientDiagnostics.CreateScope("NetworkInterfacesClient.GetEffectiveRouteTableOperation");
             scope.Start();
             try
             {
-                using var message = CreateGetEffectiveRouteTableRequest(resourceGroupName, networkInterfaceName);
+                using var message = CreateGetEffectiveRouteTableOperationRequest(resourceGroupName, networkInterfaceName);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
-                    case 200:
+                    case 202:
                         return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -654,7 +654,7 @@ namespace Azure.Network.Management.Interface
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response GetEffectiveRouteTable(string resourceGroupName, string networkInterfaceName, CancellationToken cancellationToken = default)
+        public Response GetEffectiveRouteTableOperation(string resourceGroupName, string networkInterfaceName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -665,15 +665,15 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(networkInterfaceName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("NetworkInterfacesClient.GetEffectiveRouteTable");
+            using var scope = clientDiagnostics.CreateScope("NetworkInterfacesClient.GetEffectiveRouteTableOperation");
             scope.Start();
             try
             {
-                using var message = CreateGetEffectiveRouteTableRequest(resourceGroupName, networkInterfaceName);
+                using var message = CreateGetEffectiveRouteTableOperationRequest(resourceGroupName, networkInterfaceName);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
-                    case 200:
+                    case 202:
                         return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -685,7 +685,7 @@ namespace Azure.Network.Management.Interface
                 throw;
             }
         }
-        internal HttpMessage CreateListEffectiveNetworkSecurityGroupsRequest(string resourceGroupName, string networkInterfaceName)
+        internal HttpMessage CreateListEffectiveNetworkSecurityGroupsOperationRequest(string resourceGroupName, string networkInterfaceName)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -707,7 +707,7 @@ namespace Azure.Network.Management.Interface
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> ListEffectiveNetworkSecurityGroupsAsync(string resourceGroupName, string networkInterfaceName, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ListEffectiveNetworkSecurityGroupsOperationAsync(string resourceGroupName, string networkInterfaceName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -718,15 +718,15 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(networkInterfaceName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("NetworkInterfacesClient.ListEffectiveNetworkSecurityGroups");
+            using var scope = clientDiagnostics.CreateScope("NetworkInterfacesClient.ListEffectiveNetworkSecurityGroupsOperation");
             scope.Start();
             try
             {
-                using var message = CreateListEffectiveNetworkSecurityGroupsRequest(resourceGroupName, networkInterfaceName);
+                using var message = CreateListEffectiveNetworkSecurityGroupsOperationRequest(resourceGroupName, networkInterfaceName);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
-                    case 200:
+                    case 202:
                         return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -742,7 +742,7 @@ namespace Azure.Network.Management.Interface
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response ListEffectiveNetworkSecurityGroups(string resourceGroupName, string networkInterfaceName, CancellationToken cancellationToken = default)
+        public Response ListEffectiveNetworkSecurityGroupsOperation(string resourceGroupName, string networkInterfaceName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -753,15 +753,15 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(networkInterfaceName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("NetworkInterfacesClient.ListEffectiveNetworkSecurityGroups");
+            using var scope = clientDiagnostics.CreateScope("NetworkInterfacesClient.ListEffectiveNetworkSecurityGroupsOperation");
             scope.Start();
             try
             {
-                using var message = CreateListEffectiveNetworkSecurityGroupsRequest(resourceGroupName, networkInterfaceName);
+                using var message = CreateListEffectiveNetworkSecurityGroupsOperationRequest(resourceGroupName, networkInterfaceName);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
-                    case 200:
+                    case 202:
                         return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

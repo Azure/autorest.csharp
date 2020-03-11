@@ -78,24 +78,6 @@ namespace Azure.AI.FormRecognizer
         /// <summary> Extract key-value pairs, tables, and semantic values from a given document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
         /// <param name="modelId"> Model identifier. </param>
         /// <param name="includeTextDetails"> Include text lines and element references in the result. </param>
-        /// <param name="contentType"> Upload file type. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> AnalyzeWithCustomModelAsync(Guid modelId, bool? includeTextDetails, ContentType? contentType, CancellationToken cancellationToken = default)
-        {
-            return (await RestClient.AnalyzeWithCustomModelAsync(modelId, includeTextDetails, contentType, cancellationToken).ConfigureAwait(false)).GetRawResponse();
-        }
-        /// <summary> Extract key-value pairs, tables, and semantic values from a given document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
-        /// <param name="modelId"> Model identifier. </param>
-        /// <param name="includeTextDetails"> Include text lines and element references in the result. </param>
-        /// <param name="contentType"> Upload file type. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response AnalyzeWithCustomModel(Guid modelId, bool? includeTextDetails, ContentType? contentType, CancellationToken cancellationToken = default)
-        {
-            return RestClient.AnalyzeWithCustomModel(modelId, includeTextDetails, contentType, cancellationToken).GetRawResponse();
-        }
-        /// <summary> Extract key-value pairs, tables, and semantic values from a given document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
-        /// <param name="modelId"> Model identifier. </param>
-        /// <param name="includeTextDetails"> Include text lines and element references in the result. </param>
         /// <param name="fileStream"> .json, .pdf, .jpg, .png or .tiff type file stream. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> AnalyzeWithCustomModelAsync(Guid modelId, bool? includeTextDetails, SourcePath fileStream, CancellationToken cancellationToken = default)
@@ -129,22 +111,6 @@ namespace Azure.AI.FormRecognizer
         }
         /// <summary> Extract field text and semantic values from a given receipt document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
         /// <param name="includeTextDetails"> Include text lines and element references in the result. </param>
-        /// <param name="contentType"> Upload file type. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> AnalyzeReceiptAsyncAsync(bool? includeTextDetails, ContentType? contentType, CancellationToken cancellationToken = default)
-        {
-            return (await RestClient.AnalyzeReceiptAsyncAsync(includeTextDetails, contentType, cancellationToken).ConfigureAwait(false)).GetRawResponse();
-        }
-        /// <summary> Extract field text and semantic values from a given receipt document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
-        /// <param name="includeTextDetails"> Include text lines and element references in the result. </param>
-        /// <param name="contentType"> Upload file type. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response AnalyzeReceiptAsync(bool? includeTextDetails, ContentType? contentType, CancellationToken cancellationToken = default)
-        {
-            return RestClient.AnalyzeReceiptAsync(includeTextDetails, contentType, cancellationToken).GetRawResponse();
-        }
-        /// <summary> Extract field text and semantic values from a given receipt document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
-        /// <param name="includeTextDetails"> Include text lines and element references in the result. </param>
         /// <param name="fileStream"> .json, .pdf, .jpg, .png or .tiff type file stream. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> AnalyzeReceiptAsyncAsync(bool? includeTextDetails, SourcePath fileStream, CancellationToken cancellationToken = default)
@@ -172,20 +138,6 @@ namespace Azure.AI.FormRecognizer
         public virtual Response<AnalyzeOperationResult> GetAnalyzeReceiptResult(Guid resultId, CancellationToken cancellationToken = default)
         {
             return RestClient.GetAnalyzeReceiptResult(resultId, cancellationToken);
-        }
-        /// <summary> Extract text and layout information from a given document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
-        /// <param name="contentType"> Upload file type. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> AnalyzeLayoutAsyncAsync(ContentType? contentType, CancellationToken cancellationToken = default)
-        {
-            return (await RestClient.AnalyzeLayoutAsyncAsync(contentType, cancellationToken).ConfigureAwait(false)).GetRawResponse();
-        }
-        /// <summary> Extract text and layout information from a given document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
-        /// <param name="contentType"> Upload file type. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response AnalyzeLayoutAsync(ContentType? contentType, CancellationToken cancellationToken = default)
-        {
-            return RestClient.AnalyzeLayoutAsync(contentType, cancellationToken).GetRawResponse();
         }
         /// <summary> Extract text and layout information from a given document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
         /// <param name="fileStream"> .json, .pdf, .jpg, .png or .tiff type file stream. </param>
