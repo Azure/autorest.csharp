@@ -7,6 +7,7 @@ use-extension:
   "@autorest/modelerfour": "4.9.236"
 modelerfour:
   flatten-models: true
+  flatten-payloads: true
 pipeline:
   csharpgen:
     input: modelerfour/identity
