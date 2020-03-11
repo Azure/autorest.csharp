@@ -265,38 +265,19 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         ObjectSerialization serialization = objectResponseBody.Serialization;
                         using (writer.Scope($"({responseVariable:D}, cancellationToken) =>", "{", "},"))
                         {
-                            switch (serialization)
-                            {
-                                case JsonSerialization jsonSerialization:
-                                    writer.WriteMethodDeserialization(jsonSerialization, async: false, ref valueVariable, responseVariable);
-                                    break;
-                                case XmlElementSerialization xmlSerialization:
-                                    writer.WriteMethodDeserialization(xmlSerialization, ref valueVariable, responseVariable);
-                                    break;
-                                default:
-                                    throw new NotSupportedException();
-                            }
+                            writer.WriteDeserializationForMethods(objectResponseBody.Serialization, async: false, ref valueVariable, responseVariable);
                             writer.Line($"return {valueVariable};");
                         }
 
                         using (writer.Scope($"async ({responseVariable:D}, cancellationToken) =>", newLine: false))
                         {
-                            switch (serialization)
-                            {
-                                case JsonSerialization jsonSerialization:
-                                    writer.WriteMethodDeserialization(jsonSerialization, async: true, ref valueVariable, responseVariable);
-                                    break;
-                                case XmlElementSerialization xmlSerialization:
-                                    writer.WriteMethodDeserialization(xmlSerialization, ref valueVariable, responseVariable);
-                                    break;
-                                default:
-                                    throw new NotSupportedException();
-                            }
+                            writer.WriteDeserializationForMethods(objectResponseBody.Serialization, async: true, ref valueVariable, responseVariable);
                             writer.Line($"return {valueVariable};");
                         }
                     }
                     else if (lroMethod.OriginalResponse.ResponseBody is StreamResponseBody)
                     {
+                        //TODO: https://github.com/Azure/autorest.csharp/issues/523
                         throw new NotSupportedException("Binary is not supported as message (not response) is required for ExtractResponseContent() call.");
                     }
                 }

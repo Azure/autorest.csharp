@@ -180,8 +180,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
             string s = destination;
 
-            writer
-                .Line($"{type} {destination:D} = default;");
+            writer.Line($"{type} {destination:D} = default;");
 
             if (isElement)
             {
@@ -377,13 +376,13 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
         }
 
-        public static void WriteMethodDeserialization(this CodeWriter writer, XmlElementSerialization serialization,
+        public static void WriteDeserializationForMethods(this CodeWriter writer, XmlElementSerialization serialization,
             ref string destination, string response, string document = "document")
         {
-            writer.Line($"var {document:D} = {typeof(XDocument)}.Load({response:D}.ContentStream, LoadOptions.PreserveWhitespace);");
+            writer.Line($"var {document:D} = {typeof(XDocument)}.Load({response}.ContentStream, LoadOptions.PreserveWhitespace);");
             writer.ToDeserializeCall(
                 serialization,
-                w => w.Append($"{document:D}"),
+                w => w.Append($"{document}"),
                 ref destination
             );
         }

@@ -5,6 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.V3.Generation.Types;
+using AutoRest.CSharp.V3.Output.Models.Serialization;
+using AutoRest.CSharp.V3.Output.Models.Serialization.Json;
+using AutoRest.CSharp.V3.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.V3.Output.Models.Shared;
 
 namespace AutoRest.CSharp.V3.Generation.Writers
@@ -49,6 +52,20 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             if (parameters.Any())
             {
                 writer.Line();
+            }
+        }
+
+        public static void WriteDeserializationForMethods(this CodeWriter writer, ObjectSerialization serialization, bool async,
+            ref string valueVariable, string responseVariable, string document = "document")
+        {
+            switch (serialization)
+            {
+                case JsonSerialization jsonSerialization:
+                    writer.WriteDeserializationForMethods(jsonSerialization, async, ref valueVariable, responseVariable);
+                    break;
+                case XmlElementSerialization xmlSerialization:
+                    writer.WriteDeserializationForMethods(xmlSerialization, ref valueVariable, responseVariable);
+                    break;
             }
         }
     }

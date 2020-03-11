@@ -136,7 +136,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     WriteHeader(writer, header);
                 }
 
-                if (operation.Request.Body is RequestBody body)
+                if (operation.Request.Body is SchemaRequestBody body)
                 {
                     ParameterOrConstant value = body.Value;
                     switch (body.Serialization)
@@ -157,10 +157,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                                 writerName: w => w.Append($"content.{nameof(XmlWriterContent.XmlWriter)}"));
                             writer.Line($"request.Content = content;");
                             break;
-                        case BinarySerialization _:
-                            writer.Line($"request.Content = {typeof(RequestContent)}.Create({WriteConstantOrParameter(value, ignoreNullability: true)});");
-                            break;
                     }
+                }
+                else if (operation.Request.Body is BinaryRequestBody binaryBody)
+                {
+                    writer.Line($"request.Content = {typeof(RequestContent)}.Create({WriteConstantOrParameter(binaryBody.Value, ignoreNullability: true)});");
                 }
 
                 writer.Line($"return message;");
@@ -419,28 +420,20 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     string responseVariable = $"{messageVariable}.Response";
                     if (responseBody is ObjectResponseBody objectResponseBody)
                     {
-                        switch (objectResponseBody.Serialization)
-                        {
-                            case JsonSerialization jsonSerialization:
-                                writer.WriteMethodDeserialization(jsonSerialization, async, ref valueVariable, responseVariable);
-                                break;
-                            case XmlElementSerialization xmlSerialization:
-                                writer.WriteMethodDeserialization(xmlSerialization, ref valueVariable, responseVariable);
-                                break;
-                        }
+                        writer.WriteDeserializationForMethods(objectResponseBody.Serialization, async, ref valueVariable, responseVariable);
                     }
                     else if (responseBody is StreamResponseBody _)
                     {
-                        writer.Line($"var {valueVariable:D} = {messageVariable:D}.ExtractResponseContent();");
-                        using (writer.Scope($"if ({valueVariable:D} == null)"))
+                        writer.Line($"var {valueVariable:D} = {messageVariable}.ExtractResponseContent();");
+                        using (writer.Scope($"if ({valueVariable} == null)"))
                         {
                             if (async)
                             {
-                                writer.Line($"throw await clientDiagnostics.CreateRequestFailedExceptionAsync({responseVariable:D}).ConfigureAwait(false);");
+                                writer.Line($"throw await clientDiagnostics.CreateRequestFailedExceptionAsync({responseVariable}).ConfigureAwait(false);");
                             }
                             else
                             {
-                                writer.Line($"throw clientDiagnostics.CreateRequestFailedException({responseVariable:D});");
+                                writer.Line($"throw clientDiagnostics.CreateRequestFailedException({responseVariable});");
                             }
                         }
                     }
