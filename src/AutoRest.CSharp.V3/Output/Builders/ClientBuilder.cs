@@ -93,11 +93,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                     RestClientMethod? next = null;
                     if (paging.NextLinkOperation != null)
                     {
-                        //TODO: This assumes the operation is within this operationGroup
-                        string nextOperationName = paging.NextLinkOperation.Language.Default.Name;
-
-                        // TODO: With NextLinkOperation we shouldn't be doing this at all.
-                        OperationMethod? nextOperationMethod = operationMethods.SingleOrDefault(m => m.Name.Equals(nextOperationName, StringComparison.InvariantCultureIgnoreCase));
+                        OperationMethod? nextOperationMethod = operationMethods.SingleOrDefault(m => m.Operation == paging.NextLinkOperation);
 
                         if (nextOperationMethod == null)
                         {
