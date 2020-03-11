@@ -157,6 +157,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                                 writerName: w => w.Append($"content.{nameof(XmlWriterContent.XmlWriter)}"));
                             writer.Line($"request.Content = content;");
                             break;
+                        default:
+                            throw new NotImplementedException(body.Serialization.ToString());
                     }
                 }
                 else if (operation.Request.Body is BinaryRequestBody binaryBody)
@@ -278,8 +280,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 return;
             }
 
-            Type? frameworkType = constant.Type.FrameworkType;
-
+            Type frameworkType = constant.Type.FrameworkType;
             if (frameworkType == typeof(DateTimeOffset))
             {
                 var d = (DateTimeOffset) constant.Value;
@@ -297,13 +298,9 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                 writer.Append($"}}");
             }
-            else if (frameworkType != null)
-            {
-                writer.Literal(constant.Value);
-            }
             else
             {
-                throw new InvalidOperationException("Unknown constant type");
+                writer.Literal(constant.Value);
             }
         }
 
@@ -375,7 +372,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     method = nameof(RequestUriBuilderExtensions.AppendQueryDelimited);
                     delimiter = ",";
                     break;
-
                 default:
                     method = nameof(RequestUriBuilderExtensions.AppendQuery);
                     break;
@@ -405,7 +401,9 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         //TODO: Do multiple status codes
         private void WriteStatusCodeSwitch(CodeWriter writer, ResponseBody? responseBody, CSharpType? headersModelType, RestClientMethod operation, bool async)
         {
-            using (writer.Scope($"switch (message.Response.Status)"))
+            string messageVariable = "message";
+            string responseVariable = $"{messageVariable}.Response";
+            using (writer.Scope($"switch ({responseVariable}.Status)"))
             {
                 var statusCodes = operation.Response.SuccessfulStatusCodes;
                 foreach (var statusCode in statusCodes)
@@ -416,8 +414,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 using (responseBody != null ? writer.Scope() : default)
                 {
                     string valueVariable = "value";
-                    string messageVariable = "message";
-                    string responseVariable = $"{messageVariable}.Response";
                     if (responseBody is ObjectResponseBody objectResponseBody)
                     {
                         writer.WriteDeserializationForMethods(objectResponseBody.Serialization, async, ref valueVariable, responseVariable);
@@ -425,39 +421,28 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     else if (responseBody is StreamResponseBody _)
                     {
                         writer.Line($"var {valueVariable:D} = {messageVariable}.ExtractResponseContent();");
-                        using (writer.Scope($"if ({valueVariable} == null)"))
-                        {
-                            if (async)
-                            {
-                                writer.Line($"throw await clientDiagnostics.CreateRequestFailedExceptionAsync({responseVariable}).ConfigureAwait(false);");
-                            }
-                            else
-                            {
-                                writer.Line($"throw clientDiagnostics.CreateRequestFailedException({responseVariable});");
-                            }
-                        }
                     }
 
                     if (headersModelType != null)
                     {
-                        writer.Line($"var headers = new {headersModelType}(message.Response);");
+                        writer.Line($"var headers = new {headersModelType}({responseVariable});");
                     }
 
                     switch (responseBody)
                     {
                         case null when headersModelType != null:
-                            writer.Append($"return {typeof(ResponseWithHeaders)}.FromValue(headers, message.Response);");
+                            writer.Append($"return {typeof(ResponseWithHeaders)}.FromValue(headers, {responseVariable});");
                             break;
                         case { } when headersModelType != null:
-                            writer.Append($"return {typeof(ResponseWithHeaders)}.FromValue({valueVariable}, headers, message.Response);");
+                            writer.Append($"return {typeof(ResponseWithHeaders)}.FromValue({valueVariable}, headers, {responseVariable});");
                             break;
                         case { }:
-                            writer.Append($"return {typeof(Response)}.FromValue({valueVariable}, message.Response);");
+                            writer.Append($"return {typeof(Response)}.FromValue({valueVariable}, {responseVariable});");
                             break;
                         case null when !statusCodes.Any():
                             break;
                         case null:
-                            writer.Append($"return message.Response;");
+                            writer.Append($"return {responseVariable};");
                             break;
                     }
                 }
@@ -465,11 +450,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.Line($"default:");
                 if (async)
                 {
-                    writer.Line($"throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);");
+                    writer.Line($"throw await clientDiagnostics.CreateRequestFailedExceptionAsync({responseVariable}).ConfigureAwait(false);");
                 }
                 else
                 {
-                    writer.Line($"throw clientDiagnostics.CreateRequestFailedException(message.Response);");
+                    writer.Line($"throw clientDiagnostics.CreateRequestFailedException({responseVariable});");
                 }
             }
         }

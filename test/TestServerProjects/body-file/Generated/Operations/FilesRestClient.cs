@@ -58,10 +58,6 @@ namespace body_file
                     case 200:
                         {
                             var value = message.ExtractResponseContent();
-                            if (value == null)
-                            {
-                                throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -89,10 +85,6 @@ namespace body_file
                     case 200:
                         {
                             var value = message.ExtractResponseContent();
-                            if (value == null)
-                            {
-                                throw clientDiagnostics.CreateRequestFailedException(message.Response);
-                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -131,10 +123,6 @@ namespace body_file
                     case 200:
                         {
                             var value = message.ExtractResponseContent();
-                            if (value == null)
-                            {
-                                throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -162,10 +150,6 @@ namespace body_file
                     case 200:
                         {
                             var value = message.ExtractResponseContent();
-                            if (value == null)
-                            {
-                                throw clientDiagnostics.CreateRequestFailedException(message.Response);
-                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -204,10 +188,6 @@ namespace body_file
                     case 200:
                         {
                             var value = message.ExtractResponseContent();
-                            if (value == null)
-                            {
-                                throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -235,10 +215,6 @@ namespace body_file
                     case 200:
                         {
                             var value = message.ExtractResponseContent();
-                            if (value == null)
-                            {
-                                throw clientDiagnostics.CreateRequestFailedException(message.Response);
-                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:

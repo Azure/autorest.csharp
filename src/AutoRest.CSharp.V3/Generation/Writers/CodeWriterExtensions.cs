@@ -66,6 +66,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 case XmlElementSerialization xmlSerialization:
                     writer.WriteDeserializationForMethods(xmlSerialization, ref valueVariable, responseVariable);
                     break;
+                default:
+                    throw new NotImplementedException(serialization.ToString());
             }
         }
     }
