@@ -58,7 +58,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 clientParameters[clientParameter.Language.Default.Name] = BuildParameter(clientParameter);
             }
 
-            Dictionary<string, OperationMethod> operationMethods = new Dictionary<string, OperationMethod>(StringComparer.InvariantCultureIgnoreCase);
+            List<OperationMethod> operationMethods = new List<OperationMethod>();
             foreach (Operation operation in operationGroup.Operations)
             {
                 foreach (ServiceRequest serviceRequest in operation.Requests)
@@ -71,7 +71,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                     }
 
                     RestClientMethod method = BuildMethod(operation, clientName, clientParameters, httpRequest, serviceRequest.Parameters);
-                    operationMethods[operation.Language.Default.Name] = new OperationMethod(operation, method);
+                    operationMethods.Add(new OperationMethod(operation.Language.Default.Name, operation, method));
                 }
             }
 
@@ -79,7 +79,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             List<PagingInfo> pagingMethods = new List<PagingInfo>();
             List<LongRunningOperation> longRunningOperationMethods = new List<LongRunningOperation>();
             List<ClientMethod> clientMethods = new List<ClientMethod>();
-            foreach ((Operation operation, RestClientMethod method) in operationMethods.Values)
+            foreach ((Operation operation, RestClientMethod method) in operationMethods)
             {
                 if (operation.IsLongRunning)
                 {
@@ -95,7 +95,11 @@ namespace AutoRest.CSharp.V3.Output.Builders
                     {
                         //TODO: This assumes the operation is within this operationGroup
                         string nextOperationName = paging.NextLinkOperation.Language.Default.Name;
-                        if (!operationMethods.TryGetValue(nextOperationName, out OperationMethod? nextOperationMethod))
+
+                        // TODO: With NextLinkOperation we shouldn't be doing this at all.
+                        OperationMethod? nextOperationMethod = operationMethods.SingleOrDefault(m => m.Name.Equals(nextOperationName, StringComparison.InvariantCultureIgnoreCase));
+
+                        if (nextOperationMethod == null)
                         {
                             throw new Exception($"The x-ms-pageable operationName \"{paging.Group}_{paging.Member}\" for operation {operationGroup.Key}_{operation.Language.Default.Name} was not found.");
                         }
@@ -134,7 +138,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 ));
             }
 
-            RestClientMethod[] methods = operationMethods.Select(om => om.Value.Method).Concat(nextPageMethods).ToArray();
+            RestClientMethod[] methods = operationMethods.Select(om => om.Method).Concat(nextPageMethods).ToArray();
 
             var restClient = new RestClient(
                 BuilderHelpers.CreateTypeAttributes(GetClientName(operationGroup, "RestClient"), _context.DefaultNamespace, "internal"),
@@ -170,8 +174,9 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
         private class OperationMethod
         {
-            public OperationMethod(Operation operation, RestClientMethod method)
+            public OperationMethod(string name, Operation operation, RestClientMethod method)
             {
+                Name = name;
                 Operation = operation;
                 Method = method;
             }
@@ -182,8 +187,9 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 method = Method;
             }
 
+            public string Name { get; }
             public Operation Operation { get; }
-            public RestClientMethod Method { get; set; }
+            public RestClientMethod Method { get; }
         }
 
         private static Parameter[] OrderParameters(IEnumerable<Parameter> parameters) => parameters.OrderBy(p => p.DefaultValue != null).ToArray();
