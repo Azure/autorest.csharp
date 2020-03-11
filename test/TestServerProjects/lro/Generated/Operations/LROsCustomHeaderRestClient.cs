@@ -32,7 +32,7 @@ namespace lro
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
-        internal HttpMessage CreatePutAsyncRetrySucceededRequest(Product product)
+        internal HttpMessage CreatePutAsyncRetrySucceededOperationRequest(Product product)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -50,13 +50,13 @@ namespace lro
         /// <summary> x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutAsyncRetrySucceededAsync(Product product, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutAsyncRetrySucceededOperationAsync(Product product, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LROsCustomHeaderClient.PutAsyncRetrySucceeded");
+            using var scope = clientDiagnostics.CreateScope("LROsCustomHeaderClient.PutAsyncRetrySucceededOperation");
             scope.Start();
             try
             {
-                using var message = CreatePutAsyncRetrySucceededRequest(product);
+                using var message = CreatePutAsyncRetrySucceededOperationRequest(product);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -75,13 +75,13 @@ namespace lro
         /// <summary> x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutAsyncRetrySucceeded(Product product, CancellationToken cancellationToken = default)
+        public Response PutAsyncRetrySucceededOperation(Product product, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LROsCustomHeaderClient.PutAsyncRetrySucceeded");
+            using var scope = clientDiagnostics.CreateScope("LROsCustomHeaderClient.PutAsyncRetrySucceededOperation");
             scope.Start();
             try
             {
-                using var message = CreatePutAsyncRetrySucceededRequest(product);
+                using var message = CreatePutAsyncRetrySucceededOperationRequest(product);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -97,7 +97,7 @@ namespace lro
                 throw;
             }
         }
-        internal HttpMessage CreatePut201CreatingSucceeded200Request(Product product)
+        internal HttpMessage CreatePut201CreatingSucceeded200OperationRequest(Product product)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -115,17 +115,17 @@ namespace lro
         /// <summary> x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Put201CreatingSucceeded200Async(Product product, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> Put201CreatingSucceeded200OperationAsync(Product product, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LROsCustomHeaderClient.Put201CreatingSucceeded200");
+            using var scope = clientDiagnostics.CreateScope("LROsCustomHeaderClient.Put201CreatingSucceeded200Operation");
             scope.Start();
             try
             {
-                using var message = CreatePut201CreatingSucceeded200Request(product);
+                using var message = CreatePut201CreatingSucceeded200OperationRequest(product);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
-                    case 200:
+                    case 201:
                         return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -140,17 +140,17 @@ namespace lro
         /// <summary> x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Put201CreatingSucceeded200(Product product, CancellationToken cancellationToken = default)
+        public Response Put201CreatingSucceeded200Operation(Product product, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LROsCustomHeaderClient.Put201CreatingSucceeded200");
+            using var scope = clientDiagnostics.CreateScope("LROsCustomHeaderClient.Put201CreatingSucceeded200Operation");
             scope.Start();
             try
             {
-                using var message = CreatePut201CreatingSucceeded200Request(product);
+                using var message = CreatePut201CreatingSucceeded200OperationRequest(product);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
-                    case 200:
+                    case 201:
                         return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -162,7 +162,7 @@ namespace lro
                 throw;
             }
         }
-        internal HttpMessage CreatePost202Retry200Request(Product product)
+        internal HttpMessage CreatePost202Retry200OperationRequest(Product product)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -180,13 +180,13 @@ namespace lro
         /// <summary> x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; and &apos;Retry-After&apos; headers, Polls return a 200 with a response body after success. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Post202Retry200Async(Product product, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> Post202Retry200OperationAsync(Product product, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LROsCustomHeaderClient.Post202Retry200");
+            using var scope = clientDiagnostics.CreateScope("LROsCustomHeaderClient.Post202Retry200Operation");
             scope.Start();
             try
             {
-                using var message = CreatePost202Retry200Request(product);
+                using var message = CreatePost202Retry200OperationRequest(product);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -205,13 +205,13 @@ namespace lro
         /// <summary> x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; and &apos;Retry-After&apos; headers, Polls return a 200 with a response body after success. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Post202Retry200(Product product, CancellationToken cancellationToken = default)
+        public Response Post202Retry200Operation(Product product, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LROsCustomHeaderClient.Post202Retry200");
+            using var scope = clientDiagnostics.CreateScope("LROsCustomHeaderClient.Post202Retry200Operation");
             scope.Start();
             try
             {
-                using var message = CreatePost202Retry200Request(product);
+                using var message = CreatePost202Retry200OperationRequest(product);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -227,7 +227,7 @@ namespace lro
                 throw;
             }
         }
-        internal HttpMessage CreatePostAsyncRetrySucceededRequest(Product product)
+        internal HttpMessage CreatePostAsyncRetrySucceededOperationRequest(Product product)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -245,13 +245,13 @@ namespace lro
         /// <summary> x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostAsyncRetrySucceededAsync(Product product, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PostAsyncRetrySucceededOperationAsync(Product product, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LROsCustomHeaderClient.PostAsyncRetrySucceeded");
+            using var scope = clientDiagnostics.CreateScope("LROsCustomHeaderClient.PostAsyncRetrySucceededOperation");
             scope.Start();
             try
             {
-                using var message = CreatePostAsyncRetrySucceededRequest(product);
+                using var message = CreatePostAsyncRetrySucceededOperationRequest(product);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -270,13 +270,13 @@ namespace lro
         /// <summary> x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PostAsyncRetrySucceeded(Product product, CancellationToken cancellationToken = default)
+        public Response PostAsyncRetrySucceededOperation(Product product, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LROsCustomHeaderClient.PostAsyncRetrySucceeded");
+            using var scope = clientDiagnostics.CreateScope("LROsCustomHeaderClient.PostAsyncRetrySucceededOperation");
             scope.Start();
             try
             {
-                using var message = CreatePostAsyncRetrySucceededRequest(product);
+                using var message = CreatePostAsyncRetrySucceededOperationRequest(product);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {

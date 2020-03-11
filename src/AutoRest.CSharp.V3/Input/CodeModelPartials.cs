@@ -4,7 +4,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using System.Reflection;
+using AutoRest.CSharp.V3.Utilities;
 using YamlDotNet.Serialization;
 
 #pragma warning disable SA1649
@@ -18,6 +21,58 @@ namespace AutoRest.CSharp.V3.Input
     {
         [YamlMember(Alias = "binary")]
         public bool? Binary { get; set; }
+    }
+
+    internal partial class Operation
+    {
+        // For some reason, booleans in dictionaries are deserialized as string instead of bool.
+        public bool IsLongRunning => Convert.ToBoolean(Extensions.GetValue<string>("x-ms-long-running-operation") ?? "false");
+        public string? LongRunningFinalStateVia => Extensions.GetValue<IDictionary<object, object>>("x-ms-long-running-operation-options")?.GetValue<string>("final-state-via");
+
+        public ServiceResponse LongRunningInitialResponse
+        {
+            get
+            {
+                Debug.Assert(IsLongRunning);
+
+
+                foreach (var operationResponse in Responses)
+                {
+                    if (operationResponse.Protocol.Http is HttpResponse operationHttpResponse &&
+                        !operationHttpResponse.StatusCodes.Contains(StatusCodes._200) &&
+                        !operationHttpResponse.StatusCodes.Contains(StatusCodes._204))
+                    {
+                        return operationResponse;
+                    }
+                }
+
+                return Responses.First();
+            }
+        }
+        public ServiceResponse LongRunningFinalResponse
+        {
+            get
+            {
+                Debug.Assert(IsLongRunning);
+
+                foreach (var operationResponse in Responses)
+                {
+                    if (operationResponse.Protocol.Http is HttpResponse operationHttpResponse &&
+                        (operationHttpResponse.StatusCodes.Contains(StatusCodes._200) ||
+                         operationHttpResponse.StatusCodes.Contains(StatusCodes._204)))
+                    {
+                        return operationResponse;
+                    }
+                }
+
+                return Responses.First();
+            }
+        }
+    }
+
+    internal partial class ServiceResponse
+    {
+        public HttpResponse HttpResponse => Protocol.Http as HttpResponse ?? throw new InvalidOperationException($"Expected an HTTP response");
     }
 
     internal partial class Value
