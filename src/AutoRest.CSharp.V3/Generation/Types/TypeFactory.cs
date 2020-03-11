@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using AutoRest.CSharp.V3.Input;
 using AutoRest.CSharp.V3.Output.Models.Types;
 
@@ -20,7 +21,7 @@ namespace AutoRest.CSharp.V3.Generation.Types
         public CSharpType CreateType(Schema schema, bool isNullable) => schema switch
         {
             ConstantSchema constantSchema => CreateType(constantSchema.ValueType, isNullable),
-            BinarySchema _ => new CSharpType(typeof(byte[]), isNullable),
+            BinarySchema _ => new CSharpType(typeof(Stream), isNullable),
             ByteArraySchema _ => new CSharpType(typeof(byte[]), isNullable),
             ArraySchema array => new CSharpType(typeof(IList<>), isNullable, CreateType(array.ElementType, false)),
             DictionarySchema dictionary => new CSharpType(typeof(IDictionary<,>), isNullable, new CSharpType(typeof(string)), CreateType(dictionary.ElementType, false)),

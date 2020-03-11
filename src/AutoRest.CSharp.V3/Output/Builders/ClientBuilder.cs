@@ -236,9 +236,6 @@ namespace AutoRest.CSharp.V3.Output.Builders
                             constantOrParameter = ParseConstant(constant);
                             valueSchema = constant.ValueType;
                             break;
-                        case BinarySchema _:
-                            // skip
-                            continue;
                         default:
                             constantOrParameter = BuildParameter(requestParameter);
                             break;
@@ -271,8 +268,15 @@ namespace AutoRest.CSharp.V3.Output.Builders
                             break;
                         case ParameterLocation.Body:
                             Debug.Assert(httpRequestWithBody != null);
-                            var serialization = _serializationBuilder.Build(httpRequestWithBody.KnownMediaType, requestParameter.Schema, requestParameter.IsNullable());
-                            body = new RequestBody(constantOrParameter, serialization);
+                            if (httpRequestWithBody.KnownMediaType == KnownMediaType.Binary)
+                            {
+                                body = new BinaryRequestBody(constantOrParameter);
+                            }
+                            else
+                            {
+                                var serialization = _serializationBuilder.Build(httpRequestWithBody.KnownMediaType, requestParameter.Schema, requestParameter.IsNullable());
+                                body = new SchemaRequestBody(constantOrParameter, serialization);
+                            }
                             break;
                         case ParameterLocation.Uri:
                             if (defaultName == "$host")

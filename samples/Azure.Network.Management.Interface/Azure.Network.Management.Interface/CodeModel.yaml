@@ -2871,7 +2871,7 @@ schemas: !<!Schemas>
       version: '2019-11-01'
     language: !<!Languages> 
       default:
-        name: ApplicationGatewayHttpListenerPropertiesFormatHostnamesItem
+        name: ApplicationGatewayHttpListenerPropertiesFormatHostNamesItem
         description: ''
     protocol: !<!Protocols> {}
   - !<!StringSchema> &ref_262
@@ -10423,16 +10423,16 @@ schemas: !<!Schemas>
                           elementType: *ref_269
                           language: !<!Languages> 
                             default:
-                              name: ApplicationGatewayHttpListenerPropertiesFormatHostnames
+                              name: ApplicationGatewayHttpListenerPropertiesFormatHostNames
                               description: List of Host names for HTTP Listener that allows special wildcard characters as well.
                           protocol: !<!Protocols> {}
                         flattenedNames:
                         - properties
-                        - hostnames
-                        serializedName: hostnames
+                        - hostNames
+                        serializedName: hostNames
                         language: !<!Languages> 
                           default:
-                            name: hostnames
+                            name: hostNames
                             description: List of Host names for HTTP Listener that allows special wildcard characters as well.
                         protocol: !<!Protocols> {}
                       serializationFormats:
@@ -18055,10 +18055,10 @@ schemas: !<!Schemas>
       protocol: !<!Protocols> {}
     - !<!Property> 
       schema: *ref_543
-      serializedName: hostnames
+      serializedName: hostNames
       language: !<!Languages> 
         default:
-          name: hostnames
+          name: hostNames
           description: List of Host names for HTTP Listener that allows special wildcard characters as well.
       protocol: !<!Protocols> {}
     serializationFormats:
