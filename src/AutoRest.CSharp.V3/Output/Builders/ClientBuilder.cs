@@ -52,6 +52,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 .SelectMany(op => op.Parameters.Concat(op.Requests.SelectMany(r => r.Parameters)))
                 .Where(p => p.Implementation == ImplementationLocation.Client)
                 .Distinct();
+
             Dictionary<string, Parameter> clientParameters = new Dictionary<string, Parameter>();
             foreach (RequestParameter clientParameter in allClientParameters)
             {
@@ -71,7 +72,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                     }
 
                     RestClientMethod method = BuildMethod(operation, clientName, clientParameters, httpRequest, serviceRequest.Parameters);
-                    operationMethods.Add(new OperationMethod(operation.Language.Default.Name, operation, method));
+                    operationMethods.Add(new OperationMethod(operation, method));
                 }
             }
 
@@ -170,9 +171,8 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
         private class OperationMethod
         {
-            public OperationMethod(string name, Operation operation, RestClientMethod method)
+            public OperationMethod(Operation operation, RestClientMethod method)
             {
-                Name = name;
                 Operation = operation;
                 Method = method;
             }
@@ -183,7 +183,6 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 method = Method;
             }
 
-            public string Name { get; }
             public Operation Operation { get; }
             public RestClientMethod Method { get; }
         }
