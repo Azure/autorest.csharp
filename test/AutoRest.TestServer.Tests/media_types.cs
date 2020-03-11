@@ -2,6 +2,8 @@
 // Licensed under the MIT License.
 
 using System;
+using System.IO;
+using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using AutoRest.TestServer.Tests.Infrastructure;
@@ -28,11 +30,11 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Implement binary handling: https://github.com/Azure/autorest.csharp/issues/515")]
+        [Ignore("Requires multiple media types handling: https://github.com/Azure/autorest.csharp/issues/522")]
         public Task MediaTypePdf() => Test(async (host, pipeline) =>
         {
-            //var value = "PDF";
-            var response = await new ServiceClient(ClientDiagnostics, pipeline, host).AnalyzeBodyAsync(ContentType.ApplicationPdf);
+            await using var value = new MemoryStream(Encoding.UTF8.GetBytes("PDF"));
+            var response = await new ServiceClient(ClientDiagnostics, pipeline, host).AnalyzeBodyAsync(ContentType.ApplicationPdf, value);
             Assert.AreEqual("Nice job with PDF", response.Value);
         });
     }

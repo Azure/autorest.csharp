@@ -37,6 +37,6 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> Reference to the FirewallPolicy resource. </summary>
         public SubResource FirewallPolicy { get; set; }
         /// <summary> List of Host names for HTTP Listener that allows special wildcard characters as well. </summary>
-        public IList<string> Hostnames { get; set; }
+        public IList<string> HostNames { get; set; }
     }
 }

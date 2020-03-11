@@ -383,5 +383,25 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             SerializationFormat.Duration_ISO8601 => "P",
             _ => null
         };
+
+        public static void WriteDeserializationForMethods(this CodeWriter writer, JsonSerialization serialization, bool async,
+            ref string destination, string response, string document = "document")
+        {
+            writer.Append($"using var {document:D} = ");
+            if (async)
+            {
+                writer.Line($"await {typeof(JsonDocument)}.ParseAsync({response}.ContentStream, default, cancellationToken).ConfigureAwait(false);");
+            }
+            else
+            {
+                writer.Line($"{typeof(JsonDocument)}.Parse({response}.ContentStream);");
+            }
+
+            writer.ToDeserializeCall(
+                serialization,
+                w => w.Append($"{document}.RootElement"),
+                ref destination
+            );
+        }
     }
 }

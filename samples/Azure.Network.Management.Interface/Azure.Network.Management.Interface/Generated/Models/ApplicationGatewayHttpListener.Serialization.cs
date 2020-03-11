@@ -88,11 +88,11 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("firewallPolicy");
                 writer.WriteObjectValue(FirewallPolicy);
             }
-            if (Hostnames != null)
+            if (HostNames != null)
             {
-                writer.WritePropertyName("hostnames");
+                writer.WritePropertyName("hostNames");
                 writer.WriteStartArray();
-                foreach (var item in Hostnames)
+                foreach (var item in HostNames)
                 {
                     writer.WriteStringValue(item);
                 }
@@ -231,16 +231,16 @@ namespace Azure.Network.Management.Interface.Models
                             result.FirewallPolicy = DeserializeSubResource(property0.Value);
                             continue;
                         }
-                        if (property0.NameEquals("hostnames"))
+                        if (property0.NameEquals("hostNames"))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
                                 continue;
                             }
-                            result.Hostnames = new List<string>();
+                            result.HostNames = new List<string>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                result.Hostnames.Add(item.GetString());
+                                result.HostNames.Add(item.GetString());
                             }
                             continue;
                         }
