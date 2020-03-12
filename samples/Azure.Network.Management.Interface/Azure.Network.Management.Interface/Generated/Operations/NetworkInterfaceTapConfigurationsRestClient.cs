@@ -93,6 +93,7 @@ namespace Azure.Network.Management.Interface
                 switch (message.Response.Status)
                 {
                     case 202:
+                    case 200:
                         return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -133,6 +134,7 @@ namespace Azure.Network.Management.Interface
                 switch (message.Response.Status)
                 {
                     case 202:
+                    case 200:
                         return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -308,6 +310,7 @@ namespace Azure.Network.Management.Interface
                 switch (message.Response.Status)
                 {
                     case 201:
+                    case 200:
                         return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -353,6 +356,7 @@ namespace Azure.Network.Management.Interface
                 switch (message.Response.Status)
                 {
                     case 201:
+                    case 200:
                         return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
