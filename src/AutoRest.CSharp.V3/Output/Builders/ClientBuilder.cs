@@ -310,9 +310,20 @@ namespace AutoRest.CSharp.V3.Output.Builders
                     responseHeaderModel = BuildResponseHeaderModel(operation, response);
                 }
 
+                var responseCodes = new HashSet<int>(response.HttpResponse.IntStatusCodes);
+
+                // Long running operations can respond with both initial or final status code
+                if (operation.IsLongRunning)
+                {
+                    foreach (var statusCode in operation.LongRunningFinalResponse.HttpResponse.IntStatusCodes)
+                    {
+                        responseCodes.Add(statusCode);
+                    }
+                }
+
                 clientResponse = new Response(
                     responseBody,
-                    response.HttpResponse.StatusCodes.Select(ToStatusCode).ToArray(),
+                    responseCodes.ToArray(),
                     responseHeaderModel
                 );
             }
@@ -433,7 +444,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             return new LongRunningOperation(
                 startMethod,
                 new Response(BuildResponseBody(finalResponse),
-                    finalResponse.HttpResponse.StatusCodes.Select(ToStatusCode).ToArray(),
+                    finalResponse.HttpResponse.IntStatusCodes,
                     BuildResponseHeaderModel(operation, finalResponse)),
                 name,
                 new[] { originalResponseParameter, httpMessageParameter },
@@ -524,8 +535,6 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
             return null;
         }
-
-        private static int ToStatusCode(StatusCodes arg) => int.Parse(arg.ToString().Trim('_'));
 
         private static string CreateDescription(RequestParameter requestParameter)
         {
