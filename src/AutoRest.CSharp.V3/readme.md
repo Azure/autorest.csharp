@@ -4,7 +4,7 @@
 ## Configuration
 ```yaml
 use-extension:
-  "@autorest/modelerfour": "4.9.236"
+  "@autorest/modelerfour": "4.10.242"
 modelerfour:
   flatten-models: true
   flatten-payloads: true

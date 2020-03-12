@@ -240,7 +240,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
             }
 
-            writer.Append($"public {responseType} {CreateCreateOperationName(lroMethod.Name)}(");
+            writer.Append($"internal {responseType} {CreateCreateOperationName(lroMethod.Name)}(");
             foreach (Parameter parameter in parameters)
             {
                 writer.WriteParameter(parameter);

@@ -144,20 +144,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
         private ObjectSerialization[] BuildSerializations()
         {
-            //TODO: Remove after https://github.com/Azure/autorest.modelerfour/issues/196 is fixed
-            static KnownMediaType Convert(SerializationFormats4 format) => format switch
-            {
-                SerializationFormats4.Binary => KnownMediaType.Binary,
-                SerializationFormats4.Form => KnownMediaType.Form,
-                SerializationFormats4.Json => KnownMediaType.Json,
-                SerializationFormats4.Multipart => KnownMediaType.Multipart,
-                SerializationFormats4.Text => KnownMediaType.Text,
-                SerializationFormats4.Unknown => KnownMediaType.Unknown,
-                SerializationFormats4.Xml => KnownMediaType.Xml,
-                _ => throw new ArgumentOutOfRangeException($"Format {format} is not supported.")
-            };
-
-            return _objectSchema.SerializationFormats.Select(type => _serializationBuilder.BuildObject(Convert(type), _objectSchema, this)).ToArray();
+            return _objectSchema.SerializationFormats.Select(type => _serializationBuilder.BuildObject(type, _objectSchema, this)).ToArray();
         }
 
         private CSharpType CreateDictionaryElementType(DictionarySchema inheritedDictionarySchema)

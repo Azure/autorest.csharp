@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -511,44 +512,6 @@ namespace paging
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
-        /// <summary> A long-running paging operation that includes a nextLink that has 10 pages. </summary>
-        /// <param name="clientRequestId"> The String to use. </param>
-        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
-        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual AsyncPageable<Product> GetMultiplePagesLROAsync(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
-        {
-            async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
-            {
-                var response = await RestClient.GetMultiplePagesLROAsync(clientRequestId, maxresults, timeout, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
-            }
-            async Task<Page<Product>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                var response = await RestClient.GetMultiplePagesLRONextPageAsync(clientRequestId, maxresults, timeout, nextLink, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
-        }
-        /// <summary> A long-running paging operation that includes a nextLink that has 10 pages. </summary>
-        /// <param name="clientRequestId"> The String to use. </param>
-        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
-        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Pageable<Product> GetMultiplePagesLRO(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
-        {
-            Page<Product> FirstPageFunc(int? pageSizeHint)
-            {
-                var response = RestClient.GetMultiplePagesLRO(clientRequestId, maxresults, timeout, cancellationToken);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
-            }
-            Page<Product> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                var response = RestClient.GetMultiplePagesLRONextPage(clientRequestId, maxresults, timeout, nextLink, cancellationToken);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
-        }
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="tenant"> Sets the tenant to use. </param>
@@ -676,6 +639,54 @@ namespace paging
                 return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+        }
+        /// <summary> A long-running paging operation that includes a nextLink that has 10 pages. </summary>
+        /// <param name="originalResponse"> The original response from starting the operation. </param>
+        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
+        internal Operation<ProductResult> CreateGetMultiplePagesLRO(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        {
+            if (originalResponse == null)
+            {
+                throw new ArgumentNullException(nameof(originalResponse));
+            }
+            if (createOriginalHttpMessage == null)
+            {
+                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
+            }
+
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "PagingClient.GetMultiplePagesLRO", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            (response, cancellationToken) =>
+            {
+                using var document = JsonDocument.Parse(response.ContentStream);
+                var value = ProductResult.DeserializeProductResult(document.RootElement);
+                return value;
+            },
+            async (response, cancellationToken) =>
+            {
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                var value = ProductResult.DeserializeProductResult(document.RootElement);
+                return value;
+            });
+        }
+        /// <summary> A long-running paging operation that includes a nextLink that has 10 pages. </summary>
+        /// <param name="clientRequestId"> The String to use. </param>
+        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
+        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async ValueTask<Operation<ProductResult>> StartGetMultiplePagesLROAsync(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        {
+            var originalResponse = await RestClient.GetMultiplePagesLROAsync(clientRequestId, maxresults, timeout, cancellationToken).ConfigureAwait(false);
+            return CreateGetMultiplePagesLRO(originalResponse, () => RestClient.CreateGetMultiplePagesLRORequest(clientRequestId, maxresults, timeout));
+        }
+        /// <summary> A long-running paging operation that includes a nextLink that has 10 pages. </summary>
+        /// <param name="clientRequestId"> The String to use. </param>
+        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
+        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Operation<ProductResult> StartGetMultiplePagesLRO(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        {
+            var originalResponse = RestClient.GetMultiplePagesLRO(clientRequestId, maxresults, timeout, cancellationToken);
+            return CreateGetMultiplePagesLRO(originalResponse, () => RestClient.CreateGetMultiplePagesLRORequest(clientRequestId, maxresults, timeout));
         }
     }
 }

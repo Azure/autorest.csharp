@@ -1761,32 +1761,6 @@ schemas: !<!Schemas>
         description: ''
         namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> 
-    type: object
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2016-02-29'
-    properties:
-    - !<!Property> 
-      schema: *ref_61
-      serializedName: propBH1
-      language: !<!Languages> 
-        default:
-          name: propBH1
-          description: ''
-      protocol: !<!Protocols> {}
-    serializationFormats:
-    - json
-    usage:
-    - output
-    extensions:
-      x-ms-flattened: true
-    language: !<!Languages> 
-      default:
-        name: MyBaseHelperType
-        description: ''
-        namespace: ''
-    protocol: !<!Protocols> {}
   - *ref_36
   - *ref_39
   - *ref_42

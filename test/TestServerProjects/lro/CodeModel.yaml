@@ -518,43 +518,6 @@ schemas: !<!Schemas>
         namespace: ''
     protocol: !<!Protocols> {}
   - *ref_5
-  - !<!ObjectSchema> 
-    type: object
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    properties:
-    - !<!Property> 
-      schema: *ref_3
-      serializedName: provisioningState
-      language: !<!Languages> 
-        default:
-          name: provisioningState
-          description: ''
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_4
-      readOnly: true
-      serializedName: provisioningStateValues
-      language: !<!Languages> 
-        default:
-          name: provisioningStateValues
-          description: ''
-      protocol: !<!Protocols> {}
-    serializationFormats:
-    - json
-    usage:
-    - input
-    - output
-    extensions:
-      x-ms-client-flatten: true
-      x-ms-flattened: true
-    language: !<!Languages> 
-      default:
-        name: ProductProperties
-        description: ''
-        namespace: ''
-    protocol: !<!Protocols> {}
   - !<!ObjectSchema> &ref_26
     type: object
     apiVersions:
@@ -700,43 +663,6 @@ schemas: !<!Schemas>
         namespace: ''
     protocol: !<!Protocols> {}
   - *ref_18
-  - !<!ObjectSchema> 
-    type: object
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    properties:
-    - !<!Property> 
-      schema: *ref_16
-      serializedName: provisioningState
-      language: !<!Languages> 
-        default:
-          name: provisioningState
-          description: ''
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_17
-      readOnly: true
-      serializedName: provisioningStateValues
-      language: !<!Languages> 
-        default:
-          name: provisioningStateValues
-          description: ''
-      protocol: !<!Protocols> {}
-    serializationFormats:
-    - json
-    usage:
-    - input
-    - output
-    extensions:
-      x-ms-client-flatten: true
-      x-ms-flattened: true
-    language: !<!Languages> 
-      default:
-        name: SubProductProperties
-        description: ''
-        namespace: ''
-    protocol: !<!Protocols> {}
   - !<!ObjectSchema> 
     type: object
     apiVersions:

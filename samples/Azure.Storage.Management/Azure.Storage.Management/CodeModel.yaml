@@ -213,7 +213,7 @@ schemas: !<!Schemas>
         name: Integer
         description: 'The maximum size of the share, in gigabytes. Must be greater than 0, and less than or equal to 5TB (5120). For Large File Shares, the maximum size is 102400.'
     protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_244
+  - !<!NumberSchema> &ref_243
     type: integer
     precision: 32
     language: !<!Languages> 
@@ -221,7 +221,7 @@ schemas: !<!Schemas>
         name: Integer
         description: Gets the current count of the allocated resources in the subscription.
     protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_245
+  - !<!NumberSchema> &ref_244
     type: integer
     precision: 32
     language: !<!Languages> 
@@ -1226,7 +1226,7 @@ schemas: !<!Schemas>
         name: BlobRestoreRangeEndRange
         description: Blob end range. Empty means account end.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_237
+  - !<!StringSchema> &ref_236
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1236,7 +1236,7 @@ schemas: !<!Schemas>
         name: StorageAccountListResultNextLink
         description: Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_238
+  - !<!StringSchema> &ref_237
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1246,7 +1246,7 @@ schemas: !<!Schemas>
         name: StorageAccountKeyName
         description: Name of the key.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_239
+  - !<!StringSchema> &ref_238
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1256,7 +1256,7 @@ schemas: !<!Schemas>
         name: StorageAccountKeyValue
         description: Base 64-encoded value of the key.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_242
+  - !<!StringSchema> &ref_241
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1266,7 +1266,7 @@ schemas: !<!Schemas>
         name: StorageAccountRegenerateKeyParametersKeyName
         description: 'The name of storage keys that want to be regenerated, possible values are key1, key2, kerb1, kerb2.'
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_246
+  - !<!StringSchema> &ref_245
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1276,7 +1276,7 @@ schemas: !<!Schemas>
         name: UsageNameValue
         description: Gets a string describing the resource name.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_247
+  - !<!StringSchema> &ref_246
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1286,7 +1286,7 @@ schemas: !<!Schemas>
         name: UsageNameLocalizedValue
         description: Gets a localized string describing the resource name.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_253
+  - !<!StringSchema> &ref_252
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1296,7 +1296,7 @@ schemas: !<!Schemas>
         name: IPAddressOrRange
         description: An IP address or a range of IP addresses from which to accept requests.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_257
+  - !<!StringSchema> &ref_256
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1306,7 +1306,7 @@ schemas: !<!Schemas>
         name: AccountSasParametersKeyToSign
         description: The key to sign the account SAS token with.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_258
+  - !<!StringSchema> &ref_257
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1316,7 +1316,7 @@ schemas: !<!Schemas>
         name: ListAccountSasResponseAccountSasToken
         description: List SAS credentials of storage account.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_259
+  - !<!StringSchema> &ref_258
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1326,7 +1326,7 @@ schemas: !<!Schemas>
         name: ServiceSasParametersCanonicalizedResource
         description: The canonical path to the signed resource.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_261
+  - !<!StringSchema> &ref_260
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1337,7 +1337,7 @@ schemas: !<!Schemas>
         name: Identifier
         description: 'A unique value up to 64 characters in length that correlates to an access policy specified for the container, queue, or table.'
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_262
+  - !<!StringSchema> &ref_261
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1347,7 +1347,7 @@ schemas: !<!Schemas>
         name: PartitionKeyStart
         description: The start of partition key.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_263
+  - !<!StringSchema> &ref_262
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1357,7 +1357,7 @@ schemas: !<!Schemas>
         name: PartitionKeyEnd
         description: The end of partition key.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_264
+  - !<!StringSchema> &ref_263
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1367,7 +1367,7 @@ schemas: !<!Schemas>
         name: RowKeyStart
         description: The start of row key.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_265
+  - !<!StringSchema> &ref_264
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1377,7 +1377,7 @@ schemas: !<!Schemas>
         name: RowKeyEnd
         description: The end of row key.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_266
+  - !<!StringSchema> &ref_265
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1387,7 +1387,7 @@ schemas: !<!Schemas>
         name: ServiceSasParametersKeyToSign
         description: The key to sign the account SAS token with.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_267
+  - !<!StringSchema> &ref_266
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1397,7 +1397,7 @@ schemas: !<!Schemas>
         name: CacheControl
         description: The response header override for cache control.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_268
+  - !<!StringSchema> &ref_267
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1407,7 +1407,7 @@ schemas: !<!Schemas>
         name: ContentDisposition
         description: The response header override for content disposition.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_269
+  - !<!StringSchema> &ref_268
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1417,7 +1417,7 @@ schemas: !<!Schemas>
         name: ContentEncoding
         description: The response header override for content encoding.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_270
+  - !<!StringSchema> &ref_269
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1427,7 +1427,7 @@ schemas: !<!Schemas>
         name: ContentLanguage
         description: The response header override for content language.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_271
+  - !<!StringSchema> &ref_270
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1437,7 +1437,7 @@ schemas: !<!Schemas>
         name: ContentType
         description: The response header override for content type.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_272
+  - !<!StringSchema> &ref_271
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1477,7 +1477,7 @@ schemas: !<!Schemas>
         name: ManagementPolicyFilterBlobTypesItem
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_281
+  - !<!StringSchema> &ref_280
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1487,7 +1487,7 @@ schemas: !<!Schemas>
         name: ErrorResponseCode
         description: An identifier for the error. Codes are invariant and are intended to be consumed programmatically.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_282
+  - !<!StringSchema> &ref_281
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1537,7 +1537,7 @@ schemas: !<!Schemas>
         name: EncryptionScopeKeyVaultPropertiesKeyUri
         description: 'The object identifier for a key vault key object. When applied, the encryption scope will use the key referenced by the identifier to enable customer-managed key support on this encryption scope.'
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_286
+  - !<!StringSchema> &ref_283
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -2214,7 +2214,7 @@ schemas: !<!Schemas>
           The status of blob restore progress. Possible values are: - InProgress: Indicates that blob restore is ongoing. - Complete: Indicates that blob restore has been completed successfully. - Failed: Indicates that blob restore is
           failed.
     protocol: !<!Protocols> {}
-  - !<!ChoiceSchema> &ref_250
+  - !<!ChoiceSchema> &ref_249
     choices:
     - !<!ChoiceValue> 
       value: b
@@ -2250,7 +2250,7 @@ schemas: !<!Schemas>
         name: Services
         description: 'The signed services accessible with the account SAS. Possible values include: Blob (b), Queue (q), Table (t), File (f).'
     protocol: !<!Protocols> {}
-  - !<!ChoiceSchema> &ref_251
+  - !<!ChoiceSchema> &ref_250
     choices:
     - !<!ChoiceValue> 
       value: s
@@ -2282,7 +2282,7 @@ schemas: !<!Schemas>
           The signed resource types that are accessible with the account SAS. Service (s): Access to service-level APIs; Container (c): Access to container-level APIs; Object (o): Access to object-level APIs for blobs, queue messages, table
           entities, and files.
     protocol: !<!Protocols> {}
-  - !<!ChoiceSchema> &ref_252
+  - !<!ChoiceSchema> &ref_251
     choices:
     - !<!ChoiceValue> 
       value: r
@@ -2342,7 +2342,7 @@ schemas: !<!Schemas>
         name: Permissions
         description: 'The signed permissions for the account SAS. Possible values include: Read (r), Write (w), Delete (d), List (l), Add (a), Create (c), Update (u) and Process (p).'
     protocol: !<!Protocols> {}
-  - !<!ChoiceSchema> &ref_260
+  - !<!ChoiceSchema> &ref_259
     choices:
     - !<!ChoiceValue> 
       value: b
@@ -2674,7 +2674,7 @@ schemas: !<!Schemas>
         name: StorageAccountExpand
         description: ''
     protocol: !<!Protocols> {}
-  - !<!SealedChoiceSchema> &ref_240
+  - !<!SealedChoiceSchema> &ref_239
     choices:
     - !<!ChoiceValue> 
       value: Read
@@ -2698,7 +2698,7 @@ schemas: !<!Schemas>
         name: KeyPermission
         description: Permissions for the key -- read-only or full permissions.
     protocol: !<!Protocols> {}
-  - !<!SealedChoiceSchema> &ref_243
+  - !<!SealedChoiceSchema> &ref_242
     choices:
     - !<!ChoiceValue> 
       value: Count
@@ -2746,7 +2746,7 @@ schemas: !<!Schemas>
         name: UsageUnit
         description: Gets the unit of measurement.
     protocol: !<!Protocols> {}
-  - !<!SealedChoiceSchema> &ref_254
+  - !<!SealedChoiceSchema> &ref_253
     choices:
     - !<!ChoiceValue> 
       value: 'https,http'
@@ -2902,7 +2902,7 @@ schemas: !<!Schemas>
         name: TrackedResourceTags
         description: Resource tags.
     protocol: !<!Protocols> {}
-  - !<!DictionarySchema> &ref_236
+  - !<!DictionarySchema> &ref_235
     type: dictionary
     elementType: *ref_1
     language: !<!Languages> 
@@ -3018,7 +3018,7 @@ schemas: !<!Schemas>
         name: BlobRestoreParametersTimeToRestore
         description: Restore blob to the specified time.
     protocol: !<!Protocols> {}
-  - !<!DateTimeSchema> &ref_255
+  - !<!DateTimeSchema> &ref_254
     type: date-time
     format: date-time
     apiVersions:
@@ -3029,7 +3029,7 @@ schemas: !<!Schemas>
         name: SharedAccessStartTime
         description: The time at which the SAS becomes valid.
     protocol: !<!Protocols> {}
-  - !<!DateTimeSchema> &ref_256
+  - !<!DateTimeSchema> &ref_255
     type: date-time
     format: date-time
     apiVersions:
@@ -3081,7 +3081,7 @@ schemas: !<!Schemas>
       version: '2019-06-01'
     properties:
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_292
+      schema: !<!ArraySchema> &ref_289
         type: array
         apiVersions:
         - !<!ApiVersion> 
@@ -3207,7 +3207,7 @@ schemas: !<!Schemas>
                                 description: ImmutabilityPolicy Etag.
                             protocol: !<!Protocols> {}
                           - !<!Property> 
-                            schema: !<!ArraySchema> &ref_293
+                            schema: !<!ArraySchema> &ref_290
                               type: array
                               apiVersions:
                               - !<!ApiVersion> 
@@ -3371,7 +3371,7 @@ schemas: !<!Schemas>
                                   can be a maximum of 1000 blob containers with hasLegalHold=true for a given account.
                             protocol: !<!Protocols> {}
                           - !<!Property> 
-                            schema: !<!ArraySchema> &ref_294
+                            schema: !<!ArraySchema> &ref_291
                               type: array
                               apiVersions:
                               - !<!ApiVersion> 
@@ -3924,19 +3924,19 @@ schemas: !<!Schemas>
                         version: '2019-06-01'
                       properties:
                       - !<!Property> 
-                        schema: !<!ArraySchema> &ref_291
+                        schema: !<!ArraySchema> &ref_288
                           type: array
                           apiVersions:
                           - !<!ApiVersion> 
                             version: '2019-06-01'
-                          elementType: !<!ObjectSchema> &ref_160
+                          elementType: !<!ObjectSchema> &ref_158
                             type: object
                             apiVersions:
                             - !<!ApiVersion> 
                               version: '2019-06-01'
                             properties:
                             - !<!Property> 
-                              schema: !<!ArraySchema> &ref_287
+                              schema: !<!ArraySchema> &ref_284
                                 type: array
                                 apiVersions:
                                 - !<!ApiVersion> 
@@ -3955,7 +3955,7 @@ schemas: !<!Schemas>
                                   description: 'Required if CorsRule element is present. A list of origin domains that will be allowed via CORS, or "*" to allow all domains'
                               protocol: !<!Protocols> {}
                             - !<!Property> 
-                              schema: !<!ArraySchema> &ref_288
+                              schema: !<!ArraySchema> &ref_285
                                 type: array
                                 apiVersions:
                                 - !<!ApiVersion> 
@@ -3983,7 +3983,7 @@ schemas: !<!Schemas>
                                   description: Required if CorsRule element is present. The number of seconds that the client/browser should cache a preflight response.
                               protocol: !<!Protocols> {}
                             - !<!Property> 
-                              schema: !<!ArraySchema> &ref_289
+                              schema: !<!ArraySchema> &ref_286
                                 type: array
                                 apiVersions:
                                 - !<!ApiVersion> 
@@ -4002,7 +4002,7 @@ schemas: !<!Schemas>
                                   description: Required if CorsRule element is present. A list of response headers to expose to CORS clients.
                               protocol: !<!Protocols> {}
                             - !<!Property> 
-                              schema: !<!ArraySchema> &ref_290
+                              schema: !<!ArraySchema> &ref_287
                                 type: array
                                 apiVersions:
                                 - !<!ApiVersion> 
@@ -4284,7 +4284,7 @@ schemas: !<!Schemas>
                                 description: Gets the dfs endpoint.
                             protocol: !<!Protocols> {}
                           - !<!Property> 
-                            schema: !<!ObjectSchema> &ref_230
+                            schema: !<!ObjectSchema> &ref_227
                               type: object
                               apiVersions:
                               - !<!ApiVersion> 
@@ -4364,7 +4364,7 @@ schemas: !<!Schemas>
                                 description: Gets the microsoft routing storage endpoints.
                             protocol: !<!Protocols> {}
                           - !<!Property> 
-                            schema: !<!ObjectSchema> &ref_231
+                            schema: !<!ObjectSchema> &ref_228
                               type: object
                               apiVersions:
                               - !<!ApiVersion> 
@@ -4923,7 +4923,7 @@ schemas: !<!Schemas>
                                   those traffics.
                             protocol: !<!Protocols> {}
                           - !<!Property> 
-                            schema: !<!ArraySchema> &ref_308
+                            schema: !<!ArraySchema> &ref_305
                               type: array
                               apiVersions:
                               - !<!ApiVersion> 
@@ -4985,7 +4985,7 @@ schemas: !<!Schemas>
                                 description: Sets the virtual network rules
                             protocol: !<!Protocols> {}
                           - !<!Property> 
-                            schema: !<!ArraySchema> &ref_309
+                            schema: !<!ArraySchema> &ref_306
                               type: array
                               apiVersions:
                               - !<!ApiVersion> 
@@ -5079,7 +5079,7 @@ schemas: !<!Schemas>
                             description: Account HierarchicalNamespace enabled if sets to true.
                         protocol: !<!Protocols> {}
                       - !<!Property> 
-                        schema: !<!ObjectSchema> &ref_227
+                        schema: !<!ObjectSchema> &ref_229
                           type: object
                           apiVersions:
                           - !<!ApiVersion> 
@@ -5161,7 +5161,7 @@ schemas: !<!Schemas>
                             description: Allow large file shares if sets to Enabled. It cannot be disabled once it is enabled.
                         protocol: !<!Protocols> {}
                       - !<!Property> 
-                        schema: !<!ArraySchema> &ref_228
+                        schema: !<!ArraySchema> &ref_307
                           type: array
                           apiVersions:
                           - !<!ApiVersion> 
@@ -5178,7 +5178,7 @@ schemas: !<!Schemas>
                               - *ref_4
                             properties:
                             - !<!Property> 
-                              schema: !<!ObjectSchema> &ref_232
+                              schema: !<!ObjectSchema> &ref_230
                                 type: object
                                 apiVersions:
                                 - !<!ApiVersion> 
@@ -5214,7 +5214,7 @@ schemas: !<!Schemas>
                                   description: The resource of private end point.
                               protocol: !<!Protocols> {}
                             - !<!Property> 
-                              schema: !<!ObjectSchema> &ref_233
+                              schema: !<!ObjectSchema> &ref_231
                                 type: object
                                 apiVersions:
                                 - !<!ApiVersion> 
@@ -5353,7 +5353,7 @@ schemas: !<!Schemas>
                             description: Maintains information about the network routing choice opted by the user for data transfer
                         protocol: !<!Protocols> {}
                       - !<!Property> 
-                        schema: !<!ObjectSchema> &ref_229
+                        schema: !<!ObjectSchema> &ref_232
                           type: object
                           apiVersions:
                           - !<!ApiVersion> 
@@ -5389,7 +5389,7 @@ schemas: !<!Schemas>
                                 description: Id for tracking blob restore request.
                             protocol: !<!Protocols> {}
                           - !<!Property> 
-                            schema: !<!ObjectSchema> &ref_234
+                            schema: !<!ObjectSchema> &ref_233
                               type: object
                               apiVersions:
                               - !<!ApiVersion> 
@@ -5405,12 +5405,12 @@ schemas: !<!Schemas>
                                     description: Restore blob to the specified time.
                                 protocol: !<!Protocols> {}
                               - !<!Property> 
-                                schema: !<!ArraySchema> &ref_310
+                                schema: !<!ArraySchema> &ref_308
                                   type: array
                                   apiVersions:
                                   - !<!ApiVersion> 
                                     version: '2019-06-01'
-                                  elementType: !<!ObjectSchema> &ref_235
+                                  elementType: !<!ObjectSchema> &ref_234
                                     type: object
                                     apiVersions:
                                     - !<!ApiVersion> 
@@ -5570,19 +5570,19 @@ schemas: !<!Schemas>
                         description: Returns the date and time the ManagementPolicies was last modified.
                     protocol: !<!Protocols> {}
                   - !<!Property> 
-                    schema: !<!ObjectSchema> &ref_273
+                    schema: !<!ObjectSchema> &ref_272
                       type: object
                       apiVersions:
                       - !<!ApiVersion> 
                         version: '2019-06-01'
                       properties:
                       - !<!Property> 
-                        schema: !<!ArraySchema> &ref_316
+                        schema: !<!ArraySchema> &ref_314
                           type: array
                           apiVersions:
                           - !<!ApiVersion> 
                             version: '2019-06-01'
-                          elementType: !<!ObjectSchema> &ref_274
+                          elementType: !<!ObjectSchema> &ref_273
                             type: object
                             apiVersions:
                             - !<!ApiVersion> 
@@ -5616,21 +5616,21 @@ schemas: !<!Schemas>
                                   description: The valid value is Lifecycle
                               protocol: !<!Protocols> {}
                             - !<!Property> 
-                              schema: !<!ObjectSchema> &ref_275
+                              schema: !<!ObjectSchema> &ref_274
                                 type: object
                                 apiVersions:
                                 - !<!ApiVersion> 
                                   version: '2019-06-01'
                                 properties:
                                 - !<!Property> 
-                                  schema: !<!ObjectSchema> &ref_276
+                                  schema: !<!ObjectSchema> &ref_275
                                     type: object
                                     apiVersions:
                                     - !<!ApiVersion> 
                                       version: '2019-06-01'
                                     properties:
                                     - !<!Property> 
-                                      schema: !<!ObjectSchema> &ref_277
+                                      schema: !<!ObjectSchema> &ref_276
                                         type: object
                                         apiVersions:
                                         - !<!ApiVersion> 
@@ -5703,14 +5703,14 @@ schemas: !<!Schemas>
                                           description: The management policy action for base blob
                                       protocol: !<!Protocols> {}
                                     - !<!Property> 
-                                      schema: !<!ObjectSchema> &ref_278
+                                      schema: !<!ObjectSchema> &ref_277
                                         type: object
                                         apiVersions:
                                         - !<!ApiVersion> 
                                           version: '2019-06-01'
                                         properties:
                                         - !<!Property> 
-                                          schema: !<!ObjectSchema> &ref_279
+                                          schema: !<!ObjectSchema> &ref_278
                                             type: object
                                             apiVersions:
                                             - !<!ApiVersion> 
@@ -5778,14 +5778,14 @@ schemas: !<!Schemas>
                                       description: An object that defines the action set.
                                   protocol: !<!Protocols> {}
                                 - !<!Property> 
-                                  schema: !<!ObjectSchema> &ref_280
+                                  schema: !<!ObjectSchema> &ref_279
                                     type: object
                                     apiVersions:
                                     - !<!ApiVersion> 
                                       version: '2019-06-01'
                                     properties:
                                     - !<!Property> 
-                                      schema: !<!ArraySchema> &ref_314
+                                      schema: !<!ArraySchema> &ref_312
                                         type: array
                                         apiVersions:
                                         - !<!ApiVersion> 
@@ -5804,7 +5804,7 @@ schemas: !<!Schemas>
                                           description: An array of strings for prefixes to be match.
                                       protocol: !<!Protocols> {}
                                     - !<!Property> 
-                                      schema: !<!ArraySchema> &ref_315
+                                      schema: !<!ArraySchema> &ref_313
                                         type: array
                                         apiVersions:
                                         - !<!ApiVersion> 
@@ -5936,7 +5936,7 @@ schemas: !<!Schemas>
                         description: The private link resource group id.
                     protocol: !<!Protocols> {}
                   - !<!Property> 
-                    schema: !<!ArraySchema> &ref_283
+                    schema: !<!ArraySchema> &ref_315
                       type: array
                       apiVersions:
                       - !<!ApiVersion> 
@@ -5958,7 +5958,7 @@ schemas: !<!Schemas>
                         description: The private link resource required member names.
                     protocol: !<!Protocols> {}
                   - !<!Property> 
-                    schema: !<!ArraySchema> &ref_284
+                    schema: !<!ArraySchema> &ref_316
                       type: array
                       apiVersions:
                       - !<!ApiVersion> 
@@ -6047,7 +6047,7 @@ schemas: !<!Schemas>
                         description: Gets the last modification date and time of the encryption scope in UTC.
                     protocol: !<!Protocols> {}
                   - !<!Property> 
-                    schema: !<!ObjectSchema> &ref_285
+                    schema: !<!ObjectSchema> &ref_282
                       type: object
                       apiVersions:
                       - !<!ApiVersion> 
@@ -6234,7 +6234,7 @@ schemas: !<!Schemas>
                 description: Deprecated in favor of isVersioningEnabled property.
             protocol: !<!Protocols> {}
           - !<!Property> 
-            schema: !<!ObjectSchema> &ref_158
+            schema: !<!ObjectSchema> &ref_159
               type: object
               apiVersions:
               - !<!ApiVersion> 
@@ -6269,7 +6269,7 @@ schemas: !<!Schemas>
                 description: The blob service properties for change feed events.
             protocol: !<!Protocols> {}
           - !<!Property> 
-            schema: !<!ObjectSchema> &ref_159
+            schema: !<!ObjectSchema> &ref_160
               type: object
               apiVersions:
               - !<!ApiVersion> 
@@ -6359,97 +6359,11 @@ schemas: !<!Schemas>
     protocol: !<!Protocols> {}
   - *ref_4
   - *ref_2
-  - !<!ObjectSchema> 
-    type: object
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2019-06-01'
-    properties:
-    - !<!Property> 
-      schema: *ref_150
-      serializedName: cors
-      language: !<!Languages> 
-        default:
-          name: cors
-          description: >-
-            Specifies CORS rules for the Blob service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the
-            Blob service.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_151
-      serializedName: defaultServiceVersion
-      language: !<!Languages> 
-        default:
-          name: defaultServiceVersion
-          description: DefaultServiceVersion indicates the default version to use for requests to the Blob service if an incoming request’s version is not specified. Possible values include version 2008-10-27 and all more recent versions.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_152
-      serializedName: deleteRetentionPolicy
-      language: !<!Languages> 
-        default:
-          name: deleteRetentionPolicy
-          description: The blob service properties for blob soft delete.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_153
-      serializedName: isVersioningEnabled
-      language: !<!Languages> 
-        default:
-          name: isVersioningEnabled
-          description: Versioning is enabled if set to true.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_154
-      serializedName: automaticSnapshotPolicyEnabled
-      language: !<!Languages> 
-        default:
-          name: automaticSnapshotPolicyEnabled
-          description: Deprecated in favor of isVersioningEnabled property.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_158
-      serializedName: changeFeed
-      language: !<!Languages> 
-        default:
-          name: changeFeed
-          description: The blob service properties for change feed events.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_159
-      serializedName: restorePolicy
-      language: !<!Languages> 
-        default:
-          name: restorePolicy
-          description: The blob service properties for blob restore policy.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_152
-      serializedName: containerDeleteRetentionPolicy
-      language: !<!Languages> 
-        default:
-          name: containerDeleteRetentionPolicy
-          description: The blob service properties for container soft delete.
-      protocol: !<!Protocols> {}
-    serializationFormats:
-    - json
-    usage:
-    - input
-    - output
-    extensions:
-      x-ms-client-flatten: true
-      x-ms-flattened: true
-    language: !<!Languages> 
-      default:
-        name: BlobServiceProperties2
-        description: The properties of a storage account’s Blob service.
-        namespace: ''
-    protocol: !<!Protocols> {}
   - *ref_150
-  - *ref_160
-  - *ref_152
   - *ref_158
+  - *ref_152
   - *ref_159
+  - *ref_160
   - *ref_48
   - !<!ObjectSchema> &ref_339
     type: object
@@ -6458,7 +6372,7 @@ schemas: !<!Schemas>
       version: '2019-06-01'
     properties:
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_295
+      schema: !<!ArraySchema> &ref_292
         type: array
         apiVersions:
         - !<!ApiVersion> 
@@ -6497,164 +6411,7 @@ schemas: !<!Schemas>
     protocol: !<!Protocols> {}
   - *ref_3
   - *ref_32
-  - !<!ObjectSchema> 
-    type: object
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2019-06-01'
-    properties:
-    - !<!Property> 
-      schema: *ref_5
-      serializedName: publicAccess
-      language: !<!Languages> 
-        default:
-          name: publicAccess
-          description: Specifies whether data in the container may be accessed publicly and the level of access.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_6
-      readOnly: true
-      serializedName: lastModifiedTime
-      language: !<!Languages> 
-        default:
-          name: lastModifiedTime
-          description: Returns the date and time the container was last modified.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_7
-      readOnly: true
-      serializedName: leaseStatus
-      language: !<!Languages> 
-        default:
-          name: leaseStatus
-          description: The lease status of the container.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_8
-      readOnly: true
-      serializedName: leaseState
-      language: !<!Languages> 
-        default:
-          name: leaseState
-          description: Lease state of the container.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_9
-      readOnly: true
-      serializedName: leaseDuration
-      language: !<!Languages> 
-        default:
-          name: leaseDuration
-          description: 'Specifies whether the lease on a container is of infinite or fixed duration, only when the container is leased.'
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_10
-      serializedName: metadata
-      language: !<!Languages> 
-        default:
-          name: metadata
-          description: A name-value pair to associate with the container as metadata.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_27
-      readOnly: true
-      serializedName: immutabilityPolicy
-      language: !<!Languages> 
-        default:
-          name: immutabilityPolicy
-          description: The ImmutabilityPolicy property of the container.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_28
-      readOnly: true
-      serializedName: legalHold
-      language: !<!Languages> 
-        default:
-          name: legalHold
-          description: The LegalHold property of the container.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_20
-      readOnly: true
-      serializedName: hasLegalHold
-      language: !<!Languages> 
-        default:
-          name: hasLegalHold
-          description: >-
-            The hasLegalHold public property is set to true by SRP if there are at least one existing tag. The hasLegalHold public property is set to false by SRP if all existing legal hold tags are cleared out. There can be a maximum of
-            1000 blob containers with hasLegalHold=true for a given account.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_26
-      readOnly: true
-      serializedName: hasImmutabilityPolicy
-      language: !<!Languages> 
-        default:
-          name: hasImmutabilityPolicy
-          description: >-
-            The hasImmutabilityPolicy public property is set to true by SRP if ImmutabilityPolicy has been created for this container. The hasImmutabilityPolicy public property is set to false by SRP if ImmutabilityPolicy has not been
-            created for this container.
-      protocol: !<!Protocols> {}
-    serializationFormats:
-    - json
-    usage:
-    - input
-    - output
-    extensions:
-      x-ms-flattened: true
-    language: !<!Languages> 
-      default:
-        name: ContainerProperties
-        description: The properties of a container.
-        namespace: ''
-    protocol: !<!Protocols> {}
   - *ref_27
-  - !<!ObjectSchema> 
-    type: object
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2019-06-01'
-    properties:
-    - !<!Property> 
-      schema: *ref_13
-      serializedName: immutabilityPeriodSinceCreationInDays
-      language: !<!Languages> 
-        default:
-          name: immutabilityPeriodSinceCreationInDays
-          description: 'The immutability period for the blobs in the container since the policy creation, in days.'
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_18
-      readOnly: true
-      serializedName: state
-      language: !<!Languages> 
-        default:
-          name: state
-          description: 'The ImmutabilityPolicy state of a blob container, possible values include: Locked and Unlocked.'
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_19
-      serializedName: allowProtectedAppendWrites
-      language: !<!Languages> 
-        default:
-          name: allowProtectedAppendWrites
-          description: >-
-            This property can only be changed for unlocked time-based retention policies. When enabled, new blocks can be written to an append blob while maintaining immutability protection and compliance. Only new blocks can be added and
-            any existing blocks cannot be modified or deleted. This property cannot be changed with ExtendImmutabilityPolicy API
-      protocol: !<!Protocols> {}
-    serializationFormats:
-    - json
-    usage:
-    - input
-    - output
-    extensions:
-      x-ms-flattened: true
-    language: !<!Languages> 
-      default:
-        name: ImmutabilityPolicyProperty
-        description: The properties of an ImmutabilityPolicy of a blob container.
-        namespace: ''
-    protocol: !<!Protocols> {}
   - *ref_162
   - *ref_28
   - *ref_163
@@ -6678,7 +6435,7 @@ schemas: !<!Schemas>
             1000 blob containers with hasLegalHold=true for a given account.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_296
+      schema: !<!ArraySchema> &ref_293
         type: array
         apiVersions:
         - !<!ApiVersion> 
@@ -6808,7 +6565,7 @@ schemas: !<!Schemas>
       version: '2019-06-01'
     properties:
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_297
+      schema: !<!ArraySchema> &ref_294
         type: array
         apiVersions:
         - !<!ApiVersion> 
@@ -6837,44 +6594,6 @@ schemas: !<!Schemas>
         namespace: ''
     protocol: !<!Protocols> {}
   - *ref_142
-  - !<!ObjectSchema> 
-    type: object
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2019-06-01'
-    properties:
-    - !<!Property> 
-      schema: *ref_150
-      serializedName: cors
-      language: !<!Languages> 
-        default:
-          name: cors
-          description: >-
-            Specifies CORS rules for the File service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the
-            File service.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_152
-      serializedName: shareDeleteRetentionPolicy
-      language: !<!Languages> 
-        default:
-          name: shareDeleteRetentionPolicy
-          description: The file service properties for share soft delete.
-      protocol: !<!Protocols> {}
-    serializationFormats:
-    - json
-    usage:
-    - input
-    - output
-    extensions:
-      x-ms-client-flatten: true
-      x-ms-flattened: true
-    language: !<!Languages> 
-      default:
-        name: FileServiceProperties2
-        description: The properties of File services in storage account.
-        namespace: ''
-    protocol: !<!Protocols> {}
   - !<!ObjectSchema> &ref_395
     type: object
     apiVersions:
@@ -6913,7 +6632,7 @@ schemas: !<!Schemas>
               description: 'The target of the particular error. For example, the name of the property in error.'
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: !<!ArraySchema> &ref_298
+          schema: !<!ArraySchema> &ref_295
             type: array
             apiVersions:
             - !<!ApiVersion> 
@@ -6968,7 +6687,7 @@ schemas: !<!Schemas>
       version: '2019-06-01'
     properties:
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_299
+      schema: !<!ArraySchema> &ref_296
         type: array
         apiVersions:
         - !<!ApiVersion> 
@@ -7006,50 +6725,6 @@ schemas: !<!Schemas>
         namespace: ''
     protocol: !<!Protocols> {}
   - *ref_35
-  - !<!ObjectSchema> 
-    type: object
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2019-06-01'
-    properties:
-    - !<!Property> 
-      schema: *ref_29
-      readOnly: true
-      serializedName: lastModifiedTime
-      language: !<!Languages> 
-        default:
-          name: lastModifiedTime
-          description: Returns the date and time the share was last modified.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_30
-      serializedName: metadata
-      language: !<!Languages> 
-        default:
-          name: metadata
-          description: A name-value pair to associate with the share as metadata.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_31
-      serializedName: shareQuota
-      language: !<!Languages> 
-        default:
-          name: shareQuota
-          description: 'The maximum size of the share, in gigabytes. Must be greater than 0, and less than or equal to 5TB (5120). For Large File Shares, the maximum size is 102400.'
-      protocol: !<!Protocols> {}
-    serializationFormats:
-    - json
-    usage:
-    - input
-    - output
-    extensions:
-      x-ms-flattened: true
-    language: !<!Languages> 
-      default:
-        name: FileShareProperties
-        description: The properties of the file share.
-        namespace: ''
-    protocol: !<!Protocols> {}
   - *ref_36
   - !<!ObjectSchema> &ref_420
     type: object
@@ -7058,7 +6733,7 @@ schemas: !<!Schemas>
       version: '2019-06-01'
     properties:
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_302
+      schema: !<!ArraySchema> &ref_299
         type: array
         apiVersions:
         - !<!ApiVersion> 
@@ -7148,7 +6823,7 @@ schemas: !<!Schemas>
                 version: '2019-06-01'
               properties:
               - !<!Property> 
-                schema: !<!ArraySchema> &ref_301
+                schema: !<!ArraySchema> &ref_298
                   type: array
                   apiVersions:
                   - !<!ApiVersion> 
@@ -7192,7 +6867,7 @@ schemas: !<!Schemas>
                           description: Unit could be Bytes or Count.
                       protocol: !<!Protocols> {}
                     - !<!Property> 
-                      schema: !<!ArraySchema> &ref_300
+                      schema: !<!ArraySchema> &ref_297
                         type: array
                         apiVersions:
                         - !<!ApiVersion> 
@@ -7345,32 +7020,6 @@ schemas: !<!Schemas>
     protocol: !<!Protocols> {}
   - *ref_193
   - *ref_194
-  - !<!ObjectSchema> 
-    type: object
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2019-06-01'
-    properties:
-    - !<!Property> 
-      schema: *ref_195
-      serializedName: serviceSpecification
-      language: !<!Languages> 
-        default:
-          name: serviceSpecification
-          description: 'One property of operation, include metric specifications.'
-      protocol: !<!Protocols> {}
-    serializationFormats:
-    - json
-    usage:
-    - output
-    extensions:
-      x-ms-flattened: true
-    language: !<!Languages> 
-      default:
-        name: OperationProperties
-        description: 'Properties of operation, include metric specifications.'
-        namespace: ''
-    protocol: !<!Protocols> {}
   - *ref_195
   - *ref_196
   - *ref_197
@@ -7381,7 +7030,7 @@ schemas: !<!Schemas>
       version: '2019-06-01'
     properties:
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_307
+      schema: !<!ArraySchema> &ref_304
         type: array
         apiVersions:
         - !<!ApiVersion> 
@@ -7431,7 +7080,7 @@ schemas: !<!Schemas>
                 description: Indicates the type of storage account.
             protocol: !<!Protocols> {}
           - !<!Property> 
-            schema: !<!ArraySchema> &ref_303
+            schema: !<!ArraySchema> &ref_300
               type: array
               apiVersions:
               - !<!ApiVersion> 
@@ -7451,7 +7100,7 @@ schemas: !<!Schemas>
                 description: 'The set of locations that the SKU is available. This will be supported and registered Azure Geo Regions (e.g. West US, East US, Southeast Asia, etc.).'
             protocol: !<!Protocols> {}
           - !<!Property> 
-            schema: !<!ArraySchema> &ref_304
+            schema: !<!ArraySchema> &ref_301
               type: array
               apiVersions:
               - !<!ApiVersion> 
@@ -7504,7 +7153,7 @@ schemas: !<!Schemas>
                 description: 'The capability information in the specified SKU, including file encryption, network ACLs, change notification, etc.'
             protocol: !<!Protocols> {}
           - !<!Property> 
-            schema: !<!ArraySchema> &ref_306
+            schema: !<!ArraySchema> &ref_303
               type: array
               apiVersions:
               - !<!ApiVersion> 
@@ -7525,7 +7174,7 @@ schemas: !<!Schemas>
                       description: The type of restrictions. As of now only possible value for this is location.
                   protocol: !<!Protocols> {}
                 - !<!Property> 
-                  schema: !<!ArraySchema> &ref_305
+                  schema: !<!ArraySchema> &ref_302
                     type: array
                     apiVersions:
                     - !<!ApiVersion> 
@@ -7863,98 +7512,6 @@ schemas: !<!Schemas>
         namespace: ''
     protocol: !<!Protocols> {}
   - *ref_215
-  - !<!ObjectSchema> 
-    type: object
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2019-06-01'
-    properties:
-    - !<!Property> 
-      schema: *ref_216
-      serializedName: customDomain
-      language: !<!Languages> 
-        default:
-          name: customDomain
-          description: >-
-            User domain assigned to the storage account. Name is the CNAME source. Only one custom domain is supported per storage account at this time. To clear the existing custom domain, use an empty string for the custom domain name
-            property.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_217
-      serializedName: encryption
-      language: !<!Languages> 
-        default:
-          name: encryption
-          description: Not applicable. Azure Storage encryption is enabled for all storage accounts and cannot be disabled.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_218
-      serializedName: networkAcls
-      language: !<!Languages> 
-        default:
-          name: networkRuleSet
-          description: Network rule set
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_86
-      serializedName: accessTier
-      language: !<!Languages> 
-        default:
-          name: accessTier
-          description: Required for storage accounts where kind = BlobStorage. The access tier used for billing.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_219
-      serializedName: azureFilesIdentityBasedAuthentication
-      language: !<!Languages> 
-        default:
-          name: azureFilesIdentityBasedAuthentication
-          description: Provides the identity based authentication settings for Azure Files.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_220
-      serializedName: supportsHttpsTrafficOnly
-      language: !<!Languages> 
-        default:
-          name: enableHttpsTrafficOnly
-          description: Allows https traffic only to storage service if sets to true. The default value is true since API version 2019-04-01.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_101
-      serializedName: isHnsEnabled
-      language: !<!Languages> 
-        default:
-          name: IsHnsEnabled
-          description: Account HierarchicalNamespace enabled if sets to true.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_106
-      serializedName: largeFileSharesState
-      language: !<!Languages> 
-        default:
-          name: largeFileSharesState
-          description: Allow large file shares if sets to Enabled. It cannot be disabled once it is enabled.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_221
-      serializedName: routingPreference
-      language: !<!Languages> 
-        default:
-          name: routingPreference
-          description: Maintains information about the network routing choice opted by the user for data transfer
-      protocol: !<!Protocols> {}
-    serializationFormats:
-    - json
-    usage:
-    - input
-    extensions:
-      x-ms-flattened: true
-    language: !<!Languages> 
-      default:
-        name: StorageAccountPropertiesCreateParameters
-        description: The parameters used to create the storage account.
-        namespace: ''
-    protocol: !<!Protocols> {}
   - *ref_216
   - *ref_217
   - *ref_222
@@ -7968,276 +7525,16 @@ schemas: !<!Schemas>
   - *ref_221
   - *ref_47
   - *ref_121
-  - !<!ObjectSchema> 
-    type: object
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2019-06-01'
-    properties:
-    - !<!Property> 
-      schema: *ref_53
-      readOnly: true
-      serializedName: provisioningState
-      language: !<!Languages> 
-        default:
-          name: provisioningState
-          description: Gets the status of the storage account at the time the operation was called.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_77
-      readOnly: true
-      serializedName: primaryEndpoints
-      language: !<!Languages> 
-        default:
-          name: primaryEndpoints
-          description: 'Gets the URLs that are used to perform a retrieval of a public blob, queue, or table object. Note that Standard_ZRS and Premium_LRS accounts only return the blob endpoint.'
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_70
-      readOnly: true
-      serializedName: primaryLocation
-      language: !<!Languages> 
-        default:
-          name: primaryLocation
-          description: Gets the location of the primary data center for the storage account.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_71
-      readOnly: true
-      serializedName: statusOfPrimary
-      language: !<!Languages> 
-        default:
-          name: statusOfPrimary
-          description: Gets the status indicating whether the primary location of the storage account is available or unavailable.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_72
-      readOnly: true
-      serializedName: lastGeoFailoverTime
-      language: !<!Languages> 
-        default:
-          name: lastGeoFailoverTime
-          description: >-
-            Gets the timestamp of the most recent instance of a failover to the secondary location. Only the most recent timestamp is retained. This element is not returned if there has never been a failover instance. Only available if the
-            accountType is Standard_GRS or Standard_RAGRS.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_73
-      readOnly: true
-      serializedName: secondaryLocation
-      language: !<!Languages> 
-        default:
-          name: secondaryLocation
-          description: Gets the location of the geo-replicated secondary for the storage account. Only available if the accountType is Standard_GRS or Standard_RAGRS.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_71
-      readOnly: true
-      serializedName: statusOfSecondary
-      language: !<!Languages> 
-        default:
-          name: statusOfSecondary
-          description: Gets the status indicating whether the secondary location of the storage account is available or unavailable. Only available if the SKU name is Standard_GRS or Standard_RAGRS.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_74
-      readOnly: true
-      serializedName: creationTime
-      language: !<!Languages> 
-        default:
-          name: creationTime
-          description: Gets the creation date and time of the storage account in UTC.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_216
-      readOnly: true
-      serializedName: customDomain
-      language: !<!Languages> 
-        default:
-          name: customDomain
-          description: Gets the custom domain the user assigned to this storage account.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_77
-      readOnly: true
-      serializedName: secondaryEndpoints
-      language: !<!Languages> 
-        default:
-          name: secondaryEndpoints
-          description: 'Gets the URLs that are used to perform a retrieval of a public blob, queue, or table object from the secondary location of the storage account. Only available if the SKU name is Standard_RAGRS.'
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_217
-      readOnly: true
-      serializedName: encryption
-      language: !<!Languages> 
-        default:
-          name: encryption
-          description: 'Gets the encryption settings on the account. If unspecified, the account is unencrypted.'
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_86
-      readOnly: true
-      serializedName: accessTier
-      language: !<!Languages> 
-        default:
-          name: accessTier
-          description: Required for storage accounts where kind = BlobStorage. The access tier used for billing.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_219
-      serializedName: azureFilesIdentityBasedAuthentication
-      language: !<!Languages> 
-        default:
-          name: azureFilesIdentityBasedAuthentication
-          description: Provides the identity based authentication settings for Azure Files.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_94
-      serializedName: supportsHttpsTrafficOnly
-      language: !<!Languages> 
-        default:
-          name: enableHttpsTrafficOnly
-          description: Allows https traffic only to storage service if sets to true.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_218
-      readOnly: true
-      serializedName: networkAcls
-      language: !<!Languages> 
-        default:
-          name: networkRuleSet
-          description: Network rule set
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_101
-      serializedName: isHnsEnabled
-      language: !<!Languages> 
-        default:
-          name: IsHnsEnabled
-          description: Account HierarchicalNamespace enabled if sets to true.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_227
-      readOnly: true
-      serializedName: geoReplicationStats
-      language: !<!Languages> 
-        default:
-          name: geoReplicationStats
-          description: Geo Replication Stats
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_105
-      readOnly: true
-      serializedName: failoverInProgress
-      language: !<!Languages> 
-        default:
-          name: failoverInProgress
-          description: 'If the failover is in progress, the value will be true, otherwise, it will be null.'
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_106
-      serializedName: largeFileSharesState
-      language: !<!Languages> 
-        default:
-          name: largeFileSharesState
-          description: Allow large file shares if sets to Enabled. It cannot be disabled once it is enabled.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_228
-      readOnly: true
-      serializedName: privateEndpointConnections
-      language: !<!Languages> 
-        default:
-          name: privateEndpointConnections
-          description: List of private endpoint connection associated with the specified storage account
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_221
-      serializedName: routingPreference
-      language: !<!Languages> 
-        default:
-          name: routingPreference
-          description: Maintains information about the network routing choice opted by the user for data transfer
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_229
-      readOnly: true
-      serializedName: blobRestoreStatus
-      language: !<!Languages> 
-        default:
-          name: blobRestoreStatus
-          description: Blob restore status
-      protocol: !<!Protocols> {}
-    serializationFormats:
-    - json
-    usage:
-    - output
-    - input
-    extensions:
-      x-ms-flattened: true
-    language: !<!Languages> 
-      default:
-        name: StorageAccountProperties
-        description: Properties of the storage account.
-        namespace: ''
-    protocol: !<!Protocols> {}
   - *ref_77
+  - *ref_227
+  - *ref_228
+  - *ref_229
+  - *ref_124
   - *ref_230
   - *ref_231
-  - *ref_227
-  - *ref_124
-  - !<!ObjectSchema> 
-    type: object
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2019-06-01'
-    properties:
-    - !<!Property> 
-      schema: *ref_232
-      required: false
-      serializedName: privateEndpoint
-      language: !<!Languages> 
-        default:
-          name: privateEndpoint
-          description: The resource of private end point.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_233
-      required: true
-      serializedName: privateLinkServiceConnectionState
-      language: !<!Languages> 
-        default:
-          name: privateLinkServiceConnectionState
-          description: A collection of information about the state of the connection between service consumer and provider.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_111
-      required: false
-      serializedName: provisioningState
-      language: !<!Languages> 
-        default:
-          name: provisioningState
-          description: The provisioning state of the private endpoint connection resource.
-      protocol: !<!Protocols> {}
-    serializationFormats:
-    - json
-    usage:
-    - output
-    - input
-    extensions:
-      x-ms-flattened: true
-    language: !<!Languages> 
-      default:
-        name: PrivateEndpointConnectionProperties
-        description: Properties of the PrivateEndpointConnectProperties.
-        namespace: ''
-    protocol: !<!Protocols> {}
   - *ref_232
   - *ref_233
-  - *ref_229
   - *ref_234
-  - *ref_235
   - !<!ObjectSchema> &ref_435
     type: object
     apiVersions:
@@ -8253,7 +7550,7 @@ schemas: !<!Schemas>
           description: 'Gets or sets the SKU name. Note that the SKU name cannot be updated to Standard_ZRS, Premium_LRS or Premium_ZRS, nor can accounts of those SKU names be updated to any other value.'
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_236
+      schema: *ref_235
       serializedName: tags
       language: !<!Languages> 
         default:
@@ -8378,90 +7675,6 @@ schemas: !<!Schemas>
         description: The parameters that can be provided when updating the storage account properties.
         namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> 
-    type: object
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2019-06-01'
-    properties:
-    - !<!Property> 
-      schema: *ref_216
-      serializedName: customDomain
-      language: !<!Languages> 
-        default:
-          name: customDomain
-          description: >-
-            Custom domain assigned to the storage account by the user. Name is the CNAME source. Only one custom domain is supported per storage account at this time. To clear the existing custom domain, use an empty string for the custom
-            domain name property.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_217
-      serializedName: encryption
-      language: !<!Languages> 
-        default:
-          name: encryption
-          description: Provides the encryption settings on the account. The default setting is unencrypted.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_86
-      serializedName: accessTier
-      language: !<!Languages> 
-        default:
-          name: accessTier
-          description: Required for storage accounts where kind = BlobStorage. The access tier used for billing.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_219
-      serializedName: azureFilesIdentityBasedAuthentication
-      language: !<!Languages> 
-        default:
-          name: azureFilesIdentityBasedAuthentication
-          description: Provides the identity based authentication settings for Azure Files.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_94
-      serializedName: supportsHttpsTrafficOnly
-      language: !<!Languages> 
-        default:
-          name: enableHttpsTrafficOnly
-          description: Allows https traffic only to storage service if sets to true.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_218
-      serializedName: networkAcls
-      language: !<!Languages> 
-        default:
-          name: networkRuleSet
-          description: Network rule set
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_106
-      serializedName: largeFileSharesState
-      language: !<!Languages> 
-        default:
-          name: largeFileSharesState
-          description: Allow large file shares if sets to Enabled. It cannot be disabled once it is enabled.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_221
-      serializedName: routingPreference
-      language: !<!Languages> 
-        default:
-          name: routingPreference
-          description: Maintains information about the network routing choice opted by the user for data transfer
-      protocol: !<!Protocols> {}
-    serializationFormats:
-    - json
-    usage:
-    - input
-    extensions:
-      x-ms-flattened: true
-    language: !<!Languages> 
-      default:
-        name: StorageAccountPropertiesUpdateParameters
-        description: The parameters used when updating a storage account.
-        namespace: ''
-    protocol: !<!Protocols> {}
   - !<!ObjectSchema> &ref_439
     type: object
     apiVersions:
@@ -8469,7 +7682,7 @@ schemas: !<!Schemas>
       version: '2019-06-01'
     properties:
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_311
+      schema: !<!ArraySchema> &ref_309
         type: array
         apiVersions:
         - !<!ApiVersion> 
@@ -8488,7 +7701,7 @@ schemas: !<!Schemas>
           description: Gets the list of storage accounts and their properties.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_237
+      schema: *ref_236
       readOnly: true
       serializedName: nextLink
       language: !<!Languages> 
@@ -8513,19 +7726,19 @@ schemas: !<!Schemas>
       version: '2019-06-01'
     properties:
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_312
+      schema: !<!ArraySchema> &ref_310
         type: array
         apiVersions:
         - !<!ApiVersion> 
           version: '2019-06-01'
-        elementType: !<!ObjectSchema> &ref_241
+        elementType: !<!ObjectSchema> &ref_240
           type: object
           apiVersions:
           - !<!ApiVersion> 
             version: '2019-06-01'
           properties:
           - !<!Property> 
-            schema: *ref_238
+            schema: *ref_237
             readOnly: true
             serializedName: keyName
             language: !<!Languages> 
@@ -8534,7 +7747,7 @@ schemas: !<!Schemas>
                 description: Name of the key.
             protocol: !<!Protocols> {}
           - !<!Property> 
-            schema: *ref_239
+            schema: *ref_238
             readOnly: true
             serializedName: value
             language: !<!Languages> 
@@ -8543,7 +7756,7 @@ schemas: !<!Schemas>
                 description: Base 64-encoded value of the key.
             protocol: !<!Protocols> {}
           - !<!Property> 
-            schema: *ref_240
+            schema: *ref_239
             readOnly: true
             serializedName: permissions
             language: !<!Languages> 
@@ -8583,7 +7796,7 @@ schemas: !<!Schemas>
         description: The response from the ListKeys operation.
         namespace: ''
     protocol: !<!Protocols> {}
-  - *ref_241
+  - *ref_240
   - !<!ObjectSchema> &ref_445
     type: object
     apiVersions:
@@ -8591,7 +7804,7 @@ schemas: !<!Schemas>
       version: '2019-06-01'
     properties:
     - !<!Property> 
-      schema: *ref_242
+      schema: *ref_241
       required: true
       serializedName: keyName
       language: !<!Languages> 
@@ -8616,19 +7829,19 @@ schemas: !<!Schemas>
       version: '2019-06-01'
     properties:
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_313
+      schema: !<!ArraySchema> &ref_311
         type: array
         apiVersions:
         - !<!ApiVersion> 
           version: '2019-06-01'
-        elementType: !<!ObjectSchema> &ref_248
+        elementType: !<!ObjectSchema> &ref_247
           type: object
           apiVersions:
           - !<!ApiVersion> 
             version: '2019-06-01'
           properties:
           - !<!Property> 
-            schema: *ref_243
+            schema: *ref_242
             readOnly: true
             serializedName: unit
             language: !<!Languages> 
@@ -8637,7 +7850,7 @@ schemas: !<!Schemas>
                 description: Gets the unit of measurement.
             protocol: !<!Protocols> {}
           - !<!Property> 
-            schema: *ref_244
+            schema: *ref_243
             readOnly: true
             serializedName: currentValue
             language: !<!Languages> 
@@ -8646,7 +7859,7 @@ schemas: !<!Schemas>
                 description: Gets the current count of the allocated resources in the subscription.
             protocol: !<!Protocols> {}
           - !<!Property> 
-            schema: *ref_245
+            schema: *ref_244
             readOnly: true
             serializedName: limit
             language: !<!Languages> 
@@ -8655,14 +7868,14 @@ schemas: !<!Schemas>
                 description: Gets the maximum count of the resources that can be allocated in the subscription.
             protocol: !<!Protocols> {}
           - !<!Property> 
-            schema: !<!ObjectSchema> &ref_249
+            schema: !<!ObjectSchema> &ref_248
               type: object
               apiVersions:
               - !<!ApiVersion> 
                 version: '2019-06-01'
               properties:
               - !<!Property> 
-                schema: *ref_246
+                schema: *ref_245
                 readOnly: true
                 serializedName: value
                 language: !<!Languages> 
@@ -8671,7 +7884,7 @@ schemas: !<!Schemas>
                     description: Gets a string describing the resource name.
                 protocol: !<!Protocols> {}
               - !<!Property> 
-                schema: *ref_247
+                schema: *ref_246
                 readOnly: true
                 serializedName: localizedValue
                 language: !<!Languages> 
@@ -8727,8 +7940,8 @@ schemas: !<!Schemas>
         description: The response from the List Usages operation.
         namespace: ''
     protocol: !<!Protocols> {}
+  - *ref_247
   - *ref_248
-  - *ref_249
   - !<!ObjectSchema> &ref_449
     type: object
     apiVersions:
@@ -8736,7 +7949,7 @@ schemas: !<!Schemas>
       version: '2019-06-01'
     properties:
     - !<!Property> 
-      schema: *ref_250
+      schema: *ref_249
       required: true
       serializedName: signedServices
       language: !<!Languages> 
@@ -8745,7 +7958,7 @@ schemas: !<!Schemas>
           description: 'The signed services accessible with the account SAS. Possible values include: Blob (b), Queue (q), Table (t), File (f).'
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_251
+      schema: *ref_250
       required: true
       serializedName: signedResourceTypes
       language: !<!Languages> 
@@ -8756,7 +7969,7 @@ schemas: !<!Schemas>
             table entities, and files.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_252
+      schema: *ref_251
       required: true
       serializedName: signedPermission
       language: !<!Languages> 
@@ -8765,7 +7978,7 @@ schemas: !<!Schemas>
           description: 'The signed permissions for the account SAS. Possible values include: Read (r), Write (w), Delete (d), List (l), Add (a), Create (c), Update (u) and Process (p).'
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_253
+      schema: *ref_252
       required: false
       serializedName: signedIp
       language: !<!Languages> 
@@ -8774,7 +7987,7 @@ schemas: !<!Schemas>
           description: An IP address or a range of IP addresses from which to accept requests.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_254
+      schema: *ref_253
       required: false
       serializedName: signedProtocol
       language: !<!Languages> 
@@ -8783,7 +7996,7 @@ schemas: !<!Schemas>
           description: The protocol permitted for a request made with the account SAS.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_255
+      schema: *ref_254
       required: false
       serializedName: signedStart
       language: !<!Languages> 
@@ -8792,7 +8005,7 @@ schemas: !<!Schemas>
           description: The time at which the SAS becomes valid.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_256
+      schema: *ref_255
       required: true
       serializedName: signedExpiry
       language: !<!Languages> 
@@ -8801,7 +8014,7 @@ schemas: !<!Schemas>
           description: The time at which the shared access signature becomes invalid.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_257
+      schema: *ref_256
       required: false
       serializedName: keyToSign
       language: !<!Languages> 
@@ -8826,7 +8039,7 @@ schemas: !<!Schemas>
       version: '2019-06-01'
     properties:
     - !<!Property> 
-      schema: *ref_258
+      schema: *ref_257
       readOnly: true
       serializedName: accountSasToken
       language: !<!Languages> 
@@ -8851,7 +8064,7 @@ schemas: !<!Schemas>
       version: '2019-06-01'
     properties:
     - !<!Property> 
-      schema: *ref_259
+      schema: *ref_258
       required: true
       serializedName: canonicalizedResource
       language: !<!Languages> 
@@ -8860,7 +8073,7 @@ schemas: !<!Schemas>
           description: The canonical path to the signed resource.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_260
+      schema: *ref_259
       required: false
       serializedName: signedResource
       language: !<!Languages> 
@@ -8869,7 +8082,7 @@ schemas: !<!Schemas>
           description: 'The signed services accessible with the service SAS. Possible values include: Blob (b), Container (c), File (f), Share (s).'
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_252
+      schema: *ref_251
       required: false
       serializedName: signedPermission
       language: !<!Languages> 
@@ -8878,7 +8091,7 @@ schemas: !<!Schemas>
           description: 'The signed permissions for the service SAS. Possible values include: Read (r), Write (w), Delete (d), List (l), Add (a), Create (c), Update (u) and Process (p).'
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_253
+      schema: *ref_252
       required: false
       serializedName: signedIp
       language: !<!Languages> 
@@ -8887,7 +8100,7 @@ schemas: !<!Schemas>
           description: An IP address or a range of IP addresses from which to accept requests.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_254
+      schema: *ref_253
       required: false
       serializedName: signedProtocol
       language: !<!Languages> 
@@ -8896,7 +8109,7 @@ schemas: !<!Schemas>
           description: The protocol permitted for a request made with the account SAS.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_255
+      schema: *ref_254
       required: false
       serializedName: signedStart
       language: !<!Languages> 
@@ -8905,7 +8118,7 @@ schemas: !<!Schemas>
           description: The time at which the SAS becomes valid.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_256
+      schema: *ref_255
       required: false
       serializedName: signedExpiry
       language: !<!Languages> 
@@ -8914,7 +8127,7 @@ schemas: !<!Schemas>
           description: The time at which the shared access signature becomes invalid.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_261
+      schema: *ref_260
       required: false
       serializedName: signedIdentifier
       language: !<!Languages> 
@@ -8923,7 +8136,7 @@ schemas: !<!Schemas>
           description: 'A unique value up to 64 characters in length that correlates to an access policy specified for the container, queue, or table.'
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_262
+      schema: *ref_261
       required: false
       serializedName: startPk
       language: !<!Languages> 
@@ -8932,7 +8145,7 @@ schemas: !<!Schemas>
           description: The start of partition key.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_263
+      schema: *ref_262
       required: false
       serializedName: endPk
       language: !<!Languages> 
@@ -8941,7 +8154,7 @@ schemas: !<!Schemas>
           description: The end of partition key.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_264
+      schema: *ref_263
       required: false
       serializedName: startRk
       language: !<!Languages> 
@@ -8950,7 +8163,7 @@ schemas: !<!Schemas>
           description: The start of row key.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_265
+      schema: *ref_264
       required: false
       serializedName: endRk
       language: !<!Languages> 
@@ -8959,7 +8172,7 @@ schemas: !<!Schemas>
           description: The end of row key.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_266
+      schema: *ref_265
       required: false
       serializedName: keyToSign
       language: !<!Languages> 
@@ -8968,7 +8181,7 @@ schemas: !<!Schemas>
           description: The key to sign the account SAS token with.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_267
+      schema: *ref_266
       required: false
       serializedName: rscc
       language: !<!Languages> 
@@ -8977,7 +8190,7 @@ schemas: !<!Schemas>
           description: The response header override for cache control.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_268
+      schema: *ref_267
       required: false
       serializedName: rscd
       language: !<!Languages> 
@@ -8986,7 +8199,7 @@ schemas: !<!Schemas>
           description: The response header override for content disposition.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_269
+      schema: *ref_268
       required: false
       serializedName: rsce
       language: !<!Languages> 
@@ -8995,7 +8208,7 @@ schemas: !<!Schemas>
           description: The response header override for content encoding.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_270
+      schema: *ref_269
       required: false
       serializedName: rscl
       language: !<!Languages> 
@@ -9004,7 +8217,7 @@ schemas: !<!Schemas>
           description: The response header override for content language.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_271
+      schema: *ref_270
       required: false
       serializedName: rsct
       language: !<!Languages> 
@@ -9029,7 +8242,7 @@ schemas: !<!Schemas>
       version: '2019-06-01'
     properties:
     - !<!Property> 
-      schema: *ref_272
+      schema: *ref_271
       readOnly: true
       serializedName: serviceSasToken
       language: !<!Languages> 
@@ -9048,53 +8261,15 @@ schemas: !<!Schemas>
         namespace: ''
     protocol: !<!Protocols> {}
   - *ref_143
-  - !<!ObjectSchema> 
-    type: object
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2019-06-01'
-    properties:
-    - !<!Property> 
-      schema: *ref_125
-      readOnly: true
-      required: false
-      serializedName: lastModifiedTime
-      language: !<!Languages> 
-        default:
-          name: lastModifiedTime
-          description: Returns the date and time the ManagementPolicies was last modified.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_273
-      required: true
-      serializedName: policy
-      language: !<!Languages> 
-        default:
-          name: policy
-          description: 'The Storage Account ManagementPolicy, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts.'
-      protocol: !<!Protocols> {}
-    serializationFormats:
-    - json
-    usage:
-    - output
-    - input
-    extensions:
-      x-ms-flattened: true
-    language: !<!Languages> 
-      default:
-        name: ManagementPolicyProperties
-        description: The Storage Account ManagementPolicy properties.
-        namespace: ''
-    protocol: !<!Protocols> {}
+  - *ref_272
   - *ref_273
   - *ref_274
   - *ref_275
   - *ref_276
-  - *ref_277
   - *ref_130
+  - *ref_277
   - *ref_278
   - *ref_279
-  - *ref_280
   - !<!ObjectSchema> &ref_479
     type: object
     apiVersions:
@@ -9102,7 +8277,7 @@ schemas: !<!Schemas>
       version: '2019-06-01'
     properties:
     - !<!Property> 
-      schema: *ref_281
+      schema: *ref_280
       serializedName: code
       language: !<!Languages> 
         default:
@@ -9110,7 +8285,7 @@ schemas: !<!Schemas>
           description: An identifier for the error. Codes are invariant and are intended to be consumed programmatically.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_282
+      schema: *ref_281
       serializedName: message
       language: !<!Languages> 
         default:
@@ -9162,114 +8337,8 @@ schemas: !<!Schemas>
         namespace: ''
     protocol: !<!Protocols> {}
   - *ref_144
-  - !<!ObjectSchema> 
-    type: object
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2019-06-01'
-    properties:
-    - !<!Property> 
-      schema: *ref_134
-      readOnly: true
-      serializedName: groupId
-      language: !<!Languages> 
-        default:
-          name: groupId
-          description: The private link resource group id.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_283
-      readOnly: true
-      serializedName: requiredMembers
-      language: !<!Languages> 
-        default:
-          name: requiredMembers
-          description: The private link resource required member names.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_284
-      serializedName: requiredZoneNames
-      language: !<!Languages> 
-        default:
-          name: requiredZoneNames
-          description: The private link resource Private link DNS zone name.
-      protocol: !<!Protocols> {}
-    serializationFormats:
-    - json
-    usage:
-    - input
-    - output
-    extensions:
-      x-ms-flattened: true
-    language: !<!Languages> 
-      default:
-        name: PrivateLinkResourceProperties
-        description: Properties of a private link resource.
-        namespace: ''
-    protocol: !<!Protocols> {}
   - *ref_145
-  - !<!ObjectSchema> 
-    type: object
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2019-06-01'
-    properties:
-    - !<!Property> 
-      schema: *ref_137
-      serializedName: source
-      language: !<!Languages> 
-        default:
-          name: source
-          description: 'The provider for the encryption scope. Possible values (case-insensitive):  Microsoft.Storage, Microsoft.KeyVault.'
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_138
-      serializedName: state
-      language: !<!Languages> 
-        default:
-          name: state
-          description: 'The state of the encryption scope. Possible values (case-insensitive):  Enabled, Disabled.'
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_139
-      readOnly: true
-      serializedName: creationTime
-      language: !<!Languages> 
-        default:
-          name: creationTime
-          description: Gets the creation date and time of the encryption scope in UTC.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_140
-      readOnly: true
-      serializedName: lastModifiedTime
-      language: !<!Languages> 
-        default:
-          name: lastModifiedTime
-          description: Gets the last modification date and time of the encryption scope in UTC.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_285
-      serializedName: keyVaultProperties
-      language: !<!Languages> 
-        default:
-          name: keyVaultProperties
-          description: The key vault properties for the encryption scope. This is a required field if encryption scope 'source' attribute is set to 'Microsoft.KeyVault'.
-      protocol: !<!Protocols> {}
-    serializationFormats:
-    - json
-    usage:
-    - input
-    - output
-    extensions:
-      x-ms-flattened: true
-    language: !<!Languages> 
-      default:
-        name: EncryptionScopeProperties
-        description: Properties of the encryption scope.
-        namespace: ''
-    protocol: !<!Protocols> {}
-  - *ref_285
+  - *ref_282
   - !<!ObjectSchema> &ref_503
     type: object
     apiVersions:
@@ -9296,7 +8365,7 @@ schemas: !<!Schemas>
           description: List of encryption scopes requested.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_286
+      schema: *ref_283
       readOnly: true
       serializedName: nextLink
       language: !<!Languages> 
@@ -9316,6 +8385,9 @@ schemas: !<!Schemas>
     protocol: !<!Protocols> {}
   - *ref_146
   arrays:
+  - *ref_284
+  - *ref_285
+  - *ref_286
   - *ref_287
   - *ref_288
   - *ref_289
@@ -9339,7 +8411,6 @@ schemas: !<!Schemas>
   - *ref_307
   - *ref_308
   - *ref_309
-  - *ref_228
   - *ref_310
   - *ref_311
   - *ref_312
@@ -9347,8 +8418,6 @@ schemas: !<!Schemas>
   - *ref_314
   - *ref_315
   - *ref_316
-  - *ref_283
-  - *ref_284
   - *ref_317
   - *ref_318
 globalParameters:
@@ -12831,7 +11900,7 @@ operationGroups:
     - !<!Request> 
       parameters:
       - !<!Parameter> &ref_461
-        schema: *ref_234
+        schema: *ref_233
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -12861,7 +11930,7 @@ operationGroups:
     - *ref_463
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_229
+      schema: *ref_232
       language: !<!Languages> 
         default:
           name: ''
@@ -12874,7 +11943,7 @@ operationGroups:
           statusCodes:
           - '200'
     - !<!SchemaResponse> 
-      schema: *ref_229
+      schema: *ref_232
       language: !<!Languages> 
         default:
           name: ''
