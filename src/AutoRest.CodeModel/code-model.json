@@ -1081,27 +1081,14 @@
           "description": "contexts in which the schema is used",
           "type": "array",
           "items": {
-            "enum": [
-              "input",
-              "output"
-            ],
-            "type": "string"
+            "$ref": "#/definitions/SchemaContext"
           }
         },
         "serializationFormats": {
           "description": "Known media types in which this schema can be serialized",
           "type": "array",
           "items": {
-            "enum": [
-              "binary",
-              "form",
-              "json",
-              "multipart",
-              "text",
-              "unknown",
-              "xml"
-            ],
-            "type": "string"
+            "$ref": "#/definitions/KnownMediaType"
           }
         }
       },
@@ -1185,33 +1172,6 @@
           "items": {
             "$ref": "#/definitions/GroupProperty"
           }
-        },
-        "usage": {
-          "description": "contexts in which the schema is used",
-          "type": "array",
-          "items": {
-            "enum": [
-              "input",
-              "output"
-            ],
-            "type": "string"
-          }
-        },
-        "serializationFormats": {
-          "description": "Known media types in which this schema can be serialized",
-          "type": "array",
-          "items": {
-            "enum": [
-              "binary",
-              "form",
-              "json",
-              "multipart",
-              "text",
-              "unknown",
-              "xml"
-            ],
-            "type": "string"
-          }
         }
       },
       "defaultProperties": [],
@@ -1224,6 +1184,9 @@
       "allOf": [
         {
           "$ref": "#/definitions/Schema"
+        },
+        {
+          "$ref": "#/definitions/SchemaUsage"
         }
       ]
     },
@@ -1258,33 +1221,6 @@
         },
         "discriminatorValue": {
           "type": "string"
-        },
-        "usage": {
-          "description": "contexts in which the schema is used",
-          "type": "array",
-          "items": {
-            "enum": [
-              "input",
-              "output"
-            ],
-            "type": "string"
-          }
-        },
-        "serializationFormats": {
-          "description": "Known media types in which this schema can be serialized",
-          "type": "array",
-          "items": {
-            "enum": [
-              "binary",
-              "form",
-              "json",
-              "multipart",
-              "text",
-              "unknown",
-              "xml"
-            ],
-            "type": "string"
-          }
         }
       },
       "defaultProperties": [],
@@ -1297,6 +1233,9 @@
       "allOf": [
         {
           "$ref": "#/definitions/ComplexSchema"
+        },
+        {
+          "$ref": "#/definitions/SchemaUsage"
         }
       ]
     },

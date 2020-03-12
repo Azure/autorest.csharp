@@ -157,7 +157,7 @@ operationGroups:
           name: ''
           description: ''
       protocol: !<!Protocols> 
-        http: !<!HttpWithBodyRequest> 
+        http: !<!HttpBinaryRequest> 
           path: /mediatypes/analyze
           method: post
           binary: true

@@ -957,12 +957,12 @@ namespace AutoRest.CSharp.V3.Input
         /// <summary>contexts in which the schema is used</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "usage")]
         [System.ComponentModel.DataAnnotations.Required]
-        public System.Collections.Generic.ICollection<Usage> Usage { get; set; } = new System.Collections.ObjectModel.Collection<Usage>();
+        public System.Collections.Generic.ICollection<SchemaContext> Usage { get; set; } = new System.Collections.ObjectModel.Collection<SchemaContext>();
 
         /// <summary>Known media types in which this schema can be serialized</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "serializationFormats")]
         [System.ComponentModel.DataAnnotations.Required]
-        public System.Collections.Generic.ICollection<SerializationFormats2> SerializationFormats { get; set; } = new System.Collections.ObjectModel.Collection<SerializationFormats2>();
+        public System.Collections.Generic.ICollection<KnownMediaType> SerializationFormats { get; set; } = new System.Collections.ObjectModel.Collection<KnownMediaType>();
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
@@ -1011,12 +1011,12 @@ namespace AutoRest.CSharp.V3.Input
         /// <summary>contexts in which the schema is used</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "usage")]
         [System.ComponentModel.DataAnnotations.Required]
-        public System.Collections.Generic.ICollection<Usage2> Usage { get; set; } = new System.Collections.ObjectModel.Collection<Usage2>();
+        public System.Collections.Generic.ICollection<SchemaContext> Usage { get; set; } = new System.Collections.ObjectModel.Collection<SchemaContext>();
 
         /// <summary>Known media types in which this schema can be serialized</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "serializationFormats")]
         [System.ComponentModel.DataAnnotations.Required]
-        public System.Collections.Generic.ICollection<SerializationFormats3> SerializationFormats { get; set; } = new System.Collections.ObjectModel.Collection<SerializationFormats3>();
+        public System.Collections.Generic.ICollection<KnownMediaType> SerializationFormats { get; set; } = new System.Collections.ObjectModel.Collection<KnownMediaType>();
     }
 
     /// <summary>a schema that represents a type with child properties.</summary>
@@ -1052,12 +1052,12 @@ namespace AutoRest.CSharp.V3.Input
         /// <summary>contexts in which the schema is used</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "usage")]
         [System.ComponentModel.DataAnnotations.Required]
-        public System.Collections.Generic.ICollection<Usage3> Usage { get; set; } = new System.Collections.ObjectModel.Collection<Usage3>();
+        public System.Collections.Generic.ICollection<SchemaContext> Usage { get; set; } = new System.Collections.ObjectModel.Collection<SchemaContext>();
 
         /// <summary>Known media types in which this schema can be serialized</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "serializationFormats")]
         [System.ComponentModel.DataAnnotations.Required]
-        public System.Collections.Generic.ICollection<SerializationFormats4> SerializationFormats { get; set; } = new System.Collections.ObjectModel.Collection<SerializationFormats4>();
+        public System.Collections.Generic.ICollection<KnownMediaType> SerializationFormats { get; set; } = new System.Collections.ObjectModel.Collection<KnownMediaType>();
     }
 
     /// <summary>a schema that represents a Duration value</summary>
@@ -2512,111 +2512,6 @@ namespace AutoRest.CSharp.V3.Input
 
         [System.Runtime.Serialization.EnumMember(Value = @"byte")]
         Byte = 1,
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
-    internal enum Usage
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"input")]
-        Input = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"output")]
-        Output = 1,
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
-    internal enum SerializationFormats2
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"binary")]
-        Binary = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"form")]
-        Form = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"json")]
-        Json = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"multipart")]
-        Multipart = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"text")]
-        Text = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"unknown")]
-        Unknown = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"xml")]
-        Xml = 6,
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
-    internal enum Usage2
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"input")]
-        Input = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"output")]
-        Output = 1,
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
-    internal enum SerializationFormats3
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"binary")]
-        Binary = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"form")]
-        Form = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"json")]
-        Json = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"multipart")]
-        Multipart = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"text")]
-        Text = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"unknown")]
-        Unknown = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"xml")]
-        Xml = 6,
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
-    internal enum Usage3
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"input")]
-        Input = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"output")]
-        Output = 1,
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
-    internal enum SerializationFormats4
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"binary")]
-        Binary = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"form")]
-        Form = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"json")]
-        Json = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"multipart")]
-        Multipart = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"text")]
-        Text = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"unknown")]
-        Unknown = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"xml")]
-        Xml = 6,
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
