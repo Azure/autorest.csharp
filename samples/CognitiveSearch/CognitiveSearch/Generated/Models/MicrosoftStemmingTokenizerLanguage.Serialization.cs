@@ -61,54 +61,54 @@ namespace CognitiveSearch.Models
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown MicrosoftStemmingTokenizerLanguage value.")
         };
 
-        public static MicrosoftStemmingTokenizerLanguage ToMicrosoftStemmingTokenizerLanguage(this string value) => value switch
+        public static MicrosoftStemmingTokenizerLanguage ToMicrosoftStemmingTokenizerLanguage(this string value)
         {
-            "arabic" => MicrosoftStemmingTokenizerLanguage.Arabic,
-            "bangla" => MicrosoftStemmingTokenizerLanguage.Bangla,
-            "bulgarian" => MicrosoftStemmingTokenizerLanguage.Bulgarian,
-            "catalan" => MicrosoftStemmingTokenizerLanguage.Catalan,
-            "croatian" => MicrosoftStemmingTokenizerLanguage.Croatian,
-            "czech" => MicrosoftStemmingTokenizerLanguage.Czech,
-            "danish" => MicrosoftStemmingTokenizerLanguage.Danish,
-            "dutch" => MicrosoftStemmingTokenizerLanguage.Dutch,
-            "english" => MicrosoftStemmingTokenizerLanguage.English,
-            "estonian" => MicrosoftStemmingTokenizerLanguage.Estonian,
-            "finnish" => MicrosoftStemmingTokenizerLanguage.Finnish,
-            "french" => MicrosoftStemmingTokenizerLanguage.French,
-            "german" => MicrosoftStemmingTokenizerLanguage.German,
-            "greek" => MicrosoftStemmingTokenizerLanguage.Greek,
-            "gujarati" => MicrosoftStemmingTokenizerLanguage.Gujarati,
-            "hebrew" => MicrosoftStemmingTokenizerLanguage.Hebrew,
-            "hindi" => MicrosoftStemmingTokenizerLanguage.Hindi,
-            "hungarian" => MicrosoftStemmingTokenizerLanguage.Hungarian,
-            "icelandic" => MicrosoftStemmingTokenizerLanguage.Icelandic,
-            "indonesian" => MicrosoftStemmingTokenizerLanguage.Indonesian,
-            "italian" => MicrosoftStemmingTokenizerLanguage.Italian,
-            "kannada" => MicrosoftStemmingTokenizerLanguage.Kannada,
-            "latvian" => MicrosoftStemmingTokenizerLanguage.Latvian,
-            "lithuanian" => MicrosoftStemmingTokenizerLanguage.Lithuanian,
-            "malay" => MicrosoftStemmingTokenizerLanguage.Malay,
-            "malayalam" => MicrosoftStemmingTokenizerLanguage.Malayalam,
-            "marathi" => MicrosoftStemmingTokenizerLanguage.Marathi,
-            "norwegianBokmaal" => MicrosoftStemmingTokenizerLanguage.NorwegianBokmaal,
-            "polish" => MicrosoftStemmingTokenizerLanguage.Polish,
-            "portuguese" => MicrosoftStemmingTokenizerLanguage.Portuguese,
-            "portugueseBrazilian" => MicrosoftStemmingTokenizerLanguage.PortugueseBrazilian,
-            "punjabi" => MicrosoftStemmingTokenizerLanguage.Punjabi,
-            "romanian" => MicrosoftStemmingTokenizerLanguage.Romanian,
-            "russian" => MicrosoftStemmingTokenizerLanguage.Russian,
-            "serbianCyrillic" => MicrosoftStemmingTokenizerLanguage.SerbianCyrillic,
-            "serbianLatin" => MicrosoftStemmingTokenizerLanguage.SerbianLatin,
-            "slovak" => MicrosoftStemmingTokenizerLanguage.Slovak,
-            "slovenian" => MicrosoftStemmingTokenizerLanguage.Slovenian,
-            "spanish" => MicrosoftStemmingTokenizerLanguage.Spanish,
-            "swedish" => MicrosoftStemmingTokenizerLanguage.Swedish,
-            "tamil" => MicrosoftStemmingTokenizerLanguage.Tamil,
-            "telugu" => MicrosoftStemmingTokenizerLanguage.Telugu,
-            "turkish" => MicrosoftStemmingTokenizerLanguage.Turkish,
-            "ukrainian" => MicrosoftStemmingTokenizerLanguage.Ukrainian,
-            "urdu" => MicrosoftStemmingTokenizerLanguage.Urdu,
-            _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown MicrosoftStemmingTokenizerLanguage value.")
-        };
+            if (string.Equals(value, "arabic", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftStemmingTokenizerLanguage.Arabic;
+            if (string.Equals(value, "bangla", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftStemmingTokenizerLanguage.Bangla;
+            if (string.Equals(value, "bulgarian", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftStemmingTokenizerLanguage.Bulgarian;
+            if (string.Equals(value, "catalan", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftStemmingTokenizerLanguage.Catalan;
+            if (string.Equals(value, "croatian", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftStemmingTokenizerLanguage.Croatian;
+            if (string.Equals(value, "czech", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftStemmingTokenizerLanguage.Czech;
+            if (string.Equals(value, "danish", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftStemmingTokenizerLanguage.Danish;
+            if (string.Equals(value, "dutch", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftStemmingTokenizerLanguage.Dutch;
+            if (string.Equals(value, "english", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftStemmingTokenizerLanguage.English;
+            if (string.Equals(value, "estonian", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftStemmingTokenizerLanguage.Estonian;
+            if (string.Equals(value, "finnish", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftStemmingTokenizerLanguage.Finnish;
+            if (string.Equals(value, "french", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftStemmingTokenizerLanguage.French;
+            if (string.Equals(value, "german", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftStemmingTokenizerLanguage.German;
+            if (string.Equals(value, "greek", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftStemmingTokenizerLanguage.Greek;
+            if (string.Equals(value, "gujarati", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftStemmingTokenizerLanguage.Gujarati;
+            if (string.Equals(value, "hebrew", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftStemmingTokenizerLanguage.Hebrew;
+            if (string.Equals(value, "hindi", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftStemmingTokenizerLanguage.Hindi;
+            if (string.Equals(value, "hungarian", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftStemmingTokenizerLanguage.Hungarian;
+            if (string.Equals(value, "icelandic", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftStemmingTokenizerLanguage.Icelandic;
+            if (string.Equals(value, "indonesian", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftStemmingTokenizerLanguage.Indonesian;
+            if (string.Equals(value, "italian", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftStemmingTokenizerLanguage.Italian;
+            if (string.Equals(value, "kannada", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftStemmingTokenizerLanguage.Kannada;
+            if (string.Equals(value, "latvian", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftStemmingTokenizerLanguage.Latvian;
+            if (string.Equals(value, "lithuanian", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftStemmingTokenizerLanguage.Lithuanian;
+            if (string.Equals(value, "malay", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftStemmingTokenizerLanguage.Malay;
+            if (string.Equals(value, "malayalam", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftStemmingTokenizerLanguage.Malayalam;
+            if (string.Equals(value, "marathi", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftStemmingTokenizerLanguage.Marathi;
+            if (string.Equals(value, "norwegianBokmaal", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftStemmingTokenizerLanguage.NorwegianBokmaal;
+            if (string.Equals(value, "polish", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftStemmingTokenizerLanguage.Polish;
+            if (string.Equals(value, "portuguese", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftStemmingTokenizerLanguage.Portuguese;
+            if (string.Equals(value, "portugueseBrazilian", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftStemmingTokenizerLanguage.PortugueseBrazilian;
+            if (string.Equals(value, "punjabi", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftStemmingTokenizerLanguage.Punjabi;
+            if (string.Equals(value, "romanian", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftStemmingTokenizerLanguage.Romanian;
+            if (string.Equals(value, "russian", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftStemmingTokenizerLanguage.Russian;
+            if (string.Equals(value, "serbianCyrillic", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftStemmingTokenizerLanguage.SerbianCyrillic;
+            if (string.Equals(value, "serbianLatin", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftStemmingTokenizerLanguage.SerbianLatin;
+            if (string.Equals(value, "slovak", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftStemmingTokenizerLanguage.Slovak;
+            if (string.Equals(value, "slovenian", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftStemmingTokenizerLanguage.Slovenian;
+            if (string.Equals(value, "spanish", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftStemmingTokenizerLanguage.Spanish;
+            if (string.Equals(value, "swedish", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftStemmingTokenizerLanguage.Swedish;
+            if (string.Equals(value, "tamil", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftStemmingTokenizerLanguage.Tamil;
+            if (string.Equals(value, "telugu", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftStemmingTokenizerLanguage.Telugu;
+            if (string.Equals(value, "turkish", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftStemmingTokenizerLanguage.Turkish;
+            if (string.Equals(value, "ukrainian", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftStemmingTokenizerLanguage.Ukrainian;
+            if (string.Equals(value, "urdu", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftStemmingTokenizerLanguage.Urdu;
+            throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown MicrosoftStemmingTokenizerLanguage value.");
+        }
     }
 }

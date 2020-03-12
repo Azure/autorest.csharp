@@ -21,14 +21,14 @@ namespace CognitiveSearch.Models
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown TokenCharacterKind value.")
         };
 
-        public static TokenCharacterKind ToTokenCharacterKind(this string value) => value switch
+        public static TokenCharacterKind ToTokenCharacterKind(this string value)
         {
-            "letter" => TokenCharacterKind.Letter,
-            "digit" => TokenCharacterKind.Digit,
-            "whitespace" => TokenCharacterKind.Whitespace,
-            "punctuation" => TokenCharacterKind.Punctuation,
-            "symbol" => TokenCharacterKind.Symbol,
-            _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown TokenCharacterKind value.")
-        };
+            if (string.Equals(value, "letter", StringComparison.InvariantCultureIgnoreCase)) return TokenCharacterKind.Letter;
+            if (string.Equals(value, "digit", StringComparison.InvariantCultureIgnoreCase)) return TokenCharacterKind.Digit;
+            if (string.Equals(value, "whitespace", StringComparison.InvariantCultureIgnoreCase)) return TokenCharacterKind.Whitespace;
+            if (string.Equals(value, "punctuation", StringComparison.InvariantCultureIgnoreCase)) return TokenCharacterKind.Punctuation;
+            if (string.Equals(value, "symbol", StringComparison.InvariantCultureIgnoreCase)) return TokenCharacterKind.Symbol;
+            throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown TokenCharacterKind value.");
+        }
     }
 }

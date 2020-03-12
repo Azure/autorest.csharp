@@ -20,13 +20,13 @@ namespace CognitiveServices.TextAnalytics.Models
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown DocumentSentimentValue value.")
         };
 
-        public static DocumentSentimentValue ToDocumentSentimentValue(this string value) => value switch
+        public static DocumentSentimentValue ToDocumentSentimentValue(this string value)
         {
-            "positive" => DocumentSentimentValue.Positive,
-            "neutral" => DocumentSentimentValue.Neutral,
-            "negative" => DocumentSentimentValue.Negative,
-            "mixed" => DocumentSentimentValue.Mixed,
-            _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown DocumentSentimentValue value.")
-        };
+            if (string.Equals(value, "positive", StringComparison.InvariantCultureIgnoreCase)) return DocumentSentimentValue.Positive;
+            if (string.Equals(value, "neutral", StringComparison.InvariantCultureIgnoreCase)) return DocumentSentimentValue.Neutral;
+            if (string.Equals(value, "negative", StringComparison.InvariantCultureIgnoreCase)) return DocumentSentimentValue.Negative;
+            if (string.Equals(value, "mixed", StringComparison.InvariantCultureIgnoreCase)) return DocumentSentimentValue.Mixed;
+            throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown DocumentSentimentValue value.");
+        }
     }
 }

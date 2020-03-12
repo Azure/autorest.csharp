@@ -19,12 +19,12 @@ namespace CognitiveSearch.Models
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown IndexerStatus value.")
         };
 
-        public static IndexerStatus ToIndexerStatus(this string value) => value switch
+        public static IndexerStatus ToIndexerStatus(this string value)
         {
-            "unknown" => IndexerStatus.Unknown,
-            "error" => IndexerStatus.Error,
-            "running" => IndexerStatus.Running,
-            _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown IndexerStatus value.")
-        };
+            if (string.Equals(value, "unknown", StringComparison.InvariantCultureIgnoreCase)) return IndexerStatus.Unknown;
+            if (string.Equals(value, "error", StringComparison.InvariantCultureIgnoreCase)) return IndexerStatus.Error;
+            if (string.Equals(value, "running", StringComparison.InvariantCultureIgnoreCase)) return IndexerStatus.Running;
+            throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown IndexerStatus value.");
+        }
     }
 }

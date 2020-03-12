@@ -47,40 +47,40 @@ namespace CognitiveSearch.Models
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown StopwordsList value.")
         };
 
-        public static StopwordsList ToStopwordsList(this string value) => value switch
+        public static StopwordsList ToStopwordsList(this string value)
         {
-            "arabic" => StopwordsList.Arabic,
-            "armenian" => StopwordsList.Armenian,
-            "basque" => StopwordsList.Basque,
-            "brazilian" => StopwordsList.Brazilian,
-            "bulgarian" => StopwordsList.Bulgarian,
-            "catalan" => StopwordsList.Catalan,
-            "czech" => StopwordsList.Czech,
-            "danish" => StopwordsList.Danish,
-            "dutch" => StopwordsList.Dutch,
-            "english" => StopwordsList.English,
-            "finnish" => StopwordsList.Finnish,
-            "french" => StopwordsList.French,
-            "galician" => StopwordsList.Galician,
-            "german" => StopwordsList.German,
-            "greek" => StopwordsList.Greek,
-            "hindi" => StopwordsList.Hindi,
-            "hungarian" => StopwordsList.Hungarian,
-            "indonesian" => StopwordsList.Indonesian,
-            "irish" => StopwordsList.Irish,
-            "italian" => StopwordsList.Italian,
-            "latvian" => StopwordsList.Latvian,
-            "norwegian" => StopwordsList.Norwegian,
-            "persian" => StopwordsList.Persian,
-            "portuguese" => StopwordsList.Portuguese,
-            "romanian" => StopwordsList.Romanian,
-            "russian" => StopwordsList.Russian,
-            "sorani" => StopwordsList.Sorani,
-            "spanish" => StopwordsList.Spanish,
-            "swedish" => StopwordsList.Swedish,
-            "thai" => StopwordsList.Thai,
-            "turkish" => StopwordsList.Turkish,
-            _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown StopwordsList value.")
-        };
+            if (string.Equals(value, "arabic", StringComparison.InvariantCultureIgnoreCase)) return StopwordsList.Arabic;
+            if (string.Equals(value, "armenian", StringComparison.InvariantCultureIgnoreCase)) return StopwordsList.Armenian;
+            if (string.Equals(value, "basque", StringComparison.InvariantCultureIgnoreCase)) return StopwordsList.Basque;
+            if (string.Equals(value, "brazilian", StringComparison.InvariantCultureIgnoreCase)) return StopwordsList.Brazilian;
+            if (string.Equals(value, "bulgarian", StringComparison.InvariantCultureIgnoreCase)) return StopwordsList.Bulgarian;
+            if (string.Equals(value, "catalan", StringComparison.InvariantCultureIgnoreCase)) return StopwordsList.Catalan;
+            if (string.Equals(value, "czech", StringComparison.InvariantCultureIgnoreCase)) return StopwordsList.Czech;
+            if (string.Equals(value, "danish", StringComparison.InvariantCultureIgnoreCase)) return StopwordsList.Danish;
+            if (string.Equals(value, "dutch", StringComparison.InvariantCultureIgnoreCase)) return StopwordsList.Dutch;
+            if (string.Equals(value, "english", StringComparison.InvariantCultureIgnoreCase)) return StopwordsList.English;
+            if (string.Equals(value, "finnish", StringComparison.InvariantCultureIgnoreCase)) return StopwordsList.Finnish;
+            if (string.Equals(value, "french", StringComparison.InvariantCultureIgnoreCase)) return StopwordsList.French;
+            if (string.Equals(value, "galician", StringComparison.InvariantCultureIgnoreCase)) return StopwordsList.Galician;
+            if (string.Equals(value, "german", StringComparison.InvariantCultureIgnoreCase)) return StopwordsList.German;
+            if (string.Equals(value, "greek", StringComparison.InvariantCultureIgnoreCase)) return StopwordsList.Greek;
+            if (string.Equals(value, "hindi", StringComparison.InvariantCultureIgnoreCase)) return StopwordsList.Hindi;
+            if (string.Equals(value, "hungarian", StringComparison.InvariantCultureIgnoreCase)) return StopwordsList.Hungarian;
+            if (string.Equals(value, "indonesian", StringComparison.InvariantCultureIgnoreCase)) return StopwordsList.Indonesian;
+            if (string.Equals(value, "irish", StringComparison.InvariantCultureIgnoreCase)) return StopwordsList.Irish;
+            if (string.Equals(value, "italian", StringComparison.InvariantCultureIgnoreCase)) return StopwordsList.Italian;
+            if (string.Equals(value, "latvian", StringComparison.InvariantCultureIgnoreCase)) return StopwordsList.Latvian;
+            if (string.Equals(value, "norwegian", StringComparison.InvariantCultureIgnoreCase)) return StopwordsList.Norwegian;
+            if (string.Equals(value, "persian", StringComparison.InvariantCultureIgnoreCase)) return StopwordsList.Persian;
+            if (string.Equals(value, "portuguese", StringComparison.InvariantCultureIgnoreCase)) return StopwordsList.Portuguese;
+            if (string.Equals(value, "romanian", StringComparison.InvariantCultureIgnoreCase)) return StopwordsList.Romanian;
+            if (string.Equals(value, "russian", StringComparison.InvariantCultureIgnoreCase)) return StopwordsList.Russian;
+            if (string.Equals(value, "sorani", StringComparison.InvariantCultureIgnoreCase)) return StopwordsList.Sorani;
+            if (string.Equals(value, "spanish", StringComparison.InvariantCultureIgnoreCase)) return StopwordsList.Spanish;
+            if (string.Equals(value, "swedish", StringComparison.InvariantCultureIgnoreCase)) return StopwordsList.Swedish;
+            if (string.Equals(value, "thai", StringComparison.InvariantCultureIgnoreCase)) return StopwordsList.Thai;
+            if (string.Equals(value, "turkish", StringComparison.InvariantCultureIgnoreCase)) return StopwordsList.Turkish;
+            throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown StopwordsList value.");
+        }
     }
 }

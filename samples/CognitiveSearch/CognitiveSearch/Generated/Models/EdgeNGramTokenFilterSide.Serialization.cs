@@ -18,11 +18,11 @@ namespace CognitiveSearch.Models
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown EdgeNGramTokenFilterSide value.")
         };
 
-        public static EdgeNGramTokenFilterSide ToEdgeNGramTokenFilterSide(this string value) => value switch
+        public static EdgeNGramTokenFilterSide ToEdgeNGramTokenFilterSide(this string value)
         {
-            "front" => EdgeNGramTokenFilterSide.Front,
-            "back" => EdgeNGramTokenFilterSide.Back,
-            _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown EdgeNGramTokenFilterSide value.")
-        };
+            if (string.Equals(value, "front", StringComparison.InvariantCultureIgnoreCase)) return EdgeNGramTokenFilterSide.Front;
+            if (string.Equals(value, "back", StringComparison.InvariantCultureIgnoreCase)) return EdgeNGramTokenFilterSide.Back;
+            throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown EdgeNGramTokenFilterSide value.");
+        }
     }
 }

@@ -19,12 +19,12 @@ namespace CognitiveSearch.Models
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown SearchMode value.")
         };
 
-        public static SearchMode ToSearchMode(this string value) => value switch
+        public static SearchMode ToSearchMode(this string value)
         {
-            "any" => SearchMode.Any,
-            "all" => SearchMode.All,
-            "analyzingInfixMatching" => SearchMode.AnalyzingInfixMatching,
-            _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown SearchMode value.")
-        };
+            if (string.Equals(value, "any", StringComparison.InvariantCultureIgnoreCase)) return SearchMode.Any;
+            if (string.Equals(value, "all", StringComparison.InvariantCultureIgnoreCase)) return SearchMode.All;
+            if (string.Equals(value, "analyzingInfixMatching", StringComparison.InvariantCultureIgnoreCase)) return SearchMode.AnalyzingInfixMatching;
+            throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown SearchMode value.");
+        }
     }
 }

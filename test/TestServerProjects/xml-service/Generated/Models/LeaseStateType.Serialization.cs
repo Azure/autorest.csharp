@@ -21,14 +21,14 @@ namespace xml_service.Models
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown LeaseStateType value.")
         };
 
-        public static LeaseStateType ToLeaseStateType(this string value) => value switch
+        public static LeaseStateType ToLeaseStateType(this string value)
         {
-            "available" => LeaseStateType.Available,
-            "leased" => LeaseStateType.Leased,
-            "expired" => LeaseStateType.Expired,
-            "breaking" => LeaseStateType.Breaking,
-            "broken" => LeaseStateType.Broken,
-            _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown LeaseStateType value.")
-        };
+            if (string.Equals(value, "available", StringComparison.InvariantCultureIgnoreCase)) return LeaseStateType.Available;
+            if (string.Equals(value, "leased", StringComparison.InvariantCultureIgnoreCase)) return LeaseStateType.Leased;
+            if (string.Equals(value, "expired", StringComparison.InvariantCultureIgnoreCase)) return LeaseStateType.Expired;
+            if (string.Equals(value, "breaking", StringComparison.InvariantCultureIgnoreCase)) return LeaseStateType.Breaking;
+            if (string.Equals(value, "broken", StringComparison.InvariantCultureIgnoreCase)) return LeaseStateType.Broken;
+            throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown LeaseStateType value.");
+        }
     }
 }

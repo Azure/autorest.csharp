@@ -20,13 +20,13 @@ namespace CognitiveServices.TextAnalytics.Models
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown ErrorCodeValue value.")
         };
 
-        public static ErrorCodeValue ToErrorCodeValue(this string value) => value switch
+        public static ErrorCodeValue ToErrorCodeValue(this string value)
         {
-            "invalidRequest" => ErrorCodeValue.InvalidRequest,
-            "invalidArgument" => ErrorCodeValue.InvalidArgument,
-            "internalServerError" => ErrorCodeValue.InternalServerError,
-            "serviceUnavailable" => ErrorCodeValue.ServiceUnavailable,
-            _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown ErrorCodeValue value.")
-        };
+            if (string.Equals(value, "invalidRequest", StringComparison.InvariantCultureIgnoreCase)) return ErrorCodeValue.InvalidRequest;
+            if (string.Equals(value, "invalidArgument", StringComparison.InvariantCultureIgnoreCase)) return ErrorCodeValue.InvalidArgument;
+            if (string.Equals(value, "internalServerError", StringComparison.InvariantCultureIgnoreCase)) return ErrorCodeValue.InternalServerError;
+            if (string.Equals(value, "serviceUnavailable", StringComparison.InvariantCultureIgnoreCase)) return ErrorCodeValue.ServiceUnavailable;
+            throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown ErrorCodeValue value.");
+        }
     }
 }

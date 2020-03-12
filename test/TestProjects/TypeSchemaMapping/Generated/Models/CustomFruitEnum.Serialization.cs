@@ -18,11 +18,11 @@ namespace NamespaceForEnums
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown CustomFruitEnum value.")
         };
 
-        public static CustomFruitEnum ToCustomFruitEnum(this string value) => value switch
+        public static CustomFruitEnum ToCustomFruitEnum(this string value)
         {
-            "apple" => CustomFruitEnum.Apple2,
-            "pear" => CustomFruitEnum.Pear,
-            _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown CustomFruitEnum value.")
-        };
+            if (string.Equals(value, "apple", StringComparison.InvariantCultureIgnoreCase)) return CustomFruitEnum.Apple2;
+            if (string.Equals(value, "pear", StringComparison.InvariantCultureIgnoreCase)) return CustomFruitEnum.Pear;
+            throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown CustomFruitEnum value.");
+        }
     }
 }

@@ -20,13 +20,13 @@ namespace xml_service.Models
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown CopyStatusType value.")
         };
 
-        public static CopyStatusType ToCopyStatusType(this string value) => value switch
+        public static CopyStatusType ToCopyStatusType(this string value)
         {
-            "pending" => CopyStatusType.Pending,
-            "success" => CopyStatusType.Success,
-            "aborted" => CopyStatusType.Aborted,
-            "failed" => CopyStatusType.Failed,
-            _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown CopyStatusType value.")
-        };
+            if (string.Equals(value, "pending", StringComparison.InvariantCultureIgnoreCase)) return CopyStatusType.Pending;
+            if (string.Equals(value, "success", StringComparison.InvariantCultureIgnoreCase)) return CopyStatusType.Success;
+            if (string.Equals(value, "aborted", StringComparison.InvariantCultureIgnoreCase)) return CopyStatusType.Aborted;
+            if (string.Equals(value, "failed", StringComparison.InvariantCultureIgnoreCase)) return CopyStatusType.Failed;
+            throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown CopyStatusType value.");
+        }
     }
 }

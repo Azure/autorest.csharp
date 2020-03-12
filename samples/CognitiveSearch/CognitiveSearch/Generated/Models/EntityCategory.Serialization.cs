@@ -23,16 +23,16 @@ namespace CognitiveSearch.Models
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown EntityCategory value.")
         };
 
-        public static EntityCategory ToEntityCategory(this string value) => value switch
+        public static EntityCategory ToEntityCategory(this string value)
         {
-            "location" => EntityCategory.Location,
-            "organization" => EntityCategory.Organization,
-            "person" => EntityCategory.Person,
-            "quantity" => EntityCategory.Quantity,
-            "datetime" => EntityCategory.Datetime,
-            "url" => EntityCategory.Url,
-            "email" => EntityCategory.Email,
-            _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown EntityCategory value.")
-        };
+            if (string.Equals(value, "location", StringComparison.InvariantCultureIgnoreCase)) return EntityCategory.Location;
+            if (string.Equals(value, "organization", StringComparison.InvariantCultureIgnoreCase)) return EntityCategory.Organization;
+            if (string.Equals(value, "person", StringComparison.InvariantCultureIgnoreCase)) return EntityCategory.Person;
+            if (string.Equals(value, "quantity", StringComparison.InvariantCultureIgnoreCase)) return EntityCategory.Quantity;
+            if (string.Equals(value, "datetime", StringComparison.InvariantCultureIgnoreCase)) return EntityCategory.Datetime;
+            if (string.Equals(value, "url", StringComparison.InvariantCultureIgnoreCase)) return EntityCategory.Url;
+            if (string.Equals(value, "email", StringComparison.InvariantCultureIgnoreCase)) return EntityCategory.Email;
+            throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown EntityCategory value.");
+        }
     }
 }

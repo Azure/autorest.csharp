@@ -18,11 +18,11 @@ namespace xml_service.Models
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown LeaseDurationType value.")
         };
 
-        public static LeaseDurationType ToLeaseDurationType(this string value) => value switch
+        public static LeaseDurationType ToLeaseDurationType(this string value)
         {
-            "infinite" => LeaseDurationType.Infinite,
-            "fixed" => LeaseDurationType.Fixed,
-            _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown LeaseDurationType value.")
-        };
+            if (string.Equals(value, "infinite", StringComparison.InvariantCultureIgnoreCase)) return LeaseDurationType.Infinite;
+            if (string.Equals(value, "fixed", StringComparison.InvariantCultureIgnoreCase)) return LeaseDurationType.Fixed;
+            throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown LeaseDurationType value.");
+        }
     }
 }
