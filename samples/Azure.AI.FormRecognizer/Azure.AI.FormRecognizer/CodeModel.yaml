@@ -2785,7 +2785,7 @@ operationGroups:
           name: ''
           description: ''
       protocol: !<!Protocols> 
-        http: !<!HttpWithBodyRequest> 
+        http: !<!HttpBinaryRequest> 
           path: '/custom/models/{modelId}/analyze'
           method: post
           binary: true
@@ -2987,7 +2987,7 @@ operationGroups:
           name: ''
           description: ''
       protocol: !<!Protocols> 
-        http: !<!HttpWithBodyRequest> 
+        http: !<!HttpBinaryRequest> 
           path: /prebuilt/receipt/analyze
           method: post
           binary: true
@@ -3164,7 +3164,7 @@ operationGroups:
           name: ''
           description: ''
       protocol: !<!Protocols> 
-        http: !<!HttpWithBodyRequest> 
+        http: !<!HttpBinaryRequest> 
           path: /layout/analyze
           method: post
           binary: true
