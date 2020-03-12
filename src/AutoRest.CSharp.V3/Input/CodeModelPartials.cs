@@ -68,6 +68,13 @@ namespace AutoRest.CSharp.V3.Input
         public HttpResponse HttpResponse => Protocol.Http as HttpResponse ?? throw new InvalidOperationException($"Expected an HTTP response");
     }
 
+    internal partial class HttpResponse
+    {
+        public int[] IntStatusCodes => StatusCodes.Select(ToStatusCode).ToArray();
+
+        private static int ToStatusCode(StatusCodes arg) => int.Parse(arg.ToString().Trim('_'));
+    }
+
     internal partial class Value
     {
         public Value()
