@@ -167,7 +167,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     {
                         foreach (EnumTypeValue value in schema.Values)
                         {
-                            writer.Line($"if (string.Equals(value, {value.Value.Value:L}, StringComparison.InvariantCultureIgnoreCase)) return {declaredTypeName}.{value.Declaration.Name};");
+                            writer.Line($"if ({typeof(string)}.Equals(value, {value.Value.Value:L}, {typeof(StringComparison)}.InvariantCultureIgnoreCase)) return {declaredTypeName}.{value.Declaration.Name};");
                         }
 
                         writer.Line($"throw new {typeof(ArgumentOutOfRangeException)}(nameof(value), value, \"Unknown {declaredTypeName} value.\");");
