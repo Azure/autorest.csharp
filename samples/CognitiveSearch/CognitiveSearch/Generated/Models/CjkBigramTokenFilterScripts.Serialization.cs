@@ -20,13 +20,13 @@ namespace CognitiveSearch.Models
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown CjkBigramTokenFilterScripts value.")
         };
 
-        public static CjkBigramTokenFilterScripts ToCjkBigramTokenFilterScripts(this string value) => value switch
+        public static CjkBigramTokenFilterScripts ToCjkBigramTokenFilterScripts(this string value)
         {
-            "han" => CjkBigramTokenFilterScripts.Han,
-            "hiragana" => CjkBigramTokenFilterScripts.Hiragana,
-            "katakana" => CjkBigramTokenFilterScripts.Katakana,
-            "hangul" => CjkBigramTokenFilterScripts.Hangul,
-            _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown CjkBigramTokenFilterScripts value.")
-        };
+            if (string.Equals(value, "han", StringComparison.InvariantCultureIgnoreCase)) return CjkBigramTokenFilterScripts.Han;
+            if (string.Equals(value, "hiragana", StringComparison.InvariantCultureIgnoreCase)) return CjkBigramTokenFilterScripts.Hiragana;
+            if (string.Equals(value, "katakana", StringComparison.InvariantCultureIgnoreCase)) return CjkBigramTokenFilterScripts.Katakana;
+            if (string.Equals(value, "hangul", StringComparison.InvariantCultureIgnoreCase)) return CjkBigramTokenFilterScripts.Hangul;
+            throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown CjkBigramTokenFilterScripts value.");
+        }
     }
 }

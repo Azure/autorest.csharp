@@ -20,13 +20,13 @@ namespace CognitiveSearch.Models
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown ScoringFunctionInterpolation value.")
         };
 
-        public static ScoringFunctionInterpolation ToScoringFunctionInterpolation(this string value) => value switch
+        public static ScoringFunctionInterpolation ToScoringFunctionInterpolation(this string value)
         {
-            "linear" => ScoringFunctionInterpolation.Linear,
-            "constant" => ScoringFunctionInterpolation.Constant,
-            "quadratic" => ScoringFunctionInterpolation.Quadratic,
-            "logarithmic" => ScoringFunctionInterpolation.Logarithmic,
-            _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown ScoringFunctionInterpolation value.")
-        };
+            if (string.Equals(value, "linear", StringComparison.InvariantCultureIgnoreCase)) return ScoringFunctionInterpolation.Linear;
+            if (string.Equals(value, "constant", StringComparison.InvariantCultureIgnoreCase)) return ScoringFunctionInterpolation.Constant;
+            if (string.Equals(value, "quadratic", StringComparison.InvariantCultureIgnoreCase)) return ScoringFunctionInterpolation.Quadratic;
+            if (string.Equals(value, "logarithmic", StringComparison.InvariantCultureIgnoreCase)) return ScoringFunctionInterpolation.Logarithmic;
+            throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown ScoringFunctionInterpolation value.");
+        }
     }
 }

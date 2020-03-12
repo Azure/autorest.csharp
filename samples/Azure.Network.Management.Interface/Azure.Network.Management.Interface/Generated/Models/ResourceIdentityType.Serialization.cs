@@ -20,13 +20,13 @@ namespace Azure.Network.Management.Interface.Models
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown ResourceIdentityType value.")
         };
 
-        public static ResourceIdentityType ToResourceIdentityType(this string value) => value switch
+        public static ResourceIdentityType ToResourceIdentityType(this string value)
         {
-            "SystemAssigned" => ResourceIdentityType.SystemAssigned,
-            "UserAssigned" => ResourceIdentityType.UserAssigned,
-            "SystemAssigned, UserAssigned" => ResourceIdentityType.SystemAssignedUserAssigned,
-            "None" => ResourceIdentityType.None,
-            _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown ResourceIdentityType value.")
-        };
+            if (string.Equals(value, "SystemAssigned", StringComparison.InvariantCultureIgnoreCase)) return ResourceIdentityType.SystemAssigned;
+            if (string.Equals(value, "UserAssigned", StringComparison.InvariantCultureIgnoreCase)) return ResourceIdentityType.UserAssigned;
+            if (string.Equals(value, "SystemAssigned, UserAssigned", StringComparison.InvariantCultureIgnoreCase)) return ResourceIdentityType.SystemAssignedUserAssigned;
+            if (string.Equals(value, "None", StringComparison.InvariantCultureIgnoreCase)) return ResourceIdentityType.None;
+            throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown ResourceIdentityType value.");
+        }
     }
 }

@@ -18,11 +18,11 @@ namespace xml_service.Models
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown LeaseStatusType value.")
         };
 
-        public static LeaseStatusType ToLeaseStatusType(this string value) => value switch
+        public static LeaseStatusType ToLeaseStatusType(this string value)
         {
-            "locked" => LeaseStatusType.Locked,
-            "unlocked" => LeaseStatusType.Unlocked,
-            _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown LeaseStatusType value.")
-        };
+            if (string.Equals(value, "locked", StringComparison.InvariantCultureIgnoreCase)) return LeaseStatusType.Locked;
+            if (string.Equals(value, "unlocked", StringComparison.InvariantCultureIgnoreCase)) return LeaseStatusType.Unlocked;
+            throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown LeaseStatusType value.");
+        }
     }
 }

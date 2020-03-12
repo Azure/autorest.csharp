@@ -18,11 +18,11 @@ namespace CognitiveSearch.Models
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown ImageDetail value.")
         };
 
-        public static ImageDetail ToImageDetail(this string value) => value switch
+        public static ImageDetail ToImageDetail(this string value)
         {
-            "celebrities" => ImageDetail.Celebrities,
-            "landmarks" => ImageDetail.Landmarks,
-            _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown ImageDetail value.")
-        };
+            if (string.Equals(value, "celebrities", StringComparison.InvariantCultureIgnoreCase)) return ImageDetail.Celebrities;
+            if (string.Equals(value, "landmarks", StringComparison.InvariantCultureIgnoreCase)) return ImageDetail.Landmarks;
+            throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown ImageDetail value.");
+        }
     }
 }

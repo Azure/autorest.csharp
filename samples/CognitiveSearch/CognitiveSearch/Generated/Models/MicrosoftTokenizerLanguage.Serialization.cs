@@ -58,51 +58,51 @@ namespace CognitiveSearch.Models
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown MicrosoftTokenizerLanguage value.")
         };
 
-        public static MicrosoftTokenizerLanguage ToMicrosoftTokenizerLanguage(this string value) => value switch
+        public static MicrosoftTokenizerLanguage ToMicrosoftTokenizerLanguage(this string value)
         {
-            "bangla" => MicrosoftTokenizerLanguage.Bangla,
-            "bulgarian" => MicrosoftTokenizerLanguage.Bulgarian,
-            "catalan" => MicrosoftTokenizerLanguage.Catalan,
-            "chineseSimplified" => MicrosoftTokenizerLanguage.ChineseSimplified,
-            "chineseTraditional" => MicrosoftTokenizerLanguage.ChineseTraditional,
-            "croatian" => MicrosoftTokenizerLanguage.Croatian,
-            "czech" => MicrosoftTokenizerLanguage.Czech,
-            "danish" => MicrosoftTokenizerLanguage.Danish,
-            "dutch" => MicrosoftTokenizerLanguage.Dutch,
-            "english" => MicrosoftTokenizerLanguage.English,
-            "french" => MicrosoftTokenizerLanguage.French,
-            "german" => MicrosoftTokenizerLanguage.German,
-            "greek" => MicrosoftTokenizerLanguage.Greek,
-            "gujarati" => MicrosoftTokenizerLanguage.Gujarati,
-            "hindi" => MicrosoftTokenizerLanguage.Hindi,
-            "icelandic" => MicrosoftTokenizerLanguage.Icelandic,
-            "indonesian" => MicrosoftTokenizerLanguage.Indonesian,
-            "italian" => MicrosoftTokenizerLanguage.Italian,
-            "japanese" => MicrosoftTokenizerLanguage.Japanese,
-            "kannada" => MicrosoftTokenizerLanguage.Kannada,
-            "korean" => MicrosoftTokenizerLanguage.Korean,
-            "malay" => MicrosoftTokenizerLanguage.Malay,
-            "malayalam" => MicrosoftTokenizerLanguage.Malayalam,
-            "marathi" => MicrosoftTokenizerLanguage.Marathi,
-            "norwegianBokmaal" => MicrosoftTokenizerLanguage.NorwegianBokmaal,
-            "polish" => MicrosoftTokenizerLanguage.Polish,
-            "portuguese" => MicrosoftTokenizerLanguage.Portuguese,
-            "portugueseBrazilian" => MicrosoftTokenizerLanguage.PortugueseBrazilian,
-            "punjabi" => MicrosoftTokenizerLanguage.Punjabi,
-            "romanian" => MicrosoftTokenizerLanguage.Romanian,
-            "russian" => MicrosoftTokenizerLanguage.Russian,
-            "serbianCyrillic" => MicrosoftTokenizerLanguage.SerbianCyrillic,
-            "serbianLatin" => MicrosoftTokenizerLanguage.SerbianLatin,
-            "slovenian" => MicrosoftTokenizerLanguage.Slovenian,
-            "spanish" => MicrosoftTokenizerLanguage.Spanish,
-            "swedish" => MicrosoftTokenizerLanguage.Swedish,
-            "tamil" => MicrosoftTokenizerLanguage.Tamil,
-            "telugu" => MicrosoftTokenizerLanguage.Telugu,
-            "thai" => MicrosoftTokenizerLanguage.Thai,
-            "ukrainian" => MicrosoftTokenizerLanguage.Ukrainian,
-            "urdu" => MicrosoftTokenizerLanguage.Urdu,
-            "vietnamese" => MicrosoftTokenizerLanguage.Vietnamese,
-            _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown MicrosoftTokenizerLanguage value.")
-        };
+            if (string.Equals(value, "bangla", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftTokenizerLanguage.Bangla;
+            if (string.Equals(value, "bulgarian", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftTokenizerLanguage.Bulgarian;
+            if (string.Equals(value, "catalan", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftTokenizerLanguage.Catalan;
+            if (string.Equals(value, "chineseSimplified", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftTokenizerLanguage.ChineseSimplified;
+            if (string.Equals(value, "chineseTraditional", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftTokenizerLanguage.ChineseTraditional;
+            if (string.Equals(value, "croatian", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftTokenizerLanguage.Croatian;
+            if (string.Equals(value, "czech", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftTokenizerLanguage.Czech;
+            if (string.Equals(value, "danish", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftTokenizerLanguage.Danish;
+            if (string.Equals(value, "dutch", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftTokenizerLanguage.Dutch;
+            if (string.Equals(value, "english", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftTokenizerLanguage.English;
+            if (string.Equals(value, "french", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftTokenizerLanguage.French;
+            if (string.Equals(value, "german", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftTokenizerLanguage.German;
+            if (string.Equals(value, "greek", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftTokenizerLanguage.Greek;
+            if (string.Equals(value, "gujarati", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftTokenizerLanguage.Gujarati;
+            if (string.Equals(value, "hindi", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftTokenizerLanguage.Hindi;
+            if (string.Equals(value, "icelandic", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftTokenizerLanguage.Icelandic;
+            if (string.Equals(value, "indonesian", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftTokenizerLanguage.Indonesian;
+            if (string.Equals(value, "italian", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftTokenizerLanguage.Italian;
+            if (string.Equals(value, "japanese", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftTokenizerLanguage.Japanese;
+            if (string.Equals(value, "kannada", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftTokenizerLanguage.Kannada;
+            if (string.Equals(value, "korean", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftTokenizerLanguage.Korean;
+            if (string.Equals(value, "malay", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftTokenizerLanguage.Malay;
+            if (string.Equals(value, "malayalam", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftTokenizerLanguage.Malayalam;
+            if (string.Equals(value, "marathi", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftTokenizerLanguage.Marathi;
+            if (string.Equals(value, "norwegianBokmaal", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftTokenizerLanguage.NorwegianBokmaal;
+            if (string.Equals(value, "polish", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftTokenizerLanguage.Polish;
+            if (string.Equals(value, "portuguese", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftTokenizerLanguage.Portuguese;
+            if (string.Equals(value, "portugueseBrazilian", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftTokenizerLanguage.PortugueseBrazilian;
+            if (string.Equals(value, "punjabi", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftTokenizerLanguage.Punjabi;
+            if (string.Equals(value, "romanian", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftTokenizerLanguage.Romanian;
+            if (string.Equals(value, "russian", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftTokenizerLanguage.Russian;
+            if (string.Equals(value, "serbianCyrillic", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftTokenizerLanguage.SerbianCyrillic;
+            if (string.Equals(value, "serbianLatin", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftTokenizerLanguage.SerbianLatin;
+            if (string.Equals(value, "slovenian", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftTokenizerLanguage.Slovenian;
+            if (string.Equals(value, "spanish", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftTokenizerLanguage.Spanish;
+            if (string.Equals(value, "swedish", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftTokenizerLanguage.Swedish;
+            if (string.Equals(value, "tamil", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftTokenizerLanguage.Tamil;
+            if (string.Equals(value, "telugu", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftTokenizerLanguage.Telugu;
+            if (string.Equals(value, "thai", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftTokenizerLanguage.Thai;
+            if (string.Equals(value, "ukrainian", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftTokenizerLanguage.Ukrainian;
+            if (string.Equals(value, "urdu", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftTokenizerLanguage.Urdu;
+            if (string.Equals(value, "vietnamese", StringComparison.InvariantCultureIgnoreCase)) return MicrosoftTokenizerLanguage.Vietnamese;
+            throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown MicrosoftTokenizerLanguage value.");
+        }
     }
 }
