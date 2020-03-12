@@ -60,7 +60,7 @@ namespace lro
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
-                    case 200:
+                    case 201:
                         return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -85,7 +85,7 @@ namespace lro
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
-                    case 200:
+                    case 201:
                         return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -125,7 +125,7 @@ namespace lro
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
-                    case 200:
+                    case 201:
                         return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -150,7 +150,7 @@ namespace lro
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
-                    case 200:
+                    case 201:
                         return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -190,7 +190,7 @@ namespace lro
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
-                    case 200:
+                    case 201:
                         return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -215,7 +215,7 @@ namespace lro
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
-                    case 200:
+                    case 201:
                         return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -692,7 +692,7 @@ namespace lro
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
-                    case 200:
+                    case 201:
                         return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -717,7 +717,7 @@ namespace lro
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
-                    case 200:
+                    case 201:
                         return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

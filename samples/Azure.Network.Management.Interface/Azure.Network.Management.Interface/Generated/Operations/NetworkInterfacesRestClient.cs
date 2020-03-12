@@ -85,7 +85,7 @@ namespace Azure.Network.Management.Interface
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
-                    case 200:
+                    case 202:
                         return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -120,7 +120,7 @@ namespace Azure.Network.Management.Interface
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
-                    case 200:
+                    case 202:
                         return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -282,7 +282,7 @@ namespace Azure.Network.Management.Interface
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
-                    case 200:
+                    case 201:
                         return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -322,7 +322,7 @@ namespace Azure.Network.Management.Interface
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
-                    case 200:
+                    case 201:
                         return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -638,7 +638,7 @@ namespace Azure.Network.Management.Interface
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
-                    case 200:
+                    case 202:
                         return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -673,7 +673,7 @@ namespace Azure.Network.Management.Interface
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
-                    case 200:
+                    case 202:
                         return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -726,7 +726,7 @@ namespace Azure.Network.Management.Interface
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
-                    case 200:
+                    case 202:
                         return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -761,7 +761,7 @@ namespace Azure.Network.Management.Interface
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
-                    case 200:
+                    case 202:
                         return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

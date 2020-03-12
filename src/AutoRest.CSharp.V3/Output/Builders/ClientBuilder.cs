@@ -32,6 +32,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             "x-ms-client-request-id",
             "x-ms-request-id"
         };
+
         private readonly BuildContext _context;
         private readonly SerializationBuilder _serializationBuilder;
         private readonly TypeFactory _typeFactory;
@@ -51,16 +52,16 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 .SelectMany(op => op.Parameters.Concat(op.Requests.SelectMany(r => r.Parameters)))
                 .Where(p => p.Implementation == ImplementationLocation.Client)
                 .Distinct();
+
             Dictionary<string, Parameter> clientParameters = new Dictionary<string, Parameter>();
             foreach (RequestParameter clientParameter in allClientParameters)
             {
                 clientParameters[clientParameter.Language.Default.Name] = BuildParameter(clientParameter);
             }
 
-            Dictionary<string, OperationMethod> operationMethods = new Dictionary<string, OperationMethod>(StringComparer.InvariantCultureIgnoreCase);
+            List<OperationMethod> operationMethods = new List<OperationMethod>();
             foreach (Operation operation in operationGroup.Operations)
             {
-                int overloadSuffix = 0;
                 foreach (ServiceRequest serviceRequest in operation.Requests)
                 {
                     HttpRequest? httpRequest = serviceRequest.Protocol.Http as HttpRequest;
@@ -71,9 +72,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                     }
 
                     RestClientMethod method = BuildMethod(operation, clientName, clientParameters, httpRequest, serviceRequest.Parameters);
-                    string suffix = overloadSuffix > 0 ? $"{overloadSuffix}" : String.Empty;
-                    overloadSuffix++;
-                    operationMethods.Add($"{operation.Language.Default.Name}{suffix}", new OperationMethod(operation, method));
+                    operationMethods.Add(new OperationMethod(operation, method));
                 }
             }
 
@@ -81,17 +80,23 @@ namespace AutoRest.CSharp.V3.Output.Builders
             List<PagingInfo> pagingMethods = new List<PagingInfo>();
             List<LongRunningOperation> longRunningOperationMethods = new List<LongRunningOperation>();
             List<ClientMethod> clientMethods = new List<ClientMethod>();
-            foreach ((string operationKey, (Operation operation, RestClientMethod method)) in operationMethods)
+            foreach ((Operation operation, RestClientMethod method) in operationMethods)
             {
+                if (operation.IsLongRunning)
+                {
+                    longRunningOperationMethods.Add(BuildLongRunningOperation(operation, method));
+                    continue;
+                }
+
                 Paging? paging = operation.Language.Default.Paging;
                 if (paging != null)
                 {
                     RestClientMethod? next = null;
                     if (paging.NextLinkOperation != null)
                     {
-                        //TODO: This assumes the operation is within this operationGroup
-                        string nextOperationName = paging.NextLinkOperation.Language.Default.Name;
-                        if (!operationMethods.TryGetValue(nextOperationName, out OperationMethod? nextOperationMethod))
+                        OperationMethod? nextOperationMethod = operationMethods.SingleOrDefault(m => m.Operation == paging.NextLinkOperation);
+
+                        if (nextOperationMethod == null)
                         {
                             throw new Exception($"The x-ms-pageable operationName \"{paging.Group}_{paging.Member}\" for operation {operationGroup.Key}_{operation.Language.Default.Name} was not found.");
                         }
@@ -123,28 +128,6 @@ namespace AutoRest.CSharp.V3.Output.Builders
                     continue;
                 }
 
-                // For some reason, booleans in dictionaries are deserialized as string instead of bool.
-                bool longRunningOperation = Convert.ToBoolean(operation.Extensions.GetValue<string>("x-ms-long-running-operation") ?? "false");
-                if (longRunningOperation)
-                {
-                    Response originalResponse = method.Response;
-                    operationMethods[operationKey].Method = new RestClientMethod(
-                        method.Name,
-                        method.Description,
-                        method.Request,
-                        method.Parameters,
-                        new Response(null, originalResponse.SuccessfulStatusCodes, null),
-                        method.Diagnostics
-                    );
-
-                    IDictionary<object, object> options = operation.Extensions.GetValue<IDictionary<object, object>>("x-ms-long-running-operation-options")
-                                                          ?? ImmutableDictionary<object, object>.Empty;
-                    LongRunningOperation longRunningOperationMethod = BuildLongRunningOperation(method, originalResponse, options);
-                    longRunningOperationMethods.Add(longRunningOperationMethod);
-
-                    continue;
-                }
-
                 clientMethods.Add(new ClientMethod(
                     operation.CSharpName(),
                     method,
@@ -152,7 +135,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 ));
             }
 
-            RestClientMethod[] methods = operationMethods.Select(om => om.Value.Method).Concat(nextPageMethods).ToArray();
+            RestClientMethod[] methods = operationMethods.Select(om => om.Method).Concat(nextPageMethods).ToArray();
 
             var restClient = new RestClient(
                 BuilderHelpers.CreateTypeAttributes(GetClientName(operationGroup, "RestClient"), _context.DefaultNamespace, "internal"),
@@ -201,17 +184,13 @@ namespace AutoRest.CSharp.V3.Output.Builders
             }
 
             public Operation Operation { get; }
-            public RestClientMethod Method { get; set; }
+            public RestClientMethod Method { get; }
         }
 
         private static Parameter[] OrderParameters(IEnumerable<Parameter> parameters) => parameters.OrderBy(p => p.DefaultValue != null).ToArray();
 
         private RestClientMethod BuildMethod(Operation operation, string clientName, IReadOnlyDictionary<string, Parameter> clientParameters, HttpRequest httpRequest, IEnumerable<RequestParameter> requestParameters)
         {
-            //TODO: Handle multiple responses: https://github.com/Azure/autorest.csharp/issues/413
-            ServiceResponse? response = operation.Responses.FirstOrDefault();
-            HttpResponse? httpResponse = response?.Protocol.Http as HttpResponse;
-
             HttpWithBodyRequest? httpRequestWithBody = httpRequest as HttpWithBodyRequest;
             Dictionary<string, PathSegment> uriParameters = new Dictionary<string, PathSegment>();
             Dictionary<string, PathSegment> pathParameters = new Dictionary<string, PathSegment>();
@@ -304,27 +283,45 @@ namespace AutoRest.CSharp.V3.Output.Builders
             );
 
             ResponseBody? responseBody = null;
-            if (response is SchemaResponse schemaResponse && httpResponse != null)
-            {
-                Schema schema = schemaResponse.Schema is ConstantSchema constantSchema ? constantSchema.ValueType : schemaResponse.Schema;
-                CSharpType responseType = _typeFactory.CreateType(schema, isNullable: false);
-
-                ObjectSerialization serialization = _serializationBuilder.Build(httpResponse.KnownMediaType, schema, isNullable: false);
-
-                responseBody = new ObjectResponseBody(responseType, serialization);
-            }
-            else if (response is BinaryResponse)
-            {
-                responseBody = new StreamResponseBody();
-            }
-
-            Response clientResponse = new Response(
-                responseBody,
-                httpResponse?.StatusCodes.Select(ToStatusCode).ToArray() ?? Array.Empty<int>(),
-                BuildResponseHeaderModel(operation, httpResponse)
-            );
-
+            ResponseHeaderGroupType? responseHeaderModel = null;
             string operationName = operation.CSharpName();
+
+            //TODO: Handle multiple responses: https://github.com/Azure/autorest.csharp/issues/413
+            ServiceResponse? response = null;
+
+            // if operation is a long-running operation than we're generating an initial call here so find a response with non 200/204 code
+            // fallback to the first on otherwise
+
+            if (operation.IsLongRunning)
+            {
+                response = operation.LongRunningInitialResponse;
+            }
+
+            response ??= operation.Responses.FirstOrDefault();
+
+            Response clientResponse;
+            if (response != null)
+            {
+                // Ignore response body and headers for LROs as the ArmOperationHelpers figures out them dynamically
+                if (!operation.IsLongRunning)
+                {
+                    responseBody = BuildResponseBody(response);
+
+                    responseHeaderModel = BuildResponseHeaderModel(operation, response);
+                }
+
+                clientResponse = new Response(
+                    responseBody,
+                    response.HttpResponse.StatusCodes.Select(ToStatusCode).ToArray(),
+                    responseHeaderModel
+                );
+            }
+            else
+            {
+                // Special case for httpInfrastructure testServer swagger, service method always fails
+                clientResponse = new Response(null, Array.Empty<int>(), null);
+            }
+
             return new RestClientMethod(
                 operationName,
                 BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description),
@@ -333,6 +330,26 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 clientResponse,
                 new Diagnostic($"{clientName}.{operationName}", Array.Empty<DiagnosticAttribute>())
             );
+        }
+
+        private ResponseBody? BuildResponseBody(ServiceResponse response)
+        {
+            ResponseBody? responseBody = null;
+            if (response is SchemaResponse schemaResponse)
+            {
+                Schema schema = schemaResponse.Schema is ConstantSchema constantSchema ? constantSchema.ValueType : schemaResponse.Schema;
+                CSharpType responseType = _typeFactory.CreateType(schema, isNullable: false);
+
+                ObjectSerialization serialization = _serializationBuilder.Build(response.HttpResponse.KnownMediaType, schema, isNullable: false);
+
+                responseBody = new ObjectResponseBody(responseType, serialization);
+            }
+            else if (response is BinaryResponse)
+            {
+                responseBody = new StreamResponseBody();
+            }
+
+            return responseBody;
         }
 
         private static RestClientMethod BuildNextPageMethod(RestClientMethod method)
@@ -385,7 +402,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             throw new InvalidOperationException($"{itemName} property has to be an array schema, actual {itemProperty.SchemaProperty}");
         }
 
-        private static LongRunningOperation BuildLongRunningOperation(RestClientMethod method, Response originalResponse, IDictionary<object, object> options)
+        private LongRunningOperation BuildLongRunningOperation(Operation operation, RestClientMethod startMethod)
         {
             var originalResponseParameter = new Parameter(
                 "originalResponse",
@@ -399,19 +416,29 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 new CSharpType(typeof(Func<>), new CSharpType(typeof(HttpMessage))),
                 null,
                 true);
-            OperationFinalStateVia finalStateVia = GetFinalStateVia(options.GetValue<string>("final-state-via"));
-            string name = $"{method.Name}Operation";
-            return new LongRunningOperation(method, originalResponse, name, new[] { originalResponseParameter, httpMessageParameter }, finalStateVia);
-        }
 
-        private static OperationFinalStateVia GetFinalStateVia(string? rawValue) => rawValue switch
-        {
-            "azure-async-operation" => OperationFinalStateVia.AzureAsyncOperation,
-            "location" => OperationFinalStateVia.Location,
-            "original-uri" => OperationFinalStateVia.OriginalUri,
-            null => OperationFinalStateVia.Location,
-            _ => throw new ArgumentException($"Unknown final-state-via value: {rawValue}")
-        };
+            string name = operation.CSharpName();
+
+            var finalStateVia = operation.LongRunningFinalStateVia switch
+            {
+                "azure-async-operation" => OperationFinalStateVia.AzureAsyncOperation,
+                "location" => OperationFinalStateVia.Location,
+                "original-uri" => OperationFinalStateVia.OriginalUri,
+                null => OperationFinalStateVia.Location,
+                _ => throw new ArgumentException($"Unknown final-state-via value: {operation.LongRunningFinalStateVia}")
+            };
+
+            ServiceResponse finalResponse = operation.LongRunningFinalResponse;
+
+            return new LongRunningOperation(
+                startMethod,
+                new Response(BuildResponseBody(finalResponse),
+                    finalResponse.HttpResponse.StatusCodes.Select(ToStatusCode).ToArray(),
+                    BuildResponseHeaderModel(operation, finalResponse)),
+                name,
+                new[] { originalResponseParameter, httpMessageParameter },
+                finalStateVia);
+        }
 
         private Parameter BuildParameter(RequestParameter requestParameter) => new Parameter(
             requestParameter.CSharpName(),
@@ -420,13 +447,9 @@ namespace AutoRest.CSharp.V3.Output.Builders
             ParseConstant(requestParameter),
             requestParameter.Required == true);
 
-        private ResponseHeaderGroupType? BuildResponseHeaderModel(Operation operation, HttpResponse? httpResponse)
+        private ResponseHeaderGroupType? BuildResponseHeaderModel(Operation operation, ServiceResponse response)
         {
-            if (httpResponse == null)
-            {
-                return null;
-            }
-            var httpResponseHeaders = httpResponse.Headers
+            var httpResponseHeaders = response.HttpResponse.Headers
                 .Where(h => !_knownResponseHeaders.Contains(h.Header, StringComparer.InvariantCultureIgnoreCase))
                 .ToArray();
 
