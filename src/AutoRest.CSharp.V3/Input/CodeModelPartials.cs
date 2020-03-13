@@ -16,25 +16,14 @@ using YamlDotNet.Serialization;
 // ReSharper disable once CheckNamespace
 namespace AutoRest.CSharp.V3.Input
 {
-    internal partial class RequestParameter
+    internal partial class VirtualParameter
     {
-        /// <summary>the original body parameter that this parameter is in effect replacing</summary>
-        [YamlMember(Alias = "originalParameter")]
-        [System.ComponentModel.DataAnnotations.Required]
-        public RequestParameter? OriginalParameter { get; set; }
-
-        /// <summary>if this parameter is for a nested property, this is the path of properties it takes to get there</summary>
-        [YamlMember(Alias = "pathToProperty")]
-        [System.ComponentModel.DataAnnotations.Required]
-        public ICollection<Property> PathToProperty { get; set; } = new System.Collections.ObjectModel.Collection<Property>();
-
-        /// <summary>the target property this virtual parameter represents</summary>
-        [YamlMember(Alias = "targetProperty")]
-        [System.ComponentModel.DataAnnotations.Required]
-        public Property? TargetProperty { get; set; }
+        /// <summary>if the property is marked read-only (ie, not intended to be sent to the service)</summary>
+        [YamlDotNet.Serialization.YamlMember(Alias = "readOnly")]
+        public bool? ReadOnly { get; set; }
 
         /// <summary>the wire name of this property</summary>
-        [YamlMember(Alias = "serializedName")]
+        [YamlDotNet.Serialization.YamlMember(Alias = "serializedName")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public string SerializedName { get; set; }
 
@@ -43,9 +32,13 @@ namespace AutoRest.CSharp.V3.Input
         /// If flattenedName is present, then this property is a flattened property.
         ///
         /// (ie, ['properties','name'] )</summary>
-        [YamlMember(Alias = "flattenedNames")]
+        [YamlDotNet.Serialization.YamlMember(Alias = "flattenedNames")]
         [System.ComponentModel.DataAnnotations.Required]
-        public ICollection<string> FlattenedNames { get; set; } = new System.Collections.ObjectModel.Collection<string>();
+        public System.Collections.Generic.ICollection<string> FlattenedNames { get; set; } = new System.Collections.ObjectModel.Collection<string>();
+
+        /// <summary>if this property is used as a discriminator for a polymorphic type</summary>
+        [YamlDotNet.Serialization.YamlMember(Alias = "isDiscriminator")]
+        public bool? IsDiscriminator { get; set; }
     }
 
     internal partial class Operation

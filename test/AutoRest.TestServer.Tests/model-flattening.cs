@@ -122,7 +122,12 @@ namespace AutoRest.TestServer.Tests
                 Capacity = "Large",
                 OdataValue = "http://foo"
             };
-            var result = await new ServiceClient(ClientDiagnostics, pipeline, host).PostFlattenedSimpleProductAsync(value);
+            var result = await new ServiceClient(ClientDiagnostics, pipeline, host).PostFlattenedSimpleProductAsync(
+                value.ProductId,
+                value.Description,
+                value.MaxProductDisplayName,
+                value.GenericValue,
+                value.OdataValue);
             Assert.AreEqual("123", result.Value.ProductId);
             Assert.AreEqual("product description", result.Value.Description);
             Assert.AreEqual("max name", result.Value.MaxProductDisplayName);
@@ -185,7 +190,13 @@ namespace AutoRest.TestServer.Tests
                 Capacity = "Large",
                 OdataValue = "http://foo"
             };
-            var result = await new ServiceClient(ClientDiagnostics, pipeline, host).PutSimpleProductWithGroupingAsync("groupproduct", value);
+            var result = await new ServiceClient(ClientDiagnostics, pipeline, host).PutSimpleProductWithGroupingAsync(
+                "groupproduct",
+                value.ProductId,
+                value.Description,
+                value.MaxProductDisplayName,
+                value.GenericValue,
+                value.OdataValue);
             Assert.AreEqual("123", result.Value.ProductId);
             Assert.AreEqual("product description", result.Value.Description);
             Assert.AreEqual("max name", result.Value.MaxProductDisplayName);

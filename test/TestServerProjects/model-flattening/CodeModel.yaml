@@ -1353,7 +1353,7 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
-      - !<!Parameter> &ref_54
+      - !<!VirtualParameter> &ref_54
         schema: *ref_24
         implementation: Method
         originalParameter: *ref_43
@@ -1366,7 +1366,7 @@ operationGroups:
             name: productId
             description: 'Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.'
         protocol: !<!Protocols> {}
-      - !<!Parameter> &ref_55
+      - !<!VirtualParameter> &ref_55
         schema: *ref_25
         implementation: Method
         originalParameter: *ref_43
@@ -1379,7 +1379,7 @@ operationGroups:
             name: description
             description: Description of product.
         protocol: !<!Protocols> {}
-      - !<!Parameter> &ref_56
+      - !<!VirtualParameter> &ref_56
         schema: *ref_19
         flattenedNames: *ref_46
         implementation: Method
@@ -1392,7 +1392,7 @@ operationGroups:
             name: maxProductDisplayName
             description: Display name of product.
         protocol: !<!Protocols> {}
-      - !<!Parameter> 
+      - !<!VirtualParameter> 
         schema: *ref_20
         flattenedNames: *ref_48
         implementation: Method
@@ -1405,7 +1405,7 @@ operationGroups:
             name: Capacity
             description: 'Capacity of product. For example, 4 people.'
         protocol: !<!Protocols> {}
-      - !<!Parameter> &ref_57
+      - !<!VirtualParameter> &ref_57
         schema: *ref_21
         flattenedNames: *ref_50
         implementation: Method
@@ -1418,7 +1418,7 @@ operationGroups:
             name: genericValue
             description: Generic URL value.
         protocol: !<!Protocols> {}
-      - !<!Parameter> &ref_58
+      - !<!VirtualParameter> &ref_58
         schema: *ref_22
         flattenedNames: *ref_52
         implementation: Method
@@ -1523,7 +1523,7 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
-      - !<!Parameter> &ref_61
+      - !<!VirtualParameter> &ref_61
         schema: *ref_24
         implementation: Method
         originalParameter: *ref_59
@@ -1538,7 +1538,7 @@ operationGroups:
             name: productId
             description: 'Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.'
         protocol: !<!Protocols> {}
-      - !<!Parameter> &ref_62
+      - !<!VirtualParameter> &ref_62
         schema: *ref_25
         implementation: Method
         originalParameter: *ref_59
@@ -1553,7 +1553,7 @@ operationGroups:
             name: description
             description: Description of product.
         protocol: !<!Protocols> {}
-      - !<!Parameter> &ref_63
+      - !<!VirtualParameter> &ref_63
         schema: *ref_19
         flattenedNames: *ref_46
         implementation: Method
@@ -1568,7 +1568,7 @@ operationGroups:
             name: maxProductDisplayName
             description: Display name of product.
         protocol: !<!Protocols> {}
-      - !<!Parameter> 
+      - !<!VirtualParameter> 
         schema: *ref_20
         flattenedNames: *ref_48
         implementation: Method
@@ -1583,7 +1583,7 @@ operationGroups:
             name: Capacity
             description: 'Capacity of product. For example, 4 people.'
         protocol: !<!Protocols> {}
-      - !<!Parameter> &ref_64
+      - !<!VirtualParameter> &ref_64
         schema: *ref_21
         flattenedNames: *ref_50
         implementation: Method
@@ -1598,7 +1598,7 @@ operationGroups:
             name: genericValue
             description: Generic URL value.
         protocol: !<!Protocols> {}
-      - !<!Parameter> &ref_65
+      - !<!VirtualParameter> &ref_65
         schema: *ref_22
         flattenedNames: *ref_52
         implementation: Method

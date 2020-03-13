@@ -189,6 +189,94 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
         private static Parameter[] OrderParameters(IEnumerable<Parameter> parameters) => parameters.OrderBy(p => p.DefaultValue != null).ToArray();
 
+        private Request BuildRequest(Operation operation, IReadOnlyDictionary<string, Parameter> clientParameters, HttpRequest httpRequest, IEnumerable<RequestParameter> requestParameters)
+        {
+            HttpWithBodyRequest? httpRequestWithBody = httpRequest as HttpWithBodyRequest;
+            Dictionary<string, PathSegment> uriParameters = new Dictionary<string, PathSegment>();
+            Dictionary<string, PathSegment> pathParameters = new Dictionary<string, PathSegment>();
+            List<QueryParameter> query = new List<QueryParameter>();
+            List<RequestHeader> headers = new List<RequestHeader>();
+            RequestBody? body = null;
+
+            RequestParameter[] parameters = operation.Parameters.Concat(requestParameters).ToArray();
+            foreach (RequestParameter requestParameter in parameters)
+            {
+                string defaultName = requestParameter.Language.Default.Name;
+                string serializedName = requestParameter.Language.Default.SerializedName ?? defaultName;
+                ParameterOrConstant constantOrParameter;
+                Schema valueSchema = requestParameter.Schema;
+
+                if (requestParameter.Implementation == ImplementationLocation.Method)
+                {
+                    switch (requestParameter.Schema)
+                    {
+                        case ConstantSchema constant:
+                            constantOrParameter = ParseConstant(constant);
+                            valueSchema = constant.ValueType;
+                            break;
+                        default:
+                            constantOrParameter = BuildParameter(requestParameter);
+                            break;
+                    }
+                }
+                else
+                {
+                    constantOrParameter = clientParameters[requestParameter.Language.Default.Name];
+                }
+
+                if (requestParameter.Protocol.Http is HttpParameter httpParameter)
+                {
+                    SerializationFormat serializationFormat = BuilderHelpers.GetSerializationFormat(valueSchema);
+                    bool skipEncoding = requestParameter.Extensions!.TryGetValue("x-ms-skip-url-encoding", out var value) && Convert.ToBoolean(value);
+                    switch (httpParameter.In)
+                    {
+                        case ParameterLocation.Header:
+                            headers.Add(new RequestHeader(serializedName, constantOrParameter, serializationFormat));
+                            break;
+                        case ParameterLocation.Query:
+                            query.Add(new QueryParameter(serializedName, constantOrParameter, GetSerializationStyle(httpParameter, valueSchema), !skipEncoding, serializationFormat));
+                            break;
+                        case ParameterLocation.Path:
+                            pathParameters.Add(serializedName, new PathSegment(constantOrParameter, !skipEncoding, serializationFormat));
+                            break;
+                        case ParameterLocation.Body:
+                            Debug.Assert(httpRequestWithBody != null);
+                            if (httpRequestWithBody.KnownMediaType == KnownMediaType.Binary)
+                            {
+                                body = new BinaryRequestBody(constantOrParameter);
+                            }
+                            else
+                            {
+                                var serialization = _serializationBuilder.Build(httpRequestWithBody.KnownMediaType, requestParameter.Schema, requestParameter.IsNullable());
+                                body = new SchemaRequestBody(constantOrParameter, serialization);
+                            }
+                            break;
+                        case ParameterLocation.Uri:
+                            if (defaultName == "$host")
+                            {
+                                skipEncoding = true;
+                            }
+                            uriParameters[serializedName] = new PathSegment(constantOrParameter, !skipEncoding, serializationFormat);
+                            break;
+                    }
+                }
+            }
+
+            if (httpRequestWithBody != null)
+            {
+                headers.AddRange(httpRequestWithBody.MediaTypes.Select(mediaType => new RequestHeader("Content-Type", BuilderHelpers.StringConstant(mediaType))));
+            }
+
+            return new Request(
+                httpRequest.Method.ToCoreRequestMethod() ?? RequestMethod.Get,
+                ToPathParts(httpRequest.Uri, uriParameters),
+                ToPathParts(httpRequest.Path, pathParameters),
+                query.ToArray(),
+                headers.ToArray(),
+                body
+            );
+        }
+
         private RestClientMethod BuildMethod(Operation operation, string clientName, IReadOnlyDictionary<string, Parameter> clientParameters, HttpRequest httpRequest, IEnumerable<RequestParameter> requestParameters)
         {
             HttpWithBodyRequest? httpRequestWithBody = httpRequest as HttpWithBodyRequest;
