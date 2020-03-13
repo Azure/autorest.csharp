@@ -23,6 +23,7 @@ namespace Azure.Network.Management.Interface
         private string ApiVersion;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of NetworkInterfacesRestClient. </summary>
         public NetworkInterfacesRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string ApiVersion = "2019-11-01")
         {
@@ -45,6 +46,7 @@ namespace Azure.Network.Management.Interface
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreateDeleteRequest(string resourceGroupName, string networkInterfaceName)
         {
             var message = pipeline.CreateMessage();
@@ -62,6 +64,7 @@ namespace Azure.Network.Management.Interface
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Deletes the specified network interface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
@@ -98,6 +101,7 @@ namespace Azure.Network.Management.Interface
                 throw;
             }
         }
+
         /// <summary> Deletes the specified network interface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
@@ -134,6 +138,7 @@ namespace Azure.Network.Management.Interface
                 throw;
             }
         }
+
         internal HttpMessage CreateGetRequest(string resourceGroupName, string networkInterfaceName, string expand)
         {
             var message = pipeline.CreateMessage();
@@ -155,6 +160,7 @@ namespace Azure.Network.Management.Interface
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Gets information about the specified network interface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
@@ -195,6 +201,7 @@ namespace Azure.Network.Management.Interface
                 throw;
             }
         }
+
         /// <summary> Gets information about the specified network interface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
@@ -235,6 +242,7 @@ namespace Azure.Network.Management.Interface
                 throw;
             }
         }
+
         internal HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string networkInterfaceName, NetworkInterface parameters)
         {
             var message = pipeline.CreateMessage();
@@ -256,6 +264,7 @@ namespace Azure.Network.Management.Interface
             request.Content = content;
             return message;
         }
+
         /// <summary> Creates or updates a network interface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
@@ -297,6 +306,7 @@ namespace Azure.Network.Management.Interface
                 throw;
             }
         }
+
         /// <summary> Creates or updates a network interface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
@@ -338,6 +348,7 @@ namespace Azure.Network.Management.Interface
                 throw;
             }
         }
+
         internal HttpMessage CreateUpdateTagsRequest(string resourceGroupName, string networkInterfaceName, TagsObject parameters)
         {
             var message = pipeline.CreateMessage();
@@ -359,6 +370,7 @@ namespace Azure.Network.Management.Interface
             request.Content = content;
             return message;
         }
+
         /// <summary> Updates a network interface tags. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
@@ -403,6 +415,7 @@ namespace Azure.Network.Management.Interface
                 throw;
             }
         }
+
         /// <summary> Updates a network interface tags. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
@@ -447,6 +460,7 @@ namespace Azure.Network.Management.Interface
                 throw;
             }
         }
+
         internal HttpMessage CreateListAllRequest()
         {
             var message = pipeline.CreateMessage();
@@ -461,6 +475,7 @@ namespace Azure.Network.Management.Interface
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Gets all network interfaces in a subscription. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<NetworkInterfaceListResult>> ListAllAsync(CancellationToken cancellationToken = default)
@@ -489,6 +504,7 @@ namespace Azure.Network.Management.Interface
                 throw;
             }
         }
+
         /// <summary> Gets all network interfaces in a subscription. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<NetworkInterfaceListResult> ListAll(CancellationToken cancellationToken = default)
@@ -517,6 +533,7 @@ namespace Azure.Network.Management.Interface
                 throw;
             }
         }
+
         internal HttpMessage CreateListRequest(string resourceGroupName)
         {
             var message = pipeline.CreateMessage();
@@ -533,6 +550,7 @@ namespace Azure.Network.Management.Interface
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Gets all network interfaces in a resource group. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -567,6 +585,7 @@ namespace Azure.Network.Management.Interface
                 throw;
             }
         }
+
         /// <summary> Gets all network interfaces in a resource group. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -601,6 +620,7 @@ namespace Azure.Network.Management.Interface
                 throw;
             }
         }
+
         internal HttpMessage CreateGetEffectiveRouteTableRequest(string resourceGroupName, string networkInterfaceName)
         {
             var message = pipeline.CreateMessage();
@@ -619,6 +639,7 @@ namespace Azure.Network.Management.Interface
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Gets all route tables applied to a network interface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
@@ -655,6 +676,7 @@ namespace Azure.Network.Management.Interface
                 throw;
             }
         }
+
         /// <summary> Gets all route tables applied to a network interface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
@@ -691,6 +713,7 @@ namespace Azure.Network.Management.Interface
                 throw;
             }
         }
+
         internal HttpMessage CreateListEffectiveNetworkSecurityGroupsRequest(string resourceGroupName, string networkInterfaceName)
         {
             var message = pipeline.CreateMessage();
@@ -709,6 +732,7 @@ namespace Azure.Network.Management.Interface
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Gets all network security groups applied to a network interface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
@@ -745,6 +769,7 @@ namespace Azure.Network.Management.Interface
                 throw;
             }
         }
+
         /// <summary> Gets all network security groups applied to a network interface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
@@ -781,6 +806,7 @@ namespace Azure.Network.Management.Interface
                 throw;
             }
         }
+
         internal HttpMessage CreateListAllNextPageRequest(string nextLink)
         {
             var message = pipeline.CreateMessage();
@@ -791,6 +817,7 @@ namespace Azure.Network.Management.Interface
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Gets all network interfaces in a subscription. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -825,6 +852,7 @@ namespace Azure.Network.Management.Interface
                 throw;
             }
         }
+
         /// <summary> Gets all network interfaces in a subscription. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -859,6 +887,7 @@ namespace Azure.Network.Management.Interface
                 throw;
             }
         }
+
         internal HttpMessage CreateListNextPageRequest(string nextLink)
         {
             var message = pipeline.CreateMessage();
@@ -869,6 +898,7 @@ namespace Azure.Network.Management.Interface
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Gets all network interfaces in a resource group. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -903,6 +933,7 @@ namespace Azure.Network.Management.Interface
                 throw;
             }
         }
+
         /// <summary> Gets all network interfaces in a resource group. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

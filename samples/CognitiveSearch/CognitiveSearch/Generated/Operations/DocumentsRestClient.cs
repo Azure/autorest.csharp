@@ -25,6 +25,7 @@ namespace CognitiveSearch
         private string ApiVersion;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of DocumentsRestClient. </summary>
         public DocumentsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string searchServiceName, string indexName, string searchDnsSuffix = "search.windows.net", string ApiVersion = "2019-05-06")
         {
@@ -52,6 +53,7 @@ namespace CognitiveSearch
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreateCountRequest(Guid? clientRequestId)
         {
             var message = pipeline.CreateMessage();
@@ -74,6 +76,7 @@ namespace CognitiveSearch
             }
             return message;
         }
+
         /// <summary> Queries the number of documents in the index. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -104,6 +107,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         /// <summary> Queries the number of documents in the index. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -134,6 +138,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         internal HttpMessage CreateSearchGetRequest(string searchText, bool? includeTotalResultCount, IEnumerable<string> facets, string filter, IEnumerable<string> highlightFields, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> orderBy, QueryType? queryType, IEnumerable<string> scoringParameters, string scoringProfile, IEnumerable<string> searchFields, SearchMode? searchMode, IEnumerable<string> select, int? skip, int? top, Guid? clientRequestId)
         {
             var message = pipeline.CreateMessage();
@@ -224,6 +229,7 @@ namespace CognitiveSearch
             }
             return message;
         }
+
         /// <summary> Searches for documents in the index. </summary>
         /// <param name="searchText"> A full-text search query expression; Use &quot;*&quot; or omit this parameter to match all documents. </param>
         /// <param name="includeTotalResultCount"> A value that specifies whether to fetch the total count of results. Default is false. Setting this value to true may have a performance impact. Note that the count returned is an approximation. </param>
@@ -271,6 +277,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         /// <summary> Searches for documents in the index. </summary>
         /// <param name="searchText"> A full-text search query expression; Use &quot;*&quot; or omit this parameter to match all documents. </param>
         /// <param name="includeTotalResultCount"> A value that specifies whether to fetch the total count of results. Default is false. Setting this value to true may have a performance impact. Note that the count returned is an approximation. </param>
@@ -318,6 +325,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         internal HttpMessage CreateSearchPostRequest(Guid? clientRequestId, SearchRequest searchRequest)
         {
             var message = pipeline.CreateMessage();
@@ -344,6 +352,7 @@ namespace CognitiveSearch
             request.Content = content;
             return message;
         }
+
         /// <summary> Searches for documents in the index. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="searchRequest"> The definition of the Search request. </param>
@@ -379,6 +388,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         /// <summary> Searches for documents in the index. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="searchRequest"> The definition of the Search request. </param>
@@ -414,6 +424,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         internal HttpMessage CreateGetRequest(string key, IEnumerable<string> selectedFields, Guid? clientRequestId)
         {
             var message = pipeline.CreateMessage();
@@ -442,6 +453,7 @@ namespace CognitiveSearch
             }
             return message;
         }
+
         /// <summary> Retrieves a document from the index. </summary>
         /// <param name="key"> The key of the document to retrieve. </param>
         /// <param name="selectedFields"> List of field names to retrieve for the document; Any field not retrieved will be missing from the returned document. </param>
@@ -478,6 +490,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         /// <summary> Retrieves a document from the index. </summary>
         /// <param name="key"> The key of the document to retrieve. </param>
         /// <param name="selectedFields"> List of field names to retrieve for the document; Any field not retrieved will be missing from the returned document. </param>
@@ -514,6 +527,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         internal HttpMessage CreateSuggestGetRequest(string searchText, string suggesterName, string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> orderBy, IEnumerable<string> searchFields, IEnumerable<string> select, int? top, Guid? clientRequestId)
         {
             var message = pipeline.CreateMessage();
@@ -574,6 +588,7 @@ namespace CognitiveSearch
             }
             return message;
         }
+
         /// <summary> Suggests documents in the index that match the given partial query text. </summary>
         /// <param name="searchText"> The search text to use to suggest documents. Must be at least 1 character, and no more than 100 characters. </param>
         /// <param name="suggesterName"> The name of the suggester as specified in the suggesters collection that&apos;s part of the index definition. </param>
@@ -623,6 +638,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         /// <summary> Suggests documents in the index that match the given partial query text. </summary>
         /// <param name="searchText"> The search text to use to suggest documents. Must be at least 1 character, and no more than 100 characters. </param>
         /// <param name="suggesterName"> The name of the suggester as specified in the suggesters collection that&apos;s part of the index definition. </param>
@@ -672,6 +688,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         internal HttpMessage CreateSuggestPostRequest(Guid? clientRequestId, SuggestRequest suggestRequest)
         {
             var message = pipeline.CreateMessage();
@@ -698,6 +715,7 @@ namespace CognitiveSearch
             request.Content = content;
             return message;
         }
+
         /// <summary> Suggests documents in the index that match the given partial query text. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="suggestRequest"> The Suggest request. </param>
@@ -733,6 +751,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         /// <summary> Suggests documents in the index that match the given partial query text. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="suggestRequest"> The Suggest request. </param>
@@ -768,6 +787,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         internal HttpMessage CreateIndexRequest(Guid? clientRequestId, IndexBatch batch)
         {
             var message = pipeline.CreateMessage();
@@ -794,6 +814,7 @@ namespace CognitiveSearch
             request.Content = content;
             return message;
         }
+
         /// <summary> Sends a batch of document write actions to the index. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="batch"> The batch of index actions. </param>
@@ -829,6 +850,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         /// <summary> Sends a batch of document write actions to the index. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="batch"> The batch of index actions. </param>
@@ -864,6 +886,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         internal HttpMessage CreateAutocompleteGetRequest(Guid? clientRequestId, string searchText, string suggesterName, AutocompleteMode? autocompleteMode, string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> searchFields, int? top)
         {
             var message = pipeline.CreateMessage();
@@ -920,6 +943,7 @@ namespace CognitiveSearch
             }
             return message;
         }
+
         /// <summary> Autocompletes incomplete query terms based on input text and matching terms in the index. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="searchText"> The search text to use to suggest documents. Must be at least 1 character, and no more than 100 characters. </param>
@@ -968,6 +992,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         /// <summary> Autocompletes incomplete query terms based on input text and matching terms in the index. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="searchText"> The search text to use to suggest documents. Must be at least 1 character, and no more than 100 characters. </param>
@@ -1016,6 +1041,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         internal HttpMessage CreateAutocompletePostRequest(Guid? clientRequestId, AutocompleteRequest autocompleteRequest)
         {
             var message = pipeline.CreateMessage();
@@ -1042,6 +1068,7 @@ namespace CognitiveSearch
             request.Content = content;
             return message;
         }
+
         /// <summary> Autocompletes incomplete query terms based on input text and matching terms in the index. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="autocompleteRequest"> The definition of the Autocomplete request. </param>
@@ -1077,6 +1104,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         /// <summary> Autocompletes incomplete query terms based on input text and matching terms in the index. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="autocompleteRequest"> The definition of the Autocomplete request. </param>

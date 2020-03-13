@@ -23,6 +23,7 @@ namespace CognitiveSearch
         private string ApiVersion;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of DataSourcesRestClient. </summary>
         public DataSourcesRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string searchServiceName, string searchDnsSuffix = "search.windows.net", string ApiVersion = "2019-05-06")
         {
@@ -45,6 +46,7 @@ namespace CognitiveSearch
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreateCreateOrUpdateRequest(string dataSourceName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, DataSource dataSource)
         {
             var message = pipeline.CreateMessage();
@@ -79,6 +81,7 @@ namespace CognitiveSearch
             request.Content = content;
             return message;
         }
+
         /// <summary> Creates a new datasource or updates a datasource if it already exists. </summary>
         /// <param name="dataSourceName"> The name of the datasource to create or update. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -121,6 +124,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         /// <summary> Creates a new datasource or updates a datasource if it already exists. </summary>
         /// <param name="dataSourceName"> The name of the datasource to create or update. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -163,6 +167,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         internal HttpMessage CreateDeleteRequest(string dataSourceName, Guid? clientRequestId, string ifMatch, string ifNoneMatch)
         {
             var message = pipeline.CreateMessage();
@@ -192,6 +197,7 @@ namespace CognitiveSearch
             }
             return message;
         }
+
         /// <summary> Deletes a datasource. </summary>
         /// <param name="dataSourceName"> The name of the datasource to create or update. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -225,6 +231,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         /// <summary> Deletes a datasource. </summary>
         /// <param name="dataSourceName"> The name of the datasource to create or update. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -258,6 +265,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         internal HttpMessage CreateGetRequest(string dataSourceName, Guid? clientRequestId)
         {
             var message = pipeline.CreateMessage();
@@ -279,6 +287,7 @@ namespace CognitiveSearch
             }
             return message;
         }
+
         /// <summary> Retrieves a datasource definition. </summary>
         /// <param name="dataSourceName"> The name of the datasource to create or update. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -314,6 +323,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         /// <summary> Retrieves a datasource definition. </summary>
         /// <param name="dataSourceName"> The name of the datasource to create or update. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -349,6 +359,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         internal HttpMessage CreateListRequest(string select, Guid? clientRequestId)
         {
             var message = pipeline.CreateMessage();
@@ -372,6 +383,7 @@ namespace CognitiveSearch
             }
             return message;
         }
+
         /// <summary> Lists all datasources available for a search service. </summary>
         /// <param name="select"> Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -403,6 +415,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         /// <summary> Lists all datasources available for a search service. </summary>
         /// <param name="select"> Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -434,6 +447,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         internal HttpMessage CreateCreateRequest(Guid? clientRequestId, DataSource dataSource)
         {
             var message = pipeline.CreateMessage();
@@ -457,6 +471,7 @@ namespace CognitiveSearch
             request.Content = content;
             return message;
         }
+
         /// <summary> Creates a new datasource. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="dataSource"> The definition of the datasource to create or update. </param>
@@ -492,6 +507,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         /// <summary> Creates a new datasource. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="dataSource"> The definition of the datasource to create or update. </param>

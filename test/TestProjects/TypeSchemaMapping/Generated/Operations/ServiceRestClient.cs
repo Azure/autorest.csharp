@@ -21,6 +21,7 @@ namespace TypeSchemaMapping
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of ServiceRestClient. </summary>
         public ServiceRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
@@ -33,6 +34,7 @@ namespace TypeSchemaMapping
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreateOperationRequest(CustomizedModel body)
         {
             var message = pipeline.CreateMessage();
@@ -48,6 +50,7 @@ namespace TypeSchemaMapping
             request.Content = content;
             return message;
         }
+
         /// <param name="body"> The Model to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<CustomizedModel>> OperationAsync(CustomizedModel body, CancellationToken cancellationToken = default)
@@ -77,6 +80,7 @@ namespace TypeSchemaMapping
                 throw;
             }
         }
+
         /// <param name="body"> The Model to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<CustomizedModel> Operation(CustomizedModel body, CancellationToken cancellationToken = default)

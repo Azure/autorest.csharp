@@ -20,6 +20,7 @@ namespace url_multi_collectionFormat
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of QueriesRestClient. </summary>
         public QueriesRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
@@ -32,6 +33,7 @@ namespace url_multi_collectionFormat
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreateArrayStringMultiNullRequest(IEnumerable<string> arrayQuery)
         {
             var message = pipeline.CreateMessage();
@@ -47,6 +49,7 @@ namespace url_multi_collectionFormat
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get a null array of string using the multi-array format. </summary>
         /// <param name="arrayQuery"> a null array of string using the multi-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -73,6 +76,7 @@ namespace url_multi_collectionFormat
                 throw;
             }
         }
+
         /// <summary> Get a null array of string using the multi-array format. </summary>
         /// <param name="arrayQuery"> a null array of string using the multi-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -99,6 +103,7 @@ namespace url_multi_collectionFormat
                 throw;
             }
         }
+
         internal HttpMessage CreateArrayStringMultiEmptyRequest(IEnumerable<string> arrayQuery)
         {
             var message = pipeline.CreateMessage();
@@ -114,6 +119,7 @@ namespace url_multi_collectionFormat
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get an empty array [] of string using the multi-array format. </summary>
         /// <param name="arrayQuery"> an empty array [] of string using the multi-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -140,6 +146,7 @@ namespace url_multi_collectionFormat
                 throw;
             }
         }
+
         /// <summary> Get an empty array [] of string using the multi-array format. </summary>
         /// <param name="arrayQuery"> an empty array [] of string using the multi-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -166,6 +173,7 @@ namespace url_multi_collectionFormat
                 throw;
             }
         }
+
         internal HttpMessage CreateArrayStringMultiValidRequest(IEnumerable<string> arrayQuery)
         {
             var message = pipeline.CreateMessage();
@@ -181,6 +189,7 @@ namespace url_multi_collectionFormat
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </summary>
         /// <param name="arrayQuery"> an empty array [] of string using the multi-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -207,6 +216,7 @@ namespace url_multi_collectionFormat
                 throw;
             }
         }
+
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </summary>
         /// <param name="arrayQuery"> an empty array [] of string using the multi-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

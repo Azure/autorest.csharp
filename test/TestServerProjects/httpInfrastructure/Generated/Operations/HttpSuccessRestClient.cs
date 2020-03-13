@@ -20,6 +20,7 @@ namespace httpInfrastructure
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of HttpSuccessRestClient. </summary>
         public HttpSuccessRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
@@ -32,6 +33,7 @@ namespace httpInfrastructure
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreateHead200Request()
         {
             var message = pipeline.CreateMessage();
@@ -43,6 +45,7 @@ namespace httpInfrastructure
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Return 200 status code if successful. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Head200Async(CancellationToken cancellationToken = default)
@@ -67,6 +70,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Return 200 status code if successful. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Head200(CancellationToken cancellationToken = default)
@@ -91,6 +95,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreateGet200Request()
         {
             var message = pipeline.CreateMessage();
@@ -102,6 +107,7 @@ namespace httpInfrastructure
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get 200 success. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<bool>> Get200Async(CancellationToken cancellationToken = default)
@@ -130,6 +136,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Get 200 success. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<bool> Get200(CancellationToken cancellationToken = default)
@@ -158,6 +165,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreateOptions200Request()
         {
             var message = pipeline.CreateMessage();
@@ -169,6 +177,7 @@ namespace httpInfrastructure
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Options 200 success. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<bool>> Options200Async(CancellationToken cancellationToken = default)
@@ -197,6 +206,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Options 200 success. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<bool> Options200(CancellationToken cancellationToken = default)
@@ -225,6 +235,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreatePut200Request()
         {
             var message = pipeline.CreateMessage();
@@ -240,6 +251,7 @@ namespace httpInfrastructure
             request.Content = content;
             return message;
         }
+
         /// <summary> Put boolean value true returning 200 success. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Put200Async(CancellationToken cancellationToken = default)
@@ -264,6 +276,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Put boolean value true returning 200 success. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Put200(CancellationToken cancellationToken = default)
@@ -288,6 +301,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreatePatch200Request()
         {
             var message = pipeline.CreateMessage();
@@ -303,6 +317,7 @@ namespace httpInfrastructure
             request.Content = content;
             return message;
         }
+
         /// <summary> Patch true Boolean value in request returning 200. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Patch200Async(CancellationToken cancellationToken = default)
@@ -327,6 +342,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Patch true Boolean value in request returning 200. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Patch200(CancellationToken cancellationToken = default)
@@ -351,6 +367,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreatePost200Request()
         {
             var message = pipeline.CreateMessage();
@@ -366,6 +383,7 @@ namespace httpInfrastructure
             request.Content = content;
             return message;
         }
+
         /// <summary> Post bollean value true in request that returns a 200. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Post200Async(CancellationToken cancellationToken = default)
@@ -390,6 +408,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Post bollean value true in request that returns a 200. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Post200(CancellationToken cancellationToken = default)
@@ -414,6 +433,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreateDelete200Request()
         {
             var message = pipeline.CreateMessage();
@@ -429,6 +449,7 @@ namespace httpInfrastructure
             request.Content = content;
             return message;
         }
+
         /// <summary> Delete simple boolean value true returns 200. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Delete200Async(CancellationToken cancellationToken = default)
@@ -453,6 +474,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Delete simple boolean value true returns 200. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Delete200(CancellationToken cancellationToken = default)
@@ -477,6 +499,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreatePut201Request()
         {
             var message = pipeline.CreateMessage();
@@ -492,6 +515,7 @@ namespace httpInfrastructure
             request.Content = content;
             return message;
         }
+
         /// <summary> Put true Boolean value in request returns 201. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Put201Async(CancellationToken cancellationToken = default)
@@ -516,6 +540,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Put true Boolean value in request returns 201. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Put201(CancellationToken cancellationToken = default)
@@ -540,6 +565,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreatePost201Request()
         {
             var message = pipeline.CreateMessage();
@@ -555,6 +581,7 @@ namespace httpInfrastructure
             request.Content = content;
             return message;
         }
+
         /// <summary> Post true Boolean value in request returns 201 (Created). </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Post201Async(CancellationToken cancellationToken = default)
@@ -579,6 +606,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Post true Boolean value in request returns 201 (Created). </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Post201(CancellationToken cancellationToken = default)
@@ -603,6 +631,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreatePut202Request()
         {
             var message = pipeline.CreateMessage();
@@ -618,6 +647,7 @@ namespace httpInfrastructure
             request.Content = content;
             return message;
         }
+
         /// <summary> Put true Boolean value in request returns 202 (Accepted). </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Put202Async(CancellationToken cancellationToken = default)
@@ -642,6 +672,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Put true Boolean value in request returns 202 (Accepted). </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Put202(CancellationToken cancellationToken = default)
@@ -666,6 +697,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreatePatch202Request()
         {
             var message = pipeline.CreateMessage();
@@ -681,6 +713,7 @@ namespace httpInfrastructure
             request.Content = content;
             return message;
         }
+
         /// <summary> Patch true Boolean value in request returns 202. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Patch202Async(CancellationToken cancellationToken = default)
@@ -705,6 +738,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Patch true Boolean value in request returns 202. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Patch202(CancellationToken cancellationToken = default)
@@ -729,6 +763,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreatePost202Request()
         {
             var message = pipeline.CreateMessage();
@@ -744,6 +779,7 @@ namespace httpInfrastructure
             request.Content = content;
             return message;
         }
+
         /// <summary> Post true Boolean value in request returns 202 (Accepted). </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Post202Async(CancellationToken cancellationToken = default)
@@ -768,6 +804,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Post true Boolean value in request returns 202 (Accepted). </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Post202(CancellationToken cancellationToken = default)
@@ -792,6 +829,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreateDelete202Request()
         {
             var message = pipeline.CreateMessage();
@@ -807,6 +845,7 @@ namespace httpInfrastructure
             request.Content = content;
             return message;
         }
+
         /// <summary> Delete true Boolean value in request returns 202 (accepted). </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Delete202Async(CancellationToken cancellationToken = default)
@@ -831,6 +870,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Delete true Boolean value in request returns 202 (accepted). </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Delete202(CancellationToken cancellationToken = default)
@@ -855,6 +895,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreateHead204Request()
         {
             var message = pipeline.CreateMessage();
@@ -866,6 +907,7 @@ namespace httpInfrastructure
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Return 204 status code if successful. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Head204Async(CancellationToken cancellationToken = default)
@@ -890,6 +932,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Return 204 status code if successful. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Head204(CancellationToken cancellationToken = default)
@@ -914,6 +957,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreatePut204Request()
         {
             var message = pipeline.CreateMessage();
@@ -929,6 +973,7 @@ namespace httpInfrastructure
             request.Content = content;
             return message;
         }
+
         /// <summary> Put true Boolean value in request returns 204 (no content). </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Put204Async(CancellationToken cancellationToken = default)
@@ -953,6 +998,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Put true Boolean value in request returns 204 (no content). </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Put204(CancellationToken cancellationToken = default)
@@ -977,6 +1023,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreatePatch204Request()
         {
             var message = pipeline.CreateMessage();
@@ -992,6 +1039,7 @@ namespace httpInfrastructure
             request.Content = content;
             return message;
         }
+
         /// <summary> Patch true Boolean value in request returns 204 (no content). </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Patch204Async(CancellationToken cancellationToken = default)
@@ -1016,6 +1064,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Patch true Boolean value in request returns 204 (no content). </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Patch204(CancellationToken cancellationToken = default)
@@ -1040,6 +1089,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreatePost204Request()
         {
             var message = pipeline.CreateMessage();
@@ -1055,6 +1105,7 @@ namespace httpInfrastructure
             request.Content = content;
             return message;
         }
+
         /// <summary> Post true Boolean value in request returns 204 (no content). </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Post204Async(CancellationToken cancellationToken = default)
@@ -1079,6 +1130,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Post true Boolean value in request returns 204 (no content). </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Post204(CancellationToken cancellationToken = default)
@@ -1103,6 +1155,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreateDelete204Request()
         {
             var message = pipeline.CreateMessage();
@@ -1118,6 +1171,7 @@ namespace httpInfrastructure
             request.Content = content;
             return message;
         }
+
         /// <summary> Delete true Boolean value in request returns 204 (no content). </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Delete204Async(CancellationToken cancellationToken = default)
@@ -1142,6 +1196,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Delete true Boolean value in request returns 204 (no content). </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Delete204(CancellationToken cancellationToken = default)
@@ -1166,6 +1221,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreateHead404Request()
         {
             var message = pipeline.CreateMessage();
@@ -1177,6 +1233,7 @@ namespace httpInfrastructure
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Return 404 status code. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Head404Async(CancellationToken cancellationToken = default)
@@ -1201,6 +1258,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Return 404 status code. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Head404(CancellationToken cancellationToken = default)

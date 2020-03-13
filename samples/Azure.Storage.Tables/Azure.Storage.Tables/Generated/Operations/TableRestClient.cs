@@ -23,6 +23,7 @@ namespace Azure.Storage.Tables
         private string Version;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of TableRestClient. </summary>
         public TableRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string url, string Version = "2018-10-10")
         {
@@ -40,6 +41,7 @@ namespace Azure.Storage.Tables
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreateQueryRequest(string requestId, ResponseFormat? format, int? top, string select, string filter)
         {
             var message = pipeline.CreateMessage();
@@ -73,6 +75,7 @@ namespace Azure.Storage.Tables
             request.Headers.Add("DataServiceVersion", "3.0");
             return message;
         }
+
         /// <summary> Queries tables under the given account. </summary>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="format"> Specifies the media type for the response. </param>
@@ -108,6 +111,7 @@ namespace Azure.Storage.Tables
                 throw;
             }
         }
+
         /// <summary> Queries tables under the given account. </summary>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="format"> Specifies the media type for the response. </param>
@@ -143,6 +147,7 @@ namespace Azure.Storage.Tables
                 throw;
             }
         }
+
         internal HttpMessage CreateCreateRequest(string requestId, ResponseFormat? format, TableProperties tableProperties)
         {
             var message = pipeline.CreateMessage();
@@ -168,6 +173,7 @@ namespace Azure.Storage.Tables
             request.Content = content;
             return message;
         }
+
         /// <summary> Creates a new table under the given account. </summary>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="format"> Specifies the media type for the response. </param>
@@ -205,6 +211,7 @@ namespace Azure.Storage.Tables
                 throw;
             }
         }
+
         /// <summary> Creates a new table under the given account. </summary>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="format"> Specifies the media type for the response. </param>
@@ -242,6 +249,7 @@ namespace Azure.Storage.Tables
                 throw;
             }
         }
+
         internal HttpMessage CreateDeleteRequest(string requestId, string table)
         {
             var message = pipeline.CreateMessage();
@@ -260,6 +268,7 @@ namespace Azure.Storage.Tables
             }
             return message;
         }
+
         /// <summary> Operation permanently deletes the specified table. </summary>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="table"> The name of the table. </param>
@@ -292,6 +301,7 @@ namespace Azure.Storage.Tables
                 throw;
             }
         }
+
         /// <summary> Operation permanently deletes the specified table. </summary>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="table"> The name of the table. </param>
@@ -324,6 +334,7 @@ namespace Azure.Storage.Tables
                 throw;
             }
         }
+
         internal HttpMessage CreateQueryEntitiesRequest(int? timeout, string requestId, ResponseFormat? format, int? top, string select, string filter, string table)
         {
             var message = pipeline.CreateMessage();
@@ -363,6 +374,7 @@ namespace Azure.Storage.Tables
             request.Headers.Add("DataServiceVersion", "3.0");
             return message;
         }
+
         /// <summary> Queries entities in a table. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
@@ -404,6 +416,7 @@ namespace Azure.Storage.Tables
                 throw;
             }
         }
+
         /// <summary> Queries entities in a table. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
@@ -445,6 +458,7 @@ namespace Azure.Storage.Tables
                 throw;
             }
         }
+
         internal HttpMessage CreateQueryEntitiesWithPartitionAndRowKeyRequest(int? timeout, string requestId, ResponseFormat? format, string select, string filter, string table, string partitionKey, string rowKey)
         {
             var message = pipeline.CreateMessage();
@@ -484,6 +498,7 @@ namespace Azure.Storage.Tables
             request.Headers.Add("DataServiceVersion", "3.0");
             return message;
         }
+
         /// <summary> Queries entities in a table. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
@@ -534,6 +549,7 @@ namespace Azure.Storage.Tables
                 throw;
             }
         }
+
         /// <summary> Queries entities in a table. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
@@ -584,6 +600,7 @@ namespace Azure.Storage.Tables
                 throw;
             }
         }
+
         internal HttpMessage CreateUpdateEntityRequest(int? timeout, string requestId, ResponseFormat? format, string table, string partitionKey, string rowKey, IDictionary<string, object> tableEntityProperties)
         {
             var message = pipeline.CreateMessage();
@@ -625,6 +642,7 @@ namespace Azure.Storage.Tables
             request.Content = content;
             return message;
         }
+
         /// <summary> Update entity in a table. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
@@ -670,6 +688,7 @@ namespace Azure.Storage.Tables
                 throw;
             }
         }
+
         /// <summary> Update entity in a table. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
@@ -715,6 +734,7 @@ namespace Azure.Storage.Tables
                 throw;
             }
         }
+
         internal HttpMessage CreateDeleteEntityRequest(int? timeout, string requestId, ResponseFormat? format, string table, string partitionKey, string rowKey)
         {
             var message = pipeline.CreateMessage();
@@ -746,6 +766,7 @@ namespace Azure.Storage.Tables
             request.Headers.Add("DataServiceVersion", "3.0");
             return message;
         }
+
         /// <summary> Deletes the specified entity in a table. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
@@ -790,6 +811,7 @@ namespace Azure.Storage.Tables
                 throw;
             }
         }
+
         /// <summary> Deletes the specified entity in a table. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
@@ -834,6 +856,7 @@ namespace Azure.Storage.Tables
                 throw;
             }
         }
+
         internal HttpMessage CreateInsertEntityRequest(int? timeout, string requestId, ResponseFormat? format, string table, IDictionary<string, object> tableEntityProperties)
         {
             var message = pipeline.CreateMessage();
@@ -870,6 +893,7 @@ namespace Azure.Storage.Tables
             request.Content = content;
             return message;
         }
+
         /// <summary> Insert entity in a table. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
@@ -913,6 +937,7 @@ namespace Azure.Storage.Tables
                 throw;
             }
         }
+
         /// <summary> Insert entity in a table. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
@@ -956,6 +981,7 @@ namespace Azure.Storage.Tables
                 throw;
             }
         }
+
         internal HttpMessage CreateGetAccessPolicyRequest(int? timeout, string requestId, string table)
         {
             var message = pipeline.CreateMessage();
@@ -978,6 +1004,7 @@ namespace Azure.Storage.Tables
             }
             return message;
         }
+
         /// <summary> Retrieves details about any stored access policies specified on the table that may be used wit Shared Access Signatures. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
@@ -1026,6 +1053,7 @@ namespace Azure.Storage.Tables
                 throw;
             }
         }
+
         /// <summary> Retrieves details about any stored access policies specified on the table that may be used wit Shared Access Signatures. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
@@ -1074,6 +1102,7 @@ namespace Azure.Storage.Tables
                 throw;
             }
         }
+
         internal HttpMessage CreateSetAccessPolicyRequest(int? timeout, string requestId, string table, IEnumerable<SignedIdentifier> tableAcl)
         {
             var message = pipeline.CreateMessage();
@@ -1105,6 +1134,7 @@ namespace Azure.Storage.Tables
             request.Content = content;
             return message;
         }
+
         /// <summary> sets stored access policies for the table that may be used with Shared Access Signatures. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
@@ -1139,6 +1169,7 @@ namespace Azure.Storage.Tables
                 throw;
             }
         }
+
         /// <summary> sets stored access policies for the table that may be used with Shared Access Signatures. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>

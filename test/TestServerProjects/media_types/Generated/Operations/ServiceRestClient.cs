@@ -22,6 +22,7 @@ namespace media_types
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of ServiceRestClient. </summary>
         public ServiceRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
@@ -34,6 +35,7 @@ namespace media_types
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreateAnalyzeBodyRequest(ContentType? contentType, Stream input)
         {
             var message = pipeline.CreateMessage();
@@ -50,6 +52,7 @@ namespace media_types
             request.Content = RequestContent.Create(input);
             return message;
         }
+
         /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="contentType"> Upload file type. </param>
         /// <param name="input"> Input parameter. </param>
@@ -81,6 +84,7 @@ namespace media_types
                 throw;
             }
         }
+
         /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="contentType"> Upload file type. </param>
         /// <param name="input"> Input parameter. </param>
@@ -112,6 +116,7 @@ namespace media_types
                 throw;
             }
         }
+
         internal HttpMessage CreateAnalyzeBodyRequest(SourcePath input)
         {
             var message = pipeline.CreateMessage();
@@ -127,6 +132,7 @@ namespace media_types
             request.Content = content;
             return message;
         }
+
         /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="input"> Input parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -157,6 +163,7 @@ namespace media_types
                 throw;
             }
         }
+
         /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="input"> Input parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
