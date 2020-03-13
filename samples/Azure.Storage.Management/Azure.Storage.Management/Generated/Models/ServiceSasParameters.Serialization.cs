@@ -104,6 +104,7 @@ namespace Azure.Storage.Management.Models
             }
             writer.WriteEndObject();
         }
+
         internal static ServiceSasParameters DeserializeServiceSasParameters(JsonElement element)
         {
             ServiceSasParameters result = new ServiceSasParameters();

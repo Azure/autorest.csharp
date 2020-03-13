@@ -97,6 +97,7 @@ namespace Azure.Storage.Management.Models
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
+
         internal static ListContainerItem DeserializeListContainerItem(JsonElement element)
         {
             ListContainerItem result = new ListContainerItem();

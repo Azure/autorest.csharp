@@ -50,6 +50,7 @@ namespace Azure.Network.Management.Interface.Models
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
+
         internal static IPConfigurationProfile DeserializeIPConfigurationProfile(JsonElement element)
         {
             IPConfigurationProfile result = new IPConfigurationProfile();

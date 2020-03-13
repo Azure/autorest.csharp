@@ -41,6 +41,7 @@ namespace xml_service.Models
             }
             writer.WriteEndElement();
         }
+
         internal static AppleBarrel DeserializeAppleBarrel(XElement element)
         {
             AppleBarrel result = default;

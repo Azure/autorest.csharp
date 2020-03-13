@@ -21,6 +21,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(OdataType);
             writer.WriteEndObject();
         }
+
         internal static HighWaterMarkChangeDetectionPolicy DeserializeHighWaterMarkChangeDetectionPolicy(JsonElement element)
         {
             HighWaterMarkChangeDetectionPolicy result = new HighWaterMarkChangeDetectionPolicy();

@@ -31,6 +31,7 @@ namespace Azure.AI.FormRecognizer.Models
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
+
         internal static KeysResult DeserializeKeysResult(JsonElement element)
         {
             KeysResult result = new KeysResult();

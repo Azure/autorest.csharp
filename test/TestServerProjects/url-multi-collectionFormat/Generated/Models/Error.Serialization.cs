@@ -27,6 +27,7 @@ namespace url_multi_collectionFormat.Models
             }
             writer.WriteEndObject();
         }
+
         internal static Error DeserializeError(JsonElement element)
         {
             Error result = new Error();

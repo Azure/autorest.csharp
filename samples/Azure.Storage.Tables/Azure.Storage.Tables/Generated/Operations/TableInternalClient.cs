@@ -30,6 +30,7 @@ namespace Azure.Storage.Tables
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         /// <summary> Queries tables under the given account. </summary>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="format"> Specifies the media type for the response. </param>
@@ -41,6 +42,7 @@ namespace Azure.Storage.Tables
         {
             return await RestClient.QueryAsync(requestId, format, top, select, filter, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Queries tables under the given account. </summary>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="format"> Specifies the media type for the response. </param>
@@ -52,6 +54,7 @@ namespace Azure.Storage.Tables
         {
             return RestClient.Query(requestId, format, top, select, filter, cancellationToken);
         }
+
         /// <summary> Creates a new table under the given account. </summary>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="format"> Specifies the media type for the response. </param>
@@ -61,6 +64,7 @@ namespace Azure.Storage.Tables
         {
             return await RestClient.CreateAsync(requestId, format, tableProperties, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Creates a new table under the given account. </summary>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="format"> Specifies the media type for the response. </param>
@@ -70,6 +74,7 @@ namespace Azure.Storage.Tables
         {
             return RestClient.Create(requestId, format, tableProperties, cancellationToken);
         }
+
         /// <summary> Operation permanently deletes the specified table. </summary>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="table"> The name of the table. </param>
@@ -78,6 +83,7 @@ namespace Azure.Storage.Tables
         {
             return (await RestClient.DeleteAsync(requestId, table, cancellationToken).ConfigureAwait(false)).GetRawResponse();
         }
+
         /// <summary> Operation permanently deletes the specified table. </summary>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="table"> The name of the table. </param>
@@ -86,6 +92,7 @@ namespace Azure.Storage.Tables
         {
             return RestClient.Delete(requestId, table, cancellationToken).GetRawResponse();
         }
+
         /// <summary> Queries entities in a table. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
@@ -99,6 +106,7 @@ namespace Azure.Storage.Tables
         {
             return await RestClient.QueryEntitiesAsync(timeout, requestId, format, top, select, filter, table, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Queries entities in a table. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
@@ -112,6 +120,7 @@ namespace Azure.Storage.Tables
         {
             return RestClient.QueryEntities(timeout, requestId, format, top, select, filter, table, cancellationToken);
         }
+
         /// <summary> Queries entities in a table. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
@@ -126,6 +135,7 @@ namespace Azure.Storage.Tables
         {
             return await RestClient.QueryEntitiesWithPartitionAndRowKeyAsync(timeout, requestId, format, select, filter, table, partitionKey, rowKey, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Queries entities in a table. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
@@ -140,6 +150,7 @@ namespace Azure.Storage.Tables
         {
             return RestClient.QueryEntitiesWithPartitionAndRowKey(timeout, requestId, format, select, filter, table, partitionKey, rowKey, cancellationToken);
         }
+
         /// <summary> Update entity in a table. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
@@ -153,6 +164,7 @@ namespace Azure.Storage.Tables
         {
             return (await RestClient.UpdateEntityAsync(timeout, requestId, format, table, partitionKey, rowKey, tableEntityProperties, cancellationToken).ConfigureAwait(false)).GetRawResponse();
         }
+
         /// <summary> Update entity in a table. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
@@ -166,6 +178,7 @@ namespace Azure.Storage.Tables
         {
             return RestClient.UpdateEntity(timeout, requestId, format, table, partitionKey, rowKey, tableEntityProperties, cancellationToken).GetRawResponse();
         }
+
         /// <summary> Deletes the specified entity in a table. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
@@ -178,6 +191,7 @@ namespace Azure.Storage.Tables
         {
             return (await RestClient.DeleteEntityAsync(timeout, requestId, format, table, partitionKey, rowKey, cancellationToken).ConfigureAwait(false)).GetRawResponse();
         }
+
         /// <summary> Deletes the specified entity in a table. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
@@ -190,6 +204,7 @@ namespace Azure.Storage.Tables
         {
             return RestClient.DeleteEntity(timeout, requestId, format, table, partitionKey, rowKey, cancellationToken).GetRawResponse();
         }
+
         /// <summary> Insert entity in a table. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
@@ -201,6 +216,7 @@ namespace Azure.Storage.Tables
         {
             return await RestClient.InsertEntityAsync(timeout, requestId, format, table, tableEntityProperties, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Insert entity in a table. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
@@ -212,6 +228,7 @@ namespace Azure.Storage.Tables
         {
             return RestClient.InsertEntity(timeout, requestId, format, table, tableEntityProperties, cancellationToken);
         }
+
         /// <summary> Retrieves details about any stored access policies specified on the table that may be used wit Shared Access Signatures. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
@@ -221,6 +238,7 @@ namespace Azure.Storage.Tables
         {
             return await RestClient.GetAccessPolicyAsync(timeout, requestId, table, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Retrieves details about any stored access policies specified on the table that may be used wit Shared Access Signatures. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
@@ -230,6 +248,7 @@ namespace Azure.Storage.Tables
         {
             return RestClient.GetAccessPolicy(timeout, requestId, table, cancellationToken);
         }
+
         /// <summary> sets stored access policies for the table that may be used with Shared Access Signatures. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
@@ -240,6 +259,7 @@ namespace Azure.Storage.Tables
         {
             return (await RestClient.SetAccessPolicyAsync(timeout, requestId, table, tableAcl, cancellationToken).ConfigureAwait(false)).GetRawResponse();
         }
+
         /// <summary> sets stored access policies for the table that may be used with Shared Access Signatures. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>

@@ -28,6 +28,7 @@ namespace Azure.Storage.Management.Models
             }
             writer.WriteEndObject();
         }
+
         internal static FileServiceItems DeserializeFileServiceItems(JsonElement element)
         {
             FileServiceItems result = new FileServiceItems();

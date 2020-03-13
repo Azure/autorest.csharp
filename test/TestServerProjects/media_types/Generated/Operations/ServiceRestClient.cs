@@ -56,6 +56,7 @@ namespace media_types
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<string>> AnalyzeBodyAsync(ContentType? contentType, Stream input, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.AnalyzeBody");
             scope.Start();
             try
@@ -86,6 +87,7 @@ namespace media_types
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<string> AnalyzeBody(ContentType? contentType, Stream input, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.AnalyzeBody");
             scope.Start();
             try
@@ -130,6 +132,7 @@ namespace media_types
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<string>> AnalyzeBodyAsync(SourcePath input, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.AnalyzeBody");
             scope.Start();
             try
@@ -159,6 +162,7 @@ namespace media_types
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<string> AnalyzeBody(SourcePath input, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.AnalyzeBody");
             scope.Start();
             try

@@ -97,6 +97,7 @@ namespace Azure.Storage.Management.Models
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
+
         internal static BlobContainer DeserializeBlobContainer(JsonElement element)
         {
             BlobContainer result = new BlobContainer();

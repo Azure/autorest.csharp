@@ -28,6 +28,7 @@ namespace Azure.Storage.Management.Models
             }
             writer.WriteEndObject();
         }
+
         internal static CorsRules DeserializeCorsRules(JsonElement element)
         {
             CorsRules result = new CorsRules();

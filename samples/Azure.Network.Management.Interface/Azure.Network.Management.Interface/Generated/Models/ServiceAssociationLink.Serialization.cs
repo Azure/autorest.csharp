@@ -71,6 +71,7 @@ namespace Azure.Network.Management.Interface.Models
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
+
         internal static ServiceAssociationLink DeserializeServiceAssociationLink(JsonElement element)
         {
             ServiceAssociationLink result = new ServiceAssociationLink();

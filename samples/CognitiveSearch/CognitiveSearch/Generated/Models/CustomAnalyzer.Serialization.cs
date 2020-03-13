@@ -44,6 +44,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(Name);
             writer.WriteEndObject();
         }
+
         internal static CustomAnalyzer DeserializeCustomAnalyzer(JsonElement element)
         {
             CustomAnalyzer result = new CustomAnalyzer();

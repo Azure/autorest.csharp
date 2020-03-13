@@ -39,6 +39,7 @@ namespace Azure.Storage.Management.Models
             }
             writer.WriteEndObject();
         }
+
         internal static LeaseContainerRequest DeserializeLeaseContainerRequest(JsonElement element)
         {
             LeaseContainerRequest result = new LeaseContainerRequest();

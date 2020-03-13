@@ -29,6 +29,7 @@ namespace additionalProperties
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The PetAPTrue to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -36,6 +37,7 @@ namespace additionalProperties
         {
             return await RestClient.CreateAPTrueAsync(createParameters, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The PetAPTrue to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -43,6 +45,7 @@ namespace additionalProperties
         {
             return RestClient.CreateAPTrue(createParameters, cancellationToken);
         }
+
         /// <summary> Create a CatAPTrue which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The CatAPTrue to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -50,6 +53,7 @@ namespace additionalProperties
         {
             return await RestClient.CreateCatAPTrueAsync(createParameters, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Create a CatAPTrue which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The CatAPTrue to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -57,6 +61,7 @@ namespace additionalProperties
         {
             return RestClient.CreateCatAPTrue(createParameters, cancellationToken);
         }
+
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The PetAPObject to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -64,6 +69,7 @@ namespace additionalProperties
         {
             return await RestClient.CreateAPObjectAsync(createParameters, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The PetAPObject to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -71,6 +77,7 @@ namespace additionalProperties
         {
             return RestClient.CreateAPObject(createParameters, cancellationToken);
         }
+
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The PetAPString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -78,6 +85,7 @@ namespace additionalProperties
         {
             return await RestClient.CreateAPStringAsync(createParameters, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The PetAPString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -85,6 +93,7 @@ namespace additionalProperties
         {
             return RestClient.CreateAPString(createParameters, cancellationToken);
         }
+
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The PetAPInProperties to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -92,6 +101,7 @@ namespace additionalProperties
         {
             return await RestClient.CreateAPInPropertiesAsync(createParameters, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The PetAPInProperties to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -99,6 +109,7 @@ namespace additionalProperties
         {
             return RestClient.CreateAPInProperties(createParameters, cancellationToken);
         }
+
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The PetAPInPropertiesWithAPString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -106,6 +117,7 @@ namespace additionalProperties
         {
             return await RestClient.CreateAPInPropertiesWithAPStringAsync(createParameters, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The PetAPInPropertiesWithAPString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

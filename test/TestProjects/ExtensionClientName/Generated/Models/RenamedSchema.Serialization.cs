@@ -34,6 +34,7 @@ namespace ExtensionClientName.Models
             }
             writer.WriteEndObject();
         }
+
         internal static RenamedSchema DeserializeRenamedSchema(JsonElement element)
         {
             RenamedSchema result = new RenamedSchema();

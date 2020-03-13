@@ -44,6 +44,7 @@ namespace xml_service.Models
             }
             writer.WriteEndElement();
         }
+
         internal static Slideshow DeserializeSlideshow(XElement element)
         {
             Slideshow result = default;

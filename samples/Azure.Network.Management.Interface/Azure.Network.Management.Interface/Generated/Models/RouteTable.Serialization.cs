@@ -87,6 +87,7 @@ namespace Azure.Network.Management.Interface.Models
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
+
         internal static RouteTable DeserializeRouteTable(JsonElement element)
         {
             RouteTable result = new RouteTable();

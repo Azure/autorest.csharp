@@ -22,6 +22,7 @@ namespace Azure.Storage.Management.Models
             }
             writer.WriteEndObject();
         }
+
         internal static PrivateEndpoint DeserializePrivateEndpoint(JsonElement element)
         {
             PrivateEndpoint result = new PrivateEndpoint();

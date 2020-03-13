@@ -132,6 +132,7 @@ namespace Azure.Network.Management.Interface.Models
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
+
         internal static PublicIPAddress DeserializePublicIPAddress(JsonElement element)
         {
             PublicIPAddress result = new PublicIPAddress();

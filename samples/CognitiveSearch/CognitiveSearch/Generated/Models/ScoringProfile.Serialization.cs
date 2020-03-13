@@ -40,6 +40,7 @@ namespace CognitiveSearch.Models
             }
             writer.WriteEndObject();
         }
+
         internal static ScoringProfile DeserializeScoringProfile(JsonElement element)
         {
             ScoringProfile result = new ScoringProfile();

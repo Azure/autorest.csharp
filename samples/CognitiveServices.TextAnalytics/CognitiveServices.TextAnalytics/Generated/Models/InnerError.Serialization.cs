@@ -43,6 +43,7 @@ namespace CognitiveServices.TextAnalytics.Models
             }
             writer.WriteEndObject();
         }
+
         internal static InnerError DeserializeInnerError(JsonElement element)
         {
             InnerError result = new InnerError();

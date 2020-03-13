@@ -29,54 +29,63 @@ namespace body_datetime_rfc1123
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         /// <summary> Get null datetime value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<DateTimeOffset>> GetNullAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetNullAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get null datetime value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DateTimeOffset> GetNull(CancellationToken cancellationToken = default)
         {
             return RestClient.GetNull(cancellationToken);
         }
+
         /// <summary> Get invalid datetime value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<DateTimeOffset>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetInvalidAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get invalid datetime value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DateTimeOffset> GetInvalid(CancellationToken cancellationToken = default)
         {
             return RestClient.GetInvalid(cancellationToken);
         }
+
         /// <summary> Get overflow datetime value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<DateTimeOffset>> GetOverflowAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetOverflowAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get overflow datetime value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DateTimeOffset> GetOverflow(CancellationToken cancellationToken = default)
         {
             return RestClient.GetOverflow(cancellationToken);
         }
+
         /// <summary> Get underflow datetime value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<DateTimeOffset>> GetUnderflowAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetUnderflowAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get underflow datetime value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DateTimeOffset> GetUnderflow(CancellationToken cancellationToken = default)
         {
             return RestClient.GetUnderflow(cancellationToken);
         }
+
         /// <summary> Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT. </summary>
         /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -84,6 +93,7 @@ namespace body_datetime_rfc1123
         {
             return await RestClient.PutUtcMaxDateTimeAsync(datetimeBody, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT. </summary>
         /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -91,30 +101,35 @@ namespace body_datetime_rfc1123
         {
             return RestClient.PutUtcMaxDateTime(datetimeBody, cancellationToken);
         }
+
         /// <summary> Get max datetime value fri, 31 dec 9999 23:59:59 gmt. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<DateTimeOffset>> GetUtcLowercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetUtcLowercaseMaxDateTimeAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get max datetime value fri, 31 dec 9999 23:59:59 gmt. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DateTimeOffset> GetUtcLowercaseMaxDateTime(CancellationToken cancellationToken = default)
         {
             return RestClient.GetUtcLowercaseMaxDateTime(cancellationToken);
         }
+
         /// <summary> Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<DateTimeOffset>> GetUtcUppercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetUtcUppercaseMaxDateTimeAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DateTimeOffset> GetUtcUppercaseMaxDateTime(CancellationToken cancellationToken = default)
         {
             return RestClient.GetUtcUppercaseMaxDateTime(cancellationToken);
         }
+
         /// <summary> Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT. </summary>
         /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -122,6 +137,7 @@ namespace body_datetime_rfc1123
         {
             return await RestClient.PutUtcMinDateTimeAsync(datetimeBody, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT. </summary>
         /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -129,12 +145,14 @@ namespace body_datetime_rfc1123
         {
             return RestClient.PutUtcMinDateTime(datetimeBody, cancellationToken);
         }
+
         /// <summary> Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<DateTimeOffset>> GetUtcMinDateTimeAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetUtcMinDateTimeAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DateTimeOffset> GetUtcMinDateTime(CancellationToken cancellationToken = default)

@@ -27,6 +27,7 @@ namespace custom_baseUrl.Models
             }
             writer.WriteEndObject();
         }
+
         internal static Error DeserializeError(JsonElement element)
         {
             Error result = new Error();

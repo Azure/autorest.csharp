@@ -48,6 +48,7 @@ namespace additionalProperties.Models
             }
             writer.WriteEndObject();
         }
+
         internal static PetAPInPropertiesWithAPString DeserializePetAPInPropertiesWithAPString(JsonElement element)
         {
             PetAPInPropertiesWithAPString result = new PetAPInPropertiesWithAPString();

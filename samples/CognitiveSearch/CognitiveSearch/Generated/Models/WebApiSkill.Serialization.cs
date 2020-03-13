@@ -82,6 +82,7 @@ namespace CognitiveSearch.Models
             writer.WriteEndArray();
             writer.WriteEndObject();
         }
+
         internal static WebApiSkill DeserializeWebApiSkill(JsonElement element)
         {
             WebApiSkill result = new WebApiSkill();

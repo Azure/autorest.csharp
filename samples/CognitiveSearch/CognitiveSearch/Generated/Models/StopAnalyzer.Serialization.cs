@@ -32,6 +32,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(Name);
             writer.WriteEndObject();
         }
+
         internal static StopAnalyzer DeserializeStopAnalyzer(JsonElement element)
         {
             StopAnalyzer result = new StopAnalyzer();

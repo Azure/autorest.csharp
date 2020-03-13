@@ -142,6 +142,7 @@ namespace Azure.Network.Management.Interface.Models
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
+
         internal static LoadBalancer DeserializeLoadBalancer(JsonElement element)
         {
             LoadBalancer result = new LoadBalancer();

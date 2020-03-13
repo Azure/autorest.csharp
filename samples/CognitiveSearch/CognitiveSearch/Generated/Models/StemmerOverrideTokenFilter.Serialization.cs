@@ -28,6 +28,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(Name);
             writer.WriteEndObject();
         }
+
         internal static StemmerOverrideTokenFilter DeserializeStemmerOverrideTokenFilter(JsonElement element)
         {
             StemmerOverrideTokenFilter result = new StemmerOverrideTokenFilter();

@@ -113,6 +113,7 @@ namespace CognitiveSearch.Models
             }
             writer.WriteEndObject();
         }
+
         internal static SearchRequest DeserializeSearchRequest(JsonElement element)
         {
             SearchRequest result = new SearchRequest();

@@ -27,6 +27,7 @@ namespace Azure.Storage.Management.Models
             }
             writer.WriteEndObject();
         }
+
         internal static SKUCapability DeserializeSKUCapability(JsonElement element)
         {
             SKUCapability result = new SKUCapability();

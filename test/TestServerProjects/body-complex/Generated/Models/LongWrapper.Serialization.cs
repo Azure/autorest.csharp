@@ -27,6 +27,7 @@ namespace body_complex.Models
             }
             writer.WriteEndObject();
         }
+
         internal static LongWrapper DeserializeLongWrapper(JsonElement element)
         {
             LongWrapper result = new LongWrapper();

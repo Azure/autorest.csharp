@@ -48,6 +48,7 @@ namespace body_complex.Models
             }
             writer.WriteEndObject();
         }
+
         internal static DotFishMarket DeserializeDotFishMarket(JsonElement element)
         {
             DotFishMarket result = new DotFishMarket();

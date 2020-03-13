@@ -24,6 +24,7 @@ namespace CognitiveSearch.Models
             }
             writer.WriteEndObject();
         }
+
         internal static DataContainer DeserializeDataContainer(JsonElement element)
         {
             DataContainer result = new DataContainer();

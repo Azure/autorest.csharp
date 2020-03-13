@@ -59,6 +59,7 @@ namespace model_flattening
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutArrayAsync(IEnumerable<Resource> resourceArray, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.PutArray");
             scope.Start();
             try
@@ -84,6 +85,7 @@ namespace model_flattening
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutArray(IEnumerable<Resource> resourceArray, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.PutArray");
             scope.Start();
             try
@@ -204,6 +206,7 @@ namespace model_flattening
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutWrappedArrayAsync(IEnumerable<WrappedProduct> resourceArray, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.PutWrappedArray");
             scope.Start();
             try
@@ -229,6 +232,7 @@ namespace model_flattening
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutWrappedArray(IEnumerable<WrappedProduct> resourceArray, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.PutWrappedArray");
             scope.Start();
             try
@@ -350,6 +354,7 @@ namespace model_flattening
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutDictionaryAsync(IDictionary<string, FlattenedProduct> resourceDictionary, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.PutDictionary");
             scope.Start();
             try
@@ -375,6 +380,7 @@ namespace model_flattening
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutDictionary(IDictionary<string, FlattenedProduct> resourceDictionary, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.PutDictionary");
             scope.Start();
             try
@@ -490,6 +496,7 @@ namespace model_flattening
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutResourceCollectionAsync(ResourceCollection resourceComplexObject, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.PutResourceCollection");
             scope.Start();
             try
@@ -515,6 +522,7 @@ namespace model_flattening
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutResourceCollection(ResourceCollection resourceComplexObject, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.PutResourceCollection");
             scope.Start();
             try
@@ -622,6 +630,7 @@ namespace model_flattening
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<SimpleProduct>> PutSimpleProductAsync(SimpleProduct simpleBodyProduct, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.PutSimpleProduct");
             scope.Start();
             try
@@ -651,6 +660,7 @@ namespace model_flattening
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<SimpleProduct> PutSimpleProduct(SimpleProduct simpleBodyProduct, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.PutSimpleProduct");
             scope.Start();
             try
@@ -695,6 +705,7 @@ namespace model_flattening
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<SimpleProduct>> PostFlattenedSimpleProductAsync(SimpleProduct simpleBodyProduct, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.PostFlattenedSimpleProduct");
             scope.Start();
             try
@@ -724,6 +735,7 @@ namespace model_flattening
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<SimpleProduct> PostFlattenedSimpleProduct(SimpleProduct simpleBodyProduct, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.PostFlattenedSimpleProduct");
             scope.Start();
             try

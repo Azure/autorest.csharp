@@ -26,6 +26,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(Name);
             writer.WriteEndObject();
         }
+
         internal static TruncateTokenFilter DeserializeTruncateTokenFilter(JsonElement element)
         {
             TruncateTokenFilter result = new TruncateTokenFilter();

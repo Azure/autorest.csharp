@@ -19,6 +19,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(OdataType);
             writer.WriteEndObject();
         }
+
         internal static DataChangeDetectionPolicy DeserializeDataChangeDetectionPolicy(JsonElement element)
         {
             if (element.TryGetProperty("@odata.type", out JsonElement discriminator))

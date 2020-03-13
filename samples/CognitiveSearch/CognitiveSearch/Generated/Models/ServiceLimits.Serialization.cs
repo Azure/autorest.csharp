@@ -37,6 +37,7 @@ namespace CognitiveSearch.Models
             }
             writer.WriteEndObject();
         }
+
         internal static ServiceLimits DeserializeServiceLimits(JsonElement element)
         {
             ServiceLimits result = new ServiceLimits();

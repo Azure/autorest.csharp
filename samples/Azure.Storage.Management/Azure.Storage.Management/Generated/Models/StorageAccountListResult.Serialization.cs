@@ -33,6 +33,7 @@ namespace Azure.Storage.Management.Models
             }
             writer.WriteEndObject();
         }
+
         internal static StorageAccountListResult DeserializeStorageAccountListResult(JsonElement element)
         {
             StorageAccountListResult result = new StorageAccountListResult();

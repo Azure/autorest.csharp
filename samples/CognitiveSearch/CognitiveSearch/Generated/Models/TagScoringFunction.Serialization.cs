@@ -30,6 +30,7 @@ namespace CognitiveSearch.Models
             }
             writer.WriteEndObject();
         }
+
         internal static TagScoringFunction DeserializeTagScoringFunction(JsonElement element)
         {
             TagScoringFunction result = new TagScoringFunction();

@@ -22,6 +22,7 @@ namespace httpInfrastructure.Models
             }
             writer.WriteEndObject();
         }
+
         internal static MyException DeserializeMyException(JsonElement element)
         {
             MyException result = new MyException();

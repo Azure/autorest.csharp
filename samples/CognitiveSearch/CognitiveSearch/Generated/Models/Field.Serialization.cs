@@ -87,6 +87,7 @@ namespace CognitiveSearch.Models
             }
             writer.WriteEndObject();
         }
+
         internal static Field DeserializeField(JsonElement element)
         {
             Field result = new Field();

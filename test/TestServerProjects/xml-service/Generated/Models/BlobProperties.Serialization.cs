@@ -181,6 +181,7 @@ namespace xml_service.Models
             }
             writer.WriteEndElement();
         }
+
         internal static BlobProperties DeserializeBlobProperties(XElement element)
         {
             BlobProperties result = default;

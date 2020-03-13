@@ -33,6 +33,7 @@ namespace Azure.Network.Management.Interface.Models
             }
             writer.WriteEndObject();
         }
+
         internal static NetworkInterfaceIPConfigurationListResult DeserializeNetworkInterfaceIPConfigurationListResult(JsonElement element)
         {
             NetworkInterfaceIPConfigurationListResult result = new NetworkInterfaceIPConfigurationListResult();

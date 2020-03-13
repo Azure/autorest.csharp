@@ -454,6 +454,7 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutMax32Async(int intBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("IntClient.PutMax32");
             scope.Start();
             try
@@ -479,6 +480,7 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutMax32(int intBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("IntClient.PutMax32");
             scope.Start();
             try
@@ -519,6 +521,7 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutMax64Async(long intBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("IntClient.PutMax64");
             scope.Start();
             try
@@ -544,6 +547,7 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutMax64(long intBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("IntClient.PutMax64");
             scope.Start();
             try
@@ -584,6 +588,7 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutMin32Async(int intBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("IntClient.PutMin32");
             scope.Start();
             try
@@ -609,6 +614,7 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutMin32(int intBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("IntClient.PutMin32");
             scope.Start();
             try
@@ -649,6 +655,7 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutMin64Async(long intBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("IntClient.PutMin64");
             scope.Start();
             try
@@ -674,6 +681,7 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutMin64(long intBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("IntClient.PutMin64");
             scope.Start();
             try
@@ -781,6 +789,7 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutUnixTimeDateAsync(DateTimeOffset intBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("IntClient.PutUnixTimeDate");
             scope.Start();
             try
@@ -806,6 +815,7 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutUnixTimeDate(DateTimeOffset intBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("IntClient.PutUnixTimeDate");
             scope.Start();
             try

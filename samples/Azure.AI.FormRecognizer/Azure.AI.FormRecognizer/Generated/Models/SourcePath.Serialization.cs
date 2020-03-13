@@ -22,6 +22,7 @@ namespace Azure.AI.FormRecognizer.Models
             }
             writer.WriteEndObject();
         }
+
         internal static SourcePath DeserializeSourcePath(JsonElement element)
         {
             SourcePath result = new SourcePath();

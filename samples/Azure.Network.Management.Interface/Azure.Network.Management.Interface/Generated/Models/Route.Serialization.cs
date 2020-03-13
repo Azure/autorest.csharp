@@ -55,6 +55,7 @@ namespace Azure.Network.Management.Interface.Models
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
+
         internal static Route DeserializeRoute(JsonElement element)
         {
             Route result = new Route();

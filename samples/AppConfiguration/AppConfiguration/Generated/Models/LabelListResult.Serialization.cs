@@ -33,6 +33,7 @@ namespace AppConfiguration.Models
             }
             writer.WriteEndObject();
         }
+
         internal static LabelListResult DeserializeLabelListResult(JsonElement element)
         {
             LabelListResult result = new LabelListResult();

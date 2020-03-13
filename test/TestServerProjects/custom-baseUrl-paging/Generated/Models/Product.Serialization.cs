@@ -22,6 +22,7 @@ namespace custom_baseUrl_paging.Models
             }
             writer.WriteEndObject();
         }
+
         internal static Product DeserializeProduct(JsonElement element)
         {
             Product result = new Product();

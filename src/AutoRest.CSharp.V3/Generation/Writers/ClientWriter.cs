@@ -117,6 +117,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                 writer.Line($";");
             }
+
+            writer.Line();
         }
 
         private string CreateRequestMethodName(string name) => $"Create{name}Request";
@@ -163,6 +165,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.Line($"this.clientDiagnostics = clientDiagnostics;");
                 writer.Line($"this.pipeline = pipeline;");
             }
+            writer.Line();
         }
 
         private void WritePagingOperation(CodeWriter writer, PagingInfo pagingMethod, bool async)
@@ -224,6 +227,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 }
                 writer.Line($"return {typeof(PageableHelpers)}.Create{(async ? "Async" : string.Empty)}Enumerable(FirstPageFunc, NextPageFunc);");
             }
+            writer.Line();
         }
 
         private void WriteCreateOperationOperation(CodeWriter writer, LongRunningOperation lroMethod)
@@ -284,6 +288,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                 writer.Line($");");
             }
+            writer.Line();
         }
 
         private void WriteStartOperationOperation(CodeWriter writer, LongRunningOperation lroMethod, bool async)
@@ -330,6 +335,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.RemoveTrailingComma();
                 writer.Line($"));");
             }
+            writer.Line();
         }
     }
 }

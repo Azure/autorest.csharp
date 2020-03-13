@@ -32,6 +32,7 @@ namespace Azure.Network.Management.Interface.Models
             }
             writer.WriteEndObject();
         }
+
         internal static PrivateLinkServiceConnectionState DeserializePrivateLinkServiceConnectionState(JsonElement element)
         {
             PrivateLinkServiceConnectionState result = new PrivateLinkServiceConnectionState();

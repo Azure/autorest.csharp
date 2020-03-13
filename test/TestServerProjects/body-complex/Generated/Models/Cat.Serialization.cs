@@ -43,6 +43,7 @@ namespace body_complex.Models
             }
             writer.WriteEndObject();
         }
+
         internal static Cat DeserializeCat(JsonElement element)
         {
             Cat result = new Cat();

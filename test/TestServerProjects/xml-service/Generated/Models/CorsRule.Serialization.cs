@@ -33,6 +33,7 @@ namespace xml_service.Models
             writer.WriteEndElement();
             writer.WriteEndElement();
         }
+
         internal static CorsRule DeserializeCorsRule(XElement element)
         {
             CorsRule result = default;

@@ -30,6 +30,7 @@ namespace Azure.AI.FormRecognizer.Models
             writer.WriteStringValue(Status.ToSerialString());
             writer.WriteEndObject();
         }
+
         internal static TrainingDocumentInfo DeserializeTrainingDocumentInfo(JsonElement element)
         {
             TrainingDocumentInfo result = new TrainingDocumentInfo();

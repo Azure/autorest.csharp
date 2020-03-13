@@ -21,6 +21,7 @@ namespace validation.Models
             writer.WriteStringValue(ConstProperty2);
             writer.WriteEndObject();
         }
+
         internal static ConstantProduct DeserializeConstantProduct(JsonElement element)
         {
             ConstantProduct result = new ConstantProduct();

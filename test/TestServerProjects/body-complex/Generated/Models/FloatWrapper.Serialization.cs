@@ -27,6 +27,7 @@ namespace body_complex.Models
             }
             writer.WriteEndObject();
         }
+
         internal static FloatWrapper DeserializeFloatWrapper(JsonElement element)
         {
             FloatWrapper result = new FloatWrapper();

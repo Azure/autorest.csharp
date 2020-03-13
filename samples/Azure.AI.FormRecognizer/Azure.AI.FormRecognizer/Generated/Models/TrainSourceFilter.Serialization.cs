@@ -27,6 +27,7 @@ namespace Azure.AI.FormRecognizer.Models
             }
             writer.WriteEndObject();
         }
+
         internal static TrainSourceFilter DeserializeTrainSourceFilter(JsonElement element)
         {
             TrainSourceFilter result = new TrainSourceFilter();

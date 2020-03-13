@@ -31,6 +31,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(Name);
             writer.WriteEndObject();
         }
+
         internal static PhoneticTokenFilter DeserializePhoneticTokenFilter(JsonElement element)
         {
             PhoneticTokenFilter result = new PhoneticTokenFilter();
