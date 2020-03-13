@@ -1,0 +1,139 @@
+!<!CodeModel> 
+info: !<!Info> 
+  description: Resource Flattening for AutoRest
+  title: NameConflicts
+schemas: !<!Schemas> 
+  strings:
+  - !<!StringSchema> &ref_0
+    type: string
+    language: !<!Languages> 
+      default:
+        name: String
+        description: simple string
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_2
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: String
+        description: ''
+    protocol: !<!Protocols> {}
+globalParameters:
+- !<!Parameter> &ref_1
+  schema: *ref_0
+  clientDefaultValue: 'http://localhost:3000'
+  implementation: Client
+  required: true
+  extensions:
+    x-ms-skip-url-encoding: true
+  language: !<!Languages> 
+    default:
+      name: $host
+      description: server parameter
+      serializedName: $host
+  protocol: !<!Protocols> 
+    http: !<!HttpParameter> 
+      in: uri
+operationGroups:
+- !<!OperationGroup> 
+  $key: ''
+  operations:
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    parameters:
+    - *ref_1
+    - !<!Parameter> &ref_3
+      schema: *ref_2
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: request
+          description: ''
+          serializedName: request
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+    - !<!Parameter> &ref_4
+      schema: *ref_2
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: message
+          description: ''
+          serializedName: message
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+    - !<!Parameter> &ref_5
+      schema: *ref_2
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: scope
+          description: ''
+          serializedName: scope
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+    - !<!Parameter> &ref_6
+      schema: *ref_2
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: uri
+          description: ''
+          serializedName: uri
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+    requests:
+    - !<!Request> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /originalOperation
+          method: patch
+          uri: '{$host}'
+    signatureParameters:
+    - *ref_3
+    - *ref_4
+    - *ref_5
+    - *ref_6
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    language: !<!Languages> 
+      default:
+        name: Operation
+        description: ''
+    protocol: !<!Protocols> {}
+  language: !<!Languages> 
+    default:
+      name: ''
+      description: ''
+  protocol: !<!Protocols> {}
+language: !<!Languages> 
+  default:
+    name: NameConflicts
+    description: ''
+protocol: !<!Protocols> 
+  http: !<!HttpModel> {}

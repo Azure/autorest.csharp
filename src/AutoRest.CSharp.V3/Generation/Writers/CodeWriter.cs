@@ -88,6 +88,16 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     case CSharpType t:
                         AppendType(t);
                         break;
+                    case CodeWriterDeclaration declaration:
+                        if (isDeclaration)
+                        {
+                            Declaration(declaration);
+                        }
+                        else
+                        {
+                            AppendRaw(declaration.ActualName);
+                        }
+                        break;
                     default:
                         if (isLiteral)
                         {
@@ -101,7 +111,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         {
                             throw new ArgumentNullException(index.ToString());
                         }
-
 
                         if (isDeclaration)
                         {
@@ -123,7 +132,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             _usingNamespaces.Add(@namespace);
         }
 
-        public string GetTemporaryVariable(string s)
+        private string GetTemporaryVariable(string s)
         {
             if (IsAvailable(s))
             {
@@ -291,11 +300,17 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             return this;
         }
 
-        public CodeWriter Declaration(string name)
+        private CodeWriter Declaration(string declaration)
         {
-            _scopes.Peek().Identifiers.Add(name);
+            _scopes.Peek().Identifiers.Add(declaration);
 
-            return AppendRaw(name);
+            return AppendRaw(declaration);
+        }
+
+        public CodeWriter Declaration(CodeWriterDeclaration declaration)
+        {
+            declaration.SetActualName(GetTemporaryVariable(declaration.RequestedName));
+            return Declaration(declaration.ActualName);
         }
 
         public CodeWriter Append(CodeWriterDelegate writerDelegate)
@@ -346,12 +361,12 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         internal class CodeWriterScope : IDisposable
         {
             private readonly CodeWriter _writer;
-            private readonly string _end;
+            private readonly string? _end;
             private readonly bool _newLine;
 
             public List<string> Identifiers { get; } = new List<string>();
 
-            public CodeWriterScope(CodeWriter writer, string end, bool newLine)
+            public CodeWriterScope(CodeWriter writer, string? end, bool newLine)
             {
                 _writer = writer;
                 _end = end;
@@ -361,7 +376,10 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             public void Dispose()
             {
                 _writer.PopScope(this);
-                _writer?.AppendRaw(_end);
+                if (_end != null)
+                {
+                    _writer?.AppendRaw(_end);
+                }
 
                 if (_newLine)
                 {
@@ -398,6 +416,18 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             {
                 _builder.Remove(lastCharIndex.Value, _builder.Length - lastCharIndex.Value);
             }
+        }
+
+        public CodeWriterScope AmbientScope()
+        {
+            var codeWriterScope =new CodeWriterScope(this, null, false);
+            _scopes.Push(codeWriterScope);
+            return codeWriterScope;
+        }
+
+        public void Append(CodeWriterDeclaration declaration)
+        {
+            AppendRaw(declaration.ActualName);
         }
     }
 }
