@@ -24,6 +24,7 @@ namespace xml_service.Models
             }
             writer.WriteEndElement();
         }
+
         internal static ComplexTypeNoMeta DeserializeComplexTypeNoMeta(XElement element)
         {
             ComplexTypeNoMeta result = default;

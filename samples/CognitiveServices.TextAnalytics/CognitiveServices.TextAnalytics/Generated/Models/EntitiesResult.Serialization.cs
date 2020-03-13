@@ -38,6 +38,7 @@ namespace CognitiveServices.TextAnalytics.Models
             writer.WriteStringValue(ModelVersion);
             writer.WriteEndObject();
         }
+
         internal static EntitiesResult DeserializeEntitiesResult(JsonElement element)
         {
             EntitiesResult result = new EntitiesResult();

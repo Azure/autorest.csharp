@@ -21,6 +21,7 @@ namespace paging
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of PagingRestClient. </summary>
         public PagingRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
@@ -33,6 +34,7 @@ namespace paging
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreateGetNoItemNamePagesRequest()
         {
             var message = pipeline.CreateMessage();
@@ -44,6 +46,7 @@ namespace paging
             request.Uri = uri;
             return message;
         }
+
         /// <summary> A paging operation that must return result of the default &apos;value&apos; node. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ProductResultValue>> GetNoItemNamePagesAsync(CancellationToken cancellationToken = default)
@@ -72,6 +75,7 @@ namespace paging
                 throw;
             }
         }
+
         /// <summary> A paging operation that must return result of the default &apos;value&apos; node. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ProductResultValue> GetNoItemNamePages(CancellationToken cancellationToken = default)
@@ -100,6 +104,7 @@ namespace paging
                 throw;
             }
         }
+
         internal HttpMessage CreateGetNullNextLinkNamePagesRequest()
         {
             var message = pipeline.CreateMessage();
@@ -111,6 +116,7 @@ namespace paging
             request.Uri = uri;
             return message;
         }
+
         /// <summary> A paging operation that must ignore any kind of nextLink, and stop after page 1. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ProductResult>> GetNullNextLinkNamePagesAsync(CancellationToken cancellationToken = default)
@@ -139,6 +145,7 @@ namespace paging
                 throw;
             }
         }
+
         /// <summary> A paging operation that must ignore any kind of nextLink, and stop after page 1. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ProductResult> GetNullNextLinkNamePages(CancellationToken cancellationToken = default)
@@ -167,6 +174,7 @@ namespace paging
                 throw;
             }
         }
+
         internal HttpMessage CreateGetSinglePagesRequest()
         {
             var message = pipeline.CreateMessage();
@@ -178,6 +186,7 @@ namespace paging
             request.Uri = uri;
             return message;
         }
+
         /// <summary> A paging operation that finishes on the first call without a nextlink. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ProductResult>> GetSinglePagesAsync(CancellationToken cancellationToken = default)
@@ -206,6 +215,7 @@ namespace paging
                 throw;
             }
         }
+
         /// <summary> A paging operation that finishes on the first call without a nextlink. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ProductResult> GetSinglePages(CancellationToken cancellationToken = default)
@@ -234,6 +244,7 @@ namespace paging
                 throw;
             }
         }
+
         internal HttpMessage CreateGetMultiplePagesRequest(string clientRequestId, int? maxresults, int? timeout)
         {
             var message = pipeline.CreateMessage();
@@ -257,6 +268,7 @@ namespace paging
             }
             return message;
         }
+
         /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
@@ -264,6 +276,7 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ProductResult>> GetMultiplePagesAsync(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePages");
             scope.Start();
             try
@@ -288,6 +301,7 @@ namespace paging
                 throw;
             }
         }
+
         /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
@@ -295,6 +309,7 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ProductResult> GetMultiplePages(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePages");
             scope.Start();
             try
@@ -319,6 +334,7 @@ namespace paging
                 throw;
             }
         }
+
         internal HttpMessage CreateGetOdataMultiplePagesRequest(string clientRequestId, int? maxresults, int? timeout)
         {
             var message = pipeline.CreateMessage();
@@ -342,6 +358,7 @@ namespace paging
             }
             return message;
         }
+
         /// <summary> A paging operation that includes a nextLink in odata format that has 10 pages. </summary>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
@@ -349,6 +366,7 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<OdataProductResult>> GetOdataMultiplePagesAsync(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("PagingClient.GetOdataMultiplePages");
             scope.Start();
             try
@@ -373,6 +391,7 @@ namespace paging
                 throw;
             }
         }
+
         /// <summary> A paging operation that includes a nextLink in odata format that has 10 pages. </summary>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
@@ -380,6 +399,7 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<OdataProductResult> GetOdataMultiplePages(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("PagingClient.GetOdataMultiplePages");
             scope.Start();
             try
@@ -404,6 +424,7 @@ namespace paging
                 throw;
             }
         }
+
         internal HttpMessage CreateGetMultiplePagesWithOffsetRequest(string clientRequestId, int? maxresults, int offset, int? timeout)
         {
             var message = pipeline.CreateMessage();
@@ -428,6 +449,7 @@ namespace paging
             }
             return message;
         }
+
         /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
@@ -436,6 +458,7 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ProductResult>> GetMultiplePagesWithOffsetAsync(string clientRequestId, int? maxresults, int offset, int? timeout, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesWithOffset");
             scope.Start();
             try
@@ -460,6 +483,7 @@ namespace paging
                 throw;
             }
         }
+
         /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
@@ -468,6 +492,7 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ProductResult> GetMultiplePagesWithOffset(string clientRequestId, int? maxresults, int offset, int? timeout, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesWithOffset");
             scope.Start();
             try
@@ -492,6 +517,7 @@ namespace paging
                 throw;
             }
         }
+
         internal HttpMessage CreateGetMultiplePagesRetryFirstRequest()
         {
             var message = pipeline.CreateMessage();
@@ -503,6 +529,7 @@ namespace paging
             request.Uri = uri;
             return message;
         }
+
         /// <summary> A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ProductResult>> GetMultiplePagesRetryFirstAsync(CancellationToken cancellationToken = default)
@@ -531,6 +558,7 @@ namespace paging
                 throw;
             }
         }
+
         /// <summary> A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ProductResult> GetMultiplePagesRetryFirst(CancellationToken cancellationToken = default)
@@ -559,6 +587,7 @@ namespace paging
                 throw;
             }
         }
+
         internal HttpMessage CreateGetMultiplePagesRetrySecondRequest()
         {
             var message = pipeline.CreateMessage();
@@ -570,6 +599,7 @@ namespace paging
             request.Uri = uri;
             return message;
         }
+
         /// <summary> A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ProductResult>> GetMultiplePagesRetrySecondAsync(CancellationToken cancellationToken = default)
@@ -598,6 +628,7 @@ namespace paging
                 throw;
             }
         }
+
         /// <summary> A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ProductResult> GetMultiplePagesRetrySecond(CancellationToken cancellationToken = default)
@@ -626,6 +657,7 @@ namespace paging
                 throw;
             }
         }
+
         internal HttpMessage CreateGetSinglePagesFailureRequest()
         {
             var message = pipeline.CreateMessage();
@@ -637,6 +669,7 @@ namespace paging
             request.Uri = uri;
             return message;
         }
+
         /// <summary> A paging operation that receives a 400 on the first call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ProductResult>> GetSinglePagesFailureAsync(CancellationToken cancellationToken = default)
@@ -665,6 +698,7 @@ namespace paging
                 throw;
             }
         }
+
         /// <summary> A paging operation that receives a 400 on the first call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ProductResult> GetSinglePagesFailure(CancellationToken cancellationToken = default)
@@ -693,6 +727,7 @@ namespace paging
                 throw;
             }
         }
+
         internal HttpMessage CreateGetMultiplePagesFailureRequest()
         {
             var message = pipeline.CreateMessage();
@@ -704,6 +739,7 @@ namespace paging
             request.Uri = uri;
             return message;
         }
+
         /// <summary> A paging operation that receives a 400 on the second call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ProductResult>> GetMultiplePagesFailureAsync(CancellationToken cancellationToken = default)
@@ -732,6 +768,7 @@ namespace paging
                 throw;
             }
         }
+
         /// <summary> A paging operation that receives a 400 on the second call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ProductResult> GetMultiplePagesFailure(CancellationToken cancellationToken = default)
@@ -760,6 +797,7 @@ namespace paging
                 throw;
             }
         }
+
         internal HttpMessage CreateGetMultiplePagesFailureUriRequest()
         {
             var message = pipeline.CreateMessage();
@@ -771,6 +809,7 @@ namespace paging
             request.Uri = uri;
             return message;
         }
+
         /// <summary> A paging operation that receives an invalid nextLink. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ProductResult>> GetMultiplePagesFailureUriAsync(CancellationToken cancellationToken = default)
@@ -799,6 +838,7 @@ namespace paging
                 throw;
             }
         }
+
         /// <summary> A paging operation that receives an invalid nextLink. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ProductResult> GetMultiplePagesFailureUri(CancellationToken cancellationToken = default)
@@ -827,6 +867,7 @@ namespace paging
                 throw;
             }
         }
+
         internal HttpMessage CreateGetMultiplePagesFragmentNextLinkRequest(string apiVersion, string tenant)
         {
             var message = pipeline.CreateMessage();
@@ -840,6 +881,7 @@ namespace paging
             request.Uri = uri;
             return message;
         }
+
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="tenant"> Sets the tenant to use. </param>
@@ -879,6 +921,7 @@ namespace paging
                 throw;
             }
         }
+
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="tenant"> Sets the tenant to use. </param>
@@ -918,6 +961,7 @@ namespace paging
                 throw;
             }
         }
+
         internal HttpMessage CreateGetMultiplePagesFragmentWithGroupingNextLinkRequest(string apiVersion, string tenant)
         {
             var message = pipeline.CreateMessage();
@@ -931,6 +975,7 @@ namespace paging
             request.Uri = uri;
             return message;
         }
+
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped. </summary>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="tenant"> Sets the tenant to use. </param>
@@ -970,6 +1015,7 @@ namespace paging
                 throw;
             }
         }
+
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped. </summary>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="tenant"> Sets the tenant to use. </param>
@@ -1009,6 +1055,7 @@ namespace paging
                 throw;
             }
         }
+
         internal HttpMessage CreateGetMultiplePagesLRORequest(string clientRequestId, int? maxresults, int? timeout)
         {
             var message = pipeline.CreateMessage();
@@ -1032,6 +1079,7 @@ namespace paging
             }
             return message;
         }
+
         /// <summary> A long-running paging operation that includes a nextLink that has 10 pages. </summary>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
@@ -1039,6 +1087,7 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetMultiplePagesLROAsync(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesLRO");
             scope.Start();
             try
@@ -1059,6 +1108,7 @@ namespace paging
                 throw;
             }
         }
+
         /// <summary> A long-running paging operation that includes a nextLink that has 10 pages. </summary>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
@@ -1066,6 +1116,7 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetMultiplePagesLRO(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesLRO");
             scope.Start();
             try
@@ -1086,6 +1137,7 @@ namespace paging
                 throw;
             }
         }
+
         internal HttpMessage CreateNextFragmentRequest(string apiVersion, string tenant, string nextLink)
         {
             var message = pipeline.CreateMessage();
@@ -1101,6 +1153,7 @@ namespace paging
             request.Uri = uri;
             return message;
         }
+
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="tenant"> Sets the tenant to use. </param>
@@ -1145,6 +1198,7 @@ namespace paging
                 throw;
             }
         }
+
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="tenant"> Sets the tenant to use. </param>
@@ -1189,6 +1243,7 @@ namespace paging
                 throw;
             }
         }
+
         internal HttpMessage CreateNextFragmentWithGroupingRequest(string apiVersion, string tenant, string nextLink)
         {
             var message = pipeline.CreateMessage();
@@ -1204,6 +1259,7 @@ namespace paging
             request.Uri = uri;
             return message;
         }
+
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="tenant"> Sets the tenant to use. </param>
@@ -1248,6 +1304,7 @@ namespace paging
                 throw;
             }
         }
+
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="tenant"> Sets the tenant to use. </param>
@@ -1292,6 +1349,7 @@ namespace paging
                 throw;
             }
         }
+
         internal HttpMessage CreateGetNoItemNamePagesNextPageRequest(string nextLink)
         {
             var message = pipeline.CreateMessage();
@@ -1302,6 +1360,7 @@ namespace paging
             request.Uri = uri;
             return message;
         }
+
         /// <summary> A paging operation that must return result of the default &apos;value&apos; node. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1336,6 +1395,7 @@ namespace paging
                 throw;
             }
         }
+
         /// <summary> A paging operation that must return result of the default &apos;value&apos; node. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1370,6 +1430,7 @@ namespace paging
                 throw;
             }
         }
+
         internal HttpMessage CreateGetNullNextLinkNamePagesNextPageRequest(string nextLink)
         {
             var message = pipeline.CreateMessage();
@@ -1380,6 +1441,7 @@ namespace paging
             request.Uri = uri;
             return message;
         }
+
         /// <summary> A paging operation that must ignore any kind of nextLink, and stop after page 1. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1414,6 +1476,7 @@ namespace paging
                 throw;
             }
         }
+
         /// <summary> A paging operation that must ignore any kind of nextLink, and stop after page 1. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1448,6 +1511,7 @@ namespace paging
                 throw;
             }
         }
+
         internal HttpMessage CreateGetSinglePagesNextPageRequest(string nextLink)
         {
             var message = pipeline.CreateMessage();
@@ -1458,6 +1522,7 @@ namespace paging
             request.Uri = uri;
             return message;
         }
+
         /// <summary> A paging operation that finishes on the first call without a nextlink. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1492,6 +1557,7 @@ namespace paging
                 throw;
             }
         }
+
         /// <summary> A paging operation that finishes on the first call without a nextlink. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1526,6 +1592,7 @@ namespace paging
                 throw;
             }
         }
+
         internal HttpMessage CreateGetMultiplePagesNextPageRequest(string clientRequestId, int? maxresults, int? timeout, string nextLink)
         {
             var message = pipeline.CreateMessage();
@@ -1548,6 +1615,7 @@ namespace paging
             }
             return message;
         }
+
         /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
@@ -1585,6 +1653,7 @@ namespace paging
                 throw;
             }
         }
+
         /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
@@ -1622,6 +1691,7 @@ namespace paging
                 throw;
             }
         }
+
         internal HttpMessage CreateGetOdataMultiplePagesNextPageRequest(string clientRequestId, int? maxresults, int? timeout, string nextLink)
         {
             var message = pipeline.CreateMessage();
@@ -1644,6 +1714,7 @@ namespace paging
             }
             return message;
         }
+
         /// <summary> A paging operation that includes a nextLink in odata format that has 10 pages. </summary>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
@@ -1681,6 +1752,7 @@ namespace paging
                 throw;
             }
         }
+
         /// <summary> A paging operation that includes a nextLink in odata format that has 10 pages. </summary>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
@@ -1718,6 +1790,7 @@ namespace paging
                 throw;
             }
         }
+
         internal HttpMessage CreateGetMultiplePagesWithOffsetNextPageRequest(string clientRequestId, int? maxresults, int? timeout, string nextLink)
         {
             var message = pipeline.CreateMessage();
@@ -1740,6 +1813,7 @@ namespace paging
             }
             return message;
         }
+
         /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
@@ -1777,6 +1851,7 @@ namespace paging
                 throw;
             }
         }
+
         /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
@@ -1814,6 +1889,7 @@ namespace paging
                 throw;
             }
         }
+
         internal HttpMessage CreateGetMultiplePagesRetryFirstNextPageRequest(string nextLink)
         {
             var message = pipeline.CreateMessage();
@@ -1824,6 +1900,7 @@ namespace paging
             request.Uri = uri;
             return message;
         }
+
         /// <summary> A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1858,6 +1935,7 @@ namespace paging
                 throw;
             }
         }
+
         /// <summary> A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1892,6 +1970,7 @@ namespace paging
                 throw;
             }
         }
+
         internal HttpMessage CreateGetMultiplePagesRetrySecondNextPageRequest(string nextLink)
         {
             var message = pipeline.CreateMessage();
@@ -1902,6 +1981,7 @@ namespace paging
             request.Uri = uri;
             return message;
         }
+
         /// <summary> A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1936,6 +2016,7 @@ namespace paging
                 throw;
             }
         }
+
         /// <summary> A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1970,6 +2051,7 @@ namespace paging
                 throw;
             }
         }
+
         internal HttpMessage CreateGetSinglePagesFailureNextPageRequest(string nextLink)
         {
             var message = pipeline.CreateMessage();
@@ -1980,6 +2062,7 @@ namespace paging
             request.Uri = uri;
             return message;
         }
+
         /// <summary> A paging operation that receives a 400 on the first call. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2014,6 +2097,7 @@ namespace paging
                 throw;
             }
         }
+
         /// <summary> A paging operation that receives a 400 on the first call. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2048,6 +2132,7 @@ namespace paging
                 throw;
             }
         }
+
         internal HttpMessage CreateGetMultiplePagesFailureNextPageRequest(string nextLink)
         {
             var message = pipeline.CreateMessage();
@@ -2058,6 +2143,7 @@ namespace paging
             request.Uri = uri;
             return message;
         }
+
         /// <summary> A paging operation that receives a 400 on the second call. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2092,6 +2178,7 @@ namespace paging
                 throw;
             }
         }
+
         /// <summary> A paging operation that receives a 400 on the second call. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2126,6 +2213,7 @@ namespace paging
                 throw;
             }
         }
+
         internal HttpMessage CreateGetMultiplePagesFailureUriNextPageRequest(string nextLink)
         {
             var message = pipeline.CreateMessage();
@@ -2136,6 +2224,7 @@ namespace paging
             request.Uri = uri;
             return message;
         }
+
         /// <summary> A paging operation that receives an invalid nextLink. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2170,6 +2259,7 @@ namespace paging
                 throw;
             }
         }
+
         /// <summary> A paging operation that receives an invalid nextLink. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2204,6 +2294,7 @@ namespace paging
                 throw;
             }
         }
+
         internal HttpMessage CreateNextFragmentNextPageRequest(string nextLink)
         {
             var message = pipeline.CreateMessage();
@@ -2214,6 +2305,7 @@ namespace paging
             request.Uri = uri;
             return message;
         }
+
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2248,6 +2340,7 @@ namespace paging
                 throw;
             }
         }
+
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2282,6 +2375,7 @@ namespace paging
                 throw;
             }
         }
+
         internal HttpMessage CreateNextFragmentWithGroupingNextPageRequest(string nextLink)
         {
             var message = pipeline.CreateMessage();
@@ -2292,6 +2386,7 @@ namespace paging
             request.Uri = uri;
             return message;
         }
+
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2326,6 +2421,7 @@ namespace paging
                 throw;
             }
         }
+
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

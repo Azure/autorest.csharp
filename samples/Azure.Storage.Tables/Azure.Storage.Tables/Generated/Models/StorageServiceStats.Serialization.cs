@@ -22,6 +22,7 @@ namespace Azure.Storage.Tables.Models
             }
             writer.WriteEndElement();
         }
+
         internal static StorageServiceStats DeserializeStorageServiceStats(XElement element)
         {
             StorageServiceStats result = default;

@@ -27,6 +27,7 @@ namespace Azure.Storage.Management.Models
             }
             writer.WriteEndObject();
         }
+
         internal static ErrorResponse DeserializeErrorResponse(JsonElement element)
         {
             ErrorResponse result = new ErrorResponse();

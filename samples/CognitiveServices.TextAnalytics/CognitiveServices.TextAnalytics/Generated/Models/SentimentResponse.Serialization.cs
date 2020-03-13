@@ -38,6 +38,7 @@ namespace CognitiveServices.TextAnalytics.Models
             writer.WriteStringValue(ModelVersion);
             writer.WriteEndObject();
         }
+
         internal static SentimentResponse DeserializeSentimentResponse(JsonElement element)
         {
             SentimentResponse result = new SentimentResponse();

@@ -22,6 +22,7 @@ namespace body_complex.Models
             }
             writer.WriteEndObject();
         }
+
         internal static ByteWrapper DeserializeByteWrapper(JsonElement element)
         {
             ByteWrapper result = new ByteWrapper();

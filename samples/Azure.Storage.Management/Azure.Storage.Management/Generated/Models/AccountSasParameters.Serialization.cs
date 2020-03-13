@@ -45,6 +45,7 @@ namespace Azure.Storage.Management.Models
             }
             writer.WriteEndObject();
         }
+
         internal static AccountSasParameters DeserializeAccountSasParameters(JsonElement element)
         {
             AccountSasParameters result = new AccountSasParameters();

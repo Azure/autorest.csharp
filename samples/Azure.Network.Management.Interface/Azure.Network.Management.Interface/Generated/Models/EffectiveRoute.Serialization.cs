@@ -63,6 +63,7 @@ namespace Azure.Network.Management.Interface.Models
             }
             writer.WriteEndObject();
         }
+
         internal static EffectiveRoute DeserializeEffectiveRoute(JsonElement element)
         {
             EffectiveRoute result = new EffectiveRoute();

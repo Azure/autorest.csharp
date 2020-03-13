@@ -31,30 +31,35 @@ namespace url
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         /// <summary> Get true Boolean value on path. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetBooleanTrueAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetBooleanTrueAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get true Boolean value on path. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetBooleanTrue(CancellationToken cancellationToken = default)
         {
             return RestClient.GetBooleanTrue(cancellationToken);
         }
+
         /// <summary> Get false Boolean value on path. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetBooleanFalseAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetBooleanFalseAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get false Boolean value on path. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetBooleanFalse(CancellationToken cancellationToken = default)
         {
             return RestClient.GetBooleanFalse(cancellationToken);
         }
+
         /// <summary> Get null Boolean value on query (query string should be absent). </summary>
         /// <param name="boolQuery"> null boolean value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -62,6 +67,7 @@ namespace url
         {
             return await RestClient.GetBooleanNullAsync(boolQuery, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get null Boolean value on query (query string should be absent). </summary>
         /// <param name="boolQuery"> null boolean value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -69,30 +75,35 @@ namespace url
         {
             return RestClient.GetBooleanNull(boolQuery, cancellationToken);
         }
+
         /// <summary> Get &apos;1000000&apos; integer value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetIntOneMillionAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetIntOneMillionAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get &apos;1000000&apos; integer value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetIntOneMillion(CancellationToken cancellationToken = default)
         {
             return RestClient.GetIntOneMillion(cancellationToken);
         }
+
         /// <summary> Get &apos;-1000000&apos; integer value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetIntNegativeOneMillionAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetIntNegativeOneMillionAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get &apos;-1000000&apos; integer value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetIntNegativeOneMillion(CancellationToken cancellationToken = default)
         {
             return RestClient.GetIntNegativeOneMillion(cancellationToken);
         }
+
         /// <summary> Get null integer value (no query parameter). </summary>
         /// <param name="intQuery"> null integer value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -100,6 +111,7 @@ namespace url
         {
             return await RestClient.GetIntNullAsync(intQuery, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get null integer value (no query parameter). </summary>
         /// <param name="intQuery"> null integer value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -107,30 +119,35 @@ namespace url
         {
             return RestClient.GetIntNull(intQuery, cancellationToken);
         }
+
         /// <summary> Get &apos;10000000000&apos; 64 bit integer value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetTenBillionAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetTenBillionAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get &apos;10000000000&apos; 64 bit integer value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetTenBillion(CancellationToken cancellationToken = default)
         {
             return RestClient.GetTenBillion(cancellationToken);
         }
+
         /// <summary> Get &apos;-10000000000&apos; 64 bit integer value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetNegativeTenBillionAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetNegativeTenBillionAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get &apos;-10000000000&apos; 64 bit integer value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetNegativeTenBillion(CancellationToken cancellationToken = default)
         {
             return RestClient.GetNegativeTenBillion(cancellationToken);
         }
+
         /// <summary> Get &apos;null 64 bit integer value (no query param in uri). </summary>
         /// <param name="longQuery"> null 64 bit integer value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -138,6 +155,7 @@ namespace url
         {
             return await RestClient.GetLongNullAsync(longQuery, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get &apos;null 64 bit integer value (no query param in uri). </summary>
         /// <param name="longQuery"> null 64 bit integer value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -145,30 +163,35 @@ namespace url
         {
             return RestClient.GetLongNull(longQuery, cancellationToken);
         }
+
         /// <summary> Get &apos;1.034E+20&apos; numeric value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> FloatScientificPositiveAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.FloatScientificPositiveAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get &apos;1.034E+20&apos; numeric value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response FloatScientificPositive(CancellationToken cancellationToken = default)
         {
             return RestClient.FloatScientificPositive(cancellationToken);
         }
+
         /// <summary> Get &apos;-1.034E-20&apos; numeric value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> FloatScientificNegativeAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.FloatScientificNegativeAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get &apos;-1.034E-20&apos; numeric value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response FloatScientificNegative(CancellationToken cancellationToken = default)
         {
             return RestClient.FloatScientificNegative(cancellationToken);
         }
+
         /// <summary> Get null numeric value (no query parameter). </summary>
         /// <param name="floatQuery"> null numeric value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -176,6 +199,7 @@ namespace url
         {
             return await RestClient.FloatNullAsync(floatQuery, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get null numeric value (no query parameter). </summary>
         /// <param name="floatQuery"> null numeric value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -183,30 +207,35 @@ namespace url
         {
             return RestClient.FloatNull(floatQuery, cancellationToken);
         }
+
         /// <summary> Get &apos;9999999.999&apos; numeric value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> DoubleDecimalPositiveAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.DoubleDecimalPositiveAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get &apos;9999999.999&apos; numeric value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response DoubleDecimalPositive(CancellationToken cancellationToken = default)
         {
             return RestClient.DoubleDecimalPositive(cancellationToken);
         }
+
         /// <summary> Get &apos;-9999999.999&apos; numeric value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> DoubleDecimalNegativeAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.DoubleDecimalNegativeAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get &apos;-9999999.999&apos; numeric value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response DoubleDecimalNegative(CancellationToken cancellationToken = default)
         {
             return RestClient.DoubleDecimalNegative(cancellationToken);
         }
+
         /// <summary> Get null numeric value (no query parameter). </summary>
         /// <param name="doubleQuery"> null numeric value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -214,6 +243,7 @@ namespace url
         {
             return await RestClient.DoubleNullAsync(doubleQuery, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get null numeric value (no query parameter). </summary>
         /// <param name="doubleQuery"> null numeric value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -221,42 +251,49 @@ namespace url
         {
             return RestClient.DoubleNull(doubleQuery, cancellationToken);
         }
+
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multi-byte string value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> StringUnicodeAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.StringUnicodeAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multi-byte string value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response StringUnicode(CancellationToken cancellationToken = default)
         {
             return RestClient.StringUnicode(cancellationToken);
         }
+
         /// <summary> Get &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> StringUrlEncodedAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.StringUrlEncodedAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response StringUrlEncoded(CancellationToken cancellationToken = default)
         {
             return RestClient.StringUrlEncoded(cancellationToken);
         }
+
         /// <summary> Get &apos;&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> StringEmptyAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.StringEmptyAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get &apos;&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response StringEmpty(CancellationToken cancellationToken = default)
         {
             return RestClient.StringEmpty(cancellationToken);
         }
+
         /// <summary> Get null (no query parameter in url). </summary>
         /// <param name="stringQuery"> null string value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -264,6 +301,7 @@ namespace url
         {
             return await RestClient.StringNullAsync(stringQuery, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get null (no query parameter in url). </summary>
         /// <param name="stringQuery"> null string value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -271,6 +309,7 @@ namespace url
         {
             return RestClient.StringNull(stringQuery, cancellationToken);
         }
+
         /// <summary> Get using uri with query parameter &apos;green color&apos;. </summary>
         /// <param name="enumQuery"> &apos;green color&apos; enum value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -278,6 +317,7 @@ namespace url
         {
             return await RestClient.EnumValidAsync(enumQuery, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get using uri with query parameter &apos;green color&apos;. </summary>
         /// <param name="enumQuery"> &apos;green color&apos; enum value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -285,6 +325,7 @@ namespace url
         {
             return RestClient.EnumValid(enumQuery, cancellationToken);
         }
+
         /// <summary> Get null (no query parameter in url). </summary>
         /// <param name="enumQuery"> &apos;green color&apos; enum value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -292,6 +333,7 @@ namespace url
         {
             return await RestClient.EnumNullAsync(enumQuery, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get null (no query parameter in url). </summary>
         /// <param name="enumQuery"> &apos;green color&apos; enum value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -299,6 +341,7 @@ namespace url
         {
             return RestClient.EnumNull(enumQuery, cancellationToken);
         }
+
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </summary>
         /// <param name="byteQuery"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -306,6 +349,7 @@ namespace url
         {
             return await RestClient.ByteMultiByteAsync(byteQuery, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </summary>
         /// <param name="byteQuery"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -313,18 +357,21 @@ namespace url
         {
             return RestClient.ByteMultiByte(byteQuery, cancellationToken);
         }
+
         /// <summary> Get &apos;&apos; as byte array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> ByteEmptyAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.ByteEmptyAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get &apos;&apos; as byte array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response ByteEmpty(CancellationToken cancellationToken = default)
         {
             return RestClient.ByteEmpty(cancellationToken);
         }
+
         /// <summary> Get null as byte array (no query parameters in uri). </summary>
         /// <param name="byteQuery"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -332,6 +379,7 @@ namespace url
         {
             return await RestClient.ByteNullAsync(byteQuery, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get null as byte array (no query parameters in uri). </summary>
         /// <param name="byteQuery"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -339,18 +387,21 @@ namespace url
         {
             return RestClient.ByteNull(byteQuery, cancellationToken);
         }
+
         /// <summary> Get &apos;2012-01-01&apos; as date. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> DateValidAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.DateValidAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get &apos;2012-01-01&apos; as date. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response DateValid(CancellationToken cancellationToken = default)
         {
             return RestClient.DateValid(cancellationToken);
         }
+
         /// <summary> Get null as date - this should result in no query parameters in uri. </summary>
         /// <param name="dateQuery"> null as date (no query parameters in uri). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -358,6 +409,7 @@ namespace url
         {
             return await RestClient.DateNullAsync(dateQuery, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get null as date - this should result in no query parameters in uri. </summary>
         /// <param name="dateQuery"> null as date (no query parameters in uri). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -365,18 +417,21 @@ namespace url
         {
             return RestClient.DateNull(dateQuery, cancellationToken);
         }
+
         /// <summary> Get &apos;2012-01-01T01:01:01Z&apos; as date-time. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> DateTimeValidAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.DateTimeValidAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get &apos;2012-01-01T01:01:01Z&apos; as date-time. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response DateTimeValid(CancellationToken cancellationToken = default)
         {
             return RestClient.DateTimeValid(cancellationToken);
         }
+
         /// <summary> Get null as date-time, should result in no query parameters in uri. </summary>
         /// <param name="dateTimeQuery"> null as date-time (no query parameters). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -384,6 +439,7 @@ namespace url
         {
             return await RestClient.DateTimeNullAsync(dateTimeQuery, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get null as date-time, should result in no query parameters in uri. </summary>
         /// <param name="dateTimeQuery"> null as date-time (no query parameters). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -391,6 +447,7 @@ namespace url
         {
             return RestClient.DateTimeNull(dateTimeQuery, cancellationToken);
         }
+
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -398,6 +455,7 @@ namespace url
         {
             return await RestClient.ArrayStringCsvValidAsync(arrayQuery, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -405,6 +463,7 @@ namespace url
         {
             return RestClient.ArrayStringCsvValid(arrayQuery, cancellationToken);
         }
+
         /// <summary> Get a null array of string using the csv-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -412,6 +471,7 @@ namespace url
         {
             return await RestClient.ArrayStringCsvNullAsync(arrayQuery, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get a null array of string using the csv-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -419,6 +479,7 @@ namespace url
         {
             return RestClient.ArrayStringCsvNull(arrayQuery, cancellationToken);
         }
+
         /// <summary> Get an empty array [] of string using the csv-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -426,6 +487,7 @@ namespace url
         {
             return await RestClient.ArrayStringCsvEmptyAsync(arrayQuery, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get an empty array [] of string using the csv-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -433,6 +495,7 @@ namespace url
         {
             return RestClient.ArrayStringCsvEmpty(arrayQuery, cancellationToken);
         }
+
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -440,6 +503,7 @@ namespace url
         {
             return await RestClient.ArrayStringSsvValidAsync(arrayQuery, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -447,6 +511,7 @@ namespace url
         {
             return RestClient.ArrayStringSsvValid(arrayQuery, cancellationToken);
         }
+
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -454,6 +519,7 @@ namespace url
         {
             return await RestClient.ArrayStringTsvValidAsync(arrayQuery, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -461,6 +527,7 @@ namespace url
         {
             return RestClient.ArrayStringTsvValid(arrayQuery, cancellationToken);
         }
+
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -468,6 +535,7 @@ namespace url
         {
             return await RestClient.ArrayStringPipesValidAsync(arrayQuery, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

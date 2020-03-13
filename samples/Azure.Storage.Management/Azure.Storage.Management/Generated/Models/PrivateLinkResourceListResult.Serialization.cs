@@ -28,6 +28,7 @@ namespace Azure.Storage.Management.Models
             }
             writer.WriteEndObject();
         }
+
         internal static PrivateLinkResourceListResult DeserializePrivateLinkResourceListResult(JsonElement element)
         {
             PrivateLinkResourceListResult result = new PrivateLinkResourceListResult();

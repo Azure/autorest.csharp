@@ -30,6 +30,7 @@ namespace xml_service.Models
             }
             writer.WriteEndElement();
         }
+
         internal static Error DeserializeError(XElement element)
         {
             Error result = default;

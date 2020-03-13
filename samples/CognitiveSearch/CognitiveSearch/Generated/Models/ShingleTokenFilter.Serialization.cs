@@ -51,6 +51,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(Name);
             writer.WriteEndObject();
         }
+
         internal static ShingleTokenFilter DeserializeShingleTokenFilter(JsonElement element)
         {
             ShingleTokenFilter result = new ShingleTokenFilter();

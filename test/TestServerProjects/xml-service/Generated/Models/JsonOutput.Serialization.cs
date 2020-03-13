@@ -22,6 +22,7 @@ namespace xml_service.Models
             }
             writer.WriteEndObject();
         }
+
         internal static JsonOutput DeserializeJsonOutput(JsonElement element)
         {
             JsonOutput result = new JsonOutput();

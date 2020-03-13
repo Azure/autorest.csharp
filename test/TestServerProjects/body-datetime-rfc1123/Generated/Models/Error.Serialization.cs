@@ -27,6 +27,7 @@ namespace body_datetime_rfc1123.Models
             }
             writer.WriteEndObject();
         }
+
         internal static Error DeserializeError(JsonElement element)
         {
             Error result = new Error();

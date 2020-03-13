@@ -40,6 +40,7 @@ namespace xml_service.Models
             }
             writer.WriteEndElement();
         }
+
         internal static Slide DeserializeSlide(XElement element)
         {
             Slide result = default;

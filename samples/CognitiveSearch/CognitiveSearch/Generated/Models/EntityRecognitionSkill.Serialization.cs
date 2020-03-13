@@ -74,6 +74,7 @@ namespace CognitiveSearch.Models
             writer.WriteEndArray();
             writer.WriteEndObject();
         }
+
         internal static EntityRecognitionSkill DeserializeEntityRecognitionSkill(JsonElement element)
         {
             EntityRecognitionSkill result = new EntityRecognitionSkill();

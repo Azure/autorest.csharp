@@ -19,6 +19,7 @@ namespace Azure.Storage.Management.Models
             writer.WriteNumberValue(DaysAfterCreationGreaterThan);
             writer.WriteEndObject();
         }
+
         internal static DateAfterCreation DeserializeDateAfterCreation(JsonElement element)
         {
             DateAfterCreation result = new DateAfterCreation();

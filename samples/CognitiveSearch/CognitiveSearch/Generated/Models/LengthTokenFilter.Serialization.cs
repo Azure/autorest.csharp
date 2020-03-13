@@ -31,6 +31,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(Name);
             writer.WriteEndObject();
         }
+
         internal static LengthTokenFilter DeserializeLengthTokenFilter(JsonElement element)
         {
             LengthTokenFilter result = new LengthTokenFilter();

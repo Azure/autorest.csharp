@@ -27,6 +27,7 @@ namespace lro.Models
             }
             writer.WriteEndObject();
         }
+
         internal static Sku DeserializeSku(JsonElement element)
         {
             Sku result = new Sku();

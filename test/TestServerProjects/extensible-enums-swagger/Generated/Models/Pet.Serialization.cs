@@ -29,6 +29,7 @@ namespace extensible_enums_swagger.Models
             writer.WriteStringValue(IntEnum.ToString());
             writer.WriteEndObject();
         }
+
         internal static Pet DeserializePet(JsonElement element)
         {
             Pet result = new Pet();

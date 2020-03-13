@@ -37,6 +37,7 @@ namespace Azure.Storage.Management.Models
             }
             writer.WriteEndObject();
         }
+
         internal static EncryptionServices DeserializeEncryptionServices(JsonElement element)
         {
             EncryptionServices result = new EncryptionServices();

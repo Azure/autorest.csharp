@@ -67,6 +67,7 @@ namespace CognitiveSearch.Models
             }
             writer.WriteEndObject();
         }
+
         internal static AutocompleteRequest DeserializeAutocompleteRequest(JsonElement element)
         {
             AutocompleteRequest result = new AutocompleteRequest();

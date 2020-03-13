@@ -60,6 +60,7 @@ namespace CognitiveSearch.Models
             writer.WriteEndArray();
             writer.WriteEndObject();
         }
+
         internal static TextTranslationSkill DeserializeTextTranslationSkill(JsonElement element)
         {
             TextTranslationSkill result = new TextTranslationSkill();

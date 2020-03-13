@@ -24,6 +24,7 @@ namespace CognitiveSearch.Models
             }
             writer.WriteEndObject();
         }
+
         internal static IndexingSchedule DeserializeIndexingSchedule(JsonElement element)
         {
             IndexingSchedule result = new IndexingSchedule();

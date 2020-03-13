@@ -30,6 +30,7 @@ namespace CognitiveSearch.Models
             }
             writer.WriteEndObject();
         }
+
         internal static MagnitudeScoringFunction DeserializeMagnitudeScoringFunction(JsonElement element)
         {
             MagnitudeScoringFunction result = new MagnitudeScoringFunction();

@@ -48,6 +48,7 @@ namespace body_complex.Models
             }
             writer.WriteEndObject();
         }
+
         internal static Siamese DeserializeSiamese(JsonElement element)
         {
             Siamese result = new Siamese();

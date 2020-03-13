@@ -107,6 +107,7 @@ namespace Azure.Network.Management.Interface.Models
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
+
         internal static NetworkSecurityGroup DeserializeNetworkSecurityGroup(JsonElement element)
         {
             NetworkSecurityGroup result = new NetworkSecurityGroup();

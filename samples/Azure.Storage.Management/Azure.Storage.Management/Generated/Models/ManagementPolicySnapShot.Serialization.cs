@@ -22,6 +22,7 @@ namespace Azure.Storage.Management.Models
             }
             writer.WriteEndObject();
         }
+
         internal static ManagementPolicySnapShot DeserializeManagementPolicySnapShot(JsonElement element)
         {
             ManagementPolicySnapShot result = new ManagementPolicySnapShot();

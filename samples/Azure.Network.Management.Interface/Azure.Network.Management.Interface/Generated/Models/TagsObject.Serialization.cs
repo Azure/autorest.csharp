@@ -29,6 +29,7 @@ namespace Azure.Network.Management.Interface.Models
             }
             writer.WriteEndObject();
         }
+
         internal static TagsObject DeserializeTagsObject(JsonElement element)
         {
             TagsObject result = new TagsObject();

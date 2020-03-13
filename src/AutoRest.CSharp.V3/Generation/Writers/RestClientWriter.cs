@@ -58,6 +58,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
             writer.Line($"private {typeof(ClientDiagnostics)} clientDiagnostics;");
             writer.Line($"private {typeof(HttpPipeline)} pipeline;");
+            writer.Line();
         }
 
         private void WriteClientCtor(CodeWriter writer, RestClient restClient, CSharpType cs)
@@ -83,6 +84,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.Line($"this.clientDiagnostics = clientDiagnostics;");
                 writer.Line($"this.pipeline = pipeline;");
             }
+            writer.Line();
         }
 
         private string CreateMethodName(string name, bool async) => $"{name}{(async ? "Async" : string.Empty)}";
@@ -182,6 +184,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                 writer.Line($"return {message};");
             }
+            writer.Line();
         }
 
         private void WriteUriFragment(CodeWriter writer, CodeWriterDeclaration uri, PathSegment segment)
@@ -271,6 +274,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     writer.Line($"throw;");
                 }
             }
+            writer.Line();
         }
 
         private CodeWriterDelegate WriteConstantOrParameter(ParameterOrConstant constantOrParameter, bool ignoreNullability = false) => writer =>

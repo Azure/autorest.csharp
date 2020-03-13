@@ -31,6 +31,7 @@ namespace CognitiveServices.TextAnalytics.Models
             }
             writer.WriteEndObject();
         }
+
         internal static DocumentEntities DeserializeDocumentEntities(JsonElement element)
         {
             DocumentEntities result = new DocumentEntities();

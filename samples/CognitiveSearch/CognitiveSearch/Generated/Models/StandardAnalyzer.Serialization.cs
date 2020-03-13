@@ -37,6 +37,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(Name);
             writer.WriteEndObject();
         }
+
         internal static StandardAnalyzer DeserializeStandardAnalyzer(JsonElement element)
         {
             StandardAnalyzer result = new StandardAnalyzer();

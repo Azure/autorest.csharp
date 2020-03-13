@@ -48,6 +48,7 @@ namespace CognitiveSearch.Models
             writer.WriteEndArray();
             writer.WriteEndObject();
         }
+
         internal static ConditionalSkill DeserializeConditionalSkill(JsonElement element)
         {
             ConditionalSkill result = new ConditionalSkill();

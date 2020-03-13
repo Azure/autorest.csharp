@@ -63,6 +63,7 @@ namespace Azure.AI.FormRecognizer.Models
             }
             writer.WriteEndObject();
         }
+
         internal static DataTableCell DeserializeDataTableCell(JsonElement element)
         {
             DataTableCell result = new DataTableCell();

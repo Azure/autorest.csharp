@@ -53,6 +53,7 @@ namespace Azure.Network.Management.Interface.Models
             }
             writer.WriteEndObject();
         }
+
         internal static NetworkInterfaceDnsSettings DeserializeNetworkInterfaceDnsSettings(JsonElement element)
         {
             NetworkInterfaceDnsSettings result = new NetworkInterfaceDnsSettings();

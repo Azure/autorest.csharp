@@ -49,6 +49,7 @@ namespace xml_service.Models
             }
             writer.WriteEndElement();
         }
+
         internal static ContainerProperties DeserializeContainerProperties(XElement element)
         {
             ContainerProperties result = default;

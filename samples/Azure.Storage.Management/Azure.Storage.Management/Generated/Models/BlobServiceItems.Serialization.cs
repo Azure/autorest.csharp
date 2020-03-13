@@ -28,6 +28,7 @@ namespace Azure.Storage.Management.Models
             }
             writer.WriteEndObject();
         }
+
         internal static BlobServiceItems DeserializeBlobServiceItems(JsonElement element)
         {
             BlobServiceItems result = new BlobServiceItems();

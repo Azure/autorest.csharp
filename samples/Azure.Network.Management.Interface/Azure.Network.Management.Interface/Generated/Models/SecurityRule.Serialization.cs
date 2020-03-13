@@ -146,6 +146,7 @@ namespace Azure.Network.Management.Interface.Models
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
+
         internal static SecurityRule DeserializeSecurityRule(JsonElement element)
         {
             SecurityRule result = new SecurityRule();

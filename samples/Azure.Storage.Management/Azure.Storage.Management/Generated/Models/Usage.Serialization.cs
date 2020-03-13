@@ -37,6 +37,7 @@ namespace Azure.Storage.Management.Models
             }
             writer.WriteEndObject();
         }
+
         internal static Usage DeserializeUsage(JsonElement element)
         {
             Usage result = new Usage();

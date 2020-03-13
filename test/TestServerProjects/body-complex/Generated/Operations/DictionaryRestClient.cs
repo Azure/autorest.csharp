@@ -21,6 +21,7 @@ namespace body_complex
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of DictionaryRestClient. </summary>
         public DictionaryRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
@@ -33,6 +34,7 @@ namespace body_complex
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreateGetValidRequest()
         {
             var message = pipeline.CreateMessage();
@@ -44,6 +46,7 @@ namespace body_complex
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get complex types with dictionary property. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DictionaryWrapper>> GetValidAsync(CancellationToken cancellationToken = default)
@@ -72,6 +75,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Get complex types with dictionary property. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DictionaryWrapper> GetValid(CancellationToken cancellationToken = default)
@@ -100,6 +104,7 @@ namespace body_complex
                 throw;
             }
         }
+
         internal HttpMessage CreatePutValidRequest(DictionaryWrapper complexBody)
         {
             var message = pipeline.CreateMessage();
@@ -115,6 +120,7 @@ namespace body_complex
             request.Content = content;
             return message;
         }
+
         /// <summary> Put complex types with dictionary property. </summary>
         /// <param name="complexBody"> Please put a dictionary with 5 key-value pairs: &quot;txt&quot;:&quot;notepad&quot;, &quot;bmp&quot;:&quot;mspaint&quot;, &quot;xls&quot;:&quot;excel&quot;, &quot;exe&quot;:&quot;&quot;, &quot;&quot;:null. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -145,6 +151,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Put complex types with dictionary property. </summary>
         /// <param name="complexBody"> Please put a dictionary with 5 key-value pairs: &quot;txt&quot;:&quot;notepad&quot;, &quot;bmp&quot;:&quot;mspaint&quot;, &quot;xls&quot;:&quot;excel&quot;, &quot;exe&quot;:&quot;&quot;, &quot;&quot;:null. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -175,6 +182,7 @@ namespace body_complex
                 throw;
             }
         }
+
         internal HttpMessage CreateGetEmptyRequest()
         {
             var message = pipeline.CreateMessage();
@@ -186,6 +194,7 @@ namespace body_complex
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get complex types with dictionary property which is empty. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DictionaryWrapper>> GetEmptyAsync(CancellationToken cancellationToken = default)
@@ -214,6 +223,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Get complex types with dictionary property which is empty. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DictionaryWrapper> GetEmpty(CancellationToken cancellationToken = default)
@@ -242,6 +252,7 @@ namespace body_complex
                 throw;
             }
         }
+
         internal HttpMessage CreatePutEmptyRequest(DictionaryWrapper complexBody)
         {
             var message = pipeline.CreateMessage();
@@ -257,6 +268,7 @@ namespace body_complex
             request.Content = content;
             return message;
         }
+
         /// <summary> Put complex types with dictionary property which is empty. </summary>
         /// <param name="complexBody"> Please put a dictionary with 5 key-value pairs: &quot;txt&quot;:&quot;notepad&quot;, &quot;bmp&quot;:&quot;mspaint&quot;, &quot;xls&quot;:&quot;excel&quot;, &quot;exe&quot;:&quot;&quot;, &quot;&quot;:null. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -287,6 +299,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Put complex types with dictionary property which is empty. </summary>
         /// <param name="complexBody"> Please put a dictionary with 5 key-value pairs: &quot;txt&quot;:&quot;notepad&quot;, &quot;bmp&quot;:&quot;mspaint&quot;, &quot;xls&quot;:&quot;excel&quot;, &quot;exe&quot;:&quot;&quot;, &quot;&quot;:null. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -317,6 +330,7 @@ namespace body_complex
                 throw;
             }
         }
+
         internal HttpMessage CreateGetNullRequest()
         {
             var message = pipeline.CreateMessage();
@@ -328,6 +342,7 @@ namespace body_complex
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get complex types with dictionary property which is null. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DictionaryWrapper>> GetNullAsync(CancellationToken cancellationToken = default)
@@ -356,6 +371,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Get complex types with dictionary property which is null. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DictionaryWrapper> GetNull(CancellationToken cancellationToken = default)
@@ -384,6 +400,7 @@ namespace body_complex
                 throw;
             }
         }
+
         internal HttpMessage CreateGetNotProvidedRequest()
         {
             var message = pipeline.CreateMessage();
@@ -395,6 +412,7 @@ namespace body_complex
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get complex types with dictionary property while server doesn&apos;t provide a response payload. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DictionaryWrapper>> GetNotProvidedAsync(CancellationToken cancellationToken = default)
@@ -423,6 +441,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Get complex types with dictionary property while server doesn&apos;t provide a response payload. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DictionaryWrapper> GetNotProvided(CancellationToken cancellationToken = default)

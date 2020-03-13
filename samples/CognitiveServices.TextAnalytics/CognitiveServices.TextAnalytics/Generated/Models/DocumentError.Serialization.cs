@@ -21,6 +21,7 @@ namespace CognitiveServices.TextAnalytics.Models
             writer.WriteObjectValue(Error);
             writer.WriteEndObject();
         }
+
         internal static DocumentError DeserializeDocumentError(JsonElement element)
         {
             DocumentError result = new DocumentError();

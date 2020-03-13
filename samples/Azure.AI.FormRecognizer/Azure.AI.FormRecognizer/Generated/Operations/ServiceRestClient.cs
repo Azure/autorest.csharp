@@ -22,6 +22,7 @@ namespace Azure.AI.FormRecognizer
         private string endpoint;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of ServiceRestClient. </summary>
         public ServiceRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint)
         {
@@ -34,6 +35,7 @@ namespace Azure.AI.FormRecognizer
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreateTrainCustomModelAsyncRequest(TrainRequest trainRequest)
         {
             var message = pipeline.CreateMessage();
@@ -50,6 +52,7 @@ namespace Azure.AI.FormRecognizer
             request.Content = content;
             return message;
         }
+
         /// <summary> Create and train a custom model. The request must include a source parameter that is either an externally accessible Azure storage blob container Uri (preferably a Shared Access Signature Uri) or valid path to a data folder in a locally mounted drive. When local paths are specified, they must follow the Linux/Unix path format and be an absolute path rooted to the input mount configuration setting value e.g., if &apos;{Mounts:Input}&apos; configuration setting value is &apos;/input&apos; then a valid source path would be &apos;/input/contosodataset&apos;. All data to be trained is expected to be under the source folder or sub folders under it. Models are trained using documents that are of the following content type - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos;, &apos;image/tiff&apos;. Other type of content is ignored. </summary>
         /// <param name="trainRequest"> Training request parameters. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -81,6 +84,7 @@ namespace Azure.AI.FormRecognizer
                 throw;
             }
         }
+
         /// <summary> Create and train a custom model. The request must include a source parameter that is either an externally accessible Azure storage blob container Uri (preferably a Shared Access Signature Uri) or valid path to a data folder in a locally mounted drive. When local paths are specified, they must follow the Linux/Unix path format and be an absolute path rooted to the input mount configuration setting value e.g., if &apos;{Mounts:Input}&apos; configuration setting value is &apos;/input&apos; then a valid source path would be &apos;/input/contosodataset&apos;. All data to be trained is expected to be under the source folder or sub folders under it. Models are trained using documents that are of the following content type - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos;, &apos;image/tiff&apos;. Other type of content is ignored. </summary>
         /// <param name="trainRequest"> Training request parameters. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -112,6 +116,7 @@ namespace Azure.AI.FormRecognizer
                 throw;
             }
         }
+
         internal HttpMessage CreateGetCustomModelsRequest(Enum0? op)
         {
             var message = pipeline.CreateMessage();
@@ -128,11 +133,13 @@ namespace Azure.AI.FormRecognizer
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get information about all custom models. </summary>
         /// <param name="op"> Specify whether to return summary or full list of models. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Models.Models>> GetCustomModelsAsync(Enum0? op, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetCustomModels");
             scope.Start();
             try
@@ -157,11 +164,13 @@ namespace Azure.AI.FormRecognizer
                 throw;
             }
         }
+
         /// <summary> Get information about all custom models. </summary>
         /// <param name="op"> Specify whether to return summary or full list of models. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Models.Models> GetCustomModels(Enum0? op, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetCustomModels");
             scope.Start();
             try
@@ -186,6 +195,7 @@ namespace Azure.AI.FormRecognizer
                 throw;
             }
         }
+
         internal HttpMessage CreateGetCustomModelRequest(Guid modelId, bool? includeKeys)
         {
             var message = pipeline.CreateMessage();
@@ -203,12 +213,14 @@ namespace Azure.AI.FormRecognizer
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get detailed information about a custom model. </summary>
         /// <param name="modelId"> Model identifier. </param>
         /// <param name="includeKeys"> Include list of extracted keys in model information. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Model>> GetCustomModelAsync(Guid modelId, bool? includeKeys, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetCustomModel");
             scope.Start();
             try
@@ -233,12 +245,14 @@ namespace Azure.AI.FormRecognizer
                 throw;
             }
         }
+
         /// <summary> Get detailed information about a custom model. </summary>
         /// <param name="modelId"> Model identifier. </param>
         /// <param name="includeKeys"> Include list of extracted keys in model information. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Model> GetCustomModel(Guid modelId, bool? includeKeys, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetCustomModel");
             scope.Start();
             try
@@ -263,6 +277,7 @@ namespace Azure.AI.FormRecognizer
                 throw;
             }
         }
+
         internal HttpMessage CreateDeleteCustomModelRequest(Guid modelId)
         {
             var message = pipeline.CreateMessage();
@@ -276,11 +291,13 @@ namespace Azure.AI.FormRecognizer
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Mark model for deletion. Model artifacts will be permanently removed within a predetermined period. </summary>
         /// <param name="modelId"> Model identifier. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> DeleteCustomModelAsync(Guid modelId, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.DeleteCustomModel");
             scope.Start();
             try
@@ -301,11 +318,13 @@ namespace Azure.AI.FormRecognizer
                 throw;
             }
         }
+
         /// <summary> Mark model for deletion. Model artifacts will be permanently removed within a predetermined period. </summary>
         /// <param name="modelId"> Model identifier. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response DeleteCustomModel(Guid modelId, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.DeleteCustomModel");
             scope.Start();
             try
@@ -326,6 +345,7 @@ namespace Azure.AI.FormRecognizer
                 throw;
             }
         }
+
         internal HttpMessage CreateAnalyzeWithCustomModelRequest(Guid modelId, bool? includeTextDetails, ContentType? contentType, Stream fileStream)
         {
             var message = pipeline.CreateMessage();
@@ -349,6 +369,7 @@ namespace Azure.AI.FormRecognizer
             request.Content = RequestContent.Create(fileStream);
             return message;
         }
+
         /// <summary> Extract key-value pairs, tables, and semantic values from a given document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
         /// <param name="modelId"> Model identifier. </param>
         /// <param name="includeTextDetails"> Include text lines and element references in the result. </param>
@@ -357,6 +378,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<AnalyzeWithCustomModelHeaders>> AnalyzeWithCustomModelAsync(Guid modelId, bool? includeTextDetails, ContentType? contentType, Stream fileStream, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.AnalyzeWithCustomModel");
             scope.Start();
             try
@@ -378,6 +400,7 @@ namespace Azure.AI.FormRecognizer
                 throw;
             }
         }
+
         /// <summary> Extract key-value pairs, tables, and semantic values from a given document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
         /// <param name="modelId"> Model identifier. </param>
         /// <param name="includeTextDetails"> Include text lines and element references in the result. </param>
@@ -386,6 +409,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<AnalyzeWithCustomModelHeaders> AnalyzeWithCustomModel(Guid modelId, bool? includeTextDetails, ContentType? contentType, Stream fileStream, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.AnalyzeWithCustomModel");
             scope.Start();
             try
@@ -407,6 +431,7 @@ namespace Azure.AI.FormRecognizer
                 throw;
             }
         }
+
         internal HttpMessage CreateAnalyzeWithCustomModelRequest(Guid modelId, bool? includeTextDetails, SourcePath fileStream)
         {
             var message = pipeline.CreateMessage();
@@ -429,6 +454,7 @@ namespace Azure.AI.FormRecognizer
             request.Content = content;
             return message;
         }
+
         /// <summary> Extract key-value pairs, tables, and semantic values from a given document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
         /// <param name="modelId"> Model identifier. </param>
         /// <param name="includeTextDetails"> Include text lines and element references in the result. </param>
@@ -436,6 +462,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<AnalyzeWithCustomModelHeaders>> AnalyzeWithCustomModelAsync(Guid modelId, bool? includeTextDetails, SourcePath fileStream, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.AnalyzeWithCustomModel");
             scope.Start();
             try
@@ -457,6 +484,7 @@ namespace Azure.AI.FormRecognizer
                 throw;
             }
         }
+
         /// <summary> Extract key-value pairs, tables, and semantic values from a given document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
         /// <param name="modelId"> Model identifier. </param>
         /// <param name="includeTextDetails"> Include text lines and element references in the result. </param>
@@ -464,6 +492,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<AnalyzeWithCustomModelHeaders> AnalyzeWithCustomModel(Guid modelId, bool? includeTextDetails, SourcePath fileStream, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.AnalyzeWithCustomModel");
             scope.Start();
             try
@@ -485,6 +514,7 @@ namespace Azure.AI.FormRecognizer
                 throw;
             }
         }
+
         internal HttpMessage CreateGetAnalyzeFormResultRequest(Guid modelId, Guid resultId)
         {
             var message = pipeline.CreateMessage();
@@ -500,12 +530,14 @@ namespace Azure.AI.FormRecognizer
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Obtain current status and the result of the analyze form operation. </summary>
         /// <param name="modelId"> Model identifier. </param>
         /// <param name="resultId"> Analyze operation result identifier. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<AnalyzeOperationResult>> GetAnalyzeFormResultAsync(Guid modelId, Guid resultId, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetAnalyzeFormResult");
             scope.Start();
             try
@@ -530,12 +562,14 @@ namespace Azure.AI.FormRecognizer
                 throw;
             }
         }
+
         /// <summary> Obtain current status and the result of the analyze form operation. </summary>
         /// <param name="modelId"> Model identifier. </param>
         /// <param name="resultId"> Analyze operation result identifier. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<AnalyzeOperationResult> GetAnalyzeFormResult(Guid modelId, Guid resultId, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetAnalyzeFormResult");
             scope.Start();
             try
@@ -560,6 +594,7 @@ namespace Azure.AI.FormRecognizer
                 throw;
             }
         }
+
         internal HttpMessage CreateAnalyzeReceiptAsyncRequest(bool? includeTextDetails, ContentType? contentType, Stream fileStream)
         {
             var message = pipeline.CreateMessage();
@@ -581,6 +616,7 @@ namespace Azure.AI.FormRecognizer
             request.Content = RequestContent.Create(fileStream);
             return message;
         }
+
         /// <summary> Extract field text and semantic values from a given receipt document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
         /// <param name="includeTextDetails"> Include text lines and element references in the result. </param>
         /// <param name="contentType"> Upload file type. </param>
@@ -588,6 +624,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<AnalyzeReceiptAsyncHeaders>> AnalyzeReceiptAsyncAsync(bool? includeTextDetails, ContentType? contentType, Stream fileStream, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.AnalyzeReceiptAsync");
             scope.Start();
             try
@@ -609,6 +646,7 @@ namespace Azure.AI.FormRecognizer
                 throw;
             }
         }
+
         /// <summary> Extract field text and semantic values from a given receipt document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
         /// <param name="includeTextDetails"> Include text lines and element references in the result. </param>
         /// <param name="contentType"> Upload file type. </param>
@@ -616,6 +654,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<AnalyzeReceiptAsyncHeaders> AnalyzeReceiptAsync(bool? includeTextDetails, ContentType? contentType, Stream fileStream, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.AnalyzeReceiptAsync");
             scope.Start();
             try
@@ -637,6 +676,7 @@ namespace Azure.AI.FormRecognizer
                 throw;
             }
         }
+
         internal HttpMessage CreateAnalyzeReceiptAsyncRequest(bool? includeTextDetails, SourcePath fileStream)
         {
             var message = pipeline.CreateMessage();
@@ -657,12 +697,14 @@ namespace Azure.AI.FormRecognizer
             request.Content = content;
             return message;
         }
+
         /// <summary> Extract field text and semantic values from a given receipt document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
         /// <param name="includeTextDetails"> Include text lines and element references in the result. </param>
         /// <param name="fileStream"> .json, .pdf, .jpg, .png or .tiff type file stream. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<AnalyzeReceiptAsyncHeaders>> AnalyzeReceiptAsyncAsync(bool? includeTextDetails, SourcePath fileStream, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.AnalyzeReceiptAsync");
             scope.Start();
             try
@@ -684,12 +726,14 @@ namespace Azure.AI.FormRecognizer
                 throw;
             }
         }
+
         /// <summary> Extract field text and semantic values from a given receipt document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
         /// <param name="includeTextDetails"> Include text lines and element references in the result. </param>
         /// <param name="fileStream"> .json, .pdf, .jpg, .png or .tiff type file stream. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<AnalyzeReceiptAsyncHeaders> AnalyzeReceiptAsync(bool? includeTextDetails, SourcePath fileStream, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.AnalyzeReceiptAsync");
             scope.Start();
             try
@@ -711,6 +755,7 @@ namespace Azure.AI.FormRecognizer
                 throw;
             }
         }
+
         internal HttpMessage CreateGetAnalyzeReceiptResultRequest(Guid resultId)
         {
             var message = pipeline.CreateMessage();
@@ -724,11 +769,13 @@ namespace Azure.AI.FormRecognizer
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Track the progress and obtain the result of the analyze receipt operation. </summary>
         /// <param name="resultId"> Analyze operation result identifier. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<AnalyzeOperationResult>> GetAnalyzeReceiptResultAsync(Guid resultId, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetAnalyzeReceiptResult");
             scope.Start();
             try
@@ -753,11 +800,13 @@ namespace Azure.AI.FormRecognizer
                 throw;
             }
         }
+
         /// <summary> Track the progress and obtain the result of the analyze receipt operation. </summary>
         /// <param name="resultId"> Analyze operation result identifier. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<AnalyzeOperationResult> GetAnalyzeReceiptResult(Guid resultId, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetAnalyzeReceiptResult");
             scope.Start();
             try
@@ -782,6 +831,7 @@ namespace Azure.AI.FormRecognizer
                 throw;
             }
         }
+
         internal HttpMessage CreateAnalyzeLayoutAsyncRequest(ContentType? contentType, Stream fileStream)
         {
             var message = pipeline.CreateMessage();
@@ -799,12 +849,14 @@ namespace Azure.AI.FormRecognizer
             request.Content = RequestContent.Create(fileStream);
             return message;
         }
+
         /// <summary> Extract text and layout information from a given document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
         /// <param name="contentType"> Upload file type. </param>
         /// <param name="fileStream"> .json, .pdf, .jpg, .png or .tiff type file stream. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<AnalyzeLayoutAsyncHeaders>> AnalyzeLayoutAsyncAsync(ContentType? contentType, Stream fileStream, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.AnalyzeLayoutAsync");
             scope.Start();
             try
@@ -826,12 +878,14 @@ namespace Azure.AI.FormRecognizer
                 throw;
             }
         }
+
         /// <summary> Extract text and layout information from a given document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
         /// <param name="contentType"> Upload file type. </param>
         /// <param name="fileStream"> .json, .pdf, .jpg, .png or .tiff type file stream. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<AnalyzeLayoutAsyncHeaders> AnalyzeLayoutAsync(ContentType? contentType, Stream fileStream, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.AnalyzeLayoutAsync");
             scope.Start();
             try
@@ -853,6 +907,7 @@ namespace Azure.AI.FormRecognizer
                 throw;
             }
         }
+
         internal HttpMessage CreateAnalyzeLayoutAsyncRequest(SourcePath fileStream)
         {
             var message = pipeline.CreateMessage();
@@ -869,11 +924,13 @@ namespace Azure.AI.FormRecognizer
             request.Content = content;
             return message;
         }
+
         /// <summary> Extract text and layout information from a given document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
         /// <param name="fileStream"> .json, .pdf, .jpg, .png or .tiff type file stream. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<AnalyzeLayoutAsyncHeaders>> AnalyzeLayoutAsyncAsync(SourcePath fileStream, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.AnalyzeLayoutAsync");
             scope.Start();
             try
@@ -895,11 +952,13 @@ namespace Azure.AI.FormRecognizer
                 throw;
             }
         }
+
         /// <summary> Extract text and layout information from a given document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
         /// <param name="fileStream"> .json, .pdf, .jpg, .png or .tiff type file stream. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<AnalyzeLayoutAsyncHeaders> AnalyzeLayoutAsync(SourcePath fileStream, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.AnalyzeLayoutAsync");
             scope.Start();
             try
@@ -921,6 +980,7 @@ namespace Azure.AI.FormRecognizer
                 throw;
             }
         }
+
         internal HttpMessage CreateGetAnalyzeLayoutResultRequest(Guid resultId)
         {
             var message = pipeline.CreateMessage();
@@ -934,11 +994,13 @@ namespace Azure.AI.FormRecognizer
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Track the progress and obtain the result of the analyze layout operation. </summary>
         /// <param name="resultId"> Analyze operation result identifier. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<AnalyzeOperationResult>> GetAnalyzeLayoutResultAsync(Guid resultId, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetAnalyzeLayoutResult");
             scope.Start();
             try
@@ -963,11 +1025,13 @@ namespace Azure.AI.FormRecognizer
                 throw;
             }
         }
+
         /// <summary> Track the progress and obtain the result of the analyze layout operation. </summary>
         /// <param name="resultId"> Analyze operation result identifier. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<AnalyzeOperationResult> GetAnalyzeLayoutResult(Guid resultId, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetAnalyzeLayoutResult");
             scope.Start();
             try
@@ -992,6 +1056,7 @@ namespace Azure.AI.FormRecognizer
                 throw;
             }
         }
+
         internal HttpMessage CreateGetCustomModelsNextPageRequest(string nextLink)
         {
             var message = pipeline.CreateMessage();
@@ -1002,6 +1067,7 @@ namespace Azure.AI.FormRecognizer
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get information about all custom models. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1036,6 +1102,7 @@ namespace Azure.AI.FormRecognizer
                 throw;
             }
         }
+
         /// <summary> Get information about all custom models. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

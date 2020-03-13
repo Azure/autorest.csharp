@@ -24,6 +24,7 @@ namespace body_string.Models
             }
             writer.WriteEndObject();
         }
+
         internal static RefColorConstant DeserializeRefColorConstant(JsonElement element)
         {
             RefColorConstant result = new RefColorConstant();

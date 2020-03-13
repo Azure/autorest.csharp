@@ -28,6 +28,7 @@ namespace CognitiveSearch.Models
             }
             writer.WriteEndObject();
         }
+
         internal static SynonymMap DeserializeSynonymMap(JsonElement element)
         {
             SynonymMap result = new SynonymMap();

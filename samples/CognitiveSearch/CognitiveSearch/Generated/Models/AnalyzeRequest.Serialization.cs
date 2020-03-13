@@ -50,6 +50,7 @@ namespace CognitiveSearch.Models
             }
             writer.WriteEndObject();
         }
+
         internal static AnalyzeRequest DeserializeAnalyzeRequest(JsonElement element)
         {
             AnalyzeRequest result = new AnalyzeRequest();

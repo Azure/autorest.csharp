@@ -31,6 +31,7 @@ namespace Azure.Network.Management.Interface
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         /// <summary> List all load balancers in a network interface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
@@ -58,6 +59,7 @@ namespace Azure.Network.Management.Interface
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
+
         /// <summary> List all load balancers in a network interface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>

@@ -33,6 +33,7 @@ namespace Azure.Storage.Management.Models
             }
             writer.WriteEndObject();
         }
+
         internal static FileShareItems DeserializeFileShareItems(JsonElement element)
         {
             FileShareItems result = new FileShareItems();

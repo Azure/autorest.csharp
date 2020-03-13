@@ -19,6 +19,7 @@ namespace httpInfrastructure
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of HttpServerFailureRestClient. </summary>
         public HttpServerFailureRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
@@ -31,6 +32,7 @@ namespace httpInfrastructure
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreateHead501Request()
         {
             var message = pipeline.CreateMessage();
@@ -42,6 +44,7 @@ namespace httpInfrastructure
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Return 501 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Head501Async(CancellationToken cancellationToken = default)
@@ -64,6 +67,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Return 501 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Head501(CancellationToken cancellationToken = default)
@@ -86,6 +90,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreateGet501Request()
         {
             var message = pipeline.CreateMessage();
@@ -97,6 +102,7 @@ namespace httpInfrastructure
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Return 501 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Get501Async(CancellationToken cancellationToken = default)
@@ -119,6 +125,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Return 501 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Get501(CancellationToken cancellationToken = default)
@@ -141,6 +148,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreatePost505Request()
         {
             var message = pipeline.CreateMessage();
@@ -156,6 +164,7 @@ namespace httpInfrastructure
             request.Content = content;
             return message;
         }
+
         /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Post505Async(CancellationToken cancellationToken = default)
@@ -178,6 +187,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Post505(CancellationToken cancellationToken = default)
@@ -200,6 +210,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreateDelete505Request()
         {
             var message = pipeline.CreateMessage();
@@ -215,6 +226,7 @@ namespace httpInfrastructure
             request.Content = content;
             return message;
         }
+
         /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Delete505Async(CancellationToken cancellationToken = default)
@@ -237,6 +249,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Delete505(CancellationToken cancellationToken = default)

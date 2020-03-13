@@ -44,6 +44,7 @@ namespace body_complex.Models
             }
             writer.WriteEndObject();
         }
+
         internal static Cookiecuttershark DeserializeCookiecuttershark(JsonElement element)
         {
             Cookiecuttershark result = new Cookiecuttershark();

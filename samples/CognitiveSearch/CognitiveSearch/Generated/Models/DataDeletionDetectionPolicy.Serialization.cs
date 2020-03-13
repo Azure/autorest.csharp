@@ -19,6 +19,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(OdataType);
             writer.WriteEndObject();
         }
+
         internal static DataDeletionDetectionPolicy DeserializeDataDeletionDetectionPolicy(JsonElement element)
         {
             if (element.TryGetProperty("@odata.type", out JsonElement discriminator))

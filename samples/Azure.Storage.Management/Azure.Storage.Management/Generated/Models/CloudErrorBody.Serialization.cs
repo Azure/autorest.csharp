@@ -43,6 +43,7 @@ namespace Azure.Storage.Management.Models
             }
             writer.WriteEndObject();
         }
+
         internal static CloudErrorBody DeserializeCloudErrorBody(JsonElement element)
         {
             CloudErrorBody result = new CloudErrorBody();

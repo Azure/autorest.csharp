@@ -28,6 +28,7 @@ namespace Azure.AI.FormRecognizer.Models
             writer.WriteNumberValue(Confidence);
             writer.WriteEndObject();
         }
+
         internal static KeyValuePair DeserializeKeyValuePair(JsonElement element)
         {
             KeyValuePair result = new KeyValuePair();

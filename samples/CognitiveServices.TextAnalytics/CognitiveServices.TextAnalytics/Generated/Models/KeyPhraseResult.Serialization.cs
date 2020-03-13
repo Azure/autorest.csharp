@@ -38,6 +38,7 @@ namespace CognitiveServices.TextAnalytics.Models
             writer.WriteStringValue(ModelVersion);
             writer.WriteEndObject();
         }
+
         internal static KeyPhraseResult DeserializeKeyPhraseResult(JsonElement element)
         {
             KeyPhraseResult result = new KeyPhraseResult();

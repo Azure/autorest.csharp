@@ -23,6 +23,7 @@ namespace CognitiveServices.TextAnalytics.Models
             writer.WriteNumberValue(Negative);
             writer.WriteEndObject();
         }
+
         internal static SentimentConfidenceScorePerLabel DeserializeSentimentConfidenceScorePerLabel(JsonElement element)
         {
             SentimentConfidenceScorePerLabel result = new SentimentConfidenceScorePerLabel();

@@ -21,6 +21,7 @@ namespace Azure.AI.FormRecognizer.Models
             writer.WriteNumberValue(Accuracy);
             writer.WriteEndObject();
         }
+
         internal static FormFieldsReport DeserializeFormFieldsReport(JsonElement element)
         {
             FormFieldsReport result = new FormFieldsReport();

@@ -27,6 +27,7 @@ namespace httpInfrastructure.Models
             }
             writer.WriteEndObject();
         }
+
         internal static Error DeserializeError(JsonElement element)
         {
             Error result = new Error();

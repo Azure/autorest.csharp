@@ -27,6 +27,7 @@ namespace body_dictionary.Models
             }
             writer.WriteEndObject();
         }
+
         internal static Widget DeserializeWidget(JsonElement element)
         {
             Widget result = new Widget();

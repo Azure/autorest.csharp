@@ -25,6 +25,7 @@ namespace Azure.AI.FormRecognizer.Models
             writer.WriteStringValue(LastUpdatedDateTime, "S");
             writer.WriteEndObject();
         }
+
         internal static ModelInfo DeserializeModelInfo(JsonElement element)
         {
             ModelInfo result = new ModelInfo();

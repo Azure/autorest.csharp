@@ -33,6 +33,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(Name);
             writer.WriteEndObject();
         }
+
         internal static KeywordMarkerTokenFilter DeserializeKeywordMarkerTokenFilter(JsonElement element)
         {
             KeywordMarkerTokenFilter result = new KeywordMarkerTokenFilter();

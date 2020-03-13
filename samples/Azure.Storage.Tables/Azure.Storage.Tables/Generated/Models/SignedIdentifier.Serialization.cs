@@ -22,6 +22,7 @@ namespace Azure.Storage.Tables.Models
             writer.WriteObjectValue(AccessPolicy, "AccessPolicy");
             writer.WriteEndElement();
         }
+
         internal static SignedIdentifier DeserializeSignedIdentifier(XElement element)
         {
             SignedIdentifier result = default;

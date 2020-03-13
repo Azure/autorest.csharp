@@ -22,6 +22,7 @@ namespace xml_service.Models
             }
             writer.WriteEndObject();
         }
+
         internal static JsonInput DeserializeJsonInput(JsonElement element)
         {
             JsonInput result = new JsonInput();
