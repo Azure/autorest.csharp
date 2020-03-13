@@ -184,7 +184,7 @@ namespace CognitiveSearch
             }
             if (queryType != null)
             {
-                uri.AppendQuery("queryType", queryType.Value, true);
+                uri.AppendQuery("queryType", queryType.Value.ToSerialString(), true);
             }
             if (scoringParameters != null)
             {
@@ -200,7 +200,7 @@ namespace CognitiveSearch
             }
             if (searchMode != null)
             {
-                uri.AppendQuery("searchMode", searchMode.Value, true);
+                uri.AppendQuery("searchMode", searchMode.Value.ToSerialString(), true);
             }
             if (select != null)
             {
@@ -879,7 +879,7 @@ namespace CognitiveSearch
             uri.AppendQuery("suggesterName", suggesterName, true);
             if (autocompleteMode != null)
             {
-                uri.AppendQuery("autocompleteMode", autocompleteMode.Value, true);
+                uri.AppendQuery("autocompleteMode", autocompleteMode.Value.ToSerialString(), true);
             }
             if (filter != null)
             {

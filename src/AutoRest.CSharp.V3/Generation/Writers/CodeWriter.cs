@@ -120,7 +120,10 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         public void UseNamespace(string @namespace)
         {
-            _usingNamespaces.Add(@namespace);
+            if (_currentNamespace != @namespace)
+            {
+                _usingNamespaces.Add(@namespace);
+            }
         }
 
         public string GetTemporaryVariable(string s)
@@ -159,10 +162,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             string? mappedName = type.IsFrameworkType ? GetKeywordMapping(type.FrameworkType) : null;
             if (mappedName == null)
             {
-                if (_currentNamespace != type.Namespace)
-                {
-                    UseNamespace(type.Namespace);
-                }
+                UseNamespace(type.Namespace);
 
                 AppendRaw(type.Namespace);
                 AppendRaw(".");

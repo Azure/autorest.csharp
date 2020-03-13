@@ -145,7 +145,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                             writer.Line($"using var content = new {typeof(Utf8JsonRequestContent)}();");
                             writer.ToSerializeCall(
                                 jsonSerialization,
-                                WriteConstantOrParameter(value, ignoreNullability: true),
+                                writer => WriteConstantOrParameter(writer, value, ignoreNullability: true),
                                 writerName: w => w.Append($"content.{nameof(Utf8JsonRequestContent.JsonWriter)}"));
                             writer.Line($"request.Content = content;");
                             break;
@@ -153,7 +153,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                             writer.Line($"using var content = new {typeof(XmlWriterContent)}();");
                             writer.ToSerializeCall(
                                 xmlSerialization,
-                                WriteConstantOrParameter(value, ignoreNullability: true),
+                                writer => WriteConstantOrParameter(writer, value, ignoreNullability: true),
                                 writerName: w => w.Append($"content.{nameof(XmlWriterContent.XmlWriter)}"));
                             writer.Line($"request.Content = content;");
                             break;
@@ -163,7 +163,9 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 }
                 else if (operation.Request.Body is BinaryRequestBody binaryBody)
                 {
-                    writer.Line($"request.Content = {typeof(RequestContent)}.Create({WriteConstantOrParameter(binaryBody.Value, ignoreNullability: true)});");
+                    writer.Append($"request.Content = {typeof(RequestContent)}.Create(");
+                    WriteConstantOrParameter(writer, binaryBody.Value);
+                    writer.Line($");");
                 }
 
                 writer.Line($"return message;");
@@ -172,7 +174,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private void WriteUriFragment(CodeWriter writer, PathSegment segment)
         {
-            writer.Append($"uri.AppendRaw({WriteConstantOrParameter(segment.Value)}");
+            writer.Append($"uri.AppendRaw(");
+            WriteConstantOrParameter(writer, segment.Value);
             WriteSerializationFormat(writer, segment.Format);
             writer.Line($", {segment.Escape:L});");
         }
@@ -218,7 +221,9 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.Line($"using var scope = clientDiagnostics.CreateScope({operation.Diagnostics.ScopeName:L});");
                 foreach (DiagnosticAttribute diagnosticScopeAttributes in operation.Diagnostics.Attributes)
                 {
-                    writer.Line($"scope.AddAttribute({diagnosticScopeAttributes.Name:L}, {WriteConstantOrParameter(diagnosticScopeAttributes.Value)};");
+                    writer.Append($"scope.AddAttribute({diagnosticScopeAttributes.Name:L},");
+                    WriteConstantOrParameter(writer, diagnosticScopeAttributes.Value);
+                    writer.Line($");");
                 }
                 writer.Line($"scope.Start();");
 
@@ -255,7 +260,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
         }
 
-        private CodeWriterDelegate WriteConstantOrParameter(ParameterOrConstant constantOrParameter, bool ignoreNullability = false) => writer =>
+        private void WriteConstantOrParameter(CodeWriter writer, ParameterOrConstant constantOrParameter, bool ignoreNullability = false, bool enumAsString = false)
         {
             if (constantOrParameter.IsConstant)
             {
@@ -269,7 +274,14 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     writer.AppendNullableValue(constantOrParameter.Type);
                 }
             }
-        };
+
+            if (enumAsString &&
+                !constantOrParameter.Type.IsFrameworkType &&
+                constantOrParameter.Type.Implementation is EnumType enumType)
+            {
+                writer.AppendEnumToString(enumType);
+            }
+        }
 
         private void WriteConstant(CodeWriter writer, Constant constant)
         {
@@ -306,7 +318,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private void WritePathSegment(CodeWriter writer, PathSegment segment)
         {
-            writer.Append($"uri.AppendPath({WriteConstantOrParameter(segment.Value)}");
+            writer.Append($"uri.AppendPath(");
+            WriteConstantOrParameter(writer, segment.Value, enumAsString: true);
             WriteSerializationFormat(writer, segment.Format);
             writer.Line($", {segment.Escape:L});");
         }
@@ -315,7 +328,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         {
             using (WriteValueNullCheck(writer, header.Value))
             {
-                writer.Append($"request.Headers.Add({header.Name:L}, {WriteConstantOrParameter(header.Value)}");
+                writer.Append($"request.Headers.Add({header.Name:L}, ");
+                WriteConstantOrParameter(writer, header.Value, enumAsString: true);
                 WriteSerializationFormat(writer, header.Format);
                 writer.Line($");");
             }
@@ -380,15 +394,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             ParameterOrConstant value = queryParameter.Value;
             using (WriteValueNullCheck(writer, value))
             {
-                writer.Append($"uri.{method}({queryParameter.Name:L}, {WriteConstantOrParameter(value)}");
-
-                // TODO: Hack to support extensible enums in query. https://github.com/Azure/autorest.csharp/issues/325
-                var type = value.Type;
-                if (!type.IsFrameworkType && type.Implementation is EnumType enumType && enumType.IsStringBased)
-                {
-                    writer.Append($".ToString()");
-                }
-
+                writer.Append($"uri.{method}({queryParameter.Name:L}, ");
+                WriteConstantOrParameter(writer, value, enumAsString: true);
                 if (delimiter != null)
                 {
                     writer.Append($", {delimiter:L}");

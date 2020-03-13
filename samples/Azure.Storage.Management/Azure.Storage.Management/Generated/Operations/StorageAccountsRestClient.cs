@@ -337,7 +337,7 @@ namespace Azure.Storage.Management
             uri.AppendQuery("api-version", ApiVersion, true);
             if (expand != null)
             {
-                uri.AppendQuery("$expand", expand.Value, true);
+                uri.AppendQuery("$expand", expand.Value.ToSerialString(), true);
             }
             request.Uri = uri;
             return message;

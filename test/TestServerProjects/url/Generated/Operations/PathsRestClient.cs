@@ -953,7 +953,7 @@ namespace url
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/paths/enum/green%20color/", false);
-            uri.AppendPath(enumPath, true);
+            uri.AppendPath(enumPath.ToSerialString(), true);
             request.Uri = uri;
             return message;
         }
@@ -1015,7 +1015,7 @@ namespace url
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/paths/string/null/", false);
-            uri.AppendPath(enumPath, true);
+            uri.AppendPath(enumPath.ToSerialString(), true);
             request.Uri = uri;
             return message;
         }

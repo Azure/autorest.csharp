@@ -131,7 +131,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         case EnumType clientEnum:
                             writer.Append($"{writerName}.WriteStringValue({name}")
                                 .AppendNullableValue(valueSerialization.Type)
-                                .AppendRaw(clientEnum.IsStringBased ? ".ToString()" : ".ToSerialString()")
+                                .AppendEnumToString(clientEnum)
                                 .Line($");");
                             return;
                     }

@@ -44,10 +44,5 @@ namespace Azure.Core
         {
             headers.Add(name, Convert.ToBase64String(value));
         }
-
-        public static void Add<T>(this RequestHeaders headers, string name, T value) where T: struct
-        {
-            headers.Add(name, value.ToString()!);
-        }
     }
 }
