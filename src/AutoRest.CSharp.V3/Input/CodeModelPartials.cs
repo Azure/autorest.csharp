@@ -16,6 +16,24 @@ using YamlDotNet.Serialization;
 // ReSharper disable once CheckNamespace
 namespace AutoRest.CSharp.V3.Input
 {
+    internal partial class RequestParameter
+    {
+        /// <summary>the original body parameter that this parameter is in effect replacing</summary>
+        [YamlMember(Alias = "originalParameter")]
+        [System.ComponentModel.DataAnnotations.Required]
+        public RequestParameter OriginalParameter { get; set; } = new RequestParameter();
+
+        /// <summary>if this parameter is for a nested property, this is the path of properties it takes to get there</summary>
+        [YamlMember(Alias = "pathToProperty")]
+        [System.ComponentModel.DataAnnotations.Required]
+        public ICollection<Property> PathToProperty { get; set; } = new System.Collections.ObjectModel.Collection<Property>();
+
+        /// <summary>the target property this virtual parameter represents</summary>
+        [YamlMember(Alias = "targetProperty")]
+        [System.ComponentModel.DataAnnotations.Required]
+        public Property TargetProperty { get; set; } = new Property();
+    }
+
     internal partial class Operation
     {
         // For some reason, booleans in dictionaries are deserialized as string instead of bool.

@@ -584,9 +584,9 @@ schemas: !<!Schemas>
           immediate:
           - *ref_18
         properties:
-        - !<!Property> 
+        - !<!Property> &ref_47
           schema: *ref_19
-          flattenedNames:
+          flattenedNames: &ref_46
           - details
           - max_product_display_name
           serializedName: max_product_display_name
@@ -595,9 +595,9 @@ schemas: !<!Schemas>
               name: maxProductDisplayName
               description: Display name of product.
           protocol: !<!Protocols> {}
-        - !<!Property> 
+        - !<!Property> &ref_49
           schema: *ref_20
-          flattenedNames:
+          flattenedNames: &ref_48
           - details
           - max_product_capacity
           serializedName: max_product_capacity
@@ -606,9 +606,9 @@ schemas: !<!Schemas>
               name: capacity
               description: 'Capacity of product. For example, 4 people.'
           protocol: !<!Protocols> {}
-        - !<!Property> 
+        - !<!Property> &ref_51
           schema: *ref_21
-          flattenedNames:
+          flattenedNames: &ref_50
           - details
           - max_product_image
           - generic_value
@@ -618,9 +618,9 @@ schemas: !<!Schemas>
               name: genericValue
               description: Generic URL value.
           protocol: !<!Protocols> {}
-        - !<!Property> 
+        - !<!Property> &ref_53
           schema: *ref_22
-          flattenedNames:
+          flattenedNames: &ref_52
           - details
           - max_product_image
           - '@odata.value'
@@ -644,7 +644,7 @@ schemas: !<!Schemas>
       immediate:
       - *ref_23
     properties:
-    - !<!Property> 
+    - !<!Property> &ref_44
       schema: *ref_24
       required: true
       serializedName: base_product_id
@@ -653,7 +653,7 @@ schemas: !<!Schemas>
           name: productId
           description: 'Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.'
       protocol: !<!Protocols> {}
-    - !<!Property> 
+    - !<!Property> &ref_45
       schema: *ref_25
       required: false
       serializedName: base_product_description
@@ -1341,6 +1341,7 @@ operationGroups:
       parameters:
       - !<!Parameter> &ref_43
         schema: *ref_23
+        flattened: true
         implementation: Method
         extensions:
           x-ms-client-flatten: true
@@ -1352,8 +1353,90 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      - !<!Parameter> &ref_54
+        schema: *ref_24
+        implementation: Method
+        originalParameter: *ref_43
+        pathToProperty: []
+        required: true
+        serializedName: base_product_id
+        targetProperty: *ref_44
+        language: !<!Languages> 
+          default:
+            name: productId
+            description: 'Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.'
+        protocol: !<!Protocols> {}
+      - !<!Parameter> &ref_55
+        schema: *ref_25
+        implementation: Method
+        originalParameter: *ref_43
+        pathToProperty: []
+        required: false
+        serializedName: base_product_description
+        targetProperty: *ref_45
+        language: !<!Languages> 
+          default:
+            name: description
+            description: Description of product.
+        protocol: !<!Protocols> {}
+      - !<!Parameter> &ref_56
+        schema: *ref_19
+        flattenedNames: *ref_46
+        implementation: Method
+        originalParameter: *ref_43
+        pathToProperty: []
+        serializedName: max_product_display_name
+        targetProperty: *ref_47
+        language: !<!Languages> 
+          default:
+            name: maxProductDisplayName
+            description: Display name of product.
+        protocol: !<!Protocols> {}
+      - !<!Parameter> 
+        schema: *ref_20
+        flattenedNames: *ref_48
+        implementation: Method
+        originalParameter: *ref_43
+        pathToProperty: []
+        serializedName: max_product_capacity
+        targetProperty: *ref_49
+        language: !<!Languages> 
+          default:
+            name: Capacity
+            description: 'Capacity of product. For example, 4 people.'
+        protocol: !<!Protocols> {}
+      - !<!Parameter> &ref_57
+        schema: *ref_21
+        flattenedNames: *ref_50
+        implementation: Method
+        originalParameter: *ref_43
+        pathToProperty: []
+        serializedName: generic_value
+        targetProperty: *ref_51
+        language: !<!Languages> 
+          default:
+            name: genericValue
+            description: Generic URL value.
+        protocol: !<!Protocols> {}
+      - !<!Parameter> &ref_58
+        schema: *ref_22
+        flattenedNames: *ref_52
+        implementation: Method
+        originalParameter: *ref_43
+        pathToProperty: []
+        serializedName: '@odata.value'
+        targetProperty: *ref_53
+        language: !<!Languages> 
+          default:
+            name: odataValue
+            description: URL value.
+        protocol: !<!Protocols> {}
       signatureParameters:
-      - *ref_43
+      - *ref_54
+      - *ref_55
+      - *ref_56
+      - *ref_57
+      - *ref_58
       language: !<!Languages> 
         default:
           name: ''
@@ -1406,7 +1489,7 @@ operationGroups:
       version: 1.0.0
     parameters:
     - *ref_31
-    - !<!Parameter> &ref_45
+    - !<!Parameter> &ref_66
       schema: *ref_1
       implementation: Method
       required: true
@@ -1424,12 +1507,13 @@ operationGroups:
     requests:
     - !<!Request> 
       parameters:
-      - !<!Parameter> &ref_44
+      - !<!Parameter> &ref_59
         schema: *ref_23
+        flattened: true
         implementation: Method
         extensions:
           x-ms-client-flatten: true
-          x-ms-parameter-grouping:
+          x-ms-parameter-grouping: &ref_60
             name: flatten-parameter-group
         language: !<!Languages> 
           default:
@@ -1439,8 +1523,102 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
+      - !<!Parameter> &ref_61
+        schema: *ref_24
+        implementation: Method
+        originalParameter: *ref_59
+        pathToProperty: []
+        required: true
+        serializedName: base_product_id
+        targetProperty: *ref_44
+        extensions:
+          x-ms-parameter-grouping: *ref_60
+        language: !<!Languages> 
+          default:
+            name: productId
+            description: 'Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.'
+        protocol: !<!Protocols> {}
+      - !<!Parameter> &ref_62
+        schema: *ref_25
+        implementation: Method
+        originalParameter: *ref_59
+        pathToProperty: []
+        required: false
+        serializedName: base_product_description
+        targetProperty: *ref_45
+        extensions:
+          x-ms-parameter-grouping: *ref_60
+        language: !<!Languages> 
+          default:
+            name: description
+            description: Description of product.
+        protocol: !<!Protocols> {}
+      - !<!Parameter> &ref_63
+        schema: *ref_19
+        flattenedNames: *ref_46
+        implementation: Method
+        originalParameter: *ref_59
+        pathToProperty: []
+        serializedName: max_product_display_name
+        targetProperty: *ref_47
+        extensions:
+          x-ms-parameter-grouping: *ref_60
+        language: !<!Languages> 
+          default:
+            name: maxProductDisplayName
+            description: Display name of product.
+        protocol: !<!Protocols> {}
+      - !<!Parameter> 
+        schema: *ref_20
+        flattenedNames: *ref_48
+        implementation: Method
+        originalParameter: *ref_59
+        pathToProperty: []
+        serializedName: max_product_capacity
+        targetProperty: *ref_49
+        extensions:
+          x-ms-parameter-grouping: *ref_60
+        language: !<!Languages> 
+          default:
+            name: Capacity
+            description: 'Capacity of product. For example, 4 people.'
+        protocol: !<!Protocols> {}
+      - !<!Parameter> &ref_64
+        schema: *ref_21
+        flattenedNames: *ref_50
+        implementation: Method
+        originalParameter: *ref_59
+        pathToProperty: []
+        serializedName: generic_value
+        targetProperty: *ref_51
+        extensions:
+          x-ms-parameter-grouping: *ref_60
+        language: !<!Languages> 
+          default:
+            name: genericValue
+            description: Generic URL value.
+        protocol: !<!Protocols> {}
+      - !<!Parameter> &ref_65
+        schema: *ref_22
+        flattenedNames: *ref_52
+        implementation: Method
+        originalParameter: *ref_59
+        pathToProperty: []
+        serializedName: '@odata.value'
+        targetProperty: *ref_53
+        extensions:
+          x-ms-parameter-grouping: *ref_60
+        language: !<!Languages> 
+          default:
+            name: odataValue
+            description: URL value.
+        protocol: !<!Protocols> {}
       signatureParameters:
-      - *ref_44
+      - *ref_61
+      - *ref_62
+      - *ref_63
+      - *ref_64
+      - *ref_65
       language: !<!Languages> 
         default:
           name: ''
@@ -1454,7 +1632,7 @@ operationGroups:
           - application/json
           uri: '{$host}'
     signatureParameters:
-    - *ref_45
+    - *ref_66
     responses:
     - !<!SchemaResponse> 
       schema: *ref_23
