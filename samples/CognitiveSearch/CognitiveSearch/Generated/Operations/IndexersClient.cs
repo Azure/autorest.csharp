@@ -30,6 +30,7 @@ namespace CognitiveSearch
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         /// <summary> Resets the change tracking state associated with an indexer. </summary>
         /// <param name="indexerName"> The name of the indexer to reset. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -38,6 +39,7 @@ namespace CognitiveSearch
         {
             return await RestClient.ResetAsync(indexerName, clientRequestId, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Resets the change tracking state associated with an indexer. </summary>
         /// <param name="indexerName"> The name of the indexer to reset. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -46,6 +48,7 @@ namespace CognitiveSearch
         {
             return RestClient.Reset(indexerName, clientRequestId, cancellationToken);
         }
+
         /// <summary> Runs an indexer on-demand. </summary>
         /// <param name="indexerName"> The name of the indexer to reset. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -54,6 +57,7 @@ namespace CognitiveSearch
         {
             return await RestClient.RunAsync(indexerName, clientRequestId, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Runs an indexer on-demand. </summary>
         /// <param name="indexerName"> The name of the indexer to reset. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -62,6 +66,7 @@ namespace CognitiveSearch
         {
             return RestClient.Run(indexerName, clientRequestId, cancellationToken);
         }
+
         /// <summary> Creates a new indexer or updates an indexer if it already exists. </summary>
         /// <param name="indexerName"> The name of the indexer to reset. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -73,6 +78,7 @@ namespace CognitiveSearch
         {
             return await RestClient.CreateOrUpdateAsync(indexerName, clientRequestId, ifMatch, ifNoneMatch, indexer, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Creates a new indexer or updates an indexer if it already exists. </summary>
         /// <param name="indexerName"> The name of the indexer to reset. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -84,6 +90,7 @@ namespace CognitiveSearch
         {
             return RestClient.CreateOrUpdate(indexerName, clientRequestId, ifMatch, ifNoneMatch, indexer, cancellationToken);
         }
+
         /// <summary> Deletes an indexer. </summary>
         /// <param name="indexerName"> The name of the indexer to reset. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -94,6 +101,7 @@ namespace CognitiveSearch
         {
             return await RestClient.DeleteAsync(indexerName, clientRequestId, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Deletes an indexer. </summary>
         /// <param name="indexerName"> The name of the indexer to reset. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -104,6 +112,7 @@ namespace CognitiveSearch
         {
             return RestClient.Delete(indexerName, clientRequestId, ifMatch, ifNoneMatch, cancellationToken);
         }
+
         /// <summary> Retrieves an indexer definition. </summary>
         /// <param name="indexerName"> The name of the indexer to reset. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -112,6 +121,7 @@ namespace CognitiveSearch
         {
             return await RestClient.GetAsync(indexerName, clientRequestId, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Retrieves an indexer definition. </summary>
         /// <param name="indexerName"> The name of the indexer to reset. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -120,6 +130,7 @@ namespace CognitiveSearch
         {
             return RestClient.Get(indexerName, clientRequestId, cancellationToken);
         }
+
         /// <summary> Lists all indexers available for a search service. </summary>
         /// <param name="select"> Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -128,6 +139,7 @@ namespace CognitiveSearch
         {
             return await RestClient.ListAsync(select, clientRequestId, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Lists all indexers available for a search service. </summary>
         /// <param name="select"> Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -136,6 +148,7 @@ namespace CognitiveSearch
         {
             return RestClient.List(select, clientRequestId, cancellationToken);
         }
+
         /// <summary> Creates a new indexer. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="indexer"> The definition of the indexer to create or update. </param>
@@ -144,6 +157,7 @@ namespace CognitiveSearch
         {
             return await RestClient.CreateAsync(clientRequestId, indexer, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Creates a new indexer. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="indexer"> The definition of the indexer to create or update. </param>
@@ -152,6 +166,7 @@ namespace CognitiveSearch
         {
             return RestClient.Create(clientRequestId, indexer, cancellationToken);
         }
+
         /// <summary> Returns the current status and execution history of an indexer. </summary>
         /// <param name="indexerName"> The name of the indexer to reset. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -160,6 +175,7 @@ namespace CognitiveSearch
         {
             return await RestClient.GetStatusAsync(indexerName, clientRequestId, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Returns the current status and execution history of an indexer. </summary>
         /// <param name="indexerName"> The name of the indexer to reset. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>

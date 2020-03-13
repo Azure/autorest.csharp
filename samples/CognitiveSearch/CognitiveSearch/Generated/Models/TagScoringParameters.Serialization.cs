@@ -19,6 +19,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(TagsParameter);
             writer.WriteEndObject();
         }
+
         internal static TagScoringParameters DeserializeTagScoringParameters(JsonElement element)
         {
             TagScoringParameters result = new TagScoringParameters();

@@ -33,6 +33,7 @@ namespace Azure.Network.Management.Interface.Models
             }
             writer.WriteEndObject();
         }
+
         internal static NetworkInterfaceLoadBalancerListResult DeserializeNetworkInterfaceLoadBalancerListResult(JsonElement element)
         {
             NetworkInterfaceLoadBalancerListResult result = new NetworkInterfaceLoadBalancerListResult();

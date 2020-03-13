@@ -48,6 +48,7 @@ namespace validation.Models
             writer.WriteStringValue(ConstStringAsEnum);
             writer.WriteEndObject();
         }
+
         internal static Product DeserializeProduct(JsonElement element)
         {
             Product result = new Product();

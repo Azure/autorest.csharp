@@ -33,6 +33,7 @@ namespace AppConfiguration.Models
             }
             writer.WriteEndObject();
         }
+
         internal static KeyListResult DeserializeKeyListResult(JsonElement element)
         {
             KeyListResult result = new KeyListResult();

@@ -22,6 +22,7 @@ namespace Azure.Storage.Management.Models
             }
             writer.WriteEndObject();
         }
+
         internal static EncryptionScopeKeyVaultProperties DeserializeEncryptionScopeKeyVaultProperties(JsonElement element)
         {
             EncryptionScopeKeyVaultProperties result = new EncryptionScopeKeyVaultProperties();

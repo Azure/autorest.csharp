@@ -33,6 +33,7 @@ namespace paging.Models
             }
             writer.WriteEndObject();
         }
+
         internal static OdataProductResult DeserializeOdataProductResult(JsonElement element)
         {
             OdataProductResult result = new OdataProductResult();

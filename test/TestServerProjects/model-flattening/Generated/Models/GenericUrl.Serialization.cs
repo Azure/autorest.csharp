@@ -22,6 +22,7 @@ namespace model_flattening.Models
             }
             writer.WriteEndObject();
         }
+
         internal static GenericUrl DeserializeGenericUrl(JsonElement element)
         {
             GenericUrl result = new GenericUrl();

@@ -31,6 +31,7 @@ namespace CognitiveSearch
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         /// <summary> Queries the number of documents in the index. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -38,6 +39,7 @@ namespace CognitiveSearch
         {
             return await RestClient.CountAsync(clientRequestId, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Queries the number of documents in the index. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -45,6 +47,7 @@ namespace CognitiveSearch
         {
             return RestClient.Count(clientRequestId, cancellationToken);
         }
+
         /// <summary> Searches for documents in the index. </summary>
         /// <param name="searchText"> A full-text search query expression; Use &quot;*&quot; or omit this parameter to match all documents. </param>
         /// <param name="includeTotalResultCount"> A value that specifies whether to fetch the total count of results. Default is false. Setting this value to true may have a performance impact. Note that the count returned is an approximation. </param>
@@ -69,6 +72,7 @@ namespace CognitiveSearch
         {
             return await RestClient.SearchGetAsync(searchText, includeTotalResultCount, facets, filter, highlightFields, highlightPostTag, highlightPreTag, minimumCoverage, orderBy, queryType, scoringParameters, scoringProfile, searchFields, searchMode, select, skip, top, clientRequestId, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Searches for documents in the index. </summary>
         /// <param name="searchText"> A full-text search query expression; Use &quot;*&quot; or omit this parameter to match all documents. </param>
         /// <param name="includeTotalResultCount"> A value that specifies whether to fetch the total count of results. Default is false. Setting this value to true may have a performance impact. Note that the count returned is an approximation. </param>
@@ -93,6 +97,7 @@ namespace CognitiveSearch
         {
             return RestClient.SearchGet(searchText, includeTotalResultCount, facets, filter, highlightFields, highlightPostTag, highlightPreTag, minimumCoverage, orderBy, queryType, scoringParameters, scoringProfile, searchFields, searchMode, select, skip, top, clientRequestId, cancellationToken);
         }
+
         /// <summary> Searches for documents in the index. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="searchRequest"> The definition of the Search request. </param>
@@ -101,6 +106,7 @@ namespace CognitiveSearch
         {
             return await RestClient.SearchPostAsync(clientRequestId, searchRequest, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Searches for documents in the index. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="searchRequest"> The definition of the Search request. </param>
@@ -109,6 +115,7 @@ namespace CognitiveSearch
         {
             return RestClient.SearchPost(clientRequestId, searchRequest, cancellationToken);
         }
+
         /// <summary> Retrieves a document from the index. </summary>
         /// <param name="key"> The key of the document to retrieve. </param>
         /// <param name="selectedFields"> List of field names to retrieve for the document; Any field not retrieved will be missing from the returned document. </param>
@@ -118,6 +125,7 @@ namespace CognitiveSearch
         {
             return await RestClient.GetAsync(key, selectedFields, clientRequestId, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Retrieves a document from the index. </summary>
         /// <param name="key"> The key of the document to retrieve. </param>
         /// <param name="selectedFields"> List of field names to retrieve for the document; Any field not retrieved will be missing from the returned document. </param>
@@ -127,6 +135,7 @@ namespace CognitiveSearch
         {
             return RestClient.Get(key, selectedFields, clientRequestId, cancellationToken);
         }
+
         /// <summary> Suggests documents in the index that match the given partial query text. </summary>
         /// <param name="searchText"> The search text to use to suggest documents. Must be at least 1 character, and no more than 100 characters. </param>
         /// <param name="suggesterName"> The name of the suggester as specified in the suggesters collection that&apos;s part of the index definition. </param>
@@ -145,6 +154,7 @@ namespace CognitiveSearch
         {
             return await RestClient.SuggestGetAsync(searchText, suggesterName, filter, useFuzzyMatching, highlightPostTag, highlightPreTag, minimumCoverage, orderBy, searchFields, select, top, clientRequestId, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Suggests documents in the index that match the given partial query text. </summary>
         /// <param name="searchText"> The search text to use to suggest documents. Must be at least 1 character, and no more than 100 characters. </param>
         /// <param name="suggesterName"> The name of the suggester as specified in the suggesters collection that&apos;s part of the index definition. </param>
@@ -163,6 +173,7 @@ namespace CognitiveSearch
         {
             return RestClient.SuggestGet(searchText, suggesterName, filter, useFuzzyMatching, highlightPostTag, highlightPreTag, minimumCoverage, orderBy, searchFields, select, top, clientRequestId, cancellationToken);
         }
+
         /// <summary> Suggests documents in the index that match the given partial query text. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="suggestRequest"> The Suggest request. </param>
@@ -171,6 +182,7 @@ namespace CognitiveSearch
         {
             return await RestClient.SuggestPostAsync(clientRequestId, suggestRequest, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Suggests documents in the index that match the given partial query text. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="suggestRequest"> The Suggest request. </param>
@@ -179,6 +191,7 @@ namespace CognitiveSearch
         {
             return RestClient.SuggestPost(clientRequestId, suggestRequest, cancellationToken);
         }
+
         /// <summary> Sends a batch of document write actions to the index. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="batch"> The batch of index actions. </param>
@@ -187,6 +200,7 @@ namespace CognitiveSearch
         {
             return await RestClient.IndexAsync(clientRequestId, batch, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Sends a batch of document write actions to the index. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="batch"> The batch of index actions. </param>
@@ -195,6 +209,7 @@ namespace CognitiveSearch
         {
             return RestClient.Index(clientRequestId, batch, cancellationToken);
         }
+
         /// <summary> Autocompletes incomplete query terms based on input text and matching terms in the index. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="searchText"> The search text to use to suggest documents. Must be at least 1 character, and no more than 100 characters. </param>
@@ -212,6 +227,7 @@ namespace CognitiveSearch
         {
             return await RestClient.AutocompleteGetAsync(clientRequestId, searchText, suggesterName, autocompleteMode, filter, useFuzzyMatching, highlightPostTag, highlightPreTag, minimumCoverage, searchFields, top, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Autocompletes incomplete query terms based on input text and matching terms in the index. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="searchText"> The search text to use to suggest documents. Must be at least 1 character, and no more than 100 characters. </param>
@@ -229,6 +245,7 @@ namespace CognitiveSearch
         {
             return RestClient.AutocompleteGet(clientRequestId, searchText, suggesterName, autocompleteMode, filter, useFuzzyMatching, highlightPostTag, highlightPreTag, minimumCoverage, searchFields, top, cancellationToken);
         }
+
         /// <summary> Autocompletes incomplete query terms based on input text and matching terms in the index. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="autocompleteRequest"> The definition of the Autocomplete request. </param>
@@ -237,6 +254,7 @@ namespace CognitiveSearch
         {
             return await RestClient.AutocompletePostAsync(clientRequestId, autocompleteRequest, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Autocompletes incomplete query terms based on input text and matching terms in the index. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="autocompleteRequest"> The definition of the Autocomplete request. </param>

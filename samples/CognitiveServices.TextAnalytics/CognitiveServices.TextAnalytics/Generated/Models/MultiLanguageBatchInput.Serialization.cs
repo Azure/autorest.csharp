@@ -24,6 +24,7 @@ namespace CognitiveServices.TextAnalytics.Models
             writer.WriteEndArray();
             writer.WriteEndObject();
         }
+
         internal static MultiLanguageBatchInput DeserializeMultiLanguageBatchInput(JsonElement element)
         {
             MultiLanguageBatchInput result = new MultiLanguageBatchInput();

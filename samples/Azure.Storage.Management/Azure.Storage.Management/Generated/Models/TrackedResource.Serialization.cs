@@ -46,6 +46,7 @@ namespace Azure.Storage.Management.Models
             }
             writer.WriteEndObject();
         }
+
         internal static TrackedResource DeserializeTrackedResource(JsonElement element)
         {
             TrackedResource result = new TrackedResource();

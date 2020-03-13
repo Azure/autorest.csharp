@@ -61,6 +61,7 @@ namespace Azure.Storage.Management.Models
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
+
         internal static PrivateLinkResource DeserializePrivateLinkResource(JsonElement element)
         {
             PrivateLinkResource result = new PrivateLinkResource();

@@ -25,6 +25,7 @@ namespace Azure.Storage.Tables.Models
             writer.WriteEndElement();
             writer.WriteEndElement();
         }
+
         internal static GeoReplication DeserializeGeoReplication(XElement element)
         {
             GeoReplication result = default;

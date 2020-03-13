@@ -61,6 +61,7 @@ namespace Azure.Network.Management.Interface.Models
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
+
         internal static ServiceEndpointPolicyDefinition DeserializeServiceEndpointPolicyDefinition(JsonElement element)
         {
             ServiceEndpointPolicyDefinition result = new ServiceEndpointPolicyDefinition();

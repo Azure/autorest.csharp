@@ -31,6 +31,7 @@ namespace Azure.AI.FormRecognizer.Models
             }
             writer.WriteEndObject();
         }
+
         internal static TextWord DeserializeTextWord(JsonElement element)
         {
             TextWord result = new TextWord();

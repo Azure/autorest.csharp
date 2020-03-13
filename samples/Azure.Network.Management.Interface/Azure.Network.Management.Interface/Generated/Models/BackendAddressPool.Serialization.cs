@@ -81,6 +81,7 @@ namespace Azure.Network.Management.Interface.Models
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
+
         internal static BackendAddressPool DeserializeBackendAddressPool(JsonElement element)
         {
             BackendAddressPool result = new BackendAddressPool();

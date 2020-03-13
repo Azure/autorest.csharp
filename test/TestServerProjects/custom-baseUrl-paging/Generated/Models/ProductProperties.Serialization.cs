@@ -27,6 +27,7 @@ namespace custom_baseUrl_paging.Models
             }
             writer.WriteEndObject();
         }
+
         internal static ProductProperties DeserializeProductProperties(JsonElement element)
         {
             ProductProperties result = new ProductProperties();

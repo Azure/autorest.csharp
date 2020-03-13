@@ -71,6 +71,7 @@ namespace Azure.Network.Management.Interface.Models
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
+
         internal static PrivateLinkServiceConnection DeserializePrivateLinkServiceConnection(JsonElement element)
         {
             PrivateLinkServiceConnection result = new PrivateLinkServiceConnection();

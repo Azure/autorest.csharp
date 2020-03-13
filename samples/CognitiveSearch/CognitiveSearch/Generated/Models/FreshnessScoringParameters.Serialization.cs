@@ -19,6 +19,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(BoostingDuration, "P");
             writer.WriteEndObject();
         }
+
         internal static FreshnessScoringParameters DeserializeFreshnessScoringParameters(JsonElement element)
         {
             FreshnessScoringParameters result = new FreshnessScoringParameters();

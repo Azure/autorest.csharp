@@ -31,6 +31,7 @@ namespace CognitiveServices.TextAnalytics.Models
             }
             writer.WriteEndObject();
         }
+
         internal static DocumentLanguage DeserializeDocumentLanguage(JsonElement element)
         {
             DocumentLanguage result = new DocumentLanguage();

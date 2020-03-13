@@ -21,6 +21,7 @@ namespace CognitiveSearch.Models
             writer.WriteNumberValue(BoostingDistance);
             writer.WriteEndObject();
         }
+
         internal static DistanceScoringParameters DeserializeDistanceScoringParameters(JsonElement element)
         {
             DistanceScoringParameters result = new DistanceScoringParameters();

@@ -22,6 +22,7 @@ namespace lro.Models
             }
             writer.WriteEndObject();
         }
+
         internal static SubResource DeserializeSubResource(JsonElement element)
         {
             SubResource result = new SubResource();

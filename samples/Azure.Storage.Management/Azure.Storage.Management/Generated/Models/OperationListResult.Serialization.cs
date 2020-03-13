@@ -28,6 +28,7 @@ namespace Azure.Storage.Management.Models
             }
             writer.WriteEndObject();
         }
+
         internal static OperationListResult DeserializeOperationListResult(JsonElement element)
         {
             OperationListResult result = new OperationListResult();

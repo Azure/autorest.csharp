@@ -37,6 +37,7 @@ namespace xml_service.Models
             }
             writer.WriteEndElement();
         }
+
         internal static Metrics DeserializeMetrics(XElement element)
         {
             Metrics result = default;

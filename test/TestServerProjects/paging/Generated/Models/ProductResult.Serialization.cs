@@ -33,6 +33,7 @@ namespace paging.Models
             }
             writer.WriteEndObject();
         }
+
         internal static ProductResult DeserializeProductResult(JsonElement element)
         {
             ProductResult result = new ProductResult();

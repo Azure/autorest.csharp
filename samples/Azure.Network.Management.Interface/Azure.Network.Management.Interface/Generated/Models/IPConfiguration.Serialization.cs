@@ -60,6 +60,7 @@ namespace Azure.Network.Management.Interface.Models
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
+
         internal static IPConfiguration DeserializeIPConfiguration(JsonElement element)
         {
             IPConfiguration result = new IPConfiguration();

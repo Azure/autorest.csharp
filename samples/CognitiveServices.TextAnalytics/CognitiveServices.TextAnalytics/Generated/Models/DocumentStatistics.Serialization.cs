@@ -21,6 +21,7 @@ namespace CognitiveServices.TextAnalytics.Models
             writer.WriteNumberValue(TransactionsCount);
             writer.WriteEndObject();
         }
+
         internal static DocumentStatistics DeserializeDocumentStatistics(JsonElement element)
         {
             DocumentStatistics result = new DocumentStatistics();

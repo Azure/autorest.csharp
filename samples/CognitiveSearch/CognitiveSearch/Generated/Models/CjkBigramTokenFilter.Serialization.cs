@@ -37,6 +37,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(Name);
             writer.WriteEndObject();
         }
+
         internal static CjkBigramTokenFilter DeserializeCjkBigramTokenFilter(JsonElement element)
         {
             CjkBigramTokenFilter result = new CjkBigramTokenFilter();

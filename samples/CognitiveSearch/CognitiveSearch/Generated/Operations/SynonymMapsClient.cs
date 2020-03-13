@@ -30,6 +30,7 @@ namespace CognitiveSearch
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         /// <summary> Creates a new synonym map or updates a synonym map if it already exists. </summary>
         /// <param name="synonymMapName"> The name of the synonym map to create or update. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -41,6 +42,7 @@ namespace CognitiveSearch
         {
             return await RestClient.CreateOrUpdateAsync(synonymMapName, clientRequestId, ifMatch, ifNoneMatch, synonymMap, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Creates a new synonym map or updates a synonym map if it already exists. </summary>
         /// <param name="synonymMapName"> The name of the synonym map to create or update. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -52,6 +54,7 @@ namespace CognitiveSearch
         {
             return RestClient.CreateOrUpdate(synonymMapName, clientRequestId, ifMatch, ifNoneMatch, synonymMap, cancellationToken);
         }
+
         /// <summary> Deletes a synonym map. </summary>
         /// <param name="synonymMapName"> The name of the synonym map to create or update. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -62,6 +65,7 @@ namespace CognitiveSearch
         {
             return await RestClient.DeleteAsync(synonymMapName, clientRequestId, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Deletes a synonym map. </summary>
         /// <param name="synonymMapName"> The name of the synonym map to create or update. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -72,6 +76,7 @@ namespace CognitiveSearch
         {
             return RestClient.Delete(synonymMapName, clientRequestId, ifMatch, ifNoneMatch, cancellationToken);
         }
+
         /// <summary> Retrieves a synonym map definition. </summary>
         /// <param name="synonymMapName"> The name of the synonym map to create or update. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -80,6 +85,7 @@ namespace CognitiveSearch
         {
             return await RestClient.GetAsync(synonymMapName, clientRequestId, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Retrieves a synonym map definition. </summary>
         /// <param name="synonymMapName"> The name of the synonym map to create or update. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -88,6 +94,7 @@ namespace CognitiveSearch
         {
             return RestClient.Get(synonymMapName, clientRequestId, cancellationToken);
         }
+
         /// <summary> Lists all synonym maps available for a search service. </summary>
         /// <param name="select"> Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -96,6 +103,7 @@ namespace CognitiveSearch
         {
             return await RestClient.ListAsync(select, clientRequestId, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Lists all synonym maps available for a search service. </summary>
         /// <param name="select"> Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -104,6 +112,7 @@ namespace CognitiveSearch
         {
             return RestClient.List(select, clientRequestId, cancellationToken);
         }
+
         /// <summary> Creates a new synonym map. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="synonymMap"> The definition of the synonym map to create or update. </param>
@@ -112,6 +121,7 @@ namespace CognitiveSearch
         {
             return await RestClient.CreateAsync(clientRequestId, synonymMap, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Creates a new synonym map. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="synonymMap"> The definition of the synonym map to create or update. </param>

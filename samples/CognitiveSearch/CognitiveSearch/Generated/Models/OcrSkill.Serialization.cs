@@ -63,6 +63,7 @@ namespace CognitiveSearch.Models
             writer.WriteEndArray();
             writer.WriteEndObject();
         }
+
         internal static OcrSkill DeserializeOcrSkill(JsonElement element)
         {
             OcrSkill result = new OcrSkill();

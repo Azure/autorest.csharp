@@ -27,6 +27,7 @@ namespace body_array.Models
             }
             writer.WriteEndObject();
         }
+
         internal static Product DeserializeProduct(JsonElement element)
         {
             Product result = new Product();

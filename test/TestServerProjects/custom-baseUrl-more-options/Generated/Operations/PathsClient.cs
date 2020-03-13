@@ -28,6 +28,7 @@ namespace custom_baseUrl_more_options
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         /// <summary> Get a 200 to test a valid base uri. </summary>
         /// <param name="vault"> The vault name, e.g. https://myvault. </param>
         /// <param name="secret"> Secret value. </param>
@@ -38,6 +39,7 @@ namespace custom_baseUrl_more_options
         {
             return await RestClient.GetEmptyAsync(vault, secret, keyName, keyVersion, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get a 200 to test a valid base uri. </summary>
         /// <param name="vault"> The vault name, e.g. https://myvault. </param>
         /// <param name="secret"> Secret value. </param>

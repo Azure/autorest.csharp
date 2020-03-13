@@ -33,6 +33,7 @@ namespace Azure.Storage.Management.Models
             }
             writer.WriteEndObject();
         }
+
         internal static EncryptionScopeListResult DeserializeEncryptionScopeListResult(JsonElement element)
         {
             EncryptionScopeListResult result = new EncryptionScopeListResult();

@@ -45,6 +45,7 @@ namespace Azure.AI.FormRecognizer.Models
             }
             writer.WriteEndObject();
         }
+
         internal static PageResult DeserializePageResult(JsonElement element)
         {
             PageResult result = new PageResult();

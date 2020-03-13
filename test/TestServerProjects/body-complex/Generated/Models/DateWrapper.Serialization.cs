@@ -27,6 +27,7 @@ namespace body_complex.Models
             }
             writer.WriteEndObject();
         }
+
         internal static DateWrapper DeserializeDateWrapper(JsonElement element)
         {
             DateWrapper result = new DateWrapper();

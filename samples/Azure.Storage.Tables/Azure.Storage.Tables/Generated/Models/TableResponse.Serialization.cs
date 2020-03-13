@@ -42,6 +42,7 @@ namespace Azure.Storage.Tables.Models
             }
             writer.WriteEndObject();
         }
+
         internal static TableResponse DeserializeTableResponse(JsonElement element)
         {
             TableResponse result = new TableResponse();

@@ -27,6 +27,7 @@ namespace lro.Models
             }
             writer.WriteEndObject();
         }
+
         internal static CloudError DeserializeCloudError(JsonElement element)
         {
             CloudError result = new CloudError();

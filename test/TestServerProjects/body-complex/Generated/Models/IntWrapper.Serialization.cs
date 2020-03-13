@@ -27,6 +27,7 @@ namespace body_complex.Models
             }
             writer.WriteEndObject();
         }
+
         internal static IntWrapper DeserializeIntWrapper(JsonElement element)
         {
             IntWrapper result = new IntWrapper();

@@ -38,6 +38,7 @@ namespace CognitiveSearch.Models
             }
             writer.WriteEndObject();
         }
+
         internal static Skillset DeserializeSkillset(JsonElement element)
         {
             Skillset result = new Skillset();

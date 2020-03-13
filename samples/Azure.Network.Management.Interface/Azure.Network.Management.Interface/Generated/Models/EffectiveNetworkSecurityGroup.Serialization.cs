@@ -43,6 +43,7 @@ namespace Azure.Network.Management.Interface.Models
             }
             writer.WriteEndObject();
         }
+
         internal static EffectiveNetworkSecurityGroup DeserializeEffectiveNetworkSecurityGroup(JsonElement element)
         {
             EffectiveNetworkSecurityGroup result = new EffectiveNetworkSecurityGroup();

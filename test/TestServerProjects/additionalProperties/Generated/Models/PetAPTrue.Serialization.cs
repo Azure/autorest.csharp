@@ -34,6 +34,7 @@ namespace additionalProperties.Models
             }
             writer.WriteEndObject();
         }
+
         internal static PetAPTrue DeserializePetAPTrue(JsonElement element)
         {
             PetAPTrue result = new PetAPTrue();

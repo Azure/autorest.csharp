@@ -21,6 +21,7 @@ namespace xml_service.Models
             writer.WriteEndElement();
             writer.WriteEndElement();
         }
+
         internal static BlobPrefix DeserializeBlobPrefix(XElement element)
         {
             BlobPrefix result = default;

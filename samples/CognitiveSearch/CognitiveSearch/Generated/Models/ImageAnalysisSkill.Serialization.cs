@@ -74,6 +74,7 @@ namespace CognitiveSearch.Models
             writer.WriteEndArray();
             writer.WriteEndObject();
         }
+
         internal static ImageAnalysisSkill DeserializeImageAnalysisSkill(JsonElement element)
         {
             ImageAnalysisSkill result = new ImageAnalysisSkill();

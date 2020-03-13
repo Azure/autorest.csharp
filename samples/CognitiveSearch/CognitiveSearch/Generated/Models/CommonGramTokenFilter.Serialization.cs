@@ -38,6 +38,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(Name);
             writer.WriteEndObject();
         }
+
         internal static CommonGramTokenFilter DeserializeCommonGramTokenFilter(JsonElement element)
         {
             CommonGramTokenFilter result = new CommonGramTokenFilter();

@@ -29,6 +29,7 @@ namespace ExtensionClientName
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         /// <param name="renamedPathParameter"> The String to use. </param>
         /// <param name="renamedQueryParameter"> The String to use. </param>
         /// <param name="renamedBodyParameter"> The RenamedSchema to use. </param>
@@ -37,6 +38,7 @@ namespace ExtensionClientName
         {
             return await RestClient.RenamedOperationAsync(renamedPathParameter, renamedQueryParameter, renamedBodyParameter, cancellationToken).ConfigureAwait(false);
         }
+
         /// <param name="renamedPathParameter"> The String to use. </param>
         /// <param name="renamedQueryParameter"> The String to use. </param>
         /// <param name="renamedBodyParameter"> The RenamedSchema to use. </param>

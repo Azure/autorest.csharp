@@ -42,6 +42,7 @@ namespace CognitiveSearch.Models
             }
             writer.WriteEndObject();
         }
+
         internal static ItemWarning DeserializeItemWarning(JsonElement element)
         {
             ItemWarning result = new ItemWarning();

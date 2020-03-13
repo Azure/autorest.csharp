@@ -36,6 +36,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(Name);
             writer.WriteEndObject();
         }
+
         internal static MicrosoftLanguageTokenizer DeserializeMicrosoftLanguageTokenizer(JsonElement element)
         {
             MicrosoftLanguageTokenizer result = new MicrosoftLanguageTokenizer();

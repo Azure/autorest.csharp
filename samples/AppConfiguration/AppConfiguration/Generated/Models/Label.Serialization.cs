@@ -22,6 +22,7 @@ namespace AppConfiguration.Models
             }
             writer.WriteEndObject();
         }
+
         internal static Label DeserializeLabel(JsonElement element)
         {
             Label result = new Label();

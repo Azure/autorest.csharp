@@ -47,6 +47,7 @@ namespace body_complex.Models
             }
             writer.WriteEndObject();
         }
+
         internal static Salmon DeserializeSalmon(JsonElement element)
         {
             if (element.TryGetProperty("fishtype", out JsonElement discriminator))

@@ -29,6 +29,7 @@ namespace Azure.AI.FormRecognizer.Models
             }
             writer.WriteEndObject();
         }
+
         internal static TrainRequest DeserializeTrainRequest(JsonElement element)
         {
             TrainRequest result = new TrainRequest();

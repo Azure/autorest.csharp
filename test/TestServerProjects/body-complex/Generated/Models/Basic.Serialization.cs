@@ -32,6 +32,7 @@ namespace body_complex.Models
             }
             writer.WriteEndObject();
         }
+
         internal static Basic DeserializeBasic(JsonElement element)
         {
             Basic result = new Basic();

@@ -29,6 +29,7 @@ namespace CognitiveSearch.Models
             }
             writer.WriteEndObject();
         }
+
         internal static CorsOptions DeserializeCorsOptions(JsonElement element)
         {
             CorsOptions result = new CorsOptions();

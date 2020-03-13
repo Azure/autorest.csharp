@@ -22,6 +22,7 @@ namespace Azure.Network.Management.Interface.Models
             }
             writer.WriteEndObject();
         }
+
         internal static PublicIPAddressSku DeserializePublicIPAddressSku(JsonElement element)
         {
             PublicIPAddressSku result = new PublicIPAddressSku();

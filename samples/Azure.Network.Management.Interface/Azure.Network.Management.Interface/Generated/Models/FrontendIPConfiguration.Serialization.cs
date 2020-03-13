@@ -126,6 +126,7 @@ namespace Azure.Network.Management.Interface.Models
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
+
         internal static FrontendIPConfiguration DeserializeFrontendIPConfiguration(JsonElement element)
         {
             FrontendIPConfiguration result = new FrontendIPConfiguration();
