@@ -419,7 +419,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 						_writer.TrimNewLines();
 						_writer.AppendRaw(_end);
 					}
-        
+
 		            if (_newLine)
                     {
                         _writer.Line();

@@ -19,6 +19,7 @@ namespace NameConflicts
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of ServiceRestClient. </summary>
         public ServiceRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
@@ -31,6 +32,7 @@ namespace NameConflicts
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreateOperationRequest(string request, string message, string scope, string uri)
         {
             var message0 = pipeline.CreateMessage();
@@ -46,6 +48,7 @@ namespace NameConflicts
             request0.Uri = uri0;
             return message0;
         }
+
         /// <param name="request"> The String to use. </param>
         /// <param name="message"> The String to use. </param>
         /// <param name="scope"> The String to use. </param>
@@ -90,6 +93,7 @@ namespace NameConflicts
                 throw;
             }
         }
+
         /// <param name="request"> The String to use. </param>
         /// <param name="message"> The String to use. </param>
         /// <param name="scope"> The String to use. </param>

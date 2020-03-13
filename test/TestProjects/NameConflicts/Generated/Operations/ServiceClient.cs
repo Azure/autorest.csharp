@@ -28,6 +28,7 @@ namespace NameConflicts
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         /// <param name="request"> The String to use. </param>
         /// <param name="message"> The String to use. </param>
         /// <param name="scope"> The String to use. </param>
@@ -37,6 +38,7 @@ namespace NameConflicts
         {
             return await RestClient.OperationAsync(request, message, scope, uri, cancellationToken).ConfigureAwait(false);
         }
+
         /// <param name="request"> The String to use. </param>
         /// <param name="message"> The String to use. </param>
         /// <param name="scope"> The String to use. </param>
