@@ -70,63 +70,63 @@ namespace CognitiveSearch.Models
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown StemmerTokenFilterLanguage value.")
         };
 
-        public static StemmerTokenFilterLanguage ToStemmerTokenFilterLanguage(this string value) => value switch
+        public static StemmerTokenFilterLanguage ToStemmerTokenFilterLanguage(this string value)
         {
-            "arabic" => StemmerTokenFilterLanguage.Arabic,
-            "armenian" => StemmerTokenFilterLanguage.Armenian,
-            "basque" => StemmerTokenFilterLanguage.Basque,
-            "brazilian" => StemmerTokenFilterLanguage.Brazilian,
-            "bulgarian" => StemmerTokenFilterLanguage.Bulgarian,
-            "catalan" => StemmerTokenFilterLanguage.Catalan,
-            "czech" => StemmerTokenFilterLanguage.Czech,
-            "danish" => StemmerTokenFilterLanguage.Danish,
-            "dutch" => StemmerTokenFilterLanguage.Dutch,
-            "dutchKp" => StemmerTokenFilterLanguage.DutchKp,
-            "english" => StemmerTokenFilterLanguage.English,
-            "lightEnglish" => StemmerTokenFilterLanguage.LightEnglish,
-            "minimalEnglish" => StemmerTokenFilterLanguage.MinimalEnglish,
-            "possessiveEnglish" => StemmerTokenFilterLanguage.PossessiveEnglish,
-            "porter2" => StemmerTokenFilterLanguage.Porter2,
-            "lovins" => StemmerTokenFilterLanguage.Lovins,
-            "finnish" => StemmerTokenFilterLanguage.Finnish,
-            "lightFinnish" => StemmerTokenFilterLanguage.LightFinnish,
-            "french" => StemmerTokenFilterLanguage.French,
-            "lightFrench" => StemmerTokenFilterLanguage.LightFrench,
-            "minimalFrench" => StemmerTokenFilterLanguage.MinimalFrench,
-            "galician" => StemmerTokenFilterLanguage.Galician,
-            "minimalGalician" => StemmerTokenFilterLanguage.MinimalGalician,
-            "german" => StemmerTokenFilterLanguage.German,
-            "german2" => StemmerTokenFilterLanguage.German2,
-            "lightGerman" => StemmerTokenFilterLanguage.LightGerman,
-            "minimalGerman" => StemmerTokenFilterLanguage.MinimalGerman,
-            "greek" => StemmerTokenFilterLanguage.Greek,
-            "hindi" => StemmerTokenFilterLanguage.Hindi,
-            "hungarian" => StemmerTokenFilterLanguage.Hungarian,
-            "lightHungarian" => StemmerTokenFilterLanguage.LightHungarian,
-            "indonesian" => StemmerTokenFilterLanguage.Indonesian,
-            "irish" => StemmerTokenFilterLanguage.Irish,
-            "italian" => StemmerTokenFilterLanguage.Italian,
-            "lightItalian" => StemmerTokenFilterLanguage.LightItalian,
-            "sorani" => StemmerTokenFilterLanguage.Sorani,
-            "latvian" => StemmerTokenFilterLanguage.Latvian,
-            "norwegian" => StemmerTokenFilterLanguage.Norwegian,
-            "lightNorwegian" => StemmerTokenFilterLanguage.LightNorwegian,
-            "minimalNorwegian" => StemmerTokenFilterLanguage.MinimalNorwegian,
-            "lightNynorsk" => StemmerTokenFilterLanguage.LightNynorsk,
-            "minimalNynorsk" => StemmerTokenFilterLanguage.MinimalNynorsk,
-            "portuguese" => StemmerTokenFilterLanguage.Portuguese,
-            "lightPortuguese" => StemmerTokenFilterLanguage.LightPortuguese,
-            "minimalPortuguese" => StemmerTokenFilterLanguage.MinimalPortuguese,
-            "portugueseRslp" => StemmerTokenFilterLanguage.PortugueseRslp,
-            "romanian" => StemmerTokenFilterLanguage.Romanian,
-            "russian" => StemmerTokenFilterLanguage.Russian,
-            "lightRussian" => StemmerTokenFilterLanguage.LightRussian,
-            "spanish" => StemmerTokenFilterLanguage.Spanish,
-            "lightSpanish" => StemmerTokenFilterLanguage.LightSpanish,
-            "swedish" => StemmerTokenFilterLanguage.Swedish,
-            "lightSwedish" => StemmerTokenFilterLanguage.LightSwedish,
-            "turkish" => StemmerTokenFilterLanguage.Turkish,
-            _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown StemmerTokenFilterLanguage value.")
-        };
+            if (string.Equals(value, "arabic", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.Arabic;
+            if (string.Equals(value, "armenian", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.Armenian;
+            if (string.Equals(value, "basque", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.Basque;
+            if (string.Equals(value, "brazilian", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.Brazilian;
+            if (string.Equals(value, "bulgarian", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.Bulgarian;
+            if (string.Equals(value, "catalan", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.Catalan;
+            if (string.Equals(value, "czech", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.Czech;
+            if (string.Equals(value, "danish", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.Danish;
+            if (string.Equals(value, "dutch", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.Dutch;
+            if (string.Equals(value, "dutchKp", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.DutchKp;
+            if (string.Equals(value, "english", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.English;
+            if (string.Equals(value, "lightEnglish", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.LightEnglish;
+            if (string.Equals(value, "minimalEnglish", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.MinimalEnglish;
+            if (string.Equals(value, "possessiveEnglish", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.PossessiveEnglish;
+            if (string.Equals(value, "porter2", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.Porter2;
+            if (string.Equals(value, "lovins", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.Lovins;
+            if (string.Equals(value, "finnish", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.Finnish;
+            if (string.Equals(value, "lightFinnish", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.LightFinnish;
+            if (string.Equals(value, "french", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.French;
+            if (string.Equals(value, "lightFrench", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.LightFrench;
+            if (string.Equals(value, "minimalFrench", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.MinimalFrench;
+            if (string.Equals(value, "galician", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.Galician;
+            if (string.Equals(value, "minimalGalician", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.MinimalGalician;
+            if (string.Equals(value, "german", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.German;
+            if (string.Equals(value, "german2", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.German2;
+            if (string.Equals(value, "lightGerman", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.LightGerman;
+            if (string.Equals(value, "minimalGerman", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.MinimalGerman;
+            if (string.Equals(value, "greek", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.Greek;
+            if (string.Equals(value, "hindi", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.Hindi;
+            if (string.Equals(value, "hungarian", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.Hungarian;
+            if (string.Equals(value, "lightHungarian", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.LightHungarian;
+            if (string.Equals(value, "indonesian", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.Indonesian;
+            if (string.Equals(value, "irish", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.Irish;
+            if (string.Equals(value, "italian", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.Italian;
+            if (string.Equals(value, "lightItalian", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.LightItalian;
+            if (string.Equals(value, "sorani", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.Sorani;
+            if (string.Equals(value, "latvian", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.Latvian;
+            if (string.Equals(value, "norwegian", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.Norwegian;
+            if (string.Equals(value, "lightNorwegian", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.LightNorwegian;
+            if (string.Equals(value, "minimalNorwegian", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.MinimalNorwegian;
+            if (string.Equals(value, "lightNynorsk", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.LightNynorsk;
+            if (string.Equals(value, "minimalNynorsk", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.MinimalNynorsk;
+            if (string.Equals(value, "portuguese", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.Portuguese;
+            if (string.Equals(value, "lightPortuguese", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.LightPortuguese;
+            if (string.Equals(value, "minimalPortuguese", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.MinimalPortuguese;
+            if (string.Equals(value, "portugueseRslp", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.PortugueseRslp;
+            if (string.Equals(value, "romanian", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.Romanian;
+            if (string.Equals(value, "russian", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.Russian;
+            if (string.Equals(value, "lightRussian", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.LightRussian;
+            if (string.Equals(value, "spanish", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.Spanish;
+            if (string.Equals(value, "lightSpanish", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.LightSpanish;
+            if (string.Equals(value, "swedish", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.Swedish;
+            if (string.Equals(value, "lightSwedish", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.LightSwedish;
+            if (string.Equals(value, "turkish", StringComparison.InvariantCultureIgnoreCase)) return StemmerTokenFilterLanguage.Turkish;
+            throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown StemmerTokenFilterLanguage value.");
+        }
     }
 }

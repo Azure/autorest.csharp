@@ -19,12 +19,12 @@ namespace CognitiveServices.TextAnalytics.Models
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown SentenceSentimentValue value.")
         };
 
-        public static SentenceSentimentValue ToSentenceSentimentValue(this string value) => value switch
+        public static SentenceSentimentValue ToSentenceSentimentValue(this string value)
         {
-            "positive" => SentenceSentimentValue.Positive,
-            "neutral" => SentenceSentimentValue.Neutral,
-            "negative" => SentenceSentimentValue.Negative,
-            _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown SentenceSentimentValue value.")
-        };
+            if (string.Equals(value, "positive", StringComparison.InvariantCultureIgnoreCase)) return SentenceSentimentValue.Positive;
+            if (string.Equals(value, "neutral", StringComparison.InvariantCultureIgnoreCase)) return SentenceSentimentValue.Neutral;
+            if (string.Equals(value, "negative", StringComparison.InvariantCultureIgnoreCase)) return SentenceSentimentValue.Negative;
+            throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown SentenceSentimentValue value.");
+        }
     }
 }

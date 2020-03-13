@@ -654,7 +654,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Handle multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
         public Task LRONonRetryPut201Creating400() => Test(async (host, pipeline) =>
         {
             var value = new Product();
@@ -663,7 +662,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Handle multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
         public Task LRONonRetryPut201Creating400_Sync() => Test((host, pipeline) =>
         {
             var value = new Product();
@@ -1388,7 +1386,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Handle multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
         public Task LRORetryPutSucceededWithBody() => Test(async (host, pipeline) =>
         {
             var value = new Product();
@@ -1400,7 +1397,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Handle multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
         public Task LRORetryPutSucceededWithBody_Sync() => Test((host, pipeline) =>
         {
             var value = new Product();

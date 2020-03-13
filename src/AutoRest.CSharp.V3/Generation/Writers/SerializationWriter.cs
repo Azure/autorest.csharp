@@ -163,14 +163,14 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     }
                     writer.Line();
 
-                    using (writer.Scope($"public static {declaredTypeName} To{declaredTypeName}(this string value) => value switch", end: "};"))
+                    using (writer.Scope($"public static {declaredTypeName} To{declaredTypeName}(this string value)"))
                     {
                         foreach (EnumTypeValue value in schema.Values)
                         {
-                            writer.Line($"{value.Value.Value:L} => {declaredTypeName}.{value.Declaration.Name},");
+                            writer.Line($"if ({typeof(string)}.Equals(value, {value.Value.Value:L}, {typeof(StringComparison)}.InvariantCultureIgnoreCase)) return {declaredTypeName}.{value.Declaration.Name};");
                         }
 
-                        writer.Line($"_ => throw new {typeof(ArgumentOutOfRangeException)}(nameof(value), value, \"Unknown {declaredTypeName} value.\")");
+                        writer.Line($"throw new {typeof(ArgumentOutOfRangeException)}(nameof(value), value, \"Unknown {declaredTypeName} value.\");");
                     }
                 }
             }
