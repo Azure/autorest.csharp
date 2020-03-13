@@ -150,33 +150,53 @@ namespace model_flattening
         }
         /// <summary> Put Flattened Simple Product with client flattening true on the parameter. </summary>
         /// <param name="simpleBodyProduct"> Simple body product to post. </param>
+        /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
+        /// <param name="description"> Description of product. </param>
+        /// <param name="maxProductDisplayName"> Display name of product. </param>
+        /// <param name="genericValue"> Generic URL value. </param>
+        /// <param name="odataValue"> URL value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<SimpleProduct>> PostFlattenedSimpleProductAsync(SimpleProduct simpleBodyProduct, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SimpleProduct>> PostFlattenedSimpleProductAsync(SimpleProduct simpleBodyProduct, string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PostFlattenedSimpleProductAsync(simpleBodyProduct, cancellationToken).ConfigureAwait(false);
+            return await RestClient.PostFlattenedSimpleProductAsync(simpleBodyProduct, productId, description, maxProductDisplayName, genericValue, odataValue, cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Put Flattened Simple Product with client flattening true on the parameter. </summary>
         /// <param name="simpleBodyProduct"> Simple body product to post. </param>
+        /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
+        /// <param name="description"> Description of product. </param>
+        /// <param name="maxProductDisplayName"> Display name of product. </param>
+        /// <param name="genericValue"> Generic URL value. </param>
+        /// <param name="odataValue"> URL value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<SimpleProduct> PostFlattenedSimpleProduct(SimpleProduct simpleBodyProduct, CancellationToken cancellationToken = default)
+        public virtual Response<SimpleProduct> PostFlattenedSimpleProduct(SimpleProduct simpleBodyProduct, string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, CancellationToken cancellationToken = default)
         {
-            return RestClient.PostFlattenedSimpleProduct(simpleBodyProduct, cancellationToken);
+            return RestClient.PostFlattenedSimpleProduct(simpleBodyProduct, productId, description, maxProductDisplayName, genericValue, odataValue, cancellationToken);
         }
         /// <summary> Put Simple Product with client flattening true on the model. </summary>
         /// <param name="name"> Product name with value &apos;groupproduct&apos;. </param>
         /// <param name="simpleBodyProduct"> Simple body product to put. </param>
+        /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
+        /// <param name="description"> Description of product. </param>
+        /// <param name="maxProductDisplayName"> Display name of product. </param>
+        /// <param name="genericValue"> Generic URL value. </param>
+        /// <param name="odataValue"> URL value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<SimpleProduct>> PutSimpleProductWithGroupingAsync(string name, SimpleProduct simpleBodyProduct, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SimpleProduct>> PutSimpleProductWithGroupingAsync(string name, SimpleProduct simpleBodyProduct, string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutSimpleProductWithGroupingAsync(name, simpleBodyProduct, cancellationToken).ConfigureAwait(false);
+            return await RestClient.PutSimpleProductWithGroupingAsync(name, simpleBodyProduct, productId, description, maxProductDisplayName, genericValue, odataValue, cancellationToken).ConfigureAwait(false);
         }
         /// <summary> Put Simple Product with client flattening true on the model. </summary>
         /// <param name="name"> Product name with value &apos;groupproduct&apos;. </param>
         /// <param name="simpleBodyProduct"> Simple body product to put. </param>
+        /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
+        /// <param name="description"> Description of product. </param>
+        /// <param name="maxProductDisplayName"> Display name of product. </param>
+        /// <param name="genericValue"> Generic URL value. </param>
+        /// <param name="odataValue"> URL value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<SimpleProduct> PutSimpleProductWithGrouping(string name, SimpleProduct simpleBodyProduct, CancellationToken cancellationToken = default)
+        public virtual Response<SimpleProduct> PutSimpleProductWithGrouping(string name, SimpleProduct simpleBodyProduct, string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutSimpleProductWithGrouping(name, simpleBodyProduct, cancellationToken);
+            return RestClient.PutSimpleProductWithGrouping(name, simpleBodyProduct, productId, description, maxProductDisplayName, genericValue, odataValue, cancellationToken);
         }
     }
 }

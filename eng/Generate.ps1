@@ -91,7 +91,7 @@ foreach ($testName in $testNames)
     $swaggerDefinitions[$testName] = @{
         'title'=$testName;
         'output'=$testServerDirectory;
-        'arguments'="--require=$configurationPath --input-file=$inputFile --csharpgen.attach --csharpproj.attach"
+        'arguments'="--require=$configurationPath --input-file=$inputFile"
     }
 }
 

@@ -21,7 +21,7 @@ namespace AutoRest.CSharp.V3.Input
         /// <summary>the original body parameter that this parameter is in effect replacing</summary>
         [YamlMember(Alias = "originalParameter")]
         [System.ComponentModel.DataAnnotations.Required]
-        public RequestParameter OriginalParameter { get; set; } = new RequestParameter();
+        public RequestParameter? OriginalParameter { get; set; }
 
         /// <summary>if this parameter is for a nested property, this is the path of properties it takes to get there</summary>
         [YamlMember(Alias = "pathToProperty")]
@@ -31,7 +31,21 @@ namespace AutoRest.CSharp.V3.Input
         /// <summary>the target property this virtual parameter represents</summary>
         [YamlMember(Alias = "targetProperty")]
         [System.ComponentModel.DataAnnotations.Required]
-        public Property TargetProperty { get; set; } = new Property();
+        public Property? TargetProperty { get; set; }
+
+        /// <summary>the wire name of this property</summary>
+        [YamlMember(Alias = "serializedName")]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string SerializedName { get; set; }
+
+        /// <summary>when a property is flattened, the property will be the set of serialized names to get to that target property.
+        ///
+        /// If flattenedName is present, then this property is a flattened property.
+        ///
+        /// (ie, ['properties','name'] )</summary>
+        [YamlMember(Alias = "flattenedNames")]
+        [System.ComponentModel.DataAnnotations.Required]
+        public ICollection<string> FlattenedNames { get; set; } = new System.Collections.ObjectModel.Collection<string>();
     }
 
     internal partial class Operation
