@@ -11,44 +11,8 @@ using Azure.Core;
 
 namespace body_complex.Models
 {
-    public partial class DotFishMarket : IUtf8JsonSerializable
+    public partial class DotFishMarket
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (SampleSalmon != null)
-            {
-                writer.WritePropertyName("sampleSalmon");
-                writer.WriteObjectValue(SampleSalmon);
-            }
-            if (Salmons != null)
-            {
-                writer.WritePropertyName("salmons");
-                writer.WriteStartArray();
-                foreach (var item in Salmons)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            if (SampleFish != null)
-            {
-                writer.WritePropertyName("sampleFish");
-                writer.WriteObjectValue(SampleFish);
-            }
-            if (Fishes != null)
-            {
-                writer.WritePropertyName("fishes");
-                writer.WriteStartArray();
-                foreach (var item in Fishes)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            writer.WriteEndObject();
-        }
-
         internal static DotFishMarket DeserializeDotFishMarket(JsonElement element)
         {
             DotFishMarket result = new DotFishMarket();

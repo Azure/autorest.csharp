@@ -10,6 +10,6 @@ namespace httpInfrastructure.Models
     /// <summary> The MyException. </summary>
     public partial class MyException
     {
-        public string StatusCode { get; set; }
+        public string StatusCode { get; internal set; }
     }
 }

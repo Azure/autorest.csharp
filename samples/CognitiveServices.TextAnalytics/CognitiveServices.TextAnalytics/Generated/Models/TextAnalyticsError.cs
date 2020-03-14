@@ -13,14 +13,14 @@ namespace CognitiveServices.TextAnalytics.Models
     public partial class TextAnalyticsError
     {
         /// <summary> Error code. </summary>
-        public ErrorCodeValue Code { get; set; }
+        public ErrorCodeValue Code { get; internal set; }
         /// <summary> Error message. </summary>
-        public string Message { get; set; }
+        public string Message { get; internal set; }
         /// <summary> Error target. </summary>
-        public string Target { get; set; }
+        public string Target { get; internal set; }
         /// <summary> Inner error contains more specific information. </summary>
-        public InnerError InnerError { get; set; }
+        public InnerError InnerError { get; internal set; }
         /// <summary> Details about specific errors that led to this reported error. </summary>
-        public IList<TextAnalyticsError> Details { get; set; }
+        public IList<TextAnalyticsError> Details { get; internal set; }
     }
 }

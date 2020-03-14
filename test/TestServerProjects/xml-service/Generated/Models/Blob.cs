@@ -12,12 +12,12 @@ namespace xml_service.Models
     /// <summary> An Azure Storage blob. </summary>
     public partial class Blob
     {
-        public string Name { get; set; }
-        public bool Deleted { get; set; }
-        public string Snapshot { get; set; }
+        public string Name { get; internal set; }
+        public bool Deleted { get; internal set; }
+        public string Snapshot { get; internal set; }
         /// <summary> Properties of a blob. </summary>
-        public BlobProperties Properties { get; set; } = new BlobProperties();
+        public BlobProperties Properties { get; internal set; } = new BlobProperties();
         /// <summary> Dictionary of &lt;string&gt;. </summary>
-        public IDictionary<string, string> Metadata { get; set; }
+        public IDictionary<string, string> Metadata { get; internal set; }
     }
 }

@@ -13,14 +13,14 @@ namespace Azure.AI.FormRecognizer.Models
     public partial class AnalyzeResult
     {
         /// <summary> Version of schema used for this result. </summary>
-        public string Version { get; set; }
+        public string Version { get; internal set; }
         /// <summary> Text extracted from the input. </summary>
-        public IList<ReadResult> ReadResults { get; set; } = new List<ReadResult>();
+        public IList<ReadResult> ReadResults { get; internal set; } = new List<ReadResult>();
         /// <summary> Page-level information extracted from the input. </summary>
-        public IList<PageResult> PageResults { get; set; }
+        public IList<PageResult> PageResults { get; internal set; }
         /// <summary> Document-level information extracted from the input. </summary>
-        public IList<DocumentResult> DocumentResults { get; set; }
+        public IList<DocumentResult> DocumentResults { get; internal set; }
         /// <summary> List of errors reported during the analyze operation. </summary>
-        public IList<ErrorInformation> Errors { get; set; }
+        public IList<ErrorInformation> Errors { get; internal set; }
     }
 }

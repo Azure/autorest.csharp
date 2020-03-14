@@ -10,7 +10,7 @@ namespace xml_service.Models
     /// <summary> The Error. </summary>
     public partial class Error
     {
-        public int? Status { get; set; }
-        public string Message { get; set; }
+        public int? Status { get; internal set; }
+        public string Message { get; internal set; }
     }
 }

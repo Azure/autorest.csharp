@@ -10,6 +10,6 @@ namespace httpInfrastructure.Models
     /// <summary> The C. </summary>
     public partial class C
     {
-        public string HttpCode { get; set; }
+        public string HttpCode { get; internal set; }
     }
 }

@@ -13,12 +13,12 @@ namespace CognitiveServices.TextAnalytics.Models
     public partial class EntitiesResult
     {
         /// <summary> Response by document. </summary>
-        public IList<DocumentEntities> Documents { get; set; } = new List<DocumentEntities>();
+        public IList<DocumentEntities> Documents { get; internal set; } = new List<DocumentEntities>();
         /// <summary> Errors by document id. </summary>
-        public IList<DocumentError> Errors { get; set; } = new List<DocumentError>();
+        public IList<DocumentError> Errors { get; internal set; } = new List<DocumentError>();
         /// <summary> if showStats=true was specified in the request this field will contain information about the request payload. </summary>
-        public RequestStatistics Statistics { get; set; }
+        public RequestStatistics Statistics { get; internal set; }
         /// <summary> This field indicates which model is used for scoring. </summary>
-        public string ModelVersion { get; set; }
+        public string ModelVersion { get; internal set; }
     }
 }

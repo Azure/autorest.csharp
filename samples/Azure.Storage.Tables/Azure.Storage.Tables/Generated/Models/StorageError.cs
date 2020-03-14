@@ -10,6 +10,6 @@ namespace Azure.Storage.Tables.Models
     /// <summary> The StorageError. </summary>
     public partial class StorageError
     {
-        public string Message { get; set; }
+        public string Message { get; internal set; }
     }
 }

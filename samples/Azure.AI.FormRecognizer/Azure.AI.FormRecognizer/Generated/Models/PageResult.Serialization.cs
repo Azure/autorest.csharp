@@ -11,41 +11,8 @@ using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class PageResult : IUtf8JsonSerializable
+    public partial class PageResult
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            writer.WritePropertyName("page");
-            writer.WriteNumberValue(Page);
-            if (ClusterId != null)
-            {
-                writer.WritePropertyName("clusterId");
-                writer.WriteNumberValue(ClusterId.Value);
-            }
-            if (KeyValuePairs != null)
-            {
-                writer.WritePropertyName("keyValuePairs");
-                writer.WriteStartArray();
-                foreach (var item in KeyValuePairs)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            if (Tables != null)
-            {
-                writer.WritePropertyName("tables");
-                writer.WriteStartArray();
-                foreach (var item in Tables)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            writer.WriteEndObject();
-        }
-
         internal static PageResult DeserializePageResult(JsonElement element)
         {
             PageResult result = new PageResult();

@@ -10,6 +10,6 @@ namespace xml_service.Models
     /// <summary> The JsonOutput. </summary>
     public partial class JsonOutput
     {
-        public int? Id { get; set; }
+        public int? Id { get; internal set; }
     }
 }

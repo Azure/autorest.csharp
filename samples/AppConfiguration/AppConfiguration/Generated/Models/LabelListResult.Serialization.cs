@@ -11,29 +11,8 @@ using Azure.Core;
 
 namespace AppConfiguration.Models
 {
-    public partial class LabelListResult : IUtf8JsonSerializable
+    public partial class LabelListResult
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (Items != null)
-            {
-                writer.WritePropertyName("items");
-                writer.WriteStartArray();
-                foreach (var item in Items)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            if (NextLink != null)
-            {
-                writer.WritePropertyName("@nextLink");
-                writer.WriteStringValue(NextLink);
-            }
-            writer.WriteEndObject();
-        }
-
         internal static LabelListResult DeserializeLabelListResult(JsonElement element)
         {
             LabelListResult result = new LabelListResult();

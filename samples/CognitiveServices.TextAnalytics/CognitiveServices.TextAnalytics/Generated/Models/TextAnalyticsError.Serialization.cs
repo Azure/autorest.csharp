@@ -11,38 +11,8 @@ using Azure.Core;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
-    public partial class TextAnalyticsError : IUtf8JsonSerializable
+    public partial class TextAnalyticsError
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            writer.WritePropertyName("code");
-            writer.WriteStringValue(Code.ToSerialString());
-            writer.WritePropertyName("message");
-            writer.WriteStringValue(Message);
-            if (Target != null)
-            {
-                writer.WritePropertyName("target");
-                writer.WriteStringValue(Target);
-            }
-            if (InnerError != null)
-            {
-                writer.WritePropertyName("innerError");
-                writer.WriteObjectValue(InnerError);
-            }
-            if (Details != null)
-            {
-                writer.WritePropertyName("details");
-                writer.WriteStartArray();
-                foreach (var item in Details)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            writer.WriteEndObject();
-        }
-
         internal static TextAnalyticsError DeserializeTextAnalyticsError(JsonElement element)
         {
             TextAnalyticsError result = new TextAnalyticsError();

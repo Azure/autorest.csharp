@@ -10,24 +10,8 @@ using Azure.Core;
 
 namespace custom_baseUrl_paging.Models
 {
-    public partial class ProductProperties : IUtf8JsonSerializable
+    public partial class ProductProperties
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (Id != null)
-            {
-                writer.WritePropertyName("id");
-                writer.WriteNumberValue(Id.Value);
-            }
-            if (Name != null)
-            {
-                writer.WritePropertyName("name");
-                writer.WriteStringValue(Name);
-            }
-            writer.WriteEndObject();
-        }
-
         internal static ProductProperties DeserializeProductProperties(JsonElement element)
         {
             ProductProperties result = new ProductProperties();

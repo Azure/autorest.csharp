@@ -12,11 +12,11 @@ namespace xml_service.Models
     /// <summary> Properties of a container. </summary>
     public partial class ContainerProperties
     {
-        public DateTimeOffset LastModified { get; set; }
-        public string Etag { get; set; }
-        public LeaseStatusType? LeaseStatus { get; set; }
-        public LeaseStateType? LeaseState { get; set; }
-        public LeaseDurationType? LeaseDuration { get; set; }
-        public PublicAccessType? PublicAccess { get; set; }
+        public DateTimeOffset LastModified { get; internal set; }
+        public string Etag { get; internal set; }
+        public LeaseStatusType? LeaseStatus { get; internal set; }
+        public LeaseStateType? LeaseState { get; internal set; }
+        public LeaseDurationType? LeaseDuration { get; internal set; }
+        public PublicAccessType? PublicAccess { get; internal set; }
     }
 }

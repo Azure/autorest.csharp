@@ -11,35 +11,8 @@ using Azure.Core;
 
 namespace Azure.Storage.Tables.Models
 {
-    public partial class TableEntityQueryResponse : IUtf8JsonSerializable
+    public partial class TableEntityQueryResponse
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (OdataMetadata != null)
-            {
-                writer.WritePropertyName("odata.metadata");
-                writer.WriteStringValue(OdataMetadata);
-            }
-            if (Value != null)
-            {
-                writer.WritePropertyName("value");
-                writer.WriteStartArray();
-                foreach (var item in Value)
-                {
-                    writer.WriteStartObject();
-                    foreach (var item0 in item)
-                    {
-                        writer.WritePropertyName(item0.Key);
-                        writer.WriteObjectValue(item0.Value);
-                    }
-                    writer.WriteEndObject();
-                }
-                writer.WriteEndArray();
-            }
-            writer.WriteEndObject();
-        }
-
         internal static TableEntityQueryResponse DeserializeTableEntityQueryResponse(JsonElement element)
         {
             TableEntityQueryResponse result = new TableEntityQueryResponse();

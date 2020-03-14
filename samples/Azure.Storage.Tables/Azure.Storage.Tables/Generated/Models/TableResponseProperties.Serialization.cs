@@ -10,34 +10,8 @@ using Azure.Core;
 
 namespace Azure.Storage.Tables.Models
 {
-    public partial class TableResponseProperties : IUtf8JsonSerializable
+    public partial class TableResponseProperties
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (TableName != null)
-            {
-                writer.WritePropertyName("TableName");
-                writer.WriteStringValue(TableName);
-            }
-            if (OdataType != null)
-            {
-                writer.WritePropertyName("odata.type");
-                writer.WriteStringValue(OdataType);
-            }
-            if (OdataId != null)
-            {
-                writer.WritePropertyName("odata.id");
-                writer.WriteStringValue(OdataId);
-            }
-            if (OdataEditLink != null)
-            {
-                writer.WritePropertyName("odata.editLink");
-                writer.WriteStringValue(OdataEditLink);
-            }
-            writer.WriteEndObject();
-        }
-
         internal static TableResponseProperties DeserializeTableResponseProperties(JsonElement element)
         {
             TableResponseProperties result = new TableResponseProperties();

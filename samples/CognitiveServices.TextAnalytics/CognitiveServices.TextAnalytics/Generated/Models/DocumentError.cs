@@ -11,8 +11,8 @@ namespace CognitiveServices.TextAnalytics.Models
     public partial class DocumentError
     {
         /// <summary> Document Id. </summary>
-        public string Id { get; set; }
+        public string Id { get; internal set; }
         /// <summary> Document Error. </summary>
-        public TextAnalyticsError Error { get; set; } = new TextAnalyticsError();
+        public TextAnalyticsError Error { get; internal set; } = new TextAnalyticsError();
     }
 }

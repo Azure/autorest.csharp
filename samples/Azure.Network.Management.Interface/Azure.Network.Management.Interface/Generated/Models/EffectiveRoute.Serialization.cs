@@ -11,59 +11,8 @@ using Azure.Core;
 
 namespace Azure.Network.Management.Interface.Models
 {
-    public partial class EffectiveRoute : IUtf8JsonSerializable
+    public partial class EffectiveRoute
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (Name != null)
-            {
-                writer.WritePropertyName("name");
-                writer.WriteStringValue(Name);
-            }
-            if (DisableBgpRoutePropagation != null)
-            {
-                writer.WritePropertyName("disableBgpRoutePropagation");
-                writer.WriteBooleanValue(DisableBgpRoutePropagation.Value);
-            }
-            if (Source != null)
-            {
-                writer.WritePropertyName("source");
-                writer.WriteStringValue(Source.Value.ToString());
-            }
-            if (State != null)
-            {
-                writer.WritePropertyName("state");
-                writer.WriteStringValue(State.Value.ToString());
-            }
-            if (AddressPrefix != null)
-            {
-                writer.WritePropertyName("addressPrefix");
-                writer.WriteStartArray();
-                foreach (var item in AddressPrefix)
-                {
-                    writer.WriteStringValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            if (NextHopIpAddress != null)
-            {
-                writer.WritePropertyName("nextHopIpAddress");
-                writer.WriteStartArray();
-                foreach (var item in NextHopIpAddress)
-                {
-                    writer.WriteStringValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            if (NextHopType != null)
-            {
-                writer.WritePropertyName("nextHopType");
-                writer.WriteStringValue(NextHopType.Value.ToString());
-            }
-            writer.WriteEndObject();
-        }
-
         internal static EffectiveRoute DeserializeEffectiveRoute(JsonElement element)
         {
             EffectiveRoute result = new EffectiveRoute();

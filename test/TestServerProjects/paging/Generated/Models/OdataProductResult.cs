@@ -12,7 +12,7 @@ namespace paging.Models
     /// <summary> The OdataProductResult. </summary>
     public partial class OdataProductResult
     {
-        public IList<Product> Values { get; set; }
-        public string OdataNextLink { get; set; }
+        public IList<Product> Values { get; internal set; }
+        public string OdataNextLink { get; internal set; }
     }
 }

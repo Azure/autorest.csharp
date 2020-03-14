@@ -11,6 +11,6 @@ namespace Azure.Storage.Management.Models
     public partial class CloudError
     {
         /// <summary> An error response from the Storage service. </summary>
-        public CloudErrorBody Error { get; set; }
+        public CloudErrorBody Error { get; internal set; }
     }
 }

@@ -12,10 +12,10 @@ namespace xml_service.Models
     /// <summary> An Azure Storage container. </summary>
     public partial class Container
     {
-        public string Name { get; set; }
+        public string Name { get; internal set; }
         /// <summary> Properties of a container. </summary>
-        public ContainerProperties Properties { get; set; } = new ContainerProperties();
+        public ContainerProperties Properties { get; internal set; } = new ContainerProperties();
         /// <summary> Dictionary of &lt;string&gt;. </summary>
-        public IDictionary<string, string> Metadata { get; set; }
+        public IDictionary<string, string> Metadata { get; internal set; }
     }
 }

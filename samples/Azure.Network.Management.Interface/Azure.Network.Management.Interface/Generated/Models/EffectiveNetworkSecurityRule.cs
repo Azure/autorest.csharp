@@ -13,34 +13,34 @@ namespace Azure.Network.Management.Interface.Models
     public partial class EffectiveNetworkSecurityRule
     {
         /// <summary> The name of the security rule specified by the user (if created by the user). </summary>
-        public string Name { get; set; }
+        public string Name { get; internal set; }
         /// <summary> The network protocol this rule applies to. </summary>
-        public EffectiveSecurityRuleProtocol? Protocol { get; set; }
+        public EffectiveSecurityRuleProtocol? Protocol { get; internal set; }
         /// <summary> The source port or range. </summary>
-        public string SourcePortRange { get; set; }
+        public string SourcePortRange { get; internal set; }
         /// <summary> The destination port or range. </summary>
-        public string DestinationPortRange { get; set; }
+        public string DestinationPortRange { get; internal set; }
         /// <summary> The source port ranges. Expected values include a single integer between 0 and 65535, a range using &apos;-&apos; as separator (e.g. 100-400), or an asterisk (*). </summary>
-        public IList<string> SourcePortRanges { get; set; }
+        public IList<string> SourcePortRanges { get; internal set; }
         /// <summary> The destination port ranges. Expected values include a single integer between 0 and 65535, a range using &apos;-&apos; as separator (e.g. 100-400), or an asterisk (*). </summary>
-        public IList<string> DestinationPortRanges { get; set; }
+        public IList<string> DestinationPortRanges { get; internal set; }
         /// <summary> The source address prefix. </summary>
-        public string SourceAddressPrefix { get; set; }
+        public string SourceAddressPrefix { get; internal set; }
         /// <summary> The destination address prefix. </summary>
-        public string DestinationAddressPrefix { get; set; }
+        public string DestinationAddressPrefix { get; internal set; }
         /// <summary> The source address prefixes. Expected values include CIDR IP ranges, Default Tags (VirtualNetwork, AzureLoadBalancer, Internet), System Tags, and the asterisk (*). </summary>
-        public IList<string> SourceAddressPrefixes { get; set; }
+        public IList<string> SourceAddressPrefixes { get; internal set; }
         /// <summary> The destination address prefixes. Expected values include CIDR IP ranges, Default Tags (VirtualNetwork, AzureLoadBalancer, Internet), System Tags, and the asterisk (*). </summary>
-        public IList<string> DestinationAddressPrefixes { get; set; }
+        public IList<string> DestinationAddressPrefixes { get; internal set; }
         /// <summary> The expanded source address prefix. </summary>
-        public IList<string> ExpandedSourceAddressPrefix { get; set; }
+        public IList<string> ExpandedSourceAddressPrefix { get; internal set; }
         /// <summary> Expanded destination address prefix. </summary>
-        public IList<string> ExpandedDestinationAddressPrefix { get; set; }
+        public IList<string> ExpandedDestinationAddressPrefix { get; internal set; }
         /// <summary> Whether network traffic is allowed or denied. </summary>
-        public SecurityRuleAccess? Access { get; set; }
+        public SecurityRuleAccess? Access { get; internal set; }
         /// <summary> The priority of the rule. </summary>
-        public int? Priority { get; set; }
+        public int? Priority { get; internal set; }
         /// <summary> The direction of the rule. </summary>
-        public SecurityRuleDirection? Direction { get; set; }
+        public SecurityRuleDirection? Direction { get; internal set; }
     }
 }

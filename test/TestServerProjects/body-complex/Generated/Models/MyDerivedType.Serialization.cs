@@ -10,34 +10,8 @@ using Azure.Core;
 
 namespace body_complex.Models
 {
-    public partial class MyDerivedType : IUtf8JsonSerializable
+    public partial class MyDerivedType
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (PropD1 != null)
-            {
-                writer.WritePropertyName("propD1");
-                writer.WriteStringValue(PropD1);
-            }
-            writer.WritePropertyName("kind");
-            writer.WriteStringValue(Kind);
-            if (PropB1 != null)
-            {
-                writer.WritePropertyName("propB1");
-                writer.WriteStringValue(PropB1);
-            }
-            writer.WritePropertyName("helper");
-            writer.WriteStartObject();
-            if (PropBH1 != null)
-            {
-                writer.WritePropertyName("propBH1");
-                writer.WriteStringValue(PropBH1);
-            }
-            writer.WriteEndObject();
-            writer.WriteEndObject();
-        }
-
         internal static MyDerivedType DeserializeMyDerivedType(JsonElement element)
         {
             MyDerivedType result = new MyDerivedType();

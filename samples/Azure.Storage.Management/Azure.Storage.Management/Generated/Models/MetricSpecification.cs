@@ -13,22 +13,22 @@ namespace Azure.Storage.Management.Models
     public partial class MetricSpecification
     {
         /// <summary> Name of metric specification. </summary>
-        public string Name { get; set; }
+        public string Name { get; internal set; }
         /// <summary> Display name of metric specification. </summary>
-        public string DisplayName { get; set; }
+        public string DisplayName { get; internal set; }
         /// <summary> Display description of metric specification. </summary>
-        public string DisplayDescription { get; set; }
+        public string DisplayDescription { get; internal set; }
         /// <summary> Unit could be Bytes or Count. </summary>
-        public string Unit { get; set; }
+        public string Unit { get; internal set; }
         /// <summary> Dimensions of blobs, including blob type and access tier. </summary>
-        public IList<Dimension> Dimensions { get; set; }
+        public IList<Dimension> Dimensions { get; internal set; }
         /// <summary> Aggregation type could be Average. </summary>
-        public string AggregationType { get; set; }
+        public string AggregationType { get; internal set; }
         /// <summary> The property to decide fill gap with zero or not. </summary>
-        public bool? FillGapWithZero { get; set; }
+        public bool? FillGapWithZero { get; internal set; }
         /// <summary> The category this metric specification belong to, could be Capacity. </summary>
-        public string Category { get; set; }
+        public string Category { get; internal set; }
         /// <summary> Account Resource Id. </summary>
-        public string ResourceIdDimensionNameOverride { get; set; }
+        public string ResourceIdDimensionNameOverride { get; internal set; }
     }
 }

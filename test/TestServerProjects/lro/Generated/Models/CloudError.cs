@@ -10,7 +10,7 @@ namespace lro.Models
     /// <summary> The CloudError. </summary>
     public partial class CloudError
     {
-        public int? Status { get; set; }
-        public string Message { get; set; }
+        public int? Status { get; internal set; }
+        public string Message { get; internal set; }
     }
 }

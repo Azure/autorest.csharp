@@ -16,7 +16,7 @@ namespace body_complex.Models
             Kind = null;
         }
         public string Kind { get; internal set; } = "Kind1";
-        public string PropB1 { get; set; }
-        public string PropBH1 { get; set; }
+        public string PropB1 { get; internal set; }
+        public string PropBH1 { get; internal set; }
     }
 }

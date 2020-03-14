@@ -13,12 +13,12 @@ namespace Azure.AI.FormRecognizer.Models
     public partial class TextLine
     {
         /// <summary> The text content of the line. </summary>
-        public string Text { get; set; }
+        public string Text { get; internal set; }
         /// <summary> Bounding box of an extracted line. </summary>
-        public IList<float> BoundingBox { get; set; } = new List<float>();
+        public IList<float> BoundingBox { get; internal set; } = new List<float>();
         /// <summary> The detected language of this line, if different from the overall page language. </summary>
-        public Language? Language { get; set; }
+        public Language? Language { get; internal set; }
         /// <summary> List of words in the text line. </summary>
-        public IList<TextWord> Words { get; set; } = new List<TextWord>();
+        public IList<TextWord> Words { get; internal set; } = new List<TextWord>();
     }
 }

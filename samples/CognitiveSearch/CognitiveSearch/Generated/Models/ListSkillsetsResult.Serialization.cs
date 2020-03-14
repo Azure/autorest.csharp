@@ -11,24 +11,8 @@ using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class ListSkillsetsResult : IUtf8JsonSerializable
+    public partial class ListSkillsetsResult
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (Skillsets != null)
-            {
-                writer.WritePropertyName("value");
-                writer.WriteStartArray();
-                foreach (var item in Skillsets)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            writer.WriteEndObject();
-        }
-
         internal static ListSkillsetsResult DeserializeListSkillsetsResult(JsonElement element)
         {
             ListSkillsetsResult result = new ListSkillsetsResult();

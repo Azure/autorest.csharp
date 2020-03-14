@@ -11,29 +11,8 @@ using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class AutocompleteResult : IUtf8JsonSerializable
+    public partial class AutocompleteResult
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (Coverage != null)
-            {
-                writer.WritePropertyName("@search.coverage");
-                writer.WriteNumberValue(Coverage.Value);
-            }
-            if (Results != null)
-            {
-                writer.WritePropertyName("value");
-                writer.WriteStartArray();
-                foreach (var item in Results)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            writer.WriteEndObject();
-        }
-
         internal static AutocompleteResult DeserializeAutocompleteResult(JsonElement element)
         {
             AutocompleteResult result = new AutocompleteResult();

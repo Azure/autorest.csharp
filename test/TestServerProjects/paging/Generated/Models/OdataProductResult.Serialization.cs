@@ -11,29 +11,8 @@ using Azure.Core;
 
 namespace paging.Models
 {
-    public partial class OdataProductResult : IUtf8JsonSerializable
+    public partial class OdataProductResult
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (Values != null)
-            {
-                writer.WritePropertyName("values");
-                writer.WriteStartArray();
-                foreach (var item in Values)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            if (OdataNextLink != null)
-            {
-                writer.WritePropertyName("odata.nextLink");
-                writer.WriteStringValue(OdataNextLink);
-            }
-            writer.WriteEndObject();
-        }
-
         internal static OdataProductResult DeserializeOdataProductResult(JsonElement element)
         {
             OdataProductResult result = new OdataProductResult();

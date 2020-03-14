@@ -10,44 +10,8 @@ using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class ItemError : IUtf8JsonSerializable
+    public partial class ItemError
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (Key != null)
-            {
-                writer.WritePropertyName("key");
-                writer.WriteStringValue(Key);
-            }
-            if (ErrorMessage != null)
-            {
-                writer.WritePropertyName("errorMessage");
-                writer.WriteStringValue(ErrorMessage);
-            }
-            if (StatusCode != null)
-            {
-                writer.WritePropertyName("statusCode");
-                writer.WriteNumberValue(StatusCode.Value);
-            }
-            if (Name != null)
-            {
-                writer.WritePropertyName("name");
-                writer.WriteStringValue(Name);
-            }
-            if (Details != null)
-            {
-                writer.WritePropertyName("details");
-                writer.WriteStringValue(Details);
-            }
-            if (DocumentationLink != null)
-            {
-                writer.WritePropertyName("documentationLink");
-                writer.WriteStringValue(DocumentationLink);
-            }
-            writer.WriteEndObject();
-        }
-
         internal static ItemError DeserializeItemError(JsonElement element)
         {
             ItemError result = new ItemError();

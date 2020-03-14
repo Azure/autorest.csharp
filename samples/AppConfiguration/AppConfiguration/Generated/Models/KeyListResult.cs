@@ -13,8 +13,8 @@ namespace AppConfiguration.Models
     public partial class KeyListResult
     {
         /// <summary> The collection value. </summary>
-        public IList<Key> Items { get; set; }
+        public IList<Key> Items { get; internal set; }
         /// <summary> The URI that can be used to request the next set of paged results. </summary>
-        public string NextLink { get; set; }
+        public string NextLink { get; internal set; }
     }
 }
