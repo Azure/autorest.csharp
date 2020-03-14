@@ -40,6 +40,11 @@ namespace Azure.Core
             headers.Add(name, TypeFormatters.ToString(value, format));
         }
 
+        public static void Add(this RequestHeaders headers, string name, Guid value)
+        {
+            headers.Add(name, value.ToString());
+        }
+
         public static void Add(this RequestHeaders headers, string name, byte[] value)
         {
             headers.Add(name, Convert.ToBase64String(value));
