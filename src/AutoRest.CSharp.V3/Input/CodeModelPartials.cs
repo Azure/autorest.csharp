@@ -16,31 +16,6 @@ using YamlDotNet.Serialization;
 // ReSharper disable once CheckNamespace
 namespace AutoRest.CSharp.V3.Input
 {
-    internal partial class VirtualParameter
-    {
-        /// <summary>if the property is marked read-only (ie, not intended to be sent to the service)</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "readOnly")]
-        public bool? ReadOnly { get; set; }
-
-        /// <summary>the wire name of this property</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "serializedName")]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string SerializedName { get; set; }
-
-        /// <summary>when a property is flattened, the property will be the set of serialized names to get to that target property.
-        ///
-        /// If flattenedName is present, then this property is a flattened property.
-        ///
-        /// (ie, ['properties','name'] )</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "flattenedNames")]
-        [System.ComponentModel.DataAnnotations.Required]
-        public System.Collections.Generic.ICollection<string> FlattenedNames { get; set; } = new System.Collections.ObjectModel.Collection<string>();
-
-        /// <summary>if this property is used as a discriminator for a polymorphic type</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "isDiscriminator")]
-        public bool? IsDiscriminator { get; set; }
-    }
-
     internal partial class Operation
     {
         // For some reason, booleans in dictionaries are deserialized as string instead of bool.

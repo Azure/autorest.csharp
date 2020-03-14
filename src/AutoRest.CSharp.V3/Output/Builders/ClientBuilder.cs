@@ -189,6 +189,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
         private static Parameter[] OrderParameters(IEnumerable<Parameter> parameters) => parameters.OrderBy(p => p.DefaultValue != null).ToArray();
 
+        //TODO: WIP
         private Request BuildRequest(Operation operation, IReadOnlyDictionary<string, Parameter> clientParameters, HttpRequest httpRequest, IEnumerable<RequestParameter> requestParameters)
         {
             HttpWithBodyRequest? httpRequestWithBody = httpRequest as HttpWithBodyRequest;
@@ -287,7 +288,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             List<Parameter> methodParameters = new List<Parameter>();
 
             RequestBody? body = null;
-            RequestParameter[] parameters = operation.Parameters.Concat(requestParameters).ToArray();
+            RequestParameter[] parameters = operation.Parameters.Where(p => p.Flattened != true).Concat(requestParameters.Where(p => p.Flattened != true)).ToArray();
             foreach (RequestParameter requestParameter in parameters)
             {
                 string defaultName = requestParameter.Language.Default.Name;

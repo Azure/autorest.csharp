@@ -584,9 +584,9 @@ schemas: !<!Schemas>
           immediate:
           - *ref_18
         properties:
-        - !<!Property> &ref_47
+        - !<!Property> &ref_46
           schema: *ref_19
-          flattenedNames: &ref_46
+          flattenedNames:
           - details
           - max_product_display_name
           serializedName: max_product_display_name
@@ -595,9 +595,9 @@ schemas: !<!Schemas>
               name: maxProductDisplayName
               description: Display name of product.
           protocol: !<!Protocols> {}
-        - !<!Property> &ref_49
+        - !<!Property> &ref_47
           schema: *ref_20
-          flattenedNames: &ref_48
+          flattenedNames:
           - details
           - max_product_capacity
           serializedName: max_product_capacity
@@ -606,9 +606,9 @@ schemas: !<!Schemas>
               name: capacity
               description: 'Capacity of product. For example, 4 people.'
           protocol: !<!Protocols> {}
-        - !<!Property> &ref_51
+        - !<!Property> &ref_48
           schema: *ref_21
-          flattenedNames: &ref_50
+          flattenedNames:
           - details
           - max_product_image
           - generic_value
@@ -618,9 +618,9 @@ schemas: !<!Schemas>
               name: genericValue
               description: Generic URL value.
           protocol: !<!Protocols> {}
-        - !<!Property> &ref_53
+        - !<!Property> &ref_49
           schema: *ref_22
-          flattenedNames: &ref_52
+          flattenedNames:
           - details
           - max_product_image
           - '@odata.value'
@@ -1353,40 +1353,36 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
-      - !<!VirtualParameter> &ref_54
+      - !<!VirtualParameter> &ref_50
         schema: *ref_24
         implementation: Method
         originalParameter: *ref_43
         pathToProperty: []
         required: true
-        serializedName: base_product_id
         targetProperty: *ref_44
         language: !<!Languages> 
           default:
             name: productId
             description: 'Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.'
         protocol: !<!Protocols> {}
-      - !<!VirtualParameter> &ref_55
+      - !<!VirtualParameter> &ref_51
         schema: *ref_25
         implementation: Method
         originalParameter: *ref_43
         pathToProperty: []
         required: false
-        serializedName: base_product_description
         targetProperty: *ref_45
         language: !<!Languages> 
           default:
             name: description
             description: Description of product.
         protocol: !<!Protocols> {}
-      - !<!VirtualParameter> &ref_56
+      - !<!VirtualParameter> &ref_52
         schema: *ref_19
-        flattenedNames: *ref_46
         implementation: Method
         originalParameter: *ref_43
         pathToProperty: []
-        serializedName: max_product_display_name
-        targetProperty: *ref_47
+        targetProperty: *ref_46
         language: !<!Languages> 
           default:
             name: maxProductDisplayName
@@ -1394,49 +1390,43 @@ operationGroups:
         protocol: !<!Protocols> {}
       - !<!VirtualParameter> 
         schema: *ref_20
-        flattenedNames: *ref_48
         implementation: Method
         originalParameter: *ref_43
         pathToProperty: []
-        serializedName: max_product_capacity
-        targetProperty: *ref_49
+        targetProperty: *ref_47
         language: !<!Languages> 
           default:
             name: Capacity
             description: 'Capacity of product. For example, 4 people.'
         protocol: !<!Protocols> {}
-      - !<!VirtualParameter> &ref_57
+      - !<!VirtualParameter> &ref_53
         schema: *ref_21
-        flattenedNames: *ref_50
         implementation: Method
         originalParameter: *ref_43
         pathToProperty: []
-        serializedName: generic_value
-        targetProperty: *ref_51
+        targetProperty: *ref_48
         language: !<!Languages> 
           default:
             name: genericValue
             description: Generic URL value.
         protocol: !<!Protocols> {}
-      - !<!VirtualParameter> &ref_58
+      - !<!VirtualParameter> &ref_54
         schema: *ref_22
-        flattenedNames: *ref_52
         implementation: Method
         originalParameter: *ref_43
         pathToProperty: []
-        serializedName: '@odata.value'
-        targetProperty: *ref_53
+        targetProperty: *ref_49
         language: !<!Languages> 
           default:
             name: odataValue
             description: URL value.
         protocol: !<!Protocols> {}
       signatureParameters:
+      - *ref_50
+      - *ref_51
+      - *ref_52
+      - *ref_53
       - *ref_54
-      - *ref_55
-      - *ref_56
-      - *ref_57
-      - *ref_58
       language: !<!Languages> 
         default:
           name: ''
@@ -1489,7 +1479,7 @@ operationGroups:
       version: 1.0.0
     parameters:
     - *ref_31
-    - !<!Parameter> &ref_66
+    - !<!Parameter> &ref_62
       schema: *ref_1
       implementation: Method
       required: true
@@ -1507,13 +1497,13 @@ operationGroups:
     requests:
     - !<!Request> 
       parameters:
-      - !<!Parameter> &ref_59
+      - !<!Parameter> &ref_55
         schema: *ref_23
         flattened: true
         implementation: Method
         extensions:
           x-ms-client-flatten: true
-          x-ms-parameter-grouping: &ref_60
+          x-ms-parameter-grouping: &ref_56
             name: flatten-parameter-group
         language: !<!Languages> 
           default:
@@ -1523,46 +1513,42 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
-      - !<!VirtualParameter> &ref_61
+      - !<!VirtualParameter> &ref_57
         schema: *ref_24
         implementation: Method
-        originalParameter: *ref_59
+        originalParameter: *ref_55
         pathToProperty: []
         required: true
-        serializedName: base_product_id
         targetProperty: *ref_44
         extensions:
-          x-ms-parameter-grouping: *ref_60
+          x-ms-parameter-grouping: *ref_56
         language: !<!Languages> 
           default:
             name: productId
             description: 'Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.'
         protocol: !<!Protocols> {}
-      - !<!VirtualParameter> &ref_62
+      - !<!VirtualParameter> &ref_58
         schema: *ref_25
         implementation: Method
-        originalParameter: *ref_59
+        originalParameter: *ref_55
         pathToProperty: []
         required: false
-        serializedName: base_product_description
         targetProperty: *ref_45
         extensions:
-          x-ms-parameter-grouping: *ref_60
+          x-ms-parameter-grouping: *ref_56
         language: !<!Languages> 
           default:
             name: description
             description: Description of product.
         protocol: !<!Protocols> {}
-      - !<!VirtualParameter> &ref_63
+      - !<!VirtualParameter> &ref_59
         schema: *ref_19
-        flattenedNames: *ref_46
         implementation: Method
-        originalParameter: *ref_59
+        originalParameter: *ref_55
         pathToProperty: []
-        serializedName: max_product_display_name
-        targetProperty: *ref_47
+        targetProperty: *ref_46
         extensions:
-          x-ms-parameter-grouping: *ref_60
+          x-ms-parameter-grouping: *ref_56
         language: !<!Languages> 
           default:
             name: maxProductDisplayName
@@ -1570,55 +1556,49 @@ operationGroups:
         protocol: !<!Protocols> {}
       - !<!VirtualParameter> 
         schema: *ref_20
-        flattenedNames: *ref_48
         implementation: Method
-        originalParameter: *ref_59
+        originalParameter: *ref_55
         pathToProperty: []
-        serializedName: max_product_capacity
-        targetProperty: *ref_49
+        targetProperty: *ref_47
         extensions:
-          x-ms-parameter-grouping: *ref_60
+          x-ms-parameter-grouping: *ref_56
         language: !<!Languages> 
           default:
             name: Capacity
             description: 'Capacity of product. For example, 4 people.'
         protocol: !<!Protocols> {}
-      - !<!VirtualParameter> &ref_64
+      - !<!VirtualParameter> &ref_60
         schema: *ref_21
-        flattenedNames: *ref_50
         implementation: Method
-        originalParameter: *ref_59
+        originalParameter: *ref_55
         pathToProperty: []
-        serializedName: generic_value
-        targetProperty: *ref_51
+        targetProperty: *ref_48
         extensions:
-          x-ms-parameter-grouping: *ref_60
+          x-ms-parameter-grouping: *ref_56
         language: !<!Languages> 
           default:
             name: genericValue
             description: Generic URL value.
         protocol: !<!Protocols> {}
-      - !<!VirtualParameter> &ref_65
+      - !<!VirtualParameter> &ref_61
         schema: *ref_22
-        flattenedNames: *ref_52
         implementation: Method
-        originalParameter: *ref_59
+        originalParameter: *ref_55
         pathToProperty: []
-        serializedName: '@odata.value'
-        targetProperty: *ref_53
+        targetProperty: *ref_49
         extensions:
-          x-ms-parameter-grouping: *ref_60
+          x-ms-parameter-grouping: *ref_56
         language: !<!Languages> 
           default:
             name: odataValue
             description: URL value.
         protocol: !<!Protocols> {}
       signatureParameters:
+      - *ref_57
+      - *ref_58
+      - *ref_59
+      - *ref_60
       - *ref_61
-      - *ref_62
-      - *ref_63
-      - *ref_64
-      - *ref_65
       language: !<!Languages> 
         default:
           name: ''
@@ -1632,7 +1612,7 @@ operationGroups:
           - application/json
           uri: '{$host}'
     signatureParameters:
-    - *ref_66
+    - *ref_62
     responses:
     - !<!SchemaResponse> 
       schema: *ref_23
